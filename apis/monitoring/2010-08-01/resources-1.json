@@ -12,6 +12,17 @@
           ]
         }
       },
+      "CompositeAlarm": {
+        "resource": {
+          "type": "CompositeAlarm",
+          "identifiers": [
+            {
+              "target": "Name",
+              "source": "input"
+            }
+          ]
+        }
+      },
       "Metric": {
         "resource": {
           "type": "Metric",
@@ -41,6 +52,20 @@
             }
           ],
           "path": "MetricAlarms[]"
+        }
+      },
+      "CompositeAlarms": {
+        "request": { "operation": "DescribeAlarms" },
+        "resource": {
+          "type": "CompositeAlarm",
+          "identifiers": [
+            {
+              "target": "Name",
+              "source": "response",
+              "path": "CompositeAlarms[].AlarmName"
+            }
+          ],
+          "path": "CompositeAlarms[]"
         }
       },
       "Metrics": {
@@ -215,6 +240,140 @@
               }
             ]
           }
+        }
+      }
+    },
+    "CompositeAlarm": {
+      "identifiers": [
+        {
+          "name": "Name",
+          "memberName": "AlarmName"
+        }
+      ],
+      "shape": "CompositeAlarm",
+      "load": {
+        "request": {
+          "operation": "DescribeAlarms",
+          "params": [
+            {
+              "target": "AlarmNames[0]",
+              "source": "identifier",
+              "name": "Name"
+            }
+          ]
+        },
+        "path": "CompositeAlarms[0]"
+      },
+      "actions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteAlarms",
+            "params": [
+              {
+                "target": "AlarmNames[0]",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        },
+        "DescribeHistory": {
+          "request": {
+            "operation": "DescribeAlarmHistory",
+            "params": [
+              {
+                "target": "AlarmName",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        },
+        "DisableActions": {
+          "request": {
+            "operation": "DisableAlarmActions",
+            "params": [
+              {
+                "target": "AlarmNames[0]",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        },
+        "EnableActions": {
+          "request": {
+            "operation": "EnableAlarmActions",
+            "params": [
+              {
+                "target": "AlarmNames[0]",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        },
+        "SetState": {
+          "request": {
+            "operation": "SetAlarmState",
+            "params": [
+              {
+                "target": "AlarmName",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        }
+      },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteAlarms",
+            "params": [
+              {
+                "target": "AlarmNames[]",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        },
+        "DisableActions": {
+          "request": {
+            "operation": "DisableAlarmActions",
+            "params": [
+              {
+                "target": "AlarmNames[]",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        },
+        "EnableActions": {
+          "request": {
+            "operation": "EnableAlarmActions",
+            "params": [
+              {
+                "target": "AlarmNames[]",
+                "source": "identifier",
+                "name": "Name"
+              }
+            ]
+          }
+        }
+      },
+      "waiters": {
+        "Exists": {
+          "waiterName": "CompositeAlarmExists",
+          "params": [
+            {
+              "target": "AlarmNames[]",
+              "source": "identifier",
+              "name": "Name"
+            }
+          ]
         }
       }
     },

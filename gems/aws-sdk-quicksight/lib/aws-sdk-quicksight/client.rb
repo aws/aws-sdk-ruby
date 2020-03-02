@@ -4651,7 +4651,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.17.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 

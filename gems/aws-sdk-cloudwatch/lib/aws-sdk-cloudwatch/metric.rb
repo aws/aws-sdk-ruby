@@ -375,7 +375,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -394,7 +394,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -413,7 +413,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -550,13 +550,17 @@ module Aws::CloudWatch
     #   One item in the `Metrics` array is the expression that the alarm
     #   watches. You designate this expression by setting `ReturnValue` to
     #   true for this object in the array. For more information, see
-    #   MetricDataQuery.
+    #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
     #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
     #   operation. Instead, you retrieve the metrics you are using in your
     #   math expression as part of the `Metrics` array.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html
     # @option options [Array<Types::Tag>] :tags
     #   A list of key-value pairs to associate with the alarm. You can
     #   associate as many as 50 tags with an alarm.

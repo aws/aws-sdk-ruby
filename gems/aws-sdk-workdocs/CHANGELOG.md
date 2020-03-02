@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.20.1 (2020-03-02)
+------------------
+
 * Issue - Republish the previously yanked version.
 
 1.20.0 (2020-02-28)
