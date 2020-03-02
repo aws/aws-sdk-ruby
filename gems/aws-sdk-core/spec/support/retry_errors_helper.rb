@@ -4,6 +4,7 @@ RetryErrorsSvc = ApiHelper.sample_service
 # by calling either the send_handler or passed block
 # :handler and :resp must be defined outside this helper
 def handle(send_handler = nil, &block)
+  allow(Kernel).to receive(:sleep)
   handler.handler = send_handler || block
   handler.call(resp.context)
 end

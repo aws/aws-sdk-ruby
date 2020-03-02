@@ -25,6 +25,11 @@ module Aws
       it 'defaults config.retry_mode to legacy' do
         expect(client.config.retry_mode).to eq('legacy')
       end
+
+      it 'uses the legacy handler when retry_mode is legacy' do
+        client = RetryErrorsSvc::Client.new(retry_mode: 'legacy', region: 'us-west-2')
+        expect(client.handlers.entries.map(&:handler_class)).to include(RetryErrors::LegacyHandler)
+      end
     end
 
     describe RetryErrors::LegacyHandler do
