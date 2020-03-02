@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codestar/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_star = Aws::CodeStar::Client.new
+#     resp = code_star.associate_team_member(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CodeStar all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CodeStar are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeStar::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CodeStar API errors
 #     end
 #
 # See {Errors} for more information.

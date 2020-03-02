@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
+  #
   class LoginProfile
 
     extend Aws::Deprecations

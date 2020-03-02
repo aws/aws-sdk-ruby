@@ -6,6 +6,50 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ACMPCA
+
+  # When ACMPCA returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ACMPCA::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ACMPCA errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ACMPCA::Errors::ServiceError
+  #       # rescues all ACMPCA API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CertificateMismatchException}
+  # * {ConcurrentModificationException}
+  # * {InvalidArgsException}
+  # * {InvalidArnException}
+  # * {InvalidNextTokenException}
+  # * {InvalidPolicyException}
+  # * {InvalidRequestException}
+  # * {InvalidStateException}
+  # * {InvalidTagException}
+  # * {LimitExceededException}
+  # * {MalformedCSRException}
+  # * {MalformedCertificateException}
+  # * {PermissionAlreadyExistsException}
+  # * {RequestAlreadyProcessedException}
+  # * {RequestFailedException}
+  # * {RequestInProgressException}
+  # * {ResourceNotFoundException}
+  # * {TooManyTagsException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-managedblockchain/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     managed_blockchain = Aws::ManagedBlockchain::Client.new
+#     resp = managed_blockchain.create_member(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Managed Blockchain all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Managed Blockchain are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ManagedBlockchain::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Managed Blockchain API errors
 #     end
 #
 # See {Errors} for more information.

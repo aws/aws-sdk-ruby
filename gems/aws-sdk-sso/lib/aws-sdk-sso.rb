@@ -24,17 +24,20 @@ require_relative 'aws-sdk-sso/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     sso = Aws::SSO::Client.new
+#     resp = sso.get_role_credentials(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Single Sign-On all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Single Sign-On are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SSO::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Single Sign-On API errors
 #     end
 #
 # See {Errors} for more information.

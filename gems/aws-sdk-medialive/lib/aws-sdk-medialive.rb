@@ -25,17 +25,20 @@ require_relative 'aws-sdk-medialive/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     media_live = Aws::MediaLive::Client.new
+#     resp = media_live.batch_update_schedule(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Elemental MediaLive all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Elemental MediaLive are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MediaLive::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Elemental MediaLive API errors
 #     end
 #
 # See {Errors} for more information.

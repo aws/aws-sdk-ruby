@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
+  #
   class AccountQuota
 
     extend Aws::Deprecations

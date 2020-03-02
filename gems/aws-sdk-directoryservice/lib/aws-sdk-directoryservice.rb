@@ -24,17 +24,20 @@ require_relative 'aws-sdk-directoryservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     directory_service = Aws::DirectoryService::Client.new
+#     resp = directory_service.accept_shared_directory(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Directory Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Directory Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DirectoryService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Directory Service API errors
 #     end
 #
 # See {Errors} for more information.

@@ -6,7 +6,15 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoTDataPlane
-  class Resource
+  # This class provides a resource oriented interface for IoTDataPlane.
+  # To create a resource object:
+  #     resource = Aws::IoTDataPlane::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass :client, a default client will be constructed.
+  #     client = Aws::IoTDataPlane::Client.new(region: 'us-west-2')
+  #     resource = Aws::IoTDataPlane::Resource.new(client: client)
+  #
+class Resource
 
     # @param options ({})
     # @option options [Client] :client

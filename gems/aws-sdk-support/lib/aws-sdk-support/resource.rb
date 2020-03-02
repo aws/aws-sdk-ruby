@@ -6,7 +6,15 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Support
-  class Resource
+  # This class provides a resource oriented interface for Support.
+  # To create a resource object:
+  #     resource = Aws::Support::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass :client, a default client will be constructed.
+  #     client = Aws::Support::Client.new(region: 'us-west-2')
+  #     resource = Aws::Support::Resource.new(client: client)
+  #
+class Resource
 
     # @param options ({})
     # @option options [Client] :client

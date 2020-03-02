@@ -6,6 +6,84 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElastiCache
+
+  # When ElastiCache returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ElastiCache::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ElastiCache errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ElastiCache::Errors::ServiceError
+  #       # rescues all ElastiCache API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {APICallRateForCustomerExceededFault}
+  # * {AuthorizationAlreadyExistsFault}
+  # * {AuthorizationNotFoundFault}
+  # * {CacheClusterAlreadyExistsFault}
+  # * {CacheClusterNotFoundFault}
+  # * {CacheParameterGroupAlreadyExistsFault}
+  # * {CacheParameterGroupNotFoundFault}
+  # * {CacheParameterGroupQuotaExceededFault}
+  # * {CacheSecurityGroupAlreadyExistsFault}
+  # * {CacheSecurityGroupNotFoundFault}
+  # * {CacheSecurityGroupQuotaExceededFault}
+  # * {CacheSubnetGroupAlreadyExistsFault}
+  # * {CacheSubnetGroupInUse}
+  # * {CacheSubnetGroupNotFoundFault}
+  # * {CacheSubnetGroupQuotaExceededFault}
+  # * {CacheSubnetQuotaExceededFault}
+  # * {ClusterQuotaForCustomerExceededFault}
+  # * {InsufficientCacheClusterCapacityFault}
+  # * {InvalidARNFault}
+  # * {InvalidCacheClusterStateFault}
+  # * {InvalidCacheParameterGroupStateFault}
+  # * {InvalidCacheSecurityGroupStateFault}
+  # * {InvalidKMSKeyFault}
+  # * {InvalidParameterCombinationException}
+  # * {InvalidParameterValueException}
+  # * {InvalidReplicationGroupStateFault}
+  # * {InvalidSnapshotStateFault}
+  # * {InvalidSubnet}
+  # * {InvalidVPCNetworkStateFault}
+  # * {NoOperationFault}
+  # * {NodeGroupNotFoundFault}
+  # * {NodeGroupsPerReplicationGroupQuotaExceededFault}
+  # * {NodeQuotaForClusterExceededFault}
+  # * {NodeQuotaForCustomerExceededFault}
+  # * {ReplicationGroupAlreadyExistsFault}
+  # * {ReplicationGroupAlreadyUnderMigrationFault}
+  # * {ReplicationGroupNotFoundFault}
+  # * {ReplicationGroupNotUnderMigrationFault}
+  # * {ReservedCacheNodeAlreadyExistsFault}
+  # * {ReservedCacheNodeNotFoundFault}
+  # * {ReservedCacheNodeQuotaExceededFault}
+  # * {ReservedCacheNodesOfferingNotFoundFault}
+  # * {ServiceLinkedRoleNotFoundFault}
+  # * {ServiceUpdateNotFoundFault}
+  # * {SnapshotAlreadyExistsFault}
+  # * {SnapshotFeatureNotSupportedFault}
+  # * {SnapshotNotFoundFault}
+  # * {SnapshotQuotaExceededFault}
+  # * {SubnetInUse}
+  # * {TagNotFoundFault}
+  # * {TagQuotaPerResourceExceeded}
+  # * {TestFailoverNotAvailableFault}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

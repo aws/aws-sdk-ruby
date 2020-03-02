@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
+  #
   class Volume
 
     extend Aws::Deprecations

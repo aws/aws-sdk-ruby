@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
+  #
   class RolePolicy
 
     extend Aws::Deprecations

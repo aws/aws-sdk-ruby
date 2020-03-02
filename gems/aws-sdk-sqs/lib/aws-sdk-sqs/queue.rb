@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SQS
+
+  #
   class Queue
 
     extend Aws::Deprecations

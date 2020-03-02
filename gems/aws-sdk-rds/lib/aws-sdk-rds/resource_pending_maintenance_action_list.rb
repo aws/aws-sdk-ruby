@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
+  #
   class ResourcePendingMaintenanceActionList
 
     extend Aws::Deprecations

@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
+  #
   class ScalingPolicy
 
     extend Aws::Deprecations

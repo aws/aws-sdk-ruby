@@ -24,17 +24,20 @@ require_relative 'aws-sdk-lightsail/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     lightsail = Aws::Lightsail::Client.new
+#     resp = lightsail.allocate_static_ip(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Lightsail all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Lightsail are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Lightsail::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Lightsail API errors
 #     end
 #
 # See {Errors} for more information.

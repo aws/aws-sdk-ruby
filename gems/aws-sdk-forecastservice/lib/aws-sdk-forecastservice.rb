@@ -24,17 +24,20 @@ require_relative 'aws-sdk-forecastservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     forecast_service = Aws::ForecastService::Client.new
+#     resp = forecast_service.create_dataset(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Forecast Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Forecast Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ForecastService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Forecast Service API errors
 #     end
 #
 # See {Errors} for more information.

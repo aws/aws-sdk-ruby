@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DynamoDB
+
+  #
   class Table
 
     extend Aws::Deprecations

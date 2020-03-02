@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
+  #
   class BucketLifecycle
 
     extend Aws::Deprecations

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-migrationhubconfig/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     migration_hub_config = Aws::MigrationHubConfig::Client.new
+#     resp = migration_hub_config.create_home_region_control(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Migration Hub Config all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Migration Hub Config are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MigrationHubConfig::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Migration Hub Config API errors
 #     end
 #
 # See {Errors} for more information.

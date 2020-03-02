@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudFormation
+
+  #
   class StackResource
 
     extend Aws::Deprecations

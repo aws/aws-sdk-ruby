@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
+  #
   class LoadBalancer
 
     extend Aws::Deprecations

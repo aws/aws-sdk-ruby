@@ -6,7 +6,15 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ApplicationAutoScaling
-  class Resource
+  # This class provides a resource oriented interface for ApplicationAutoScaling.
+  # To create a resource object:
+  #     resource = Aws::ApplicationAutoScaling::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass :client, a default client will be constructed.
+  #     client = Aws::ApplicationAutoScaling::Client.new(region: 'us-west-2')
+  #     resource = Aws::ApplicationAutoScaling::Resource.new(client: client)
+  #
+class Resource
 
     # @param options ({})
     # @option options [Client] :client

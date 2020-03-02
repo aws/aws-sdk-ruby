@@ -6,6 +6,113 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudFront
+
+  # When CloudFront returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CloudFront::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CloudFront errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CloudFront::Errors::ServiceError
+  #       # rescues all CloudFront API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDenied}
+  # * {BatchTooLarge}
+  # * {CNAMEAlreadyExists}
+  # * {CannotChangeImmutablePublicKeyFields}
+  # * {CloudFrontOriginAccessIdentityAlreadyExists}
+  # * {CloudFrontOriginAccessIdentityInUse}
+  # * {DistributionAlreadyExists}
+  # * {DistributionNotDisabled}
+  # * {FieldLevelEncryptionConfigAlreadyExists}
+  # * {FieldLevelEncryptionConfigInUse}
+  # * {FieldLevelEncryptionProfileAlreadyExists}
+  # * {FieldLevelEncryptionProfileInUse}
+  # * {FieldLevelEncryptionProfileSizeExceeded}
+  # * {IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior}
+  # * {IllegalUpdate}
+  # * {InconsistentQuantities}
+  # * {InvalidArgument}
+  # * {InvalidDefaultRootObject}
+  # * {InvalidErrorCode}
+  # * {InvalidForwardCookies}
+  # * {InvalidGeoRestrictionParameter}
+  # * {InvalidHeadersForS3Origin}
+  # * {InvalidIfMatchVersion}
+  # * {InvalidLambdaFunctionAssociation}
+  # * {InvalidLocationCode}
+  # * {InvalidMinimumProtocolVersion}
+  # * {InvalidOrigin}
+  # * {InvalidOriginAccessIdentity}
+  # * {InvalidOriginKeepaliveTimeout}
+  # * {InvalidOriginReadTimeout}
+  # * {InvalidProtocolSettings}
+  # * {InvalidQueryStringParameters}
+  # * {InvalidRelativePath}
+  # * {InvalidRequiredProtocol}
+  # * {InvalidResponseCode}
+  # * {InvalidTTLOrder}
+  # * {InvalidTagging}
+  # * {InvalidViewerCertificate}
+  # * {InvalidWebACLId}
+  # * {MissingBody}
+  # * {NoSuchCloudFrontOriginAccessIdentity}
+  # * {NoSuchDistribution}
+  # * {NoSuchFieldLevelEncryptionConfig}
+  # * {NoSuchFieldLevelEncryptionProfile}
+  # * {NoSuchInvalidation}
+  # * {NoSuchOrigin}
+  # * {NoSuchPublicKey}
+  # * {NoSuchResource}
+  # * {NoSuchStreamingDistribution}
+  # * {PreconditionFailed}
+  # * {PublicKeyAlreadyExists}
+  # * {PublicKeyInUse}
+  # * {QueryArgProfileEmpty}
+  # * {StreamingDistributionAlreadyExists}
+  # * {StreamingDistributionNotDisabled}
+  # * {TooManyCacheBehaviors}
+  # * {TooManyCertificates}
+  # * {TooManyCloudFrontOriginAccessIdentities}
+  # * {TooManyCookieNamesInWhiteList}
+  # * {TooManyDistributionCNAMEs}
+  # * {TooManyDistributions}
+  # * {TooManyDistributionsAssociatedToFieldLevelEncryptionConfig}
+  # * {TooManyDistributionsWithLambdaAssociations}
+  # * {TooManyFieldLevelEncryptionConfigs}
+  # * {TooManyFieldLevelEncryptionContentTypeProfiles}
+  # * {TooManyFieldLevelEncryptionEncryptionEntities}
+  # * {TooManyFieldLevelEncryptionFieldPatterns}
+  # * {TooManyFieldLevelEncryptionProfiles}
+  # * {TooManyFieldLevelEncryptionQueryArgProfiles}
+  # * {TooManyHeadersInForwardedValues}
+  # * {TooManyInvalidationsInProgress}
+  # * {TooManyLambdaFunctionAssociations}
+  # * {TooManyOriginCustomHeaders}
+  # * {TooManyOriginGroupsPerDistribution}
+  # * {TooManyOrigins}
+  # * {TooManyPublicKeys}
+  # * {TooManyQueryStringParameters}
+  # * {TooManyStreamingDistributionCNAMEs}
+  # * {TooManyStreamingDistributions}
+  # * {TooManyTrustedSigners}
+  # * {TrustedSignerDoesNotExist}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

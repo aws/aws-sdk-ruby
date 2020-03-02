@@ -6,7 +6,15 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::NetworkManager
-  class Resource
+  # This class provides a resource oriented interface for NetworkManager.
+  # To create a resource object:
+  #     resource = Aws::NetworkManager::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass :client, a default client will be constructed.
+  #     client = Aws::NetworkManager::Client.new(region: 'us-west-2')
+  #     resource = Aws::NetworkManager::Resource.new(client: client)
+  #
+class Resource
 
     # @param options ({})
     # @option options [Client] :client

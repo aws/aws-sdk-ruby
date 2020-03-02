@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
+  #
   class DBSubnetGroup
 
     extend Aws::Deprecations

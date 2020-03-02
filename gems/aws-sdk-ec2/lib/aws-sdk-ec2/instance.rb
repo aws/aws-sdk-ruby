@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
+  #
   class Instance
 
     extend Aws::Deprecations

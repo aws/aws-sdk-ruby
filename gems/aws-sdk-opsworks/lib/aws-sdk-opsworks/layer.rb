@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::OpsWorks
+
+  #
   class Layer
 
     extend Aws::Deprecations

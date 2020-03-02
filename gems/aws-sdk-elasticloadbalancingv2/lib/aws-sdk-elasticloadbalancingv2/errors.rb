@@ -6,6 +6,68 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElasticLoadBalancingV2
+
+  # When ElasticLoadBalancingV2 returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ElasticLoadBalancingV2::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ElasticLoadBalancingV2 errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ElasticLoadBalancingV2::Errors::ServiceError
+  #       # rescues all ElasticLoadBalancingV2 API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AllocationIdNotFoundException}
+  # * {AvailabilityZoneNotSupportedException}
+  # * {CertificateNotFoundException}
+  # * {DuplicateListenerException}
+  # * {DuplicateLoadBalancerNameException}
+  # * {DuplicateTagKeysException}
+  # * {DuplicateTargetGroupNameException}
+  # * {HealthUnavailableException}
+  # * {IncompatibleProtocolsException}
+  # * {InvalidConfigurationRequestException}
+  # * {InvalidLoadBalancerActionException}
+  # * {InvalidSchemeException}
+  # * {InvalidSecurityGroupException}
+  # * {InvalidSubnetException}
+  # * {InvalidTargetException}
+  # * {ListenerNotFoundException}
+  # * {LoadBalancerNotFoundException}
+  # * {OperationNotPermittedException}
+  # * {PriorityInUseException}
+  # * {ResourceInUseException}
+  # * {RuleNotFoundException}
+  # * {SSLPolicyNotFoundException}
+  # * {SubnetNotFoundException}
+  # * {TargetGroupAssociationLimitException}
+  # * {TargetGroupNotFoundException}
+  # * {TooManyActionsException}
+  # * {TooManyCertificatesException}
+  # * {TooManyListenersException}
+  # * {TooManyLoadBalancersException}
+  # * {TooManyRegistrationsForTargetIdException}
+  # * {TooManyRulesException}
+  # * {TooManyTagsException}
+  # * {TooManyTargetGroupsException}
+  # * {TooManyTargetsException}
+  # * {TooManyUniqueTargetGroupsPerLoadBalancerException}
+  # * {UnsupportedProtocolException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

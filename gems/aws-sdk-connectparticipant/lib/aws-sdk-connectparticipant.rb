@@ -24,17 +24,20 @@ require_relative 'aws-sdk-connectparticipant/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     connect_participant = Aws::ConnectParticipant::Client.new
+#     resp = connect_participant.create_participant_connection(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Connect Participant Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Connect Participant Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ConnectParticipant::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Connect Participant Service API errors
 #     end
 #
 # See {Errors} for more information.

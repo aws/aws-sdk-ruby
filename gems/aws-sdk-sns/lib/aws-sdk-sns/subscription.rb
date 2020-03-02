@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SNS
+
+  #
   class Subscription
 
     extend Aws::Deprecations

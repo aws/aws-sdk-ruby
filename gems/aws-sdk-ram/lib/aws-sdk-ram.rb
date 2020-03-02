@@ -24,17 +24,20 @@ require_relative 'aws-sdk-ram/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ram = Aws::RAM::Client.new
+#     resp = ram.accept_resource_share_invitation(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Resource Access Manager all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Resource Access Manager are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::RAM::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Resource Access Manager API errors
 #     end
 #
 # See {Errors} for more information.

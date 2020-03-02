@@ -6,6 +6,59 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Lambda
+
+  # When Lambda returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Lambda::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Lambda errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Lambda::Errors::ServiceError
+  #       # rescues all Lambda API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CodeStorageExceededException}
+  # * {EC2AccessDeniedException}
+  # * {EC2ThrottledException}
+  # * {EC2UnexpectedException}
+  # * {ENILimitReachedException}
+  # * {InvalidParameterValueException}
+  # * {InvalidRequestContentException}
+  # * {InvalidRuntimeException}
+  # * {InvalidSecurityGroupIDException}
+  # * {InvalidSubnetIDException}
+  # * {InvalidZipFileException}
+  # * {KMSAccessDeniedException}
+  # * {KMSDisabledException}
+  # * {KMSInvalidStateException}
+  # * {KMSNotFoundException}
+  # * {PolicyLengthExceededException}
+  # * {PreconditionFailedException}
+  # * {ProvisionedConcurrencyConfigNotFoundException}
+  # * {RequestTooLargeException}
+  # * {ResourceConflictException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ResourceNotReadyException}
+  # * {ServiceException}
+  # * {SubnetIPAddressLimitReachedException}
+  # * {TooManyRequestsException}
+  # * {UnsupportedMediaTypeException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

@@ -25,17 +25,20 @@ require_relative 'aws-sdk-acmpca/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     acmpca = Aws::ACMPCA::Client.new
+#     resp = acmpca.create_certificate_authority(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Certificate Manager Private Certificate Authority all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Certificate Manager Private Certificate Authority are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ACMPCA::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Certificate Manager Private Certificate Authority API errors
 #     end
 #
 # See {Errors} for more information.

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codeguruprofiler/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_guru_profiler = Aws::CodeGuruProfiler::Client.new
+#     resp = code_guru_profiler.configure_agent(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CodeGuru Profiler all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CodeGuru Profiler are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeGuruProfiler::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CodeGuru Profiler API errors
 #     end
 #
 # See {Errors} for more information.

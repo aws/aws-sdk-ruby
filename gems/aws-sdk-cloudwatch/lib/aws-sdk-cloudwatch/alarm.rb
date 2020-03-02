@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatch
+
+  #
   class Alarm
 
     extend Aws::Deprecations

@@ -86,7 +86,6 @@ module AwsSdkCodeGenerator
       def example_operation_name
         raise "no operations found for the service" if @service.api['operations'].empty?
         underscore(@service.api['operations'].keys.first)
-        nil
       end
 
       def eventstream_shape?

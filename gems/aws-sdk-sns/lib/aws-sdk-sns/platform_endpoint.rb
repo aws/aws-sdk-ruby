@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SNS
+
+  #
   class PlatformEndpoint
 
     extend Aws::Deprecations

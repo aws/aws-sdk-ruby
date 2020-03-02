@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Glacier
+
+  #
   class Job
 
     extend Aws::Deprecations

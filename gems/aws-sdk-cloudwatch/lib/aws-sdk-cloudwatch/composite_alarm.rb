@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatch
+
+  #
   class CompositeAlarm
 
     extend Aws::Deprecations

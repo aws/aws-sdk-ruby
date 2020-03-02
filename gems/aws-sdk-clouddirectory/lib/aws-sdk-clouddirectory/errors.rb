@@ -6,6 +6,67 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudDirectory
+
+  # When CloudDirectory returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CloudDirectory::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CloudDirectory errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CloudDirectory::Errors::ServiceError
+  #       # rescues all CloudDirectory API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {BatchWriteException}
+  # * {CannotListParentOfRootException}
+  # * {DirectoryAlreadyExistsException}
+  # * {DirectoryDeletedException}
+  # * {DirectoryNotDisabledException}
+  # * {DirectoryNotEnabledException}
+  # * {FacetAlreadyExistsException}
+  # * {FacetInUseException}
+  # * {FacetNotFoundException}
+  # * {FacetValidationException}
+  # * {IncompatibleSchemaException}
+  # * {IndexedAttributeMissingException}
+  # * {InternalServiceException}
+  # * {InvalidArnException}
+  # * {InvalidAttachmentException}
+  # * {InvalidFacetUpdateException}
+  # * {InvalidNextTokenException}
+  # * {InvalidRuleException}
+  # * {InvalidSchemaDocException}
+  # * {InvalidTaggingRequestException}
+  # * {LimitExceededException}
+  # * {LinkNameAlreadyInUseException}
+  # * {NotIndexException}
+  # * {NotNodeException}
+  # * {NotPolicyException}
+  # * {ObjectAlreadyDetachedException}
+  # * {ObjectNotDetachedException}
+  # * {ResourceNotFoundException}
+  # * {RetryableConflictException}
+  # * {SchemaAlreadyExistsException}
+  # * {SchemaAlreadyPublishedException}
+  # * {StillContainsLinksException}
+  # * {UnsupportedIndexTypeException}
+  # * {ValidationException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

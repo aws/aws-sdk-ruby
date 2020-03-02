@@ -6,6 +6,8 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Glacier
+
+  #
   class Vault
 
     extend Aws::Deprecations

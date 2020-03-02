@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codestarnotifications/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_star_notifications = Aws::CodeStarNotifications::Client.new
+#     resp = code_star_notifications.create_notification_rule(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CodeStar Notifications all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CodeStar Notifications are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeStarNotifications::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CodeStar Notifications API errors
 #     end
 #
 # See {Errors} for more information.

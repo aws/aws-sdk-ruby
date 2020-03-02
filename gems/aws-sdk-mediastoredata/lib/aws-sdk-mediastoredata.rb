@@ -24,17 +24,20 @@ require_relative 'aws-sdk-mediastoredata/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     media_store_data = Aws::MediaStoreData::Client.new
+#     resp = media_store_data.delete_object(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Elemental MediaStore Data Plane all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Elemental MediaStore Data Plane are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MediaStoreData::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Elemental MediaStore Data Plane API errors
 #     end
 #
 # See {Errors} for more information.
