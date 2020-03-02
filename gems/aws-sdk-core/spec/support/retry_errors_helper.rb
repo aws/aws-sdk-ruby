@@ -12,7 +12,7 @@ end
 # A helper method to test Standard and Adaptive tests
 # Expects a test case defined as a Hash with response and expect keys.
 # response: Hash with status_code and error
-# expect: delay, available_capacity, retries, calculated_rate
+# expect: delay, available_capacity, retries, calculated_rate, measured_tx_rate, fill_rate
 def handle_with_retry(test_cases)
   # Apply delay expectations first
   test_cases.each do |test_case|
@@ -54,6 +54,14 @@ def apply_expectations(test_case)
   if expected[:calculated_rate]
     expect(resp.context.config.client_rate_limiter.instance_variable_get(:@calculated_rate))
       .to be_within(0.1).of(expected[:calculated_rate])
+  end
+  if expected[:measured_tx_rate]
+    expect(resp.context.config.client_rate_limiter.instance_variable_get(:@measured_tx_rate))
+      .to be_within(0.1).of(expected[:measured_tx_rate])
+  end
+  if expected[:fill_rate]
+    expect(resp.context.config.client_rate_limiter.instance_variable_get(:@fill_rate))
+      .to be_within(0.1).of(expected[:fill_rate])
   end
 end
 
