@@ -24,6 +24,16 @@ module Aws
         expect { client }.to raise_error(ArgumentError)
       end
 
+      it 'uses the handler when retry_mode is standard' do
+        client = RetryErrorsSvc::Client.new(retry_mode: 'standard', region: 'us-west-2')
+        expect(client.handlers.entries.map(&:handler_class)).to include(RetryErrors::Handler)
+      end
+
+      it 'uses the handler when retry_mode is adaptive' do
+        client = RetryErrorsSvc::Client.new(retry_mode: 'adaptive', region: 'us-west-2')
+        expect(client.handlers.entries.map(&:handler_class)).to include(RetryErrors::Handler)
+      end
+
       it 'defaults config.max_attempts to 3' do
         expect(client.config.max_attempts).to eq(3)
       end
@@ -49,6 +59,21 @@ module Aws
       it 'raises when max_attempts is not >= 0' do
         ENV['AWS_MAX_ATTEMPTS'] = -1
         expect { client }.to raise_error(ArgumentError)
+      end
+
+      it 'defaults config.adaptive_retry_wait_to_fill to true' do
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(true)
+      end
+
+      it 'can configure adaptive_retry_wait_to_fill using ENV with precedence over config' do
+        ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] = false
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
+      end
+
+      it 'can configure adaptive_retry_wait_to_fill with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:adaptive_retry_wait_to_fill).and_return(false)
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
       end
     end
 

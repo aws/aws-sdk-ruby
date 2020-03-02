@@ -124,14 +124,28 @@ setting this value to 5 will result in a request being retried up to
       end
 
       option(
-        :correct_clock_skew,
+        :adaptive_retry_wait_to_fill,
         default: true,
         doc_type: 'Boolean',
-        docstring: <<-DOCS)
-whether to apply a clock skew
-correction and retry requests that fail because of an skewed client
-clock.
+        docstring: <<-DOCS) do |cfg|
+Used only in `adaptive` retry mode.  When true, the request will sleep
+until there is sufficent client side capacity to retry the request.
+When wait_to_fill is false, the request will raise a RetryCapacityNotAvailableError
+and will not retry instead of sleeping.
+        DOCS
+        resolve_adaptive_retry_wait_to_fill(cfg)
+      end
+
+      option(
+        :correct_clock_skew,
+        default: false,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS) do |cfg|
+Specifies whether to apply a clock skew correction and retry requests 
+that fail because of a skewed client clock.
       DOCS
+        resolve_correct_clock_skew(cfg)
+      end
 
       # @api private undocumented
       option(:client_rate_limiter) { Retries::ClientRateLimiter.new }
@@ -164,6 +178,34 @@ clock.
           raise ArgumentError,
                 'Must provide a positive integer for max_attempts profile '\
                 'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+        end
+        value
+      end
+
+        def self.resolve_adaptive_retry_wait_to_fill(cfg)
+          value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL']
+          value = Aws.shared_config.adaptive_retry_wait_to_fill(profile: cfg.profile) if value.nil?
+          value = true if value.nil?
+
+          # Raise if provided is not a boolean
+          unless value.is_a?(TrueClass) || value.is_a?(FalseClass)
+            raise ArgumentError,
+                'Must provide a boolean for adaptive_retry_wait_to_fill profile '\
+                'option or for ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
+          end
+          value
+        end
+
+      def self.resolve_correct_clock_skew(cfg)
+        value = ENV['AWS_CORRECT_CLOCK_SKEW']
+        value = Aws.shared_config.correct_clock_skew(profile: cfg.profile) if value.nil?
+        value = false if value.nil?
+
+        # Raise if provided is not a boolean
+        unless value.is_a?(TrueClass) || value.is_a?(FalseClass)
+          raise ArgumentError,
+                'Must provide a boolean for correct_clock_sckew profile '\
+                'option or for ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
         end
         value
       end
@@ -203,7 +245,7 @@ clock.
           # need a maximum rate at which we can send requests (max_send_rate)
           # is unset until a throttle is seen
           if config.retry_mode == 'adaptive'
-            config.client_rate_limiter.token_bucket_acquire(1)
+            config.client_rate_limiter.token_bucket_acquire(1, config.adaptive_retry_wait_to_fill)
           end
         end
 
@@ -240,7 +282,6 @@ clock.
           context.http_response.reset
           call(context)
         end
-
       end
 
       class LegacyHandler < Seahorse::Client::Handler
