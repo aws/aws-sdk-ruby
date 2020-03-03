@@ -2901,6 +2901,7 @@ module Aws::EC2
     CreateFlowLogsRequest.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "LogDestinationType"))
     CreateFlowLogsRequest.add_member(:log_destination, Shapes::ShapeRef.new(shape: String, location_name: "LogDestination"))
     CreateFlowLogsRequest.add_member(:log_format, Shapes::ShapeRef.new(shape: String, location_name: "LogFormat"))
+    CreateFlowLogsRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateFlowLogsRequest.add_member(:max_aggregation_interval, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxAggregationInterval"))
     CreateFlowLogsRequest.struct_class = Types::CreateFlowLogsRequest
 
@@ -5502,7 +5503,7 @@ module Aws::EC2
 
     FleetSet.member = Shapes::ShapeRef.new(shape: FleetData, location_name: "item")
 
-    FlowLog.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
+    FlowLog.add_member(:creation_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTime"))
     FlowLog.add_member(:deliver_logs_error_message, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsErrorMessage"))
     FlowLog.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsPermissionArn"))
     FlowLog.add_member(:deliver_logs_status, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsStatus"))
@@ -5514,6 +5515,7 @@ module Aws::EC2
     FlowLog.add_member(:log_destination_type, Shapes::ShapeRef.new(shape: LogDestinationType, location_name: "logDestinationType"))
     FlowLog.add_member(:log_destination, Shapes::ShapeRef.new(shape: String, location_name: "logDestination"))
     FlowLog.add_member(:log_format, Shapes::ShapeRef.new(shape: String, location_name: "logFormat"))
+    FlowLog.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     FlowLog.add_member(:max_aggregation_interval, Shapes::ShapeRef.new(shape: Integer, location_name: "maxAggregationInterval"))
     FlowLog.struct_class = Types::FlowLog
 
@@ -8310,7 +8312,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "SubnetId"))
     RunInstancesRequest.add_member(:user_data, Shapes::ShapeRef.new(shape: String, location_name: "UserData"))
     RunInstancesRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "additionalInfo"))
-    RunInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    RunInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     RunInstancesRequest.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiTermination"))
     RunInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RunInstancesRequest.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsOptimized"))
@@ -11029,6 +11031,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeCoipPoolsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCoipPoolsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_conversion_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -11343,6 +11351,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceTypeOfferingsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceTypeOfferingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instance_types, Seahorse::Model::Operation.new.tap do |o|
@@ -11351,6 +11365,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInstanceTypesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInstanceTypesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -11437,6 +11457,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_local_gateway_route_table_vpc_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -11445,6 +11471,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewayRouteTableVpcAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewayRouteTableVpcAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_local_gateway_route_tables, Seahorse::Model::Operation.new.tap do |o|
@@ -11453,6 +11485,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewayRouteTablesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewayRouteTablesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_local_gateway_virtual_interface_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -11461,6 +11499,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewayVirtualInterfaceGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewayVirtualInterfaceGroupsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_local_gateway_virtual_interfaces, Seahorse::Model::Operation.new.tap do |o|
@@ -11469,6 +11513,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewayVirtualInterfacesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewayVirtualInterfacesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_local_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -11477,6 +11527,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocalGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocalGatewaysResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_moving_addresses, Seahorse::Model::Operation.new.tap do |o|
@@ -11914,6 +11970,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayMulticastDomainsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayMulticastDomainsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_transit_gateway_peering_attachments, Seahorse::Model::Operation.new.tap do |o|
@@ -11922,6 +11984,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTransitGatewayPeeringAttachmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTransitGatewayPeeringAttachmentsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_transit_gateway_route_tables, Seahorse::Model::Operation.new.tap do |o|
@@ -12530,6 +12598,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayMulticastDomainAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayMulticastDomainAssociationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_transit_gateway_route_table_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -13214,6 +13288,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SearchLocalGatewayRoutesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchLocalGatewayRoutesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:search_transit_gateway_multicast_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -13222,6 +13302,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SearchTransitGatewayMulticastGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchTransitGatewayMulticastGroupsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:search_transit_gateway_routes, Seahorse::Model::Operation.new.tap do |o|

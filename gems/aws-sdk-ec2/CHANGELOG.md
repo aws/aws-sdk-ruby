@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2020-03-03)
+------------------
+
+* Feature - Amazon VPC Flow Logs adds support for tags and tagging on resource creation.
+
 1.145.0 (2020-02-26)
 ------------------
 
