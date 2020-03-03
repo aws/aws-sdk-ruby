@@ -291,6 +291,54 @@ module Aws
           # Have to run the method each time because there are no failures
           successes.each { |success| handle_with_retry([success]) }
         end
+
+        it 'verifies success and throttling behavior' do
+          client_rate_limiter = config.client_rate_limiter
+          client_rate_limiter.instance_variable_set(:@last_throttle_time, 0)
+          # Needs to be smaller than 't' in the iterations
+          client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
+          client_rate_limiter.instance_variable_set(:@last_max_rate, 0)
+
+
+          def success(timestamp, measured_tx_rate, fill_rate)
+            [{
+              response: { status_code: 200, error: nil, timestamp: timestamp },
+              expect: { fill_rate: fill_rate, measured_tx_rate: measured_tx_rate }
+            }]
+          end
+
+          def throttle(timestamp, measured_tx_rate, fill_rate)
+            [{
+               response: { status_code: 429, error: service_error, timestamp: timestamp },
+               expect: { fill_rate: fill_rate, measured_tx_rate: measured_tx_rate }
+             }]
+          end
+
+          handle_with_retry success(0.2, 0.0, 0.5)
+          handle_with_retry success(0.4, 0.0, 0.5)
+          handle_with_retry success(0.6, 4.8, 0.5)
+          handle_with_retry success(0.8, 4.8, 0.5)
+          handle_with_retry success(1.0, 4.16, 0.5)
+          handle_with_retry success(1.2, 4.16, 0.69)
+          handle_with_retry success(1.4, 4.16, 1.10)
+          handle_with_retry success(1.6, 5.63, 1.63)
+          handle_with_retry success(1.8, 5.63, 2.33)
+
+          handle_with_retry throttle(2.0, 4.32, 3.02) +
+                            success(2.2, 4.32, 3.48)
+
+          handle_with_retry success(2.4, 4.32, 3.82)
+
+          # the token bucket need additional capacity to fulfill this request
+          client_rate_limiter.instance_variable_set(:@current_capacity, 10)
+          handle_with_retry success(2.6, 5.66, 4.05)
+
+          handle_with_retry success(2.8, 5.66, 4.20)
+          handle_with_retry success(3.0, 4.33, 4.28)
+
+          handle_with_retry throttle(3.2, 4.33, 2.99) +
+                            success(3.4, 4.32, 3.45)
+        end
       end
     end
   end

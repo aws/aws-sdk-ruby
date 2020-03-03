@@ -6,7 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatch
-  class Alarm
+  class CompositeAlarm
 
     extend Aws::Deprecations
 
@@ -32,16 +32,25 @@ module Aws::CloudWatch
     end
     alias :alarm_name :name
 
+    # Indicates whether actions should be executed during any changes to the
+    # alarm state.
+    # @return [Boolean]
+    def actions_enabled
+      data[:actions_enabled]
+    end
+
+    # The actions to execute when this alarm transitions to the ALARM state
+    # from any other state. Each action is specified as an Amazon Resource
+    # Name (ARN).
+    # @return [Array<String>]
+    def alarm_actions
+      data[:alarm_actions]
+    end
+
     # The Amazon Resource Name (ARN) of the alarm.
     # @return [String]
     def alarm_arn
       data[:alarm_arn]
-    end
-
-    # The description of the alarm.
-    # @return [String]
-    def alarm_description
-      data[:alarm_description]
     end
 
     # The time stamp of the last update to the alarm configuration.
@@ -50,41 +59,32 @@ module Aws::CloudWatch
       data[:alarm_configuration_updated_timestamp]
     end
 
-    # Indicates whether actions should be executed during any changes to the
-    # alarm state.
-    # @return [Boolean]
-    def actions_enabled
-      data[:actions_enabled]
+    # The description of the alarm.
+    # @return [String]
+    def alarm_description
+      data[:alarm_description]
     end
 
-    # The actions to execute when this alarm transitions to the `OK` state
-    # from any other state. Each action is specified as an Amazon Resource
-    # Name (ARN).
-    # @return [Array<String>]
-    def ok_actions
-      data[:ok_actions]
-    end
-
-    # The actions to execute when this alarm transitions to the `ALARM`
-    # state from any other state. Each action is specified as an Amazon
-    # Resource Name (ARN).
-    # @return [Array<String>]
-    def alarm_actions
-      data[:alarm_actions]
+    # The rule that this alarm uses to evaluate its alarm state.
+    # @return [String]
+    def alarm_rule
+      data[:alarm_rule]
     end
 
     # The actions to execute when this alarm transitions to the
-    # `INSUFFICIENT_DATA` state from any other state. Each action is
+    # INSUFFICIENT\_DATA state from any other state. Each action is
     # specified as an Amazon Resource Name (ARN).
     # @return [Array<String>]
     def insufficient_data_actions
       data[:insufficient_data_actions]
     end
 
-    # The state value for the alarm.
-    # @return [String]
-    def state_value
-      data[:state_value]
+    # The actions to execute when this alarm transitions to the OK state
+    # from any other state. Each action is specified as an Amazon Resource
+    # Name (ARN).
+    # @return [Array<String>]
+    def ok_actions
+      data[:ok_actions]
     end
 
     # An explanation for the alarm state, in text format.
@@ -105,110 +105,10 @@ module Aws::CloudWatch
       data[:state_updated_timestamp]
     end
 
-    # The name of the metric associated with the alarm, if this is an alarm
-    # based on a single metric.
+    # The state value for the alarm.
     # @return [String]
-    def metric_name
-      data[:metric_name]
-    end
-
-    # The namespace of the metric associated with the alarm.
-    # @return [String]
-    def namespace
-      data[:namespace]
-    end
-
-    # The statistic for the metric associated with the alarm, other than
-    # percentile. For percentile statistics, use `ExtendedStatistic`.
-    # @return [String]
-    def statistic
-      data[:statistic]
-    end
-
-    # The percentile statistic for the metric associated with the alarm.
-    # Specify a value between p0.0 and p100.
-    # @return [String]
-    def extended_statistic
-      data[:extended_statistic]
-    end
-
-    # The dimensions for the metric associated with the alarm.
-    # @return [Array<Types::Dimension>]
-    def dimensions
-      data[:dimensions]
-    end
-
-    # The period, in seconds, over which the statistic is applied.
-    # @return [Integer]
-    def period
-      data[:period]
-    end
-
-    # The unit of the metric associated with the alarm.
-    # @return [String]
-    def unit
-      data[:unit]
-    end
-
-    # The number of periods over which data is compared to the specified
-    # threshold.
-    # @return [Integer]
-    def evaluation_periods
-      data[:evaluation_periods]
-    end
-
-    # The number of data points that must be breaching to trigger the alarm.
-    # @return [Integer]
-    def datapoints_to_alarm
-      data[:datapoints_to_alarm]
-    end
-
-    # The value to compare with the specified statistic.
-    # @return [Float]
-    def threshold
-      data[:threshold]
-    end
-
-    # The arithmetic operation to use when comparing the specified statistic
-    # and threshold. The specified statistic value is used as the first
-    # operand.
-    # @return [String]
-    def comparison_operator
-      data[:comparison_operator]
-    end
-
-    # Sets how this alarm is to handle missing data points. If this
-    # parameter is omitted, the default behavior of `missing` is used.
-    # @return [String]
-    def treat_missing_data
-      data[:treat_missing_data]
-    end
-
-    # Used only for alarms based on percentiles. If `ignore`, the alarm
-    # state does not change during periods with too few data points to be
-    # statistically significant. If `evaluate` or this parameter is not
-    # used, the alarm is always evaluated and possibly changes state no
-    # matter how many data points are available.
-    # @return [String]
-    def evaluate_low_sample_count_percentile
-      data[:evaluate_low_sample_count_percentile]
-    end
-
-    # An array of MetricDataQuery structures, used in an alarm based on a
-    # metric math expression. Each structure either retrieves a metric or
-    # performs a math expression. One item in the Metrics array is the math
-    # expression that the alarm watches. This expression by designated by
-    # having `ReturnValue` set to true.
-    # @return [Array<Types::MetricDataQuery>]
-    def metrics
-      data[:metrics]
-    end
-
-    # In an alarm based on an anomaly detection model, this is the ID of the
-    # `ANOMALY_DETECTION_BAND` function used as the threshold for the alarm.
-    # @return [String]
-    def threshold_metric_id
-      data[:threshold_metric_id]
+    def state_value
+      data[:state_value]
     end
 
     # @!endgroup
@@ -218,21 +118,21 @@ module Aws::CloudWatch
       @client
     end
 
-    # Loads, or reloads {#data} for the current {Alarm}.
+    # Loads, or reloads {#data} for the current {CompositeAlarm}.
     # Returns `self` making it possible to chain methods.
     #
-    #     alarm.reload.data
+    #     composite_alarm.reload.data
     #
     # @return [self]
     def load
       resp = @client.describe_alarms(alarm_names: [@name])
-      @data = resp.metric_alarms[0]
+      @data = resp.composite_alarms[0]
       self
     end
     alias :reload :load
 
-    # @return [Types::MetricAlarm]
-    #   Returns the data for this {Alarm}. Calls
+    # @return [Types::CompositeAlarm]
+    #   Returns the data for this {CompositeAlarm}. Calls
     #   {Client#describe_alarms} if {#data_loaded?} is `false`.
     def data
       load unless @data
@@ -248,7 +148,7 @@ module Aws::CloudWatch
 
     # @param [Hash] options ({})
     # @return [Boolean]
-    #   Returns `true` if the Alarm exists.
+    #   Returns `true` if the CompositeAlarm exists.
     def exists?(options = {})
       begin
         wait_until_exists(options.merge(max_attempts: 1))
@@ -265,13 +165,13 @@ module Aws::CloudWatch
     # @option options [Float] :delay (5)
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
-    # @return [Alarm]
+    # @return [CompositeAlarm]
     def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
-      waiter = Waiters::AlarmExists.new(options)
+      waiter = Waiters::CompositeAlarmExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(alarm_names: [@name]))
-      Alarm.new({
+      CompositeAlarm.new({
         name: @name,
         client: @client
       })
@@ -376,7 +276,7 @@ module Aws::CloudWatch
 
     # @example Request syntax with placeholder values
     #
-    #   alarm.delete()
+    #   composite_alarm.delete()
     # @param [Hash] options ({})
     # @return [EmptyStructure]
     def delete(options = {})
@@ -387,7 +287,7 @@ module Aws::CloudWatch
 
     # @example Request syntax with placeholder values
     #
-    #   alarm.describe_history({
+    #   composite_alarm.describe_history({
     #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
     #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
     #     start_date: Time.now,
@@ -426,7 +326,7 @@ module Aws::CloudWatch
 
     # @example Request syntax with placeholder values
     #
-    #   alarm.disable_actions()
+    #   composite_alarm.disable_actions()
     # @param [Hash] options ({})
     # @return [EmptyStructure]
     def disable_actions(options = {})
@@ -437,7 +337,7 @@ module Aws::CloudWatch
 
     # @example Request syntax with placeholder values
     #
-    #   alarm.enable_actions()
+    #   composite_alarm.enable_actions()
     # @param [Hash] options ({})
     # @return [EmptyStructure]
     def enable_actions(options = {})
@@ -448,7 +348,7 @@ module Aws::CloudWatch
 
     # @example Request syntax with placeholder values
     #
-    #   alarm.set_state({
+    #   composite_alarm.set_state({
     #     state_value: "OK", # required, accepts OK, ALARM, INSUFFICIENT_DATA
     #     state_reason: "StateReason", # required
     #     state_reason_data: "StateReasonData",
@@ -472,21 +372,6 @@ module Aws::CloudWatch
       options = options.merge(alarm_name: @name)
       resp = @client.set_alarm_state(options)
       resp.data
-    end
-
-    # @!group Associations
-
-    # @return [Metric, nil]
-    def metric
-      if data[:namespace] && data[:metric_name]
-        Metric.new(
-          namespace: data[:namespace],
-          name: data[:metric_name],
-          client: @client
-        )
-      else
-        nil
-      end
     end
 
     # @deprecated

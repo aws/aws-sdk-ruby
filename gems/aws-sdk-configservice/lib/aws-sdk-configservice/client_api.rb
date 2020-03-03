@@ -821,7 +821,7 @@ module Aws::ConfigService
     DeletePendingAggregationRequestRequest.struct_class = Types::DeletePendingAggregationRequestRequest
 
     DeleteRemediationConfigurationRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
-    DeleteRemediationConfigurationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
+    DeleteRemediationConfigurationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
     DeleteRemediationConfigurationRequest.struct_class = Types::DeleteRemediationConfigurationRequest
 
     DeleteRemediationConfigurationResponse.struct_class = Types::DeleteRemediationConfigurationResponse
@@ -1611,9 +1611,9 @@ module Aws::ConfigService
     RemediationConfiguration.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
     RemediationConfiguration.add_member(:target_type, Shapes::ShapeRef.new(shape: RemediationTargetType, required: true, location_name: "TargetType"))
     RemediationConfiguration.add_member(:target_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "TargetId"))
-    RemediationConfiguration.add_member(:target_version, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TargetVersion"))
+    RemediationConfiguration.add_member(:target_version, Shapes::ShapeRef.new(shape: String, location_name: "TargetVersion"))
     RemediationConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: RemediationParameters, location_name: "Parameters"))
-    RemediationConfiguration.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
+    RemediationConfiguration.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
     RemediationConfiguration.add_member(:automatic, Shapes::ShapeRef.new(shape: Boolean, location_name: "Automatic"))
     RemediationConfiguration.add_member(:execution_controls, Shapes::ShapeRef.new(shape: ExecutionControls, location_name: "ExecutionControls"))
     RemediationConfiguration.add_member(:maximum_automatic_attempts, Shapes::ShapeRef.new(shape: AutoRemediationAttempts, location_name: "MaximumAutomaticAttempts"))

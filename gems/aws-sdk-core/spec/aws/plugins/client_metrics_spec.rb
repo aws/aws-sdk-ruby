@@ -16,16 +16,16 @@ module Aws
           client_side_monitoring_publisher: stub_publisher
         )
         client.handlers.add(
-          ClientMetrics::Handler,
+          ClientMetricsPlugin::Handler,
           step: :initialize
         )
         client.handlers.add(
-          ClientMetricsSender::LatencyHandler,
+          ClientMetricsSendPlugin::LatencyHandler,
           step: :sign,
           priority: 0
         )
         client.handlers.add(
-          ClientMetricsSender::AttemptHandler,
+          ClientMetricsSendPlugin::AttemptHandler,
           step: :sign,
           priority: 95
         )
@@ -58,13 +58,13 @@ module Aws
             client_side_monitoring: false
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetrics::Handler
+            Aws::Plugins::ClientMetricsPlugin::Handler
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSender::AttemptHandler
+            Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSender::LatencyHandler
+            Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
           )
         end
 
@@ -76,13 +76,13 @@ module Aws
             client_side_monitoring_port: nil
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetrics::Handler
+            Aws::Plugins::ClientMetricsPlugin::Handler
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSender::AttemptHandler
+            Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSender::LatencyHandler
+            Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
           )
         end
 
@@ -95,13 +95,13 @@ module Aws
           expect(client.config.client_side_monitoring_port).to eq(31000)
           expect(client.config.client_side_monitoring_host).to eq("127.0.0.1")
           expect(client.handlers.to_a).to include(
-            Aws::Plugins::ClientMetrics::Handler
+            Aws::Plugins::ClientMetricsPlugin::Handler
           )
           expect(client.handlers.to_a).to include(
-            Aws::Plugins::ClientMetricsSender::AttemptHandler
+            Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
           )
           expect(client.handlers.to_a).to include(
-            Aws::Plugins::ClientMetricsSender::LatencyHandler
+            Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
           )
         end
 
@@ -109,18 +109,18 @@ module Aws
           env["AWS_CSM_ENABLED"] = "fAlSe"
           client = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetrics
+            Aws::Plugins::ClientMetricsPlugin
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSender
+            Aws::Plugins::ClientMetricsSendPlugin
           )
           env["AWS_CSM_ENABLED"] = "F"
           client2 = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client2.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetrics
+            Aws::Plugins::ClientMetricsPlugin
           )
           expect(client2.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSender
+            Aws::Plugins::ClientMetricsSendPlugin
           )
         end
 
@@ -267,16 +267,16 @@ module Aws
               client_side_monitoring_publisher: stub_publisher
             )
             client.handlers.add(
-              ClientMetrics::Handler,
+              ClientMetricsPlugin::Handler,
               step: :initialize
             )
             client.handlers.add(
-              ClientMetricsSender::LatencyHandler,
+              ClientMetricsSendPlugin::LatencyHandler,
               step: :sign,
               priority: 0
             )
             client.handlers.add(
-              ClientMetricsSender::AttemptHandler,
+              ClientMetricsSendPlugin::AttemptHandler,
               step: :sign,
               priority: 95
             )
@@ -317,16 +317,16 @@ module Aws
               client_side_monitoring_publisher: stub_publisher
             )
             client.handlers.add(
-              ClientMetrics::Handler,
+              ClientMetricsPlugin::Handler,
               step: :initialize
             )
             client.handlers.add(
-              ClientMetricsSender::LatencyHandler,
+              ClientMetricsSendPlugin::LatencyHandler,
               step: :sign,
               priority: 0
             )
             client.handlers.add(
-              ClientMetricsSender::AttemptHandler,
+              ClientMetricsSendPlugin::AttemptHandler,
               step: :sign,
               priority: 95
             )

@@ -1,9 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.19.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
 1.19.0 (2020-02-28)
 ------------------
 
+* Issue - This version has been yanked. (#2239)
 * Feature - App Mesh now supports Transport Layer Security (TLS) between Virtual Nodes in a Mesh. Customers can use managed certificates from an AWS Certificate Manager Private Certificate Authority or bring their own certificates from the local file system to encrypt traffic between their workloads. See https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html for details.
 
 1.18.0 (2019-10-24)
@@ -100,4 +106,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-appmesh`.
-

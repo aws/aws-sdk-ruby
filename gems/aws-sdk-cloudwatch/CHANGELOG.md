@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-03-02)
+------------------
+
+* Feature - Introducing Amazon CloudWatch Composite Alarms
+
 1.32.0 (2020-01-20)
 ------------------
 

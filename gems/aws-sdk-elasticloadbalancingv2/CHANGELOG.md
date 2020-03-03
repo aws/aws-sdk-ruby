@@ -1,9 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.40.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
 1.40.0 (2020-02-28)
 ------------------
 
+* Issue - This version has been yanked. (#2239)
 * Feature - Added a target group attribute to support sticky sessions for Network Load Balancers.
 
 1.39.0 (2019-11-25)
@@ -270,4 +276,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-elasticloadbalancingv2` gem.
-
