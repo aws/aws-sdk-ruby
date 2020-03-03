@@ -84,14 +84,6 @@ OptionParser.new do |opts|
 
 end.parse!
 
-# TODO: REMOVE ME
-puts "OVERRIDING TIME - Adding clock skew of #{20*60} seconds"
-class Time
-  def self.now
-    Time.new - 20*60
-   end
-end
-
 # amend the $LOAD_PATH
 options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
