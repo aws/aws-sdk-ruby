@@ -5,7 +5,7 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
-        @service_name = options.fetch(:service_name)
+        @service_name = options.fetch(:service).name
         @errors = ErrorList.new(api: @service.api, module_name: module_name).to_a
       end
 

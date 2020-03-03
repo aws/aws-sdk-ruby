@@ -140,7 +140,7 @@ module AwsSdkCodeGenerator
     end
 
     def errors_module
-      Views::ErrorsModule.new(service: @service, service_name: @service.name).render
+      Views::ErrorsModule.new(service: @service).render
     end
 
     def waiters_module
