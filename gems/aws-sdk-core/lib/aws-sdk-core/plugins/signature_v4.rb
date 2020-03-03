@@ -107,7 +107,13 @@ module Aws
           req.headers.delete('X-Amz-Security-Token')
           req.headers.delete('X-Amz-Date')
 
-          puts "Signing step...."
+          if (context.config.respond_to?(:clock_skew) && context.config.correct_clock_skew)
+            endpoint = context.http_request.endpoint.to_s
+            skew = context.config.clock_skew.clock_correction(endpoint)
+            if skew.abs > 0
+              req.headers['X-Amz-Date'] = (Time.now.utc + skew).strftime("%Y%m%dT%H%M%SZ")
+            end
+          end
 
           # compute the signature
           begin

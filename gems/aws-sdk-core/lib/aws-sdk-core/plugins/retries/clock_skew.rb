@@ -21,32 +21,23 @@ module Aws
           @mutex.synchronize { @endpoint_clock_corrections[endpoint] = correction }
         end
 
-        def corrected_now_utc(endpoint)
-          clock_correction = clock_correction(endpoint)
-          Time.now.utc + clock_correction
-        end
-
         # Determines whether a request has clock skew by comparing
-        # the adjusted current time against the server's time in the response
+        # the current time against the server's time in the response
         # @param context [Seahorse::Client::RequestContext]
         def clock_skewed?(context)
-          endpoint = context.http_request.endpoint.to_s
           server_time = server_time(context.http_response)
-          corrected_now = corrected_now_utc(endpoint)
-          server_time && (corrected_now - server_time).abs > CLOCK_SKEW_THRESHOLD
+          server_time && (Time.now.utc - server_time).abs > CLOCK_SKEW_THRESHOLD
         end
 
-        # Update the stored clockscew value for an endpoint
+        # Update the stored clock skew value for an endpoint
         # from the server's time in the response
         # @param context [Seahorse::Client::RequestContext]
         def update_clock_skew(context)
-          puts "Checking clock skew"
           endpoint = context.http_request.endpoint.to_s
           now_utc = Time.now.utc
           server_time = server_time(context.http_response)
-          if (server_time && (now_utc - server_time).abs > CLOCK_SKEW_THRESHOLD)
-            puts "CLOCK SKEW for endpoint=#{endpoint} value: #{now_utc - server_time}"
-            set_clock_correction(endpoint, now_utc - server_time)
+          if server_time && (now_utc - server_time).abs > CLOCK_SKEW_THRESHOLD
+            set_clock_correction(endpoint, server_time - now_utc)
           end
         end
 

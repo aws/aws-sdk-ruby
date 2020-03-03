@@ -85,9 +85,10 @@ OptionParser.new do |opts|
 end.parse!
 
 # TODO: REMOVE ME
+puts "OVERRIDING TIME - Adding clock skew of #{20*60} seconds"
 class Time
   def self.now
-    Time.new - 3900
+    Time.new - 20*60
    end
 end
 

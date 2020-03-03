@@ -219,10 +219,14 @@ that fail because of a skewed client clock.
           config = context.config
 
           get_send_token(config)
+          puts "\n\n----------------------------------------\nCall: #{context.retries}"
           response = @handler.call(context)
           error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
           request_bookkeeping(context, response, error_inspector)
+
+          # Clock skew needs to be updated from the response even when
+          # the request is not retryable
           config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
 
           return response unless retryable?(context, response, error_inspector)
