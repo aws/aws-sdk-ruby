@@ -28,6 +28,12 @@ module Aws::ComprehendMedical
     #   attribute is correctly related to this entity.
     #   @return [Float]
     #
+    # @!attribute [rw] relationship_type
+    #   The type of relationship between the entity and attribute. Type for
+    #   the relationship is `OVERLAP`, indicating that the entity occurred
+    #   at the same time as the `Date_Expression`.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The numeric identifier for this attribute. This is a monotonically
     #   increasing id unique within this response rather than a global
@@ -50,6 +56,10 @@ module Aws::ComprehendMedical
     #   The segment of input text extracted as this attribute.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   The category of attribute.
+    #   @return [String]
+    #
     # @!attribute [rw] traits
     #   Contextual information for this attribute.
     #   @return [Array<Types::Trait>]
@@ -60,10 +70,12 @@ module Aws::ComprehendMedical
       :type,
       :score,
       :relationship_score,
+      :relationship_type,
       :id,
       :begin_offset,
       :end_offset,
       :text,
+      :category,
       :traits)
       include Aws::Structure
     end
@@ -759,7 +771,7 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # The input properties for an entities detection job
+    # The input properties for an entities detection job.
     #
     # @note When making an API call, you may pass InputDataConfig
     #   data as a hash:

@@ -71,6 +71,7 @@ module Aws::ComprehendMedical
     ModelVersion = Shapes::StringShape.new(name: 'ModelVersion')
     OntologyLinkingBoundedLengthString = Shapes::StringShape.new(name: 'OntologyLinkingBoundedLengthString')
     OutputDataConfig = Shapes::StructureShape.new(name: 'OutputDataConfig')
+    RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RxNormAttribute = Shapes::StructureShape.new(name: 'RxNormAttribute')
     RxNormAttributeList = Shapes::ListShape.new(name: 'RxNormAttributeList')
@@ -108,10 +109,12 @@ module Aws::ComprehendMedical
     Attribute.add_member(:type, Shapes::ShapeRef.new(shape: EntitySubType, location_name: "Type"))
     Attribute.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
     Attribute.add_member(:relationship_score, Shapes::ShapeRef.new(shape: Float, location_name: "RelationshipScore"))
+    Attribute.add_member(:relationship_type, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "RelationshipType"))
     Attribute.add_member(:id, Shapes::ShapeRef.new(shape: Integer, location_name: "Id"))
     Attribute.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
     Attribute.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
     Attribute.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    Attribute.add_member(:category, Shapes::ShapeRef.new(shape: EntityType, location_name: "Category"))
     Attribute.add_member(:traits, Shapes::ShapeRef.new(shape: TraitList, location_name: "Traits"))
     Attribute.struct_class = Types::Attribute
 

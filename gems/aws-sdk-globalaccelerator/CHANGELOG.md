@@ -1,9 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.14.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
 1.14.0 (2020-02-27)
 ------------------
 
+* Issue - This version has been yanked. (#2239)
 * Feature - This release adds support for adding tags to accelerators and bringing your own IP address to AWS Global Accelerator (BYOIP).
 
 1.13.0 (2019-10-23)
@@ -75,4 +81,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-globalaccelerator`.
-

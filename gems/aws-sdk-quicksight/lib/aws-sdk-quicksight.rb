@@ -42,6 +42,6 @@ require_relative 'aws-sdk-quicksight/customizations'
 # @service
 module Aws::QuickSight
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.17.1'
 
 end

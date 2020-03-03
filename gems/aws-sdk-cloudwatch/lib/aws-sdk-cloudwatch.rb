@@ -15,6 +15,7 @@ require_relative 'aws-sdk-cloudwatch/errors'
 require_relative 'aws-sdk-cloudwatch/waiters'
 require_relative 'aws-sdk-cloudwatch/resource'
 require_relative 'aws-sdk-cloudwatch/alarm'
+require_relative 'aws-sdk-cloudwatch/composite_alarm'
 require_relative 'aws-sdk-cloudwatch/metric'
 require_relative 'aws-sdk-cloudwatch/customizations'
 
@@ -45,6 +46,6 @@ require_relative 'aws-sdk-cloudwatch/customizations'
 # @service
 module Aws::CloudWatch
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.33.0'
 
 end

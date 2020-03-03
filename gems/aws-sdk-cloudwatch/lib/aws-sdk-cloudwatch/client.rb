@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics.rb'
-require 'aws-sdk-core/plugins/client_metrics_sender.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
@@ -54,8 +54,8 @@ module Aws::CloudWatch
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetrics)
-    add_plugin(Aws::Plugins::ClientMetricsSender)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
@@ -254,8 +254,31 @@ module Aws::CloudWatch
 
     # @!group API Operations
 
-    # Deletes the specified alarms. You can delete up to 50 alarms in one
-    # operation. In the event of an error, no alarms are deleted.
+    # Deletes the specified alarms. You can delete up to 100 alarms in one
+    # operation. However, this total can include no more than one composite
+    # alarm. For example, you could delete 99 metric alarms and one
+    # composite alarms with one operation, but you can't delete two
+    # composite alarms with one operation.
+    #
+    # In the event of an error, no alarms are deleted.
+    #
+    # <note markdown="1"> It is possible to create a loop or cycle of composite alarms, where
+    # composite alarm A depends on composite alarm B, and composite alarm B
+    # also depends on composite alarm A. In this scenario, you can't delete
+    # any composite alarm that is part of the cycle because there is always
+    # still a composite alarm that depends on that alarm that you want to
+    # delete.
+    #
+    #  To get out of such a situation, you must break the cycle by changing
+    # the rule of one of the composite alarms in the cycle to remove a
+    # dependency that creates the cycle. The simplest change to make to
+    # break a cycle is to change the `AlarmRule` of one of the alarms to
+    # `False`.
+    #
+    #  Additionally, the evaluation of composite alarms stops if CloudWatch
+    # detects a cycle in the evaluation path.
+    #
+    #  </note>
     #
     # @option params [required, Array<String>] :alarm_names
     #   The alarms to be deleted.
@@ -349,7 +372,11 @@ module Aws::CloudWatch
     #
     # @option params [required, Array<String>] :rule_names
     #   An array of the rule names to delete. If you need to find out the
-    #   names of your rules, use DescribeInsightRules.
+    #   names of your rules, use [DescribeInsightRules][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html
     #
     # @return [Types::DeleteInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -380,13 +407,19 @@ module Aws::CloudWatch
 
     # Retrieves the history for the specified alarm. You can filter the
     # results by date range or item type. If an alarm name is not specified,
-    # the histories for all alarms are returned.
+    # the histories for either all metric alarms or all composite alarms are
+    # returned.
     #
     # CloudWatch retains the history of an alarm even if you delete the
     # alarm.
     #
     # @option params [String] :alarm_name
     #   The name of the alarm.
+    #
+    # @option params [Array<String>] :alarm_types
+    #   Use this parameter to specify whether you want the operation to return
+    #   metric alarms or composite alarms. If you omit this parameter, only
+    #   metric alarms are returned.
     #
     # @option params [String] :history_item_type
     #   The type of alarm histories to retrieve.
@@ -404,6 +437,12 @@ module Aws::CloudWatch
     #   The token returned by a previous call to indicate that there is more
     #   data available.
     #
+    # @option params [String] :scan_by
+    #   Specified whether to return the newest or oldest alarm history first.
+    #   Specify `TimestampDescending` to have the newest event history
+    #   returned first, and specify `TimestampAscending` to have the oldest
+    #   history returned first.
+    #
     # @return [Types::DescribeAlarmHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAlarmHistoryOutput#alarm_history_items #alarm_history_items} => Array&lt;Types::AlarmHistoryItem&gt;
@@ -413,17 +452,20 @@ module Aws::CloudWatch
     #
     #   resp = client.describe_alarm_history({
     #     alarm_name: "AlarmName",
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
     #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
     #     start_date: Time.now,
     #     end_date: Time.now,
     #     max_records: 1,
     #     next_token: "NextToken",
+    #     scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
     #   })
     #
     # @example Response structure
     #
     #   resp.alarm_history_items #=> Array
     #   resp.alarm_history_items[0].alarm_name #=> String
+    #   resp.alarm_history_items[0].alarm_type #=> String, one of "CompositeAlarm", "MetricAlarm"
     #   resp.alarm_history_items[0].timestamp #=> Time
     #   resp.alarm_history_items[0].history_item_type #=> String, one of "ConfigurationUpdate", "StateUpdate", "Action"
     #   resp.alarm_history_items[0].history_summary #=> String
@@ -439,22 +481,74 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Retrieves the specified alarms. If no alarms are specified, all alarms
-    # are returned. Alarms can be retrieved by using only a prefix for the
-    # alarm name, the alarm state, or a prefix for any action.
+    # Retrieves the specified alarms. You can filter the results by
+    # specifying a a prefix for the alarm name, the alarm state, or a prefix
+    # for any action.
     #
     # @option params [Array<String>] :alarm_names
-    #   The names of the alarms.
+    #   The names of the alarms to retrieve information about.
     #
     # @option params [String] :alarm_name_prefix
-    #   The alarm name prefix. If this parameter is specified, you cannot
-    #   specify `AlarmNames`.
+    #   An alarm name prefix. If you specify this parameter, you receive
+    #   information about all alarms that have names that start with this
+    #   prefix.
+    #
+    #   If this parameter is specified, you cannot specify `AlarmNames`.
+    #
+    # @option params [Array<String>] :alarm_types
+    #   Use this parameter to specify whether you want the operation to return
+    #   metric alarms or composite alarms. If you omit this parameter, only
+    #   metric alarms are returned.
+    #
+    # @option params [String] :children_of_alarm_name
+    #   If you use this parameter and specify the name of a composite alarm,
+    #   the operation returns information about the "children" alarms of the
+    #   alarm you specify. These are the metric alarms and composite alarms
+    #   referenced in the `AlarmRule` field of the composite alarm that you
+    #   specify in `ChildrenOfAlarmName`. Information about the composite
+    #   alarm that you name in `ChildrenOfAlarmName` is not returned.
+    #
+    #   If you specify `ChildrenOfAlarmName`, you cannot specify any other
+    #   parameters in the request except for `MaxRecords` and `NextToken`. If
+    #   you do so, you will receive a validation error.
+    #
+    #   <note markdown="1"> Only the `Alarm Name`, `ARN`, `StateValue`
+    #   (OK/ALARM/INSUFFICIENT\_DATA), and `StateUpdatedTimestamp` information
+    #   are returned by this operation when you use this parameter. To get
+    #   complete information about these alarms, perform another
+    #   `DescribeAlarms` operation and specify the parent alarm names in the
+    #   `AlarmNames` parameter.
+    #
+    #    </note>
+    #
+    # @option params [String] :parents_of_alarm_name
+    #   If you use this parameter and specify the name of a metric or
+    #   composite alarm, the operation returns information about the
+    #   "parent" alarms of the alarm you specify. These are the composite
+    #   alarms that have `AlarmRule` parameters that reference the alarm named
+    #   in `ParentsOfAlarmName`. Information about the alarm that you specify
+    #   in `ParentsOfAlarmName` is not returned.
+    #
+    #   If you specify `ParentsOfAlarmName`, you cannot specify any other
+    #   parameters in the request except for `MaxRecords` and `NextToken`. If
+    #   you do so, you will receive a validation error.
+    #
+    #   <note markdown="1"> Only the Alarm Name and ARN are returned by this operation when you
+    #   use this parameter. To get complete information about these alarms,
+    #   perform another `DescribeAlarms` operation and specify the parent
+    #   alarm names in the `AlarmNames` parameter.
+    #
+    #    </note>
     #
     # @option params [String] :state_value
-    #   The state value to be used in matching alarms.
+    #   Specify this parameter to receive information only about alarms that
+    #   are currently in the state that you specify.
     #
     # @option params [String] :action_prefix
-    #   The action name prefix.
+    #   Use this parameter to filter the results of the operation to only
+    #   those alarms that use a certain alarm action. For example, you could
+    #   specify the ARN of an SNS topic to find all alarms that send
+    #   notifications to that topic.
     #
     # @option params [Integer] :max_records
     #   The maximum number of alarm descriptions to retrieve.
@@ -465,6 +559,7 @@ module Aws::CloudWatch
     #
     # @return [Types::DescribeAlarmsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribeAlarmsOutput#composite_alarms #composite_alarms} => Array&lt;Types::CompositeAlarm&gt;
     #   * {Types::DescribeAlarmsOutput#metric_alarms #metric_alarms} => Array&lt;Types::MetricAlarm&gt;
     #   * {Types::DescribeAlarmsOutput#next_token #next_token} => String
     #
@@ -473,6 +568,9 @@ module Aws::CloudWatch
     #   resp = client.describe_alarms({
     #     alarm_names: ["AlarmName"],
     #     alarm_name_prefix: "AlarmNamePrefix",
+    #     alarm_types: ["CompositeAlarm"], # accepts CompositeAlarm, MetricAlarm
+    #     children_of_alarm_name: "AlarmName",
+    #     parents_of_alarm_name: "AlarmName",
     #     state_value: "OK", # accepts OK, ALARM, INSUFFICIENT_DATA
     #     action_prefix: "ActionPrefix",
     #     max_records: 1,
@@ -481,6 +579,23 @@ module Aws::CloudWatch
     #
     # @example Response structure
     #
+    #   resp.composite_alarms #=> Array
+    #   resp.composite_alarms[0].actions_enabled #=> Boolean
+    #   resp.composite_alarms[0].alarm_actions #=> Array
+    #   resp.composite_alarms[0].alarm_actions[0] #=> String
+    #   resp.composite_alarms[0].alarm_arn #=> String
+    #   resp.composite_alarms[0].alarm_configuration_updated_timestamp #=> Time
+    #   resp.composite_alarms[0].alarm_description #=> String
+    #   resp.composite_alarms[0].alarm_name #=> String
+    #   resp.composite_alarms[0].alarm_rule #=> String
+    #   resp.composite_alarms[0].insufficient_data_actions #=> Array
+    #   resp.composite_alarms[0].insufficient_data_actions[0] #=> String
+    #   resp.composite_alarms[0].ok_actions #=> Array
+    #   resp.composite_alarms[0].ok_actions[0] #=> String
+    #   resp.composite_alarms[0].state_reason #=> String
+    #   resp.composite_alarms[0].state_reason_data #=> String
+    #   resp.composite_alarms[0].state_updated_timestamp #=> Time
+    #   resp.composite_alarms[0].state_value #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
     #   resp.metric_alarms #=> Array
     #   resp.metric_alarms[0].alarm_name #=> String
     #   resp.metric_alarms[0].alarm_arn #=> String
@@ -656,7 +771,7 @@ module Aws::CloudWatch
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in one operation. The maximum
-    #   value you can specify is 10.
+    #   value that you can specify is 100.
     #
     #   To retrieve the remaining results, make another call with the returned
     #   `NextToken` value.
@@ -798,7 +913,11 @@ module Aws::CloudWatch
     #
     # @option params [required, Array<String>] :rule_names
     #   An array of the rule names to disable. If you need to find out the
-    #   names of your rules, use DescribeInsightRules.
+    #   names of your rules, use [DescribeInsightRules][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html
     #
     # @return [Types::DisableInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,7 +973,11 @@ module Aws::CloudWatch
     #
     # @option params [required, Array<String>] :rule_names
     #   An array of the rule names to enable. If you need to find out the
-    #   names of your rules, use DescribeInsightRules.
+    #   names of your rules, use [DescribeInsightRules][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html
     #
     # @return [Types::EnableInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1063,7 +1186,7 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # You can use the `GetMetricData` API to retrieve as many as 100
+    # You can use the `GetMetricData` API to retrieve as many as 500
     # different metrics in a single request, with a total of as many as
     # 100,800 data points. You can also optionally perform math expressions
     # on the values of the returned statistics, to create new time series
@@ -1116,7 +1239,7 @@ module Aws::CloudWatch
     #
     # @option params [required, Array<Types::MetricDataQuery>] :metric_data_queries
     #   The metric queries to be returned. A single `GetMetricData` call can
-    #   include as many as 100 `MetricDataQuery` structures. Each of these
+    #   include as many as 500 `MetricDataQuery` structures. Each of these
     #   structures can specify either a metric to retrieve, or a math
     #   expression to perform on retrieved data.
     #
@@ -1488,11 +1611,15 @@ module Aws::CloudWatch
     #   `MetricWidget` parameter in each `GetMetricWidgetImage` call.
     #
     #   For more information about the syntax of `MetricWidget` see
-    #   CloudWatch-Metric-Widget-Structure.
+    #   [GetMetricWidgetImage: Metric Widget Structure and Syntax][1].
     #
     #   If any metric on the graph could not load all the requested data
     #   points, an orange triangle with an exclamation point appears next to
     #   the graph legend.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html
     #
     # @option params [String] :output_format
     #   The format of the resulting image. Only PNG images are supported.
@@ -1601,14 +1728,20 @@ module Aws::CloudWatch
     end
 
     # List the specified metrics. You can use the returned metrics with
-    # GetMetricData or GetMetricStatistics to obtain statistical data.
+    # [GetMetricData][1] or [GetMetricStatistics][2] to obtain statistical
+    # data.
     #
     # Up to 500 results are returned for any one call. To retrieve
     # additional results, use the returned token with subsequent calls.
     #
     # After you create a metric, allow up to fifteen minutes before the
     # metric appears. Statistics about the metric, however, are available
-    # sooner using GetMetricData or GetMetricStatistics.
+    # sooner using [GetMetricData][1] or [GetMetricStatistics][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html
     #
     # @option params [String] :namespace
     #   The namespace to filter against.
@@ -1764,6 +1897,179 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates or updates a *composite alarm*. When you create a composite
+    # alarm, you specify a rule expression for the alarm that takes into
+    # account the alarm states of other alarms that you have created. The
+    # composite alarm goes into ALARM state only if all conditions of the
+    # rule are met.
+    #
+    # The alarms specified in a composite alarm's rule expression can
+    # include metric alarms and other composite alarms.
+    #
+    # Using composite alarms can reduce alarm noise. You can create multiple
+    # metric alarms, and also create a composite alarm and set up alerts
+    # only for the composite alarm. For example, you could create a
+    # composite alarm that goes into ALARM state only when more than one of
+    # the underlying metric alarms are in ALARM state.
+    #
+    # Currently, the only alarm actions that can be taken by composite
+    # alarms are notifying SNS topics.
+    #
+    # <note markdown="1"> It is possible to create a loop or cycle of composite alarms, where
+    # composite alarm A depends on composite alarm B, and composite alarm B
+    # also depends on composite alarm A. In this scenario, you can't delete
+    # any composite alarm that is part of the cycle because there is always
+    # still a composite alarm that depends on that alarm that you want to
+    # delete.
+    #
+    #  To get out of such a situation, you must break the cycle by changing
+    # the rule of one of the composite alarms in the cycle to remove a
+    # dependency that creates the cycle. The simplest change to make to
+    # break a cycle is to change the `AlarmRule` of one of the alarms to
+    # `False`.
+    #
+    #  Additionally, the evaluation of composite alarms stops if CloudWatch
+    # detects a cycle in the evaluation path.
+    #
+    #  </note>
+    #
+    # When this operation creates an alarm, the alarm state is immediately
+    # set to `INSUFFICIENT_DATA`. The alarm is then evaluated and its state
+    # is set appropriately. Any actions associated with the new state are
+    # then executed. For a composite alarm, this initial time after creation
+    # is the only time that the alarm can be in `INSUFFICIENT_DATA` state.
+    #
+    # When you update an existing alarm, its state is left unchanged, but
+    # the update completely overwrites the previous configuration of the
+    # alarm.
+    #
+    # @option params [Boolean] :actions_enabled
+    #   Indicates whether actions should be executed during any changes to the
+    #   alarm state of the composite alarm. The default is `TRUE`.
+    #
+    # @option params [Array<String>] :alarm_actions
+    #   The actions to execute when this alarm transitions to the `ALARM`
+    #   state from any other state. Each action is specified as an Amazon
+    #   Resource Name (ARN).
+    #
+    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    # @option params [String] :alarm_description
+    #   The description for the composite alarm.
+    #
+    # @option params [required, String] :alarm_name
+    #   The name for the composite alarm. This name must be unique within your
+    #   AWS account.
+    #
+    # @option params [required, String] :alarm_rule
+    #   An expression that specifies which other alarms are to be evaluated to
+    #   determine this composite alarm's state. For each alarm that you
+    #   reference, you designate a function that specifies whether that alarm
+    #   needs to be in ALARM state, OK state, or INSUFFICIENT\_DATA state. You
+    #   can use operators (AND, OR and NOT) to combine multiple functions in a
+    #   single expression. You can use parenthesis to logically group the
+    #   functions in your expression.
+    #
+    #   You can use either alarm names or ARNs to reference the other alarms
+    #   that are to be evaluated.
+    #
+    #   Functions can include the following:
+    #
+    #   * `ALARM("alarm-name or alarm-ARN")` is TRUE if the named alarm is in
+    #     ALARM state.
+    #
+    #   * `OK("alarm-name or alarm-ARN")` is TRUE if the named alarm is in OK
+    #     state.
+    #
+    #   * `INSUFFICIENT_DATA("alarm-name or alarm-ARN")` is TRUE if the named
+    #     alarm is in INSUFFICIENT\_DATA state.
+    #
+    #   * `TRUE` always evaluates to TRUE.
+    #
+    #   * `FALSE` always evaluates to FALSE.
+    #
+    #   TRUE and FALSE are useful for testing a complex `AlarmRule` structure,
+    #   and for testing your alarm actions.
+    #
+    #   Alarm names specified in `AlarmRule` can be surrounded with
+    #   double-quotes ("), but do not have to be.
+    #
+    #   The following are some examples of `AlarmRule`\:
+    #
+    #   * `ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh)`
+    #     specifies that the composite alarm goes into ALARM state only if
+    #     both CPUUtilizationTooHigh and DiskReadOpsTooHigh alarms are in
+    #     ALARM state.
+    #
+    #   * `ALARM(CPUUtilizationTooHigh) AND NOT ALARM(DeploymentInProgress)`
+    #     specifies that the alarm goes to ALARM state if
+    #     CPUUtilizationTooHigh is in ALARM state and DeploymentInProgress is
+    #     not in ALARM state. This example reduces alarm noise during a known
+    #     deployment window.
+    #
+    #   * `(ALARM(CPUUtilizationTooHigh) OR ALARM(DiskReadOpsTooHigh)) AND
+    #     OK(NetworkOutTooHigh)` goes into ALARM state if
+    #     CPUUtilizationTooHigh OR DiskReadOpsTooHigh is in ALARM state, and
+    #     if NetworkOutTooHigh is in OK state. This provides another example
+    #     of using a composite alarm to prevent noise. This rule ensures that
+    #     you are not notified with an alarm action on high CPU or disk usage
+    #     if a known network problem is also occurring.
+    #
+    #   The `AlarmRule` can specify as many as 100 "children" alarms. The
+    #   `AlarmRule` expression can have as many as 500 elements. Elements are
+    #   child alarms, TRUE or FALSE statements, and parentheses.
+    #
+    # @option params [Array<String>] :insufficient_data_actions
+    #   The actions to execute when this alarm transitions to the
+    #   `INSUFFICIENT_DATA` state from any other state. Each action is
+    #   specified as an Amazon Resource Name (ARN).
+    #
+    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    # @option params [Array<String>] :ok_actions
+    #   The actions to execute when this alarm transitions to an `OK` state
+    #   from any other state. Each action is specified as an Amazon Resource
+    #   Name (ARN).
+    #
+    #   Valid Values: `arn:aws:sns:region:account-id:sns-topic-name `
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the composite alarm. You
+    #   can associate as many as 50 tags with an alarm.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions, by granting a user permission to
+    #   access or change only resources with certain tag values.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_composite_alarm({
+    #     actions_enabled: false,
+    #     alarm_actions: ["ResourceName"],
+    #     alarm_description: "AlarmDescription",
+    #     alarm_name: "AlarmName", # required
+    #     alarm_rule: "AlarmRule", # required
+    #     insufficient_data_actions: ["ResourceName"],
+    #     ok_actions: ["ResourceName"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarm AWS API Documentation
+    #
+    # @overload put_composite_alarm(params = {})
+    # @param [Hash] params ({})
+    def put_composite_alarm(params = {}, options = {})
+      req = build_request(:put_composite_alarm, params)
+      req.send_request(options)
+    end
+
     # Creates a dashboard if it does not already exist, or updates an
     # existing dashboard. If you update a dashboard, the entire contents are
     # replaced with what you specify here.
@@ -1797,8 +2103,12 @@ module Aws::CloudWatch
     #   the widgets to include and their location on the dashboard. This
     #   parameter is required.
     #
-    #   For more information about the syntax, see
-    #   CloudWatch-Dashboard-Body-Structure.
+    #   For more information about the syntax, see [Dashboard Body Structure
+    #   and Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
     #
     # @return [Types::PutDashboardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1946,7 +2256,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -1966,7 +2276,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -1986,7 +2296,7 @@ module Aws::CloudWatch
     #   `arn:aws:automate:region:ec2:recover` \|
     #   `arn:aws:automate:region:ec2:reboot` \|
     #   `arn:aws:sns:region:account-id:sns-topic-name ` \|
-    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-idautoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+    #   `arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
     #   `
     #
     #   Valid Values (for use with IAM roles):
@@ -2148,13 +2458,17 @@ module Aws::CloudWatch
     #   One item in the `Metrics` array is the expression that the alarm
     #   watches. You designate this expression by setting `ReturnValue` to
     #   true for this object in the array. For more information, see
-    #   MetricDataQuery.
+    #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
     #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
     #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
     #   operation. Instead, you retrieve the metrics you are using in your
     #   math expression as part of the `Metrics` array.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDataQuery.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of key-value pairs to associate with the alarm. You can
@@ -2249,7 +2563,7 @@ module Aws::CloudWatch
     # associates the data points with the specified metric. If the specified
     # metric does not exist, CloudWatch creates the metric. When CloudWatch
     # creates a metric, it can take up to fifteen minutes for the metric to
-    # appear in calls to ListMetrics.
+    # appear in calls to [ListMetrics][1].
     #
     # You can publish either individual data points in the `Value` field, or
     # arrays of values and the number of times each value occurred during
@@ -2271,11 +2585,14 @@ module Aws::CloudWatch
     # You can use up to 10 dimensions per metric to further clarify what
     # data the metric collects. Each dimension consists of a Name and Value
     # pair. For more information about specifying dimensions, see
-    # [Publishing Metrics][1] in the *Amazon CloudWatch User Guide*.
+    # [Publishing Metrics][2] in the *Amazon CloudWatch User Guide*.
     #
     # Data points with time stamps from 24 hours ago or longer can take at
-    # least 48 hours to become available for GetMetricData or
-    # GetMetricStatistics from the time they are submitted.
+    # least 48 hours to become available for [GetMetricData][3] or
+    # [GetMetricStatistics][4] from the time they are submitted. Data points
+    # with time stamps between 3 and 24 hours ago can take as much as 2
+    # hours to become available for for [GetMetricData][3] or
+    # [GetMetricStatistics][4].
     #
     # CloudWatch needs raw data points to calculate percentile statistics.
     # If you publish data using a statistic set instead, you can only
@@ -2290,7 +2607,10 @@ module Aws::CloudWatch
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html
+    # [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html
     #
     # @option params [required, String] :namespace
     #   The namespace for the metric data.
@@ -2347,10 +2667,25 @@ module Aws::CloudWatch
     # for the appropriate state is invoked. For example, if your alarm is
     # configured to send an Amazon SNS message when an alarm is triggered,
     # temporarily changing the alarm state to `ALARM` sends an SNS message.
-    # The alarm returns to its actual state (often within seconds). Because
-    # the alarm state change happens quickly, it is typically only visible
-    # in the alarm's **History** tab in the Amazon CloudWatch console or
-    # through DescribeAlarmHistory.
+    #
+    # Metric alarms returns to their actual state quickly, often within
+    # seconds. Because the metric alarm state change happens quickly, it is
+    # typically only visible in the alarm's **History** tab in the Amazon
+    # CloudWatch console or through [DescribeAlarmHistory][1].
+    #
+    # If you use `SetAlarmState` on a composite alarm, the composite alarm
+    # is not guaranteed to return to its actual state. It will return to its
+    # actual state only once any of its children alarms change state. It is
+    # also re-evaluated if you update its configuration.
+    #
+    # If an alarm triggers EC2 Auto Scaling policies or application Auto
+    # Scaling policies, you must include information in the
+    # `StateReasonData` parameter to enable the policy to take the correct
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarmHistory.html
     #
     # @option params [required, String] :alarm_name
     #   The name for the alarm. This name must be unique within the AWS
@@ -2366,6 +2701,11 @@ module Aws::CloudWatch
     # @option params [String] :state_reason_data
     #   The reason that this alarm is set to this specific state, in JSON
     #   format.
+    #
+    #   For SNS or EC2 alarm actions, this is just informational. But for EC2
+    #   Auto Scaling or application Auto Scaling alarm actions, the Auto
+    #   Scaling policy uses the information in this field to take the correct
+    #   action.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2481,7 +2821,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2547,9 +2887,10 @@ module Aws::CloudWatch
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name  | params             | :delay   | :max_attempts |
-    # | ------------ | ------------------ | -------- | ------------- |
-    # | alarm_exists | {#describe_alarms} | 5        | 40            |
+    # | waiter_name            | params             | :delay   | :max_attempts |
+    # | ---------------------- | ------------------ | -------- | ------------- |
+    # | alarm_exists           | {#describe_alarms} | 5        | 40            |
+    # | composite_alarm_exists | {#describe_alarms} | 5        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -2600,7 +2941,8 @@ module Aws::CloudWatch
 
     def waiters
       {
-        alarm_exists: Waiters::AlarmExists
+        alarm_exists: Waiters::AlarmExists,
+        composite_alarm_exists: Waiters::CompositeAlarmExists
       }
     end
 

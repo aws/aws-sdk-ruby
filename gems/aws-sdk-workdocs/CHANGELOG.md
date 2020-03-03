@@ -1,9 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.20.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
 1.20.0 (2020-02-28)
 ------------------
 
+* Issue - This version has been yanked. (#2239)
 * Feature - Documentation updates for workdocs
 
 1.19.0 (2019-10-23)
@@ -160,4 +166,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-workdocs`.
-

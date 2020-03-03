@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics.rb'
-require 'aws-sdk-core/plugins/client_metrics_sender.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
@@ -54,8 +54,8 @@ module Aws::ComprehendMedical
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetrics)
-    add_plugin(Aws::Plugins::ClientMetricsSender)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
@@ -390,31 +390,35 @@ module Aws::ComprehendMedical
     #   resp.entities[0].end_offset #=> Integer
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].text #=> String
-    #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY"
-    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
+    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
     #   resp.entities[0].attributes[0].text #=> String
+    #   resp.entities[0].attributes[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
     #   resp.entities[0].attributes[0].traits #=> Array
     #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
     #   resp.unmapped_attributes #=> Array
-    #   resp.unmapped_attributes[0].type #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY"
-    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.unmapped_attributes[0].type #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
+    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.unmapped_attributes[0].attribute.score #=> Float
     #   resp.unmapped_attributes[0].attribute.relationship_score #=> Float
+    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION"
     #   resp.unmapped_attributes[0].attribute.id #=> Integer
     #   resp.unmapped_attributes[0].attribute.begin_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.end_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.text #=> String
+    #   resp.unmapped_attributes[0].attribute.category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
     #   resp.unmapped_attributes[0].attribute.traits #=> Array
     #   resp.unmapped_attributes[0].attribute.traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.unmapped_attributes[0].attribute.traits[0].score #=> Float
@@ -432,7 +436,8 @@ module Aws::ComprehendMedical
 
     # Inspects the clinical text for a variety of medical entities and
     # returns specific information about them such as entity category,
-    # location, and confidence score on that information.
+    # location, and confidence score on that information. Amazon Comprehend
+    # Medical only detects medical entities in English language texts.
     #
     # The `DetectEntitiesV2` operation replaces the DetectEntities
     # operation. This new action uses a different model for determining the
@@ -469,31 +474,35 @@ module Aws::ComprehendMedical
     #   resp.entities[0].end_offset #=> Integer
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].text #=> String
-    #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY"
-    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
+    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
     #   resp.entities[0].attributes[0].text #=> String
+    #   resp.entities[0].attributes[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
     #   resp.entities[0].attributes[0].traits #=> Array
     #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
     #   resp.unmapped_attributes #=> Array
-    #   resp.unmapped_attributes[0].type #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY"
-    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.unmapped_attributes[0].type #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
+    #   resp.unmapped_attributes[0].attribute.type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.unmapped_attributes[0].attribute.score #=> Float
     #   resp.unmapped_attributes[0].attribute.relationship_score #=> Float
+    #   resp.unmapped_attributes[0].attribute.relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION"
     #   resp.unmapped_attributes[0].attribute.id #=> Integer
     #   resp.unmapped_attributes[0].attribute.begin_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.end_offset #=> Integer
     #   resp.unmapped_attributes[0].attribute.text #=> String
+    #   resp.unmapped_attributes[0].attribute.category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
     #   resp.unmapped_attributes[0].attribute.traits #=> Array
     #   resp.unmapped_attributes[0].attribute.traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.unmapped_attributes[0].attribute.traits[0].score #=> Float
@@ -510,8 +519,9 @@ module Aws::ComprehendMedical
     end
 
     # Inspects the clinical text for protected health information (PHI)
-    # entities and entity category, location, and confidence score on that
-    # information.
+    # entities and returns the entity category, location, and confidence
+    # score for each entity. Amazon Comprehend Medical only detects entities
+    # in English language texts.
     #
     # @option params [required, String] :text
     #   A UTF-8 text string containing the clinical content being examined for
@@ -538,19 +548,21 @@ module Aws::ComprehendMedical
     #   resp.entities[0].end_offset #=> Integer
     #   resp.entities[0].score #=> Float
     #   resp.entities[0].text #=> String
-    #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY"
-    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.entities[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
+    #   resp.entities[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].traits #=> Array
     #   resp.entities[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].traits[0].score #=> Float
     #   resp.entities[0].attributes #=> Array
-    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY"
+    #   resp.entities[0].attributes[0].type #=> String, one of "NAME", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "GENERIC_NAME", "BRAND_NAME", "STRENGTH", "RATE", "ACUITY", "TEST_NAME", "TEST_VALUE", "TEST_UNITS", "PROCEDURE_NAME", "TREATMENT_NAME", "DATE", "AGE", "CONTACT_POINT", "EMAIL", "IDENTIFIER", "URL", "ADDRESS", "PROFESSION", "SYSTEM_ORGAN_SITE", "DIRECTION", "QUALITY", "QUANTITY", "TIME_EXPRESSION", "TIME_TO_MEDICATION_NAME", "TIME_TO_DX_NAME", "TIME_TO_TEST_NAME", "TIME_TO_PROCEDURE_NAME", "TIME_TO_TREATMENT_NAME"
     #   resp.entities[0].attributes[0].score #=> Float
     #   resp.entities[0].attributes[0].relationship_score #=> Float
+    #   resp.entities[0].attributes[0].relationship_type #=> String, one of "EVERY", "WITH_DOSAGE", "ADMINISTERED_VIA", "FOR", "NEGATIVE", "OVERLAP", "DOSAGE", "ROUTE_OR_MODE", "FORM", "FREQUENCY", "DURATION", "STRENGTH", "RATE", "ACUITY", "TEST_VALUE", "TEST_UNITS", "DIRECTION"
     #   resp.entities[0].attributes[0].id #=> Integer
     #   resp.entities[0].attributes[0].begin_offset #=> Integer
     #   resp.entities[0].attributes[0].end_offset #=> Integer
     #   resp.entities[0].attributes[0].text #=> String
+    #   resp.entities[0].attributes[0].category #=> String, one of "MEDICATION", "MEDICAL_CONDITION", "PROTECTED_HEALTH_INFORMATION", "TEST_TREATMENT_PROCEDURE", "ANATOMY", "TIME_EXPRESSION"
     #   resp.entities[0].attributes[0].traits #=> Array
     #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "SIGN", "SYMPTOM", "DIAGNOSIS", "NEGATION"
     #   resp.entities[0].attributes[0].traits[0].score #=> Float
@@ -569,7 +581,8 @@ module Aws::ComprehendMedical
     # InferICD10CM detects medical conditions as entities listed in a
     # patient record and links those entities to normalized concept
     # identifiers in the ICD-10-CM knowledge base from the Centers for
-    # Disease Control.
+    # Disease Control. Amazon Comprehend Medical only detects medical
+    # entities in English language texts.
     #
     # @option params [required, String] :text
     #   The input text used for analysis. The input for InferICD10CM is a
@@ -629,7 +642,8 @@ module Aws::ComprehendMedical
 
     # InferRxNorm detects medications as entities listed in a patient record
     # and links to the normalized concept identifiers in the RxNorm database
-    # from the National Library of Medicine.
+    # from the National Library of Medicine. Amazon Comprehend Medical only
+    # detects medical entities in English language texts.
     #
     # @option params [required, String] :text
     #   The input text used for analysis. The input for InferRxNorm is a
@@ -1027,7 +1041,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
