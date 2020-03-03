@@ -14,7 +14,7 @@ module Aws::S3
   #     client = Aws::S3::Client.new(region: 'us-west-2')
   #     resource = Aws::S3::Resource.new(client: client)
   #
-class Resource
+  class Resource
 
     # @param options ({})
     # @option options [Client] :client
