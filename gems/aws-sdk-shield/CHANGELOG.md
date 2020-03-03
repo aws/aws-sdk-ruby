@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support Shield API Pagination on ListAttacks and ListProtections
+
 1.22.0 (2020-02-14)
 ------------------
 
