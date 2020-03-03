@@ -26,7 +26,7 @@ module Aws
         # @param context [Seahorse::Client::RequestContext]
         def clock_skewed?(context)
           server_time = server_time(context.http_response)
-          server_time && (Time.now.utc - server_time).abs > CLOCK_SKEW_THRESHOLD
+          !!server_time && (Time.now.utc - server_time).abs > CLOCK_SKEW_THRESHOLD
         end
 
         # Update the stored clock skew value for an endpoint

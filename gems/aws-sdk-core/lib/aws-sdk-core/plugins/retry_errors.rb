@@ -219,7 +219,6 @@ that fail because of a skewed client clock.
           config = context.config
 
           get_send_token(config)
-          puts "\n\n----------------------------------------\nCall: #{context.retries}"
           response = @handler.call(context)
           error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
