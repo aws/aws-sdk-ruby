@@ -30,6 +30,16 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:guardduty)
 
 module Aws::GuardDuty
+  # An API client for GuardDuty.  To construct a client, you need to configure a +:region+ and +:credentials+.
+  #     client = Aws::GuardDuty::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  # For details on configuring region and credentials see
+  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -209,16 +219,16 @@ module Aws::GuardDuty
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     per-request on the session yielded by {#session_for}.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +237,7 @@ module Aws::GuardDuty
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session yielded by {#session_for}.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1229,6 +1239,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port #=> Integer
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port_name #=> String
     #   resp.findings[0].service.action.network_connection_action.protocol #=> String
+    #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v4 #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_name #=> String
@@ -1245,6 +1256,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.port_probe_action.port_probe_details #=> Array
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port #=> Integer
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port_name #=> String
+    #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v4 #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_name #=> String
@@ -1739,6 +1751,8 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2535,7 +2549,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

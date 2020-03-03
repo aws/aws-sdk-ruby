@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iot/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t = Aws::IoT::Client.new
+#     resp = io_t.accept_certificate_transfer(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoT::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT API errors
 #     end
 #
 # See {Errors} for more information.

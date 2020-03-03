@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
   class ObjectVersion
 
     extend Aws::Deprecations

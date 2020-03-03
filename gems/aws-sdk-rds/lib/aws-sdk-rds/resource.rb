@@ -6,6 +6,13 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+  # This class provides a resource oriented interface for RDS.
+  # To create a resource object:
+  #     resource = Aws::RDS::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass +:client+, a default client will be constructed.
+  #     client = Aws::RDS::Client.new(region: 'us-west-2')
+  #     resource = Aws::RDS::Resource.new(client: client)
   class Resource
 
     # @param options ({})

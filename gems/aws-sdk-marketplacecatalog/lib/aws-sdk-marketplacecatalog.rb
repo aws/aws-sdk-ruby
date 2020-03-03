@@ -24,17 +24,20 @@ require_relative 'aws-sdk-marketplacecatalog/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     marketplace_catalog = Aws::MarketplaceCatalog::Client.new
+#     resp = marketplace_catalog.cancel_change_set(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Marketplace Catalog Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Marketplace Catalog Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MarketplaceCatalog::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Marketplace Catalog Service API errors
 #     end
 #
 # See {Errors} for more information.

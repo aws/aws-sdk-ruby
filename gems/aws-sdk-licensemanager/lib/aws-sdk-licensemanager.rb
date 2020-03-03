@@ -24,17 +24,20 @@ require_relative 'aws-sdk-licensemanager/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     license_manager = Aws::LicenseManager::Client.new
+#     resp = license_manager.create_license_configuration(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS License Manager all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS License Manager are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::LicenseManager::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS License Manager API errors
 #     end
 #
 # See {Errors} for more information.

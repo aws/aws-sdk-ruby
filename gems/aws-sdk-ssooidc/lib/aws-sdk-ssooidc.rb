@@ -24,17 +24,20 @@ require_relative 'aws-sdk-ssooidc/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ssooidc = Aws::SSOOIDC::Client.new
+#     resp = ssooidc.create_token(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS SSO OIDC all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS SSO OIDC are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SSOOIDC::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS SSO OIDC API errors
 #     end
 #
 # See {Errors} for more information.

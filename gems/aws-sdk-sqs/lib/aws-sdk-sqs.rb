@@ -26,17 +26,20 @@ require_relative 'aws-sdk-sqs/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     sqs = Aws::SQS::Client.new
+#     resp = sqs.add_permission(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Simple Queue Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Simple Queue Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SQS::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Simple Queue Service API errors
 #     end
 #
 # See {Errors} for more information.

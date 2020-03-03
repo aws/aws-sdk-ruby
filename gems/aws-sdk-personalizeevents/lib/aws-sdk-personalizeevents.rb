@@ -24,17 +24,20 @@ require_relative 'aws-sdk-personalizeevents/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     personalize_events = Aws::PersonalizeEvents::Client.new
+#     resp = personalize_events.put_events(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Personalize Events all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Personalize Events are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::PersonalizeEvents::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Personalize Events API errors
 #     end
 #
 # See {Errors} for more information.

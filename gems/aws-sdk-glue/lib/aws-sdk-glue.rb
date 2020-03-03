@@ -24,17 +24,20 @@ require_relative 'aws-sdk-glue/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     glue = Aws::Glue::Client.new
+#     resp = glue.batch_create_partition(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Glue all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Glue are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Glue::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Glue API errors
 #     end
 #
 # See {Errors} for more information.

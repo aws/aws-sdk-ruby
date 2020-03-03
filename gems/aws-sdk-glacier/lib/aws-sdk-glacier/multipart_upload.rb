@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Glacier
+
   class MultipartUpload
 
     extend Aws::Deprecations

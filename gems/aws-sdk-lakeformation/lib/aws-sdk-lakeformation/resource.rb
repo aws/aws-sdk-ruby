@@ -6,6 +6,13 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::LakeFormation
+  # This class provides a resource oriented interface for LakeFormation.
+  # To create a resource object:
+  #     resource = Aws::LakeFormation::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass +:client+, a default client will be constructed.
+  #     client = Aws::LakeFormation::Client.new(region: 'us-west-2')
+  #     resource = Aws::LakeFormation::Resource.new(client: client)
   class Resource
 
     # @param options ({})

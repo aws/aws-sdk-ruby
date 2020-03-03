@@ -24,17 +24,20 @@ require_relative 'aws-sdk-mediatailor/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     media_tailor = Aws::MediaTailor::Client.new
+#     resp = media_tailor.delete_playback_configuration(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS MediaTailor all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS MediaTailor are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MediaTailor::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS MediaTailor API errors
 #     end
 #
 # See {Errors} for more information.

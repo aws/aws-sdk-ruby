@@ -24,17 +24,20 @@ require_relative 'aws-sdk-cognitoidentityprovider/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cognito_identity_provider = Aws::CognitoIdentityProvider::Client.new
+#     resp = cognito_identity_provider.add_custom_attributes(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Cognito Identity Provider all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Cognito Identity Provider are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CognitoIdentityProvider::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Cognito Identity Provider API errors
 #     end
 #
 # See {Errors} for more information.

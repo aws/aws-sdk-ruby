@@ -5810,6 +5810,14 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "SecurityGroupIds":{
+          "shape":"ClientVpnSecurityGroupIdSet",
+          "locationName":"securityGroupIdSet"
+        },
+        "VpcId":{
+          "shape":"VpcId",
+          "locationName":"vpcId"
         }
       }
     },
@@ -6334,7 +6342,12 @@
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
-        }
+        },
+        "SecurityGroupIds":{
+          "shape":"ClientVpnSecurityGroupIdSet",
+          "locationName":"SecurityGroupId"
+        },
+        "VpcId":{"shape":"VpcId"}
       }
     },
     "CreateClientVpnEndpointResult":{
@@ -6612,6 +6625,10 @@
         "LogDestinationType":{"shape":"LogDestinationType"},
         "LogDestination":{"shape":"String"},
         "LogFormat":{"shape":"String"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        },
         "MaxAggregationInterval":{"shape":"Integer"}
       }
     },
@@ -14560,7 +14577,7 @@
       "type":"structure",
       "members":{
         "CreationTime":{
-          "shape":"DateTime",
+          "shape":"MillisecondDateTime",
           "locationName":"creationTime"
         },
         "DeliverLogsErrorMessage":{
@@ -14606,6 +14623,10 @@
         "LogFormat":{
           "shape":"String",
           "locationName":"logFormat"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         },
         "MaxAggregationInterval":{
           "shape":"Integer",
@@ -19660,7 +19681,12 @@
         "VpnPort":{"shape":"Integer"},
         "Description":{"shape":"String"},
         "SplitTunnel":{"shape":"Boolean"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "SecurityGroupIds":{
+          "shape":"ClientVpnSecurityGroupIdSet",
+          "locationName":"SecurityGroupId"
+        },
+        "VpcId":{"shape":"VpcId"}
       }
     },
     "ModifyClientVpnEndpointResult":{
@@ -23801,7 +23827,8 @@
         "vpc",
         "vpc-peering-connection",
         "vpn-connection",
-        "vpn-gateway"
+        "vpn-gateway",
+        "vpc-flow-log"
       ]
     },
     "ResponseError":{
@@ -24318,7 +24345,6 @@
         },
         "ClientToken":{
           "shape":"String",
-          "idempotencyToken":true,
           "locationName":"clientToken"
         },
         "DisableApiTermination":{

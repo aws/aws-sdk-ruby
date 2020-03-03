@@ -6,6 +6,136 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Redshift
+
+  # When Redshift returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Redshift::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Redshift errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Redshift::Errors::ServiceError
+  #       # rescues all Redshift API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessToSnapshotDeniedFault}
+  # * {AuthorizationAlreadyExistsFault}
+  # * {AuthorizationNotFoundFault}
+  # * {AuthorizationQuotaExceededFault}
+  # * {BatchDeleteRequestSizeExceededFault}
+  # * {BatchModifyClusterSnapshotsLimitExceededFault}
+  # * {BucketNotFoundFault}
+  # * {ClusterAlreadyExistsFault}
+  # * {ClusterNotFoundFault}
+  # * {ClusterOnLatestRevisionFault}
+  # * {ClusterParameterGroupAlreadyExistsFault}
+  # * {ClusterParameterGroupNotFoundFault}
+  # * {ClusterParameterGroupQuotaExceededFault}
+  # * {ClusterQuotaExceededFault}
+  # * {ClusterSecurityGroupAlreadyExistsFault}
+  # * {ClusterSecurityGroupNotFoundFault}
+  # * {ClusterSecurityGroupQuotaExceededFault}
+  # * {ClusterSnapshotAlreadyExistsFault}
+  # * {ClusterSnapshotNotFoundFault}
+  # * {ClusterSnapshotQuotaExceededFault}
+  # * {ClusterSubnetGroupAlreadyExistsFault}
+  # * {ClusterSubnetGroupNotFoundFault}
+  # * {ClusterSubnetGroupQuotaExceededFault}
+  # * {ClusterSubnetQuotaExceededFault}
+  # * {CopyToRegionDisabledFault}
+  # * {DependentServiceRequestThrottlingFault}
+  # * {DependentServiceUnavailableFault}
+  # * {EventSubscriptionQuotaExceededFault}
+  # * {HsmClientCertificateAlreadyExistsFault}
+  # * {HsmClientCertificateNotFoundFault}
+  # * {HsmClientCertificateQuotaExceededFault}
+  # * {HsmConfigurationAlreadyExistsFault}
+  # * {HsmConfigurationNotFoundFault}
+  # * {HsmConfigurationQuotaExceededFault}
+  # * {InProgressTableRestoreQuotaExceededFault}
+  # * {IncompatibleOrderableOptions}
+  # * {InsufficientClusterCapacityFault}
+  # * {InsufficientS3BucketPolicyFault}
+  # * {InvalidClusterParameterGroupStateFault}
+  # * {InvalidClusterSecurityGroupStateFault}
+  # * {InvalidClusterSnapshotScheduleStateFault}
+  # * {InvalidClusterSnapshotStateFault}
+  # * {InvalidClusterStateFault}
+  # * {InvalidClusterSubnetGroupStateFault}
+  # * {InvalidClusterSubnetStateFault}
+  # * {InvalidClusterTrackFault}
+  # * {InvalidElasticIpFault}
+  # * {InvalidHsmClientCertificateStateFault}
+  # * {InvalidHsmConfigurationStateFault}
+  # * {InvalidReservedNodeStateFault}
+  # * {InvalidRestoreFault}
+  # * {InvalidRetentionPeriodFault}
+  # * {InvalidS3BucketNameFault}
+  # * {InvalidS3KeyPrefixFault}
+  # * {InvalidScheduleFault}
+  # * {InvalidScheduledActionFault}
+  # * {InvalidSnapshotCopyGrantStateFault}
+  # * {InvalidSubnet}
+  # * {InvalidSubscriptionStateFault}
+  # * {InvalidTableRestoreArgumentFault}
+  # * {InvalidTagFault}
+  # * {InvalidVPCNetworkStateFault}
+  # * {LimitExceededFault}
+  # * {NumberOfNodesPerClusterLimitExceededFault}
+  # * {NumberOfNodesQuotaExceededFault}
+  # * {ReservedNodeAlreadyExistsFault}
+  # * {ReservedNodeAlreadyMigratedFault}
+  # * {ReservedNodeNotFoundFault}
+  # * {ReservedNodeOfferingNotFoundFault}
+  # * {ReservedNodeQuotaExceededFault}
+  # * {ResizeNotFoundFault}
+  # * {ResourceNotFoundFault}
+  # * {SNSInvalidTopicFault}
+  # * {SNSNoAuthorizationFault}
+  # * {SNSTopicArnNotFoundFault}
+  # * {ScheduleDefinitionTypeUnsupportedFault}
+  # * {ScheduledActionAlreadyExistsFault}
+  # * {ScheduledActionNotFoundFault}
+  # * {ScheduledActionQuotaExceededFault}
+  # * {ScheduledActionTypeUnsupportedFault}
+  # * {SnapshotCopyAlreadyDisabledFault}
+  # * {SnapshotCopyAlreadyEnabledFault}
+  # * {SnapshotCopyDisabledFault}
+  # * {SnapshotCopyGrantAlreadyExistsFault}
+  # * {SnapshotCopyGrantNotFoundFault}
+  # * {SnapshotCopyGrantQuotaExceededFault}
+  # * {SnapshotScheduleAlreadyExistsFault}
+  # * {SnapshotScheduleNotFoundFault}
+  # * {SnapshotScheduleQuotaExceededFault}
+  # * {SnapshotScheduleUpdateInProgressFault}
+  # * {SourceNotFoundFault}
+  # * {SubnetAlreadyInUse}
+  # * {SubscriptionAlreadyExistFault}
+  # * {SubscriptionCategoryNotFoundFault}
+  # * {SubscriptionEventIdNotFoundFault}
+  # * {SubscriptionNotFoundFault}
+  # * {SubscriptionSeverityNotFoundFault}
+  # * {TableLimitExceededFault}
+  # * {TableRestoreNotFoundFault}
+  # * {TagLimitExceededFault}
+  # * {UnauthorizedOperation}
+  # * {UnknownSnapshotCopyRegionFault}
+  # * {UnsupportedOperationFault}
+  # * {UnsupportedOptionFault}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

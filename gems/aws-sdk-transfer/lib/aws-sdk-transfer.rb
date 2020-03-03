@@ -24,17 +24,20 @@ require_relative 'aws-sdk-transfer/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     transfer = Aws::Transfer::Client.new
+#     resp = transfer.create_server(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Transfer for SFTP all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Transfer for SFTP are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Transfer::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Transfer for SFTP API errors
 #     end
 #
 # See {Errors} for more information.

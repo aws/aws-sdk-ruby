@@ -6,6 +6,144 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
+  # When RDS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::RDS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all RDS errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::RDS::Errors::ServiceError
+  #       # rescues all RDS API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AuthorizationAlreadyExistsFault}
+  # * {AuthorizationNotFoundFault}
+  # * {AuthorizationQuotaExceededFault}
+  # * {BackupPolicyNotFoundFault}
+  # * {CertificateNotFoundFault}
+  # * {CustomAvailabilityZoneAlreadyExistsFault}
+  # * {CustomAvailabilityZoneNotFoundFault}
+  # * {CustomAvailabilityZoneQuotaExceededFault}
+  # * {DBClusterAlreadyExistsFault}
+  # * {DBClusterBacktrackNotFoundFault}
+  # * {DBClusterEndpointAlreadyExistsFault}
+  # * {DBClusterEndpointNotFoundFault}
+  # * {DBClusterEndpointQuotaExceededFault}
+  # * {DBClusterNotFoundFault}
+  # * {DBClusterParameterGroupNotFoundFault}
+  # * {DBClusterQuotaExceededFault}
+  # * {DBClusterRoleAlreadyExistsFault}
+  # * {DBClusterRoleNotFoundFault}
+  # * {DBClusterRoleQuotaExceededFault}
+  # * {DBClusterSnapshotAlreadyExistsFault}
+  # * {DBClusterSnapshotNotFoundFault}
+  # * {DBInstanceAlreadyExistsFault}
+  # * {DBInstanceAutomatedBackupNotFoundFault}
+  # * {DBInstanceAutomatedBackupQuotaExceededFault}
+  # * {DBInstanceNotFoundFault}
+  # * {DBInstanceRoleAlreadyExistsFault}
+  # * {DBInstanceRoleNotFoundFault}
+  # * {DBInstanceRoleQuotaExceededFault}
+  # * {DBLogFileNotFoundFault}
+  # * {DBParameterGroupAlreadyExistsFault}
+  # * {DBParameterGroupNotFoundFault}
+  # * {DBParameterGroupQuotaExceededFault}
+  # * {DBProxyAlreadyExistsFault}
+  # * {DBProxyNotFoundFault}
+  # * {DBProxyQuotaExceededFault}
+  # * {DBProxyTargetAlreadyRegisteredFault}
+  # * {DBProxyTargetGroupNotFoundFault}
+  # * {DBProxyTargetNotFoundFault}
+  # * {DBSecurityGroupAlreadyExistsFault}
+  # * {DBSecurityGroupNotFoundFault}
+  # * {DBSecurityGroupNotSupportedFault}
+  # * {DBSecurityGroupQuotaExceededFault}
+  # * {DBSnapshotAlreadyExistsFault}
+  # * {DBSnapshotNotFoundFault}
+  # * {DBSubnetGroupAlreadyExistsFault}
+  # * {DBSubnetGroupDoesNotCoverEnoughAZs}
+  # * {DBSubnetGroupNotAllowedFault}
+  # * {DBSubnetGroupNotFoundFault}
+  # * {DBSubnetGroupQuotaExceededFault}
+  # * {DBSubnetQuotaExceededFault}
+  # * {DBUpgradeDependencyFailureFault}
+  # * {DomainNotFoundFault}
+  # * {EventSubscriptionQuotaExceededFault}
+  # * {ExportTaskAlreadyExistsFault}
+  # * {ExportTaskNotFoundFault}
+  # * {GlobalClusterAlreadyExistsFault}
+  # * {GlobalClusterNotFoundFault}
+  # * {GlobalClusterQuotaExceededFault}
+  # * {IamRoleMissingPermissionsFault}
+  # * {IamRoleNotFoundFault}
+  # * {InstallationMediaAlreadyExistsFault}
+  # * {InstallationMediaNotFoundFault}
+  # * {InstanceQuotaExceededFault}
+  # * {InsufficientDBClusterCapacityFault}
+  # * {InsufficientDBInstanceCapacityFault}
+  # * {InsufficientStorageClusterCapacityFault}
+  # * {InvalidDBClusterCapacityFault}
+  # * {InvalidDBClusterEndpointStateFault}
+  # * {InvalidDBClusterSnapshotStateFault}
+  # * {InvalidDBClusterStateFault}
+  # * {InvalidDBInstanceAutomatedBackupStateFault}
+  # * {InvalidDBInstanceStateFault}
+  # * {InvalidDBParameterGroupStateFault}
+  # * {InvalidDBProxyStateFault}
+  # * {InvalidDBSecurityGroupStateFault}
+  # * {InvalidDBSnapshotStateFault}
+  # * {InvalidDBSubnetGroupFault}
+  # * {InvalidDBSubnetGroupStateFault}
+  # * {InvalidDBSubnetStateFault}
+  # * {InvalidEventSubscriptionStateFault}
+  # * {InvalidExportOnlyFault}
+  # * {InvalidExportSourceStateFault}
+  # * {InvalidExportTaskStateFault}
+  # * {InvalidGlobalClusterStateFault}
+  # * {InvalidOptionGroupStateFault}
+  # * {InvalidRestoreFault}
+  # * {InvalidS3BucketFault}
+  # * {InvalidSubnet}
+  # * {InvalidVPCNetworkStateFault}
+  # * {KMSKeyNotAccessibleFault}
+  # * {OptionGroupAlreadyExistsFault}
+  # * {OptionGroupNotFoundFault}
+  # * {OptionGroupQuotaExceededFault}
+  # * {PointInTimeRestoreNotEnabledFault}
+  # * {ProvisionedIopsNotAvailableInAZFault}
+  # * {ReservedDBInstanceAlreadyExistsFault}
+  # * {ReservedDBInstanceNotFoundFault}
+  # * {ReservedDBInstanceQuotaExceededFault}
+  # * {ReservedDBInstancesOfferingNotFoundFault}
+  # * {ResourceNotFoundFault}
+  # * {SNSInvalidTopicFault}
+  # * {SNSNoAuthorizationFault}
+  # * {SNSTopicArnNotFoundFault}
+  # * {SharedSnapshotQuotaExceededFault}
+  # * {SnapshotQuotaExceededFault}
+  # * {SourceNotFoundFault}
+  # * {StorageQuotaExceededFault}
+  # * {StorageTypeNotSupportedFault}
+  # * {SubnetAlreadyInUse}
+  # * {SubscriptionAlreadyExistFault}
+  # * {SubscriptionCategoryNotFoundFault}
+  # * {SubscriptionNotFoundFault}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

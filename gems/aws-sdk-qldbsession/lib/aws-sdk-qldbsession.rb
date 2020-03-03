@@ -24,17 +24,20 @@ require_relative 'aws-sdk-qldbsession/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     qldb_session = Aws::QLDBSession::Client.new
+#     resp = qldb_session.send_command(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon QLDB Session all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon QLDB Session are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::QLDBSession::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon QLDB Session API errors
 #     end
 #
 # See {Errors} for more information.

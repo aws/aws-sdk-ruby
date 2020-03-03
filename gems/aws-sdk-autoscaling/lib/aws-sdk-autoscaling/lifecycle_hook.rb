@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
   class LifecycleHook
 
     extend Aws::Deprecations

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codegurureviewer/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_guru_reviewer = Aws::CodeGuruReviewer::Client.new
+#     resp = code_guru_reviewer.associate_repository(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CodeGuru Reviewer all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CodeGuru Reviewer are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeGuruReviewer::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CodeGuru Reviewer API errors
 #     end
 #
 # See {Errors} for more information.

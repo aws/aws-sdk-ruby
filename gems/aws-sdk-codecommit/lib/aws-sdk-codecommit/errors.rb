@@ -6,6 +6,213 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeCommit
+
+  # When CodeCommit returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CodeCommit::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CodeCommit errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CodeCommit::Errors::ServiceError
+  #       # rescues all CodeCommit API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ActorDoesNotExistException}
+  # * {ApprovalRuleContentRequiredException}
+  # * {ApprovalRuleDoesNotExistException}
+  # * {ApprovalRuleNameAlreadyExistsException}
+  # * {ApprovalRuleNameRequiredException}
+  # * {ApprovalRuleTemplateContentRequiredException}
+  # * {ApprovalRuleTemplateDoesNotExistException}
+  # * {ApprovalRuleTemplateInUseException}
+  # * {ApprovalRuleTemplateNameAlreadyExistsException}
+  # * {ApprovalRuleTemplateNameRequiredException}
+  # * {ApprovalStateRequiredException}
+  # * {AuthorDoesNotExistException}
+  # * {BeforeCommitIdAndAfterCommitIdAreSameException}
+  # * {BlobIdDoesNotExistException}
+  # * {BlobIdRequiredException}
+  # * {BranchDoesNotExistException}
+  # * {BranchNameExistsException}
+  # * {BranchNameIsTagNameException}
+  # * {BranchNameRequiredException}
+  # * {CannotDeleteApprovalRuleFromTemplateException}
+  # * {CannotModifyApprovalRuleFromTemplateException}
+  # * {ClientRequestTokenRequiredException}
+  # * {CommentContentRequiredException}
+  # * {CommentContentSizeLimitExceededException}
+  # * {CommentDeletedException}
+  # * {CommentDoesNotExistException}
+  # * {CommentIdRequiredException}
+  # * {CommentNotCreatedByCallerException}
+  # * {CommitDoesNotExistException}
+  # * {CommitIdDoesNotExistException}
+  # * {CommitIdRequiredException}
+  # * {CommitIdsLimitExceededException}
+  # * {CommitIdsListRequiredException}
+  # * {CommitMessageLengthExceededException}
+  # * {CommitRequiredException}
+  # * {ConcurrentReferenceUpdateException}
+  # * {DefaultBranchCannotBeDeletedException}
+  # * {DirectoryNameConflictsWithFileNameException}
+  # * {EncryptionIntegrityChecksFailedException}
+  # * {EncryptionKeyAccessDeniedException}
+  # * {EncryptionKeyDisabledException}
+  # * {EncryptionKeyNotFoundException}
+  # * {EncryptionKeyUnavailableException}
+  # * {FileContentAndSourceFileSpecifiedException}
+  # * {FileContentRequiredException}
+  # * {FileContentSizeLimitExceededException}
+  # * {FileDoesNotExistException}
+  # * {FileEntryRequiredException}
+  # * {FileModeRequiredException}
+  # * {FileNameConflictsWithDirectoryNameException}
+  # * {FilePathConflictsWithSubmodulePathException}
+  # * {FileTooLargeException}
+  # * {FolderContentSizeLimitExceededException}
+  # * {FolderDoesNotExistException}
+  # * {IdempotencyParameterMismatchException}
+  # * {InvalidActorArnException}
+  # * {InvalidApprovalRuleContentException}
+  # * {InvalidApprovalRuleNameException}
+  # * {InvalidApprovalRuleTemplateContentException}
+  # * {InvalidApprovalRuleTemplateDescriptionException}
+  # * {InvalidApprovalRuleTemplateNameException}
+  # * {InvalidApprovalStateException}
+  # * {InvalidAuthorArnException}
+  # * {InvalidBlobIdException}
+  # * {InvalidBranchNameException}
+  # * {InvalidClientRequestTokenException}
+  # * {InvalidCommentIdException}
+  # * {InvalidCommitException}
+  # * {InvalidCommitIdException}
+  # * {InvalidConflictDetailLevelException}
+  # * {InvalidConflictResolutionException}
+  # * {InvalidConflictResolutionStrategyException}
+  # * {InvalidContinuationTokenException}
+  # * {InvalidDeletionParameterException}
+  # * {InvalidDescriptionException}
+  # * {InvalidDestinationCommitSpecifierException}
+  # * {InvalidEmailException}
+  # * {InvalidFileLocationException}
+  # * {InvalidFileModeException}
+  # * {InvalidFilePositionException}
+  # * {InvalidMaxConflictFilesException}
+  # * {InvalidMaxMergeHunksException}
+  # * {InvalidMaxResultsException}
+  # * {InvalidMergeOptionException}
+  # * {InvalidOrderException}
+  # * {InvalidOverrideStatusException}
+  # * {InvalidParentCommitIdException}
+  # * {InvalidPathException}
+  # * {InvalidPullRequestEventTypeException}
+  # * {InvalidPullRequestIdException}
+  # * {InvalidPullRequestStatusException}
+  # * {InvalidPullRequestStatusUpdateException}
+  # * {InvalidReferenceNameException}
+  # * {InvalidRelativeFileVersionEnumException}
+  # * {InvalidReplacementContentException}
+  # * {InvalidReplacementTypeException}
+  # * {InvalidRepositoryDescriptionException}
+  # * {InvalidRepositoryNameException}
+  # * {InvalidRepositoryTriggerBranchNameException}
+  # * {InvalidRepositoryTriggerCustomDataException}
+  # * {InvalidRepositoryTriggerDestinationArnException}
+  # * {InvalidRepositoryTriggerEventsException}
+  # * {InvalidRepositoryTriggerNameException}
+  # * {InvalidRepositoryTriggerRegionException}
+  # * {InvalidResourceArnException}
+  # * {InvalidRevisionIdException}
+  # * {InvalidRuleContentSha256Exception}
+  # * {InvalidSortByException}
+  # * {InvalidSourceCommitSpecifierException}
+  # * {InvalidSystemTagUsageException}
+  # * {InvalidTagKeysListException}
+  # * {InvalidTagsMapException}
+  # * {InvalidTargetBranchException}
+  # * {InvalidTargetException}
+  # * {InvalidTargetsException}
+  # * {InvalidTitleException}
+  # * {ManualMergeRequiredException}
+  # * {MaximumBranchesExceededException}
+  # * {MaximumConflictResolutionEntriesExceededException}
+  # * {MaximumFileContentToLoadExceededException}
+  # * {MaximumFileEntriesExceededException}
+  # * {MaximumItemsToCompareExceededException}
+  # * {MaximumNumberOfApprovalsExceededException}
+  # * {MaximumOpenPullRequestsExceededException}
+  # * {MaximumRepositoryNamesExceededException}
+  # * {MaximumRepositoryTriggersExceededException}
+  # * {MaximumRuleTemplatesAssociatedWithRepositoryException}
+  # * {MergeOptionRequiredException}
+  # * {MultipleConflictResolutionEntriesException}
+  # * {MultipleRepositoriesInPullRequestException}
+  # * {NameLengthExceededException}
+  # * {NoChangeException}
+  # * {NumberOfRuleTemplatesExceededException}
+  # * {NumberOfRulesExceededException}
+  # * {OverrideAlreadySetException}
+  # * {OverrideStatusRequiredException}
+  # * {ParentCommitDoesNotExistException}
+  # * {ParentCommitIdOutdatedException}
+  # * {ParentCommitIdRequiredException}
+  # * {PathDoesNotExistException}
+  # * {PathRequiredException}
+  # * {PullRequestAlreadyClosedException}
+  # * {PullRequestApprovalRulesNotSatisfiedException}
+  # * {PullRequestCannotBeApprovedByAuthorException}
+  # * {PullRequestDoesNotExistException}
+  # * {PullRequestIdRequiredException}
+  # * {PullRequestStatusRequiredException}
+  # * {PutFileEntryConflictException}
+  # * {ReferenceDoesNotExistException}
+  # * {ReferenceNameRequiredException}
+  # * {ReferenceTypeNotSupportedException}
+  # * {ReplacementContentRequiredException}
+  # * {ReplacementTypeRequiredException}
+  # * {RepositoryDoesNotExistException}
+  # * {RepositoryLimitExceededException}
+  # * {RepositoryNameExistsException}
+  # * {RepositoryNameRequiredException}
+  # * {RepositoryNamesRequiredException}
+  # * {RepositoryNotAssociatedWithPullRequestException}
+  # * {RepositoryTriggerBranchNameListRequiredException}
+  # * {RepositoryTriggerDestinationArnRequiredException}
+  # * {RepositoryTriggerEventsListRequiredException}
+  # * {RepositoryTriggerNameRequiredException}
+  # * {RepositoryTriggersListRequiredException}
+  # * {ResourceArnRequiredException}
+  # * {RestrictedSourceFileException}
+  # * {RevisionIdRequiredException}
+  # * {RevisionNotCurrentException}
+  # * {SameFileContentException}
+  # * {SamePathRequestException}
+  # * {SourceAndDestinationAreSameException}
+  # * {SourceFileOrContentRequiredException}
+  # * {TagKeysListRequiredException}
+  # * {TagPolicyException}
+  # * {TagsMapRequiredException}
+  # * {TargetRequiredException}
+  # * {TargetsRequiredException}
+  # * {TipOfSourceReferenceIsDifferentException}
+  # * {TipsDivergenceExceededException}
+  # * {TitleRequiredException}
+  # * {TooManyTagsException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

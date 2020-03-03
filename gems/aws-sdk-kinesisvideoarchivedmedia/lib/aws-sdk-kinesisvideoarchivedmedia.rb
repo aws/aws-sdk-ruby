@@ -24,17 +24,20 @@ require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kinesis_video_archived_media = Aws::KinesisVideoArchivedMedia::Client.new
+#     resp = kinesis_video_archived_media.get_dash_streaming_session_url(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Kinesis Video Streams Archived Media all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Kinesis Video Streams Archived Media are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::KinesisVideoArchivedMedia::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Kinesis Video Streams Archived Media API errors
 #     end
 #
 # See {Errors} for more information.

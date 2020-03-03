@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Glacier
+
   class Archive
 
     extend Aws::Deprecations

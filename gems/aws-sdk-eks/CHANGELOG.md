@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-03-05)
+------------------
+
+* Feature - Amazon EKS now supports adding a KMS key to your cluster for envelope encryption of Kubernetes secrets.
+
 1.31.0 (2020-01-24)
 ------------------
 

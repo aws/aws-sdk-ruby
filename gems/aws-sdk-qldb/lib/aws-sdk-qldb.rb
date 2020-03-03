@@ -24,17 +24,20 @@ require_relative 'aws-sdk-qldb/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     qldb = Aws::QLDB::Client.new
+#     resp = qldb.create_ledger(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon QLDB all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon QLDB are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::QLDB::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon QLDB API errors
 #     end
 #
 # See {Errors} for more information.

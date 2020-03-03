@@ -6,6 +6,13 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MediaStoreData
+  # This class provides a resource oriented interface for MediaStoreData.
+  # To create a resource object:
+  #     resource = Aws::MediaStoreData::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass +:client+, a default client will be constructed.
+  #     client = Aws::MediaStoreData::Client.new(region: 'us-west-2')
+  #     resource = Aws::MediaStoreData::Resource.new(client: client)
   class Resource
 
     # @param options ({})

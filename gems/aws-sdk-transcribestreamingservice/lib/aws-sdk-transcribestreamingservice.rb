@@ -26,17 +26,20 @@ require_relative 'aws-sdk-transcribestreamingservice/event_streams'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     transcribe_streaming_service = Aws::TranscribeStreamingService::Client.new
+#     resp = transcribe_streaming_service.start_stream_transcription(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Transcribe Streaming Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Transcribe Streaming Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::TranscribeStreamingService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Transcribe Streaming Service API errors
 #     end
 #
 # See {Errors} for more information.

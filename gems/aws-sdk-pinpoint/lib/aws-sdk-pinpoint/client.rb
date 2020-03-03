@@ -30,6 +30,16 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:pinpoint)
 
 module Aws::Pinpoint
+  # An API client for Pinpoint.  To construct a client, you need to configure a +:region+ and +:credentials+.
+  #     client = Aws::Pinpoint::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  # For details on configuring region and credentials see
+  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -209,16 +219,16 @@ module Aws::Pinpoint
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     per-request on the session yielded by {#session_for}.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +237,7 @@ module Aws::Pinpoint
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session yielded by {#session_for}.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -855,6 +865,7 @@ module Aws::Pinpoint
     #     email_template_request: { # required
     #       default_substitutions: "__string",
     #       html_part: "__string",
+    #       recommender_id: "__string",
     #       subject: "__string",
     #       tags: {
     #         "__string" => "__string",
@@ -1502,6 +1513,7 @@ module Aws::Pinpoint
     #         title: "__string",
     #         url: "__string",
     #       },
+    #       recommender_id: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
@@ -1522,6 +1534,59 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def create_push_template(params = {}, options = {})
       req = build_request(:create_push_template, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon Pinpoint configuration for a recommender model.
+    #
+    # @option params [required, Types::CreateRecommenderConfiguration] :create_recommender_configuration
+    #   Specifies Amazon Pinpoint configuration settings for retrieving and
+    #   processing recommendation data from a recommender model.
+    #
+    # @return [Types::CreateRecommenderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRecommenderConfigurationResponse#recommender_configuration_response #recommender_configuration_response} => Types::RecommenderConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_recommender_configuration({
+    #     create_recommender_configuration: { # required
+    #       attributes: {
+    #         "__string" => "__string",
+    #       },
+    #       description: "__string",
+    #       name: "__string",
+    #       recommendation_provider_id_type: "__string",
+    #       recommendation_provider_role_arn: "__string", # required
+    #       recommendation_provider_uri: "__string", # required
+    #       recommendation_transformer_uri: "__string",
+    #       recommendations_display_name: "__string",
+    #       recommendations_per_message: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_configuration_response.attributes #=> Hash
+    #   resp.recommender_configuration_response.attributes["__string"] #=> String
+    #   resp.recommender_configuration_response.creation_date #=> String
+    #   resp.recommender_configuration_response.description #=> String
+    #   resp.recommender_configuration_response.id #=> String
+    #   resp.recommender_configuration_response.last_modified_date #=> String
+    #   resp.recommender_configuration_response.name #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_id_type #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_role_arn #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_uri #=> String
+    #   resp.recommender_configuration_response.recommendation_transformer_uri #=> String
+    #   resp.recommender_configuration_response.recommendations_display_name #=> String
+    #   resp.recommender_configuration_response.recommendations_per_message #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateRecommenderConfiguration AWS API Documentation
+    #
+    # @overload create_recommender_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_recommender_configuration(params = {}, options = {})
+      req = build_request(:create_recommender_configuration, params)
       req.send_request(options)
     end
 
@@ -1829,6 +1894,7 @@ module Aws::Pinpoint
     #     sms_template_request: { # required
     #       body: "__string",
     #       default_substitutions: "__string",
+    #       recommender_id: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
@@ -2812,6 +2878,45 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_push_template(params = {}, options = {})
       req = build_request(:delete_push_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Pinpoint configuration for a recommender model.
+    #
+    # @option params [required, String] :recommender_id
+    #
+    # @return [Types::DeleteRecommenderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRecommenderConfigurationResponse#recommender_configuration_response #recommender_configuration_response} => Types::RecommenderConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_recommender_configuration({
+    #     recommender_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_configuration_response.attributes #=> Hash
+    #   resp.recommender_configuration_response.attributes["__string"] #=> String
+    #   resp.recommender_configuration_response.creation_date #=> String
+    #   resp.recommender_configuration_response.description #=> String
+    #   resp.recommender_configuration_response.id #=> String
+    #   resp.recommender_configuration_response.last_modified_date #=> String
+    #   resp.recommender_configuration_response.name #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_id_type #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_role_arn #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_uri #=> String
+    #   resp.recommender_configuration_response.recommendation_transformer_uri #=> String
+    #   resp.recommender_configuration_response.recommendations_display_name #=> String
+    #   resp.recommender_configuration_response.recommendations_per_message #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteRecommenderConfiguration AWS API Documentation
+    #
+    # @overload delete_recommender_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_recommender_configuration(params = {}, options = {})
+      req = build_request(:delete_recommender_configuration, params)
       req.send_request(options)
     end
 
@@ -4759,6 +4864,7 @@ module Aws::Pinpoint
     #   resp.email_template_response.default_substitutions #=> String
     #   resp.email_template_response.html_part #=> String
     #   resp.email_template_response.last_modified_date #=> String
+    #   resp.email_template_response.recommender_id #=> String
     #   resp.email_template_response.subject #=> String
     #   resp.email_template_response.tags #=> Hash
     #   resp.email_template_response.tags["__string"] #=> String
@@ -5501,6 +5607,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.gcm.title #=> String
     #   resp.push_notification_template_response.gcm.url #=> String
     #   resp.push_notification_template_response.last_modified_date #=> String
+    #   resp.push_notification_template_response.recommender_id #=> String
     #   resp.push_notification_template_response.tags #=> Hash
     #   resp.push_notification_template_response.tags["__string"] #=> String
     #   resp.push_notification_template_response.template_description #=> String
@@ -5514,6 +5621,91 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_push_template(params = {}, options = {})
       req = build_request(:get_push_template, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about an Amazon Pinpoint configuration for a
+    # recommender model.
+    #
+    # @option params [required, String] :recommender_id
+    #
+    # @return [Types::GetRecommenderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecommenderConfigurationResponse#recommender_configuration_response #recommender_configuration_response} => Types::RecommenderConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recommender_configuration({
+    #     recommender_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_configuration_response.attributes #=> Hash
+    #   resp.recommender_configuration_response.attributes["__string"] #=> String
+    #   resp.recommender_configuration_response.creation_date #=> String
+    #   resp.recommender_configuration_response.description #=> String
+    #   resp.recommender_configuration_response.id #=> String
+    #   resp.recommender_configuration_response.last_modified_date #=> String
+    #   resp.recommender_configuration_response.name #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_id_type #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_role_arn #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_uri #=> String
+    #   resp.recommender_configuration_response.recommendation_transformer_uri #=> String
+    #   resp.recommender_configuration_response.recommendations_display_name #=> String
+    #   resp.recommender_configuration_response.recommendations_per_message #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetRecommenderConfiguration AWS API Documentation
+    #
+    # @overload get_recommender_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_recommender_configuration(params = {}, options = {})
+      req = build_request(:get_recommender_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all the recommender model configurations
+    # that are associated with your Amazon Pinpoint account.
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [String] :token
+    #
+    # @return [Types::GetRecommenderConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecommenderConfigurationsResponse#list_recommender_configurations_response #list_recommender_configurations_response} => Types::ListRecommenderConfigurationsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recommender_configurations({
+    #     page_size: "__string",
+    #     token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.list_recommender_configurations_response.item #=> Array
+    #   resp.list_recommender_configurations_response.item[0].attributes #=> Hash
+    #   resp.list_recommender_configurations_response.item[0].attributes["__string"] #=> String
+    #   resp.list_recommender_configurations_response.item[0].creation_date #=> String
+    #   resp.list_recommender_configurations_response.item[0].description #=> String
+    #   resp.list_recommender_configurations_response.item[0].id #=> String
+    #   resp.list_recommender_configurations_response.item[0].last_modified_date #=> String
+    #   resp.list_recommender_configurations_response.item[0].name #=> String
+    #   resp.list_recommender_configurations_response.item[0].recommendation_provider_id_type #=> String
+    #   resp.list_recommender_configurations_response.item[0].recommendation_provider_role_arn #=> String
+    #   resp.list_recommender_configurations_response.item[0].recommendation_provider_uri #=> String
+    #   resp.list_recommender_configurations_response.item[0].recommendation_transformer_uri #=> String
+    #   resp.list_recommender_configurations_response.item[0].recommendations_display_name #=> String
+    #   resp.list_recommender_configurations_response.item[0].recommendations_per_message #=> Integer
+    #   resp.list_recommender_configurations_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetRecommenderConfigurations AWS API Documentation
+    #
+    # @overload get_recommender_configurations(params = {})
+    # @param [Hash] params ({})
+    def get_recommender_configurations(params = {}, options = {})
+      req = build_request(:get_recommender_configurations, params)
       req.send_request(options)
     end
 
@@ -6232,6 +6424,7 @@ module Aws::Pinpoint
     #   resp.sms_template_response.creation_date #=> String
     #   resp.sms_template_response.default_substitutions #=> String
     #   resp.sms_template_response.last_modified_date #=> String
+    #   resp.sms_template_response.recommender_id #=> String
     #   resp.sms_template_response.tags #=> Hash
     #   resp.sms_template_response.tags["__string"] #=> String
     #   resp.sms_template_response.template_description #=> String
@@ -6572,7 +6765,7 @@ module Aws::Pinpoint
     end
 
     # Retrieves all the tags (keys and values) that are associated with an
-    # application, campaign, journey, message template, or segment.
+    # application, campaign, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
@@ -7408,13 +7601,13 @@ module Aws::Pinpoint
     end
 
     # Adds one or more tags (keys and values) to an application, campaign,
-    # journey, message template, or segment.
+    # message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Types::TagsModel] :tags_model
     #   Specifies the tags (keys and values) for an application, campaign,
-    #   journey, message template, or segment.
+    #   message template, or segment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7439,7 +7632,7 @@ module Aws::Pinpoint
     end
 
     # Removes one or more tags (keys and values) from an application,
-    # campaign, journey, message template, or segment.
+    # campaign, message template, or segment.
     #
     # @option params [required, String] :resource_arn
     #
@@ -8450,6 +8643,7 @@ module Aws::Pinpoint
     #     email_template_request: { # required
     #       default_substitutions: "__string",
     #       html_part: "__string",
+    #       recommender_id: "__string",
     #       subject: "__string",
     #       tags: {
     #         "__string" => "__string",
@@ -9372,6 +9566,7 @@ module Aws::Pinpoint
     #         title: "__string",
     #         url: "__string",
     #       },
+    #       recommender_id: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
@@ -9392,6 +9587,62 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def update_push_template(params = {}, options = {})
       req = build_request(:update_push_template, params)
+      req.send_request(options)
+    end
+
+    # Updates an Amazon Pinpoint configuration for a recommender model.
+    #
+    # @option params [required, String] :recommender_id
+    #
+    # @option params [required, Types::UpdateRecommenderConfiguration] :update_recommender_configuration
+    #   Specifies Amazon Pinpoint configuration settings for retrieving and
+    #   processing recommendation data from a recommender model.
+    #
+    # @return [Types::UpdateRecommenderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRecommenderConfigurationResponse#recommender_configuration_response #recommender_configuration_response} => Types::RecommenderConfigurationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_recommender_configuration({
+    #     recommender_id: "__string", # required
+    #     update_recommender_configuration: { # required
+    #       attributes: {
+    #         "__string" => "__string",
+    #       },
+    #       description: "__string",
+    #       name: "__string",
+    #       recommendation_provider_id_type: "__string",
+    #       recommendation_provider_role_arn: "__string", # required
+    #       recommendation_provider_uri: "__string", # required
+    #       recommendation_transformer_uri: "__string",
+    #       recommendations_display_name: "__string",
+    #       recommendations_per_message: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_configuration_response.attributes #=> Hash
+    #   resp.recommender_configuration_response.attributes["__string"] #=> String
+    #   resp.recommender_configuration_response.creation_date #=> String
+    #   resp.recommender_configuration_response.description #=> String
+    #   resp.recommender_configuration_response.id #=> String
+    #   resp.recommender_configuration_response.last_modified_date #=> String
+    #   resp.recommender_configuration_response.name #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_id_type #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_role_arn #=> String
+    #   resp.recommender_configuration_response.recommendation_provider_uri #=> String
+    #   resp.recommender_configuration_response.recommendation_transformer_uri #=> String
+    #   resp.recommender_configuration_response.recommendations_display_name #=> String
+    #   resp.recommender_configuration_response.recommendations_per_message #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateRecommenderConfiguration AWS API Documentation
+    #
+    # @overload update_recommender_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_recommender_configuration(params = {}, options = {})
+      req = build_request(:update_recommender_configuration, params)
       req.send_request(options)
     end
 
@@ -9757,6 +10008,7 @@ module Aws::Pinpoint
     #     sms_template_request: { # required
     #       body: "__string",
     #       default_substitutions: "__string",
+    #       recommender_id: "__string",
     #       tags: {
     #         "__string" => "__string",
     #       },
@@ -9925,7 +10177,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

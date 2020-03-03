@@ -6,6 +6,43 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatchLogs
+
+  # When CloudWatchLogs returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CloudWatchLogs::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CloudWatchLogs errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CloudWatchLogs::Errors::ServiceError
+  #       # rescues all CloudWatchLogs API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {DataAlreadyAcceptedException}
+  # * {InvalidOperationException}
+  # * {InvalidParameterException}
+  # * {InvalidSequenceTokenException}
+  # * {LimitExceededException}
+  # * {MalformedQueryException}
+  # * {OperationAbortedException}
+  # * {ResourceAlreadyExistsException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {UnrecognizedClientException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

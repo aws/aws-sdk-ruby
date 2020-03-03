@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-03-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-03-04)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces support for integrating recommender models with email, push notification, and SMS message templates. You can now use these types of templates to connect to recommender models and add personalized recommendations to messages that you send from campaigns and journeys.
+
 1.33.0 (2020-02-20)
 ------------------
 

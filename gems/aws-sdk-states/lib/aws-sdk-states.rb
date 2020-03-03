@@ -24,17 +24,20 @@ require_relative 'aws-sdk-states/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     states = Aws::States::Client.new
+#     resp = states.create_activity(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Step Functions all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Step Functions are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::States::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Step Functions API errors
 #     end
 #
 # See {Errors} for more information.

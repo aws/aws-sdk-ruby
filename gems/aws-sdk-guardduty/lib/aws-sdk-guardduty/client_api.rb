@@ -147,6 +147,7 @@ module Aws::GuardDuty
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListThreatIntelSetsRequest = Shapes::StructureShape.new(name: 'ListThreatIntelSetsRequest')
     ListThreatIntelSetsResponse = Shapes::StructureShape.new(name: 'ListThreatIntelSetsResponse')
+    LocalIpDetails = Shapes::StructureShape.new(name: 'LocalIpDetails')
     LocalPortDetails = Shapes::StructureShape.new(name: 'LocalPortDetails')
     Location = Shapes::StringShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -691,6 +692,9 @@ module Aws::GuardDuty
     ListThreatIntelSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListThreatIntelSetsResponse.struct_class = Types::ListThreatIntelSetsResponse
 
+    LocalIpDetails.add_member(:ip_address_v4, Shapes::ShapeRef.new(shape: String, location_name: "ipAddressV4"))
+    LocalIpDetails.struct_class = Types::LocalIpDetails
+
     LocalPortDetails.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     LocalPortDetails.add_member(:port_name, Shapes::ShapeRef.new(shape: String, location_name: "portName"))
     LocalPortDetails.struct_class = Types::LocalPortDetails
@@ -718,6 +722,7 @@ module Aws::GuardDuty
     NetworkConnectionAction.add_member(:connection_direction, Shapes::ShapeRef.new(shape: String, location_name: "connectionDirection"))
     NetworkConnectionAction.add_member(:local_port_details, Shapes::ShapeRef.new(shape: LocalPortDetails, location_name: "localPortDetails"))
     NetworkConnectionAction.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    NetworkConnectionAction.add_member(:local_ip_details, Shapes::ShapeRef.new(shape: LocalIpDetails, location_name: "localIpDetails"))
     NetworkConnectionAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     NetworkConnectionAction.add_member(:remote_port_details, Shapes::ShapeRef.new(shape: RemotePortDetails, location_name: "remotePortDetails"))
     NetworkConnectionAction.struct_class = Types::NetworkConnectionAction
@@ -749,6 +754,7 @@ module Aws::GuardDuty
     PortProbeAction.struct_class = Types::PortProbeAction
 
     PortProbeDetail.add_member(:local_port_details, Shapes::ShapeRef.new(shape: LocalPortDetails, location_name: "localPortDetails"))
+    PortProbeDetail.add_member(:local_ip_details, Shapes::ShapeRef.new(shape: LocalIpDetails, location_name: "localIpDetails"))
     PortProbeDetail.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     PortProbeDetail.struct_class = Types::PortProbeDetail
 

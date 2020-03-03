@@ -25,17 +25,20 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ops_works_cm = Aws::OpsWorksCM::Client.new
+#     resp = ops_works_cm.associate_node(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS OpsWorks CM all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS OpsWorks CM are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::OpsWorksCM::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS OpsWorks CM API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 # @service
 module Aws::OpsWorksCM
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end

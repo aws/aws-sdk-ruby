@@ -2197,6 +2197,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.protocol
     #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -2573,6 +2575,19 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the local IP address of the connection.
+    #
+    # @!attribute [rw] ip_address_v4
+    #   IPV4 remote address of the connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalIpDetails AWS API Documentation
+    #
+    class LocalIpDetails < Struct.new(
+      :ip_address_v4)
+      include Aws::Structure
+    end
+
     # Contains information about the port for the local connection.
     #
     # @!attribute [rw] port
@@ -2683,6 +2698,10 @@ module Aws::GuardDuty
     #   Network connection protocol.
     #   @return [String]
     #
+    # @!attribute [rw] local_ip_details
+    #   Local IP information of the connection.
+    #   @return [Types::LocalIpDetails]
+    #
     # @!attribute [rw] remote_ip_details
     #   Remote IP information of the connection.
     #   @return [Types::RemoteIpDetails]
@@ -2698,6 +2717,7 @@ module Aws::GuardDuty
       :connection_direction,
       :local_port_details,
       :protocol,
+      :local_ip_details,
       :remote_ip_details,
       :remote_port_details)
       include Aws::Structure
@@ -2816,6 +2836,10 @@ module Aws::GuardDuty
     #   Local port information of the connection.
     #   @return [Types::LocalPortDetails]
     #
+    # @!attribute [rw] local_ip_details
+    #   Local IP information of the connection.
+    #   @return [Types::LocalIpDetails]
+    #
     # @!attribute [rw] remote_ip_details
     #   Remote IP information of the connection.
     #   @return [Types::RemoteIpDetails]
@@ -2824,6 +2848,7 @@ module Aws::GuardDuty
     #
     class PortProbeDetail < Struct.new(
       :local_port_details,
+      :local_ip_details,
       :remote_ip_details)
       include Aws::Structure
     end

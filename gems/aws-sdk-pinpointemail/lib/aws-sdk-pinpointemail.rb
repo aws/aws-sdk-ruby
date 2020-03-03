@@ -24,17 +24,20 @@ require_relative 'aws-sdk-pinpointemail/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     pinpoint_email = Aws::PinpointEmail::Client.new
+#     resp = pinpoint_email.create_configuration_set(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Pinpoint Email Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Pinpoint Email Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::PinpointEmail::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Pinpoint Email Service API errors
 #     end
 #
 # See {Errors} for more information.

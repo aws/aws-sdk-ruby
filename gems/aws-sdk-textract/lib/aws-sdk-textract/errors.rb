@@ -6,6 +6,45 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Textract
+
+  # When Textract returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Textract::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Textract errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Textract::Errors::ServiceError
+  #       # rescues all Textract API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {BadDocumentException}
+  # * {DocumentTooLargeException}
+  # * {HumanLoopQuotaExceededException}
+  # * {IdempotentParameterMismatchException}
+  # * {InternalServerError}
+  # * {InvalidJobIdException}
+  # * {InvalidParameterException}
+  # * {InvalidS3ObjectException}
+  # * {LimitExceededException}
+  # * {ProvisionedThroughputExceededException}
+  # * {ThrottlingException}
+  # * {UnsupportedDocumentException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

@@ -6,6 +6,13 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::KinesisVideoSignalingChannels
+  # This class provides a resource oriented interface for KinesisVideoSignalingChannels.
+  # To create a resource object:
+  #     resource = Aws::KinesisVideoSignalingChannels::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass +:client+, a default client will be constructed.
+  #     client = Aws::KinesisVideoSignalingChannels::Client.new(region: 'us-west-2')
+  #     resource = Aws::KinesisVideoSignalingChannels::Resource.new(client: client)
   class Resource
 
     # @param options ({})

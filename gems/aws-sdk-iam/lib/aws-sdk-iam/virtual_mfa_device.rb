@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
   class VirtualMfaDevice
 
     extend Aws::Deprecations

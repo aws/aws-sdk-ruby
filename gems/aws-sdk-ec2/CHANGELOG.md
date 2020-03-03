@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.147.0 (2020-03-05)
+------------------
+
+* Feature - You can now create AWS Client VPN Endpoints with a specified VPC and Security Group. Additionally, you can modify these attributes when modifying the endpoint.
+
+1.146.0 (2020-03-03)
+------------------
+
+* Feature - Amazon VPC Flow Logs adds support for tags and tagging on resource creation.
+
 1.145.0 (2020-02-26)
 ------------------
 

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-wafv2/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     wafv2 = Aws::WAFV2::Client.new
+#     resp = wafv2.associate_web_acl(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS WAFV2 all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS WAFV2 are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::WAFV2::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS WAFV2 API errors
 #     end
 #
 # See {Errors} for more information.

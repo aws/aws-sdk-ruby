@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
   class AccountPasswordPolicy
 
     extend Aws::Deprecations

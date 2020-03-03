@@ -24,17 +24,20 @@ require_relative 'aws-sdk-servicecatalog/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     service_catalog = Aws::ServiceCatalog::Client.new
+#     resp = service_catalog.accept_portfolio_share(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Service Catalog all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Service Catalog are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ServiceCatalog::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Service Catalog API errors
 #     end
 #
 # See {Errors} for more information.

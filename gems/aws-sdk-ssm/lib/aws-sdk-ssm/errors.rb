@@ -6,6 +6,145 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SSM
+
+  # When SSM returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SSM::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SSM errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SSM::Errors::ServiceError
+  #       # rescues all SSM API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AlreadyExistsException}
+  # * {AssociatedInstances}
+  # * {AssociationAlreadyExists}
+  # * {AssociationDoesNotExist}
+  # * {AssociationExecutionDoesNotExist}
+  # * {AssociationLimitExceeded}
+  # * {AssociationVersionLimitExceeded}
+  # * {AutomationDefinitionNotFoundException}
+  # * {AutomationDefinitionVersionNotFoundException}
+  # * {AutomationExecutionLimitExceededException}
+  # * {AutomationExecutionNotFoundException}
+  # * {AutomationStepNotFoundException}
+  # * {ComplianceTypeCountLimitExceededException}
+  # * {CustomSchemaCountLimitExceededException}
+  # * {DocumentAlreadyExists}
+  # * {DocumentLimitExceeded}
+  # * {DocumentPermissionLimit}
+  # * {DocumentVersionLimitExceeded}
+  # * {DoesNotExistException}
+  # * {DuplicateDocumentContent}
+  # * {DuplicateDocumentVersionName}
+  # * {DuplicateInstanceId}
+  # * {FeatureNotAvailableException}
+  # * {HierarchyLevelLimitExceededException}
+  # * {HierarchyTypeMismatchException}
+  # * {IdempotentParameterMismatch}
+  # * {IncompatiblePolicyException}
+  # * {InternalServerError}
+  # * {InvalidActivation}
+  # * {InvalidActivationId}
+  # * {InvalidAggregatorException}
+  # * {InvalidAllowedPatternException}
+  # * {InvalidAssociation}
+  # * {InvalidAssociationVersion}
+  # * {InvalidAutomationExecutionParametersException}
+  # * {InvalidAutomationSignalException}
+  # * {InvalidAutomationStatusUpdateException}
+  # * {InvalidCommandId}
+  # * {InvalidDeleteInventoryParametersException}
+  # * {InvalidDeletionIdException}
+  # * {InvalidDocument}
+  # * {InvalidDocumentContent}
+  # * {InvalidDocumentOperation}
+  # * {InvalidDocumentSchemaVersion}
+  # * {InvalidDocumentType}
+  # * {InvalidDocumentVersion}
+  # * {InvalidFilter}
+  # * {InvalidFilterKey}
+  # * {InvalidFilterOption}
+  # * {InvalidFilterValue}
+  # * {InvalidInstanceId}
+  # * {InvalidInstanceInformationFilterValue}
+  # * {InvalidInventoryGroupException}
+  # * {InvalidInventoryItemContextException}
+  # * {InvalidInventoryRequestException}
+  # * {InvalidItemContentException}
+  # * {InvalidKeyId}
+  # * {InvalidNextToken}
+  # * {InvalidNotificationConfig}
+  # * {InvalidOptionException}
+  # * {InvalidOutputFolder}
+  # * {InvalidOutputLocation}
+  # * {InvalidParameters}
+  # * {InvalidPermissionType}
+  # * {InvalidPluginName}
+  # * {InvalidPolicyAttributeException}
+  # * {InvalidPolicyTypeException}
+  # * {InvalidResourceId}
+  # * {InvalidResourceType}
+  # * {InvalidResultAttributeException}
+  # * {InvalidRole}
+  # * {InvalidSchedule}
+  # * {InvalidTarget}
+  # * {InvalidTypeNameException}
+  # * {InvalidUpdate}
+  # * {InvocationDoesNotExist}
+  # * {ItemContentMismatchException}
+  # * {ItemSizeLimitExceededException}
+  # * {MaxDocumentSizeExceeded}
+  # * {OpsItemAlreadyExistsException}
+  # * {OpsItemInvalidParameterException}
+  # * {OpsItemLimitExceededException}
+  # * {OpsItemNotFoundException}
+  # * {ParameterAlreadyExists}
+  # * {ParameterLimitExceeded}
+  # * {ParameterMaxVersionLimitExceeded}
+  # * {ParameterNotFound}
+  # * {ParameterPatternMismatchException}
+  # * {ParameterVersionLabelLimitExceeded}
+  # * {ParameterVersionNotFound}
+  # * {PoliciesLimitExceededException}
+  # * {ResourceDataSyncAlreadyExistsException}
+  # * {ResourceDataSyncConflictException}
+  # * {ResourceDataSyncCountExceededException}
+  # * {ResourceDataSyncInvalidConfigurationException}
+  # * {ResourceDataSyncNotFoundException}
+  # * {ResourceInUseException}
+  # * {ResourceLimitExceededException}
+  # * {ServiceSettingNotFound}
+  # * {StatusUnchanged}
+  # * {SubTypeCountLimitExceededException}
+  # * {TargetInUseException}
+  # * {TargetNotConnected}
+  # * {TooManyTagsError}
+  # * {TooManyUpdates}
+  # * {TotalSizeLimitExceededException}
+  # * {UnsupportedCalendarException}
+  # * {UnsupportedFeatureRequiredException}
+  # * {UnsupportedInventoryItemContextException}
+  # * {UnsupportedInventorySchemaVersionException}
+  # * {UnsupportedOperatingSystem}
+  # * {UnsupportedParameterType}
+  # * {UnsupportedPlatformType}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

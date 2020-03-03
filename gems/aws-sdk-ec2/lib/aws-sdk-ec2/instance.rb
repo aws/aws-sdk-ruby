@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class Instance
 
     extend Aws::Deprecations
@@ -195,8 +196,7 @@ module Aws::EC2
       data[:ena_support]
     end
 
-    # The hypervisor type of the instance. The value `xen` is used for both
-    # Xen and Nitro hypervisors.
+    # The hypervisor type of the instance.
     # @return [String]
     def hypervisor
       data[:hypervisor]

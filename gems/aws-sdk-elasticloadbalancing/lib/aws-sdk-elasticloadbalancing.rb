@@ -25,17 +25,20 @@ require_relative 'aws-sdk-elasticloadbalancing/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elastic_load_balancing = Aws::ElasticLoadBalancing::Client.new
+#     resp = elastic_load_balancing.add_tags(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Elastic Load Balancing all
-# extend {Errors::ServiceError}.
+# Errors returned from Elastic Load Balancing are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElasticLoadBalancing::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Elastic Load Balancing API errors
 #     end
 #
 # See {Errors} for more information.

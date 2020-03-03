@@ -6,6 +6,43 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EKS
+
+  # When EKS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::EKS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all EKS errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::EKS::Errors::ServiceError
+  #       # rescues all EKS API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BadRequestException}
+  # * {ClientException}
+  # * {InvalidParameterException}
+  # * {InvalidRequestException}
+  # * {NotFoundException}
+  # * {ResourceInUseException}
+  # * {ResourceLimitExceededException}
+  # * {ResourceNotFoundException}
+  # * {ServerException}
+  # * {ServiceUnavailableException}
+  # * {UnsupportedAvailabilityZoneException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
