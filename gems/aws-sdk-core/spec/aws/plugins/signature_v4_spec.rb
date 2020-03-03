@@ -221,6 +221,65 @@ module Aws
         end
 
       end
+
+      describe 'clock skew correction' do
+        let(:clock_skew) { Retries::ClockSkew.new }
+        let(:now) { Time.now }
+        let(:utc) { now.utc }
+
+        before(:each) {
+          allow(Time).to receive(:now).and_return(now)
+          allow(now).to receive(:utc).and_return(utc)
+        }
+
+        it 'skips clock skew correction when clock_skew is not available on the configuration' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: nil,
+            stub_responses: true
+          ))
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+        end
+
+        it 'skips clock skew correction when correct_clock_skew is false' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: clock_skew,
+            correct_clock_skew: false,
+            stub_responses: true
+          ))
+          expect(clock_skew).not_to receive(:clock_correction)
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+        end
+
+        it 'skips clock skew correction when clock skew is 0' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: clock_skew,
+            correct_clock_skew: true,
+            stub_responses: true
+          ))
+          clock_skew = client.config.clock_skew
+          expect(clock_skew).to receive(:clock_correction).and_return(0)
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq now.utc.strftime("%Y%m%dT%H%M%SZ")
+        end
+
+        it 'applies clock skew correction when clock skew is non zero' do
+          client = Sigv4Client.new(options.merge(
+            clock_skew: clock_skew,
+            correct_clock_skew: true,
+            stub_responses: true
+          ))
+          clock_skew = client.config.clock_skew
+          expect(clock_skew).to receive(:clock_correction).and_return(1000)
+          resp = client.example_operation
+          expect(resp.context.http_request.headers['X-Amz-Date']).
+            to eq (now.utc + 1000).strftime("%Y%m%dT%H%M%SZ")
+        end
+      end
     end
   end
 end

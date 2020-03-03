@@ -64,6 +64,11 @@ module Aws
             subject.update_clock_skew(context)
             expect(subject.clock_correction(endpoint)).to be_within(1).of(1000)
           end
+
+          it 'does not update corrections for other end points' do
+            subject.update_clock_skew(context)
+            expect(subject.clock_correction('other_endpoint')).to be 0
+          end
         end
       end
     end

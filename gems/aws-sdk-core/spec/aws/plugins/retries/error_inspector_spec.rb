@@ -227,6 +227,43 @@ module Aws
           end
         end
       end
+
+      describe '#clock_skew?' do
+        let(:context) { double("context", config: double("config", clock_skew: double('clock_skew', clock_skewed?: clock_skewed))) }
+        let(:clock_skewed) { true }
+
+        clock_skew_errors = [
+          RetryErrorsSvc::Errors::RequestTimeTooSkewed,
+          RetryErrorsSvc::Errors::RequestExpired,
+          RetryErrorsSvc::Errors::InvalidSignatureException,
+          RetryErrorsSvc::Errors::SignatureDoesNotMatch,
+          RetryErrorsSvc::Errors::AuthFailure,
+          RetryErrorsSvc::Errors::RequestInTheFuture
+        ]
+
+        clock_skew_errors.each do |e|
+          it "returns true for #{e.name}" do
+            expect(inspector(e).clock_skew?(context)).to be(true)
+          end
+        end
+
+        it 'returns false if the error is not a clock skew error' do
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).clock_skew?(context)
+          ).to be(false)
+        end
+
+        context 'the clock is not skewed' do
+          let(:clock_skewed) { false }
+
+          it 'returns false' do
+            expect(
+              inspector(RetryErrorsSvc::Errors::RequestTimeTooSkewed).clock_skew?(context)
+            ).to be(false)
+          end
+        end
+      end
+
     end
   end
 end
