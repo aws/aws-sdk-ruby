@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add StackRollbackComplete waiter that waits until stack reaches UPDATE_ROLLBACK_COMPLETE state.
+
 1.30.0 (2020-02-11)
 ------------------
 

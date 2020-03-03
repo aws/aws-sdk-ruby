@@ -5260,6 +5260,7 @@ module Aws::CloudFormation
     # | stack_delete_complete      | {#describe_stacks}            | 30       | 120           |
     # | stack_exists               | {#describe_stacks}            | 5        | 20            |
     # | stack_import_complete      | {#describe_stacks}            | 30       | 120           |
+    # | stack_rollback_complete    | {#describe_stacks}            | 30       | 120           |
     # | stack_update_complete      | {#describe_stacks}            | 30       | 120           |
     # | type_registration_complete | {#describe_type_registration} | 30       | 120           |
     #
@@ -5317,6 +5318,7 @@ module Aws::CloudFormation
         stack_delete_complete: Waiters::StackDeleteComplete,
         stack_exists: Waiters::StackExists,
         stack_import_complete: Waiters::StackImportComplete,
+        stack_rollback_complete: Waiters::StackRollbackComplete,
         stack_update_complete: Waiters::StackUpdateComplete,
         type_registration_complete: Waiters::TypeRegistrationComplete
       }
