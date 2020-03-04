@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.459 (2020-03-04)
+------------------
+
 * Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
 
 2.11.458 (2020-03-03)
