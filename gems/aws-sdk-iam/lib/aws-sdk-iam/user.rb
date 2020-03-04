@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class User
 
     extend Aws::Deprecations

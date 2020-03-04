@@ -13,7 +13,6 @@ module Aws::CodeGuruReviewer
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CodeGuruReviewer::Client.new(region: 'us-west-2')
   #     resource = Aws::CodeGuruReviewer::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

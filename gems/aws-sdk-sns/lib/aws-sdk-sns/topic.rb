@@ -7,7 +7,6 @@
 
 module Aws::SNS
 
-  #
   class Topic
 
     extend Aws::Deprecations

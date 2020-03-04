@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBClusterParameterGroup
 
     extend Aws::Deprecations

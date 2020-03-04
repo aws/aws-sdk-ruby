@@ -13,7 +13,6 @@ module Aws::WorkMail
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::WorkMail::Client.new(region: 'us-west-2')
   #     resource = Aws::WorkMail::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

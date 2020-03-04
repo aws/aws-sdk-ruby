@@ -13,7 +13,6 @@ module Aws::SESV2
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::SESV2::Client.new(region: 'us-west-2')
   #     resource = Aws::SESV2::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

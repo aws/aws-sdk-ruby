@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class Tag
 
     extend Aws::Deprecations

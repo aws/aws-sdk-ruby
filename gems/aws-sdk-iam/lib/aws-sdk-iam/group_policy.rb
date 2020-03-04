@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class GroupPolicy
 
     extend Aws::Deprecations

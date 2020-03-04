@@ -7,7 +7,6 @@
 
 module Aws::Glacier
 
-  #
   class Job
 
     extend Aws::Deprecations

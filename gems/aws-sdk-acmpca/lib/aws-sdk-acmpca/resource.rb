@@ -13,7 +13,6 @@ module Aws::ACMPCA
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ACMPCA::Client.new(region: 'us-west-2')
   #     resource = Aws::ACMPCA::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

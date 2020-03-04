@@ -13,7 +13,6 @@ module Aws::SavingsPlans
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::SavingsPlans::Client.new(region: 'us-west-2')
   #     resource = Aws::SavingsPlans::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

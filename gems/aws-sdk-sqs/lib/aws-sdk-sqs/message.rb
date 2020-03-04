@@ -7,7 +7,6 @@
 
 module Aws::SQS
 
-  #
   class Message
 
     extend Aws::Deprecations

@@ -13,7 +13,6 @@ module Aws::IoT1ClickDevicesService
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::IoT1ClickDevicesService::Client.new(region: 'us-west-2')
   #     resource = Aws::IoT1ClickDevicesService::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

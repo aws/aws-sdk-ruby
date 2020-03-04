@@ -7,7 +7,6 @@
 
 module Aws::SQS
 
-  #
   class Queue
 
     extend Aws::Deprecations

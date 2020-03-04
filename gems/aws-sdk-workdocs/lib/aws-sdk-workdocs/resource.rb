@@ -13,7 +13,6 @@ module Aws::WorkDocs
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::WorkDocs::Client.new(region: 'us-west-2')
   #     resource = Aws::WorkDocs::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

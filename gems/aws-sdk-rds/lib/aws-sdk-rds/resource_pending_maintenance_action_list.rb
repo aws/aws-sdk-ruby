@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class ResourcePendingMaintenanceActionList
 
     extend Aws::Deprecations

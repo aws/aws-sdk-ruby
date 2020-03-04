@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class EventCategoryMap
 
     extend Aws::Deprecations

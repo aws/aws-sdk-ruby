@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class LaunchConfiguration
 
     extend Aws::Deprecations

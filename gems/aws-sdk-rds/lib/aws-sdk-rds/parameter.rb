@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class Parameter
 
     extend Aws::Deprecations

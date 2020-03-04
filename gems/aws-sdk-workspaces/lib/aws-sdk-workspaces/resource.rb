@@ -13,7 +13,6 @@ module Aws::WorkSpaces
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::WorkSpaces::Client.new(region: 'us-west-2')
   #     resource = Aws::WorkSpaces::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -13,7 +13,6 @@ module Aws::CloudHSMV2
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CloudHSMV2::Client.new(region: 'us-west-2')
   #     resource = Aws::CloudHSMV2::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

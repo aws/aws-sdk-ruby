@@ -13,7 +13,6 @@ module Aws::SimpleDB
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::SimpleDB::Client.new(region: 'us-west-2')
   #     resource = Aws::SimpleDB::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

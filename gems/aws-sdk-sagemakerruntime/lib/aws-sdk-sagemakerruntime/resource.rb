@@ -13,7 +13,6 @@ module Aws::SageMakerRuntime
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::SageMakerRuntime::Client.new(region: 'us-west-2')
   #     resource = Aws::SageMakerRuntime::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

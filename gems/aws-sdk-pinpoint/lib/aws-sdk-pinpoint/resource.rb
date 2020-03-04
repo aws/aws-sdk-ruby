@@ -13,7 +13,6 @@ module Aws::Pinpoint
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Pinpoint::Client.new(region: 'us-west-2')
   #     resource = Aws::Pinpoint::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

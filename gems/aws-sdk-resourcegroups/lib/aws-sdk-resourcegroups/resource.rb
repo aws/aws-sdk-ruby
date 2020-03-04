@@ -13,7 +13,6 @@ module Aws::ResourceGroups
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ResourceGroups::Client.new(region: 'us-west-2')
   #     resource = Aws::ResourceGroups::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

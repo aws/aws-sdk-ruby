@@ -7,7 +7,6 @@
 
 module Aws::Glacier
 
-  #
   class Archive
 
     extend Aws::Deprecations

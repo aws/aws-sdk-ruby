@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class ServerCertificate
 
     extend Aws::Deprecations

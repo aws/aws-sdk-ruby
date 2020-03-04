@@ -7,7 +7,6 @@
 
 module Aws::CloudFormation
 
-  #
   class Event
 
     extend Aws::Deprecations

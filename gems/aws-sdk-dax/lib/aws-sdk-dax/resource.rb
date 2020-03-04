@@ -13,7 +13,6 @@ module Aws::DAX
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::DAX::Client.new(region: 'us-west-2')
   #     resource = Aws::DAX::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

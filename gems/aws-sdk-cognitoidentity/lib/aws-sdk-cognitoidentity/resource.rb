@@ -13,7 +13,6 @@ module Aws::CognitoIdentity
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CognitoIdentity::Client.new(region: 'us-west-2')
   #     resource = Aws::CognitoIdentity::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

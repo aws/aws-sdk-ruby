@@ -13,7 +13,6 @@ module Aws::SSM
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::SSM::Client.new(region: 'us-west-2')
   #     resource = Aws::SSM::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

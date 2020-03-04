@@ -13,7 +13,6 @@ module Aws::GroundStation
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::GroundStation::Client.new(region: 'us-west-2')
   #     resource = Aws::GroundStation::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

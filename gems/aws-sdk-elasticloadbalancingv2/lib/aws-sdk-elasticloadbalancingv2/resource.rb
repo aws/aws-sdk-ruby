@@ -13,7 +13,6 @@ module Aws::ElasticLoadBalancingV2
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ElasticLoadBalancingV2::Client.new(region: 'us-west-2')
   #     resource = Aws::ElasticLoadBalancingV2::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

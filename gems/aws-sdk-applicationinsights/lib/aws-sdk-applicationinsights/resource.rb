@@ -13,7 +13,6 @@ module Aws::ApplicationInsights
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ApplicationInsights::Client.new(region: 'us-west-2')
   #     resource = Aws::ApplicationInsights::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

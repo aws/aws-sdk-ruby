@@ -13,7 +13,6 @@ module Aws::ServiceDiscovery
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ServiceDiscovery::Client.new(region: 'us-west-2')
   #     resource = Aws::ServiceDiscovery::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

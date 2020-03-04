@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class Event
 
     extend Aws::Deprecations

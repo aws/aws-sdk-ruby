@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBParameterGroup
 
     extend Aws::Deprecations

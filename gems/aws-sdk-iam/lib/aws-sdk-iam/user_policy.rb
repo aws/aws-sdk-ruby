@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class UserPolicy
 
     extend Aws::Deprecations

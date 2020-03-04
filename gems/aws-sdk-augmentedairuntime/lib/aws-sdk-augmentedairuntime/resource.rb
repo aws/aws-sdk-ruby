@@ -13,7 +13,6 @@ module Aws::AugmentedAIRuntime
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::AugmentedAIRuntime::Client.new(region: 'us-west-2')
   #     resource = Aws::AugmentedAIRuntime::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

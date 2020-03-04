@@ -13,7 +13,6 @@ module Aws::EFS
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::EFS::Client.new(region: 'us-west-2')
   #     resource = Aws::EFS::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

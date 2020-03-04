@@ -13,7 +13,6 @@ module Aws::Detective
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Detective::Client.new(region: 'us-west-2')
   #     resource = Aws::Detective::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -7,7 +7,6 @@
 
 module Aws::CloudWatch
 
-  #
   class Alarm
 
     extend Aws::Deprecations

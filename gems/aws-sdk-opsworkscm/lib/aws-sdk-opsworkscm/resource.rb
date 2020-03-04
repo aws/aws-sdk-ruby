@@ -13,7 +13,6 @@ module Aws::OpsWorksCM
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::OpsWorksCM::Client.new(region: 'us-west-2')
   #     resource = Aws::OpsWorksCM::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class NotificationConfiguration
 
     extend Aws::Deprecations

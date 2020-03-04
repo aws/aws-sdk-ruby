@@ -13,7 +13,6 @@ module Aws::SNS
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::SNS::Client.new(region: 'us-west-2')
   #     resource = Aws::SNS::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

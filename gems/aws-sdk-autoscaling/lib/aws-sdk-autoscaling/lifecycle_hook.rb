@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class LifecycleHook
 
     extend Aws::Deprecations

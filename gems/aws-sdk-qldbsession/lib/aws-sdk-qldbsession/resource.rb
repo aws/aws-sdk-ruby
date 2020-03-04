@@ -13,7 +13,6 @@ module Aws::QLDBSession
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::QLDBSession::Client.new(region: 'us-west-2')
   #     resource = Aws::QLDBSession::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

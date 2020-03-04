@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class AccountQuota
 
     extend Aws::Deprecations

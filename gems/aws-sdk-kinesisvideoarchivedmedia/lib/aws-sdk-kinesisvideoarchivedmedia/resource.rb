@@ -13,7 +13,6 @@ module Aws::KinesisVideoArchivedMedia
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::KinesisVideoArchivedMedia::Client.new(region: 'us-west-2')
   #     resource = Aws::KinesisVideoArchivedMedia::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

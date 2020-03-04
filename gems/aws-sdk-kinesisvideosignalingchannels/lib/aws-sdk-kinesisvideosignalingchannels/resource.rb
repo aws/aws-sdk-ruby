@@ -13,7 +13,6 @@ module Aws::KinesisVideoSignalingChannels
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::KinesisVideoSignalingChannels::Client.new(region: 'us-west-2')
   #     resource = Aws::KinesisVideoSignalingChannels::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

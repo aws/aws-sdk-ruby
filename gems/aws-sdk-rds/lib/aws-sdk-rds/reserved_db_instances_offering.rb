@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class ReservedDBInstancesOffering
 
     extend Aws::Deprecations

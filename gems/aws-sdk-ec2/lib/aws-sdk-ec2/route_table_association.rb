@@ -7,7 +7,6 @@
 
 module Aws::EC2
 
-  #
   class RouteTableAssociation
 
     extend Aws::Deprecations

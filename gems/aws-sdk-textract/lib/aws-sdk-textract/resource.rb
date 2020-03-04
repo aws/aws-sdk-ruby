@@ -13,7 +13,6 @@ module Aws::Textract
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Textract::Client.new(region: 'us-west-2')
   #     resource = Aws::Textract::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

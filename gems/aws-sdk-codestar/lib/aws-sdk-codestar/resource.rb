@@ -13,7 +13,6 @@ module Aws::CodeStar
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CodeStar::Client.new(region: 'us-west-2')
   #     resource = Aws::CodeStar::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

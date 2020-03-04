@@ -13,7 +13,6 @@ module Aws::MarketplaceCommerceAnalytics
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::MarketplaceCommerceAnalytics::Client.new(region: 'us-west-2')
   #     resource = Aws::MarketplaceCommerceAnalytics::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

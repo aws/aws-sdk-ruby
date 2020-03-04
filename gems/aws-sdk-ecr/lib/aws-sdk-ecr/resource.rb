@@ -13,7 +13,6 @@ module Aws::ECR
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ECR::Client.new(region: 'us-west-2')
   #     resource = Aws::ECR::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

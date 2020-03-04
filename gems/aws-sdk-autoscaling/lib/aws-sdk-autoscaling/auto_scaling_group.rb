@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class AutoScalingGroup
 
     extend Aws::Deprecations

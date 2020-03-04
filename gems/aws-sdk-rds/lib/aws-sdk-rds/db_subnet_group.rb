@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBSubnetGroup
 
     extend Aws::Deprecations

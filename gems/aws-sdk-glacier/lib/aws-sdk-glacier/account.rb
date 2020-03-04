@@ -7,7 +7,6 @@
 
 module Aws::Glacier
 
-  #
   class Account
 
     extend Aws::Deprecations

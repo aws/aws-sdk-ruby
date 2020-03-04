@@ -13,7 +13,6 @@ module Aws::MigrationHubConfig
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::MigrationHubConfig::Client.new(region: 'us-west-2')
   #     resource = Aws::MigrationHubConfig::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -13,7 +13,6 @@ module Aws::ServiceQuotas
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ServiceQuotas::Client.new(region: 'us-west-2')
   #     resource = Aws::ServiceQuotas::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

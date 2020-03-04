@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class AccountSummary
 
     extend Aws::Deprecations

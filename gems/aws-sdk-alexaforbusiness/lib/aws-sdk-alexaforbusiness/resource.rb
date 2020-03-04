@@ -13,7 +13,6 @@ module Aws::AlexaForBusiness
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::AlexaForBusiness::Client.new(region: 'us-west-2')
   #     resource = Aws::AlexaForBusiness::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

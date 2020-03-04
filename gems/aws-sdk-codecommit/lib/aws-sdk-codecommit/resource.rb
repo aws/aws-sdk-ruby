@@ -13,7 +13,6 @@ module Aws::CodeCommit
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CodeCommit::Client.new(region: 'us-west-2')
   #     resource = Aws::CodeCommit::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

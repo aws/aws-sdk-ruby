@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class OptionGroupOption
 
     extend Aws::Deprecations

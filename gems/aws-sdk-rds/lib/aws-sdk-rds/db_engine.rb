@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBEngine
 
     extend Aws::Deprecations

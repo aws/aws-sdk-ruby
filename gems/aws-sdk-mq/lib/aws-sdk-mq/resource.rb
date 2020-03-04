@@ -13,7 +13,6 @@ module Aws::MQ
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::MQ::Client.new(region: 'us-west-2')
   #     resource = Aws::MQ::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -13,7 +13,6 @@ module Aws::IoT
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::IoT::Client.new(region: 'us-west-2')
   #     resource = Aws::IoT::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

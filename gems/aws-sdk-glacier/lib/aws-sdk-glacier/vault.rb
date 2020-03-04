@@ -7,7 +7,6 @@
 
 module Aws::Glacier
 
-  #
   class Vault
 
     extend Aws::Deprecations

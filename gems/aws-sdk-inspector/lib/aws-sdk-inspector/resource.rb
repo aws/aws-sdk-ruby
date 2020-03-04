@@ -13,7 +13,6 @@ module Aws::Inspector
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Inspector::Client.new(region: 'us-west-2')
   #     resource = Aws::Inspector::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

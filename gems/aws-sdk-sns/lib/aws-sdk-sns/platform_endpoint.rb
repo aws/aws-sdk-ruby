@@ -7,7 +7,6 @@
 
 module Aws::SNS
 
-  #
   class PlatformEndpoint
 
     extend Aws::Deprecations

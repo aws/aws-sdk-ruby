@@ -13,7 +13,6 @@ module Aws::ConnectParticipant
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ConnectParticipant::Client.new(region: 'us-west-2')
   #     resource = Aws::ConnectParticipant::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

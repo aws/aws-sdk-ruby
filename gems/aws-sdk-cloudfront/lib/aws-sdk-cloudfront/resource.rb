@@ -13,7 +13,6 @@ module Aws::CloudFront
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CloudFront::Client.new(region: 'us-west-2')
   #     resource = Aws::CloudFront::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

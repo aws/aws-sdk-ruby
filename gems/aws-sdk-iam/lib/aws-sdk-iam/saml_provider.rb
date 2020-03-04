@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class SamlProvider
 
     extend Aws::Deprecations

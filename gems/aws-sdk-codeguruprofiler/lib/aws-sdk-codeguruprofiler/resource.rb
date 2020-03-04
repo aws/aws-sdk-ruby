@@ -13,7 +13,6 @@ module Aws::CodeGuruProfiler
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CodeGuruProfiler::Client.new(region: 'us-west-2')
   #     resource = Aws::CodeGuruProfiler::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

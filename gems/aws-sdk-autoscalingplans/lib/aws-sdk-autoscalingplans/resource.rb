@@ -13,7 +13,6 @@ module Aws::AutoScalingPlans
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::AutoScalingPlans::Client.new(region: 'us-west-2')
   #     resource = Aws::AutoScalingPlans::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

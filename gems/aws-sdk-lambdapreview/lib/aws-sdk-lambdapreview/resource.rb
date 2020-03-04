@@ -13,7 +13,6 @@ module Aws::LambdaPreview
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::LambdaPreview::Client.new(region: 'us-west-2')
   #     resource = Aws::LambdaPreview::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

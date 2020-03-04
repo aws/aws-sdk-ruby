@@ -13,7 +13,6 @@ module Aws::Route53Resolver
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Route53Resolver::Client.new(region: 'us-west-2')
   #     resource = Aws::Route53Resolver::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

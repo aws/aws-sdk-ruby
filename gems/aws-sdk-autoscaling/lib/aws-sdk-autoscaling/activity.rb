@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class Activity
 
     extend Aws::Deprecations

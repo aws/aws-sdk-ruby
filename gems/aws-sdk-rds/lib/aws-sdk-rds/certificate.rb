@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class Certificate
 
     extend Aws::Deprecations

@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBClusterSnapshot
 
     extend Aws::Deprecations

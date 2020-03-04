@@ -13,7 +13,6 @@ module Aws::ComprehendMedical
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ComprehendMedical::Client.new(region: 'us-west-2')
   #     resource = Aws::ComprehendMedical::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

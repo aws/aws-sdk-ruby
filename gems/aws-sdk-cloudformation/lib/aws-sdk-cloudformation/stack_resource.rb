@@ -7,7 +7,6 @@
 
 module Aws::CloudFormation
 
-  #
   class StackResource
 
     extend Aws::Deprecations

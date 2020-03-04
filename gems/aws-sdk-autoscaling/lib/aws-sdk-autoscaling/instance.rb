@@ -7,7 +7,6 @@
 
 module Aws::AutoScaling
 
-  #
   class Instance
 
     extend Aws::Deprecations

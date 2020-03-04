@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class AccessKey
 
     extend Aws::Deprecations

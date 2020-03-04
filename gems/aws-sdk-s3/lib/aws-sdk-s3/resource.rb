@@ -13,7 +13,6 @@ module Aws::S3
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::S3::Client.new(region: 'us-west-2')
   #     resource = Aws::S3::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

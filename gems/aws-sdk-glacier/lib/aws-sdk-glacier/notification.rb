@@ -7,7 +7,6 @@
 
 module Aws::Glacier
 
-  #
   class Notification
 
     extend Aws::Deprecations

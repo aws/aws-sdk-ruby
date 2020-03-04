@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class AccountPasswordPolicy
 
     extend Aws::Deprecations

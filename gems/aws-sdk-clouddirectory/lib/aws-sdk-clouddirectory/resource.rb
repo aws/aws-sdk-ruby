@@ -13,7 +13,6 @@ module Aws::CloudDirectory
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CloudDirectory::Client.new(region: 'us-west-2')
   #     resource = Aws::CloudDirectory::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

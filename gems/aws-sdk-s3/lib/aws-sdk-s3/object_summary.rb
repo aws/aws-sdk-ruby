@@ -7,7 +7,6 @@
 
 module Aws::S3
 
-  #
   class ObjectSummary
 
     extend Aws::Deprecations

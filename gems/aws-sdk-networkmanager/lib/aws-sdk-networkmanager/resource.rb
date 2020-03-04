@@ -13,7 +13,6 @@ module Aws::NetworkManager
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::NetworkManager::Client.new(region: 'us-west-2')
   #     resource = Aws::NetworkManager::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

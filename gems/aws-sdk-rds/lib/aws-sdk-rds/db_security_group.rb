@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBSecurityGroup
 
     extend Aws::Deprecations

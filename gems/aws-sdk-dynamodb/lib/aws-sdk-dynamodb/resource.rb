@@ -13,7 +13,6 @@ module Aws::DynamoDB
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::DynamoDB::Client.new(region: 'us-west-2')
   #     resource = Aws::DynamoDB::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

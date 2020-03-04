@@ -13,7 +13,6 @@ module Aws::Amplify
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Amplify::Client.new(region: 'us-west-2')
   #     resource = Aws::Amplify::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

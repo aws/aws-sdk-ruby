@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class AssumeRolePolicy
 
     extend Aws::Deprecations

@@ -13,7 +13,6 @@ module Aws::DeviceFarm
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::DeviceFarm::Client.new(region: 'us-west-2')
   #     resource = Aws::DeviceFarm::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

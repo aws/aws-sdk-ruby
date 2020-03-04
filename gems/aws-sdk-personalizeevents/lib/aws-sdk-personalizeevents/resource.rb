@@ -13,7 +13,6 @@ module Aws::PersonalizeEvents
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::PersonalizeEvents::Client.new(region: 'us-west-2')
   #     resource = Aws::PersonalizeEvents::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

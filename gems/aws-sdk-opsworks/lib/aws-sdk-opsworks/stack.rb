@@ -7,7 +7,6 @@
 
 module Aws::OpsWorks
 
-  #
   class Stack
 
     extend Aws::Deprecations

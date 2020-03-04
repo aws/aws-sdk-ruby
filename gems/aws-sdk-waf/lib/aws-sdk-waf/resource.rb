@@ -13,7 +13,6 @@ module Aws::WAF
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::WAF::Client.new(region: 'us-west-2')
   #     resource = Aws::WAF::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

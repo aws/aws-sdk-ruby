@@ -13,7 +13,6 @@ module Aws::Rekognition
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Rekognition::Client.new(region: 'us-west-2')
   #     resource = Aws::Rekognition::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

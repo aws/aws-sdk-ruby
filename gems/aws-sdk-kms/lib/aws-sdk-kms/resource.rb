@@ -13,7 +13,6 @@ module Aws::KMS
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::KMS::Client.new(region: 'us-west-2')
   #     resource = Aws::KMS::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

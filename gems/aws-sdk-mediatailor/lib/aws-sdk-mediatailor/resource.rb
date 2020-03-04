@@ -13,7 +13,6 @@ module Aws::MediaTailor
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::MediaTailor::Client.new(region: 'us-west-2')
   #     resource = Aws::MediaTailor::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBLogFile
 
     extend Aws::Deprecations

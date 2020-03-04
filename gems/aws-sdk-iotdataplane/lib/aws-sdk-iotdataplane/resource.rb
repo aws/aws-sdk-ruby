@@ -13,7 +13,6 @@ module Aws::IoTDataPlane
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::IoTDataPlane::Client.new(region: 'us-west-2')
   #     resource = Aws::IoTDataPlane::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

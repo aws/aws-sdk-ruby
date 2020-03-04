@@ -7,7 +7,6 @@
 
 module Aws::IAM
 
-  #
   class CurrentUser
 
     extend Aws::Deprecations

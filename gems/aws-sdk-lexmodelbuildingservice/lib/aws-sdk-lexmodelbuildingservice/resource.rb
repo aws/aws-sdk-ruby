@@ -13,7 +13,6 @@ module Aws::LexModelBuildingService
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::LexModelBuildingService::Client.new(region: 'us-west-2')
   #     resource = Aws::LexModelBuildingService::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

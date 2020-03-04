@@ -13,7 +13,6 @@ module Aws::Comprehend
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::Comprehend::Client.new(region: 'us-west-2')
   #     resource = Aws::Comprehend::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

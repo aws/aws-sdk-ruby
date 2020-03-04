@@ -13,7 +13,6 @@ module Aws::CloudWatch
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::CloudWatch::Client.new(region: 'us-west-2')
   #     resource = Aws::CloudWatch::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

@@ -13,7 +13,6 @@ module Aws::AppMesh
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::AppMesh::Client.new(region: 'us-west-2')
   #     resource = Aws::AppMesh::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

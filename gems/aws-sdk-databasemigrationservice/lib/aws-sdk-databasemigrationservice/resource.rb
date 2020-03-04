@@ -13,7 +13,6 @@ module Aws::DatabaseMigrationService
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::DatabaseMigrationService::Client.new(region: 'us-west-2')
   #     resource = Aws::DatabaseMigrationService::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})

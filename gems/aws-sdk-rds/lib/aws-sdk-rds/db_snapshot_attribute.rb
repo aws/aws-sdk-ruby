@@ -7,7 +7,6 @@
 
 module Aws::RDS
 
-  #
   class DBSnapshotAttribute
 
     extend Aws::Deprecations

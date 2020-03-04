@@ -13,7 +13,6 @@ module Aws::ManagedBlockchain
   # If you do not pass +:client+, a default client will be constructed.
   #     client = Aws::ManagedBlockchain::Client.new(region: 'us-west-2')
   #     resource = Aws::ManagedBlockchain::Resource.new(client: client)
-  #
   class Resource
 
     # @param options ({})
