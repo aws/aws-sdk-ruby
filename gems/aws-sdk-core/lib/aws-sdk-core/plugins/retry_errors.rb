@@ -182,19 +182,21 @@ that fail because of a skewed client clock.
         value
       end
 
-        def self.resolve_adaptive_retry_wait_to_fill(cfg)
-          value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL']
-          value = Aws.shared_config.adaptive_retry_wait_to_fill(profile: cfg.profile) if value.nil?
-          value = true if value.nil?
+      def self.resolve_adaptive_retry_wait_to_fill(cfg)
+        value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] ||
+          Aws.shared_config.adaptive_retry_wait_to_fill(profile: cfg.profile) ||
+          'true'
 
-          # Raise if provided is not a boolean
-          unless value.is_a?(TrueClass) || value.is_a?(FalseClass)
-            raise ArgumentError,
-                'Must provide a boolean for adaptive_retry_wait_to_fill profile '\
-                'option or for ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
-          end
-          value
+        # Raise if provided value is not true or false
+        if value != 'true' && value != 'false'
+          raise ArgumentError,
+                'Must provide either `true` or `false` for '\
+                'adaptive_retry_wait_to_fill profile option or for '\
+                'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
         end
+
+        value == 'true'
+      end
 
       def self.resolve_correct_clock_skew(cfg)
         value = ENV['AWS_CORRECT_CLOCK_SKEW']
