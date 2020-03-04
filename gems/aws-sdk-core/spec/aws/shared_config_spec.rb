@@ -235,5 +235,17 @@ module Aws
 
     end
 
+    context 'adaptive_retry_wait_to_fill' do
+
+      it 'can resolve adaptive_retry_wait_to_fill from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'adaptive_retry_wait_to_fill'
+        )
+        expect(config.adaptive_retry_wait_to_fill).to eq('false')
+      end
+    end
+
   end
 end

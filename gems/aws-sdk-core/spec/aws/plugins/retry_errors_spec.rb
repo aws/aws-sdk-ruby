@@ -66,13 +66,13 @@ module Aws
       end
 
       it 'can configure adaptive_retry_wait_to_fill using ENV with precedence over config' do
-        ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] = false
+        ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] = 'false'
         expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
       end
 
       it 'can configure adaptive_retry_wait_to_fill with shared config' do
         allow_any_instance_of(Aws::SharedConfig)
-          .to receive(:adaptive_retry_wait_to_fill).and_return(false)
+          .to receive(:adaptive_retry_wait_to_fill).and_return('false')
         expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
       end
     end
