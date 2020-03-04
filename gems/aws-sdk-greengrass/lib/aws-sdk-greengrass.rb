@@ -24,17 +24,20 @@ require_relative 'aws-sdk-greengrass/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     greengrass = Aws::Greengrass::Client.new
+#     resp = greengrass.associate_role_to_group(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Greengrass all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Greengrass are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Greengrass::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Greengrass API errors
 #     end
 #
 # See {Errors} for more information.

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-kinesisvideosignalingchannels/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kinesis_video_signaling_channels = Aws::KinesisVideoSignalingChannels::Client.new
+#     resp = kinesis_video_signaling_channels.get_ice_server_config(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Kinesis Video Signaling Channels all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Kinesis Video Signaling Channels are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::KinesisVideoSignalingChannels::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Kinesis Video Signaling Channels API errors
 #     end
 #
 # See {Errors} for more information.

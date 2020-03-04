@@ -24,17 +24,20 @@ require_relative 'aws-sdk-batch/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     batch = Aws::Batch::Client.new
+#     resp = batch.cancel_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Batch all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Batch are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Batch::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Batch API errors
 #     end
 #
 # See {Errors} for more information.

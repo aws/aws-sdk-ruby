@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
   class NotificationConfiguration
 
     extend Aws::Deprecations

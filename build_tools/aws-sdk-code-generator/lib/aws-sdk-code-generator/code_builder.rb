@@ -167,6 +167,7 @@ module AwsSdkCodeGenerator
     def root_resource_class
       Views::RootResourceClass.new(
         module_name: @service.module_name,
+        service_name: @service.name,
         resources: @service.resources,
         paginators: @paginators,
         api: @api,

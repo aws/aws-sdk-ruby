@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::APIGateway
+
+  # When APIGateway returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::APIGateway::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all APIGateway errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::APIGateway::Errors::ServiceError
+  #       # rescues all APIGateway API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BadRequestException}
+  # * {ConflictException}
+  # * {LimitExceededException}
+  # * {NotFoundException}
+  # * {ServiceUnavailableException}
+  # * {TooManyRequestsException}
+  # * {UnauthorizedException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

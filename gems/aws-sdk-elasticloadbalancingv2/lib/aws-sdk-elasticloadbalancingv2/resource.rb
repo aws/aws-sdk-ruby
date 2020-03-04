@@ -6,6 +6,13 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElasticLoadBalancingV2
+  # This class provides a resource oriented interface for ElasticLoadBalancingV2.
+  # To create a resource object:
+  #     resource = Aws::ElasticLoadBalancingV2::Resource.new(region: 'us-west-2')
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass +:client+, a default client will be constructed.
+  #     client = Aws::ElasticLoadBalancingV2::Client.new(region: 'us-west-2')
+  #     resource = Aws::ElasticLoadBalancingV2::Resource.new(client: client)
   class Resource
 
     # @param options ({})

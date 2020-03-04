@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatch
+
   class Metric
 
     extend Aws::Deprecations

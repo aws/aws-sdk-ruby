@@ -24,17 +24,20 @@ require_relative 'aws-sdk-cloudhsmv2/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cloud_hsmv2 = Aws::CloudHSMV2::Client.new
+#     resp = cloud_hsmv2.copy_backup_to_region(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CloudHSM V2 all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CloudHSM V2 are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CloudHSMV2::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CloudHSM V2 API errors
 #     end
 #
 # See {Errors} for more information.

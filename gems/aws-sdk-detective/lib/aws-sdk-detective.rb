@@ -24,17 +24,20 @@ require_relative 'aws-sdk-detective/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     detective = Aws::Detective::Client.new
+#     resp = detective.accept_invitation(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Detective all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Detective are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Detective::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Detective API errors
 #     end
 #
 # See {Errors} for more information.

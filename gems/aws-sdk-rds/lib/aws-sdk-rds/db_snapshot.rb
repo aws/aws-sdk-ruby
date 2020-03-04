@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
   class DBSnapshot
 
     extend Aws::Deprecations

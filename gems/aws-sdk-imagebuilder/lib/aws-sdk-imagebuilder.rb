@@ -24,17 +24,20 @@ require_relative 'aws-sdk-imagebuilder/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     imagebuilder = Aws::Imagebuilder::Client.new
+#     resp = imagebuilder.cancel_image_creation(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from EC2 Image Builder all
-# extend {Errors::ServiceError}.
+# Errors returned from EC2 Image Builder are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Imagebuilder::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all EC2 Image Builder API errors
 #     end
 #
 # See {Errors} for more information.

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-groundstation/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ground_station = Aws::GroundStation::Client.new
+#     resp = ground_station.cancel_contact(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Ground Station all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Ground Station are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::GroundStation::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Ground Station API errors
 #     end
 #
 # See {Errors} for more information.

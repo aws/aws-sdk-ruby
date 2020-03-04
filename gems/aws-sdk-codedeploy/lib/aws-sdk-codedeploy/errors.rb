@@ -6,6 +6,144 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeDeploy
+
+  # When CodeDeploy returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CodeDeploy::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CodeDeploy errors using ServiceError:
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CodeDeploy::Errors::ServiceError
+  #       # rescues all CodeDeploy API errors
+  #     end
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error, including:
+  # *
+  # * #params - The request params
+  # * #operation_name - Name of the API operation invoked
+  # * #http_request
+  # * #http_response
+  # * etc ...
+  #
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AlarmsLimitExceededException}
+  # * {ApplicationAlreadyExistsException}
+  # * {ApplicationDoesNotExistException}
+  # * {ApplicationLimitExceededException}
+  # * {ApplicationNameRequiredException}
+  # * {ArnNotSupportedException}
+  # * {BatchLimitExceededException}
+  # * {BucketNameFilterRequiredException}
+  # * {DeploymentAlreadyCompletedException}
+  # * {DeploymentAlreadyStartedException}
+  # * {DeploymentConfigAlreadyExistsException}
+  # * {DeploymentConfigDoesNotExistException}
+  # * {DeploymentConfigInUseException}
+  # * {DeploymentConfigLimitExceededException}
+  # * {DeploymentConfigNameRequiredException}
+  # * {DeploymentDoesNotExistException}
+  # * {DeploymentGroupAlreadyExistsException}
+  # * {DeploymentGroupDoesNotExistException}
+  # * {DeploymentGroupLimitExceededException}
+  # * {DeploymentGroupNameRequiredException}
+  # * {DeploymentIdRequiredException}
+  # * {DeploymentIsNotInReadyStateException}
+  # * {DeploymentLimitExceededException}
+  # * {DeploymentNotStartedException}
+  # * {DeploymentTargetDoesNotExistException}
+  # * {DeploymentTargetIdRequiredException}
+  # * {DeploymentTargetListSizeExceededException}
+  # * {DescriptionTooLongException}
+  # * {ECSServiceMappingLimitExceededException}
+  # * {GitHubAccountTokenDoesNotExistException}
+  # * {GitHubAccountTokenNameRequiredException}
+  # * {IamArnRequiredException}
+  # * {IamSessionArnAlreadyRegisteredException}
+  # * {IamUserArnAlreadyRegisteredException}
+  # * {IamUserArnRequiredException}
+  # * {InstanceDoesNotExistException}
+  # * {InstanceIdRequiredException}
+  # * {InstanceLimitExceededException}
+  # * {InstanceNameAlreadyRegisteredException}
+  # * {InstanceNameRequiredException}
+  # * {InstanceNotRegisteredException}
+  # * {InvalidAlarmConfigException}
+  # * {InvalidApplicationNameException}
+  # * {InvalidArnException}
+  # * {InvalidAutoRollbackConfigException}
+  # * {InvalidAutoScalingGroupException}
+  # * {InvalidBlueGreenDeploymentConfigurationException}
+  # * {InvalidBucketNameFilterException}
+  # * {InvalidComputePlatformException}
+  # * {InvalidDeployedStateFilterException}
+  # * {InvalidDeploymentConfigIdException}
+  # * {InvalidDeploymentConfigNameException}
+  # * {InvalidDeploymentGroupNameException}
+  # * {InvalidDeploymentIdException}
+  # * {InvalidDeploymentInstanceTypeException}
+  # * {InvalidDeploymentStatusException}
+  # * {InvalidDeploymentStyleException}
+  # * {InvalidDeploymentTargetIdException}
+  # * {InvalidDeploymentWaitTypeException}
+  # * {InvalidEC2TagCombinationException}
+  # * {InvalidEC2TagException}
+  # * {InvalidECSServiceException}
+  # * {InvalidFileExistsBehaviorException}
+  # * {InvalidGitHubAccountTokenException}
+  # * {InvalidGitHubAccountTokenNameException}
+  # * {InvalidIamSessionArnException}
+  # * {InvalidIamUserArnException}
+  # * {InvalidIgnoreApplicationStopFailuresValueException}
+  # * {InvalidInputException}
+  # * {InvalidInstanceIdException}
+  # * {InvalidInstanceNameException}
+  # * {InvalidInstanceStatusException}
+  # * {InvalidInstanceTypeException}
+  # * {InvalidKeyPrefixFilterException}
+  # * {InvalidLifecycleEventHookExecutionIdException}
+  # * {InvalidLifecycleEventHookExecutionStatusException}
+  # * {InvalidLoadBalancerInfoException}
+  # * {InvalidMinimumHealthyHostValueException}
+  # * {InvalidNextTokenException}
+  # * {InvalidOnPremisesTagCombinationException}
+  # * {InvalidOperationException}
+  # * {InvalidRegistrationStatusException}
+  # * {InvalidRevisionException}
+  # * {InvalidRoleException}
+  # * {InvalidSortByException}
+  # * {InvalidSortOrderException}
+  # * {InvalidTagException}
+  # * {InvalidTagFilterException}
+  # * {InvalidTagsToAddException}
+  # * {InvalidTargetException}
+  # * {InvalidTargetFilterNameException}
+  # * {InvalidTargetGroupPairException}
+  # * {InvalidTargetInstancesException}
+  # * {InvalidTimeRangeException}
+  # * {InvalidTrafficRoutingConfigurationException}
+  # * {InvalidTriggerConfigException}
+  # * {InvalidUpdateOutdatedInstancesOnlyValueException}
+  # * {LifecycleEventAlreadyCompletedException}
+  # * {LifecycleHookLimitExceededException}
+  # * {MultipleIamArnsProvidedException}
+  # * {OperationNotSupportedException}
+  # * {ResourceArnRequiredException}
+  # * {ResourceValidationException}
+  # * {RevisionDoesNotExistException}
+  # * {RevisionRequiredException}
+  # * {RoleRequiredException}
+  # * {TagLimitExceededException}
+  # * {TagRequiredException}
+  # * {TagSetListLimitExceededException}
+  # * {ThrottlingException}
+  # * {TriggerTargetsLimitExceededException}
+  # * {UnsupportedActionForDeploymentTypeException}
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors

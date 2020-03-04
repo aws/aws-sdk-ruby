@@ -24,17 +24,20 @@ require_relative 'aws-sdk-appmesh/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     app_mesh = Aws::AppMesh::Client.new
+#     resp = app_mesh.create_mesh(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS App Mesh all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS App Mesh are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AppMesh::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS App Mesh API errors
 #     end
 #
 # See {Errors} for more information.

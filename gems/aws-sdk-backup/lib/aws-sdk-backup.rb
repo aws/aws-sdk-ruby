@@ -24,17 +24,20 @@ require_relative 'aws-sdk-backup/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     backup = Aws::Backup::Client.new
+#     resp = backup.create_backup_plan(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Backup all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Backup are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Backup::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Backup API errors
 #     end
 #
 # See {Errors} for more information.

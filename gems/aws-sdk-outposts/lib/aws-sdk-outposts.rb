@@ -24,17 +24,20 @@ require_relative 'aws-sdk-outposts/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     outposts = Aws::Outposts::Client.new
+#     resp = outposts.create_outpost(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Outposts all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Outposts are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Outposts::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Outposts API errors
 #     end
 #
 # See {Errors} for more information.

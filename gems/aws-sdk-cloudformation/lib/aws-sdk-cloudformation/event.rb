@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudFormation
+
   class Event
 
     extend Aws::Deprecations

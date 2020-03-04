@@ -24,17 +24,20 @@ require_relative 'aws-sdk-personalize/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     personalize = Aws::Personalize::Client.new
+#     resp = personalize.create_batch_inference_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Personalize all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Personalize are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Personalize::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Personalize API errors
 #     end
 #
 # See {Errors} for more information.

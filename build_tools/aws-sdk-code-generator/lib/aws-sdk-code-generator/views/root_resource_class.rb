@@ -4,6 +4,7 @@ module AwsSdkCodeGenerator
 
       def initialize(options)
         @module_name = options.fetch(:module_name)
+        @service_name = options.fetch(:service_name)
         class_name = @module_name.split('::').last
         api = options.fetch(:api)
         resource = (options[:resources] || {})['service'] || {}
@@ -25,6 +26,9 @@ module AwsSdkCodeGenerator
 
       # @return [Array<ResourceAssociation>]
       attr_reader :associations
+
+      # @return [String]
+      attr_reader :service_name
 
       # @return [String|nil]
       def generated_src_warning

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-cognitosync/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cognito_sync = Aws::CognitoSync::Client.new
+#     resp = cognito_sync.bulk_publish(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Cognito Sync all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Cognito Sync are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CognitoSync::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Cognito Sync API errors
 #     end
 #
 # See {Errors} for more information.
