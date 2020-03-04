@@ -115,6 +115,27 @@ module Aws::Pinpoint
 
     end
 
+    class PayloadTooLargeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Pinpoint::Types::PayloadTooLargeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
     class TooManyRequestsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
