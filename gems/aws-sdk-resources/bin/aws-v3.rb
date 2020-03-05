@@ -185,7 +185,6 @@ end
 
 def run_with_irb
   require 'irb'
-  puts Time.now
   IRB.start
 end
 

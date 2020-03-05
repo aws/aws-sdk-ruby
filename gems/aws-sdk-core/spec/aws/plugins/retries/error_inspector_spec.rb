@@ -172,10 +172,8 @@ module Aws
 
       describe '#endpoint_discovery?' do
         let(:context) do
-          double('context', operation: operation, config: config)
+          double('context', operation: operation)
         end
-        let(:config) { double('config', endpoint_cache: endpoint_cache) }
-        let(:endpoint_cache) { double('endpoint_cache') }
 
         context 'operation is not endpoint_discovery' do
           let(:operation) { double('operation', endpoint_discovery: false) }
@@ -201,10 +199,6 @@ module Aws
           end
 
           it 'returns true when the status code is 421' do
-            expect(endpoint_cache).to receive(:extract_key).with(context)
-              .and_return('key')
-            expect(endpoint_cache).to receive(:delete).with('key')
-
             expect(
               inspector(
                 RetryErrorsSvc::Errors::SomeRandomError, 421
@@ -213,11 +207,7 @@ module Aws
           end
 
           context 'EndpointDiscoveryError' do
-            it 'returns true and updates the endpoint_cache' do
-              expect(endpoint_cache).to receive(:extract_key).with(context)
-                .and_return('key')
-              expect(endpoint_cache).to receive(:delete).with('key')
-
+            it 'returns true when the error is an EndpointDiscoveryError' do
               expect(
                 inspector(
                   Errors::EndpointDiscoveryError.new, 400
@@ -229,7 +219,9 @@ module Aws
       end
 
       describe '#clock_skew?' do
-        let(:context) { double("context", config: double("config", clock_skew: double('clock_skew', clock_skewed?: clock_skewed))) }
+        let(:context) { double("context", config: config) }
+        let(:config) { double("config", clock_skew: clock_skew) }
+        let(:clock_skew) { double('clock_skew', clock_skewed?: clock_skewed) }
         let(:clock_skewed) { true }
 
         clock_skew_errors = [

@@ -81,13 +81,13 @@ module Aws
       end
 
       it 'can configure correct_clock_skew using ENV with precedence over config' do
-        ENV['AWS_CORRECT_CLOCK_SKEW'] = true
+        ENV['AWS_CORRECT_CLOCK_SKEW'] = 'true'
         expect(client.config.correct_clock_skew).to eq(true)
       end
 
       it 'can configure correct_clock_skew with shared config' do
         allow_any_instance_of(Aws::SharedConfig)
-          .to receive(:correct_clock_skew).and_return(true)
+          .to receive(:correct_clock_skew).and_return('true')
         expect(client.config.correct_clock_skew).to eq(true)
       end
     end
@@ -276,6 +276,24 @@ module Aws
 
           handle_with_retry(test_case_def)
         end
+      end
+
+      it 'deletes endpoints from the endpoint cache and retries endpoint discovery errors' do
+        endpoint_error = Errors::EndpointDiscoveryError.new(nil, nil)
+
+        test_case_def = [
+          {
+            response: { status_code: 421, error: endpoint_error, endpoint_discovery: true },
+            expect: { retries: 1 }
+          },
+          {
+            response: { status_code: 200, error: nil },
+            expect: { retries: 1 }
+          }
+        ]
+
+        expect(resp.context.config.endpoint_cache).to receive(:delete_from_context)
+        handle_with_retry(test_case_def)
       end
 
       context 'adaptive mode' do

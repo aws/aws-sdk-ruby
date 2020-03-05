@@ -94,20 +94,9 @@ module Aws
         def endpoint_discovery?(context)
           return false unless context.operation.endpoint_discovery
 
-          if @http_status_code == 421 ||
-            extract_name(@error) == 'InvalidEndpointException'
-            @error = Errors::EndpointDiscoveryError.new
-          end
-
-          # When endpoint discovery error occurs
-          # evict the endpoint from cache
-          if @error.is_a?(Errors::EndpointDiscoveryError)
-            key = context.config.endpoint_cache.extract_key(context)
-            context.config.endpoint_cache.delete(key)
-            true
-          else
-            false
-          end
+          @http_status_code == 421 ||
+            @name == 'InvalidEndpointException' ||
+            @error.is_a?(Errors::EndpointDiscoveryError)
         end
 
         def modeled_retryable?
@@ -124,13 +113,13 @@ module Aws
         end
 
         def retryable?(context)
-          (expired_credentials? && refreshable_credentials?(context)) ||
-            throttling_error? ||
-            checksum? ||
-            networking? ||
-            server? ||
-            endpoint_discovery?(context) ||
+          server? ||
             modeled_retryable? ||
+            throttling_error? ||
+            networking? ||
+            checksum? ||
+            endpoint_discovery?(context) ||
+            (expired_credentials? && refreshable_credentials?(context)) ||
             clock_skew?(context)
         end
 

@@ -118,6 +118,12 @@ module Aws
       parts.join('_')
     end
 
+    # extract and delete the key from the cache from request context
+    # @param [RequestContext] ctx
+    def delete_from_context(ctx)
+      delete extract_key(ctx)
+    end
+
     # update polling threads pool
     # param [String] key
     # param [Thread] thread

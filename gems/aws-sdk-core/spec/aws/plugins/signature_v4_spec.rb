@@ -227,10 +227,10 @@ module Aws
         let(:now) { Time.now }
         let(:utc) { now.utc }
 
-        before(:each) {
+        before(:each) do
           allow(Time).to receive(:now).and_return(now)
           allow(now).to receive(:utc).and_return(utc)
-        }
+        end
 
         it 'skips clock skew correction when clock_skew is not available on the configuration' do
           client = Sigv4Client.new(options.merge(

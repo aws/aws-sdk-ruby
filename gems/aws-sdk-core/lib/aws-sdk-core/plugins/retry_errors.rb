@@ -199,17 +199,19 @@ that fail because of a skewed client clock.
       end
 
       def self.resolve_correct_clock_skew(cfg)
-        value = ENV['AWS_CORRECT_CLOCK_SKEW']
-        value = Aws.shared_config.correct_clock_skew(profile: cfg.profile) if value.nil?
-        value = false if value.nil?
+        value = ENV['AWS_CORRECT_CLOCK_SKEW'] ||
+          Aws.shared_config.correct_clock_skew(profile: cfg.profile) ||
+          'false'
 
-        # Raise if provided is not a boolean
-        unless value.is_a?(TrueClass) || value.is_a?(FalseClass)
+        # Raise if provided value is not true or false
+        if value != 'true' && value != 'false'
           raise ArgumentError,
-                'Must provide a boolean for correct_clock_sckew profile '\
-                'option or for ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
+                'Must provide either `true` or `false` for '\
+                'correct_clock_skew profile option or for '\
+                'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
         end
-        value
+
+        value == 'true'
       end
 
       class Handler < Seahorse::Client::Handler
@@ -225,6 +227,8 @@ that fail because of a skewed client clock.
           error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
           request_bookkeeping(context, response, error_inspector)
+
+          config.endpoint_cache.delete_from_context(context) if error_inspector.endpoint_discovery?(context)
 
           # Clock skew needs to be updated from the response even when
           # the request is not retryable
@@ -294,7 +298,15 @@ that fail because of a skewed client clock.
         def call(context)
           response = @handler.call(context)
           if response.error
-            retry_if_possible(response)
+            error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
+
+            context.config.endpoint_cache.delete_from_context(context) if error_inspector.endpoint_discovery?(context)
+
+            # Clock skew needs to be updated from the response even when
+            # the request is not retryable
+            context.config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
+
+            retry_if_possible(response, error_inspector)
           else
             response
           end
@@ -302,9 +314,8 @@ that fail because of a skewed client clock.
 
         private
 
-        def retry_if_possible(response)
+        def retry_if_possible(response, error_inspector)
           context = response.context
-          error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
           if should_retry?(context, error_inspector)
             retry_request(context, error_inspector)
           else
