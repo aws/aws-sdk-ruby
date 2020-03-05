@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
+
+* Feature - Aws::OpsWorksCM - Updated the API for AWS OpsWorks CM.
+
 2.11.460 (2020-03-04)
 ------------------
 
