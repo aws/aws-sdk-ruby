@@ -2632,6 +2632,8 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:authentication_options, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationList, location_name: "authenticationOptions"))
     ClientVpnEndpoint.add_member(:connection_log_options, Shapes::ShapeRef.new(shape: ConnectionLogResponseOptions, location_name: "connectionLogOptions"))
     ClientVpnEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    ClientVpnEndpoint.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "securityGroupIdSet"))
+    ClientVpnEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
 
     ClientVpnEndpointIdList.member = Shapes::ShapeRef.new(shape: ClientVpnEndpointId, location_name: "item")
@@ -2796,6 +2798,8 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateClientVpnEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateClientVpnEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateClientVpnEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "SecurityGroupId"))
+    CreateClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
 
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
@@ -6896,6 +6900,8 @@ module Aws::EC2
     ModifyClientVpnEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ModifyClientVpnEndpointRequest.add_member(:split_tunnel, Shapes::ShapeRef.new(shape: Boolean, location_name: "SplitTunnel"))
     ModifyClientVpnEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyClientVpnEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ClientVpnSecurityGroupIdSet, location_name: "SecurityGroupId"))
+    ModifyClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     ModifyClientVpnEndpointRequest.struct_class = Types::ModifyClientVpnEndpointRequest
 
     ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))

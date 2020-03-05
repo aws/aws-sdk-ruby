@@ -379,6 +379,9 @@ module Aws::EKS
     #   organization. Each tag consists of a key and an optional value, both
     #   of which you define.
     #
+    # @option params [Array<Types::EncryptionConfig>] :encryption_config
+    #   The encryption configuration for the cluster.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -433,6 +436,14 @@ module Aws::EKS
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     encryption_config: [
+    #       {
+    #         resources: ["String"],
+    #         provider: {
+    #           key_arn: "String",
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -464,6 +475,10 @@ module Aws::EKS
     #   resp.cluster.platform_version #=> String
     #   resp.cluster.tags #=> Hash
     #   resp.cluster.tags["TagKey"] #=> String
+    #   resp.cluster.encryption_config #=> Array
+    #   resp.cluster.encryption_config[0].resources #=> Array
+    #   resp.cluster.encryption_config[0].resources[0] #=> String
+    #   resp.cluster.encryption_config[0].provider.key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateCluster AWS API Documentation
     #
@@ -860,6 +875,10 @@ module Aws::EKS
     #   resp.cluster.platform_version #=> String
     #   resp.cluster.tags #=> Hash
     #   resp.cluster.tags["TagKey"] #=> String
+    #   resp.cluster.encryption_config #=> Array
+    #   resp.cluster.encryption_config[0].resources #=> Array
+    #   resp.cluster.encryption_config[0].resources[0] #=> String
+    #   resp.cluster.encryption_config[0].provider.key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteCluster AWS API Documentation
     #
@@ -1084,6 +1103,10 @@ module Aws::EKS
     #   resp.cluster.platform_version #=> String
     #   resp.cluster.tags #=> Hash
     #   resp.cluster.tags["TagKey"] #=> String
+    #   resp.cluster.encryption_config #=> Array
+    #   resp.cluster.encryption_config[0].resources #=> Array
+    #   resp.cluster.encryption_config[0].resources[0] #=> String
+    #   resp.cluster.encryption_config[0].provider.key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCluster AWS API Documentation
     #
@@ -1966,7 +1989,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

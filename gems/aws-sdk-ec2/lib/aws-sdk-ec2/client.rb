@@ -1197,6 +1197,12 @@ module Aws::EC2
     # subnet in each Availability Zone. We recommend that you associate at
     # least two subnets to provide Availability Zone redundancy.
     #
+    # If you specified a VPC when you created the Client VPN endpoint or if
+    # you have previous subnet associations, the specified subnet must be in
+    # the same VPC. To specify a subnet that's in a different VPC, you must
+    # first modify the Client VPN endpoint (ModifyClientVpnEndpoint) and
+    # change the VPC that's associated with it.
+    #
     # @option params [required, String] :client_vpn_endpoint_id
     #   The ID of the Client VPN endpoint.
     #
@@ -3728,6 +3734,16 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the Client VPN endpoint during creation.
     #
+    # @option params [Array<String>] :security_group_ids
+    #   The IDs of one or more security groups to apply to the target network.
+    #   You must also specify the ID of the VPC that contains the security
+    #   groups.
+    #
+    # @option params [String] :vpc_id
+    #   The ID of the VPC to associate with the Client VPN endpoint. If no
+    #   security group IDs are specified in the request, the default security
+    #   group for the VPC is applied.
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -3773,6 +3789,8 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     security_group_ids: ["String"],
+    #     vpc_id: "VpcId",
     #   })
     #
     # @example Response structure
@@ -11505,11 +11523,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the specified virtual private gateway. We recommend that
-    # before you delete a virtual private gateway, you detach it from the
-    # VPC and delete the VPN connection. Note that you don't need to delete
-    # the virtual private gateway if you plan to delete and recreate the VPN
-    # connection between your VPC and your network.
+    # Deletes the specified virtual private gateway. You must first detach
+    # the virtual private gateway from the VPC. Note that you don't need to
+    # delete the virtual private gateway if you plan to delete and recreate
+    # the VPN connection between your VPC and your network.
     #
     # @option params [required, String] :vpn_gateway_id
     #   The ID of the virtual private gateway.
@@ -12792,6 +12809,9 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].tags #=> Array
     #   resp.client_vpn_endpoints[0].tags[0].key #=> String
     #   resp.client_vpn_endpoints[0].tags[0].value #=> String
+    #   resp.client_vpn_endpoints[0].security_group_ids #=> Array
+    #   resp.client_vpn_endpoints[0].security_group_ids[0] #=> String
+    #   resp.client_vpn_endpoints[0].vpc_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -21700,9 +21720,10 @@ module Aws::EC2
     #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
     #     `fpga-image` \| `image` \| `instance` \| `host-reservation` \|
     #     `internet-gateway` \| `launch-template` \| `natgateway` \|
-    #     `network-acl` \| `network-interface` \| `reserved-instances` \|
-    #     `route-table` \| `security-group` \| `snapshot` \|
-    #     `spot-instances-request` \| `subnet` \| `volume` \| `vpc` \|
+    #     `network-acl` \| `network-interface` \| `placement-group` \|
+    #     `reserved-instances` \| `route-table` \| `security-group` \|
+    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
+    #     `vpc` \| `vpc-endpoint` \| `vpc-endpoint-service` \|
     #     `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
@@ -24872,6 +24893,10 @@ module Aws::EC2
     #   The ID of the route table.
     #
     # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -25554,6 +25579,10 @@ module Aws::EC2
     #   the same VPC that the virtual private gateway is attached to.
     #
     # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -27778,9 +27807,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the specified Client VPN endpoint. You can only modify an
-    # endpoint's server certificate information, client connection logging
-    # information, DNS server, and description. Modifying the DNS server
+    # Modifies the specified Client VPN endpoint. Modifying the DNS server
     # resets existing client connections.
     #
     # @option params [required, String] :client_vpn_endpoint_id
@@ -27837,6 +27864,12 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<String>] :security_group_ids
+    #   The IDs of one or more security groups to apply to the target network.
+    #
+    # @option params [String] :vpc_id
+    #   The ID of the VPC to associate with the Client VPN endpoint.
+    #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
@@ -27859,6 +27892,8 @@ module Aws::EC2
     #     description: "String",
     #     split_tunnel: false,
     #     dry_run: false,
+    #     security_group_ids: ["String"],
+    #     vpc_id: "VpcId",
     #   })
     #
     # @example Response structure
@@ -30671,9 +30706,9 @@ module Aws::EC2
     # the transit gateway route table.
     #
     # After you perform this operation, the AWS VPN endpoint's IP addresses
-    # on the AWS side and the tunnel options remain intact. Your s2slong;
-    # connection will be temporarily unavailable for approximately 10
-    # minutes while we provision the new endpoints
+    # on the AWS side and the tunnel options remain intact. Your AWS
+    # Site-to-Site VPN connection will be temporarily unavailable for a
+    # brief period while we provision the new endpoints.
     #
     #
     #
@@ -36054,7 +36089,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.147.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

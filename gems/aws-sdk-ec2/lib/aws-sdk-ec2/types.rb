@@ -3628,6 +3628,14 @@ module Aws::EC2
     #   Any tags assigned to the Client VPN endpoint.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups for the target network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -3647,7 +3655,9 @@ module Aws::EC2
       :server_certificate_arn,
       :authentication_options,
       :connection_log_options,
-      :tags)
+      :tags,
+      :security_group_ids,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -4622,6 +4632,8 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         security_group_ids: ["String"],
+    #         vpc_id: "VpcId",
     #       }
     #
     # @!attribute [rw] client_cidr_block
@@ -4728,6 +4740,18 @@ module Aws::EC2
     #   The tags to apply to the Client VPN endpoint during creation.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of one or more security groups to apply to the target
+    #   network. You must also specify the ID of the VPC that contains the
+    #   security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC to associate with the Client VPN endpoint. If no
+    #   security group IDs are specified in the request, the default
+    #   security group for the VPC is applied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -4742,7 +4766,9 @@ module Aws::EC2
       :split_tunnel,
       :dry_run,
       :client_token,
-      :tag_specifications)
+      :tag_specifications,
+      :security_group_ids,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -18827,9 +18853,10 @@ module Aws::EC2
     #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
     #     `fpga-image` \| `image` \| `instance` \| `host-reservation` \|
     #     `internet-gateway` \| `launch-template` \| `natgateway` \|
-    #     `network-acl` \| `network-interface` \| `reserved-instances` \|
-    #     `route-table` \| `security-group` \| `snapshot` \|
-    #     `spot-instances-request` \| `subnet` \| `volume` \| `vpc` \|
+    #     `network-acl` \| `network-interface` \| `placement-group` \|
+    #     `reserved-instances` \| `route-table` \| `security-group` \|
+    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
+    #     `vpc` \| `vpc-endpoint` \| `vpc-endpoint-service` \|
     #     `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
@@ -21685,6 +21712,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationRequest AWS API Documentation
@@ -22987,6 +23018,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationRequest AWS API Documentation
@@ -31406,6 +31441,8 @@ module Aws::EC2
     #         description: "String",
     #         split_tunnel: false,
     #         dry_run: false,
+    #         security_group_ids: ["String"],
+    #         vpc_id: "VpcId",
     #       }
     #
     # @!attribute [rw] client_vpn_endpoint_id
@@ -31470,6 +31507,15 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of one or more security groups to apply to the target
+    #   network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC to associate with the Client VPN endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -31480,7 +31526,9 @@ module Aws::EC2
       :vpn_port,
       :description,
       :split_tunnel,
-      :dry_run)
+      :dry_run,
+      :security_group_ids,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -44054,10 +44102,13 @@ module Aws::EC2
     #   support tagging on creation are: `capacity-reservation` \|
     #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
     #   \| `instance` \| `key-pair` \| `launch-template` \|
-    #   `placement-group` \| `snapshot` \| `traffic-mirror-filter` \|
-    #   `traffic-mirror-session` \| `traffic-mirror-target` \|
-    #   `transit-gateway` \| `transit-gateway-attachment` \|
-    #   `transit-gateway-route-table` \| `volume`.
+    #   `spot-fleet-request` \| `placement-group` \| `snapshot` \|
+    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
+    #   `traffic-mirror-target` \| `transit-gateway` \|
+    #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
+    #   `vpc-endpoint` (for interface VPC endpoints)\|
+    #   `vpc-endpoint-service` (for gateway VPC endpoints) \| `volume` \|
+    #   `vpc-flow-log`.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #

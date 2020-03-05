@@ -158,6 +158,10 @@ module Aws::EKS
     #   propagate to any other resources associated with the cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] encryption_config
+    #   The encryption configuration for the cluster.
+    #   @return [Array<Types::EncryptionConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -174,7 +178,8 @@ module Aws::EKS
       :certificate_authority,
       :client_request_token,
       :platform_version,
-      :tags)
+      :tags,
+      :encryption_config)
       include Aws::Structure
     end
 
@@ -204,6 +209,14 @@ module Aws::EKS
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         encryption_config: [
+    #           {
+    #             resources: ["String"],
+    #             provider: {
+    #               key_arn: "String",
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -275,6 +288,10 @@ module Aws::EKS
     #   both of which you define.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] encryption_config
+    #   The encryption configuration for the cluster.
+    #   @return [Array<Types::EncryptionConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -284,7 +301,8 @@ module Aws::EKS
       :resources_vpc_config,
       :logging,
       :client_request_token,
-      :tags)
+      :tags,
+      :encryption_config)
       include Aws::Structure
     end
 
@@ -795,6 +813,36 @@ module Aws::EKS
     #
     class DescribeUpdateResponse < Struct.new(
       :update)
+      include Aws::Structure
+    end
+
+    # The encryption configuration for the cluster.
+    #
+    # @note When making an API call, you may pass EncryptionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         resources: ["String"],
+    #         provider: {
+    #           key_arn: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resources
+    #   Specifies the resources to be encrypted. The only supported value is
+    #   "secrets".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] provider
+    #   AWS Key Management Service (AWS KMS) customer master key (CMK).
+    #   Either the ARN or the alias can be used.
+    #   @return [Types::Provider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/EncryptionConfig AWS API Documentation
+    #
+    class EncryptionConfig < Struct.new(
+      :resources,
+      :provider)
       include Aws::Structure
     end
 
@@ -1669,6 +1717,36 @@ module Aws::EKS
     #
     class OIDC < Struct.new(
       :issuer)
+      include Aws::Structure
+    end
+
+    # Identifies the AWS Key Management Service (AWS KMS) customer master
+    # key (CMK) used to encrypt the secrets.
+    #
+    # @note When making an API call, you may pass Provider
+    #   data as a hash:
+    #
+    #       {
+    #         key_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] key_arn
+    #   Amazon Resource Name (ARN) or alias of the customer master key
+    #   (CMK). The CMK must be symmetric, created in the same region as the
+    #   cluster, and if the CMK was created in a different account, the user
+    #   must have access to the CMK. For more information, see [Allowing
+    #   Users in Other Accounts to Use a CMK][1] in the *AWS Key Management
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Provider AWS API Documentation
+    #
+    class Provider < Struct.new(
+      :key_arn)
       include Aws::Structure
     end
 

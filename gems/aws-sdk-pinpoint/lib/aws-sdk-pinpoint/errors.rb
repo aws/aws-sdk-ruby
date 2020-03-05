@@ -35,6 +35,7 @@ module Aws::Pinpoint
   # * {InternalServerErrorException}
   # * {MethodNotAllowedException}
   # * {NotFoundException}
+  # * {PayloadTooLargeException}
   # * {TooManyRequestsException}
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-03-05)
+------------------
+
+* Feature - Add a new finding field for EC2 findings indicating the instance's local IP address involved in the threat.
+
 1.25.0 (2019-11-15)
 ------------------
 

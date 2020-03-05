@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-03-05)
+------------------
+
+* Feature - Updated the Tag regex pattern to align with AWS tagging APIs.
+
 1.28.0 (2020-01-24)
 ------------------
 

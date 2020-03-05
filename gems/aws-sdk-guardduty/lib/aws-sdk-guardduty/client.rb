@@ -1239,6 +1239,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port #=> Integer
     #   resp.findings[0].service.action.network_connection_action.local_port_details.port_name #=> String
     #   resp.findings[0].service.action.network_connection_action.protocol #=> String
+    #   resp.findings[0].service.action.network_connection_action.local_ip_details.ip_address_v4 #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.network_connection_action.remote_ip_details.country.country_name #=> String
@@ -1255,6 +1256,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.port_probe_action.port_probe_details #=> Array
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port #=> Integer
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_port_details.port_name #=> String
+    #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].local_ip_details.ip_address_v4 #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.country.country_name #=> String
@@ -1749,6 +1751,8 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2545,7 +2549,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
