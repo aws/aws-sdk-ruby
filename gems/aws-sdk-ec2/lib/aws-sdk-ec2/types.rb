@@ -31344,6 +31344,51 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyAvailabilityZoneGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "String", # required
+    #         opt_in_status: "opted-in", # required, accepts opted-in, not-opted-in
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The names of the Zone Group.
+    #   @return [String]
+    #
+    # @!attribute [rw] opt_in_status
+    #   Indicates whether to enable or disable Zone Group membership. The
+    #   valid values are `opted-in`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAvailabilityZoneGroupRequest AWS API Documentation
+    #
+    class ModifyAvailabilityZoneGroupRequest < Struct.new(
+      :group_name,
+      :opt_in_status,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Is `true` if the request succeeds, and an error otherwise.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAvailabilityZoneGroupResult AWS API Documentation
+    #
+    class ModifyAvailabilityZoneGroupResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyCapacityReservationRequest
     #   data as a hash:
     #

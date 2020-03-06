@@ -30,14 +30,16 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:elasticinference)
 
 module Aws::ElasticInference
-  # An API client for ElasticInference.  To construct a client, you need to configure a +:region+ and +:credentials+.
-  #     client = Aws::ElasticInference::Client.new(
-  #       region: region_name,
-  #       credentials: credentials,
-  #       # ...
-  #     )
+  # An API client for ElasticInference.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #   client = Aws::ElasticInference::Client.new(
+  #     region: region_name,
+  #     credentials: credentials,
+  #     # ...
+  #   )
+  #
   # For details on configuring region and credentials see
-  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
   #
   # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base

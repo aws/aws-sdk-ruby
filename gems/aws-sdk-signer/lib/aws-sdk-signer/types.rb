@@ -80,7 +80,7 @@ module Aws::Signer
     #   @return [Types::Source]
     #
     # @!attribute [rw] signing_material
-    #   Amazon Resource Name (ARN) of your code signing certificate.
+    #   The Amazon Resource Name (ARN) of your code signing certificate.
     #   @return [Types::SigningMaterial]
     #
     # @!attribute [rw] platform_id
@@ -586,6 +586,7 @@ module Aws::Signer
     #             encryption_algorithm: "RSA", # accepts RSA, ECDSA
     #             hash_algorithm: "SHA1", # accepts SHA1, SHA256
     #           },
+    #           signing_image_format: "JSON", # accepts JSON, JSONEmbedded, JSONDetached
     #         },
     #         signing_parameters: {
     #           "SigningParameterKey" => "SigningParameterValue",
@@ -605,7 +606,7 @@ module Aws::Signer
     #   @return [Types::SigningMaterial]
     #
     # @!attribute [rw] platform_id
-    #   The ID of the signing profile to be created.
+    #   The ID of the signing platform to be created.
     #   @return [String]
     #
     # @!attribute [rw] overrides
@@ -620,7 +621,8 @@ module Aws::Signer
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   Tags to be associated with the signing profile being created.
+    #   Tags to be associated with the signing profile that is being
+    #   created.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/PutSigningProfileRequest AWS API Documentation
@@ -760,7 +762,7 @@ module Aws::Signer
     #   @return [Types::EncryptionAlgorithmOptions]
     #
     # @!attribute [rw] hash_algorithm_options
-    #   The hash algorithm options that are available for a a code signing
+    #   The hash algorithm options that are available for a code signing
     #   job.
     #   @return [Types::HashAlgorithmOptions]
     #
@@ -804,11 +806,11 @@ module Aws::Signer
     # The image format of a code signing platform or profile.
     #
     # @!attribute [rw] supported_formats
-    #   The supported formats of a code signing signing image.
+    #   The supported formats of a code signing image.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_format
-    #   The default format of a code signing signing image.
+    #   The default format of a code signing image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningImageFormat AWS API Documentation
@@ -882,7 +884,7 @@ module Aws::Signer
     end
 
     # Contains information about the signing configurations and parameters
-    # that is used to perform a code signing job.
+    # that are used to perform a code signing job.
     #
     # @!attribute [rw] platform_id
     #   The ID of a code signing; platform.
@@ -944,6 +946,7 @@ module Aws::Signer
     #           encryption_algorithm: "RSA", # accepts RSA, ECDSA
     #           hash_algorithm: "SHA1", # accepts SHA1, SHA256
     #         },
+    #         signing_image_format: "JSON", # accepts JSON, JSONEmbedded, JSONDetached
     #       }
     #
     # @!attribute [rw] signing_configuration
@@ -951,10 +954,20 @@ module Aws::Signer
     #   hash algorithm of a signing job.
     #   @return [Types::SigningConfigurationOverrides]
     #
+    # @!attribute [rw] signing_image_format
+    #   A signed image is a JSON object. When overriding the default signing
+    #   platform configuration, a customer can select either of two signing
+    #   formats, `JSONEmbedded` or `JSONDetached`. (A third format value,
+    #   `JSON`, is reserved for future use.) With `JSONEmbedded`, the
+    #   signing image has the payload embedded in it. With `JSONDetached`,
+    #   the payload is not be embedded in the signing image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/SigningPlatformOverrides AWS API Documentation
     #
     class SigningPlatformOverrides < Struct.new(
-      :signing_configuration)
+      :signing_configuration,
+      :signing_image_format)
       include Aws::Structure
     end
 
@@ -983,7 +996,7 @@ module Aws::Signer
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   Amazon Resource Name (ARN) for the signing profile.
+    #   The Amazon Resource Name (ARN) for the signing profile.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1104,7 +1117,7 @@ module Aws::Signer
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) for the signing profile.
+    #   The Amazon Resource Name (ARN) for the signing profile.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1144,11 +1157,11 @@ module Aws::Signer
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   Amazon Resource Name (ARN) for the signing profile .
+    #   The Amazon Resource Name (ARN) for the signing profile.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   A list of tag keys to be removed from the signing profile .
+    #   A list of tag keys to be removed from the signing profile.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/UntagResourceRequest AWS API Documentation

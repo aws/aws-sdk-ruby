@@ -1844,6 +1844,11 @@ module Aws::GuardDuty
     #   The type of the EC2 instance.
     #   @return [String]
     #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable
+    #   to AWS Outposts instances.
+    #   @return [String]
+    #
     # @!attribute [rw] launch_time
     #   The launch time of the EC2 instance.
     #   @return [String]
@@ -1874,6 +1879,7 @@ module Aws::GuardDuty
       :instance_id,
       :instance_state,
       :instance_type,
+      :outpost_arn,
       :launch_time,
       :network_interfaces,
       :platform,
@@ -2146,6 +2152,8 @@ module Aws::GuardDuty
     #   * resource.instanceDetails.imageId
     #
     #   * resource.instanceDetails.instanceId
+    #
+    #   * resource.instanceDetails.outpostArn
     #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #

@@ -878,6 +878,7 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #               },
+    #               stream_ui: false,
     #             },
     #           },
     #         ],
@@ -900,6 +901,7 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #               },
+    #               stream_ui: false,
     #             },
     #           },
     #         ],
@@ -2402,6 +2404,7 @@ module Aws::RoboMaker
     #             },
     #           ],
     #         },
+    #         stream_ui: false,
     #       }
     #
     # @!attribute [rw] package_name
@@ -2420,13 +2423,22 @@ module Aws::RoboMaker
     #   The port forwarding configuration.
     #   @return [Types::PortForwardingConfig]
     #
+    # @!attribute [rw] stream_ui
+    #   Boolean indicating whether a streaming session will be configured
+    #   for the application. If `True`, AWS RoboMaker will configure a
+    #   connection so you can interact with your application as it is
+    #   running in the simulation. You must configure and luanch the
+    #   component. It must have a graphical user interface.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/LaunchConfig AWS API Documentation
     #
     class LaunchConfig < Struct.new(
       :package_name,
       :launch_file,
       :environment_variables,
-      :port_forwarding_config)
+      :port_forwarding_config,
+      :stream_ui)
       include Aws::Structure
     end
 
@@ -3357,6 +3369,7 @@ module Aws::RoboMaker
     #               },
     #             ],
     #           },
+    #           stream_ui: false,
     #         },
     #       }
     #
@@ -3571,6 +3584,7 @@ module Aws::RoboMaker
     #               },
     #             ],
     #           },
+    #           stream_ui: false,
     #         },
     #       }
     #
@@ -3886,6 +3900,7 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #               },
+    #               stream_ui: false,
     #             },
     #           },
     #         ],
@@ -3908,6 +3923,7 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #               },
+    #               stream_ui: false,
     #             },
     #           },
     #         ],
@@ -4184,6 +4200,7 @@ module Aws::RoboMaker
     #                       },
     #                     ],
     #                   },
+    #                   stream_ui: false,
     #                 },
     #               },
     #             ],
@@ -4206,6 +4223,7 @@ module Aws::RoboMaker
     #                       },
     #                     ],
     #                   },
+    #                   stream_ui: false,
     #                 },
     #               },
     #             ],
@@ -4234,6 +4252,9 @@ module Aws::RoboMaker
     # @!attribute [rw] client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] batch_policy

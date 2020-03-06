@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-03-06)
+------------------
+
+* Feature - Added support for streaming a GUI from robot and simulation applications
+
 1.19.0 (2020-02-07)
 ------------------
 

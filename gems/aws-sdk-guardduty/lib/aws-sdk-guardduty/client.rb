@@ -30,14 +30,16 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:guardduty)
 
 module Aws::GuardDuty
-  # An API client for GuardDuty.  To construct a client, you need to configure a +:region+ and +:credentials+.
-  #     client = Aws::GuardDuty::Client.new(
-  #       region: region_name,
-  #       credentials: credentials,
-  #       # ...
-  #     )
+  # An API client for GuardDuty.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #   client = Aws::GuardDuty::Client.new(
+  #     region: region_name,
+  #     credentials: credentials,
+  #     # ...
+  #   )
+  #
   # For details on configuring region and credentials see
-  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
   #
   # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
@@ -1192,6 +1194,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.instance_details.instance_id #=> String
     #   resp.findings[0].resource.instance_details.instance_state #=> String
     #   resp.findings[0].resource.instance_details.instance_type #=> String
+    #   resp.findings[0].resource.instance_details.outpost_arn #=> String
     #   resp.findings[0].resource.instance_details.launch_time #=> String
     #   resp.findings[0].resource.instance_details.network_interfaces #=> Array
     #   resp.findings[0].resource.instance_details.network_interfaces[0].ipv_6_addresses #=> Array
@@ -1701,6 +1704,8 @@ module Aws::GuardDuty
     #   * resource.instanceDetails.imageId
     #
     #   * resource.instanceDetails.instanceId
+    #
+    #   * resource.instanceDetails.outpostArn
     #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
@@ -2549,7 +2554,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

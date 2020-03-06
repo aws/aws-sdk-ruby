@@ -11,22 +11,17 @@ module Aws::SESV2
   # These errors all extend Aws::SESV2::Errors::ServiceError < {Aws::Errors::ServiceError}
   #
   # You can rescue all SESV2 errors using ServiceError:
+  #
   #     begin
   #       # do stuff
   #     rescue Aws::SESV2::Errors::ServiceError
   #       # rescues all SESV2 API errors
   #     end
   #
+  #
   # ## Request Context
   # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
-  # information about the request that generated the error, including:
-  # *
-  # * #params - The request params
-  # * #operation_name - Name of the API operation invoked
-  # * #http_request
-  # * #http_response
-  # * etc ...
-  #
+  # information about the request that generated the error.
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
@@ -41,6 +36,7 @@ module Aws::SESV2
   # * {NotFoundException}
   # * {SendingPausedException}
   # * {TooManyRequestsException}
+  #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors

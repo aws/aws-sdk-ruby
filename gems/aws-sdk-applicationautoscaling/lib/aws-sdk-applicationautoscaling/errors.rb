@@ -11,22 +11,17 @@ module Aws::ApplicationAutoScaling
   # These errors all extend Aws::ApplicationAutoScaling::Errors::ServiceError < {Aws::Errors::ServiceError}
   #
   # You can rescue all ApplicationAutoScaling errors using ServiceError:
+  #
   #     begin
   #       # do stuff
   #     rescue Aws::ApplicationAutoScaling::Errors::ServiceError
   #       # rescues all ApplicationAutoScaling API errors
   #     end
   #
+  #
   # ## Request Context
   # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
-  # information about the request that generated the error, including:
-  # *
-  # * #params - The request params
-  # * #operation_name - Name of the API operation invoked
-  # * #http_request
-  # * #http_response
-  # * etc ...
-  #
+  # information about the request that generated the error.
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
@@ -37,6 +32,7 @@ module Aws::ApplicationAutoScaling
   # * {LimitExceededException}
   # * {ObjectNotFoundException}
   # * {ValidationException}
+  #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors

@@ -281,6 +281,7 @@ module Aws::Signer
     SigningPlatform.struct_class = Types::SigningPlatform
 
     SigningPlatformOverrides.add_member(:signing_configuration, Shapes::ShapeRef.new(shape: SigningConfigurationOverrides, location_name: "signingConfiguration"))
+    SigningPlatformOverrides.add_member(:signing_image_format, Shapes::ShapeRef.new(shape: ImageFormat, location_name: "signingImageFormat"))
     SigningPlatformOverrides.struct_class = Types::SigningPlatformOverrides
 
     SigningPlatforms.member = Shapes::ShapeRef.new(shape: SigningPlatform)

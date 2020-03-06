@@ -171,6 +171,28 @@ module Aws::AppMesh
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner, or another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] uid
     #   The unique identifier for the resource.
     #   @return [String]
@@ -186,6 +208,8 @@ module Aws::AppMesh
       :arn,
       :created_at,
       :last_updated_at,
+      :mesh_owner,
+      :resource_owner,
       :uid,
       :version)
       include Aws::Structure
@@ -478,12 +502,24 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         route_name: "ResourceName", # required
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh to delete the route in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] route_name
@@ -498,6 +534,7 @@ module Aws::AppMesh
     #
     class DeleteRouteInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :route_name,
       :virtual_router_name)
       include Aws::Structure
@@ -699,6 +736,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         spec: { # required
     #           listeners: [
     #             {
@@ -731,6 +769,18 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual router in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then the account that you specify must share the
+    #   mesh with your account before you can create the resource in the
+    #   service mesh. For more information about mesh sharing, see [Working
+    #   with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] spec
     #   The virtual router specification to apply.
     #   @return [Types::VirtualRouterSpec]
@@ -752,6 +802,7 @@ module Aws::AppMesh
     class CreateVirtualRouterInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :spec,
       :tags,
       :virtual_router_name)
@@ -1156,6 +1207,28 @@ module Aws::AppMesh
     #   The name of the service mesh that the route resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner, or another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] route_name
     #   The name of the route.
     #   @return [String]
@@ -1169,6 +1242,8 @@ module Aws::AppMesh
     class RouteRef < Struct.new(
       :arn,
       :mesh_name,
+      :mesh_owner,
+      :resource_owner,
       :route_name,
       :virtual_router_name)
       include Aws::Structure
@@ -1179,11 +1254,23 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         virtual_node_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh to delete the virtual node in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_node_name
@@ -1194,6 +1281,7 @@ module Aws::AppMesh
     #
     class DeleteVirtualNodeInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :virtual_node_name)
       include Aws::Structure
     end
@@ -1525,6 +1613,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         spec: { # required
     #           backend_defaults: {
     #             client_policy: {
@@ -1641,6 +1730,18 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual node in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then the account that you specify must share the
+    #   mesh with your account before you can create the resource in the
+    #   service mesh. For more information about mesh sharing, see [Working
+    #   with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] spec
     #   The virtual node specification to apply.
     #   @return [Types::VirtualNodeSpec]
@@ -1662,6 +1763,7 @@ module Aws::AppMesh
     class CreateVirtualNodeInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :spec,
       :tags,
       :virtual_node_name)
@@ -1920,11 +2022,23 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         virtual_service_name: "ServiceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh to delete the virtual service in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_service_name
@@ -1935,6 +2049,7 @@ module Aws::AppMesh
     #
     class DeleteVirtualServiceInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :virtual_service_name)
       include Aws::Structure
     end
@@ -1996,6 +2111,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         spec: { # required
     #           backend_defaults: {
     #             client_policy: {
@@ -2106,6 +2222,17 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual node resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] spec
     #   The new virtual node specification to apply. This overwrites the
     #   existing data.
@@ -2120,6 +2247,7 @@ module Aws::AppMesh
     class UpdateVirtualNodeInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :spec,
       :virtual_node_name)
       include Aws::Structure
@@ -2192,6 +2320,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         spec: { # required
     #           provider: {
     #             virtual_node: {
@@ -2224,6 +2353,18 @@ module Aws::AppMesh
     #   The name of the service mesh to create the virtual service in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then the account that you specify must share the
+    #   mesh with your account before you can create the resource in the
+    #   service mesh. For more information about mesh sharing, see [Working
+    #   with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] spec
     #   The virtual service specification to apply.
     #   @return [Types::VirtualServiceSpec]
@@ -2245,6 +2386,7 @@ module Aws::AppMesh
     class CreateVirtualServiceInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :spec,
       :tags,
       :virtual_service_name)
@@ -2257,6 +2399,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         spec: { # required
     #           listeners: [
     #             {
@@ -2283,6 +2426,17 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual router resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] spec
     #   The new virtual router specification to apply. This overwrites the
     #   existing data.
@@ -2297,6 +2451,7 @@ module Aws::AppMesh
     class UpdateVirtualRouterInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :spec,
       :virtual_router_name)
       include Aws::Structure
@@ -2372,11 +2527,23 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh to delete the virtual router in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_router_name
@@ -2387,6 +2554,7 @@ module Aws::AppMesh
     #
     class DeleteVirtualRouterInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :virtual_router_name)
       include Aws::Structure
     end
@@ -2396,12 +2564,24 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         route_name: "ResourceName", # required
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the route resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] route_name
@@ -2416,6 +2596,7 @@ module Aws::AppMesh
     #
     class DescribeRouteInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :route_name,
       :virtual_router_name)
       include Aws::Structure
@@ -2438,6 +2619,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         spec: { # required
     #           provider: {
     #             virtual_node: {
@@ -2464,6 +2646,17 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual service resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] spec
     #   The new virtual service specification to apply. This overwrites the
     #   existing data.
@@ -2478,6 +2671,7 @@ module Aws::AppMesh
     class UpdateVirtualServiceInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :spec,
       :virtual_service_name)
       include Aws::Structure
@@ -2526,6 +2720,7 @@ module Aws::AppMesh
     #       {
     #         limit: 1,
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         next_token: "String",
     #         virtual_router_name: "ResourceName", # required
     #       }
@@ -2545,6 +2740,17 @@ module Aws::AppMesh
     #   The name of the service mesh to list routes in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListRoutes` request where `limit` was used and the results exceeded
@@ -2561,6 +2767,7 @@ module Aws::AppMesh
     class ListRoutesInput < Struct.new(
       :limit,
       :mesh_name,
+      :mesh_owner,
       :next_token,
       :virtual_router_name)
       include Aws::Structure
@@ -2577,6 +2784,28 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual service resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner, or another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] virtual_service_name
     #   The name of the virtual service.
     #   @return [String]
@@ -2586,6 +2815,8 @@ module Aws::AppMesh
     class VirtualServiceRef < Struct.new(
       :arn,
       :mesh_name,
+      :mesh_owner,
+      :resource_owner,
       :virtual_service_name)
       include Aws::Structure
     end
@@ -2614,6 +2845,28 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual router resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner, or another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] virtual_router_name
     #   The name of the virtual router.
     #   @return [String]
@@ -2623,6 +2876,8 @@ module Aws::AppMesh
     class VirtualRouterRef < Struct.new(
       :arn,
       :mesh_name,
+      :mesh_owner,
+      :resource_owner,
       :virtual_router_name)
       include Aws::Structure
     end
@@ -2714,6 +2969,28 @@ module Aws::AppMesh
     #   The name of the service mesh that the virtual node resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner, or another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] virtual_node_name
     #   The name of the virtual node.
     #   @return [String]
@@ -2723,6 +3000,8 @@ module Aws::AppMesh
     class VirtualNodeRef < Struct.new(
       :arn,
       :mesh_name,
+      :mesh_owner,
+      :resource_owner,
       :virtual_node_name)
       include Aws::Structure
     end
@@ -2890,11 +3169,23 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         virtual_service_name: "ServiceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the virtual service resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_service_name
@@ -2905,6 +3196,7 @@ module Aws::AppMesh
     #
     class DescribeVirtualServiceInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :virtual_service_name)
       include Aws::Structure
     end
@@ -3030,6 +3322,7 @@ module Aws::AppMesh
     #       {
     #         limit: 1,
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         next_token: "String",
     #       }
     #
@@ -3048,6 +3341,17 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual routers in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListVirtualRouters` request where `limit` was used and the results
@@ -3060,6 +3364,7 @@ module Aws::AppMesh
     class ListVirtualRoutersInput < Struct.new(
       :limit,
       :mesh_name,
+      :mesh_owner,
       :next_token)
       include Aws::Structure
     end
@@ -3070,6 +3375,7 @@ module Aws::AppMesh
     #       {
     #         limit: 1,
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         next_token: "String",
     #       }
     #
@@ -3088,6 +3394,17 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual services in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListVirtualServices` request where `limit` was used and the results
@@ -3100,6 +3417,7 @@ module Aws::AppMesh
     class ListVirtualServicesInput < Struct.new(
       :limit,
       :mesh_name,
+      :mesh_owner,
       :next_token)
       include Aws::Structure
     end
@@ -3133,6 +3451,7 @@ module Aws::AppMesh
     #       {
     #         limit: 1,
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         next_token: "String",
     #       }
     #
@@ -3151,6 +3470,17 @@ module Aws::AppMesh
     #   The name of the service mesh to list virtual nodes in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListVirtualNodes` request where `limit` was used and the results
@@ -3163,6 +3493,7 @@ module Aws::AppMesh
     class ListVirtualNodesInput < Struct.new(
       :limit,
       :mesh_name,
+      :mesh_owner,
       :next_token)
       include Aws::Structure
     end
@@ -3320,11 +3651,35 @@ module Aws::AppMesh
     #   The name of the service mesh.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The AWS IAM account ID of the resource owner. If the account ID is
+    #   not your own, then it's the ID of the mesh owner, or another
+    #   account that the mesh is shared with. For more information about
+    #   mesh sharing, see [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/MeshRef AWS API Documentation
     #
     class MeshRef < Struct.new(
       :arn,
-      :mesh_name)
+      :mesh_name,
+      :mesh_owner,
+      :resource_owner)
       include Aws::Structure
     end
 
@@ -3401,11 +3756,23 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         virtual_node_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the virtual node resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_node_name
@@ -3416,6 +3783,7 @@ module Aws::AppMesh
     #
     class DescribeVirtualNodeInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :virtual_node_name)
       include Aws::Structure
     end
@@ -3668,11 +4036,12 @@ module Aws::AppMesh
 
     # An object that represents a local file certificate. The certificate
     # must meet specific requirements and you must have proxy authorization
-    # enabled. For more information, see [TLS Encryption][1].
+    # enabled. For more information, see [Transport Layer Security
+    # (TLS)][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites
     #
     # @note When making an API call, you may pass ListenerTlsFileCertificate
     #   data as a hash:
@@ -3756,11 +4125,23 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         virtual_router_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh that the virtual router resides in.
+    #   @return [String]
+    #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] virtual_router_name
@@ -3771,6 +4152,7 @@ module Aws::AppMesh
     #
     class DescribeVirtualRouterInput < Struct.new(
       :mesh_name,
+      :mesh_owner,
       :virtual_router_name)
       include Aws::Structure
     end
@@ -3864,6 +4246,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         route_name: "ResourceName", # required
     #         spec: { # required
     #           grpc_route: {
@@ -4020,6 +4403,18 @@ module Aws::AppMesh
     #   The name of the service mesh to create the route in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then the account that you specify must share the
+    #   mesh with your account before you can create the resource in the
+    #   service mesh. For more information about mesh sharing, see [Working
+    #   with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] route_name
     #   The name to use for the route.
     #   @return [String]
@@ -4037,7 +4432,9 @@ module Aws::AppMesh
     #   @return [Array<Types::TagRef>]
     #
     # @!attribute [rw] virtual_router_name
-    #   The name of the virtual router in which to create the route.
+    #   The name of the virtual router in which to create the route. If the
+    #   virtual router is in a shared mesh, then you must be the owner of
+    #   the virtual router resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/CreateRouteInput AWS API Documentation
@@ -4045,6 +4442,7 @@ module Aws::AppMesh
     class CreateRouteInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :route_name,
       :spec,
       :tags,
@@ -4058,6 +4456,7 @@ module Aws::AppMesh
     #       {
     #         client_token: "String",
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #         route_name: "ResourceName", # required
     #         spec: { # required
     #           grpc_route: {
@@ -4208,6 +4607,17 @@ module Aws::AppMesh
     #   The name of the service mesh that the route resides in.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @!attribute [rw] route_name
     #   The name of the route to update.
     #   @return [String]
@@ -4226,6 +4636,7 @@ module Aws::AppMesh
     class UpdateRouteInput < Struct.new(
       :client_token,
       :mesh_name,
+      :mesh_owner,
       :route_name,
       :spec,
       :virtual_router_name)
@@ -4306,16 +4717,29 @@ module Aws::AppMesh
     #
     #       {
     #         mesh_name: "ResourceName", # required
+    #         mesh_owner: "AccountId",
     #       }
     #
     # @!attribute [rw] mesh_name
     #   The name of the service mesh to describe.
     #   @return [String]
     #
+    # @!attribute [rw] mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID
+    #   is not your own, then it's the ID of the account that shared the
+    #   mesh with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/DescribeMeshInput AWS API Documentation
     #
     class DescribeMeshInput < Struct.new(
-      :mesh_name)
+      :mesh_name,
+      :mesh_owner)
       include Aws::Structure
     end
 
@@ -4455,12 +4879,12 @@ module Aws::AppMesh
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) for the certificate. The certificate
     #   must meet specific requirements and you must have proxy
-    #   authorization enabled. For more information, see [TLS
-    #   Encryption][1].
+    #   authorization enabled. For more information, see [Transport Layer
+    #   Security (TLS)][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListenerTlsAcmCertificate AWS API Documentation

@@ -46,14 +46,16 @@ require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
 
 module Aws::S3
-  # An API client for S3.  To construct a client, you need to configure a +:region+ and +:credentials+.
-  #     client = Aws::S3::Client.new(
-  #       region: region_name,
-  #       credentials: credentials,
-  #       # ...
-  #     )
+  # An API client for S3.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #   client = Aws::S3::Client.new(
+  #     region: region_name,
+  #     credentials: credentials,
+  #     # ...
+  #   )
+  #
   # For details on configuring region and credentials see
-  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
   #
   # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base

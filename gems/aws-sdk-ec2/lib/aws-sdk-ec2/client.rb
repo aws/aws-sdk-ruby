@@ -32,14 +32,16 @@ require 'aws-sdk-ec2/plugins/region_validation.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:ec2)
 
 module Aws::EC2
-  # An API client for EC2.  To construct a client, you need to configure a +:region+ and +:credentials+.
-  #     client = Aws::EC2::Client.new(
-  #       region: region_name,
-  #       credentials: credentials,
-  #       # ...
-  #     )
+  # An API client for EC2.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #   client = Aws::EC2::Client.new(
+  #     region: region_name,
+  #     credentials: credentials,
+  #     # ...
+  #   )
+  #
   # For details on configuring region and credentials see
-  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
   #
   # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
@@ -27733,6 +27735,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Enables or disables a Zone Group for your account. To use Local Zones,
+    # you must first enable the Zone Group.
+    #
+    # @option params [required, String] :group_name
+    #   The names of the Zone Group.
+    #
+    # @option params [required, String] :opt_in_status
+    #   Indicates whether to enable or disable Zone Group membership. The
+    #   valid values are `opted-in`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyAvailabilityZoneGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyAvailabilityZoneGroupResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_availability_zone_group({
+    #     group_name: "String", # required
+    #     opt_in_status: "opted-in", # required, accepts opted-in, not-opted-in
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyAvailabilityZoneGroup AWS API Documentation
+    #
+    # @overload modify_availability_zone_group(params = {})
+    # @param [Hash] params ({})
+    def modify_availability_zone_group(params = {}, options = {})
+      req = build_request(:modify_availability_zone_group, params)
+      req.send_request(options)
+    end
+
     # Modifies a Capacity Reservation's capacity and the conditions under
     # which it is to be released. You cannot change a Capacity
     # Reservation's instance type, EBS optimization, instance store
@@ -36089,7 +36132,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.147.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
