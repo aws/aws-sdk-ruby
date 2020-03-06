@@ -18,7 +18,7 @@ module Aws
 
         option(:sigv4_region) do |cfg|
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
-
+          puts "sigv4_region: #{cfg.region}"
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
@@ -115,7 +115,7 @@ module Aws
           private
 
           def handle_region_errors(response)
-            if wrong_sigv4_region?(response) && !fips_region?(response)
+            if wrong_sigv4_region?(response) && !fips_region?(response) && !custom_endpoint?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -137,6 +137,13 @@ module Aws
 
           def fips_region?(resp)
             resp.context.http_request.endpoint.host.include?('fips')
+          end
+
+          def custom_endpoint?(resp)
+            resolved_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(
+              resp.context.config.region
+            )
+            !resp.context.http_request.endpoint.hostname.include?(resolved_suffix)
           end
 
           def wrong_sigv4_region?(resp)
