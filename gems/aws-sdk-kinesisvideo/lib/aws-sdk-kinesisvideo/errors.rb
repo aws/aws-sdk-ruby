@@ -11,22 +11,17 @@ module Aws::KinesisVideo
   # These errors all extend Aws::KinesisVideo::Errors::ServiceError < {Aws::Errors::ServiceError}
   #
   # You can rescue all KinesisVideo errors using ServiceError:
+  #
   #     begin
   #       # do stuff
   #     rescue Aws::KinesisVideo::Errors::ServiceError
   #       # rescues all KinesisVideo API errors
   #     end
   #
+  #
   # ## Request Context
   # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
-  # information about the request that generated the error, including:
-  # *
-  # * #params - The request params
-  # * #operation_name - Name of the API operation invoked
-  # * #http_request
-  # * #http_response
-  # * etc ...
-  #
+  # information about the request that generated the error.
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
@@ -43,6 +38,7 @@ module Aws::KinesisVideo
   # * {ResourceNotFoundException}
   # * {TagsPerResourceExceededLimitException}
   # * {VersionMismatchException}
+  #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
