@@ -106,6 +106,33 @@ module Aws
         end
       end
 
+      context 'using custom endpoint and wrong sigv4 region' do
+        before(:each) do
+          body = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>"\
+                 'AuthorizationHeaderMalformed</Code><Message>The '\
+                 "authorization header is malformed; the region 'us-west-2' is"\
+                 "wrong; expecting 'eu-central-1'</Message><Region>"\
+                 'eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId>'\
+                 '<HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oek'\
+                 'WlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>'
+          stub_request(:put, 'http://bucket.localhost:9000/key')
+            .to_return(status: [400, 'Bad Request'], body: body)
+        end
+
+        it 'doesnt retry with a new endpoint' do
+          client = S3::Client.new(
+            client_opts.merge(
+              region: 'us-west-2',
+              endpoint: 'http://localhost:9000'
+            )
+          )
+          expect do
+            client.put_object(bucket: 'bucket', key: 'key', body: 'body')
+          end.to raise_error(Aws::S3::Errors::AuthorizationHeaderMalformed)
+        end
+
+      end
+
       describe 'Client Side Monitoring' do
         let(:stub_publisher) do
           StubPublisher.new
