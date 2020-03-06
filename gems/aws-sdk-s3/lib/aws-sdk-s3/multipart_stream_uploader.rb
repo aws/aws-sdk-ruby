@@ -62,12 +62,18 @@ module Aws
         completed = Queue.new
         errors = IO.pipe do |read_pipe, write_pipe|
           threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
-          block.call(write_pipe)
-          write_pipe.close
+          begin
+            block.call(write_pipe)
+          ensure
+            write_pipe.close # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
+          end
           threads.map(&:value).compact
         end
+      rescue => e
+        errors = [e]
+      ensure
         if errors.empty?
-          Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
+          return Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
         else
           abort_upload(upload_id, options, errors)
         end
