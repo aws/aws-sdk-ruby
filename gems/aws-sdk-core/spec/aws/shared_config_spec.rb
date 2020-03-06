@@ -255,7 +255,7 @@ module Aws
           config_enabled: true,
           profile_name: 'correct_clock_skew'
         )
-        expect(config.correct_clock_skew).to eq('true')
+        expect(config.correct_clock_skew).to eq('false')
       end
     end
 

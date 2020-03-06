@@ -100,7 +100,7 @@ Specifies which retry algorithm to use. Values are:
   * legacy` - The pre-existing retry behavior.  This is default value if
     no retry mode is provided.
   * `standard` - A standardized set of retry rules across the AWS SDKs.
-    This includes support for retry quotas, which limit the number of 
+    This includes support for retry quotas, which limit the number of
     unsuccessful retries a client can make.
   * `adaptive` - An experimental retry mode that includes all the
     functionality of `standard` mode along with automatic client side
@@ -130,19 +130,19 @@ setting this value to 5 will result in a request being retried up to
         docstring: <<-DOCS) do |cfg|
 Used only in `adaptive` retry mode.  When true, the request will sleep
 until there is sufficent client side capacity to retry the request.
-When wait_to_fill is false, the request will raise a RetryCapacityNotAvailableError
-and will not retry instead of sleeping.
+When false, the request will raise a `RetryCapacityNotAvailableError` and will
+not retry instead of sleeping.
         DOCS
         resolve_adaptive_retry_wait_to_fill(cfg)
       end
 
       option(
         :correct_clock_skew,
-        default: false,
+        default: true,
         doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
-Specifies whether to apply a clock skew correction and retry requests 
-that fail because of a skewed client clock.
+Used only in `standard` and adaptive retry modes. Specifies whether to apply
+a clock skew correction and retry requests with skewed client clocks.
       DOCS
         resolve_correct_clock_skew(cfg)
       end
@@ -201,7 +201,7 @@ that fail because of a skewed client clock.
       def self.resolve_correct_clock_skew(cfg)
         value = ENV['AWS_CORRECT_CLOCK_SKEW'] ||
           Aws.shared_config.correct_clock_skew(profile: cfg.profile) ||
-          'false'
+          'true'
 
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
@@ -224,7 +224,9 @@ that fail because of a skewed client clock.
 
           get_send_token(config)
           response = @handler.call(context)
-          error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
+          error_inspector = Retries::ErrorInspector.new(
+            response.error, response.context.http_response.status_code
+          )
 
           request_bookkeeping(context, response, error_inspector)
 
@@ -235,13 +237,16 @@ that fail because of a skewed client clock.
 
           # Clock skew needs to be updated from the response even when
           # the request is not retryable
-          config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
+          if error_inspector.clock_skew?(context)
+            config.clock_skew.update_clock_skew(context)
+          end
 
           return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
 
-          context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error_inspector)
+          context.metadata[:retries][:capacity_amount]
+            = config.retry_quota.checkout_capacity(error_inspector)
           return response unless context.metadata[:retries][:capacity_amount] > 0
 
           delay = exponential_backoff(context.retries)
@@ -257,7 +262,10 @@ that fail because of a skewed client clock.
           # need a maximum rate at which we can send requests (max_send_rate)
           # is unset until a throttle is seen
           if config.retry_mode == 'adaptive'
-            config.client_rate_limiter.token_bucket_acquire(1, config.adaptive_retry_wait_to_fill)
+            config.client_rate_limiter.token_bucket_acquire(
+              1,
+              config.adaptive_retry_wait_to_fill
+            )
           end
         end
 
@@ -266,7 +274,9 @@ that fail because of a skewed client clock.
         def request_bookkeeping(context, response, error_inspector)
           config = context.config
           if response.successful?
-            config.retry_quota.release(context.metadata[:retries][:capacity_amount])
+            config.retry_quota.release(
+              context.metadata[:retries][:capacity_amount]
+            )
           end
 
           if config.retry_mode == 'adaptive'
@@ -301,15 +311,14 @@ that fail because of a skewed client clock.
         def call(context)
           response = @handler.call(context)
           if response.error
-            error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
+            error_inspector = Retries::ErrorInspector.new(
+              response.error, response.context.http_response.status_code
+            )
 
             if error_inspector.endpoint_discovery?(context)
               key = context.config.endpoint_cache.extract_key(context)
               context.config.endpoint_cache.delete(key)
             end
-            # Clock skew needs to be updated from the response even when
-            # the request is not retryable
-            context.config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
 
             retry_if_possible(response, error_inspector)
           else
