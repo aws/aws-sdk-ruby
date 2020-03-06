@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't update endpoint on region mismatch errors when using a custom endpoint.
+
 1.60.2 (2020-02-07)
 ------------------
 
