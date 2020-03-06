@@ -292,7 +292,8 @@ module Aws
           }
         ]
 
-        expect(resp.context.config.endpoint_cache).to receive(:delete_from_context)
+        expect(resp.context.config.endpoint_cache).to receive(:extract_key).and_return('key')
+        expect(resp.context.config.endpoint_cache).to receive(:delete).with('key')
         handle_with_retry(test_case_def)
       end
 

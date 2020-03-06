@@ -228,7 +228,10 @@ that fail because of a skewed client clock.
 
           request_bookkeeping(context, response, error_inspector)
 
-          config.endpoint_cache.delete_from_context(context) if error_inspector.endpoint_discovery?(context)
+          if error_inspector.endpoint_discovery?(context)
+            key = config.endpoint_cache.extract_key(context)
+            config.endpoint_cache.delete(key)
+          end
 
           # Clock skew needs to be updated from the response even when
           # the request is not retryable
@@ -300,8 +303,10 @@ that fail because of a skewed client clock.
           if response.error
             error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
-            context.config.endpoint_cache.delete_from_context(context) if error_inspector.endpoint_discovery?(context)
-
+            if error_inspector.endpoint_discovery?(context)
+              key = context.config.endpoint_cache.extract_key(context)
+              context.config.endpoint_cache.delete(key)
+            end
             # Clock skew needs to be updated from the response even when
             # the request is not retryable
             context.config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
