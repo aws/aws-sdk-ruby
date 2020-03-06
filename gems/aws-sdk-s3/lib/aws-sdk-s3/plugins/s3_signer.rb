@@ -17,6 +17,7 @@ module Aws
 
         option(:sigv4_region) do |cfg|
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
+
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
@@ -61,9 +62,8 @@ module Aws
           def sigv4_signer(context)
             # If the client was configured with the wrong region,
             # we have to build a new signer.
-            if
-              context[:cached_sigv4_region] &&
-              context[:cached_sigv4_region] != context.config.sigv4_signer.region
+            if context[:cached_sigv4_region] &&
+               context[:cached_sigv4_region] != context.config.sigv4_signer.region
               S3Signer.build_v4_signer(
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
@@ -142,10 +142,8 @@ module Aws
 
           def wrong_sigv4_region?(resp)
             resp.context.http_response.status_code == 400 &&
-              (
-                resp.context.http_response.headers['x-amz-bucket-region'] ||
-                resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
-              )
+              (resp.context.http_response.headers['x-amz-bucket-region'] ||
+               resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/))
           end
 
           def resign_with_new_region(context, actual_region)
