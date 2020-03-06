@@ -115,7 +115,9 @@ module Aws
           private
 
           def handle_region_errors(response)
-            if wrong_sigv4_region?(response) && !fips_region?(response) && !custom_endpoint?(response)
+            if wrong_sigv4_region?(response) &&
+               !fips_region?(response) &&
+               !custom_endpoint?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -148,10 +150,10 @@ module Aws
 
           def wrong_sigv4_region?(resp)
             resp.context.http_response.status_code == 400 &&
-            (
-              resp.context.http_response.headers['x-amz-bucket-region'] ||
-              resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
-            )
+              (
+                resp.context.http_response.headers['x-amz-bucket-region'] ||
+                resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
+              )
           end
 
           def resign_with_new_region(context, actual_region)
@@ -178,9 +180,9 @@ module Aws
 
           def log_warning(context, actual_region)
             msg = "S3 client configured for #{context.config.region.inspect} " +
-              "but the bucket #{context.params[:bucket].inspect} is in " +
-              "#{actual_region.inspect}; Please configure the proper region " +
-              "to avoid multiple unnecessary redirects and signing attempts\n"
+                  "but the bucket #{context.params[:bucket].inspect} is in " +
+                  "#{actual_region.inspect}; Please configure the proper region " +
+                  "to avoid multiple unnecessary redirects and signing attempts\n"
             if logger = context.config.logger
               logger.warn(msg)
             else
