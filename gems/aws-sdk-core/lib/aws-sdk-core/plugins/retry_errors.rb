@@ -97,7 +97,7 @@ This option is only used in the `legacy` retry mode.
         doc_type: String,
         docstring: <<-DOCS) do |cfg|
 Specifies which retry algorithm to use. Values are:
-  * legacy` - The pre-existing retry behavior.  This is default value if
+  * `legacy` - The pre-existing retry behavior.  This is default value if
     no retry mode is provided.
   * `standard` - A standardized set of retry rules across the AWS SDKs.
     This includes support for retry quotas, which limit the number of
