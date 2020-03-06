@@ -245,8 +245,8 @@ a clock skew correction and retry requests with skewed client clocks.
 
           return response if context.retries >= config.max_attempts - 1
 
-          context.metadata[:retries][:capacity_amount]
-            = config.retry_quota.checkout_capacity(error_inspector)
+          context.metadata[:retries][:capacity_amount] =
+            config.retry_quota.checkout_capacity(error_inspector)
           return response unless context.metadata[:retries][:capacity_amount] > 0
 
           delay = exponential_backoff(context.retries)
