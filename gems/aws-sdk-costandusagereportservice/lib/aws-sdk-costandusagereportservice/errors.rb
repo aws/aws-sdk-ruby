@@ -11,22 +11,17 @@ module Aws::CostandUsageReportService
   # These errors all extend Aws::CostandUsageReportService::Errors::ServiceError < {Aws::Errors::ServiceError}
   #
   # You can rescue all CostandUsageReportService errors using ServiceError:
+  #
   #     begin
   #       # do stuff
   #     rescue Aws::CostandUsageReportService::Errors::ServiceError
   #       # rescues all CostandUsageReportService API errors
   #     end
   #
+  #
   # ## Request Context
   # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
-  # information about the request that generated the error, including:
-  # *
-  # * #params - The request params
-  # * #operation_name - Name of the API operation invoked
-  # * #http_request
-  # * #http_response
-  # * etc ...
-  #
+  # information about the request that generated the error.
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
@@ -34,6 +29,7 @@ module Aws::CostandUsageReportService
   # * {InternalErrorException}
   # * {ReportLimitReachedException}
   # * {ValidationException}
+  #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors

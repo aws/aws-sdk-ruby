@@ -31,14 +31,16 @@ require 'aws-sdk-rds/plugins/cross_region_copying.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:rds)
 
 module Aws::RDS
-  # An API client for RDS.  To construct a client, you need to configure a +:region+ and +:credentials+.
-  #     client = Aws::RDS::Client.new(
-  #       region: region_name,
-  #       credentials: credentials,
-  #       # ...
-  #     )
+  # An API client for RDS.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #   client = Aws::RDS::Client.new(
+  #     region: region_name,
+  #     credentials: credentials,
+  #     # ...
+  #   )
+  #
   # For details on configuring region and credentials see
-  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
   #
   # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base

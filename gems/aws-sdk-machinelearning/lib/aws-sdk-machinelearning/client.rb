@@ -31,14 +31,16 @@ require 'aws-sdk-machinelearning/plugins/predict_endpoint.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:machinelearning)
 
 module Aws::MachineLearning
-  # An API client for MachineLearning.  To construct a client, you need to configure a +:region+ and +:credentials+.
-  #     client = Aws::MachineLearning::Client.new(
-  #       region: region_name,
-  #       credentials: credentials,
-  #       # ...
-  #     )
+  # An API client for MachineLearning.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #   client = Aws::MachineLearning::Client.new(
+  #     region: region_name,
+  #     credentials: credentials,
+  #     # ...
+  #   )
+  #
   # For details on configuring region and credentials see
-  # the {developer-guide}[https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/setup-config.html].
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
   #
   # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
