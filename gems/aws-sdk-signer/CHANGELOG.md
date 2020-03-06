@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-03-06)
+------------------
+
+* Feature - This release enables signing image format override in PutSigningProfile requests, adding two more enum fields, JSONEmbedded and JSONDetached. This release also extends the length limit of SigningProfile name from 20 to 64.
+
 1.17.0 (2019-11-06)
 ------------------
 

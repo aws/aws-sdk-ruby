@@ -631,6 +631,7 @@ module Aws::RoboMaker
     LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
     LaunchConfig.add_member(:port_forwarding_config, Shapes::ShapeRef.new(shape: PortForwardingConfig, location_name: "portForwardingConfig"))
+    LaunchConfig.add_member(:stream_ui, Shapes::ShapeRef.new(shape: Boolean, location_name: "streamUI"))
     LaunchConfig.struct_class = Types::LaunchConfig
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -919,7 +920,7 @@ module Aws::RoboMaker
 
     Sources.member = Shapes::ShapeRef.new(shape: Source)
 
-    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartSimulationJobBatchRequest.add_member(:batch_policy, Shapes::ShapeRef.new(shape: BatchPolicy, location_name: "batchPolicy"))
     StartSimulationJobBatchRequest.add_member(:create_simulation_job_requests, Shapes::ShapeRef.new(shape: CreateSimulationJobRequests, required: true, location_name: "createSimulationJobRequests"))
     StartSimulationJobBatchRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))

@@ -329,6 +329,7 @@ module Aws::Signer
     #   resp.profile_name #=> String
     #   resp.overrides.signing_configuration.encryption_algorithm #=> String, one of "RSA", "ECDSA"
     #   resp.overrides.signing_configuration.hash_algorithm #=> String, one of "SHA1", "SHA256"
+    #   resp.overrides.signing_image_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.signing_parameters #=> Hash
     #   resp.signing_parameters["SigningParameterKey"] #=> String
     #   resp.created_at #=> Time
@@ -384,8 +385,8 @@ module Aws::Signer
     #   resp.signing_configuration.hash_algorithm_options.allowed_values[0] #=> String, one of "SHA1", "SHA256"
     #   resp.signing_configuration.hash_algorithm_options.default_value #=> String, one of "SHA1", "SHA256"
     #   resp.signing_image_format.supported_formats #=> Array
-    #   resp.signing_image_format.supported_formats[0] #=> String, one of "JSON"
-    #   resp.signing_image_format.default_format #=> String, one of "JSON"
+    #   resp.signing_image_format.supported_formats[0] #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
+    #   resp.signing_image_format.default_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.max_size_in_mb #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningPlatform AWS API Documentation
@@ -426,6 +427,7 @@ module Aws::Signer
     #   resp.platform_id #=> String
     #   resp.overrides.signing_configuration.encryption_algorithm #=> String, one of "RSA", "ECDSA"
     #   resp.overrides.signing_configuration.hash_algorithm #=> String, one of "SHA1", "SHA256"
+    #   resp.overrides.signing_image_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.signing_parameters #=> Hash
     #   resp.signing_parameters["SigningParameterKey"] #=> String
     #   resp.status #=> String, one of "Active", "Canceled"
@@ -568,8 +570,8 @@ module Aws::Signer
     #   resp.platforms[0].signing_configuration.hash_algorithm_options.allowed_values[0] #=> String, one of "SHA1", "SHA256"
     #   resp.platforms[0].signing_configuration.hash_algorithm_options.default_value #=> String, one of "SHA1", "SHA256"
     #   resp.platforms[0].signing_image_format.supported_formats #=> Array
-    #   resp.platforms[0].signing_image_format.supported_formats[0] #=> String, one of "JSON"
-    #   resp.platforms[0].signing_image_format.default_format #=> String, one of "JSON"
+    #   resp.platforms[0].signing_image_format.supported_formats[0] #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
+    #   resp.platforms[0].signing_image_format.default_format #=> String, one of "JSON", "JSONEmbedded", "JSONDetached"
     #   resp.platforms[0].max_size_in_mb #=> Integer
     #   resp.next_token #=> String
     #
@@ -685,7 +687,7 @@ module Aws::Signer
     #   with the new signing profile.
     #
     # @option params [required, String] :platform_id
-    #   The ID of the signing profile to be created.
+    #   The ID of the signing platform to be created.
     #
     # @option params [Types::SigningPlatformOverrides] :overrides
     #   A subfield of `platform`. This specifies any different configuration
@@ -697,7 +699,7 @@ module Aws::Signer
     #   that you want to use during signing.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to be associated with the signing profile being created.
+    #   Tags to be associated with the signing profile that is being created.
     #
     # @return [Types::PutSigningProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -716,6 +718,7 @@ module Aws::Signer
     #         encryption_algorithm: "RSA", # accepts RSA, ECDSA
     #         hash_algorithm: "SHA1", # accepts SHA1, SHA256
     #       },
+    #       signing_image_format: "JSON", # accepts JSON, JSONEmbedded, JSONDetached
     #     },
     #     signing_parameters: {
     #       "SigningParameterKey" => "SigningParameterValue",
@@ -824,12 +827,12 @@ module Aws::Signer
 
     # Adds one or more tags to a signing profile. Tags are labels that you
     # can use to identify and organize your AWS resources. Each tag consists
-    # of a key and an optional value. You specify the signing profile using
-    # its Amazon Resource Name (ARN). You specify the tag by using a
-    # key-value pair.
+    # of a key and an optional value. To specify the signing profile, use
+    # its Amazon Resource Name (ARN). To specify the tag, use a key-value
+    # pair.
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) for the signing profile.
+    #   The Amazon Resource Name (ARN) for the signing profile.
     #
     # @option params [required, Hash<String,String>] :tags
     #   One or more tags to be associated with the signing profile.
@@ -854,14 +857,14 @@ module Aws::Signer
       req.send_request(options)
     end
 
-    # Remove one or more tags from a signing profile. Specify a list of tag
-    # keys to remove the tags.
+    # Removes one or more tags from a signing profile. To remove the tags,
+    # specify a list of tag keys.
     #
     # @option params [required, String] :resource_arn
-    #   Amazon Resource Name (ARN) for the signing profile .
+    #   The Amazon Resource Name (ARN) for the signing profile.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   A list of tag keys to be removed from the signing profile .
+    #   A list of tag keys to be removed from the signing profile.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -894,7 +897,7 @@ module Aws::Signer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-signer'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

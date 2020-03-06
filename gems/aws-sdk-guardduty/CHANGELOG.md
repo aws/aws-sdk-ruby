@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-03-06)
+------------------
+
+* Feature - Amazon GuardDuty findings now include the OutpostArn if the finding is generated for an AWS Outposts EC2 host.
+
 1.26.0 (2020-03-05)
 ------------------
 

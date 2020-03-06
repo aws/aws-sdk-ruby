@@ -309,6 +309,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.jobs[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.jobs[0].robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.jobs[0].simulation_applications #=> Array
     #   resp.jobs[0].simulation_applications[0].application #=> String
     #   resp.jobs[0].simulation_applications[0].application_version #=> String
@@ -320,6 +321,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.jobs[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.jobs[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.jobs[0].data_sources #=> Array
     #   resp.jobs[0].data_sources[0].name #=> String
     #   resp.jobs[0].data_sources[0].s3_bucket #=> String
@@ -516,7 +518,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.created_at #=> Time
     #   resp.deployment_config.concurrent_deployment_percentage #=> Integer
     #   resp.deployment_config.failure_threshold_percentage #=> Integer
@@ -1027,6 +1029,7 @@ module Aws::RoboMaker
     #               },
     #             ],
     #           },
+    #           stream_ui: false,
     #         },
     #       },
     #     ],
@@ -1049,6 +1052,7 @@ module Aws::RoboMaker
     #               },
     #             ],
     #           },
+    #           stream_ui: false,
     #         },
     #       },
     #     ],
@@ -1095,6 +1099,7 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.simulation_applications #=> Array
     #   resp.simulation_applications[0].application #=> String
     #   resp.simulation_applications[0].application_version #=> String
@@ -1106,6 +1111,7 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1305,7 +1311,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.created_at #=> Time
     #   resp.robot_deployment_summary #=> Array
     #   resp.robot_deployment_summary[0].arn #=> String
@@ -1317,7 +1323,7 @@ module Aws::RoboMaker
     #   resp.robot_deployment_summary[0].progress_detail.estimated_time_remaining_seconds #=> Integer
     #   resp.robot_deployment_summary[0].progress_detail.target_resource #=> String
     #   resp.robot_deployment_summary[0].failure_reason #=> String
-    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.robot_deployment_summary[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1601,6 +1607,7 @@ module Aws::RoboMaker
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.simulation_applications #=> Array
     #   resp.simulation_applications[0].application #=> String
     #   resp.simulation_applications[0].application_version #=> String
@@ -1612,6 +1619,7 @@ module Aws::RoboMaker
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.data_sources #=> Array
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].s3_bucket #=> String
@@ -1695,6 +1703,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].application #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].application_version #=> String
@@ -1706,6 +1715,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.failed_requests[0].request.data_sources #=> Array
     #   resp.failed_requests[0].request.data_sources[0].name #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
@@ -1740,6 +1750,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.pending_requests[0].simulation_applications #=> Array
     #   resp.pending_requests[0].simulation_applications[0].application #=> String
     #   resp.pending_requests[0].simulation_applications[0].application_version #=> String
@@ -1751,6 +1762,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.pending_requests[0].data_sources #=> Array
     #   resp.pending_requests[0].data_sources[0].name #=> String
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
@@ -1854,7 +1866,7 @@ module Aws::RoboMaker
     #   resp.deployment_jobs[0].deployment_config.download_condition_file.key #=> String
     #   resp.deployment_jobs[0].deployment_config.download_condition_file.etag #=> String
     #   resp.deployment_jobs[0].failure_reason #=> String
-    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.deployment_jobs[0].failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.deployment_jobs[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -2366,6 +2378,9 @@ module Aws::RoboMaker
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @option params [Types::BatchPolicy] :batch_policy
     #   The batch policy.
     #
@@ -2430,6 +2445,7 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #               },
+    #               stream_ui: false,
     #             },
     #           },
     #         ],
@@ -2452,6 +2468,7 @@ module Aws::RoboMaker
     #                   },
     #                 ],
     #               },
+    #               stream_ui: false,
     #             },
     #           },
     #         ],
@@ -2506,6 +2523,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.failed_requests[0].request.simulation_applications #=> Array
     #   resp.failed_requests[0].request.simulation_applications[0].application #=> String
     #   resp.failed_requests[0].request.simulation_applications[0].application_version #=> String
@@ -2517,6 +2535,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.failed_requests[0].request.data_sources #=> Array
     #   resp.failed_requests[0].request.data_sources[0].name #=> String
     #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
@@ -2551,6 +2570,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].robot_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.pending_requests[0].simulation_applications #=> Array
     #   resp.pending_requests[0].simulation_applications[0].application #=> String
     #   resp.pending_requests[0].simulation_applications[0].application_version #=> String
@@ -2562,6 +2582,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
     #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.stream_ui #=> Boolean
     #   resp.pending_requests[0].data_sources #=> Array
     #   resp.pending_requests[0].data_sources[0].name #=> String
     #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
@@ -2649,7 +2670,7 @@ module Aws::RoboMaker
     #   resp.deployment_application_configs[0].launch_config.environment_variables #=> Hash
     #   resp.deployment_application_configs[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.failure_reason #=> String
-    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
+    #   resp.failure_code #=> String, one of "ResourceNotFound", "EnvironmentSetupError", "EtagMismatch", "FailureThresholdBreached", "RobotDeploymentAborted", "RobotDeploymentNoResponse", "RobotAgentConnectionTimeout", "GreengrassDeploymentFailed", "InvalidGreengrassGroup", "MissingRobotArchitecture", "MissingRobotApplicationArchitecture", "MissingRobotDeploymentResource", "GreengrassGroupVersionDoesNotExist", "LambdaDeleted", "ExtractingBundleFailure", "PreLaunchFileFailure", "PostLaunchFileFailure", "BadPermissionError", "DownloadConditionFailed", "InternalServerError"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SyncDeploymentJob AWS API Documentation
@@ -2903,7 +2924,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

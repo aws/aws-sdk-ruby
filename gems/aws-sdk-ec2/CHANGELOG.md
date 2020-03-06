@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2020-03-06)
+------------------
+
+* Feature - This release provides customers with a self-service option to enable Local Zones.
+
 1.147.0 (2020-03-05)
 ------------------
 

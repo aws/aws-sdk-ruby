@@ -581,6 +581,7 @@ module Aws::GuardDuty
     InstanceDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     InstanceDetails.add_member(:instance_state, Shapes::ShapeRef.new(shape: String, location_name: "instanceState"))
     InstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    InstanceDetails.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     InstanceDetails.add_member(:launch_time, Shapes::ShapeRef.new(shape: String, location_name: "launchTime"))
     InstanceDetails.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "networkInterfaces"))
     InstanceDetails.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))

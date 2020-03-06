@@ -1192,6 +1192,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.instance_details.instance_id #=> String
     #   resp.findings[0].resource.instance_details.instance_state #=> String
     #   resp.findings[0].resource.instance_details.instance_type #=> String
+    #   resp.findings[0].resource.instance_details.outpost_arn #=> String
     #   resp.findings[0].resource.instance_details.launch_time #=> String
     #   resp.findings[0].resource.instance_details.network_interfaces #=> Array
     #   resp.findings[0].resource.instance_details.network_interfaces[0].ipv_6_addresses #=> Array
@@ -1701,6 +1702,8 @@ module Aws::GuardDuty
     #   * resource.instanceDetails.imageId
     #
     #   * resource.instanceDetails.instanceId
+    #
+    #   * resource.instanceDetails.outpostArn
     #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
@@ -2549,7 +2552,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

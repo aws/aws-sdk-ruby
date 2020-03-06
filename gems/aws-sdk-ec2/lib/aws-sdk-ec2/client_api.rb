@@ -1270,6 +1270,9 @@ module Aws::EC2
     MemoryInfo = Shapes::StructureShape.new(name: 'MemoryInfo')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
     MillisecondDateTime = Shapes::TimestampShape.new(name: 'MillisecondDateTime')
+    ModifyAvailabilityZoneGroupRequest = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupRequest')
+    ModifyAvailabilityZoneGroupResult = Shapes::StructureShape.new(name: 'ModifyAvailabilityZoneGroupResult')
+    ModifyAvailabilityZoneOptInStatus = Shapes::StringShape.new(name: 'ModifyAvailabilityZoneOptInStatus')
     ModifyCapacityReservationRequest = Shapes::StructureShape.new(name: 'ModifyCapacityReservationRequest')
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
     ModifyClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointRequest')
@@ -6881,6 +6884,14 @@ module Aws::EC2
 
     MemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: MemorySize, location_name: "sizeInMiB"))
     MemoryInfo.struct_class = Types::MemoryInfo
+
+    ModifyAvailabilityZoneGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupName"))
+    ModifyAvailabilityZoneGroupRequest.add_member(:opt_in_status, Shapes::ShapeRef.new(shape: ModifyAvailabilityZoneOptInStatus, required: true, location_name: "OptInStatus"))
+    ModifyAvailabilityZoneGroupRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyAvailabilityZoneGroupRequest.struct_class = Types::ModifyAvailabilityZoneGroupRequest
+
+    ModifyAvailabilityZoneGroupResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyAvailabilityZoneGroupResult.struct_class = Types::ModifyAvailabilityZoneGroupResult
 
     ModifyCapacityReservationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     ModifyCapacityReservationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
@@ -12686,6 +12697,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ImportVolumeRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportVolumeResult)
+      end)
+
+      api.add_operation(:modify_availability_zone_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyAvailabilityZoneGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyAvailabilityZoneGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyAvailabilityZoneGroupResult)
       end)
 
       api.add_operation(:modify_capacity_reservation, Seahorse::Model::Operation.new.tap do |o|
