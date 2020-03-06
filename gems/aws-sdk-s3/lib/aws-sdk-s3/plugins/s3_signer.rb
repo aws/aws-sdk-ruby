@@ -186,11 +186,13 @@ module Aws
           # @option options [required, #credentials] :credentials
           # @api private
           def build_v4_signer(options = {})
-            Aws::Sigv4::Signer.new(service: 's3',
-                                   region: options[:region],
-                                   credentials_provider: options[:credentials],
-                                   uri_escape_path: false,
-                                   unsigned_headers: ['content-length', 'x-amzn-trace-id'])
+            Aws::Sigv4::Signer.new(
+              service: 's3',
+              region: options[:region],
+              credentials_provider: options[:credentials],
+              uri_escape_path: false,
+              unsigned_headers: ['content-length', 'x-amzn-trace-id']
+            )
           end
 
           def new_hostname(context, region)
