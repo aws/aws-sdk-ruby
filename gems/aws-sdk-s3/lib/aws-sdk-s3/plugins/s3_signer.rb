@@ -6,7 +6,6 @@ module Aws
       # This plugin is an implementation detail and may be modified.
       # @api private
       class S3Signer < Seahorse::Client::Plugin
-
         option(:signature_version, 'v4')
 
         option(:sigv4_signer) do |cfg|
@@ -18,7 +17,6 @@ module Aws
 
         option(:sigv4_region) do |cfg|
           raise Aws::Errors::MissingRegionError if cfg.region.nil?
-          puts "sigv4_region: #{cfg.region}"
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
@@ -50,7 +48,6 @@ module Aws
         end
 
         class V4Handler < Seahorse::Client::Handler
-
           def call(context)
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
@@ -67,7 +64,6 @@ module Aws
             if
               context[:cached_sigv4_region] &&
               context[:cached_sigv4_region] != context.config.sigv4_signer.region
-            then
               S3Signer.build_v4_signer(
                 region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
@@ -76,13 +72,11 @@ module Aws
               context.config.sigv4_signer
             end
           end
-
         end
 
         # This handler will update the http endpoint when the bucket region
         # is known/cached.
         class CachedBucketRegionHandler < Seahorse::Client::Handler
-
           def call(context)
             bucket = context.params[:bucket]
             check_for_cached_region(context, bucket) if bucket
@@ -98,7 +92,6 @@ module Aws
               context[:cached_sigv4_region] = cached_region
             end
           end
-
         end
 
         # This handler detects when a request fails because of a mismatched bucket
@@ -106,7 +99,6 @@ module Aws
         # region, then finally a version 4 signed request against the correct
         # regional endpoint.
         class BucketRegionErrorHandler < Seahorse::Client::Handler
-
           def call(context)
             response = @handler.call(context)
             handle_region_errors(response)
@@ -171,7 +163,7 @@ module Aws
 
           def region_from_body(body)
             region = body.match(/<Region>(.+?)<\/Region>/)[1]
-            if region.nil? || region == ""
+            if region.nil? || region == ''
               raise "couldn't get region from body: #{body}"
             else
               region
@@ -179,32 +171,28 @@ module Aws
           end
 
           def log_warning(context, actual_region)
-            msg = "S3 client configured for #{context.config.region.inspect} " +
-                  "but the bucket #{context.params[:bucket].inspect} is in " +
-                  "#{actual_region.inspect}; Please configure the proper region " +
+            msg = "S3 client configured for #{context.config.region.inspect} " \
+                  "but the bucket #{context.params[:bucket].inspect} is in " \
+                  "#{actual_region.inspect}; Please configure the proper region " \
                   "to avoid multiple unnecessary redirects and signing attempts\n"
-            if logger = context.config.logger
+            if (logger = context.config.logger)
               logger.warn(msg)
             else
               warn(msg)
             end
           end
-
         end
 
         class << self
-
           # @option options [required, String] :region
           # @option options [required, #credentials] :credentials
           # @api private
           def build_v4_signer(options = {})
-            Aws::Sigv4::Signer.new({
-              service: 's3',
-              region: options[:region],
-              credentials_provider: options[:credentials],
-              uri_escape_path: false,
-              unsigned_headers: ['content-length', 'x-amzn-trace-id'],
-            })
+            Aws::Sigv4::Signer.new(service: 's3',
+                                   region: options[:region],
+                                   credentials_provider: options[:credentials],
+                                   uri_escape_path: false,
+                                   unsigned_headers: ['content-length', 'x-amzn-trace-id'])
           end
 
           def new_hostname(context, region)
