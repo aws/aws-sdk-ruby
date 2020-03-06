@@ -13,8 +13,8 @@ module Aws
 
       let(:client) { Client.new(client_opts) }
 
-      let(:auth_header_malformed_body) do
-        '<?xml version="1.0" encoding="UTF-8"?>\n<Error><Code>'\
+      let(:auth_header_malformed_body) do 
+       '<?xml version="1.0" encoding="UTF-8"?>\n<Error><Code>'\
        'AuthorizationHeaderMalformed</Code><Message>The '\
        "authorization header is malformed; the region 'us-west-2' is"\
        "wrong; expecting 'eu-central-1'</Message><Region>"\
