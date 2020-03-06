@@ -75,6 +75,21 @@ module Aws
           .to receive(:adaptive_retry_wait_to_fill).and_return('false')
         expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
       end
+
+      it 'defaults config.correct_clock_skew to false' do
+        expect(client.config.correct_clock_skew).to eq(false)
+      end
+
+      it 'can configure correct_clock_skew using ENV with precedence over config' do
+        ENV['AWS_CORRECT_CLOCK_SKEW'] = 'true'
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
+
+      it 'can configure correct_clock_skew with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:correct_clock_skew).and_return('true')
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
     end
 
     describe RetryErrors::Handler do
@@ -102,12 +117,14 @@ module Aws
 
       let(:service_error) { RetryErrorsSvc::Errors::ServiceError.new(nil, nil) }
 
+      let(:endpoint) { 'http://example.com' }
+
       before(:each) do
         resp.context.config = config
         operation.endpoint_discovery = {}
         resp.context.operation = operation
         resp.context.client =  Seahorse::Client::Base.new(
-          endpoint: 'http://example.com'
+          endpoint: endpoint
         )
       end
 
@@ -243,6 +260,41 @@ module Aws
 
           handle_with_retry(test_case_def)
         end
+
+        it 'corrects and retries clock skew errors' do
+          clock_skew_error = RetryErrorsSvc::Errors::RequestTimeTooSkewed.new(nil, nil)
+          test_case_def = [
+            {
+              response: { status_code: 500, error: clock_skew_error, clock_skew: 1000 },
+              expect: { retries: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { retries: 1, clock_correction: 1000 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+      end
+
+      it 'deletes endpoints from the endpoint cache and retries endpoint discovery errors' do
+        endpoint_error = Errors::EndpointDiscoveryError.new(nil, nil)
+
+        test_case_def = [
+          {
+            response: { status_code: 421, error: endpoint_error, endpoint_discovery: true },
+            expect: { retries: 1 }
+          },
+          {
+            response: { status_code: 200, error: nil },
+            expect: { retries: 1 }
+          }
+        ]
+
+        expect(resp.context.config.endpoint_cache).to receive(:extract_key).and_return('key')
+        expect(resp.context.config.endpoint_cache).to receive(:delete).with('key')
+        handle_with_retry(test_case_def)
       end
 
       context 'adaptive mode' do

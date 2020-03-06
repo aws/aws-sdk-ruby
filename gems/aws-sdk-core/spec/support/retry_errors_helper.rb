@@ -63,6 +63,12 @@ def apply_expectations(test_case)
     expect(resp.context.config.client_rate_limiter.instance_variable_get(:@fill_rate))
       .to be_within(0.1).of(expected[:fill_rate])
   end
+
+  if expected[:clock_correction]
+    endpoint = resp.context.http_request.endpoint
+    expect(resp.context.config.clock_skew.clock_correction(endpoint))
+      .to be_within(1).of(expected[:clock_correction])
+  end
 end
 
 def setup_next_response(test_case)
@@ -72,5 +78,13 @@ def setup_next_response(test_case)
 
   if response[:timestamp]
     allow(Aws::Util).to receive(:monotonic_seconds).and_return(response[:timestamp])
+  end
+
+  if response[:clock_skew]
+    resp.context.http_response.headers['date'] = Time.now.utc + response[:clock_skew]
+  end
+
+  if response[:endpoint_discovery]
+    allow(resp.context.operation).to receive(:endpoint_discovery).and_return(true)
   end
 end

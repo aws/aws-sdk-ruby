@@ -247,5 +247,17 @@ module Aws
       end
     end
 
+    context 'correct_clock_skew' do
+
+      it 'can resolve correct_clock_skew from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'correct_clock_skew'
+        )
+        expect(config.correct_clock_skew).to eq('true')
+      end
+    end
+
   end
 end

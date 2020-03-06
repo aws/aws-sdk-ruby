@@ -155,7 +155,8 @@ module Aws
       :s3_use_arn_region,
       :s3_us_east_1_regional_endpoint,
       :sts_regional_endpoints,
-      :adaptive_retry_wait_to_fill
+      :adaptive_retry_wait_to_fill,
+      :correct_clock_skew
     )
 
     private

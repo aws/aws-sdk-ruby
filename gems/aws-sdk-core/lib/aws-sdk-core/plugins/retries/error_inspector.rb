@@ -48,6 +48,18 @@ module Aws
           ]
         )
 
+        # See: https://github.com/aws/aws-sdk-net/blob/5810dfe401e0eac2e59d02276d4b479224b4538e/sdk/src/Core/Amazon.Runtime/Pipeline/RetryHandler/RetryPolicy.cs#L78
+        CLOCK_SKEW_ERRORS = Set.new(
+          [
+            'RequestTimeTooSkewed',
+            'RequestExpired',
+            'InvalidSignatureException',
+            'SignatureDoesNotMatch',
+            'AuthFailure',
+            'RequestInTheFuture'
+          ]
+        )
+
         def initialize(error, http_status_code)
           @error = error
           @name = extract_name(@error)
@@ -82,20 +94,9 @@ module Aws
         def endpoint_discovery?(context)
           return false unless context.operation.endpoint_discovery
 
-          if @http_status_code == 421 ||
-            extract_name(@error) == 'InvalidEndpointException'
-            @error = Errors::EndpointDiscoveryError.new
-          end
-
-          # When endpoint discovery error occurs
-          # evict the endpoint from cache
-          if @error.is_a?(Errors::EndpointDiscoveryError)
-            key = context.config.endpoint_cache.extract_key(context)
-            context.config.endpoint_cache.delete(key)
-            true
-          else
-            false
-          end
+          @http_status_code == 421 ||
+            @name == 'InvalidEndpointException' ||
+            @error.is_a?(Errors::EndpointDiscoveryError)
         end
 
         def modeled_retryable?
@@ -106,14 +107,20 @@ module Aws
           @error.is_a?(Errors::ServiceError) && @error.throttling?
         end
 
+        def clock_skew?(context)
+          CLOCK_SKEW_ERRORS.include?(@name) &&
+            context.config.clock_skew.clock_skewed?(context)
+        end
+
         def retryable?(context)
-          (expired_credentials? && refreshable_credentials?(context)) ||
+          server? ||
+            modeled_retryable? ||
             throttling_error? ||
-            checksum? ||
             networking? ||
-            server? ||
+            checksum? ||
             endpoint_discovery?(context) ||
-            modeled_retryable?
+            (expired_credentials? && refreshable_credentials?(context)) ||
+            clock_skew?(context)
         end
 
         private

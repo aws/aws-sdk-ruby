@@ -2,6 +2,7 @@ require 'set'
 require_relative 'retries/error_inspector'
 require_relative 'retries/retry_quota'
 require_relative 'retries/client_rate_limiter'
+require_relative 'retries/clock_skew'
 
 module Aws
   module Plugins
@@ -135,11 +136,25 @@ and will not retry instead of sleeping.
         resolve_adaptive_retry_wait_to_fill(cfg)
       end
 
+      option(
+        :correct_clock_skew,
+        default: false,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS) do |cfg|
+Specifies whether to apply a clock skew correction and retry requests 
+that fail because of a skewed client clock.
+      DOCS
+        resolve_correct_clock_skew(cfg)
+      end
+
       # @api private undocumented
       option(:client_rate_limiter) { Retries::ClientRateLimiter.new }
 
       # @api private undocumented
       option(:retry_quota) { Retries::RetryQuota.new }
+
+      # @api private undocumented
+      option(:clock_skew) { Retries::ClockSkew.new }
 
       def self.resolve_retry_mode(cfg)
         value = ENV['AWS_RETRY_MODE'] ||
@@ -183,6 +198,22 @@ and will not retry instead of sleeping.
         value == 'true'
       end
 
+      def self.resolve_correct_clock_skew(cfg)
+        value = ENV['AWS_CORRECT_CLOCK_SKEW'] ||
+          Aws.shared_config.correct_clock_skew(profile: cfg.profile) ||
+          'false'
+
+        # Raise if provided value is not true or false
+        if value != 'true' && value != 'false'
+          raise ArgumentError,
+                'Must provide either `true` or `false` for '\
+                'correct_clock_skew profile option or for '\
+                'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
+        end
+
+        value == 'true'
+      end
+
       class Handler < Seahorse::Client::Handler
         # Max backoff (in seconds)
         MAX_BACKOFF = 20
@@ -196,6 +227,16 @@ and will not retry instead of sleeping.
           error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
           request_bookkeeping(context, response, error_inspector)
+
+          if error_inspector.endpoint_discovery?(context)
+            key = config.endpoint_cache.extract_key(context)
+            config.endpoint_cache.delete(key)
+          end
+
+          # Clock skew needs to be updated from the response even when
+          # the request is not retryable
+          config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
+
           return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
@@ -260,7 +301,17 @@ and will not retry instead of sleeping.
         def call(context)
           response = @handler.call(context)
           if response.error
-            retry_if_possible(response)
+            error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
+
+            if error_inspector.endpoint_discovery?(context)
+              key = context.config.endpoint_cache.extract_key(context)
+              context.config.endpoint_cache.delete(key)
+            end
+            # Clock skew needs to be updated from the response even when
+            # the request is not retryable
+            context.config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
+
+            retry_if_possible(response, error_inspector)
           else
             response
           end
@@ -268,9 +319,8 @@ and will not retry instead of sleeping.
 
         private
 
-        def retry_if_possible(response)
+        def retry_if_possible(response, error_inspector)
           context = response.context
-          error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
           if should_retry?(context, error_inspector)
             retry_request(context, error_inspector)
           else
