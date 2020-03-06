@@ -42,21 +42,21 @@ module {{module_name}}
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
       {{#members}}
+          
       # @return [{{type}}]
       def {{name}}
         {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
       end
       {{/members}}
-
       {{#retryable}}
+
       def retryable?
         true
       end
       {{/retryable}}
-
       {{#throttling}}
+
       def throttling?
         true
       end
