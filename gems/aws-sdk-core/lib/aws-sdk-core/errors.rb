@@ -37,12 +37,12 @@ module Aws
 
       end
 
-      # @return [Boolean] (false) Error is a retryable exception.
+      # @api private undocumented
       def retryable?
         false
       end
 
-      # @return [Boolean] (false) Error is a retryable throttling exception.
+      # @api private undocumented
       def throttling?
         false
       end

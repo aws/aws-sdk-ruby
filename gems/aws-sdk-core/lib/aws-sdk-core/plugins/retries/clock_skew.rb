@@ -9,7 +9,6 @@ module Aws
 
         def initialize
           @mutex = Mutex.new
-          @system_clock_offset = 0
           @endpoint_clock_corrections = Hash.new(0)
         end
 
