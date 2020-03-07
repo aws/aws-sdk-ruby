@@ -76,8 +76,8 @@ module Aws
         expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
       end
 
-      it 'defaults config.correct_clock_skew to false' do
-        expect(client.config.correct_clock_skew).to eq(false)
+      it 'defaults config.correct_clock_skew to true' do
+        expect(client.config.correct_clock_skew).to eq(true)
       end
 
       it 'can configure correct_clock_skew using ENV with precedence over config' do

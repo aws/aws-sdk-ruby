@@ -43,7 +43,7 @@ module {{module_name}}
         super(context, message, data)
       end
       {{#members}}
-          
+
       # @return [{{type}}]
       def {{name}}
         {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
