@@ -41,11 +41,11 @@ module Aws
         end
       end
 
-      describe '#update_clock_skew' do
+      describe '#update_clock_correction' do
         context 'server time is not set' do
           let(:server_time) { nil }
           it 'does not update the corrections' do
-            subject.update_clock_skew(context)
+            subject.update_clock_correction(context)
             expect(subject.clock_correction(endpoint)).to be 0
           end
         end
@@ -53,7 +53,7 @@ module Aws
         context 'server time matches the clients time' do
           let(:server_time) { Time.now.utc.to_s }
           it 'does not update the corrections' do
-            subject.update_clock_skew(context)
+            subject.update_clock_correction(context)
             expect(subject.clock_correction(endpoint)).to be 0
           end
         end
@@ -61,12 +61,12 @@ module Aws
         context 'server time is off by more than the threshold' do
           let(:server_time) { (Time.now.utc + 1000).to_s }
           it 'updates the corrections' do
-            subject.update_clock_skew(context)
+            subject.update_clock_correction(context)
             expect(subject.clock_correction(endpoint)).to be_within(1).of(1000)
           end
 
           it 'does not update corrections for other end points' do
-            subject.update_clock_skew(context)
+            subject.update_clock_correction(context)
             expect(subject.clock_correction('other_endpoint')).to be 0
           end
         end
