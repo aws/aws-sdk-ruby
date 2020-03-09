@@ -155,7 +155,7 @@ module Aws
               nil
             rescue => error
               # keep other threads from uploading other parts
-              mutex.synchronize { read_pipe.close_read }
+              mutex.synchronize { read_pipe.close_read unless read_pipe.closed? }
               error
             end
           end
