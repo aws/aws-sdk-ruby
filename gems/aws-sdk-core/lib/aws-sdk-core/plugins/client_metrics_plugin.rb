@@ -1,4 +1,5 @@
 require 'date'
+require_relative 'retries/error_inspector'
 
 module Aws
   module Plugins
@@ -141,7 +142,7 @@ all generated client side metrics. Defaults to an empty string.
             @handler.call(context)
           rescue StandardError => e
             # Handle SDK Exceptions
-            inspector = Aws::Plugins::RetryErrors::ErrorInspector.new(
+            inspector = Retries::ErrorInspector.new(
               e,
               context.http_response.status_code
             )

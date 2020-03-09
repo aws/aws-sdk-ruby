@@ -36,6 +36,16 @@ module Aws
         attr_accessor :code
 
       end
+
+      # @api private undocumented
+      def retryable?
+        false
+      end
+
+      # @api private undocumented
+      def throttling?
+        false
+      end
     end
 
     # Raised when InstanceProfileCredentialsProvider or
@@ -253,6 +263,15 @@ Known AWS regions include (not specific to this service):
         end.join("\n")
       end
 
+    end
+
+    # Raised when attempting to retry a request
+    # and no capacity is available to retry (See adaptive retry_mode)
+    class RetryCapacityNotAvailableError < RuntimeError
+      def initialize(*args)
+        msg = 'Insufficient client side capacity available to retry request.'
+        super(msg)
+      end
     end
 
     # This module is mixed into another module, providing dynamic

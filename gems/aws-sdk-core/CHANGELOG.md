@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `standard` and `adaptive` retry modes.
+
 3.90.1 (2020-02-14)
 ------------------
 

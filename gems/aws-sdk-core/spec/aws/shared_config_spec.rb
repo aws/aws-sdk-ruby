@@ -193,5 +193,71 @@ module Aws
         expect(config.s3_use_arn_region).to eq('false')
       end
     end
+    context 'retry_mode' do
+
+      it 'can resolve retry_mode from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'retry_mode_legacy'
+        )
+        expect(config.retry_mode).to eq('legacy')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'retry_mode_standard'
+        )
+        expect(config.retry_mode).to eq('standard')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'retry_mode_adaptive'
+        )
+        expect(config.retry_mode).to eq('adaptive')
+      end
+
+    end
+
+    context 'max_attempts' do
+
+      it 'can resolve max_attempts from config file' do
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'max_attempts'
+        )
+        expect(config.max_attempts).to eq('1')
+
+      end
+
+    end
+
+    context 'adaptive_retry_wait_to_fill' do
+
+      it 'can resolve adaptive_retry_wait_to_fill from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'adaptive_retry_wait_to_fill'
+        )
+        expect(config.adaptive_retry_wait_to_fill).to eq('false')
+      end
+    end
+
+    context 'correct_clock_skew' do
+
+      it 'can resolve correct_clock_skew from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'correct_clock_skew'
+        )
+        expect(config.correct_clock_skew).to eq('false')
+      end
+    end
+
   end
 end

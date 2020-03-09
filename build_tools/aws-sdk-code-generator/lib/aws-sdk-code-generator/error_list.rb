@@ -10,7 +10,6 @@ module AwsSdkCodeGenerator
         # only generate error shape with non empty members
         # excluding event shapes marked as error
         if error_struct?(shape)
-          members = shape['members'].keys.map {|k| Underscore.underscore(k) }
           members = shape['members'].inject([]) do |arr, (k, v)|
             arr << {
               name: Underscore.underscore(k),
@@ -22,7 +21,9 @@ module AwsSdkCodeGenerator
           es << Error.new(
             name: name,
             members: members,
-            data_type: "#{@module_name}::Types::#{name}"
+            data_type: "#{@module_name}::Types::#{name}",
+            retryable: !!shape['retryable'],
+            throttling: throttling?(shape)
           )
         end
         es
@@ -38,12 +39,19 @@ module AwsSdkCodeGenerator
       @errors.each(&block)
     end
 
+    def throttling?(shape)
+      shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
+    end
+
+
     class Error
 
       def initialize(options)
         @name = options.fetch(:name)
         @data_type = options[:data_type]
         @members = options[:members]
+        @retryable = options[:retryable]
+        @throttling = options[:throttling]
       end
 
       # @return [String]
@@ -54,6 +62,12 @@ module AwsSdkCodeGenerator
 
       # @return [Array<Hash>]
       attr_reader :members
+
+      # @return [Boolean]
+      attr_reader :retryable
+
+      # @return [Boolean]
+      attr_reader :throttling
 
     end
 

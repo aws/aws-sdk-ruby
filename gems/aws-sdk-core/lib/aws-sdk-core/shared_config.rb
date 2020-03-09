@@ -143,16 +143,20 @@ module Aws
     end
 
     config_reader(
+      :region,
       :credential_process,
+      :endpoint_discovery_enabled,
+      :max_attempts,
+      :retry_mode,
+      :adaptive_retry_wait_to_fill,
+      :correct_clock_skew,
       :csm_client_id,
       :csm_enabled,
       :csm_host,
       :csm_port,
-      :endpoint_discovery_enabled,
-      :region,
+      :sts_regional_endpoints,
       :s3_use_arn_region,
-      :s3_us_east_1_regional_endpoint,
-      :sts_regional_endpoints
+      :s3_us_east_1_regional_endpoint
     )
 
     private
