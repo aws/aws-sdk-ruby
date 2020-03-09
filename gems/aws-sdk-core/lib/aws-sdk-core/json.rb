@@ -7,28 +7,24 @@ require_relative 'json/parser'
 module Aws
   # @api private
   module Json
-
     class ParseError < StandardError
-
       def initialize(error)
         @error = error
         super(error.message)
       end
 
       attr_reader :error
-
     end
 
     class << self
-
       def load(json)
         ENGINE.load(json, *ENGINE_LOAD_OPTIONS)
       rescue *ENGINE_ERRORS => e
-        raise ParseError.new(e)
+        raise ParseError, e
       end
 
       def load_file(path)
-        self.load(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
+        load(File.open(path, 'r', encoding: 'UTF-8', &:read))
       end
 
       def dump(value)
@@ -39,7 +35,12 @@ module Aws
 
       def oj_engine
         require 'oj'
-        [Oj, [{mode: :compat, symbol_keys: false}], [{ mode: :compat }], oj_parse_error]
+        [
+          Oj,
+          [{ mode: :compat, symbol_keys: false }],
+          [{ mode: :compat }],
+          oj_parse_error
+        ]
       rescue LoadError
         false
       end
@@ -50,17 +51,15 @@ module Aws
 
       def oj_parse_error
         if Oj.const_defined?('ParseError')
-          [Oj::ParseError, EncodingError]
+          [Oj::ParseError, EncodingError, JSON::ParserError]
         else
           [SyntaxError]
         end
       end
-
     end
 
     # @api private
     ENGINE, ENGINE_LOAD_OPTIONS, ENGINE_DUMP_OPTIONS, ENGINE_ERRORS =
       oj_engine || json_engine
-
   end
 end

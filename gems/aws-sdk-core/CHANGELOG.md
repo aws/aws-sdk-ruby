@@ -1,11 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Rescue from `JSON::ParserError` when using `Oj.mimic_JSON`. (#2247)
+
 3.91.0 (2020-03-09)
 ------------------
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
-
 * Feature - Add `standard` and `adaptive` retry modes.
 
 3.90.1 (2020-02-14)
