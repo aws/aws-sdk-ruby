@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-03-09)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports the ability to configure the Preferred Channel Pipeline for channels contributing to a Multiplex.
+
 1.40.0 (2019-12-17)
 ------------------
 

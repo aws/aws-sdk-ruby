@@ -354,8 +354,15 @@ module Aws::EC2
 
     # @example Request syntax with placeholder values
     #
-    #   nat_gateway.delete()
+    #   nat_gateway.delete({
+    #     dry_run: false,
+    #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @return [Types::DeleteNatGatewayResult]
     def delete(options = {})
       options = options.merge(nat_gateway_id: @id)

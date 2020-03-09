@@ -55,7 +55,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -71,7 +70,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -87,7 +85,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistException < ServiceError
@@ -103,7 +100,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -119,7 +115,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -135,7 +130,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -151,7 +145,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -167,7 +160,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -183,7 +175,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -199,7 +190,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
   end

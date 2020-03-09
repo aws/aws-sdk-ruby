@@ -61,7 +61,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ClientException < ServiceError
@@ -77,7 +76,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -93,7 +91,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -109,7 +106,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPaginationTokenException < ServiceError
@@ -125,7 +121,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -141,7 +136,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -157,7 +151,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -173,7 +166,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -189,7 +181,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidVersionNumberException < ServiceError
@@ -205,7 +196,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -221,7 +211,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDependencyException < ServiceError
@@ -237,7 +226,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -253,7 +241,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -269,7 +256,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -285,7 +271,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -301,7 +286,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
   end

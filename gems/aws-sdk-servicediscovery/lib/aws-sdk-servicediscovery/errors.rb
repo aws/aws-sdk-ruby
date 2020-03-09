@@ -56,7 +56,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRequest < ServiceError
@@ -77,7 +76,6 @@ module Aws::ServiceDiscovery
       def duplicate_operation_id
         @data[:duplicate_operation_id]
       end
-
     end
 
     class InstanceNotFound < ServiceError
@@ -93,7 +91,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInput < ServiceError
@@ -109,7 +106,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class NamespaceAlreadyExists < ServiceError
@@ -135,7 +131,6 @@ module Aws::ServiceDiscovery
       def namespace_id
         @data[:namespace_id]
       end
-
     end
 
     class NamespaceNotFound < ServiceError
@@ -151,7 +146,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotFound < ServiceError
@@ -167,7 +161,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUse < ServiceError
@@ -183,7 +176,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceeded < ServiceError
@@ -199,7 +191,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceAlreadyExists < ServiceError
@@ -225,7 +216,6 @@ module Aws::ServiceDiscovery
       def service_id
         @data[:service_id]
       end
-
     end
 
     class ServiceNotFound < ServiceError
@@ -241,7 +231,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
   end

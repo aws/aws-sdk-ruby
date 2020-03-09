@@ -52,7 +52,6 @@ module Aws::CloudSearchDomain
       def message
         @message || @data[:message]
       end
-
     end
 
     class SearchException < ServiceError
@@ -68,7 +67,6 @@ module Aws::CloudSearchDomain
       def message
         @message || @data[:message]
       end
-
     end
 
   end

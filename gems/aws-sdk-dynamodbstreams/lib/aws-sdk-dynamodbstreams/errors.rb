@@ -50,7 +50,6 @@ module Aws::DynamoDBStreams
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -66,7 +65,6 @@ module Aws::DynamoDBStreams
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -82,7 +80,6 @@ module Aws::DynamoDBStreams
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -98,7 +95,6 @@ module Aws::DynamoDBStreams
       def message
         @message || @data[:message]
       end
-
     end
 
     class TrimmedDataAccessException < ServiceError
@@ -114,7 +110,6 @@ module Aws::DynamoDBStreams
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -152,6 +152,12 @@ module Aws::S3
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -181,6 +187,10 @@ module Aws::S3
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -230,6 +240,12 @@ module Aws::S3
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
@@ -242,11 +258,19 @@ module Aws::S3
     #     where server-side-encryption is used with customer-provided keys.
     #     This should only be disabled for local testing.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -254,11 +278,26 @@ module Aws::S3
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #       * `legacy` - The pre-existing retry behavior.  This is default value if
+    #         no retry mode is provided.
+    #       * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #         This includes support for retry quotas, which limit the number of
+    #         unsuccessful retries a client can make.
+    #       * `adaptive` - An experimental retry mode that includes all the
+    #         functionality of `standard` mode along with automatic client side
+    #         throttling.  This is a provisional mode that may change behavior
+    #         in the future.
     #
     #   @option options [String] :s3_us_east_1_regional_endpoint ("legacy")
     #     Passing in `regional` to enable regional endpoint for S3's `us-east-1`
@@ -11725,7 +11764,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.60.2'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

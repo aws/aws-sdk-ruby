@@ -54,7 +54,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -70,7 +69,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class CreateFlow420Exception < ServiceError
@@ -86,7 +84,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -102,7 +99,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class GrantFlowEntitlements420Exception < ServiceError
@@ -118,7 +114,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -134,7 +129,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -150,7 +144,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -166,7 +159,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -182,7 +174,6 @@ module Aws::MediaConnect
       def message
         @message || @data[:message]
       end
-
     end
 
   end

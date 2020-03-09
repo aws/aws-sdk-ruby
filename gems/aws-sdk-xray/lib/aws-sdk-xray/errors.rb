@@ -48,7 +48,6 @@ module Aws::XRay
       def message
         @message || @data[:message]
       end
-
     end
 
     class RuleLimitExceededException < ServiceError
@@ -64,7 +63,6 @@ module Aws::XRay
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottledException < ServiceError
@@ -80,7 +78,6 @@ module Aws::XRay
       def message
         @message || @data[:message]
       end
-
     end
 
   end

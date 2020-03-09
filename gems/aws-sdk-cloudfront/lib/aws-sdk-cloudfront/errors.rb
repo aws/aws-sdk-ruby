@@ -126,7 +126,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class BatchTooLarge < ServiceError
@@ -142,7 +141,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class CNAMEAlreadyExists < ServiceError
@@ -158,7 +156,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class CannotChangeImmutablePublicKeyFields < ServiceError
@@ -174,7 +171,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudFrontOriginAccessIdentityAlreadyExists < ServiceError
@@ -190,7 +186,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudFrontOriginAccessIdentityInUse < ServiceError
@@ -206,7 +201,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class DistributionAlreadyExists < ServiceError
@@ -222,7 +216,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class DistributionNotDisabled < ServiceError
@@ -238,7 +231,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class FieldLevelEncryptionConfigAlreadyExists < ServiceError
@@ -254,7 +246,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class FieldLevelEncryptionConfigInUse < ServiceError
@@ -270,7 +261,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class FieldLevelEncryptionProfileAlreadyExists < ServiceError
@@ -286,7 +276,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class FieldLevelEncryptionProfileInUse < ServiceError
@@ -302,7 +291,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class FieldLevelEncryptionProfileSizeExceeded < ServiceError
@@ -318,7 +306,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < ServiceError
@@ -334,7 +321,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class IllegalUpdate < ServiceError
@@ -350,7 +336,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InconsistentQuantities < ServiceError
@@ -366,7 +351,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgument < ServiceError
@@ -382,7 +366,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDefaultRootObject < ServiceError
@@ -398,7 +381,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidErrorCode < ServiceError
@@ -414,7 +396,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidForwardCookies < ServiceError
@@ -430,7 +411,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidGeoRestrictionParameter < ServiceError
@@ -446,7 +426,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidHeadersForS3Origin < ServiceError
@@ -462,7 +441,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidIfMatchVersion < ServiceError
@@ -478,7 +456,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLambdaFunctionAssociation < ServiceError
@@ -494,7 +471,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLocationCode < ServiceError
@@ -510,7 +486,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidMinimumProtocolVersion < ServiceError
@@ -526,7 +501,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOrigin < ServiceError
@@ -542,7 +516,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOriginAccessIdentity < ServiceError
@@ -558,7 +531,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOriginKeepaliveTimeout < ServiceError
@@ -574,7 +546,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOriginReadTimeout < ServiceError
@@ -590,7 +561,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidProtocolSettings < ServiceError
@@ -606,7 +576,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidQueryStringParameters < ServiceError
@@ -622,7 +591,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRelativePath < ServiceError
@@ -638,7 +606,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequiredProtocol < ServiceError
@@ -654,7 +621,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResponseCode < ServiceError
@@ -670,7 +636,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTTLOrder < ServiceError
@@ -686,7 +651,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagging < ServiceError
@@ -702,7 +666,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidViewerCertificate < ServiceError
@@ -718,7 +681,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidWebACLId < ServiceError
@@ -734,7 +696,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingBody < ServiceError
@@ -750,7 +711,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchCloudFrontOriginAccessIdentity < ServiceError
@@ -766,7 +726,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchDistribution < ServiceError
@@ -782,7 +741,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchFieldLevelEncryptionConfig < ServiceError
@@ -798,7 +756,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchFieldLevelEncryptionProfile < ServiceError
@@ -814,7 +771,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchInvalidation < ServiceError
@@ -830,7 +786,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchOrigin < ServiceError
@@ -846,7 +801,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchPublicKey < ServiceError
@@ -862,7 +816,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchResource < ServiceError
@@ -878,7 +831,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchStreamingDistribution < ServiceError
@@ -894,7 +846,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class PreconditionFailed < ServiceError
@@ -910,7 +861,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class PublicKeyAlreadyExists < ServiceError
@@ -926,7 +876,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class PublicKeyInUse < ServiceError
@@ -942,7 +891,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class QueryArgProfileEmpty < ServiceError
@@ -958,7 +906,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class StreamingDistributionAlreadyExists < ServiceError
@@ -974,7 +921,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class StreamingDistributionNotDisabled < ServiceError
@@ -990,7 +936,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyCacheBehaviors < ServiceError
@@ -1006,7 +951,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyCertificates < ServiceError
@@ -1022,7 +966,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyCloudFrontOriginAccessIdentities < ServiceError
@@ -1038,7 +981,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyCookieNamesInWhiteList < ServiceError
@@ -1054,7 +996,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyDistributionCNAMEs < ServiceError
@@ -1070,7 +1011,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyDistributions < ServiceError
@@ -1086,7 +1026,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < ServiceError
@@ -1102,7 +1041,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyDistributionsWithLambdaAssociations < ServiceError
@@ -1118,7 +1056,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFieldLevelEncryptionConfigs < ServiceError
@@ -1134,7 +1071,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFieldLevelEncryptionContentTypeProfiles < ServiceError
@@ -1150,7 +1086,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFieldLevelEncryptionEncryptionEntities < ServiceError
@@ -1166,7 +1101,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFieldLevelEncryptionFieldPatterns < ServiceError
@@ -1182,7 +1116,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFieldLevelEncryptionProfiles < ServiceError
@@ -1198,7 +1131,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFieldLevelEncryptionQueryArgProfiles < ServiceError
@@ -1214,7 +1146,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyHeadersInForwardedValues < ServiceError
@@ -1230,7 +1161,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyInvalidationsInProgress < ServiceError
@@ -1246,7 +1176,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyLambdaFunctionAssociations < ServiceError
@@ -1262,7 +1191,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyOriginCustomHeaders < ServiceError
@@ -1278,7 +1206,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyOriginGroupsPerDistribution < ServiceError
@@ -1294,7 +1221,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyOrigins < ServiceError
@@ -1310,7 +1236,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyPublicKeys < ServiceError
@@ -1326,7 +1251,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyQueryStringParameters < ServiceError
@@ -1342,7 +1266,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyStreamingDistributionCNAMEs < ServiceError
@@ -1358,7 +1281,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyStreamingDistributions < ServiceError
@@ -1374,7 +1296,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTrustedSigners < ServiceError
@@ -1390,7 +1311,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
     class TrustedSignerDoesNotExist < ServiceError
@@ -1406,7 +1326,6 @@ module Aws::CloudFront
       def message
         @message || @data[:message]
       end
-
     end
 
   end

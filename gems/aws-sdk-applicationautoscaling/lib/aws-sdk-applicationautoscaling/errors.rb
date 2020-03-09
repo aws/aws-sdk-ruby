@@ -52,7 +52,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class FailedResourceAccessException < ServiceError
@@ -68,7 +67,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -84,7 +82,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -100,7 +97,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -116,7 +112,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectNotFoundException < ServiceError
@@ -132,7 +127,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -148,7 +142,6 @@ module Aws::ApplicationAutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
   end

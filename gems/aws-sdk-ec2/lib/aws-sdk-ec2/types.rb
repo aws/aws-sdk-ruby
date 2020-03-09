@@ -6424,7 +6424,19 @@ module Aws::EC2
     #       {
     #         allocation_id: "AllocationId", # required
     #         client_token: "String",
+    #         dry_run: false,
     #         subnet_id: "SubnetId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] allocation_id
@@ -6440,21 +6452,37 @@ module Aws::EC2
     #
     #   Constraint: Maximum 64 ASCII characters.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] subnet_id
     #   The subnet in which to create the NAT gateway.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the NAT gateway.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
     #
     class CreateNatGatewayRequest < Struct.new(
       :allocation_id,
       :client_token,
-      :subnet_id)
+      :dry_run,
+      :subnet_id,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -9905,8 +9933,16 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         dry_run: false,
     #         nat_gateway_id: "NatGatewayId", # required
     #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] nat_gateway_id
     #   The ID of the NAT gateway.
@@ -9915,6 +9951,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNatGatewayRequest AWS API Documentation
     #
     class DeleteNatGatewayRequest < Struct.new(
+      :dry_run,
       :nat_gateway_id)
       include Aws::Structure
     end
@@ -15968,6 +16005,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         dry_run: false,
     #         filter: [
     #           {
     #             name: "String",
@@ -15978,6 +16016,13 @@ module Aws::EC2
     #         nat_gateway_ids: ["NatGatewayId"],
     #         next_token: "String",
     #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] filter
     #   One or more filters.
@@ -16020,6 +16065,7 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysRequest AWS API Documentation
     #
     class DescribeNatGatewaysRequest < Struct.new(
+      :dry_run,
       :filter,
       :max_results,
       :nat_gateway_ids,

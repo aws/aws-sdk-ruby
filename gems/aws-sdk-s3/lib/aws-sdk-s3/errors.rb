@@ -47,7 +47,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BucketAlreadyOwnedByYou < ServiceError
@@ -58,7 +57,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchBucket < ServiceError
@@ -69,7 +67,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchKey < ServiceError
@@ -80,7 +77,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchUpload < ServiceError
@@ -91,7 +87,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ObjectAlreadyInActiveTierError < ServiceError
@@ -102,7 +97,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ObjectNotInActiveTierError < ServiceError
@@ -113,7 +107,6 @@ module Aws::S3
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

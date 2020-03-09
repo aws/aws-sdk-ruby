@@ -57,7 +57,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HumanLoopQuotaExceededException < ServiceError
@@ -83,7 +82,6 @@ module Aws::Rekognition
       def service_code
         @data[:service_code]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -94,7 +92,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ImageTooLargeException < ServiceError
@@ -105,7 +102,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -116,7 +112,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidImageFormatException < ServiceError
@@ -127,7 +122,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidPaginationTokenException < ServiceError
@@ -138,7 +132,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -149,7 +142,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3ObjectException < ServiceError
@@ -160,7 +152,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -171,7 +162,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProvisionedThroughputExceededException < ServiceError
@@ -182,7 +172,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -193,7 +182,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -204,7 +192,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -215,7 +202,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotReadyException < ServiceError
@@ -226,7 +212,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -237,7 +222,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class VideoTooLargeException < ServiceError
@@ -248,7 +232,6 @@ module Aws::Rekognition
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

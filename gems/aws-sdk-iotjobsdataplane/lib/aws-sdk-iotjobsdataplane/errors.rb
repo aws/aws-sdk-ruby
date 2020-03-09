@@ -52,7 +52,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -68,7 +67,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateTransitionException < ServiceError
@@ -84,7 +82,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -100,7 +97,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -116,7 +112,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class TerminalStateException < ServiceError
@@ -132,7 +127,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -153,7 +147,6 @@ module Aws::IoTJobsDataPlane
       def payload
         @data[:payload]
       end
-
     end
 
   end

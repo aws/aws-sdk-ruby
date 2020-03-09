@@ -58,7 +58,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -74,7 +73,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRequestException < ServiceError
@@ -90,7 +88,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -106,7 +103,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidConfigurationException < ServiceError
@@ -122,7 +118,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLambdaFunctionOutputException < ServiceError
@@ -138,7 +133,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -154,7 +148,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class LambdaThrottledException < ServiceError
@@ -170,7 +163,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -186,7 +178,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -202,7 +193,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceConflictException < ServiceError
@@ -218,7 +208,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -234,7 +223,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -250,7 +238,6 @@ module Aws::CognitoSync
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -56,7 +56,6 @@ module Aws::QLDB
       def parameter_name
         @data[:parameter_name]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -77,7 +76,6 @@ module Aws::QLDB
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -103,7 +101,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -129,7 +126,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -155,7 +151,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ResourcePreconditionNotMetException < ServiceError
@@ -181,7 +176,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
   end

@@ -61,7 +61,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -82,7 +81,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -103,7 +101,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -124,7 +121,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -145,7 +141,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -166,7 +161,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceFailureException < ServiceError
@@ -187,7 +181,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -208,7 +201,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottledClientException < ServiceError
@@ -229,7 +221,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedClientException < ServiceError
@@ -250,7 +241,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnprocessableEntityException < ServiceError
@@ -271,7 +261,6 @@ module Aws::Chime
       def message
         @message || @data[:message]
       end
-
     end
 
   end

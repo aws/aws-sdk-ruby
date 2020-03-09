@@ -53,7 +53,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IDPCommunicationErrorException < ServiceError
@@ -69,7 +68,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IDPRejectedClaimException < ServiceError
@@ -85,7 +83,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAuthorizationMessageException < ServiceError
@@ -101,7 +98,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidIdentityTokenException < ServiceError
@@ -117,7 +113,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -133,7 +128,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class PackedPolicyTooLargeException < ServiceError
@@ -149,7 +143,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class RegionDisabledException < ServiceError
@@ -165,7 +158,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

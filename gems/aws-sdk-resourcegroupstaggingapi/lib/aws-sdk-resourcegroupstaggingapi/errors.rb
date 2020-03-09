@@ -51,7 +51,6 @@ module Aws::ResourceGroupsTaggingAPI
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConstraintViolationException < ServiceError
@@ -67,7 +66,6 @@ module Aws::ResourceGroupsTaggingAPI
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -83,7 +81,6 @@ module Aws::ResourceGroupsTaggingAPI
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -99,7 +96,6 @@ module Aws::ResourceGroupsTaggingAPI
       def message
         @message || @data[:message]
       end
-
     end
 
     class PaginationTokenExpiredException < ServiceError
@@ -115,7 +111,6 @@ module Aws::ResourceGroupsTaggingAPI
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottledException < ServiceError
@@ -131,7 +126,6 @@ module Aws::ResourceGroupsTaggingAPI
       def message
         @message || @data[:message]
       end
-
     end
 
   end

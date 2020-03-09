@@ -51,7 +51,6 @@ module Aws::WorkLink
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -67,7 +66,6 @@ module Aws::WorkLink
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -83,7 +81,6 @@ module Aws::WorkLink
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -99,7 +96,6 @@ module Aws::WorkLink
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -115,7 +111,6 @@ module Aws::WorkLink
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -131,7 +126,6 @@ module Aws::WorkLink
       def message
         @message || @data[:message]
       end
-
     end
 
   end

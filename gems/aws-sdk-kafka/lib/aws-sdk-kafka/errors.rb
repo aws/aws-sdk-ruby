@@ -58,7 +58,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -79,7 +78,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -100,7 +98,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -121,7 +118,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -142,7 +138,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -163,7 +158,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -184,7 +178,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -205,7 +198,6 @@ module Aws::Kafka
       def message
         @message || @data[:message]
       end
-
     end
 
   end

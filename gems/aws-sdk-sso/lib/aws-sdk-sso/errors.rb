@@ -49,7 +49,6 @@ module Aws::SSO
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -65,7 +64,6 @@ module Aws::SSO
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -81,7 +79,6 @@ module Aws::SSO
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -97,7 +94,6 @@ module Aws::SSO
       def message
         @message || @data[:message]
       end
-
     end
 
   end

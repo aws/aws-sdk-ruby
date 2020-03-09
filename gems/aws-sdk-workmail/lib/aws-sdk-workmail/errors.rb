@@ -64,7 +64,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryUnavailableException < ServiceError
@@ -80,7 +79,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EmailAddressInUseException < ServiceError
@@ -96,7 +94,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityAlreadyRegisteredException < ServiceError
@@ -112,7 +109,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotFoundException < ServiceError
@@ -128,7 +124,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityStateException < ServiceError
@@ -144,7 +139,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidConfigurationException < ServiceError
@@ -160,7 +154,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -176,7 +169,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPasswordException < ServiceError
@@ -192,7 +184,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -208,7 +199,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class MailDomainNotFoundException < ServiceError
@@ -224,7 +214,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class MailDomainStateException < ServiceError
@@ -240,7 +229,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class NameAvailabilityException < ServiceError
@@ -256,7 +244,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationNotFoundException < ServiceError
@@ -272,7 +259,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationStateException < ServiceError
@@ -288,7 +274,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReservedNameException < ServiceError
@@ -304,7 +289,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -320,7 +304,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -336,7 +319,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -352,7 +334,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
   end

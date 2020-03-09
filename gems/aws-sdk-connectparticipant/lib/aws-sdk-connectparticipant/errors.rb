@@ -49,7 +49,6 @@ module Aws::ConnectParticipant
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -65,7 +64,6 @@ module Aws::ConnectParticipant
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -81,7 +79,6 @@ module Aws::ConnectParticipant
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -97,7 +94,6 @@ module Aws::ConnectParticipant
       def message
         @message || @data[:message]
       end
-
     end
 
   end

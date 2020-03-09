@@ -53,7 +53,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -64,7 +63,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidServiceRoleException < ServiceError
@@ -75,7 +73,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -86,7 +83,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProjectAlreadyExistsException < ServiceError
@@ -97,7 +93,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProjectConfigurationException < ServiceError
@@ -108,7 +103,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProjectCreationFailedException < ServiceError
@@ -119,7 +113,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProjectNotFoundException < ServiceError
@@ -130,7 +123,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TeamMemberAlreadyAssociatedException < ServiceError
@@ -141,7 +133,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TeamMemberNotFoundException < ServiceError
@@ -152,7 +143,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UserProfileAlreadyExistsException < ServiceError
@@ -163,7 +153,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UserProfileNotFoundException < ServiceError
@@ -174,7 +163,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ValidationException < ServiceError
@@ -185,7 +173,6 @@ module Aws::CodeStar
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

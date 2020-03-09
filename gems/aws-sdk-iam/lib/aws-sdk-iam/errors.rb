@@ -72,7 +72,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CredentialReportExpiredException < ServiceError
@@ -88,7 +87,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CredentialReportNotPresentException < ServiceError
@@ -104,7 +102,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CredentialReportNotReadyException < ServiceError
@@ -120,7 +117,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeleteConflictException < ServiceError
@@ -136,7 +132,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateCertificateException < ServiceError
@@ -152,7 +147,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateSSHPublicKeyException < ServiceError
@@ -168,7 +162,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityAlreadyExistsException < ServiceError
@@ -184,7 +177,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityTemporarilyUnmodifiableException < ServiceError
@@ -200,7 +192,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAuthenticationCodeException < ServiceError
@@ -216,7 +207,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCertificateException < ServiceError
@@ -232,7 +222,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -248,7 +237,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPublicKeyException < ServiceError
@@ -264,7 +252,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidUserTypeException < ServiceError
@@ -280,7 +267,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class KeyPairMismatchException < ServiceError
@@ -296,7 +282,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -312,7 +297,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedCertificateException < ServiceError
@@ -328,7 +312,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -344,7 +327,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchEntityException < ServiceError
@@ -360,7 +342,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PasswordPolicyViolationException < ServiceError
@@ -376,7 +357,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyEvaluationException < ServiceError
@@ -392,7 +372,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotAttachableException < ServiceError
@@ -408,7 +387,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReportGenerationLimitExceededException < ServiceError
@@ -424,7 +402,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceFailureException < ServiceError
@@ -440,7 +417,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceNotSupportedException < ServiceError
@@ -456,7 +432,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnmodifiableEntityException < ServiceError
@@ -472,7 +447,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnrecognizedPublicKeyEncodingException < ServiceError
@@ -488,7 +462,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

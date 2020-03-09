@@ -56,7 +56,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class EncryptionFailure < ServiceError
@@ -72,7 +71,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceError < ServiceError
@@ -88,7 +86,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -104,7 +101,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -120,7 +116,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -136,7 +131,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -152,7 +146,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -168,7 +161,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class PreconditionNotMetException < ServiceError
@@ -184,7 +176,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceExistsException < ServiceError
@@ -200,7 +191,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -216,7 +206,6 @@ module Aws::SecretsManager
       def message
         @message || @data[:message]
       end
-
     end
 
   end

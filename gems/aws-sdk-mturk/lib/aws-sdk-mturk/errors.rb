@@ -52,7 +52,6 @@ module Aws::MTurk
       def turk_error_code
         @data[:turk_error_code]
       end
-
     end
 
     class ServiceFault < ServiceError
@@ -73,7 +72,6 @@ module Aws::MTurk
       def turk_error_code
         @data[:turk_error_code]
       end
-
     end
 
   end

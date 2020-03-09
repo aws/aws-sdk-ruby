@@ -51,7 +51,6 @@ module Aws::MediaStore
       def message
         @message || @data[:message]
       end
-
     end
 
     class ContainerNotFoundException < ServiceError
@@ -67,7 +66,6 @@ module Aws::MediaStore
       def message
         @message || @data[:message]
       end
-
     end
 
     class CorsPolicyNotFoundException < ServiceError
@@ -83,7 +81,6 @@ module Aws::MediaStore
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -99,7 +96,6 @@ module Aws::MediaStore
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -115,7 +111,6 @@ module Aws::MediaStore
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotFoundException < ServiceError
@@ -131,7 +126,6 @@ module Aws::MediaStore
       def message
         @message || @data[:message]
       end
-
     end
 
   end

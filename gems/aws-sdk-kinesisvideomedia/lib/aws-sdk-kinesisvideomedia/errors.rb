@@ -51,7 +51,6 @@ module Aws::KinesisVideoMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConnectionLimitExceededException < ServiceError
@@ -67,7 +66,6 @@ module Aws::KinesisVideoMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -83,7 +81,6 @@ module Aws::KinesisVideoMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidEndpointException < ServiceError
@@ -99,7 +96,6 @@ module Aws::KinesisVideoMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -115,7 +111,6 @@ module Aws::KinesisVideoMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -131,7 +126,6 @@ module Aws::KinesisVideoMedia
       def message
         @message || @data[:message]
       end
-
     end
 
   end

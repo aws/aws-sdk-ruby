@@ -52,7 +52,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextToken < ServiceError
@@ -68,7 +67,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededFault < ServiceError
@@ -84,7 +82,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceContentionFault < ServiceError
@@ -100,7 +97,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseFault < ServiceError
@@ -116,7 +112,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class ScalingActivityInProgressFault < ServiceError
@@ -132,7 +127,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceLinkedRoleFailure < ServiceError
@@ -148,7 +142,6 @@ module Aws::AutoScaling
       def message
         @message || @data[:message]
       end
-
     end
 
   end

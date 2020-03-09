@@ -52,7 +52,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -68,7 +67,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidKMSResourceException < ServiceError
@@ -89,7 +87,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -105,7 +102,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -121,7 +117,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -137,7 +132,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -153,7 +147,6 @@ module Aws::Firehose
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -51,7 +51,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AlreadyExistsException < ServiceError
@@ -62,7 +61,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -73,7 +71,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -84,7 +81,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -95,7 +91,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -106,7 +101,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MailFromDomainNotVerifiedException < ServiceError
@@ -117,7 +111,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MessageRejected < ServiceError
@@ -128,7 +121,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -139,7 +131,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SendingPausedException < ServiceError
@@ -150,7 +141,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -161,7 +151,6 @@ module Aws::SESV2
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

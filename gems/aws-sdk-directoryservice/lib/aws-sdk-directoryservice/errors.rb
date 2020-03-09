@@ -81,7 +81,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class AuthenticationFailedException < ServiceError
@@ -102,7 +101,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class CertificateAlreadyExistsException < ServiceError
@@ -123,7 +121,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class CertificateDoesNotExistException < ServiceError
@@ -144,7 +141,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class CertificateInUseException < ServiceError
@@ -165,7 +161,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class CertificateLimitExceededException < ServiceError
@@ -186,7 +181,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ClientException < ServiceError
@@ -207,7 +201,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DirectoryAlreadySharedException < ServiceError
@@ -228,7 +221,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DirectoryDoesNotExistException < ServiceError
@@ -249,7 +241,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DirectoryLimitExceededException < ServiceError
@@ -270,7 +261,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DirectoryNotSharedException < ServiceError
@@ -291,7 +281,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DirectoryUnavailableException < ServiceError
@@ -312,7 +301,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DomainControllerLimitExceededException < ServiceError
@@ -333,7 +321,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class EntityAlreadyExistsException < ServiceError
@@ -354,7 +341,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class EntityDoesNotExistException < ServiceError
@@ -375,7 +361,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InsufficientPermissionsException < ServiceError
@@ -396,7 +381,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidCertificateException < ServiceError
@@ -417,7 +401,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidLDAPSStatusException < ServiceError
@@ -438,7 +421,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -459,7 +441,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -480,7 +461,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidPasswordException < ServiceError
@@ -501,7 +481,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidTargetException < ServiceError
@@ -522,7 +501,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class IpRouteLimitExceededException < ServiceError
@@ -543,7 +521,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class NoAvailableCertificateException < ServiceError
@@ -564,7 +541,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class OrganizationsException < ServiceError
@@ -585,7 +561,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -606,7 +581,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ShareLimitExceededException < ServiceError
@@ -627,7 +601,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class SnapshotLimitExceededException < ServiceError
@@ -648,7 +621,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class TagLimitExceededException < ServiceError
@@ -669,7 +641,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -690,7 +661,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
     class UserDoesNotExistException < ServiceError
@@ -711,7 +681,6 @@ module Aws::DirectoryService
       def request_id
         @data[:request_id]
       end
-
     end
 
   end

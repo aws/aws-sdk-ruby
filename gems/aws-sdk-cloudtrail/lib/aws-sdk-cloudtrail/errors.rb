@@ -82,7 +82,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CloudTrailAccessNotEnabledException < ServiceError
@@ -93,7 +92,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CloudWatchLogsDeliveryUnavailableException < ServiceError
@@ -104,7 +102,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsightNotEnabledException < ServiceError
@@ -115,7 +112,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientDependencyServiceAccessPermissionException < ServiceError
@@ -126,7 +122,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientEncryptionPolicyException < ServiceError
@@ -137,7 +132,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientS3BucketPolicyException < ServiceError
@@ -148,7 +142,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientSnsTopicPolicyException < ServiceError
@@ -159,7 +152,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCloudWatchLogsLogGroupArnException < ServiceError
@@ -170,7 +162,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCloudWatchLogsRoleArnException < ServiceError
@@ -181,7 +172,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEventCategoryException < ServiceError
@@ -192,7 +182,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEventSelectorsException < ServiceError
@@ -203,7 +192,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidHomeRegionException < ServiceError
@@ -214,7 +202,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInsightSelectorsException < ServiceError
@@ -225,7 +212,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidKmsKeyIdException < ServiceError
@@ -236,7 +222,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidLookupAttributesException < ServiceError
@@ -247,7 +232,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMaxResultsException < ServiceError
@@ -258,7 +242,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -269,7 +252,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -280,7 +262,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3BucketNameException < ServiceError
@@ -291,7 +272,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3PrefixException < ServiceError
@@ -302,7 +282,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSnsTopicNameException < ServiceError
@@ -313,7 +292,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagParameterException < ServiceError
@@ -324,7 +302,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTimeRangeException < ServiceError
@@ -335,7 +312,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTokenException < ServiceError
@@ -346,7 +322,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTrailNameException < ServiceError
@@ -357,7 +332,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class KmsException < ServiceError
@@ -368,7 +342,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class KmsKeyDisabledException < ServiceError
@@ -379,7 +352,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class KmsKeyNotFoundException < ServiceError
@@ -390,7 +362,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumNumberOfTrailsExceededException < ServiceError
@@ -401,7 +372,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NotOrganizationMasterAccountException < ServiceError
@@ -412,7 +382,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -423,7 +392,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OrganizationNotInAllFeaturesModeException < ServiceError
@@ -434,7 +402,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OrganizationsNotInUseException < ServiceError
@@ -445,7 +412,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -456,7 +422,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceTypeNotSupportedException < ServiceError
@@ -467,7 +432,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class S3BucketDoesNotExistException < ServiceError
@@ -478,7 +442,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagsLimitExceededException < ServiceError
@@ -489,7 +452,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TrailAlreadyExistsException < ServiceError
@@ -500,7 +462,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TrailNotFoundException < ServiceError
@@ -511,7 +472,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TrailNotProvidedException < ServiceError
@@ -522,7 +482,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -533,7 +492,6 @@ module Aws::CloudTrail
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

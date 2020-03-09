@@ -52,7 +52,6 @@ module Aws::ApplicationInsights
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -68,7 +67,6 @@ module Aws::ApplicationInsights
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -84,7 +82,6 @@ module Aws::ApplicationInsights
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -100,7 +97,6 @@ module Aws::ApplicationInsights
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagsAlreadyExistException < ServiceError
@@ -116,7 +112,6 @@ module Aws::ApplicationInsights
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -137,7 +132,6 @@ module Aws::ApplicationInsights
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -153,7 +147,6 @@ module Aws::ApplicationInsights
       def message
         @message || @data[:message]
       end
-
     end
 
   end

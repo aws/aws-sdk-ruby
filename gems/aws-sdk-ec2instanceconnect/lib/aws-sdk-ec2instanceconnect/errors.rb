@@ -50,7 +50,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class EC2InstanceNotFoundException < ServiceError
@@ -66,7 +65,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgsException < ServiceError
@@ -82,7 +80,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -98,7 +95,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -114,7 +110,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
   end

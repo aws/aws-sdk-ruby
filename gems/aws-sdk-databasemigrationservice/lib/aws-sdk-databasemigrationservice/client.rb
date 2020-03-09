@@ -120,6 +120,12 @@ module Aws::DatabaseMigrationService
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
     #     this client.
@@ -143,6 +149,10 @@ module Aws::DatabaseMigrationService
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
+    #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -178,15 +188,29 @@ module Aws::DatabaseMigrationService
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -194,11 +218,26 @@ module Aws::DatabaseMigrationService
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #       * `legacy` - The pre-existing retry behavior.  This is default value if
+    #         no retry mode is provided.
+    #       * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #         This includes support for retry quotas, which limit the number of
+    #         unsuccessful retries a client can make.
+    #       * `adaptive` - An experimental retry mode that includes all the
+    #         functionality of `standard` mode along with automatic client side
+    #         throttling.  This is a provisional mode that may change behavior
+    #         in the future.
     #
     #   @option options [String] :secret_access_key
     #
@@ -395,18 +434,20 @@ module Aws::DatabaseMigrationService
     # Creates an endpoint using the provided settings.
     #
     # @option params [required, String] :endpoint_identifier
-    #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and must
-    #   not end with a hyphen or contain two consecutive hyphens.
+    #   The database endpoint identifier. Identifiers must begin with a letter
+    #   and must contain only ASCII letters, digits, and hyphens. They can't
+    #   end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [required, String] :endpoint_type
     #   The type of endpoint. Valid values are `source` and `target`.
     #
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   `EndpointType` value, include `mysql`, `oracle`, `postgres`,
-    #   `mariadb`, `aurora`, `aurora-postgresql`, `redshift`, `s3`, `db2`,
-    #   `azuredb`, `sybase`, `dynamodb`, `mongodb`, and `sqlserver`.
+    #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
+    #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #
     # @option params [String] :username
     #   The user name to be used to log in to the endpoint database.
@@ -465,9 +506,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see [Using Object
-    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database Migration
-    #   Service User Guide.*
+    #   information about other available settings, see [Using Object Mapping
+    #   to Migrate Data to DynamoDB][1] in the *AWS Database Migration Service
+    #   User Guide.*
     #
     #
     #
@@ -508,7 +549,7 @@ module Aws::DatabaseMigrationService
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
     #   information about the available settings, see the configuration
-    #   properties section in [ Using MongoDB as a Target for AWS Database
+    #   properties section in [Using MongoDB as a Target for AWS Database
     #   Migration Service][1] in the *AWS Database Migration Service User
     #   Guide.*
     #
@@ -517,14 +558,24 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
-    #   Settings in JSON format for the target Amazon Kinesis Data Streams
-    #   endpoint. For more information about the available settings, see
+    #   Settings in JSON format for the target endpoint for Amazon Kinesis
+    #   Data Streams. For information about other available settings, see
     #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
     #   the *AWS Database Migration User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #
+    # @option params [Types::KafkaSettings] :kafka_settings
+    #   Settings in JSON format for the target Apache Kafka endpoint. For
+    #   information about other available settings, see [Using Object Mapping
+    #   to Migrate Data to Apache Kafka][1] in the *AWS Database Migration
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -537,6 +588,7 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
     #
     # @option params [Types::RedshiftSettings] :redshift_settings
+    #   Provides information that defines an Amazon Redshift endpoint.
     #
     # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -630,6 +682,7 @@ module Aws::DatabaseMigrationService
     #       cdc_inserts_only: false,
     #       timestamp_column_name: "String",
     #       parquet_timestamp_in_millisecond: false,
+    #       cdc_inserts_and_updates: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -651,8 +704,17 @@ module Aws::DatabaseMigrationService
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
-    #       message_format: "json", # accepts json
+    #       message_format: "json", # accepts json, json-unformatted
     #       service_access_role_arn: "String",
+    #       include_transaction_details: false,
+    #       include_partition_value: false,
+    #       partition_include_schema_table: false,
+    #       include_table_alter_operations: false,
+    #       include_control_details: false,
+    #     },
+    #     kafka_settings: {
+    #       broker: "String",
+    #       topic: "String",
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -729,6 +791,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
     #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -744,8 +807,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
-    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.broker #=> String
+    #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -821,7 +891,7 @@ module Aws::DatabaseMigrationService
     #   The type of AWS DMS resource that generates the events. For example,
     #   if you want to be notified of events generated by a replication
     #   instance, you set this parameter to `replication-instance`. If this
-    #   value is not specified, all events are returned.
+    #   value isn't specified, all events are returned.
     #
     #   Valid values: `replication-instance` \| `replication-task`
     #
@@ -918,7 +988,7 @@ module Aws::DatabaseMigrationService
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `myrepinstance`
     #
@@ -940,9 +1010,9 @@ module Aws::DatabaseMigrationService
     #   replication instance.
     #
     # @option params [String] :availability_zone
-    #   The AWS Availability Zone where the replication instance will be
-    #   created. The default value is a random, system-chosen Availability
-    #   Zone in the endpoint's AWS Region, for example: `us-east-1d`
+    #   The Availability Zone where the replication instance will be created.
+    #   The default value is a random, system-chosen Availability Zone in the
+    #   endpoint's AWS Region, for example: `us-east-1d`
     #
     # @option params [String] :replication_subnet_group_identifier
     #   A subnet group to associate with the replication instance.
@@ -962,16 +1032,16 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Boolean] :multi_az
     #   Specifies whether the replication instance is a Multi-AZ deployment.
-    #   You cannot set the `AvailabilityZone` parameter if the Multi-AZ
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
     #   parameter is set to `true`.
     #
     # @option params [String] :engine_version
     #   The engine version number of the replication instance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates whether minor engine upgrades will be applied automatically
-    #   to the replication instance during the maintenance window. This
-    #   parameter defaults to `true`.
+    #   A value that indicates whether minor engine upgrades are applied
+    #   automatically to the replication instance during the maintenance
+    #   window. This parameter defaults to `true`.
     #
     #   Default: `true`
     #
@@ -1627,6 +1697,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
     #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -1642,8 +1713,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
-    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.broker #=> String
+    #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -2050,7 +2128,7 @@ module Aws::DatabaseMigrationService
     # @option params [String] :marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond the
-    #   marker, up to the vlue specified by `MaxRecords`.
+    #   marker, up to the value specified by `MaxRecords`.
     #
     # @return [Types::DescribeCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2410,6 +2488,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoints[0].s3_settings.timestamp_column_name #=> String
     #   resp.endpoints[0].s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoints[0].s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoints[0].dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].dms_transfer_settings.bucket_name #=> String
     #   resp.endpoints[0].mongo_db_settings.username #=> String
@@ -2425,8 +2504,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].mongo_db_settings.auth_source #=> String
     #   resp.endpoints[0].mongo_db_settings.kms_key_id #=> String
     #   resp.endpoints[0].kinesis_settings.stream_arn #=> String
-    #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoints[0].kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoints[0].kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoints[0].kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoints[0].kafka_settings.broker #=> String
+    #   resp.endpoints[0].kafka_settings.topic #=> String
     #   resp.endpoints[0].elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -3123,9 +3209,9 @@ module Aws::DatabaseMigrationService
     # returns the latest results.
     #
     # @option params [String] :replication_task_arn
-    #   \- The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   task. When this input parameter is specified the API will return only
-    #   one result and ignore the values of the max-records and marker
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   task. When this input parameter is specified, the API returns only one
+    #   result and ignore the values of the `MaxRecords` and `Marker`
     #   parameters.
     #
     # @option params [Integer] :max_records
@@ -3447,6 +3533,9 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].full_load_rows #=> Integer
     #   resp.table_statistics[0].full_load_condtnl_chk_failed_rows #=> Integer
     #   resp.table_statistics[0].full_load_error_rows #=> Integer
+    #   resp.table_statistics[0].full_load_start_time #=> Time
+    #   resp.table_statistics[0].full_load_end_time #=> Time
+    #   resp.table_statistics[0].full_load_reloaded #=> Boolean
     #   resp.table_statistics[0].last_update_time #=> Time
     #   resp.table_statistics[0].table_state #=> String
     #   resp.table_statistics[0].validation_pending_records #=> Integer
@@ -3469,8 +3558,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :certificate_identifier
     #   A customer-assigned name for the certificate. Identifiers must begin
-    #   with a letter; must contain only ASCII letters, digits, and hyphens;
-    #   and must not end with a hyphen or contain two consecutive hyphens.
+    #   with a letter and must contain only ASCII letters, digits, and
+    #   hyphens. They can't end with a hyphen or contain two consecutive
+    #   hyphens.
     #
     # @option params [String] :certificate_pem
     #   The contents of a `.pem` file, which contains an X.509 certificate.
@@ -3591,18 +3681,20 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #
     # @option params [String] :endpoint_identifier
-    #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and must
-    #   not end with a hyphen or contain two consecutive hyphens.
+    #   The database endpoint identifier. Identifiers must begin with a letter
+    #   and must contain only ASCII letters, digits, and hyphens. They can't
+    #   end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [String] :endpoint_type
     #   The type of endpoint. Valid values are `source` and `target`.
     #
     # @option params [String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndpointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
-    #   mongodb, and sqlserver.
+    #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`, `"s3"`,
+    #   `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -3640,9 +3732,9 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see [Using Object
-    #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database Migration
-    #   Service User Guide.*
+    #   information about other available settings, see [Using Object Mapping
+    #   to Migrate Data to DynamoDB][1] in the *AWS Database Migration Service
+    #   User Guide.*
     #
     #
     #
@@ -3664,22 +3756,22 @@ module Aws::DatabaseMigrationService
     #
     #   Attributes include the following:
     #
-    #   * serviceAccessRoleArn - The IAM role that has permission to access
-    #     the Amazon S3 bucket.
+    #   * serviceAccessRoleArn - The AWS Identity and Access Management (IAM)
+    #     role that has permission to access the Amazon S3 bucket.
     #
     #   * BucketName - The name of the S3 bucket to use.
     #
     #   * compressionType - An optional parameter to use GZIP to compress the
-    #     target files. Set to NONE (the default) or do not use to leave the
-    #     files uncompressed.
+    #     target files. Either set this parameter to NONE (the default) or
+    #     don't use it to leave the files uncompressed.
     #
-    #   Shorthand syntax: ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string
+    #   Shorthand syntax for these settings is as follows:
+    #   `ServiceAccessRoleArn=string
+    #   ,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax:
-    #
-    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName": "string",
-    #   "CompressionType": "none"\|"gzip" \\}
+    #   JSON syntax for these settings is as follows: `\{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"|"gzip" \} `
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
@@ -3693,14 +3785,24 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
-    #   Settings in JSON format for the target Amazon Kinesis Data Streams
-    #   endpoint. For more information about the available settings, see
+    #   Settings in JSON format for the target endpoint for Amazon Kinesis
+    #   Data Streams. For information about other available settings, see
     #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
     #   the *AWS Database Migration User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #
+    # @option params [Types::KafkaSettings] :kafka_settings
+    #   Settings in JSON format for the target Apache Kafka endpoint. For
+    #   information about other available settings, see [Using Object Mapping
+    #   to Migrate Data to Apache Kafka][1] in the *AWS Database Migration
+    #   User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -3713,6 +3815,7 @@ module Aws::DatabaseMigrationService
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
     #
     # @option params [Types::RedshiftSettings] :redshift_settings
+    #   Provides information that defines an Amazon Redshift endpoint.
     #
     # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3785,6 +3888,7 @@ module Aws::DatabaseMigrationService
     #       cdc_inserts_only: false,
     #       timestamp_column_name: "String",
     #       parquet_timestamp_in_millisecond: false,
+    #       cdc_inserts_and_updates: false,
     #     },
     #     dms_transfer_settings: {
     #       service_access_role_arn: "String",
@@ -3806,8 +3910,17 @@ module Aws::DatabaseMigrationService
     #     },
     #     kinesis_settings: {
     #       stream_arn: "String",
-    #       message_format: "json", # accepts json
+    #       message_format: "json", # accepts json, json-unformatted
     #       service_access_role_arn: "String",
+    #       include_transaction_details: false,
+    #       include_partition_value: false,
+    #       partition_include_schema_table: false,
+    #       include_table_alter_operations: false,
+    #       include_control_details: false,
+    #     },
+    #     kafka_settings: {
+    #       broker: "String",
+    #       topic: "String",
     #     },
     #     elasticsearch_settings: {
     #       service_access_role_arn: "String", # required
@@ -3884,6 +3997,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.s3_settings.cdc_inserts_only #=> Boolean
     #   resp.endpoint.s3_settings.timestamp_column_name #=> String
     #   resp.endpoint.s3_settings.parquet_timestamp_in_millisecond #=> Boolean
+    #   resp.endpoint.s3_settings.cdc_inserts_and_updates #=> Boolean
     #   resp.endpoint.dms_transfer_settings.service_access_role_arn #=> String
     #   resp.endpoint.dms_transfer_settings.bucket_name #=> String
     #   resp.endpoint.mongo_db_settings.username #=> String
@@ -3899,8 +4013,15 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
     #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #   resp.endpoint.kinesis_settings.stream_arn #=> String
-    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json"
+    #   resp.endpoint.kinesis_settings.message_format #=> String, one of "json", "json-unformatted"
     #   resp.endpoint.kinesis_settings.service_access_role_arn #=> String
+    #   resp.endpoint.kinesis_settings.include_transaction_details #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_partition_value #=> Boolean
+    #   resp.endpoint.kinesis_settings.partition_include_schema_table #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_table_alter_operations #=> Boolean
+    #   resp.endpoint.kinesis_settings.include_control_details #=> Boolean
+    #   resp.endpoint.kafka_settings.broker #=> String
+    #   resp.endpoint.kafka_settings.topic #=> String
     #   resp.endpoint.elasticsearch_settings.service_access_role_arn #=> String
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
@@ -4050,7 +4171,7 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Boolean] :multi_az
     #   Specifies whether the replication instance is a Multi-AZ deployment.
-    #   You cannot set the `AvailabilityZone` parameter if the Multi-AZ
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
     #   parameter is set to `true`.
     #
     # @option params [String] :engine_version
@@ -4066,13 +4187,19 @@ module Aws::DatabaseMigrationService
     #   replication instance's current version.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically to
-    #   the replication instance during the maintenance window. Changing this
-    #   parameter does not result in an outage except in the following case
-    #   and the change is asynchronously applied as soon as possible. An
-    #   outage will result if this parameter is set to `true` during the
-    #   maintenance window, and a newer minor version is available, and AWS
-    #   DMS has enabled auto patching for that engine version.
+    #   A value that indicates that minor version upgrades are applied
+    #   automatically to the replication instance during the maintenance
+    #   window. Changing this parameter doesn't result in an outage, except
+    #   in the case dsecribed following. The change is asynchronously applied
+    #   as soon as possible.
+    #
+    #   An outage does result if these factors apply:
+    #
+    #   * This parameter is set to `true` during the maintenance window.
+    #
+    #   * A newer minor version is available.
+    #
+    #   * AWS DMS has enabled automatic patching for the given engine version.
     #
     # @option params [String] :replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
@@ -4984,7 +5111,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

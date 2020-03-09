@@ -70,7 +70,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupNotFoundException < ServiceError
@@ -86,7 +85,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConditionalCheckFailedException < ServiceError
@@ -102,7 +100,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ContinuousBackupsUnavailableException < ServiceError
@@ -118,7 +115,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class GlobalTableAlreadyExistsException < ServiceError
@@ -134,7 +130,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class GlobalTableNotFoundException < ServiceError
@@ -150,7 +145,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -166,7 +160,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class IndexNotFoundException < ServiceError
@@ -182,7 +175,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -198,7 +190,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRestoreTimeException < ServiceError
@@ -214,7 +205,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ItemCollectionSizeLimitExceededException < ServiceError
@@ -230,7 +220,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -246,7 +235,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class PointInTimeRecoveryUnavailableException < ServiceError
@@ -262,7 +250,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ProvisionedThroughputExceededException < ServiceError
@@ -278,7 +265,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicaAlreadyExistsException < ServiceError
@@ -294,7 +280,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicaNotFoundException < ServiceError
@@ -310,7 +295,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestLimitExceeded < ServiceError
@@ -326,7 +310,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -342,7 +325,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -358,7 +340,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class TableAlreadyExistsException < ServiceError
@@ -374,7 +355,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class TableInUseException < ServiceError
@@ -390,7 +370,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class TableNotFoundException < ServiceError
@@ -406,7 +385,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class TransactionCanceledException < ServiceError
@@ -427,7 +405,6 @@ module Aws::DynamoDB
       def cancellation_reasons
         @data[:cancellation_reasons]
       end
-
     end
 
     class TransactionConflictException < ServiceError
@@ -443,7 +420,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
     class TransactionInProgressException < ServiceError
@@ -459,7 +435,6 @@ module Aws::DynamoDB
       def message
         @message || @data[:message]
       end
-
     end
 
   end

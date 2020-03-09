@@ -221,7 +221,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleContentRequiredException < ServiceError
@@ -232,7 +231,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleDoesNotExistException < ServiceError
@@ -243,7 +241,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleNameAlreadyExistsException < ServiceError
@@ -254,7 +251,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleNameRequiredException < ServiceError
@@ -265,7 +261,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleTemplateContentRequiredException < ServiceError
@@ -276,7 +271,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleTemplateDoesNotExistException < ServiceError
@@ -287,7 +281,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleTemplateInUseException < ServiceError
@@ -298,7 +291,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleTemplateNameAlreadyExistsException < ServiceError
@@ -309,7 +301,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalRuleTemplateNameRequiredException < ServiceError
@@ -320,7 +311,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalStateRequiredException < ServiceError
@@ -331,7 +321,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorDoesNotExistException < ServiceError
@@ -342,7 +331,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BeforeCommitIdAndAfterCommitIdAreSameException < ServiceError
@@ -353,7 +341,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BlobIdDoesNotExistException < ServiceError
@@ -364,7 +351,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BlobIdRequiredException < ServiceError
@@ -375,7 +361,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BranchDoesNotExistException < ServiceError
@@ -386,7 +371,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BranchNameExistsException < ServiceError
@@ -397,7 +381,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BranchNameIsTagNameException < ServiceError
@@ -408,7 +391,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BranchNameRequiredException < ServiceError
@@ -419,7 +401,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CannotDeleteApprovalRuleFromTemplateException < ServiceError
@@ -430,7 +411,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CannotModifyApprovalRuleFromTemplateException < ServiceError
@@ -441,7 +421,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClientRequestTokenRequiredException < ServiceError
@@ -452,7 +431,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommentContentRequiredException < ServiceError
@@ -463,7 +441,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommentContentSizeLimitExceededException < ServiceError
@@ -474,7 +451,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommentDeletedException < ServiceError
@@ -485,7 +461,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommentDoesNotExistException < ServiceError
@@ -496,7 +471,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommentIdRequiredException < ServiceError
@@ -507,7 +481,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommentNotCreatedByCallerException < ServiceError
@@ -518,7 +491,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitDoesNotExistException < ServiceError
@@ -529,7 +501,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitIdDoesNotExistException < ServiceError
@@ -540,7 +511,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitIdRequiredException < ServiceError
@@ -551,7 +521,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitIdsLimitExceededException < ServiceError
@@ -562,7 +531,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitIdsListRequiredException < ServiceError
@@ -573,7 +541,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitMessageLengthExceededException < ServiceError
@@ -584,7 +551,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CommitRequiredException < ServiceError
@@ -595,7 +561,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ConcurrentReferenceUpdateException < ServiceError
@@ -606,7 +571,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DefaultBranchCannotBeDeletedException < ServiceError
@@ -617,7 +581,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DirectoryNameConflictsWithFileNameException < ServiceError
@@ -628,7 +591,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EncryptionIntegrityChecksFailedException < ServiceError
@@ -639,7 +601,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EncryptionKeyAccessDeniedException < ServiceError
@@ -650,7 +611,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EncryptionKeyDisabledException < ServiceError
@@ -661,7 +621,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EncryptionKeyNotFoundException < ServiceError
@@ -672,7 +631,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EncryptionKeyUnavailableException < ServiceError
@@ -683,7 +641,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileContentAndSourceFileSpecifiedException < ServiceError
@@ -694,7 +651,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileContentRequiredException < ServiceError
@@ -705,7 +661,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileContentSizeLimitExceededException < ServiceError
@@ -716,7 +671,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileDoesNotExistException < ServiceError
@@ -727,7 +681,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileEntryRequiredException < ServiceError
@@ -738,7 +691,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileModeRequiredException < ServiceError
@@ -749,7 +701,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileNameConflictsWithDirectoryNameException < ServiceError
@@ -760,7 +711,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FilePathConflictsWithSubmodulePathException < ServiceError
@@ -771,7 +721,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FileTooLargeException < ServiceError
@@ -782,7 +731,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FolderContentSizeLimitExceededException < ServiceError
@@ -793,7 +741,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class FolderDoesNotExistException < ServiceError
@@ -804,7 +751,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IdempotencyParameterMismatchException < ServiceError
@@ -815,7 +761,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidActorArnException < ServiceError
@@ -826,7 +771,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalRuleContentException < ServiceError
@@ -837,7 +781,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalRuleNameException < ServiceError
@@ -848,7 +791,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalRuleTemplateContentException < ServiceError
@@ -859,7 +801,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalRuleTemplateDescriptionException < ServiceError
@@ -870,7 +811,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalRuleTemplateNameException < ServiceError
@@ -881,7 +821,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalStateException < ServiceError
@@ -892,7 +831,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidAuthorArnException < ServiceError
@@ -903,7 +841,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidBlobIdException < ServiceError
@@ -914,7 +851,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidBranchNameException < ServiceError
@@ -925,7 +861,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClientRequestTokenException < ServiceError
@@ -936,7 +871,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCommentIdException < ServiceError
@@ -947,7 +881,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCommitException < ServiceError
@@ -958,7 +891,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCommitIdException < ServiceError
@@ -969,7 +901,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidConflictDetailLevelException < ServiceError
@@ -980,7 +911,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidConflictResolutionException < ServiceError
@@ -991,7 +921,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidConflictResolutionStrategyException < ServiceError
@@ -1002,7 +931,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidContinuationTokenException < ServiceError
@@ -1013,7 +941,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeletionParameterException < ServiceError
@@ -1024,7 +951,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDescriptionException < ServiceError
@@ -1035,7 +961,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDestinationCommitSpecifierException < ServiceError
@@ -1046,7 +971,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEmailException < ServiceError
@@ -1057,7 +981,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidFileLocationException < ServiceError
@@ -1068,7 +991,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidFileModeException < ServiceError
@@ -1079,7 +1001,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidFilePositionException < ServiceError
@@ -1090,7 +1011,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMaxConflictFilesException < ServiceError
@@ -1101,7 +1021,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMaxMergeHunksException < ServiceError
@@ -1112,7 +1031,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMaxResultsException < ServiceError
@@ -1123,7 +1041,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMergeOptionException < ServiceError
@@ -1134,7 +1051,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidOrderException < ServiceError
@@ -1145,7 +1061,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidOverrideStatusException < ServiceError
@@ -1156,7 +1071,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParentCommitIdException < ServiceError
@@ -1167,7 +1081,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidPathException < ServiceError
@@ -1178,7 +1091,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidPullRequestEventTypeException < ServiceError
@@ -1189,7 +1101,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidPullRequestIdException < ServiceError
@@ -1200,7 +1111,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidPullRequestStatusException < ServiceError
@@ -1211,7 +1121,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidPullRequestStatusUpdateException < ServiceError
@@ -1222,7 +1131,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidReferenceNameException < ServiceError
@@ -1233,7 +1141,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRelativeFileVersionEnumException < ServiceError
@@ -1244,7 +1151,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidReplacementContentException < ServiceError
@@ -1255,7 +1161,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidReplacementTypeException < ServiceError
@@ -1266,7 +1171,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryDescriptionException < ServiceError
@@ -1277,7 +1181,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryNameException < ServiceError
@@ -1288,7 +1191,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryTriggerBranchNameException < ServiceError
@@ -1299,7 +1201,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryTriggerCustomDataException < ServiceError
@@ -1310,7 +1211,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryTriggerDestinationArnException < ServiceError
@@ -1321,7 +1221,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryTriggerEventsException < ServiceError
@@ -1332,7 +1231,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryTriggerNameException < ServiceError
@@ -1343,7 +1241,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRepositoryTriggerRegionException < ServiceError
@@ -1354,7 +1251,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidResourceArnException < ServiceError
@@ -1365,7 +1261,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRevisionIdException < ServiceError
@@ -1376,7 +1271,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRuleContentSha256Exception < ServiceError
@@ -1387,7 +1281,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSortByException < ServiceError
@@ -1398,7 +1291,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSourceCommitSpecifierException < ServiceError
@@ -1409,7 +1301,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSystemTagUsageException < ServiceError
@@ -1420,7 +1311,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagKeysListException < ServiceError
@@ -1431,7 +1321,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagsMapException < ServiceError
@@ -1442,7 +1331,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetBranchException < ServiceError
@@ -1453,7 +1341,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetException < ServiceError
@@ -1464,7 +1351,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetsException < ServiceError
@@ -1475,7 +1361,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTitleException < ServiceError
@@ -1486,7 +1371,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ManualMergeRequiredException < ServiceError
@@ -1497,7 +1381,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumBranchesExceededException < ServiceError
@@ -1508,7 +1391,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumConflictResolutionEntriesExceededException < ServiceError
@@ -1519,7 +1401,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumFileContentToLoadExceededException < ServiceError
@@ -1530,7 +1411,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumFileEntriesExceededException < ServiceError
@@ -1541,7 +1421,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumItemsToCompareExceededException < ServiceError
@@ -1552,7 +1431,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumNumberOfApprovalsExceededException < ServiceError
@@ -1563,7 +1441,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumOpenPullRequestsExceededException < ServiceError
@@ -1574,7 +1451,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumRepositoryNamesExceededException < ServiceError
@@ -1585,7 +1461,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumRepositoryTriggersExceededException < ServiceError
@@ -1596,7 +1471,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaximumRuleTemplatesAssociatedWithRepositoryException < ServiceError
@@ -1607,7 +1481,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MergeOptionRequiredException < ServiceError
@@ -1618,7 +1491,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MultipleConflictResolutionEntriesException < ServiceError
@@ -1629,7 +1501,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MultipleRepositoriesInPullRequestException < ServiceError
@@ -1640,7 +1511,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NameLengthExceededException < ServiceError
@@ -1651,7 +1521,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoChangeException < ServiceError
@@ -1662,7 +1531,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NumberOfRuleTemplatesExceededException < ServiceError
@@ -1673,7 +1541,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NumberOfRulesExceededException < ServiceError
@@ -1684,7 +1551,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OverrideAlreadySetException < ServiceError
@@ -1695,7 +1561,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OverrideStatusRequiredException < ServiceError
@@ -1706,7 +1571,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ParentCommitDoesNotExistException < ServiceError
@@ -1717,7 +1581,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ParentCommitIdOutdatedException < ServiceError
@@ -1728,7 +1591,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ParentCommitIdRequiredException < ServiceError
@@ -1739,7 +1601,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PathDoesNotExistException < ServiceError
@@ -1750,7 +1611,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PathRequiredException < ServiceError
@@ -1761,7 +1621,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PullRequestAlreadyClosedException < ServiceError
@@ -1772,7 +1631,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PullRequestApprovalRulesNotSatisfiedException < ServiceError
@@ -1783,7 +1641,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PullRequestCannotBeApprovedByAuthorException < ServiceError
@@ -1794,7 +1651,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PullRequestDoesNotExistException < ServiceError
@@ -1805,7 +1661,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PullRequestIdRequiredException < ServiceError
@@ -1816,7 +1671,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PullRequestStatusRequiredException < ServiceError
@@ -1827,7 +1681,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PutFileEntryConflictException < ServiceError
@@ -1838,7 +1691,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReferenceDoesNotExistException < ServiceError
@@ -1849,7 +1701,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReferenceNameRequiredException < ServiceError
@@ -1860,7 +1711,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReferenceTypeNotSupportedException < ServiceError
@@ -1871,7 +1721,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReplacementContentRequiredException < ServiceError
@@ -1882,7 +1731,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReplacementTypeRequiredException < ServiceError
@@ -1893,7 +1741,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryDoesNotExistException < ServiceError
@@ -1904,7 +1751,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryLimitExceededException < ServiceError
@@ -1915,7 +1761,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryNameExistsException < ServiceError
@@ -1926,7 +1771,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryNameRequiredException < ServiceError
@@ -1937,7 +1781,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryNamesRequiredException < ServiceError
@@ -1948,7 +1791,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryNotAssociatedWithPullRequestException < ServiceError
@@ -1959,7 +1801,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryTriggerBranchNameListRequiredException < ServiceError
@@ -1970,7 +1811,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryTriggerDestinationArnRequiredException < ServiceError
@@ -1981,7 +1821,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryTriggerEventsListRequiredException < ServiceError
@@ -1992,7 +1831,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryTriggerNameRequiredException < ServiceError
@@ -2003,7 +1841,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RepositoryTriggersListRequiredException < ServiceError
@@ -2014,7 +1851,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceArnRequiredException < ServiceError
@@ -2025,7 +1861,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RestrictedSourceFileException < ServiceError
@@ -2036,7 +1871,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RevisionIdRequiredException < ServiceError
@@ -2047,7 +1881,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RevisionNotCurrentException < ServiceError
@@ -2058,7 +1891,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SameFileContentException < ServiceError
@@ -2069,7 +1901,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SamePathRequestException < ServiceError
@@ -2080,7 +1911,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SourceAndDestinationAreSameException < ServiceError
@@ -2091,7 +1921,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SourceFileOrContentRequiredException < ServiceError
@@ -2102,7 +1931,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagKeysListRequiredException < ServiceError
@@ -2113,7 +1941,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagPolicyException < ServiceError
@@ -2124,7 +1951,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagsMapRequiredException < ServiceError
@@ -2135,7 +1961,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TargetRequiredException < ServiceError
@@ -2146,7 +1971,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TargetsRequiredException < ServiceError
@@ -2157,7 +1981,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TipOfSourceReferenceIsDifferentException < ServiceError
@@ -2168,7 +1991,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TipsDivergenceExceededException < ServiceError
@@ -2179,7 +2001,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TitleRequiredException < ServiceError
@@ -2190,7 +2011,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -2201,7 +2021,6 @@ module Aws::CodeCommit
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

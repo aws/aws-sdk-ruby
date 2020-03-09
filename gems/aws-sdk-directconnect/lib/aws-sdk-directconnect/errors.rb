@@ -49,7 +49,6 @@ module Aws::DirectConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectConnectServerException < ServiceError
@@ -65,7 +64,6 @@ module Aws::DirectConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateTagKeysException < ServiceError
@@ -76,7 +74,6 @@ module Aws::DirectConnect
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -87,7 +84,6 @@ module Aws::DirectConnect
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

@@ -50,7 +50,6 @@ module Aws::MigrationHubConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class DryRunOperation < ServiceError
@@ -66,7 +65,6 @@ module Aws::MigrationHubConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -82,7 +80,6 @@ module Aws::MigrationHubConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -98,7 +95,6 @@ module Aws::MigrationHubConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -114,7 +110,6 @@ module Aws::MigrationHubConfig
       def message
         @message || @data[:message]
       end
-
     end
 
   end

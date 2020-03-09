@@ -47,7 +47,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ConflictException < ServiceError
@@ -58,7 +57,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -69,7 +67,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -80,7 +77,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -91,7 +87,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -102,7 +97,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -113,7 +107,6 @@ module Aws::Cloud9
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

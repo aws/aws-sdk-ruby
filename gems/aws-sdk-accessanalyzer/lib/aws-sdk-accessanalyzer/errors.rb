@@ -52,7 +52,6 @@ module Aws::AccessAnalyzer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -78,7 +77,6 @@ module Aws::AccessAnalyzer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -99,7 +97,6 @@ module Aws::AccessAnalyzer
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -125,7 +122,6 @@ module Aws::AccessAnalyzer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -151,7 +147,6 @@ module Aws::AccessAnalyzer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -172,7 +167,6 @@ module Aws::AccessAnalyzer
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -198,7 +192,6 @@ module Aws::AccessAnalyzer
       def reason
         @data[:reason]
       end
-
     end
 
   end

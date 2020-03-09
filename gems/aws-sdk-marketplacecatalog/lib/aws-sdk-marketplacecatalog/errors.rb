@@ -53,7 +53,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -69,7 +68,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -85,7 +83,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -101,7 +98,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotSupportedException < ServiceError
@@ -117,7 +113,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -133,7 +128,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -149,7 +143,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -165,7 +158,6 @@ module Aws::MarketplaceCatalog
       def message
         @message || @data[:message]
       end
-
     end
 
   end

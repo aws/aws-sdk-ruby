@@ -78,7 +78,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class DependencyFailureException < ServiceError
@@ -109,7 +108,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -140,7 +138,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -171,7 +168,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -202,7 +198,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class MissingParameterValueException < ServiceError
@@ -233,7 +228,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -264,7 +258,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -295,7 +288,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
   end

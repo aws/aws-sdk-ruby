@@ -49,7 +49,6 @@ module Aws::SavingsPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -65,7 +64,6 @@ module Aws::SavingsPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -81,7 +79,6 @@ module Aws::SavingsPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -97,7 +94,6 @@ module Aws::SavingsPlans
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -52,7 +52,6 @@ module Aws::DataSync
       def error_code
         @data[:error_code]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -73,7 +72,6 @@ module Aws::DataSync
       def error_code
         @data[:error_code]
       end
-
     end
 
   end

@@ -48,7 +48,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParametersException < ServiceError
@@ -59,7 +58,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidStateException < ServiceError
@@ -70,7 +68,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -81,7 +78,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationNotSupportedException < ServiceError
@@ -92,7 +88,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -103,7 +98,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -114,7 +108,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagOptionNotMigratedException < ServiceError
@@ -125,7 +118,6 @@ module Aws::ServiceCatalog
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

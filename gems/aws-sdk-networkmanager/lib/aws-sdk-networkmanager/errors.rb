@@ -52,7 +52,6 @@ module Aws::NetworkManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -78,7 +77,6 @@ module Aws::NetworkManager
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -99,7 +97,6 @@ module Aws::NetworkManager
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -125,7 +122,6 @@ module Aws::NetworkManager
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -161,7 +157,6 @@ module Aws::NetworkManager
       def service_code
         @data[:service_code]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -182,7 +177,6 @@ module Aws::NetworkManager
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -208,7 +202,6 @@ module Aws::NetworkManager
       def fields
         @data[:fields]
       end
-
     end
 
   end

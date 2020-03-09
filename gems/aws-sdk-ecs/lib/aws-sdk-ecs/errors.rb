@@ -63,7 +63,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AttributeLimitExceededException < ServiceError
@@ -74,7 +73,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BlockedException < ServiceError
@@ -85,7 +83,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClientException < ServiceError
@@ -101,7 +98,6 @@ module Aws::ECS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ClusterContainsContainerInstancesException < ServiceError
@@ -112,7 +108,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterContainsServicesException < ServiceError
@@ -123,7 +118,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterContainsTasksException < ServiceError
@@ -134,7 +128,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterNotFoundException < ServiceError
@@ -145,7 +138,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -156,7 +148,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -167,7 +158,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MissingVersionException < ServiceError
@@ -178,7 +168,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoUpdateAvailableException < ServiceError
@@ -189,7 +178,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PlatformTaskDefinitionIncompatibilityException < ServiceError
@@ -200,7 +188,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PlatformUnknownException < ServiceError
@@ -211,7 +198,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -222,7 +208,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -233,7 +218,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ServerException < ServiceError
@@ -249,7 +233,6 @@ module Aws::ECS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceNotActiveException < ServiceError
@@ -260,7 +243,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ServiceNotFoundException < ServiceError
@@ -271,7 +253,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TargetNotFoundException < ServiceError
@@ -282,7 +263,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TaskSetNotFoundException < ServiceError
@@ -293,7 +273,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedFeatureException < ServiceError
@@ -304,7 +283,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UpdateInProgressException < ServiceError
@@ -315,7 +293,6 @@ module Aws::ECS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

@@ -152,7 +152,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationNotFoundFault < ServiceError
@@ -163,7 +162,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationQuotaExceededFault < ServiceError
@@ -174,7 +172,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BackupPolicyNotFoundFault < ServiceError
@@ -185,7 +182,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CertificateNotFoundFault < ServiceError
@@ -196,7 +192,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CustomAvailabilityZoneAlreadyExistsFault < ServiceError
@@ -207,7 +202,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CustomAvailabilityZoneNotFoundFault < ServiceError
@@ -218,7 +212,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CustomAvailabilityZoneQuotaExceededFault < ServiceError
@@ -229,7 +222,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterAlreadyExistsFault < ServiceError
@@ -240,7 +232,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterBacktrackNotFoundFault < ServiceError
@@ -251,7 +242,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterEndpointAlreadyExistsFault < ServiceError
@@ -262,7 +252,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterEndpointNotFoundFault < ServiceError
@@ -273,7 +262,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterEndpointQuotaExceededFault < ServiceError
@@ -284,7 +272,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterNotFoundFault < ServiceError
@@ -295,7 +282,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterParameterGroupNotFoundFault < ServiceError
@@ -306,7 +292,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterQuotaExceededFault < ServiceError
@@ -317,7 +302,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterRoleAlreadyExistsFault < ServiceError
@@ -328,7 +312,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterRoleNotFoundFault < ServiceError
@@ -339,7 +322,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterRoleQuotaExceededFault < ServiceError
@@ -350,7 +332,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterSnapshotAlreadyExistsFault < ServiceError
@@ -361,7 +342,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterSnapshotNotFoundFault < ServiceError
@@ -372,7 +352,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceAlreadyExistsFault < ServiceError
@@ -383,7 +362,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceAutomatedBackupNotFoundFault < ServiceError
@@ -394,7 +372,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceAutomatedBackupQuotaExceededFault < ServiceError
@@ -405,7 +382,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceNotFoundFault < ServiceError
@@ -416,7 +392,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceRoleAlreadyExistsFault < ServiceError
@@ -427,7 +402,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceRoleNotFoundFault < ServiceError
@@ -438,7 +412,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceRoleQuotaExceededFault < ServiceError
@@ -449,7 +422,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBLogFileNotFoundFault < ServiceError
@@ -460,7 +432,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBParameterGroupAlreadyExistsFault < ServiceError
@@ -471,7 +442,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBParameterGroupNotFoundFault < ServiceError
@@ -482,7 +452,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBParameterGroupQuotaExceededFault < ServiceError
@@ -493,7 +462,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBProxyAlreadyExistsFault < ServiceError
@@ -504,7 +472,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBProxyNotFoundFault < ServiceError
@@ -515,7 +482,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBProxyQuotaExceededFault < ServiceError
@@ -526,7 +492,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBProxyTargetAlreadyRegisteredFault < ServiceError
@@ -537,7 +502,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBProxyTargetGroupNotFoundFault < ServiceError
@@ -548,7 +512,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBProxyTargetNotFoundFault < ServiceError
@@ -559,7 +522,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSecurityGroupAlreadyExistsFault < ServiceError
@@ -570,7 +532,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSecurityGroupNotFoundFault < ServiceError
@@ -581,7 +542,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSecurityGroupNotSupportedFault < ServiceError
@@ -592,7 +552,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSecurityGroupQuotaExceededFault < ServiceError
@@ -603,7 +562,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSnapshotAlreadyExistsFault < ServiceError
@@ -614,7 +572,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSnapshotNotFoundFault < ServiceError
@@ -625,7 +582,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupAlreadyExistsFault < ServiceError
@@ -636,7 +592,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupDoesNotCoverEnoughAZs < ServiceError
@@ -647,7 +602,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupNotAllowedFault < ServiceError
@@ -658,7 +612,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupNotFoundFault < ServiceError
@@ -669,7 +622,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupQuotaExceededFault < ServiceError
@@ -680,7 +632,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetQuotaExceededFault < ServiceError
@@ -691,7 +642,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBUpgradeDependencyFailureFault < ServiceError
@@ -702,7 +652,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DomainNotFoundFault < ServiceError
@@ -713,7 +662,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EventSubscriptionQuotaExceededFault < ServiceError
@@ -724,7 +672,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ExportTaskAlreadyExistsFault < ServiceError
@@ -735,7 +682,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ExportTaskNotFoundFault < ServiceError
@@ -746,7 +692,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class GlobalClusterAlreadyExistsFault < ServiceError
@@ -757,7 +702,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class GlobalClusterNotFoundFault < ServiceError
@@ -768,7 +712,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class GlobalClusterQuotaExceededFault < ServiceError
@@ -779,7 +722,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IamRoleMissingPermissionsFault < ServiceError
@@ -790,7 +732,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IamRoleNotFoundFault < ServiceError
@@ -801,7 +742,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstallationMediaAlreadyExistsFault < ServiceError
@@ -812,7 +752,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstallationMediaNotFoundFault < ServiceError
@@ -823,7 +762,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceQuotaExceededFault < ServiceError
@@ -834,7 +772,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientDBClusterCapacityFault < ServiceError
@@ -845,7 +782,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientDBInstanceCapacityFault < ServiceError
@@ -856,7 +792,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientStorageClusterCapacityFault < ServiceError
@@ -867,7 +802,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBClusterCapacityFault < ServiceError
@@ -878,7 +812,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBClusterEndpointStateFault < ServiceError
@@ -889,7 +822,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBClusterSnapshotStateFault < ServiceError
@@ -900,7 +832,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBClusterStateFault < ServiceError
@@ -911,7 +842,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBInstanceAutomatedBackupStateFault < ServiceError
@@ -922,7 +852,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBInstanceStateFault < ServiceError
@@ -933,7 +862,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBParameterGroupStateFault < ServiceError
@@ -944,7 +872,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBProxyStateFault < ServiceError
@@ -955,7 +882,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSecurityGroupStateFault < ServiceError
@@ -966,7 +892,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSnapshotStateFault < ServiceError
@@ -977,7 +902,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSubnetGroupFault < ServiceError
@@ -988,7 +912,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSubnetGroupStateFault < ServiceError
@@ -999,7 +922,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSubnetStateFault < ServiceError
@@ -1010,7 +932,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEventSubscriptionStateFault < ServiceError
@@ -1021,7 +942,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidExportOnlyFault < ServiceError
@@ -1032,7 +952,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidExportSourceStateFault < ServiceError
@@ -1043,7 +962,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidExportTaskStateFault < ServiceError
@@ -1054,7 +972,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidGlobalClusterStateFault < ServiceError
@@ -1065,7 +982,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidOptionGroupStateFault < ServiceError
@@ -1076,7 +992,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRestoreFault < ServiceError
@@ -1087,7 +1002,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3BucketFault < ServiceError
@@ -1098,7 +1012,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSubnet < ServiceError
@@ -1109,7 +1022,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidVPCNetworkStateFault < ServiceError
@@ -1120,7 +1032,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class KMSKeyNotAccessibleFault < ServiceError
@@ -1131,7 +1042,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OptionGroupAlreadyExistsFault < ServiceError
@@ -1142,7 +1052,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OptionGroupNotFoundFault < ServiceError
@@ -1153,7 +1062,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OptionGroupQuotaExceededFault < ServiceError
@@ -1164,7 +1072,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PointInTimeRestoreNotEnabledFault < ServiceError
@@ -1175,7 +1082,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProvisionedIopsNotAvailableInAZFault < ServiceError
@@ -1186,7 +1092,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedDBInstanceAlreadyExistsFault < ServiceError
@@ -1197,7 +1102,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedDBInstanceNotFoundFault < ServiceError
@@ -1208,7 +1112,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedDBInstanceQuotaExceededFault < ServiceError
@@ -1219,7 +1122,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedDBInstancesOfferingNotFoundFault < ServiceError
@@ -1230,7 +1132,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundFault < ServiceError
@@ -1241,7 +1142,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSInvalidTopicFault < ServiceError
@@ -1252,7 +1152,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSNoAuthorizationFault < ServiceError
@@ -1263,7 +1162,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSTopicArnNotFoundFault < ServiceError
@@ -1274,7 +1172,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SharedSnapshotQuotaExceededFault < ServiceError
@@ -1285,7 +1182,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotQuotaExceededFault < ServiceError
@@ -1296,7 +1192,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SourceNotFoundFault < ServiceError
@@ -1307,7 +1202,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StorageQuotaExceededFault < ServiceError
@@ -1318,7 +1212,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StorageTypeNotSupportedFault < ServiceError
@@ -1329,7 +1222,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetAlreadyInUse < ServiceError
@@ -1340,7 +1232,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionAlreadyExistFault < ServiceError
@@ -1351,7 +1242,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionCategoryNotFoundFault < ServiceError
@@ -1362,7 +1252,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionNotFoundFault < ServiceError
@@ -1373,7 +1262,6 @@ module Aws::RDS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

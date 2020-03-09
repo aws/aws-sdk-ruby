@@ -45,6 +45,6 @@ require_relative 'aws-sdk-codestarconnections/customizations'
 # @service
 module Aws::CodeStarconnections
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

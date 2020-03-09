@@ -56,7 +56,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatibleImageException < ServiceError
@@ -72,7 +71,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAccountStatusException < ServiceError
@@ -88,7 +86,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -104,7 +101,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRoleException < ServiceError
@@ -120,7 +116,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -136,7 +131,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -152,7 +146,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -168,7 +161,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -184,7 +176,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotAvailableException < ServiceError
@@ -200,7 +191,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -216,7 +206,6 @@ module Aws::AppStream
       def message
         @message || @data[:message]
       end
-
     end
 
   end

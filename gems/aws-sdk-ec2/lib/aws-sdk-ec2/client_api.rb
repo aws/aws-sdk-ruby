@@ -3001,8 +3001,10 @@ module Aws::EC2
     CreateLocalGatewayRouteTableVpcAssociationResult.struct_class = Types::CreateLocalGatewayRouteTableVpcAssociationResult
 
     CreateNatGatewayRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, required: true, location_name: "AllocationId"))
-    CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateNatGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateNatGatewayRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
+    CreateNatGatewayRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateNatGatewayRequest.struct_class = Types::CreateNatGatewayRequest
 
     CreateNatGatewayResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -3516,6 +3518,7 @@ module Aws::EC2
     DeleteLocalGatewayRouteTableVpcAssociationResult.add_member(:local_gateway_route_table_vpc_association, Shapes::ShapeRef.new(shape: LocalGatewayRouteTableVpcAssociation, location_name: "localGatewayRouteTableVpcAssociation"))
     DeleteLocalGatewayRouteTableVpcAssociationResult.struct_class = Types::DeleteLocalGatewayRouteTableVpcAssociationResult
 
+    DeleteNatGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteNatGatewayRequest.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: NatGatewayId, required: true, location_name: "NatGatewayId"))
     DeleteNatGatewayRequest.struct_class = Types::DeleteNatGatewayRequest
 
@@ -4348,6 +4351,7 @@ module Aws::EC2
     DescribeMovingAddressesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeMovingAddressesResult.struct_class = Types::DescribeMovingAddressesResult
 
+    DescribeNatGatewaysRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeNatGatewaysRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeNatGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeNatGatewaysMaxResults, location_name: "MaxResults"))
     DescribeNatGatewaysRequest.add_member(:nat_gateway_ids, Shapes::ShapeRef.new(shape: NatGatewayIdStringList, location_name: "NatGatewayId"))

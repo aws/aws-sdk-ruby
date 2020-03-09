@@ -67,7 +67,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ConcurrentUpdatingException < ServiceError
@@ -88,7 +87,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -109,7 +107,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DomainNotWhitelistedException < ServiceError
@@ -130,7 +127,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class IdentityTypeNotSupportedException < ServiceError
@@ -151,7 +147,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -172,7 +167,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -193,7 +187,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -214,7 +207,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -240,7 +232,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class PreconditionNotMetException < ServiceError
@@ -261,7 +252,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class QuickSightUserNotFoundException < ServiceError
@@ -282,7 +272,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ResourceExistsException < ServiceError
@@ -308,7 +297,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -334,7 +322,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -360,7 +347,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class SessionLifetimeInMinutesInvalidException < ServiceError
@@ -381,7 +367,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -402,7 +387,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class UnsupportedUserEditionException < ServiceError
@@ -423,7 +407,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
   end

@@ -43,7 +43,6 @@ module Aws::CloudHSM
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CloudHsmServiceException < ServiceError
@@ -64,7 +63,6 @@ module Aws::CloudHSM
       def retryable
         @data[:retryable]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -75,7 +73,6 @@ module Aws::CloudHSM
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

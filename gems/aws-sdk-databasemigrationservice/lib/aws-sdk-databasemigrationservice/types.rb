@@ -139,8 +139,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # The name of the Availability Zone for use during database migration.
+    #
     # @!attribute [rw] name
-    #   The name of the availability zone.
+    #   The name of the Availability Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AvailabilityZone AWS API Documentation
@@ -155,8 +157,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] certificate_identifier
     #   A customer-assigned name for the certificate. Identifiers must begin
-    #   with a letter; must contain only ASCII letters, digits, and hyphens;
-    #   and must not end with a hyphen or contain two consecutive hyphens.
+    #   with a letter and must contain only ASCII letters, digits, and
+    #   hyphens. They can't end with a hyphen or contain two consecutive
+    #   hyphens.
     #   @return [String]
     #
     # @!attribute [rw] certificate_creation_date
@@ -212,13 +215,16 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Status of the connection between an endpoint and a replication
+    # instance, including Amazon Resource Names (ARNs) and the last error
+    # message issued.
+    #
     # @!attribute [rw] replication_instance_arn
-    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   The ARN of the replication instance.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
-    #   The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   endpoint.
+    #   The ARN string that uniquely identifies the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -230,9 +236,9 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] endpoint_identifier
-    #   The identifier of the endpoint. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and
-    #   must not end with a hyphen or contain two consecutive hyphens.
+    #   The identifier of the endpoint. Identifiers must begin with a letter
+    #   and must contain only ASCII letters, digits, and hyphens. They
+    #   can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] replication_instance_identifier
@@ -300,6 +306,7 @@ module Aws::DatabaseMigrationService
     #           cdc_inserts_only: false,
     #           timestamp_column_name: "String",
     #           parquet_timestamp_in_millisecond: false,
+    #           cdc_inserts_and_updates: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -321,8 +328,17 @@ module Aws::DatabaseMigrationService
     #         },
     #         kinesis_settings: {
     #           stream_arn: "String",
-    #           message_format: "json", # accepts json
+    #           message_format: "json", # accepts json, json-unformatted
     #           service_access_role_arn: "String",
+    #           include_transaction_details: false,
+    #           include_partition_value: false,
+    #           partition_include_schema_table: false,
+    #           include_table_alter_operations: false,
+    #           include_control_details: false,
+    #         },
+    #         kafka_settings: {
+    #           broker: "String",
+    #           topic: "String",
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -361,8 +377,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and
-    #   must not end with a hyphen or contain two consecutive hyphens.
+    #   letter and must contain only ASCII letters, digits, and hyphens.
+    #   They can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -371,9 +387,11 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   `EndpointType` value, include `mysql`, `oracle`, `postgres`,
-    #   `mariadb`, `aurora`, `aurora-postgresql`, `redshift`, `s3`, `db2`,
-    #   `azuredb`, `sybase`, `dynamodb`, `mongodb`, and `sqlserver`.
+    #   `EndpointType` value, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
+    #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -446,7 +464,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see [Using Object
+    #   information about other available settings, see [Using Object
     #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database
     #   Migration Service User Guide.*
     #
@@ -492,7 +510,7 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
     #   information about the available settings, see the configuration
-    #   properties section in [ Using MongoDB as a Target for AWS Database
+    #   properties section in [Using MongoDB as a Target for AWS Database
     #   Migration Service][1] in the *AWS Database Migration Service User
     #   Guide.*
     #
@@ -502,8 +520,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::MongoDbSettings]
     #
     # @!attribute [rw] kinesis_settings
-    #   Settings in JSON format for the target Amazon Kinesis Data Streams
-    #   endpoint. For more information about the available settings, see
+    #   Settings in JSON format for the target endpoint for Amazon Kinesis
+    #   Data Streams. For information about other available settings, see
     #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1]
     #   in the *AWS Database Migration User Guide.*
     #
@@ -511,6 +529,17 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
     #   @return [Types::KinesisSettings]
+    #
+    # @!attribute [rw] kafka_settings
+    #   Settings in JSON format for the target Apache Kafka endpoint. For
+    #   information about other available settings, see [Using Object
+    #   Mapping to Migrate Data to Apache Kafka][1] in the *AWS Database
+    #   Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
+    #   @return [Types::KafkaSettings]
     #
     # @!attribute [rw] elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -524,6 +553,7 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ElasticsearchSettings]
     #
     # @!attribute [rw] redshift_settings
+    #   Provides information that defines an Amazon Redshift endpoint.
     #   @return [Types::RedshiftSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
@@ -549,6 +579,7 @@ module Aws::DatabaseMigrationService
       :dms_transfer_settings,
       :mongo_db_settings,
       :kinesis_settings,
+      :kafka_settings,
       :elasticsearch_settings,
       :redshift_settings)
       include Aws::Structure
@@ -598,7 +629,7 @@ module Aws::DatabaseMigrationService
     #   The type of AWS DMS resource that generates the events. For example,
     #   if you want to be notified of events generated by a replication
     #   instance, you set this parameter to `replication-instance`. If this
-    #   value is not specified, all events are returned.
+    #   value isn't specified, all events are returned.
     #
     #   Valid values: `replication-instance` \| `replication-task`
     #   @return [String]
@@ -694,7 +725,7 @@ module Aws::DatabaseMigrationService
     #
     #   * First character must be a letter.
     #
-    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `myrepinstance`
     #   @return [String]
@@ -720,7 +751,7 @@ module Aws::DatabaseMigrationService
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
-    #   The AWS Availability Zone where the replication instance will be
+    #   The Availability Zone where the replication instance will be
     #   created. The default value is a random, system-chosen Availability
     #   Zone in the endpoint's AWS Region, for example: `us-east-1d`
     #   @return [String]
@@ -745,7 +776,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] multi_az
     #   Specifies whether the replication instance is a Multi-AZ deployment.
-    #   You cannot set the `AvailabilityZone` parameter if the Multi-AZ
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
     #   parameter is set to `true`.
     #   @return [Boolean]
     #
@@ -754,7 +785,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates whether minor engine upgrades will be applied
+    #   A value that indicates whether minor engine upgrades are applied
     #   automatically to the replication instance during the maintenance
     #   window. This parameter defaults to `true`.
     #
@@ -1301,7 +1332,7 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
-    #   the marker, up to the vlue specified by `MaxRecords`.
+    #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificatesMessage AWS API Documentation
@@ -2083,9 +2114,9 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] replication_task_arn
-    #   \- The Amazon Resource Name (ARN) string that uniquely identifies the
-    #   task. When this input parameter is specified the API will return
-    #   only one result and ignore the values of the max-records and marker
+    #   The Amazon Resource Name (ARN) string that uniquely identifies the
+    #   task. When this input parameter is specified, the API returns only
+    #   one result and ignore the values of the `MaxRecords` and `Marker`
     #   parameters.
     #   @return [String]
     #
@@ -2374,6 +2405,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides the Amazon Resource Name (ARN) of the AWS Identity and Access
+    # Management (IAM) role used to define an Amazon DynamoDB target
+    # endpoint.
+    #
     # @note When making an API call, you may pass DynamoDbSettings
     #   data as a hash:
     #
@@ -2392,6 +2427,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines an Elasticsearch endpoint.
+    #
     # @note When making an API call, you may pass ElasticsearchSettings
     #   data as a hash:
     #
@@ -2417,8 +2454,8 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] error_retry_duration
-    #   The maximum number of seconds that DMS retries failed API requests
-    #   to the Elasticsearch cluster.
+    #   The maximum number of seconds for which DMS retries failed API
+    #   requests to the Elasticsearch cluster.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ElasticsearchSettings AWS API Documentation
@@ -2431,10 +2468,21 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes an endpoint of a database instance in response to operations
+    # such as the following:
+    #
+    # * `CreateEndpoint`
+    #
+    # * `DescribeEndpoint`
+    #
+    # * `DescribeEndpointTypes`
+    #
+    # * `ModifyEndpoint`
+    #
     # @!attribute [rw] endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and
-    #   must not end with a hyphen or contain two consecutive hyphens.
+    #   letter and must contain only ASCII letters, digits, and hyphens.
+    #   They can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -2443,9 +2491,11 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
-    #   EndpointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
-    #   mongodb, and sqlserver.
+    #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
+    #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #   @return [String]
     #
     # @!attribute [rw] engine_display_name
@@ -2558,9 +2608,14 @@ module Aws::DatabaseMigrationService
     #   @return [Types::MongoDbSettings]
     #
     # @!attribute [rw] kinesis_settings
-    #   The settings for the Amazon Kinesis source endpoint. For more
+    #   The settings for the Amazon Kinesis target endpoint. For more
     #   information, see the `KinesisSettings` structure.
     #   @return [Types::KinesisSettings]
+    #
+    # @!attribute [rw] kafka_settings
+    #   The settings for the Apache Kafka target endpoint. For more
+    #   information, see the `KafkaSettings` structure.
+    #   @return [Types::KafkaSettings]
     #
     # @!attribute [rw] elasticsearch_settings
     #   The settings for the Elasticsearch source endpoint. For more
@@ -2596,11 +2651,17 @@ module Aws::DatabaseMigrationService
       :dms_transfer_settings,
       :mongo_db_settings,
       :kinesis_settings,
+      :kafka_settings,
       :elasticsearch_settings,
       :redshift_settings)
       include Aws::Structure
     end
 
+    # Describes an identifiable significant activity that affects a
+    # replication instance or task. This object can provide the message, the
+    # available event categories, the date and source of the event, and the
+    # AWS DMS resource type.
+    #
     # @!attribute [rw] source_identifier
     #   The identifier of an event source.
     #   @return [String]
@@ -2634,6 +2695,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Lists categories of events subscribed to, and generated by, the
+    # applicable AWS DMS resource type.
+    #
     # @!attribute [rw] source_type
     #   The type of AWS DMS resource that generates events.
     #
@@ -2653,6 +2717,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes an event notification subscription created by the
+    # `CreateEventSubscription` operation.
+    #
     # @!attribute [rw] customer_aws_id
     #   The AWS customer account associated with the AWS DMS event
     #   notification subscription.
@@ -2718,6 +2785,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Identifies the name and value of a source filter object used to limit
+    # the number and type of records transferred from your source to your
+    # target.
+    #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
     #
@@ -2759,8 +2830,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] certificate_identifier
     #   A customer-assigned name for the certificate. Identifiers must begin
-    #   with a letter; must contain only ASCII letters, digits, and hyphens;
-    #   and must not end with a hyphen or contain two consecutive hyphens.
+    #   with a letter and must contain only ASCII letters, digits, and
+    #   hyphens. They can't end with a hyphen or contain two consecutive
+    #   hyphens.
     #   @return [String]
     #
     # @!attribute [rw] certificate_pem
@@ -2920,13 +2992,57 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that describes an Apache Kafka endpoint. This
+    # information includes the output format of records applied to the
+    # endpoint and details of transaction and control table data
+    # information.
+    #
+    # @note When making an API call, you may pass KafkaSettings
+    #   data as a hash:
+    #
+    #       {
+    #         broker: "String",
+    #         topic: "String",
+    #       }
+    #
+    # @!attribute [rw] broker
+    #   The broker location and port of the Kafka broker that hosts your
+    #   Kafka instance. Specify the broker in the form `
+    #   broker-hostname-or-ip:port `. For example,
+    #   `"ec2-12-345-678-901.compute-1.amazonaws.com:2345"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic
+    #   The topic to which you migrate the data. If you don't specify a
+    #   topic, AWS DMS specifies `"kafka-default-topic"` as the migration
+    #   topic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KafkaSettings AWS API Documentation
+    #
+    class KafkaSettings < Struct.new(
+      :broker,
+      :topic)
+      include Aws::Structure
+    end
+
+    # Provides information that describes an Amazon Kinesis Data Stream
+    # endpoint. This information includes the output format of records
+    # applied to the endpoint and details of transaction and control table
+    # data information.
+    #
     # @note When making an API call, you may pass KinesisSettings
     #   data as a hash:
     #
     #       {
     #         stream_arn: "String",
-    #         message_format: "json", # accepts json
+    #         message_format: "json", # accepts json, json-unformatted
     #         service_access_role_arn: "String",
+    #         include_transaction_details: false,
+    #         include_partition_value: false,
+    #         partition_include_schema_table: false,
+    #         include_table_alter_operations: false,
+    #         include_control_details: false,
     #       }
     #
     # @!attribute [rw] stream_arn
@@ -2936,20 +3052,63 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] message_format
     #   The output format for the records created on the endpoint. The
-    #   message format is `JSON`.
+    #   message format is `JSON` (default) or `JSON_UNFORMATTED` (a single
+    #   line with no tab).
     #   @return [String]
     #
     # @!attribute [rw] service_access_role_arn
-    #   The Amazon Resource Name (ARN) for the IAM role that DMS uses to
-    #   write to the Amazon Kinesis data stream.
+    #   The Amazon Resource Name (ARN) for the AWS Identity and Access
+    #   Management (IAM) role that AWS DMS uses to write to the Kinesis data
+    #   stream.
     #   @return [String]
+    #
+    # @!attribute [rw] include_transaction_details
+    #   Provides detailed transaction information from the source database.
+    #   This information includes a commit timestamp, a log position, and
+    #   values for `transaction_id`, previous `transaction_id`, and
+    #   `transaction_record_id` (the record offset within a transaction).
+    #   The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_partition_value
+    #   Shows the partition value within the Kinesis message output, unless
+    #   the partition type is `schema-table-type`. The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] partition_include_schema_table
+    #   Prefixes schema and table names to partition values, when the
+    #   partition type is `primary-key-type`. Doing this increases data
+    #   distribution among Kinesis shards. For example, suppose that a
+    #   SysBench schema has thousands of tables and each table has only
+    #   limited range for a primary key. In this case, the same primary key
+    #   is sent from thousands of tables to the same shard, which causes
+    #   throttling. The default is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_table_alter_operations
+    #   Includes any data definition language (DDL) operations that change
+    #   the table in the control data, such as `rename-table`, `drop-table`,
+    #   `add-column`, `drop-column`, and `rename-column`. The default is
+    #   `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_control_details
+    #   Shows detailed control information for table definition, column
+    #   definition, and table and column changes in the Kinesis message
+    #   output. The default is `False`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/KinesisSettings AWS API Documentation
     #
     class KinesisSettings < Struct.new(
       :stream_arn,
       :message_format,
-      :service_access_role_arn)
+      :service_access_role_arn,
+      :include_transaction_details,
+      :include_partition_value,
+      :partition_include_schema_table,
+      :include_table_alter_operations,
+      :include_control_details)
       include Aws::Structure
     end
 
@@ -3025,6 +3184,7 @@ module Aws::DatabaseMigrationService
     #           cdc_inserts_only: false,
     #           timestamp_column_name: "String",
     #           parquet_timestamp_in_millisecond: false,
+    #           cdc_inserts_and_updates: false,
     #         },
     #         dms_transfer_settings: {
     #           service_access_role_arn: "String",
@@ -3046,8 +3206,17 @@ module Aws::DatabaseMigrationService
     #         },
     #         kinesis_settings: {
     #           stream_arn: "String",
-    #           message_format: "json", # accepts json
+    #           message_format: "json", # accepts json, json-unformatted
     #           service_access_role_arn: "String",
+    #           include_transaction_details: false,
+    #           include_partition_value: false,
+    #           partition_include_schema_table: false,
+    #           include_table_alter_operations: false,
+    #           include_control_details: false,
+    #         },
+    #         kafka_settings: {
+    #           broker: "String",
+    #           topic: "String",
     #         },
     #         elasticsearch_settings: {
     #           service_access_role_arn: "String", # required
@@ -3091,8 +3260,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a
-    #   letter; must contain only ASCII letters, digits, and hyphens; and
-    #   must not end with a hyphen or contain two consecutive hyphens.
+    #   letter and must contain only ASCII letters, digits, and hyphens.
+    #   They can't end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
@@ -3101,9 +3270,11 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndpointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
-    #   mongodb, and sqlserver.
+    #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
+    #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -3152,7 +3323,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
-    #   more information about the available settings, see [Using Object
+    #   information about other available settings, see [Using Object
     #   Mapping to Migrate Data to DynamoDB][1] in the *AWS Database
     #   Migration Service User Guide.*
     #
@@ -3178,22 +3349,22 @@ module Aws::DatabaseMigrationService
     #
     #   Attributes include the following:
     #
-    #   * serviceAccessRoleArn - The IAM role that has permission to access
-    #     the Amazon S3 bucket.
+    #   * serviceAccessRoleArn - The AWS Identity and Access Management
+    #     (IAM) role that has permission to access the Amazon S3 bucket.
     #
     #   * BucketName - The name of the S3 bucket to use.
     #
     #   * compressionType - An optional parameter to use GZIP to compress
-    #     the target files. Set to NONE (the default) or do not use to leave
-    #     the files uncompressed.
+    #     the target files. Either set this parameter to NONE (the default)
+    #     or don't use it to leave the files uncompressed.
     #
-    #   Shorthand syntax: ServiceAccessRoleArn=string
-    #   ,BucketName=string,CompressionType=string
+    #   Shorthand syntax for these settings is as follows:
+    #   `ServiceAccessRoleArn=string
+    #   ,BucketName=string,CompressionType=string`
     #
-    #   JSON syntax:
-    #
-    #   \\\{ "ServiceAccessRoleArn": "string", "BucketName":
-    #   "string", "CompressionType": "none"\|"gzip" \\}
+    #   JSON syntax for these settings is as follows: `\{
+    #   "ServiceAccessRoleArn": "string", "BucketName": "string",
+    #   "CompressionType": "none"|"gzip" \} `
     #   @return [Types::DmsTransferSettings]
     #
     # @!attribute [rw] mongo_db_settings
@@ -3209,8 +3380,8 @@ module Aws::DatabaseMigrationService
     #   @return [Types::MongoDbSettings]
     #
     # @!attribute [rw] kinesis_settings
-    #   Settings in JSON format for the target Amazon Kinesis Data Streams
-    #   endpoint. For more information about the available settings, see
+    #   Settings in JSON format for the target endpoint for Amazon Kinesis
+    #   Data Streams. For information about other available settings, see
     #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1]
     #   in the *AWS Database Migration User Guide.*
     #
@@ -3218,6 +3389,17 @@ module Aws::DatabaseMigrationService
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
     #   @return [Types::KinesisSettings]
+    #
+    # @!attribute [rw] kafka_settings
+    #   Settings in JSON format for the target Apache Kafka endpoint. For
+    #   information about other available settings, see [Using Object
+    #   Mapping to Migrate Data to Apache Kafka][1] in the *AWS Database
+    #   Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
+    #   @return [Types::KafkaSettings]
     #
     # @!attribute [rw] elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -3231,6 +3413,7 @@ module Aws::DatabaseMigrationService
     #   @return [Types::ElasticsearchSettings]
     #
     # @!attribute [rw] redshift_settings
+    #   Provides information that defines an Amazon Redshift endpoint.
     #   @return [Types::RedshiftSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
@@ -3255,6 +3438,7 @@ module Aws::DatabaseMigrationService
       :dms_transfer_settings,
       :mongo_db_settings,
       :kinesis_settings,
+      :kafka_settings,
       :elasticsearch_settings,
       :redshift_settings)
       include Aws::Structure
@@ -3397,7 +3581,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] multi_az
     #   Specifies whether the replication instance is a Multi-AZ deployment.
-    #   You cannot set the `AvailabilityZone` parameter if the Multi-AZ
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
     #   parameter is set to `true`.
     #   @return [Boolean]
     #
@@ -3416,13 +3600,20 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
-    #   Indicates that minor version upgrades will be applied automatically
-    #   to the replication instance during the maintenance window. Changing
-    #   this parameter does not result in an outage except in the following
-    #   case and the change is asynchronously applied as soon as possible.
-    #   An outage will result if this parameter is set to `true` during the
-    #   maintenance window, and a newer minor version is available, and AWS
-    #   DMS has enabled auto patching for that engine version.
+    #   A value that indicates that minor version upgrades are applied
+    #   automatically to the replication instance during the maintenance
+    #   window. Changing this parameter doesn't result in an outage, except
+    #   in the case dsecribed following. The change is asynchronously
+    #   applied as soon as possible.
+    #
+    #   An outage does result if these factors apply:
+    #
+    #   * This parameter is set to `true` during the maintenance window.
+    #
+    #   * A newer minor version is available.
+    #
+    #   * AWS DMS has enabled automatic patching for the given engine
+    #     version.
     #   @return [Boolean]
     #
     # @!attribute [rw] replication_instance_identifier
@@ -3620,6 +3811,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines a MongoDB endpoint.
+    #
     # @note When making an API call, you may pass MongoDbSettings
     #   data as a hash:
     #
@@ -3676,7 +3869,7 @@ module Aws::DatabaseMigrationService
     #   Valid values: DEFAULT, MONGODB\_CR, SCRAM\_SHA\_1
     #
     #   DEFAULT – For MongoDB version 2.x, use MONGODB\_CR. For MongoDB
-    #   version 3.x, use SCRAM\_SHA\_1. This setting is not used when
+    #   version 3.x, use SCRAM\_SHA\_1. This setting isn't used when
     #   authType=No.
     #   @return [String]
     #
@@ -3705,7 +3898,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] auth_source
-    #   The MongoDB database name. This setting is not used when
+    #   The MongoDB database name. This setting isn't used when
     #   `authType=NO`.
     #
     #   The default is admin.
@@ -3738,6 +3931,11 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # In response to the `DescribeOrderableReplicationInstances` operation,
+    # this object describes an available replication instance. This
+    # description includes the replication instance's type, engine version,
+    # and allocated storage.
+    #
     # @!attribute [rw] engine_version
     #   The version of the replication engine.
     #   @return [String]
@@ -3804,37 +4002,41 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes a maintenance action pending for an AWS DMS resource,
+    # including when and how it will be applied. This data type is a
+    # response element to the `DescribePendingMaintenanceActions` operation.
+    #
     # @!attribute [rw] action
     #   The type of pending maintenance action that is available for the
     #   resource.
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date
-    #   The date of the maintenance window when the action will be applied.
-    #   The maintenance action will be applied to the resource during its
-    #   first maintenance window after this date. If this date is specified,
-    #   any `next-maintenance` opt-in requests are ignored.
+    #   The date of the maintenance window when the action is to be applied.
+    #   The maintenance action is applied to the resource during its first
+    #   maintenance window after this date. If this date is specified, any
+    #   `next-maintenance` opt-in requests are ignored.
     #   @return [Time]
     #
     # @!attribute [rw] forced_apply_date
     #   The date when the maintenance action will be automatically applied.
-    #   The maintenance action will be applied to the resource on this date
+    #   The maintenance action is applied to the resource on this date
     #   regardless of the maintenance window for the resource. If this date
     #   is specified, any `immediate` opt-in requests are ignored.
     #   @return [Time]
     #
     # @!attribute [rw] opt_in_status
-    #   Indicates the type of opt-in request that has been received for the
-    #   resource.
+    #   The type of opt-in request that has been received for the resource.
     #   @return [String]
     #
     # @!attribute [rw] current_apply_date
     #   The effective date when the pending maintenance action will be
     #   applied to the resource. This date takes into account opt-in
-    #   requests received from the `ApplyPendingMaintenanceAction` API, the
-    #   `AutoAppliedAfterDate`, and the `ForcedApplyDate`. This value is
-    #   blank if an opt-in request has not been received and nothing has
-    #   been specified as `AutoAppliedAfterDate` or `ForcedApplyDate`.
+    #   requests received from the `ApplyPendingMaintenanceAction` API
+    #   operation, and also the `AutoAppliedAfterDate` and `ForcedApplyDate`
+    #   parameter values. This value is blank if an opt-in request has not
+    #   been received and nothing has been specified for
+    #   `AutoAppliedAfterDate` or `ForcedApplyDate`.
     #   @return [Time]
     #
     # @!attribute [rw] description
@@ -3890,6 +4092,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that defines an Amazon Redshift endpoint.
+    #
     # @note When making an API call, you may pass RedshiftSettings
     #   data as a hash:
     #
@@ -4145,6 +4349,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that describes status of a schema at an endpoint
+    # specified by the `DescribeRefreshSchemaStatus` operation.
+    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -4261,6 +4468,8 @@ module Aws::DatabaseMigrationService
     #
     class RemoveTagsFromResourceResponse < Aws::EmptyStructure; end
 
+    # Provides information that defines a replication instance.
+    #
     # @!attribute [rw] replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
@@ -4319,7 +4528,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] multi_az
     #   Specifies whether the replication instance is a Multi-AZ deployment.
-    #   You cannot set the `AvailabilityZone` parameter if the Multi-AZ
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
     #   parameter is set to `true`.
     #   @return [Boolean]
     #
@@ -4372,7 +4581,7 @@ module Aws::DatabaseMigrationService
     #   @return [Boolean]
     #
     # @!attribute [rw] secondary_availability_zone
-    #   The availability zone of the standby replication instance in a
+    #   The Availability Zone of the standby replication instance in a
     #   Multi-AZ deployment.
     #   @return [String]
     #
@@ -4437,6 +4646,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information about the values of pending modifications to a
+    # replication instance. This data type is an object of the
+    # `ReplicationInstance` user-defined data type.
+    #
     # @!attribute [rw] replication_instance_class
     #   The compute and memory capacity of the replication instance.
     #
@@ -4452,7 +4665,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] multi_az
     #   Specifies whether the replication instance is a Multi-AZ deployment.
-    #   You cannot set the `AvailabilityZone` parameter if the Multi-AZ
+    #   You can't set the `AvailabilityZone` parameter if the Multi-AZ
     #   parameter is set to `true`.
     #   @return [Boolean]
     #
@@ -4470,6 +4683,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes a subnet group in response to a request by the
+    # `DescribeReplicationSubnetGroup` operation.
+    #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The identifier of the replication instance subnet group.
     #   @return [String]
@@ -4514,6 +4730,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information that describes a replication task created by the
+    # `CreateReplicationTask` operation.
+    #
     # @!attribute [rw] replication_task_identifier
     #   The user-assigned replication task identifier or name.
     #
@@ -4683,6 +4902,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # In response to a request by the `DescribeReplicationTasks` operation,
+    # this object provides a collection of statistics about a replication
+    # task.
+    #
     # @!attribute [rw] full_load_progress_percent
     #   The percent complete for the full load migration task.
     #   @return [Integer]
@@ -4727,7 +4950,7 @@ module Aws::DatabaseMigrationService
     #   @return [Time]
     #
     # @!attribute [rw] full_load_start_date
-    #   The date the the replication task full load was started.
+    #   The date the replication task full load was started.
     #   @return [Time]
     #
     # @!attribute [rw] full_load_finish_date
@@ -4779,6 +5002,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Identifies an AWS DMS resource and any pending actions for it.
+    #
     # @!attribute [rw] resource_identifier
     #   The Amazon Resource Name (ARN) of the DMS resource that the pending
     #   maintenance action applies to. For information about creating an
@@ -4840,6 +5065,7 @@ module Aws::DatabaseMigrationService
     #         cdc_inserts_only: false,
     #         timestamp_column_name: "String",
     #         parquet_timestamp_in_millisecond: false,
+    #         cdc_inserts_and_updates: false,
     #       }
     #
     # @!attribute [rw] service_access_role_arn
@@ -4863,7 +5089,7 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] bucket_folder
     #   An optional parameter to set a folder name in the S3 bucket. If
     #   provided, tables are created in the path `
-    #   bucketFolder/schema_name/table_name/`. If this parameter is not
+    #   bucketFolder/schema_name/table_name/`. If this parameter isn't
     #   specified, then the path used is ` schema_name/table_name/`.
     #   @return [String]
     #
@@ -4873,9 +5099,9 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] compression_type
     #   An optional parameter to use GZIP to compress the target files. Set
-    #   to GZIP to compress the target files. Set to NONE (the default) or
-    #   do not use to leave the files uncompressed. Applies to both .csv and
-    #   .parquet file formats.
+    #   to GZIP to compress the target files. Either set this parameter to
+    #   NONE (the default) or don't use it to leave the files uncompressed.
+    #   This parameter applies to both .csv and .parquet file formats.
     #   @return [String]
     #
     # @!attribute [rw] encryption_mode
@@ -5005,11 +5231,11 @@ module Aws::DatabaseMigrationService
     #   file. This allows the format of your target records from a full load
     #   to be consistent with the target records from a CDC load.
     #
-    #   <note markdown="1"> This setting works together with the `CdcInsertsOnly` parameter for
-    #   output to .csv files only. For more information about how these
-    #   settings work together, see [Indicating Source DB Operations in
-    #   Migrated S3 Data][1] in the *AWS Database Migration Service User
-    #   Guide.*.
+    #   <note markdown="1"> This setting works together with the `CdcInsertsOnly` and the
+    #   `CdcInsertsAndUpdates` parameters for output to .csv files only. For
+    #   more information about how these settings work together, see
+    #   [Indicating Source DB Operations in Migrated S3 Data][1] in the *AWS
+    #   Database Migration Service User Guide.*.
     #
     #    </note>
     #
@@ -5039,8 +5265,14 @@ module Aws::DatabaseMigrationService
     #   Operations in Migrated S3 Data][1] in the *AWS Database Migration
     #   Service User Guide.*.
     #
-    #   <note markdown="1"> AWS DMS supports this interaction between the `CdcInsertsOnly` and
-    #   `IncludeOpForFullLoad` parameters in versions 3.1.4 and later.
+    #   <note markdown="1"> AWS DMS supports the interaction described preceding between the
+    #   `CdcInsertsOnly` and `IncludeOpForFullLoad` parameters in versions
+    #   3.1.4 and later.
+    #
+    #    `CdcInsertsOnly` and `CdcInsertsAndUpdates` can't both be set to
+    #   `true` for the same endpoint. Set either `CdcInsertsOnly` or
+    #   `CdcInsertsAndUpdates` to `true` for the same endpoint, but not
+    #   both.
     #
     #    </note>
     #
@@ -5110,6 +5342,39 @@ module Aws::DatabaseMigrationService
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] cdc_inserts_and_updates
+    #   A value that enables a change data capture (CDC) load to write
+    #   INSERT and UPDATE operations to .csv or .parquet (columnar storage)
+    #   output files. The default setting is `false`, but when
+    #   `CdcInsertsAndUpdates` is set to `true`or `y`, INSERTs and UPDATEs
+    #   from the source database are migrated to the .csv or .parquet file.
+    #
+    #   For .csv file format only, how these INSERTs and UPDATEs are
+    #   recorded depends on the value of the `IncludeOpForFullLoad`
+    #   parameter. If `IncludeOpForFullLoad` is set to `true`, the first
+    #   field of every CDC record is set to either `I` or `U` to indicate
+    #   INSERT and UPDATE operations at the source. But if
+    #   `IncludeOpForFullLoad` is set to `false`, CDC records are written
+    #   without an indication of INSERT or UPDATE operations at the source.
+    #   For more information about how these settings work together, see
+    #   [Indicating Source DB Operations in Migrated S3 Data][1] in the *AWS
+    #   Database Migration Service User Guide.*.
+    #
+    #   <note markdown="1"> AWS DMS supports the use of the `CdcInsertsAndUpdates` parameter in
+    #   versions 3.3.1 and later.
+    #
+    #    `CdcInsertsOnly` and `CdcInsertsAndUpdates` can't both be set to
+    #   `true` for the same endpoint. Set either `CdcInsertsOnly` or
+    #   `CdcInsertsAndUpdates` to `true` for the same endpoint, but not
+    #   both.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/S3Settings AWS API Documentation
     #
     class S3Settings < Struct.new(
@@ -5132,7 +5397,8 @@ module Aws::DatabaseMigrationService
       :include_op_for_full_load,
       :cdc_inserts_only,
       :timestamp_column_name,
-      :parquet_timestamp_in_millisecond)
+      :parquet_timestamp_in_millisecond,
+      :cdc_inserts_and_updates)
       include Aws::Structure
     end
 
@@ -5321,6 +5587,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # In response to a request by the `DescribeReplicationSubnetGroup`
+    # operation, this object identifies a subnet by its given Availability
+    # Zone, subnet identifier, and status.
+    #
     # @!attribute [rw] subnet_identifier
     #   The subnet identifier.
     #   @return [String]
@@ -5354,11 +5624,18 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides information about types of supported endpoints in response to
+    # a request by the `DescribeEndpointTypes` operation. This information
+    # includes the type of endpoint, the database engine name, and whether
+    # change data capture (CDC) is supported.
+    #
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
-    #   EndpointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
-    #   mongodb, and sqlserver.
+    #   EndpointType, include `"mysql"`, `"oracle"`, `"postgres"`,
+    #   `"mariadb"`, `"aurora"`, `"aurora-postgresql"`, `"redshift"`,
+    #   `"s3"`, `"db2"`, `"azuredb"`, `"sybase"`, `"dynamodb"`, `"mongodb"`,
+    #   `"kinesis"`, `"kafka"`, `"elasticsearch"`, `"documentdb"`, and
+    #   `"sqlserver"`.
     #   @return [String]
     #
     # @!attribute [rw] supports_cdc
@@ -5385,6 +5662,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides a collection of table statistics in response to a request by
+    # the `DescribeTableStatistics` operation.
+    #
     # @!attribute [rw] schema_name
     #   The schema name.
     #   @return [String]
@@ -5406,26 +5686,40 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] ddls
-    #   The Data Definition Language (DDL) used to build and modify the
+    #   The data definition language (DDL) used to build and modify the
     #   structure of your tables.
     #   @return [Integer]
     #
     # @!attribute [rw] full_load_rows
-    #   The number of rows added during the Full Load operation.
+    #   The number of rows added during the full load operation.
     #   @return [Integer]
     #
     # @!attribute [rw] full_load_condtnl_chk_failed_rows
-    #   The number of rows that failed conditional checks during the Full
-    #   Load operation (valid only for DynamoDB as a target migrations).
+    #   The number of rows that failed conditional checks during the full
+    #   load operation (valid only for migrations where DynamoDB is the
+    #   target).
     #   @return [Integer]
     #
     # @!attribute [rw] full_load_error_rows
-    #   The number of rows that failed to load during the Full Load
-    #   operation (valid only for DynamoDB as a target migrations).
+    #   The number of rows that failed to load during the full load
+    #   operation (valid only for migrations where DynamoDB is the target).
     #   @return [Integer]
     #
+    # @!attribute [rw] full_load_start_time
+    #   The time when the full load operation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] full_load_end_time
+    #   The time when the full load operation completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] full_load_reloaded
+    #   A value that indicates if the table was reloaded (`true`) or loaded
+    #   as part of a new full load operation (`false`).
+    #   @return [Boolean]
+    #
     # @!attribute [rw] last_update_time
-    #   The last time the table was updated.
+    #   The last time a table was updated.
     #   @return [Time]
     #
     # @!attribute [rw] table_state
@@ -5445,36 +5739,36 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     #
     # @!attribute [rw] validation_suspended_records
-    #   The number of records that could not be validated.
+    #   The number of records that couldn't be validated.
     #   @return [Integer]
     #
     # @!attribute [rw] validation_state
     #   The validation state of the table.
     #
-    #   The parameter can have the following values
+    #   This parameter can have the following values:
     #
-    #   * Not enabled—Validation is not enabled for the table in the
+    #   * Not enabled - Validation isn't enabled for the table in the
     #     migration task.
     #
-    #   * Pending records—Some records in the table are waiting for
+    #   * Pending records - Some records in the table are waiting for
     #     validation.
     #
-    #   * Mismatched records—Some records in the table do not match between
-    #     the source and target.
+    #   * Mismatched records - Some records in the table don't match
+    #     between the source and target.
     #
-    #   * Suspended records—Some records in the table could not be
+    #   * Suspended records - Some records in the table couldn't be
     #     validated.
     #
-    #   * No primary key—The table could not be validated because it had no
-    #     primary key.
+    #   * No primary key - The table couldn't be validated because it has
+    #     no primary key.
     #
-    #   * Table error—The table was not validated because it was in an error
-    #     state and some data was not migrated.
+    #   * Table error - The table wasn't validated because it's in an
+    #     error state and some data wasn't migrated.
     #
-    #   * Validated—All rows in the table were validated. If the table is
+    #   * Validated - All rows in the table are validated. If the table is
     #     updated, the status can change from Validated.
     #
-    #   * Error—The table could not be validated because of an unexpected
+    #   * Error - The table couldn't be validated because of an unexpected
     #     error.
     #   @return [String]
     #
@@ -5494,6 +5788,9 @@ module Aws::DatabaseMigrationService
       :full_load_rows,
       :full_load_condtnl_chk_failed_rows,
       :full_load_error_rows,
+      :full_load_start_time,
+      :full_load_end_time,
+      :full_load_reloaded,
       :last_update_time,
       :table_state,
       :validation_pending_records,
@@ -5504,6 +5801,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Provides the name of the schema and table to be reloaded.
+    #
     # @note When making an API call, you may pass TableToReload
     #   data as a hash:
     #
@@ -5528,6 +5827,15 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # A user-defined key-value pair that describes metadata added to an AWS
+    # DMS resource and that is used by operations such as the following:
+    #
+    # * `AddTagsToResource`
+    #
+    # * `ListTagsForResource`
+    #
+    # * `RemoveTagsFromResource`
+    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -5538,7 +5846,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be from
-    #   1 to 128 Unicode characters in length and cannot be prefixed with
+    #   1 to 128 Unicode characters in length and can't be prefixed with
     #   "aws:" or "dms:". The string can only contain only the set of
     #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
     #   '+', '-' (Java regex:
@@ -5547,7 +5855,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] value
     #   A value is the optional value of the tag. The string value can be
-    #   from 1 to 256 Unicode characters in length and cannot be prefixed
+    #   from 1 to 256 Unicode characters in length and can't be prefixed
     #   with "aws:" or "dms:". The string can only contain only the set
     #   of Unicode letters, digits, white-space, '\_', '.', '/',
     #   '=', '+', '-' (Java regex:
@@ -5610,6 +5918,9 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # Describes status of a security group associated with the virtual
+    # private cloud hosting your replication and DB instances.
+    #
     # @!attribute [rw] vpc_security_group_id
     #   The VPC security group Id.
     #   @return [String]

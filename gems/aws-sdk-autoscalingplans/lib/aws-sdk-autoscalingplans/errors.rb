@@ -51,7 +51,6 @@ module Aws::AutoScalingPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -67,7 +66,6 @@ module Aws::AutoScalingPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -83,7 +81,6 @@ module Aws::AutoScalingPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -99,7 +96,6 @@ module Aws::AutoScalingPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectNotFoundException < ServiceError
@@ -115,7 +111,6 @@ module Aws::AutoScalingPlans
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -131,7 +126,6 @@ module Aws::AutoScalingPlans
       def message
         @message || @data[:message]
       end
-
     end
 
   end

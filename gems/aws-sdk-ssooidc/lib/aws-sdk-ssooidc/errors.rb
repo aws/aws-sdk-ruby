@@ -62,7 +62,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class AuthorizationPendingException < ServiceError
@@ -83,7 +82,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class ExpiredTokenException < ServiceError
@@ -104,7 +102,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -125,7 +122,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidClientException < ServiceError
@@ -146,7 +142,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidClientMetadataException < ServiceError
@@ -167,7 +162,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidGrantException < ServiceError
@@ -188,7 +182,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -209,7 +202,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidScopeException < ServiceError
@@ -230,7 +222,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class SlowDownException < ServiceError
@@ -251,7 +242,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class UnauthorizedClientException < ServiceError
@@ -272,7 +262,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class UnsupportedGrantTypeException < ServiceError
@@ -293,7 +282,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
   end

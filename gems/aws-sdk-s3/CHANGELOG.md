@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Don't update endpoint on region mismatch errors when using a custom endpoint.
 
 1.60.2 (2020-02-07)

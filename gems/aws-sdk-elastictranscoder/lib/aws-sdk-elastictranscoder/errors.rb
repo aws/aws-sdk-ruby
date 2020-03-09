@@ -47,7 +47,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IncompatibleVersionException < ServiceError
@@ -58,7 +57,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -69,7 +67,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -80,7 +77,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -91,7 +87,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -102,7 +97,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ValidationException < ServiceError
@@ -113,7 +107,6 @@ module Aws::ElasticTranscoder
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

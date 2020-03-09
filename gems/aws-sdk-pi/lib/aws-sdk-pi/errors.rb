@@ -48,7 +48,6 @@ module Aws::PI
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -64,7 +63,6 @@ module Aws::PI
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -80,7 +78,6 @@ module Aws::PI
       def message
         @message || @data[:message]
       end
-
     end
 
   end

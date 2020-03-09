@@ -49,7 +49,6 @@ module Aws::MediaStoreData
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -65,7 +64,6 @@ module Aws::MediaStoreData
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectNotFoundException < ServiceError
@@ -81,7 +79,6 @@ module Aws::MediaStoreData
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestedRangeNotSatisfiableException < ServiceError
@@ -97,7 +94,6 @@ module Aws::MediaStoreData
       def message
         @message || @data[:message]
       end
-
     end
 
   end

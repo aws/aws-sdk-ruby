@@ -53,7 +53,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidEncodingException < ServiceError
@@ -69,7 +68,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -85,7 +83,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -101,7 +98,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -117,7 +113,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextSizeLimitExceededException < ServiceError
@@ -133,7 +128,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -149,7 +143,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -165,7 +158,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
   end

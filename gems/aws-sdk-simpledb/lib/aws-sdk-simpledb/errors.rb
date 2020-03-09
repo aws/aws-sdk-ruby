@@ -62,7 +62,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class DuplicateItemName < ServiceError
@@ -78,7 +77,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class InvalidNextToken < ServiceError
@@ -94,7 +92,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class InvalidNumberPredicates < ServiceError
@@ -110,7 +107,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class InvalidNumberValueTests < ServiceError
@@ -126,7 +122,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class InvalidParameterValue < ServiceError
@@ -142,7 +137,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class InvalidQueryExpression < ServiceError
@@ -158,7 +152,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class MissingParameter < ServiceError
@@ -174,7 +167,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NoSuchDomain < ServiceError
@@ -190,7 +182,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NumberDomainAttributesExceeded < ServiceError
@@ -206,7 +197,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NumberDomainBytesExceeded < ServiceError
@@ -222,7 +212,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NumberDomainsExceeded < ServiceError
@@ -238,7 +227,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NumberItemAttributesExceeded < ServiceError
@@ -254,7 +242,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NumberSubmittedAttributesExceeded < ServiceError
@@ -270,7 +257,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class NumberSubmittedItemsExceeded < ServiceError
@@ -286,7 +272,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class RequestTimeout < ServiceError
@@ -302,7 +287,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
     class TooManyRequestedAttributes < ServiceError
@@ -318,7 +302,6 @@ module Aws::SimpleDB
       def box_usage
         @data[:box_usage]
       end
-
     end
 
   end

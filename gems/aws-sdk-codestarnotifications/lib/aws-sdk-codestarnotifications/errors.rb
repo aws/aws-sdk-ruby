@@ -53,7 +53,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -69,7 +68,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConfigurationException < ServiceError
@@ -85,7 +83,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -101,7 +98,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -117,7 +113,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -133,7 +128,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -149,7 +143,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -165,7 +158,6 @@ module Aws::CodeStarNotifications
       def message
         @message || @data[:message]
       end
-
     end
 
   end

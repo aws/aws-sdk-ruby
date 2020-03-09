@@ -59,7 +59,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class FleetCapacityExceededException < ServiceError
@@ -75,7 +74,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class GameSessionFullException < ServiceError
@@ -91,7 +89,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -107,7 +104,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -123,7 +119,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFleetStatusException < ServiceError
@@ -139,7 +134,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidGameSessionStatusException < ServiceError
@@ -155,7 +149,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -171,7 +164,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -187,7 +179,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -203,7 +194,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class TaggingFailedException < ServiceError
@@ -219,7 +209,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class TerminalRoutingStrategyException < ServiceError
@@ -235,7 +224,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -251,7 +239,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedRegionException < ServiceError
@@ -267,7 +254,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
   end

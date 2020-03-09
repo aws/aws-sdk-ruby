@@ -50,7 +50,6 @@ module Aws::TranscribeService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -66,7 +65,6 @@ module Aws::TranscribeService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -82,7 +80,6 @@ module Aws::TranscribeService
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -98,7 +95,6 @@ module Aws::TranscribeService
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -114,7 +110,6 @@ module Aws::TranscribeService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

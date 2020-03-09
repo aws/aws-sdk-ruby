@@ -52,7 +52,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -78,7 +77,6 @@ module Aws::DataExchange
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -94,7 +92,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -120,7 +117,6 @@ module Aws::DataExchange
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ServiceLimitExceededException < ServiceError
@@ -146,7 +142,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -162,7 +157,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -178,7 +172,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
   end

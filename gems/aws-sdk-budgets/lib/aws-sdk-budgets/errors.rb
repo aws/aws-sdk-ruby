@@ -53,7 +53,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class CreationLimitExceededException < ServiceError
@@ -69,7 +68,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRecordException < ServiceError
@@ -85,7 +83,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExpiredNextTokenException < ServiceError
@@ -101,7 +98,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -117,7 +113,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -133,7 +128,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -149,7 +143,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -165,7 +158,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
   end

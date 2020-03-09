@@ -64,7 +64,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFDisallowedNameException < ServiceError
@@ -80,7 +79,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInternalErrorException < ServiceError
@@ -96,7 +94,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInvalidAccountException < ServiceError
@@ -107,7 +104,6 @@ module Aws::WAFRegional
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class WAFInvalidOperationException < ServiceError
@@ -123,7 +119,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInvalidParameterException < ServiceError
@@ -149,7 +144,6 @@ module Aws::WAFRegional
       def reason
         @data[:reason]
       end
-
     end
 
     class WAFInvalidPermissionPolicyException < ServiceError
@@ -165,7 +159,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInvalidRegexPatternException < ServiceError
@@ -181,7 +174,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFLimitsExceededException < ServiceError
@@ -197,7 +189,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonEmptyEntityException < ServiceError
@@ -213,7 +204,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonexistentContainerException < ServiceError
@@ -229,7 +219,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonexistentItemException < ServiceError
@@ -245,7 +234,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFReferencedItemException < ServiceError
@@ -261,7 +249,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFServiceLinkedRoleErrorException < ServiceError
@@ -277,7 +264,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFStaleDataException < ServiceError
@@ -293,7 +279,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFSubscriptionNotFoundException < ServiceError
@@ -309,7 +294,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFTagOperationException < ServiceError
@@ -325,7 +309,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFTagOperationInternalErrorException < ServiceError
@@ -341,7 +324,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFUnavailableEntityException < ServiceError
@@ -357,7 +339,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
   end

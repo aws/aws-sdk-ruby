@@ -56,7 +56,6 @@ module Aws::CloudWatchLogs
       def expected_sequence_token
         @data[:expected_sequence_token]
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -67,7 +66,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -78,7 +76,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSequenceTokenException < ServiceError
@@ -94,7 +91,6 @@ module Aws::CloudWatchLogs
       def expected_sequence_token
         @data[:expected_sequence_token]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -105,7 +101,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MalformedQueryException < ServiceError
@@ -121,7 +116,6 @@ module Aws::CloudWatchLogs
       def query_compile_error
         @data[:query_compile_error]
       end
-
     end
 
     class OperationAbortedException < ServiceError
@@ -132,7 +126,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -143,7 +136,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -154,7 +146,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -165,7 +156,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnrecognizedClientException < ServiceError
@@ -176,7 +166,6 @@ module Aws::CloudWatchLogs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

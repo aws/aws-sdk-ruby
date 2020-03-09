@@ -57,7 +57,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class InternalException < ServiceError
@@ -78,7 +77,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidAccessException < ServiceError
@@ -99,7 +97,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -120,7 +117,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -141,7 +137,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class ResourceConflictException < ServiceError
@@ -162,7 +157,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -183,7 +177,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
   end

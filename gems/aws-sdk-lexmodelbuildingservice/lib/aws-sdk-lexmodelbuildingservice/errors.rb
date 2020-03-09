@@ -52,7 +52,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -68,7 +67,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -84,7 +82,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -105,7 +102,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -121,7 +117,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class PreconditionFailedException < ServiceError
@@ -137,7 +132,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -158,7 +152,6 @@ module Aws::LexModelBuildingService
       def example_reference
         @data[:example_reference]
       end
-
     end
 
   end

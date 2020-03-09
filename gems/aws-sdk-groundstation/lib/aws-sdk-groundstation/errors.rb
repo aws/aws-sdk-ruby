@@ -54,7 +54,6 @@ module Aws::GroundStation
       def parameter_name
         @data[:parameter_name]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -75,7 +74,6 @@ module Aws::GroundStation
       def parameter_name
         @data[:parameter_name]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -96,7 +94,6 @@ module Aws::GroundStation
       def parameter_name
         @data[:parameter_name]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -112,7 +109,6 @@ module Aws::GroundStation
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -55,7 +55,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -71,7 +70,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -87,7 +85,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -103,7 +100,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -119,7 +115,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -135,7 +130,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -151,7 +145,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -167,7 +160,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -183,7 +175,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -199,7 +190,6 @@ module Aws::AppMesh
       def message
         @message || @data[:message]
       end
-
     end
 
   end

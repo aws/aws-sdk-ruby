@@ -404,6 +404,7 @@ module Aws::MediaLive
     PipelineDetail = Shapes::StructureShape.new(name: 'PipelineDetail')
     PipelineId = Shapes::StringShape.new(name: 'PipelineId')
     PipelinePauseStateSettings = Shapes::StructureShape.new(name: 'PipelinePauseStateSettings')
+    PreferredChannelPipeline = Shapes::StringShape.new(name: 'PreferredChannelPipeline')
     PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
@@ -1913,6 +1914,7 @@ module Aws::MediaLive
     MultiplexProgramServiceDescriptor.add_member(:service_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "serviceName"))
     MultiplexProgramServiceDescriptor.struct_class = Types::MultiplexProgramServiceDescriptor
 
+    MultiplexProgramSettings.add_member(:preferred_channel_pipeline, Shapes::ShapeRef.new(shape: PreferredChannelPipeline, location_name: "preferredChannelPipeline"))
     MultiplexProgramSettings.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMin0Max65535, required: true, location_name: "programNumber"))
     MultiplexProgramSettings.add_member(:service_descriptor, Shapes::ShapeRef.new(shape: MultiplexProgramServiceDescriptor, location_name: "serviceDescriptor"))
     MultiplexProgramSettings.add_member(:video_settings, Shapes::ShapeRef.new(shape: MultiplexVideoSettings, location_name: "videoSettings"))

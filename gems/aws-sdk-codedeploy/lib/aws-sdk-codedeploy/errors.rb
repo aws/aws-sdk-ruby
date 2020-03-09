@@ -152,7 +152,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApplicationAlreadyExistsException < ServiceError
@@ -163,7 +162,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApplicationDoesNotExistException < ServiceError
@@ -174,7 +172,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApplicationLimitExceededException < ServiceError
@@ -185,7 +182,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApplicationNameRequiredException < ServiceError
@@ -196,7 +192,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ArnNotSupportedException < ServiceError
@@ -207,7 +202,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BatchLimitExceededException < ServiceError
@@ -218,7 +212,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BucketNameFilterRequiredException < ServiceError
@@ -229,7 +222,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentAlreadyCompletedException < ServiceError
@@ -240,7 +232,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentAlreadyStartedException < ServiceError
@@ -251,7 +242,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentConfigAlreadyExistsException < ServiceError
@@ -262,7 +252,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentConfigDoesNotExistException < ServiceError
@@ -273,7 +262,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentConfigInUseException < ServiceError
@@ -284,7 +272,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentConfigLimitExceededException < ServiceError
@@ -295,7 +282,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentConfigNameRequiredException < ServiceError
@@ -306,7 +292,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentDoesNotExistException < ServiceError
@@ -317,7 +302,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentGroupAlreadyExistsException < ServiceError
@@ -328,7 +312,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentGroupDoesNotExistException < ServiceError
@@ -339,7 +322,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentGroupLimitExceededException < ServiceError
@@ -350,7 +332,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentGroupNameRequiredException < ServiceError
@@ -361,7 +342,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentIdRequiredException < ServiceError
@@ -372,7 +352,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentIsNotInReadyStateException < ServiceError
@@ -383,7 +362,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentLimitExceededException < ServiceError
@@ -394,7 +372,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentNotStartedException < ServiceError
@@ -405,7 +382,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentTargetDoesNotExistException < ServiceError
@@ -416,7 +392,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentTargetIdRequiredException < ServiceError
@@ -427,7 +402,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DeploymentTargetListSizeExceededException < ServiceError
@@ -438,7 +412,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DescriptionTooLongException < ServiceError
@@ -449,7 +422,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ECSServiceMappingLimitExceededException < ServiceError
@@ -460,7 +432,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class GitHubAccountTokenDoesNotExistException < ServiceError
@@ -471,7 +442,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class GitHubAccountTokenNameRequiredException < ServiceError
@@ -482,7 +452,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IamArnRequiredException < ServiceError
@@ -493,7 +462,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IamSessionArnAlreadyRegisteredException < ServiceError
@@ -504,7 +472,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IamUserArnAlreadyRegisteredException < ServiceError
@@ -515,7 +482,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IamUserArnRequiredException < ServiceError
@@ -526,7 +492,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceDoesNotExistException < ServiceError
@@ -537,7 +502,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceIdRequiredException < ServiceError
@@ -548,7 +512,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceLimitExceededException < ServiceError
@@ -559,7 +522,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceNameAlreadyRegisteredException < ServiceError
@@ -570,7 +532,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceNameRequiredException < ServiceError
@@ -581,7 +542,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceNotRegisteredException < ServiceError
@@ -592,7 +552,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidAlarmConfigException < ServiceError
@@ -603,7 +562,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApplicationNameException < ServiceError
@@ -614,7 +572,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -625,7 +582,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidAutoRollbackConfigException < ServiceError
@@ -636,7 +592,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidAutoScalingGroupException < ServiceError
@@ -647,7 +602,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidBlueGreenDeploymentConfigurationException < ServiceError
@@ -658,7 +612,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidBucketNameFilterException < ServiceError
@@ -669,7 +622,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidComputePlatformException < ServiceError
@@ -680,7 +632,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeployedStateFilterException < ServiceError
@@ -691,7 +642,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentConfigIdException < ServiceError
@@ -702,7 +652,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentConfigNameException < ServiceError
@@ -713,7 +662,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentGroupNameException < ServiceError
@@ -724,7 +672,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentIdException < ServiceError
@@ -735,7 +682,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentInstanceTypeException < ServiceError
@@ -746,7 +692,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentStatusException < ServiceError
@@ -757,7 +702,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentStyleException < ServiceError
@@ -768,7 +712,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentTargetIdException < ServiceError
@@ -779,7 +722,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeploymentWaitTypeException < ServiceError
@@ -790,7 +732,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEC2TagCombinationException < ServiceError
@@ -801,7 +742,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEC2TagException < ServiceError
@@ -812,7 +752,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidECSServiceException < ServiceError
@@ -823,7 +762,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidFileExistsBehaviorException < ServiceError
@@ -834,7 +772,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidGitHubAccountTokenException < ServiceError
@@ -845,7 +782,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidGitHubAccountTokenNameException < ServiceError
@@ -856,7 +792,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidIamSessionArnException < ServiceError
@@ -867,7 +802,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidIamUserArnException < ServiceError
@@ -878,7 +812,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidIgnoreApplicationStopFailuresValueException < ServiceError
@@ -889,7 +822,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -900,7 +832,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInstanceIdException < ServiceError
@@ -911,7 +842,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInstanceNameException < ServiceError
@@ -922,7 +852,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInstanceStatusException < ServiceError
@@ -933,7 +862,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInstanceTypeException < ServiceError
@@ -944,7 +872,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidKeyPrefixFilterException < ServiceError
@@ -955,7 +882,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidLifecycleEventHookExecutionIdException < ServiceError
@@ -966,7 +892,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidLifecycleEventHookExecutionStatusException < ServiceError
@@ -977,7 +902,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidLoadBalancerInfoException < ServiceError
@@ -988,7 +912,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMinimumHealthyHostValueException < ServiceError
@@ -999,7 +922,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -1010,7 +932,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidOnPremisesTagCombinationException < ServiceError
@@ -1021,7 +942,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -1032,7 +952,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRegistrationStatusException < ServiceError
@@ -1043,7 +962,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRevisionException < ServiceError
@@ -1054,7 +972,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRoleException < ServiceError
@@ -1065,7 +982,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSortByException < ServiceError
@@ -1076,7 +992,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSortOrderException < ServiceError
@@ -1087,7 +1002,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -1098,7 +1012,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagFilterException < ServiceError
@@ -1109,7 +1022,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagsToAddException < ServiceError
@@ -1120,7 +1032,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetException < ServiceError
@@ -1131,7 +1042,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetFilterNameException < ServiceError
@@ -1142,7 +1052,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetGroupPairException < ServiceError
@@ -1153,7 +1062,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTargetInstancesException < ServiceError
@@ -1164,7 +1072,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTimeRangeException < ServiceError
@@ -1175,7 +1082,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTrafficRoutingConfigurationException < ServiceError
@@ -1186,7 +1092,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTriggerConfigException < ServiceError
@@ -1197,7 +1102,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidUpdateOutdatedInstancesOnlyValueException < ServiceError
@@ -1208,7 +1112,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LifecycleEventAlreadyCompletedException < ServiceError
@@ -1219,7 +1122,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LifecycleHookLimitExceededException < ServiceError
@@ -1230,7 +1132,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MultipleIamArnsProvidedException < ServiceError
@@ -1241,7 +1142,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationNotSupportedException < ServiceError
@@ -1252,7 +1152,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceArnRequiredException < ServiceError
@@ -1263,7 +1162,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceValidationException < ServiceError
@@ -1274,7 +1172,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RevisionDoesNotExistException < ServiceError
@@ -1285,7 +1182,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RevisionRequiredException < ServiceError
@@ -1296,7 +1192,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RoleRequiredException < ServiceError
@@ -1307,7 +1202,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagLimitExceededException < ServiceError
@@ -1318,7 +1212,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagRequiredException < ServiceError
@@ -1329,7 +1222,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagSetListLimitExceededException < ServiceError
@@ -1340,7 +1232,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -1351,7 +1242,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TriggerTargetsLimitExceededException < ServiceError
@@ -1362,7 +1252,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedActionForDeploymentTypeException < ServiceError
@@ -1373,7 +1262,6 @@ module Aws::CodeDeploy
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

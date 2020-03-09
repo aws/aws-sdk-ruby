@@ -124,6 +124,7 @@ module Aws::DatabaseMigrationService
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KMSNotFoundFault = Shapes::StructureShape.new(name: 'KMSNotFoundFault')
     KMSThrottlingFault = Shapes::StructureShape.new(name: 'KMSThrottlingFault')
+    KafkaSettings = Shapes::StructureShape.new(name: 'KafkaSettings')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     KinesisSettings = Shapes::StructureShape.new(name: 'KinesisSettings')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
@@ -292,6 +293,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     CreateEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     CreateEndpointMessage.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
+    CreateEndpointMessage.add_member(:kafka_settings, Shapes::ShapeRef.new(shape: KafkaSettings, location_name: "KafkaSettings"))
     CreateEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     CreateEndpointMessage.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
@@ -598,6 +600,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     Endpoint.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     Endpoint.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
+    Endpoint.add_member(:kafka_settings, Shapes::ShapeRef.new(shape: KafkaSettings, location_name: "KafkaSettings"))
     Endpoint.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     Endpoint.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
     Endpoint.struct_class = Types::Endpoint
@@ -681,11 +684,20 @@ module Aws::DatabaseMigrationService
     KMSThrottlingFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     KMSThrottlingFault.struct_class = Types::KMSThrottlingFault
 
+    KafkaSettings.add_member(:broker, Shapes::ShapeRef.new(shape: String, location_name: "Broker"))
+    KafkaSettings.add_member(:topic, Shapes::ShapeRef.new(shape: String, location_name: "Topic"))
+    KafkaSettings.struct_class = Types::KafkaSettings
+
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
     KinesisSettings.add_member(:stream_arn, Shapes::ShapeRef.new(shape: String, location_name: "StreamArn"))
     KinesisSettings.add_member(:message_format, Shapes::ShapeRef.new(shape: MessageFormatValue, location_name: "MessageFormat"))
     KinesisSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    KinesisSettings.add_member(:include_transaction_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTransactionDetails"))
+    KinesisSettings.add_member(:include_partition_value, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludePartitionValue"))
+    KinesisSettings.add_member(:partition_include_schema_table, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PartitionIncludeSchemaTable"))
+    KinesisSettings.add_member(:include_table_alter_operations, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeTableAlterOperations"))
+    KinesisSettings.add_member(:include_control_details, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IncludeControlDetails"))
     KinesisSettings.struct_class = Types::KinesisSettings
 
     ListTagsForResourceMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
@@ -713,6 +725,7 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:dms_transfer_settings, Shapes::ShapeRef.new(shape: DmsTransferSettings, location_name: "DmsTransferSettings"))
     ModifyEndpointMessage.add_member(:mongo_db_settings, Shapes::ShapeRef.new(shape: MongoDbSettings, location_name: "MongoDbSettings"))
     ModifyEndpointMessage.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
+    ModifyEndpointMessage.add_member(:kafka_settings, Shapes::ShapeRef.new(shape: KafkaSettings, location_name: "KafkaSettings"))
     ModifyEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
     ModifyEndpointMessage.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
@@ -1003,6 +1016,7 @@ module Aws::DatabaseMigrationService
     S3Settings.add_member(:cdc_inserts_only, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CdcInsertsOnly"))
     S3Settings.add_member(:timestamp_column_name, Shapes::ShapeRef.new(shape: String, location_name: "TimestampColumnName"))
     S3Settings.add_member(:parquet_timestamp_in_millisecond, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ParquetTimestampInMillisecond"))
+    S3Settings.add_member(:cdc_inserts_and_updates, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CdcInsertsAndUpdates"))
     S3Settings.struct_class = Types::S3Settings
 
     SNSInvalidTopicFault.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -1071,6 +1085,9 @@ module Aws::DatabaseMigrationService
     TableStatistics.add_member(:full_load_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadRows"))
     TableStatistics.add_member(:full_load_condtnl_chk_failed_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadCondtnlChkFailedRows"))
     TableStatistics.add_member(:full_load_error_rows, Shapes::ShapeRef.new(shape: Long, location_name: "FullLoadErrorRows"))
+    TableStatistics.add_member(:full_load_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "FullLoadStartTime"))
+    TableStatistics.add_member(:full_load_end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "FullLoadEndTime"))
+    TableStatistics.add_member(:full_load_reloaded, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "FullLoadReloaded"))
     TableStatistics.add_member(:last_update_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LastUpdateTime"))
     TableStatistics.add_member(:table_state, Shapes::ShapeRef.new(shape: String, location_name: "TableState"))
     TableStatistics.add_member(:validation_pending_records, Shapes::ShapeRef.new(shape: Long, location_name: "ValidationPendingRecords"))

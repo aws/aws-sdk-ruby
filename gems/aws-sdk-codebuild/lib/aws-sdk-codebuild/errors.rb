@@ -45,7 +45,6 @@ module Aws::CodeBuild
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -56,7 +55,6 @@ module Aws::CodeBuild
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OAuthProviderException < ServiceError
@@ -67,7 +65,6 @@ module Aws::CodeBuild
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -78,7 +75,6 @@ module Aws::CodeBuild
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -89,7 +85,6 @@ module Aws::CodeBuild
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

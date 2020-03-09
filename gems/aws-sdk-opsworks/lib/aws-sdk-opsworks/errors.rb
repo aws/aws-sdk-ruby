@@ -47,7 +47,6 @@ module Aws::OpsWorks
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -63,7 +62,6 @@ module Aws::OpsWorks
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -52,7 +52,6 @@ module Aws::IoTAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -68,7 +67,6 @@ module Aws::IoTAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -84,7 +82,6 @@ module Aws::IoTAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -110,7 +107,6 @@ module Aws::IoTAnalytics
       def resource_arn
         @data[:resource_arn]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -126,7 +122,6 @@ module Aws::IoTAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -142,7 +137,6 @@ module Aws::IoTAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -158,7 +152,6 @@ module Aws::IoTAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
   end

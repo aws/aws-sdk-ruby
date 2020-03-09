@@ -54,7 +54,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class DryRunOperation < ServiceError
@@ -70,7 +69,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class HomeRegionNotSetException < ServiceError
@@ -86,7 +84,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -102,7 +99,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -118,7 +114,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyErrorException < ServiceError
@@ -134,7 +129,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -150,7 +144,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -166,7 +159,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedOperation < ServiceError
@@ -182,7 +174,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
   end

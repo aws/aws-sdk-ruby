@@ -49,7 +49,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUse < ServiceError
@@ -65,7 +64,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceeded < ServiceError
@@ -81,7 +79,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFound < ServiceError
@@ -97,7 +94,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
   end

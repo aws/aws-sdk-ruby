@@ -52,7 +52,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
     class DependentServiceFailureException < ServiceError
@@ -68,7 +67,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -84,7 +82,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -100,7 +97,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -116,7 +112,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -137,7 +132,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -153,7 +147,6 @@ module Aws::Amplify
       def message
         @message || @data[:message]
       end
-
     end
 
   end

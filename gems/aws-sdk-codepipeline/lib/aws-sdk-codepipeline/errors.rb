@@ -74,7 +74,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ActionTypeNotFoundException < ServiceError
@@ -85,7 +84,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ApprovalAlreadyCompletedException < ServiceError
@@ -96,7 +94,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -112,7 +109,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicatedStopRequestException < ServiceError
@@ -128,7 +124,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidActionDeclarationException < ServiceError
@@ -139,7 +134,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidApprovalTokenException < ServiceError
@@ -150,7 +144,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -166,7 +159,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidBlockerDeclarationException < ServiceError
@@ -177,7 +169,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClientTokenException < ServiceError
@@ -188,7 +179,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidJobException < ServiceError
@@ -199,7 +189,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidJobStateException < ServiceError
@@ -210,7 +199,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -221,7 +209,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNonceException < ServiceError
@@ -232,7 +219,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidStageDeclarationException < ServiceError
@@ -243,7 +229,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidStructureException < ServiceError
@@ -254,7 +239,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagsException < ServiceError
@@ -270,7 +254,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidWebhookAuthenticationParametersException < ServiceError
@@ -281,7 +264,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidWebhookFilterPatternException < ServiceError
@@ -292,7 +274,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class JobNotFoundException < ServiceError
@@ -303,7 +284,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -314,7 +294,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NotLatestPipelineExecutionException < ServiceError
@@ -325,7 +304,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OutputVariablesSizeExceededException < ServiceError
@@ -341,7 +319,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class PipelineExecutionNotFoundException < ServiceError
@@ -352,7 +329,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PipelineExecutionNotStoppableException < ServiceError
@@ -368,7 +344,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class PipelineNameInUseException < ServiceError
@@ -379,7 +354,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PipelineNotFoundException < ServiceError
@@ -390,7 +364,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PipelineVersionNotFoundException < ServiceError
@@ -401,7 +374,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -412,7 +384,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StageNotFoundException < ServiceError
@@ -423,7 +394,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StageNotRetryableException < ServiceError
@@ -434,7 +404,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -450,7 +419,6 @@ module Aws::CodePipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -461,7 +429,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class WebhookNotFoundException < ServiceError
@@ -472,7 +439,6 @@ module Aws::CodePipeline
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

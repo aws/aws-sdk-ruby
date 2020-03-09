@@ -50,7 +50,6 @@ module Aws::IoTEventsData
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -66,7 +65,6 @@ module Aws::IoTEventsData
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -82,7 +80,6 @@ module Aws::IoTEventsData
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -98,7 +95,6 @@ module Aws::IoTEventsData
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -114,7 +110,6 @@ module Aws::IoTEventsData
       def message
         @message || @data[:message]
       end
-
     end
 
   end

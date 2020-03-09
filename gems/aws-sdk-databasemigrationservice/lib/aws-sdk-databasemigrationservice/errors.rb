@@ -65,7 +65,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InsufficientResourceCapacityFault < ServiceError
@@ -81,7 +80,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCertificateFault < ServiceError
@@ -97,7 +95,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceStateFault < ServiceError
@@ -113,7 +110,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSubnet < ServiceError
@@ -129,7 +125,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSAccessDeniedFault < ServiceError
@@ -145,7 +140,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSDisabledFault < ServiceError
@@ -161,7 +155,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSInvalidStateFault < ServiceError
@@ -177,7 +170,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSKeyNotAccessibleFault < ServiceError
@@ -193,7 +185,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSNotFoundFault < ServiceError
@@ -209,7 +200,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSThrottlingFault < ServiceError
@@ -225,7 +215,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationSubnetGroupDoesNotCoverEnoughAZs < ServiceError
@@ -241,7 +230,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsFault < ServiceError
@@ -262,7 +250,6 @@ module Aws::DatabaseMigrationService
       def resource_arn
         @data[:resource_arn]
       end
-
     end
 
     class ResourceNotFoundFault < ServiceError
@@ -278,7 +265,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceQuotaExceededFault < ServiceError
@@ -294,7 +280,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class SNSInvalidTopicFault < ServiceError
@@ -310,7 +295,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class SNSNoAuthorizationFault < ServiceError
@@ -326,7 +310,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class StorageQuotaExceededFault < ServiceError
@@ -342,7 +325,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class SubnetAlreadyInUse < ServiceError
@@ -358,7 +340,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
     class UpgradeDependencyFailureFault < ServiceError
@@ -374,7 +355,6 @@ module Aws::DatabaseMigrationService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

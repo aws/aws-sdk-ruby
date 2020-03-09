@@ -48,7 +48,6 @@ module Aws::ElasticInference
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -64,7 +63,6 @@ module Aws::ElasticInference
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -80,7 +78,6 @@ module Aws::ElasticInference
       def message
         @message || @data[:message]
       end
-
     end
 
   end

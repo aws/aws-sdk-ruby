@@ -46,6 +46,6 @@ require_relative 'aws-sdk-signer/customizations'
 # @service
 module Aws::Signer
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.19.0'
 
 end

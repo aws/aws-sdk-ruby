@@ -74,7 +74,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AlreadyExistsException < ServiceError
@@ -90,7 +89,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class CannotDeleteException < ServiceError
@@ -106,7 +104,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class ConfigurationSetAlreadyExistsException < ServiceError
@@ -122,7 +119,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class ConfigurationSetDoesNotExistException < ServiceError
@@ -138,7 +134,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class ConfigurationSetSendingPausedException < ServiceError
@@ -154,7 +149,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class CustomVerificationEmailInvalidContentException < ServiceError
@@ -165,7 +159,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CustomVerificationEmailTemplateAlreadyExistsException < ServiceError
@@ -181,7 +174,6 @@ module Aws::SES
       def custom_verification_email_template_name
         @data[:custom_verification_email_template_name]
       end
-
     end
 
     class CustomVerificationEmailTemplateDoesNotExistException < ServiceError
@@ -197,7 +189,6 @@ module Aws::SES
       def custom_verification_email_template_name
         @data[:custom_verification_email_template_name]
       end
-
     end
 
     class EventDestinationAlreadyExistsException < ServiceError
@@ -218,7 +209,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class EventDestinationDoesNotExistException < ServiceError
@@ -239,7 +229,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class FromEmailAddressNotVerifiedException < ServiceError
@@ -255,7 +244,6 @@ module Aws::SES
       def from_email_address
         @data[:from_email_address]
       end
-
     end
 
     class InvalidCloudWatchDestinationException < ServiceError
@@ -276,7 +264,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class InvalidConfigurationSetException < ServiceError
@@ -287,7 +274,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeliveryOptionsException < ServiceError
@@ -298,7 +284,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidFirehoseDestinationException < ServiceError
@@ -319,7 +304,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class InvalidLambdaFunctionException < ServiceError
@@ -335,7 +319,6 @@ module Aws::SES
       def function_arn
         @data[:function_arn]
       end
-
     end
 
     class InvalidPolicyException < ServiceError
@@ -346,7 +329,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRenderingParameterException < ServiceError
@@ -362,7 +344,6 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
-
     end
 
     class InvalidS3ConfigurationException < ServiceError
@@ -378,7 +359,6 @@ module Aws::SES
       def bucket
         @data[:bucket]
       end
-
     end
 
     class InvalidSNSDestinationException < ServiceError
@@ -399,7 +379,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class InvalidSnsTopicException < ServiceError
@@ -415,7 +394,6 @@ module Aws::SES
       def topic
         @data[:topic]
       end
-
     end
 
     class InvalidTemplateException < ServiceError
@@ -431,7 +409,6 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
-
     end
 
     class InvalidTrackingOptionsException < ServiceError
@@ -442,7 +419,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -453,7 +429,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MailFromDomainNotVerifiedException < ServiceError
@@ -464,7 +439,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MessageRejected < ServiceError
@@ -475,7 +449,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MissingRenderingAttributeException < ServiceError
@@ -491,7 +464,6 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
-
     end
 
     class ProductionAccessNotGrantedException < ServiceError
@@ -502,7 +474,6 @@ module Aws::SES
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RuleDoesNotExistException < ServiceError
@@ -518,7 +489,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class RuleSetDoesNotExistException < ServiceError
@@ -534,7 +504,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class TemplateDoesNotExistException < ServiceError
@@ -550,7 +519,6 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
-
     end
 
     class TrackingOptionsAlreadyExistsException < ServiceError
@@ -566,7 +534,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class TrackingOptionsDoesNotExistException < ServiceError
@@ -582,7 +549,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
   end

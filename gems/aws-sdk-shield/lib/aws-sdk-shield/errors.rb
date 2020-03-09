@@ -58,7 +58,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessDeniedForDependencyException < ServiceError
@@ -74,7 +73,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -90,7 +88,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -106,7 +103,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPaginationTokenException < ServiceError
@@ -122,7 +118,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -138,7 +133,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceException < ServiceError
@@ -154,7 +148,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitsExceededException < ServiceError
@@ -180,7 +173,6 @@ module Aws::Shield
       def limit
         @data[:limit]
       end
-
     end
 
     class LockedSubscriptionException < ServiceError
@@ -196,7 +188,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoAssociatedRoleException < ServiceError
@@ -212,7 +203,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class OptimisticLockException < ServiceError
@@ -228,7 +218,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -244,7 +233,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -260,7 +248,6 @@ module Aws::Shield
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -58,7 +58,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -74,7 +73,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -95,7 +93,6 @@ module Aws::Route53Resolver
       def field_name
         @data[:field_name]
       end
-
     end
 
     class InvalidPolicyDocument < ServiceError
@@ -111,7 +108,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -127,7 +123,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -143,7 +138,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -164,7 +158,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceExistsException < ServiceError
@@ -185,7 +178,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -206,7 +198,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -227,7 +218,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -248,7 +238,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -264,7 +253,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnknownResourceException < ServiceError
@@ -280,7 +268,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
   end

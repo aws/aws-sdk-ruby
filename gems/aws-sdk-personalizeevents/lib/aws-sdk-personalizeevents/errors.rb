@@ -46,7 +46,6 @@ module Aws::PersonalizeEvents
       def message
         @message || @data[:message]
       end
-
     end
 
   end

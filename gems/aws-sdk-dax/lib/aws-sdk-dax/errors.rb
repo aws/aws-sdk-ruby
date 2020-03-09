@@ -66,7 +66,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterNotFoundFault < ServiceError
@@ -77,7 +76,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterQuotaForCustomerExceededFault < ServiceError
@@ -88,7 +86,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientClusterCapacityFault < ServiceError
@@ -99,7 +96,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidARNFault < ServiceError
@@ -110,7 +106,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterStateFault < ServiceError
@@ -121,7 +116,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -137,7 +131,6 @@ module Aws::DAX
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterGroupStateFault < ServiceError
@@ -148,7 +141,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -164,7 +156,6 @@ module Aws::DAX
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSubnet < ServiceError
@@ -175,7 +166,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidVPCNetworkStateFault < ServiceError
@@ -186,7 +176,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeNotFoundFault < ServiceError
@@ -197,7 +186,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeQuotaForClusterExceededFault < ServiceError
@@ -208,7 +196,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeQuotaForCustomerExceededFault < ServiceError
@@ -219,7 +206,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ParameterGroupAlreadyExistsFault < ServiceError
@@ -230,7 +216,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ParameterGroupNotFoundFault < ServiceError
@@ -241,7 +226,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ParameterGroupQuotaExceededFault < ServiceError
@@ -252,7 +236,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ServiceLinkedRoleNotFoundFault < ServiceError
@@ -263,7 +246,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetGroupAlreadyExistsFault < ServiceError
@@ -274,7 +256,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetGroupInUseFault < ServiceError
@@ -285,7 +266,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetGroupNotFoundFault < ServiceError
@@ -296,7 +276,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetGroupQuotaExceededFault < ServiceError
@@ -307,7 +286,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetInUse < ServiceError
@@ -318,7 +296,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetQuotaExceededFault < ServiceError
@@ -329,7 +306,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagNotFoundFault < ServiceError
@@ -340,7 +316,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagQuotaPerResourceExceeded < ServiceError
@@ -351,7 +326,6 @@ module Aws::DAX
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

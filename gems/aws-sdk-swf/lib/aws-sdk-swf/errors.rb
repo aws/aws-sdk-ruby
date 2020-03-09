@@ -55,7 +55,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class DomainAlreadyExistsFault < ServiceError
@@ -71,7 +70,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class DomainDeprecatedFault < ServiceError
@@ -87,7 +85,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededFault < ServiceError
@@ -103,7 +100,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedFault < ServiceError
@@ -119,7 +115,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsFault < ServiceError
@@ -135,7 +130,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class TypeAlreadyExistsFault < ServiceError
@@ -151,7 +145,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class TypeDeprecatedFault < ServiceError
@@ -167,7 +160,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnknownResourceFault < ServiceError
@@ -183,7 +175,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class WorkflowExecutionAlreadyStartedFault < ServiceError
@@ -199,7 +190,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
   end

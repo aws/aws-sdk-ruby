@@ -49,7 +49,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalException < ServiceError
@@ -60,7 +59,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEventPatternException < ServiceError
@@ -71,7 +69,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidStateException < ServiceError
@@ -82,7 +79,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -93,7 +89,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ManagedRuleException < ServiceError
@@ -104,7 +99,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PolicyLengthExceededException < ServiceError
@@ -115,7 +109,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -126,7 +119,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -137,7 +129,6 @@ module Aws::EventBridge
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

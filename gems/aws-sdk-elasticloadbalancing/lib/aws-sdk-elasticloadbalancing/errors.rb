@@ -62,7 +62,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CertificateNotFoundException < ServiceError
@@ -73,7 +72,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DependencyThrottleException < ServiceError
@@ -84,7 +82,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DuplicateAccessPointNameException < ServiceError
@@ -95,7 +92,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DuplicateListenerException < ServiceError
@@ -106,7 +102,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DuplicatePolicyNameException < ServiceError
@@ -117,7 +112,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DuplicateTagKeysException < ServiceError
@@ -128,7 +122,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidConfigurationRequestException < ServiceError
@@ -139,7 +132,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEndPointException < ServiceError
@@ -150,7 +142,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSchemeException < ServiceError
@@ -161,7 +152,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSecurityGroupException < ServiceError
@@ -172,7 +162,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSubnetException < ServiceError
@@ -183,7 +172,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ListenerNotFoundException < ServiceError
@@ -194,7 +182,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LoadBalancerAttributeNotFoundException < ServiceError
@@ -205,7 +192,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -216,7 +202,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PolicyNotFoundException < ServiceError
@@ -227,7 +212,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PolicyTypeNotFoundException < ServiceError
@@ -238,7 +222,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetNotFoundException < ServiceError
@@ -249,7 +232,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyAccessPointsException < ServiceError
@@ -260,7 +242,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyPoliciesException < ServiceError
@@ -271,7 +252,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -282,7 +262,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedProtocolException < ServiceError
@@ -293,7 +272,6 @@ module Aws::ElasticLoadBalancing
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

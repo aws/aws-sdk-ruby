@@ -550,7 +550,19 @@ module Aws::EC2
     #   natgateway = ec2.create_nat_gateway({
     #     allocation_id: "AllocationId", # required
     #     client_token: "String",
+    #     dry_run: false,
     #     subnet_id: "SubnetId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :allocation_id
@@ -567,8 +579,15 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :subnet_id
     #   The subnet in which to create the NAT gateway.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the NAT gateway.
     # @return [NatGateway]
     def create_nat_gateway(options = {})
       resp = @client.create_nat_gateway(options)
@@ -2103,6 +2122,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   nat_gateways = ec2.nat_gateways({
+    #     dry_run: false,
     #     filter: [
     #       {
     #         name: "String",
@@ -2112,6 +2132,11 @@ module Aws::EC2
     #     nat_gateway_ids: ["NatGatewayId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filter
     #   One or more filters.
     #

@@ -61,7 +61,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -77,7 +76,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -93,7 +91,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFilterException < ServiceError
@@ -109,7 +106,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -125,7 +121,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class JobNotFoundException < ServiceError
@@ -141,7 +136,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class KmsKeyValidationException < ServiceError
@@ -157,7 +151,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -173,7 +166,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -189,7 +181,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -205,7 +196,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -221,7 +211,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextSizeLimitExceededException < ServiceError
@@ -237,7 +226,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -253,7 +241,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagKeysException < ServiceError
@@ -269,7 +256,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -285,7 +271,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedLanguageException < ServiceError
@@ -301,7 +286,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
   end

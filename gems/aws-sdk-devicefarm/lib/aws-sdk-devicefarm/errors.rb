@@ -57,7 +57,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class CannotDeleteException < ServiceError
@@ -73,7 +72,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotencyException < ServiceError
@@ -89,7 +87,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -105,7 +102,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -121,7 +117,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -137,7 +132,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotEligibleException < ServiceError
@@ -153,7 +147,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -169,7 +162,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceAccountException < ServiceError
@@ -185,7 +177,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagOperationException < ServiceError
@@ -206,7 +197,6 @@ module Aws::DeviceFarm
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class TagPolicyException < ServiceError
@@ -227,7 +217,6 @@ module Aws::DeviceFarm
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -248,7 +237,6 @@ module Aws::DeviceFarm
       def resource_name
         @data[:resource_name]
       end
-
     end
 
   end

@@ -68,7 +68,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentAccessException < ServiceError
@@ -84,7 +83,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class EndpointDisabledException < ServiceError
@@ -100,7 +98,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FilterPolicyLimitExceededException < ServiceError
@@ -116,7 +113,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -132,7 +128,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -148,7 +143,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -164,7 +158,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSecurityException < ServiceError
@@ -180,7 +173,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSAccessDeniedException < ServiceError
@@ -196,7 +188,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSDisabledException < ServiceError
@@ -212,7 +203,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSInvalidStateException < ServiceError
@@ -228,7 +218,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSNotFoundException < ServiceError
@@ -244,7 +233,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSOptInRequired < ServiceError
@@ -260,7 +248,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSThrottlingException < ServiceError
@@ -276,7 +263,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -292,7 +278,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class PlatformApplicationDisabledException < ServiceError
@@ -308,7 +293,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -324,7 +308,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class StaleTagException < ServiceError
@@ -340,7 +323,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SubscriptionLimitExceededException < ServiceError
@@ -356,7 +338,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagLimitExceededException < ServiceError
@@ -372,7 +353,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagPolicyException < ServiceError
@@ -388,7 +368,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottledException < ServiceError
@@ -404,7 +383,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TopicLimitExceededException < ServiceError
@@ -420,7 +398,6 @@ module Aws::SNS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

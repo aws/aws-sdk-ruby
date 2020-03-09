@@ -96,7 +96,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictingDomainExists < ServiceError
@@ -112,7 +111,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictingTypes < ServiceError
@@ -128,7 +126,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class DelegationSetAlreadyCreated < ServiceError
@@ -144,7 +141,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class DelegationSetAlreadyReusable < ServiceError
@@ -160,7 +156,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class DelegationSetInUse < ServiceError
@@ -176,7 +171,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class DelegationSetNotAvailable < ServiceError
@@ -192,7 +186,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class DelegationSetNotReusable < ServiceError
@@ -208,7 +201,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HealthCheckAlreadyExists < ServiceError
@@ -224,7 +216,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HealthCheckInUse < ServiceError
@@ -240,7 +231,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HealthCheckVersionMismatch < ServiceError
@@ -256,7 +246,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HostedZoneAlreadyExists < ServiceError
@@ -272,7 +261,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HostedZoneNotEmpty < ServiceError
@@ -288,7 +276,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HostedZoneNotFound < ServiceError
@@ -304,7 +291,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class HostedZoneNotPrivate < ServiceError
@@ -320,7 +306,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatibleVersion < ServiceError
@@ -336,7 +321,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InsufficientCloudWatchLogsResourcePolicy < ServiceError
@@ -352,7 +336,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgument < ServiceError
@@ -368,7 +351,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidChangeBatch < ServiceError
@@ -389,7 +371,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDomainName < ServiceError
@@ -405,7 +386,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInput < ServiceError
@@ -421,7 +401,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPaginationToken < ServiceError
@@ -437,7 +416,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTrafficPolicyDocument < ServiceError
@@ -453,7 +431,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidVPCId < ServiceError
@@ -469,7 +446,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class LastVPCAssociation < ServiceError
@@ -485,7 +461,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitsExceeded < ServiceError
@@ -501,7 +476,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchChange < ServiceError
@@ -517,7 +491,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchCloudWatchLogsLogGroup < ServiceError
@@ -533,7 +506,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchDelegationSet < ServiceError
@@ -549,7 +521,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchGeoLocation < ServiceError
@@ -565,7 +536,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchHealthCheck < ServiceError
@@ -581,7 +551,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchHostedZone < ServiceError
@@ -597,7 +566,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchQueryLoggingConfig < ServiceError
@@ -613,7 +581,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchTrafficPolicy < ServiceError
@@ -629,7 +596,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchTrafficPolicyInstance < ServiceError
@@ -645,7 +611,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -661,7 +626,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class PriorRequestNotComplete < ServiceError
@@ -677,7 +641,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class PublicZoneVPCAssociation < ServiceError
@@ -693,7 +656,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class QueryLoggingConfigAlreadyExists < ServiceError
@@ -709,7 +671,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -725,7 +686,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyHealthChecks < ServiceError
@@ -741,7 +701,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyHostedZones < ServiceError
@@ -757,7 +716,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTrafficPolicies < ServiceError
@@ -773,7 +731,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTrafficPolicyInstances < ServiceError
@@ -789,7 +746,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTrafficPolicyVersionsForCurrentPolicy < ServiceError
@@ -805,7 +761,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyVPCAssociationAuthorizations < ServiceError
@@ -821,7 +776,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TrafficPolicyAlreadyExists < ServiceError
@@ -837,7 +791,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TrafficPolicyInUse < ServiceError
@@ -853,7 +806,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class TrafficPolicyInstanceAlreadyExists < ServiceError
@@ -869,7 +821,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class VPCAssociationAuthorizationNotFound < ServiceError
@@ -885,7 +836,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
     class VPCAssociationNotFound < ServiceError
@@ -901,7 +851,6 @@ module Aws::Route53
       def message
         @message || @data[:message]
       end
-
     end
 
   end

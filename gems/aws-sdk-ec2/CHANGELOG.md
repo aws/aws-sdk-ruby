@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2020-03-09)
+------------------
+
+* Feature - Amazon Virtual Private Cloud (VPC) NAT Gateway adds support for tagging on resource creation.
+
 1.148.0 (2020-03-06)
 ------------------
 

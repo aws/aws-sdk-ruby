@@ -49,7 +49,6 @@ module Aws::CostandUsageReportService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -65,7 +64,6 @@ module Aws::CostandUsageReportService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReportLimitReachedException < ServiceError
@@ -81,7 +79,6 @@ module Aws::CostandUsageReportService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -97,7 +94,6 @@ module Aws::CostandUsageReportService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

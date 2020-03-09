@@ -52,7 +52,6 @@ module Aws::GuardDuty
       def type
         @data[:type]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -73,7 +72,6 @@ module Aws::GuardDuty
       def type
         @data[:type]
       end
-
     end
 
   end

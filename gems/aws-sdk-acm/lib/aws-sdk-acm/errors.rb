@@ -57,7 +57,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -73,7 +72,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDomainValidationOptionsException < ServiceError
@@ -89,7 +87,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -105,7 +102,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateException < ServiceError
@@ -121,7 +117,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -137,7 +132,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -153,7 +147,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestInProgressException < ServiceError
@@ -169,7 +162,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -185,7 +177,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -201,7 +192,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagPolicyException < ServiceError
@@ -217,7 +207,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -233,7 +222,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

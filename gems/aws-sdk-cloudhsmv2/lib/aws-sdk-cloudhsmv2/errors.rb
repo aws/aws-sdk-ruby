@@ -51,7 +51,6 @@ module Aws::CloudHSMV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmInternalFailureException < ServiceError
@@ -67,7 +66,6 @@ module Aws::CloudHSMV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmInvalidRequestException < ServiceError
@@ -83,7 +81,6 @@ module Aws::CloudHSMV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmResourceNotFoundException < ServiceError
@@ -99,7 +96,6 @@ module Aws::CloudHSMV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmServiceException < ServiceError
@@ -115,7 +111,6 @@ module Aws::CloudHSMV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmTagException < ServiceError
@@ -131,7 +126,6 @@ module Aws::CloudHSMV2
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -52,7 +52,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -68,7 +67,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceErrorException < ServiceError
@@ -84,7 +82,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -100,7 +97,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -116,7 +112,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -132,7 +127,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -148,7 +142,6 @@ module Aws::Signer
       def message
         @message || @data[:message]
       end
-
     end
 
   end

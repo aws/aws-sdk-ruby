@@ -80,7 +80,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class BatchWriteException < ServiceError
@@ -106,7 +105,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class CannotListParentOfRootException < ServiceError
@@ -122,7 +120,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryAlreadyExistsException < ServiceError
@@ -138,7 +135,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryDeletedException < ServiceError
@@ -154,7 +150,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryNotDisabledException < ServiceError
@@ -170,7 +165,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryNotEnabledException < ServiceError
@@ -186,7 +180,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetAlreadyExistsException < ServiceError
@@ -202,7 +195,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetInUseException < ServiceError
@@ -218,7 +210,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetNotFoundException < ServiceError
@@ -234,7 +225,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetValidationException < ServiceError
@@ -250,7 +240,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatibleSchemaException < ServiceError
@@ -266,7 +255,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class IndexedAttributeMissingException < ServiceError
@@ -282,7 +270,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -298,7 +285,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -314,7 +300,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAttachmentException < ServiceError
@@ -330,7 +315,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFacetUpdateException < ServiceError
@@ -346,7 +330,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -362,7 +345,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRuleException < ServiceError
@@ -378,7 +360,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSchemaDocException < ServiceError
@@ -394,7 +375,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTaggingRequestException < ServiceError
@@ -410,7 +390,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -426,7 +405,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class LinkNameAlreadyInUseException < ServiceError
@@ -442,7 +420,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotIndexException < ServiceError
@@ -458,7 +435,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotNodeException < ServiceError
@@ -474,7 +450,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotPolicyException < ServiceError
@@ -490,7 +465,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectAlreadyDetachedException < ServiceError
@@ -506,7 +480,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectNotDetachedException < ServiceError
@@ -522,7 +495,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -538,7 +510,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class RetryableConflictException < ServiceError
@@ -554,7 +525,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchemaAlreadyExistsException < ServiceError
@@ -570,7 +540,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchemaAlreadyPublishedException < ServiceError
@@ -586,7 +555,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class StillContainsLinksException < ServiceError
@@ -602,7 +570,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedIndexTypeException < ServiceError
@@ -618,7 +585,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -634,7 +600,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
   end

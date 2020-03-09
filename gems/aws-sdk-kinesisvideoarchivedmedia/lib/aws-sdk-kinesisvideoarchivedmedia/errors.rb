@@ -53,7 +53,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -69,7 +68,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCodecPrivateDataException < ServiceError
@@ -85,7 +83,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingCodecPrivateDataException < ServiceError
@@ -101,7 +98,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoDataRetentionException < ServiceError
@@ -117,7 +113,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -133,7 +128,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -149,7 +143,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedStreamMediaTypeException < ServiceError
@@ -165,7 +158,6 @@ module Aws::KinesisVideoArchivedMedia
       def message
         @message || @data[:message]
       end
-
     end
 
   end

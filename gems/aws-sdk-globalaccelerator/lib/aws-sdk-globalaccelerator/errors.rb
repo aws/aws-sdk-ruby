@@ -60,7 +60,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AcceleratorNotFoundException < ServiceError
@@ -76,7 +75,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessDeniedException < ServiceError
@@ -92,7 +90,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AssociatedEndpointGroupFoundException < ServiceError
@@ -108,7 +105,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AssociatedListenerFoundException < ServiceError
@@ -124,7 +120,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class ByoipCidrNotFoundException < ServiceError
@@ -140,7 +135,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class EndpointGroupAlreadyExistsException < ServiceError
@@ -156,7 +150,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class EndpointGroupNotFoundException < ServiceError
@@ -172,7 +165,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectCidrStateException < ServiceError
@@ -188,7 +180,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceErrorException < ServiceError
@@ -204,7 +195,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -220,7 +210,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -236,7 +225,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPortRangeException < ServiceError
@@ -252,7 +240,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -268,7 +255,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class ListenerNotFoundException < ServiceError
@@ -284,7 +270,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
   end

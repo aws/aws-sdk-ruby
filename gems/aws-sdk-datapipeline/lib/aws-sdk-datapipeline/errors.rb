@@ -50,7 +50,6 @@ module Aws::DataPipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -66,7 +65,6 @@ module Aws::DataPipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class PipelineDeletedException < ServiceError
@@ -82,7 +80,6 @@ module Aws::DataPipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class PipelineNotFoundException < ServiceError
@@ -98,7 +95,6 @@ module Aws::DataPipeline
       def message
         @message || @data[:message]
       end
-
     end
 
     class TaskNotFoundException < ServiceError
@@ -114,7 +110,6 @@ module Aws::DataPipeline
       def message
         @message || @data[:message]
       end
-
     end
 
   end

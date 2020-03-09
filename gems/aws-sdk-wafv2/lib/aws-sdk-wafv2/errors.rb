@@ -58,7 +58,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFDuplicateItemException < ServiceError
@@ -74,7 +73,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInternalErrorException < ServiceError
@@ -90,7 +88,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInvalidParameterException < ServiceError
@@ -121,7 +118,6 @@ module Aws::WAFV2
       def reason
         @data[:reason]
       end
-
     end
 
     class WAFInvalidResourceException < ServiceError
@@ -137,7 +133,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFLimitsExceededException < ServiceError
@@ -153,7 +148,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonexistentItemException < ServiceError
@@ -169,7 +163,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFOptimisticLockException < ServiceError
@@ -185,7 +178,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFServiceLinkedRoleErrorException < ServiceError
@@ -201,7 +193,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFSubscriptionNotFoundException < ServiceError
@@ -217,7 +208,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFTagOperationException < ServiceError
@@ -233,7 +223,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFTagOperationInternalErrorException < ServiceError
@@ -249,7 +238,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFUnavailableEntityException < ServiceError
@@ -265,7 +253,6 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
-
     end
 
   end

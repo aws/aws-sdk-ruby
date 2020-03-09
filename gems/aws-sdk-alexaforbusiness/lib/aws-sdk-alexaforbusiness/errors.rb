@@ -60,7 +60,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -76,7 +75,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeviceNotRegisteredException < ServiceError
@@ -92,7 +90,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCertificateAuthorityException < ServiceError
@@ -108,7 +105,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDeviceException < ServiceError
@@ -124,7 +120,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSecretsManagerResourceException < ServiceError
@@ -140,7 +135,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidServiceLinkedRoleStateException < ServiceError
@@ -156,7 +150,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidUserStatusException < ServiceError
@@ -172,7 +165,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -188,7 +180,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class NameInUseException < ServiceError
@@ -204,7 +195,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -220,7 +210,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAssociatedException < ServiceError
@@ -236,7 +225,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -257,7 +245,6 @@ module Aws::AlexaForBusiness
       def client_request_token
         @data[:client_request_token]
       end
-
     end
 
     class SkillNotLinkedException < ServiceError
@@ -273,7 +260,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -289,7 +275,6 @@ module Aws::AlexaForBusiness
       def message
         @message || @data[:message]
       end
-
     end
 
   end

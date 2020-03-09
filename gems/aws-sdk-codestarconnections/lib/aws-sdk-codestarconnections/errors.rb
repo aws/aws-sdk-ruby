@@ -47,7 +47,6 @@ module Aws::CodeStarconnections
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -63,7 +62,6 @@ module Aws::CodeStarconnections
       def message
         @message || @data[:message]
       end
-
     end
 
   end

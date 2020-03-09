@@ -54,7 +54,6 @@ module Aws::LambdaPreview
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestContentException < ServiceError
@@ -75,7 +74,6 @@ module Aws::LambdaPreview
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -96,7 +94,6 @@ module Aws::LambdaPreview
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -117,7 +114,6 @@ module Aws::LambdaPreview
       def message
         @message || @data[:message]
       end
-
     end
 
   end

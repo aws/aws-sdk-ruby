@@ -54,7 +54,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotencyException < ServiceError
@@ -70,7 +69,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -86,7 +84,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -102,7 +99,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -118,7 +114,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class JobStatusException < ServiceError
@@ -134,7 +129,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchPublicAccessBlockConfiguration < ServiceError
@@ -150,7 +144,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -166,7 +159,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -182,7 +174,6 @@ module Aws::S3Control
       def message
         @message || @data[:message]
       end
-
     end
 
   end

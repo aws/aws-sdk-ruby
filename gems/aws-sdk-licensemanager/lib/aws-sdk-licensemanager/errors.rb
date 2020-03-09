@@ -55,7 +55,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class AuthorizationException < ServiceError
@@ -71,7 +70,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class FailedDependencyException < ServiceError
@@ -87,7 +85,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class FilterLimitExceededException < ServiceError
@@ -103,7 +100,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -119,7 +115,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceStateException < ServiceError
@@ -135,7 +130,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class LicenseUsageException < ServiceError
@@ -151,7 +145,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class RateLimitExceededException < ServiceError
@@ -167,7 +160,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -183,7 +175,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerInternalException < ServiceError
@@ -199,7 +190,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
   end

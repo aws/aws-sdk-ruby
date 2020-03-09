@@ -55,7 +55,6 @@ module Aws::IoT1ClickProjects
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -76,7 +75,6 @@ module Aws::IoT1ClickProjects
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceConflictException < ServiceError
@@ -97,7 +95,6 @@ module Aws::IoT1ClickProjects
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -118,7 +115,6 @@ module Aws::IoT1ClickProjects
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -139,7 +135,6 @@ module Aws::IoT1ClickProjects
       def message
         @message || @data[:message]
       end
-
     end
 
   end

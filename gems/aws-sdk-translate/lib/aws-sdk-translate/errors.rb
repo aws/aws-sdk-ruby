@@ -61,7 +61,6 @@ module Aws::Translate
       def detected_language_code
         @data[:detected_language_code]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -77,7 +76,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFilterException < ServiceError
@@ -93,7 +91,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -109,7 +106,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -125,7 +121,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -141,7 +136,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -157,7 +151,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -173,7 +166,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextSizeLimitExceededException < ServiceError
@@ -189,7 +181,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -205,7 +196,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedLanguagePairException < ServiceError
@@ -231,7 +221,6 @@ module Aws::Translate
       def target_language_code
         @data[:target_language_code]
       end
-
     end
 
   end

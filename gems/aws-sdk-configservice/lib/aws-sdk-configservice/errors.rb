@@ -91,7 +91,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientDeliveryPolicyException < ServiceError
@@ -102,7 +101,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientPermissionsException < ServiceError
@@ -113,7 +111,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidConfigurationRecorderNameException < ServiceError
@@ -124,7 +121,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDeliveryChannelNameException < ServiceError
@@ -135,7 +131,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidExpressionException < ServiceError
@@ -146,7 +141,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidLimitException < ServiceError
@@ -157,7 +151,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -168,7 +161,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -179,7 +171,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRecordingGroupException < ServiceError
@@ -190,7 +181,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidResultTokenException < ServiceError
@@ -201,7 +191,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRoleException < ServiceError
@@ -212,7 +201,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3KeyPrefixException < ServiceError
@@ -223,7 +211,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSNSTopicARNException < ServiceError
@@ -234,7 +221,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTimeRangeException < ServiceError
@@ -245,7 +231,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LastDeliveryChannelDeleteFailedException < ServiceError
@@ -256,7 +241,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -267,7 +251,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxActiveResourcesExceededException < ServiceError
@@ -278,7 +261,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfConfigRulesExceededException < ServiceError
@@ -289,7 +271,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfConfigurationRecordersExceededException < ServiceError
@@ -300,7 +281,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfConformancePacksExceededException < ServiceError
@@ -311,7 +291,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfDeliveryChannelsExceededException < ServiceError
@@ -322,7 +301,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfOrganizationConfigRulesExceededException < ServiceError
@@ -333,7 +311,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfOrganizationConformancePacksExceededException < ServiceError
@@ -344,7 +321,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MaxNumberOfRetentionConfigurationsExceededException < ServiceError
@@ -355,7 +331,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoAvailableConfigurationRecorderException < ServiceError
@@ -366,7 +341,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoAvailableDeliveryChannelException < ServiceError
@@ -377,7 +351,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoAvailableOrganizationException < ServiceError
@@ -388,7 +361,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoRunningConfigurationRecorderException < ServiceError
@@ -399,7 +371,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchBucketException < ServiceError
@@ -410,7 +381,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchConfigRuleException < ServiceError
@@ -421,7 +391,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchConfigRuleInConformancePackException < ServiceError
@@ -432,7 +401,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchConfigurationAggregatorException < ServiceError
@@ -443,7 +411,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchConfigurationRecorderException < ServiceError
@@ -454,7 +421,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchConformancePackException < ServiceError
@@ -465,7 +431,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchDeliveryChannelException < ServiceError
@@ -476,7 +441,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchOrganizationConfigRuleException < ServiceError
@@ -487,7 +451,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchOrganizationConformancePackException < ServiceError
@@ -498,7 +461,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchRemediationConfigurationException < ServiceError
@@ -509,7 +471,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchRemediationExceptionException < ServiceError
@@ -520,7 +481,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoSuchRetentionConfigurationException < ServiceError
@@ -531,7 +491,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OrganizationAccessDeniedException < ServiceError
@@ -542,7 +501,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OrganizationAllFeaturesNotEnabledException < ServiceError
@@ -553,7 +511,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OrganizationConformancePackTemplateValidationException < ServiceError
@@ -564,7 +521,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OversizedConfigurationItemException < ServiceError
@@ -575,7 +531,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class RemediationInProgressException < ServiceError
@@ -586,7 +541,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -597,7 +551,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotDiscoveredException < ServiceError
@@ -608,7 +561,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -619,7 +571,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -630,7 +581,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ValidationException < ServiceError
@@ -641,7 +591,6 @@ module Aws::ConfigService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

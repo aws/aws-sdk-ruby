@@ -58,7 +58,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccountChannelLimitExceededException < ServiceError
@@ -74,7 +73,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccountStreamLimitExceededException < ServiceError
@@ -90,7 +88,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class ClientLimitExceededException < ServiceError
@@ -106,7 +103,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeviceStreamLimitExceededException < ServiceError
@@ -122,7 +118,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -138,7 +133,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDeviceException < ServiceError
@@ -154,7 +148,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceFormatException < ServiceError
@@ -170,7 +163,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -186,7 +178,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -202,7 +193,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -218,7 +208,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagsPerResourceExceededLimitException < ServiceError
@@ -234,7 +223,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
     class VersionMismatchException < ServiceError
@@ -250,7 +238,6 @@ module Aws::KinesisVideo
       def message
         @message || @data[:message]
       end
-
     end
 
   end

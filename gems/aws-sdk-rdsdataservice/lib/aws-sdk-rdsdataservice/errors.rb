@@ -51,7 +51,6 @@ module Aws::RDSDataService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -67,7 +66,6 @@ module Aws::RDSDataService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -78,7 +76,6 @@ module Aws::RDSDataService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -94,7 +91,6 @@ module Aws::RDSDataService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableError < ServiceError
@@ -105,7 +101,6 @@ module Aws::RDSDataService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StatementTimeoutException < ServiceError
@@ -126,7 +121,6 @@ module Aws::RDSDataService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

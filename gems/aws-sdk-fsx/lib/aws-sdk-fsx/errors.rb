@@ -76,7 +76,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupInProgress < ServiceError
@@ -92,7 +91,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupNotFound < ServiceError
@@ -108,7 +106,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupRestoring < ServiceError
@@ -129,7 +126,6 @@ module Aws::FSx
       def file_system_id
         @data[:file_system_id]
       end
-
     end
 
     class BadRequest < ServiceError
@@ -145,7 +141,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class DataRepositoryTaskEnded < ServiceError
@@ -161,7 +156,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class DataRepositoryTaskExecuting < ServiceError
@@ -177,7 +171,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class DataRepositoryTaskNotFound < ServiceError
@@ -193,7 +186,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemNotFound < ServiceError
@@ -209,7 +201,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatibleParameterError < ServiceError
@@ -230,7 +221,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -246,7 +236,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidExportPath < ServiceError
@@ -262,7 +251,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidImportPath < ServiceError
@@ -278,7 +266,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNetworkSettings < ServiceError
@@ -304,7 +291,6 @@ module Aws::FSx
       def invalid_security_group_id
         @data[:invalid_security_group_id]
       end
-
     end
 
     class InvalidPerUnitStorageThroughput < ServiceError
@@ -320,7 +306,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingFileSystemConfiguration < ServiceError
@@ -336,7 +321,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotServiceResourceError < ServiceError
@@ -357,7 +341,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDoesNotSupportTagging < ServiceError
@@ -378,7 +361,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFound < ServiceError
@@ -399,7 +381,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceLimitExceeded < ServiceError
@@ -420,7 +401,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedOperation < ServiceError
@@ -436,7 +416,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
   end

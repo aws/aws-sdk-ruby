@@ -54,7 +54,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class Ec2RequestFailedException < ServiceError
@@ -70,7 +69,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAddressException < ServiceError
@@ -86,7 +84,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputCombinationException < ServiceError
@@ -102,7 +99,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidJobStateException < ServiceError
@@ -118,7 +114,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -134,7 +129,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceException < ServiceError
@@ -155,7 +149,6 @@ module Aws::Snowball
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class KMSRequestFailedException < ServiceError
@@ -171,7 +164,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAddressException < ServiceError
@@ -187,7 +179,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
   end

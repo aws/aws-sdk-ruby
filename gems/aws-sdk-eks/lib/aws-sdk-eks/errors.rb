@@ -56,7 +56,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ClientException < ServiceError
@@ -82,7 +81,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -113,7 +111,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -139,7 +136,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -155,7 +151,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -181,7 +176,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -207,7 +201,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -238,7 +231,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerException < ServiceError
@@ -264,7 +256,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -280,7 +271,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAvailabilityZoneException < ServiceError
@@ -311,7 +301,6 @@ module Aws::EKS
       def valid_zones
         @data[:valid_zones]
       end
-
     end
 
   end

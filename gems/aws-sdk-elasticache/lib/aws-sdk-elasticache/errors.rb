@@ -92,7 +92,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationAlreadyExistsFault < ServiceError
@@ -103,7 +102,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationNotFoundFault < ServiceError
@@ -114,7 +112,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheClusterAlreadyExistsFault < ServiceError
@@ -125,7 +122,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheClusterNotFoundFault < ServiceError
@@ -136,7 +132,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheParameterGroupAlreadyExistsFault < ServiceError
@@ -147,7 +142,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheParameterGroupNotFoundFault < ServiceError
@@ -158,7 +152,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheParameterGroupQuotaExceededFault < ServiceError
@@ -169,7 +162,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSecurityGroupAlreadyExistsFault < ServiceError
@@ -180,7 +172,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSecurityGroupNotFoundFault < ServiceError
@@ -191,7 +182,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSecurityGroupQuotaExceededFault < ServiceError
@@ -202,7 +192,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSubnetGroupAlreadyExistsFault < ServiceError
@@ -213,7 +202,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSubnetGroupInUse < ServiceError
@@ -224,7 +212,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSubnetGroupNotFoundFault < ServiceError
@@ -235,7 +222,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSubnetGroupQuotaExceededFault < ServiceError
@@ -246,7 +232,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CacheSubnetQuotaExceededFault < ServiceError
@@ -257,7 +242,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterQuotaForCustomerExceededFault < ServiceError
@@ -268,7 +252,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientCacheClusterCapacityFault < ServiceError
@@ -279,7 +262,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidARNFault < ServiceError
@@ -290,7 +272,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCacheClusterStateFault < ServiceError
@@ -301,7 +282,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCacheParameterGroupStateFault < ServiceError
@@ -312,7 +292,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidCacheSecurityGroupStateFault < ServiceError
@@ -323,7 +302,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidKMSKeyFault < ServiceError
@@ -334,7 +312,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -350,7 +327,6 @@ module Aws::ElastiCache
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -366,7 +342,6 @@ module Aws::ElastiCache
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidReplicationGroupStateFault < ServiceError
@@ -377,7 +352,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSnapshotStateFault < ServiceError
@@ -388,7 +362,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSubnet < ServiceError
@@ -399,7 +372,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidVPCNetworkStateFault < ServiceError
@@ -410,7 +382,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NoOperationFault < ServiceError
@@ -421,7 +392,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeGroupNotFoundFault < ServiceError
@@ -432,7 +402,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeGroupsPerReplicationGroupQuotaExceededFault < ServiceError
@@ -443,7 +412,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeQuotaForClusterExceededFault < ServiceError
@@ -454,7 +422,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NodeQuotaForCustomerExceededFault < ServiceError
@@ -465,7 +432,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReplicationGroupAlreadyExistsFault < ServiceError
@@ -476,7 +442,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReplicationGroupAlreadyUnderMigrationFault < ServiceError
@@ -487,7 +452,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReplicationGroupNotFoundFault < ServiceError
@@ -498,7 +462,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReplicationGroupNotUnderMigrationFault < ServiceError
@@ -509,7 +472,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedCacheNodeAlreadyExistsFault < ServiceError
@@ -520,7 +482,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedCacheNodeNotFoundFault < ServiceError
@@ -531,7 +492,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedCacheNodeQuotaExceededFault < ServiceError
@@ -542,7 +502,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedCacheNodesOfferingNotFoundFault < ServiceError
@@ -553,7 +512,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ServiceLinkedRoleNotFoundFault < ServiceError
@@ -564,7 +522,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ServiceUpdateNotFoundFault < ServiceError
@@ -575,7 +532,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotAlreadyExistsFault < ServiceError
@@ -586,7 +542,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotFeatureNotSupportedFault < ServiceError
@@ -597,7 +552,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotNotFoundFault < ServiceError
@@ -608,7 +562,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotQuotaExceededFault < ServiceError
@@ -619,7 +572,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetInUse < ServiceError
@@ -630,7 +582,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagNotFoundFault < ServiceError
@@ -641,7 +592,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagQuotaPerResourceExceeded < ServiceError
@@ -652,7 +602,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TestFailoverNotAvailableFault < ServiceError
@@ -663,7 +612,6 @@ module Aws::ElastiCache
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

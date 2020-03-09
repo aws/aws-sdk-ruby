@@ -53,7 +53,6 @@ module Aws::ElasticsearchService
       def message
         @message || @data[:message]
       end
-
     end
 
     class DisabledOperationException < ServiceError
@@ -64,7 +63,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalException < ServiceError
@@ -75,7 +73,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTypeException < ServiceError
@@ -86,7 +83,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -97,7 +93,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -108,7 +103,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -119,7 +113,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ValidationException < ServiceError
@@ -130,7 +123,6 @@ module Aws::ElasticsearchService
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

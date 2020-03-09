@@ -56,7 +56,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -72,7 +71,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingRequiredParameterException < ServiceError
@@ -88,7 +86,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoConnectorsAvailableException < ServiceError
@@ -104,7 +101,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -120,7 +116,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationJobAlreadyExistsException < ServiceError
@@ -136,7 +131,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationJobNotFoundException < ServiceError
@@ -152,7 +146,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationRunLimitExceededException < ServiceError
@@ -168,7 +161,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerCannotBeReplicatedException < ServiceError
@@ -184,7 +176,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TemporarilyUnavailableException < ServiceError
@@ -195,7 +186,6 @@ module Aws::SMS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnauthorizedOperationException < ServiceError
@@ -211,7 +201,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

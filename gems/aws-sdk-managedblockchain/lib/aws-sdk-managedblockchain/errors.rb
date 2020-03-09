@@ -49,7 +49,6 @@ module Aws::ManagedBlockchain
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IllegalActionException < ServiceError
@@ -65,7 +64,6 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceErrorException < ServiceError
@@ -76,7 +74,6 @@ module Aws::ManagedBlockchain
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -92,7 +89,6 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -108,7 +104,6 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -124,7 +119,6 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -140,7 +134,6 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotReadyException < ServiceError
@@ -156,7 +149,6 @@ module Aws::ManagedBlockchain
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -167,7 +159,6 @@ module Aws::ManagedBlockchain
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

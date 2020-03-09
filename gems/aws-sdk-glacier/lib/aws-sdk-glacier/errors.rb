@@ -63,7 +63,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -89,7 +88,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -115,7 +113,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingParameterValueException < ServiceError
@@ -141,7 +138,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyEnforcedException < ServiceError
@@ -167,7 +163,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestTimeoutException < ServiceError
@@ -193,7 +188,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -219,7 +213,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -245,7 +238,6 @@ module Aws::Glacier
       def message
         @message || @data[:message]
       end
-
     end
 
   end

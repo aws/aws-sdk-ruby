@@ -59,7 +59,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValuesException < ServiceError
@@ -75,7 +74,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceStateException < ServiceError
@@ -91,7 +89,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationInProgressException < ServiceError
@@ -107,7 +104,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotSupportedException < ServiceError
@@ -123,7 +119,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -139,7 +134,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAssociatedException < ServiceError
@@ -155,7 +149,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceCreationFailedException < ServiceError
@@ -171,7 +164,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -187,7 +179,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -208,7 +199,6 @@ module Aws::WorkSpaces
       def resource_id
         @data[:resource_id]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -229,7 +219,6 @@ module Aws::WorkSpaces
       def resource_id
         @data[:resource_id]
       end
-
     end
 
     class UnsupportedNetworkConfigurationException < ServiceError
@@ -245,7 +234,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedWorkspaceConfigurationException < ServiceError
@@ -261,7 +249,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
     class WorkspacesDefaultRoleNotFoundException < ServiceError
@@ -277,7 +264,6 @@ module Aws::WorkSpaces
       def message
         @message || @data[:message]
       end
-
     end
 
   end

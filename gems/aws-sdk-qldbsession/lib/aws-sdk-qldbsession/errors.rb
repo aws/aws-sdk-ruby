@@ -55,7 +55,6 @@ module Aws::QLDBSession
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidSessionException < ServiceError
@@ -76,7 +75,6 @@ module Aws::QLDBSession
       def code
         @code || @data[:code]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -92,7 +90,6 @@ module Aws::QLDBSession
       def message
         @message || @data[:message]
       end
-
     end
 
     class OccConflictException < ServiceError
@@ -108,7 +105,6 @@ module Aws::QLDBSession
       def message
         @message || @data[:message]
       end
-
     end
 
     class RateExceededException < ServiceError
@@ -124,7 +120,6 @@ module Aws::QLDBSession
       def message
         @message || @data[:message]
       end
-
     end
 
   end

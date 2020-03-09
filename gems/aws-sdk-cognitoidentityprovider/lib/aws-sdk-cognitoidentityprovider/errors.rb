@@ -82,7 +82,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class CodeDeliveryFailureException < ServiceError
@@ -98,7 +97,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class CodeMismatchException < ServiceError
@@ -114,7 +112,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -130,7 +127,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateProviderException < ServiceError
@@ -146,7 +142,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class EnableSoftwareTokenMFAException < ServiceError
@@ -162,7 +157,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExpiredCodeException < ServiceError
@@ -178,7 +172,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class GroupExistsException < ServiceError
@@ -194,7 +187,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -210,7 +202,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidEmailRoleAccessPolicyException < ServiceError
@@ -226,7 +217,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLambdaResponseException < ServiceError
@@ -242,7 +232,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOAuthFlowException < ServiceError
@@ -258,7 +247,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -274,7 +262,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPasswordException < ServiceError
@@ -290,7 +277,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSmsRoleAccessPolicyException < ServiceError
@@ -306,7 +292,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSmsRoleTrustRelationshipException < ServiceError
@@ -322,7 +307,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidUserPoolConfigurationException < ServiceError
@@ -338,7 +322,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -354,7 +337,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class MFAMethodNotFoundException < ServiceError
@@ -370,7 +352,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -386,7 +367,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class PasswordResetRequiredException < ServiceError
@@ -402,7 +382,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class PreconditionNotMetException < ServiceError
@@ -418,7 +397,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -434,7 +412,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class ScopeDoesNotExistException < ServiceError
@@ -450,7 +427,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class SoftwareTokenMFANotFoundException < ServiceError
@@ -466,7 +442,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyFailedAttemptsException < ServiceError
@@ -482,7 +457,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -498,7 +472,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnexpectedLambdaException < ServiceError
@@ -514,7 +487,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedIdentityProviderException < ServiceError
@@ -530,7 +502,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedUserStateException < ServiceError
@@ -546,7 +517,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UserImportInProgressException < ServiceError
@@ -562,7 +532,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UserLambdaValidationException < ServiceError
@@ -578,7 +547,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UserNotConfirmedException < ServiceError
@@ -594,7 +562,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UserNotFoundException < ServiceError
@@ -610,7 +577,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UserPoolAddOnNotEnabledException < ServiceError
@@ -626,7 +592,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UserPoolTaggingException < ServiceError
@@ -642,7 +607,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
     class UsernameExistsException < ServiceError
@@ -658,7 +622,6 @@ module Aws::CognitoIdentityProvider
       def message
         @message || @data[:message]
       end
-
     end
 
   end

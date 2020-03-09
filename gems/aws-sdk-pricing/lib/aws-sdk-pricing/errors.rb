@@ -50,7 +50,6 @@ module Aws::Pricing
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -66,7 +65,6 @@ module Aws::Pricing
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -82,7 +80,6 @@ module Aws::Pricing
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -98,7 +95,6 @@ module Aws::Pricing
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -114,7 +110,6 @@ module Aws::Pricing
       def message
         @message || @data[:message]
       end
-
     end
 
   end

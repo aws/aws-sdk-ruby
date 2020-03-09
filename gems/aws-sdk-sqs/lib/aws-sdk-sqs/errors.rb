@@ -56,7 +56,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BatchRequestTooLong < ServiceError
@@ -67,7 +66,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EmptyBatchRequest < ServiceError
@@ -78,7 +76,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidAttributeName < ServiceError
@@ -89,7 +86,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidBatchEntryId < ServiceError
@@ -100,7 +96,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidIdFormat < ServiceError
@@ -111,7 +106,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidMessageContents < ServiceError
@@ -122,7 +116,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class MessageNotInflight < ServiceError
@@ -133,7 +126,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OverLimit < ServiceError
@@ -144,7 +136,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PurgeQueueInProgress < ServiceError
@@ -155,7 +146,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class QueueDeletedRecently < ServiceError
@@ -166,7 +156,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class QueueDoesNotExist < ServiceError
@@ -177,7 +166,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class QueueNameExists < ServiceError
@@ -188,7 +176,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReceiptHandleIsInvalid < ServiceError
@@ -199,7 +186,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TooManyEntriesInBatchRequest < ServiceError
@@ -210,7 +196,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedOperation < ServiceError
@@ -221,7 +206,6 @@ module Aws::SQS
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

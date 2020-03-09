@@ -56,7 +56,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -72,7 +71,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -88,7 +86,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class DependencyFailedException < ServiceError
@@ -104,7 +101,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -120,7 +116,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -141,7 +136,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class LoopDetectedException < ServiceError
@@ -157,7 +151,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAcceptableException < ServiceError
@@ -173,7 +166,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -189,7 +181,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestTimeoutException < ServiceError
@@ -205,7 +196,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedMediaTypeException < ServiceError
@@ -221,7 +211,6 @@ module Aws::Lex
       def message
         @message || @data[:message]
       end
-
     end
 
   end

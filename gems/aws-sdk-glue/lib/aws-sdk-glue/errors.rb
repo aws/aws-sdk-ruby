@@ -67,7 +67,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class AlreadyExistsException < ServiceError
@@ -83,7 +82,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -99,7 +97,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentRunsExceededException < ServiceError
@@ -115,7 +112,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConditionCheckFailureException < ServiceError
@@ -131,7 +127,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class CrawlerNotRunningException < ServiceError
@@ -147,7 +142,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class CrawlerRunningException < ServiceError
@@ -163,7 +157,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class CrawlerStoppingException < ServiceError
@@ -179,7 +172,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotFoundException < ServiceError
@@ -195,7 +187,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class GlueEncryptionException < ServiceError
@@ -211,7 +202,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -227,7 +217,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -243,7 +232,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -259,7 +247,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class MLTransformNotReadyException < ServiceError
@@ -275,7 +262,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoScheduleException < ServiceError
@@ -291,7 +277,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationTimeoutException < ServiceError
@@ -307,7 +292,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNumberLimitExceededException < ServiceError
@@ -323,7 +307,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchedulerNotRunningException < ServiceError
@@ -339,7 +322,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchedulerRunningException < ServiceError
@@ -355,7 +337,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchedulerTransitioningException < ServiceError
@@ -371,7 +352,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -387,7 +367,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class VersionMismatchException < ServiceError
@@ -403,7 +382,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
   end

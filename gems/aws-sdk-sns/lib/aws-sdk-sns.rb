@@ -49,6 +49,6 @@ require_relative 'aws-sdk-sns/customizations'
 # @service
 module Aws::SNS
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

@@ -49,7 +49,6 @@ module Aws::AppConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -65,7 +64,6 @@ module Aws::AppConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -81,7 +79,6 @@ module Aws::AppConfig
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -102,7 +99,6 @@ module Aws::AppConfig
       def resource_name
         @data[:resource_name]
       end
-
     end
 
   end

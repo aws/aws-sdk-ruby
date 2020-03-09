@@ -46,7 +46,6 @@ module Aws::WorkMailMessageFlow
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -3413,6 +3413,7 @@ module Aws::MediaLive
     #       {
     #         multiplex_id: "__string", # required
     #         multiplex_program_settings: { # required
+    #           preferred_channel_pipeline: "CURRENTLY_ACTIVE", # accepts CURRENTLY_ACTIVE, PIPELINE_0, PIPELINE_1
     #           program_number: 1, # required
     #           service_descriptor: {
     #             provider_name: "__stringMax256", # required
@@ -10123,6 +10124,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         preferred_channel_pipeline: "CURRENTLY_ACTIVE", # accepts CURRENTLY_ACTIVE, PIPELINE_0, PIPELINE_1
     #         program_number: 1, # required
     #         service_descriptor: {
     #           provider_name: "__stringMax256", # required
@@ -10136,6 +10138,11 @@ module Aws::MediaLive
     #           },
     #         },
     #       }
+    #
+    # @!attribute [rw] preferred_channel_pipeline
+    #   Indicates which pipeline is preferred by the multiplex for program
+    #   ingest.
+    #   @return [String]
     #
     # @!attribute [rw] program_number
     #   Unique program number.
@@ -10153,6 +10160,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramSettings AWS API Documentation
     #
     class MultiplexProgramSettings < Struct.new(
+      :preferred_channel_pipeline,
       :program_number,
       :service_descriptor,
       :video_settings)
@@ -15146,6 +15154,7 @@ module Aws::MediaLive
     #       {
     #         multiplex_id: "__string", # required
     #         multiplex_program_settings: {
+    #           preferred_channel_pipeline: "CURRENTLY_ACTIVE", # accepts CURRENTLY_ACTIVE, PIPELINE_0, PIPELINE_1
     #           program_number: 1, # required
     #           service_descriptor: {
     #             provider_name: "__stringMax256", # required

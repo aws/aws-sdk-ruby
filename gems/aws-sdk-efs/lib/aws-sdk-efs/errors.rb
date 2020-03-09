@@ -81,7 +81,6 @@ module Aws::EFS
       def access_point_id
         @data[:access_point_id]
       end
-
     end
 
     class AccessPointLimitExceeded < ServiceError
@@ -102,7 +101,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessPointNotFound < ServiceError
@@ -123,7 +121,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequest < ServiceError
@@ -144,7 +141,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class DependencyTimeout < ServiceError
@@ -165,7 +161,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemAlreadyExists < ServiceError
@@ -191,7 +186,6 @@ module Aws::EFS
       def file_system_id
         @data[:file_system_id]
       end
-
     end
 
     class FileSystemInUse < ServiceError
@@ -212,7 +206,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemLimitExceeded < ServiceError
@@ -233,7 +226,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemNotFound < ServiceError
@@ -254,7 +246,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectFileSystemLifeCycleState < ServiceError
@@ -275,7 +266,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectMountTargetState < ServiceError
@@ -296,7 +286,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InsufficientThroughputCapacity < ServiceError
@@ -317,7 +306,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -338,7 +326,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPolicyException < ServiceError
@@ -359,7 +346,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IpAddressInUse < ServiceError
@@ -380,7 +366,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MountTargetConflict < ServiceError
@@ -401,7 +386,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MountTargetNotFound < ServiceError
@@ -422,7 +406,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NetworkInterfaceLimitExceeded < ServiceError
@@ -443,7 +426,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoFreeAddressesInSubnet < ServiceError
@@ -464,7 +446,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotFound < ServiceError
@@ -485,7 +466,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SecurityGroupLimitExceeded < ServiceError
@@ -506,7 +486,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SecurityGroupNotFound < ServiceError
@@ -527,7 +506,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SubnetNotFound < ServiceError
@@ -548,7 +526,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThroughputLimitExceeded < ServiceError
@@ -569,7 +546,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequests < ServiceError
@@ -590,7 +566,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAvailabilityZone < ServiceError
@@ -611,7 +586,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -52,7 +52,6 @@ module Aws::Greengrass
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -73,7 +72,6 @@ module Aws::Greengrass
       def message
         @message || @data[:message]
       end
-
     end
 
   end

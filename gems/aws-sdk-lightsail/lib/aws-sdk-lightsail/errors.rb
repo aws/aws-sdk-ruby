@@ -67,7 +67,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
     class AccountSetupInProgressException < ServiceError
@@ -98,7 +97,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -129,7 +127,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -160,7 +157,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
     class OperationFailureException < ServiceError
@@ -191,7 +187,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -222,7 +217,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
     class UnauthenticatedException < ServiceError
@@ -253,7 +247,6 @@ module Aws::Lightsail
       def tip
         @data[:tip]
       end
-
     end
 
   end

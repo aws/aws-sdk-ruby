@@ -99,7 +99,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CertificateNotFoundFault < ServiceError
@@ -110,7 +109,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterAlreadyExistsFault < ServiceError
@@ -121,7 +119,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterNotFoundFault < ServiceError
@@ -132,7 +129,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterParameterGroupNotFoundFault < ServiceError
@@ -143,7 +139,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterQuotaExceededFault < ServiceError
@@ -154,7 +149,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterRoleAlreadyExistsFault < ServiceError
@@ -165,7 +159,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterRoleNotFoundFault < ServiceError
@@ -176,7 +169,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterRoleQuotaExceededFault < ServiceError
@@ -187,7 +179,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterSnapshotAlreadyExistsFault < ServiceError
@@ -198,7 +189,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBClusterSnapshotNotFoundFault < ServiceError
@@ -209,7 +199,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceAlreadyExistsFault < ServiceError
@@ -220,7 +209,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBInstanceNotFoundFault < ServiceError
@@ -231,7 +219,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBParameterGroupAlreadyExistsFault < ServiceError
@@ -242,7 +229,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBParameterGroupNotFoundFault < ServiceError
@@ -253,7 +239,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBParameterGroupQuotaExceededFault < ServiceError
@@ -264,7 +249,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSecurityGroupNotFoundFault < ServiceError
@@ -275,7 +259,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSnapshotAlreadyExistsFault < ServiceError
@@ -286,7 +269,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSnapshotNotFoundFault < ServiceError
@@ -297,7 +279,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupAlreadyExistsFault < ServiceError
@@ -308,7 +289,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupDoesNotCoverEnoughAZs < ServiceError
@@ -319,7 +299,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupNotFoundFault < ServiceError
@@ -330,7 +309,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetGroupQuotaExceededFault < ServiceError
@@ -341,7 +319,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBSubnetQuotaExceededFault < ServiceError
@@ -352,7 +329,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DBUpgradeDependencyFailureFault < ServiceError
@@ -363,7 +339,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DomainNotFoundFault < ServiceError
@@ -374,7 +349,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EventSubscriptionQuotaExceededFault < ServiceError
@@ -385,7 +359,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InstanceQuotaExceededFault < ServiceError
@@ -396,7 +369,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientDBClusterCapacityFault < ServiceError
@@ -407,7 +379,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientDBInstanceCapacityFault < ServiceError
@@ -418,7 +389,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientStorageClusterCapacityFault < ServiceError
@@ -429,7 +399,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBClusterSnapshotStateFault < ServiceError
@@ -440,7 +409,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBClusterStateFault < ServiceError
@@ -451,7 +419,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBInstanceStateFault < ServiceError
@@ -462,7 +429,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBParameterGroupStateFault < ServiceError
@@ -473,7 +439,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSecurityGroupStateFault < ServiceError
@@ -484,7 +449,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSnapshotStateFault < ServiceError
@@ -495,7 +459,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSubnetGroupStateFault < ServiceError
@@ -506,7 +469,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidDBSubnetStateFault < ServiceError
@@ -517,7 +479,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidEventSubscriptionStateFault < ServiceError
@@ -528,7 +489,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRestoreFault < ServiceError
@@ -539,7 +499,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSubnet < ServiceError
@@ -550,7 +509,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidVPCNetworkStateFault < ServiceError
@@ -561,7 +519,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class KMSKeyNotAccessibleFault < ServiceError
@@ -572,7 +529,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OptionGroupNotFoundFault < ServiceError
@@ -583,7 +539,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProvisionedIopsNotAvailableInAZFault < ServiceError
@@ -594,7 +549,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundFault < ServiceError
@@ -605,7 +559,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSInvalidTopicFault < ServiceError
@@ -616,7 +569,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSNoAuthorizationFault < ServiceError
@@ -627,7 +579,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSTopicArnNotFoundFault < ServiceError
@@ -638,7 +589,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SharedSnapshotQuotaExceededFault < ServiceError
@@ -649,7 +599,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotQuotaExceededFault < ServiceError
@@ -660,7 +609,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SourceNotFoundFault < ServiceError
@@ -671,7 +619,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StorageQuotaExceededFault < ServiceError
@@ -682,7 +629,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StorageTypeNotSupportedFault < ServiceError
@@ -693,7 +639,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetAlreadyInUse < ServiceError
@@ -704,7 +649,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionAlreadyExistFault < ServiceError
@@ -715,7 +659,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionCategoryNotFoundFault < ServiceError
@@ -726,7 +669,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionNotFoundFault < ServiceError
@@ -737,7 +679,6 @@ module Aws::Neptune
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

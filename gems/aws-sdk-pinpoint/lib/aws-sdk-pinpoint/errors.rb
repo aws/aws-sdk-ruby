@@ -57,7 +57,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -78,7 +77,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -99,7 +97,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
     class MethodNotAllowedException < ServiceError
@@ -120,7 +117,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -141,7 +137,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
     class PayloadTooLargeException < ServiceError
@@ -162,7 +157,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -183,7 +177,6 @@ module Aws::Pinpoint
       def request_id
         @data[:request_id]
       end
-
     end
 
   end

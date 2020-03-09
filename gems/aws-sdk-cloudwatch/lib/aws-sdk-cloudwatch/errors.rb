@@ -53,7 +53,6 @@ module Aws::CloudWatch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DashboardInvalidInputError < ServiceError
@@ -74,7 +73,6 @@ module Aws::CloudWatch
       def dashboard_validation_messages
         @data[:dashboard_validation_messages]
       end
-
     end
 
     class DashboardNotFoundError < ServiceError
@@ -90,7 +88,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceFault < ServiceError
@@ -106,7 +103,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFormatFault < ServiceError
@@ -122,7 +118,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextToken < ServiceError
@@ -138,7 +133,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -154,7 +148,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -170,7 +163,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -181,7 +173,6 @@ module Aws::CloudWatch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededFault < ServiceError
@@ -197,7 +188,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingRequiredParameterException < ServiceError
@@ -213,7 +203,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFound < ServiceError
@@ -229,7 +218,6 @@ module Aws::CloudWatch
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -250,7 +238,6 @@ module Aws::CloudWatch
       def resource_id
         @data[:resource_id]
       end
-
     end
 
   end

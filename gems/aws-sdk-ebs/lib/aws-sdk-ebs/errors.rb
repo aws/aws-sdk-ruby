@@ -47,7 +47,6 @@ module Aws::EBS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -68,7 +67,6 @@ module Aws::EBS
       def reason
         @data[:reason]
       end
-
     end
 
   end

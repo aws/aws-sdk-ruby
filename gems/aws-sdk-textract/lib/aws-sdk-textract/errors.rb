@@ -53,7 +53,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BadDocumentException < ServiceError
@@ -64,7 +63,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DocumentTooLargeException < ServiceError
@@ -75,7 +73,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HumanLoopQuotaExceededException < ServiceError
@@ -101,7 +98,6 @@ module Aws::Textract
       def service_code
         @data[:service_code]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -112,7 +108,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -123,7 +118,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidJobIdException < ServiceError
@@ -134,7 +128,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -145,7 +138,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3ObjectException < ServiceError
@@ -156,7 +148,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -167,7 +158,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ProvisionedThroughputExceededException < ServiceError
@@ -178,7 +168,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -189,7 +178,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedDocumentException < ServiceError
@@ -200,7 +188,6 @@ module Aws::Textract
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

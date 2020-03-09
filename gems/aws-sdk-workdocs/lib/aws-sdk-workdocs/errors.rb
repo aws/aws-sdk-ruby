@@ -70,7 +70,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictingOperationException < ServiceError
@@ -86,7 +85,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomMetadataLimitExceededException < ServiceError
@@ -102,7 +100,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeactivatingLastSystemUserException < ServiceError
@@ -113,7 +110,6 @@ module Aws::WorkDocs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DocumentLockedForCommentsException < ServiceError
@@ -129,7 +125,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class DraftUploadOutOfSyncException < ServiceError
@@ -145,7 +140,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityAlreadyExistsException < ServiceError
@@ -161,7 +155,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotExistsException < ServiceError
@@ -182,7 +175,6 @@ module Aws::WorkDocs
       def entity_ids
         @data[:entity_ids]
       end
-
     end
 
     class FailedDependencyException < ServiceError
@@ -198,7 +190,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class IllegalUserStateException < ServiceError
@@ -214,7 +205,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -230,7 +220,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCommentOperationException < ServiceError
@@ -246,7 +235,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -262,7 +250,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPasswordException < ServiceError
@@ -278,7 +265,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -294,7 +280,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ProhibitedStateException < ServiceError
@@ -310,7 +295,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestedEntityTooLargeException < ServiceError
@@ -326,7 +310,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyCheckedOutException < ServiceError
@@ -342,7 +325,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -358,7 +340,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class StorageLimitExceededException < ServiceError
@@ -374,7 +355,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class StorageLimitWillExceedException < ServiceError
@@ -390,7 +370,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyLabelsException < ServiceError
@@ -406,7 +385,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManySubscriptionsException < ServiceError
@@ -422,7 +400,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedOperationException < ServiceError
@@ -433,7 +410,6 @@ module Aws::WorkDocs
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnauthorizedResourceAccessException < ServiceError
@@ -449,7 +425,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -52,7 +52,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -68,7 +67,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -89,7 +87,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -105,7 +102,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -126,7 +122,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -147,7 +142,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -163,7 +157,6 @@ module Aws::APIGateway
       def message
         @message || @data[:message]
       end
-
     end
 
   end

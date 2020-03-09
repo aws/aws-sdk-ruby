@@ -45,6 +45,6 @@ require_relative 'aws-sdk-states/customizations'
 # @service
 module Aws::States
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

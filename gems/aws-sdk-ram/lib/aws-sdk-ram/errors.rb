@@ -66,7 +66,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidClientTokenException < ServiceError
@@ -82,7 +81,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidMaxResultsException < ServiceError
@@ -98,7 +96,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -114,7 +111,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -130,7 +126,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceTypeException < ServiceError
@@ -146,7 +141,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateTransitionException < ServiceError
@@ -162,7 +156,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedArnException < ServiceError
@@ -178,7 +171,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingRequiredParameterException < ServiceError
@@ -194,7 +186,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -210,7 +201,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceArnNotFoundException < ServiceError
@@ -226,7 +216,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationAlreadyAcceptedException < ServiceError
@@ -242,7 +231,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationAlreadyRejectedException < ServiceError
@@ -258,7 +246,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationArnNotFoundException < ServiceError
@@ -274,7 +261,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationExpiredException < ServiceError
@@ -290,7 +276,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareLimitExceededException < ServiceError
@@ -306,7 +291,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerInternalException < ServiceError
@@ -322,7 +306,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -338,7 +321,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagLimitExceededException < ServiceError
@@ -354,7 +336,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagPolicyViolationException < ServiceError
@@ -370,7 +351,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnknownResourceException < ServiceError
@@ -386,7 +366,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

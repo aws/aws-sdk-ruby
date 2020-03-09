@@ -53,7 +53,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -69,7 +68,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -85,7 +83,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingAuthenticationToken < ServiceError
@@ -101,7 +98,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class OptInRequiredException < ServiceError
@@ -117,7 +113,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -133,7 +128,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -149,7 +143,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -165,7 +158,6 @@ module Aws::ComputeOptimizer
       def message
         @message || @data[:message]
       end
-
     end
 
   end

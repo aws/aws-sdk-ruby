@@ -58,7 +58,6 @@ module Aws::MachineLearning
       def code
         @code || @data[:code]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -79,7 +78,6 @@ module Aws::MachineLearning
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -100,7 +98,6 @@ module Aws::MachineLearning
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -116,7 +113,6 @@ module Aws::MachineLearning
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -137,7 +133,6 @@ module Aws::MachineLearning
       def code
         @code || @data[:code]
       end
-
     end
 
     class PredictorNotMountedException < ServiceError
@@ -153,7 +148,6 @@ module Aws::MachineLearning
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -174,7 +168,6 @@ module Aws::MachineLearning
       def code
         @code || @data[:code]
       end
-
     end
 
     class TagLimitExceededException < ServiceError
@@ -190,7 +183,6 @@ module Aws::MachineLearning
       def message
         @message || @data[:message]
       end
-
     end
 
   end

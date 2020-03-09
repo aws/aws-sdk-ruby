@@ -51,7 +51,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRequest < ServiceError
@@ -67,7 +66,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInput < ServiceError
@@ -83,7 +81,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationLimitExceeded < ServiceError
@@ -99,7 +96,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class TLDRulesViolation < ServiceError
@@ -115,7 +111,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedTLD < ServiceError
@@ -131,7 +126,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
   end

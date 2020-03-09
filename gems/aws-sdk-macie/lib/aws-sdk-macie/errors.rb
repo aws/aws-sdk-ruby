@@ -54,7 +54,6 @@ module Aws::Macie
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalException < ServiceError
@@ -75,7 +74,6 @@ module Aws::Macie
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -101,7 +99,6 @@ module Aws::Macie
       def field_name
         @data[:field_name]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -127,7 +124,6 @@ module Aws::Macie
       def resource_type
         @data[:resource_type]
       end
-
     end
 
   end

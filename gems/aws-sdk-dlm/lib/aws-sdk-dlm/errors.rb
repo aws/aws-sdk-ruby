@@ -54,7 +54,6 @@ module Aws::DLM
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -85,7 +84,6 @@ module Aws::DLM
       def mutually_exclusive_parameters
         @data[:mutually_exclusive_parameters]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -111,7 +109,6 @@ module Aws::DLM
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -142,7 +139,6 @@ module Aws::DLM
       def resource_ids
         @data[:resource_ids]
       end
-
     end
 
   end

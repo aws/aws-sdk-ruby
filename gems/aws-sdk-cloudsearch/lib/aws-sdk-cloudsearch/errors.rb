@@ -57,7 +57,6 @@ module Aws::CloudSearch
       def message
         @message || @data[:message]
       end
-
     end
 
     class DisabledOperationException < ServiceError
@@ -68,7 +67,6 @@ module Aws::CloudSearch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalException < ServiceError
@@ -79,7 +77,6 @@ module Aws::CloudSearch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTypeException < ServiceError
@@ -90,7 +87,6 @@ module Aws::CloudSearch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -101,7 +97,6 @@ module Aws::CloudSearch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -112,7 +107,6 @@ module Aws::CloudSearch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ValidationException < ServiceError
@@ -123,7 +117,6 @@ module Aws::CloudSearch
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

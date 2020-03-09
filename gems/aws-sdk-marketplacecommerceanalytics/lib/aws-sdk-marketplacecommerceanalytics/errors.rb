@@ -46,7 +46,6 @@ module Aws::MarketplaceCommerceAnalytics
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -55,7 +55,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -71,7 +70,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -87,7 +85,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class MethodNotAllowedException < ServiceError
@@ -103,7 +100,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestEntityTooLargeException < ServiceError
@@ -119,7 +115,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -135,7 +130,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -151,7 +145,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -167,7 +160,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -183,7 +175,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedDocumentEncodingException < ServiceError
@@ -199,7 +190,6 @@ module Aws::IoTDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -60,7 +60,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CFNRegistryException < ServiceError
@@ -76,7 +75,6 @@ module Aws::CloudFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class ChangeSetNotFoundException < ServiceError
@@ -87,7 +85,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CreatedButModifiedException < ServiceError
@@ -98,7 +95,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientCapabilitiesException < ServiceError
@@ -109,7 +105,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidChangeSetStatusException < ServiceError
@@ -120,7 +115,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -131,7 +125,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidStateTransitionException < ServiceError
@@ -142,7 +135,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -153,7 +145,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NameAlreadyExistsException < ServiceError
@@ -164,7 +155,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationIdAlreadyExistsException < ServiceError
@@ -175,7 +165,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationInProgressException < ServiceError
@@ -186,7 +175,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationNotFoundException < ServiceError
@@ -197,7 +185,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class OperationStatusCheckFailedException < ServiceError
@@ -208,7 +195,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StackInstanceNotFoundException < ServiceError
@@ -219,7 +205,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StackSetNotEmptyException < ServiceError
@@ -230,7 +215,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StackSetNotFoundException < ServiceError
@@ -241,7 +225,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class StaleRequestException < ServiceError
@@ -252,7 +235,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TokenAlreadyExistsException < ServiceError
@@ -263,7 +245,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TypeNotFoundException < ServiceError
@@ -274,7 +255,6 @@ module Aws::CloudFormation
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

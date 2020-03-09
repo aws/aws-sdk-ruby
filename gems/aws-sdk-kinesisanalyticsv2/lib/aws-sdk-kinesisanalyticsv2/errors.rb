@@ -58,7 +58,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -74,7 +73,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidApplicationConfigurationException < ServiceError
@@ -90,7 +88,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -106,7 +103,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -122,7 +118,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -138,7 +133,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -154,7 +148,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -170,7 +163,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceProvisionedThroughputExceededException < ServiceError
@@ -186,7 +178,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -202,7 +193,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -218,7 +208,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnableToDetectSchemaException < ServiceError
@@ -244,7 +233,6 @@ module Aws::KinesisAnalyticsV2
       def processed_input_records
         @data[:processed_input_records]
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -260,7 +248,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -54,7 +54,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictErrorException < ServiceError
@@ -70,7 +69,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class HomeRegionNotSetException < ServiceError
@@ -86,7 +84,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -102,7 +99,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -118,7 +114,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -134,7 +129,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -150,7 +144,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -166,7 +159,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerInternalErrorException < ServiceError
@@ -182,7 +174,6 @@ module Aws::ApplicationDiscoveryService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

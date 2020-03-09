@@ -46,7 +46,6 @@ module Aws::MediaTailor
       def message
         @message || @data[:message]
       end
-
     end
 
   end

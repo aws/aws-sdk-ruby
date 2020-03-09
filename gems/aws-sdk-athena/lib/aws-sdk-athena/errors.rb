@@ -49,7 +49,6 @@ module Aws::Athena
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -70,7 +69,6 @@ module Aws::Athena
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -91,7 +89,6 @@ module Aws::Athena
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -112,7 +109,6 @@ module Aws::Athena
       def reason
         @data[:reason]
       end
-
     end
 
   end

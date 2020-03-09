@@ -1197,6 +1197,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   nat_gateways = subnet.nat_gateways({
+    #     dry_run: false,
     #     filter: [
     #       {
     #         name: "String",
@@ -1206,6 +1207,11 @@ module Aws::EC2
     #     nat_gateway_ids: ["NatGatewayId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filter
     #   One or more filters.
     #

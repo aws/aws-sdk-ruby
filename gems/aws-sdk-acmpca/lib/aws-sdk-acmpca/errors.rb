@@ -63,7 +63,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -79,7 +78,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgsException < ServiceError
@@ -95,7 +93,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -111,7 +108,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -127,7 +123,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPolicyException < ServiceError
@@ -143,7 +138,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -159,7 +153,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateException < ServiceError
@@ -175,7 +168,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -191,7 +183,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -207,7 +198,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedCSRException < ServiceError
@@ -223,7 +213,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedCertificateException < ServiceError
@@ -239,7 +228,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class PermissionAlreadyExistsException < ServiceError
@@ -255,7 +243,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestAlreadyProcessedException < ServiceError
@@ -271,7 +258,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestFailedException < ServiceError
@@ -287,7 +273,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestInProgressException < ServiceError
@@ -303,7 +288,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -319,7 +303,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -335,7 +318,6 @@ module Aws::ACMPCA
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -66,7 +66,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class AgentsAlreadyRunningAssessmentException < ServiceError
@@ -97,7 +96,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class AssessmentRunInProgressException < ServiceError
@@ -128,7 +126,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class InternalException < ServiceError
@@ -149,7 +146,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class InvalidCrossAccountRoleException < ServiceError
@@ -175,7 +171,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -201,7 +196,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -227,7 +221,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class NoSuchEntityException < ServiceError
@@ -253,7 +246,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class PreviewGenerationInProgressException < ServiceError
@@ -269,7 +261,6 @@ module Aws::Inspector
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceTemporarilyUnavailableException < ServiceError
@@ -290,7 +281,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class UnsupportedFeatureException < ServiceError
@@ -311,7 +301,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
   end

@@ -44,7 +44,6 @@ module Aws::ApiGatewayManagementApi
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class GoneException < ServiceError
@@ -55,7 +54,6 @@ module Aws::ApiGatewayManagementApi
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class PayloadTooLargeException < ServiceError
@@ -71,7 +69,6 @@ module Aws::ApiGatewayManagementApi
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -82,7 +79,6 @@ module Aws::ApiGatewayManagementApi
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

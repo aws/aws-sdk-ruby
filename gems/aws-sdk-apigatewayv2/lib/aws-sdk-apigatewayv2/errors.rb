@@ -50,7 +50,6 @@ module Aws::ApiGatewayV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -66,7 +65,6 @@ module Aws::ApiGatewayV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -82,7 +80,6 @@ module Aws::ApiGatewayV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -103,7 +100,6 @@ module Aws::ApiGatewayV2
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -124,7 +120,6 @@ module Aws::ApiGatewayV2
       def message
         @message || @data[:message]
       end
-
     end
 
   end

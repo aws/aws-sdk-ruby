@@ -51,7 +51,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -67,7 +66,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotFoundException < ServiceError
@@ -83,7 +81,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -99,7 +96,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -115,7 +111,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationTimeoutException < ServiceError
@@ -131,7 +126,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -48,7 +48,6 @@ module Aws::Health
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPaginationToken < ServiceError
@@ -64,7 +63,6 @@ module Aws::Health
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedLocale < ServiceError
@@ -80,7 +78,6 @@ module Aws::Health
       def message
         @message || @data[:message]
       end
-
     end
 
   end

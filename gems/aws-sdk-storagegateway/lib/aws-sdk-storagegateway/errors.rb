@@ -53,7 +53,6 @@ module Aws::StorageGateway
       def error
         @data[:error]
       end
-
     end
 
     class InvalidGatewayRequestException < ServiceError
@@ -74,7 +73,6 @@ module Aws::StorageGateway
       def error
         @data[:error]
       end
-
     end
 
     class ServiceUnavailableError < ServiceError
@@ -95,7 +93,6 @@ module Aws::StorageGateway
       def error
         @data[:error]
       end
-
     end
 
   end

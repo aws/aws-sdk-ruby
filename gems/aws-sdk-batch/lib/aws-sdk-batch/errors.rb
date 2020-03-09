@@ -47,7 +47,6 @@ module Aws::Batch
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerException < ServiceError
@@ -63,7 +62,6 @@ module Aws::Batch
       def message
         @message || @data[:message]
       end
-
     end
 
   end

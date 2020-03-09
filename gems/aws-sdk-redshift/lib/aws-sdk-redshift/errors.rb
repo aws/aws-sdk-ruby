@@ -144,7 +144,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationAlreadyExistsFault < ServiceError
@@ -155,7 +154,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationNotFoundFault < ServiceError
@@ -166,7 +164,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class AuthorizationQuotaExceededFault < ServiceError
@@ -177,7 +174,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BatchDeleteRequestSizeExceededFault < ServiceError
@@ -188,7 +184,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BatchModifyClusterSnapshotsLimitExceededFault < ServiceError
@@ -199,7 +194,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class BucketNotFoundFault < ServiceError
@@ -210,7 +204,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterAlreadyExistsFault < ServiceError
@@ -221,7 +214,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterNotFoundFault < ServiceError
@@ -232,7 +224,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterOnLatestRevisionFault < ServiceError
@@ -243,7 +234,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterParameterGroupAlreadyExistsFault < ServiceError
@@ -254,7 +244,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterParameterGroupNotFoundFault < ServiceError
@@ -265,7 +254,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterParameterGroupQuotaExceededFault < ServiceError
@@ -276,7 +264,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterQuotaExceededFault < ServiceError
@@ -287,7 +274,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSecurityGroupAlreadyExistsFault < ServiceError
@@ -298,7 +284,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSecurityGroupNotFoundFault < ServiceError
@@ -309,7 +294,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSecurityGroupQuotaExceededFault < ServiceError
@@ -320,7 +304,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSnapshotAlreadyExistsFault < ServiceError
@@ -331,7 +314,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSnapshotNotFoundFault < ServiceError
@@ -342,7 +324,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSnapshotQuotaExceededFault < ServiceError
@@ -353,7 +334,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSubnetGroupAlreadyExistsFault < ServiceError
@@ -364,7 +344,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSubnetGroupNotFoundFault < ServiceError
@@ -375,7 +354,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSubnetGroupQuotaExceededFault < ServiceError
@@ -386,7 +364,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ClusterSubnetQuotaExceededFault < ServiceError
@@ -397,7 +374,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class CopyToRegionDisabledFault < ServiceError
@@ -408,7 +384,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DependentServiceRequestThrottlingFault < ServiceError
@@ -419,7 +394,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class DependentServiceUnavailableFault < ServiceError
@@ -430,7 +404,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class EventSubscriptionQuotaExceededFault < ServiceError
@@ -441,7 +414,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HsmClientCertificateAlreadyExistsFault < ServiceError
@@ -452,7 +424,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HsmClientCertificateNotFoundFault < ServiceError
@@ -463,7 +434,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HsmClientCertificateQuotaExceededFault < ServiceError
@@ -474,7 +444,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HsmConfigurationAlreadyExistsFault < ServiceError
@@ -485,7 +454,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HsmConfigurationNotFoundFault < ServiceError
@@ -496,7 +464,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class HsmConfigurationQuotaExceededFault < ServiceError
@@ -507,7 +474,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InProgressTableRestoreQuotaExceededFault < ServiceError
@@ -518,7 +484,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class IncompatibleOrderableOptions < ServiceError
@@ -529,7 +494,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientClusterCapacityFault < ServiceError
@@ -540,7 +504,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InsufficientS3BucketPolicyFault < ServiceError
@@ -551,7 +514,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterParameterGroupStateFault < ServiceError
@@ -562,7 +524,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterSecurityGroupStateFault < ServiceError
@@ -573,7 +534,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterSnapshotScheduleStateFault < ServiceError
@@ -584,7 +544,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterSnapshotStateFault < ServiceError
@@ -595,7 +554,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterStateFault < ServiceError
@@ -606,7 +564,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterSubnetGroupStateFault < ServiceError
@@ -617,7 +574,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterSubnetStateFault < ServiceError
@@ -628,7 +584,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidClusterTrackFault < ServiceError
@@ -639,7 +594,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidElasticIpFault < ServiceError
@@ -650,7 +604,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidHsmClientCertificateStateFault < ServiceError
@@ -661,7 +614,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidHsmConfigurationStateFault < ServiceError
@@ -672,7 +624,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidReservedNodeStateFault < ServiceError
@@ -683,7 +634,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRestoreFault < ServiceError
@@ -694,7 +644,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidRetentionPeriodFault < ServiceError
@@ -705,7 +654,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3BucketNameFault < ServiceError
@@ -716,7 +664,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidS3KeyPrefixFault < ServiceError
@@ -727,7 +674,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidScheduleFault < ServiceError
@@ -738,7 +684,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidScheduledActionFault < ServiceError
@@ -749,7 +694,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSnapshotCopyGrantStateFault < ServiceError
@@ -760,7 +704,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSubnet < ServiceError
@@ -771,7 +714,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidSubscriptionStateFault < ServiceError
@@ -782,7 +724,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTableRestoreArgumentFault < ServiceError
@@ -793,7 +734,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidTagFault < ServiceError
@@ -804,7 +744,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InvalidVPCNetworkStateFault < ServiceError
@@ -815,7 +754,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class LimitExceededFault < ServiceError
@@ -826,7 +764,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NumberOfNodesPerClusterLimitExceededFault < ServiceError
@@ -837,7 +774,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class NumberOfNodesQuotaExceededFault < ServiceError
@@ -848,7 +784,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedNodeAlreadyExistsFault < ServiceError
@@ -859,7 +794,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedNodeAlreadyMigratedFault < ServiceError
@@ -870,7 +804,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedNodeNotFoundFault < ServiceError
@@ -881,7 +814,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedNodeOfferingNotFoundFault < ServiceError
@@ -892,7 +824,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ReservedNodeQuotaExceededFault < ServiceError
@@ -903,7 +834,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResizeNotFoundFault < ServiceError
@@ -914,7 +844,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ResourceNotFoundFault < ServiceError
@@ -925,7 +854,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSInvalidTopicFault < ServiceError
@@ -936,7 +864,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSNoAuthorizationFault < ServiceError
@@ -947,7 +874,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SNSTopicArnNotFoundFault < ServiceError
@@ -958,7 +884,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ScheduleDefinitionTypeUnsupportedFault < ServiceError
@@ -969,7 +894,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ScheduledActionAlreadyExistsFault < ServiceError
@@ -980,7 +904,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ScheduledActionNotFoundFault < ServiceError
@@ -991,7 +914,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ScheduledActionQuotaExceededFault < ServiceError
@@ -1002,7 +924,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class ScheduledActionTypeUnsupportedFault < ServiceError
@@ -1013,7 +934,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotCopyAlreadyDisabledFault < ServiceError
@@ -1024,7 +944,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotCopyAlreadyEnabledFault < ServiceError
@@ -1035,7 +954,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotCopyDisabledFault < ServiceError
@@ -1046,7 +964,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotCopyGrantAlreadyExistsFault < ServiceError
@@ -1057,7 +974,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotCopyGrantNotFoundFault < ServiceError
@@ -1068,7 +984,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotCopyGrantQuotaExceededFault < ServiceError
@@ -1079,7 +994,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotScheduleAlreadyExistsFault < ServiceError
@@ -1090,7 +1004,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotScheduleNotFoundFault < ServiceError
@@ -1101,7 +1014,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotScheduleQuotaExceededFault < ServiceError
@@ -1112,7 +1024,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SnapshotScheduleUpdateInProgressFault < ServiceError
@@ -1123,7 +1034,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SourceNotFoundFault < ServiceError
@@ -1134,7 +1044,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubnetAlreadyInUse < ServiceError
@@ -1145,7 +1054,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionAlreadyExistFault < ServiceError
@@ -1156,7 +1064,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionCategoryNotFoundFault < ServiceError
@@ -1167,7 +1074,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionEventIdNotFoundFault < ServiceError
@@ -1178,7 +1084,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionNotFoundFault < ServiceError
@@ -1189,7 +1094,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class SubscriptionSeverityNotFoundFault < ServiceError
@@ -1200,7 +1104,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TableLimitExceededFault < ServiceError
@@ -1211,7 +1114,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TableRestoreNotFoundFault < ServiceError
@@ -1222,7 +1124,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class TagLimitExceededFault < ServiceError
@@ -1233,7 +1134,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnauthorizedOperation < ServiceError
@@ -1244,7 +1144,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnknownSnapshotCopyRegionFault < ServiceError
@@ -1255,7 +1154,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedOperationFault < ServiceError
@@ -1266,7 +1164,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class UnsupportedOptionFault < ServiceError
@@ -1277,7 +1174,6 @@ module Aws::Redshift
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
   end

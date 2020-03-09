@@ -56,7 +56,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeveloperUserAlreadyRegisteredException < ServiceError
@@ -72,7 +71,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExternalServiceException < ServiceError
@@ -88,7 +86,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -104,7 +101,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidIdentityPoolConfigurationException < ServiceError
@@ -120,7 +116,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -136,7 +131,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -152,7 +146,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotAuthorizedException < ServiceError
@@ -168,7 +161,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceConflictException < ServiceError
@@ -184,7 +176,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -200,7 +191,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -216,7 +206,6 @@ module Aws::CognitoIdentity
       def message
         @message || @data[:message]
       end
-
     end
 
   end

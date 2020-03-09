@@ -45,6 +45,6 @@ require_relative 'aws-sdk-iotthingsgraph/customizations'
 # @service
 module Aws::IoTThingsGraph
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

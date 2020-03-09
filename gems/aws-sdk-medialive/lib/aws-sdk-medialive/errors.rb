@@ -54,7 +54,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -70,7 +69,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -86,7 +84,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -102,7 +99,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class GatewayTimeoutException < ServiceError
@@ -118,7 +114,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -134,7 +129,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -150,7 +144,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -166,7 +159,6 @@ module Aws::MediaLive
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnprocessableEntityException < ServiceError
@@ -187,7 +179,6 @@ module Aws::MediaLive
       def validation_errors
         @data[:validation_errors]
       end
-
     end
 
   end

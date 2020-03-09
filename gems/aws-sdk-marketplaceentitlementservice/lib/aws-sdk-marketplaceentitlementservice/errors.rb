@@ -48,7 +48,6 @@ module Aws::MarketplaceEntitlementService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -64,7 +63,6 @@ module Aws::MarketplaceEntitlementService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -80,7 +78,6 @@ module Aws::MarketplaceEntitlementService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

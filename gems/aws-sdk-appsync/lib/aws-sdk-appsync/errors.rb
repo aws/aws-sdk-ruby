@@ -56,7 +56,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ApiKeyLimitExceededException < ServiceError
@@ -72,7 +71,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ApiKeyValidityOutOfBoundsException < ServiceError
@@ -88,7 +86,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ApiLimitExceededException < ServiceError
@@ -104,7 +101,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -120,7 +116,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -136,7 +131,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class GraphQLSchemaException < ServiceError
@@ -152,7 +146,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -168,7 +161,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -184,7 +176,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -200,7 +191,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -216,7 +206,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
   end

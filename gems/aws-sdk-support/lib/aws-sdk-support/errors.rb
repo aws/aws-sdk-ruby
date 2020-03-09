@@ -54,7 +54,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class AttachmentLimitExceeded < ServiceError
@@ -70,7 +69,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class AttachmentSetExpired < ServiceError
@@ -86,7 +84,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class AttachmentSetIdNotFound < ServiceError
@@ -102,7 +99,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class AttachmentSetSizeLimitExceeded < ServiceError
@@ -118,7 +114,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class CaseCreationLimitExceeded < ServiceError
@@ -134,7 +129,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class CaseIdNotFound < ServiceError
@@ -150,7 +144,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class DescribeAttachmentLimitExceeded < ServiceError
@@ -166,7 +159,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -182,7 +174,6 @@ module Aws::Support
       def message
         @message || @data[:message]
       end
-
     end
 
   end

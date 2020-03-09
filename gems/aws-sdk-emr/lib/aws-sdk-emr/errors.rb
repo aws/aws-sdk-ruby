@@ -43,7 +43,6 @@ module Aws::EMR
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -59,7 +58,6 @@ module Aws::EMR
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -80,7 +78,6 @@ module Aws::EMR
       def message
         @message || @data[:message]
       end
-
     end
 
   end

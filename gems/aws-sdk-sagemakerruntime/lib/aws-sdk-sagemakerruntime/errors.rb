@@ -49,7 +49,6 @@ module Aws::SageMakerRuntime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ModelError < ServiceError
@@ -80,7 +79,6 @@ module Aws::SageMakerRuntime
       def log_stream_arn
         @data[:log_stream_arn]
       end
-
     end
 
     class ServiceUnavailable < ServiceError
@@ -96,7 +94,6 @@ module Aws::SageMakerRuntime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationError < ServiceError
@@ -112,7 +109,6 @@ module Aws::SageMakerRuntime
       def message
         @message || @data[:message]
       end
-
     end
 
   end

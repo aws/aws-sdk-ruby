@@ -54,7 +54,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -70,7 +69,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -86,7 +84,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -102,7 +99,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -118,7 +114,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -134,7 +129,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -150,7 +144,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -166,7 +159,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -182,7 +174,6 @@ module Aws::RoboMaker
       def message
         @message || @data[:message]
       end
-
     end
 
   end

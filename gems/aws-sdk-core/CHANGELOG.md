@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.91.0 (2020-03-09)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Add `standard` and `adaptive` retry modes.
 
 3.90.1 (2020-02-14)
