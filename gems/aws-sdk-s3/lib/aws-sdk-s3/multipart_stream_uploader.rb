@@ -65,7 +65,8 @@ module Aws
           begin
             block.call(write_pipe)
           ensure
-            write_pipe.close # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
+            # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
+            write_pipe.close
           end
           threads.map(&:value).compact
         end
