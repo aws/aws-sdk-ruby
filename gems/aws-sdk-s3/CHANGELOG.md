@@ -7,6 +7,7 @@ Unreleased Changes
 * Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
 
 * Issue - Don't update endpoint on region mismatch errors when using a custom endpoint.
+* Issue - Fix raising in `Object#upload_stream` block not triggering the `Aws::S3::MultipartStreamUploader#abort_upload`
 
 1.60.2 (2020-02-07)
 ------------------
