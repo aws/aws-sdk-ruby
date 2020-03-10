@@ -60,21 +60,23 @@ module Aws
 
       def upload_parts(upload_id, options, &block)
         completed = Queue.new
-        errors = IO.pipe do |read_pipe, write_pipe|
-          threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
-          begin
-            block.call(write_pipe)
-          ensure
-            # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
-            write_pipe.close
+        errors = begin
+          IO.pipe do |read_pipe, write_pipe|
+            threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
+            begin
+              block.call(write_pipe)
+            ensure
+              # Ensure the pipe is closed to avoid https://github.com/jruby/jruby/issues/6111
+              write_pipe.close
+            end
+            threads.map(&:value).compact
           end
-          threads.map(&:value).compact
+        rescue => e
+          [e]
         end
-      rescue => e
-        errors = [e]
-      ensure
+
         if errors.empty?
-          return Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
+          Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
         else
           abort_upload(upload_id, options, errors)
         end
