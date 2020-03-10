@@ -436,7 +436,13 @@ module Aws::EC2
     #   The location from which the IP address is advertised. Use this
     #   parameter to limit the address to this location.
     #
-    #   Use [DescribeVpcs][1] to view the network border groups.
+    #   A network border group is a unique set of Availability Zones or
+    #   Local Zones from where AWS advertises IP addresses and limits the
+    #   addresses to the group. IP addresses cannot move between network
+    #   border groups.
+    #
+    #   Use [DescribeAvailabilityZones][1] to view the network border
+    #   groups.
     #
     #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you
     #   attempt this operation on EC2 classic, you will receive an
@@ -447,7 +453,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
@@ -667,7 +673,7 @@ module Aws::EC2
     #       {
     #         client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #         vpc_id: "VpcId", # required
-    #         security_group_ids: ["String"], # required
+    #         security_group_ids: ["SecurityGroupId"], # required
     #         dry_run: false,
     #       }
     #
@@ -2481,7 +2487,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         export_task_id: "ExportTaskId", # required
+    #         export_task_id: "ExportVmTaskId", # required
     #       }
     #
     # @!attribute [rw] export_task_id
@@ -4632,7 +4638,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
-    #         security_group_ids: ["String"],
+    #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #       }
     #
@@ -5925,7 +5931,7 @@ module Aws::EC2
     #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
-    #                 kms_key_id: "String",
+    #                 kms_key_id: "KmsKeyId",
     #                 snapshot_id: "SnapshotId",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -6136,7 +6142,7 @@ module Aws::EC2
     #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
-    #                 kms_key_id: "String",
+    #                 kms_key_id: "KmsKeyId",
     #                 snapshot_id: "SnapshotId",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -7941,7 +7947,7 @@ module Aws::EC2
     #
     #       {
     #         transit_gateway_id: "TransitGatewayId", # required
-    #         peer_transit_gateway_id: "String", # required
+    #         peer_transit_gateway_id: "TransitAssociationGatewayId", # required
     #         peer_account_id: "String", # required
     #         peer_region: "String", # required
     #         tag_specifications: [
@@ -9511,7 +9517,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         fleet_ids: ["FleetIdentifier"], # required
+    #         fleet_ids: ["FleetId"], # required
     #         terminate_instances: false, # required
     #       }
     #
@@ -11332,7 +11338,7 @@ module Aws::EC2
     #           },
     #         ],
     #         public_ips: ["String"],
-    #         allocation_ids: ["String"],
+    #         allocation_ids: ["AllocationId"],
     #         dry_run: false,
     #       }
     #
@@ -11668,7 +11674,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         capacity_reservation_ids: ["String"],
+    #         capacity_reservation_ids: ["CapacityReservationId"],
     #         next_token: "String",
     #         max_results: 1,
     #         filters: [
@@ -11696,6 +11702,85 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `instance-type` - The type of instance for which the Capacity
+    #     Reservation reserves capacity.
+    #
+    #   * `owner-id` - The ID of the AWS account that owns the Capacity
+    #     Reservation.
+    #
+    #   * `availability-zone-id` - The Availability Zone ID of the Capacity
+    #     Reservation.
+    #
+    #   * `instance-platform` - The type of operating system for which the
+    #     Capacity Reservation reserves capacity.
+    #
+    #   * `availability-zone` - The Availability Zone ID of the Capacity
+    #     Reservation.
+    #
+    #   * `tenancy` - Indicates the tenancy of the Capacity Reservation. A
+    #     Capacity Reservation can have one of the following tenancy
+    #     settings:
+    #
+    #     * `default` - The Capacity Reservation is created on hardware that
+    #       is shared with other AWS accounts.
+    #
+    #     * `dedicated` - The Capacity Reservation is created on
+    #       single-tenant hardware that is dedicated to a single AWS
+    #       account.
+    #
+    #   * `state` - The current state of the Capacity Reservation. A
+    #     Capacity Reservation can be in one of the following states:
+    #
+    #     * `active`- The Capacity Reservation is active and the capacity is
+    #       available for your use.
+    #
+    #     * `expired` - The Capacity Reservation expired automatically at
+    #       the date and time specified in your request. The reserved
+    #       capacity is no longer available for your use.
+    #
+    #     * `cancelled` - The Capacity Reservation was manually cancelled.
+    #       The reserved capacity is no longer available for your use.
+    #
+    #     * `pending` - The Capacity Reservation request was successful but
+    #       the capacity provisioning is still pending.
+    #
+    #     * `failed` - The Capacity Reservation request has failed. A
+    #       request might fail due to invalid request parameters, capacity
+    #       constraints, or instance limit constraints. Failed requests are
+    #       retained for 60 minutes.
+    #
+    #   * `end-date` - The date and time at which the Capacity Reservation
+    #     expires. When a Capacity Reservation expires, the reserved
+    #     capacity is released and you can no longer launch instances into
+    #     it. The Capacity Reservation's state changes to expired when it
+    #     reaches its end date and time.
+    #
+    #   * `end-date-type` - Indicates the way in which the Capacity
+    #     Reservation ends. A Capacity Reservation can have one of the
+    #     following end types:
+    #
+    #     * `unlimited` - The Capacity Reservation remains active until you
+    #       explicitly cancel it.
+    #
+    #     * `limited` - The Capacity Reservation expires automatically at a
+    #       specified date and time.
+    #
+    #   * `instance-match-criteria` - Indicates the type of instance
+    #     launches that the Capacity Reservation accepts. The options
+    #     include:
+    #
+    #     * `open` - The Capacity Reservation accepts all instances that
+    #       have matching attributes (instance type, platform, and
+    #       Availability Zone). Instances that have matching attributes
+    #       launch into the Capacity Reservation automatically without
+    #       specifying any additional parameters.
+    #
+    #     * `targeted` - The Capacity Reservation only accepts instances
+    #       that have matching attributes (instance type, platform, and
+    #       Availability Zone), and explicitly target the Capacity
+    #       Reservation. This ensures that only permitted instances can use
+    #       the reserved capacity.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -12213,7 +12298,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         pool_ids: ["String"],
+    #         pool_ids: ["CoipPoolId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -12738,7 +12823,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         export_task_ids: ["String"],
+    #         export_task_ids: ["ExportTaskId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -12974,7 +13059,7 @@ module Aws::EC2
     #         event_type: "instance-change", # accepts instance-change, fleet-change, service-error
     #         max_results: 1,
     #         next_token: "String",
-    #         fleet_id: "FleetIdentifier", # required
+    #         fleet_id: "FleetId", # required
     #         start_time: Time.now, # required
     #       }
     #
@@ -13066,7 +13151,7 @@ module Aws::EC2
     #         dry_run: false,
     #         max_results: 1,
     #         next_token: "String",
-    #         fleet_id: "FleetIdentifier", # required
+    #         fleet_id: "FleetId", # required
     #         filters: [
     #           {
     #             name: "String",
@@ -13182,7 +13267,7 @@ module Aws::EC2
     #         dry_run: false,
     #         max_results: 1,
     #         next_token: "String",
-    #         fleet_ids: ["FleetIdentifier"],
+    #         fleet_ids: ["FleetId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -14620,10 +14705,10 @@ module Aws::EC2
     #     `false`)
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
-    #     type is EBS-optimized. (`true` \| `false`)
+    #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
     #
     #   * `ebs-info.encryption-support` - Indicates whether EBS encryption
-    #     is supported. (`true` \| `false`)
+    #     is supported. (`supported` \| `unsupported`)
     #
     #   * `free-tier-eligible` - Indicates whether the instance type is
     #     eligible to use in the free tier. (`true` \| `false`)
@@ -14787,7 +14872,8 @@ module Aws::EC2
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \|
-    #     `xen`).
+    #     `xen`). The value `xen` is used for both Xen and Nitro
+    #     hypervisors.
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
     #     the instance. Specified as an ARN.
@@ -19295,7 +19381,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         transit_gateway_multicast_domain_ids: ["String"],
+    #         transit_gateway_multicast_domain_ids: ["TransitGatewayMulticastDomainId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -19389,7 +19475,22 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   One or more filters.
+    #   One or more filters. The possible values are:
+    #
+    #   * `transit-gateway-attachment-id` - The ID of the transit gateway
+    #     attachment.
+    #
+    #   * `local-owner-id` - The ID of your AWS account.
+    #
+    #   * `remote-owner-id` - The ID of the AWS account in the remote Region
+    #     that owns the transit gateway.
+    #
+    #   * `state` - The state of the peering attachment (`available` \|
+    #     `deleted` \| `deleting` \| `failed` \| `modifying` \|
+    #     `pendingAcceptance` \| `pending` \| `rollingBack` \| `rejected` \|
+    #     `rejecting`).
+    #
+    #   * `transit-gateway-id` - The ID of the transit gateway.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -19441,7 +19542,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         transit_gateway_route_table_ids: ["String"],
+    #         transit_gateway_route_table_ids: ["TransitGatewayRouteTableId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -20089,7 +20190,7 @@ module Aws::EC2
     #
     #       {
     #         attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
-    #         vpc_id: "String", # required
+    #         vpc_id: "VpcId", # required
     #         dry_run: false,
     #       }
     #
@@ -21880,7 +21981,7 @@ module Aws::EC2
     #
     #       {
     #         client_vpn_endpoint_id: "ClientVpnEndpointId", # required
-    #         association_id: "String", # required
+    #         association_id: "ClientVpnAssociationId", # required
     #         dry_run: false,
     #       }
     #
@@ -26935,7 +27036,7 @@ module Aws::EC2
     #           host_resource_group_arn: "String",
     #         },
     #         private_ip_address: "String",
-    #         subnet_id: "String",
+    #         subnet_id: "SubnetId",
     #         user_data: {
     #           data: "String",
     #         },
@@ -27049,7 +27150,7 @@ module Aws::EC2
     #             host_resource_group_arn: "String",
     #           },
     #           private_ip_address: "String",
-    #           subnet_id: "String",
+    #           subnet_id: "SubnetId",
     #           user_data: {
     #             data: "String",
     #           },
@@ -27646,7 +27747,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   The hypervisor type of the instance.
+    #   The hypervisor type of the instance. The value `xen` is used for
+    #   both Xen and Nitro hypervisors.
     #   @return [String]
     #
     # @!attribute [rw] iam_instance_profile
@@ -29662,7 +29764,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
+    #           kms_key_id: "KmsKeyId",
     #           snapshot_id: "SnapshotId",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -29912,7 +30014,7 @@ module Aws::EC2
     #         encrypted: false,
     #         delete_on_termination: false,
     #         iops: 1,
-    #         kms_key_id: "String",
+    #         kms_key_id: "KmsKeyId",
     #         snapshot_id: "SnapshotId",
     #         volume_size: 1,
     #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -31400,12 +31502,17 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] group_name
-    #   The names of the Zone Group.
+    #   The name of the Availability Zone Group.
     #   @return [String]
     #
     # @!attribute [rw] opt_in_status
-    #   Indicates whether to enable or disable Zone Group membership. The
-    #   valid values are `opted-in`.
+    #   Indicates whether to enable or disable membership. The valid values
+    #   are `opted-in`. You must contact [AWS Support][1] to disable an
+    #   Availability Zone group.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -31532,7 +31639,7 @@ module Aws::EC2
     #         description: "String",
     #         split_tunnel: false,
     #         dry_run: false,
-    #         security_group_ids: ["String"],
+    #         security_group_ids: ["SecurityGroupId"],
     #         vpc_id: "VpcId",
     #       }
     #
@@ -31747,7 +31854,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
-    #         fleet_id: "FleetIdentifier", # required
+    #         fleet_id: "FleetId", # required
     #         target_capacity_specification: { # required
     #           total_target_capacity: 1, # required
     #           on_demand_target_capacity: 1,
@@ -37583,7 +37690,7 @@ module Aws::EC2
     #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
-    #               kms_key_id: "String",
+    #               kms_key_id: "KmsKeyId",
     #               snapshot_id: "SnapshotId",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -40030,7 +40137,7 @@ module Aws::EC2
     #             ipv_6_address: "String",
     #           },
     #         ],
-    #         kernel_id: "String",
+    #         kernel_id: "KernelId",
     #         key_name: "KeyPairName",
     #         max_count: 1, # required
     #         min_count: 1, # required
@@ -40047,10 +40154,10 @@ module Aws::EC2
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
     #         },
-    #         ramdisk_id: "String",
+    #         ramdisk_id: "RamdiskId",
     #         security_group_ids: ["SecurityGroupId"],
     #         security_groups: ["SecurityGroupName"],
-    #         subnet_id: "String",
+    #         subnet_id: "SubnetId",
     #         user_data: "String",
     #         additional_info: "String",
     #         client_token: "String",
@@ -40327,8 +40434,11 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
     #
     #   Constraints: Maximum 64 ASCII characters
     #
@@ -43078,13 +43188,16 @@ module Aws::EC2
     #   The key-value pair for tagging the Spot Fleet request on creation.
     #   The value for `ResourceType` must be `spot-fleet-request`, otherwise
     #   the Spot Fleet request fails. To tag instances at launch, specify
-    #   the tags in the [launch template][1]. For information about tagging
-    #   after launch, see [Tagging Your Resources][2].
+    #   the tags in the [launch template][1] (valid only if you use
+    #   `LaunchTemplateConfigs`) or in the [ `SpotFleetTagSpecification`
+    #   ][2] (valid only if you use `LaunchSpecifications`). For information
+    #   about tagging after launch, see [Tagging Your Resources][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetTagSpecification.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
@@ -43132,8 +43245,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource. Currently, the only resource types that are
-    #   supported are `spot-fleet-request` and `instance`.
+    #   The type of resource. Currently, the only resource type that is
+    #   supported is `instance`. To tag the Spot Fleet request on creation,
+    #   use the `TagSpecifications` parameter in [
+    #   `SpotFleetRequestConfigData` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetRequestConfigData.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -44481,7 +44600,7 @@ module Aws::EC2
     #
     #       {
     #         client_vpn_endpoint_id: "ClientVpnEndpointId", # required
-    #         connection_id: "String",
+    #         connection_id: "VpnConnectionId",
     #         username: "String",
     #         dry_run: false,
     #       }

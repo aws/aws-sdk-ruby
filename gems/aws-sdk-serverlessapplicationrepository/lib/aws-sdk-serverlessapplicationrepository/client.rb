@@ -749,6 +749,8 @@ module Aws::ServerlessApplicationRepository
     #   resp.statements #=> Array
     #   resp.statements[0].actions #=> Array
     #   resp.statements[0].actions[0] #=> String
+    #   resp.statements[0].principal_org_i_ds #=> Array
+    #   resp.statements[0].principal_org_i_ds[0] #=> String
     #   resp.statements[0].principals #=> Array
     #   resp.statements[0].principals[0] #=> String
     #   resp.statements[0].statement_id #=> String
@@ -947,6 +949,7 @@ module Aws::ServerlessApplicationRepository
     #     statements: [ # required
     #       {
     #         actions: ["__string"], # required
+    #         principal_org_i_ds: ["__string"],
     #         principals: ["__string"], # required
     #         statement_id: "__string",
     #       },
@@ -958,6 +961,8 @@ module Aws::ServerlessApplicationRepository
     #   resp.statements #=> Array
     #   resp.statements[0].actions #=> Array
     #   resp.statements[0].actions[0] #=> String
+    #   resp.statements[0].principal_org_i_ds #=> Array
+    #   resp.statements[0].principal_org_i_ds[0] #=> String
     #   resp.statements[0].principals #=> Array
     #   resp.statements[0].principals[0] #=> String
     #   resp.statements[0].statement_id #=> String
@@ -968,6 +973,33 @@ module Aws::ServerlessApplicationRepository
     # @param [Hash] params ({})
     def put_application_policy(params = {}, options = {})
       req = build_request(:put_application_policy, params)
+      req.send_request(options)
+    end
+
+    # Unshares an application from an AWS Organization.
+    #
+    # This operation can be called only from the organization's master
+    # account.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :organization_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.unshare_application({
+    #     application_id: "__string", # required
+    #     organization_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UnshareApplication AWS API Documentation
+    #
+    # @overload unshare_application(params = {})
+    # @param [Hash] params ({})
+    def unshare_application(params = {}, options = {})
+      req = build_request(:unshare_application, params)
       req.send_request(options)
     end
 
@@ -1078,7 +1110,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

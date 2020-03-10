@@ -181,6 +181,7 @@ module Aws::ServerlessApplicationRepository
     #
     #       {
     #         actions: ["__string"], # required
+    #         principal_org_i_ds: ["__string"],
     #         principals: ["__string"], # required
     #         statement_id: "__string",
     #       }
@@ -192,6 +193,15 @@ module Aws::ServerlessApplicationRepository
     #
     #
     #   [1]: https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] principal_org_i_ds
+    #   An array of PrinciplalOrgIDs, which corresponds to AWS IAM
+    #   [aws:PrincipalOrgID][1] global condition key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
@@ -206,6 +216,7 @@ module Aws::ServerlessApplicationRepository
     #
     class ApplicationPolicyStatement < Struct.new(
       :actions,
+      :principal_org_i_ds,
       :principals,
       :statement_id)
       include Aws::Structure
@@ -1622,6 +1633,7 @@ module Aws::ServerlessApplicationRepository
     #         statements: [ # required
     #           {
     #             actions: ["__string"], # required
+    #             principal_org_i_ds: ["__string"],
     #             principals: ["__string"], # required
     #             statement_id: "__string",
     #           },
@@ -1832,6 +1844,41 @@ module Aws::ServerlessApplicationRepository
     class TooManyRequestsException < Struct.new(
       :error_code,
       :message)
+      include Aws::Structure
+    end
+
+    # Unshare application request.
+    #
+    # @!attribute [rw] organization_id
+    #   The AWS Organization ID to unshare the application from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UnshareApplicationInput AWS API Documentation
+    #
+    class UnshareApplicationInput < Struct.new(
+      :organization_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UnshareApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         organization_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UnshareApplicationRequest AWS API Documentation
+    #
+    class UnshareApplicationRequest < Struct.new(
+      :application_id,
+      :organization_id)
       include Aws::Structure
     end
 

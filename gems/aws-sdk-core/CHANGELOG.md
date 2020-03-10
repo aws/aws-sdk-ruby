@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.91.1 (2020-03-10)
+------------------
+
 * Issue - Rescue from `JSON::ParserError` when using `Oj.mimic_JSON`. (#2247)
 
 3.91.0 (2020-03-09)

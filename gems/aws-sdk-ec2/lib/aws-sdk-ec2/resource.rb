@@ -84,7 +84,7 @@ module Aws::EC2
     #         ipv_6_address: "String",
     #       },
     #     ],
-    #     kernel_id: "String",
+    #     kernel_id: "KernelId",
     #     key_name: "KeyPairName",
     #     max_count: 1, # required
     #     min_count: 1, # required
@@ -101,10 +101,10 @@ module Aws::EC2
     #       spread_domain: "String",
     #       host_resource_group_arn: "String",
     #     },
-    #     ramdisk_id: "String",
+    #     ramdisk_id: "RamdiskId",
     #     security_group_ids: ["SecurityGroupId"],
     #     security_groups: ["SecurityGroupName"],
-    #     subnet_id: "String",
+    #     subnet_id: "SubnetId",
     #     user_data: "String",
     #     additional_info: "String",
     #     client_token: "String",
@@ -346,8 +346,11 @@ module Aws::EC2
     #   Reserved.
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
     #
     #   Constraints: Maximum 64 ASCII characters
     #
@@ -1363,7 +1366,7 @@ module Aws::EC2
     #       },
     #     ],
     #     public_ips: ["String"],
-    #     allocation_ids: ["String"],
+    #     allocation_ids: ["AllocationId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1722,6 +1725,7 @@ module Aws::EC2
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
+    #     The value `xen` is used for both Xen and Nitro hypervisors.
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
     #     the instance. Specified as an ARN.
@@ -3091,7 +3095,7 @@ module Aws::EC2
     #       },
     #     ],
     #     public_ips: ["String"],
-    #     allocation_ids: ["String"],
+    #     allocation_ids: ["AllocationId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

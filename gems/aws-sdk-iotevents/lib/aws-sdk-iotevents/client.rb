@@ -366,7 +366,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -410,7 +411,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -457,7 +459,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -503,7 +506,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -695,6 +699,7 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.seconds #=> Integer
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].lambda.function_arn #=> String
@@ -713,6 +718,7 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.seconds #=> Integer
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].lambda.function_arn #=> String
@@ -732,6 +738,7 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.seconds #=> Integer
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].lambda.function_arn #=> String
@@ -750,6 +757,7 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.seconds #=> Integer
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].lambda.function_arn #=> String
@@ -1120,7 +1128,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -1164,7 +1173,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -1211,7 +1221,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -1257,7 +1268,8 @@ module Aws::IoTEvents
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
-    #                       seconds: 1, # required
+    #                       seconds: 1,
+    #                       duration_expression: "VariableValue",
     #                     },
     #                     clear_timer: {
     #                       timer_name: "TimerName", # required
@@ -1371,7 +1383,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

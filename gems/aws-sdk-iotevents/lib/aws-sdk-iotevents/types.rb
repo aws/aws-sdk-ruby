@@ -26,7 +26,8 @@ module Aws::IoTEvents
     #         },
     #         set_timer: {
     #           timer_name: "TimerName", # required
-    #           seconds: 1, # required
+    #           seconds: 1,
+    #           duration_expression: "VariableValue",
     #         },
     #         clear_timer: {
     #           timer_name: "TimerName", # required
@@ -186,7 +187,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -230,7 +232,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -277,7 +280,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -323,7 +327,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -713,7 +718,8 @@ module Aws::IoTEvents
     #                       },
     #                       set_timer: {
     #                         timer_name: "TimerName", # required
-    #                         seconds: 1, # required
+    #                         seconds: 1,
+    #                         duration_expression: "VariableValue",
     #                       },
     #                       clear_timer: {
     #                         timer_name: "TimerName", # required
@@ -757,7 +763,8 @@ module Aws::IoTEvents
     #                       },
     #                       set_timer: {
     #                         timer_name: "TimerName", # required
-    #                         seconds: 1, # required
+    #                         seconds: 1,
+    #                         duration_expression: "VariableValue",
     #                       },
     #                       clear_timer: {
     #                         timer_name: "TimerName", # required
@@ -804,7 +811,8 @@ module Aws::IoTEvents
     #                       },
     #                       set_timer: {
     #                         timer_name: "TimerName", # required
-    #                         seconds: 1, # required
+    #                         seconds: 1,
+    #                         duration_expression: "VariableValue",
     #                       },
     #                       clear_timer: {
     #                         timer_name: "TimerName", # required
@@ -850,7 +858,8 @@ module Aws::IoTEvents
     #                       },
     #                       set_timer: {
     #                         timer_name: "TimerName", # required
-    #                         seconds: 1, # required
+    #                         seconds: 1,
+    #                         duration_expression: "VariableValue",
     #                       },
     #                       clear_timer: {
     #                         timer_name: "TimerName", # required
@@ -989,7 +998,8 @@ module Aws::IoTEvents
     #             },
     #             set_timer: {
     #               timer_name: "TimerName", # required
-    #               seconds: 1, # required
+    #               seconds: 1,
+    #               duration_expression: "VariableValue",
     #             },
     #             clear_timer: {
     #               timer_name: "TimerName", # required
@@ -1484,7 +1494,8 @@ module Aws::IoTEvents
     #                 },
     #                 set_timer: {
     #                   timer_name: "TimerName", # required
-    #                   seconds: 1, # required
+    #                   seconds: 1,
+    #                   duration_expression: "VariableValue",
     #                 },
     #                 clear_timer: {
     #                   timer_name: "TimerName", # required
@@ -1547,7 +1558,8 @@ module Aws::IoTEvents
     #                 },
     #                 set_timer: {
     #                   timer_name: "TimerName", # required
-    #                   seconds: 1, # required
+    #                   seconds: 1,
+    #                   duration_expression: "VariableValue",
     #                 },
     #                 clear_timer: {
     #                   timer_name: "TimerName", # required
@@ -1610,7 +1622,8 @@ module Aws::IoTEvents
     #                 },
     #                 set_timer: {
     #                   timer_name: "TimerName", # required
-    #                   seconds: 1, # required
+    #                   seconds: 1,
+    #                   duration_expression: "VariableValue",
     #                 },
     #                 clear_timer: {
     #                   timer_name: "TimerName", # required
@@ -1654,7 +1667,8 @@ module Aws::IoTEvents
     #                 },
     #                 set_timer: {
     #                   timer_name: "TimerName", # required
-    #                   seconds: 1, # required
+    #                   seconds: 1,
+    #                   duration_expression: "VariableValue",
     #                 },
     #                 clear_timer: {
     #                   timer_name: "TimerName", # required
@@ -1725,7 +1739,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Information needed to reset the timer.
+    # Information required to reset the timer. The timer is reset to the
+    # previously evaluated result of the duration.
     #
     # @note When making an API call, you may pass ResetTimerAction
     #   data as a hash:
@@ -1822,7 +1837,8 @@ module Aws::IoTEvents
     #
     #       {
     #         timer_name: "TimerName", # required
-    #         seconds: 1, # required
+    #         seconds: 1,
+    #         duration_expression: "VariableValue",
     #       }
     #
     # @!attribute [rw] timer_name
@@ -1831,13 +1847,23 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] seconds
     #   The number of seconds until the timer expires. The minimum value is
-    #   60 seconds to ensure accuracy. The maximum value is 31622400
-    #   seconds.
+    #   60 seconds to ensure accuracy.
     #   @return [Integer]
+    #
+    # @!attribute [rw] duration_expression
+    #   The duration of the timer, in seconds. You can use a string
+    #   expression that includes numbers, variables
+    #   (`$variable.<variable-name>`), and input values
+    #   (`$input.<input-name>.<path-to-datum>`) as the duration. The range
+    #   of the duration is 1-31622400 seconds. To ensure accuracy, the
+    #   minimum duration is 60 seconds. The evaluated result of the duration
+    #   is rounded down to the nearest whole number.
+    #   @return [String]
     #
     class SetTimerAction < Struct.new(
       :timer_name,
-      :seconds)
+      :seconds,
+      :duration_expression)
       include Aws::Structure
     end
 
@@ -1882,7 +1908,7 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] use_base_64
     #   Set this to TRUE if you want the data to be base-64 encoded before
-    #   it is written to the queue. Otherwise, set this to FALSE.
+    #   it is written to the queue.
     #   @return [Boolean]
     #
     class SqsAction < Struct.new(
@@ -1917,7 +1943,8 @@ module Aws::IoTEvents
     #                   },
     #                   set_timer: {
     #                     timer_name: "TimerName", # required
-    #                     seconds: 1, # required
+    #                     seconds: 1,
+    #                     duration_expression: "VariableValue",
     #                   },
     #                   clear_timer: {
     #                     timer_name: "TimerName", # required
@@ -1961,7 +1988,8 @@ module Aws::IoTEvents
     #                   },
     #                   set_timer: {
     #                     timer_name: "TimerName", # required
-    #                     seconds: 1, # required
+    #                     seconds: 1,
+    #                     duration_expression: "VariableValue",
     #                   },
     #                   clear_timer: {
     #                     timer_name: "TimerName", # required
@@ -2008,7 +2036,8 @@ module Aws::IoTEvents
     #                   },
     #                   set_timer: {
     #                     timer_name: "TimerName", # required
-    #                     seconds: 1, # required
+    #                     seconds: 1,
+    #                     duration_expression: "VariableValue",
     #                   },
     #                   clear_timer: {
     #                     timer_name: "TimerName", # required
@@ -2054,7 +2083,8 @@ module Aws::IoTEvents
     #                   },
     #                   set_timer: {
     #                     timer_name: "TimerName", # required
-    #                     seconds: 1, # required
+    #                     seconds: 1,
+    #                     duration_expression: "VariableValue",
     #                   },
     #                   clear_timer: {
     #                     timer_name: "TimerName", # required
@@ -2197,7 +2227,8 @@ module Aws::IoTEvents
     #             },
     #             set_timer: {
     #               timer_name: "TimerName", # required
-    #               seconds: 1, # required
+    #               seconds: 1,
+    #               duration_expression: "VariableValue",
     #             },
     #             clear_timer: {
     #               timer_name: "TimerName", # required
@@ -2312,7 +2343,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -2356,7 +2388,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -2403,7 +2436,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required
@@ -2449,7 +2483,8 @@ module Aws::IoTEvents
     #                         },
     #                         set_timer: {
     #                           timer_name: "TimerName", # required
-    #                           seconds: 1, # required
+    #                           seconds: 1,
+    #                           duration_expression: "VariableValue",
     #                         },
     #                         clear_timer: {
     #                           timer_name: "TimerName", # required

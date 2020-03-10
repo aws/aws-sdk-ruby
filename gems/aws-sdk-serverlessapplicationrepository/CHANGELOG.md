@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-03-10)
+------------------
+
+* Feature - AWS Serverless Application Repository now supports sharing applications privately with AWS Organizations.
+
 1.24.0 (2020-03-09)
 ------------------
 

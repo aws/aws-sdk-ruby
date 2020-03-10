@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-03-10)
+------------------
+
+* Feature - API update that adds a new parameter, durationExpression, to SetTimerAction, and deprecates seconds
+
 1.9.0 (2020-03-09)
 ------------------
 

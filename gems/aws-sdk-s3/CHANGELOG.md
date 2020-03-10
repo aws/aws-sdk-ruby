@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.61.1 (2020-03-10)
+------------------
+
 * Issue - Fix raising in `Object#upload_stream` block not triggering the `Aws::S3::MultipartStreamUploader#abort_upload`.
 
 1.61.0 (2020-03-09)

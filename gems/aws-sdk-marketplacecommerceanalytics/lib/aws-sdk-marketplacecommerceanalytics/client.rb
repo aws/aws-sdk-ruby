@@ -406,11 +406,13 @@ module Aws::MarketplaceCommerceAnalytics
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :data_set_publication_date
     #   The date a data set was published. For daily data sets, provide a date
-    #   with day-level granularity for the desired day. For weekly data sets,
-    #   provide a date with day-level granularity within the desired week (the
-    #   day value will be ignored). For monthly data sets, provide a date with
+    #   with day-level granularity for the desired day. For monthly data sets
+    #   except those with prefix disbursed\_amount, provide a date with
     #   month-level granularity for the desired month (the day value will be
-    #   ignored).
+    #   ignored). For data sets with prefix disbursed\_amount, provide a date
+    #   with day-level granularity for the desired day. For these data sets we
+    #   will look backwards in time over the range of 31 days until the first
+    #   data set is found (the latest one).
     #
     # @option params [required, String] :role_name_arn
     #   The Amazon Resource Name (ARN) of the Role with an attached
@@ -573,7 +575,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
