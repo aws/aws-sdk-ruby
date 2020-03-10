@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::ServerlessApplicationRepository - Updated the API, and documentation for AWSServerlessApplicationRepository.
+
 2.11.463 (2020-03-09)
 ------------------
 
