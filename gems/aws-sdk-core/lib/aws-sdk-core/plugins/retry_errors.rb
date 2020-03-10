@@ -328,7 +328,7 @@ a clock skew correction and retry requests with skewed client clocks.
 
           endpoint = context.http_request.endpoint
           estimated_skew = context.config.clock_skew.estimated_skew(endpoint)
-          read_timeout = context.config.http_read_timeout
+          read_timeout = context.config.http_read_timeout if context.config.respond_to?(:http_read_timeout)
           if estimated_skew && read_timeout
             (Time.now.utc + read_timeout + estimated_skew).strftime("%Y%m%dT%H%M%SZ")
           end

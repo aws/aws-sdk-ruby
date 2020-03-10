@@ -14,8 +14,12 @@ module Aws
       let(:server_time) { Time.now.utc.to_s }
 
       describe '#initialize' do
-        it 'is initialized with 0 skew' do
+        it 'is initialized with 0 correction' do
           expect(subject.clock_correction(endpoint)).to be 0
+        end
+
+        it 'is initialized with nil skew' do
+          expect(subject.estimated_skew(endpoint)).to be_nil
         end
       end
 
@@ -68,6 +72,24 @@ module Aws
           it 'does not update corrections for other end points' do
             subject.update_clock_correction(context)
             expect(subject.clock_correction('other_endpoint')).to be 0
+          end
+        end
+      end
+
+      describe '#update_estimated_skew' do
+        context 'server time is not set' do
+          let(:server_time) { nil }
+          it 'does not update the skew' do
+            subject.update_estimated_skew(context)
+            expect(subject.estimated_skew(endpoint)).to be nil
+          end
+        end
+
+        context 'server time is set' do
+          let(:server_time) { (Time.now.utc + 1000).to_s }
+          it 'updates the skew' do
+            subject.update_estimated_skew(context)
+            expect(subject.estimated_skew(endpoint)).to be_within(1).of(1000)
           end
         end
       end

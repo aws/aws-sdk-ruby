@@ -35,13 +35,6 @@ module Aws
           @mutex.synchronize { @endpoint_estimated_skews[endpoint.to_s] }
         end
 
-        # Sets the clock correction for an endpoint
-        # @param endpoint [URI / String]
-        # @param correction [Number]
-        def set_clock_correction(endpoint, correction)
-          @mutex.synchronize { @endpoint_clock_corrections[endpoint.to_s] = correction }
-        end
-
         # Determines whether a request has clock skew by comparing
         # the current time against the server's time in the response
         # @param context [Seahorse::Client::RequestContext]
@@ -63,7 +56,6 @@ module Aws
           end
         end
 
-
         # Called for every request
         # Update our estimated clock skew for the endpoint
         # from the servers time in the response
@@ -72,7 +64,9 @@ module Aws
           endpoint = context.http_request.endpoint
           now_utc = Time.now.utc
           server_time = server_time(context.http_response)
-          @mutex.synchronize { @endpoint_estimated_skews[endpoint.to_s] = server_time - now_utc }
+          if server_time
+            @mutex.synchronize { @endpoint_estimated_skews[endpoint.to_s] = server_time - now_utc }
+          end
         end
 
         private
@@ -84,6 +78,13 @@ module Aws
           rescue
             nil
           end
+        end
+
+        # Sets the clock correction for an endpoint
+        # @param endpoint [URI / String]
+        # @param correction [Number]
+        def set_clock_correction(endpoint, correction)
+          @mutex.synchronize { @endpoint_clock_corrections[endpoint.to_s] = correction }
         end
 
       end

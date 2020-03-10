@@ -276,25 +276,42 @@ module Aws
 
           handle_with_retry(test_case_def)
         end
-      end
 
-      it 'deletes endpoints from the endpoint cache and retries endpoint discovery errors' do
-        endpoint_error = Errors::EndpointDiscoveryError.new(nil, nil)
+        it 'deletes endpoints from the endpoint cache and retries endpoint discovery errors' do
+          endpoint_error = Errors::EndpointDiscoveryError.new(nil, nil)
 
-        test_case_def = [
-          {
-            response: { status_code: 421, error: endpoint_error, endpoint_discovery: true },
-            expect: { retries: 1 }
-          },
-          {
-            response: { status_code: 200, error: nil },
-            expect: { retries: 1 }
-          }
-        ]
+          test_case_def = [
+            {
+              response: { status_code: 421, error: endpoint_error, endpoint_discovery: true },
+              expect: { retries: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { retries: 1 }
+            }
+          ]
 
-        expect(resp.context.config.endpoint_cache).to receive(:extract_key).and_return('key')
-        expect(resp.context.config.endpoint_cache).to receive(:delete).with('key')
-        handle_with_retry(test_case_def)
+          expect(resp.context.config.endpoint_cache).to receive(:extract_key).and_return('key')
+          expect(resp.context.config.endpoint_cache).to receive(:delete).with('key')
+          handle_with_retry(test_case_def)
+        end
+
+        it 'correctly sets the TTL value on the retry header' do
+          allow(config).to receive(:http_read_timeout).and_return(60)
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error, clock_skew: 100 },
+              expect: { retries: 1, ttl: false }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { retries: 1, ttl: 100 + 60 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
       end
 
       context 'adaptive mode' do
