@@ -30,6 +30,7 @@ def handle_with_retry(test_cases)
     setup_next_response(test_cases[i])
 
     i += 1
+    # the handle block needs to return the response
     resp
   end
 
@@ -54,7 +55,15 @@ def apply_expectations(test_case)
       )
     ).to eq(expected[:available_capacity])
   end
-  expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]
+
+  if expected[:retries]
+    expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]
+    expect(resp.context.http_request.headers['amz-sdk-request'])
+      .to include("attempt=#{expected[:retries]}")
+    expect(resp.context.http_request.headers['amz-sdk-request'])
+      .to include("max=#{resp.context.config.max_attempts}")
+  end
+
   if expected[:calculated_rate]
     expect(
       resp.context.config.client_rate_limiter.instance_variable_get(
@@ -99,5 +108,24 @@ def setup_next_response(test_case)
 
   if response[:endpoint_discovery]
     allow(resp.context.operation).to receive(:endpoint_discovery).and_return(true)
+  end
+
+  # Some expectations need to be applied before the next
+  # call to the handler occurs.
+  # Anything to be tested before @handler.call(context)
+  expected = test_case[:expect]
+  if expected.include? :ttl
+    if expected[:ttl] != false
+      expect(resp.context.http_request.headers['amz-sdk-request'])
+        .to include('ttl=')
+      ttl = resp.context.http_request.headers['amz-sdk-request']
+                .match(/ttl=([0-9TZ]+)/).captures.first
+      expect { ttl = Time.parse(ttl) }.not_to raise_error
+      expect(ttl - Time.now.utc)
+        .to be_within(2).of(expected[:ttl])
+    else
+      expect(resp.context.http_request.headers['amz-sdk-request'])
+        .not_to include('ttl=')
+    end
   end
 end

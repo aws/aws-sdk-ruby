@@ -223,6 +223,7 @@ a clock skew correction and retry requests with skewed client clocks.
           config = context.config
 
           get_send_token(config)
+          add_retry_headers(context)
           response = @handler.call(context)
           error_inspector = Retries::ErrorInspector.new(
             response.error, response.context.http_response.status_code
@@ -235,11 +236,15 @@ a clock skew correction and retry requests with skewed client clocks.
             config.endpoint_cache.delete(key)
           end
 
-          # Clock skew needs to be updated from the response even when
-          # the request is not retryable
+          # Clock correction needs to be updated from the response even when
+          # the request is not retryable but should only be updated
+          # in the case of clock skew errors
           if error_inspector.clock_skew?(context)
-            config.clock_skew.update_clock_skew(context)
+            config.clock_skew.update_clock_correction(context)
           end
+
+          # Estimated skew needs to be updated on every request
+          config.clock_skew.update_estimated_skew(context)
 
           return response unless retryable?(context, response, error_inspector)
 
@@ -303,6 +308,35 @@ a clock skew correction and retry requests with skewed client clocks.
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
+        end
+
+        def add_retry_headers(context)
+          request_pairs = {
+            'attempt' => context.retries,
+            'max' => context.config.max_attempts
+          }
+          if (ttl = compute_request_ttl(context))
+            request_pairs['ttl'] = ttl
+          end
+
+          # create the request header
+          formatted_header = request_pairs.map { |k, v| "#{k}=#{v}" }.join('; ')
+          context.http_request.headers['amz-sdk-request'] = formatted_header
+        end
+
+        def compute_request_ttl(context)
+          return if context.operation.async
+
+          endpoint = context.http_request.endpoint
+          estimated_skew = context.config.clock_skew.estimated_skew(endpoint)
+          if context.config.respond_to?(:http_read_timeout)
+            read_timeout = context.config.http_read_timeout
+          end
+
+          if estimated_skew && read_timeout
+            (Time.now.utc + read_timeout + estimated_skew)
+              .strftime('%Y%m%dT%H%M%SZ')
+          end
         end
       end
 
