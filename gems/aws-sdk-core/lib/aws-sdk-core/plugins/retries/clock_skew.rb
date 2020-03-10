@@ -28,7 +28,8 @@ module Aws
         # The estimated skew factors in any clock skew from
         # the service along with any network latency.
         # This provides a more accurate value for the ttl,
-        # which should represent when the client will stop waiting for a request.
+        # which should represent when the client will stop
+        # waiting for a request.
         # Estimated Skew should not be used to correct clock skew errors
         # it should only be used to estimate TTL for a request
         def estimated_skew(endpoint)
@@ -40,7 +41,8 @@ module Aws
         # @param context [Seahorse::Client::RequestContext]
         def clock_skewed?(context)
           server_time = server_time(context.http_response)
-          !!server_time && (Time.now.utc - server_time).abs > CLOCK_SKEW_THRESHOLD
+          !!server_time &&
+            (Time.now.utc - server_time).abs > CLOCK_SKEW_THRESHOLD
         end
 
         # Called only on clock skew related errors
@@ -64,8 +66,9 @@ module Aws
           endpoint = context.http_request.endpoint
           now_utc = Time.now.utc
           server_time = server_time(context.http_response)
-          if server_time
-            @mutex.synchronize { @endpoint_estimated_skews[endpoint.to_s] = server_time - now_utc }
+          return unless server_time
+          @mutex.synchronize do
+            @endpoint_estimated_skews[endpoint.to_s] = server_time - now_utc
           end
         end
 
@@ -84,9 +87,10 @@ module Aws
         # @param endpoint [URI / String]
         # @param correction [Number]
         def set_clock_correction(endpoint, correction)
-          @mutex.synchronize { @endpoint_clock_corrections[endpoint.to_s] = correction }
+          @mutex.synchronize do
+            @endpoint_clock_corrections[endpoint.to_s] = correction
+          end
         end
-
       end
     end
   end
