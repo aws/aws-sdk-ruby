@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      -name: list files
+      - name: list files
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           env.changed_files=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
