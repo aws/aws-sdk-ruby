@@ -8,14 +8,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: list files
-        run: |
-          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
-          env.changed_files=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-          echo env.changed_files
+      - id: file_changes
+        uses: trilom/file-changes-action@v1
 
       - name: Comment PR with dynamic message
         uses: thollander/actions-comment-pull-request@master
         with:
-          message: 'Dynamic message : your current branch is ${{ github.head_ref }} and changes: ${{env.changed_files}}.'
+          message: 'Dynamic message : your current branch is ${{ github.head_ref }} and changes: ${{env.steps.file_changes.outputs.files}}.'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
