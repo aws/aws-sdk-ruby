@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EFS - Updated the documentation for Amazon Elastic File System.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
 2.11.464 (2020-03-10)
 ------------------
 
