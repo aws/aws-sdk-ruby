@@ -6,6 +6,7 @@ module AwsSdkCodeGenerator
       # @param [Hash, String] api
       # @return [String, nil]
       def docstring(shape_or_shape_ref, api)
+        # TEST CHANGE
         ref, shape = resolve(shape_or_shape_ref, api)
         # APIG models, downcase shape name in origin or "__" prefix in origin
         # code-gen shape name might have been changed (upcased_first/lstrip_prefix/both),

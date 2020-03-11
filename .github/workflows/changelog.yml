@@ -1,18 +1,15 @@
-on: pull_request
+on:
+  pull_request:
+    paths:
+    - 'build_tools/**/*.rb'
 
 jobs:
   changelog_comment_pr:
     runs-on: ubuntu-latest
     name: Comment on Changelog requires
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - id: file_changes
-        uses: trilom/file-changes-action@v1
-
       - name: Comment PR with dynamic message
         uses: thollander/actions-comment-pull-request@master
         with:
-          message: 'Dynamic message : your current branch is ${{ github.head_ref }} and changes: ${{env.steps.file_changes.outputs.files}}.'
+          message: 'This change modifies the generator.  Do you need to make updates the change logs in individual gems?'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
