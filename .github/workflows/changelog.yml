@@ -8,9 +8,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      -name: list files
+        run: |
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
+          env.changed_files=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          echo env.changed_files
+
       - name: Comment PR with dynamic message
         uses: thollander/actions-comment-pull-request@master
         with:
-          message: 'Dynamic message : your current branch is ${{ github.head_ref }}.
-            Check [Contexts and expression syntax](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/contexts-and-expression-syntax-for-github-actions) available variables.'
+          message: 'Dynamic message : your current branch is ${{ github.head_ref }} and changes: ${{env.changed_files}}.'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
