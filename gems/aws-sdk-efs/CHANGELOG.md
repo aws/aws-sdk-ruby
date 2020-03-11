@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-03-11)
+------------------
+
+* Feature - Documentation updates for elasticfilesystem
+
 1.25.0 (2020-03-09)
 ------------------
 

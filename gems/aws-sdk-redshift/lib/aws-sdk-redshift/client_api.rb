@@ -291,6 +291,8 @@ module Aws::Redshift
     ParameterApplyType = Shapes::StringShape.new(name: 'ParameterApplyType')
     ParameterGroupList = Shapes::ListShape.new(name: 'ParameterGroupList')
     ParametersList = Shapes::ListShape.new(name: 'ParametersList')
+    PauseClusterMessage = Shapes::StructureShape.new(name: 'PauseClusterMessage')
+    PauseClusterResult = Shapes::StructureShape.new(name: 'PauseClusterResult')
     PendingActionsList = Shapes::ListShape.new(name: 'PendingActionsList')
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
     PurchaseReservedNodeOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedNodeOfferingMessage')
@@ -324,6 +326,8 @@ module Aws::Redshift
     RestoreStatus = Shapes::StructureShape.new(name: 'RestoreStatus')
     RestoreTableFromClusterSnapshotMessage = Shapes::StructureShape.new(name: 'RestoreTableFromClusterSnapshotMessage')
     RestoreTableFromClusterSnapshotResult = Shapes::StructureShape.new(name: 'RestoreTableFromClusterSnapshotResult')
+    ResumeClusterMessage = Shapes::StructureShape.new(name: 'ResumeClusterMessage')
+    ResumeClusterResult = Shapes::StructureShape.new(name: 'ResumeClusterResult')
     RevisionTarget = Shapes::StructureShape.new(name: 'RevisionTarget')
     RevisionTargetsList = Shapes::ListShape.new(name: 'RevisionTargetsList')
     RevokeClusterSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'RevokeClusterSecurityGroupIngressMessage')
@@ -1526,6 +1530,12 @@ module Aws::Redshift
 
     ParametersList.member = Shapes::ShapeRef.new(shape: Parameter, location_name: "Parameter")
 
+    PauseClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    PauseClusterMessage.struct_class = Types::PauseClusterMessage
+
+    PauseClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    PauseClusterResult.struct_class = Types::PauseClusterResult
+
     PendingActionsList.member = Shapes::ShapeRef.new(shape: String)
 
     PendingModifiedValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserPassword"))
@@ -1703,6 +1713,12 @@ module Aws::Redshift
     RestoreTableFromClusterSnapshotResult.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "TableRestoreStatus"))
     RestoreTableFromClusterSnapshotResult.struct_class = Types::RestoreTableFromClusterSnapshotResult
 
+    ResumeClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    ResumeClusterMessage.struct_class = Types::ResumeClusterMessage
+
+    ResumeClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    ResumeClusterResult.struct_class = Types::ResumeClusterResult
+
     RevisionTarget.add_member(:database_revision, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseRevision"))
     RevisionTarget.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     RevisionTarget.add_member(:database_revision_release_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "DatabaseRevisionReleaseDate"))
@@ -1771,6 +1787,8 @@ module Aws::Redshift
     ScheduledActionTimeList.member = Shapes::ShapeRef.new(shape: TStamp, location_name: "ScheduledActionTime")
 
     ScheduledActionType.add_member(:resize_cluster, Shapes::ShapeRef.new(shape: ResizeClusterMessage, location_name: "ResizeCluster"))
+    ScheduledActionType.add_member(:pause_cluster, Shapes::ShapeRef.new(shape: PauseClusterMessage, location_name: "PauseCluster"))
+    ScheduledActionType.add_member(:resume_cluster, Shapes::ShapeRef.new(shape: ResumeClusterMessage, location_name: "ResumeCluster"))
     ScheduledActionType.struct_class = Types::ScheduledActionType
 
     ScheduledActionTypeUnsupportedFault.struct_class = Types::ScheduledActionTypeUnsupportedFault
@@ -2797,6 +2815,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InsufficientS3BucketPolicyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3KeyPrefixFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketNameFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:enable_snapshot_copy, Seahorse::Model::Operation.new.tap do |o|
@@ -2897,6 +2916,7 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: ModifyClusterMaintenanceMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyClusterMaintenanceResult)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:modify_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2999,6 +3019,16 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleUpdateInProgressFault)
       end)
 
+      api.add_operation(:pause_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PauseCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PauseClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: PauseClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+      end)
+
       api.add_operation(:purchase_reserved_node_offering, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PurchaseReservedNodeOffering"
         o.http_method = "POST"
@@ -3094,6 +3124,16 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:resume_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResumeClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: ResumeClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:revoke_cluster_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|

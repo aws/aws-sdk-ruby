@@ -1979,6 +1979,12 @@ module Aws::Redshift
     #         number_of_nodes: 1,
     #         classic: false,
     #       },
+    #       pause_cluster: {
+    #         cluster_identifier: "String", # required
+    #       },
+    #       resume_cluster: {
+    #         cluster_identifier: "String", # required
+    #       },
     #     },
     #     schedule: "String", # required
     #     iam_role: "String", # required
@@ -1996,6 +2002,8 @@ module Aws::Redshift
     #   resp.target_action.resize_cluster.node_type #=> String
     #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.target_action.pause_cluster.cluster_identifier #=> String
+    #   resp.target_action.resume_cluster.cluster_identifier #=> String
     #   resp.schedule #=> String
     #   resp.iam_role #=> String
     #   resp.scheduled_action_description #=> String
@@ -4764,7 +4772,7 @@ module Aws::Redshift
     #
     #   resp = client.describe_scheduled_actions({
     #     scheduled_action_name: "String",
-    #     target_action_type: "ResizeCluster", # accepts ResizeCluster
+    #     target_action_type: "ResizeCluster", # accepts ResizeCluster, PauseCluster, ResumeCluster
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     active: false,
@@ -4788,6 +4796,8 @@ module Aws::Redshift
     #   resp.scheduled_actions[0].target_action.resize_cluster.node_type #=> String
     #   resp.scheduled_actions[0].target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.scheduled_actions[0].target_action.resize_cluster.classic #=> Boolean
+    #   resp.scheduled_actions[0].target_action.pause_cluster.cluster_identifier #=> String
+    #   resp.scheduled_actions[0].target_action.resume_cluster.cluster_identifier #=> String
     #   resp.scheduled_actions[0].schedule #=> String
     #   resp.scheduled_actions[0].iam_role #=> String
     #   resp.scheduled_actions[0].scheduled_action_description #=> String
@@ -7003,6 +7013,12 @@ module Aws::Redshift
     #         number_of_nodes: 1,
     #         classic: false,
     #       },
+    #       pause_cluster: {
+    #         cluster_identifier: "String", # required
+    #       },
+    #       resume_cluster: {
+    #         cluster_identifier: "String", # required
+    #       },
     #     },
     #     schedule: "String",
     #     iam_role: "String",
@@ -7020,6 +7036,8 @@ module Aws::Redshift
     #   resp.target_action.resize_cluster.node_type #=> String
     #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.target_action.pause_cluster.cluster_identifier #=> String
+    #   resp.target_action.resume_cluster.cluster_identifier #=> String
     #   resp.schedule #=> String
     #   resp.iam_role #=> String
     #   resp.scheduled_action_description #=> String
@@ -7252,6 +7270,128 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_snapshot_schedule(params = {}, options = {})
       req = build_request(:modify_snapshot_schedule, params)
+      req.send_request(options)
+    end
+
+    # Pauses a cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to be paused.
+    #
+    # @return [Types::PauseClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PauseClusterResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_cluster({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
+    #
+    # @overload pause_cluster(params = {})
+    # @param [Hash] params ({})
+    def pause_cluster(params = {}, options = {})
+      req = build_request(:pause_cluster, params)
       req.send_request(options)
     end
 
@@ -8135,6 +8275,128 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Resumes a paused cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to be resumed.
+    #
+    # @return [Types::ResumeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeClusterResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_cluster({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
+    #
+    # @overload resume_cluster(params = {})
+    # @param [Hash] params ({})
+    def resume_cluster(params = {}, options = {})
+      req = build_request(:resume_cluster, params)
+      req.send_request(options)
+    end
+
     # Revokes an ingress rule in an Amazon Redshift security group for a
     # previously authorized IP range or Amazon EC2 security group. To add an
     # ingress rule, see AuthorizeClusterSecurityGroupIngress. For
@@ -8438,7 +8700,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

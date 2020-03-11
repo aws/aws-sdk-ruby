@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-03-11)
+------------------
+
+* Feature - Amazon Redshift now supports operations to pause and resume a cluster on demand or on a schedule.
+
 1.38.0 (2020-03-09)
 ------------------
 

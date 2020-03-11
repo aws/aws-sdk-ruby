@@ -425,6 +425,8 @@ module Aws::Redshift
     #
     #   * `modifying`
     #
+    #   * `paused`
+    #
     #   * `rebooting`
     #
     #   * `renaming`
@@ -2486,6 +2488,12 @@ module Aws::Redshift
     #             number_of_nodes: 1,
     #             classic: false,
     #           },
+    #           pause_cluster: {
+    #             cluster_identifier: "String", # required
+    #           },
+    #           resume_cluster: {
+    #             cluster_identifier: "String", # required
+    #           },
     #         },
     #         schedule: "String", # required
     #         iam_role: "String", # required
@@ -4524,7 +4532,7 @@ module Aws::Redshift
     #
     #       {
     #         scheduled_action_name: "String",
-    #         target_action_type: "ResizeCluster", # accepts ResizeCluster
+    #         target_action_type: "ResizeCluster", # accepts ResizeCluster, PauseCluster, ResumeCluster
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         active: false,
@@ -6823,6 +6831,12 @@ module Aws::Redshift
     #             number_of_nodes: 1,
     #             classic: false,
     #           },
+    #           pause_cluster: {
+    #             cluster_identifier: "String", # required
+    #           },
+    #           resume_cluster: {
+    #             cluster_identifier: "String", # required
+    #           },
     #         },
     #         schedule: "String",
     #         iam_role: "String",
@@ -7214,6 +7228,35 @@ module Aws::Redshift
       :apply_type,
       :is_modifiable,
       :minimum_engine_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PauseClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to be paused.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseClusterMessage AWS API Documentation
+    #
+    class PauseClusterMessage < Struct.new(
+      :cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseClusterResult AWS API Documentation
+    #
+    class PauseClusterResult < Struct.new(
+      :cluster)
       include Aws::Structure
     end
 
@@ -8318,6 +8361,35 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to be resumed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeClusterMessage AWS API Documentation
+    #
+    class ResumeClusterMessage < Struct.new(
+      :cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeClusterResult AWS API Documentation
+    #
+    class ResumeClusterResult < Struct.new(
+      :cluster)
+      include Aws::Structure
+    end
+
     # Describes a `RevisionTarget`.
     #
     # @!attribute [rw] database_revision
@@ -8654,16 +8726,32 @@ module Aws::Redshift
     #           number_of_nodes: 1,
     #           classic: false,
     #         },
+    #         pause_cluster: {
+    #           cluster_identifier: "String", # required
+    #         },
+    #         resume_cluster: {
+    #           cluster_identifier: "String", # required
+    #         },
     #       }
     #
     # @!attribute [rw] resize_cluster
     #   An action that runs a `ResizeCluster` API operation.
     #   @return [Types::ResizeClusterMessage]
     #
+    # @!attribute [rw] pause_cluster
+    #   An action that runs a `PauseCluster` API operation.
+    #   @return [Types::PauseClusterMessage]
+    #
+    # @!attribute [rw] resume_cluster
+    #   An action that runs a `ResumeCluster` API operation.
+    #   @return [Types::ResumeClusterMessage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionType AWS API Documentation
     #
     class ScheduledActionType < Struct.new(
-      :resize_cluster)
+      :resize_cluster,
+      :pause_cluster,
+      :resume_cluster)
       include Aws::Structure
     end
 

@@ -525,6 +525,9 @@ module Aws::EFS
     #   If `KmsKeyId` is specified, the CreateFileSystemRequest$Encrypted
     #   parameter must be set to true.
     #
+    #   EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with
+    #   EFS file systems.
+    #
     # @option params [String] :throughput_mode
     #   The throughput mode for the file system to be created. There are two
     #   throughput modes to choose from for your file system: `bursting` and
@@ -1758,15 +1761,14 @@ module Aws::EFS
     # system policy, which can be the default policy or an explicit policy
     # set or updated using this API operation. When an explicit policy is
     # set, it overrides the default policy. For more information about the
-    # default file system policy, see [Using Resource-based Policies with
-    # EFS][1].
+    # default file system policy, see [Default EFS File System Policy][1].
     #
     # This operation requires permissions for the
     # `elasticfilesystem:PutFileSystemPolicy` action.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy
     #
     # @option params [required, String] :file_system_id
     #   The ID of the EFS file system that you want to create or update the
@@ -2068,7 +2070,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
