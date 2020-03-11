@@ -89,7 +89,7 @@ module Seahorse
           @pool_mutex.synchronize do
             _clean
             if @pool.key?(endpoint)
-              session = @pool[endpoint].shift
+              session = @pool[endpoint].pop
             end
           end
 
