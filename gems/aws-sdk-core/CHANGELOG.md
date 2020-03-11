@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.91.2 (2020-03-11)
+------------------
+
+* Issue - Seahorse::Client::NetHttp::ConnectionPool to prefer least recently used connections
+
 3.91.1 (2020-03-10)
 ------------------
 
