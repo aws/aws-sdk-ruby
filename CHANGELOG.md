@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
 2.11.465 (2020-03-11)
 ------------------
 
