@@ -1,0 +1,24 @@
+on: pull_request
+
+jobs:
+  changelog_comment_pr:
+    runs-on: ubuntu-latest
+    name: Comment on Changelog requires
+    steps:
+      - id: file_changes
+          uses: trilom/file-changes-action@v1
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: test
+        run: |
+          echo '${{ steps.file_changes.outputs.files}}'
+          echo '${{ steps.file_changes.outputs.files_modified}}'
+          echo '${{ steps.file_changes.outputs.files_added}}'
+          echo '${{ steps.file_changes.outputs.files_deleted}}'
+
+      - name: Comment PR with dynamic message
+        uses: thollander/actions-comment-pull-request@master
+        with:
+          message: 'Consider adding a changelog entry'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
