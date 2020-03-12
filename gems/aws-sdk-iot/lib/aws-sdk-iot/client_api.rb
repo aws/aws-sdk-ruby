@@ -176,6 +176,7 @@ module Aws::IoT
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     CloudwatchAlarmAction = Shapes::StructureShape.new(name: 'CloudwatchAlarmAction')
+    CloudwatchLogsAction = Shapes::StructureShape.new(name: 'CloudwatchLogsAction')
     CloudwatchMetricAction = Shapes::StructureShape.new(name: 'CloudwatchMetricAction')
     Code = Shapes::StringShape.new(name: 'Code')
     CodeSigning = Shapes::StructureShape.new(name: 'CodeSigning')
@@ -625,6 +626,7 @@ module Aws::IoT
     ListV2LoggingLevelsResponse = Shapes::StructureShape.new(name: 'ListV2LoggingLevelsResponse')
     ListViolationEventsRequest = Shapes::StructureShape.new(name: 'ListViolationEventsRequest')
     ListViolationEventsResponse = Shapes::StructureShape.new(name: 'ListViolationEventsResponse')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogTarget = Shapes::StructureShape.new(name: 'LogTarget')
     LogTargetConfiguration = Shapes::StructureShape.new(name: 'LogTargetConfiguration')
@@ -1069,6 +1071,7 @@ module Aws::IoT
     Action.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseAction, location_name: "firehose"))
     Action.add_member(:cloudwatch_metric, Shapes::ShapeRef.new(shape: CloudwatchMetricAction, location_name: "cloudwatchMetric"))
     Action.add_member(:cloudwatch_alarm, Shapes::ShapeRef.new(shape: CloudwatchAlarmAction, location_name: "cloudwatchAlarm"))
+    Action.add_member(:cloudwatch_logs, Shapes::ShapeRef.new(shape: CloudwatchLogsAction, location_name: "cloudwatchLogs"))
     Action.add_member(:elasticsearch, Shapes::ShapeRef.new(shape: ElasticsearchAction, location_name: "elasticsearch"))
     Action.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceAction, location_name: "salesforce"))
     Action.add_member(:iot_analytics, Shapes::ShapeRef.new(shape: IotAnalyticsAction, location_name: "iotAnalytics"))
@@ -1428,6 +1431,10 @@ module Aws::IoT
     CloudwatchAlarmAction.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, required: true, location_name: "stateReason"))
     CloudwatchAlarmAction.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, required: true, location_name: "stateValue"))
     CloudwatchAlarmAction.struct_class = Types::CloudwatchAlarmAction
+
+    CloudwatchLogsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+    CloudwatchLogsAction.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    CloudwatchLogsAction.struct_class = Types::CloudwatchLogsAction
 
     CloudwatchMetricAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
     CloudwatchMetricAction.add_member(:metric_namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "metricNamespace"))

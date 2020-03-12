@@ -1972,7 +1972,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
@@ -2031,7 +2031,7 @@ module Aws::IoT
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html
     #
     # @option params [required, String] :thing_group_name
     #   The thing group name to create.
@@ -2235,6 +2235,10 @@ module Aws::IoT
     #             state_reason: "StateReason", # required
     #             state_value: "StateValue", # required
     #           },
+    #           cloudwatch_logs: {
+    #             role_arn: "AwsArn", # required
+    #             log_group_name: "LogGroupName", # required
+    #           },
     #           elasticsearch: {
     #             role_arn: "AwsArn", # required
     #             endpoint: "ElasticsearchEndpoint", # required
@@ -2374,6 +2378,10 @@ module Aws::IoT
     #           alarm_name: "AlarmName", # required
     #           state_reason: "StateReason", # required
     #           state_value: "StateValue", # required
+    #         },
+    #         cloudwatch_logs: {
+    #           role_arn: "AwsArn", # required
+    #           log_group_name: "LogGroupName", # required
     #         },
     #         elasticsearch: {
     #           role_arn: "AwsArn", # required
@@ -3632,6 +3640,10 @@ module Aws::IoT
     #   * `iot:Jobs` - Returns an AWS IoT device management Jobs API endpoint.
     #
     #   ^
+    #
+    #   We strongly recommend that customers use the newer `iot:Data-ATS`
+    #   endpoint type to avoid issues related to the widespread distrust of
+    #   Symantec certificate authorities.
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4927,6 +4939,8 @@ module Aws::IoT
     #   resp.rule.actions[0].cloudwatch_alarm.alarm_name #=> String
     #   resp.rule.actions[0].cloudwatch_alarm.state_reason #=> String
     #   resp.rule.actions[0].cloudwatch_alarm.state_value #=> String
+    #   resp.rule.actions[0].cloudwatch_logs.role_arn #=> String
+    #   resp.rule.actions[0].cloudwatch_logs.log_group_name #=> String
     #   resp.rule.actions[0].elasticsearch.role_arn #=> String
     #   resp.rule.actions[0].elasticsearch.endpoint #=> String
     #   resp.rule.actions[0].elasticsearch.index #=> String
@@ -5009,6 +5023,8 @@ module Aws::IoT
     #   resp.rule.error_action.cloudwatch_alarm.alarm_name #=> String
     #   resp.rule.error_action.cloudwatch_alarm.state_reason #=> String
     #   resp.rule.error_action.cloudwatch_alarm.state_value #=> String
+    #   resp.rule.error_action.cloudwatch_logs.role_arn #=> String
+    #   resp.rule.error_action.cloudwatch_logs.log_group_name #=> String
     #   resp.rule.error_action.elasticsearch.role_arn #=> String
     #   resp.rule.error_action.elasticsearch.endpoint #=> String
     #   resp.rule.error_action.elasticsearch.index #=> String
@@ -7333,12 +7349,12 @@ module Aws::IoT
     # [2]: https://console.aws.amazon.com/support/home
     #
     # @option params [required, String] :template_body
-    #   The provisioning template. See [Programmatic Provisioning][1] for more
-    #   information.
+    #   The provisioning template. See [Provisioning Devices That Have Device
+    #   Certificates][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html
     #
     # @option params [Hash<String,String>] :parameters
     #   The parameters for provisioning a thing. See [Programmatic
@@ -7561,6 +7577,10 @@ module Aws::IoT
     #             state_reason: "StateReason", # required
     #             state_value: "StateValue", # required
     #           },
+    #           cloudwatch_logs: {
+    #             role_arn: "AwsArn", # required
+    #             log_group_name: "LogGroupName", # required
+    #           },
     #           elasticsearch: {
     #             role_arn: "AwsArn", # required
     #             endpoint: "ElasticsearchEndpoint", # required
@@ -7700,6 +7720,10 @@ module Aws::IoT
     #           alarm_name: "AlarmName", # required
     #           state_reason: "StateReason", # required
     #           state_value: "StateValue", # required
+    #         },
+    #         cloudwatch_logs: {
+    #           role_arn: "AwsArn", # required
+    #           log_group_name: "LogGroupName", # required
     #         },
     #         elasticsearch: {
     #           role_arn: "AwsArn", # required
@@ -8570,9 +8594,10 @@ module Aws::IoT
     # @option params [required, String] :new_status
     #   The new status.
     #
-    #   **Note:** Setting the status to PENDING\_TRANSFER will result in an
-    #   exception being thrown. PENDING\_TRANSFER is a status used internally
-    #   by AWS IoT. It is not intended for developer use.
+    #   **Note:** Setting the status to PENDING\_TRANSFER or
+    #   PENDING\_ACTIVATION will result in an exception being thrown.
+    #   PENDING\_TRANSFER and PENDING\_ACTIVATION are statuses used internally
+    #   by AWS IoT. They are not intended for developer use.
     #
     #   **Note:** The status value REGISTER\_INACTIVE is deprecated and should
     #   not be used.
@@ -9461,7 +9486,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-03-12)
+------------------
+
+* Feature - Amazon Lex now supports tagging for bots, bot aliases and bot channels.
+
 1.27.0 (2020-03-09)
 ------------------
 

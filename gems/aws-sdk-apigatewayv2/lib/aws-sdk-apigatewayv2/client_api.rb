@@ -64,6 +64,10 @@ module Aws::ApiGatewayV2
     CreateStageInput = Shapes::StructureShape.new(name: 'CreateStageInput')
     CreateStageRequest = Shapes::StructureShape.new(name: 'CreateStageRequest')
     CreateStageResponse = Shapes::StructureShape.new(name: 'CreateStageResponse')
+    CreateVpcLinkInput = Shapes::StructureShape.new(name: 'CreateVpcLinkInput')
+    CreateVpcLinkRequest = Shapes::StructureShape.new(name: 'CreateVpcLinkRequest')
+    CreateVpcLinkResponse = Shapes::StructureShape.new(name: 'CreateVpcLinkResponse')
+    DeleteAccessLogSettingsRequest = Shapes::StructureShape.new(name: 'DeleteAccessLogSettingsRequest')
     DeleteApiMappingRequest = Shapes::StructureShape.new(name: 'DeleteApiMappingRequest')
     DeleteApiRequest = Shapes::StructureShape.new(name: 'DeleteApiRequest')
     DeleteAuthorizerRequest = Shapes::StructureShape.new(name: 'DeleteAuthorizerRequest')
@@ -74,9 +78,12 @@ module Aws::ApiGatewayV2
     DeleteIntegrationResponseRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationResponseRequest')
     DeleteModelRequest = Shapes::StructureShape.new(name: 'DeleteModelRequest')
     DeleteRouteRequest = Shapes::StructureShape.new(name: 'DeleteRouteRequest')
+    DeleteRouteRequestParameterRequest = Shapes::StructureShape.new(name: 'DeleteRouteRequestParameterRequest')
     DeleteRouteResponseRequest = Shapes::StructureShape.new(name: 'DeleteRouteResponseRequest')
     DeleteRouteSettingsRequest = Shapes::StructureShape.new(name: 'DeleteRouteSettingsRequest')
     DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
+    DeleteVpcLinkRequest = Shapes::StructureShape.new(name: 'DeleteVpcLinkRequest')
+    DeleteVpcLinkResponse = Shapes::StructureShape.new(name: 'DeleteVpcLinkResponse')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     Deployments = Shapes::StructureShape.new(name: 'Deployments')
@@ -134,6 +141,10 @@ module Aws::ApiGatewayV2
     GetStagesResponse = Shapes::StructureShape.new(name: 'GetStagesResponse')
     GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
     GetTagsResponse = Shapes::StructureShape.new(name: 'GetTagsResponse')
+    GetVpcLinkRequest = Shapes::StructureShape.new(name: 'GetVpcLinkRequest')
+    GetVpcLinkResponse = Shapes::StructureShape.new(name: 'GetVpcLinkResponse')
+    GetVpcLinksRequest = Shapes::StructureShape.new(name: 'GetVpcLinksRequest')
+    GetVpcLinksResponse = Shapes::StructureShape.new(name: 'GetVpcLinksResponse')
     Id = Shapes::StringShape.new(name: 'Id')
     IdentitySourceList = Shapes::ListShape.new(name: 'IdentitySourceList')
     ImportApiInput = Shapes::StructureShape.new(name: 'ImportApiInput')
@@ -169,6 +180,7 @@ module Aws::ApiGatewayV2
     RouteSettings = Shapes::StructureShape.new(name: 'RouteSettings')
     RouteSettingsMap = Shapes::MapShape.new(name: 'RouteSettingsMap')
     Routes = Shapes::StructureShape.new(name: 'Routes')
+    SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     SecurityPolicy = Shapes::StringShape.new(name: 'SecurityPolicy')
     SelectionExpression = Shapes::StringShape.new(name: 'SelectionExpression')
     SelectionKey = Shapes::StringShape.new(name: 'SelectionKey')
@@ -184,12 +196,15 @@ module Aws::ApiGatewayV2
     StringWithLengthBetween1And256 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And256')
     StringWithLengthBetween1And512 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And512')
     StringWithLengthBetween1And64 = Shapes::StringShape.new(name: 'StringWithLengthBetween1And64')
+    SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     Tags = Shapes::MapShape.new(name: 'Tags')
     Template = Shapes::StructureShape.new(name: 'Template')
     TemplateMap = Shapes::MapShape.new(name: 'TemplateMap')
+    TlsConfig = Shapes::StructureShape.new(name: 'TlsConfig')
+    TlsConfigInput = Shapes::StructureShape.new(name: 'TlsConfigInput')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateApiInput = Shapes::StructureShape.new(name: 'UpdateApiInput')
@@ -225,7 +240,14 @@ module Aws::ApiGatewayV2
     UpdateStageInput = Shapes::StructureShape.new(name: 'UpdateStageInput')
     UpdateStageRequest = Shapes::StructureShape.new(name: 'UpdateStageRequest')
     UpdateStageResponse = Shapes::StructureShape.new(name: 'UpdateStageResponse')
+    UpdateVpcLinkInput = Shapes::StructureShape.new(name: 'UpdateVpcLinkInput')
+    UpdateVpcLinkRequest = Shapes::StructureShape.new(name: 'UpdateVpcLinkRequest')
+    UpdateVpcLinkResponse = Shapes::StructureShape.new(name: 'UpdateVpcLinkResponse')
     UriWithLengthBetween1And2048 = Shapes::StringShape.new(name: 'UriWithLengthBetween1And2048')
+    VpcLink = Shapes::StructureShape.new(name: 'VpcLink')
+    VpcLinkStatus = Shapes::StringShape.new(name: 'VpcLinkStatus')
+    VpcLinkVersion = Shapes::StringShape.new(name: 'VpcLinkVersion')
+    VpcLinks = Shapes::StructureShape.new(name: 'VpcLinks')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -240,6 +262,7 @@ module Aws::ApiGatewayV2
     __listOfRoute = Shapes::ListShape.new(name: '__listOfRoute')
     __listOfRouteResponse = Shapes::ListShape.new(name: '__listOfRouteResponse')
     __listOfStage = Shapes::ListShape.new(name: '__listOfStage')
+    __listOfVpcLink = Shapes::ListShape.new(name: '__listOfVpcLink')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __string = Shapes::StringShape.new(name: '__string')
@@ -460,6 +483,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationInput.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationInput.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     CreateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    CreateIntegrationInput.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     CreateIntegrationInput.struct_class = Types::CreateIntegrationInput
 
     CreateIntegrationRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -477,6 +501,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationRequest.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     CreateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    CreateIntegrationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     CreateIntegrationRequest.struct_class = Types::CreateIntegrationRequest
 
     CreateIntegrationResponseInput.add_member(:content_handling_strategy, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandlingStrategy"))
@@ -520,6 +545,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     CreateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    CreateIntegrationResult.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     CreateIntegrationResult.struct_class = Types::CreateIntegrationResult
 
     CreateModelInput.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And256, location_name: "contentType"))
@@ -646,6 +672,33 @@ module Aws::ApiGatewayV2
     CreateStageResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateStageResponse.struct_class = Types::CreateStageResponse
 
+    CreateVpcLinkInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
+    CreateVpcLinkInput.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    CreateVpcLinkInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
+    CreateVpcLinkInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateVpcLinkInput.struct_class = Types::CreateVpcLinkInput
+
+    CreateVpcLinkRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
+    CreateVpcLinkRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    CreateVpcLinkRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
+    CreateVpcLinkRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateVpcLinkRequest.struct_class = Types::CreateVpcLinkRequest
+
+    CreateVpcLinkResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
+    CreateVpcLinkResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    CreateVpcLinkResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    CreateVpcLinkResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    CreateVpcLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateVpcLinkResponse.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: Id, location_name: "vpcLinkId"))
+    CreateVpcLinkResponse.add_member(:vpc_link_status, Shapes::ShapeRef.new(shape: VpcLinkStatus, location_name: "vpcLinkStatus"))
+    CreateVpcLinkResponse.add_member(:vpc_link_status_message, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "vpcLinkStatusMessage"))
+    CreateVpcLinkResponse.add_member(:vpc_link_version, Shapes::ShapeRef.new(shape: VpcLinkVersion, location_name: "vpcLinkVersion"))
+    CreateVpcLinkResponse.struct_class = Types::CreateVpcLinkResponse
+
+    DeleteAccessLogSettingsRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
+    DeleteAccessLogSettingsRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
+    DeleteAccessLogSettingsRequest.struct_class = Types::DeleteAccessLogSettingsRequest
+
     DeleteApiMappingRequest.add_member(:api_mapping_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiMappingId"))
     DeleteApiMappingRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
     DeleteApiMappingRequest.struct_class = Types::DeleteApiMappingRequest
@@ -684,19 +737,29 @@ module Aws::ApiGatewayV2
     DeleteRouteRequest.add_member(:route_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routeId"))
     DeleteRouteRequest.struct_class = Types::DeleteRouteRequest
 
+    DeleteRouteRequestParameterRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
+    DeleteRouteRequestParameterRequest.add_member(:request_parameter_key, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "requestParameterKey"))
+    DeleteRouteRequestParameterRequest.add_member(:route_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routeId"))
+    DeleteRouteRequestParameterRequest.struct_class = Types::DeleteRouteRequestParameterRequest
+
     DeleteRouteResponseRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     DeleteRouteResponseRequest.add_member(:route_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routeId"))
     DeleteRouteResponseRequest.add_member(:route_response_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routeResponseId"))
     DeleteRouteResponseRequest.struct_class = Types::DeleteRouteResponseRequest
 
     DeleteRouteSettingsRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
-    DeleteRouteSettingsRequest.add_member(:route_key, Shapes::ShapeRef.new(shape: SelectionKey, required: true, location: "uri", location_name: "routeKey"))
+    DeleteRouteSettingsRequest.add_member(:route_key, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "routeKey"))
     DeleteRouteSettingsRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
     DeleteRouteSettingsRequest.struct_class = Types::DeleteRouteSettingsRequest
 
     DeleteStageRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
     DeleteStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "stageName"))
     DeleteStageRequest.struct_class = Types::DeleteStageRequest
+
+    DeleteVpcLinkRequest.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "vpcLinkId"))
+    DeleteVpcLinkRequest.struct_class = Types::DeleteVpcLinkRequest
+
+    DeleteVpcLinkResponse.struct_class = Types::DeleteVpcLinkResponse
 
     Deployment.add_member(:auto_deployed, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoDeployed"))
     Deployment.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
@@ -885,6 +948,7 @@ module Aws::ApiGatewayV2
     GetIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     GetIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     GetIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    GetIntegrationResult.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     GetIntegrationResult.struct_class = Types::GetIntegrationResult
 
     GetIntegrationsRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -1005,8 +1069,30 @@ module Aws::ApiGatewayV2
     GetTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     GetTagsRequest.struct_class = Types::GetTagsRequest
 
-    GetTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    GetTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     GetTagsResponse.struct_class = Types::GetTagsResponse
+
+    GetVpcLinkRequest.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "vpcLinkId"))
+    GetVpcLinkRequest.struct_class = Types::GetVpcLinkRequest
+
+    GetVpcLinkResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
+    GetVpcLinkResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    GetVpcLinkResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    GetVpcLinkResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    GetVpcLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    GetVpcLinkResponse.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: Id, location_name: "vpcLinkId"))
+    GetVpcLinkResponse.add_member(:vpc_link_status, Shapes::ShapeRef.new(shape: VpcLinkStatus, location_name: "vpcLinkStatus"))
+    GetVpcLinkResponse.add_member(:vpc_link_status_message, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "vpcLinkStatusMessage"))
+    GetVpcLinkResponse.add_member(:vpc_link_version, Shapes::ShapeRef.new(shape: VpcLinkVersion, location_name: "vpcLinkVersion"))
+    GetVpcLinkResponse.struct_class = Types::GetVpcLinkResponse
+
+    GetVpcLinksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maxResults"))
+    GetVpcLinksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    GetVpcLinksRequest.struct_class = Types::GetVpcLinksRequest
+
+    GetVpcLinksResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfVpcLink, location_name: "items"))
+    GetVpcLinksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetVpcLinksResponse.struct_class = Types::GetVpcLinksResponse
 
     IdentitySourceList.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -1051,6 +1137,7 @@ module Aws::ApiGatewayV2
     Integration.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     Integration.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     Integration.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    Integration.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     Integration.struct_class = Types::Integration
 
     IntegrationParameters.key = Shapes::ShapeRef.new(shape: __string)
@@ -1169,6 +1256,8 @@ module Aws::ApiGatewayV2
     Routes.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Routes.struct_class = Types::Routes
 
+    SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: __string)
+
     Stage.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
     Stage.add_member(:api_gateway_managed, Shapes::ShapeRef.new(shape: __boolean, location_name: "apiGatewayManaged"))
     Stage.add_member(:auto_deploy, Shapes::ShapeRef.new(shape: __boolean, location_name: "autoDeploy"))
@@ -1192,6 +1281,8 @@ module Aws::ApiGatewayV2
     Stages.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     Stages.struct_class = Types::Stages
 
+    SubnetIdList.member = Shapes::ShapeRef.new(shape: __string)
+
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
 
@@ -1209,6 +1300,12 @@ module Aws::ApiGatewayV2
 
     TemplateMap.key = Shapes::ShapeRef.new(shape: __string)
     TemplateMap.value = Shapes::ShapeRef.new(shape: StringWithLengthBetween0And32K)
+
+    TlsConfig.add_member(:server_name_to_verify, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "serverNameToVerify"))
+    TlsConfig.struct_class = Types::TlsConfig
+
+    TlsConfigInput.add_member(:server_name_to_verify, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And512, location_name: "serverNameToVerify"))
+    TlsConfigInput.struct_class = Types::TlsConfigInput
 
     TooManyRequestsException.add_member(:limit_type, Shapes::ShapeRef.new(shape: __string, location_name: "limitType"))
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1353,6 +1450,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationInput.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationInput.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     UpdateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    UpdateIntegrationInput.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     UpdateIntegrationInput.struct_class = Types::UpdateIntegrationInput
 
     UpdateIntegrationRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
@@ -1371,6 +1469,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationRequest.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     UpdateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    UpdateIntegrationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     UpdateIntegrationRequest.struct_class = Types::UpdateIntegrationRequest
 
     UpdateIntegrationResponseInput.add_member(:content_handling_strategy, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandlingStrategy"))
@@ -1415,6 +1514,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
     UpdateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    UpdateIntegrationResult.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     UpdateIntegrationResult.struct_class = Types::UpdateIntegrationResult
 
     UpdateModelInput.add_member(:content_type, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And256, location_name: "contentType"))
@@ -1541,6 +1641,39 @@ module Aws::ApiGatewayV2
     UpdateStageResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateStageResponse.struct_class = Types::UpdateStageResponse
 
+    UpdateVpcLinkInput.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    UpdateVpcLinkInput.struct_class = Types::UpdateVpcLinkInput
+
+    UpdateVpcLinkRequest.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    UpdateVpcLinkRequest.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "vpcLinkId"))
+    UpdateVpcLinkRequest.struct_class = Types::UpdateVpcLinkRequest
+
+    UpdateVpcLinkResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
+    UpdateVpcLinkResponse.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, location_name: "name"))
+    UpdateVpcLinkResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
+    UpdateVpcLinkResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "subnetIds"))
+    UpdateVpcLinkResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    UpdateVpcLinkResponse.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: Id, location_name: "vpcLinkId"))
+    UpdateVpcLinkResponse.add_member(:vpc_link_status, Shapes::ShapeRef.new(shape: VpcLinkStatus, location_name: "vpcLinkStatus"))
+    UpdateVpcLinkResponse.add_member(:vpc_link_status_message, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "vpcLinkStatusMessage"))
+    UpdateVpcLinkResponse.add_member(:vpc_link_version, Shapes::ShapeRef.new(shape: VpcLinkVersion, location_name: "vpcLinkVersion"))
+    UpdateVpcLinkResponse.struct_class = Types::UpdateVpcLinkResponse
+
+    VpcLink.add_member(:created_date, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "createdDate"))
+    VpcLink.add_member(:name, Shapes::ShapeRef.new(shape: StringWithLengthBetween1And128, required: true, location_name: "name"))
+    VpcLink.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "securityGroupIds"))
+    VpcLink.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
+    VpcLink.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    VpcLink.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "vpcLinkId"))
+    VpcLink.add_member(:vpc_link_status, Shapes::ShapeRef.new(shape: VpcLinkStatus, location_name: "vpcLinkStatus"))
+    VpcLink.add_member(:vpc_link_status_message, Shapes::ShapeRef.new(shape: StringWithLengthBetween0And1024, location_name: "vpcLinkStatusMessage"))
+    VpcLink.add_member(:vpc_link_version, Shapes::ShapeRef.new(shape: VpcLinkVersion, location_name: "vpcLinkVersion"))
+    VpcLink.struct_class = Types::VpcLink
+
+    VpcLinks.add_member(:items, Shapes::ShapeRef.new(shape: __listOfVpcLink, location_name: "items"))
+    VpcLinks.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    VpcLinks.struct_class = Types::VpcLinks
+
     __listOfApi.member = Shapes::ShapeRef.new(shape: Api)
 
     __listOfApiMapping.member = Shapes::ShapeRef.new(shape: ApiMapping)
@@ -1562,6 +1695,8 @@ module Aws::ApiGatewayV2
     __listOfRouteResponse.member = Shapes::ShapeRef.new(shape: RouteResponse)
 
     __listOfStage.member = Shapes::ShapeRef.new(shape: Stage)
+
+    __listOfVpcLink.member = Shapes::ShapeRef.new(shape: VpcLink)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -1716,6 +1851,26 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcLink"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/vpclinks"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcLinkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_access_log_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessLogSettings"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/apis/{apiId}/stages/{stageName}/accesslogsettings"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessLogSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_api, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteApi"
         o.http_method = "DELETE"
@@ -1817,6 +1972,16 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_route_request_parameter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRouteRequestParameter"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/apis/{apiId}/routes/{routeId}/requestparameters/{requestParameterKey}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRouteRequestParameterRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:delete_route_response, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRouteResponse"
         o.http_method = "DELETE"
@@ -1843,6 +2008,16 @@ module Aws::ApiGatewayV2
         o.http_request_uri = "/v2/apis/{apiId}/stages/{stageName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteStageRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcLink"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/vpclinks/{vpcLinkId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcLinkResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
@@ -2101,6 +2276,26 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:get_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpcLink"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/vpclinks/{vpcLinkId}"
+        o.input = Shapes::ShapeRef.new(shape: GetVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpcLinkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_vpc_links, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpcLinks"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/vpclinks"
+        o.input = Shapes::ShapeRef.new(shape: GetVpcLinksRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVpcLinksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:import_api, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportApi"
         o.http_method = "PUT"
@@ -2281,13 +2476,15 @@ module Aws::ApiGatewayV2
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
-      api.add_authorizer(:authorization_strategy, Seahorse::Model::Authorizer.new.tap do |a|
-        a.name = "authorization_strategy"
-        a.type = "provided"
-        a.placement = {
-          :location => "header",
-          :name => "Authorization"
-        }
+      api.add_operation(:update_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVpcLink"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/vpclinks/{vpcLinkId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVpcLinkResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
     end
 

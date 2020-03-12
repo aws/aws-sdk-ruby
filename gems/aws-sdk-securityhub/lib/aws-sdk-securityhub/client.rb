@@ -466,7 +466,8 @@ module Aws::SecurityHub
     #         updated_at: "NonEmptyString", # required
     #         severity: { # required
     #           product: 1.0,
-    #           normalized: 1, # required
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           normalized: 1,
     #         },
     #         confidence: 1,
     #         criticality: 1,
@@ -731,6 +732,25 @@ module Aws::SecurityHub
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
+    #                 created_at: "NonEmptyString",
+    #                 server_side_encryption_configuration: {
+    #                   rules: [
+    #                     {
+    #                       apply_server_side_encryption_by_default: {
+    #                         sse_algorithm: "NonEmptyString",
+    #                         kms_master_key_id: "NonEmptyString",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               aws_s3_object: {
+    #                 last_modified: "NonEmptyString",
+    #                 etag: "NonEmptyString",
+    #                 version_id: "NonEmptyString",
+    #                 content_type: "NonEmptyString",
+    #                 server_side_encryption: "NonEmptyString",
+    #                 ssekms_key_id: "NonEmptyString",
     #               },
     #               aws_iam_access_key: {
     #                 user_name: "NonEmptyString",
@@ -901,6 +921,9 @@ module Aws::SecurityHub
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
+    #         workflow: {
+    #           status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #         },
     #         record_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #         related_findings: [
     #           {
@@ -1499,6 +1522,12 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       workflow_state: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
+    #       workflow_status: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
@@ -2758,6 +2787,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
@@ -2829,6 +2864,7 @@ module Aws::SecurityHub
     #   resp.findings[0].created_at #=> String
     #   resp.findings[0].updated_at #=> String
     #   resp.findings[0].severity.product #=> Float
+    #   resp.findings[0].severity.label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.findings[0].severity.normalized #=> Integer
     #   resp.findings[0].confidence #=> Integer
     #   resp.findings[0].criticality #=> Integer
@@ -3003,6 +3039,16 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_name #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.created_at #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.last_modified #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.etag #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.version_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.content_type #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.server_side_encryption #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.ssekms_key_id #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.user_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.status #=> String, one of "Active", "Inactive"
     #   resp.findings[0].resources[0].details.aws_iam_access_key.created_at #=> String
@@ -3113,6 +3159,7 @@ module Aws::SecurityHub
     #   resp.findings[0].compliance.related_requirements[0] #=> String
     #   resp.findings[0].verification_state #=> String, one of "UNKNOWN", "TRUE_POSITIVE", "FALSE_POSITIVE", "BENIGN_POSITIVE"
     #   resp.findings[0].workflow_state #=> String, one of "NEW", "ASSIGNED", "IN_PROGRESS", "DEFERRED", "RESOLVED"
+    #   resp.findings[0].workflow.status #=> String, one of "NEW", "NOTIFIED", "RESOLVED", "SUPPRESSED"
     #   resp.findings[0].record_state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.findings[0].related_findings #=> Array
     #   resp.findings[0].related_findings[0].product_arn #=> String
@@ -3167,7 +3214,9 @@ module Aws::SecurityHub
     # Lists and describes insights for the specified insight ARNs.
     #
     # @option params [Array<String>] :insight_arns
-    #   The ARNs of the insights to describe.
+    #   The ARNs of the insights to describe. If you do not provide any
+    #   insight ARNs, then `GetInsights` returns all of your custom insights.
+    #   It does not return any managed insights.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination. On your first call to the
@@ -3452,6 +3501,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.workflow_state #=> Array
     #   resp.insights[0].filters.workflow_state[0].value #=> String
     #   resp.insights[0].filters.workflow_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
+    #   resp.insights[0].filters.workflow_status #=> Array
+    #   resp.insights[0].filters.workflow_status[0].value #=> String
+    #   resp.insights[0].filters.workflow_status[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.record_state #=> Array
     #   resp.insights[0].filters.record_state[0].value #=> String
     #   resp.insights[0].filters.record_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
@@ -4392,6 +4444,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
@@ -4979,6 +5037,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
@@ -5082,7 +5146,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

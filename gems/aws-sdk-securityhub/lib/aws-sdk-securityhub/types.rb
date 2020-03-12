@@ -2311,6 +2311,17 @@ module Aws::SecurityHub
     #       {
     #         owner_id: "NonEmptyString",
     #         owner_name: "NonEmptyString",
+    #         created_at: "NonEmptyString",
+    #         server_side_encryption_configuration: {
+    #           rules: [
+    #             {
+    #               apply_server_side_encryption_by_default: {
+    #                 sse_algorithm: "NonEmptyString",
+    #                 kms_master_key_id: "NonEmptyString",
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] owner_id
@@ -2321,11 +2332,156 @@ module Aws::SecurityHub
     #   The display name of the owner of the S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time when the S3 bucket was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_configuration
+    #   The encryption rules that are applied to the S3 bucket.
+    #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
     class AwsS3BucketDetails < Struct.new(
       :owner_id,
-      :owner_name)
+      :owner_name,
+      :created_at,
+      :server_side_encryption_configuration)
+      include Aws::Structure
+    end
+
+    # Specifies the default server-side encryption to apply to new objects
+    # in the bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketServerSideEncryptionByDefault
+    #   data as a hash:
+    #
+    #       {
+    #         sse_algorithm: "NonEmptyString",
+    #         kms_master_key_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] sse_algorithm
+    #   Server-side encryption algorithm to use for the default encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   AWS KMS customer master key (CMK) ID to use for the default
+    #   encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionByDefault AWS API Documentation
+    #
+    class AwsS3BucketServerSideEncryptionByDefault < Struct.new(
+      :sse_algorithm,
+      :kms_master_key_id)
+      include Aws::Structure
+    end
+
+    # The encryption configuration for the S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketServerSideEncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [
+    #           {
+    #             apply_server_side_encryption_by_default: {
+    #               sse_algorithm: "NonEmptyString",
+    #               kms_master_key_id: "NonEmptyString",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   The encryption rules that are applied to the S3 bucket.
+    #   @return [Array<Types::AwsS3BucketServerSideEncryptionRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionConfiguration AWS API Documentation
+    #
+    class AwsS3BucketServerSideEncryptionConfiguration < Struct.new(
+      :rules)
+      include Aws::Structure
+    end
+
+    # An encryption rule to apply to the S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketServerSideEncryptionRule
+    #   data as a hash:
+    #
+    #       {
+    #         apply_server_side_encryption_by_default: {
+    #           sse_algorithm: "NonEmptyString",
+    #           kms_master_key_id: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] apply_server_side_encryption_by_default
+    #   Specifies the default server-side encryption to apply to new objects
+    #   in the bucket. If a `PUT` Object request doesn't specify any
+    #   server-side encryption, this default encryption is applied.
+    #   @return [Types::AwsS3BucketServerSideEncryptionByDefault]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionRule AWS API Documentation
+    #
+    class AwsS3BucketServerSideEncryptionRule < Struct.new(
+      :apply_server_side_encryption_by_default)
+      include Aws::Structure
+    end
+
+    # Details about an AWS S3 object.
+    #
+    # @note When making an API call, you may pass AwsS3ObjectDetails
+    #   data as a hash:
+    #
+    #       {
+    #         last_modified: "NonEmptyString",
+    #         etag: "NonEmptyString",
+    #         version_id: "NonEmptyString",
+    #         content_type: "NonEmptyString",
+    #         server_side_encryption: "NonEmptyString",
+    #         ssekms_key_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time when the object was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The opaque identifier assigned by a web server to a specific version
+    #   of a resource found at a URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A standard MIME type describing the format of the object data.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption
+    #   If the object is stored using server-side encryption, the value of
+    #   the server-side encryption algorithm used when storing this object
+    #   in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssekms_key_id
+    #   The identifier of the AWS Key Management Service (AWS KMS) symmetric
+    #   customer managed customer master key (CMK) that was used for the
+    #   object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3ObjectDetails AWS API Documentation
+    #
+    class AwsS3ObjectDetails < Struct.new(
+      :last_modified,
+      :etag,
+      :version_id,
+      :content_type,
+      :server_side_encryption,
+      :ssekms_key_id)
       include Aws::Structure
     end
 
@@ -2356,7 +2512,8 @@ module Aws::SecurityHub
     #         updated_at: "NonEmptyString", # required
     #         severity: { # required
     #           product: 1.0,
-    #           normalized: 1, # required
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           normalized: 1,
     #         },
     #         confidence: 1,
     #         criticality: 1,
@@ -2621,6 +2778,25 @@ module Aws::SecurityHub
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
+    #                 created_at: "NonEmptyString",
+    #                 server_side_encryption_configuration: {
+    #                   rules: [
+    #                     {
+    #                       apply_server_side_encryption_by_default: {
+    #                         sse_algorithm: "NonEmptyString",
+    #                         kms_master_key_id: "NonEmptyString",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               aws_s3_object: {
+    #                 last_modified: "NonEmptyString",
+    #                 etag: "NonEmptyString",
+    #                 version_id: "NonEmptyString",
+    #                 content_type: "NonEmptyString",
+    #                 server_side_encryption: "NonEmptyString",
+    #                 ssekms_key_id: "NonEmptyString",
     #               },
     #               aws_iam_access_key: {
     #                 user_name: "NonEmptyString",
@@ -2791,6 +2967,9 @@ module Aws::SecurityHub
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
+    #         workflow: {
+    #           status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #         },
     #         record_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #         related_findings: [
     #           {
@@ -2814,10 +2993,10 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] product_arn
-    #   The ARN generated by Security Hub that uniquely identifies a
-    #   third-party company (security-findings provider) after this
-    #   provider's product (solution that generates findings) is registered
-    #   with Security Hub.
+    #   The ARN generated by Security Hub that uniquely identifies a product
+    #   that generates findings. This can be the ARN for a third-party
+    #   product that is integrated with Security Hub, or the ARN for a
+    #   custom integration.
     #   @return [String]
     #
     # @!attribute [rw] generator_id
@@ -2957,6 +3136,11 @@ module Aws::SecurityHub
     #   The workflow state of a finding.
     #   @return [String]
     #
+    # @!attribute [rw] workflow
+    #   Provides information about the status of the investigation into a
+    #   finding.
+    #   @return [Types::Workflow]
+    #
     # @!attribute [rw] record_state
     #   The record state of a finding.
     #   @return [String]
@@ -2999,6 +3183,7 @@ module Aws::SecurityHub
       :compliance,
       :verification_state,
       :workflow_state,
+      :workflow,
       :record_state,
       :related_findings,
       :note)
@@ -3515,6 +3700,12 @@ module Aws::SecurityHub
     #             comparison: "EQUALS", # accepts EQUALS, PREFIX
     #           },
     #         ],
+    #         workflow_status: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #           },
+    #         ],
     #         record_state: [
     #           {
     #             value: "NonEmptyString",
@@ -3910,6 +4101,24 @@ module Aws::SecurityHub
     #   The workflow state of a finding.
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] workflow_status
+    #   The status of the investigation into a finding. Allowed values are
+    #   the following.
+    #
+    #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #   * `NOTIFIED` - Indicates that the resource owner has been notified
+    #     about the security issue. Used when the initial reviewer is not
+    #     the resource owner, and needs intervention from the resource
+    #     owner.
+    #
+    #   * `SUPPRESSED` - The finding will not be reviewed again and will not
+    #     be acted upon.
+    #
+    #   * `RESOLVED` - The finding was reviewed and remediated and is now
+    #     considered resolved.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] record_state
     #   The updated record state for the finding.
     #   @return [Array<Types::StringFilter>]
@@ -4017,6 +4226,7 @@ module Aws::SecurityHub
       :compliance_status,
       :verification_state,
       :workflow_state,
+      :workflow_status,
       :record_state,
       :related_findings_product_arn,
       :related_findings_id,
@@ -4365,7 +4575,8 @@ module Aws::SecurityHub
     #             updated_at: "NonEmptyString", # required
     #             severity: { # required
     #               product: 1.0,
-    #               normalized: 1, # required
+    #               label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #               normalized: 1,
     #             },
     #             confidence: 1,
     #             criticality: 1,
@@ -4630,6 +4841,25 @@ module Aws::SecurityHub
     #                   aws_s3_bucket: {
     #                     owner_id: "NonEmptyString",
     #                     owner_name: "NonEmptyString",
+    #                     created_at: "NonEmptyString",
+    #                     server_side_encryption_configuration: {
+    #                       rules: [
+    #                         {
+    #                           apply_server_side_encryption_by_default: {
+    #                             sse_algorithm: "NonEmptyString",
+    #                             kms_master_key_id: "NonEmptyString",
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   aws_s3_object: {
+    #                     last_modified: "NonEmptyString",
+    #                     etag: "NonEmptyString",
+    #                     version_id: "NonEmptyString",
+    #                     content_type: "NonEmptyString",
+    #                     server_side_encryption: "NonEmptyString",
+    #                     ssekms_key_id: "NonEmptyString",
     #                   },
     #                   aws_iam_access_key: {
     #                     user_name: "NonEmptyString",
@@ -4800,6 +5030,9 @@ module Aws::SecurityHub
     #             },
     #             verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #             workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
+    #             workflow: {
+    #               status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #             },
     #             record_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #             related_findings: [
     #               {
@@ -5482,6 +5715,12 @@ module Aws::SecurityHub
     #             },
     #           ],
     #           workflow_state: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
+    #           workflow_status: [
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
@@ -6733,6 +6972,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -6876,7 +7121,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] insight_arns
-    #   The ARNs of the insights to describe.
+    #   The ARNs of the insights to describe. If you do not provide any
+    #   insight ARNs, then `GetInsights` returns all of your custom
+    #   insights. It does not return any managed insights.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -8170,6 +8417,25 @@ module Aws::SecurityHub
     #           aws_s3_bucket: {
     #             owner_id: "NonEmptyString",
     #             owner_name: "NonEmptyString",
+    #             created_at: "NonEmptyString",
+    #             server_side_encryption_configuration: {
+    #               rules: [
+    #                 {
+    #                   apply_server_side_encryption_by_default: {
+    #                     sse_algorithm: "NonEmptyString",
+    #                     kms_master_key_id: "NonEmptyString",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           aws_s3_object: {
+    #             last_modified: "NonEmptyString",
+    #             etag: "NonEmptyString",
+    #             version_id: "NonEmptyString",
+    #             content_type: "NonEmptyString",
+    #             server_side_encryption: "NonEmptyString",
+    #             ssekms_key_id: "NonEmptyString",
     #           },
     #           aws_iam_access_key: {
     #             user_name: "NonEmptyString",
@@ -8609,6 +8875,25 @@ module Aws::SecurityHub
     #         aws_s3_bucket: {
     #           owner_id: "NonEmptyString",
     #           owner_name: "NonEmptyString",
+    #           created_at: "NonEmptyString",
+    #           server_side_encryption_configuration: {
+    #             rules: [
+    #               {
+    #                 apply_server_side_encryption_by_default: {
+    #                   sse_algorithm: "NonEmptyString",
+    #                   kms_master_key_id: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         aws_s3_object: {
+    #           last_modified: "NonEmptyString",
+    #           etag: "NonEmptyString",
+    #           version_id: "NonEmptyString",
+    #           content_type: "NonEmptyString",
+    #           server_side_encryption: "NonEmptyString",
+    #           ssekms_key_id: "NonEmptyString",
     #         },
     #         aws_iam_access_key: {
     #           user_name: "NonEmptyString",
@@ -8804,6 +9089,10 @@ module Aws::SecurityHub
     #   Details about an Amazon S3 Bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
     #
+    # @!attribute [rw] aws_s3_object
+    #   Details about an Amazon S3 object related to a finding.
+    #   @return [Types::AwsS3ObjectDetails]
+    #
     # @!attribute [rw] aws_iam_access_key
     #   Details about an IAM access key related to a finding.
     #   @return [Types::AwsIamAccessKeyDetails]
@@ -8869,6 +9158,7 @@ module Aws::SecurityHub
       :aws_elbv_2_load_balancer,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
+      :aws_s3_object,
       :aws_iam_access_key,
       :aws_iam_role,
       :aws_kms_key,
@@ -8925,7 +9215,8 @@ module Aws::SecurityHub
     #
     #       {
     #         product: 1.0,
-    #         normalized: 1, # required
+    #         label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #         normalized: 1,
     #       }
     #
     # @!attribute [rw] product
@@ -8933,14 +9224,45 @@ module Aws::SecurityHub
     #   partner product that generated the finding.
     #   @return [Float]
     #
+    # @!attribute [rw] label
+    #   The severity value of the finding. The allowed values are the
+    #   following.
+    #
+    #   * `INFORMATIONAL` - No issue was found.
+    #
+    #   * `LOW` - The issue does not require action on its own.
+    #
+    #   * `MEDIUM` - The issue must be addressed but not urgently.
+    #
+    #   * `HIGH` - The issue must be addressed as a priority.
+    #
+    #   * `CRITICAL` - The issue must be remediated immediately to avoid it
+    #     escalating.
+    #   @return [String]
+    #
     # @!attribute [rw] normalized
-    #   The normalized severity of a finding.
+    #   Deprecated. This attribute is being deprecated. Instead of providing
+    #   `Normalized`, provide `Label`.
+    #
+    #   If you provide `Normalized` and do not provide `Label`, `Label` is
+    #   set automatically as follows.
+    #
+    #   * 0 - `INFORMATIONAL`
+    #
+    #   * 1–39 - `LOW`
+    #
+    #   * 40–69 - `MEDIUM`
+    #
+    #   * 70–89 - `HIGH`
+    #
+    #   * 90–100 - `CRITICAL`
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity AWS API Documentation
     #
     class Severity < Struct.new(
       :product,
+      :label,
       :normalized)
       include Aws::Structure
     end
@@ -9799,6 +10121,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -10387,6 +10715,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -10575,6 +10909,40 @@ module Aws::SecurityHub
     #
     class WafOverrideAction < Struct.new(
       :type)
+      include Aws::Structure
+    end
+
+    # Provides information about the status of the investigation into a
+    # finding.
+    #
+    # @note When making an API call, you may pass Workflow
+    #   data as a hash:
+    #
+    #       {
+    #         status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the investigation into the finding. The allowed values
+    #   are the following.
+    #
+    #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #   * `NOTIFIED` - Indicates that you notified the resource owner about
+    #     the security issue. Used when the initial reviewer is not the
+    #     resource owner, and needs intervention from the resource owner.
+    #
+    #   * `SUPPRESSED` - The finding will not be reviewed again and will not
+    #     be acted upon.
+    #
+    #   * `RESOLVED` - The finding was reviewed and remediated and is now
+    #     considered resolved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Workflow AWS API Documentation
+    #
+    class Workflow < Struct.new(
+      :status)
       include Aws::Structure
     end
 

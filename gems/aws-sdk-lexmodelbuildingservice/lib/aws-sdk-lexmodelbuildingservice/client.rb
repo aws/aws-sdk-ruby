@@ -2417,6 +2417,38 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
+    # Gets a list of tags associated with the specified resource. Only bots,
+    # bot aliases, and bot channels can have tags associated with them.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get a list of tags
+    #   for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Lex conversational bot or replaces an existing bot.
     # When you create or update a bot you are only required to specify a
     # name, a locale, and whether the bot is directed toward children under
@@ -2610,6 +2642,11 @@ module Aws::LexModelBuildingService
     #   is the same as calling the `CreateBotVersion` operation. If you don't
     #   specify `createVersion`, the default is `false`.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to add to the bot. You can only add tags when you
+    #   create a bot, you can't use the `PutBot` operation to update the tags
+    #   on a bot. To update tags, use the `TagResource` operation.
+    #
     # @return [Types::PutBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutBotResponse#name #name} => String
@@ -2629,6 +2666,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotResponse#child_directed #child_directed} => Boolean
     #   * {Types::PutBotResponse#create_version #create_version} => Boolean
     #   * {Types::PutBotResponse#detect_sentiment #detect_sentiment} => Boolean
+    #   * {Types::PutBotResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To create a bot
@@ -2760,6 +2798,12 @@ module Aws::LexModelBuildingService
     #     child_directed: false, # required
     #     detect_sentiment: false,
     #     create_version: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2792,6 +2836,9 @@ module Aws::LexModelBuildingService
     #   resp.child_directed #=> Boolean
     #   resp.create_version #=> Boolean
     #   resp.detect_sentiment #=> Boolean
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot AWS API Documentation
     #
@@ -2836,6 +2883,12 @@ module Aws::LexModelBuildingService
     # @option params [Types::ConversationLogsRequest] :conversation_logs
     #   Settings for conversation logs for the alias.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to add to the bot alias. You can only add tags when you
+    #   create an alias, you can't use the `PutBotAlias` operation to update
+    #   the tags on a bot alias. To update tags, use the `TagResource`
+    #   operation.
+    #
     # @return [Types::PutBotAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutBotAliasResponse#name #name} => String
@@ -2846,6 +2899,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotAliasResponse#created_date #created_date} => Time
     #   * {Types::PutBotAliasResponse#checksum #checksum} => String
     #   * {Types::PutBotAliasResponse#conversation_logs #conversation_logs} => Types::ConversationLogsResponse
+    #   * {Types::PutBotAliasResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2866,6 +2920,12 @@ module Aws::LexModelBuildingService
     #       ],
     #       iam_role_arn: "IamRoleArn", # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2884,6 +2944,9 @@ module Aws::LexModelBuildingService
     #   resp.conversation_logs.log_settings[0].resource_arn #=> String
     #   resp.conversation_logs.log_settings[0].resource_prefix #=> String
     #   resp.conversation_logs.iam_role_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias AWS API Documentation
     #
@@ -3762,6 +3825,10 @@ module Aws::LexModelBuildingService
     #     conflict with an existing resource. The $LASTEST version of the
     #     existing resource is overwritten with the data from the import file.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tags to add to the imported bot. You can only add tags when
+    #   you import a bot, you can't add tags to an intent or slot type.
+    #
     # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartImportResponse#name #name} => String
@@ -3769,6 +3836,7 @@ module Aws::LexModelBuildingService
     #   * {Types::StartImportResponse#merge_strategy #merge_strategy} => String
     #   * {Types::StartImportResponse#import_id #import_id} => String
     #   * {Types::StartImportResponse#import_status #import_status} => String
+    #   * {Types::StartImportResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::StartImportResponse#created_date #created_date} => Time
     #
     # @example Request syntax with placeholder values
@@ -3777,6 +3845,12 @@ module Aws::LexModelBuildingService
     #     payload: "data", # required
     #     resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
     #     merge_strategy: "OVERWRITE_LATEST", # required, accepts OVERWRITE_LATEST, FAIL_ON_CONFLICT
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3786,6 +3860,9 @@ module Aws::LexModelBuildingService
     #   resp.merge_strategy #=> String, one of "OVERWRITE_LATEST", "FAIL_ON_CONFLICT"
     #   resp.import_id #=> String
     #   resp.import_status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #   resp.created_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImport AWS API Documentation
@@ -3794,6 +3871,68 @@ module Aws::LexModelBuildingService
     # @param [Hash] params ({})
     def start_import(params = {}, options = {})
       req = build_request(:start_import, params)
+      req.send_request(options)
+    end
+
+    # Adds the specified tags to the specified resource. If a tag key
+    # already exists, the existing value is replaced with the new value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel
+    #   to tag.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tag keys to add to the resource. If a tag key already
+    #   exists, the existing value is replaced with the new value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from a bot, bot alias or bot channel.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove the tags
+    #   from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys to remove from the resource. If a tag key does not
+    #   exist on the resource, it is ignored.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -3810,7 +3949,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

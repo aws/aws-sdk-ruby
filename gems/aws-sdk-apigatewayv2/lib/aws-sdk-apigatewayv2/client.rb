@@ -761,6 +761,11 @@ module Aws::ApiGatewayV2
     # @option params [Integer] :timeout_in_millis
     #   An integer with a value between \[50-29000\].
     #
+    # @option params [Types::TlsConfigInput] :tls_config
+    #   The TLS configuration for a private integration. If you specify a TLS
+    #   configuration, private integration traffic uses the HTTPS protocol.
+    #   Supported only for HTTP APIs.
+    #
     # @return [Types::CreateIntegrationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntegrationResult#api_gateway_managed #api_gateway_managed} => Boolean
@@ -780,6 +785,7 @@ module Aws::ApiGatewayV2
     #   * {Types::CreateIntegrationResult#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::CreateIntegrationResult#template_selection_expression #template_selection_expression} => String
     #   * {Types::CreateIntegrationResult#timeout_in_millis #timeout_in_millis} => Integer
+    #   * {Types::CreateIntegrationResult#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -803,6 +809,9 @@ module Aws::ApiGatewayV2
     #     },
     #     template_selection_expression: "SelectionExpression",
     #     timeout_in_millis: 1,
+    #     tls_config: {
+    #       server_name_to_verify: "StringWithLengthBetween1And512",
+    #     },
     #   })
     #
     # @example Response structure
@@ -826,6 +835,7 @@ module Aws::ApiGatewayV2
     #   resp.request_templates["__string"] #=> String
     #   resp.template_selection_expression #=> String
     #   resp.timeout_in_millis #=> Integer
+    #   resp.tls_config.server_name_to_verify #=> String
     #
     # @overload create_integration(params = {})
     # @param [Hash] params ({})
@@ -1235,7 +1245,7 @@ module Aws::ApiGatewayV2
     #     default_route_settings: {
     #       data_trace_enabled: false,
     #       detailed_metrics_enabled: false,
-    #       logging_level: "ERROR", # accepts ERROR, INFO, false
+    #       logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #       throttling_burst_limit: 1,
     #       throttling_rate_limit: 1.0,
     #     },
@@ -1245,7 +1255,7 @@ module Aws::ApiGatewayV2
     #       "__string" => {
     #         data_trace_enabled: false,
     #         detailed_metrics_enabled: false,
-    #         logging_level: "ERROR", # accepts ERROR, INFO, false
+    #         logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #         throttling_burst_limit: 1,
     #         throttling_rate_limit: 1.0,
     #       },
@@ -1269,7 +1279,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.default_route_settings.data_trace_enabled #=> Boolean
     #   resp.default_route_settings.detailed_metrics_enabled #=> Boolean
-    #   resp.default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.default_route_settings.throttling_burst_limit #=> Integer
     #   resp.default_route_settings.throttling_rate_limit #=> Float
     #   resp.deployment_id #=> String
@@ -1279,7 +1289,7 @@ module Aws::ApiGatewayV2
     #   resp.route_settings #=> Hash
     #   resp.route_settings["__string"].data_trace_enabled #=> Boolean
     #   resp.route_settings["__string"].detailed_metrics_enabled #=> Boolean
-    #   resp.route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.route_settings["__string"].throttling_burst_limit #=> Integer
     #   resp.route_settings["__string"].throttling_rate_limit #=> Float
     #   resp.stage_name #=> String
@@ -1292,6 +1302,88 @@ module Aws::ApiGatewayV2
     # @param [Hash] params ({})
     def create_stage(params = {}, options = {})
       req = build_request(:create_stage, params)
+      req.send_request(options)
+    end
+
+    # Creates a VPC link.
+    #
+    # @option params [required, String] :name
+    #   A string with a length between \[1-128\].
+    #
+    # @option params [Array<String>] :security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #
+    # @option params [required, Array<String>] :subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Represents a collection of tags associated with the resource.
+    #
+    # @return [Types::CreateVpcLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcLinkResponse#created_date #created_date} => Time
+    #   * {Types::CreateVpcLinkResponse#name #name} => String
+    #   * {Types::CreateVpcLinkResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateVpcLinkResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::CreateVpcLinkResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::CreateVpcLinkResponse#vpc_link_id #vpc_link_id} => String
+    #   * {Types::CreateVpcLinkResponse#vpc_link_status #vpc_link_status} => String
+    #   * {Types::CreateVpcLinkResponse#vpc_link_status_message #vpc_link_status_message} => String
+    #   * {Types::CreateVpcLinkResponse#vpc_link_version #vpc_link_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_link({
+    #     name: "StringWithLengthBetween1And128", # required
+    #     security_group_ids: ["__string"],
+    #     subnet_ids: ["__string"], # required
+    #     tags: {
+    #       "__string" => "StringWithLengthBetween1And1600",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_date #=> Time
+    #   resp.name #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.subnet_ids #=> Array
+    #   resp.subnet_ids[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.vpc_link_id #=> String
+    #   resp.vpc_link_status #=> String, one of "PENDING", "AVAILABLE", "DELETING", "FAILED", "INACTIVE"
+    #   resp.vpc_link_status_message #=> String
+    #   resp.vpc_link_version #=> String, one of "V2"
+    #
+    # @overload create_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_link(params = {}, options = {})
+      req = build_request(:create_vpc_link, params)
+      req.send_request(options)
+    end
+
+    # Deletes the AccessLogSettings for a Stage. To disable access logging
+    # for a Stage, delete its AccessLogSettings.
+    #
+    # @option params [required, String] :api_id
+    #
+    # @option params [required, String] :stage_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_log_settings({
+    #     api_id: "__string", # required
+    #     stage_name: "__string", # required
+    #   })
+    #
+    # @overload delete_access_log_settings(params = {})
+    # @param [Hash] params ({})
+    def delete_access_log_settings(params = {}, options = {})
+      req = build_request(:delete_access_log_settings, params)
       req.send_request(options)
     end
 
@@ -1509,6 +1601,31 @@ module Aws::ApiGatewayV2
       req.send_request(options)
     end
 
+    # Deletes a route request parameter.
+    #
+    # @option params [required, String] :api_id
+    #
+    # @option params [required, String] :request_parameter_key
+    #
+    # @option params [required, String] :route_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_route_request_parameter({
+    #     api_id: "__string", # required
+    #     request_parameter_key: "__string", # required
+    #     route_id: "__string", # required
+    #   })
+    #
+    # @overload delete_route_request_parameter(params = {})
+    # @param [Hash] params ({})
+    def delete_route_request_parameter(params = {}, options = {})
+      req = build_request(:delete_route_request_parameter, params)
+      req.send_request(options)
+    end
+
     # Deletes a RouteResponse.
     #
     # @option params [required, String] :api_id
@@ -1539,14 +1656,6 @@ module Aws::ApiGatewayV2
     # @option params [required, String] :api_id
     #
     # @option params [required, String] :route_key
-    #   After evaluating a selection expression, the result is compared
-    #   against one or more selection keys to find a matching key. See
-    #   [Selection Expressions][1] for a list of expressions and each
-    #   expression's associated selection key type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [required, String] :stage_name
     #
@@ -1556,7 +1665,7 @@ module Aws::ApiGatewayV2
     #
     #   resp = client.delete_route_settings({
     #     api_id: "__string", # required
-    #     route_key: "SelectionKey", # required
+    #     route_key: "__string", # required
     #     stage_name: "__string", # required
     #   })
     #
@@ -1586,6 +1695,25 @@ module Aws::ApiGatewayV2
     # @param [Hash] params ({})
     def delete_stage(params = {}, options = {})
       req = build_request(:delete_stage, params)
+      req.send_request(options)
+    end
+
+    # Deletes a VPC link.
+    #
+    # @option params [required, String] :vpc_link_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_link({
+    #     vpc_link_id: "__string", # required
+    #   })
+    #
+    # @overload delete_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_link(params = {}, options = {})
+      req = build_request(:delete_vpc_link, params)
       req.send_request(options)
     end
 
@@ -2058,6 +2186,7 @@ module Aws::ApiGatewayV2
     #   * {Types::GetIntegrationResult#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::GetIntegrationResult#template_selection_expression #template_selection_expression} => String
     #   * {Types::GetIntegrationResult#timeout_in_millis #timeout_in_millis} => Integer
+    #   * {Types::GetIntegrationResult#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2087,6 +2216,7 @@ module Aws::ApiGatewayV2
     #   resp.request_templates["__string"] #=> String
     #   resp.template_selection_expression #=> String
     #   resp.timeout_in_millis #=> Integer
+    #   resp.tls_config.server_name_to_verify #=> String
     #
     # @overload get_integration(params = {})
     # @param [Hash] params ({})
@@ -2225,6 +2355,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].request_templates["__string"] #=> String
     #   resp.items[0].template_selection_expression #=> String
     #   resp.items[0].timeout_in_millis #=> Integer
+    #   resp.items[0].tls_config.server_name_to_verify #=> String
     #   resp.next_token #=> String
     #
     # @overload get_integrations(params = {})
@@ -2564,7 +2695,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.default_route_settings.data_trace_enabled #=> Boolean
     #   resp.default_route_settings.detailed_metrics_enabled #=> Boolean
-    #   resp.default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.default_route_settings.throttling_burst_limit #=> Integer
     #   resp.default_route_settings.throttling_rate_limit #=> Float
     #   resp.deployment_id #=> String
@@ -2574,7 +2705,7 @@ module Aws::ApiGatewayV2
     #   resp.route_settings #=> Hash
     #   resp.route_settings["__string"].data_trace_enabled #=> Boolean
     #   resp.route_settings["__string"].detailed_metrics_enabled #=> Boolean
-    #   resp.route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.route_settings["__string"].throttling_burst_limit #=> Integer
     #   resp.route_settings["__string"].throttling_rate_limit #=> Float
     #   resp.stage_name #=> String
@@ -2622,7 +2753,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].created_date #=> Time
     #   resp.items[0].default_route_settings.data_trace_enabled #=> Boolean
     #   resp.items[0].default_route_settings.detailed_metrics_enabled #=> Boolean
-    #   resp.items[0].default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.items[0].default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.items[0].default_route_settings.throttling_burst_limit #=> Integer
     #   resp.items[0].default_route_settings.throttling_rate_limit #=> Float
     #   resp.items[0].deployment_id #=> String
@@ -2632,7 +2763,7 @@ module Aws::ApiGatewayV2
     #   resp.items[0].route_settings #=> Hash
     #   resp.items[0].route_settings["__string"].data_trace_enabled #=> Boolean
     #   resp.items[0].route_settings["__string"].detailed_metrics_enabled #=> Boolean
-    #   resp.items[0].route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.items[0].route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.items[0].route_settings["__string"].throttling_burst_limit #=> Integer
     #   resp.items[0].route_settings["__string"].throttling_rate_limit #=> Float
     #   resp.items[0].stage_name #=> String
@@ -2672,6 +2803,92 @@ module Aws::ApiGatewayV2
     # @param [Hash] params ({})
     def get_tags(params = {}, options = {})
       req = build_request(:get_tags, params)
+      req.send_request(options)
+    end
+
+    # Gets a VPC link.
+    #
+    # @option params [required, String] :vpc_link_id
+    #
+    # @return [Types::GetVpcLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpcLinkResponse#created_date #created_date} => Time
+    #   * {Types::GetVpcLinkResponse#name #name} => String
+    #   * {Types::GetVpcLinkResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetVpcLinkResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::GetVpcLinkResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetVpcLinkResponse#vpc_link_id #vpc_link_id} => String
+    #   * {Types::GetVpcLinkResponse#vpc_link_status #vpc_link_status} => String
+    #   * {Types::GetVpcLinkResponse#vpc_link_status_message #vpc_link_status_message} => String
+    #   * {Types::GetVpcLinkResponse#vpc_link_version #vpc_link_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpc_link({
+    #     vpc_link_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_date #=> Time
+    #   resp.name #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.subnet_ids #=> Array
+    #   resp.subnet_ids[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.vpc_link_id #=> String
+    #   resp.vpc_link_status #=> String, one of "PENDING", "AVAILABLE", "DELETING", "FAILED", "INACTIVE"
+    #   resp.vpc_link_status_message #=> String
+    #   resp.vpc_link_version #=> String, one of "V2"
+    #
+    # @overload get_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def get_vpc_link(params = {}, options = {})
+      req = build_request(:get_vpc_link, params)
+      req.send_request(options)
+    end
+
+    # Gets a collection of VPC links.
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::GetVpcLinksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpcLinksResponse#items #items} => Array&lt;Types::VpcLink&gt;
+    #   * {Types::GetVpcLinksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpc_links({
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].created_date #=> Time
+    #   resp.items[0].name #=> String
+    #   resp.items[0].security_group_ids #=> Array
+    #   resp.items[0].security_group_ids[0] #=> String
+    #   resp.items[0].subnet_ids #=> Array
+    #   resp.items[0].subnet_ids[0] #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
+    #   resp.items[0].vpc_link_id #=> String
+    #   resp.items[0].vpc_link_status #=> String, one of "PENDING", "AVAILABLE", "DELETING", "FAILED", "INACTIVE"
+    #   resp.items[0].vpc_link_status_message #=> String
+    #   resp.items[0].vpc_link_version #=> String, one of "V2"
+    #   resp.next_token #=> String
+    #
+    # @overload get_vpc_links(params = {})
+    # @param [Hash] params ({})
+    def get_vpc_links(params = {}, options = {})
+      req = build_request(:get_vpc_links, params)
       req.send_request(options)
     end
 
@@ -3312,6 +3529,11 @@ module Aws::ApiGatewayV2
     # @option params [Integer] :timeout_in_millis
     #   An integer with a value between \[50-29000\].
     #
+    # @option params [Types::TlsConfigInput] :tls_config
+    #   The TLS configuration for a private integration. If you specify a TLS
+    #   configuration, private integration traffic uses the HTTPS protocol.
+    #   Supported only for HTTP APIs.
+    #
     # @return [Types::UpdateIntegrationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIntegrationResult#api_gateway_managed #api_gateway_managed} => Boolean
@@ -3331,6 +3553,7 @@ module Aws::ApiGatewayV2
     #   * {Types::UpdateIntegrationResult#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::UpdateIntegrationResult#template_selection_expression #template_selection_expression} => String
     #   * {Types::UpdateIntegrationResult#timeout_in_millis #timeout_in_millis} => Integer
+    #   * {Types::UpdateIntegrationResult#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -3355,6 +3578,9 @@ module Aws::ApiGatewayV2
     #     },
     #     template_selection_expression: "SelectionExpression",
     #     timeout_in_millis: 1,
+    #     tls_config: {
+    #       server_name_to_verify: "StringWithLengthBetween1And512",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3378,6 +3604,7 @@ module Aws::ApiGatewayV2
     #   resp.request_templates["__string"] #=> String
     #   resp.template_selection_expression #=> String
     #   resp.timeout_in_millis #=> Integer
+    #   resp.tls_config.server_name_to_verify #=> String
     #
     # @overload update_integration(params = {})
     # @param [Hash] params ({})
@@ -3795,7 +4022,7 @@ module Aws::ApiGatewayV2
     #     default_route_settings: {
     #       data_trace_enabled: false,
     #       detailed_metrics_enabled: false,
-    #       logging_level: "ERROR", # accepts ERROR, INFO, false
+    #       logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #       throttling_burst_limit: 1,
     #       throttling_rate_limit: 1.0,
     #     },
@@ -3805,7 +4032,7 @@ module Aws::ApiGatewayV2
     #       "__string" => {
     #         data_trace_enabled: false,
     #         detailed_metrics_enabled: false,
-    #         logging_level: "ERROR", # accepts ERROR, INFO, false
+    #         logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #         throttling_burst_limit: 1,
     #         throttling_rate_limit: 1.0,
     #       },
@@ -3826,7 +4053,7 @@ module Aws::ApiGatewayV2
     #   resp.created_date #=> Time
     #   resp.default_route_settings.data_trace_enabled #=> Boolean
     #   resp.default_route_settings.detailed_metrics_enabled #=> Boolean
-    #   resp.default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.default_route_settings.logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.default_route_settings.throttling_burst_limit #=> Integer
     #   resp.default_route_settings.throttling_rate_limit #=> Float
     #   resp.deployment_id #=> String
@@ -3836,7 +4063,7 @@ module Aws::ApiGatewayV2
     #   resp.route_settings #=> Hash
     #   resp.route_settings["__string"].data_trace_enabled #=> Boolean
     #   resp.route_settings["__string"].detailed_metrics_enabled #=> Boolean
-    #   resp.route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "false"
+    #   resp.route_settings["__string"].logging_level #=> String, one of "ERROR", "INFO", "OFF"
     #   resp.route_settings["__string"].throttling_burst_limit #=> Integer
     #   resp.route_settings["__string"].throttling_rate_limit #=> Float
     #   resp.stage_name #=> String
@@ -3849,6 +4076,54 @@ module Aws::ApiGatewayV2
     # @param [Hash] params ({})
     def update_stage(params = {}, options = {})
       req = build_request(:update_stage, params)
+      req.send_request(options)
+    end
+
+    # Updates a VPC link.
+    #
+    # @option params [String] :name
+    #   A string with a length between \[1-128\].
+    #
+    # @option params [required, String] :vpc_link_id
+    #
+    # @return [Types::UpdateVpcLinkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVpcLinkResponse#created_date #created_date} => Time
+    #   * {Types::UpdateVpcLinkResponse#name #name} => String
+    #   * {Types::UpdateVpcLinkResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateVpcLinkResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateVpcLinkResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateVpcLinkResponse#vpc_link_id #vpc_link_id} => String
+    #   * {Types::UpdateVpcLinkResponse#vpc_link_status #vpc_link_status} => String
+    #   * {Types::UpdateVpcLinkResponse#vpc_link_status_message #vpc_link_status_message} => String
+    #   * {Types::UpdateVpcLinkResponse#vpc_link_version #vpc_link_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpc_link({
+    #     name: "StringWithLengthBetween1And128",
+    #     vpc_link_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_date #=> Time
+    #   resp.name #=> String
+    #   resp.security_group_ids #=> Array
+    #   resp.security_group_ids[0] #=> String
+    #   resp.subnet_ids #=> Array
+    #   resp.subnet_ids[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.vpc_link_id #=> String
+    #   resp.vpc_link_status #=> String, one of "PENDING", "AVAILABLE", "DELETING", "FAILED", "INACTIVE"
+    #   resp.vpc_link_status_message #=> String
+    #   resp.vpc_link_version #=> String, one of "V2"
+    #
+    # @overload update_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def update_vpc_link(params = {}, options = {})
+      req = build_request(:update_vpc_link, params)
       req.send_request(options)
     end
 
@@ -3865,7 +4140,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

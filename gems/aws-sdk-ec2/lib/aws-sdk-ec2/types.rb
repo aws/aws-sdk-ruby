@@ -44311,8 +44311,8 @@ module Aws::EC2
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
     #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
-    #   \| `instance` \| `key-pair` \| `launch-template` \|
-    #   `spot-fleet-request` \| `placement-group` \| `snapshot` \|
+    #   \| `instance` \| `key-pair` \| `launch-template` \| \| `natgateway`
+    #   \| `spot-fleet-request` \| `placement-group` \| `snapshot` \|
     #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
     #   `traffic-mirror-target` \| `transit-gateway` \|
     #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|

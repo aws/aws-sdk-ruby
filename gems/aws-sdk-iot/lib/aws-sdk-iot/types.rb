@@ -171,6 +171,10 @@ module Aws::IoT
     #           state_reason: "StateReason", # required
     #           state_value: "StateValue", # required
     #         },
+    #         cloudwatch_logs: {
+    #           role_arn: "AwsArn", # required
+    #           log_group_name: "LogGroupName", # required
+    #         },
     #         elasticsearch: {
     #           role_arn: "AwsArn", # required
     #           endpoint: "ElasticsearchEndpoint", # required
@@ -288,6 +292,10 @@ module Aws::IoT
     #   Change the state of a CloudWatch alarm.
     #   @return [Types::CloudwatchAlarmAction]
     #
+    # @!attribute [rw] cloudwatch_logs
+    #   Send data to CloudWatch logs.
+    #   @return [Types::CloudwatchLogsAction]
+    #
     # @!attribute [rw] elasticsearch
     #   Write data to an Amazon Elasticsearch Service domain.
     #   @return [Types::ElasticsearchAction]
@@ -329,6 +337,7 @@ module Aws::IoT
       :firehose,
       :cloudwatch_metric,
       :cloudwatch_alarm,
+      :cloudwatch_logs,
       :elasticsearch,
       :salesforce,
       :iot_analytics,
@@ -1913,6 +1922,30 @@ module Aws::IoT
       :alarm_name,
       :state_reason,
       :state_value)
+      include Aws::Structure
+    end
+
+    # Describes an action that sends data to CloudWatch logs.
+    #
+    # @note When making an API call, you may pass CloudwatchLogsAction
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "AwsArn", # required
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role that allows access to the CloudWatch log.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The CloudWatch log group to which the action sends data.
+    #   @return [String]
+    #
+    class CloudwatchLogsAction < Struct.new(
+      :role_arn,
+      :log_group_name)
       include Aws::Structure
     end
 
@@ -3778,6 +3811,10 @@ module Aws::IoT
     #                 state_reason: "StateReason", # required
     #                 state_value: "StateValue", # required
     #               },
+    #               cloudwatch_logs: {
+    #                 role_arn: "AwsArn", # required
+    #                 log_group_name: "LogGroupName", # required
+    #               },
     #               elasticsearch: {
     #                 role_arn: "AwsArn", # required
     #                 endpoint: "ElasticsearchEndpoint", # required
@@ -3917,6 +3954,10 @@ module Aws::IoT
     #               alarm_name: "AlarmName", # required
     #               state_reason: "StateReason", # required
     #               state_value: "StateValue", # required
+    #             },
+    #             cloudwatch_logs: {
+    #               role_arn: "AwsArn", # required
+    #               log_group_name: "LogGroupName", # required
     #             },
     #             elasticsearch: {
     #               role_arn: "AwsArn", # required
@@ -5139,6 +5180,10 @@ module Aws::IoT
     #     endpoint.
     #
     #   ^
+    #
+    #   We strongly recommend that customers use the newer `iot:Data-ATS`
+    #   endpoint type to avoid issues related to the widespread distrust of
+    #   Symantec certificate authorities.
     #   @return [String]
     #
     class DescribeEndpointRequest < Struct.new(
@@ -11103,12 +11148,12 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_body
-    #   The provisioning template. See [Programmatic Provisioning][1] for
-    #   more information.
+    #   The provisioning template. See [Provisioning Devices That Have
+    #   Device Certificates][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -11391,6 +11436,10 @@ module Aws::IoT
     #                 state_reason: "StateReason", # required
     #                 state_value: "StateValue", # required
     #               },
+    #               cloudwatch_logs: {
+    #                 role_arn: "AwsArn", # required
+    #                 log_group_name: "LogGroupName", # required
+    #               },
     #               elasticsearch: {
     #                 role_arn: "AwsArn", # required
     #                 endpoint: "ElasticsearchEndpoint", # required
@@ -11530,6 +11579,10 @@ module Aws::IoT
     #               alarm_name: "AlarmName", # required
     #               state_reason: "StateReason", # required
     #               state_value: "StateValue", # required
+    #             },
+    #             cloudwatch_logs: {
+    #               role_arn: "AwsArn", # required
+    #               log_group_name: "LogGroupName", # required
     #             },
     #             elasticsearch: {
     #               role_arn: "AwsArn", # required
@@ -13794,6 +13847,10 @@ module Aws::IoT
     #               state_reason: "StateReason", # required
     #               state_value: "StateValue", # required
     #             },
+    #             cloudwatch_logs: {
+    #               role_arn: "AwsArn", # required
+    #               log_group_name: "LogGroupName", # required
+    #             },
     #             elasticsearch: {
     #               role_arn: "AwsArn", # required
     #               endpoint: "ElasticsearchEndpoint", # required
@@ -13933,6 +13990,10 @@ module Aws::IoT
     #             alarm_name: "AlarmName", # required
     #             state_reason: "StateReason", # required
     #             state_value: "StateValue", # required
+    #           },
+    #           cloudwatch_logs: {
+    #             role_arn: "AwsArn", # required
+    #             log_group_name: "LogGroupName", # required
     #           },
     #           elasticsearch: {
     #             role_arn: "AwsArn", # required
@@ -14417,9 +14478,10 @@ module Aws::IoT
     # @!attribute [rw] new_status
     #   The new status.
     #
-    #   **Note:** Setting the status to PENDING\_TRANSFER will result in an
-    #   exception being thrown. PENDING\_TRANSFER is a status used
-    #   internally by AWS IoT. It is not intended for developer use.
+    #   **Note:** Setting the status to PENDING\_TRANSFER or
+    #   PENDING\_ACTIVATION will result in an exception being thrown.
+    #   PENDING\_TRANSFER and PENDING\_ACTIVATION are statuses used
+    #   internally by AWS IoT. They are not intended for developer use.
     #
     #   **Note:** The status value REGISTER\_INACTIVE is deprecated and
     #   should not be used.

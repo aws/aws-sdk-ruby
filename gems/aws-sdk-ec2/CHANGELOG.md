@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2020-03-12)
+------------------
+
+* Feature - Documentation updates for EC2
+
 1.150.0 (2020-03-10)
 ------------------
 

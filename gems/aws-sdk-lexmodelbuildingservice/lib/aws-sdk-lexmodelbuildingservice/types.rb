@@ -2518,6 +2518,36 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get a list of tags
+    #   for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags associated with a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Settings used to configure delivery mode and destination for
     # conversation logs.
     #
@@ -2728,6 +2758,12 @@ module Aws::LexModelBuildingService
     #           ],
     #           iam_role_arn: "IamRoleArn", # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -2763,6 +2799,13 @@ module Aws::LexModelBuildingService
     #   Settings for conversation logs for the alias.
     #   @return [Types::ConversationLogsRequest]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the bot alias. You can only add tags when
+    #   you create an alias, you can't use the `PutBotAlias` operation to
+    #   update the tags on a bot alias. To update tags, use the
+    #   `TagResource` operation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasRequest AWS API Documentation
     #
     class PutBotAliasRequest < Struct.new(
@@ -2771,7 +2814,8 @@ module Aws::LexModelBuildingService
       :bot_version,
       :bot_name,
       :checksum,
-      :conversation_logs)
+      :conversation_logs,
+      :tags)
       include Aws::Structure
     end
 
@@ -2809,6 +2853,10 @@ module Aws::LexModelBuildingService
     #   for the alias.
     #   @return [Types::ConversationLogsResponse]
     #
+    # @!attribute [rw] tags
+    #   A list of tags associated with a bot.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasResponse AWS API Documentation
     #
     class PutBotAliasResponse < Struct.new(
@@ -2819,7 +2867,8 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :checksum,
-      :conversation_logs)
+      :conversation_logs,
+      :tags)
       include Aws::Structure
     end
 
@@ -2864,6 +2913,12 @@ module Aws::LexModelBuildingService
     #         child_directed: false, # required
     #         detect_sentiment: false,
     #         create_version: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3055,6 +3110,12 @@ module Aws::LexModelBuildingService
     #   don't specify `createVersion`, the default is `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the bot. You can only add tags when you
+    #   create a bot, you can't use the `PutBot` operation to update the
+    #   tags on a bot. To update tags, use the `TagResource` operation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotRequest AWS API Documentation
     #
     class PutBotRequest < Struct.new(
@@ -3070,7 +3131,8 @@ module Aws::LexModelBuildingService
       :locale,
       :child_directed,
       :detect_sentiment,
-      :create_version)
+      :create_version,
+      :tags)
       include Aws::Structure
     end
 
@@ -3199,6 +3261,10 @@ module Aws::LexModelBuildingService
     #   `false` in the response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   A list of tags associated with the bot.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotResponse AWS API Documentation
     #
     class PutBotResponse < Struct.new(
@@ -3218,7 +3284,8 @@ module Aws::LexModelBuildingService
       :locale,
       :child_directed,
       :create_version,
-      :detect_sentiment)
+      :detect_sentiment,
+      :tags)
       include Aws::Structure
     end
 
@@ -4045,6 +4112,12 @@ module Aws::LexModelBuildingService
     #         payload: "data", # required
     #         resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
     #         merge_strategy: "OVERWRITE_LATEST", # required, accepts OVERWRITE_LATEST, FAIL_ON_CONFLICT
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] payload
@@ -4078,12 +4151,19 @@ module Aws::LexModelBuildingService
     #     file.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags to add to the imported bot. You can only add tags
+    #   when you import a bot, you can't add tags to an intent or slot
+    #   type.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportRequest AWS API Documentation
     #
     class StartImportRequest < Struct.new(
       :payload,
       :resource_type,
-      :merge_strategy)
+      :merge_strategy,
+      :tags)
       include Aws::Structure
     end
 
@@ -4108,6 +4188,10 @@ module Aws::LexModelBuildingService
     #   the reason for the failure using the `GetImport` operation.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of tags added to the imported bot.
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] created_date
     #   A timestamp for the date and time that the import job was requested.
     #   @return [Time]
@@ -4120,6 +4204,7 @@ module Aws::LexModelBuildingService
       :merge_strategy,
       :import_id,
       :import_status,
+      :tags,
       :created_date)
       include Aws::Structure
     end
@@ -4163,6 +4248,100 @@ module Aws::LexModelBuildingService
       :response_card)
       include Aws::Structure
     end
+
+    # A list of key/value pairs that identify a bot, bot alias, or bot
+    # channel. Tag keys and values can consist of Unicode letters, digits,
+    # white space, and any of the following symbols: \_ . : / = + - @.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key for the tag. Keys are not case-sensitive and must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value associated with a key. The value may be an empty string
+    #   but it can't be null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel
+    #   to tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag keys to add to the resource. If a tag key already
+    #   exists, the existing value is replaced with the new value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove the tags
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys to remove from the resource. If a tag key does
+    #   not exist on the resource, it is ignored.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Provides information about a single utterance that was made to your
     # bot.
