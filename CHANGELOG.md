@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppConfig - Updated the documentation for Amazon AppConfig.
+
 2.11.466 (2020-03-12)
 ------------------
 
