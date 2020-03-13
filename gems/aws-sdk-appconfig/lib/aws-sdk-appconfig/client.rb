@@ -354,9 +354,9 @@ module Aws::AppConfig
     end
 
     # Information that enables AppConfig to access the configuration source.
-    # Valid configuration sources include Systems Manager (SSM) documents
-    # and SSM Parameter Store parameters. A configuration profile includes
-    # the following information.
+    # Valid configuration sources include Systems Manager (SSM) documents,
+    # SSM Parameter Store parameters, and Amazon S3 objects. A configuration
+    # profile includes the following information.
     #
     # * The Uri location of the configuration data.
     #
@@ -365,6 +365,13 @@ module Aws::AppConfig
     #
     # * A validator for the configuration data. Available validators include
     #   either a JSON Schema or an AWS Lambda function.
+    #
+    # For more information, see [Create a Configuration and a Configuration
+    # Profile][1] in the *AWS AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -376,12 +383,15 @@ module Aws::AppConfig
     #   A description of the configuration profile.
     #
     # @option params [required, String] :location_uri
-    #   A URI to locate the configuration. You can specify either a Systems
-    #   Manager (SSM) document or an SSM Parameter Store parameter. For an SSM
-    #   document, specify either the document name in the format
-    #   `ssm-document://<Document name>` or the Amazon Resource Name (ARN).
-    #   For a parameter, specify either the parameter name in the format
-    #   `ssm-parameter://<Parameter name>` or the ARN.
+    #   A URI to locate the configuration. You can specify a Systems Manager
+    #   (SSM) document, an SSM Parameter Store parameter, or an Amazon S3
+    #   object. For an SSM document, specify either the document name in the
+    #   format `ssm-document://<Document_name>` or the Amazon Resource Name
+    #   (ARN). For a parameter, specify either the parameter name in the
+    #   format `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
+    #   object, specify the URI in the following format:
+    #   `s3://<bucket>/<objectKey> `. Here is an example:
+    #   s3://my-bucket/my-app/us-east-1/my-config.json
     #
     # @option params [required, String] :retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration at
@@ -760,13 +770,16 @@ module Aws::AppConfig
     # Retrieve information about a configuration.
     #
     # @option params [required, String] :application
-    #   The application to get.
+    #   The application to get. Specify either the application name or the
+    #   application ID.
     #
     # @option params [required, String] :environment
-    #   The environment to get.
+    #   The environment to get. Specify either the environment name or the
+    #   environment ID.
     #
     # @option params [required, String] :configuration
-    #   The configuration to get.
+    #   The configuration to get. Specify either the configuration name or the
+    #   configuration ID.
     #
     # @option params [required, String] :client_id
     #   A unique ID to identify the client for the configuration. This ID
@@ -1809,7 +1822,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

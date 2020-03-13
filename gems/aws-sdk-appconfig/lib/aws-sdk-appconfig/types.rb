@@ -257,12 +257,15 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   A URI to locate the configuration. You can specify either a Systems
-    #   Manager (SSM) document or an SSM Parameter Store parameter. For an
-    #   SSM document, specify either the document name in the format
-    #   `ssm-document://<Document name>` or the Amazon Resource Name (ARN).
-    #   For a parameter, specify either the parameter name in the format
-    #   `ssm-parameter://<Parameter name>` or the ARN.
+    #   A URI to locate the configuration. You can specify a Systems Manager
+    #   (SSM) document, an SSM Parameter Store parameter, or an Amazon S3
+    #   object. For an SSM document, specify either the document name in the
+    #   format `ssm-document://<Document_name>` or the Amazon Resource Name
+    #   (ARN). For a parameter, specify either the parameter name in the
+    #   format `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon
+    #   S3 object, specify the URI in the following format:
+    #   `s3://<bucket>/<objectKey> `. Here is an example:
+    #   s3://my-bucket/my-app/us-east-1/my-config.json
     #   @return [String]
     #
     # @!attribute [rw] retrieval_role_arn
@@ -875,15 +878,18 @@ module Aws::AppConfig
     #       }
     #
     # @!attribute [rw] application
-    #   The application to get.
+    #   The application to get. Specify either the application name or the
+    #   application ID.
     #   @return [String]
     #
     # @!attribute [rw] environment
-    #   The environment to get.
+    #   The environment to get. Specify either the environment name or the
+    #   environment ID.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The configuration to get.
+    #   The configuration to get. Specify either the configuration name or
+    #   the configuration ID.
     #   @return [String]
     #
     # @!attribute [rw] client_id

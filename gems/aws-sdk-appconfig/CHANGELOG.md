@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-03-13)
+------------------
+
+* Feature - This release adds S3 as a configuration source provider.
+
 1.2.0 (2020-03-09)
 ------------------
 
