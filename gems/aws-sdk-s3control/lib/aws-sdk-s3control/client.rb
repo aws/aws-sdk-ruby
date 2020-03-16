@@ -35,11 +35,11 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
 module Aws::S3Control
   # An API client for S3Control.  To construct a client, you need to configure a `:region` and `:credentials`.
   #
-  #   client = Aws::S3Control::Client.new(
-  #     region: region_name,
-  #     credentials: credentials,
-  #     # ...
-  #   )
+  #     client = Aws::S3Control::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
   #
   # For details on configuring region and credentials see
   # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
@@ -235,15 +235,19 @@ module Aws::S3Control
     #
     #   @option options [String] :retry_mode ("legacy")
     #     Specifies which retry algorithm to use. Values are:
-    #       * `legacy` - The pre-existing retry behavior.  This is default value if
-    #         no retry mode is provided.
-    #       * `standard` - A standardized set of retry rules across the AWS SDKs.
-    #         This includes support for retry quotas, which limit the number of
-    #         unsuccessful retries a client can make.
-    #       * `adaptive` - An experimental retry mode that includes all the
-    #         functionality of `standard` mode along with automatic client side
-    #         throttling.  This is a provisional mode that may change behavior
-    #         in the future.
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
