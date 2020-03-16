@@ -818,7 +818,7 @@ module Aws::SSM
     PatchSourceProduct = Shapes::StringShape.new(name: 'PatchSourceProduct')
     PatchSourceProductList = Shapes::ListShape.new(name: 'PatchSourceProductList')
     PatchStatus = Shapes::StructureShape.new(name: 'PatchStatus')
-    PatchStringDate = Shapes::StringShape.new(name: 'PatchStringDate')
+    PatchStringDateTime = Shapes::StringShape.new(name: 'PatchStringDateTime')
     PatchTitle = Shapes::StringShape.new(name: 'PatchTitle')
     PatchUnreportedNotApplicableCount = Shapes::IntegerShape.new(name: 'PatchUnreportedNotApplicableCount')
     PatchVendor = Shapes::StringShape.new(name: 'PatchVendor')
@@ -866,6 +866,8 @@ module Aws::SSM
     ResourceDataSyncConflictException = Shapes::StructureShape.new(name: 'ResourceDataSyncConflictException')
     ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
     ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
+    ResourceDataSyncDestinationDataSharing = Shapes::StructureShape.new(name: 'ResourceDataSyncDestinationDataSharing')
+    ResourceDataSyncDestinationDataSharingType = Shapes::StringShape.new(name: 'ResourceDataSyncDestinationDataSharingType')
     ResourceDataSyncIncludeFutureRegions = Shapes::BooleanShape.new(name: 'ResourceDataSyncIncludeFutureRegions')
     ResourceDataSyncInvalidConfigurationException = Shapes::StructureShape.new(name: 'ResourceDataSyncInvalidConfigurationException')
     ResourceDataSyncItem = Shapes::StructureShape.new(name: 'ResourceDataSyncItem')
@@ -3349,7 +3351,7 @@ module Aws::SSM
     PatchRule.add_member(:patch_filter_group, Shapes::ShapeRef.new(shape: PatchFilterGroup, required: true, location_name: "PatchFilterGroup"))
     PatchRule.add_member(:compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ComplianceLevel"))
     PatchRule.add_member(:approve_after_days, Shapes::ShapeRef.new(shape: ApproveAfterDays, location_name: "ApproveAfterDays", metadata: {"box"=>true}))
-    PatchRule.add_member(:approve_until_date, Shapes::ShapeRef.new(shape: PatchStringDate, location_name: "ApproveUntilDate", metadata: {"box"=>true}))
+    PatchRule.add_member(:approve_until_date, Shapes::ShapeRef.new(shape: PatchStringDateTime, location_name: "ApproveUntilDate", metadata: {"box"=>true}))
     PatchRule.add_member(:enable_non_security, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNonSecurity", metadata: {"box"=>true}))
     PatchRule.struct_class = Types::PatchRule
 
@@ -3511,6 +3513,9 @@ module Aws::SSM
     ResourceDataSyncCountExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceDataSyncCountExceededException.struct_class = Types::ResourceDataSyncCountExceededException
 
+    ResourceDataSyncDestinationDataSharing.add_member(:destination_data_sharing_type, Shapes::ShapeRef.new(shape: ResourceDataSyncDestinationDataSharingType, location_name: "DestinationDataSharingType"))
+    ResourceDataSyncDestinationDataSharing.struct_class = Types::ResourceDataSyncDestinationDataSharing
+
     ResourceDataSyncInvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceDataSyncInvalidConfigurationException.struct_class = Types::ResourceDataSyncInvalidConfigurationException
 
@@ -3543,6 +3548,7 @@ module Aws::SSM
     ResourceDataSyncS3Destination.add_member(:sync_format, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Format, required: true, location_name: "SyncFormat"))
     ResourceDataSyncS3Destination.add_member(:region, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Region, required: true, location_name: "Region"))
     ResourceDataSyncS3Destination.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: ResourceDataSyncAWSKMSKeyARN, location_name: "AWSKMSKeyARN"))
+    ResourceDataSyncS3Destination.add_member(:destination_data_sharing, Shapes::ShapeRef.new(shape: ResourceDataSyncDestinationDataSharing, location_name: "DestinationDataSharing"))
     ResourceDataSyncS3Destination.struct_class = Types::ResourceDataSyncS3Destination
 
     ResourceDataSyncSource.add_member(:source_type, Shapes::ShapeRef.new(shape: ResourceDataSyncSourceType, required: true, location_name: "SourceType"))

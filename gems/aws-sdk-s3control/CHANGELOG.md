@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-03-16)
+------------------
+
+* Feature - Amazon S3 now supports Batch Operations job tagging.
+
 1.15.0 (2020-03-09)
 ------------------
 

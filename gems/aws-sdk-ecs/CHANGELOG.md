@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2020-03-16)
+------------------
+
+* Feature - This release adds the ability to update the task placement strategy and constraints for Amazon ECS services.
+
 1.58.0 (2020-03-09)
 ------------------
 

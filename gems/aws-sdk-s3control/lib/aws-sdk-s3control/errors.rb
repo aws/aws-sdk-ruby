@@ -34,6 +34,7 @@ module Aws::S3Control
   # * {NoSuchPublicAccessBlockConfiguration}
   # * {NotFoundException}
   # * {TooManyRequestsException}
+  # * {TooManyTagsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -166,6 +167,21 @@ module Aws::S3Control
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::S3Control::Types::TooManyRequestsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::S3Control::Types::TooManyTagsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

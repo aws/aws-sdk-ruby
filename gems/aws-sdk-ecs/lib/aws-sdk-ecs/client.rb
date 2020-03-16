@@ -615,7 +615,8 @@ module Aws::ECS
     # Runs and maintains a desired number of tasks from a specified task
     # definition. If the number of tasks running in a service drops below
     # the `desiredCount`, Amazon ECS runs another copy of the task in the
-    # specified cluster. To update an existing service, see UpdateService.
+    # specified cluster. To update an existing service, see the
+    # UpdateService action.
     #
     # In addition to maintaining the desired count of tasks in your service,
     # you can optionally run your service behind one or more load balancers.
@@ -944,14 +945,17 @@ module Aws::ECS
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
     #   should ignore unhealthy Elastic Load Balancing target health checks
-    #   after a task has first started. This is only valid if your service is
-    #   configured to use a load balancer. If your service's tasks take a
-    #   while to start and respond to Elastic Load Balancing health checks,
-    #   you can specify a health check grace period of up to 2,147,483,647
-    #   seconds. During that time, the ECS service scheduler ignores health
-    #   check status. This grace period can prevent the ECS service scheduler
-    #   from marking tasks as unhealthy and stopping them before they have
-    #   time to come up.
+    #   after a task has first started. This is only used when your service is
+    #   configured to use a load balancer. If your service has a load balancer
+    #   defined and you don't specify a health check grace period value, the
+    #   default value of `0` is used.
+    #
+    #   If your service's tasks take a while to start and respond to Elastic
+    #   Load Balancing health checks, you can specify a health check grace
+    #   period of up to 2,147,483,647 seconds. During that time, the Amazon
+    #   ECS service scheduler ignores health check status. This grace period
+    #   can prevent the service scheduler from marking tasks as unhealthy and
+    #   stopping them before they have time to come up.
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -7424,6 +7428,26 @@ module Aws::ECS
     #   An object representing the network configuration for a task or
     #   service.
     #
+    # @option params [Array<Types::PlacementConstraint>] :placement_constraints
+    #   An array of task placement constraint objects to update the service to
+    #   use. If no value is specified, the existing placement constraints for
+    #   the service will remain unchanged. If this value is specified, it will
+    #   override any existing placement constraints defined for the service.
+    #   To remove all existing placement constraints, specify an empty array.
+    #
+    #   You can specify a maximum of 10 constraints per task (this limit
+    #   includes constraints in the task definition and those specified at
+    #   runtime).
+    #
+    # @option params [Array<Types::PlacementStrategy>] :placement_strategy
+    #   The task placement strategy objects to update the service to use. If
+    #   no value is specified, the existing placement strategy for the service
+    #   will remain unchanged. If this value is specified, it will override
+    #   the existing placement strategy defined for the service. To remove an
+    #   existing placement strategy, specify an empty object.
+    #
+    #   You can specify a maximum of five strategy rules per service.
+    #
     # @option params [String] :platform_version
     #   The platform version on which your tasks in the service are running. A
     #   platform version is only specified for tasks using the Fargate launch
@@ -7512,6 +7536,18 @@ module Aws::ECS
     #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     },
+    #     placement_constraints: [
+    #       {
+    #         type: "distinctInstance", # accepts distinctInstance, memberOf
+    #         expression: "String",
+    #       },
+    #     ],
+    #     placement_strategy: [
+    #       {
+    #         type: "random", # accepts random, spread, binpack
+    #         field: "String",
+    #       },
+    #     ],
     #     platform_version: "String",
     #     force_new_deployment: false,
     #     health_check_grace_period_seconds: 1,
@@ -7838,7 +7874,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

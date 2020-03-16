@@ -25,6 +25,8 @@ module Aws::S3Control
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     DeleteAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointPolicyRequest')
     DeleteAccessPointRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointRequest')
+    DeleteJobTaggingRequest = Shapes::StructureShape.new(name: 'DeleteJobTaggingRequest')
+    DeleteJobTaggingResult = Shapes::StructureShape.new(name: 'DeleteJobTaggingResult')
     DeletePublicAccessBlockRequest = Shapes::StructureShape.new(name: 'DeletePublicAccessBlockRequest')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
@@ -35,6 +37,8 @@ module Aws::S3Control
     GetAccessPointPolicyStatusResult = Shapes::StructureShape.new(name: 'GetAccessPointPolicyStatusResult')
     GetAccessPointRequest = Shapes::StructureShape.new(name: 'GetAccessPointRequest')
     GetAccessPointResult = Shapes::StructureShape.new(name: 'GetAccessPointResult')
+    GetJobTaggingRequest = Shapes::StructureShape.new(name: 'GetJobTaggingRequest')
+    GetJobTaggingResult = Shapes::StructureShape.new(name: 'GetJobTaggingResult')
     GetPublicAccessBlockOutput = Shapes::StructureShape.new(name: 'GetPublicAccessBlockOutput')
     GetPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'GetPublicAccessBlockRequest')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
@@ -94,6 +98,8 @@ module Aws::S3Control
     PolicyStatus = Shapes::StructureShape.new(name: 'PolicyStatus')
     PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
     PutAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'PutAccessPointPolicyRequest')
+    PutJobTaggingRequest = Shapes::StructureShape.new(name: 'PutJobTaggingRequest')
+    PutJobTaggingResult = Shapes::StructureShape.new(name: 'PutJobTaggingResult')
     PutPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'PutPublicAccessBlockRequest')
     ReportPrefixString = Shapes::StringShape.new(name: 'ReportPrefixString')
     RequestedJobStatus = Shapes::StringShape.new(name: 'RequestedJobStatus')
@@ -130,6 +136,7 @@ module Aws::S3Control
     SuspendedDate = Shapes::TimestampShape.new(name: 'SuspendedDate')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UpdateJobPriorityRequest = Shapes::StructureShape.new(name: 'UpdateJobPriorityRequest')
     UpdateJobPriorityResult = Shapes::StructureShape.new(name: 'UpdateJobPriorityResult')
     UpdateJobStatusRequest = Shapes::StructureShape.new(name: 'UpdateJobStatusRequest')
@@ -164,6 +171,7 @@ module Aws::S3Control
     CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyMaxLength256String, location_name: "Description"))
     CreateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location_name: "Priority", metadata: {"box"=>true}))
     CreateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
+    CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -176,6 +184,12 @@ module Aws::S3Control
     DeleteAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     DeleteAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
     DeleteAccessPointRequest.struct_class = Types::DeleteAccessPointRequest
+
+    DeleteJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    DeleteJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
+    DeleteJobTaggingRequest.struct_class = Types::DeleteJobTaggingRequest
+
+    DeleteJobTaggingResult.struct_class = Types::DeleteJobTaggingResult
 
     DeletePublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
@@ -212,6 +226,13 @@ module Aws::S3Control
     GetAccessPointResult.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetAccessPointResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
     GetAccessPointResult.struct_class = Types::GetAccessPointResult
+
+    GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    GetJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
+    GetJobTaggingRequest.struct_class = Types::GetJobTaggingRequest
+
+    GetJobTaggingResult.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
+    GetJobTaggingResult.struct_class = Types::GetJobTaggingResult
 
     GetPublicAccessBlockOutput.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetPublicAccessBlockOutput.struct_class = Types::GetPublicAccessBlockOutput
@@ -352,6 +373,13 @@ module Aws::S3Control
     PutAccessPointPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
     PutAccessPointPolicyRequest.struct_class = Types::PutAccessPointPolicyRequest
 
+    PutJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    PutJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
+    PutJobTaggingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "Tags"))
+    PutJobTaggingRequest.struct_class = Types::PutJobTaggingRequest
+
+    PutJobTaggingResult.struct_class = Types::PutJobTaggingResult
+
     PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     PutPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     PutPublicAccessBlockRequest.struct_class = Types::PutPublicAccessBlockRequest
@@ -433,6 +461,9 @@ module Aws::S3Control
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     UpdateJobPriorityRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
@@ -520,6 +551,17 @@ module Aws::S3Control
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:delete_job_tagging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteJobTagging"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/jobs/{id}/tagging"
+        o.input = Shapes::ShapeRef.new(shape: DeleteJobTaggingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteJobTaggingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:delete_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePublicAccessBlock"
         o.http_method = "DELETE"
@@ -562,6 +604,17 @@ module Aws::S3Control
         o.http_request_uri = "/v20180820/accesspoint/{name}/policyStatus"
         o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusRequest)
         o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusResult)
+      end)
+
+      api.add_operation(:get_job_tagging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJobTagging"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/jobs/{id}/tagging"
+        o.input = Shapes::ShapeRef.new(shape: GetJobTaggingRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJobTaggingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_public_access_block, Seahorse::Model::Operation.new.tap do |o|
@@ -615,6 +668,23 @@ module Aws::S3Control
           }
         )
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:put_job_tagging, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutJobTagging"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/jobs/{id}/tagging"
+        o.input = Shapes::ShapeRef.new(shape: PutJobTaggingRequest,
+          location_name: "PutJobTaggingRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: PutJobTaggingResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:put_public_access_block, Seahorse::Model::Operation.new.tap do |o|

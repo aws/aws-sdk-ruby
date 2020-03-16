@@ -598,6 +598,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -960,6 +962,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -1436,6 +1441,7 @@ module Aws::ElastiCache
     #   resp.cache_parameter_group.cache_parameter_group_name #=> String
     #   resp.cache_parameter_group.cache_parameter_group_family #=> String
     #   resp.cache_parameter_group.description #=> String
+    #   resp.cache_parameter_group.is_global #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup AWS API Documentation
     #
@@ -1604,8 +1610,80 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Global Datastore for Redis offers fully managed, fast, reliable and
+    # secure cross-region replication. Using Global Datastore for Redis, you
+    # can create cross-region read replica clusters for ElastiCache for
+    # Redis to enable low-latency reads and disaster recovery across
+    # regions. For more information, see [Replication Across Regions Using
+    # Global
+    # Datastore](/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html).
+    #
+    # * The **GlobalReplicationGroupId** is the name of the Global
+    #   Datastore.
+    #
+    # * The **PrimaryReplicationGroupId** represents the name of the primary
+    #   cluster that accepts writes and will replicate updates to the
+    #   secondary cluster.
+    #
+    # @option params [required, String] :global_replication_group_id_suffix
+    #   The suffix for name of a Global Datastore. The suffix guarantees
+    #   uniqueness of the Global Datastore name across multiple regions.
+    #
+    # @option params [String] :global_replication_group_description
+    #   Provides details of the Global Datastore
+    #
+    # @option params [required, String] :primary_replication_group_id
+    #   The name of the primary cluster that accepts writes and will replicate
+    #   updates to the secondary cluster.
+    #
+    # @return [Types::CreateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_global_replication_group({
+    #     global_replication_group_id_suffix: "String", # required
+    #     global_replication_group_description: "String",
+    #     primary_replication_group_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload create_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def create_global_replication_group(params = {}, options = {})
+      req = build_request(:create_global_replication_group, params)
+      req.send_request(options)
+    end
+
     # Creates a Redis (cluster mode disabled) or a Redis (cluster mode
     # enabled) replication group.
+    #
+    # This API can be used to create a standalone regional replication group
+    # or a secondary replication group associated with a Global Datastore.
     #
     # A Redis (cluster mode disabled) replication group is a collection of
     # clusters, where one of the clusters is a read/write primary and the
@@ -1650,6 +1728,9 @@ module Aws::ElastiCache
     #
     # @option params [required, String] :replication_group_description
     #   A user-created description for the replication group.
+    #
+    # @option params [String] :global_replication_group_id
+    #   The name of the Global Datastore
     #
     # @option params [String] :primary_cluster_id
     #   The identifier of the cluster that serves as the primary for this
@@ -1759,6 +1840,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -2026,7 +2110,7 @@ module Aws::ElastiCache
     #   Default: `false`
     #
     # @option params [String] :kms_key_id
-    #   The ID of the KMS key used to encrypt the disk on the cluster.
+    #   The ID of the KMS key used to encrypt the disk in the cluster.
     #
     # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2128,6 +2212,7 @@ module Aws::ElastiCache
     #   resp = client.create_replication_group({
     #     replication_group_id: "String", # required
     #     replication_group_description: "String", # required
+    #     global_replication_group_id: "String",
     #     primary_cluster_id: "String",
     #     automatic_failover_enabled: false,
     #     num_cache_clusters: 1,
@@ -2174,6 +2259,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -2427,7 +2514,79 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Dynamically decreases the number of replics in a Redis (cluster mode
+    # Decreases the number of node groups in a Global Datastore
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, Integer] :node_group_count
+    #   The number of node groups (shards) that results from the modification
+    #   of the shard configuration
+    #
+    # @option params [Array<String>] :global_node_groups_to_remove
+    #   If the value of NodeGroupCount is less than the current number of node
+    #   groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain
+    #   is required. NodeGroupsToRemove is a list of NodeGroupIds to remove
+    #   from the cluster. ElastiCache for Redis will attempt to remove all
+    #   node groups listed by NodeGroupsToRemove from the cluster.
+    #
+    # @option params [Array<String>] :global_node_groups_to_retain
+    #   If the value of NodeGroupCount is less than the current number of node
+    #   groups (shards), then either NodeGroupsToRemove or NodeGroupsToRetain
+    #   is required. NodeGroupsToRemove is a list of NodeGroupIds to remove
+    #   from the cluster. ElastiCache for Redis will attempt to remove all
+    #   node groups listed by NodeGroupsToRemove from the cluster.
+    #
+    # @option params [required, Boolean] :apply_immediately
+    #   Indicates that the shard reconfiguration process begins immediately.
+    #   At present, the only permitted value for this parameter is true.
+    #
+    # @return [Types::DecreaseNodeGroupsInGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DecreaseNodeGroupsInGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.decrease_node_groups_in_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     node_group_count: 1, # required
+    #     global_node_groups_to_remove: ["String"],
+    #     global_node_groups_to_retain: ["String"],
+    #     apply_immediately: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseNodeGroupsInGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload decrease_node_groups_in_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def decrease_node_groups_in_global_replication_group(params = {}, options = {})
+      req = build_request(:decrease_node_groups_in_global_replication_group, params)
+      req.send_request(options)
+    end
+
+    # Dynamically decreases the number of replicas in a Redis (cluster mode
     # disabled) replication group or the number of replica nodes in one or
     # more node groups (shards) of a Redis (cluster mode enabled)
     # replication group. This operation is performed with no cluster down
@@ -2493,6 +2652,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -2793,6 +2954,76 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Deleting a Global Datastore is a two-step process:
+    #
+    # * First, you must DisassociateGlobalReplicationGroup to remove the
+    #   secondary clusters in the Global Datastore.
+    #
+    # * Once the Global Datastore contains only the primary cluster, you can
+    #   use DeleteGlobalReplicationGroup API to delete the Global Datastore
+    #   while retainining the primary cluster using Retain…= true.
+    #
+    # Since the Global Datastore has only a primary cluster, you can delete
+    # the Global Datastore while retaining the primary by setting
+    # `RetainPrimaryCluster=true`.
+    #
+    # When you receive a successful response from this operation, Amazon
+    # ElastiCache immediately begins deleting the selected resources; you
+    # cannot cancel or revert this operation.
+    #
+    # <note markdown="1"> This operation is valid for Redis only.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, Boolean] :retain_primary_replication_group
+    #   If set to `true`, the primary replication is retained as a standalone
+    #   replication group.
+    #
+    # @return [Types::DeleteGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     retain_primary_replication_group: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload delete_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def delete_global_replication_group(params = {}, options = {})
+      req = build_request(:delete_global_replication_group, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing replication group. By default, this operation
     # deletes the entire replication group, including the primary/primaries
     # and all of the read replicas. If the replication group has only one
@@ -2860,6 +3091,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -3573,6 +3806,7 @@ module Aws::ElastiCache
     #   resp.cache_parameter_groups[0].cache_parameter_group_name #=> String
     #   resp.cache_parameter_groups[0].cache_parameter_group_family #=> String
     #   resp.cache_parameter_groups[0].description #=> String
+    #   resp.cache_parameter_groups[0].is_global #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups AWS API Documentation
     #
@@ -5099,6 +5333,75 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Returns information about a particular global replication group. If no
+    # identifier is specified, returns information about all Global
+    # Datastores.
+    #
+    # @option params [String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :marker
+    #   An optional marker returned from a prior request. Use this marker for
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by `MaxRecords`.
+    #
+    # @option params [Boolean] :show_member_info
+    #   Returns the list of members that comprise the Global Datastore.
+    #
+    # @return [Types::DescribeGlobalReplicationGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalReplicationGroupsResult#marker #marker} => String
+    #   * {Types::DescribeGlobalReplicationGroupsResult#global_replication_groups #global_replication_groups} => Array&lt;Types::GlobalReplicationGroup&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_replication_groups({
+    #     global_replication_group_id: "String",
+    #     max_records: 1,
+    #     marker: "String",
+    #     show_member_info: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.global_replication_groups #=> Array
+    #   resp.global_replication_groups[0].global_replication_group_id #=> String
+    #   resp.global_replication_groups[0].global_replication_group_description #=> String
+    #   resp.global_replication_groups[0].status #=> String
+    #   resp.global_replication_groups[0].cache_node_type #=> String
+    #   resp.global_replication_groups[0].engine #=> String
+    #   resp.global_replication_groups[0].engine_version #=> String
+    #   resp.global_replication_groups[0].members #=> Array
+    #   resp.global_replication_groups[0].members[0].replication_group_id #=> String
+    #   resp.global_replication_groups[0].members[0].replication_group_region #=> String
+    #   resp.global_replication_groups[0].members[0].role #=> String
+    #   resp.global_replication_groups[0].members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_groups[0].members[0].status #=> String
+    #   resp.global_replication_groups[0].cluster_enabled #=> Boolean
+    #   resp.global_replication_groups[0].global_node_groups #=> Array
+    #   resp.global_replication_groups[0].global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_groups[0].global_node_groups[0].slots #=> String
+    #   resp.global_replication_groups[0].auth_token_enabled #=> Boolean
+    #   resp.global_replication_groups[0].transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_groups[0].at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeGlobalReplicationGroups AWS API Documentation
+    #
+    # @overload describe_global_replication_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_global_replication_groups(params = {}, options = {})
+      req = build_request(:describe_global_replication_groups, params)
+      req.send_request(options)
+    end
+
     # Returns information about a particular replication group. If no
     # identifier is specified, `DescribeReplicationGroups` returns
     # information about all replication groups.
@@ -5212,6 +5515,8 @@ module Aws::ElastiCache
     #   resp.replication_groups #=> Array
     #   resp.replication_groups[0].replication_group_id #=> String
     #   resp.replication_groups[0].description #=> String
+    #   resp.replication_groups[0].global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_groups[0].global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_groups[0].status #=> String
     #   resp.replication_groups[0].pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_groups[0].pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -5287,6 +5592,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -5459,6 +5767,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -6234,6 +6545,191 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Remove a secondary cluster from the Global Datastore using the Global
+    # Datastore name. The secondary cluster will no longer receive updates
+    # from the primary cluster, but will remain as a standalone cluster in
+    # that AWS region.
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, String] :replication_group_id
+    #   The name of the secondary cluster you wish to remove from the Global
+    #   Datastore
+    #
+    # @option params [required, String] :replication_group_region
+    #   The AWS region of secondary cluster you wish to remove from the Global
+    #   Datastore
+    #
+    # @return [Types::DisassociateGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     replication_group_id: "String", # required
+    #     replication_group_region: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DisassociateGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload disassociate_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_global_replication_group(params = {}, options = {})
+      req = build_request(:disassociate_global_replication_group, params)
+      req.send_request(options)
+    end
+
+    # Used to failover the primary region to a selected secondary region.
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, String] :primary_region
+    #   The AWS region of the primary cluster of the Global Datastore
+    #
+    # @option params [required, String] :primary_replication_group_id
+    #   The name of the primary replication group
+    #
+    # @return [Types::FailoverGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     primary_region: "String", # required
+    #     primary_replication_group_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/FailoverGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload failover_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def failover_global_replication_group(params = {}, options = {})
+      req = build_request(:failover_global_replication_group, params)
+      req.send_request(options)
+    end
+
+    # Increase the number of node groups in the Global Datastore
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, Integer] :node_group_count
+    #   The number of node groups you wish to add
+    #
+    # @option params [Array<Types::RegionalConfiguration>] :regional_configurations
+    #   Describes the replication group IDs, the AWS regions where they are
+    #   stored and the shard configuration for each that comprise the Global
+    #   Datastore
+    #
+    # @option params [required, Boolean] :apply_immediately
+    #   Indicates that the process begins immediately. At present, the only
+    #   permitted value for this parameter is true.
+    #
+    # @return [Types::IncreaseNodeGroupsInGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::IncreaseNodeGroupsInGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.increase_node_groups_in_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     node_group_count: 1, # required
+    #     regional_configurations: [
+    #       {
+    #         replication_group_id: "String", # required
+    #         replication_group_region: "String", # required
+    #         resharding_configuration: [ # required
+    #           {
+    #             node_group_id: "AllowedNodeGroupId",
+    #             preferred_availability_zones: ["String"],
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     apply_immediately: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseNodeGroupsInGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload increase_node_groups_in_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def increase_node_groups_in_global_replication_group(params = {}, options = {})
+      req = build_request(:increase_node_groups_in_global_replication_group, params)
+      req.send_request(options)
+    end
+
     # Dynamically increases the number of replics in a Redis (cluster mode
     # disabled) replication group or the number of replica nodes in one or
     # more node groups (shards) of a Redis (cluster mode enabled)
@@ -6284,6 +6780,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -7095,6 +7593,80 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Modifies the settings for a Global Datastore.
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, Boolean] :apply_immediately
+    #   If true, this parameter causes the modifications in this request and
+    #   any pending modifications to be applied, asynchronously and as soon as
+    #   possible, regardless of the PreferredMaintenanceWindow setting for the
+    #   replication group. If false, changes to the nodes in the replication
+    #   group are applied on the next maintenance reboot, or the next failure
+    #   reboot, whichever occurs first.
+    #
+    # @option params [String] :cache_node_type
+    #   A valid cache node type that you want to scale this Global Datastore
+    #   to.
+    #
+    # @option params [String] :engine_version
+    #   The upgraded version of the cache engine to be run on the clusters in
+    #   the Global Datastore.
+    #
+    # @option params [String] :global_replication_group_description
+    #   A description of the Global Datastore
+    #
+    # @option params [Boolean] :automatic_failover_enabled
+    #   Determines whether a read replica is automatically promoted to
+    #   read/write primary if the existing primary encounters a failure.
+    #
+    # @return [Types::ModifyGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     apply_immediately: false, # required
+    #     cache_node_type: "String",
+    #     engine_version: "String",
+    #     global_replication_group_description: "String",
+    #     automatic_failover_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload modify_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def modify_global_replication_group(params = {}, options = {})
+      req = build_request(:modify_global_replication_group, params)
+      req.send_request(options)
+    end
+
     # Modifies the settings for a replication group.
     #
     # For Redis (cluster mode enabled) clusters, this operation cannot be
@@ -7407,6 +7979,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -7522,6 +8096,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -7635,6 +8211,57 @@ module Aws::ElastiCache
     # @param [Hash] params ({})
     def purchase_reserved_cache_nodes_offering(params = {}, options = {})
       req = build_request(:purchase_reserved_cache_nodes_offering, params)
+      req.send_request(options)
+    end
+
+    # Redistribute slots to ensure unifirom distribution across existing
+    # shards in the cluster.
+    #
+    # @option params [required, String] :global_replication_group_id
+    #   The name of the Global Datastore
+    #
+    # @option params [required, Boolean] :apply_immediately
+    #   If `True`, redistribution is applied immediately.
+    #
+    # @return [Types::RebalanceSlotsInGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebalanceSlotsInGlobalReplicationGroupResult#global_replication_group #global_replication_group} => Types::GlobalReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rebalance_slots_in_global_replication_group({
+    #     global_replication_group_id: "String", # required
+    #     apply_immediately: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_replication_group.global_replication_group_id #=> String
+    #   resp.global_replication_group.global_replication_group_description #=> String
+    #   resp.global_replication_group.status #=> String
+    #   resp.global_replication_group.cache_node_type #=> String
+    #   resp.global_replication_group.engine #=> String
+    #   resp.global_replication_group.engine_version #=> String
+    #   resp.global_replication_group.members #=> Array
+    #   resp.global_replication_group.members[0].replication_group_id #=> String
+    #   resp.global_replication_group.members[0].replication_group_region #=> String
+    #   resp.global_replication_group.members[0].role #=> String
+    #   resp.global_replication_group.members[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.global_replication_group.members[0].status #=> String
+    #   resp.global_replication_group.cluster_enabled #=> Boolean
+    #   resp.global_replication_group.global_node_groups #=> Array
+    #   resp.global_replication_group.global_node_groups[0].global_node_group_id #=> String
+    #   resp.global_replication_group.global_node_groups[0].slots #=> String
+    #   resp.global_replication_group.auth_token_enabled #=> Boolean
+    #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebalanceSlotsInGlobalReplicationGroup AWS API Documentation
+    #
+    # @overload rebalance_slots_in_global_replication_group(params = {})
+    # @param [Hash] params ({})
+    def rebalance_slots_in_global_replication_group(params = {}, options = {})
+      req = build_request(:rebalance_slots_in_global_replication_group, params)
       req.send_request(options)
     end
 
@@ -8026,6 +8653,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -8150,6 +8779,8 @@ module Aws::ElastiCache
     #
     #   resp.replication_group.replication_group_id #=> String
     #   resp.replication_group.description #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_id #=> String
+    #   resp.replication_group.global_replication_group_info.global_replication_group_member_role #=> String
     #   resp.replication_group.status #=> String
     #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
     #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
@@ -8208,7 +8839,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

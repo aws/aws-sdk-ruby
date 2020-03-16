@@ -2104,6 +2104,12 @@ module Aws::CognitoIdentityProvider
     # The Amazon Pinpoint analytics configuration for collecting metrics for
     # a user pool.
     #
+    # <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    # projects in the US East (N. Virginia) us-east-1 Region, regardless of
+    # the region in which the user pool resides.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass AnalyticsConfigurationType
     #   data as a hash:
     #
@@ -2146,6 +2152,12 @@ module Aws::CognitoIdentityProvider
     #
     # An endpoint uniquely identifies a mobile device, email address, or
     # phone number that can receive messages from Amazon Pinpoint analytics.
+    #
+    # <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    # projects in the US East (N. Virginia) us-east-1 Region, regardless of
+    # the region in which the user pool resides.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass AnalyticsMetadataType
     #   data as a hash:
@@ -2993,7 +3005,7 @@ module Aws::CognitoIdentityProvider
     #
     #     * MetadataFile OR MetadataURL
     #
-    #     * IDPSignOut *optional*
+    #     * IDPSignout *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_mapping
@@ -3314,6 +3326,12 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] analytics_configuration
     #   The Amazon Pinpoint analytics configuration for collecting metrics
     #   for this user pool.
+    #
+    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    #   projects in the US East (N. Virginia) us-east-1 Region, regardless
+    #   of the region in which the user pool resides.
+    #
+    #    </note>
     #   @return [Types::AnalyticsConfigurationType]
     #
     # @!attribute [rw] prevent_user_existence_errors
@@ -4548,11 +4566,17 @@ module Aws::CognitoIdentityProvider
     #   The risk level.
     #   @return [String]
     #
+    # @!attribute [rw] compromised_credentials_detected
+    #   Indicates whether compromised credentials were detected during an
+    #   authentication event.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EventRiskType AWS API Documentation
     #
     class EventRiskType < Struct.new(
       :risk_decision,
-      :risk_level)
+      :risk_level,
+      :compromised_credentials_detected)
       include Aws::Structure
     end
 
@@ -8723,6 +8747,12 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] analytics_configuration
     #   The Amazon Pinpoint analytics configuration for collecting metrics
     #   for this user pool.
+    #
+    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    #   projects in the US East (N. Virginia) us-east-1 Region, regardless
+    #   of the region in which the user pool resides.
+    #
+    #    </note>
     #   @return [Types::AnalyticsConfigurationType]
     #
     # @!attribute [rw] prevent_user_existence_errors
@@ -9447,6 +9477,12 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] analytics_configuration
     #   The Amazon Pinpoint analytics configuration for the user pool
     #   client.
+    #
+    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    #   projects in the US East (N. Virginia) us-east-1 Region, regardless
+    #   of the region in which the user pool resides.
+    #
+    #    </note>
     #   @return [Types::AnalyticsConfigurationType]
     #
     # @!attribute [rw] prevent_user_existence_errors

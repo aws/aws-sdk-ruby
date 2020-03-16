@@ -1431,7 +1431,7 @@ module Aws::SSM
     #           },
     #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #           approve_after_days: 1,
-    #           approve_until_date: "PatchStringDate",
+    #           approve_until_date: "PatchStringDateTime",
     #           enable_non_security: false,
     #         },
     #       ],
@@ -1534,6 +1534,9 @@ module Aws::SSM
     #       sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #       region: "ResourceDataSyncS3Region", # required
     #       awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
+    #       destination_data_sharing: {
+    #         destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
+    #       },
     #     },
     #     sync_type: "ResourceDataSyncType",
     #     sync_source: {
@@ -6446,6 +6449,7 @@ module Aws::SSM
     #   resp.resource_data_sync_items[0].s3_destination.sync_format #=> String, one of "JsonSerDe"
     #   resp.resource_data_sync_items[0].s3_destination.region #=> String
     #   resp.resource_data_sync_items[0].s3_destination.awskms_key_arn #=> String
+    #   resp.resource_data_sync_items[0].s3_destination.destination_data_sharing.destination_data_sharing_type #=> String
     #   resp.resource_data_sync_items[0].last_sync_time #=> Time
     #   resp.resource_data_sync_items[0].last_successful_sync_time #=> Time
     #   resp.resource_data_sync_items[0].sync_last_modified_time #=> Time
@@ -9140,7 +9144,7 @@ module Aws::SSM
     #           },
     #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #           approve_after_days: 1,
-    #           approve_until_date: "PatchStringDate",
+    #           approve_until_date: "PatchStringDateTime",
     #           enable_non_security: false,
     #         },
     #       ],
@@ -9310,7 +9314,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1087,6 +1087,7 @@ module Aws::CognitoIdentityProvider
 
     EventRiskType.add_member(:risk_decision, Shapes::ShapeRef.new(shape: RiskDecisionType, location_name: "RiskDecision"))
     EventRiskType.add_member(:risk_level, Shapes::ShapeRef.new(shape: RiskLevelType, location_name: "RiskLevel"))
+    EventRiskType.add_member(:compromised_credentials_detected, Shapes::ShapeRef.new(shape: WrappedBooleanType, location_name: "CompromisedCredentialsDetected"))
     EventRiskType.struct_class = Types::EventRiskType
 
     ExpiredCodeException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))

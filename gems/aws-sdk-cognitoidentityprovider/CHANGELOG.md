@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-03-16)
+------------------
+
+* Feature - Additional response field "CompromisedCredentialsDetected" added to AdminListUserAuthEvents.
+
 1.33.0 (2020-03-09)
 ------------------
 

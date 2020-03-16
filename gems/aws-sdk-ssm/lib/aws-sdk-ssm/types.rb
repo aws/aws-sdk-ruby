@@ -3112,7 +3112,7 @@ module Aws::SSM
     #               },
     #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #               approve_after_days: 1,
-    #               approve_until_date: "PatchStringDate",
+    #               approve_until_date: "PatchStringDateTime",
     #               enable_non_security: false,
     #             },
     #           ],
@@ -3285,6 +3285,9 @@ module Aws::SSM
     #           sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #           region: "ResourceDataSyncS3Region", # required
     #           awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
+    #           destination_data_sharing: {
+    #             destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
+    #           },
     #         },
     #         sync_type: "ResourceDataSyncType",
     #         sync_source: {
@@ -5541,8 +5544,7 @@ module Aws::SSM
     #   @return [Array<Types::ParameterMetadata>]
     #
     # @!attribute [rw] next_token
-    #   The token to use when requesting the next set of items. If there are
-    #   no additional items to return, the string is empty.
+    #   The token to use when requesting the next set of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParametersResult AWS API Documentation
@@ -12932,7 +12934,7 @@ module Aws::SSM
     #         },
     #         compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approve_after_days: 1,
-    #         approve_until_date: "PatchStringDate",
+    #         approve_until_date: "PatchStringDateTime",
     #         enable_non_security: false,
     #       }
     #
@@ -12954,8 +12956,7 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] approve_until_date
-    #   The cutoff date for auto approval of released patches. Any patches
-    #   released on or before this date will be installed automatically
+    #   Example API
     #   @return [String]
     #
     # @!attribute [rw] enable_non_security
@@ -12994,7 +12995,7 @@ module Aws::SSM
     #             },
     #             compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #             approve_after_days: 1,
-    #             approve_until_date: "PatchStringDate",
+    #             approve_until_date: "PatchStringDateTime",
     #             enable_non_security: false,
     #           },
     #         ],
@@ -14201,6 +14202,29 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Synchronize Systems Manager Inventory data from multiple AWS accounts
+    # defined in AWS Organizations to a centralized Amazon S3 bucket. Data
+    # is synchronized to individual key prefixes in the central bucket. Each
+    # key prefix represents a different AWS account ID.
+    #
+    # @note When making an API call, you may pass ResourceDataSyncDestinationDataSharing
+    #   data as a hash:
+    #
+    #       {
+    #         destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
+    #       }
+    #
+    # @!attribute [rw] destination_data_sharing_type
+    #   The sharing data type. Only `Organization` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncDestinationDataSharing AWS API Documentation
+    #
+    class ResourceDataSyncDestinationDataSharing < Struct.new(
+      :destination_data_sharing_type)
+      include Aws::Structure
+    end
+
     # The specified sync configuration is invalid.
     #
     # @!attribute [rw] message
@@ -14329,6 +14353,9 @@ module Aws::SSM
     #         sync_format: "JsonSerDe", # required, accepts JsonSerDe
     #         region: "ResourceDataSyncS3Region", # required
     #         awskms_key_arn: "ResourceDataSyncAWSKMSKeyARN",
+    #         destination_data_sharing: {
+    #           destination_data_sharing_type: "ResourceDataSyncDestinationDataSharingType",
+    #         },
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -14355,6 +14382,10 @@ module Aws::SSM
     #   belong to the same Region as the destination Amazon S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] destination_data_sharing
+    #   Enables destination data sharing. By default, this field is `null`.
+    #   @return [Types::ResourceDataSyncDestinationDataSharing]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncS3Destination AWS API Documentation
     #
     class ResourceDataSyncS3Destination < Struct.new(
@@ -14362,7 +14393,8 @@ module Aws::SSM
       :prefix,
       :sync_format,
       :region,
-      :awskms_key_arn)
+      :awskms_key_arn,
+      :destination_data_sharing)
       include Aws::Structure
     end
 
@@ -17104,7 +17136,7 @@ module Aws::SSM
     #               },
     #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #               approve_after_days: 1,
-    #               approve_until_date: "PatchStringDate",
+    #               approve_until_date: "PatchStringDateTime",
     #               enable_non_security: false,
     #             },
     #           ],

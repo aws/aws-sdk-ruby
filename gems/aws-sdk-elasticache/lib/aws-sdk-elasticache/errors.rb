@@ -42,11 +42,14 @@ module Aws::ElastiCache
   # * {CacheSubnetGroupQuotaExceededFault}
   # * {CacheSubnetQuotaExceededFault}
   # * {ClusterQuotaForCustomerExceededFault}
+  # * {GlobalReplicationGroupAlreadyExistsFault}
+  # * {GlobalReplicationGroupNotFoundFault}
   # * {InsufficientCacheClusterCapacityFault}
   # * {InvalidARNFault}
   # * {InvalidCacheClusterStateFault}
   # * {InvalidCacheParameterGroupStateFault}
   # * {InvalidCacheSecurityGroupStateFault}
+  # * {InvalidGlobalReplicationGroupStateFault}
   # * {InvalidKMSKeyFault}
   # * {InvalidParameterCombinationException}
   # * {InvalidParameterValueException}
@@ -254,6 +257,26 @@ module Aws::ElastiCache
       end
     end
 
+    class GlobalReplicationGroupAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::GlobalReplicationGroupAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class GlobalReplicationGroupNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::GlobalReplicationGroupNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InsufficientCacheClusterCapacityFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -299,6 +322,16 @@ module Aws::ElastiCache
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElastiCache::Types::InvalidCacheSecurityGroupStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidGlobalReplicationGroupStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::InvalidGlobalReplicationGroupStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

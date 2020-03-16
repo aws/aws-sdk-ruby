@@ -71,11 +71,10 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] scale_down_modifications
     #   A string list, each element of which specifies a cache node type
-    #   which you can use to scale your cluster or replication group.
-    #
-    #   When scaling down on a Redis cluster or replication group using
-    #   `ModifyCacheCluster` or `ModifyReplicationGroup`, use a value from
-    #   this list for the `CacheNodeType` parameter.
+    #   which you can use to scale your cluster or replication group. When
+    #   scaling down a Redis cluster or replication group using
+    #   ModifyCacheCluster or ModifyReplicationGroup, use a value from this
+    #   list for the CacheNodeType parameter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage AWS API Documentation
@@ -266,6 +265,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -615,6 +617,9 @@ module Aws::ElastiCache
     #     **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #     `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
+    #     **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #     `cache.t3.medium`
+    #
     #     **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #     `cache.t2.medium`
     #
@@ -675,7 +680,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] cache_node_status
-    #   The current state of this cache node.
+    #   The current state of this cache node, one of the following values:
+    #   `available`, `creating`, `rebooting`, or `deleting`.
     #   @return [String]
     #
     # @!attribute [rw] cache_node_create_time
@@ -864,12 +870,18 @@ module Aws::ElastiCache
     #   The description for this cache parameter group.
     #   @return [String]
     #
+    # @!attribute [rw] is_global
+    #   Indicates whether the parameter group is associated with a Global
+    #   Datastore
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroup AWS API Documentation
     #
     class CacheParameterGroup < Struct.new(
       :cache_parameter_group_name,
       :cache_parameter_group_family,
-      :description)
+      :description,
+      :is_global)
       include Aws::Structure
     end
 
@@ -1479,6 +1491,9 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
+    #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
     #
@@ -1907,6 +1922,57 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id_suffix: "String", # required
+    #         global_replication_group_description: "String",
+    #         primary_replication_group_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id_suffix
+    #   The suffix for name of a Global Datastore. The suffix guarantees
+    #   uniqueness of the Global Datastore name across multiple regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_replication_group_description
+    #   Provides details of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_replication_group_id
+    #   The name of the primary cluster that accepts writes and will
+    #   replicate updates to the secondary cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class CreateGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id_suffix,
+      :global_replication_group_description,
+      :primary_replication_group_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroupResult AWS API Documentation
+    #
+    class CreateGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
+      include Aws::Structure
+    end
+
     # Represents the input of a `CreateReplicationGroup` operation.
     #
     # @note When making an API call, you may pass CreateReplicationGroupMessage
@@ -1915,6 +1981,7 @@ module Aws::ElastiCache
     #       {
     #         replication_group_id: "String", # required
     #         replication_group_description: "String", # required
+    #         global_replication_group_id: "String",
     #         primary_cluster_id: "String",
     #         automatic_failover_enabled: false,
     #         num_cache_clusters: 1,
@@ -1974,6 +2041,10 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] replication_group_description
     #   A user-created description for the replication group.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
     #   @return [String]
     #
     # @!attribute [rw] primary_cluster_id
@@ -2091,6 +2162,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -2378,7 +2452,7 @@ module Aws::ElastiCache
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the KMS key used to encrypt the disk on the cluster.
+    #   The ID of the KMS key used to encrypt the disk in the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
@@ -2386,6 +2460,7 @@ module Aws::ElastiCache
     class CreateReplicationGroupMessage < Struct.new(
       :replication_group_id,
       :replication_group_description,
+      :global_replication_group_id,
       :primary_cluster_id,
       :automatic_failover_enabled,
       :num_cache_clusters,
@@ -2503,6 +2578,79 @@ module Aws::ElastiCache
     class CustomerNodeEndpoint < Struct.new(
       :address,
       :port)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DecreaseNodeGroupsInGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         node_group_count: 1, # required
+    #         global_node_groups_to_remove: ["String"],
+    #         global_node_groups_to_retain: ["String"],
+    #         apply_immediately: false, # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] node_group_count
+    #   The number of node groups (shards) that results from the
+    #   modification of the shard configuration
+    #   @return [Integer]
+    #
+    # @!attribute [rw] global_node_groups_to_remove
+    #   If the value of NodeGroupCount is less than the current number of
+    #   node groups (shards), then either NodeGroupsToRemove or
+    #   NodeGroupsToRetain is required. NodeGroupsToRemove is a list of
+    #   NodeGroupIds to remove from the cluster. ElastiCache for Redis will
+    #   attempt to remove all node groups listed by NodeGroupsToRemove from
+    #   the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] global_node_groups_to_retain
+    #   If the value of NodeGroupCount is less than the current number of
+    #   node groups (shards), then either NodeGroupsToRemove or
+    #   NodeGroupsToRetain is required. NodeGroupsToRemove is a list of
+    #   NodeGroupIds to remove from the cluster. ElastiCache for Redis will
+    #   attempt to remove all node groups listed by NodeGroupsToRemove from
+    #   the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Indicates that the shard reconfiguration process begins immediately.
+    #   At present, the only permitted value for this parameter is true.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseNodeGroupsInGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class DecreaseNodeGroupsInGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :node_group_count,
+      :global_node_groups_to_remove,
+      :global_node_groups_to_retain,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseNodeGroupsInGlobalReplicationGroupResult AWS API Documentation
+    #
+    class DecreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
       include Aws::Structure
     end
 
@@ -2696,6 +2844,50 @@ module Aws::ElastiCache
     #
     class DeleteCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         retain_primary_replication_group: false, # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] retain_primary_replication_group
+    #   If set to `true`, the primary replication is retained as a
+    #   standalone replication group.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class DeleteGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :retain_primary_replication_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteGlobalReplicationGroupResult AWS API Documentation
+    #
+    class DeleteGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
       include Aws::Structure
     end
 
@@ -3223,6 +3415,68 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGlobalReplicationGroupsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #         show_member_info: false,
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified MaxRecords value, a marker is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] show_member_info
+    #   Returns the list of members that comprise the Global Datastore.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeGlobalReplicationGroupsMessage AWS API Documentation
+    #
+    class DescribeGlobalReplicationGroupsMessage < Struct.new(
+      :global_replication_group_id,
+      :max_records,
+      :marker,
+      :show_member_info)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxRecords. &gt;
+    #   @return [String]
+    #
+    # @!attribute [rw] global_replication_groups
+    #   Indicates the slot configuration and global identifier for each
+    #   slice group.
+    #   @return [Array<Types::GlobalReplicationGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeGlobalReplicationGroupsResult AWS API Documentation
+    #
+    class DescribeGlobalReplicationGroupsResult < Struct.new(
+      :marker,
+      :global_replication_groups)
+      include Aws::Structure
+    end
+
     # Represents the input of a `DescribeReplicationGroups` operation.
     #
     # @note When making an API call, you may pass DescribeReplicationGroupsMessage
@@ -3316,6 +3570,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -3466,6 +3723,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -3788,6 +4048,57 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         replication_group_id: "String", # required
+    #         replication_group_region: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group_id
+    #   The name of the secondary cluster you wish to remove from the Global
+    #   Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group_region
+    #   The AWS region of secondary cluster you wish to remove from the
+    #   Global Datastore
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DisassociateGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class DisassociateGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :replication_group_id,
+      :replication_group_region)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DisassociateGlobalReplicationGroupResult AWS API Documentation
+    #
+    class DisassociateGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
+      include Aws::Structure
+    end
+
     # Provides ownership and status information for an Amazon EC2 security
     # group.
     #
@@ -3918,6 +4229,304 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass FailoverGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         primary_region: "String", # required
+    #         primary_replication_group_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_region
+    #   The AWS region of the primary cluster of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_replication_group_id
+    #   The name of the primary replication group
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/FailoverGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class FailoverGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :primary_region,
+      :primary_replication_group_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/FailoverGlobalReplicationGroupResult AWS API Documentation
+    #
+    class FailoverGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
+      include Aws::Structure
+    end
+
+    # Indicates the slot configuration and global identifier for a slice
+    # group.
+    #
+    # @!attribute [rw] global_node_group_id
+    #   The name of the global node group
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   The keyspace for this node group
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalNodeGroup AWS API Documentation
+    #
+    class GlobalNodeGroup < Struct.new(
+      :global_node_group_id,
+      :slots)
+      include Aws::Structure
+    end
+
+    # Consists of a primary cluster that accepts writes and an associated
+    # secondary cluster that resides in a different AWS region. The
+    # secondary cluster accepts only reads. The primary cluster
+    # automatically replicates updates to the secondary cluster.
+    #
+    # * The **GlobalReplicationGroupId** represents the name of the Global
+    #   Datastore, which is what you use to associate a secondary cluster.
+    #
+    # ^
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] global_replication_group_description
+    #   The optional description of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_node_type
+    #   The cache node type of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine. For preview, it is Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The Elasticache Redis engine version. For preview, it is Redis
+    #   version 5.0.5 only.
+    #   @return [String]
+    #
+    # @!attribute [rw] members
+    #   The replication groups that comprise the Global Datastore.
+    #   @return [Array<Types::GlobalReplicationGroupMember>]
+    #
+    # @!attribute [rw] cluster_enabled
+    #   A flag that indicates whether the Global Datastore is cluster
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] global_node_groups
+    #   Indicates the slot configuration and global identifier for each
+    #   slice group.
+    #   @return [Array<Types::GlobalNodeGroup>]
+    #
+    # @!attribute [rw] auth_token_enabled
+    #   A flag that enables using an `AuthToken` (password) when issuing
+    #   Redis commands.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transit_encryption_enabled
+    #   A flag that enables in-transit encryption when set to true. You
+    #   cannot modify the value of `TransitEncryptionEnabled` after the
+    #   cluster is created. To enable in-transit encryption on a cluster you
+    #   must set `TransitEncryptionEnabled` to true when you create a
+    #   cluster.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] at_rest_encryption_enabled
+    #   A flag that enables encryption at rest when set to `true`.
+    #
+    #   You cannot modify the value of `AtRestEncryptionEnabled` after the
+    #   replication group is created. To enable encryption at rest on a
+    #   replication group you must set `AtRestEncryptionEnabled` to `true`
+    #   when you create the replication group.
+    #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroup AWS API Documentation
+    #
+    class GlobalReplicationGroup < Struct.new(
+      :global_replication_group_id,
+      :global_replication_group_description,
+      :status,
+      :cache_node_type,
+      :engine,
+      :engine_version,
+      :members,
+      :cluster_enabled,
+      :global_node_groups,
+      :auth_token_enabled,
+      :transit_encryption_enabled,
+      :at_rest_encryption_enabled)
+      include Aws::Structure
+    end
+
+    # The Global Datastore name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroupAlreadyExistsFault AWS API Documentation
+    #
+    class GlobalReplicationGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The name of the Global Datastore and role of this replication group in
+    # the Global Datastore.
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] global_replication_group_member_role
+    #   The role of the replication group in a Global Datastore. Can be
+    #   primary or secondary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroupInfo AWS API Documentation
+    #
+    class GlobalReplicationGroupInfo < Struct.new(
+      :global_replication_group_id,
+      :global_replication_group_member_role)
+      include Aws::Structure
+    end
+
+    # A member of a Global Datastore. It contains the Replication Group Id,
+    # the AWS region and the role of the replication group.
+    #
+    # @!attribute [rw] replication_group_id
+    #   The replication group id of the Global Datastore member.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group_region
+    #   The AWS region of the Global Datastore member.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   Indicates the role of the replication group, primary or secondary.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_failover
+    #   Indicates whether automatic failover is enabled for the replication
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the membership of the replication group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroupMember AWS API Documentation
+    #
+    class GlobalReplicationGroupMember < Struct.new(
+      :replication_group_id,
+      :replication_group_region,
+      :role,
+      :automatic_failover,
+      :status)
+      include Aws::Structure
+    end
+
+    # The Global Datastore does not exist
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/GlobalReplicationGroupNotFoundFault AWS API Documentation
+    #
+    class GlobalReplicationGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass IncreaseNodeGroupsInGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         node_group_count: 1, # required
+    #         regional_configurations: [
+    #           {
+    #             replication_group_id: "String", # required
+    #             replication_group_region: "String", # required
+    #             resharding_configuration: [ # required
+    #               {
+    #                 node_group_id: "AllowedNodeGroupId",
+    #                 preferred_availability_zones: ["String"],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         apply_immediately: false, # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] node_group_count
+    #   The number of node groups you wish to add
+    #   @return [Integer]
+    #
+    # @!attribute [rw] regional_configurations
+    #   Describes the replication group IDs, the AWS regions where they are
+    #   stored and the shard configuration for each that comprise the Global
+    #   Datastore
+    #   @return [Array<Types::RegionalConfiguration>]
+    #
+    # @!attribute [rw] apply_immediately
+    #   Indicates that the process begins immediately. At present, the only
+    #   permitted value for this parameter is true.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseNodeGroupsInGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class IncreaseNodeGroupsInGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :node_group_count,
+      :regional_configurations,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseNodeGroupsInGlobalReplicationGroupResult AWS API Documentation
+    #
+    class IncreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass IncreaseReplicaCountMessage
     #   data as a hash:
     #
@@ -4018,6 +4627,12 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidCacheSecurityGroupStateFault AWS API Documentation
     #
     class InvalidCacheSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The Global Datastore is not available
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidGlobalReplicationGroupStateFault AWS API Documentation
+    #
+    class InvalidGlobalReplicationGroupStateFault < Aws::EmptyStructure; end
 
     # The KMS key supplied is not valid.
     #
@@ -4617,6 +5232,81 @@ module Aws::ElastiCache
     #
     class ModifyCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         apply_immediately: false, # required
+    #         cache_node_type: "String",
+    #         engine_version: "String",
+    #         global_replication_group_description: "String",
+    #         automatic_failover_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   If true, this parameter causes the modifications in this request and
+    #   any pending modifications to be applied, asynchronously and as soon
+    #   as possible, regardless of the PreferredMaintenanceWindow setting
+    #   for the replication group. If false, changes to the nodes in the
+    #   replication group are applied on the next maintenance reboot, or the
+    #   next failure reboot, whichever occurs first.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cache_node_type
+    #   A valid cache node type that you want to scale this Global Datastore
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The upgraded version of the cache engine to be run on the clusters
+    #   in the Global Datastore.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_replication_group_description
+    #   A description of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_failover_enabled
+    #   Determines whether a read replica is automatically promoted to
+    #   read/write primary if the existing primary encounters a failure.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class ModifyGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :apply_immediately,
+      :cache_node_type,
+      :engine_version,
+      :global_replication_group_description,
+      :automatic_failover_enabled)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyGlobalReplicationGroupResult AWS API Documentation
+    #
+    class ModifyGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
       include Aws::Structure
     end
 
@@ -5516,6 +6206,49 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RebalanceSlotsInGlobalReplicationGroupMessage
+    #   data as a hash:
+    #
+    #       {
+    #         global_replication_group_id: "String", # required
+    #         apply_immediately: false, # required
+    #       }
+    #
+    # @!attribute [rw] global_replication_group_id
+    #   The name of the Global Datastore
+    #   @return [String]
+    #
+    # @!attribute [rw] apply_immediately
+    #   If `True`, redistribution is applied immediately.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebalanceSlotsInGlobalReplicationGroupMessage AWS API Documentation
+    #
+    class RebalanceSlotsInGlobalReplicationGroupMessage < Struct.new(
+      :global_replication_group_id,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_replication_group
+    #   Consists of a primary cluster that accepts writes and an associated
+    #   secondary cluster that resides in a different AWS region. The
+    #   secondary cluster accepts only reads. The primary cluster
+    #   automatically replicates updates to the secondary cluster.
+    #
+    #   * The **GlobalReplicationGroupId** represents the name of the Global
+    #     Datastore, which is what you use to associate a secondary cluster.
+    #
+    #   ^
+    #   @return [Types::GlobalReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebalanceSlotsInGlobalReplicationGroupResult AWS API Documentation
+    #
+    class RebalanceSlotsInGlobalReplicationGroupResult < Struct.new(
+      :global_replication_group)
+      include Aws::Structure
+    end
+
     # Represents the input of a `RebootCacheCluster` operation.
     #
     # @note When making an API call, you may pass RebootCacheClusterMessage
@@ -5575,6 +6308,44 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # A list of the replication groups
+    #
+    # @note When making an API call, you may pass RegionalConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         replication_group_region: "String", # required
+    #         resharding_configuration: [ # required
+    #           {
+    #             node_group_id: "AllowedNodeGroupId",
+    #             preferred_availability_zones: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The name of the secondary cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group_region
+    #   The AWS region where the cluster is stored
+    #   @return [String]
+    #
+    # @!attribute [rw] resharding_configuration
+    #   A list of `PreferredAvailabilityZones` objects that specifies the
+    #   configuration of a node group in the resharded cluster.
+    #   @return [Array<Types::ReshardingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RegionalConfiguration AWS API Documentation
+    #
+    class RegionalConfiguration < Struct.new(
+      :replication_group_id,
+      :replication_group_region,
+      :resharding_configuration)
+      include Aws::Structure
+    end
+
     # Represents the input of a `RemoveTagsFromResource` operation.
     #
     # @note When making an API call, you may pass RemoveTagsFromResourceMessage
@@ -5621,6 +6392,11 @@ module Aws::ElastiCache
     # @!attribute [rw] description
     #   The user supplied description of the replication group.
     #   @return [String]
+    #
+    # @!attribute [rw] global_replication_group_info
+    #   The name of the Global Datastore and role of this replication group
+    #   in the Global Datastore.
+    #   @return [Types::GlobalReplicationGroupInfo]
     #
     # @!attribute [rw] status
     #   The current state of this replication group - `creating`,
@@ -5754,6 +6530,7 @@ module Aws::ElastiCache
     class ReplicationGroup < Struct.new(
       :replication_group_id,
       :description,
+      :global_replication_group_info,
       :status,
       :pending_modified_values,
       :member_clusters,
@@ -5886,6 +6663,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -6065,6 +6845,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`
@@ -6512,6 +7295,9 @@ module Aws::ElastiCache
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
+    #       `cache.t3.medium`
     #
     #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
     #       `cache.t2.medium`

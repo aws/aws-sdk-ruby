@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2020-03-16)
+------------------
+
+* Feature - Resource data sync for AWS Systems Manager Inventory now includes destination data sharing. This feature enables you to synchronize inventory data from multiple AWS accounts into a central Amazon S3 bucket. To use this feature, all AWS accounts must be listed in AWS Organizations.
+
 1.72.0 (2020-03-09)
 ------------------
 

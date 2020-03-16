@@ -224,6 +224,12 @@ module Aws::S3Control
     #         description: "NonEmptyMaxLength256String",
     #         priority: 1, # required
     #         role_arn: "IAMRoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "NonEmptyMaxLength1024String", # required
+    #             value: "MaxLength1024String", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] account_id
@@ -280,6 +286,11 @@ module Aws::S3Control
     #   job's operation on each object in the manifest.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   An optional set of tags to associate with the job when it is
+    #   created.
+    #   @return [Array<Types::S3Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -291,7 +302,8 @@ module Aws::S3Control
       :manifest,
       :description,
       :priority,
-      :role_arn)
+      :role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -354,6 +366,35 @@ module Aws::S3Control
       :name)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteJobTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the Amazon Web Services account associated with
+    #   the Amazon S3 batch operations job you want to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The ID for the job whose tags you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteJobTaggingRequest AWS API Documentation
+    #
+    class DeleteJobTaggingRequest < Struct.new(
+      :account_id,
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteJobTaggingResult AWS API Documentation
+    #
+    class DeleteJobTaggingResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePublicAccessBlockRequest
     #   data as a hash:
@@ -552,6 +593,42 @@ module Aws::S3Control
       :vpc_configuration,
       :public_access_block_configuration,
       :creation_date)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetJobTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the Amazon Web Services account associated with
+    #   the Amazon S3 batch operations job you want to retrieve tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The ID for the job whose tags you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTaggingRequest AWS API Documentation
+    #
+    class GetJobTaggingRequest < Struct.new(
+      :account_id,
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The set of tags associated with the job.
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTaggingResult AWS API Documentation
+    #
+    class GetJobTaggingResult < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1426,6 +1503,46 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutJobTaggingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         job_id: "JobId", # required
+    #         tags: [ # required
+    #           {
+    #             key: "NonEmptyMaxLength1024String", # required
+    #             value: "MaxLength1024String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the Amazon Web Services account associated with
+    #   the Amazon S3 batch operations job you want to replace tags on.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_id
+    #   The ID for the job whose tags you want to replace.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The set of tags to associate with the job.
+    #   @return [Array<Types::S3Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutJobTaggingRequest AWS API Documentation
+    #
+    class PutJobTaggingRequest < Struct.new(
+      :account_id,
+      :job_id,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutJobTaggingResult AWS API Documentation
+    #
+    class PutJobTaggingResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PutPublicAccessBlockRequest
     #   data as a hash:
     #
@@ -1935,6 +2052,16 @@ module Aws::S3Control
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/TooManyRequestsException AWS API Documentation
     #
     class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
       :message)
       include Aws::Structure
     end

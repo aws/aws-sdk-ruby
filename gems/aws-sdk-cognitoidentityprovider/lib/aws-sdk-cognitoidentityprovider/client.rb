@@ -1419,6 +1419,7 @@ module Aws::CognitoIdentityProvider
     #   resp.auth_events[0].event_response #=> String, one of "Success", "Failure"
     #   resp.auth_events[0].event_risk.risk_decision #=> String, one of "NoRisk", "AccountTakeover", "Block"
     #   resp.auth_events[0].event_risk.risk_level #=> String, one of "Low", "Medium", "High"
+    #   resp.auth_events[0].event_risk.compromised_credentials_detected #=> Boolean
     #   resp.auth_events[0].challenge_responses #=> Array
     #   resp.auth_events[0].challenge_responses[0].challenge_name #=> String, one of "Password", "Mfa"
     #   resp.auth_events[0].challenge_responses[0].challenge_response #=> String, one of "Success", "Failure"
@@ -2484,7 +2485,7 @@ module Aws::CognitoIdentityProvider
     #
     #     * MetadataFile OR MetadataURL
     #
-    #     * IDPSignOut *optional*
+    #     * IDPSignout *optional*
     #
     # @option params [Hash<String,String>] :attribute_mapping
     #   A mapping of identity provider attributes to standard and custom user
@@ -3081,6 +3082,12 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::AnalyticsConfigurationType] :analytics_configuration
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
+    #
+    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    #   projects in the US East (N. Virginia) us-east-1 Region, regardless of
+    #   the region in which the user pool resides.
+    #
+    #    </note>
     #
     # @option params [String] :prevent_user_existence_errors
     #   Use this setting to choose which errors and responses are returned by
@@ -3864,13 +3871,13 @@ module Aws::CognitoIdentityProvider
 
     # Calling this API causes a message to be sent to the end user with a
     # confirmation code that is required to change the user's password. For
-    # the `Username` parameter, you can use the username or user alias. If a
-    # verified phone number exists for the user, the confirmation code is
-    # sent to the phone number. Otherwise, if a verified email exists, the
-    # confirmation code is sent to the email. If neither a verified phone
-    # number nor a verified email exists, `InvalidParameterException` is
-    # thrown. To use the confirmation code for resetting the password, call
-    # .
+    # the `Username` parameter, you can use the username or user alias. The
+    # method used to send the confirmation code is sent according to the
+    # specified AccountRecoverySetting. For more information, see
+    # [Recovering User Accounts]() in the *Amazon Cognito Developer Guide*.
+    # If neither a verified phone number nor a verified email exists, an
+    # `InvalidParameterException` is thrown. To use the confirmation code
+    # for resetting the password, call .
     #
     # @option params [required, String] :client_id
     #   The ID of the client associated with the user pool.
@@ -6562,6 +6569,12 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
     #
+    #   <note markdown="1"> Cognito User Pools only supports sending events to Amazon Pinpoint
+    #   projects in the US East (N. Virginia) us-east-1 Region, regardless of
+    #   the region in which the user pool resides.
+    #
+    #    </note>
+    #
     # @option params [String] :prevent_user_existence_errors
     #   Use this setting to choose which errors and responses are returned by
     #   Cognito APIs during authentication, account confirmation, and password
@@ -6843,7 +6856,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

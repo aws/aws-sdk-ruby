@@ -417,6 +417,9 @@ module Aws::S3Control
     #   (IAM) Role that batch operations will use to execute this job's
     #   operation on each object in the manifest.
     #
+    # @option params [Array<Types::S3Tag>] :tags
+    #   An optional set of tags to associate with the job when it is created.
+    #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResult#job_id #job_id} => String
@@ -532,6 +535,12 @@ module Aws::S3Control
     #     description: "NonEmptyMaxLength256String",
     #     priority: 1, # required
     #     role_arn: "IAMRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "NonEmptyMaxLength1024String", # required
+    #         value: "MaxLength1024String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -596,6 +605,33 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def delete_access_point_policy(params = {}, options = {})
       req = build_request(:delete_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # Delete the tags on a Amazon S3 batch operations job, if any.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the Amazon Web Services account associated with the
+    #   Amazon S3 batch operations job you want to remove tags from.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for the job whose tags you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_tagging({
+    #     account_id: "AccountId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteJobTagging AWS API Documentation
+    #
+    # @overload delete_job_tagging(params = {})
+    # @param [Hash] params ({})
+    def delete_job_tagging(params = {}, options = {})
+      req = build_request(:delete_job_tagging, params)
       req.send_request(options)
     end
 
@@ -848,6 +884,41 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Retrieve the tags on a Amazon S3 batch operations job.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the Amazon Web Services account associated with the
+    #   Amazon S3 batch operations job you want to retrieve tags for.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for the job whose tags you want to retrieve.
+    #
+    # @return [Types::GetJobTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobTaggingResult#tags #tags} => Array&lt;Types::S3Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_tagging({
+    #     account_id: "AccountId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTagging AWS API Documentation
+    #
+    # @overload get_job_tagging(params = {})
+    # @param [Hash] params ({})
+    def get_job_tagging(params = {}, options = {})
+      req = build_request(:get_job_tagging, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
     # Services account.
     #
@@ -1040,6 +1111,42 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Replace the set of tags on a Amazon S3 batch operations job.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the Amazon Web Services account associated with the
+    #   Amazon S3 batch operations job you want to replace tags on.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for the job whose tags you want to replace.
+    #
+    # @option params [required, Array<Types::S3Tag>] :tags
+    #   The set of tags to associate with the job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_job_tagging({
+    #     account_id: "AccountId", # required
+    #     job_id: "JobId", # required
+    #     tags: [ # required
+    #       {
+    #         key: "NonEmptyMaxLength1024String", # required
+    #         value: "MaxLength1024String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutJobTagging AWS API Documentation
+    #
+    # @overload put_job_tagging(params = {})
+    # @param [Hash] params ({})
+    def put_job_tagging(params = {}, options = {})
+      req = build_request(:put_job_tagging, params)
+      req.send_request(options)
+    end
+
     # Creates or modifies the `PublicAccessBlock` configuration for an
     # Amazon Web Services account.
     #
@@ -1169,7 +1276,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

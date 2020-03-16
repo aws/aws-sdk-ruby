@@ -90,12 +90,16 @@ module Aws::ElastiCache
     CreateCacheSecurityGroupResult = Shapes::StructureShape.new(name: 'CreateCacheSecurityGroupResult')
     CreateCacheSubnetGroupMessage = Shapes::StructureShape.new(name: 'CreateCacheSubnetGroupMessage')
     CreateCacheSubnetGroupResult = Shapes::StructureShape.new(name: 'CreateCacheSubnetGroupResult')
+    CreateGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'CreateGlobalReplicationGroupMessage')
+    CreateGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'CreateGlobalReplicationGroupResult')
     CreateReplicationGroupMessage = Shapes::StructureShape.new(name: 'CreateReplicationGroupMessage')
     CreateReplicationGroupResult = Shapes::StructureShape.new(name: 'CreateReplicationGroupResult')
     CreateSnapshotMessage = Shapes::StructureShape.new(name: 'CreateSnapshotMessage')
     CreateSnapshotResult = Shapes::StructureShape.new(name: 'CreateSnapshotResult')
     CustomerNodeEndpoint = Shapes::StructureShape.new(name: 'CustomerNodeEndpoint')
     CustomerNodeEndpointList = Shapes::ListShape.new(name: 'CustomerNodeEndpointList')
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'DecreaseNodeGroupsInGlobalReplicationGroupMessage')
+    DecreaseNodeGroupsInGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'DecreaseNodeGroupsInGlobalReplicationGroupResult')
     DecreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'DecreaseReplicaCountMessage')
     DecreaseReplicaCountResult = Shapes::StructureShape.new(name: 'DecreaseReplicaCountResult')
     DeleteCacheClusterMessage = Shapes::StructureShape.new(name: 'DeleteCacheClusterMessage')
@@ -103,6 +107,8 @@ module Aws::ElastiCache
     DeleteCacheParameterGroupMessage = Shapes::StructureShape.new(name: 'DeleteCacheParameterGroupMessage')
     DeleteCacheSecurityGroupMessage = Shapes::StructureShape.new(name: 'DeleteCacheSecurityGroupMessage')
     DeleteCacheSubnetGroupMessage = Shapes::StructureShape.new(name: 'DeleteCacheSubnetGroupMessage')
+    DeleteGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'DeleteGlobalReplicationGroupMessage')
+    DeleteGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'DeleteGlobalReplicationGroupResult')
     DeleteReplicationGroupMessage = Shapes::StructureShape.new(name: 'DeleteReplicationGroupMessage')
     DeleteReplicationGroupResult = Shapes::StructureShape.new(name: 'DeleteReplicationGroupResult')
     DeleteSnapshotMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotMessage')
@@ -116,6 +122,8 @@ module Aws::ElastiCache
     DescribeEngineDefaultParametersMessage = Shapes::StructureShape.new(name: 'DescribeEngineDefaultParametersMessage')
     DescribeEngineDefaultParametersResult = Shapes::StructureShape.new(name: 'DescribeEngineDefaultParametersResult')
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
+    DescribeGlobalReplicationGroupsMessage = Shapes::StructureShape.new(name: 'DescribeGlobalReplicationGroupsMessage')
+    DescribeGlobalReplicationGroupsResult = Shapes::StructureShape.new(name: 'DescribeGlobalReplicationGroupsResult')
     DescribeReplicationGroupsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationGroupsMessage')
     DescribeReservedCacheNodesMessage = Shapes::StructureShape.new(name: 'DescribeReservedCacheNodesMessage')
     DescribeReservedCacheNodesOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedCacheNodesOfferingsMessage')
@@ -123,6 +131,8 @@ module Aws::ElastiCache
     DescribeSnapshotsListMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotsListMessage')
     DescribeSnapshotsMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotsMessage')
     DescribeUpdateActionsMessage = Shapes::StructureShape.new(name: 'DescribeUpdateActionsMessage')
+    DisassociateGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'DisassociateGlobalReplicationGroupMessage')
+    DisassociateGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'DisassociateGlobalReplicationGroupResult')
     Double = Shapes::FloatShape.new(name: 'Double')
     EC2SecurityGroup = Shapes::StructureShape.new(name: 'EC2SecurityGroup')
     EC2SecurityGroupList = Shapes::ListShape.new(name: 'EC2SecurityGroupList')
@@ -131,6 +141,20 @@ module Aws::ElastiCache
     Event = Shapes::StructureShape.new(name: 'Event')
     EventList = Shapes::ListShape.new(name: 'EventList')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    FailoverGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'FailoverGlobalReplicationGroupMessage')
+    FailoverGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'FailoverGlobalReplicationGroupResult')
+    GlobalNodeGroup = Shapes::StructureShape.new(name: 'GlobalNodeGroup')
+    GlobalNodeGroupIdList = Shapes::ListShape.new(name: 'GlobalNodeGroupIdList')
+    GlobalNodeGroupList = Shapes::ListShape.new(name: 'GlobalNodeGroupList')
+    GlobalReplicationGroup = Shapes::StructureShape.new(name: 'GlobalReplicationGroup')
+    GlobalReplicationGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'GlobalReplicationGroupAlreadyExistsFault')
+    GlobalReplicationGroupInfo = Shapes::StructureShape.new(name: 'GlobalReplicationGroupInfo')
+    GlobalReplicationGroupList = Shapes::ListShape.new(name: 'GlobalReplicationGroupList')
+    GlobalReplicationGroupMember = Shapes::StructureShape.new(name: 'GlobalReplicationGroupMember')
+    GlobalReplicationGroupMemberList = Shapes::ListShape.new(name: 'GlobalReplicationGroupMemberList')
+    GlobalReplicationGroupNotFoundFault = Shapes::StructureShape.new(name: 'GlobalReplicationGroupNotFoundFault')
+    IncreaseNodeGroupsInGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'IncreaseNodeGroupsInGlobalReplicationGroupMessage')
+    IncreaseNodeGroupsInGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'IncreaseNodeGroupsInGlobalReplicationGroupResult')
     IncreaseReplicaCountMessage = Shapes::StructureShape.new(name: 'IncreaseReplicaCountMessage')
     IncreaseReplicaCountResult = Shapes::StructureShape.new(name: 'IncreaseReplicaCountResult')
     InsufficientCacheClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientCacheClusterCapacityFault')
@@ -140,6 +164,7 @@ module Aws::ElastiCache
     InvalidCacheClusterStateFault = Shapes::StructureShape.new(name: 'InvalidCacheClusterStateFault')
     InvalidCacheParameterGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheParameterGroupStateFault')
     InvalidCacheSecurityGroupStateFault = Shapes::StructureShape.new(name: 'InvalidCacheSecurityGroupStateFault')
+    InvalidGlobalReplicationGroupStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalReplicationGroupStateFault')
     InvalidKMSKeyFault = Shapes::StructureShape.new(name: 'InvalidKMSKeyFault')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
@@ -155,6 +180,8 @@ module Aws::ElastiCache
     ModifyCacheParameterGroupMessage = Shapes::StructureShape.new(name: 'ModifyCacheParameterGroupMessage')
     ModifyCacheSubnetGroupMessage = Shapes::StructureShape.new(name: 'ModifyCacheSubnetGroupMessage')
     ModifyCacheSubnetGroupResult = Shapes::StructureShape.new(name: 'ModifyCacheSubnetGroupResult')
+    ModifyGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'ModifyGlobalReplicationGroupMessage')
+    ModifyGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'ModifyGlobalReplicationGroupResult')
     ModifyReplicationGroupMessage = Shapes::StructureShape.new(name: 'ModifyReplicationGroupMessage')
     ModifyReplicationGroupResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupResult')
     ModifyReplicationGroupShardConfigurationMessage = Shapes::StructureShape.new(name: 'ModifyReplicationGroupShardConfigurationMessage')
@@ -193,10 +220,14 @@ module Aws::ElastiCache
     ProcessedUpdateActionList = Shapes::ListShape.new(name: 'ProcessedUpdateActionList')
     PurchaseReservedCacheNodesOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedCacheNodesOfferingMessage')
     PurchaseReservedCacheNodesOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedCacheNodesOfferingResult')
+    RebalanceSlotsInGlobalReplicationGroupMessage = Shapes::StructureShape.new(name: 'RebalanceSlotsInGlobalReplicationGroupMessage')
+    RebalanceSlotsInGlobalReplicationGroupResult = Shapes::StructureShape.new(name: 'RebalanceSlotsInGlobalReplicationGroupResult')
     RebootCacheClusterMessage = Shapes::StructureShape.new(name: 'RebootCacheClusterMessage')
     RebootCacheClusterResult = Shapes::StructureShape.new(name: 'RebootCacheClusterResult')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+    RegionalConfiguration = Shapes::StructureShape.new(name: 'RegionalConfiguration')
+    RegionalConfigurationList = Shapes::ListShape.new(name: 'RegionalConfigurationList')
     RemoveReplicasList = Shapes::ListShape.new(name: 'RemoveReplicasList')
     RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
     ReplicaConfigurationList = Shapes::ListShape.new(name: 'ReplicaConfigurationList')
@@ -410,6 +441,7 @@ module Aws::ElastiCache
     CacheParameterGroup.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     CacheParameterGroup.add_member(:cache_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupFamily"))
     CacheParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CacheParameterGroup.add_member(:is_global, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsGlobal"))
     CacheParameterGroup.struct_class = Types::CacheParameterGroup
 
     CacheParameterGroupAlreadyExistsFault.struct_class = Types::CacheParameterGroupAlreadyExistsFault
@@ -561,8 +593,17 @@ module Aws::ElastiCache
     CreateCacheSubnetGroupResult.add_member(:cache_subnet_group, Shapes::ShapeRef.new(shape: CacheSubnetGroup, location_name: "CacheSubnetGroup"))
     CreateCacheSubnetGroupResult.struct_class = Types::CreateCacheSubnetGroupResult
 
+    CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_id_suffix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupIdSuffix"))
+    CreateGlobalReplicationGroupMessage.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
+    CreateGlobalReplicationGroupMessage.add_member(:primary_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrimaryReplicationGroupId"))
+    CreateGlobalReplicationGroupMessage.struct_class = Types::CreateGlobalReplicationGroupMessage
+
+    CreateGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    CreateGlobalReplicationGroupResult.struct_class = Types::CreateGlobalReplicationGroupResult
+
     CreateReplicationGroupMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     CreateReplicationGroupMessage.add_member(:replication_group_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupDescription"))
+    CreateReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupId"))
     CreateReplicationGroupMessage.add_member(:primary_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryClusterId"))
     CreateReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
     CreateReplicationGroupMessage.add_member(:num_cache_clusters, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumCacheClusters"))
@@ -610,6 +651,16 @@ module Aws::ElastiCache
 
     CustomerNodeEndpointList.member = Shapes::ShapeRef.new(shape: CustomerNodeEndpoint)
 
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:node_group_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NodeGroupCount"))
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:global_node_groups_to_remove, Shapes::ShapeRef.new(shape: GlobalNodeGroupIdList, location_name: "GlobalNodeGroupsToRemove"))
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:global_node_groups_to_retain, Shapes::ShapeRef.new(shape: GlobalNodeGroupIdList, location_name: "GlobalNodeGroupsToRetain"))
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
+    DecreaseNodeGroupsInGlobalReplicationGroupMessage.struct_class = Types::DecreaseNodeGroupsInGlobalReplicationGroupMessage
+
+    DecreaseNodeGroupsInGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    DecreaseNodeGroupsInGlobalReplicationGroupResult.struct_class = Types::DecreaseNodeGroupsInGlobalReplicationGroupResult
+
     DecreaseReplicaCountMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     DecreaseReplicaCountMessage.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NewReplicaCount"))
     DecreaseReplicaCountMessage.add_member(:replica_configuration, Shapes::ShapeRef.new(shape: ReplicaConfigurationList, location_name: "ReplicaConfiguration"))
@@ -635,6 +686,13 @@ module Aws::ElastiCache
 
     DeleteCacheSubnetGroupMessage.add_member(:cache_subnet_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheSubnetGroupName"))
     DeleteCacheSubnetGroupMessage.struct_class = Types::DeleteCacheSubnetGroupMessage
+
+    DeleteGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    DeleteGlobalReplicationGroupMessage.add_member(:retain_primary_replication_group, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RetainPrimaryReplicationGroup"))
+    DeleteGlobalReplicationGroupMessage.struct_class = Types::DeleteGlobalReplicationGroupMessage
+
+    DeleteGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    DeleteGlobalReplicationGroupResult.struct_class = Types::DeleteGlobalReplicationGroupResult
 
     DeleteReplicationGroupMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     DeleteReplicationGroupMessage.add_member(:retain_primary_cluster, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RetainPrimaryCluster"))
@@ -703,6 +761,16 @@ module Aws::ElastiCache
     DescribeEventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeEventsMessage.struct_class = Types::DescribeEventsMessage
 
+    DescribeGlobalReplicationGroupsMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupId"))
+    DescribeGlobalReplicationGroupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeGlobalReplicationGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeGlobalReplicationGroupsMessage.add_member(:show_member_info, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowMemberInfo"))
+    DescribeGlobalReplicationGroupsMessage.struct_class = Types::DescribeGlobalReplicationGroupsMessage
+
+    DescribeGlobalReplicationGroupsResult.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeGlobalReplicationGroupsResult.add_member(:global_replication_groups, Shapes::ShapeRef.new(shape: GlobalReplicationGroupList, location_name: "GlobalReplicationGroups"))
+    DescribeGlobalReplicationGroupsResult.struct_class = Types::DescribeGlobalReplicationGroupsResult
+
     DescribeReplicationGroupsMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     DescribeReplicationGroupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReplicationGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -758,6 +826,14 @@ module Aws::ElastiCache
     DescribeUpdateActionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeUpdateActionsMessage.struct_class = Types::DescribeUpdateActionsMessage
 
+    DisassociateGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    DisassociateGlobalReplicationGroupMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    DisassociateGlobalReplicationGroupMessage.add_member(:replication_group_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupRegion"))
+    DisassociateGlobalReplicationGroupMessage.struct_class = Types::DisassociateGlobalReplicationGroupMessage
+
+    DisassociateGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    DisassociateGlobalReplicationGroupResult.struct_class = Types::DisassociateGlobalReplicationGroupResult
+
     EC2SecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     EC2SecurityGroup.add_member(:ec2_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "EC2SecurityGroupName"))
     EC2SecurityGroup.add_member(:ec2_security_group_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "EC2SecurityGroupOwnerId"))
@@ -787,6 +863,64 @@ module Aws::ElastiCache
     EventsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     EventsMessage.struct_class = Types::EventsMessage
 
+    FailoverGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    FailoverGlobalReplicationGroupMessage.add_member(:primary_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrimaryRegion"))
+    FailoverGlobalReplicationGroupMessage.add_member(:primary_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PrimaryReplicationGroupId"))
+    FailoverGlobalReplicationGroupMessage.struct_class = Types::FailoverGlobalReplicationGroupMessage
+
+    FailoverGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    FailoverGlobalReplicationGroupResult.struct_class = Types::FailoverGlobalReplicationGroupResult
+
+    GlobalNodeGroup.add_member(:global_node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalNodeGroupId"))
+    GlobalNodeGroup.add_member(:slots, Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
+    GlobalNodeGroup.struct_class = Types::GlobalNodeGroup
+
+    GlobalNodeGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "GlobalNodeGroupId")
+
+    GlobalNodeGroupList.member = Shapes::ShapeRef.new(shape: GlobalNodeGroup, location_name: "GlobalNodeGroup")
+
+    GlobalReplicationGroup.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupId"))
+    GlobalReplicationGroup.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
+    GlobalReplicationGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    GlobalReplicationGroup.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
+    GlobalReplicationGroup.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
+    GlobalReplicationGroup.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    GlobalReplicationGroup.add_member(:members, Shapes::ShapeRef.new(shape: GlobalReplicationGroupMemberList, location_name: "Members"))
+    GlobalReplicationGroup.add_member(:cluster_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ClusterEnabled"))
+    GlobalReplicationGroup.add_member(:global_node_groups, Shapes::ShapeRef.new(shape: GlobalNodeGroupList, location_name: "GlobalNodeGroups"))
+    GlobalReplicationGroup.add_member(:auth_token_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AuthTokenEnabled"))
+    GlobalReplicationGroup.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
+    GlobalReplicationGroup.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
+    GlobalReplicationGroup.struct_class = Types::GlobalReplicationGroup
+
+    GlobalReplicationGroupAlreadyExistsFault.struct_class = Types::GlobalReplicationGroupAlreadyExistsFault
+
+    GlobalReplicationGroupInfo.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupId"))
+    GlobalReplicationGroupInfo.add_member(:global_replication_group_member_role, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupMemberRole"))
+    GlobalReplicationGroupInfo.struct_class = Types::GlobalReplicationGroupInfo
+
+    GlobalReplicationGroupList.member = Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup")
+
+    GlobalReplicationGroupMember.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+    GlobalReplicationGroupMember.add_member(:replication_group_region, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupRegion"))
+    GlobalReplicationGroupMember.add_member(:role, Shapes::ShapeRef.new(shape: String, location_name: "Role"))
+    GlobalReplicationGroupMember.add_member(:automatic_failover, Shapes::ShapeRef.new(shape: AutomaticFailoverStatus, location_name: "AutomaticFailover"))
+    GlobalReplicationGroupMember.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    GlobalReplicationGroupMember.struct_class = Types::GlobalReplicationGroupMember
+
+    GlobalReplicationGroupMemberList.member = Shapes::ShapeRef.new(shape: GlobalReplicationGroupMember, location_name: "GlobalReplicationGroupMember")
+
+    GlobalReplicationGroupNotFoundFault.struct_class = Types::GlobalReplicationGroupNotFoundFault
+
+    IncreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    IncreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:node_group_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NodeGroupCount"))
+    IncreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:regional_configurations, Shapes::ShapeRef.new(shape: RegionalConfigurationList, location_name: "RegionalConfigurations"))
+    IncreaseNodeGroupsInGlobalReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
+    IncreaseNodeGroupsInGlobalReplicationGroupMessage.struct_class = Types::IncreaseNodeGroupsInGlobalReplicationGroupMessage
+
+    IncreaseNodeGroupsInGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    IncreaseNodeGroupsInGlobalReplicationGroupResult.struct_class = Types::IncreaseNodeGroupsInGlobalReplicationGroupResult
+
     IncreaseReplicaCountMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     IncreaseReplicaCountMessage.add_member(:new_replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NewReplicaCount"))
     IncreaseReplicaCountMessage.add_member(:replica_configuration, Shapes::ShapeRef.new(shape: ReplicaConfigurationList, location_name: "ReplicaConfiguration"))
@@ -805,6 +939,8 @@ module Aws::ElastiCache
     InvalidCacheParameterGroupStateFault.struct_class = Types::InvalidCacheParameterGroupStateFault
 
     InvalidCacheSecurityGroupStateFault.struct_class = Types::InvalidCacheSecurityGroupStateFault
+
+    InvalidGlobalReplicationGroupStateFault.struct_class = Types::InvalidGlobalReplicationGroupStateFault
 
     InvalidKMSKeyFault.struct_class = Types::InvalidKMSKeyFault
 
@@ -866,6 +1002,17 @@ module Aws::ElastiCache
 
     ModifyCacheSubnetGroupResult.add_member(:cache_subnet_group, Shapes::ShapeRef.new(shape: CacheSubnetGroup, location_name: "CacheSubnetGroup"))
     ModifyCacheSubnetGroupResult.struct_class = Types::ModifyCacheSubnetGroupResult
+
+    ModifyGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    ModifyGlobalReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
+    ModifyGlobalReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
+    ModifyGlobalReplicationGroupMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
+    ModifyGlobalReplicationGroupMessage.add_member(:global_replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "GlobalReplicationGroupDescription"))
+    ModifyGlobalReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
+    ModifyGlobalReplicationGroupMessage.struct_class = Types::ModifyGlobalReplicationGroupMessage
+
+    ModifyGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    ModifyGlobalReplicationGroupResult.struct_class = Types::ModifyGlobalReplicationGroupResult
 
     ModifyReplicationGroupMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     ModifyReplicationGroupMessage.add_member(:replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupDescription"))
@@ -1025,6 +1172,13 @@ module Aws::ElastiCache
     PurchaseReservedCacheNodesOfferingResult.add_member(:reserved_cache_node, Shapes::ShapeRef.new(shape: ReservedCacheNode, location_name: "ReservedCacheNode"))
     PurchaseReservedCacheNodesOfferingResult.struct_class = Types::PurchaseReservedCacheNodesOfferingResult
 
+    RebalanceSlotsInGlobalReplicationGroupMessage.add_member(:global_replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GlobalReplicationGroupId"))
+    RebalanceSlotsInGlobalReplicationGroupMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ApplyImmediately"))
+    RebalanceSlotsInGlobalReplicationGroupMessage.struct_class = Types::RebalanceSlotsInGlobalReplicationGroupMessage
+
+    RebalanceSlotsInGlobalReplicationGroupResult.add_member(:global_replication_group, Shapes::ShapeRef.new(shape: GlobalReplicationGroup, location_name: "GlobalReplicationGroup"))
+    RebalanceSlotsInGlobalReplicationGroupResult.struct_class = Types::RebalanceSlotsInGlobalReplicationGroupResult
+
     RebootCacheClusterMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheClusterId"))
     RebootCacheClusterMessage.add_member(:cache_node_ids_to_reboot, Shapes::ShapeRef.new(shape: CacheNodeIdsList, required: true, location_name: "CacheNodeIdsToReboot"))
     RebootCacheClusterMessage.struct_class = Types::RebootCacheClusterMessage
@@ -1038,6 +1192,13 @@ module Aws::ElastiCache
 
     RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "RecurringCharge")
 
+    RegionalConfiguration.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    RegionalConfiguration.add_member(:replication_group_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupRegion"))
+    RegionalConfiguration.add_member(:resharding_configuration, Shapes::ShapeRef.new(shape: ReshardingConfigurationList, required: true, location_name: "ReshardingConfiguration"))
+    RegionalConfiguration.struct_class = Types::RegionalConfiguration
+
+    RegionalConfigurationList.member = Shapes::ShapeRef.new(shape: RegionalConfiguration, location_name: "RegionalConfiguration")
+
     RemoveReplicasList.member = Shapes::ShapeRef.new(shape: String)
 
     RemoveTagsFromResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
@@ -1048,6 +1209,7 @@ module Aws::ElastiCache
 
     ReplicationGroup.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
     ReplicationGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ReplicationGroup.add_member(:global_replication_group_info, Shapes::ShapeRef.new(shape: GlobalReplicationGroupInfo, location_name: "GlobalReplicationGroupInfo"))
     ReplicationGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     ReplicationGroup.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: ReplicationGroupPendingModifiedValues, location_name: "PendingModifiedValues"))
     ReplicationGroup.add_member(:member_clusters, Shapes::ShapeRef.new(shape: ClusterIdList, location_name: "MemberClusters"))
@@ -1460,6 +1622,19 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
       end)
 
+      api.add_operation(:create_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: CreateGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:create_replication_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReplicationGroup"
         o.http_method = "POST"
@@ -1479,6 +1654,8 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -1498,6 +1675,18 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: SnapshotFeatureNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:decrease_node_groups_in_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DecreaseNodeGroupsInGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DecreaseNodeGroupsInGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DecreaseNodeGroupsInGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:decrease_replica_count, Seahorse::Model::Operation.new.tap do |o|
@@ -1567,6 +1756,17 @@ module Aws::ElastiCache
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupInUse)
         o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupNotFoundFault)
+      end)
+
+      api.add_operation(:delete_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:delete_replication_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1725,6 +1925,23 @@ module Aws::ElastiCache
         )
       end)
 
+      api.add_operation(:describe_global_replication_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGlobalReplicationGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGlobalReplicationGroupsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGlobalReplicationGroupsResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_replication_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeReplicationGroups"
         o.http_method = "POST"
@@ -1827,6 +2044,41 @@ module Aws::ElastiCache
         )
       end)
 
+      api.add_operation(:disassociate_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:failover_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "FailoverGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: FailoverGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: FailoverGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:increase_node_groups_in_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "IncreaseNodeGroupsInGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: IncreaseNodeGroupsInGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: IncreaseNodeGroupsInGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:increase_replica_count, Seahorse::Model::Operation.new.tap do |o|
         o.name = "IncreaseReplicaCount"
         o.http_method = "POST"
@@ -1899,6 +2151,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidCacheParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
       end)
 
       api.add_operation(:modify_cache_subnet_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1911,6 +2164,17 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: CacheSubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: SubnetInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+      end)
+
+      api.add_operation(:modify_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:modify_replication_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1966,6 +2230,17 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
+      api.add_operation(:rebalance_slots_in_global_replication_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebalanceSlotsInGlobalReplicationGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RebalanceSlotsInGlobalReplicationGroupMessage)
+        o.output = Shapes::ShapeRef.new(shape: RebalanceSlotsInGlobalReplicationGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: GlobalReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:reboot_cache_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RebootCacheCluster"
         o.http_method = "POST"
@@ -1998,6 +2273,7 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalReplicationGroupStateFault)
       end)
 
       api.add_operation(:revoke_cache_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|

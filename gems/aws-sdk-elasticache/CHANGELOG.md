@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-03-16)
+------------------
+
+* Feature - Amazon ElastiCache now supports Global Datastore for Redis. Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. You can create, modify and describe a Global Datastore, as well as add or remove regions from your Global Datastore and promote a region as primary in Global Datastore.
+
 1.30.0 (2020-03-09)
 ------------------
 
