@@ -51,6 +51,13 @@ module Aws::MediaConvert
     AudioSelectorGroup = Shapes::StructureShape.new(name: 'AudioSelectorGroup')
     AudioSelectorType = Shapes::StringShape.new(name: 'AudioSelectorType')
     AudioTypeControl = Shapes::StringShape.new(name: 'AudioTypeControl')
+    Av1AdaptiveQuantization = Shapes::StringShape.new(name: 'Av1AdaptiveQuantization')
+    Av1FramerateControl = Shapes::StringShape.new(name: 'Av1FramerateControl')
+    Av1FramerateConversionAlgorithm = Shapes::StringShape.new(name: 'Av1FramerateConversionAlgorithm')
+    Av1QvbrSettings = Shapes::StructureShape.new(name: 'Av1QvbrSettings')
+    Av1RateControlMode = Shapes::StringShape.new(name: 'Av1RateControlMode')
+    Av1Settings = Shapes::StructureShape.new(name: 'Av1Settings')
+    Av1SpatialAdaptiveQuantization = Shapes::StringShape.new(name: 'Av1SpatialAdaptiveQuantization')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BillingTagsSource = Shapes::StringShape.new(name: 'BillingTagsSource')
@@ -533,6 +540,7 @@ module Aws::MediaConvert
     __integerMin48000Max48000 = Shapes::IntegerShape.new(name: '__integerMin48000Max48000')
     __integerMin6000Max1024000 = Shapes::IntegerShape.new(name: '__integerMin6000Max1024000')
     __integerMin64000Max640000 = Shapes::IntegerShape.new(name: '__integerMin64000Max640000')
+    __integerMin7Max15 = Shapes::IntegerShape.new(name: '__integerMin7Max15')
     __integerMin8000Max192000 = Shapes::IntegerShape.new(name: '__integerMin8000Max192000')
     __integerMin8000Max96000 = Shapes::IntegerShape.new(name: '__integerMin8000Max96000')
     __integerMin96Max600 = Shapes::IntegerShape.new(name: '__integerMin96Max600')
@@ -706,6 +714,24 @@ module Aws::MediaConvert
 
     AudioSelectorGroup.add_member(:audio_selector_names, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "audioSelectorNames"))
     AudioSelectorGroup.struct_class = Types::AudioSelectorGroup
+
+    Av1QvbrSettings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
+    Av1QvbrSettings.add_member(:qvbr_quality_level_fine_tune, Shapes::ShapeRef.new(shape: __doubleMin0Max1, location_name: "qvbrQualityLevelFineTune"))
+    Av1QvbrSettings.struct_class = Types::Av1QvbrSettings
+
+    Av1Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: Av1AdaptiveQuantization, location_name: "adaptiveQuantization"))
+    Av1Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: Av1FramerateControl, location_name: "framerateControl"))
+    Av1Settings.add_member(:framerate_conversion_algorithm, Shapes::ShapeRef.new(shape: Av1FramerateConversionAlgorithm, location_name: "framerateConversionAlgorithm"))
+    Av1Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateDenominator"))
+    Av1Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "framerateNumerator"))
+    Av1Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "gopSize"))
+    Av1Settings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "maxBitrate"))
+    Av1Settings.add_member(:number_b_frames_between_reference_frames, Shapes::ShapeRef.new(shape: __integerMin7Max15, location_name: "numberBFramesBetweenReferenceFrames"))
+    Av1Settings.add_member(:qvbr_settings, Shapes::ShapeRef.new(shape: Av1QvbrSettings, location_name: "qvbrSettings"))
+    Av1Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Av1RateControlMode, location_name: "rateControlMode"))
+    Av1Settings.add_member(:slices, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "slices"))
+    Av1Settings.add_member(:spatial_adaptive_quantization, Shapes::ShapeRef.new(shape: Av1SpatialAdaptiveQuantization, location_name: "spatialAdaptiveQuantization"))
+    Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG, location_name: "availBlankingImage"))
     AvailBlanking.struct_class = Types::AvailBlanking
@@ -1852,6 +1878,7 @@ module Aws::MediaConvert
     UpdateQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))
     UpdateQueueResponse.struct_class = Types::UpdateQueueResponse
 
+    VideoCodecSettings.add_member(:av_1_settings, Shapes::ShapeRef.new(shape: Av1Settings, location_name: "av1Settings"))
     VideoCodecSettings.add_member(:codec, Shapes::ShapeRef.new(shape: VideoCodec, location_name: "codec"))
     VideoCodecSettings.add_member(:frame_capture_settings, Shapes::ShapeRef.new(shape: FrameCaptureSettings, location_name: "frameCaptureSettings"))
     VideoCodecSettings.add_member(:h264_settings, Shapes::ShapeRef.new(shape: H264Settings, location_name: "h264Settings"))

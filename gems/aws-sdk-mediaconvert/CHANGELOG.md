@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-03-17)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for: AV1 encoding in File Group MP4, DASH and CMAF DASH outputs; PCM/WAV audio output in MPEG2-TS containers; and Opus audio in Webm inputs.
+
 1.43.0 (2020-03-09)
 ------------------
 

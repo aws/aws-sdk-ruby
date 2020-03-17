@@ -1124,7 +1124,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -1886,7 +1903,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -2839,7 +2869,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -3575,7 +3622,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -4103,7 +4163,24 @@ module Aws::MediaConvert
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -4572,7 +4649,20 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -5500,7 +5590,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -6204,7 +6307,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -6654,7 +6770,20 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -7415,7 +7544,20 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -8163,7 +8305,20 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].preset #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -8649,7 +8804,20 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.presets[0].settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -9739,7 +9907,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -10472,7 +10657,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -10994,7 +11192,24 @@ module Aws::MediaConvert
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -11460,7 +11675,20 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -11744,7 +11972,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
