@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.469 (2020-03-17)
 ------------------
 
