@@ -1773,6 +1773,8 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
     #   resp.solution_version.training_hours #=> Float
     #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
+    #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters #=> Hash
+    #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters["ParameterName"] #=> String
     #   resp.solution_version.status #=> String
     #   resp.solution_version.failure_reason #=> String
     #   resp.solution_version.creation_date_time #=> Time
@@ -1855,6 +1857,7 @@ module Aws::Personalize
     #   resp.batch_inference_jobs[0].creation_date_time #=> Time
     #   resp.batch_inference_jobs[0].last_updated_date_time #=> Time
     #   resp.batch_inference_jobs[0].failure_reason #=> String
+    #   resp.batch_inference_jobs[0].solution_version_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListBatchInferenceJobs AWS API Documentation
@@ -2351,7 +2354,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1854,7 +1854,7 @@ module Aws::RDS
     DescribeExportTasksMessage.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
     DescribeExportTasksMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeExportTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
-    DescribeExportTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: String, location_name: "MaxRecords"))
+    DescribeExportTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeExportTasksMessage.struct_class = Types::DescribeExportTasksMessage
 
     DescribeGlobalClustersMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))

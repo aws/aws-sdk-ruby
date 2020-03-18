@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2020-03-18)
+------------------
+
+* Feature - Updated the MaxRecords type in DescribeExportTasks to Integer.
+
 1.79.0 (2020-03-09)
 ------------------
 

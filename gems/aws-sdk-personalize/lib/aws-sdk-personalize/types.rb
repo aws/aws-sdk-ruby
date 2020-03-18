@@ -296,6 +296,10 @@ module Aws::Personalize
     #   If the batch inference job failed, the reason for the failure.
     #   @return [String]
     #
+    # @!attribute [rw] solution_version_arn
+    #   The ARN of the solution version used by the batch inference job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobSummary AWS API Documentation
     #
     class BatchInferenceJobSummary < Struct.new(
@@ -304,7 +308,8 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time,
-      :failure_reason)
+      :failure_reason,
+      :solution_version_arn)
       include Aws::Structure
     end
 
@@ -2324,7 +2329,7 @@ module Aws::Personalize
     #       }
     #
     # @!attribute [rw] type
-    #   The data type of the metric.
+    #   The type of the metric. Valid values are `Maximize` and `Minimize`.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
@@ -3394,6 +3399,11 @@ module Aws::Personalize
     #   uses the native-recipe-hrnn-coldstart.
     #   @return [String]
     #
+    # @!attribute [rw] tuned_hpo_params
+    #   If hyperparameter optimization was performed, contains the
+    #   hyperparameter values of the best performing model.
+    #   @return [Types::TunedHPOParams]
+    #
     # @!attribute [rw] status
     #   The status of the solution version.
     #
@@ -3434,6 +3444,7 @@ module Aws::Personalize
       :solution_config,
       :training_hours,
       :training_mode,
+      :tuned_hpo_params,
       :status,
       :failure_reason,
       :creation_date_time,
@@ -3481,6 +3492,20 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason)
+      include Aws::Structure
+    end
+
+    # If hyperparameter optimization (HPO) was performed, contains the
+    # hyperparameter values of the best performing model.
+    #
+    # @!attribute [rw] algorithm_hyper_parameters
+    #   A list of the hyperparameter values of the best performing model.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TunedHPOParams AWS API Documentation
+    #
+    class TunedHPOParams < Struct.new(
+      :algorithm_hyper_parameters)
       include Aws::Structure
     end
 

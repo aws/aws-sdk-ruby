@@ -309,7 +309,7 @@ module Aws::MediaConnect
 
     # @!group API Operations
 
-    # Adds outputs to an existing flow. You can create up to 20 outputs per
+    # Adds outputs to an existing flow. You can create up to 50 outputs per
     # flow.
     #
     # @option params [required, String] :flow_arn
@@ -392,8 +392,89 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Adds Sources to flow
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, Array<Types::SetSourceRequest>] :sources
+    #   A list of sources that you want to add.
+    #
+    # @return [Types::AddFlowSourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddFlowSourcesResponse#flow_arn #flow_arn} => String
+    #   * {Types::AddFlowSourcesResponse#sources #sources} => Array&lt;Types::Source&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_flow_sources({
+    #     flow_arn: "__string", # required
+    #     sources: [ # required
+    #       {
+    #         decryption: {
+    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
+    #           role_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
+    #         },
+    #         description: "__string",
+    #         entitlement_arn: "__string",
+    #         ingest_port: 1,
+    #         max_bitrate: 1,
+    #         max_latency: 1,
+    #         name: "__string",
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         stream_id: "__string",
+    #         whitelist_cidr: "__string",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.sources #=> Array
+    #   resp.sources[0].data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.sources[0].decryption.constant_initialization_vector #=> String
+    #   resp.sources[0].decryption.device_id #=> String
+    #   resp.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.sources[0].decryption.region #=> String
+    #   resp.sources[0].decryption.resource_id #=> String
+    #   resp.sources[0].decryption.role_arn #=> String
+    #   resp.sources[0].decryption.secret_arn #=> String
+    #   resp.sources[0].decryption.url #=> String
+    #   resp.sources[0].description #=> String
+    #   resp.sources[0].entitlement_arn #=> String
+    #   resp.sources[0].ingest_ip #=> String
+    #   resp.sources[0].ingest_port #=> Integer
+    #   resp.sources[0].name #=> String
+    #   resp.sources[0].source_arn #=> String
+    #   resp.sources[0].transport.cidr_allow_list #=> Array
+    #   resp.sources[0].transport.cidr_allow_list[0] #=> String
+    #   resp.sources[0].transport.max_bitrate #=> Integer
+    #   resp.sources[0].transport.max_latency #=> Integer
+    #   resp.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.sources[0].transport.remote_id #=> String
+    #   resp.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.sources[0].transport.stream_id #=> String
+    #   resp.sources[0].whitelist_cidr #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSources AWS API Documentation
+    #
+    # @overload add_flow_sources(params = {})
+    # @param [Hash] params ({})
+    def add_flow_sources(params = {}, options = {})
+      req = build_request(:add_flow_sources, params)
+      req.send_request(options)
+    end
+
     # Creates a new flow. The request must include one source. The request
-    # optionally can include outputs (up to 20) and entitlements (up to 50).
+    # optionally can include outputs (up to 50) and entitlements (up to 50).
     #
     # @option params [String] :availability_zone
     #   The Availability Zone that you want to create the flow in. These
@@ -409,8 +490,13 @@ module Aws::MediaConnect
     # @option params [Array<Types::AddOutputRequest>] :outputs
     #   The outputs that you want to add to this flow.
     #
-    # @option params [required, Types::SetSourceRequest] :source
+    # @option params [Types::SetSourceRequest] :source
     #   The settings for the source of the flow.
+    #
+    # @option params [Types::FailoverConfig] :source_failover_config
+    #   The settings for source failover
+    #
+    # @option params [Array<Types::SetSourceRequest>] :sources
     #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -465,7 +551,7 @@ module Aws::MediaConnect
     #         stream_id: "__string",
     #       },
     #     ],
-    #     source: { # required
+    #     source: {
     #       decryption: {
     #         algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #         constant_initialization_vector: "__string",
@@ -487,6 +573,34 @@ module Aws::MediaConnect
     #       stream_id: "__string",
     #       whitelist_cidr: "__string",
     #     },
+    #     source_failover_config: {
+    #       recovery_window: 1,
+    #       state: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     sources: [
+    #       {
+    #         decryption: {
+    #           algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #           constant_initialization_vector: "__string",
+    #           device_id: "__string",
+    #           key_type: "speke", # accepts speke, static-key
+    #           region: "__string",
+    #           resource_id: "__string",
+    #           role_arn: "__string", # required
+    #           secret_arn: "__string",
+    #           url: "__string",
+    #         },
+    #         description: "__string",
+    #         entitlement_arn: "__string",
+    #         ingest_port: 1,
+    #         max_bitrate: 1,
+    #         max_latency: 1,
+    #         name: "__string",
+    #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #         stream_id: "__string",
+    #         whitelist_cidr: "__string",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -563,6 +677,34 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.flow.sources #=> Array
+    #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.flow.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.flow.sources[0].decryption.constant_initialization_vector #=> String
+    #   resp.flow.sources[0].decryption.device_id #=> String
+    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.sources[0].decryption.region #=> String
+    #   resp.flow.sources[0].decryption.resource_id #=> String
+    #   resp.flow.sources[0].decryption.role_arn #=> String
+    #   resp.flow.sources[0].decryption.secret_arn #=> String
+    #   resp.flow.sources[0].decryption.url #=> String
+    #   resp.flow.sources[0].description #=> String
+    #   resp.flow.sources[0].entitlement_arn #=> String
+    #   resp.flow.sources[0].ingest_ip #=> String
+    #   resp.flow.sources[0].ingest_port #=> Integer
+    #   resp.flow.sources[0].name #=> String
+    #   resp.flow.sources[0].source_arn #=> String
+    #   resp.flow.sources[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
+    #   resp.flow.sources[0].transport.max_bitrate #=> Integer
+    #   resp.flow.sources[0].transport.max_latency #=> Integer
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.sources[0].transport.remote_id #=> String
+    #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.sources[0].transport.stream_id #=> String
+    #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow AWS API Documentation
@@ -694,6 +836,34 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
     #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.flow.sources #=> Array
+    #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.flow.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.flow.sources[0].decryption.constant_initialization_vector #=> String
+    #   resp.flow.sources[0].decryption.device_id #=> String
+    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.sources[0].decryption.region #=> String
+    #   resp.flow.sources[0].decryption.resource_id #=> String
+    #   resp.flow.sources[0].decryption.role_arn #=> String
+    #   resp.flow.sources[0].decryption.secret_arn #=> String
+    #   resp.flow.sources[0].decryption.url #=> String
+    #   resp.flow.sources[0].description #=> String
+    #   resp.flow.sources[0].entitlement_arn #=> String
+    #   resp.flow.sources[0].ingest_ip #=> String
+    #   resp.flow.sources[0].ingest_port #=> Integer
+    #   resp.flow.sources[0].name #=> String
+    #   resp.flow.sources[0].source_arn #=> String
+    #   resp.flow.sources[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
+    #   resp.flow.sources[0].transport.max_bitrate #=> Integer
+    #   resp.flow.sources[0].transport.max_latency #=> Integer
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.sources[0].transport.remote_id #=> String
+    #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.sources[0].transport.stream_id #=> String
+    #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
     #   resp.messages.errors #=> Array
     #   resp.messages.errors[0] #=> String
@@ -912,6 +1082,39 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Removes a source from an existing flow. This request can be made only
+    # if there is more than one source on the flow.
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, String] :source_arn
+    #
+    # @return [Types::RemoveFlowSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveFlowSourceResponse#flow_arn #flow_arn} => String
+    #   * {Types::RemoveFlowSourceResponse#source_arn #source_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_flow_source({
+    #     flow_arn: "__string", # required
+    #     source_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.source_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowSource AWS API Documentation
+    #
+    # @overload remove_flow_source(params = {})
+    # @param [Hash] params ({})
+    def remove_flow_source(params = {}, options = {})
+      req = build_request(:remove_flow_source, params)
+      req.send_request(options)
+    end
+
     # Revokes an entitlement from a flow. Once an entitlement is revoked,
     # the content becomes unavailable to the subscriber and the associated
     # output is removed.
@@ -1057,6 +1260,140 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates flow
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [Types::UpdateFailoverConfig] :source_failover_config
+    #   The settings for source failover
+    #
+    # @return [Types::UpdateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFlowResponse#flow #flow} => Types::Flow
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_flow({
+    #     flow_arn: "__string", # required
+    #     source_failover_config: {
+    #       recovery_window: 1,
+    #       state: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow.availability_zone #=> String
+    #   resp.flow.description #=> String
+    #   resp.flow.egress_ip #=> String
+    #   resp.flow.entitlements #=> Array
+    #   resp.flow.entitlements[0].data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.flow.entitlements[0].description #=> String
+    #   resp.flow.entitlements[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.flow.entitlements[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.entitlements[0].encryption.device_id #=> String
+    #   resp.flow.entitlements[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.entitlements[0].encryption.region #=> String
+    #   resp.flow.entitlements[0].encryption.resource_id #=> String
+    #   resp.flow.entitlements[0].encryption.role_arn #=> String
+    #   resp.flow.entitlements[0].encryption.secret_arn #=> String
+    #   resp.flow.entitlements[0].encryption.url #=> String
+    #   resp.flow.entitlements[0].entitlement_arn #=> String
+    #   resp.flow.entitlements[0].name #=> String
+    #   resp.flow.entitlements[0].subscribers #=> Array
+    #   resp.flow.entitlements[0].subscribers[0] #=> String
+    #   resp.flow.flow_arn #=> String
+    #   resp.flow.name #=> String
+    #   resp.flow.outputs #=> Array
+    #   resp.flow.outputs[0].data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.flow.outputs[0].description #=> String
+    #   resp.flow.outputs[0].destination #=> String
+    #   resp.flow.outputs[0].encryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.flow.outputs[0].encryption.constant_initialization_vector #=> String
+    #   resp.flow.outputs[0].encryption.device_id #=> String
+    #   resp.flow.outputs[0].encryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.outputs[0].encryption.region #=> String
+    #   resp.flow.outputs[0].encryption.resource_id #=> String
+    #   resp.flow.outputs[0].encryption.role_arn #=> String
+    #   resp.flow.outputs[0].encryption.secret_arn #=> String
+    #   resp.flow.outputs[0].encryption.url #=> String
+    #   resp.flow.outputs[0].entitlement_arn #=> String
+    #   resp.flow.outputs[0].media_live_input_arn #=> String
+    #   resp.flow.outputs[0].name #=> String
+    #   resp.flow.outputs[0].output_arn #=> String
+    #   resp.flow.outputs[0].port #=> Integer
+    #   resp.flow.outputs[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.outputs[0].transport.cidr_allow_list[0] #=> String
+    #   resp.flow.outputs[0].transport.max_bitrate #=> Integer
+    #   resp.flow.outputs[0].transport.max_latency #=> Integer
+    #   resp.flow.outputs[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.outputs[0].transport.remote_id #=> String
+    #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.flow.source.decryption.constant_initialization_vector #=> String
+    #   resp.flow.source.decryption.device_id #=> String
+    #   resp.flow.source.decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.source.decryption.region #=> String
+    #   resp.flow.source.decryption.resource_id #=> String
+    #   resp.flow.source.decryption.role_arn #=> String
+    #   resp.flow.source.decryption.secret_arn #=> String
+    #   resp.flow.source.decryption.url #=> String
+    #   resp.flow.source.description #=> String
+    #   resp.flow.source.entitlement_arn #=> String
+    #   resp.flow.source.ingest_ip #=> String
+    #   resp.flow.source.ingest_port #=> Integer
+    #   resp.flow.source.name #=> String
+    #   resp.flow.source.source_arn #=> String
+    #   resp.flow.source.transport.cidr_allow_list #=> Array
+    #   resp.flow.source.transport.cidr_allow_list[0] #=> String
+    #   resp.flow.source.transport.max_bitrate #=> Integer
+    #   resp.flow.source.transport.max_latency #=> Integer
+    #   resp.flow.source.transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.source.transport.remote_id #=> String
+    #   resp.flow.source.transport.smoothing_latency #=> Integer
+    #   resp.flow.source.transport.stream_id #=> String
+    #   resp.flow.source.whitelist_cidr #=> String
+    #   resp.flow.source_failover_config.recovery_window #=> Integer
+    #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.flow.sources #=> Array
+    #   resp.flow.sources[0].data_transfer_subscriber_fee_percent #=> Integer
+    #   resp.flow.sources[0].decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
+    #   resp.flow.sources[0].decryption.constant_initialization_vector #=> String
+    #   resp.flow.sources[0].decryption.device_id #=> String
+    #   resp.flow.sources[0].decryption.key_type #=> String, one of "speke", "static-key"
+    #   resp.flow.sources[0].decryption.region #=> String
+    #   resp.flow.sources[0].decryption.resource_id #=> String
+    #   resp.flow.sources[0].decryption.role_arn #=> String
+    #   resp.flow.sources[0].decryption.secret_arn #=> String
+    #   resp.flow.sources[0].decryption.url #=> String
+    #   resp.flow.sources[0].description #=> String
+    #   resp.flow.sources[0].entitlement_arn #=> String
+    #   resp.flow.sources[0].ingest_ip #=> String
+    #   resp.flow.sources[0].ingest_port #=> Integer
+    #   resp.flow.sources[0].name #=> String
+    #   resp.flow.sources[0].source_arn #=> String
+    #   resp.flow.sources[0].transport.cidr_allow_list #=> Array
+    #   resp.flow.sources[0].transport.cidr_allow_list[0] #=> String
+    #   resp.flow.sources[0].transport.max_bitrate #=> Integer
+    #   resp.flow.sources[0].transport.max_latency #=> Integer
+    #   resp.flow.sources[0].transport.protocol #=> String, one of "zixi-push", "rtp-fec", "rtp", "zixi-pull", "rist"
+    #   resp.flow.sources[0].transport.remote_id #=> String
+    #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
+    #   resp.flow.sources[0].transport.stream_id #=> String
+    #   resp.flow.sources[0].whitelist_cidr #=> String
+    #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlow AWS API Documentation
+    #
+    # @overload update_flow(params = {})
+    # @param [Hash] params ({})
+    def update_flow(params = {}, options = {})
+      req = build_request(:update_flow, params)
       req.send_request(options)
     end
 
@@ -1369,7 +1706,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

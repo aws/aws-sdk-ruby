@@ -14,6 +14,8 @@ module Aws::MediaConnect
     AddFlowOutputs420Exception = Shapes::StructureShape.new(name: 'AddFlowOutputs420Exception')
     AddFlowOutputsRequest = Shapes::StructureShape.new(name: 'AddFlowOutputsRequest')
     AddFlowOutputsResponse = Shapes::StructureShape.new(name: 'AddFlowOutputsResponse')
+    AddFlowSourcesRequest = Shapes::StructureShape.new(name: 'AddFlowSourcesRequest')
+    AddFlowSourcesResponse = Shapes::StructureShape.new(name: 'AddFlowSourcesResponse')
     AddOutputRequest = Shapes::StructureShape.new(name: 'AddOutputRequest')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -26,6 +28,7 @@ module Aws::MediaConnect
     DescribeFlowResponse = Shapes::StructureShape.new(name: 'DescribeFlowResponse')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
+    FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
     Flow = Shapes::StructureShape.new(name: 'Flow')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GrantEntitlementRequest = Shapes::StructureShape.new(name: 'GrantEntitlementRequest')
@@ -49,6 +52,8 @@ module Aws::MediaConnect
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     RemoveFlowOutputRequest = Shapes::StructureShape.new(name: 'RemoveFlowOutputRequest')
     RemoveFlowOutputResponse = Shapes::StructureShape.new(name: 'RemoveFlowOutputResponse')
+    RemoveFlowSourceRequest = Shapes::StructureShape.new(name: 'RemoveFlowSourceRequest')
+    RemoveFlowSourceResponse = Shapes::StructureShape.new(name: 'RemoveFlowSourceResponse')
     ResponseError = Shapes::StructureShape.new(name: 'ResponseError')
     RevokeFlowEntitlementRequest = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementRequest')
     RevokeFlowEntitlementResponse = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementResponse')
@@ -58,6 +63,7 @@ module Aws::MediaConnect
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartFlowRequest = Shapes::StructureShape.new(name: 'StartFlowRequest')
     StartFlowResponse = Shapes::StructureShape.new(name: 'StartFlowResponse')
+    State = Shapes::StringShape.new(name: 'State')
     Status = Shapes::StringShape.new(name: 'Status')
     StopFlowRequest = Shapes::StructureShape.new(name: 'StopFlowRequest')
     StopFlowResponse = Shapes::StructureShape.new(name: 'StopFlowResponse')
@@ -66,10 +72,13 @@ module Aws::MediaConnect
     Transport = Shapes::StructureShape.new(name: 'Transport')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateEncryption = Shapes::StructureShape.new(name: 'UpdateEncryption')
+    UpdateFailoverConfig = Shapes::StructureShape.new(name: 'UpdateFailoverConfig')
     UpdateFlowEntitlementRequest = Shapes::StructureShape.new(name: 'UpdateFlowEntitlementRequest')
     UpdateFlowEntitlementResponse = Shapes::StructureShape.new(name: 'UpdateFlowEntitlementResponse')
     UpdateFlowOutputRequest = Shapes::StructureShape.new(name: 'UpdateFlowOutputRequest')
     UpdateFlowOutputResponse = Shapes::StructureShape.new(name: 'UpdateFlowOutputResponse')
+    UpdateFlowRequest = Shapes::StructureShape.new(name: 'UpdateFlowRequest')
+    UpdateFlowResponse = Shapes::StructureShape.new(name: 'UpdateFlowResponse')
     UpdateFlowSourceRequest = Shapes::StructureShape.new(name: 'UpdateFlowSourceRequest')
     UpdateFlowSourceResponse = Shapes::StructureShape.new(name: 'UpdateFlowSourceResponse')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
@@ -81,6 +90,9 @@ module Aws::MediaConnect
     __listOfListedEntitlement = Shapes::ListShape.new(name: '__listOfListedEntitlement')
     __listOfListedFlow = Shapes::ListShape.new(name: '__listOfListedFlow')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
+    __listOfSetSourceRequest = Shapes::ListShape.new(name: '__listOfSetSourceRequest')
+    __listOfSource = Shapes::ListShape.new(name: '__listOfSource')
+    __listOf__integer = Shapes::ListShape.new(name: '__listOf__integer')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
@@ -98,6 +110,14 @@ module Aws::MediaConnect
     AddFlowOutputsResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     AddFlowOutputsResponse.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfOutput, location_name: "outputs"))
     AddFlowOutputsResponse.struct_class = Types::AddFlowOutputsResponse
+
+    AddFlowSourcesRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    AddFlowSourcesRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSetSourceRequest, required: true, location_name: "sources"))
+    AddFlowSourcesRequest.struct_class = Types::AddFlowSourcesRequest
+
+    AddFlowSourcesResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    AddFlowSourcesResponse.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSource, location_name: "sources"))
+    AddFlowSourcesResponse.struct_class = Types::AddFlowSourcesResponse
 
     AddOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     AddOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -122,7 +142,9 @@ module Aws::MediaConnect
     CreateFlowRequest.add_member(:entitlements, Shapes::ShapeRef.new(shape: __listOfGrantEntitlementRequest, location_name: "entitlements"))
     CreateFlowRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateFlowRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfAddOutputRequest, location_name: "outputs"))
-    CreateFlowRequest.add_member(:source, Shapes::ShapeRef.new(shape: SetSourceRequest, required: true, location_name: "source"))
+    CreateFlowRequest.add_member(:source, Shapes::ShapeRef.new(shape: SetSourceRequest, location_name: "source"))
+    CreateFlowRequest.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: FailoverConfig, location_name: "sourceFailoverConfig"))
+    CreateFlowRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSetSourceRequest, location_name: "sources"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -161,6 +183,10 @@ module Aws::MediaConnect
     Entitlement.add_member(:subscribers, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "subscribers"))
     Entitlement.struct_class = Types::Entitlement
 
+    FailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: __integer, location_name: "recoveryWindow"))
+    FailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
+    FailoverConfig.struct_class = Types::FailoverConfig
+
     Flow.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "availabilityZone"))
     Flow.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Flow.add_member(:egress_ip, Shapes::ShapeRef.new(shape: __string, location_name: "egressIp"))
@@ -169,6 +195,8 @@ module Aws::MediaConnect
     Flow.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Flow.add_member(:outputs, Shapes::ShapeRef.new(shape: __listOfOutput, required: true, location_name: "outputs"))
     Flow.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
+    Flow.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: FailoverConfig, location_name: "sourceFailoverConfig"))
+    Flow.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSource, location_name: "sources"))
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Flow.struct_class = Types::Flow
 
@@ -257,6 +285,14 @@ module Aws::MediaConnect
     RemoveFlowOutputResponse.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, location_name: "outputArn"))
     RemoveFlowOutputResponse.struct_class = Types::RemoveFlowOutputResponse
 
+    RemoveFlowSourceRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    RemoveFlowSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceArn"))
+    RemoveFlowSourceRequest.struct_class = Types::RemoveFlowSourceRequest
+
+    RemoveFlowSourceResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    RemoveFlowSourceResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceArn"))
+    RemoveFlowSourceResponse.struct_class = Types::RemoveFlowSourceResponse
+
     ResponseError.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ResponseError.struct_class = Types::ResponseError
 
@@ -340,6 +376,10 @@ module Aws::MediaConnect
     UpdateEncryption.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     UpdateEncryption.struct_class = Types::UpdateEncryption
 
+    UpdateFailoverConfig.add_member(:recovery_window, Shapes::ShapeRef.new(shape: __integer, location_name: "recoveryWindow"))
+    UpdateFailoverConfig.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
+    UpdateFailoverConfig.struct_class = Types::UpdateFailoverConfig
+
     UpdateFlowEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFlowEntitlementRequest.add_member(:encryption, Shapes::ShapeRef.new(shape: UpdateEncryption, location_name: "encryption"))
     UpdateFlowEntitlementRequest.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "entitlementArn"))
@@ -369,6 +409,13 @@ module Aws::MediaConnect
     UpdateFlowOutputResponse.add_member(:output, Shapes::ShapeRef.new(shape: Output, location_name: "output"))
     UpdateFlowOutputResponse.struct_class = Types::UpdateFlowOutputResponse
 
+    UpdateFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    UpdateFlowRequest.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: UpdateFailoverConfig, location_name: "sourceFailoverConfig"))
+    UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
+
+    UpdateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
+    UpdateFlowResponse.struct_class = Types::UpdateFlowResponse
+
     UpdateFlowSourceRequest.add_member(:decryption, Shapes::ShapeRef.new(shape: UpdateEncryption, location_name: "decryption"))
     UpdateFlowSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateFlowSourceRequest.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __string, location_name: "entitlementArn"))
@@ -397,6 +444,12 @@ module Aws::MediaConnect
     __listOfListedFlow.member = Shapes::ShapeRef.new(shape: ListedFlow)
 
     __listOfOutput.member = Shapes::ShapeRef.new(shape: Output)
+
+    __listOfSetSourceRequest.member = Shapes::ShapeRef.new(shape: SetSourceRequest)
+
+    __listOfSource.member = Shapes::ShapeRef.new(shape: Source)
+
+    __listOf__integer.member = Shapes::ShapeRef.new(shape: __integer)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -428,6 +481,20 @@ module Aws::MediaConnect
         o.input = Shapes::ShapeRef.new(shape: AddFlowOutputsRequest)
         o.output = Shapes::ShapeRef.new(shape: AddFlowOutputsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AddFlowOutputs420Exception)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:add_flow_sources, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddFlowSources"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/flows/{flowArn}/source"
+        o.input = Shapes::ShapeRef.new(shape: AddFlowSourcesRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddFlowSourcesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -554,6 +621,20 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:remove_flow_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveFlowSource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/flows/{flowArn}/source/{sourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: RemoveFlowSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveFlowSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:revoke_flow_entitlement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RevokeFlowEntitlement"
         o.http_method = "DELETE"
@@ -616,6 +697,20 @@ module Aws::MediaConnect
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_flow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFlow"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/flows/{flowArn}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFlowRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFlowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_flow_entitlement, Seahorse::Model::Operation.new.tap do |o|

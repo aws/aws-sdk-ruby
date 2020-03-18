@@ -22,7 +22,7 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
-    # Adds outputs to an existing flow. You can create up to 20 outputs per
+    # Adds outputs to an existing flow. You can create up to 50 outputs per
     # flow.
     #
     # @note When making an API call, you may pass AddFlowOutputsRequest
@@ -88,6 +88,73 @@ module Aws::MediaConnect
     class AddFlowOutputsResponse < Struct.new(
       :flow_arn,
       :outputs)
+      include Aws::Structure
+    end
+
+    # Adds sources to an existing flow.
+    #
+    # @note When making an API call, you may pass AddFlowSourcesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         sources: [ # required
+    #           {
+    #             decryption: {
+    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
+    #               role_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
+    #             },
+    #             description: "__string",
+    #             entitlement_arn: "__string",
+    #             ingest_port: 1,
+    #             max_bitrate: 1,
+    #             max_latency: 1,
+    #             name: "__string",
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             stream_id: "__string",
+    #             whitelist_cidr: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   A list of sources that you want to add.
+    #   @return [Array<Types::SetSourceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSourcesRequest AWS API Documentation
+    #
+    class AddFlowSourcesRequest < Struct.new(
+      :flow_arn,
+      :sources)
+      include Aws::Structure
+    end
+
+    # The result of a successful AddFlowSources request. The response
+    # includes the details of the newly added sources.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that these sources were added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The details of the newly added sources.
+    #   @return [Array<Types::Source>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSourcesResponse AWS API Documentation
+    #
+    class AddFlowSourcesResponse < Struct.new(
+      :flow_arn,
+      :sources)
       include Aws::Structure
     end
 
@@ -219,7 +286,7 @@ module Aws::MediaConnect
     end
 
     # Creates a new flow. The request must include one source. The request
-    # optionally can include outputs (up to 20) and one entitlement.
+    # optionally can include outputs (up to 50) and one entitlement.
     #
     # @note When making an API call, you may pass CreateFlowRequest
     #   data as a hash:
@@ -271,7 +338,7 @@ module Aws::MediaConnect
     #             stream_id: "__string",
     #           },
     #         ],
-    #         source: { # required
+    #         source: {
     #           decryption: {
     #             algorithm: "aes128", # required, accepts aes128, aes192, aes256
     #             constant_initialization_vector: "__string",
@@ -293,6 +360,34 @@ module Aws::MediaConnect
     #           stream_id: "__string",
     #           whitelist_cidr: "__string",
     #         },
+    #         source_failover_config: {
+    #           recovery_window: 1,
+    #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         sources: [
+    #           {
+    #             decryption: {
+    #               algorithm: "aes128", # required, accepts aes128, aes192, aes256
+    #               constant_initialization_vector: "__string",
+    #               device_id: "__string",
+    #               key_type: "speke", # accepts speke, static-key
+    #               region: "__string",
+    #               resource_id: "__string",
+    #               role_arn: "__string", # required
+    #               secret_arn: "__string",
+    #               url: "__string",
+    #             },
+    #             description: "__string",
+    #             entitlement_arn: "__string",
+    #             ingest_port: 1,
+    #             max_bitrate: 1,
+    #             max_latency: 1,
+    #             name: "__string",
+    #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
+    #             stream_id: "__string",
+    #             whitelist_cidr: "__string",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -317,6 +412,13 @@ module Aws::MediaConnect
     #   The settings for the source of the flow.
     #   @return [Types::SetSourceRequest]
     #
+    # @!attribute [rw] source_failover_config
+    #   The settings for source failover
+    #   @return [Types::FailoverConfig]
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::SetSourceRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -324,7 +426,9 @@ module Aws::MediaConnect
       :entitlements,
       :name,
       :outputs,
-      :source)
+      :source,
+      :source_failover_config,
+      :sources)
       include Aws::Structure
     end
 
@@ -540,6 +644,31 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The settings for source failover
+    #
+    # @note When making an API call, you may pass FailoverConfig
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_window: 1,
+    #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] recovery_window
+    #   Search window time to look for dash-7 packets
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/FailoverConfig AWS API Documentation
+    #
+    class FailoverConfig < Struct.new(
+      :recovery_window,
+      :state)
+      include Aws::Structure
+    end
+
     # The settings for a flow, including its source, outputs, and
     # entitlements.
     #
@@ -579,6 +708,13 @@ module Aws::MediaConnect
     #   The settings for the source of the flow.
     #   @return [Types::Source]
     #
+    # @!attribute [rw] source_failover_config
+    #   The settings for source failover
+    #   @return [Types::FailoverConfig]
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::Source>]
+    #
     # @!attribute [rw] status
     #   The current status of the flow.
     #   @return [String]
@@ -594,6 +730,8 @@ module Aws::MediaConnect
       :name,
       :outputs,
       :source,
+      :source_failover_config,
+      :sources,
       :status)
       include Aws::Structure
     end
@@ -1085,6 +1223,47 @@ module Aws::MediaConnect
     class RemoveFlowOutputResponse < Struct.new(
       :flow_arn,
       :output_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveFlowSourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         source_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowSourceRequest AWS API Documentation
+    #
+    class RemoveFlowSourceRequest < Struct.new(
+      :flow_arn,
+      :source_arn)
+      include Aws::Structure
+    end
+
+    # The result of a successful RemoveFlowSource request including the flow
+    # ARN and the source ARN that was removed.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that is associated with the source you removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the source that was removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowSourceResponse AWS API Documentation
+    #
+    class RemoveFlowSourceResponse < Struct.new(
+      :flow_arn,
+      :source_arn)
       include Aws::Structure
     end
 
@@ -1593,6 +1772,31 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The settings for source failover
+    #
+    # @note When making an API call, you may pass UpdateFailoverConfig
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_window: 1,
+    #         state: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] recovery_window
+    #   Recovery window time to look for dash-7 packets
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFailoverConfig AWS API Documentation
+    #
+    class UpdateFailoverConfig < Struct.new(
+      :recovery_window,
+      :state)
+      include Aws::Structure
+    end
+
     # The updates that you want to make to a specific entitlement.
     #
     # @note When making an API call, you may pass UpdateFlowEntitlementRequest
@@ -1789,6 +1993,48 @@ module Aws::MediaConnect
     class UpdateFlowOutputResponse < Struct.new(
       :flow_arn,
       :output)
+      include Aws::Structure
+    end
+
+    # Updates an existing flow.
+    #
+    # @note When making an API call, you may pass UpdateFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         source_failover_config: {
+    #           recovery_window: 1,
+    #           state: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] source_failover_config
+    #   The settings for source failover
+    #   @return [Types::UpdateFailoverConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowRequest AWS API Documentation
+    #
+    class UpdateFlowRequest < Struct.new(
+      :flow_arn,
+      :source_failover_config)
+      include Aws::Structure
+    end
+
+    # Updates an existing flow.
+    #
+    # @!attribute [rw] flow
+    #   The settings for a flow, including its source, outputs, and
+    #   entitlements.
+    #   @return [Types::Flow]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowResponse AWS API Documentation
+    #
+    class UpdateFlowResponse < Struct.new(
+      :flow)
       include Aws::Structure
     end
 

@@ -10055,7 +10055,7 @@ module Aws::RDS
     #           },
     #         ],
     #         marker: "String",
-    #         max_records: "String",
+    #         max_records: 1,
     #       }
     #
     # @!attribute [rw] export_task_identifier
@@ -10102,7 +10102,7 @@ module Aws::RDS
     #   Default: 100
     #
     #   Constraints: Minimum 20, maximum 100.
-    #   @return [String]
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasksMessage AWS API Documentation
     #

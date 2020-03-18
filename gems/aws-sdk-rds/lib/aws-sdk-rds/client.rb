@@ -9371,7 +9371,7 @@ module Aws::RDS
     #   response includes only records beyond the marker, up to the value
     #   specified by the `MaxRecords` parameter.
     #
-    # @option params [String] :max_records
+    # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified value, a pagination token called a
     #   marker is included in the response. You can use the marker in a later
@@ -9398,7 +9398,7 @@ module Aws::RDS
     #       },
     #     ],
     #     marker: "String",
-    #     max_records: "String",
+    #     max_records: 1,
     #   })
     #
     # @example Response structure
@@ -18284,7 +18284,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
