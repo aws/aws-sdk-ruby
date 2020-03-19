@@ -9,8 +9,8 @@ module Aws
           doc_type: String,
           docstring: <<-DOCS) do |cfg|
 Passing in 'regional' to enable regional endpoint for STS for all supported
-regions (except 'aws-global'), defaults to 'legacy' mode, using global endpoint
-for legacy regions.
+regions (except 'aws-global'). Using 'legacy' mode will force all legacy 
+regions to resolve to the STS global endpoint.
           DOCS
           resolve_sts_regional_endpoints(cfg)
         end
