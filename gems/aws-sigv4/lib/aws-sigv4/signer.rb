@@ -564,7 +564,7 @@ module Aws
           OpenSSL::Digest::SHA256.file(value).hexdigest
         elsif value.respond_to?(:read)
           sha256 = OpenSSL::Digest::SHA256.new
-          while chunk = value.read(1024 * 1024, buffer ||= "") # 1MB
+          while chunk = value.read(1024 * 1024, buffer ||= ::String.new) # 1MB
             sha256.update(chunk)
           end
           value.rewind
