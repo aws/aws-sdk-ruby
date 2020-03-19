@@ -9,7 +9,4 @@
 --exclude \/client_api.rb$
 --no-progress
 -e doc-src/plugins/service_tag.rb
-gems/**/lib/*/*/*/*.rb
-gems/**/lib/*/*/*.rb
-gems/**/lib/*/*.rb
-gems/**/lib/*.rb
+gems/**/lib/**/*.rb
