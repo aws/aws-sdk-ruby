@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Default to regional STS endpoints
+
 2.11.471 (2020-03-19)
 ------------------
 
