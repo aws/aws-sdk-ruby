@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.471 (2020-03-19)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 * Feature - Aws::Outposts - Updated the documentation for AWS Outposts.
