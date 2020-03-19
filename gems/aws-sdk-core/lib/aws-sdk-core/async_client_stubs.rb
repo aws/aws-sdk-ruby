@@ -42,8 +42,8 @@ module Aws
       if config.stub_responses
         @send_events
       else
-        msg = 'This method is only implemented for stubbed clients, and is '
-        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        msg = 'This method is only implemented for stubbed clients, and is '\
+          'available when you enable stubbing in the constructor with `stub_responses: true`'
         raise NotImplementedError.new(msg)
       end
     end

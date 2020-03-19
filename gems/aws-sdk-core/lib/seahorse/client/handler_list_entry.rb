@@ -86,8 +86,8 @@ module Seahorse
         if STEPS.key?(step)
           @step = step
         else
-          msg = "invalid :step `%s', must be one of :initialize, :validate, "
-          msg << ":build, :sign or :send"
+          msg = "invalid :step `%s', must be one of :initialize, :validate, "\
+            ":build, :sign or :send"
           raise ArgumentError, msg % step.inspect
         end
       end

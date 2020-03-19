@@ -48,8 +48,8 @@ module Aws
           when true, false then { bool: obj }
           when nil then { null: true }
           else
-            msg = "unsupported type, expected Hash, Array, Set, String, Numeric, "
-            msg << "IO, true, false, or nil, got #{obj.class.name}"
+            msg = "unsupported type, expected Hash, Array, Set, String, Numeric, "\
+              "IO, true, false, or nil, got #{obj.class.name}"
             raise ArgumentError, msg
           end
         end

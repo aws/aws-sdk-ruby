@@ -119,12 +119,11 @@ the S3 ARN.
 
           def accesspoint_arn_host(arn, dualstack)
             _resource_type, resource_name = parse_resource(arn.resource)
-            accesspoint = "#{resource_name}-#{arn.account_id}"
-            accesspoint << '.s3-accesspoint'
-            accesspoint << '.dualstack' if dualstack
             sfx = Aws::Partitions::EndpointProvider.dns_suffix_for(arn.region)
-            accesspoint << ".#{arn.region}.#{sfx}"
-            accesspoint
+            "#{resource_name}-#{arn.account_id}"\
+            '.s3-accesspoint'\
+            "#{'.dualstack' if dualstack}"\
+            ".#{arn.region}.#{sfx}"
           end
 
           def parse_resource(str)

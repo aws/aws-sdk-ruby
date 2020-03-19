@@ -21,8 +21,8 @@ module Aws
         if @regions.key?(region_name)
           @regions[region_name]
         else
-          msg = "invalid region name #{region_name.inspect}; valid region "
-          msg << "names include #{@regions.keys.join(', ')}"
+          msg = "invalid region name #{region_name.inspect}; valid region "\
+            "names include #{@regions.keys.join(', ')}"
           raise ArgumentError, msg
         end
       end
@@ -45,8 +45,8 @@ module Aws
         if @services.key?(service_name)
           @services[service_name]
         else
-          msg = "invalid service name #{service_name.inspect}; valid service "
-          msg << "names include #{@services.keys.join(', ')}"
+          msg = "invalid service name #{service_name.inspect}; valid service "\
+            "names include #{@services.keys.join(', ')}"
           raise ArgumentError, msg
         end
       end

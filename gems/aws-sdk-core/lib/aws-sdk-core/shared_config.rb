@@ -306,8 +306,8 @@ module Aws
     def validate_profile_exists(profile)
       unless (@parsed_credentials && @parsed_credentials[profile]) ||
              (@parsed_config && @parsed_config[profile])
-        msg = "Profile `#{profile}' not found in #{@credentials_path}"
-        msg << " or #{@config_path}" if @config_path
+        msg = "Profile `#{profile}' not found in #{@credentials_path}"\
+        "#{" or #{@config_path}" if @config_path}"
         raise Errors::NoSuchProfileError, msg
       end
     end
