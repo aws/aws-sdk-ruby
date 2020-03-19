@@ -839,6 +839,8 @@ module Aws::ServiceDiscovery
     #   * {Types::GetInstancesHealthStatusResponse#status #status} => Hash&lt;String,String&gt;
     #   * {Types::GetInstancesHealthStatusResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_instances_health_status({
@@ -1010,6 +1012,8 @@ module Aws::ServiceDiscovery
     #   * {Types::ListInstancesResponse#instances #instances} => Array&lt;Types::InstanceSummary&gt;
     #   * {Types::ListInstancesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instances({
@@ -1069,6 +1073,8 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::ListNamespacesResponse#namespaces #namespaces} => Array&lt;Types::NamespaceSummary&gt;
     #   * {Types::ListNamespacesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1142,6 +1148,8 @@ module Aws::ServiceDiscovery
     #   * {Types::ListOperationsResponse#operations #operations} => Array&lt;Types::OperationSummary&gt;
     #   * {Types::ListOperationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_operations({
@@ -1206,6 +1214,8 @@ module Aws::ServiceDiscovery
     #
     #   * {Types::ListServicesResponse#services #services} => Array&lt;Types::ServiceSummary&gt;
     #   * {Types::ListServicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

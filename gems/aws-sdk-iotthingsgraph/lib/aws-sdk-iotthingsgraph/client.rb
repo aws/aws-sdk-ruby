@@ -944,6 +944,8 @@ module Aws::IoTThingsGraph
     #   * {Types::GetFlowTemplateRevisionsResponse#summaries #summaries} => Array&lt;Types::FlowTemplateSummary&gt;
     #   * {Types::GetFlowTemplateRevisionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_flow_template_revisions({
@@ -1107,6 +1109,8 @@ module Aws::IoTThingsGraph
     #   * {Types::GetSystemTemplateRevisionsResponse#summaries #summaries} => Array&lt;Types::SystemTemplateSummary&gt;
     #   * {Types::GetSystemTemplateRevisionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_system_template_revisions({
@@ -1189,6 +1193,8 @@ module Aws::IoTThingsGraph
     #   * {Types::ListFlowExecutionMessagesResponse#messages #messages} => Array&lt;Types::FlowExecutionMessage&gt;
     #   * {Types::ListFlowExecutionMessagesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_flow_execution_messages({
@@ -1229,6 +1235,8 @@ module Aws::IoTThingsGraph
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1284,6 +1292,8 @@ module Aws::IoTThingsGraph
     #
     #   * {Types::SearchEntitiesResponse#descriptions #descriptions} => Array&lt;Types::EntityDescription&gt;
     #   * {Types::SearchEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1344,6 +1354,8 @@ module Aws::IoTThingsGraph
     #   * {Types::SearchFlowExecutionsResponse#summaries #summaries} => Array&lt;Types::FlowExecutionSummary&gt;
     #   * {Types::SearchFlowExecutionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_flow_executions({
@@ -1390,6 +1402,8 @@ module Aws::IoTThingsGraph
     #
     #   * {Types::SearchFlowTemplatesResponse#summaries #summaries} => Array&lt;Types::FlowTemplateSummary&gt;
     #   * {Types::SearchFlowTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1440,6 +1454,8 @@ module Aws::IoTThingsGraph
     #
     #   * {Types::SearchSystemInstancesResponse#summaries #summaries} => Array&lt;Types::SystemInstanceSummary&gt;
     #   * {Types::SearchSystemInstancesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1494,6 +1510,8 @@ module Aws::IoTThingsGraph
     #
     #   * {Types::SearchSystemTemplatesResponse#summaries #summaries} => Array&lt;Types::SystemTemplateSummary&gt;
     #   * {Types::SearchSystemTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1557,6 +1575,8 @@ module Aws::IoTThingsGraph
     #
     #   * {Types::SearchThingsResponse#things #things} => Array&lt;Types::Thing&gt;
     #   * {Types::SearchThingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

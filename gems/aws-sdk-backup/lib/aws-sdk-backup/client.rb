@@ -1425,6 +1425,8 @@ module Aws::Backup
     #   * {Types::ListBackupJobsOutput#backup_jobs #backup_jobs} => Array&lt;Types::BackupJob&gt;
     #   * {Types::ListBackupJobsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backup_jobs({
@@ -1489,6 +1491,8 @@ module Aws::Backup
     #   * {Types::ListBackupPlanTemplatesOutput#next_token #next_token} => String
     #   * {Types::ListBackupPlanTemplatesOutput#backup_plan_templates_list #backup_plan_templates_list} => Array&lt;Types::BackupPlanTemplatesListMember&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backup_plan_templates({
@@ -1532,6 +1536,8 @@ module Aws::Backup
     #
     #   * {Types::ListBackupPlanVersionsOutput#next_token #next_token} => String
     #   * {Types::ListBackupPlanVersionsOutput#backup_plan_versions_list #backup_plan_versions_list} => Array&lt;Types::BackupPlansListMember&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1585,6 +1591,8 @@ module Aws::Backup
     #   * {Types::ListBackupPlansOutput#next_token #next_token} => String
     #   * {Types::ListBackupPlansOutput#backup_plans_list #backup_plans_list} => Array&lt;Types::BackupPlansListMember&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backup_plans({
@@ -1635,6 +1643,8 @@ module Aws::Backup
     #   * {Types::ListBackupSelectionsOutput#next_token #next_token} => String
     #   * {Types::ListBackupSelectionsOutput#backup_selections_list #backup_selections_list} => Array&lt;Types::BackupSelectionsListMember&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backup_selections({
@@ -1679,6 +1689,8 @@ module Aws::Backup
     #
     #   * {Types::ListBackupVaultsOutput#backup_vault_list #backup_vault_list} => Array&lt;Types::BackupVaultListMember&gt;
     #   * {Types::ListBackupVaultsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1754,6 +1766,8 @@ module Aws::Backup
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
     #   * {Types::ListCopyJobsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_copy_jobs({
@@ -1815,6 +1829,8 @@ module Aws::Backup
     #
     #   * {Types::ListProtectedResourcesOutput#results #results} => Array&lt;Types::ProtectedResource&gt;
     #   * {Types::ListProtectedResourcesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1880,6 +1896,8 @@ module Aws::Backup
     #
     #   * {Types::ListRecoveryPointsByBackupVaultOutput#next_token #next_token} => String
     #   * {Types::ListRecoveryPointsByBackupVaultOutput#recovery_points #recovery_points} => Array&lt;Types::RecoveryPointByBackupVault&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1950,6 +1968,8 @@ module Aws::Backup
     #   * {Types::ListRecoveryPointsByResourceOutput#next_token #next_token} => String
     #   * {Types::ListRecoveryPointsByResourceOutput#recovery_points #recovery_points} => Array&lt;Types::RecoveryPointByResource&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recovery_points_by_resource({
@@ -1994,6 +2014,8 @@ module Aws::Backup
     #
     #   * {Types::ListRestoreJobsOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
     #   * {Types::ListRestoreJobsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2048,6 +2070,8 @@ module Aws::Backup
     #
     #   * {Types::ListTagsOutput#next_token #next_token} => String
     #   * {Types::ListTagsOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

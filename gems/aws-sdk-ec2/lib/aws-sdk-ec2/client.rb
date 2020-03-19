@@ -12436,6 +12436,11 @@ module Aws::EC2
     #   resp.bundle_tasks[0].storage.s3.upload_policy_signature #=> String
     #   resp.bundle_tasks[0].update_time #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * bundle_task_complete
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasks AWS API Documentation
     #
     # @overload describe_bundle_tasks(params = {})
@@ -12469,6 +12474,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeByoipCidrsResult#byoip_cidrs #byoip_cidrs} => Array&lt;Types::ByoipCidr&gt;
     #   * {Types::DescribeByoipCidrsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -12601,6 +12608,8 @@ module Aws::EC2
     #   * {Types::DescribeCapacityReservationsResult#next_token #next_token} => String
     #   * {Types::DescribeCapacityReservationsResult#capacity_reservations #capacity_reservations} => Array&lt;Types::CapacityReservation&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_capacity_reservations({
@@ -12703,6 +12712,8 @@ module Aws::EC2
     #   * {Types::DescribeClassicLinkInstancesResult#instances #instances} => Array&lt;Types::ClassicLinkInstance&gt;
     #   * {Types::DescribeClassicLinkInstancesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_classic_link_instances({
@@ -12775,6 +12786,8 @@ module Aws::EC2
     #   * {Types::DescribeClientVpnAuthorizationRulesResult#authorization_rules #authorization_rules} => Array&lt;Types::AuthorizationRule&gt;
     #   * {Types::DescribeClientVpnAuthorizationRulesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_authorization_rules({
@@ -12844,6 +12857,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeClientVpnConnectionsResult#connections #connections} => Array&lt;Types::ClientVpnConnection&gt;
     #   * {Types::DescribeClientVpnConnectionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -12918,6 +12933,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeClientVpnEndpointsResult#client_vpn_endpoints #client_vpn_endpoints} => Array&lt;Types::ClientVpnEndpoint&gt;
     #   * {Types::DescribeClientVpnEndpointsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -13014,6 +13031,8 @@ module Aws::EC2
     #   * {Types::DescribeClientVpnRoutesResult#routes #routes} => Array&lt;Types::ClientVpnRoute&gt;
     #   * {Types::DescribeClientVpnRoutesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_routes({
@@ -13089,6 +13108,8 @@ module Aws::EC2
     #   * {Types::DescribeClientVpnTargetNetworksResult#client_vpn_target_networks #client_vpn_target_networks} => Array&lt;Types::TargetNetwork&gt;
     #   * {Types::DescribeClientVpnTargetNetworksResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_target_networks({
@@ -13163,6 +13184,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeCoipPoolsResult#coip_pools #coip_pools} => Array&lt;Types::CoipPool&gt;
     #   * {Types::DescribeCoipPoolsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -13265,6 +13288,13 @@ module Aws::EC2
     #   resp.conversion_tasks[0].tags #=> Array
     #   resp.conversion_tasks[0].tags[0].key #=> String
     #   resp.conversion_tasks[0].tags[0].value #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * conversion_task_cancelled
+    #   * conversion_task_completed
+    #   * conversion_task_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasks AWS API Documentation
     #
@@ -13377,6 +13407,11 @@ module Aws::EC2
     #   resp.customer_gateways[0].tags[0].key #=> String
     #   resp.customer_gateways[0].tags[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * customer_gateway_available
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGateways AWS API Documentation
     #
     # @overload describe_customer_gateways(params = {})
@@ -13440,6 +13475,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeDhcpOptionsResult#dhcp_options #dhcp_options} => Array&lt;Types::DhcpOptions&gt;
     #   * {Types::DescribeDhcpOptionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a DHCP options set
@@ -13548,6 +13585,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeEgressOnlyInternetGatewaysResult#egress_only_internet_gateways #egress_only_internet_gateways} => Array&lt;Types::EgressOnlyInternetGateway&gt;
     #   * {Types::DescribeEgressOnlyInternetGatewaysResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -13700,6 +13739,8 @@ module Aws::EC2
     #   * {Types::DescribeExportImageTasksResult#export_image_tasks #export_image_tasks} => Array&lt;Types::ExportImageTask&gt;
     #   * {Types::DescribeExportImageTasksResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_image_tasks({
@@ -13779,6 +13820,12 @@ module Aws::EC2
     #   resp.export_tasks[0].tags[0].key #=> String
     #   resp.export_tasks[0].tags[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * export_task_cancelled
+    #   * export_task_completed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasks AWS API Documentation
     #
     # @overload describe_export_tasks(params = {})
@@ -13821,6 +13868,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeFastSnapshotRestoresResult#fast_snapshot_restores #fast_snapshot_restores} => Array&lt;Types::DescribeFastSnapshotRestoreSuccessItem&gt;
     #   * {Types::DescribeFastSnapshotRestoresResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -14046,6 +14095,8 @@ module Aws::EC2
     #   * {Types::DescribeFleetsResult#next_token #next_token} => String
     #   * {Types::DescribeFleetsResult#fleets #fleets} => Array&lt;Types::FleetData&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_fleets({
@@ -14207,6 +14258,8 @@ module Aws::EC2
     #   * {Types::DescribeFlowLogsResult#flow_logs #flow_logs} => Array&lt;Types::FlowLog&gt;
     #   * {Types::DescribeFlowLogsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_flow_logs({
@@ -14362,6 +14415,8 @@ module Aws::EC2
     #   * {Types::DescribeFpgaImagesResult#fpga_images #fpga_images} => Array&lt;Types::FpgaImage&gt;
     #   * {Types::DescribeFpgaImagesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_fpga_images({
@@ -14471,6 +14526,8 @@ module Aws::EC2
     #   * {Types::DescribeHostReservationOfferingsResult#next_token #next_token} => String
     #   * {Types::DescribeHostReservationOfferingsResult#offering_set #offering_set} => Array&lt;Types::HostOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_host_reservation_offerings({
@@ -14549,6 +14606,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeHostReservationsResult#host_reservation_set #host_reservation_set} => Array&lt;Types::HostReservation&gt;
     #   * {Types::DescribeHostReservationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -14649,6 +14708,8 @@ module Aws::EC2
     #   * {Types::DescribeHostsResult#hosts #hosts} => Array&lt;Types::Host&gt;
     #   * {Types::DescribeHostsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hosts({
@@ -14732,6 +14793,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeIamInstanceProfileAssociationsResult#iam_instance_profile_associations #iam_instance_profile_associations} => Array&lt;Types::IamInstanceProfileAssociation&gt;
     #   * {Types::DescribeIamInstanceProfileAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe an IAM instance profile association
@@ -15254,6 +15317,12 @@ module Aws::EC2
     #   resp.images[0].tags[0].value #=> String
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * image_available
+    #   * image_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImages AWS API Documentation
     #
     # @overload describe_images(params = {})
@@ -15289,6 +15358,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeImportImageTasksResult#import_image_tasks #import_image_tasks} => Array&lt;Types::ImportImageTask&gt;
     #   * {Types::DescribeImportImageTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -15374,6 +15445,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeImportSnapshotTasksResult#import_snapshot_tasks #import_snapshot_tasks} => Array&lt;Types::ImportSnapshotTask&gt;
     #   * {Types::DescribeImportSnapshotTasksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -15638,6 +15711,8 @@ module Aws::EC2
     #   * {Types::DescribeInstanceCreditSpecificationsResult#instance_credit_specifications #instance_credit_specifications} => Array&lt;Types::InstanceCreditSpecification&gt;
     #   * {Types::DescribeInstanceCreditSpecificationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_credit_specifications({
@@ -15781,6 +15856,8 @@ module Aws::EC2
     #   * {Types::DescribeInstanceStatusResult#instance_statuses #instance_statuses} => Array&lt;Types::InstanceStatus&gt;
     #   * {Types::DescribeInstanceStatusResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the status of an instance
     #
@@ -15867,6 +15944,12 @@ module Aws::EC2
     #   resp.instance_statuses[0].system_status.status #=> String, one of "ok", "impaired", "insufficient-data", "not-applicable", "initializing"
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * instance_status_ok
+    #   * system_status_ok
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatus AWS API Documentation
     #
     # @overload describe_instance_status(params = {})
@@ -15911,6 +15994,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeInstanceTypeOfferingsResult#instance_type_offerings #instance_type_offerings} => Array&lt;Types::InstanceTypeOffering&gt;
     #   * {Types::DescribeInstanceTypeOfferingsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -16051,6 +16136,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeInstanceTypesResult#instance_types #instance_types} => Array&lt;Types::InstanceTypeInfo&gt;
     #   * {Types::DescribeInstanceTypesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -16455,6 +16542,8 @@ module Aws::EC2
     #   * {Types::DescribeInstancesResult#reservations #reservations} => Array&lt;Types::Reservation&gt;
     #   * {Types::DescribeInstancesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe an Amazon EC2 instance
     #
@@ -16658,6 +16747,14 @@ module Aws::EC2
     #   resp.reservations[0].reservation_id #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * instance_exists
+    #   * instance_running
+    #   * instance_stopped
+    #   * instance_terminated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstances AWS API Documentation
     #
     # @overload describe_instances(params = {})
@@ -16716,6 +16813,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeInternetGatewaysResult#internet_gateways #internet_gateways} => Array&lt;Types::InternetGateway&gt;
     #   * {Types::DescribeInternetGatewaysResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe the Internet gateway for a VPC
@@ -16823,6 +16922,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeIpv6PoolsResult#ipv_6_pools #ipv_6_pools} => Array&lt;Types::Ipv6Pool&gt;
     #   * {Types::DescribeIpv6PoolsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -16939,6 +17040,11 @@ module Aws::EC2
     #   resp.key_pairs[0].tags[0].key #=> String
     #   resp.key_pairs[0].tags[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * key_pair_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairs AWS API Documentation
     #
     # @overload describe_key_pairs(params = {})
@@ -17007,6 +17113,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeLaunchTemplateVersionsResult#launch_template_versions #launch_template_versions} => Array&lt;Types::LaunchTemplateVersion&gt;
     #   * {Types::DescribeLaunchTemplateVersionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe the versions for a launch template
@@ -17235,6 +17343,8 @@ module Aws::EC2
     #   * {Types::DescribeLaunchTemplatesResult#launch_templates #launch_templates} => Array&lt;Types::LaunchTemplate&gt;
     #   * {Types::DescribeLaunchTemplatesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a launch template
     #
@@ -17327,6 +17437,8 @@ module Aws::EC2
     #   * {Types::DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult#local_gateway_route_table_virtual_interface_group_associations #local_gateway_route_table_virtual_interface_group_associations} => Array&lt;Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation&gt;
     #   * {Types::DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_route_table_virtual_interface_group_associations({
@@ -17391,6 +17503,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeLocalGatewayRouteTableVpcAssociationsResult#local_gateway_route_table_vpc_associations #local_gateway_route_table_vpc_associations} => Array&lt;Types::LocalGatewayRouteTableVpcAssociation&gt;
     #   * {Types::DescribeLocalGatewayRouteTableVpcAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -17458,6 +17572,8 @@ module Aws::EC2
     #   * {Types::DescribeLocalGatewayRouteTablesResult#local_gateway_route_tables #local_gateway_route_tables} => Array&lt;Types::LocalGatewayRouteTable&gt;
     #   * {Types::DescribeLocalGatewayRouteTablesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_route_tables({
@@ -17521,6 +17637,8 @@ module Aws::EC2
     #   * {Types::DescribeLocalGatewayVirtualInterfaceGroupsResult#local_gateway_virtual_interface_groups #local_gateway_virtual_interface_groups} => Array&lt;Types::LocalGatewayVirtualInterfaceGroup&gt;
     #   * {Types::DescribeLocalGatewayVirtualInterfaceGroupsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_virtual_interface_groups({
@@ -17583,6 +17701,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeLocalGatewayVirtualInterfacesResult#local_gateway_virtual_interfaces #local_gateway_virtual_interfaces} => Array&lt;Types::LocalGatewayVirtualInterface&gt;
     #   * {Types::DescribeLocalGatewayVirtualInterfacesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -17650,6 +17770,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeLocalGatewaysResult#local_gateways #local_gateways} => Array&lt;Types::LocalGateway&gt;
     #   * {Types::DescribeLocalGatewaysResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -17725,6 +17847,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeMovingAddressesResult#moving_address_statuses #moving_address_statuses} => Array&lt;Types::MovingAddressStatus&gt;
     #   * {Types::DescribeMovingAddressesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe your moving addresses
@@ -17821,6 +17945,8 @@ module Aws::EC2
     #   * {Types::DescribeNatGatewaysResult#nat_gateways #nat_gateways} => Array&lt;Types::NatGateway&gt;
     #   * {Types::DescribeNatGatewaysResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a NAT gateway
     #
@@ -17898,6 +18024,11 @@ module Aws::EC2
     #   resp.nat_gateways[0].tags[0].key #=> String
     #   resp.nat_gateways[0].tags[0].value #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * nat_gateway_available
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGateways AWS API Documentation
     #
@@ -17994,6 +18125,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeNetworkAclsResult#network_acls #network_acls} => Array&lt;Types::NetworkAcl&gt;
     #   * {Types::DescribeNetworkAclsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a network ACL
@@ -18262,6 +18395,8 @@ module Aws::EC2
     #   * {Types::DescribeNetworkInterfacePermissionsResult#network_interface_permissions #network_interface_permissions} => Array&lt;Types::NetworkInterfacePermission&gt;
     #   * {Types::DescribeNetworkInterfacePermissionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_interface_permissions({
@@ -18437,6 +18572,8 @@ module Aws::EC2
     #   * {Types::DescribeNetworkInterfacesResult#network_interfaces #network_interfaces} => Array&lt;Types::NetworkInterface&gt;
     #   * {Types::DescribeNetworkInterfacesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a network interface
     #
@@ -18566,6 +18703,11 @@ module Aws::EC2
     #   resp.network_interfaces[0].vpc_id #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * network_interface_available
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaces AWS API Documentation
     #
     # @overload describe_network_interfaces(params = {})
@@ -18685,6 +18827,8 @@ module Aws::EC2
     #   * {Types::DescribePrefixListsResult#next_token #next_token} => String
     #   * {Types::DescribePrefixListsResult#prefix_lists #prefix_lists} => Array&lt;Types::PrefixList&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_prefix_lists({
@@ -18770,6 +18914,8 @@ module Aws::EC2
     #   * {Types::DescribePrincipalIdFormatResult#principals #principals} => Array&lt;Types::PrincipalIdFormat&gt;
     #   * {Types::DescribePrincipalIdFormatResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_principal_id_format({
@@ -18828,6 +18974,8 @@ module Aws::EC2
     #
     #   * {Types::DescribePublicIpv4PoolsResult#public_ipv_4_pools #public_ipv_4_pools} => Array&lt;Types::PublicIpv4Pool&gt;
     #   * {Types::DescribePublicIpv4PoolsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -19294,6 +19442,8 @@ module Aws::EC2
     #   * {Types::DescribeReservedInstancesModificationsResult#next_token #next_token} => String
     #   * {Types::DescribeReservedInstancesModificationsResult#reserved_instances_modifications #reserved_instances_modifications} => Array&lt;Types::ReservedInstancesModification&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_instances_modifications({
@@ -19477,6 +19627,8 @@ module Aws::EC2
     #   * {Types::DescribeReservedInstancesOfferingsResult#reserved_instances_offerings #reserved_instances_offerings} => Array&lt;Types::ReservedInstancesOffering&gt;
     #   * {Types::DescribeReservedInstancesOfferingsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_instances_offerings({
@@ -19645,6 +19797,8 @@ module Aws::EC2
     #   * {Types::DescribeRouteTablesResult#route_tables #route_tables} => Array&lt;Types::RouteTable&gt;
     #   * {Types::DescribeRouteTablesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a route table
     #
@@ -19805,6 +19959,8 @@ module Aws::EC2
     #   * {Types::DescribeScheduledInstanceAvailabilityResult#next_token #next_token} => String
     #   * {Types::DescribeScheduledInstanceAvailabilityResult#scheduled_instance_availability_set #scheduled_instance_availability_set} => Array&lt;Types::ScheduledInstanceAvailability&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe an available schedule
     #
@@ -19953,6 +20109,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeScheduledInstancesResult#next_token #next_token} => String
     #   * {Types::DescribeScheduledInstancesResult#scheduled_instance_set #scheduled_instance_set} => Array&lt;Types::ScheduledInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe your Scheduled Instances
@@ -20238,6 +20396,8 @@ module Aws::EC2
     #   * {Types::DescribeSecurityGroupsResult#security_groups #security_groups} => Array&lt;Types::SecurityGroup&gt;
     #   * {Types::DescribeSecurityGroupsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a security group
     #
@@ -20342,6 +20502,11 @@ module Aws::EC2
     #   resp.security_groups[0].tags[0].value #=> String
     #   resp.security_groups[0].vpc_id #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * security_group_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroups AWS API Documentation
     #
@@ -20564,6 +20729,8 @@ module Aws::EC2
     #   * {Types::DescribeSnapshotsResult#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #   * {Types::DescribeSnapshotsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a snapshot
     #
@@ -20664,6 +20831,11 @@ module Aws::EC2
     #   resp.snapshots[0].tags[0].key #=> String
     #   resp.snapshots[0].tags[0].value #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * snapshot_completed
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshots AWS API Documentation
     #
@@ -20959,6 +21131,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeSpotFleetRequestsResponse#next_token #next_token} => String
     #   * {Types::DescribeSpotFleetRequestsResponse#spot_fleet_request_configs #spot_fleet_request_configs} => Array&lt;Types::SpotFleetRequestConfig&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a Spot fleet request
@@ -21305,6 +21479,8 @@ module Aws::EC2
     #   * {Types::DescribeSpotInstanceRequestsResult#spot_instance_requests #spot_instance_requests} => Array&lt;Types::SpotInstanceRequest&gt;
     #   * {Types::DescribeSpotInstanceRequestsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a Spot Instance request
     #
@@ -21449,6 +21625,11 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * spot_instance_request_fulfilled
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests AWS API Documentation
     #
     # @overload describe_spot_instance_requests(params = {})
@@ -21530,6 +21711,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeSpotPriceHistoryResult#next_token #next_token} => String
     #   * {Types::DescribeSpotPriceHistoryResult#spot_price_history #spot_price_history} => Array&lt;Types::SpotPrice&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe Spot price history for Linux/UNIX (Amazon VPC)
@@ -21633,6 +21816,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeStaleSecurityGroupsResult#next_token #next_token} => String
     #   * {Types::DescribeStaleSecurityGroupsResult#stale_security_group_set #stale_security_group_set} => Array&lt;Types::StaleSecurityGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -21776,6 +21961,8 @@ module Aws::EC2
     #   * {Types::DescribeSubnetsResult#subnets #subnets} => Array&lt;Types::Subnet&gt;
     #   * {Types::DescribeSubnetsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the subnets for a VPC
     #
@@ -21849,6 +22036,11 @@ module Aws::EC2
     #   resp.subnets[0].outpost_arn #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * subnet_available
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnets AWS API Documentation
     #
     # @overload describe_subnets(params = {})
@@ -21908,6 +22100,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTagsResult#next_token #next_token} => String
     #   * {Types::DescribeTagsResult#tags #tags} => Array&lt;Types::TagDescription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe the tags for a single resource
@@ -22005,6 +22199,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTrafficMirrorFiltersResult#traffic_mirror_filters #traffic_mirror_filters} => Array&lt;Types::TrafficMirrorFilter&gt;
     #   * {Types::DescribeTrafficMirrorFiltersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -22120,6 +22316,8 @@ module Aws::EC2
     #   * {Types::DescribeTrafficMirrorSessionsResult#traffic_mirror_sessions #traffic_mirror_sessions} => Array&lt;Types::TrafficMirrorSession&gt;
     #   * {Types::DescribeTrafficMirrorSessionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_traffic_mirror_sessions({
@@ -22200,6 +22398,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTrafficMirrorTargetsResult#traffic_mirror_targets #traffic_mirror_targets} => Array&lt;Types::TrafficMirrorTarget&gt;
     #   * {Types::DescribeTrafficMirrorTargetsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -22293,6 +22493,8 @@ module Aws::EC2
     #   * {Types::DescribeTransitGatewayAttachmentsResult#transit_gateway_attachments #transit_gateway_attachments} => Array&lt;Types::TransitGatewayAttachment&gt;
     #   * {Types::DescribeTransitGatewayAttachmentsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_transit_gateway_attachments({
@@ -22369,6 +22571,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTransitGatewayMulticastDomainsResult#transit_gateway_multicast_domains #transit_gateway_multicast_domains} => Array&lt;Types::TransitGatewayMulticastDomain&gt;
     #   * {Types::DescribeTransitGatewayMulticastDomainsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -22447,6 +22651,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTransitGatewayPeeringAttachmentsResult#transit_gateway_peering_attachments #transit_gateway_peering_attachments} => Array&lt;Types::TransitGatewayPeeringAttachment&gt;
     #   * {Types::DescribeTransitGatewayPeeringAttachmentsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -22537,6 +22743,8 @@ module Aws::EC2
     #   * {Types::DescribeTransitGatewayRouteTablesResult#transit_gateway_route_tables #transit_gateway_route_tables} => Array&lt;Types::TransitGatewayRouteTable&gt;
     #   * {Types::DescribeTransitGatewayRouteTablesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_transit_gateway_route_tables({
@@ -22612,6 +22820,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTransitGatewayVpcAttachmentsResult#transit_gateway_vpc_attachments #transit_gateway_vpc_attachments} => Array&lt;Types::TransitGatewayVpcAttachment&gt;
     #   * {Types::DescribeTransitGatewayVpcAttachmentsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -22718,6 +22928,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeTransitGatewaysResult#transit_gateways #transit_gateways} => Array&lt;Types::TransitGateway&gt;
     #   * {Types::DescribeTransitGatewaysResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -22951,6 +23163,8 @@ module Aws::EC2
     #   * {Types::DescribeVolumeStatusResult#next_token #next_token} => String
     #   * {Types::DescribeVolumeStatusResult#volume_statuses #volume_statuses} => Array&lt;Types::VolumeStatusItem&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the status of a single volume
     #
@@ -23169,6 +23383,8 @@ module Aws::EC2
     #   * {Types::DescribeVolumesResult#volumes #volumes} => Array&lt;Types::Volume&gt;
     #   * {Types::DescribeVolumesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe all volumes
     #
@@ -23293,6 +23509,13 @@ module Aws::EC2
     #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * volume_available
+    #   * volume_deleted
+    #   * volume_in_use
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes AWS API Documentation
     #
     # @overload describe_volumes(params = {})
@@ -23351,6 +23574,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeVolumesModificationsResult#volumes_modifications #volumes_modifications} => Array&lt;Types::VolumeModification&gt;
     #   * {Types::DescribeVolumesModificationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -23566,6 +23791,8 @@ module Aws::EC2
     #   * {Types::DescribeVpcClassicLinkDnsSupportResult#next_token #next_token} => String
     #   * {Types::DescribeVpcClassicLinkDnsSupportResult#vpcs #vpcs} => Array&lt;Types::ClassicLinkDnsSupport&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_classic_link_dns_support({
@@ -23631,6 +23858,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeVpcEndpointConnectionNotificationsResult#connection_notification_set #connection_notification_set} => Array&lt;Types::ConnectionNotification&gt;
     #   * {Types::DescribeVpcEndpointConnectionNotificationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -23706,6 +23935,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeVpcEndpointConnectionsResult#vpc_endpoint_connections #vpc_endpoint_connections} => Array&lt;Types::VpcEndpointConnection&gt;
     #   * {Types::DescribeVpcEndpointConnectionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -23792,6 +24023,8 @@ module Aws::EC2
     #   * {Types::DescribeVpcEndpointServiceConfigurationsResult#service_configurations #service_configurations} => Array&lt;Types::ServiceConfiguration&gt;
     #   * {Types::DescribeVpcEndpointServiceConfigurationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_endpoint_service_configurations({
@@ -23876,6 +24109,8 @@ module Aws::EC2
     #
     #   * {Types::DescribeVpcEndpointServicePermissionsResult#allowed_principals #allowed_principals} => Array&lt;Types::AllowedPrincipal&gt;
     #   * {Types::DescribeVpcEndpointServicePermissionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -24051,6 +24286,8 @@ module Aws::EC2
     #   * {Types::DescribeVpcEndpointsResult#vpc_endpoints #vpc_endpoints} => Array&lt;Types::VpcEndpoint&gt;
     #   * {Types::DescribeVpcEndpointsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_endpoints({
@@ -24174,6 +24411,8 @@ module Aws::EC2
     #   * {Types::DescribeVpcPeeringConnectionsResult#vpc_peering_connections #vpc_peering_connections} => Array&lt;Types::VpcPeeringConnection&gt;
     #   * {Types::DescribeVpcPeeringConnectionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_vpc_peering_connections({
@@ -24222,6 +24461,12 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].tags[0].value #=> String
     #   resp.vpc_peering_connections[0].vpc_peering_connection_id #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * vpc_peering_connection_deleted
+    #   * vpc_peering_connection_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnections AWS API Documentation
     #
@@ -24307,6 +24552,8 @@ module Aws::EC2
     #   * {Types::DescribeVpcsResult#vpcs #vpcs} => Array&lt;Types::Vpc&gt;
     #   * {Types::DescribeVpcsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a VPC
     #
@@ -24379,6 +24626,12 @@ module Aws::EC2
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * vpc_available
+    #   * vpc_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcs AWS API Documentation
     #
@@ -24520,6 +24773,12 @@ module Aws::EC2
     #   resp.vpn_connections[0].vgw_telemetry[0].status #=> String, one of "UP", "DOWN"
     #   resp.vpn_connections[0].vgw_telemetry[0].status_message #=> String
     #   resp.vpn_connections[0].vgw_telemetry[0].certificate_arn #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * vpn_connection_available
+    #   * vpn_connection_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnections AWS API Documentation
     #
@@ -26194,6 +26453,8 @@ module Aws::EC2
     #   * {Types::GetAssociatedIpv6PoolCidrsResult#ipv_6_cidr_associations #ipv_6_cidr_associations} => Array&lt;Types::Ipv6CidrAssociation&gt;
     #   * {Types::GetAssociatedIpv6PoolCidrsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_associated_ipv_6_pool_cidrs({
@@ -26903,6 +27164,11 @@ module Aws::EC2
     #   resp.password_data #=> String
     #   resp.timestamp #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * password_data_available
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordData AWS API Documentation
     #
     # @overload get_password_data(params = {})
@@ -27023,6 +27289,8 @@ module Aws::EC2
     #   * {Types::GetTransitGatewayAttachmentPropagationsResult#transit_gateway_attachment_propagations #transit_gateway_attachment_propagations} => Array&lt;Types::TransitGatewayAttachmentPropagation&gt;
     #   * {Types::GetTransitGatewayAttachmentPropagationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_attachment_propagations({
@@ -27095,6 +27363,8 @@ module Aws::EC2
     #   * {Types::GetTransitGatewayMulticastDomainAssociationsResult#multicast_domain_associations #multicast_domain_associations} => Array&lt;Types::TransitGatewayMulticastDomainAssociation&gt;
     #   * {Types::GetTransitGatewayMulticastDomainAssociationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_multicast_domain_associations({
@@ -27163,6 +27433,8 @@ module Aws::EC2
     #   * {Types::GetTransitGatewayRouteTableAssociationsResult#associations #associations} => Array&lt;Types::TransitGatewayRouteTableAssociation&gt;
     #   * {Types::GetTransitGatewayRouteTableAssociationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_route_table_associations({
@@ -27229,6 +27501,8 @@ module Aws::EC2
     #
     #   * {Types::GetTransitGatewayRouteTablePropagationsResult#transit_gateway_route_table_propagations #transit_gateway_route_table_propagations} => Array&lt;Types::TransitGatewayRouteTablePropagation&gt;
     #   * {Types::GetTransitGatewayRouteTablePropagationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -35213,6 +35487,8 @@ module Aws::EC2
     #   * {Types::SearchLocalGatewayRoutesResult#routes #routes} => Array&lt;Types::LocalGatewayRoute&gt;
     #   * {Types::SearchLocalGatewayRoutesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_local_gateway_routes({
@@ -35302,6 +35578,8 @@ module Aws::EC2
     #
     #   * {Types::SearchTransitGatewayMulticastGroupsResult#multicast_groups #multicast_groups} => Array&lt;Types::TransitGatewayMulticastGroup&gt;
     #   * {Types::SearchTransitGatewayMulticastGroupsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

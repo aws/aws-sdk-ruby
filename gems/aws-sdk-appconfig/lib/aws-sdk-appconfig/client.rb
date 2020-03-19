@@ -1055,6 +1055,8 @@ module Aws::AppConfig
     #   * {Types::Applications#items #items} => Array&lt;Types::Application&gt;
     #   * {Types::Applications#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
@@ -1097,6 +1099,8 @@ module Aws::AppConfig
     #
     #   * {Types::ConfigurationProfiles#items #items} => Array&lt;Types::ConfigurationProfileSummary&gt;
     #   * {Types::ConfigurationProfiles#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1141,6 +1145,8 @@ module Aws::AppConfig
     #
     #   * {Types::DeploymentStrategies#items #items} => Array&lt;Types::DeploymentStrategy&gt;
     #   * {Types::DeploymentStrategies#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1192,6 +1198,8 @@ module Aws::AppConfig
     #
     #   * {Types::Deployments#items #items} => Array&lt;Types::DeploymentSummary&gt;
     #   * {Types::Deployments#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1245,6 +1253,8 @@ module Aws::AppConfig
     #
     #   * {Types::Environments#items #items} => Array&lt;Types::Environment&gt;
     #   * {Types::Environments#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

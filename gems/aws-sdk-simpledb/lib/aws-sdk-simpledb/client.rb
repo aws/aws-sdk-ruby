@@ -657,6 +657,8 @@ module Aws::SimpleDB
     #   * {Types::ListDomainsResult#domain_names #domain_names} => Array&lt;String&gt;
     #   * {Types::ListDomainsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domains({
@@ -782,6 +784,8 @@ module Aws::SimpleDB
     #
     #   * {Types::SelectResult#items #items} => Array&lt;Types::Item&gt;
     #   * {Types::SelectResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

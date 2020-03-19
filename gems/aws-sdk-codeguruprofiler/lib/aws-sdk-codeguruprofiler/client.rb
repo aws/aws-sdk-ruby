@@ -567,6 +567,8 @@ module Aws::CodeGuruProfiler
     #   * {Types::ListProfileTimesResponse#next_token #next_token} => String
     #   * {Types::ListProfileTimesResponse#profile_times #profile_times} => Array&lt;Types::ProfileTime&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_profile_times({
@@ -625,6 +627,8 @@ module Aws::CodeGuruProfiler
     #   * {Types::ListProfilingGroupsResponse#next_token #next_token} => String
     #   * {Types::ListProfilingGroupsResponse#profiling_group_names #profiling_group_names} => Array&lt;String&gt;
     #   * {Types::ListProfilingGroupsResponse#profiling_groups #profiling_groups} => Array&lt;Types::ProfilingGroupDescription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

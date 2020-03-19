@@ -908,6 +908,8 @@ module Aws::SMS
     #   * {Types::GetConnectorsResponse#connector_list #connector_list} => Array&lt;Types::Connector&gt;
     #   * {Types::GetConnectorsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_connectors({
@@ -958,6 +960,8 @@ module Aws::SMS
     #
     #   * {Types::GetReplicationJobsResponse#replication_job_list #replication_job_list} => Array&lt;Types::ReplicationJob&gt;
     #   * {Types::GetReplicationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1034,6 +1038,8 @@ module Aws::SMS
     #   * {Types::GetReplicationRunsResponse#replication_job #replication_job} => Types::ReplicationJob
     #   * {Types::GetReplicationRunsResponse#replication_run_list #replication_run_list} => Array&lt;Types::ReplicationRun&gt;
     #   * {Types::GetReplicationRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1126,6 +1132,8 @@ module Aws::SMS
     #   * {Types::GetServersResponse#server_catalog_status #server_catalog_status} => String
     #   * {Types::GetServersResponse#server_list #server_list} => Array&lt;Types::Server&gt;
     #   * {Types::GetServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

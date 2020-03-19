@@ -2010,6 +2010,8 @@ module Aws::DeviceFarm
     #   * {Types::GetOfferingStatusResult#next_period #next_period} => Hash&lt;String,Types::OfferingStatus&gt;
     #   * {Types::GetOfferingStatusResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get status information about device offerings
     #
@@ -2747,6 +2749,8 @@ module Aws::DeviceFarm
     #   * {Types::ListArtifactsResult#artifacts #artifacts} => Array&lt;Types::Artifact&gt;
     #   * {Types::ListArtifactsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list artifacts for a resource
     #
@@ -2860,6 +2864,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListDevicePoolsResult#device_pools #device_pools} => Array&lt;Types::DevicePool&gt;
     #   * {Types::ListDevicePoolsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about device pools
@@ -3018,6 +3024,8 @@ module Aws::DeviceFarm
     #   * {Types::ListDevicesResult#devices #devices} => Array&lt;Types::Device&gt;
     #   * {Types::ListDevicesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get information about devices
     #
@@ -3154,6 +3162,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListJobsResult#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about jobs
@@ -3355,6 +3365,8 @@ module Aws::DeviceFarm
     #   * {Types::ListOfferingTransactionsResult#offering_transactions #offering_transactions} => Array&lt;Types::OfferingTransaction&gt;
     #   * {Types::ListOfferingTransactionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get information about device offering transactions
     #
@@ -3499,6 +3511,8 @@ module Aws::DeviceFarm
     #   * {Types::ListOfferingsResult#offerings #offerings} => Array&lt;Types::Offering&gt;
     #   * {Types::ListOfferingsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get information about device offerings
     #
@@ -3618,6 +3632,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListProjectsResult#projects #projects} => Array&lt;Types::Project&gt;
     #   * {Types::ListProjectsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about a Device Farm project
@@ -3798,6 +3814,8 @@ module Aws::DeviceFarm
     #   * {Types::ListRunsResult#runs #runs} => Array&lt;Types::Run&gt;
     #   * {Types::ListRunsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get information about a test run
     #
@@ -3941,6 +3959,8 @@ module Aws::DeviceFarm
     #   * {Types::ListSamplesResult#samples #samples} => Array&lt;Types::Sample&gt;
     #   * {Types::ListSamplesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get information about samples
     #
@@ -3995,6 +4015,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListSuitesResult#suites #suites} => Array&lt;Types::Suite&gt;
     #   * {Types::ListSuitesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about suites
@@ -4099,6 +4121,8 @@ module Aws::DeviceFarm
     #   * {Types::ListTestGridProjectsResult#test_grid_projects #test_grid_projects} => Array&lt;Types::TestGridProject&gt;
     #   * {Types::ListTestGridProjectsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_test_grid_projects({
@@ -4139,6 +4163,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListTestGridSessionActionsResult#actions #actions} => Array&lt;Types::TestGridSessionAction&gt;
     #   * {Types::ListTestGridSessionActionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4185,6 +4211,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListTestGridSessionArtifactsResult#artifacts #artifacts} => Array&lt;Types::TestGridSessionArtifact&gt;
     #   * {Types::ListTestGridSessionArtifactsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4243,6 +4271,8 @@ module Aws::DeviceFarm
     #   * {Types::ListTestGridSessionsResult#test_grid_sessions #test_grid_sessions} => Array&lt;Types::TestGridSession&gt;
     #   * {Types::ListTestGridSessionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_test_grid_sessions({
@@ -4290,6 +4320,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListTestsResult#tests #tests} => Array&lt;Types::Test&gt;
     #   * {Types::ListTestsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about tests
@@ -4367,6 +4399,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListUniqueProblemsResult#unique_problems #unique_problems} => Hash&lt;String,Array&lt;Types::UniqueProblem&gt;&gt;
     #   * {Types::ListUniqueProblemsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about unique problems
@@ -4539,6 +4573,8 @@ module Aws::DeviceFarm
     #
     #   * {Types::ListUploadsResult#uploads #uploads} => Array&lt;Types::Upload&gt;
     #   * {Types::ListUploadsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get information about uploads

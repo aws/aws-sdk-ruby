@@ -1507,6 +1507,8 @@ module Aws::SecretsManager
     #   * {Types::ListSecretVersionIdsResponse#arn #arn} => String
     #   * {Types::ListSecretVersionIdsResponse#name #name} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list all of the secret versions associated with a secret
     #
@@ -1626,6 +1628,8 @@ module Aws::SecretsManager
     #
     #   * {Types::ListSecretsResponse#secret_list #secret_list} => Array&lt;Types::SecretListEntry&gt;
     #   * {Types::ListSecretsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the secrets in your account

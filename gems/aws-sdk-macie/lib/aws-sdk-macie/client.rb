@@ -483,6 +483,8 @@ module Aws::Macie
     #   * {Types::ListMemberAccountsResult#member_accounts #member_accounts} => Array&lt;Types::MemberAccount&gt;
     #   * {Types::ListMemberAccountsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_member_accounts({
@@ -529,6 +531,8 @@ module Aws::Macie
     #
     #   * {Types::ListS3ResourcesResult#s3_resources #s3_resources} => Array&lt;Types::S3ResourceClassification&gt;
     #   * {Types::ListS3ResourcesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

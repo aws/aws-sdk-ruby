@@ -1646,6 +1646,12 @@ module Aws::AppStream
     #   resp.fleets[0].iam_role_arn #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * fleet_started
+    #   * fleet_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets AWS API Documentation
     #
     # @overload describe_fleets(params = {})
@@ -1749,6 +1755,8 @@ module Aws::AppStream
     #   * {Types::DescribeImagePermissionsResult#shared_image_permissions_list #shared_image_permissions_list} => Array&lt;Types::SharedImagePermissions&gt;
     #   * {Types::DescribeImagePermissionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_permissions({
@@ -1800,6 +1808,8 @@ module Aws::AppStream
     #
     #   * {Types::DescribeImagesResult#images #images} => Array&lt;Types::Image&gt;
     #   * {Types::DescribeImagesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

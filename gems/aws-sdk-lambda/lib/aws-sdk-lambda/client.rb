@@ -1737,6 +1737,11 @@ module Aws::Lambda
     #   resp.tags["TagKey"] #=> String
     #   resp.concurrency.reserved_concurrent_executions #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * function_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction AWS API Documentation
     #
     # @overload get_function(params = {})
@@ -1922,6 +1927,12 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * function_active
+    #   * function_updated
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -2508,6 +2519,8 @@ module Aws::Lambda
     #   * {Types::ListAliasesResponse#next_marker #next_marker} => String
     #   * {Types::ListAliasesResponse#aliases #aliases} => Array&lt;Types::AliasConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a Lambda function aliases
     #
@@ -2599,6 +2612,8 @@ module Aws::Lambda
     #   * {Types::ListEventSourceMappingsResponse#next_marker #next_marker} => String
     #   * {Types::ListEventSourceMappingsResponse#event_source_mappings #event_source_mappings} => Array&lt;Types::EventSourceMappingConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_source_mappings({
@@ -2670,6 +2685,8 @@ module Aws::Lambda
     #   * {Types::ListFunctionEventInvokeConfigsResponse#function_event_invoke_configs #function_event_invoke_configs} => Array&lt;Types::FunctionEventInvokeConfig&gt;
     #   * {Types::ListFunctionEventInvokeConfigsResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_function_event_invoke_configs({
@@ -2726,6 +2743,8 @@ module Aws::Lambda
     #
     #   * {Types::ListFunctionsResponse#next_marker #next_marker} => String
     #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of Lambda functions
@@ -2829,6 +2848,8 @@ module Aws::Lambda
     #   * {Types::ListLayerVersionsResponse#next_marker #next_marker} => String
     #   * {Types::ListLayerVersionsResponse#layer_versions #layer_versions} => Array&lt;Types::LayerVersionsListItem&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
@@ -2881,6 +2902,8 @@ module Aws::Lambda
     #
     #   * {Types::ListLayersResponse#next_marker #next_marker} => String
     #   * {Types::ListLayersResponse#layers #layers} => Array&lt;Types::LayersListItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2942,6 +2965,8 @@ module Aws::Lambda
     #
     #   * {Types::ListProvisionedConcurrencyConfigsResponse#provisioned_concurrency_configs #provisioned_concurrency_configs} => Array&lt;Types::ProvisionedConcurrencyConfigListItem&gt;
     #   * {Types::ListProvisionedConcurrencyConfigsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3039,6 +3064,8 @@ module Aws::Lambda
     #
     #   * {Types::ListVersionsByFunctionResponse#next_marker #next_marker} => String
     #   * {Types::ListVersionsByFunctionResponse#versions #versions} => Array&lt;Types::FunctionConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of Lambda function versions

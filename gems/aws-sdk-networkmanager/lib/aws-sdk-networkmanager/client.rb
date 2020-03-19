@@ -944,6 +944,8 @@ module Aws::NetworkManager
     #   * {Types::DescribeGlobalNetworksResponse#global_networks #global_networks} => Array&lt;Types::GlobalNetwork&gt;
     #   * {Types::DescribeGlobalNetworksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_networks({
@@ -1081,6 +1083,8 @@ module Aws::NetworkManager
     #   * {Types::GetCustomerGatewayAssociationsResponse#customer_gateway_associations #customer_gateway_associations} => Array&lt;Types::CustomerGatewayAssociation&gt;
     #   * {Types::GetCustomerGatewayAssociationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_customer_gateway_associations({
@@ -1131,6 +1135,8 @@ module Aws::NetworkManager
     #
     #   * {Types::GetDevicesResponse#devices #devices} => Array&lt;Types::Device&gt;
     #   * {Types::GetDevicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1196,6 +1202,8 @@ module Aws::NetworkManager
     #   * {Types::GetLinkAssociationsResponse#link_associations #link_associations} => Array&lt;Types::LinkAssociation&gt;
     #   * {Types::GetLinkAssociationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_link_associations({
@@ -1257,6 +1265,8 @@ module Aws::NetworkManager
     #   * {Types::GetLinksResponse#links #links} => Array&lt;Types::Link&gt;
     #   * {Types::GetLinksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_links({
@@ -1316,6 +1326,8 @@ module Aws::NetworkManager
     #   * {Types::GetSitesResponse#sites #sites} => Array&lt;Types::Site&gt;
     #   * {Types::GetSitesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_sites({
@@ -1371,6 +1383,8 @@ module Aws::NetworkManager
     #
     #   * {Types::GetTransitGatewayRegistrationsResponse#transit_gateway_registrations #transit_gateway_registrations} => Array&lt;Types::TransitGatewayRegistration&gt;
     #   * {Types::GetTransitGatewayRegistrationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

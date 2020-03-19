@@ -1647,6 +1647,8 @@ module Aws::GuardDuty
     #   * {Types::ListDetectorsResponse#detector_ids #detector_ids} => Array&lt;String&gt;
     #   * {Types::ListDetectorsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_detectors({
@@ -1690,6 +1692,8 @@ module Aws::GuardDuty
     #
     #   * {Types::ListFiltersResponse#filter_names #filter_names} => Array&lt;String&gt;
     #   * {Types::ListFiltersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1853,6 +1857,8 @@ module Aws::GuardDuty
     #   * {Types::ListFindingsResponse#finding_ids #finding_ids} => Array&lt;String&gt;
     #   * {Types::ListFindingsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_findings({
@@ -1922,6 +1928,8 @@ module Aws::GuardDuty
     #   * {Types::ListIPSetsResponse#ip_set_ids #ip_set_ids} => Array&lt;String&gt;
     #   * {Types::ListIPSetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ip_sets({
@@ -1964,6 +1972,8 @@ module Aws::GuardDuty
     #
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::Invitation&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2018,6 +2028,8 @@ module Aws::GuardDuty
     #   * {Types::ListMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_members({
@@ -2067,6 +2079,8 @@ module Aws::GuardDuty
     #
     #   * {Types::ListPublishingDestinationsResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
     #   * {Types::ListPublishingDestinationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2148,6 +2162,8 @@ module Aws::GuardDuty
     #
     #   * {Types::ListThreatIntelSetsResponse#threat_intel_set_ids #threat_intel_set_ids} => Array&lt;String&gt;
     #   * {Types::ListThreatIntelSetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

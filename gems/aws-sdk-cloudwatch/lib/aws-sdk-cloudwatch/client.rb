@@ -503,6 +503,8 @@ module Aws::CloudWatch
     #   * {Types::DescribeAlarmHistoryOutput#alarm_history_items #alarm_history_items} => Array&lt;Types::AlarmHistoryItem&gt;
     #   * {Types::DescribeAlarmHistoryOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_alarm_history({
@@ -618,6 +620,8 @@ module Aws::CloudWatch
     #   * {Types::DescribeAlarmsOutput#metric_alarms #metric_alarms} => Array&lt;Types::MetricAlarm&gt;
     #   * {Types::DescribeAlarmsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_alarms({
@@ -698,6 +702,12 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * alarm_exists
+    #   * composite_alarm_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
     #
@@ -913,6 +923,8 @@ module Aws::CloudWatch
     #
     #   * {Types::DescribeInsightRulesOutput#next_token #next_token} => String
     #   * {Types::DescribeInsightRulesOutput#insight_rules #insight_rules} => Array&lt;Types::InsightRule&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1366,6 +1378,8 @@ module Aws::CloudWatch
     #   * {Types::GetMetricDataOutput#next_token #next_token} => String
     #   * {Types::GetMetricDataOutput#messages #messages} => Array&lt;Types::MessageData&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_metric_data({
@@ -1757,6 +1771,8 @@ module Aws::CloudWatch
     #   * {Types::ListDashboardsOutput#dashboard_entries #dashboard_entries} => Array&lt;Types::DashboardEntry&gt;
     #   * {Types::ListDashboardsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dashboards({
@@ -1815,6 +1831,8 @@ module Aws::CloudWatch
     #
     #   * {Types::ListMetricsOutput#metrics #metrics} => Array&lt;Types::Metric&gt;
     #   * {Types::ListMetricsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

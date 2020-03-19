@@ -3573,6 +3573,8 @@ module Aws::KMS
     #   * {Types::ListAliasesResponse#next_marker #next_marker} => String
     #   * {Types::ListAliasesResponse#truncated #truncated} => Boolean
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list aliases
     #
@@ -3692,6 +3694,8 @@ module Aws::KMS
     #   * {Types::ListGrantsResponse#grants #grants} => Array&lt;Types::GrantListEntry&gt;
     #   * {Types::ListGrantsResponse#next_marker #next_marker} => String
     #   * {Types::ListGrantsResponse#truncated #truncated} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list grants for a customer master key (CMK)
@@ -3838,6 +3842,8 @@ module Aws::KMS
     #   * {Types::ListKeyPoliciesResponse#next_marker #next_marker} => String
     #   * {Types::ListKeyPoliciesResponse#truncated #truncated} => Boolean
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list key policies for a customer master key (CMK)
     #
@@ -3901,6 +3907,8 @@ module Aws::KMS
     #   * {Types::ListKeysResponse#keys #keys} => Array&lt;Types::KeyListEntry&gt;
     #   * {Types::ListKeysResponse#next_marker #next_marker} => String
     #   * {Types::ListKeysResponse#truncated #truncated} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list customer master keys (CMKs)

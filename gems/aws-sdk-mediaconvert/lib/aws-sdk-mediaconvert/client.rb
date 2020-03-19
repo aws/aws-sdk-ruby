@@ -5034,6 +5034,8 @@ module Aws::MediaConvert
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
     #   * {Types::DescribeEndpointsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_endpoints({
@@ -7062,6 +7064,8 @@ module Aws::MediaConvert
     #   * {Types::ListJobTemplatesResponse#job_templates #job_templates} => Array&lt;Types::JobTemplate&gt;
     #   * {Types::ListJobTemplatesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_job_templates({
@@ -7800,6 +7804,8 @@ module Aws::MediaConvert
     #
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8569,6 +8575,8 @@ module Aws::MediaConvert
     #   * {Types::ListPresetsResponse#next_token #next_token} => String
     #   * {Types::ListPresetsResponse#presets #presets} => Array&lt;Types::Preset&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_presets({
@@ -9047,6 +9055,8 @@ module Aws::MediaConvert
     #
     #   * {Types::ListQueuesResponse#next_token #next_token} => String
     #   * {Types::ListQueuesResponse#queues #queues} => Array&lt;Types::Queue&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

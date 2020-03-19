@@ -32,7 +32,7 @@ module AwsSdkCodeGenerator
         waiters = waiters ? waiters['waiters'] : {}
         waiters = waiters.map do |waiter_name, waiter|
           Waiter.new.tap do |w|
-            w.name =  Underscore.underscore(waiter_name)
+            w.name = Underscore.underscore(waiter_name)
             w.class_name = waiter_name
             w.client_method = Underscore.underscore(waiter['operation'])
             w.delay = waiter['delay'].to_i
@@ -43,6 +43,16 @@ module AwsSdkCodeGenerator
         end.sort_by(&:name)
         waiters.last.last = true unless waiters.empty?
         waiters
+      end
+
+      # @return [Map<String, Array<Waiter> >]
+      def build_operations_map(waiters)
+        operations_map = {}
+        waiters = build_list(waiters)
+        waiters.each do |w|
+          (operations_map[w.client_method] ||= []) << w
+        end
+        operations_map
       end
 
       # @param [Array<Waiter>]

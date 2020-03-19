@@ -533,6 +533,8 @@ module Aws::CodeStarNotifications
     #   * {Types::ListEventTypesResult#event_types #event_types} => Array&lt;Types::EventTypeSummary&gt;
     #   * {Types::ListEventTypesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_types({
@@ -588,6 +590,8 @@ module Aws::CodeStarNotifications
     #
     #   * {Types::ListNotificationRulesResult#next_token #next_token} => String
     #   * {Types::ListNotificationRulesResult#notification_rules #notification_rules} => Array&lt;Types::NotificationRuleSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -671,6 +675,8 @@ module Aws::CodeStarNotifications
     #
     #   * {Types::ListTargetsResult#targets #targets} => Array&lt;Types::TargetSummary&gt;
     #   * {Types::ListTargetsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

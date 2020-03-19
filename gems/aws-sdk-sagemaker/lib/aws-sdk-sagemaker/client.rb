@@ -4889,6 +4889,12 @@ module Aws::SageMaker
     #   resp.creation_time #=> Time
     #   resp.last_modified_time #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * endpoint_deleted
+    #   * endpoint_in_service
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpoint AWS API Documentation
     #
     # @overload describe_endpoint(params = {})
@@ -5703,6 +5709,13 @@ module Aws::SageMaker
     #   resp.additional_code_repositories[0] #=> String
     #   resp.root_access #=> String, one of "Enabled", "Disabled"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * notebook_instance_deleted
+    #   * notebook_instance_in_service
+    #   * notebook_instance_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance AWS API Documentation
     #
     # @overload describe_notebook_instance(params = {})
@@ -5844,6 +5857,11 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_arn #=> String
     #   resp.auto_ml_job_arn #=> String
     #   resp.training_job_arn #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * processing_job_completed_or_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeProcessingJob AWS API Documentation
     #
@@ -6034,6 +6052,11 @@ module Aws::SageMaker
     #   resp.debug_rule_evaluation_statuses[0].status_details #=> String
     #   resp.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * training_job_completed_or_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTrainingJob AWS API Documentation
     #
     # @overload describe_training_job(params = {})
@@ -6111,6 +6134,11 @@ module Aws::SageMaker
     #   resp.experiment_config.experiment_name #=> String
     #   resp.experiment_config.trial_name #=> String
     #   resp.experiment_config.trial_component_display_name #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * transform_job_completed_or_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeTransformJob AWS API Documentation
     #
@@ -6512,6 +6540,8 @@ module Aws::SageMaker
     #   * {Types::ListAlgorithmsOutput#algorithm_summary_list #algorithm_summary_list} => Array&lt;Types::AlgorithmSummary&gt;
     #   * {Types::ListAlgorithmsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_algorithms({
@@ -6569,6 +6599,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListAppsResponse#apps #apps} => Array&lt;Types::AppDetails&gt;
     #   * {Types::ListAppsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6640,6 +6672,8 @@ module Aws::SageMaker
     #   * {Types::ListAutoMLJobsResponse#auto_ml_job_summaries #auto_ml_job_summaries} => Array&lt;Types::AutoMLJobSummary&gt;
     #   * {Types::ListAutoMLJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_auto_ml_jobs({
@@ -6705,6 +6739,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListCandidatesForAutoMLJobResponse#candidates #candidates} => Array&lt;Types::AutoMLCandidate&gt;
     #   * {Types::ListCandidatesForAutoMLJobResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6792,6 +6828,8 @@ module Aws::SageMaker
     #   * {Types::ListCodeRepositoriesOutput#code_repository_summary_list #code_repository_summary_list} => Array&lt;Types::CodeRepositorySummary&gt;
     #   * {Types::ListCodeRepositoriesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_code_repositories({
@@ -6877,6 +6915,8 @@ module Aws::SageMaker
     #   * {Types::ListCompilationJobsResponse#compilation_job_summaries #compilation_job_summaries} => Array&lt;Types::CompilationJobSummary&gt;
     #   * {Types::ListCompilationJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_compilation_jobs({
@@ -6927,6 +6967,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListDomainsResponse#domains #domains} => Array&lt;Types::DomainDetails&gt;
     #   * {Types::ListDomainsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6988,6 +7030,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListEndpointConfigsOutput#endpoint_configs #endpoint_configs} => Array&lt;Types::EndpointConfigSummary&gt;
     #   * {Types::ListEndpointConfigsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7062,6 +7106,8 @@ module Aws::SageMaker
     #   * {Types::ListEndpointsOutput#endpoints #endpoints} => Array&lt;Types::EndpointSummary&gt;
     #   * {Types::ListEndpointsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_endpoints({
@@ -7129,6 +7175,8 @@ module Aws::SageMaker
     #   * {Types::ListExperimentsResponse#experiment_summaries #experiment_summaries} => Array&lt;Types::ExperimentSummary&gt;
     #   * {Types::ListExperimentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_experiments({
@@ -7189,6 +7237,8 @@ module Aws::SageMaker
     #   * {Types::ListFlowDefinitionsResponse#flow_definition_summaries #flow_definition_summaries} => Array&lt;Types::FlowDefinitionSummary&gt;
     #   * {Types::ListFlowDefinitionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_flow_definitions({
@@ -7246,6 +7296,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListHumanTaskUisResponse#human_task_ui_summaries #human_task_ui_summaries} => Array&lt;Types::HumanTaskUiSummary&gt;
     #   * {Types::ListHumanTaskUisResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7318,6 +7370,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListHyperParameterTuningJobsResponse#hyper_parameter_tuning_job_summaries #hyper_parameter_tuning_job_summaries} => Array&lt;Types::HyperParameterTuningJobSummary&gt;
     #   * {Types::ListHyperParameterTuningJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7410,6 +7464,8 @@ module Aws::SageMaker
     #   * {Types::ListLabelingJobsResponse#labeling_job_summary_list #labeling_job_summary_list} => Array&lt;Types::LabelingJobSummary&gt;
     #   * {Types::ListLabelingJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_labeling_jobs({
@@ -7496,6 +7552,8 @@ module Aws::SageMaker
     #   * {Types::ListLabelingJobsForWorkteamResponse#labeling_job_summary_list #labeling_job_summary_list} => Array&lt;Types::LabelingJobForWorkteamSummary&gt;
     #   * {Types::ListLabelingJobsForWorkteamResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_labeling_jobs_for_workteam({
@@ -7565,6 +7623,8 @@ module Aws::SageMaker
     #   * {Types::ListModelPackagesOutput#model_package_summary_list #model_package_summary_list} => Array&lt;Types::ModelPackageSummary&gt;
     #   * {Types::ListModelPackagesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_model_packages({
@@ -7632,6 +7692,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListModelsOutput#models #models} => Array&lt;Types::ModelSummary&gt;
     #   * {Types::ListModelsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7711,6 +7773,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListMonitoringExecutionsResponse#monitoring_execution_summaries #monitoring_execution_summaries} => Array&lt;Types::MonitoringExecutionSummary&gt;
     #   * {Types::ListMonitoringExecutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7802,6 +7866,8 @@ module Aws::SageMaker
     #   * {Types::ListMonitoringSchedulesResponse#monitoring_schedule_summaries #monitoring_schedule_summaries} => Array&lt;Types::MonitoringScheduleSummary&gt;
     #   * {Types::ListMonitoringSchedulesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_monitoring_schedules({
@@ -7880,6 +7946,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListNotebookInstanceLifecycleConfigsOutput#next_token #next_token} => String
     #   * {Types::ListNotebookInstanceLifecycleConfigsOutput#notebook_instance_lifecycle_configs #notebook_instance_lifecycle_configs} => Array&lt;Types::NotebookInstanceLifecycleConfigSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7982,6 +8050,8 @@ module Aws::SageMaker
     #   * {Types::ListNotebookInstancesOutput#next_token #next_token} => String
     #   * {Types::ListNotebookInstancesOutput#notebook_instances #notebook_instances} => Array&lt;Types::NotebookInstanceSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_notebook_instances({
@@ -8069,6 +8139,8 @@ module Aws::SageMaker
     #   * {Types::ListProcessingJobsResponse#processing_job_summaries #processing_job_summaries} => Array&lt;Types::ProcessingJobSummary&gt;
     #   * {Types::ListProcessingJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_processing_jobs({
@@ -8128,6 +8200,8 @@ module Aws::SageMaker
     #   * {Types::ListSubscribedWorkteamsResponse#subscribed_workteams #subscribed_workteams} => Array&lt;Types::SubscribedWorkteam&gt;
     #   * {Types::ListSubscribedWorkteamsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_subscribed_workteams({
@@ -8173,6 +8247,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListTagsOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8242,6 +8318,8 @@ module Aws::SageMaker
     #   * {Types::ListTrainingJobsResponse#training_job_summaries #training_job_summaries} => Array&lt;Types::TrainingJobSummary&gt;
     #   * {Types::ListTrainingJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_training_jobs({
@@ -8309,6 +8387,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListTrainingJobsForHyperParameterTuningJobResponse#training_job_summaries #training_job_summaries} => Array&lt;Types::HyperParameterTrainingJobSummary&gt;
     #   * {Types::ListTrainingJobsForHyperParameterTuningJobResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8394,6 +8474,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListTransformJobsResponse#transform_job_summaries #transform_job_summaries} => Array&lt;Types::TransformJobSummary&gt;
     #   * {Types::ListTransformJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8486,6 +8568,8 @@ module Aws::SageMaker
     #   * {Types::ListTrialComponentsResponse#trial_component_summaries #trial_component_summaries} => Array&lt;Types::TrialComponentSummary&gt;
     #   * {Types::ListTrialComponentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_trial_components({
@@ -8572,6 +8656,8 @@ module Aws::SageMaker
     #   * {Types::ListTrialsResponse#trial_summaries #trial_summaries} => Array&lt;Types::TrialSummary&gt;
     #   * {Types::ListTrialsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_trials({
@@ -8633,6 +8719,8 @@ module Aws::SageMaker
     #   * {Types::ListUserProfilesResponse#user_profiles #user_profiles} => Array&lt;Types::UserProfileDetails&gt;
     #   * {Types::ListUserProfilesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_user_profiles({
@@ -8690,6 +8778,8 @@ module Aws::SageMaker
     #
     #   * {Types::ListWorkteamsResponse#workteams #workteams} => Array&lt;Types::Workteam&gt;
     #   * {Types::ListWorkteamsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8814,6 +8904,8 @@ module Aws::SageMaker
     #
     #   * {Types::SearchResponse#results #results} => Array&lt;Types::SearchRecord&gt;
     #   * {Types::SearchResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

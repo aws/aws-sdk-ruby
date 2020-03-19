@@ -6,13 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Backup
-  # This class provides a resource oriented interface for Backup.
-  # To create a resource object:
-  #     resource = Aws::Backup::Resource.new(region: 'us-west-2')
-  # You can supply a client object with custom configuration that will be used for all resource operations.
-  # If you do not pass +:client+, a default client will be constructed.
-  #     client = Aws::Backup::Client.new(region: 'us-west-2')
-  #     resource = Aws::Backup::Resource.new(client: client)
+
   class Resource
 
     # @param options ({})

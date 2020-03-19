@@ -504,6 +504,11 @@ module Aws::ACM
     #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * certificate_validated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate AWS API Documentation
     #
     # @overload describe_certificate(params = {})
@@ -764,6 +769,8 @@ module Aws::ACM
     #
     #   * {Types::ListCertificatesResponse#next_token #next_token} => String
     #   * {Types::ListCertificatesResponse#certificate_summary_list #certificate_summary_list} => Array&lt;Types::CertificateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -1265,6 +1265,8 @@ module Aws::SWF
     #   * {Types::History#events #events} => Array&lt;Types::HistoryEvent&gt;
     #   * {Types::History#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workflow_execution_history({
@@ -1602,6 +1604,8 @@ module Aws::SWF
     #   * {Types::ActivityTypeInfos#type_infos #type_infos} => Array&lt;Types::ActivityTypeInfo&gt;
     #   * {Types::ActivityTypeInfos#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_activity_types({
@@ -1766,6 +1770,8 @@ module Aws::SWF
     #   * {Types::WorkflowExecutionInfos#execution_infos #execution_infos} => Array&lt;Types::WorkflowExecutionInfo&gt;
     #   * {Types::WorkflowExecutionInfos#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_closed_workflow_executions({
@@ -1884,6 +1890,8 @@ module Aws::SWF
     #
     #   * {Types::DomainInfos#domain_infos #domain_infos} => Array&lt;Types::DomainInfo&gt;
     #   * {Types::DomainInfos#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2013,6 +2021,8 @@ module Aws::SWF
     #
     #   * {Types::WorkflowExecutionInfos#execution_infos #execution_infos} => Array&lt;Types::WorkflowExecutionInfo&gt;
     #   * {Types::WorkflowExecutionInfos#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2153,6 +2163,8 @@ module Aws::SWF
     #
     #   * {Types::WorkflowTypeInfos#type_infos #type_infos} => Array&lt;Types::WorkflowTypeInfo&gt;
     #   * {Types::WorkflowTypeInfos#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2386,6 +2398,8 @@ module Aws::SWF
     #   * {Types::DecisionTask#events #events} => Array&lt;Types::HistoryEvent&gt;
     #   * {Types::DecisionTask#next_page_token #next_page_token} => String
     #   * {Types::DecisionTask#previous_started_event_id #previous_started_event_id} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

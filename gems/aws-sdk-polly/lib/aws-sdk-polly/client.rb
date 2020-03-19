@@ -672,6 +672,8 @@ module Aws::Polly
     #   * {Types::ListSpeechSynthesisTasksOutput#next_token #next_token} => String
     #   * {Types::ListSpeechSynthesisTasksOutput#synthesis_tasks #synthesis_tasks} => Array&lt;Types::SynthesisTask&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_speech_synthesis_tasks({

@@ -823,6 +823,12 @@ module Aws::EMR
     #   resp.cluster.step_concurrency_level #=> Integer
     #   resp.cluster.outpost_arn #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * cluster_running
+    #   * cluster_terminated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
     # @overload describe_cluster(params = {})
@@ -1031,6 +1037,11 @@ module Aws::EMR
     #   resp.step.status.timeline.start_date_time #=> Time
     #   resp.step.status.timeline.end_date_time #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * step_complete
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep AWS API Documentation
     #
     # @overload describe_step(params = {})
@@ -1087,6 +1098,8 @@ module Aws::EMR
     #   * {Types::ListBootstrapActionsOutput#bootstrap_actions #bootstrap_actions} => Array&lt;Types::Command&gt;
     #   * {Types::ListBootstrapActionsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_bootstrap_actions({
@@ -1137,6 +1150,8 @@ module Aws::EMR
     #
     #   * {Types::ListClustersOutput#clusters #clusters} => Array&lt;Types::ClusterSummary&gt;
     #   * {Types::ListClustersOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1190,6 +1205,8 @@ module Aws::EMR
     #
     #   * {Types::ListInstanceFleetsOutput#instance_fleets #instance_fleets} => Array&lt;Types::InstanceFleet&gt;
     #   * {Types::ListInstanceFleetsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1257,6 +1274,8 @@ module Aws::EMR
     #
     #   * {Types::ListInstanceGroupsOutput#instance_groups #instance_groups} => Array&lt;Types::InstanceGroup&gt;
     #   * {Types::ListInstanceGroupsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1374,6 +1393,8 @@ module Aws::EMR
     #   * {Types::ListInstancesOutput#instances #instances} => Array&lt;Types::Instance&gt;
     #   * {Types::ListInstancesOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instances({
@@ -1433,6 +1454,8 @@ module Aws::EMR
     #   * {Types::ListSecurityConfigurationsOutput#security_configurations #security_configurations} => Array&lt;Types::SecurityConfigurationSummary&gt;
     #   * {Types::ListSecurityConfigurationsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_configurations({
@@ -1478,6 +1501,8 @@ module Aws::EMR
     #
     #   * {Types::ListStepsOutput#steps #steps} => Array&lt;Types::StepSummary&gt;
     #   * {Types::ListStepsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

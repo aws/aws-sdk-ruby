@@ -826,6 +826,8 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::ListApplicationDependenciesResponse#dependencies #dependencies} => Array&lt;Types::ApplicationDependencySummary&gt;
     #   * {Types::ListApplicationDependenciesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_dependencies({
@@ -864,6 +866,8 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::ListApplicationVersionsResponse#next_token #next_token} => String
     #   * {Types::ListApplicationVersionsResponse#versions #versions} => Array&lt;Types::VersionSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_versions({
@@ -900,6 +904,8 @@ module Aws::ServerlessApplicationRepository
     #
     #   * {Types::ListApplicationsResponse#applications #applications} => Array&lt;Types::ApplicationSummary&gt;
     #   * {Types::ListApplicationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

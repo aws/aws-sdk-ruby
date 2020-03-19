@@ -2411,6 +2411,11 @@ module Aws::OpsWorks
     #   resp.apps[0].environment[0].value #=> String
     #   resp.apps[0].environment[0].secure #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * app_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeApps AWS API Documentation
     #
     # @overload describe_apps(params = {})
@@ -2547,6 +2552,11 @@ module Aws::OpsWorks
     #   resp.deployments[0].instance_ids #=> Array
     #   resp.deployments[0].instance_ids[0] #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * deployment_successful
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeployments AWS API Documentation
     #
     # @overload describe_deployments(params = {})
@@ -2599,6 +2609,8 @@ module Aws::OpsWorks
     #
     #   * {Types::DescribeEcsClustersResult#ecs_clusters #ecs_clusters} => Array&lt;Types::EcsCluster&gt;
     #   * {Types::DescribeEcsClustersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2847,6 +2859,14 @@ module Aws::OpsWorks
     #   resp.instances[0].subnet_id #=> String
     #   resp.instances[0].tenancy #=> String
     #   resp.instances[0].virtualization_type #=> String, one of "paravirtual", "hvm"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * instance_online
+    #   * instance_registered
+    #   * instance_stopped
+    #   * instance_terminated
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances AWS API Documentation
     #

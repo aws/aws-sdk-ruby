@@ -955,6 +955,8 @@ module Aws::MediaConnect
     #   * {Types::ListEntitlementsResponse#entitlements #entitlements} => Array&lt;Types::ListedEntitlement&gt;
     #   * {Types::ListEntitlementsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_entitlements({
@@ -990,6 +992,8 @@ module Aws::MediaConnect
     #
     #   * {Types::ListFlowsResponse#flows #flows} => Array&lt;Types::ListedFlow&gt;
     #   * {Types::ListFlowsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -392,6 +392,8 @@ module Aws::MigrationHubConfig
     #   * {Types::DescribeHomeRegionControlsResult#home_region_controls #home_region_controls} => Array&lt;Types::HomeRegionControl&gt;
     #   * {Types::DescribeHomeRegionControlsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_home_region_controls({

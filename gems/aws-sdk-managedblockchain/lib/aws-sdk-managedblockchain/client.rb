@@ -819,6 +819,8 @@ module Aws::ManagedBlockchain
     #   * {Types::ListInvitationsOutput#invitations #invitations} => Array&lt;Types::Invitation&gt;
     #   * {Types::ListInvitationsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_invitations({
@@ -881,6 +883,8 @@ module Aws::ManagedBlockchain
     #   * {Types::ListMembersOutput#members #members} => Array&lt;Types::MemberSummary&gt;
     #   * {Types::ListMembersOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_members({
@@ -938,6 +942,8 @@ module Aws::ManagedBlockchain
     #   * {Types::ListNetworksOutput#networks #networks} => Array&lt;Types::NetworkSummary&gt;
     #   * {Types::ListNetworksOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_networks({
@@ -993,6 +999,8 @@ module Aws::ManagedBlockchain
     #   * {Types::ListNodesOutput#nodes #nodes} => Array&lt;Types::NodeSummary&gt;
     #   * {Types::ListNodesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_nodes({
@@ -1044,6 +1052,8 @@ module Aws::ManagedBlockchain
     #   * {Types::ListProposalVotesOutput#proposal_votes #proposal_votes} => Array&lt;Types::VoteSummary&gt;
     #   * {Types::ListProposalVotesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_proposal_votes({
@@ -1086,6 +1096,8 @@ module Aws::ManagedBlockchain
     #
     #   * {Types::ListProposalsOutput#proposals #proposals} => Array&lt;Types::ProposalSummary&gt;
     #   * {Types::ListProposalsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

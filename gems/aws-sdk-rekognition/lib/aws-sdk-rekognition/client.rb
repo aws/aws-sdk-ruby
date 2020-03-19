@@ -1005,6 +1005,8 @@ module Aws::Rekognition
     #   * {Types::DescribeProjectVersionsResponse#project_version_descriptions #project_version_descriptions} => Array&lt;Types::ProjectVersionDescription&gt;
     #   * {Types::DescribeProjectVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_project_versions({
@@ -1050,6 +1052,12 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.version #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * project_version_running
+    #   * project_version_training_completed
+    #
     # @overload describe_project_versions(params = {})
     # @param [Hash] params ({})
     def describe_project_versions(params = {}, options = {})
@@ -1079,6 +1087,8 @@ module Aws::Rekognition
     #
     #   * {Types::DescribeProjectsResponse#project_descriptions #project_descriptions} => Array&lt;Types::ProjectDescription&gt;
     #   * {Types::DescribeProjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1941,6 +1951,8 @@ module Aws::Rekognition
     #   * {Types::GetCelebrityRecognitionResponse#next_token #next_token} => String
     #   * {Types::GetCelebrityRecognitionResponse#celebrities #celebrities} => Array&lt;Types::CelebrityRecognition&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_celebrity_recognition({
@@ -2084,6 +2096,8 @@ module Aws::Rekognition
     #   * {Types::GetContentModerationResponse#next_token #next_token} => String
     #   * {Types::GetContentModerationResponse#moderation_model_version #moderation_model_version} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_content_moderation({
@@ -2165,6 +2179,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceDetectionResponse#next_token #next_token} => String
     #   * {Types::GetFaceDetectionResponse#faces #faces} => Array&lt;Types::FaceDetection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2294,6 +2310,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceSearchResponse#next_token #next_token} => String
     #   * {Types::GetFaceSearchResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceSearchResponse#persons #persons} => Array&lt;Types::PersonMatch&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2441,6 +2459,8 @@ module Aws::Rekognition
     #   * {Types::GetLabelDetectionResponse#labels #labels} => Array&lt;Types::LabelDetection&gt;
     #   * {Types::GetLabelDetectionResponse#label_model_version #label_model_version} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_label_detection({
@@ -2551,6 +2571,8 @@ module Aws::Rekognition
     #   * {Types::GetPersonTrackingResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetPersonTrackingResponse#next_token #next_token} => String
     #   * {Types::GetPersonTrackingResponse#persons #persons} => Array&lt;Types::PersonDetection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2676,6 +2698,8 @@ module Aws::Rekognition
     #   * {Types::GetTextDetectionResponse#text_detections #text_detections} => Array&lt;Types::TextDetectionResult&gt;
     #   * {Types::GetTextDetectionResponse#next_token #next_token} => String
     #   * {Types::GetTextDetectionResponse#text_model_version #text_model_version} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3171,6 +3195,8 @@ module Aws::Rekognition
     #   * {Types::ListCollectionsResponse#next_token #next_token} => String
     #   * {Types::ListCollectionsResponse#face_model_versions #face_model_versions} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the collections
     #
@@ -3234,6 +3260,8 @@ module Aws::Rekognition
     #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
     #   * {Types::ListFacesResponse#next_token #next_token} => String
     #   * {Types::ListFacesResponse#face_model_version #face_model_version} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the faces in a collection
@@ -3418,6 +3446,8 @@ module Aws::Rekognition
     #
     #   * {Types::ListStreamProcessorsResponse#next_token #next_token} => String
     #   * {Types::ListStreamProcessorsResponse#stream_processors #stream_processors} => Array&lt;Types::StreamProcessor&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

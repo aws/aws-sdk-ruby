@@ -1575,6 +1575,8 @@ module Aws::Imagebuilder
     #   * {Types::ListComponentBuildVersionsResponse#component_summary_list #component_summary_list} => Array&lt;Types::ComponentSummary&gt;
     #   * {Types::ListComponentBuildVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_component_build_versions({
@@ -1635,6 +1637,8 @@ module Aws::Imagebuilder
     #   * {Types::ListComponentsResponse#component_version_list #component_version_list} => Array&lt;Types::ComponentVersion&gt;
     #   * {Types::ListComponentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_components({
@@ -1689,6 +1693,8 @@ module Aws::Imagebuilder
     #   * {Types::ListDistributionConfigurationsResponse#request_id #request_id} => String
     #   * {Types::ListDistributionConfigurationsResponse#distribution_configuration_summary_list #distribution_configuration_summary_list} => Array&lt;Types::DistributionConfigurationSummary&gt;
     #   * {Types::ListDistributionConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1746,6 +1752,8 @@ module Aws::Imagebuilder
     #   * {Types::ListImageBuildVersionsResponse#request_id #request_id} => String
     #   * {Types::ListImageBuildVersionsResponse#image_summary_list #image_summary_list} => Array&lt;Types::ImageSummary&gt;
     #   * {Types::ListImageBuildVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1815,6 +1823,8 @@ module Aws::Imagebuilder
     #   * {Types::ListImagePipelineImagesResponse#image_summary_list #image_summary_list} => Array&lt;Types::ImageSummary&gt;
     #   * {Types::ListImagePipelineImagesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_pipeline_images({
@@ -1878,6 +1888,8 @@ module Aws::Imagebuilder
     #   * {Types::ListImagePipelinesResponse#request_id #request_id} => String
     #   * {Types::ListImagePipelinesResponse#image_pipeline_list #image_pipeline_list} => Array&lt;Types::ImagePipeline&gt;
     #   * {Types::ListImagePipelinesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1950,6 +1962,8 @@ module Aws::Imagebuilder
     #   * {Types::ListImageRecipesResponse#image_recipe_summary_list #image_recipe_summary_list} => Array&lt;Types::ImageRecipeSummary&gt;
     #   * {Types::ListImageRecipesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_recipes({
@@ -2013,6 +2027,8 @@ module Aws::Imagebuilder
     #   * {Types::ListImagesResponse#image_version_list #image_version_list} => Array&lt;Types::ImageVersion&gt;
     #   * {Types::ListImagesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_images({
@@ -2065,6 +2081,8 @@ module Aws::Imagebuilder
     #   * {Types::ListInfrastructureConfigurationsResponse#request_id #request_id} => String
     #   * {Types::ListInfrastructureConfigurationsResponse#infrastructure_configuration_summary_list #infrastructure_configuration_summary_list} => Array&lt;Types::InfrastructureConfigurationSummary&gt;
     #   * {Types::ListInfrastructureConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

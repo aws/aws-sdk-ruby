@@ -370,6 +370,8 @@ module Aws::CostandUsageReportService
     #   * {Types::DescribeReportDefinitionsResponse#report_definitions #report_definitions} => Array&lt;Types::ReportDefinition&gt;
     #   * {Types::DescribeReportDefinitionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the AWS Cost and Usage reports for the account.
     #

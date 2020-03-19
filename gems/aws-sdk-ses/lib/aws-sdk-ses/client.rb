@@ -2036,6 +2036,11 @@ module Aws::SES
     #   resp.verification_attributes["Identity"].verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
     #   resp.verification_attributes["Identity"].verification_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * identity_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributes AWS API Documentation
     #
     # @overload get_identity_verification_attributes(params = {})
@@ -2263,6 +2268,8 @@ module Aws::SES
     #   * {Types::ListCustomVerificationEmailTemplatesResponse#custom_verification_email_templates #custom_verification_email_templates} => Array&lt;Types::CustomVerificationEmailTemplate&gt;
     #   * {Types::ListCustomVerificationEmailTemplatesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_custom_verification_email_templates({
@@ -2311,6 +2318,8 @@ module Aws::SES
     #
     #   * {Types::ListIdentitiesResponse#identities #identities} => Array&lt;String&gt;
     #   * {Types::ListIdentitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: ListIdentities

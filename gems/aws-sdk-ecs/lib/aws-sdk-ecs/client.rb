@@ -3016,6 +3016,12 @@ module Aws::ECS
     #   resp.failures[0].reason #=> String
     #   resp.failures[0].detail #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * services_inactive
+    #   * services_stable
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices AWS API Documentation
     #
     # @overload describe_services(params = {})
@@ -3551,6 +3557,12 @@ module Aws::ECS
     #   resp.failures[0].reason #=> String
     #   resp.failures[0].detail #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * tasks_running
+    #   * tasks_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks AWS API Documentation
     #
     # @overload describe_tasks(params = {})
@@ -3653,6 +3665,8 @@ module Aws::ECS
     #
     #   * {Types::ListAccountSettingsResponse#settings #settings} => Array&lt;Types::Setting&gt;
     #   * {Types::ListAccountSettingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To view your effective account settings
@@ -3793,6 +3807,8 @@ module Aws::ECS
     #   * {Types::ListAttributesResponse#attributes #attributes} => Array&lt;Types::Attribute&gt;
     #   * {Types::ListAttributesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_attributes({
@@ -3850,6 +3866,8 @@ module Aws::ECS
     #
     #   * {Types::ListClustersResponse#cluster_arns #cluster_arns} => Array&lt;String&gt;
     #   * {Types::ListClustersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list your available clusters
@@ -3949,6 +3967,8 @@ module Aws::ECS
     #   * {Types::ListContainerInstancesResponse#container_instance_arns #container_instance_arns} => Array&lt;String&gt;
     #   * {Types::ListContainerInstancesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list your available container instances in a cluster
     #
@@ -4030,6 +4050,8 @@ module Aws::ECS
     #
     #   * {Types::ListServicesResponse#service_arns #service_arns} => Array&lt;String&gt;
     #   * {Types::ListServicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the services in a cluster
@@ -4177,6 +4199,8 @@ module Aws::ECS
     #   * {Types::ListTaskDefinitionFamiliesResponse#families #families} => Array&lt;String&gt;
     #   * {Types::ListTaskDefinitionFamiliesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list your registered task definition families
     #
@@ -4289,6 +4313,8 @@ module Aws::ECS
     #
     #   * {Types::ListTaskDefinitionsResponse#task_definition_arns #task_definition_arns} => Array&lt;String&gt;
     #   * {Types::ListTaskDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list your registered task definitions
@@ -4432,6 +4458,8 @@ module Aws::ECS
     #
     #   * {Types::ListTasksResponse#task_arns #task_arns} => Array&lt;String&gt;
     #   * {Types::ListTasksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the tasks in a cluster

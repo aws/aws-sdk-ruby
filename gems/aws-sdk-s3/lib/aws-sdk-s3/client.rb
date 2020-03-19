@@ -5322,6 +5322,12 @@ module Aws::S3
     #     bucket: "BucketName", # required
     #   })
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * bucket_exists
+    #   * bucket_not_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucket AWS API Documentation
     #
     # @overload head_bucket(params = {})
@@ -5581,6 +5587,12 @@ module Aws::S3
     #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
     #   resp.object_lock_retain_until_date #=> Time
     #   resp.object_lock_legal_hold_status #=> String, one of "ON", "OFF"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * object_exists
+    #   * object_not_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject AWS API Documentation
     #
@@ -6037,6 +6049,8 @@ module Aws::S3
     #   * {Types::ListMultipartUploadsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListMultipartUploadsOutput#encoding_type #encoding_type} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
@@ -6269,6 +6283,8 @@ module Aws::S3
     #   * {Types::ListObjectVersionsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListObjectVersionsOutput#encoding_type #encoding_type} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list object versions
     #
@@ -6429,6 +6445,8 @@ module Aws::S3
     #   * {Types::ListObjectsOutput#max_keys #max_keys} => Integer
     #   * {Types::ListObjectsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListObjectsOutput#encoding_type #encoding_type} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list objects in a bucket
@@ -6609,6 +6627,8 @@ module Aws::S3
     #   * {Types::ListObjectsV2Output#next_continuation_token #next_continuation_token} => String
     #   * {Types::ListObjectsV2Output#start_after #start_after} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get object list
     #
@@ -6784,6 +6804,8 @@ module Aws::S3
     #   * {Types::ListPartsOutput#owner #owner} => Types::Owner
     #   * {Types::ListPartsOutput#storage_class #storage_class} => String
     #   * {Types::ListPartsOutput#request_charged #request_charged} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list parts of a multipart upload.

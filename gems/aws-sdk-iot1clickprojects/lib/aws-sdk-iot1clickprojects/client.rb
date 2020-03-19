@@ -637,6 +637,8 @@ module Aws::IoT1ClickProjects
     #   * {Types::ListPlacementsResponse#placements #placements} => Array&lt;Types::PlacementSummary&gt;
     #   * {Types::ListPlacementsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_placements({
@@ -675,6 +677,8 @@ module Aws::IoT1ClickProjects
     #
     #   * {Types::ListProjectsResponse#projects #projects} => Array&lt;Types::ProjectSummary&gt;
     #   * {Types::ListProjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

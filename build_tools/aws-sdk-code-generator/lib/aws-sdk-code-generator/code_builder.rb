@@ -115,6 +115,7 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
+        paginators: @service.paginators,
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway'

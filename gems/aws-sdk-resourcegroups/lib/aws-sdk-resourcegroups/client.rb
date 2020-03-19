@@ -532,6 +532,8 @@ module Aws::ResourceGroups
     #   * {Types::ListGroupResourcesOutput#next_token #next_token} => String
     #   * {Types::ListGroupResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_resources({
@@ -592,6 +594,8 @@ module Aws::ResourceGroups
     #   * {Types::ListGroupsOutput#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups({
@@ -647,6 +651,8 @@ module Aws::ResourceGroups
     #   * {Types::SearchResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::SearchResourcesOutput#next_token #next_token} => String
     #   * {Types::SearchResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

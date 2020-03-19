@@ -421,6 +421,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   * {Types::GetComplianceSummaryOutput#summary_list #summary_list} => Array&lt;Types::Summary&gt;
     #   * {Types::GetComplianceSummaryOutput#pagination_token #pagination_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_compliance_summary({
@@ -599,6 +601,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   * {Types::GetResourcesOutput#pagination_token #pagination_token} => String
     #   * {Types::GetResourcesOutput#resource_tag_mapping_list #resource_tag_mapping_list} => Array&lt;Types::ResourceTagMapping&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resources({
@@ -652,6 +656,8 @@ module Aws::ResourceGroupsTaggingAPI
     #   * {Types::GetTagKeysOutput#pagination_token #pagination_token} => String
     #   * {Types::GetTagKeysOutput#tag_keys #tag_keys} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_tag_keys({
@@ -690,6 +696,8 @@ module Aws::ResourceGroupsTaggingAPI
     #
     #   * {Types::GetTagValuesOutput#pagination_token #pagination_token} => String
     #   * {Types::GetTagValuesOutput#tag_values #tag_values} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

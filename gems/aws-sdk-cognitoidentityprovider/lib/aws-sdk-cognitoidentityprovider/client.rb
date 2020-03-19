@@ -1355,6 +1355,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::AdminListGroupsForUserResponse#groups #groups} => Array&lt;Types::GroupType&gt;
     #   * {Types::AdminListGroupsForUserResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.admin_list_groups_for_user({
@@ -1404,6 +1406,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::AdminListUserAuthEventsResponse#auth_events #auth_events} => Array&lt;Types::AuthEventType&gt;
     #   * {Types::AdminListUserAuthEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4623,6 +4627,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::ListGroupsResponse#groups #groups} => Array&lt;Types::GroupType&gt;
     #   * {Types::ListGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups({
@@ -4668,6 +4674,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::ListIdentityProvidersResponse#providers #providers} => Array&lt;Types::ProviderDescription&gt;
     #   * {Types::ListIdentityProvidersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_identity_providers({
@@ -4709,6 +4717,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::ListResourceServersResponse#resource_servers #resource_servers} => Array&lt;Types::ResourceServerType&gt;
     #   * {Types::ListResourceServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4848,6 +4858,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::ListUserPoolClientsResponse#user_pool_clients #user_pool_clients} => Array&lt;Types::UserPoolClientDescription&gt;
     #   * {Types::ListUserPoolClientsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_user_pool_clients({
@@ -4888,6 +4900,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::ListUserPoolsResponse#user_pools #user_pools} => Array&lt;Types::UserPoolDescriptionType&gt;
     #   * {Types::ListUserPoolsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5002,6 +5016,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::UserType&gt;
     #   * {Types::ListUsersResponse#pagination_token #pagination_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_users({
@@ -5059,6 +5075,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * {Types::ListUsersInGroupResponse#users #users} => Array&lt;Types::UserType&gt;
     #   * {Types::ListUsersInGroupResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

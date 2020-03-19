@@ -872,6 +872,8 @@ module Aws::DataExchange
     #   * {Types::ListDataSetRevisionsResponse#next_token #next_token} => String
     #   * {Types::ListDataSetRevisionsResponse#revisions #revisions} => Array&lt;Types::RevisionEntry&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_set_revisions({
@@ -917,6 +919,8 @@ module Aws::DataExchange
     #
     #   * {Types::ListDataSetsResponse#data_sets #data_sets} => Array&lt;Types::DataSetEntry&gt;
     #   * {Types::ListDataSetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -965,6 +969,8 @@ module Aws::DataExchange
     #
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::JobEntry&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1043,6 +1049,8 @@ module Aws::DataExchange
     #
     #   * {Types::ListRevisionAssetsResponse#assets #assets} => Array&lt;Types::AssetEntry&gt;
     #   * {Types::ListRevisionAssetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

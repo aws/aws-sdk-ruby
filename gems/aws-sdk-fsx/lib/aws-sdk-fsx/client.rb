@@ -1333,6 +1333,8 @@ module Aws::FSx
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
     #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe Amazon FSx backups
     #
@@ -1494,6 +1496,8 @@ module Aws::FSx
     #   * {Types::DescribeDataRepositoryTasksResponse#data_repository_tasks #data_repository_tasks} => Array&lt;Types::DataRepositoryTask&gt;
     #   * {Types::DescribeDataRepositoryTasksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_data_repository_tasks({
@@ -1591,6 +1595,8 @@ module Aws::FSx
     #
     #   * {Types::DescribeFileSystemsResponse#file_systems #file_systems} => Array&lt;Types::FileSystem&gt;
     #   * {Types::DescribeFileSystemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe an Amazon FSx file system

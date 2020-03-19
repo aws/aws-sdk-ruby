@@ -3942,6 +3942,8 @@ module Aws::IAM
     #   * {Types::GetAccountAuthorizationDetailsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::GetAccountAuthorizationDetailsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_account_authorization_details({
@@ -4390,6 +4392,8 @@ module Aws::IAM
     #   * {Types::GetGroupResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::GetGroupResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_group({
@@ -4589,6 +4593,11 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].tags[0].value #=> String
     #   resp.instance_profile.roles[0].role_last_used.last_used_date #=> Time
     #   resp.instance_profile.roles[0].role_last_used.region #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * instance_profile_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile AWS API Documentation
     #
@@ -4903,6 +4912,11 @@ module Aws::IAM
     #   resp.policy.create_date #=> Time
     #   resp.policy.update_date #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * policy_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy AWS API Documentation
     #
     # @overload get_policy(params = {})
@@ -5074,6 +5088,11 @@ module Aws::IAM
     #   resp.role.tags[0].value #=> String
     #   resp.role.role_last_used.last_used_date #=> Time
     #   resp.role.role_last_used.region #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * role_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole AWS API Documentation
     #
@@ -5734,6 +5753,11 @@ module Aws::IAM
     #   resp.user.tags[0].key #=> String
     #   resp.user.tags[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * user_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUser AWS API Documentation
     #
     # @overload get_user(params = {})
@@ -5872,6 +5896,8 @@ module Aws::IAM
     #   * {Types::ListAccessKeysResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAccessKeysResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the access key IDs for an IAM user
     #
@@ -5956,6 +5982,8 @@ module Aws::IAM
     #   * {Types::ListAccountAliasesResponse#account_aliases #account_aliases} => Array&lt;String&gt;
     #   * {Types::ListAccountAliasesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAccountAliasesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list account aliases
@@ -6065,6 +6093,8 @@ module Aws::IAM
     #   * {Types::ListAttachedGroupPoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAttachedGroupPoliciesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_attached_group_policies({
@@ -6161,6 +6191,8 @@ module Aws::IAM
     #   * {Types::ListAttachedRolePoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAttachedRolePoliciesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_attached_role_policies({
@@ -6256,6 +6288,8 @@ module Aws::IAM
     #   * {Types::ListAttachedUserPoliciesResponse#attached_policies #attached_policies} => Array&lt;Types::AttachedPolicy&gt;
     #   * {Types::ListAttachedUserPoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListAttachedUserPoliciesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6366,6 +6400,8 @@ module Aws::IAM
     #   * {Types::ListEntitiesForPolicyResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListEntitiesForPolicyResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_entities_for_policy({
@@ -6450,6 +6486,8 @@ module Aws::IAM
     #   * {Types::ListGroupPoliciesResponse#policy_names #policy_names} => Array&lt;String&gt;
     #   * {Types::ListGroupPoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListGroupPoliciesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the in-line policies for an IAM group
@@ -6536,6 +6574,8 @@ module Aws::IAM
     #   * {Types::ListGroupsResponse#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListGroupsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the IAM groups for the current account
@@ -6639,6 +6679,8 @@ module Aws::IAM
     #   * {Types::ListGroupsForUserResponse#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsForUserResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListGroupsForUserResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the groups that an IAM user belongs to
@@ -6750,6 +6792,8 @@ module Aws::IAM
     #   * {Types::ListInstanceProfilesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListInstanceProfilesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instance_profiles({
@@ -6841,6 +6885,8 @@ module Aws::IAM
     #   * {Types::ListInstanceProfilesForRoleResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListInstanceProfilesForRoleResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instance_profiles_for_role({
@@ -6928,6 +6974,8 @@ module Aws::IAM
     #   * {Types::ListMFADevicesResponse#mfa_devices #mfa_devices} => Array&lt;Types::MFADevice&gt;
     #   * {Types::ListMFADevicesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListMFADevicesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7061,6 +7109,8 @@ module Aws::IAM
     #   * {Types::ListPoliciesResponse#policies #policies} => Array&lt;Types::Policy&gt;
     #   * {Types::ListPoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListPoliciesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7297,6 +7347,8 @@ module Aws::IAM
     #   * {Types::ListPolicyVersionsResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListPolicyVersionsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policy_versions({
@@ -7374,6 +7426,8 @@ module Aws::IAM
     #   * {Types::ListRolePoliciesResponse#policy_names #policy_names} => Array&lt;String&gt;
     #   * {Types::ListRolePoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListRolePoliciesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7543,6 +7597,8 @@ module Aws::IAM
     #   * {Types::ListRolesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListRolesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_roles({
@@ -7666,6 +7722,8 @@ module Aws::IAM
     #   * {Types::ListSSHPublicKeysResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListSSHPublicKeysResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ssh_public_keys({
@@ -7748,6 +7806,8 @@ module Aws::IAM
     #   * {Types::ListServerCertificatesResponse#server_certificate_metadata_list #server_certificate_metadata_list} => Array&lt;Types::ServerCertificateMetadata&gt;
     #   * {Types::ListServerCertificatesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListServerCertificatesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7889,6 +7949,8 @@ module Aws::IAM
     #   * {Types::ListSigningCertificatesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListSigningCertificatesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the signing certificates for an IAM user
     #
@@ -7989,6 +8051,8 @@ module Aws::IAM
     #   * {Types::ListUserPoliciesResponse#policy_names #policy_names} => Array&lt;String&gt;
     #   * {Types::ListUserPoliciesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListUserPoliciesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8154,6 +8218,8 @@ module Aws::IAM
     #   * {Types::ListUsersResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListUsersResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list IAM users
     #
@@ -8253,6 +8319,8 @@ module Aws::IAM
     #   * {Types::ListVirtualMFADevicesResponse#virtual_mfa_devices #virtual_mfa_devices} => Array&lt;Types::VirtualMFADevice&gt;
     #   * {Types::ListVirtualMFADevicesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListVirtualMFADevicesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list virtual MFA devices
@@ -9357,6 +9425,8 @@ module Aws::IAM
     #   * {Types::SimulatePolicyResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::SimulatePolicyResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.simulate_custom_policy({
@@ -9681,6 +9751,8 @@ module Aws::IAM
     #   * {Types::SimulatePolicyResponse#evaluation_results #evaluation_results} => Array&lt;Types::EvaluationResult&gt;
     #   * {Types::SimulatePolicyResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::SimulatePolicyResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

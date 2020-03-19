@@ -577,6 +577,8 @@ module Aws::Mobile
     #   * {Types::ListBundlesResult#bundle_list #bundle_list} => Array&lt;Types::BundleDetails&gt;
     #   * {Types::ListBundlesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_bundles({
@@ -619,6 +621,8 @@ module Aws::Mobile
     #
     #   * {Types::ListProjectsResult#projects #projects} => Array&lt;Types::ProjectSummary&gt;
     #   * {Types::ListProjectsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -1308,6 +1308,8 @@ module Aws::WorkDocs
     #   * {Types::DescribeDocumentVersionsResponse#document_versions #document_versions} => Array&lt;Types::DocumentVersionMetadata&gt;
     #   * {Types::DescribeDocumentVersionsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_document_versions({
@@ -1388,6 +1390,8 @@ module Aws::WorkDocs
     #   * {Types::DescribeFolderContentsResponse#folders #folders} => Array&lt;Types::FolderMetadata&gt;
     #   * {Types::DescribeFolderContentsResponse#documents #documents} => Array&lt;Types::DocumentMetadata&gt;
     #   * {Types::DescribeFolderContentsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1706,6 +1710,8 @@ module Aws::WorkDocs
     #   * {Types::DescribeUsersResponse#users #users} => Array&lt;Types::User&gt;
     #   * {Types::DescribeUsersResponse#total_number_of_users #total_number_of_users} => Integer
     #   * {Types::DescribeUsersResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

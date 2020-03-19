@@ -1287,6 +1287,12 @@ module Aws::Glacier
     #   resp.number_of_archives #=> Integer
     #   resp.size_in_bytes #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * vault_exists
+    #   * vault_not_exists
+    #
     # @overload describe_vault(params = {})
     # @param [Hash] params ({})
     def describe_vault(params = {}, options = {})
@@ -2174,6 +2180,8 @@ module Aws::Glacier
     #   * {Types::ListJobsOutput#job_list #job_list} => Array&lt;Types::GlacierJobDescription&gt;
     #   * {Types::ListJobsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list jobs for a vault
     #
@@ -2359,6 +2367,8 @@ module Aws::Glacier
     #   * {Types::ListMultipartUploadsOutput#uploads_list #uploads_list} => Array&lt;Types::UploadListElement&gt;
     #   * {Types::ListMultipartUploadsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list all the in-progress multipart uploads for a vault
     #
@@ -2490,6 +2500,8 @@ module Aws::Glacier
     #   * {Types::ListPartsOutput#creation_date #creation_date} => Time
     #   * {Types::ListPartsOutput#parts #parts} => Array&lt;Types::PartListElement&gt;
     #   * {Types::ListPartsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the parts of an archive that have been uploaded in a multipart upload
@@ -2720,6 +2732,8 @@ module Aws::Glacier
     #
     #   * {Types::ListVaultsOutput#vault_list #vault_list} => Array&lt;Types::DescribeVaultOutput&gt;
     #   * {Types::ListVaultsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list all vaults owned by the calling user's account

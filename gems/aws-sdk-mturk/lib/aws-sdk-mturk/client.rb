@@ -1680,6 +1680,8 @@ module Aws::MTurk
     #   * {Types::ListAssignmentsForHITResponse#num_results #num_results} => Integer
     #   * {Types::ListAssignmentsForHITResponse#assignments #assignments} => Array&lt;Types::Assignment&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_assignments_for_hit({
@@ -1742,6 +1744,8 @@ module Aws::MTurk
     #   * {Types::ListBonusPaymentsResponse#next_token #next_token} => String
     #   * {Types::ListBonusPaymentsResponse#bonus_payments #bonus_payments} => Array&lt;Types::BonusPayment&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_bonus_payments({
@@ -1786,6 +1790,8 @@ module Aws::MTurk
     #   * {Types::ListHITsResponse#next_token #next_token} => String
     #   * {Types::ListHITsResponse#num_results #num_results} => Integer
     #   * {Types::ListHITsResponse#hits #hits} => Array&lt;Types::HIT&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1858,6 +1864,8 @@ module Aws::MTurk
     #   * {Types::ListHITsForQualificationTypeResponse#next_token #next_token} => String
     #   * {Types::ListHITsForQualificationTypeResponse#num_results #num_results} => Integer
     #   * {Types::ListHITsForQualificationTypeResponse#hits #hits} => Array&lt;Types::HIT&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1935,6 +1943,8 @@ module Aws::MTurk
     #   * {Types::ListQualificationRequestsResponse#next_token #next_token} => String
     #   * {Types::ListQualificationRequestsResponse#qualification_requests #qualification_requests} => Array&lt;Types::QualificationRequest&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_qualification_requests({
@@ -1998,6 +2008,8 @@ module Aws::MTurk
     #   * {Types::ListQualificationTypesResponse#num_results #num_results} => Integer
     #   * {Types::ListQualificationTypesResponse#next_token #next_token} => String
     #   * {Types::ListQualificationTypesResponse#qualification_types #qualification_types} => Array&lt;Types::QualificationType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2075,6 +2087,8 @@ module Aws::MTurk
     #   * {Types::ListReviewPolicyResultsForHITResponse#assignment_review_report #assignment_review_report} => Types::ReviewReport
     #   * {Types::ListReviewPolicyResultsForHITResponse#hit_review_report #hit_review_report} => Types::ReviewReport
     #   * {Types::ListReviewPolicyResultsForHITResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2175,6 +2189,8 @@ module Aws::MTurk
     #   * {Types::ListReviewableHITsResponse#num_results #num_results} => Integer
     #   * {Types::ListReviewableHITsResponse#hits #hits} => Array&lt;Types::HIT&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_reviewable_hits({
@@ -2243,6 +2259,8 @@ module Aws::MTurk
     #   * {Types::ListWorkerBlocksResponse#num_results #num_results} => Integer
     #   * {Types::ListWorkerBlocksResponse#worker_blocks #worker_blocks} => Array&lt;Types::WorkerBlock&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_worker_blocks({
@@ -2288,6 +2306,8 @@ module Aws::MTurk
     #   * {Types::ListWorkersWithQualificationTypeResponse#next_token #next_token} => String
     #   * {Types::ListWorkersWithQualificationTypeResponse#num_results #num_results} => Integer
     #   * {Types::ListWorkersWithQualificationTypeResponse#qualifications #qualifications} => Array&lt;Types::Qualification&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -683,6 +683,8 @@ module Aws::CloudHSMV2
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
     #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_backups({
@@ -755,6 +757,8 @@ module Aws::CloudHSMV2
     #
     #   * {Types::DescribeClustersResponse#clusters #clusters} => Array&lt;Types::Cluster&gt;
     #   * {Types::DescribeClustersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -884,6 +888,8 @@ module Aws::CloudHSMV2
     #
     #   * {Types::ListTagsResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

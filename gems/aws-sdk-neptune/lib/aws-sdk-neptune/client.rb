@@ -3023,6 +3023,8 @@ module Aws::Neptune
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
     #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_engine_versions({
@@ -3134,6 +3136,8 @@ module Aws::Neptune
     #
     #   * {Types::DBInstanceMessage#marker #marker} => String
     #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3252,6 +3256,12 @@ module Aws::Neptune
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
     #   resp.db_instances[0].deletion_protection #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * db_instance_available
+    #   * db_instance_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBInstances AWS API Documentation
     #
     # @overload describe_db_instances(params = {})
@@ -3298,6 +3308,8 @@ module Aws::Neptune
     #
     #   * {Types::DBParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBParameterGroupsMessage#db_parameter_groups #db_parameter_groups} => Array&lt;Types::DBParameterGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3374,6 +3386,8 @@ module Aws::Neptune
     #   * {Types::DBParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBParameterGroupDetails#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_parameters({
@@ -3449,6 +3463,8 @@ module Aws::Neptune
     #
     #   * {Types::DBSubnetGroupMessage#marker #marker} => String
     #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3585,6 +3601,8 @@ module Aws::Neptune
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_engine_default_parameters({
@@ -3701,6 +3719,8 @@ module Aws::Neptune
     #
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3828,6 +3848,8 @@ module Aws::Neptune
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -3913,6 +3935,8 @@ module Aws::Neptune
     #
     #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
     #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

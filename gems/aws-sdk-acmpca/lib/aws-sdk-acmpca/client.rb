@@ -743,6 +743,11 @@ module Aws::ACMPCA
     #   resp.s3_key #=> String
     #   resp.created_at #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * audit_report_created
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/DescribeCertificateAuthorityAuditReport AWS API Documentation
     #
     # @overload describe_certificate_authority_audit_report(params = {})
@@ -791,6 +796,11 @@ module Aws::ACMPCA
     #
     #   resp.certificate #=> String
     #   resp.certificate_chain #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * certificate_issued
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificate AWS API Documentation
     #
@@ -866,6 +876,11 @@ module Aws::ACMPCA
     # @example Response structure
     #
     #   resp.csr #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * certificate_authority_csr_created
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/GetCertificateAuthorityCsr AWS API Documentation
     #
@@ -1081,6 +1096,8 @@ module Aws::ACMPCA
     #   * {Types::ListCertificateAuthoritiesResponse#certificate_authorities #certificate_authorities} => Array&lt;Types::CertificateAuthority&gt;
     #   * {Types::ListCertificateAuthoritiesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_certificate_authorities({
@@ -1161,6 +1178,8 @@ module Aws::ACMPCA
     #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
     #   * {Types::ListPermissionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permissions({
@@ -1219,6 +1238,8 @@ module Aws::ACMPCA
     #
     #   * {Types::ListTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

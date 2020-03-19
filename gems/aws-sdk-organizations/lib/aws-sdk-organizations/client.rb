@@ -2814,6 +2814,8 @@ module Aws::Organizations
     #   * {Types::ListAWSServiceAccessForOrganizationResponse#enabled_service_principals #enabled_service_principals} => Array&lt;Types::EnabledServicePrincipal&gt;
     #   * {Types::ListAWSServiceAccessForOrganizationResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_aws_service_access_for_organization({
@@ -2874,6 +2876,8 @@ module Aws::Organizations
     #
     #   * {Types::ListAccountsResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of all of the accounts in an organization
@@ -2998,6 +3002,8 @@ module Aws::Organizations
     #   * {Types::ListAccountsForParentResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsForParentResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of all of the accounts in a root or OU
     #
@@ -3121,6 +3127,8 @@ module Aws::Organizations
     #   * {Types::ListChildrenResponse#children #children} => Array&lt;Types::Child&gt;
     #   * {Types::ListChildrenResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of all of the child accounts and OUs in a parent root or OU
     #
@@ -3211,6 +3219,8 @@ module Aws::Organizations
     #
     #   * {Types::ListCreateAccountStatusResponse#create_account_statuses #create_account_statuses} => Array&lt;Types::CreateAccountStatus&gt;
     #   * {Types::ListCreateAccountStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of completed account creation requests made in the organization
@@ -3340,6 +3350,8 @@ module Aws::Organizations
     #
     #   * {Types::ListHandshakesForAccountResponse#handshakes #handshakes} => Array&lt;Types::Handshake&gt;
     #   * {Types::ListHandshakesForAccountResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of the handshakes sent to an account
@@ -3488,6 +3500,8 @@ module Aws::Organizations
     #
     #   * {Types::ListHandshakesForOrganizationResponse#handshakes #handshakes} => Array&lt;Types::Handshake&gt;
     #   * {Types::ListHandshakesForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of the handshakes associated with an organization
@@ -3681,6 +3695,8 @@ module Aws::Organizations
     #   * {Types::ListOrganizationalUnitsForParentResponse#organizational_units #organizational_units} => Array&lt;Types::OrganizationalUnit&gt;
     #   * {Types::ListOrganizationalUnitsForParentResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of all of the child OUs in a parent root or OU
     #
@@ -3792,6 +3808,8 @@ module Aws::Organizations
     #   * {Types::ListParentsResponse#parents #parents} => Array&lt;Types::Parent&gt;
     #   * {Types::ListParentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of all of the parents of a child OU or account
     #
@@ -3874,6 +3892,8 @@ module Aws::Organizations
     #
     #   * {Types::ListPoliciesResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list policies in the organization
@@ -4004,6 +4024,8 @@ module Aws::Organizations
     #   * {Types::ListPoliciesForTargetResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesForTargetResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list policies attached to a root, OU, or account
     #
@@ -4104,6 +4126,8 @@ module Aws::Organizations
     #   * {Types::ListRootsResponse#roots #roots} => Array&lt;Types::Root&gt;
     #   * {Types::ListRootsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of roots in the organization
     #
@@ -4177,6 +4201,8 @@ module Aws::Organizations
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -4248,6 +4274,8 @@ module Aws::Organizations
     #
     #   * {Types::ListTargetsForPolicyResponse#targets #targets} => Array&lt;Types::PolicyTargetSummary&gt;
     #   * {Types::ListTargetsForPolicyResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of roots, OUs, and accounts to which a policy is attached

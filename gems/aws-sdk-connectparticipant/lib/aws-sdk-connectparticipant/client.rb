@@ -433,6 +433,8 @@ module Aws::ConnectParticipant
     #   * {Types::GetTranscriptResponse#transcript #transcript} => Array&lt;Types::Item&gt;
     #   * {Types::GetTranscriptResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transcript({

@@ -2466,6 +2466,11 @@ module Aws::Route53
     #   resp.change_info.submitted_at #=> Time
     #   resp.change_info.comment #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * resource_record_sets_changed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange AWS API Documentation
     #
     # @overload get_change(params = {})
@@ -3250,6 +3255,8 @@ module Aws::Route53
     #   * {Types::ListHealthChecksResponse#next_marker #next_marker} => String
     #   * {Types::ListHealthChecksResponse#max_items #max_items} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_health_checks({
@@ -3348,6 +3355,8 @@ module Aws::Route53
     #   * {Types::ListHostedZonesResponse#is_truncated #is_truncated} => Boolean
     #   * {Types::ListHostedZonesResponse#next_marker #next_marker} => String
     #   * {Types::ListHostedZonesResponse#max_items #max_items} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3725,6 +3734,8 @@ module Aws::Route53
     #   * {Types::ListResourceRecordSetsResponse#next_record_type #next_record_type} => String
     #   * {Types::ListResourceRecordSetsResponse#next_record_identifier #next_record_identifier} => String
     #   * {Types::ListResourceRecordSetsResponse#max_items #max_items} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

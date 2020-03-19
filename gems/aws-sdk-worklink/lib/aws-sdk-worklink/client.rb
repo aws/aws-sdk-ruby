@@ -871,6 +871,8 @@ module Aws::WorkLink
     #   * {Types::ListDevicesResponse#devices #devices} => Array&lt;Types::DeviceSummary&gt;
     #   * {Types::ListDevicesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_devices({
@@ -912,6 +914,8 @@ module Aws::WorkLink
     #   * {Types::ListDomainsResponse#domains #domains} => Array&lt;Types::DomainSummary&gt;
     #   * {Types::ListDomainsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domains({
@@ -951,6 +955,8 @@ module Aws::WorkLink
     #
     #   * {Types::ListFleetsResponse#fleet_summary_list #fleet_summary_list} => Array&lt;Types::FleetSummary&gt;
     #   * {Types::ListFleetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -998,6 +1004,8 @@ module Aws::WorkLink
     #   * {Types::ListWebsiteAuthorizationProvidersResponse#website_authorization_providers #website_authorization_providers} => Array&lt;Types::WebsiteAuthorizationProviderSummary&gt;
     #   * {Types::ListWebsiteAuthorizationProvidersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_website_authorization_providers({
@@ -1041,6 +1049,8 @@ module Aws::WorkLink
     #
     #   * {Types::ListWebsiteCertificateAuthoritiesResponse#website_certificate_authorities #website_certificate_authorities} => Array&lt;Types::WebsiteCaSummary&gt;
     #   * {Types::ListWebsiteCertificateAuthoritiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

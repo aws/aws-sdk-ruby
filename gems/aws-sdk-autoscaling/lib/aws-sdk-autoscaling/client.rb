@@ -1825,6 +1825,8 @@ module Aws::AutoScaling
     #   * {Types::AutoScalingGroupsType#auto_scaling_groups #auto_scaling_groups} => Array&lt;Types::AutoScalingGroup&gt;
     #   * {Types::AutoScalingGroupsType#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe an Auto Scaling group
     #
@@ -1956,6 +1958,13 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].max_instance_lifetime #=> Integer
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * group_exists
+    #   * group_in_service
+    #   * group_not_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups AWS API Documentation
     #
     # @overload describe_auto_scaling_groups(params = {})
@@ -1984,6 +1993,8 @@ module Aws::AutoScaling
     #
     #   * {Types::AutoScalingInstancesType#auto_scaling_instances #auto_scaling_instances} => Array&lt;Types::AutoScalingInstanceDetails&gt;
     #   * {Types::AutoScalingInstancesType#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe one or more Auto Scaling instances
@@ -2103,6 +2114,8 @@ module Aws::AutoScaling
     #
     #   * {Types::LaunchConfigurationsType#launch_configurations #launch_configurations} => Array&lt;Types::LaunchConfiguration&gt;
     #   * {Types::LaunchConfigurationsType#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe Auto Scaling launch configurations
@@ -2515,6 +2528,8 @@ module Aws::AutoScaling
     #   * {Types::DescribeNotificationConfigurationsAnswer#notification_configurations #notification_configurations} => Array&lt;Types::NotificationConfiguration&gt;
     #   * {Types::DescribeNotificationConfigurationsAnswer#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe Auto Scaling notification configurations
     #
@@ -2594,6 +2609,8 @@ module Aws::AutoScaling
     #
     #   * {Types::PoliciesType#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
     #   * {Types::PoliciesType#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe Auto Scaling policies
@@ -2709,6 +2726,8 @@ module Aws::AutoScaling
     #
     #   * {Types::ActivitiesType#activities #activities} => Array&lt;Types::Activity&gt;
     #   * {Types::ActivitiesType#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe the scaling activities for an Auto Scaling group
@@ -2862,6 +2881,8 @@ module Aws::AutoScaling
     #   * {Types::ScheduledActionsType#scheduled_update_group_actions #scheduled_update_group_actions} => Array&lt;Types::ScheduledUpdateGroupAction&gt;
     #   * {Types::ScheduledActionsType#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe scheduled actions
     #
@@ -2950,6 +2971,8 @@ module Aws::AutoScaling
     #
     #   * {Types::TagsType#tags #tags} => Array&lt;Types::TagDescription&gt;
     #   * {Types::TagsType#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe tags

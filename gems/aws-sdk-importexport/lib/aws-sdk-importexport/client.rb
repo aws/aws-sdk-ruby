@@ -568,6 +568,8 @@ module Aws::ImportExport
     #   * {Types::ListJobsOutput#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsOutput#is_truncated #is_truncated} => Boolean
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({

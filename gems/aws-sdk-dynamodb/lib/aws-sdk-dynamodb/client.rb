@@ -511,6 +511,8 @@ module Aws::DynamoDB
     #   * {Types::BatchGetItemOutput#unprocessed_keys #unprocessed_keys} => Hash&lt;String,Types::KeysAndAttributes&gt;
     #   * {Types::BatchGetItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve multiple items from a table
     #
@@ -2556,6 +2558,12 @@ module Aws::DynamoDB
     #   resp.table.archival_summary.archival_reason #=> String
     #   resp.table.archival_summary.archival_backup_arn #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * table_exists
+    #   * table_not_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
     # @overload describe_table(params = {})
@@ -2975,6 +2983,8 @@ module Aws::DynamoDB
     #   * {Types::ListContributorInsightsOutput#contributor_insights_summaries #contributor_insights_summaries} => Array&lt;Types::ContributorInsightsSummary&gt;
     #   * {Types::ListContributorInsightsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contributor_insights({
@@ -3073,6 +3083,8 @@ module Aws::DynamoDB
     #
     #   * {Types::ListTablesOutput#table_names #table_names} => Array&lt;String&gt;
     #   * {Types::ListTablesOutput#last_evaluated_table_name #last_evaluated_table_name} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list tables
@@ -3930,6 +3942,8 @@ module Aws::DynamoDB
     #   * {Types::QueryOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::QueryOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To query an item
     #
@@ -4776,6 +4790,8 @@ module Aws::DynamoDB
     #   * {Types::ScanOutput#scanned_count #scanned_count} => Integer
     #   * {Types::ScanOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::ScanOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To scan a table

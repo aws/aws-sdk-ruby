@@ -2139,6 +2139,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeCertificatesResponse#marker #marker} => String
     #   * {Types::DescribeCertificatesResponse#certificates #certificates} => Array&lt;Types::Certificate&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: Describe certificates
     #
@@ -2231,6 +2233,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeConnectionsResponse#marker #marker} => String
     #   * {Types::DescribeConnectionsResponse#connections #connections} => Array&lt;Types::Connection&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: Describe connections
     #
@@ -2289,6 +2293,11 @@ module Aws::DatabaseMigrationService
     #   resp.connections[0].endpoint_identifier #=> String
     #   resp.connections[0].replication_instance_identifier #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * test_connection_succeeds
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections AWS API Documentation
     #
     # @overload describe_connections(params = {})
@@ -2324,6 +2333,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeEndpointTypesResponse#marker #marker} => String
     #   * {Types::DescribeEndpointTypesResponse#supported_endpoint_types #supported_endpoint_types} => Array&lt;Types::SupportedEndpointType&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe endpoint types
@@ -2410,6 +2421,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeEndpointsResponse#marker #marker} => String
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe endpoints
@@ -2547,6 +2560,11 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.username #=> String
     #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * endpoint_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints AWS API Documentation
     #
     # @overload describe_endpoints(params = {})
@@ -2639,6 +2657,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeEventSubscriptionsResponse#marker #marker} => String
     #   * {Types::DescribeEventSubscriptionsResponse#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_subscriptions({
@@ -2730,6 +2750,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeEventsResponse#marker #marker} => String
     #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -2791,6 +2813,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeOrderableReplicationInstancesResponse#orderable_replication_instances #orderable_replication_instances} => Array&lt;Types::OrderableReplicationInstance&gt;
     #   * {Types::DescribeOrderableReplicationInstancesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe orderable replication instances
@@ -2866,6 +2890,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribePendingMaintenanceActionsResponse#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
     #   * {Types::DescribePendingMaintenanceActionsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2977,6 +3003,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeReplicationInstanceTaskLogsResponse#replication_instance_task_logs #replication_instance_task_logs} => Array&lt;Types::ReplicationInstanceTaskLog&gt;
     #   * {Types::DescribeReplicationInstanceTaskLogsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_replication_instance_task_logs({
@@ -3032,6 +3060,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationInstancesResponse#marker #marker} => String
     #   * {Types::DescribeReplicationInstancesResponse#replication_instances #replication_instances} => Array&lt;Types::ReplicationInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe replication instances
@@ -3114,6 +3144,12 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].free_until #=> Time
     #   resp.replication_instances[0].dns_name_servers #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * replication_instance_available
+    #   * replication_instance_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances AWS API Documentation
     #
     # @overload describe_replication_instances(params = {})
@@ -3147,6 +3183,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationSubnetGroupsResponse#marker #marker} => String
     #   * {Types::DescribeReplicationSubnetGroupsResponse#replication_subnet_groups #replication_subnet_groups} => Array&lt;Types::ReplicationSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe replication subnet groups
@@ -3239,6 +3277,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#bucket_name #bucket_name} => String
     #   * {Types::DescribeReplicationTaskAssessmentResultsResponse#replication_task_assessment_results #replication_task_assessment_results} => Array&lt;Types::ReplicationTaskAssessmentResult&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_replication_task_assessment_results({
@@ -3302,6 +3342,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeReplicationTasksResponse#marker #marker} => String
     #   * {Types::DescribeReplicationTasksResponse#replication_tasks #replication_tasks} => Array&lt;Types::ReplicationTask&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe replication tasks
@@ -3375,6 +3417,14 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * replication_task_deleted
+    #   * replication_task_ready
+    #   * replication_task_running
+    #   * replication_task_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks AWS API Documentation
     #
     # @overload describe_replication_tasks(params = {})
@@ -3409,6 +3459,8 @@ module Aws::DatabaseMigrationService
     #
     #   * {Types::DescribeSchemasResponse#marker #marker} => String
     #   * {Types::DescribeSchemasResponse#schemas #schemas} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe schemas
@@ -3489,6 +3541,8 @@ module Aws::DatabaseMigrationService
     #   * {Types::DescribeTableStatisticsResponse#replication_task_arn #replication_task_arn} => String
     #   * {Types::DescribeTableStatisticsResponse#table_statistics #table_statistics} => Array&lt;Types::TableStatistics&gt;
     #   * {Types::DescribeTableStatisticsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Describe table statistics

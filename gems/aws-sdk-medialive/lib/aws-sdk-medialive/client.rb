@@ -3639,6 +3639,14 @@ module Aws::MediaLive
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * channel_created
+    #   * channel_deleted
+    #   * channel_running
+    #   * channel_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannel AWS API Documentation
     #
     # @overload describe_channel(params = {})
@@ -3794,6 +3802,14 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * multiplex_created
+    #   * multiplex_deleted
+    #   * multiplex_running
+    #   * multiplex_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplex AWS API Documentation
     #
@@ -3998,6 +4014,8 @@ module Aws::MediaLive
     #   * {Types::DescribeScheduleResponse#next_token #next_token} => String
     #   * {Types::DescribeScheduleResponse#schedule_actions #schedule_actions} => Array&lt;Types::ScheduleAction&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_schedule({
@@ -4077,6 +4095,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListChannelsResponse#channels #channels} => Array&lt;Types::ChannelSummary&gt;
     #   * {Types::ListChannelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4170,6 +4190,8 @@ module Aws::MediaLive
     #   * {Types::ListInputSecurityGroupsResponse#input_security_groups #input_security_groups} => Array&lt;Types::InputSecurityGroup&gt;
     #   * {Types::ListInputSecurityGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_input_security_groups({
@@ -4210,6 +4232,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListInputsResponse#inputs #inputs} => Array&lt;Types::Input&gt;
     #   * {Types::ListInputsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4271,6 +4295,8 @@ module Aws::MediaLive
     #   * {Types::ListMultiplexProgramsResponse#multiplex_programs #multiplex_programs} => Array&lt;Types::MultiplexProgramSummary&gt;
     #   * {Types::ListMultiplexProgramsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_multiplex_programs({
@@ -4305,6 +4331,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListMultiplexesResponse#multiplexes #multiplexes} => Array&lt;Types::MultiplexSummary&gt;
     #   * {Types::ListMultiplexesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4368,6 +4396,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListOfferingsResponse#next_token #next_token} => String
     #   * {Types::ListOfferingsResponse#offerings #offerings} => Array&lt;Types::Offering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4444,6 +4474,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListReservationsResponse#next_token #next_token} => String
     #   * {Types::ListReservationsResponse#reservations #reservations} => Array&lt;Types::Reservation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

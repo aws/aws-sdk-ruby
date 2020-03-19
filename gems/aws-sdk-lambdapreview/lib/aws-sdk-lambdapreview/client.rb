@@ -661,6 +661,8 @@ module Aws::LambdaPreview
     #   * {Types::ListEventSourcesResponse#next_marker #next_marker} => String
     #   * {Types::ListEventSourcesResponse#event_sources #event_sources} => Array&lt;Types::EventSourceConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_sources({
@@ -714,6 +716,8 @@ module Aws::LambdaPreview
     #
     #   * {Types::ListFunctionsResponse#next_marker #next_marker} => String
     #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

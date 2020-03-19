@@ -1316,6 +1316,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeBatchPredictionsOutput#results #results} => Array&lt;Types::BatchPrediction&gt;
     #   * {Types::DescribeBatchPredictionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_batch_predictions({
@@ -1352,6 +1354,11 @@ module Aws::MachineLearning
     #   resp.results[0].total_record_count #=> Integer
     #   resp.results[0].invalid_record_count #=> Integer
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * batch_prediction_available
     #
     # @overload describe_batch_predictions(params = {})
     # @param [Hash] params ({})
@@ -1441,6 +1448,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeDataSourcesOutput#results #results} => Array&lt;Types::DataSource&gt;
     #   * {Types::DescribeDataSourcesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_data_sources({
@@ -1488,6 +1497,11 @@ module Aws::MachineLearning
     #   resp.results[0].finished_at #=> Time
     #   resp.results[0].started_at #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * data_source_available
     #
     # @overload describe_data_sources(params = {})
     # @param [Hash] params ({})
@@ -1582,6 +1596,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeEvaluationsOutput#results #results} => Array&lt;Types::Evaluation&gt;
     #   * {Types::DescribeEvaluationsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_evaluations({
@@ -1617,6 +1633,11 @@ module Aws::MachineLearning
     #   resp.results[0].finished_at #=> Time
     #   resp.results[0].started_at #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * evaluation_available
     #
     # @overload describe_evaluations(params = {})
     # @param [Hash] params ({})
@@ -1714,6 +1735,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeMLModelsOutput#results #results} => Array&lt;Types::MLModel&gt;
     #   * {Types::DescribeMLModelsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_ml_models({
@@ -1757,6 +1780,11 @@ module Aws::MachineLearning
     #   resp.results[0].finished_at #=> Time
     #   resp.results[0].started_at #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * ml_model_available
     #
     # @overload describe_ml_models(params = {})
     # @param [Hash] params ({})

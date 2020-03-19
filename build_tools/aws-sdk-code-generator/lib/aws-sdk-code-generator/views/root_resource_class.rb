@@ -46,6 +46,11 @@ module AwsSdkCodeGenerator
         associations.size > 0
       end
 
+      # @return [Boolean]
+      def documentation?
+        actions? || associations?
+      end
+
     end
   end
 end

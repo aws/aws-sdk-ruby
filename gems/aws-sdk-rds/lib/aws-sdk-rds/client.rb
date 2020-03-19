@@ -6559,6 +6559,8 @@ module Aws::RDS
     #   * {Types::CustomAvailabilityZoneMessage#marker #marker} => String
     #   * {Types::CustomAvailabilityZoneMessage#custom_availability_zones #custom_availability_zones} => Array&lt;Types::CustomAvailabilityZone&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_custom_availability_zones({
@@ -7254,6 +7256,12 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].iam_database_authentication_enabled #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * db_cluster_snapshot_available
+    #   * db_cluster_snapshot_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots AWS API Documentation
     #
     # @overload describe_db_cluster_snapshots(params = {})
@@ -7324,6 +7332,8 @@ module Aws::RDS
     #
     #   * {Types::DBClusterMessage#marker #marker} => String
     #   * {Types::DBClusterMessage#db_clusters #db_clusters} => Array&lt;Types::DBCluster&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB clusters
@@ -7510,6 +7520,8 @@ module Aws::RDS
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
     #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list DB engine version settings
     #
@@ -7650,6 +7662,8 @@ module Aws::RDS
     #   * {Types::DBInstanceAutomatedBackupMessage#marker #marker} => String
     #   * {Types::DBInstanceAutomatedBackupMessage#db_instance_automated_backups #db_instance_automated_backups} => Array&lt;Types::DBInstanceAutomatedBackup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_instance_automated_backups({
@@ -7767,6 +7781,8 @@ module Aws::RDS
     #
     #   * {Types::DBInstanceMessage#marker #marker} => String
     #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB instance settings
@@ -7913,6 +7929,12 @@ module Aws::RDS
     #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instances[0].max_allocated_storage #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * db_instance_available
+    #   * db_instance_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
     # @overload describe_db_instances(params = {})
@@ -7964,6 +7986,8 @@ module Aws::RDS
     #
     #   * {Types::DescribeDBLogFilesResponse#describe_db_log_files #describe_db_log_files} => Array&lt;Types::DescribeDBLogFilesDetails&gt;
     #   * {Types::DescribeDBLogFilesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB log file names
@@ -8054,6 +8078,8 @@ module Aws::RDS
     #   * {Types::DBParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBParameterGroupsMessage#db_parameter_groups #db_parameter_groups} => Array&lt;Types::DBParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about DB parameter groups
     #
@@ -8141,6 +8167,8 @@ module Aws::RDS
     #
     #   * {Types::DBParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBParameterGroupDetails#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB parameters
@@ -8231,6 +8259,8 @@ module Aws::RDS
     #   * {Types::DescribeDBProxiesResponse#db_proxies #db_proxies} => Array&lt;Types::DBProxy&gt;
     #   * {Types::DescribeDBProxiesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxies({
@@ -8317,6 +8347,8 @@ module Aws::RDS
     #   * {Types::DescribeDBProxyTargetGroupsResponse#target_groups #target_groups} => Array&lt;Types::DBProxyTargetGroup&gt;
     #   * {Types::DescribeDBProxyTargetGroupsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxy_target_groups({
@@ -8396,6 +8428,8 @@ module Aws::RDS
     #   * {Types::DescribeDBProxyTargetsResponse#targets #targets} => Array&lt;Types::DBProxyTarget&gt;
     #   * {Types::DescribeDBProxyTargetsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxy_targets({
@@ -8461,6 +8495,8 @@ module Aws::RDS
     #
     #   * {Types::DBSecurityGroupMessage#marker #marker} => String
     #   * {Types::DBSecurityGroupMessage#db_security_groups #db_security_groups} => Array&lt;Types::DBSecurityGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB security group settings
@@ -8699,6 +8735,8 @@ module Aws::RDS
     #   * {Types::DBSnapshotMessage#marker #marker} => String
     #   * {Types::DBSnapshotMessage#db_snapshots #db_snapshots} => Array&lt;Types::DBSnapshot&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list DB snapshot attributes
     #
@@ -8769,6 +8807,12 @@ module Aws::RDS
     #   resp.db_snapshots[0].processor_features[0].value #=> String
     #   resp.db_snapshots[0].dbi_resource_id #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * db_snapshot_available
+    #   * db_snapshot_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
     #
     # @overload describe_db_snapshots(params = {})
@@ -8814,6 +8858,8 @@ module Aws::RDS
     #
     #   * {Types::DBSubnetGroupMessage#marker #marker} => String
     #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB subnet groups
@@ -8987,6 +9033,8 @@ module Aws::RDS
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list default parameters for a DB engine
     #
@@ -9141,6 +9189,8 @@ module Aws::RDS
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about DB event notification subscriptions
     #
@@ -9280,6 +9330,8 @@ module Aws::RDS
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about events
     #
@@ -9386,6 +9438,8 @@ module Aws::RDS
     #   * {Types::ExportTasksMessage#marker #marker} => String
     #   * {Types::ExportTasksMessage#export_tasks #export_tasks} => Array&lt;Types::ExportTask&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_tasks({
@@ -9488,6 +9542,8 @@ module Aws::RDS
     #   * {Types::GlobalClustersMessage#marker #marker} => String
     #   * {Types::GlobalClustersMessage#global_clusters #global_clusters} => Array&lt;Types::GlobalCluster&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_clusters({
@@ -9568,6 +9624,8 @@ module Aws::RDS
     #   * {Types::InstallationMediaMessage#marker #marker} => String
     #   * {Types::InstallationMediaMessage#installation_media #installation_media} => Array&lt;Types::InstallationMedia&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_installation_media({
@@ -9636,6 +9694,8 @@ module Aws::RDS
     #
     #   * {Types::OptionGroupOptionsMessage#option_group_options #option_group_options} => Array&lt;Types::OptionGroupOption&gt;
     #   * {Types::OptionGroupOptionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB option group options
@@ -9748,6 +9808,8 @@ module Aws::RDS
     #
     #   * {Types::OptionGroups#option_groups_list #option_groups_list} => Array&lt;Types::OptionGroup&gt;
     #   * {Types::OptionGroups#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB option groups
@@ -9867,6 +9929,8 @@ module Aws::RDS
     #
     #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
     #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about orderable DB instance options
@@ -10107,6 +10171,8 @@ module Aws::RDS
     #   * {Types::ReservedDBInstanceMessage#marker #marker} => String
     #   * {Types::ReservedDBInstanceMessage#reserved_db_instances #reserved_db_instances} => Array&lt;Types::ReservedDBInstance&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about reserved DB instances
     #
@@ -10238,6 +10304,8 @@ module Aws::RDS
     #
     #   * {Types::ReservedDBInstancesOfferingMessage#marker #marker} => String
     #   * {Types::ReservedDBInstancesOfferingMessage#reserved_db_instances_offerings #reserved_db_instances_offerings} => Array&lt;Types::ReservedDBInstancesOffering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about reserved DB instance offerings
@@ -10533,6 +10601,8 @@ module Aws::RDS
     #   * {Types::DownloadDBLogFilePortionDetails#log_file_data #log_file_data} => String
     #   * {Types::DownloadDBLogFilePortionDetails#marker #marker} => String
     #   * {Types::DownloadDBLogFilePortionDetails#additional_data_pending #additional_data_pending} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB log files

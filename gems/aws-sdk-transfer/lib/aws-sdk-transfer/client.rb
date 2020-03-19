@@ -820,6 +820,8 @@ module Aws::Transfer
     #   * {Types::ListServersResponse#next_token #next_token} => String
     #   * {Types::ListServersResponse#servers #servers} => Array&lt;Types::ListedServer&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_servers({
@@ -872,6 +874,8 @@ module Aws::Transfer
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -919,6 +923,8 @@ module Aws::Transfer
     #   * {Types::ListUsersResponse#next_token #next_token} => String
     #   * {Types::ListUsersResponse#server_id #server_id} => String
     #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::ListedUser&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

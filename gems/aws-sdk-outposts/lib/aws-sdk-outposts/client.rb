@@ -497,6 +497,8 @@ module Aws::Outposts
     #   * {Types::ListOutpostsOutput#outposts #outposts} => Array&lt;Types::Outpost&gt;
     #   * {Types::ListOutpostsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_outposts({
@@ -539,6 +541,8 @@ module Aws::Outposts
     #
     #   * {Types::ListSitesOutput#sites #sites} => Array&lt;Types::Site&gt;
     #   * {Types::ListSitesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

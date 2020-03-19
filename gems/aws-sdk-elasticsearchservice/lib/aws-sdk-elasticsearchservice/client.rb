@@ -1083,6 +1083,8 @@ module Aws::ElasticsearchService
     #   * {Types::DescribeReservedElasticsearchInstanceOfferingsResponse#next_token #next_token} => String
     #   * {Types::DescribeReservedElasticsearchInstanceOfferingsResponse#reserved_elasticsearch_instance_offerings #reserved_elasticsearch_instance_offerings} => Array&lt;Types::ReservedElasticsearchInstanceOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_elasticsearch_instance_offerings({
@@ -1133,6 +1135,8 @@ module Aws::ElasticsearchService
     #
     #   * {Types::DescribeReservedElasticsearchInstancesResponse#next_token #next_token} => String
     #   * {Types::DescribeReservedElasticsearchInstancesResponse#reserved_elasticsearch_instances #reserved_elasticsearch_instances} => Array&lt;Types::ReservedElasticsearchInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1224,6 +1228,8 @@ module Aws::ElasticsearchService
     #
     #   * {Types::GetUpgradeHistoryResponse#upgrade_histories #upgrade_histories} => Array&lt;Types::UpgradeHistory&gt;
     #   * {Types::GetUpgradeHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1332,6 +1338,8 @@ module Aws::ElasticsearchService
     #   * {Types::ListElasticsearchInstanceTypesResponse#elasticsearch_instance_types #elasticsearch_instance_types} => Array&lt;String&gt;
     #   * {Types::ListElasticsearchInstanceTypesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_elasticsearch_instance_types({
@@ -1369,6 +1377,8 @@ module Aws::ElasticsearchService
     #
     #   * {Types::ListElasticsearchVersionsResponse#elasticsearch_versions #elasticsearch_versions} => Array&lt;String&gt;
     #   * {Types::ListElasticsearchVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

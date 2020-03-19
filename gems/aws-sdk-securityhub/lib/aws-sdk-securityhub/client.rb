@@ -1831,6 +1831,8 @@ module Aws::SecurityHub
     #   * {Types::DescribeActionTargetsResponse#action_targets #action_targets} => Array&lt;Types::ActionTarget&gt;
     #   * {Types::DescribeActionTargetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_action_targets({
@@ -1908,6 +1910,8 @@ module Aws::SecurityHub
     #   * {Types::DescribeProductsResponse#products #products} => Array&lt;Types::Product&gt;
     #   * {Types::DescribeProductsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_products({
@@ -1962,6 +1966,8 @@ module Aws::SecurityHub
     #   * {Types::DescribeStandardsResponse#standards #standards} => Array&lt;Types::Standard&gt;
     #   * {Types::DescribeStandardsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_standards({
@@ -2012,6 +2018,8 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeStandardsControlsResponse#controls #controls} => Array&lt;Types::StandardsControl&gt;
     #   * {Types::DescribeStandardsControlsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2233,6 +2241,8 @@ module Aws::SecurityHub
     #   * {Types::GetEnabledStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
     #   * {Types::GetEnabledStandardsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_enabled_standards({
@@ -2284,6 +2294,8 @@ module Aws::SecurityHub
     #
     #   * {Types::GetFindingsResponse#findings #findings} => Array&lt;Types::AwsSecurityFinding&gt;
     #   * {Types::GetFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3238,6 +3250,8 @@ module Aws::SecurityHub
     #   * {Types::GetInsightsResponse#insights #insights} => Array&lt;Types::Insight&gt;
     #   * {Types::GetInsightsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_insights({
@@ -3686,6 +3700,8 @@ module Aws::SecurityHub
     #   * {Types::ListEnabledProductsForImportResponse#product_subscriptions #product_subscriptions} => Array&lt;String&gt;
     #   * {Types::ListEnabledProductsForImportResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_enabled_products_for_import({
@@ -3727,6 +3743,8 @@ module Aws::SecurityHub
     #
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::Invitation&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3783,6 +3801,8 @@ module Aws::SecurityHub
     #
     #   * {Types::ListMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

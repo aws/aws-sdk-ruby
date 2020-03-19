@@ -475,6 +475,8 @@ module Aws::MarketplaceCatalog
     #   * {Types::ListChangeSetsResponse#change_set_summary_list #change_set_summary_list} => Array&lt;Types::ChangeSetSummaryListItem&gt;
     #   * {Types::ListChangeSetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_change_sets({
@@ -542,6 +544,8 @@ module Aws::MarketplaceCatalog
     #
     #   * {Types::ListEntitiesResponse#entity_summary_list #entity_summary_list} => Array&lt;Types::EntitySummary&gt;
     #   * {Types::ListEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

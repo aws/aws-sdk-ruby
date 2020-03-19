@@ -351,6 +351,8 @@ module Aws::Pricing
     #   * {Types::DescribeServicesResponse#format_version #format_version} => String
     #   * {Types::DescribeServicesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of services and service codes
     #
@@ -436,6 +438,8 @@ module Aws::Pricing
     #   * {Types::GetAttributeValuesResponse#attribute_values #attribute_values} => Array&lt;Types::AttributeValue&gt;
     #   * {Types::GetAttributeValuesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To retrieve a list of attribute values
     #
@@ -510,6 +514,8 @@ module Aws::Pricing
     #   * {Types::GetProductsResponse#format_version #format_version} => String
     #   * {Types::GetProductsResponse#price_list #price_list} => Array&lt;String&gt;
     #   * {Types::GetProductsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of products

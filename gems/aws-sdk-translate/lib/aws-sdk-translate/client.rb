@@ -525,6 +525,8 @@ module Aws::Translate
     #   * {Types::ListTerminologiesResponse#terminology_properties_list #terminology_properties_list} => Array&lt;Types::TerminologyProperties&gt;
     #   * {Types::ListTerminologiesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_terminologies({
@@ -576,6 +578,8 @@ module Aws::Translate
     #
     #   * {Types::ListTextTranslationJobsResponse#text_translation_job_properties_list #text_translation_job_properties_list} => Array&lt;Types::TextTranslationJobProperties&gt;
     #   * {Types::ListTextTranslationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

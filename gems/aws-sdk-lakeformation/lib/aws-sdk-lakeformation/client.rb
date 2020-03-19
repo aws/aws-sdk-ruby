@@ -611,6 +611,8 @@ module Aws::LakeFormation
     #   * {Types::GetEffectivePermissionsForPathResponse#permissions #permissions} => Array&lt;Types::PrincipalResourcePermissions&gt;
     #   * {Types::GetEffectivePermissionsForPathResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_effective_permissions_for_path({
@@ -781,6 +783,8 @@ module Aws::LakeFormation
     #   * {Types::ListPermissionsResponse#principal_resource_permissions #principal_resource_permissions} => Array&lt;Types::PrincipalResourcePermissions&gt;
     #   * {Types::ListPermissionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permissions({
@@ -861,6 +865,8 @@ module Aws::LakeFormation
     #
     #   * {Types::ListResourcesResponse#resource_info_list #resource_info_list} => Array&lt;Types::ResourceInfo&gt;
     #   * {Types::ListResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

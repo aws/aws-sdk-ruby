@@ -1814,6 +1814,11 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_status_messages[0] #=> String
     #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * deployment_successful
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment AWS API Documentation
     #
     # @overload get_deployment(params = {})
@@ -2207,6 +2212,8 @@ module Aws::CodeDeploy
     #   * {Types::ListApplicationRevisionsOutput#revisions #revisions} => Array&lt;Types::RevisionLocation&gt;
     #   * {Types::ListApplicationRevisionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_revisions({
@@ -2256,6 +2263,8 @@ module Aws::CodeDeploy
     #   * {Types::ListApplicationsOutput#applications #applications} => Array&lt;String&gt;
     #   * {Types::ListApplicationsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
@@ -2288,6 +2297,8 @@ module Aws::CodeDeploy
     #
     #   * {Types::ListDeploymentConfigsOutput#deployment_configs_list #deployment_configs_list} => Array&lt;String&gt;
     #   * {Types::ListDeploymentConfigsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2327,6 +2338,8 @@ module Aws::CodeDeploy
     #   * {Types::ListDeploymentGroupsOutput#application_name #application_name} => String
     #   * {Types::ListDeploymentGroupsOutput#deployment_groups #deployment_groups} => Array&lt;String&gt;
     #   * {Types::ListDeploymentGroupsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2396,6 +2409,8 @@ module Aws::CodeDeploy
     #
     #   * {Types::ListDeploymentInstancesOutput#instances_list #instances_list} => Array&lt;String&gt;
     #   * {Types::ListDeploymentInstancesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2520,6 +2535,8 @@ module Aws::CodeDeploy
     #
     #   * {Types::ListDeploymentsOutput#deployments #deployments} => Array&lt;String&gt;
     #   * {Types::ListDeploymentsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

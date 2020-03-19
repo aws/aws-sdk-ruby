@@ -1153,6 +1153,12 @@ module Aws::EKS
     #   resp.cluster.encryption_config[0].resources[0] #=> String
     #   resp.cluster.encryption_config[0].provider.key_arn #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * cluster_active
+    #   * cluster_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCluster AWS API Documentation
     #
     # @overload describe_cluster(params = {})
@@ -1263,6 +1269,12 @@ module Aws::EKS
     #   resp.nodegroup.tags #=> Hash
     #   resp.nodegroup.tags["TagKey"] #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * nodegroup_active
+    #   * nodegroup_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeNodegroup AWS API Documentation
     #
     # @overload describe_nodegroup(params = {})
@@ -1354,6 +1366,8 @@ module Aws::EKS
     #   * {Types::ListClustersResponse#clusters #clusters} => Array&lt;String&gt;
     #   * {Types::ListClustersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list your available clusters
     #
@@ -1422,6 +1436,8 @@ module Aws::EKS
     #   * {Types::ListFargateProfilesResponse#fargate_profile_names #fargate_profile_names} => Array&lt;String&gt;
     #   * {Types::ListFargateProfilesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fargate_profiles({
@@ -1472,6 +1488,8 @@ module Aws::EKS
     #
     #   * {Types::ListNodegroupsResponse#nodegroups #nodegroups} => Array&lt;String&gt;
     #   * {Types::ListNodegroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1572,6 +1590,8 @@ module Aws::EKS
     #
     #   * {Types::ListUpdatesResponse#update_ids #update_ids} => Array&lt;String&gt;
     #   * {Types::ListUpdatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -1447,6 +1447,8 @@ module Aws::Inspector
     #   * {Types::GetExclusionsPreviewResponse#exclusion_previews #exclusion_previews} => Array&lt;Types::ExclusionPreview&gt;
     #   * {Types::GetExclusionsPreviewResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_exclusions_preview({
@@ -1706,6 +1708,8 @@ module Aws::Inspector
     #   * {Types::ListAssessmentRunAgentsResponse#assessment_run_agents #assessment_run_agents} => Array&lt;Types::AssessmentRunAgent&gt;
     #   * {Types::ListAssessmentRunAgentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: List assessment run agents
     #
@@ -1944,6 +1948,8 @@ module Aws::Inspector
     #   * {Types::ListAssessmentRunsResponse#assessment_run_arns #assessment_run_arns} => Array&lt;String&gt;
     #   * {Types::ListAssessmentRunsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: List assessment runs
     #
@@ -2043,6 +2049,8 @@ module Aws::Inspector
     #   * {Types::ListAssessmentTargetsResponse#assessment_target_arns #assessment_target_arns} => Array&lt;String&gt;
     #   * {Types::ListAssessmentTargetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: List assessment targets
     #
@@ -2116,6 +2124,8 @@ module Aws::Inspector
     #
     #   * {Types::ListAssessmentTemplatesResponse#assessment_template_arns #assessment_template_arns} => Array&lt;String&gt;
     #   * {Types::ListAssessmentTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: List assessment templates
@@ -2195,6 +2205,8 @@ module Aws::Inspector
     #   * {Types::ListEventSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::ListEventSubscriptionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: List event subscriptions
     #
@@ -2272,6 +2284,8 @@ module Aws::Inspector
     #   * {Types::ListExclusionsResponse#exclusion_arns #exclusion_arns} => Array&lt;String&gt;
     #   * {Types::ListExclusionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_exclusions({
@@ -2326,6 +2340,8 @@ module Aws::Inspector
     #
     #   * {Types::ListFindingsResponse#finding_arns #finding_arns} => Array&lt;String&gt;
     #   * {Types::ListFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: List findings
@@ -2412,6 +2428,8 @@ module Aws::Inspector
     #
     #   * {Types::ListRulesPackagesResponse#rules_package_arns #rules_package_arns} => Array&lt;String&gt;
     #   * {Types::ListRulesPackagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: List rules packages
@@ -2527,6 +2545,8 @@ module Aws::Inspector
     #
     #   * {Types::PreviewAgentsResponse#agent_previews #agent_previews} => Array&lt;Types::AgentPreview&gt;
     #   * {Types::PreviewAgentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: Preview agents

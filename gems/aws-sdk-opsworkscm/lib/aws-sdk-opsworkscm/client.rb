@@ -1086,6 +1086,11 @@ module Aws::OpsWorksCM
     #   resp.engine_attributes[0].name #=> String
     #   resp.engine_attributes[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * node_associated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus AWS API Documentation
     #
     # @overload describe_node_association_status(params = {})

@@ -980,6 +980,8 @@ module Aws::MediaPackage
     #   * {Types::ListChannelsResponse#channels #channels} => Array&lt;Types::Channel&gt;
     #   * {Types::ListChannelsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_channels({
@@ -1025,6 +1027,8 @@ module Aws::MediaPackage
     #
     #   * {Types::ListHarvestJobsResponse#harvest_jobs #harvest_jobs} => Array&lt;Types::HarvestJob&gt;
     #   * {Types::ListHarvestJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1072,6 +1076,8 @@ module Aws::MediaPackage
     #
     #   * {Types::ListOriginEndpointsResponse#next_token #next_token} => String
     #   * {Types::ListOriginEndpointsResponse#origin_endpoints #origin_endpoints} => Array&lt;Types::OriginEndpoint&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

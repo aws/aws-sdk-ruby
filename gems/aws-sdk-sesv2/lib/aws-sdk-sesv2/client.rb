@@ -1015,6 +1015,8 @@ module Aws::SESV2
     #   * {Types::GetDedicatedIpsResponse#dedicated_ips #dedicated_ips} => Array&lt;Types::DedicatedIp&gt;
     #   * {Types::GetDedicatedIpsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_dedicated_ips({
@@ -1359,6 +1361,8 @@ module Aws::SESV2
     #   * {Types::ListConfigurationSetsResponse#configuration_sets #configuration_sets} => Array&lt;String&gt;
     #   * {Types::ListConfigurationSetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_sets({
@@ -1398,6 +1402,8 @@ module Aws::SESV2
     #
     #   * {Types::ListDedicatedIpPoolsResponse#dedicated_ip_pools #dedicated_ip_pools} => Array&lt;String&gt;
     #   * {Types::ListDedicatedIpPoolsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1445,6 +1451,8 @@ module Aws::SESV2
     #
     #   * {Types::ListDeliverabilityTestReportsResponse#deliverability_test_reports #deliverability_test_reports} => Array&lt;Types::DeliverabilityTestReport&gt;
     #   * {Types::ListDeliverabilityTestReportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1506,6 +1514,8 @@ module Aws::SESV2
     #
     #   * {Types::ListDomainDeliverabilityCampaignsResponse#domain_deliverability_campaigns #domain_deliverability_campaigns} => Array&lt;Types::DomainDeliverabilityCampaign&gt;
     #   * {Types::ListDomainDeliverabilityCampaignsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1571,6 +1581,8 @@ module Aws::SESV2
     #   * {Types::ListEmailIdentitiesResponse#email_identities #email_identities} => Array&lt;Types::IdentityInfo&gt;
     #   * {Types::ListEmailIdentitiesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_email_identities({
@@ -1625,6 +1637,8 @@ module Aws::SESV2
     #
     #   * {Types::ListSuppressedDestinationsResponse#suppressed_destination_summaries #suppressed_destination_summaries} => Array&lt;Types::SuppressedDestinationSummary&gt;
     #   * {Types::ListSuppressedDestinationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

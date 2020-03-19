@@ -405,6 +405,8 @@ module Aws::AugmentedAIRuntime
     #   * {Types::ListHumanLoopsResponse#human_loop_summaries #human_loop_summaries} => Array&lt;Types::HumanLoopSummary&gt;
     #   * {Types::ListHumanLoopsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_human_loops({

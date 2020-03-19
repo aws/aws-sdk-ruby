@@ -904,6 +904,8 @@ module Aws::CloudTrail
     #   * {Types::ListPublicKeysResponse#public_key_list #public_key_list} => Array&lt;Types::PublicKey&gt;
     #   * {Types::ListPublicKeysResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_public_keys({
@@ -946,6 +948,8 @@ module Aws::CloudTrail
     #   * {Types::ListTagsResponse#resource_tag_list #resource_tag_list} => Array&lt;Types::ResourceTag&gt;
     #   * {Types::ListTagsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags({
@@ -984,6 +988,8 @@ module Aws::CloudTrail
     #
     #   * {Types::ListTrailsResponse#trails #trails} => Array&lt;Types::TrailInfo&gt;
     #   * {Types::ListTrailsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1084,6 +1090,8 @@ module Aws::CloudTrail
     #
     #   * {Types::LookupEventsResponse#events #events} => Array&lt;Types::Event&gt;
     #   * {Types::LookupEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -504,6 +504,8 @@ module Aws::CodeGuruReviewer
     #   * {Types::ListRepositoryAssociationsResponse#repository_association_summaries #repository_association_summaries} => Array&lt;Types::RepositoryAssociationSummary&gt;
     #   * {Types::ListRepositoryAssociationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_repository_associations({

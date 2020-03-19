@@ -2535,6 +2535,8 @@ module Aws::Chime
     #   * {Types::ListAccountsResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_accounts({
@@ -2590,6 +2592,8 @@ module Aws::Chime
     #   * {Types::ListAttendeesResponse#attendees #attendees} => Array&lt;Types::Attendee&gt;
     #   * {Types::ListAttendeesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_attendees({
@@ -2632,6 +2636,8 @@ module Aws::Chime
     #
     #   * {Types::ListBotsResponse#bots #bots} => Array&lt;Types::Bot&gt;
     #   * {Types::ListBotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2683,6 +2689,8 @@ module Aws::Chime
     #   * {Types::ListMeetingsResponse#meetings #meetings} => Array&lt;Types::Meeting&gt;
     #   * {Types::ListMeetingsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_meetings({
@@ -2726,6 +2734,8 @@ module Aws::Chime
     #
     #   * {Types::ListPhoneNumberOrdersResponse#phone_number_orders #phone_number_orders} => Array&lt;Types::PhoneNumberOrder&gt;
     #   * {Types::ListPhoneNumberOrdersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2782,6 +2792,8 @@ module Aws::Chime
     #
     #   * {Types::ListPhoneNumbersResponse#phone_numbers #phone_numbers} => Array&lt;Types::PhoneNumber&gt;
     #   * {Types::ListPhoneNumbersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2849,6 +2861,8 @@ module Aws::Chime
     #   * {Types::ListRoomMembershipsResponse#room_memberships #room_memberships} => Array&lt;Types::RoomMembership&gt;
     #   * {Types::ListRoomMembershipsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_room_memberships({
@@ -2901,6 +2915,8 @@ module Aws::Chime
     #
     #   * {Types::ListRoomsResponse#rooms #rooms} => Array&lt;Types::Room&gt;
     #   * {Types::ListRoomsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2956,6 +2972,8 @@ module Aws::Chime
     #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::User&gt;
     #   * {Types::ListUsersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_users({
@@ -3007,6 +3025,8 @@ module Aws::Chime
     #
     #   * {Types::ListVoiceConnectorGroupsResponse#voice_connector_groups #voice_connector_groups} => Array&lt;Types::VoiceConnectorGroup&gt;
     #   * {Types::ListVoiceConnectorGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3079,6 +3099,8 @@ module Aws::Chime
     #
     #   * {Types::ListVoiceConnectorsResponse#voice_connectors #voice_connectors} => Array&lt;Types::VoiceConnector&gt;
     #   * {Types::ListVoiceConnectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

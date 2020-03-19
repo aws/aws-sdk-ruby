@@ -746,6 +746,8 @@ module Aws::QLDB
     #   * {Types::ListJournalS3ExportsResponse#journal_s3_exports #journal_s3_exports} => Array&lt;Types::JournalS3ExportDescription&gt;
     #   * {Types::ListJournalS3ExportsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_journal_s3_exports({
@@ -804,6 +806,8 @@ module Aws::QLDB
     #   * {Types::ListJournalS3ExportsForLedgerResponse#journal_s3_exports #journal_s3_exports} => Array&lt;Types::JournalS3ExportDescription&gt;
     #   * {Types::ListJournalS3ExportsForLedgerResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_journal_s3_exports_for_ledger({
@@ -858,6 +862,8 @@ module Aws::QLDB
     #
     #   * {Types::ListLedgersResponse#ledgers #ledgers} => Array&lt;Types::LedgerSummary&gt;
     #   * {Types::ListLedgersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

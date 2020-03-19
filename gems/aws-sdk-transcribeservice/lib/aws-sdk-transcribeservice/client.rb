@@ -683,6 +683,8 @@ module Aws::TranscribeService
     #   * {Types::ListTranscriptionJobsResponse#next_token #next_token} => String
     #   * {Types::ListTranscriptionJobsResponse#transcription_job_summaries #transcription_job_summaries} => Array&lt;Types::TranscriptionJobSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_transcription_jobs({
@@ -745,6 +747,8 @@ module Aws::TranscribeService
     #   * {Types::ListVocabulariesResponse#next_token #next_token} => String
     #   * {Types::ListVocabulariesResponse#vocabularies #vocabularies} => Array&lt;Types::VocabularyInfo&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_vocabularies({
@@ -793,6 +797,8 @@ module Aws::TranscribeService
     #
     #   * {Types::ListVocabularyFiltersResponse#next_token #next_token} => String
     #   * {Types::ListVocabularyFiltersResponse#vocabulary_filters #vocabulary_filters} => Array&lt;Types::VocabularyFilterInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

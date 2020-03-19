@@ -753,6 +753,8 @@ module Aws::KinesisVideo
     #   * {Types::ListSignalingChannelsOutput#channel_info_list #channel_info_list} => Array&lt;Types::ChannelInfo&gt;
     #   * {Types::ListSignalingChannelsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_signaling_channels({
@@ -808,6 +810,8 @@ module Aws::KinesisVideo
     #
     #   * {Types::ListStreamsOutput#stream_info_list #stream_info_list} => Array&lt;Types::StreamInfo&gt;
     #   * {Types::ListStreamsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

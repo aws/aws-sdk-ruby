@@ -325,6 +325,8 @@ module Aws::XRay
     #   * {Types::BatchGetTracesResult#unprocessed_trace_ids #unprocessed_trace_ids} => Array&lt;String&gt;
     #   * {Types::BatchGetTracesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_traces({
@@ -594,6 +596,8 @@ module Aws::XRay
     #   * {Types::GetGroupsResult#groups #groups} => Array&lt;Types::GroupSummary&gt;
     #   * {Types::GetGroupsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_groups({
@@ -626,6 +630,8 @@ module Aws::XRay
     #
     #   * {Types::GetSamplingRulesResult#sampling_rule_records #sampling_rule_records} => Array&lt;Types::SamplingRuleRecord&gt;
     #   * {Types::GetSamplingRulesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -673,6 +679,8 @@ module Aws::XRay
     #
     #   * {Types::GetSamplingStatisticSummariesResult#sampling_statistic_summaries #sampling_statistic_summaries} => Array&lt;Types::SamplingStatisticSummary&gt;
     #   * {Types::GetSamplingStatisticSummariesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -783,6 +791,8 @@ module Aws::XRay
     #   * {Types::GetServiceGraphResult#contains_old_group_versions #contains_old_group_versions} => Boolean
     #   * {Types::GetServiceGraphResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_service_graph({
@@ -887,6 +897,8 @@ module Aws::XRay
     #   * {Types::GetTimeSeriesServiceStatisticsResult#contains_old_group_versions #contains_old_group_versions} => Boolean
     #   * {Types::GetTimeSeriesServiceStatisticsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_time_series_service_statistics({
@@ -946,6 +958,8 @@ module Aws::XRay
     #
     #   * {Types::GetTraceGraphResult#services #services} => Array&lt;Types::Service&gt;
     #   * {Types::GetTraceGraphResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1067,6 +1081,8 @@ module Aws::XRay
     #   * {Types::GetTraceSummariesResult#approximate_time #approximate_time} => Time
     #   * {Types::GetTraceSummariesResult#traces_processed_count #traces_processed_count} => Integer
     #   * {Types::GetTraceSummariesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

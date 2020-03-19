@@ -922,6 +922,8 @@ module Aws::ECR
     #   * {Types::DescribeImageScanFindingsResponse#image_scan_findings #image_scan_findings} => Types::ImageScanFindings
     #   * {Types::DescribeImageScanFindingsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_scan_findings({
@@ -956,6 +958,11 @@ module Aws::ECR
     #   resp.image_scan_findings.finding_severity_counts #=> Hash
     #   resp.image_scan_findings.finding_severity_counts["FindingSeverity"] #=> Integer
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * image_scan_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindings AWS API Documentation
     #
@@ -1014,6 +1021,8 @@ module Aws::ECR
     #
     #   * {Types::DescribeImagesResponse#image_details #image_details} => Array&lt;Types::ImageDetail&gt;
     #   * {Types::DescribeImagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1102,6 +1111,8 @@ module Aws::ECR
     #
     #   * {Types::DescribeRepositoriesResponse#repositories #repositories} => Array&lt;Types::Repository&gt;
     #   * {Types::DescribeRepositoriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe all repositories in the current account
@@ -1366,6 +1377,8 @@ module Aws::ECR
     #   * {Types::GetLifecyclePolicyPreviewResponse#preview_results #preview_results} => Array&lt;Types::LifecyclePolicyPreviewResult&gt;
     #   * {Types::GetLifecyclePolicyPreviewResponse#summary #summary} => Types::LifecyclePolicyPreviewSummary
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_lifecycle_policy_preview({
@@ -1399,6 +1412,11 @@ module Aws::ECR
     #   resp.preview_results[0].action.type #=> String, one of "EXPIRE"
     #   resp.preview_results[0].applied_rule_priority #=> Integer
     #   resp.summary.expiring_image_total_count #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * lifecycle_policy_preview_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyPreview AWS API Documentation
     #
@@ -1558,6 +1576,8 @@ module Aws::ECR
     #
     #   * {Types::ListImagesResponse#image_ids #image_ids} => Array&lt;Types::ImageIdentifier&gt;
     #   * {Types::ListImagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list all images in a repository

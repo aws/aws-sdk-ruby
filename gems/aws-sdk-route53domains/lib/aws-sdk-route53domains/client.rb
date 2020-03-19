@@ -825,6 +825,8 @@ module Aws::Route53Domains
     #   * {Types::ListDomainsResponse#domains #domains} => Array&lt;Types::DomainSummary&gt;
     #   * {Types::ListDomainsResponse#next_page_marker #next_page_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domains({
@@ -875,6 +877,8 @@ module Aws::Route53Domains
     #
     #   * {Types::ListOperationsResponse#operations #operations} => Array&lt;Types::OperationSummary&gt;
     #   * {Types::ListOperationsResponse#next_page_marker #next_page_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

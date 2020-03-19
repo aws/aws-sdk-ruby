@@ -597,6 +597,8 @@ module Aws::Cloud9
     #   * {Types::DescribeEnvironmentMembershipsResult#memberships #memberships} => Array&lt;Types::EnvironmentMember&gt;
     #   * {Types::DescribeEnvironmentMembershipsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: DescribeEnvironmentMemberships1
     #
@@ -841,6 +843,8 @@ module Aws::Cloud9
     #
     #   * {Types::ListEnvironmentsResult#next_token #next_token} => String
     #   * {Types::ListEnvironmentsResult#environment_ids #environment_ids} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: ListEnvironments

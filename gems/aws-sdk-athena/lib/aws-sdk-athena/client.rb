@@ -733,6 +733,8 @@ module Aws::Athena
     #   * {Types::GetQueryResultsOutput#result_set #result_set} => Types::ResultSet
     #   * {Types::GetQueryResultsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_query_results({
@@ -833,6 +835,8 @@ module Aws::Athena
     #   * {Types::ListNamedQueriesOutput#named_query_ids #named_query_ids} => Array&lt;String&gt;
     #   * {Types::ListNamedQueriesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_named_queries({
@@ -881,6 +885,8 @@ module Aws::Athena
     #
     #   * {Types::ListQueryExecutionsOutput#query_execution_ids #query_execution_ids} => Array&lt;String&gt;
     #   * {Types::ListQueryExecutionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -960,6 +966,8 @@ module Aws::Athena
     #
     #   * {Types::ListWorkGroupsOutput#work_groups #work_groups} => Array&lt;Types::WorkGroupSummary&gt;
     #   * {Types::ListWorkGroupsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

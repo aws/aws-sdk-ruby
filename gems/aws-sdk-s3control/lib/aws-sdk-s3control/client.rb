@@ -988,6 +988,8 @@ module Aws::S3Control
     #   * {Types::ListAccessPointsResult#access_point_list #access_point_list} => Array&lt;Types::AccessPoint&gt;
     #   * {Types::ListAccessPointsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_access_points({
@@ -1039,6 +1041,8 @@ module Aws::S3Control
     #
     #   * {Types::ListJobsResult#next_token #next_token} => String
     #   * {Types::ListJobsResult#jobs #jobs} => Array&lt;Types::JobListDescriptor&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -766,6 +766,8 @@ module Aws::Kafka
     #   * {Types::ListClusterOperationsResponse#cluster_operation_info_list #cluster_operation_info_list} => Array&lt;Types::ClusterOperationInfo&gt;
     #   * {Types::ListClusterOperationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_cluster_operations({
@@ -842,6 +844,8 @@ module Aws::Kafka
     #   * {Types::ListClustersResponse#cluster_info_list #cluster_info_list} => Array&lt;Types::ClusterInfo&gt;
     #   * {Types::ListClustersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_clusters({
@@ -912,6 +916,8 @@ module Aws::Kafka
     #   * {Types::ListConfigurationRevisionsResponse#next_token #next_token} => String
     #   * {Types::ListConfigurationRevisionsResponse#revisions #revisions} => Array&lt;Types::ConfigurationRevision&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_revisions({
@@ -947,6 +953,8 @@ module Aws::Kafka
     #
     #   * {Types::ListConfigurationsResponse#configurations #configurations} => Array&lt;Types::Configuration&gt;
     #   * {Types::ListConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -989,6 +997,8 @@ module Aws::Kafka
     #   * {Types::ListKafkaVersionsResponse#kafka_versions #kafka_versions} => Array&lt;Types::KafkaVersion&gt;
     #   * {Types::ListKafkaVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_kafka_versions({
@@ -1024,6 +1034,8 @@ module Aws::Kafka
     #
     #   * {Types::ListNodesResponse#next_token #next_token} => String
     #   * {Types::ListNodesResponse#node_info_list #node_info_list} => Array&lt;Types::NodeInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

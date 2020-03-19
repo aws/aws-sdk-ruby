@@ -629,6 +629,8 @@ module Aws::Detective
     #   * {Types::ListGraphsResponse#graph_list #graph_list} => Array&lt;Types::Graph&gt;
     #   * {Types::ListGraphsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_graphs({
@@ -681,6 +683,8 @@ module Aws::Detective
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::MemberDetail&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_invitations({
@@ -732,6 +736,8 @@ module Aws::Detective
     #
     #   * {Types::ListMembersResponse#member_details #member_details} => Array&lt;Types::MemberDetail&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

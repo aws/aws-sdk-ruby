@@ -393,6 +393,8 @@ module Aws::EBS
     #   * {Types::ListChangedBlocksResponse#block_size #block_size} => Integer
     #   * {Types::ListChangedBlocksResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_changed_blocks({
@@ -448,6 +450,8 @@ module Aws::EBS
     #   * {Types::ListSnapshotBlocksResponse#volume_size #volume_size} => Integer
     #   * {Types::ListSnapshotBlocksResponse#block_size #block_size} => Integer
     #   * {Types::ListSnapshotBlocksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

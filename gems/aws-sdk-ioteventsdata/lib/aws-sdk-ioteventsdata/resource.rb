@@ -6,13 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoTEventsData
-  # This class provides a resource oriented interface for IoTEventsData.
-  # To create a resource object:
-  #     resource = Aws::IoTEventsData::Resource.new(region: 'us-west-2')
-  # You can supply a client object with custom configuration that will be used for all resource operations.
-  # If you do not pass +:client+, a default client will be constructed.
-  #     client = Aws::IoTEventsData::Client.new(region: 'us-west-2')
-  #     resource = Aws::IoTEventsData::Resource.new(client: client)
+
   class Resource
 
     # @param options ({})

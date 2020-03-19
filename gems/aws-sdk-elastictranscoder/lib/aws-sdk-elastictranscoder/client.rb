@@ -1464,6 +1464,8 @@ module Aws::ElasticTranscoder
     #   * {Types::ListJobsByPipelineResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsByPipelineResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs_by_pipeline({
@@ -1717,6 +1719,8 @@ module Aws::ElasticTranscoder
     #   * {Types::ListJobsByStatusResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsByStatusResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs_by_status({
@@ -1964,6 +1968,8 @@ module Aws::ElasticTranscoder
     #   * {Types::ListPipelinesResponse#pipelines #pipelines} => Array&lt;Types::Pipeline&gt;
     #   * {Types::ListPipelinesResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipelines({
@@ -2027,6 +2033,8 @@ module Aws::ElasticTranscoder
     #
     #   * {Types::ListPresetsResponse#presets #presets} => Array&lt;Types::Preset&gt;
     #   * {Types::ListPresetsResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2323,6 +2331,11 @@ module Aws::ElasticTranscoder
     #   resp.job.timing.submit_time_millis #=> Integer
     #   resp.job.timing.start_time_millis #=> Integer
     #   resp.job.timing.finish_time_millis #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * job_complete
     #
     # @overload read_job(params = {})
     # @param [Hash] params ({})

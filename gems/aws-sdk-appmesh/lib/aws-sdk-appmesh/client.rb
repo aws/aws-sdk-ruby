@@ -1903,6 +1903,8 @@ module Aws::AppMesh
     #   * {Types::ListMeshesOutput#meshes #meshes} => Array&lt;Types::MeshRef&gt;
     #   * {Types::ListMeshesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_meshes({
@@ -1967,6 +1969,8 @@ module Aws::AppMesh
     #   * {Types::ListRoutesOutput#next_token #next_token} => String
     #   * {Types::ListRoutesOutput#routes #routes} => Array&lt;Types::RouteRef&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_routes({
@@ -2023,6 +2027,8 @@ module Aws::AppMesh
     #
     #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::TagRef&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2083,6 +2089,8 @@ module Aws::AppMesh
     #
     #   * {Types::ListVirtualNodesOutput#next_token #next_token} => String
     #   * {Types::ListVirtualNodesOutput#virtual_nodes #virtual_nodes} => Array&lt;Types::VirtualNodeRef&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2148,6 +2156,8 @@ module Aws::AppMesh
     #   * {Types::ListVirtualRoutersOutput#next_token #next_token} => String
     #   * {Types::ListVirtualRoutersOutput#virtual_routers #virtual_routers} => Array&lt;Types::VirtualRouterRef&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_virtual_routers({
@@ -2211,6 +2221,8 @@ module Aws::AppMesh
     #
     #   * {Types::ListVirtualServicesOutput#next_token #next_token} => String
     #   * {Types::ListVirtualServicesOutput#virtual_services #virtual_services} => Array&lt;Types::VirtualServiceRef&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

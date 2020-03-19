@@ -381,6 +381,8 @@ module Aws::SSO
     #   * {Types::ListAccountRolesResponse#next_token #next_token} => String
     #   * {Types::ListAccountRolesResponse#role_list #role_list} => Array&lt;Types::RoleInfo&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_roles({
@@ -434,6 +436,8 @@ module Aws::SSO
     #
     #   * {Types::ListAccountsResponse#next_token #next_token} => String
     #   * {Types::ListAccountsResponse#account_list #account_list} => Array&lt;Types::AccountInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

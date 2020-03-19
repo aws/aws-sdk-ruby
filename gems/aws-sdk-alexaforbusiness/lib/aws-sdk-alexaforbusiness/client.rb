@@ -2042,6 +2042,8 @@ module Aws::AlexaForBusiness
     #   * {Types::ListBusinessReportSchedulesResponse#business_report_schedules #business_report_schedules} => Array&lt;Types::BusinessReportSchedule&gt;
     #   * {Types::ListBusinessReportSchedulesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_business_report_schedules({
@@ -2089,6 +2091,8 @@ module Aws::AlexaForBusiness
     #
     #   * {Types::ListConferenceProvidersResponse#conference_providers #conference_providers} => Array&lt;Types::ConferenceProvider&gt;
     #   * {Types::ListConferenceProvidersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2151,6 +2155,8 @@ module Aws::AlexaForBusiness
     #   * {Types::ListDeviceEventsResponse#device_events #device_events} => Array&lt;Types::DeviceEvent&gt;
     #   * {Types::ListDeviceEventsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_device_events({
@@ -2192,6 +2198,8 @@ module Aws::AlexaForBusiness
     #
     #   * {Types::ListGatewayGroupsResponse#gateway_groups #gateway_groups} => Array&lt;Types::GatewayGroupSummary&gt;
     #   * {Types::ListGatewayGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2235,6 +2243,8 @@ module Aws::AlexaForBusiness
     #
     #   * {Types::ListGatewaysResponse#gateways #gateways} => Array&lt;Types::GatewaySummary&gt;
     #   * {Types::ListGatewaysResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2291,6 +2301,8 @@ module Aws::AlexaForBusiness
     #   * {Types::ListSkillsResponse#skill_summaries #skill_summaries} => Array&lt;Types::SkillSummary&gt;
     #   * {Types::ListSkillsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_skills({
@@ -2333,6 +2345,8 @@ module Aws::AlexaForBusiness
     #   * {Types::ListSkillsStoreCategoriesResponse#category_list #category_list} => Array&lt;Types::Category&gt;
     #   * {Types::ListSkillsStoreCategoriesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_skills_store_categories({
@@ -2372,6 +2386,8 @@ module Aws::AlexaForBusiness
     #
     #   * {Types::ListSkillsStoreSkillsByCategoryResponse#skills_store_skills #skills_store_skills} => Array&lt;Types::SkillsStoreSkill&gt;
     #   * {Types::ListSkillsStoreSkillsByCategoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2436,6 +2452,8 @@ module Aws::AlexaForBusiness
     #   * {Types::ListSmartHomeAppliancesResponse#smart_home_appliances #smart_home_appliances} => Array&lt;Types::SmartHomeAppliance&gt;
     #   * {Types::ListSmartHomeAppliancesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_smart_home_appliances({
@@ -2482,6 +2500,8 @@ module Aws::AlexaForBusiness
     #
     #   * {Types::ListTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2807,6 +2827,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchAddressBooksResponse#next_token #next_token} => String
     #   * {Types::SearchAddressBooksResponse#total_count #total_count} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_address_books({
@@ -2872,6 +2894,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchContactsResponse#contacts #contacts} => Array&lt;Types::ContactData&gt;
     #   * {Types::SearchContactsResponse#next_token #next_token} => String
     #   * {Types::SearchContactsResponse#total_count #total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2951,6 +2975,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchDevicesResponse#devices #devices} => Array&lt;Types::DeviceData&gt;
     #   * {Types::SearchDevicesResponse#next_token #next_token} => String
     #   * {Types::SearchDevicesResponse#total_count #total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3032,6 +3058,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchNetworkProfilesResponse#next_token #next_token} => String
     #   * {Types::SearchNetworkProfilesResponse#total_count #total_count} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_network_profiles({
@@ -3101,6 +3129,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchProfilesResponse#profiles #profiles} => Array&lt;Types::ProfileData&gt;
     #   * {Types::SearchProfilesResponse#next_token #next_token} => String
     #   * {Types::SearchProfilesResponse#total_count #total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3174,6 +3204,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchRoomsResponse#next_token #next_token} => String
     #   * {Types::SearchRoomsResponse#total_count #total_count} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_rooms({
@@ -3243,6 +3275,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchSkillGroupsResponse#next_token #next_token} => String
     #   * {Types::SearchSkillGroupsResponse#total_count #total_count} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_skill_groups({
@@ -3310,6 +3344,8 @@ module Aws::AlexaForBusiness
     #   * {Types::SearchUsersResponse#users #users} => Array&lt;Types::UserData&gt;
     #   * {Types::SearchUsersResponse#next_token #next_token} => String
     #   * {Types::SearchUsersResponse#total_count #total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

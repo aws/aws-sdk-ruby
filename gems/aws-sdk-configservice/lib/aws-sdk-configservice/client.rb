@@ -2111,6 +2111,8 @@ module Aws::ConfigService
     #   * {Types::DescribeRemediationExceptionsResponse#remediation_exceptions #remediation_exceptions} => Array&lt;Types::RemediationException&gt;
     #   * {Types::DescribeRemediationExceptionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_remediation_exceptions({
@@ -2170,6 +2172,8 @@ module Aws::ConfigService
     #
     #   * {Types::DescribeRemediationExecutionStatusResponse#remediation_execution_statuses #remediation_execution_statuses} => Array&lt;Types::RemediationExecutionStatus&gt;
     #   * {Types::DescribeRemediationExecutionStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3099,6 +3103,8 @@ module Aws::ConfigService
     #
     #   * {Types::GetResourceConfigHistoryResponse#configuration_items #configuration_items} => Array&lt;Types::ConfigurationItem&gt;
     #   * {Types::GetResourceConfigHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4276,6 +4282,8 @@ module Aws::ConfigService
     #   * {Types::SelectAggregateResourceConfigResponse#results #results} => Array&lt;String&gt;
     #   * {Types::SelectAggregateResourceConfigResponse#query_info #query_info} => Types::QueryInfo
     #   * {Types::SelectAggregateResourceConfigResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

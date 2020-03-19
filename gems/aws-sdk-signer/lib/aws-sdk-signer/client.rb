@@ -385,6 +385,11 @@ module Aws::Signer
     #   resp.signed_object.s3.bucket_name #=> String
     #   resp.signed_object.s3.key #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * successful_signing_job
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/DescribeSigningJob AWS API Documentation
     #
     # @overload describe_signing_job(params = {})
@@ -526,6 +531,8 @@ module Aws::Signer
     #   * {Types::ListSigningJobsResponse#jobs #jobs} => Array&lt;Types::SigningJob&gt;
     #   * {Types::ListSigningJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_signing_jobs({
@@ -589,6 +596,8 @@ module Aws::Signer
     #
     #   * {Types::ListSigningPlatformsResponse#platforms #platforms} => Array&lt;Types::SigningPlatform&gt;
     #   * {Types::ListSigningPlatformsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -654,6 +663,8 @@ module Aws::Signer
     #
     #   * {Types::ListSigningProfilesResponse#profiles #profiles} => Array&lt;Types::SigningProfile&gt;
     #   * {Types::ListSigningProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

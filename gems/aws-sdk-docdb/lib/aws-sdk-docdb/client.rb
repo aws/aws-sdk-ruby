@@ -2030,6 +2030,8 @@ module Aws::DocDB
     #   * {Types::DBClusterMessage#marker #marker} => String
     #   * {Types::DBClusterMessage#db_clusters #db_clusters} => Array&lt;Types::DBCluster&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_clusters({
@@ -2153,6 +2155,8 @@ module Aws::DocDB
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
     #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_engine_versions({
@@ -2248,6 +2252,8 @@ module Aws::DocDB
     #   * {Types::DBInstanceMessage#marker #marker} => String
     #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_instances({
@@ -2326,6 +2332,12 @@ module Aws::DocDB
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * db_instance_available
+    #   * db_instance_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBInstances AWS API Documentation
     #
     # @overload describe_db_instances(params = {})
@@ -2364,6 +2376,8 @@ module Aws::DocDB
     #
     #   * {Types::DBSubnetGroupMessage#marker #marker} => String
     #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2591,6 +2605,8 @@ module Aws::DocDB
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -2674,6 +2690,8 @@ module Aws::DocDB
     #
     #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
     #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

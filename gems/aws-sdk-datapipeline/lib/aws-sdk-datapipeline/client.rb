@@ -550,6 +550,8 @@ module Aws::DataPipeline
     #   * {Types::DescribeObjectsOutput#marker #marker} => String
     #   * {Types::DescribeObjectsOutput#has_more_results #has_more_results} => Boolean
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_objects({
@@ -733,6 +735,8 @@ module Aws::DataPipeline
     #   * {Types::ListPipelinesOutput#pipeline_id_list #pipeline_id_list} => Array&lt;Types::PipelineIdName&gt;
     #   * {Types::ListPipelinesOutput#marker #marker} => String
     #   * {Types::ListPipelinesOutput#has_more_results #has_more_results} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -957,6 +961,8 @@ module Aws::DataPipeline
     #   * {Types::QueryObjectsOutput#ids #ids} => Array&lt;String&gt;
     #   * {Types::QueryObjectsOutput#marker #marker} => String
     #   * {Types::QueryObjectsOutput#has_more_results #has_more_results} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

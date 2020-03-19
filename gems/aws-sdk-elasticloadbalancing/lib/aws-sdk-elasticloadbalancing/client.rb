@@ -1447,6 +1447,13 @@ module Aws::ElasticLoadBalancing
     #   resp.instance_states[0].reason_code #=> String
     #   resp.instance_states[0].description #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * any_instance_in_service
+    #   * instance_deregistered
+    #   * instance_in_service
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth AWS API Documentation
     #
     # @overload describe_instance_health(params = {})
@@ -1689,6 +1696,8 @@ module Aws::ElasticLoadBalancing
     #
     #   * {Types::DescribeAccessPointsOutput#load_balancer_descriptions #load_balancer_descriptions} => Array&lt;Types::LoadBalancerDescription&gt;
     #   * {Types::DescribeAccessPointsOutput#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe one of your load balancers

@@ -1166,6 +1166,8 @@ module Aws::EFS
     #   * {Types::DescribeAccessPointsResponse#access_points #access_points} => Array&lt;Types::AccessPointDescription&gt;
     #   * {Types::DescribeAccessPointsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_access_points({
@@ -1293,6 +1295,8 @@ module Aws::EFS
     #   * {Types::DescribeFileSystemsResponse#marker #marker} => String
     #   * {Types::DescribeFileSystemsResponse#file_systems #file_systems} => Array&lt;Types::FileSystemDescription&gt;
     #   * {Types::DescribeFileSystemsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe an EFS file system
@@ -1613,6 +1617,8 @@ module Aws::EFS
     #   * {Types::DescribeTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeTagsResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the tags for a file system
     #
@@ -1680,6 +1686,8 @@ module Aws::EFS
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

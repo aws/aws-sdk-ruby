@@ -712,6 +712,8 @@ module Aws::FraudDetector
     #   * {Types::DescribeModelVersionsResult#model_version_details #model_version_details} => Array&lt;Types::ModelVersionDetail&gt;
     #   * {Types::DescribeModelVersionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_model_versions({
@@ -832,6 +834,8 @@ module Aws::FraudDetector
     #   * {Types::GetDetectorsResult#detectors #detectors} => Array&lt;Types::Detector&gt;
     #   * {Types::GetDetectorsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_detectors({
@@ -880,6 +884,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetExternalModelsResult#external_models #external_models} => Array&lt;Types::ExternalModel&gt;
     #   * {Types::GetExternalModelsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -984,6 +990,8 @@ module Aws::FraudDetector
     #   * {Types::GetModelsResult#next_token #next_token} => String
     #   * {Types::GetModelsResult#models #models} => Array&lt;Types::Model&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_models({
@@ -1041,6 +1049,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetOutcomesResult#outcomes #outcomes} => Array&lt;Types::Outcome&gt;
     #   * {Types::GetOutcomesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1152,6 +1162,8 @@ module Aws::FraudDetector
     #   * {Types::GetRulesResult#rule_details #rule_details} => Array&lt;Types::RuleDetail&gt;
     #   * {Types::GetRulesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_rules({
@@ -1206,6 +1218,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetVariablesResult#variables #variables} => Array&lt;Types::Variable&gt;
     #   * {Types::GetVariablesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

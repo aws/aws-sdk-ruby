@@ -1802,6 +1802,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeListenersOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
     #   * {Types::DescribeListenersOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a listener
     #
@@ -2002,6 +2004,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeLoadBalancersOutput#load_balancers #load_balancers} => Array&lt;Types::LoadBalancer&gt;
     #   * {Types::DescribeLoadBalancersOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a load balancer
     #
@@ -2078,6 +2082,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.next_marker #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * load_balancer_available
+    #   * load_balancer_exists
+    #   * load_balancers_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers AWS API Documentation
     #
@@ -2551,6 +2562,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeTargetGroupsOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
     #   * {Types::DescribeTargetGroupsOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a target group
     #
@@ -2731,6 +2744,12 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining", "unavailable"
     #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Target.HealthCheckDisabled", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * target_deregistered
+    #   * target_in_service
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth AWS API Documentation
     #

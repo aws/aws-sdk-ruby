@@ -3221,6 +3221,8 @@ module Aws::StorageGateway
     #   * {Types::DescribeTapeArchivesOutput#tape_archives #tape_archives} => Array&lt;Types::TapeArchive&gt;
     #   * {Types::DescribeTapeArchivesOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe virtual tapes in the VTS
     #
@@ -3316,6 +3318,8 @@ module Aws::StorageGateway
     #   * {Types::DescribeTapeRecoveryPointsOutput#tape_recovery_point_infos #tape_recovery_point_infos} => Array&lt;Types::TapeRecoveryPointInfo&gt;
     #   * {Types::DescribeTapeRecoveryPointsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe virtual tape recovery points
     #
@@ -3403,6 +3407,8 @@ module Aws::StorageGateway
     #
     #   * {Types::DescribeTapesOutput#tapes #tapes} => Array&lt;Types::Tape&gt;
     #   * {Types::DescribeTapesOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe virtual tape(s) associated with gateway
@@ -3590,6 +3596,8 @@ module Aws::StorageGateway
     #   * {Types::DescribeVTLDevicesOutput#gateway_arn #gateway_arn} => String
     #   * {Types::DescribeVTLDevicesOutput#vtl_devices #vtl_devices} => Array&lt;Types::VTLDevice&gt;
     #   * {Types::DescribeVTLDevicesOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe virtual tape library (VTL) devices of a single gateway
@@ -3937,6 +3945,8 @@ module Aws::StorageGateway
     #   * {Types::ListFileSharesOutput#next_marker #next_marker} => String
     #   * {Types::ListFileSharesOutput#file_share_info_list #file_share_info_list} => Array&lt;Types::FileShareInfo&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_file_shares({
@@ -3990,6 +4000,8 @@ module Aws::StorageGateway
     #
     #   * {Types::ListGatewaysOutput#gateways #gateways} => Array&lt;Types::GatewayInfo&gt;
     #   * {Types::ListGatewaysOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To lists region specific gateways per AWS account
@@ -4149,6 +4161,8 @@ module Aws::StorageGateway
     #   * {Types::ListTagsForResourceOutput#marker #marker} => String
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list tags that have been added to a resource
     #
@@ -4228,6 +4242,8 @@ module Aws::StorageGateway
     #
     #   * {Types::ListTapesOutput#tape_infos #tape_infos} => Array&lt;Types::TapeInfo&gt;
     #   * {Types::ListTapesOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4388,6 +4404,8 @@ module Aws::StorageGateway
     #   * {Types::ListVolumesOutput#gateway_arn #gateway_arn} => String
     #   * {Types::ListVolumesOutput#marker #marker} => String
     #   * {Types::ListVolumesOutput#volume_infos #volume_infos} => Array&lt;Types::VolumeInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the iSCSI stored volumes of a gateway

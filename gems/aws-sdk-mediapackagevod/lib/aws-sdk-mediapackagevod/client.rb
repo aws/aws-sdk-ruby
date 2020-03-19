@@ -841,6 +841,8 @@ module Aws::MediaPackageVod
     #   * {Types::ListAssetsResponse#assets #assets} => Array&lt;Types::AssetShallow&gt;
     #   * {Types::ListAssetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_assets({
@@ -883,6 +885,8 @@ module Aws::MediaPackageVod
     #
     #   * {Types::ListPackagingConfigurationsResponse#next_token #next_token} => String
     #   * {Types::ListPackagingConfigurationsResponse#packaging_configurations #packaging_configurations} => Array&lt;Types::PackagingConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -976,6 +980,8 @@ module Aws::MediaPackageVod
     #
     #   * {Types::ListPackagingGroupsResponse#next_token #next_token} => String
     #   * {Types::ListPackagingGroupsResponse#packaging_groups #packaging_groups} => Array&lt;Types::PackagingGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

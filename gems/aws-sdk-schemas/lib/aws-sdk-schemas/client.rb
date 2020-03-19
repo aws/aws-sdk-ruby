@@ -585,6 +585,11 @@ module Aws::Schemas
     #   resp.schema_version #=> String
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * code_binding_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DescribeCodeBinding AWS API Documentation
     #
     # @overload describe_code_binding(params = {})
@@ -797,6 +802,8 @@ module Aws::Schemas
     #   * {Types::ListDiscoverersResponse#discoverers #discoverers} => Array&lt;Types::DiscovererSummary&gt;
     #   * {Types::ListDiscoverersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_discoverers({
@@ -841,6 +848,8 @@ module Aws::Schemas
     #   * {Types::ListRegistriesResponse#next_token #next_token} => String
     #   * {Types::ListRegistriesResponse#registries #registries} => Array&lt;Types::RegistrySummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_registries({
@@ -883,6 +892,8 @@ module Aws::Schemas
     #   * {Types::ListSchemaVersionsResponse#next_token #next_token} => String
     #   * {Types::ListSchemaVersionsResponse#schema_versions #schema_versions} => Array&lt;Types::SchemaVersionSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_schema_versions({
@@ -923,6 +934,8 @@ module Aws::Schemas
     #
     #   * {Types::ListSchemasResponse#next_token #next_token} => String
     #   * {Types::ListSchemasResponse#schemas #schemas} => Array&lt;Types::SchemaSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1075,6 +1088,8 @@ module Aws::Schemas
     #
     #   * {Types::SearchSchemasResponse#next_token #next_token} => String
     #   * {Types::SearchSchemasResponse#schemas #schemas} => Array&lt;Types::SearchSchemaSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

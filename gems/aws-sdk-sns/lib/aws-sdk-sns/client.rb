@@ -935,6 +935,8 @@ module Aws::SNS
     #   * {Types::ListEndpointsByPlatformApplicationResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
     #   * {Types::ListEndpointsByPlatformApplicationResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_endpoints_by_platform_application({
@@ -1027,6 +1029,8 @@ module Aws::SNS
     #   * {Types::ListPlatformApplicationsResponse#platform_applications #platform_applications} => Array&lt;Types::PlatformApplication&gt;
     #   * {Types::ListPlatformApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_platform_applications({
@@ -1064,6 +1068,8 @@ module Aws::SNS
     #
     #   * {Types::ListSubscriptionsResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::ListSubscriptionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1108,6 +1114,8 @@ module Aws::SNS
     #
     #   * {Types::ListSubscriptionsByTopicResponse#subscriptions #subscriptions} => Array&lt;Types::Subscription&gt;
     #   * {Types::ListSubscriptionsByTopicResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1185,6 +1193,8 @@ module Aws::SNS
     #
     #   * {Types::ListTopicsResponse#topics #topics} => Array&lt;Types::Topic&gt;
     #   * {Types::ListTopicsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

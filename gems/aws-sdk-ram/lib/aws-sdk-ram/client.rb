@@ -746,6 +746,8 @@ module Aws::RAM
     #   * {Types::GetResourcePoliciesResponse#policies #policies} => Array&lt;String&gt;
     #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_policies({
@@ -805,6 +807,8 @@ module Aws::RAM
     #   * {Types::GetResourceShareAssociationsResponse#resource_share_associations #resource_share_associations} => Array&lt;Types::ResourceShareAssociation&gt;
     #   * {Types::GetResourceShareAssociationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_share_associations({
@@ -860,6 +864,8 @@ module Aws::RAM
     #
     #   * {Types::GetResourceShareInvitationsResponse#resource_share_invitations #resource_share_invitations} => Array&lt;Types::ResourceShareInvitation&gt;
     #   * {Types::GetResourceShareInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -932,6 +938,8 @@ module Aws::RAM
     #   * {Types::GetResourceSharesResponse#resource_shares #resource_shares} => Array&lt;Types::ResourceShare&gt;
     #   * {Types::GetResourceSharesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_shares({
@@ -993,6 +1001,8 @@ module Aws::RAM
     #
     #   * {Types::ListPendingInvitationResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::ListPendingInvitationResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1110,6 +1120,8 @@ module Aws::RAM
     #   * {Types::ListPrincipalsResponse#principals #principals} => Array&lt;Types::Principal&gt;
     #   * {Types::ListPrincipalsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_principals({
@@ -1225,6 +1237,8 @@ module Aws::RAM
     #
     #   * {Types::ListResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::ListResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

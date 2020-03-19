@@ -928,6 +928,8 @@ module Aws::Snowball
     #   * {Types::DescribeAddressesResult#addresses #addresses} => Array&lt;Types::Address&gt;
     #   * {Types::DescribeAddressesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe all the addresses you've created for AWS Snowball
     #
@@ -1678,6 +1680,8 @@ module Aws::Snowball
     #
     #   * {Types::ListJobsResult#job_list_entries #job_list_entries} => Array&lt;Types::JobListEntry&gt;
     #   * {Types::ListJobsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of jobs that you've created for AWS Snowball

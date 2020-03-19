@@ -2255,6 +2255,8 @@ module Aws::APIGateway
     #   * {Types::ApiKeys#position #position} => String
     #   * {Types::ApiKeys#items #items} => Array&lt;Types::ApiKey&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_api_keys({
@@ -2460,6 +2462,8 @@ module Aws::APIGateway
     #   * {Types::BasePathMappings#position #position} => String
     #   * {Types::BasePathMappings#items #items} => Array&lt;Types::BasePathMapping&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_base_path_mappings({
@@ -2534,6 +2538,8 @@ module Aws::APIGateway
     #
     #   * {Types::ClientCertificates#position #position} => String
     #   * {Types::ClientCertificates#items #items} => Array&lt;Types::ClientCertificate&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2631,6 +2637,8 @@ module Aws::APIGateway
     #
     #   * {Types::Deployments#position #position} => String
     #   * {Types::Deployments#items #items} => Array&lt;Types::Deployment&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2899,6 +2907,8 @@ module Aws::APIGateway
     #
     #   * {Types::DomainNames#position #position} => String
     #   * {Types::DomainNames#items #items} => Array&lt;Types::DomainName&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3452,6 +3462,8 @@ module Aws::APIGateway
     #   * {Types::Models#position #position} => String
     #   * {Types::Models#items #items} => Array&lt;Types::Model&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_models({
@@ -3670,6 +3682,8 @@ module Aws::APIGateway
     #   * {Types::Resources#position #position} => String
     #   * {Types::Resources#items #items} => Array&lt;Types::Resource&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resources({
@@ -3805,6 +3819,8 @@ module Aws::APIGateway
     #
     #   * {Types::RestApis#position #position} => String
     #   * {Types::RestApis#items #items} => Array&lt;Types::RestApi&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4180,6 +4196,8 @@ module Aws::APIGateway
     #   * {Types::Usage#position #position} => String
     #   * {Types::Usage#items #items} => Hash&lt;String,Array&lt;Array&lt;Integer&gt;&gt;&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_usage({
@@ -4321,6 +4339,8 @@ module Aws::APIGateway
     #   * {Types::UsagePlanKeys#position #position} => String
     #   * {Types::UsagePlanKeys#items #items} => Array&lt;Types::UsagePlanKey&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_usage_plan_keys({
@@ -4362,6 +4382,8 @@ module Aws::APIGateway
     #
     #   * {Types::UsagePlans#position #position} => String
     #   * {Types::UsagePlans#items #items} => Array&lt;Types::UsagePlan&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4455,6 +4477,8 @@ module Aws::APIGateway
     #
     #   * {Types::VpcLinks#position #position} => String
     #   * {Types::VpcLinks#items #items} => Array&lt;Types::VpcLink&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

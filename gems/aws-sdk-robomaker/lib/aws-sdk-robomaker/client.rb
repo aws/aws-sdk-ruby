@@ -1876,6 +1876,8 @@ module Aws::RoboMaker
     #   * {Types::ListDeploymentJobsResponse#deployment_jobs #deployment_jobs} => Array&lt;Types::DeploymentJob&gt;
     #   * {Types::ListDeploymentJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployment_jobs({
@@ -1959,6 +1961,8 @@ module Aws::RoboMaker
     #   * {Types::ListFleetsResponse#fleet_details #fleet_details} => Array&lt;Types::Fleet&gt;
     #   * {Types::ListFleetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fleets({
@@ -2025,6 +2029,8 @@ module Aws::RoboMaker
     #   * {Types::ListRobotApplicationsResponse#robot_application_summaries #robot_application_summaries} => Array&lt;Types::RobotApplicationSummary&gt;
     #   * {Types::ListRobotApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_robot_applications({
@@ -2090,6 +2096,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListRobotsResponse#robots #robots} => Array&lt;Types::Robot&gt;
     #   * {Types::ListRobotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2160,6 +2168,8 @@ module Aws::RoboMaker
     #   * {Types::ListSimulationApplicationsResponse#simulation_application_summaries #simulation_application_summaries} => Array&lt;Types::SimulationApplicationSummary&gt;
     #   * {Types::ListSimulationApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_simulation_applications({
@@ -2220,6 +2230,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListSimulationJobBatchesResponse#simulation_job_batch_summaries #simulation_job_batch_summaries} => Array&lt;Types::SimulationJobBatchSummary&gt;
     #   * {Types::ListSimulationJobBatchesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2293,6 +2305,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListSimulationJobsResponse#simulation_job_summaries #simulation_job_summaries} => Array&lt;Types::SimulationJobSummary&gt;
     #   * {Types::ListSimulationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

@@ -1861,6 +1861,11 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * change_set_create_complete
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet AWS API Documentation
     #
     # @overload describe_change_set(params = {})
@@ -1965,6 +1970,8 @@ module Aws::CloudFormation
     #
     #   * {Types::DescribeStackEventsOutput#stack_events #stack_events} => Array&lt;Types::StackEvent&gt;
     #   * {Types::DescribeStackEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2162,6 +2169,8 @@ module Aws::CloudFormation
     #
     #   * {Types::DescribeStackResourceDriftsOutput#stack_resource_drifts #stack_resource_drifts} => Array&lt;Types::StackResourceDrift&gt;
     #   * {Types::DescribeStackResourceDriftsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2445,6 +2454,8 @@ module Aws::CloudFormation
     #   * {Types::DescribeStacksOutput#stacks #stacks} => Array&lt;Types::Stack&gt;
     #   * {Types::DescribeStacksOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_stacks({
@@ -2494,6 +2505,15 @@ module Aws::CloudFormation
     #   resp.stacks[0].drift_information.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.stacks[0].drift_information.last_check_timestamp #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * stack_create_complete
+    #   * stack_delete_complete
+    #   * stack_exists
+    #   * stack_import_complete
+    #   * stack_update_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks AWS API Documentation
     #
@@ -2626,6 +2646,11 @@ module Aws::CloudFormation
     #   resp.description #=> String
     #   resp.type_arn #=> String
     #   resp.type_version_arn #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * type_registration_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistration AWS API Documentation
     #
@@ -3249,6 +3274,8 @@ module Aws::CloudFormation
     #   * {Types::ListExportsOutput#exports #exports} => Array&lt;Types::Export&gt;
     #   * {Types::ListExportsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_exports({
@@ -3297,6 +3324,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListImportsOutput#imports #imports} => Array&lt;String&gt;
     #   * {Types::ListImportsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3410,6 +3439,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListStackResourcesOutput#stack_resource_summaries #stack_resource_summaries} => Array&lt;Types::StackResourceSummary&gt;
     #   * {Types::ListStackResourcesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3632,6 +3663,8 @@ module Aws::CloudFormation
     #   * {Types::ListStacksOutput#stack_summaries #stack_summaries} => Array&lt;Types::StackSummary&gt;
     #   * {Types::ListStacksOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stacks({
@@ -3707,6 +3740,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListTypeRegistrationsOutput#registration_token_list #registration_token_list} => Array&lt;String&gt;
     #   * {Types::ListTypeRegistrationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3787,6 +3822,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListTypeVersionsOutput#type_version_summaries #type_version_summaries} => Array&lt;Types::TypeVersionSummary&gt;
     #   * {Types::ListTypeVersionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3884,6 +3921,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListTypesOutput#type_summaries #type_summaries} => Array&lt;Types::TypeSummary&gt;
     #   * {Types::ListTypesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

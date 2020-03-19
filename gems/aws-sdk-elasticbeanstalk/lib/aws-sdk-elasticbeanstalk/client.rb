@@ -2510,6 +2510,8 @@ module Aws::ElasticBeanstalk
     #   * {Types::EventDescriptionsMessage#events #events} => Array&lt;Types::EventDescription&gt;
     #   * {Types::EventDescriptionsMessage#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To view events for an environment
     #

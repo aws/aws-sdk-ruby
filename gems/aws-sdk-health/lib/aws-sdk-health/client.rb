@@ -349,6 +349,8 @@ module Aws::Health
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#affected_accounts #affected_accounts} => Array&lt;String&gt;
     #   * {Types::DescribeAffectedAccountsForOrganizationResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_affected_accounts_for_organization({
@@ -405,6 +407,8 @@ module Aws::Health
     #
     #   * {Types::DescribeAffectedEntitiesResponse#entities #entities} => Array&lt;Types::AffectedEntity&gt;
     #   * {Types::DescribeAffectedEntitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -492,6 +496,8 @@ module Aws::Health
     #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#entities #entities} => Array&lt;Types::AffectedEntity&gt;
     #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#failed_set #failed_set} => Array&lt;Types::OrganizationAffectedEntitiesErrorItem&gt;
     #   * {Types::DescribeAffectedEntitiesForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -594,6 +600,8 @@ module Aws::Health
     #
     #   * {Types::DescribeEventAggregatesResponse#event_aggregates #event_aggregates} => Array&lt;Types::EventAggregate&gt;
     #   * {Types::DescribeEventAggregatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -811,6 +819,8 @@ module Aws::Health
     #   * {Types::DescribeEventTypesResponse#event_types #event_types} => Array&lt;Types::EventType&gt;
     #   * {Types::DescribeEventTypesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_types({
@@ -872,6 +882,8 @@ module Aws::Health
     #
     #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
     #   * {Types::DescribeEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -979,6 +991,8 @@ module Aws::Health
     #
     #   * {Types::DescribeEventsForOrganizationResponse#events #events} => Array&lt;Types::OrganizationEvent&gt;
     #   * {Types::DescribeEventsForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

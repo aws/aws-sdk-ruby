@@ -644,6 +644,8 @@ module Aws::Kinesis
     #
     #   * {Types::DescribeStreamOutput#stream_description #stream_description} => Types::StreamDescription
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_stream({
@@ -673,6 +675,12 @@ module Aws::Kinesis
     #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
     #   resp.stream_description.encryption_type #=> String, one of "NONE", "KMS"
     #   resp.stream_description.key_id #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * stream_exists
+    #   * stream_not_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream AWS API Documentation
     #
@@ -1353,6 +1361,8 @@ module Aws::Kinesis
     #   * {Types::ListStreamConsumersOutput#consumers #consumers} => Array&lt;Types::Consumer&gt;
     #   * {Types::ListStreamConsumersOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stream_consumers({
@@ -1409,6 +1419,8 @@ module Aws::Kinesis
     #
     #   * {Types::ListStreamsOutput#stream_names #stream_names} => Array&lt;String&gt;
     #   * {Types::ListStreamsOutput#has_more_streams #has_more_streams} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

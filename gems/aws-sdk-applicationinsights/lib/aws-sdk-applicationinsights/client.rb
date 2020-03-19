@@ -854,6 +854,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListApplicationsResponse#application_info_list #application_info_list} => Array&lt;Types::ApplicationInfo&gt;
     #   * {Types::ListApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
@@ -898,6 +900,8 @@ module Aws::ApplicationInsights
     #
     #   * {Types::ListComponentsResponse#application_component_list #application_component_list} => Array&lt;Types::ApplicationComponent&gt;
     #   * {Types::ListComponentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -972,6 +976,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListConfigurationHistoryResponse#event_list #event_list} => Array&lt;Types::ConfigurationEvent&gt;
     #   * {Types::ListConfigurationHistoryResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_history({
@@ -1022,6 +1028,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListLogPatternSetsResponse#log_pattern_sets #log_pattern_sets} => Array&lt;String&gt;
     #   * {Types::ListLogPatternSetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_log_pattern_sets({
@@ -1067,6 +1075,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListLogPatternsResponse#resource_group_name #resource_group_name} => String
     #   * {Types::ListLogPatternsResponse#log_patterns #log_patterns} => Array&lt;Types::LogPattern&gt;
     #   * {Types::ListLogPatternsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1122,6 +1132,8 @@ module Aws::ApplicationInsights
     #
     #   * {Types::ListProblemsResponse#problem_list #problem_list} => Array&lt;Types::Problem&gt;
     #   * {Types::ListProblemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

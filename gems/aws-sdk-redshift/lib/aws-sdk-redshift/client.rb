@@ -2910,6 +2910,8 @@ module Aws::Redshift
     #   * {Types::ClusterParameterGroupsMessage#marker #marker} => String
     #   * {Types::ClusterParameterGroupsMessage#parameter_groups #parameter_groups} => Array&lt;Types::ClusterParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_parameter_groups({
@@ -2994,6 +2996,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::ClusterParameterGroupDetails#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3102,6 +3106,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterSecurityGroupMessage#marker #marker} => String
     #   * {Types::ClusterSecurityGroupMessage#cluster_security_groups #cluster_security_groups} => Array&lt;Types::ClusterSecurityGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3270,6 +3276,8 @@ module Aws::Redshift
     #   * {Types::SnapshotMessage#marker #marker} => String
     #   * {Types::SnapshotMessage#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_snapshots({
@@ -3334,6 +3342,11 @@ module Aws::Redshift
     #   resp.snapshots[0].manual_snapshot_retention_period #=> Integer
     #   resp.snapshots[0].manual_snapshot_remaining_days #=> Integer
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * snapshot_available
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots AWS API Documentation
     #
@@ -3405,6 +3418,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterSubnetGroupMessage#marker #marker} => String
     #   * {Types::ClusterSubnetGroupMessage#cluster_subnet_groups #cluster_subnet_groups} => Array&lt;Types::ClusterSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3545,6 +3560,8 @@ module Aws::Redshift
     #   * {Types::ClusterVersionsMessage#marker #marker} => String
     #   * {Types::ClusterVersionsMessage#cluster_versions #cluster_versions} => Array&lt;Types::ClusterVersion&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_versions({
@@ -3641,6 +3658,8 @@ module Aws::Redshift
     #
     #   * {Types::ClustersMessage#marker #marker} => String
     #   * {Types::ClustersMessage#clusters #clusters} => Array&lt;Types::Cluster&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3752,6 +3771,13 @@ module Aws::Redshift
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    #
+    #   * cluster_available
+    #   * cluster_deleted
+    #   * cluster_restored
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
     # @overload describe_clusters(params = {})
@@ -3798,6 +3824,8 @@ module Aws::Redshift
     # @return [Types::DescribeDefaultClusterParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDefaultClusterParametersResult#default_cluster_parameters #default_cluster_parameters} => Types::DefaultClusterParameters
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3938,6 +3966,8 @@ module Aws::Redshift
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_subscriptions({
@@ -4076,6 +4106,8 @@ module Aws::Redshift
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -4173,6 +4205,8 @@ module Aws::Redshift
     #   * {Types::HsmClientCertificateMessage#marker #marker} => String
     #   * {Types::HsmClientCertificateMessage#hsm_client_certificates #hsm_client_certificates} => Array&lt;Types::HsmClientCertificate&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hsm_client_certificates({
@@ -4265,6 +4299,8 @@ module Aws::Redshift
     #
     #   * {Types::HsmConfigurationMessage#marker #marker} => String
     #   * {Types::HsmConfigurationMessage#hsm_configurations #hsm_configurations} => Array&lt;Types::HsmConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4390,6 +4426,8 @@ module Aws::Redshift
     #   * {Types::NodeConfigurationOptionsMessage#node_configuration_option_list #node_configuration_option_list} => Array&lt;Types::NodeConfigurationOption&gt;
     #   * {Types::NodeConfigurationOptionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_node_configuration_options({
@@ -4478,6 +4516,8 @@ module Aws::Redshift
     #   * {Types::OrderableClusterOptionsMessage#orderable_cluster_options #orderable_cluster_options} => Array&lt;Types::OrderableClusterOption&gt;
     #   * {Types::OrderableClusterOptionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_orderable_cluster_options({
@@ -4551,6 +4591,8 @@ module Aws::Redshift
     #   * {Types::ReservedNodeOfferingsMessage#marker #marker} => String
     #   * {Types::ReservedNodeOfferingsMessage#reserved_node_offerings #reserved_node_offerings} => Array&lt;Types::ReservedNodeOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_node_offerings({
@@ -4612,6 +4654,8 @@ module Aws::Redshift
     #
     #   * {Types::ReservedNodesMessage#marker #marker} => String
     #   * {Types::ReservedNodesMessage#reserved_nodes #reserved_nodes} => Array&lt;Types::ReservedNode&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4771,6 +4815,8 @@ module Aws::Redshift
     #
     #   * {Types::ScheduledActionsMessage#marker #marker} => String
     #   * {Types::ScheduledActionsMessage#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

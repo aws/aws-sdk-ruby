@@ -2970,6 +2970,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListAcceptedPortfolioSharesOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
     #   * {Types::ListAcceptedPortfolioSharesOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_accepted_portfolio_shares({
@@ -3025,6 +3027,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListBudgetsForResourceOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
     #   * {Types::ListBudgetsForResourceOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_budgets_for_resource({
@@ -3077,6 +3081,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListConstraintsForPortfolioOutput#constraint_details #constraint_details} => Array&lt;Types::ConstraintDetail&gt;
     #   * {Types::ListConstraintsForPortfolioOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3133,6 +3139,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListLaunchPathsOutput#launch_path_summaries #launch_path_summaries} => Array&lt;Types::LaunchPathSummary&gt;
     #   * {Types::ListLaunchPathsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3204,6 +3212,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListOrganizationPortfolioAccessOutput#organization_nodes #organization_nodes} => Array&lt;Types::OrganizationNode&gt;
     #   * {Types::ListOrganizationPortfolioAccessOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organization_portfolio_access({
@@ -3261,6 +3271,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListPortfolioAccessOutput#account_ids #account_ids} => Array&lt;String&gt;
     #   * {Types::ListPortfolioAccessOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_portfolio_access({
@@ -3308,6 +3320,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListPortfoliosOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
     #   * {Types::ListPortfoliosOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3363,6 +3377,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListPortfoliosForProductOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
     #   * {Types::ListPortfoliosForProductOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_portfolios_for_product({
@@ -3417,6 +3433,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListPrincipalsForPortfolioOutput#principals #principals} => Array&lt;Types::Principal&gt;
     #   * {Types::ListPrincipalsForPortfolioOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3581,6 +3599,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListProvisioningArtifactsForServiceActionOutput#provisioning_artifact_views #provisioning_artifact_views} => Array&lt;Types::ProvisioningArtifactView&gt;
     #   * {Types::ListProvisioningArtifactsForServiceActionOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_provisioning_artifacts_for_service_action({
@@ -3720,6 +3740,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListResourcesForTagOptionOutput#resource_details #resource_details} => Array&lt;Types::ResourceDetail&gt;
     #   * {Types::ListResourcesForTagOptionOutput#page_token #page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resources_for_tag_option({
@@ -3770,6 +3792,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListServiceActionsOutput#service_action_summaries #service_action_summaries} => Array&lt;Types::ServiceActionSummary&gt;
     #   * {Types::ListServiceActionsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3827,6 +3851,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListServiceActionsForProvisioningArtifactOutput#service_action_summaries #service_action_summaries} => Array&lt;Types::ServiceActionSummary&gt;
     #   * {Types::ListServiceActionsForProvisioningArtifactOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3928,6 +3954,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListTagOptionsOutput#tag_option_details #tag_option_details} => Array&lt;Types::TagOptionDetail&gt;
     #   * {Types::ListTagOptionsOutput#page_token #page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4230,6 +4258,8 @@ module Aws::ServiceCatalog
     #   * {Types::SearchProductsOutput#product_view_aggregations #product_view_aggregations} => Hash&lt;String,Array&lt;Types::ProductViewAggregationValue&gt;&gt;
     #   * {Types::SearchProductsOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_products({
@@ -4311,6 +4341,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::SearchProductsAsAdminOutput#product_view_details #product_view_details} => Array&lt;Types::ProductViewDetail&gt;
     #   * {Types::SearchProductsAsAdminOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4399,6 +4431,8 @@ module Aws::ServiceCatalog
     #   * {Types::SearchProvisionedProductsOutput#provisioned_products #provisioned_products} => Array&lt;Types::ProvisionedProductAttribute&gt;
     #   * {Types::SearchProvisionedProductsOutput#total_results_count #total_results_count} => Integer
     #   * {Types::SearchProvisionedProductsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

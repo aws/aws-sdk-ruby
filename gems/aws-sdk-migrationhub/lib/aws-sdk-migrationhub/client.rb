@@ -717,6 +717,8 @@ module Aws::MigrationHub
     #   * {Types::ListApplicationStatesResult#application_state_list #application_state_list} => Array&lt;Types::ApplicationState&gt;
     #   * {Types::ListApplicationStatesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_application_states({
@@ -773,6 +775,8 @@ module Aws::MigrationHub
     #   * {Types::ListCreatedArtifactsResult#next_token #next_token} => String
     #   * {Types::ListCreatedArtifactsResult#created_artifact_list #created_artifact_list} => Array&lt;Types::CreatedArtifact&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_created_artifacts({
@@ -819,6 +823,8 @@ module Aws::MigrationHub
     #
     #   * {Types::ListDiscoveredResourcesResult#next_token #next_token} => String
     #   * {Types::ListDiscoveredResourcesResult#discovered_resource_list #discovered_resource_list} => Array&lt;Types::DiscoveredResource&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -872,6 +878,8 @@ module Aws::MigrationHub
     #   * {Types::ListMigrationTasksResult#next_token #next_token} => String
     #   * {Types::ListMigrationTasksResult#migration_task_summary_list #migration_task_summary_list} => Array&lt;Types::MigrationTaskSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_migration_tasks({
@@ -915,6 +923,8 @@ module Aws::MigrationHub
     #
     #   * {Types::ListProgressUpdateStreamsResult#progress_update_stream_summary_list #progress_update_stream_summary_list} => Array&lt;Types::ProgressUpdateStreamSummary&gt;
     #   * {Types::ListProgressUpdateStreamsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
