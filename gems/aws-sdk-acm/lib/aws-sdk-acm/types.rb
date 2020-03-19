@@ -409,6 +409,12 @@ module Aws::ACM
     #   domain validation. For more information, see [Use DNS to Validate
     #   Domain Ownership][1].
     #
+    #   Note: The CNAME information that you need does not include the name
+    #   of your domain. If you include  your domain name in the DNS database
+    #   CNAME record, validation fails.  For example, if the name is
+    #   "\_a79865eb4cd1a6ab990a45779b4e0b96.yourdomain.com", only
+    #   "\_a79865eb4cd1a6ab990a45779b4e0b96" must be used.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
@@ -637,13 +643,14 @@ module Aws::ACM
     end
 
     # @!attribute [rw] certificate
-    #   String that contains the ACM certificate represented by the ARN
-    #   specified at input.
+    #   The ACM-issued certificate corresponding to the ARN specified as
+    #   input.
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
-    #   The certificate chain that contains the root certificate issued by
-    #   the certificate authority (CA).
+    #   Certificates forming the requested certificate's chain of trust.
+    #   The chain consists of the certificate of the issuing CA and the
+    #   intermediate certificates of any other subordinate CAs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateResponse AWS API Documentation
@@ -814,7 +821,7 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # An ACM limit has been exceeded.
+    # An ACM quota has been exceeded.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1100,9 +1107,9 @@ module Aws::ACM
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name.
     #   The maximum number of domain names that you can add to an ACM
-    #   certificate is 100. However, the initial limit is 10 domain names.
-    #   If you need more than 10 names, you must request a limit increase.
-    #   For more information, see [Limits][1].
+    #   certificate is 100. However, the initial quota is 10 domain names.
+    #   If you need more than 10 names, you must request a quota increase.
+    #   For more information, see [Quotas][1].
     #
     #   The maximum length of a SAN DNS name is 253 octets. The name is made
     #   up of multiple labels separated by periods. No label can be longer

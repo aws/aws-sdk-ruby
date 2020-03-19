@@ -574,12 +574,15 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Retrieves a certificate specified by an ARN and its certificate chain
-    # . The chain is an ordered list of certificates that contains the end
-    # entity certificate, intermediate certificates of subordinate CAs, and
-    # the root certificate in that order. The certificate and certificate
-    # chain are base64 encoded. If you want to decode the certificate to see
-    # the individual fields, you can use OpenSSL.
+    # Retrieves an Amazon-issued certificate and its certificate chain. The
+    # chain consists of the certificate of the issuing CA and the
+    # intermediate certificates of any other subordinate CAs. All of the
+    # certificates are base64 encoded. You can use [OpenSSL][1] to decode
+    # the certificates and inspect individual fields.
+    #
+    #
+    #
+    # [1]: https://wiki.openssl.org/index.php/Command_Line_Utilities
     #
     # @option params [required, String] :certificate_arn
     #   String that contains a certificate ARN in the following format:
@@ -979,9 +982,9 @@ module Aws::ACM
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name. The
     #   maximum number of domain names that you can add to an ACM certificate
-    #   is 100. However, the initial limit is 10 domain names. If you need
-    #   more than 10 names, you must request a limit increase. For more
-    #   information, see [Limits][1].
+    #   is 100. However, the initial quota is 10 domain names. If you need
+    #   more than 10 names, you must request a quota increase. For more
+    #   information, see [Quotas][1].
     #
     #   The maximum length of a SAN DNS name is 253 octets. The name is made
     #   up of multiple labels separated by periods. No label can be longer
@@ -1212,7 +1215,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

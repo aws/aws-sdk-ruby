@@ -323,8 +323,12 @@ module Aws::Outposts
     # @option params [String] :availability_zone
     #   The Availability Zone.
     #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
+    #
     # @option params [String] :availability_zone_id
     #   The ID of the Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #
     # @return [Types::CreateOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -582,7 +586,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

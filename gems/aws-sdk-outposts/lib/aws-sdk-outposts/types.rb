@@ -45,10 +45,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpostInput AWS API Documentation
@@ -351,10 +355,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
