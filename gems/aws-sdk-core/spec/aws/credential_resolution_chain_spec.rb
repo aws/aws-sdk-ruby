@@ -84,7 +84,7 @@ module Aws
           'AR_TOKEN'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_web_identity', region: 'us-west-2'
+          profile: 'ar_web_identity', region: 'us-east-1'
         )
         expect(
           client.config.credentials.credentials.access_key_id
@@ -100,7 +100,7 @@ module Aws
           'AR_TOKEN'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_plus_creds', region: 'us-west-2'
+          profile: 'ar_plus_creds', region: 'us-east-1'
         )
 
         expect(
@@ -110,7 +110,7 @@ module Aws
         sts_client = client.config.credentials.client
         expect(
           sts_client.config.region
-        ).to eq('us-west-2')
+        ).to eq('us-east-1')
       end
 
       it 'prefers shared credential file static credentials over shared config' do
@@ -237,7 +237,7 @@ module Aws
             'AR_TOKEN'
           )
           client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_web_src', region: 'us-west-2'
+            profile: 'ar_web_src', region: 'us-east-1'
           )
           expect(
             client.config.credentials.credentials.access_key_id
@@ -246,7 +246,7 @@ module Aws
           sts_client = client.config.credentials.client
           expect(
             sts_client.config.region
-          ).to eq('us-west-2')
+          ).to eq('us-east-1')
         end
 
         it 'supports :source_profile from process credentials' do
@@ -516,7 +516,7 @@ module Aws
     end
 
     def assume_role_stub(role_arn, input_access_key, access_key, secret_key, token)
-      stub_request(:post, 'https://sts.amazonaws.com/')
+      stub_request(:post, 'https://sts.us-east-1.amazonaws.com/')
         .with(headers: { 'authorization' => /Credential=#{input_access_key}/ })
         .to_return(body: <<-RESP)
           <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
@@ -541,7 +541,7 @@ module Aws
 
     def assume_role_web_identity_stub(role_arn, access_key, secret_key, token)
       stub_token_file('token')
-      stub_request(:post, 'https://sts.amazonaws.com/')
+      stub_request(:post, 'https://sts.us-east-1.amazonaws.com/')
         .to_return(body: <<-RESP)
           <AssumeRoleWithWebIdentityResponse xmlns=\"https://sts.amazonaws.com/doc/2011-06-15/\">
             <AssumeRoleWithWebIdentityResult>
