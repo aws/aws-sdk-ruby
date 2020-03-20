@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Change the default of sts_regional_endpoints from 'legacy' to 'regional'.
+
 1.285.0 (2020-03-18)
 ------------------
 

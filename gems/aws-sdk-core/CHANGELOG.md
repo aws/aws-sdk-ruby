@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Default to regional STS endpoints
+* Issue - Change the default of sts_regional_endpoints from 'legacy' to 'regional'.
 
 3.91.1 (2020-03-10)
 ------------------

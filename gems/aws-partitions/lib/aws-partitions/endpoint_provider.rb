@@ -116,7 +116,7 @@ module Aws
       end
 
       class << self
-        def resolve(region, service, sts_regional_endpoints = 'legacy')
+        def resolve(region, service, sts_regional_endpoints = 'regional')
           default_provider.resolve(region, service, sts_regional_endpoints)
         end
 
