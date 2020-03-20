@@ -65,12 +65,12 @@ module Aws::Redshift
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name        | params                        | :delay   | :max_attempts |
-  # | ------------------ | ----------------------------- | -------- | ------------- |
-  # | cluster_available  | {#describe_clusters}          | 60       | 30            |
-  # | cluster_deleted    | {#describe_clusters}          | 60       | 30            |
-  # | cluster_restored   | {#describe_clusters}          | 60       | 30            |
-  # | snapshot_available | {#describe_cluster_snapshots} | 15       | 20            |
+  # | waiter_name        | params                              | :delay   | :max_attempts |
+  # | ------------------ | ----------------------------------- | -------- | ------------- |
+  # | cluster_available  | {Client#describe_clusters}          | 60       | 30            |
+  # | cluster_deleted    | {Client#describe_clusters}          | 60       | 30            |
+  # | cluster_restored   | {Client#describe_clusters}          | 60       | 30            |
+  # | snapshot_available | {Client#describe_cluster_snapshots} | 15       | 20            |
   #
   module Waiters
 

@@ -2294,7 +2294,7 @@ module Aws::DatabaseMigrationService
     #   resp.connections[0].replication_instance_identifier #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * test_connection_succeeds
     #
@@ -2561,7 +2561,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].redshift_settings.write_buffer_size #=> Integer
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * endpoint_deleted
     #
@@ -3145,7 +3145,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].dns_name_servers #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * replication_instance_available
     #   * replication_instance_deleted
@@ -3418,7 +3418,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * replication_task_deleted
     #   * replication_task_ready
@@ -5235,16 +5235,16 @@ module Aws::DatabaseMigrationService
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                    | params                            | :delay   | :max_attempts |
-    # | ------------------------------ | --------------------------------- | -------- | ------------- |
-    # | endpoint_deleted               | {#describe_endpoints}             | 5        | 60            |
-    # | replication_instance_available | {#describe_replication_instances} | 60       | 60            |
-    # | replication_instance_deleted   | {#describe_replication_instances} | 15       | 60            |
-    # | replication_task_deleted       | {#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_ready         | {#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_running       | {#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_stopped       | {#describe_replication_tasks}     | 15       | 60            |
-    # | test_connection_succeeds       | {#describe_connections}           | 5        | 60            |
+    # | waiter_name                    | params                                  | :delay   | :max_attempts |
+    # | ------------------------------ | --------------------------------------- | -------- | ------------- |
+    # | endpoint_deleted               | {Client#describe_endpoints}             | 5        | 60            |
+    # | replication_instance_available | {Client#describe_replication_instances} | 60       | 60            |
+    # | replication_instance_deleted   | {Client#describe_replication_instances} | 15       | 60            |
+    # | replication_task_deleted       | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_ready         | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_running       | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | replication_task_stopped       | {Client#describe_replication_tasks}     | 15       | 60            |
+    # | test_connection_succeeds       | {Client#describe_connections}           | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

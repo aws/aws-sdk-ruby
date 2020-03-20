@@ -1087,7 +1087,7 @@ module Aws::OpsWorksCM
     #   resp.engine_attributes[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * node_associated
     #
@@ -1826,9 +1826,9 @@ module Aws::OpsWorksCM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params                              | :delay   | :max_attempts |
-    # | --------------- | ----------------------------------- | -------- | ------------- |
-    # | node_associated | {#describe_node_association_status} | 15       | 15            |
+    # | waiter_name     | params                                    | :delay   | :max_attempts |
+    # | --------------- | ----------------------------------------- | -------- | ------------- |
+    # | node_associated | {Client#describe_node_association_status} | 15       | 15            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

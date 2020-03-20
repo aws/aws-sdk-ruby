@@ -65,11 +65,11 @@ module Aws::AutoScaling
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name      | params                          | :delay   | :max_attempts |
-  # | ---------------- | ------------------------------- | -------- | ------------- |
-  # | group_exists     | {#describe_auto_scaling_groups} | 5        | 10            |
-  # | group_in_service | {#describe_auto_scaling_groups} | 15       | 40            |
-  # | group_not_exists | {#describe_auto_scaling_groups} | 15       | 40            |
+  # | waiter_name      | params                                | :delay   | :max_attempts |
+  # | ---------------- | ------------------------------------- | -------- | ------------- |
+  # | group_exists     | {Client#describe_auto_scaling_groups} | 5        | 10            |
+  # | group_in_service | {Client#describe_auto_scaling_groups} | 15       | 40            |
+  # | group_not_exists | {Client#describe_auto_scaling_groups} | 15       | 40            |
   #
   module Waiters
 

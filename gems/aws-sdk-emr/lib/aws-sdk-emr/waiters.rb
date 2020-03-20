@@ -65,11 +65,11 @@ module Aws::EMR
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name        | params              | :delay   | :max_attempts |
-  # | ------------------ | ------------------- | -------- | ------------- |
-  # | cluster_running    | {#describe_cluster} | 30       | 60            |
-  # | cluster_terminated | {#describe_cluster} | 30       | 60            |
-  # | step_complete      | {#describe_step}    | 30       | 60            |
+  # | waiter_name        | params                    | :delay   | :max_attempts |
+  # | ------------------ | ------------------------- | -------- | ------------- |
+  # | cluster_running    | {Client#describe_cluster} | 30       | 60            |
+  # | cluster_terminated | {Client#describe_cluster} | 30       | 60            |
+  # | step_complete      | {Client#describe_step}    | 30       | 60            |
   #
   module Waiters
 

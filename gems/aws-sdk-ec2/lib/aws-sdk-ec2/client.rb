@@ -12437,7 +12437,7 @@ module Aws::EC2
     #   resp.bundle_tasks[0].update_time #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * bundle_task_complete
     #
@@ -13290,7 +13290,7 @@ module Aws::EC2
     #   resp.conversion_tasks[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * conversion_task_cancelled
     #   * conversion_task_completed
@@ -13408,7 +13408,7 @@ module Aws::EC2
     #   resp.customer_gateways[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * customer_gateway_available
     #
@@ -13821,7 +13821,7 @@ module Aws::EC2
     #   resp.export_tasks[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * export_task_cancelled
     #   * export_task_completed
@@ -15318,7 +15318,7 @@ module Aws::EC2
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * image_available
     #   * image_exists
@@ -15945,7 +15945,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * instance_status_ok
     #   * system_status_ok
@@ -16748,7 +16748,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * instance_exists
     #   * instance_running
@@ -17041,7 +17041,7 @@ module Aws::EC2
     #   resp.key_pairs[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * key_pair_exists
     #
@@ -18026,7 +18026,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * nat_gateway_available
     #
@@ -18704,7 +18704,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * network_interface_available
     #
@@ -20504,7 +20504,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * security_group_exists
     #
@@ -20833,7 +20833,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * snapshot_completed
     #
@@ -21626,7 +21626,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * spot_instance_request_fulfilled
     #
@@ -22037,7 +22037,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * subnet_available
     #
@@ -23510,7 +23510,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * volume_available
     #   * volume_deleted
@@ -24463,7 +24463,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vpc_peering_connection_deleted
     #   * vpc_peering_connection_exists
@@ -24628,7 +24628,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vpc_available
     #   * vpc_exists
@@ -24775,7 +24775,7 @@ module Aws::EC2
     #   resp.vpn_connections[0].vgw_telemetry[0].certificate_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vpn_connection_available
     #   * vpn_connection_deleted
@@ -27165,7 +27165,7 @@ module Aws::EC2
     #   resp.timestamp #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * password_data_available
     #

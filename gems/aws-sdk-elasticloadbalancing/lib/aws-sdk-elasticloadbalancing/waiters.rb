@@ -65,11 +65,11 @@ module Aws::ElasticLoadBalancing
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name             | params                      | :delay   | :max_attempts |
-  # | ----------------------- | --------------------------- | -------- | ------------- |
-  # | any_instance_in_service | {#describe_instance_health} | 15       | 40            |
-  # | instance_deregistered   | {#describe_instance_health} | 15       | 40            |
-  # | instance_in_service     | {#describe_instance_health} | 15       | 40            |
+  # | waiter_name             | params                            | :delay   | :max_attempts |
+  # | ----------------------- | --------------------------------- | -------- | ------------- |
+  # | any_instance_in_service | {Client#describe_instance_health} | 15       | 40            |
+  # | instance_deregistered   | {Client#describe_instance_health} | 15       | 40            |
+  # | instance_in_service     | {Client#describe_instance_health} | 15       | 40            |
   #
   module Waiters
 

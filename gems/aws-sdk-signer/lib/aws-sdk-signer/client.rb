@@ -386,7 +386,7 @@ module Aws::Signer
     #   resp.signed_object.s3.key #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * successful_signing_job
     #
@@ -1019,9 +1019,9 @@ module Aws::Signer
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name            | params                  | :delay   | :max_attempts |
-    # | ---------------------- | ----------------------- | -------- | ------------- |
-    # | successful_signing_job | {#describe_signing_job} | 20       | 25            |
+    # | waiter_name            | params                        | :delay   | :max_attempts |
+    # | ---------------------- | ----------------------------- | -------- | ------------- |
+    # | successful_signing_job | {Client#describe_signing_job} | 20       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

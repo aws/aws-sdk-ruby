@@ -65,9 +65,9 @@ module Aws::OpsWorksCM
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name     | params                              | :delay   | :max_attempts |
-  # | --------------- | ----------------------------------- | -------- | ------------- |
-  # | node_associated | {#describe_node_association_status} | 15       | 15            |
+  # | waiter_name     | params                                    | :delay   | :max_attempts |
+  # | --------------- | ----------------------------------------- | -------- | ------------- |
+  # | node_associated | {Client#describe_node_association_status} | 15       | 15            |
   #
   module Waiters
 

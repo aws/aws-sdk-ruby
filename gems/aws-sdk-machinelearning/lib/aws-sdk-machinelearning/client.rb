@@ -1356,7 +1356,7 @@ module Aws::MachineLearning
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * batch_prediction_available
     #
@@ -1499,7 +1499,7 @@ module Aws::MachineLearning
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * data_source_available
     #
@@ -1635,7 +1635,7 @@ module Aws::MachineLearning
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * evaluation_available
     #
@@ -1782,7 +1782,7 @@ module Aws::MachineLearning
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * ml_model_available
     #
@@ -2384,12 +2384,12 @@ module Aws::MachineLearning
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                | params                        | :delay   | :max_attempts |
-    # | -------------------------- | ----------------------------- | -------- | ------------- |
-    # | batch_prediction_available | {#describe_batch_predictions} | 30       | 60            |
-    # | data_source_available      | {#describe_data_sources}      | 30       | 60            |
-    # | evaluation_available       | {#describe_evaluations}       | 30       | 60            |
-    # | ml_model_available         | {#describe_ml_models}         | 30       | 60            |
+    # | waiter_name                | params                              | :delay   | :max_attempts |
+    # | -------------------------- | ----------------------------------- | -------- | ------------- |
+    # | batch_prediction_available | {Client#describe_batch_predictions} | 30       | 60            |
+    # | data_source_available      | {Client#describe_data_sources}      | 30       | 60            |
+    # | evaluation_available       | {Client#describe_evaluations}       | 30       | 60            |
+    # | ml_model_available         | {Client#describe_ml_models}         | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

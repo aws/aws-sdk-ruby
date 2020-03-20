@@ -1862,7 +1862,7 @@ module Aws::CloudFormation
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * change_set_create_complete
     #
@@ -2507,7 +2507,7 @@ module Aws::CloudFormation
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * stack_create_complete
     #   * stack_delete_complete
@@ -2648,7 +2648,7 @@ module Aws::CloudFormation
     #   resp.type_version_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * type_registration_complete
     #
@@ -5347,15 +5347,15 @@ module Aws::CloudFormation
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                | params                        | :delay   | :max_attempts |
-    # | -------------------------- | ----------------------------- | -------- | ------------- |
-    # | change_set_create_complete | {#describe_change_set}        | 30       | 120           |
-    # | stack_create_complete      | {#describe_stacks}            | 30       | 120           |
-    # | stack_delete_complete      | {#describe_stacks}            | 30       | 120           |
-    # | stack_exists               | {#describe_stacks}            | 5        | 20            |
-    # | stack_import_complete      | {#describe_stacks}            | 30       | 120           |
-    # | stack_update_complete      | {#describe_stacks}            | 30       | 120           |
-    # | type_registration_complete | {#describe_type_registration} | 30       | 120           |
+    # | waiter_name                | params                              | :delay   | :max_attempts |
+    # | -------------------------- | ----------------------------------- | -------- | ------------- |
+    # | change_set_create_complete | {Client#describe_change_set}        | 30       | 120           |
+    # | stack_create_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_delete_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_exists               | {Client#describe_stacks}            | 5        | 20            |
+    # | stack_import_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_update_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | type_registration_complete | {Client#describe_type_registration} | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

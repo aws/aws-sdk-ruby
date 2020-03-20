@@ -65,9 +65,9 @@ module Aws::ElasticTranscoder
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name  | params      | :delay   | :max_attempts |
-  # | ------------ | ----------- | -------- | ------------- |
-  # | job_complete | {#read_job} | 30       | 120           |
+  # | waiter_name  | params            | :delay   | :max_attempts |
+  # | ------------ | ----------------- | -------- | ------------- |
+  # | job_complete | {Client#read_job} | 30       | 120           |
   #
   module Waiters
 

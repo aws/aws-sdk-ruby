@@ -1815,7 +1815,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * deployment_successful
     #
@@ -3306,9 +3306,9 @@ module Aws::CodeDeploy
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params            | :delay   | :max_attempts |
-    # | --------------------- | ----------------- | -------- | ------------- |
-    # | deployment_successful | {#get_deployment} | 15       | 120           |
+    # | waiter_name           | params                  | :delay   | :max_attempts |
+    # | --------------------- | ----------------------- | -------- | ------------- |
+    # | deployment_successful | {Client#get_deployment} | 15       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -65,16 +65,16 @@ module Aws::SageMaker
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                         | params                        | :delay   | :max_attempts |
-  # | ----------------------------------- | ----------------------------- | -------- | ------------- |
-  # | endpoint_deleted                    | {#describe_endpoint}          | 30       | 60            |
-  # | endpoint_in_service                 | {#describe_endpoint}          | 30       | 120           |
-  # | notebook_instance_deleted           | {#describe_notebook_instance} | 30       | 60            |
-  # | notebook_instance_in_service        | {#describe_notebook_instance} | 30       | 60            |
-  # | notebook_instance_stopped           | {#describe_notebook_instance} | 30       | 60            |
-  # | processing_job_completed_or_stopped | {#describe_processing_job}    | 60       | 60            |
-  # | training_job_completed_or_stopped   | {#describe_training_job}      | 120      | 180           |
-  # | transform_job_completed_or_stopped  | {#describe_transform_job}     | 60       | 60            |
+  # | waiter_name                         | params                              | :delay   | :max_attempts |
+  # | ----------------------------------- | ----------------------------------- | -------- | ------------- |
+  # | endpoint_deleted                    | {Client#describe_endpoint}          | 30       | 60            |
+  # | endpoint_in_service                 | {Client#describe_endpoint}          | 30       | 120           |
+  # | notebook_instance_deleted           | {Client#describe_notebook_instance} | 30       | 60            |
+  # | notebook_instance_in_service        | {Client#describe_notebook_instance} | 30       | 60            |
+  # | notebook_instance_stopped           | {Client#describe_notebook_instance} | 30       | 60            |
+  # | processing_job_completed_or_stopped | {Client#describe_processing_job}    | 60       | 60            |
+  # | training_job_completed_or_stopped   | {Client#describe_training_job}      | 120      | 180           |
+  # | transform_job_completed_or_stopped  | {Client#describe_transform_job}     | 60       | 60            |
   #
   module Waiters
 

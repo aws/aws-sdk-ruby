@@ -5323,7 +5323,7 @@ module Aws::S3
     #   })
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * bucket_exists
     #   * bucket_not_exists
@@ -5589,7 +5589,7 @@ module Aws::S3
     #   resp.object_lock_legal_hold_status #=> String, one of "ON", "OFF"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * object_exists
     #   * object_not_exists
@@ -11856,12 +11856,12 @@ module Aws::S3
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params         | :delay   | :max_attempts |
-    # | ----------------- | -------------- | -------- | ------------- |
-    # | bucket_exists     | {#head_bucket} | 5        | 20            |
-    # | bucket_not_exists | {#head_bucket} | 5        | 20            |
-    # | object_exists     | {#head_object} | 5        | 20            |
-    # | object_not_exists | {#head_object} | 5        | 20            |
+    # | waiter_name       | params               | :delay   | :max_attempts |
+    # | ----------------- | -------------------- | -------- | ------------- |
+    # | bucket_exists     | {Client#head_bucket} | 5        | 20            |
+    # | bucket_not_exists | {Client#head_bucket} | 5        | 20            |
+    # | object_exists     | {Client#head_object} | 5        | 20            |
+    # | object_not_exists | {Client#head_object} | 5        | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

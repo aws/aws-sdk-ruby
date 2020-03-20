@@ -65,12 +65,12 @@ module Aws::ElastiCache
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                 | params                         | :delay   | :max_attempts |
-  # | --------------------------- | ------------------------------ | -------- | ------------- |
-  # | cache_cluster_available     | {#describe_cache_clusters}     | 15       | 40            |
-  # | cache_cluster_deleted       | {#describe_cache_clusters}     | 15       | 40            |
-  # | replication_group_available | {#describe_replication_groups} | 15       | 40            |
-  # | replication_group_deleted   | {#describe_replication_groups} | 15       | 40            |
+  # | waiter_name                 | params                               | :delay   | :max_attempts |
+  # | --------------------------- | ------------------------------------ | -------- | ------------- |
+  # | cache_cluster_available     | {Client#describe_cache_clusters}     | 15       | 40            |
+  # | cache_cluster_deleted       | {Client#describe_cache_clusters}     | 15       | 40            |
+  # | replication_group_available | {Client#describe_replication_groups} | 15       | 40            |
+  # | replication_group_deleted   | {Client#describe_replication_groups} | 15       | 40            |
   #
   module Waiters
 

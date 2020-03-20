@@ -3017,7 +3017,7 @@ module Aws::ECS
     #   resp.failures[0].detail #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * services_inactive
     #   * services_stable
@@ -3558,7 +3558,7 @@ module Aws::ECS
     #   resp.failures[0].detail #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * tasks_running
     #   * tasks_stopped
@@ -7972,12 +7972,12 @@ module Aws::ECS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params               | :delay   | :max_attempts |
-    # | ----------------- | -------------------- | -------- | ------------- |
-    # | services_inactive | {#describe_services} | 15       | 40            |
-    # | services_stable   | {#describe_services} | 15       | 40            |
-    # | tasks_running     | {#describe_tasks}    | 6        | 100           |
-    # | tasks_stopped     | {#describe_tasks}    | 6        | 100           |
+    # | waiter_name       | params                     | :delay   | :max_attempts |
+    # | ----------------- | -------------------------- | -------- | ------------- |
+    # | services_inactive | {Client#describe_services} | 15       | 40            |
+    # | services_stable   | {Client#describe_services} | 15       | 40            |
+    # | tasks_running     | {Client#describe_tasks}    | 6        | 100           |
+    # | tasks_stopped     | {Client#describe_tasks}    | 6        | 100           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -2333,7 +2333,7 @@ module Aws::DocDB
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * db_instance_available
     #   * db_instance_deleted
@@ -4306,10 +4306,10 @@ module Aws::DocDB
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                   | :delay   | :max_attempts |
-    # | --------------------- | ------------------------ | -------- | ------------- |
-    # | db_instance_available | {#describe_db_instances} | 30       | 60            |
-    # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
+    # | waiter_name           | params                         | :delay   | :max_attempts |
+    # | --------------------- | ------------------------------ | -------- | ------------- |
+    # | db_instance_available | {Client#describe_db_instances} | 30       | 60            |
+    # | db_instance_deleted   | {Client#describe_db_instances} | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

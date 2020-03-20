@@ -65,10 +65,10 @@ module Aws::ECR
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                       | params                          | :delay   | :max_attempts |
-  # | --------------------------------- | ------------------------------- | -------- | ------------- |
-  # | image_scan_complete               | {#describe_image_scan_findings} | 5        | 60            |
-  # | lifecycle_policy_preview_complete | {#get_lifecycle_policy_preview} | 5        | 20            |
+  # | waiter_name                       | params                                | :delay   | :max_attempts |
+  # | --------------------------------- | ------------------------------------- | -------- | ------------- |
+  # | image_scan_complete               | {Client#describe_image_scan_findings} | 5        | 60            |
+  # | lifecycle_policy_preview_complete | {Client#get_lifecycle_policy_preview} | 5        | 20            |
   #
   module Waiters
 

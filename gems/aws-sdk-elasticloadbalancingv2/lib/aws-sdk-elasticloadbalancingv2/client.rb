@@ -2084,7 +2084,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.next_marker #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * load_balancer_available
     #   * load_balancer_exists
@@ -2746,7 +2746,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target_health.description #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * target_deregistered
     #   * target_in_service
@@ -4282,13 +4282,13 @@ module Aws::ElasticLoadBalancingV2
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name             | params                     | :delay   | :max_attempts |
-    # | ----------------------- | -------------------------- | -------- | ------------- |
-    # | load_balancer_available | {#describe_load_balancers} | 15       | 40            |
-    # | load_balancer_exists    | {#describe_load_balancers} | 15       | 40            |
-    # | load_balancers_deleted  | {#describe_load_balancers} | 15       | 40            |
-    # | target_deregistered     | {#describe_target_health}  | 15       | 40            |
-    # | target_in_service       | {#describe_target_health}  | 15       | 40            |
+    # | waiter_name             | params                           | :delay   | :max_attempts |
+    # | ----------------------- | -------------------------------- | -------- | ------------- |
+    # | load_balancer_available | {Client#describe_load_balancers} | 15       | 40            |
+    # | load_balancer_exists    | {Client#describe_load_balancers} | 15       | 40            |
+    # | load_balancers_deleted  | {Client#describe_load_balancers} | 15       | 40            |
+    # | target_deregistered     | {Client#describe_target_health}  | 15       | 40            |
+    # | target_in_service       | {Client#describe_target_health}  | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

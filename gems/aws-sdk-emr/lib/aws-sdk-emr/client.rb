@@ -824,7 +824,7 @@ module Aws::EMR
     #   resp.cluster.outpost_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * cluster_running
     #   * cluster_terminated
@@ -1038,7 +1038,7 @@ module Aws::EMR
     #   resp.step.status.timeline.end_date_time #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * step_complete
     #
@@ -2575,11 +2575,11 @@ module Aws::EMR
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name        | params              | :delay   | :max_attempts |
-    # | ------------------ | ------------------- | -------- | ------------- |
-    # | cluster_running    | {#describe_cluster} | 30       | 60            |
-    # | cluster_terminated | {#describe_cluster} | 30       | 60            |
-    # | step_complete      | {#describe_step}    | 30       | 60            |
+    # | waiter_name        | params                    | :delay   | :max_attempts |
+    # | ------------------ | ------------------------- | -------- | ------------- |
+    # | cluster_running    | {Client#describe_cluster} | 30       | 60            |
+    # | cluster_terminated | {Client#describe_cluster} | 30       | 60            |
+    # | step_complete      | {Client#describe_step}    | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
