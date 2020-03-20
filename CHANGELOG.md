@@ -3,6 +3,14 @@ Unreleased Changes
 
 * Issue - Change the default of `sts_regional_endpoints` from 'legacy' to 'regional'.
 
+2.11.473 (2020-03-20)
+------------------
+
+2.11.472 (2020-03-20)
+------------------
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
 2.11.471 (2020-03-19)
 ------------------
 
