@@ -1647,7 +1647,7 @@ module Aws::AppStream
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * fleet_started
     #   * fleet_stopped
@@ -3133,10 +3133,10 @@ module Aws::AppStream
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name   | params             | :delay   | :max_attempts |
-    # | ------------- | ------------------ | -------- | ------------- |
-    # | fleet_started | {#describe_fleets} | 30       | 40            |
-    # | fleet_stopped | {#describe_fleets} | 30       | 40            |
+    # | waiter_name   | params                   | :delay   | :max_attempts |
+    # | ------------- | ------------------------ | -------- | ------------- |
+    # | fleet_started | {Client#describe_fleets} | 30       | 40            |
+    # | fleet_stopped | {Client#describe_fleets} | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

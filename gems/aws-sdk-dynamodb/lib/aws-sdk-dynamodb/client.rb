@@ -2559,7 +2559,7 @@ module Aws::DynamoDB
     #   resp.table.archival_summary.archival_backup_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * table_exists
     #   * table_not_exists
@@ -6697,10 +6697,10 @@ module Aws::DynamoDB
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params            | :delay   | :max_attempts |
-    # | ---------------- | ----------------- | -------- | ------------- |
-    # | table_exists     | {#describe_table} | 20       | 25            |
-    # | table_not_exists | {#describe_table} | 20       | 25            |
+    # | waiter_name      | params                  | :delay   | :max_attempts |
+    # | ---------------- | ----------------------- | -------- | ------------- |
+    # | table_exists     | {Client#describe_table} | 20       | 25            |
+    # | table_not_exists | {Client#describe_table} | 20       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -65,14 +65,14 @@ module Aws::OpsWorks
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name           | params                  | :delay   | :max_attempts |
-  # | --------------------- | ----------------------- | -------- | ------------- |
-  # | app_exists            | {#describe_apps}        | 1        | 40            |
-  # | deployment_successful | {#describe_deployments} | 15       | 40            |
-  # | instance_online       | {#describe_instances}   | 15       | 40            |
-  # | instance_registered   | {#describe_instances}   | 15       | 40            |
-  # | instance_stopped      | {#describe_instances}   | 15       | 40            |
-  # | instance_terminated   | {#describe_instances}   | 15       | 40            |
+  # | waiter_name           | params                        | :delay   | :max_attempts |
+  # | --------------------- | ----------------------------- | -------- | ------------- |
+  # | app_exists            | {Client#describe_apps}        | 1        | 40            |
+  # | deployment_successful | {Client#describe_deployments} | 15       | 40            |
+  # | instance_online       | {Client#describe_instances}   | 15       | 40            |
+  # | instance_registered   | {Client#describe_instances}   | 15       | 40            |
+  # | instance_stopped      | {Client#describe_instances}   | 15       | 40            |
+  # | instance_terminated   | {Client#describe_instances}   | 15       | 40            |
   #
   module Waiters
 

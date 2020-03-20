@@ -3344,7 +3344,7 @@ module Aws::Redshift
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * snapshot_available
     #
@@ -3772,7 +3772,7 @@ module Aws::Redshift
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * cluster_available
     #   * cluster_deleted
@@ -8816,12 +8816,12 @@ module Aws::Redshift
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name        | params                        | :delay   | :max_attempts |
-    # | ------------------ | ----------------------------- | -------- | ------------- |
-    # | cluster_available  | {#describe_clusters}          | 60       | 30            |
-    # | cluster_deleted    | {#describe_clusters}          | 60       | 30            |
-    # | cluster_restored   | {#describe_clusters}          | 60       | 30            |
-    # | snapshot_available | {#describe_cluster_snapshots} | 15       | 20            |
+    # | waiter_name        | params                              | :delay   | :max_attempts |
+    # | ------------------ | ----------------------------------- | -------- | ------------- |
+    # | cluster_available  | {Client#describe_clusters}          | 60       | 30            |
+    # | cluster_deleted    | {Client#describe_clusters}          | 60       | 30            |
+    # | cluster_restored   | {Client#describe_clusters}          | 60       | 30            |
+    # | snapshot_available | {Client#describe_cluster_snapshots} | 15       | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

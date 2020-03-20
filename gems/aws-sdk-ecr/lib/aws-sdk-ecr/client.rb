@@ -960,7 +960,7 @@ module Aws::ECR
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * image_scan_complete
     #
@@ -1414,7 +1414,7 @@ module Aws::ECR
     #   resp.summary.expiring_image_total_count #=> Integer
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * lifecycle_policy_preview_complete
     #
@@ -2239,10 +2239,10 @@ module Aws::ECR
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                       | params                          | :delay   | :max_attempts |
-    # | --------------------------------- | ------------------------------- | -------- | ------------- |
-    # | image_scan_complete               | {#describe_image_scan_findings} | 5        | 60            |
-    # | lifecycle_policy_preview_complete | {#get_lifecycle_policy_preview} | 5        | 20            |
+    # | waiter_name                       | params                                | :delay   | :max_attempts |
+    # | --------------------------------- | ------------------------------------- | -------- | ------------- |
+    # | image_scan_complete               | {Client#describe_image_scan_findings} | 5        | 60            |
+    # | lifecycle_policy_preview_complete | {Client#get_lifecycle_policy_preview} | 5        | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -65,10 +65,10 @@ module Aws::DocDB
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name           | params                   | :delay   | :max_attempts |
-  # | --------------------- | ------------------------ | -------- | ------------- |
-  # | db_instance_available | {#describe_db_instances} | 30       | 60            |
-  # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
+  # | waiter_name           | params                         | :delay   | :max_attempts |
+  # | --------------------- | ------------------------------ | -------- | ------------- |
+  # | db_instance_available | {Client#describe_db_instances} | 30       | 60            |
+  # | db_instance_deleted   | {Client#describe_db_instances} | 30       | 60            |
   #
   module Waiters
 

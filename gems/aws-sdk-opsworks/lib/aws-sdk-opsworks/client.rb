@@ -2412,7 +2412,7 @@ module Aws::OpsWorks
     #   resp.apps[0].environment[0].secure #=> Boolean
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * app_exists
     #
@@ -2553,7 +2553,7 @@ module Aws::OpsWorks
     #   resp.deployments[0].instance_ids[0] #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * deployment_successful
     #
@@ -2861,7 +2861,7 @@ module Aws::OpsWorks
     #   resp.instances[0].virtualization_type #=> String, one of "paravirtual", "hvm"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * instance_online
     #   * instance_registered
@@ -5697,14 +5697,14 @@ module Aws::OpsWorks
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                  | :delay   | :max_attempts |
-    # | --------------------- | ----------------------- | -------- | ------------- |
-    # | app_exists            | {#describe_apps}        | 1        | 40            |
-    # | deployment_successful | {#describe_deployments} | 15       | 40            |
-    # | instance_online       | {#describe_instances}   | 15       | 40            |
-    # | instance_registered   | {#describe_instances}   | 15       | 40            |
-    # | instance_stopped      | {#describe_instances}   | 15       | 40            |
-    # | instance_terminated   | {#describe_instances}   | 15       | 40            |
+    # | waiter_name           | params                        | :delay   | :max_attempts |
+    # | --------------------- | ----------------------------- | -------- | ------------- |
+    # | app_exists            | {Client#describe_apps}        | 1        | 40            |
+    # | deployment_successful | {Client#describe_deployments} | 15       | 40            |
+    # | instance_online       | {Client#describe_instances}   | 15       | 40            |
+    # | instance_registered   | {Client#describe_instances}   | 15       | 40            |
+    # | instance_stopped      | {Client#describe_instances}   | 15       | 40            |
+    # | instance_terminated   | {Client#describe_instances}   | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

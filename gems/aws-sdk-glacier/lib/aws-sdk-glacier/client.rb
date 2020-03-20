@@ -1288,7 +1288,7 @@ module Aws::Glacier
     #   resp.size_in_bytes #=> Integer
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vault_exists
     #   * vault_not_exists
@@ -3426,10 +3426,10 @@ module Aws::Glacier
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params            | :delay   | :max_attempts |
-    # | ---------------- | ----------------- | -------- | ------------- |
-    # | vault_exists     | {#describe_vault} | 3        | 15            |
-    # | vault_not_exists | {#describe_vault} | 3        | 15            |
+    # | waiter_name      | params                  | :delay   | :max_attempts |
+    # | ---------------- | ----------------------- | -------- | ------------- |
+    # | vault_exists     | {Client#describe_vault} | 3        | 15            |
+    # | vault_not_exists | {Client#describe_vault} | 3        | 15            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

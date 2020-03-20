@@ -65,12 +65,12 @@ module Aws::IAM
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name             | params                  | :delay   | :max_attempts |
-  # | ----------------------- | ----------------------- | -------- | ------------- |
-  # | instance_profile_exists | {#get_instance_profile} | 1        | 40            |
-  # | policy_exists           | {#get_policy}           | 1        | 20            |
-  # | role_exists             | {#get_role}             | 1        | 20            |
-  # | user_exists             | {#get_user}             | 1        | 20            |
+  # | waiter_name             | params                        | :delay   | :max_attempts |
+  # | ----------------------- | ----------------------------- | -------- | ------------- |
+  # | instance_profile_exists | {Client#get_instance_profile} | 1        | 40            |
+  # | policy_exists           | {Client#get_policy}           | 1        | 20            |
+  # | role_exists             | {Client#get_role}             | 1        | 20            |
+  # | user_exists             | {Client#get_user}             | 1        | 20            |
   #
   module Waiters
 

@@ -677,7 +677,7 @@ module Aws::Kinesis
     #   resp.stream_description.key_id #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * stream_exists
     #   * stream_not_exists
@@ -2266,10 +2266,10 @@ module Aws::Kinesis
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params             | :delay   | :max_attempts |
-    # | ----------------- | ------------------ | -------- | ------------- |
-    # | stream_exists     | {#describe_stream} | 10       | 18            |
-    # | stream_not_exists | {#describe_stream} | 10       | 18            |
+    # | waiter_name       | params                   | :delay   | :max_attempts |
+    # | ----------------- | ------------------------ | -------- | ------------- |
+    # | stream_exists     | {Client#describe_stream} | 10       | 18            |
+    # | stream_not_exists | {Client#describe_stream} | 10       | 18            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

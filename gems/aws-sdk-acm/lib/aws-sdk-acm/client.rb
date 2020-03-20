@@ -505,7 +505,7 @@ module Aws::ACM
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * certificate_validated
     #
@@ -1281,9 +1281,9 @@ module Aws::ACM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                  | :delay   | :max_attempts |
-    # | --------------------- | ----------------------- | -------- | ------------- |
-    # | certificate_validated | {#describe_certificate} | 60       | 40            |
+    # | waiter_name           | params                        | :delay   | :max_attempts |
+    # | --------------------- | ----------------------------- | -------- | ------------- |
+    # | certificate_validated | {Client#describe_certificate} | 60       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

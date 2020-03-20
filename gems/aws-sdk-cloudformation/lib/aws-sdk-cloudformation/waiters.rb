@@ -65,15 +65,15 @@ module Aws::CloudFormation
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                | params                        | :delay   | :max_attempts |
-  # | -------------------------- | ----------------------------- | -------- | ------------- |
-  # | change_set_create_complete | {#describe_change_set}        | 30       | 120           |
-  # | stack_create_complete      | {#describe_stacks}            | 30       | 120           |
-  # | stack_delete_complete      | {#describe_stacks}            | 30       | 120           |
-  # | stack_exists               | {#describe_stacks}            | 5        | 20            |
-  # | stack_import_complete      | {#describe_stacks}            | 30       | 120           |
-  # | stack_update_complete      | {#describe_stacks}            | 30       | 120           |
-  # | type_registration_complete | {#describe_type_registration} | 30       | 120           |
+  # | waiter_name                | params                              | :delay   | :max_attempts |
+  # | -------------------------- | ----------------------------------- | -------- | ------------- |
+  # | change_set_create_complete | {Client#describe_change_set}        | 30       | 120           |
+  # | stack_create_complete      | {Client#describe_stacks}            | 30       | 120           |
+  # | stack_delete_complete      | {Client#describe_stacks}            | 30       | 120           |
+  # | stack_exists               | {Client#describe_stacks}            | 5        | 20            |
+  # | stack_import_complete      | {Client#describe_stacks}            | 30       | 120           |
+  # | stack_update_complete      | {Client#describe_stacks}            | 30       | 120           |
+  # | type_registration_complete | {Client#describe_type_registration} | 30       | 120           |
   #
   module Waiters
 

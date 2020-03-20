@@ -65,12 +65,12 @@ module Aws::ECS
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name       | params               | :delay   | :max_attempts |
-  # | ----------------- | -------------------- | -------- | ------------- |
-  # | services_inactive | {#describe_services} | 15       | 40            |
-  # | services_stable   | {#describe_services} | 15       | 40            |
-  # | tasks_running     | {#describe_tasks}    | 6        | 100           |
-  # | tasks_stopped     | {#describe_tasks}    | 6        | 100           |
+  # | waiter_name       | params                     | :delay   | :max_attempts |
+  # | ----------------- | -------------------------- | -------- | ------------- |
+  # | services_inactive | {Client#describe_services} | 15       | 40            |
+  # | services_stable   | {Client#describe_services} | 15       | 40            |
+  # | tasks_running     | {Client#describe_tasks}    | 6        | 100           |
+  # | tasks_stopped     | {Client#describe_tasks}    | 6        | 100           |
   #
   module Waiters
 

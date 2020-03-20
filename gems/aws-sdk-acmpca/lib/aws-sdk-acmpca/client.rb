@@ -744,7 +744,7 @@ module Aws::ACMPCA
     #   resp.created_at #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * audit_report_created
     #
@@ -798,7 +798,7 @@ module Aws::ACMPCA
     #   resp.certificate_chain #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * certificate_issued
     #
@@ -878,7 +878,7 @@ module Aws::ACMPCA
     #   resp.csr #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * certificate_authority_csr_created
     #
@@ -1576,11 +1576,11 @@ module Aws::ACMPCA
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                       | params                                         | :delay   | :max_attempts |
-    # | --------------------------------- | ---------------------------------------------- | -------- | ------------- |
-    # | audit_report_created              | {#describe_certificate_authority_audit_report} | 3        | 60            |
-    # | certificate_authority_csr_created | {#get_certificate_authority_csr}               | 3        | 60            |
-    # | certificate_issued                | {#get_certificate}                             | 3        | 60            |
+    # | waiter_name                       | params                                               | :delay   | :max_attempts |
+    # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
+    # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
+    # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
+    # | certificate_issued                | {Client#get_certificate}                             | 3        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

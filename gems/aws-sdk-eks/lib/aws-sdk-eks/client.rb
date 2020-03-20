@@ -1154,7 +1154,7 @@ module Aws::EKS
     #   resp.cluster.encryption_config[0].provider.key_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * cluster_active
     #   * cluster_deleted
@@ -1270,7 +1270,7 @@ module Aws::EKS
     #   resp.nodegroup.tags["TagKey"] #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * nodegroup_active
     #   * nodegroup_deleted
@@ -2120,12 +2120,12 @@ module Aws::EKS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                | :delay   | :max_attempts |
-    # | ----------------- | --------------------- | -------- | ------------- |
-    # | cluster_active    | {#describe_cluster}   | 30       | 40            |
-    # | cluster_deleted   | {#describe_cluster}   | 30       | 40            |
-    # | nodegroup_active  | {#describe_nodegroup} | 30       | 80            |
-    # | nodegroup_deleted | {#describe_nodegroup} | 30       | 40            |
+    # | waiter_name       | params                      | :delay   | :max_attempts |
+    # | ----------------- | --------------------------- | -------- | ------------- |
+    # | cluster_active    | {Client#describe_cluster}   | 30       | 40            |
+    # | cluster_deleted   | {Client#describe_cluster}   | 30       | 40            |
+    # | nodegroup_active  | {Client#describe_nodegroup} | 30       | 80            |
+    # | nodegroup_deleted | {Client#describe_nodegroup} | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

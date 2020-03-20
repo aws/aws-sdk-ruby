@@ -2333,7 +2333,7 @@ module Aws::ElasticTranscoder
     #   resp.job.timing.finish_time_millis #=> Integer
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * job_complete
     #
@@ -3039,9 +3039,9 @@ module Aws::ElasticTranscoder
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name  | params      | :delay   | :max_attempts |
-    # | ------------ | ----------- | -------- | ------------- |
-    # | job_complete | {#read_job} | 30       | 120           |
+    # | waiter_name  | params            | :delay   | :max_attempts |
+    # | ------------ | ----------------- | -------- | ------------- |
+    # | job_complete | {Client#read_job} | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

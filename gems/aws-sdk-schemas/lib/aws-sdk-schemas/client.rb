@@ -586,7 +586,7 @@ module Aws::Schemas
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * code_binding_exists
     #
@@ -1464,9 +1464,9 @@ module Aws::Schemas
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name         | params                   | :delay   | :max_attempts |
-    # | ------------------- | ------------------------ | -------- | ------------- |
-    # | code_binding_exists | {#describe_code_binding} | 2        | 30            |
+    # | waiter_name         | params                         | :delay   | :max_attempts |
+    # | ------------------- | ------------------------------ | -------- | ------------- |
+    # | code_binding_exists | {Client#describe_code_binding} | 2        | 30            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -3640,7 +3640,7 @@ module Aws::MediaLive
     #   resp.tags["__string"] #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * channel_created
     #   * channel_deleted
@@ -3804,7 +3804,7 @@ module Aws::MediaLive
     #   resp.tags["__string"] #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * multiplex_created
     #   * multiplex_deleted
@@ -8222,16 +8222,16 @@ module Aws::MediaLive
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                | :delay   | :max_attempts |
-    # | ----------------- | --------------------- | -------- | ------------- |
-    # | channel_created   | {#describe_channel}   | 3        | 5             |
-    # | channel_deleted   | {#describe_channel}   | 5        | 20            |
-    # | channel_running   | {#describe_channel}   | 5        | 120           |
-    # | channel_stopped   | {#describe_channel}   | 5        | 28            |
-    # | multiplex_created | {#describe_multiplex} | 3        | 5             |
-    # | multiplex_deleted | {#describe_multiplex} | 5        | 20            |
-    # | multiplex_running | {#describe_multiplex} | 5        | 120           |
-    # | multiplex_stopped | {#describe_multiplex} | 5        | 28            |
+    # | waiter_name       | params                      | :delay   | :max_attempts |
+    # | ----------------- | --------------------------- | -------- | ------------- |
+    # | channel_created   | {Client#describe_channel}   | 3        | 5             |
+    # | channel_deleted   | {Client#describe_channel}   | 5        | 20            |
+    # | channel_running   | {Client#describe_channel}   | 5        | 120           |
+    # | channel_stopped   | {Client#describe_channel}   | 5        | 28            |
+    # | multiplex_created | {Client#describe_multiplex} | 3        | 5             |
+    # | multiplex_deleted | {Client#describe_multiplex} | 5        | 20            |
+    # | multiplex_running | {Client#describe_multiplex} | 5        | 120           |
+    # | multiplex_stopped | {Client#describe_multiplex} | 5        | 28            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

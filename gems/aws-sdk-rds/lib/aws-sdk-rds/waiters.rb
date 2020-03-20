@@ -65,14 +65,14 @@ module Aws::RDS
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                   | params                           | :delay   | :max_attempts |
-  # | ----------------------------- | -------------------------------- | -------- | ------------- |
-  # | db_cluster_snapshot_available | {#describe_db_cluster_snapshots} | 30       | 60            |
-  # | db_cluster_snapshot_deleted   | {#describe_db_cluster_snapshots} | 30       | 60            |
-  # | db_instance_available         | {#describe_db_instances}         | 30       | 60            |
-  # | db_instance_deleted           | {#describe_db_instances}         | 30       | 60            |
-  # | db_snapshot_available         | {#describe_db_snapshots}         | 30       | 60            |
-  # | db_snapshot_deleted           | {#describe_db_snapshots}         | 30       | 60            |
+  # | waiter_name                   | params                                 | :delay   | :max_attempts |
+  # | ----------------------------- | -------------------------------------- | -------- | ------------- |
+  # | db_cluster_snapshot_available | {Client#describe_db_cluster_snapshots} | 30       | 60            |
+  # | db_cluster_snapshot_deleted   | {Client#describe_db_cluster_snapshots} | 30       | 60            |
+  # | db_instance_available         | {Client#describe_db_instances}         | 30       | 60            |
+  # | db_instance_deleted           | {Client#describe_db_instances}         | 30       | 60            |
+  # | db_snapshot_available         | {Client#describe_db_snapshots}         | 30       | 60            |
+  # | db_snapshot_deleted           | {Client#describe_db_snapshots}         | 30       | 60            |
   #
   module Waiters
 

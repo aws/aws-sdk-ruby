@@ -65,10 +65,10 @@ module Aws::Rekognition
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                        | params                       | :delay   | :max_attempts |
-  # | ---------------------------------- | ---------------------------- | -------- | ------------- |
-  # | project_version_running            | {#describe_project_versions} | 30       | 40            |
-  # | project_version_training_completed | {#describe_project_versions} | 120      | 360           |
+  # | waiter_name                        | params                             | :delay   | :max_attempts |
+  # | ---------------------------------- | ---------------------------------- | -------- | ------------- |
+  # | project_version_running            | {Client#describe_project_versions} | 30       | 40            |
+  # | project_version_training_completed | {Client#describe_project_versions} | 120      | 360           |
   #
   module Waiters
 
