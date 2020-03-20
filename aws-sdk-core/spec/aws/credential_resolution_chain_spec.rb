@@ -229,7 +229,7 @@ JSON
     end
 
     def assume_role_stub(role_arn, input_access_key, access_key, secret_key, token)
-      stub_request(:post, "https://sts.amazonaws.com/").
+      stub_request(:post, "https://sts.us-east-1.amazonaws.com/").
         with(headers: { "authorization" => /Credential=#{input_access_key}/ }).
         to_return(body: <<-RESP)
 <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">

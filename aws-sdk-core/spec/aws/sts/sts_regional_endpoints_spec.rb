@@ -27,18 +27,18 @@ module Aws
           expect(client.config.sts_regional_endpoints).to eq('regional')
         end
 
-        it 'defaults to `legacy`' do
+        it "defaults to 'regional'" do
           client = Client.new(
             stub_responses: true,
             region: 'us-west-2'
           )
-          expect(client.config.sts_regional_endpoints).to eq('legacy')
+          expect(client.config.sts_regional_endpoints).to eq('regional')
           resp = client.get_caller_identity
           expect(resp.context.http_request.endpoint.to_s).to eq(
-            'https://sts.amazonaws.com')
+            'https://sts.us-west-2.amazonaws.com')
         end
 
-        it 'can be set `regional` in the constructor' do
+        it "can be set 'regional' in the constructor" do
           client = Client.new(
             stub_responses: true,
             sts_regional_endpoints: 'regional',
@@ -65,6 +65,7 @@ module Aws
         it 'has no effect on fips endpoint' do
           client = Client.new(
             stub_responses: true,
+            sts_regional_endpoints: 'legacy',
             region: 'us-west-2-fips'
           )
           expect(client.config.sts_regional_endpoints).to eq('legacy')
@@ -82,7 +83,7 @@ module Aws
             'https://sts-fips.us-west-2.amazonaws.com')
         end
 
-        it 'has no effect on aws-global even when `regional`' do
+        it "has no effect on aws-global even when 'regional'" do
           client = Client.new(
             stub_responses: true,
             sts_regional_endpoints: 'regional',
@@ -97,6 +98,7 @@ module Aws
         it 'has no effect on current regionalized regions' do
           client = Client.new(
             stub_responses: true,
+            sts_regional_endpoints: 'legacy',
             region: 'ap-east-1'
           )
           expect(client.config.sts_regional_endpoints).to eq('legacy')
@@ -118,6 +120,7 @@ module Aws
         it 'has no effect on cn-north-1 region' do
           client = Client.new(
             stub_responses: true,
+            sts_regional_endpoints: 'legacy',
             region: 'cn-north-1'
           )
           expect(client.config.sts_regional_endpoints).to eq('legacy')
@@ -139,6 +142,7 @@ module Aws
         it 'configures properly at config' do
           client = Client.new(
             stub_responses: true,
+            sts_regional_endpoints: 'legacy',
             region: 'us-west-2'
           )
           expect(client.config.sts_regional_endpoints).to eq('legacy')
