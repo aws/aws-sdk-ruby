@@ -269,11 +269,21 @@ module Aws
             ).to eq('https://sts.us-east-1.amazonaws.com')
           end
 
-          it 'defaults to legacy global behavior' do
+          it 'defaults to regional behavior' do
             expect(
               Partitions::EndpointProvider.resolve(
                 'us-east-1',
                 'sts'
+              )
+            ).to eq('https://sts.us-east-1.amazonaws.com')
+          end
+
+          it 'resolves a legacy global endpoint' do
+            expect(
+              Partitions::EndpointProvider.resolve(
+                'us-east-1',
+                'sts',
+                'legacy'
               )
             ).to eq('https://sts.amazonaws.com')
           end
