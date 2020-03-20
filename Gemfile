@@ -102,7 +102,7 @@ end
 
 group :docs do
   gem 'rdiscount', platforms: :ruby
-  gem 'yard', '~> 0.9.11'
+  gem 'yard', '~> 0'
   gem 'yard-sitemap', '~> 1.0'
 end
 
