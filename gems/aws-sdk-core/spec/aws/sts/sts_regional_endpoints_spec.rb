@@ -27,7 +27,7 @@ module Aws
           expect(client.config.sts_regional_endpoints).to eq('regional')
         end
 
-        it 'defaults to `regional`' do
+        it "defaults to 'regional'" do
           client = Client.new(
             stub_responses: true,
             region: 'us-west-2'
@@ -38,7 +38,7 @@ module Aws
             'https://sts.us-west-2.amazonaws.com')
         end
 
-        it 'can be set `regional` in the constructor' do
+        it "can be set 'regional' in the constructor" do
           client = Client.new(
             stub_responses: true,
             sts_regional_endpoints: 'regional',
@@ -83,7 +83,7 @@ module Aws
             'https://sts-fips.us-west-2.amazonaws.com')
         end
 
-        it 'has no effect on aws-global even when `regional`' do
+        it "has no effect on aws-global even when 'regional'" do
           client = Client.new(
             stub_responses: true,
             sts_regional_endpoints: 'regional',
