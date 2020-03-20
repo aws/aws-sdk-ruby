@@ -2,7 +2,6 @@ language: ruby
 
 before_install:
   - gem install bundler -v '< 2'
-  - "find . -type f -iname '*.rb' -exec sed -i '1s/^/# frozen_string_literal: true\\n/' \"{}\" +;"
 
 dist: trusty
 
@@ -25,7 +24,10 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
-script: rake build && rake test:spec
+script: >
+  bundle exec rake build &&
+  find . -not -path './vendor/*' -type f -iname '*.rb' -exec sed -i -z '1s/^\(\s*#\s*encoding[^\n]*\n\)\?/\1# frozen_string_literal: true\n/' '{}' +; &&
+  bundle exec rake test:spec
 
 bundler_args: --without docs repl
 
