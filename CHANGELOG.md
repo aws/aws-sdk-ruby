@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.472 (2020-03-20)
+------------------
+
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
 
 2.11.471 (2020-03-19)
