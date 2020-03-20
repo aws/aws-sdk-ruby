@@ -36677,40 +36677,40 @@ module Aws::EC2
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                     | params                              | :delay   | :max_attempts |
-    # | ------------------------------- | ----------------------------------- | -------- | ------------- |
-    # | bundle_task_complete            | {#describe_bundle_tasks}            | 15       | 40            |
-    # | conversion_task_cancelled       | {#describe_conversion_tasks}        | 15       | 40            |
-    # | conversion_task_completed       | {#describe_conversion_tasks}        | 15       | 40            |
-    # | conversion_task_deleted         | {#describe_conversion_tasks}        | 15       | 40            |
-    # | customer_gateway_available      | {#describe_customer_gateways}       | 15       | 40            |
-    # | export_task_cancelled           | {#describe_export_tasks}            | 15       | 40            |
-    # | export_task_completed           | {#describe_export_tasks}            | 15       | 40            |
-    # | image_available                 | {#describe_images}                  | 15       | 40            |
-    # | image_exists                    | {#describe_images}                  | 15       | 40            |
-    # | instance_exists                 | {#describe_instances}               | 5        | 40            |
-    # | instance_running                | {#describe_instances}               | 15       | 40            |
-    # | instance_status_ok              | {#describe_instance_status}         | 15       | 40            |
-    # | instance_stopped                | {#describe_instances}               | 15       | 40            |
-    # | instance_terminated             | {#describe_instances}               | 15       | 40            |
-    # | key_pair_exists                 | {#describe_key_pairs}               | 5        | 6             |
-    # | nat_gateway_available           | {#describe_nat_gateways}            | 15       | 40            |
-    # | network_interface_available     | {#describe_network_interfaces}      | 20       | 10            |
-    # | password_data_available         | {#get_password_data}                | 15       | 40            |
-    # | security_group_exists           | {#describe_security_groups}         | 5        | 6             |
-    # | snapshot_completed              | {#describe_snapshots}               | 15       | 40            |
-    # | spot_instance_request_fulfilled | {#describe_spot_instance_requests}  | 15       | 40            |
-    # | subnet_available                | {#describe_subnets}                 | 15       | 40            |
-    # | system_status_ok                | {#describe_instance_status}         | 15       | 40            |
-    # | volume_available                | {#describe_volumes}                 | 15       | 40            |
-    # | volume_deleted                  | {#describe_volumes}                 | 15       | 40            |
-    # | volume_in_use                   | {#describe_volumes}                 | 15       | 40            |
-    # | vpc_available                   | {#describe_vpcs}                    | 15       | 40            |
-    # | vpc_exists                      | {#describe_vpcs}                    | 1        | 5             |
-    # | vpc_peering_connection_deleted  | {#describe_vpc_peering_connections} | 15       | 40            |
-    # | vpc_peering_connection_exists   | {#describe_vpc_peering_connections} | 15       | 40            |
-    # | vpn_connection_available        | {#describe_vpn_connections}         | 15       | 40            |
-    # | vpn_connection_deleted          | {#describe_vpn_connections}         | 15       | 40            |
+    # | waiter_name                     | params                                    | :delay   | :max_attempts |
+    # | ------------------------------- | ----------------------------------------- | -------- | ------------- |
+    # | bundle_task_complete            | {Client#describe_bundle_tasks}            | 15       | 40            |
+    # | conversion_task_cancelled       | {Client#describe_conversion_tasks}        | 15       | 40            |
+    # | conversion_task_completed       | {Client#describe_conversion_tasks}        | 15       | 40            |
+    # | conversion_task_deleted         | {Client#describe_conversion_tasks}        | 15       | 40            |
+    # | customer_gateway_available      | {Client#describe_customer_gateways}       | 15       | 40            |
+    # | export_task_cancelled           | {Client#describe_export_tasks}            | 15       | 40            |
+    # | export_task_completed           | {Client#describe_export_tasks}            | 15       | 40            |
+    # | image_available                 | {Client#describe_images}                  | 15       | 40            |
+    # | image_exists                    | {Client#describe_images}                  | 15       | 40            |
+    # | instance_exists                 | {Client#describe_instances}               | 5        | 40            |
+    # | instance_running                | {Client#describe_instances}               | 15       | 40            |
+    # | instance_status_ok              | {Client#describe_instance_status}         | 15       | 40            |
+    # | instance_stopped                | {Client#describe_instances}               | 15       | 40            |
+    # | instance_terminated             | {Client#describe_instances}               | 15       | 40            |
+    # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
+    # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
+    # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
+    # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
+    # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
+    # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
+    # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
+    # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
+    # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
+    # | volume_available                | {Client#describe_volumes}                 | 15       | 40            |
+    # | volume_deleted                  | {Client#describe_volumes}                 | 15       | 40            |
+    # | volume_in_use                   | {Client#describe_volumes}                 | 15       | 40            |
+    # | vpc_available                   | {Client#describe_vpcs}                    | 15       | 40            |
+    # | vpc_exists                      | {Client#describe_vpcs}                    | 1        | 5             |
+    # | vpc_peering_connection_deleted  | {Client#describe_vpc_peering_connections} | 15       | 40            |
+    # | vpc_peering_connection_exists   | {Client#describe_vpc_peering_connections} | 15       | 40            |
+    # | vpn_connection_available        | {Client#describe_vpn_connections}         | 15       | 40            |
+    # | vpn_connection_deleted          | {Client#describe_vpn_connections}         | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
