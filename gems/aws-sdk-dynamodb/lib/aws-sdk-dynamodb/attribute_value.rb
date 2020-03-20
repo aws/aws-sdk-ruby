@@ -49,7 +49,7 @@ module Aws
           when nil then { null: true }
           else
             msg = "unsupported type, expected Hash, Array, Set, String, Numeric, "\
-              "IO, true, false, or nil, got #{obj.class.name}"
+                  "IO, true, false, or nil, got #{obj.class.name}"
             raise ArgumentError, msg
           end
         end

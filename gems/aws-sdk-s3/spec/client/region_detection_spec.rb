@@ -29,7 +29,7 @@ module Aws
       end
 
       context 'accessing eu-central-1 bucket using classic endpoint and wrong'\
-        'sigv4 region' do
+              'sigv4 region' do
         before(:each) do
           stub_request(:put, 'https://bucket.s3.us-west-2.amazonaws.com/key')
             .to_return(status: [400, 'Bad Request'], body: auth_header_malformed_body)

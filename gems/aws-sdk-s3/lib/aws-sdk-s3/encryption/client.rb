@@ -352,7 +352,7 @@ module Aws
             location
           else
             msg = ":envelope_location must be :metadata or :instruction_file "\
-              "got #{location.inspect}"
+                  "got #{location.inspect}"
             raise ArgumentError, msg
           end
         end

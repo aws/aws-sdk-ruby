@@ -198,12 +198,12 @@ module Aws
             {
               status_code: 404,
               body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
-                "<Error>\n"\
-                "<Code>NoSuchKey</Code>\n"\
-                "<Message>The resource you requested does not exist</Message>\n"\
-                "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
-                "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
-                "</Error>",
+                    "<Error>\n"\
+                    "<Code>NoSuchKey</Code>\n"\
+                    "<Message>The resource you requested does not exist</Message>\n"\
+                    "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                    "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                    "</Error>",
               headers: {}
             },
             {}
@@ -234,12 +234,12 @@ module Aws
             {
               status_code: 404,
               body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
-                "<Error>\n"\
-                "<Code>NoSuchKey</Code>\n"\
-                "<Message>The resource you requested does not exist</Message>\n"\
-                "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
-                "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
-                "</Error>",
+                    "<Error>\n"\
+                    "<Code>NoSuchKey</Code>\n"\
+                    "<Message>The resource you requested does not exist</Message>\n"\
+                    "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                    "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                    "</Error>",
               headers: {
                 "x-amz-id-2" => "fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=",
                 "x-amz-request-id" => "226FC0DC6464C2AE"
@@ -364,12 +364,12 @@ module Aws
               {
                 status_code: 404,
                 body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
-                  "<Error>\n"\
-                  "<Code>NoSuchKey</Code>\n"\
-                  "<Message>The resource you requested does not exist</Message>\n"\
-                  "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
-                  "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
-                  "</Error>",
+                      "<Error>\n"\
+                      "<Code>NoSuchKey</Code>\n"\
+                      "<Message>The resource you requested does not exist</Message>\n"\
+                      "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                      "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                      "</Error>",
                 headers: {}
               },
               {}
@@ -409,12 +409,12 @@ module Aws
               {
                 status_code: 500,
                 body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
-                  "<Error>\n"\
-                  "<Code>InternalServiceError</Code>\n"\
-                  "<Message>Fake internal service error.</Message>\n"\
-                  "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
-                  "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
-                  "</Error>",
+                      "<Error>\n"\
+                      "<Code>InternalServiceError</Code>\n"\
+                      "<Message>Fake internal service error.</Message>\n"\
+                      "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                      "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                      "</Error>",
                 headers: {}
               },
               {}

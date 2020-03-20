@@ -43,7 +43,7 @@ module Aws
           end
         else
           msg = "Invalid mode #{@mode} provided, "\
-            "mode should be :single_request, :get_range or :auto"
+                "mode should be :single_request, :get_range or :auto"
           raise ArgumentError, msg
         end
       end

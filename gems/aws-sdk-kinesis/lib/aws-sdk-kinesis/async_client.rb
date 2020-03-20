@@ -529,8 +529,8 @@ module Aws::Kinesis
       when nil then event_stream_class.new
       else
         msg = "expected #{type}_event_stream_handler to be a block or "\
-          "instance of Aws::Kinesis::#{event_stream_class}"\
-          ", got `#{handler.inspect}` instead"
+              "instance of Aws::Kinesis::#{event_stream_class}"\
+              ", got `#{handler.inspect}` instead"
         raise ArgumentError, msg
       end
     end

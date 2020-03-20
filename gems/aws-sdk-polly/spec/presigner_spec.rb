@@ -39,7 +39,8 @@ module Aws
       describe '#presigned_url' do
 
         it 'can presign #synthesize_speech correctly' do
-          expected_url = "https://polly.us-west-2.amazonaws.com/v1/speech?"\
+          expected_url =
+            "https://polly.us-west-2.amazonaws.com/v1/speech?"\
             "LexiconNames=mno&LexiconNames=abc&OutputFormat=mp3&SampleRate=128&"\
             "Text=Hello%20World&TextType=text&VoiceId=Ewa&"\
             "X-Amz-Algorithm=AWS4-HMAC-SHA256&"\

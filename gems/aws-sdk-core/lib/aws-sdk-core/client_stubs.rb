@@ -176,7 +176,7 @@ module Aws
         apply_stubs(operation_name, stubs.flatten)
       else
         msg = 'stubbing is not enabled; enable stubbing in the constructor '\
-          'with `:stub_responses => true`'
+              'with `:stub_responses => true`'
         raise msg
       end
     end
@@ -199,7 +199,7 @@ module Aws
         end
       else
         msg = 'This method is only implemented for stubbed clients, and is '\
-          'available when you enable stubbing in the constructor with `stub_responses: true`'
+              'available when you enable stubbing in the constructor with `stub_responses: true`'
         raise NotImplementedError.new(msg)
       end
     end

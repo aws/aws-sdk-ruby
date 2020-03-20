@@ -110,7 +110,7 @@ module Seahorse
             emit(:done)
           else
             msg = "options must be empty or must contain :status_code, :headers, "\
-              "and :body"
+                  "and :body"
             raise ArgumentError, msg
           end
         end

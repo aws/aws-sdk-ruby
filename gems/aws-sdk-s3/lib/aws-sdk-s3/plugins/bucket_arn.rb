@@ -66,19 +66,19 @@ the S3 ARN.
           def validate_config!(config)
             unless config.regional_endpoint
               raise ArgumentError,
-                    'Cannot provide both an accesspoint ARN and :endpoint.'
+                'Cannot provide both an accesspoint ARN and :endpoint.'
             end
 
             if config.use_accelerate_endpoint
               raise ArgumentError,
-                    'Cannot provide both an accesspoint ARN and setting '\
-                    ':use_accelerate_endpoint to true.'
+                'Cannot provide both an accesspoint ARN and setting '\
+                ':use_accelerate_endpoint to true.'
             end
 
             if config.force_path_style
               raise ArgumentError,
-                    'Cannot provide both an accesspoint ARN and setting '\
-                    ':force_path_style to true.'
+                'Cannot provide both an accesspoint ARN and setting '\
+                ':force_path_style to true.'
             end
           end
         end
@@ -96,7 +96,7 @@ the S3 ARN.
                 [bucket_name, region, arn]
               else
                 raise ArgumentError,
-                      'Only accesspoint type ARNs are currently supported.'
+                  'Only accesspoint type ARNs are currently supported.'
               end
             else
               [bucket_name, region]
@@ -109,7 +109,7 @@ the S3 ARN.
               url.host = accesspoint_arn_host(arn, dualstack)
             else
               raise ArgumentError,
-                    'Only accesspoint type ARNs are currently supported.'
+                'Only accesspoint type ARNs are currently supported.'
             end
             url.path = url_path(url.path, arn)
             url
@@ -145,9 +145,9 @@ the S3 ARN.
             # Raise if provided value is not true or false
             if value != 'true' && value != 'false'
               raise ArgumentError,
-                    'Must provide either `true` or `false` for '\
-                    's3_use_arn_region profile option or for '\
-                    'ENV[\'AWS_S3_USE_ARN_REGION\']'
+                'Must provide either `true` or `false` for '\
+                's3_use_arn_region profile option or for '\
+                'ENV[\'AWS_S3_USE_ARN_REGION\']'
             end
 
             value == 'true'
@@ -169,29 +169,29 @@ the S3 ARN.
 
             if arn.region.empty? || arn.account_id.empty?
               raise ArgumentError,
-                    'S3 Access Point ARNs must contain both a valid region '\
-                    ' and a valid account id.'
+                'S3 Access Point ARNs must contain both a valid region '\
+                ' and a valid account id.'
             end
 
             if resource_name.include?(':') || resource_name.include?('/')
               raise ArgumentError,
-                    'ARN resource id must be a single value.'
+                'ARN resource id must be a single value.'
             end
 
             unless Plugins::BucketDns.valid_subdomain?(
               "#{resource_name}-#{arn.account_id}"
             )
               raise ArgumentError,
-                    "#{resource_name}-#{arn.account_id} is not a "\
-                    'valid subdomain.'
+                "#{resource_name}-#{arn.account_id} is not a "\
+                'valid subdomain.'
             end
           end
 
           def validate_region!(arn, region, s3_use_arn_region)
             if region.include?('fips')
               raise ArgumentError,
-                    'FIPS client regions are currently not supported with '\
-                    'accesspoint ARNs.'
+                'FIPS client regions are currently not supported with '\
+                'accesspoint ARNs.'
             end
 
             if s3_use_arn_region &&

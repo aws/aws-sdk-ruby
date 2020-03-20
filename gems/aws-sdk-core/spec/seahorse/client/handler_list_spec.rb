@@ -87,7 +87,7 @@ module Seahorse
 
           it 'raises an error if :step is not valid' do
             msg = "invalid :step `:bogus', must be one of :initialize, "\
-              ":validate, :build, :sign or :send"
+                  ":validate, :build, :sign or :send"
             expect {
               handlers.add('handler', step: :bogus)
             }.to raise_error(ArgumentError, msg)

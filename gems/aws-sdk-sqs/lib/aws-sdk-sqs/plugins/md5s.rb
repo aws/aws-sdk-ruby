@@ -120,7 +120,7 @@ module Aws
 
           def mismatch_error_message(section, local_md5, returned_md5, response)
             m = "MD5 returned by SQS does not match "\
-              "the calculation on the original request. ("
+                "the calculation on the original request. ("
             if response.respond_to?(:id) && !response.id.nil?
               m = "#{m}Message ID: #{response.id}, "
             end

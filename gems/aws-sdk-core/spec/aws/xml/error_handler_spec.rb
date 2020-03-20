@@ -119,8 +119,8 @@ module Aws
         stub_request(:post, "https://cloudfront.amazonaws.com/2018-11-05/origin-access-identity/cloudfront").
           to_return(:status => 400, :body => unmodeled_error)
         msg = "1 validation error detected: Value null at"\
-          " 'cloudFrontOriginAccessIdentityConfig' failed to satisfy"\
-          " constraint: Member must not be null"
+              " 'cloudFrontOriginAccessIdentityConfig' failed to satisfy"\
+              " constraint: Member must not be null"
         expect {
           cloudfront.create_cloud_front_origin_access_identity(
             cloud_front_origin_access_identity_config: {
@@ -140,7 +140,8 @@ module Aws
         expect {
           route53.change_resource_record_sets
         }.to raise_error { |error|
-          expected_msg = "Tried to create resource record set "\
+          expected_msg =
+            "Tried to create resource record set "\
             "duplicate.example.com. type A, but it already exists"
           expect(error.message).to eq(expected_msg)
         }

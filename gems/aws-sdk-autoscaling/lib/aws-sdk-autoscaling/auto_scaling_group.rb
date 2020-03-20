@@ -1294,7 +1294,7 @@ module Aws::AutoScaling
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
         msg = "pass options to configure the waiter; "\
-          "yielding the waiter is deprecated"
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end

@@ -572,7 +572,7 @@ module Aws
       def check_required_values!
         unless @key_set
           msg = "key required; you must provide a key via :key, "\
-            ":key_starts_with, or :allow_any => ['key']"
+                ":key_starts_with, or :allow_any => ['key']"
           raise msg
         end
       end

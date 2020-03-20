@@ -14,7 +14,7 @@ module Seahorse
         class TruncatedBodyError < IOError
           def initialize(bytes_expected, bytes_received)
             msg = "http response body truncated, expected #{bytes_expected} "\
-              "bytes, received #{bytes_received} bytes"
+                  "bytes, received #{bytes_received} bytes"
             super(msg)
           end
         end

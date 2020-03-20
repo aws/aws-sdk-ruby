@@ -89,7 +89,7 @@ module Seahorse
               @status = :active
             elsif @status == :closed
               msg = "Async Client HTTP2 Connection is closed, you may"\
-                " use #new_connection to create a new HTTP2 Connection for this client"
+                    " use #new_connection to create a new HTTP2 Connection for this client"
               raise Http2ConnectionClosedError.new(msg)
             end
           }
@@ -171,7 +171,7 @@ module Seahorse
           @h2_client.on(:frame) do |bytes|
             if @socket.nil?
               msg = "Connection is closed due to errors, "\
-                "you can find errors at async_client.connection.errors"
+                    "you can find errors at async_client.connection.errors"
               raise Http2ConnectionClosedError.new(msg)
             else
               @socket.print(bytes)
