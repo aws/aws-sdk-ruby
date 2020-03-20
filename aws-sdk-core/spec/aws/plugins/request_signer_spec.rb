@@ -208,7 +208,7 @@ module Aws
           expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=a0ca9d2f46f3bc5af23c4569d40607722f4eb50c068159de5328f4f9a452df4d')
         end
 
-        it `signs payload for operations without 'v4-unsigned-payload' for 'authtype'` do
+        it "signs payload for operations without 'v4-unsigned-payload' for 'authtype'" do
           plugin.add_options(config)
           client = klass.new(
             signature_version: 'v4',

@@ -49,7 +49,7 @@ module Aws
 
     private
 
-    def endpoint_for(region, service, sts_regional_endpoints = 'legacy')
+    def endpoint_for(region, service, sts_regional_endpoints = 'regional')
       partition = get_partition(region)
       endpoint = default_endpoint(partition, service, region)
       service_cfg = partition.fetch("services", {}).fetch(service, {})
@@ -108,7 +108,7 @@ module Aws
 
     class << self
 
-      def resolve(region, service, sts_regional_endpoints = nil)
+      def resolve(region, service, sts_regional_endpoints = 'regional')
         default_provider.resolve(region, service, sts_regional_endpoints)
       end
 
