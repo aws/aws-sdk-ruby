@@ -842,6 +842,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.type #=> String
     #   resp.constraint_detail.description #=> String
     #   resp.constraint_detail.owner #=> String
+    #   resp.constraint_detail.product_id #=> String
+    #   resp.constraint_detail.portfolio_id #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
@@ -1747,6 +1749,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.type #=> String
     #   resp.constraint_detail.description #=> String
     #   resp.constraint_detail.owner #=> String
+    #   resp.constraint_detail.product_id #=> String
+    #   resp.constraint_detail.portfolio_id #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
@@ -3101,6 +3105,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_details[0].type #=> String
     #   resp.constraint_details[0].description #=> String
     #   resp.constraint_details[0].owner #=> String
+    #   resp.constraint_details[0].product_id #=> String
+    #   resp.constraint_details[0].portfolio_id #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolio AWS API Documentation
@@ -4657,6 +4663,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.type #=> String
     #   resp.constraint_detail.description #=> String
     #   resp.constraint_detail.owner #=> String
+    #   resp.constraint_detail.product_id #=> String
+    #   resp.constraint_detail.portfolio_id #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
@@ -5237,7 +5245,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

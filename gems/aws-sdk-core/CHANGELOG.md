@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.92.0 (2020-03-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Issue - Change the default of `sts_regional_endpoints` from 'legacy' to 'regional'.
 
 3.91.1 (2020-03-10)

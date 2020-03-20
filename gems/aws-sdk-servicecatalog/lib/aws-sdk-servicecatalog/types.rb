@@ -441,13 +441,27 @@ module Aws::ServiceCatalog
     #   The owner of the constraint.
     #   @return [String]
     #
+    # @!attribute [rw] product_id
+    #   The identifier of the product the constraint applies to. Note that a
+    #   constraint applies to a specific instance of a product within a
+    #   certain portfolio.
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The identifier of the portfolio the product resides in. The
+    #   constraint applies only to the instance of the product that lives
+    #   within this portfolio.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail AWS API Documentation
     #
     class ConstraintDetail < Struct.new(
       :constraint_id,
       :type,
       :description,
-      :owner)
+      :owner,
+      :product_id,
+      :portfolio_id)
       include Aws::Structure
     end
 

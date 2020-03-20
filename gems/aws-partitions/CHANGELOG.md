@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.286.0 (2020-03-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 * Issue - Change the default of sts_regional_endpoints from 'legacy' to 'regional'.
 
 1.285.0 (2020-03-18)

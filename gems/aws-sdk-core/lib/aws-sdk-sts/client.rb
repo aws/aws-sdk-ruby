@@ -249,10 +249,10 @@ module Aws::STS
     #
     #   @option options [String] :session_token
     #
-    #   @option options [String] :sts_regional_endpoints ("legacy")
+    #   @option options [String] :sts_regional_endpoints ("regional")
     #     Passing in 'regional' to enable regional endpoint for STS for all supported
-    #     regions (except 'aws-global'), defaults to 'legacy' mode, using global endpoint
-    #     for legacy regions.
+    #     regions (except 'aws-global'). Using 'legacy' mode will force all legacy
+    #     regions to resolve to the STS global endpoint.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
@@ -2186,7 +2186,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.91.1'
+      context[:gem_version] = '3.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
