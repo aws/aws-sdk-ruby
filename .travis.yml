@@ -1,4 +1,8 @@
 language: ruby
+cache: bundler
+
+# to clear bundler cache:
+#   rm -r ./vendor
 
 before_install:
   - gem install bundler -v '< 2'
