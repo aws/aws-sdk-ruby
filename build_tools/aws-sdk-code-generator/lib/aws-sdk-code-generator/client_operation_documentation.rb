@@ -252,7 +252,7 @@ module AwsSdkCodeGenerator
       waiters_doc = waiters.map do |w|
         "#   * #{w.name}"
       end
-      "#\n# The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):\n#\n" + waiters_doc.join("\n")
+      "#\n# The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):\n#\n" + waiters_doc.join("\n")
     end
 
     def see_also_tag(operation, api)
