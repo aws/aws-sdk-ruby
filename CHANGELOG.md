@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::Route53 - Updated the documentation for Amazon Route 53.
+
 * Issue - Change the default of `sts_regional_endpoints` from 'legacy' to 'regional'.
 
 2.11.473 (2020-03-20)
