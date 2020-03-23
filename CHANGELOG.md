@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.474 (2020-03-23)
+------------------
+
 * Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
 
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
