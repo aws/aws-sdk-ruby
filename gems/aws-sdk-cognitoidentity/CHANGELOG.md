@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for enhanced flow through the addition of the `CognitoIdentityCredentials` - an auto-refreshing credentials provider.
+
 1.19.0 (2020-03-09)
 ------------------
 
