@@ -67,12 +67,12 @@ module Aws::Route53
     #   that the alarm was created in.
     #
     #   For the current list of CloudWatch regions, see [Amazon
-    #   CloudWatch][1] in the *AWS Regions and Endpoints* chapter of the
-    #   *Amazon Web Services General Reference*.
+    #   CloudWatch][1] in the *AWS Service Endpoints* chapter of the *Amazon
+    #   Web Services General Reference*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -93,7 +93,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/publishingMetrics.html#high-resolution-metrics
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/publishingMetrics.html#high-resolution-metrics
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AlarmIdentifier AWS API Documentation
@@ -120,7 +120,7 @@ module Aws::Route53
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #
     # @note When making an API call, you may pass AliasTarget
     #   data as a hash:
@@ -165,7 +165,7 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region that you created the
     #     environment in. The environment must have a regionalized
     #     subdomain. For a list of regions and the corresponding hosted zone
-    #     IDs, see [AWS Elastic Beanstalk][3] in the "AWS Regions and
+    #     IDs, see [AWS Elastic Beanstalk][3] in the "AWS Service
     #     Endpoints" chapter of the *Amazon Web Services General
     #     Reference*.
     #
@@ -174,8 +174,8 @@ module Aws::Route53
     #   : Specify the value of the hosted zone ID for the load balancer. Use
     #     the following methods to get the hosted zone ID:
     #
-    #     * [Elastic Load Balancing][4] table in the "AWS Regions and
-    #       Endpoints" chapter of the *Amazon Web Services General
+    #     * [Service Endpoints][4] table in the "Elastic Load Balancing
+    #       Endpoints and Quotas" topic in the *Amazon Web Services General
     #       Reference*\: Use the value that corresponds with the region that
     #       you created your load balancer in. Note that there are separate
     #       columns for Application and Classic Load Balancers and for
@@ -208,12 +208,15 @@ module Aws::Route53
     #         [describe-load-balancers][8] to get the value of
     #         `CanonicalHostedZoneId`.
     #
+    #   AWS Global Accelerator accelerator
+    #
+    #   : Specify `Z2BJ6XQ5FK7U4H`.
+    #
     #   An Amazon S3 bucket configured as a static website
     #
     #   : Specify the hosted zone ID for the region that you created the
-    #     bucket in. For more information about valid values, see the
-    #     [Amazon Simple Storage Service Website Endpoints][9] table in the
-    #     "AWS Regions and Endpoints" chapter of the *Amazon Web Services
+    #     bucket in. For more information about valid values, see the table
+    #     [Amazon S3 Website Endpoints][9] in the *Amazon Web Services
     #     General Reference*.
     #
     #   Another Route 53 resource record set in your hosted zone
@@ -226,13 +229,13 @@ module Aws::Route53
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html
     #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html
-    #   [3]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
-    #   [4]: https://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region
-    #   [5]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
-    #   [6]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
+    #   [4]: https://docs.aws.amazon.com/general/latest/gr/elb.html
+    #   [5]: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [6]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
     #   [7]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
     #   [8]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
-    #   [9]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [9]: https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -323,8 +326,7 @@ module Aws::Route53
     #
     #     * *AWS CLI*\: Use the `describe-environments` command to get the
     #       value of the `CNAME` attribute. For more information, see
-    #       [describe-environments][6] in the *AWS Command Line Interface
-    #       Reference*.
+    #       [describe-environments][6] in the *AWS CLI Command Reference*.
     #
     #   ELB load balancer
     #
@@ -359,16 +361,25 @@ module Aws::Route53
     #       * Application and Network Load Balancers:
     #         [describe-load-balancers][10]
     #
+    #   AWS Global Accelerator accelerator
+    #
+    #   : Specify the DNS name for your accelerator:
+    #
+    #     * **Global Accelerator API:** To get the DNS name, use
+    #       [DescribeAccelerator][11].
+    #
+    #     * **AWS CLI:** To get the DNS name, use
+    #       [describe-accelerator][12].
+    #
     #   Amazon S3 bucket that is configured as a static website
     #
     #   : Specify the domain name of the Amazon S3 website endpoint that you
     #     created the bucket in, for example,
     #     `s3-website.us-east-2.amazonaws.com`. For more information about
-    #     valid values, see the table [Amazon Simple Storage Service (S3)
-    #     Website Endpoints][11] in the *Amazon Web Services General
-    #     Reference*. For more information about using S3 buckets for
-    #     websites, see [Getting Started with Amazon Route 53][12] in the
-    #     *Amazon Route 53 Developer Guide.*
+    #     valid values, see the table [Amazon S3 Website Endpoints][13] in
+    #     the *Amazon Web Services General Reference*. For more information
+    #     about using S3 buckets for websites, see [Getting Started with
+    #     Amazon Route 53][14] in the *Amazon Route 53 Developer Guide.*
     #
     #   Another Route 53 resource record set
     #
@@ -389,16 +400,18 @@ module Aws::Route53
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html
     #   [2]: https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html
-    #   [3]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
-    #   [4]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html
-    #   [5]: http://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html
-    #   [6]: http://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html
-    #   [7]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
-    #   [8]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [3]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
+    #   [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html
+    #   [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html
+    #   [6]: https://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html
+    #   [7]: https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [8]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
     #   [9]: http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html
     #   [10]: http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html
-    #   [11]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    #   [12]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
+    #   [11]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_DescribeAccelerator.html
+    #   [12]: https://docs.aws.amazon.com/cli/latest/reference/globalaccelerator/describe-accelerator.html
+    #   [13]: https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints
+    #   [14]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
     #   @return [String]
     #
     # @!attribute [rw] evaluate_target_health
@@ -486,8 +499,8 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AliasTarget AWS API Documentation
@@ -910,7 +923,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -927,7 +940,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
     #   @return [Array<Types::Dimension>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CloudWatchAlarmConfiguration AWS API Documentation
@@ -1970,19 +1983,51 @@ module Aws::Route53
     # @!attribute [rw] continent_code
     #   The two-letter code for the continent.
     #
-    #   Valid values: `AF` \| `AN` \| `AS` \| `EU` \| `OC` \| `NA` \| `SA`
+    #   Amazon Route 53 supports the following continent codes:
+    #
+    #   * **AF**\: Africa
+    #
+    #   * **AN**\: Antarctica
+    #
+    #   * **AS**\: Asia
+    #
+    #   * **EU**\: Europe
+    #
+    #   * **OC**\: Oceania
+    #
+    #   * **NA**\: North America
+    #
+    #   * **SA**\: South America
     #
     #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
     #   `SubdivisionCode` returns an `InvalidInput` error.
     #   @return [String]
     #
     # @!attribute [rw] country_code
-    #   The two-letter code for the country.
+    #   For geolocation resource record sets, the two-letter code for a
+    #   country.
+    #
+    #   Amazon Route 53 uses the two-letter country codes that are specified
+    #   in [ISO standard 3166-1 alpha-2][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #   @return [String]
     #
     # @!attribute [rw] subdivision_code
-    #   The code for the subdivision. Route 53 currently supports only
-    #   states in the United States.
+    #   For geolocation resource record sets, the two-letter code for a
+    #   state of the United States. Route 53 doesn't support any other
+    #   values for `SubdivisionCode`. For a list of state abbreviations, see
+    #   [Appendix B: Two–Letter State and Possession Abbreviations][1] on
+    #   the United States Postal Service website.
+    #
+    #   If you specify `subdivisioncode`, you must also specify `US` for
+    #   `CountryCode`.
+    #
+    #
+    #
+    #   [1]: https://pe.usps.com/text/pub28/28apb.htm
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoLocation AWS API Documentation
@@ -2171,7 +2216,9 @@ module Aws::Route53
     #       }
     #
     # @!attribute [rw] continent_code
-    #   Amazon Route 53 supports the following continent codes:
+    #   For geolocation resource record sets, a two-letter abbreviation that
+    #   identifies a continent. Amazon Route 53 supports the following
+    #   continent codes:
     #
     #   * **AF**\: Africa
     #
@@ -2198,14 +2245,17 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] subdivision_code
-    #   Amazon Route 53 uses the one- to three-letter subdivision codes that
-    #   are specified in [ISO standard 3166-1 alpha-2][1]. Route 53 doesn't
-    #   support subdivision codes for all countries. If you specify
-    #   `subdivisioncode`, you must also specify `countrycode`.
+    #   For `SubdivisionCode`, Amazon Route 53 supports only states of the
+    #   United States. For a list of state abbreviations, see [Appendix B:
+    #   Two–Letter State and Possession Abbreviations][1] on the United
+    #   States Postal Service website.
+    #
+    #   If you specify `subdivisioncode`, you must also specify `US` for
+    #   `CountryCode`.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #   [1]: https://pe.usps.com/text/pub28/28apb.htm
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocationRequest AWS API Documentation
@@ -2883,9 +2933,13 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port on the endpoint on which you want Amazon Route 53 to
-    #   perform health checks. Specify a value for `Port` only when you
-    #   specify a value for `IPAddress`.
+    #   The port on the endpoint that you want Amazon Route 53 to perform
+    #   health checks on.
+    #
+    #   <note markdown="1"> Don't specify a value for `Port` when you specify a value for
+    #   `Type` of `CLOUDWATCH_METRIC` or `CALCULATED`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] type
@@ -3019,7 +3073,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] search_string
-    #   If the value of Type is `HTTP_STR_MATCH` or `HTTP_STR_MATCH`, the
+    #   If the value of Type is `HTTP_STR_MATCH` or `HTTPS_STR_MATCH`, the
     #   string that you want Amazon Route 53 to search for in the response
     #   body from the specified resource. If the string appears in the
     #   response body, Route 53 considers the resource healthy.
@@ -3053,7 +3107,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #   @return [Integer]
     #
     # @!attribute [rw] measure_latency
@@ -3669,25 +3723,17 @@ module Aws::Route53
     #   `true`, and if `NextCountryCode` from the previous response has a
     #   value, enter that value in `startcountrycode` to return the next
     #   page of results.
-    #
-    #   Route 53 uses the two-letter country codes that are specified in
-    #   [ISO standard 3166-1 alpha-2][1].
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #   @return [String]
     #
     # @!attribute [rw] start_subdivision_code
-    #   The code for the subdivision (for example, state or province) with
-    #   which you want to start listing locations that Amazon Route 53
-    #   supports for geolocation. If Route 53 has already returned a page or
-    #   more of results, if `IsTruncated` is `true`, and if
-    #   `NextSubdivisionCode` from the previous response has a value, enter
-    #   that value in `startsubdivisioncode` to return the next page of
-    #   results.
+    #   The code for the state of the United States with which you want to
+    #   start listing locations that Amazon Route 53 supports for
+    #   geolocation. If Route 53 has already returned a page or more of
+    #   results, if `IsTruncated` is `true`, and if `NextSubdivisionCode`
+    #   from the previous response has a value, enter that value in
+    #   `startsubdivisioncode` to return the next page of results.
     #
-    #   To list subdivisions of a country, you must include both
+    #   To list subdivisions (U.S. states), you must include both
     #   `startcountrycode` and `startsubdivisioncode`.
     #   @return [String]
     #
@@ -4161,7 +4207,9 @@ module Aws::Route53
     #
     # @!attribute [rw] start_record_name
     #   The first name in the lexicographic ordering of resource record sets
-    #   that you want to list.
+    #   that you want to list. If the specified record name doesn't exist,
+    #   the results begin with the first resource record set that has a name
+    #   greater than the value of `name`.
     #   @return [String]
     #
     # @!attribute [rw] start_record_type
@@ -4186,9 +4234,9 @@ module Aws::Route53
     #
     #   * **Elastic Load Balancing load balancer**\: A \| AAAA
     #
-    #   * **Amazon S3 bucket**\: A
+    #   * **S3 bucket**\: A
     #
-    #   * **Amazon VPC interface VPC endpoint**\: A
+    #   * **VPC interface VPC endpoint**\: A
     #
     #   * **Another resource record set in this hosted zone:** The type of
     #     the resource record set that the alias references.
@@ -5117,6 +5165,12 @@ module Aws::Route53
     end
 
     # Amazon Route 53 doesn't support the specified geographic location.
+    # For a list of supported geolocation codes, see the [GeoLocation][1]
+    # data type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html
     #
     # @!attribute [rw] message
     #   Descriptive message for the error response.
@@ -5393,7 +5447,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -5437,7 +5491,7 @@ module Aws::Route53
     #     record sets to route traffic to your distribution, one with a
     #     value of `A` and one with a value of `AAAA`.
     #
-    #   * **AWS Elastic Beanstalk environment that has a regionalized
+    #   * **Amazon API Gateway environment that has a regionalized
     #     subdomain**\: `A`
     #
     #   * **ELB load balancers:** `A` \| `AAAA`
@@ -5461,7 +5515,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
     #   [2]: http://tools.ietf.org/html/rfc7208#section-14.1
     #   @return [String]
     #
@@ -5520,7 +5574,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html
     #   @return [Integer]
     #
     # @!attribute [rw] region
@@ -5530,8 +5584,8 @@ module Aws::Route53
     #   instance or an ELB load balancer, and is referred to by an IP
     #   address or a DNS domain name, depending on the record type.
     #
-    #   <note markdown="1"> Creating latency and latency alias resource record sets in private
-    #   hosted zones is not supported.
+    #   <note markdown="1"> Although creating latency and latency alias resource record sets in
+    #   a private hosted zone is allowed, it's not supported.
     #
     #    </note>
     #
@@ -5568,8 +5622,8 @@ module Aws::Route53
     #   `192.0.2.111`, create a resource record set with a `Type` of `A` and
     #   a `ContinentCode` of `AF`.
     #
-    #   <note markdown="1"> Creating geolocation and geolocation alias resource record sets in
-    #   private hosted zones is not supported.
+    #   <note markdown="1"> Although creating geolocation and geolocation alias resource record
+    #   sets in a private hosted zone is allowed, it's not supported.
     #
     #    </note>
     #
@@ -5593,8 +5647,9 @@ module Aws::Route53
     #   you create geolocation resource record sets that cover all seven
     #   continents, Route 53 will receive some DNS queries from locations
     #   that it can't identify. We recommend that you create a resource
-    #   record set for which the value of `CountryCode` is `*`, which
-    #   handles both queries that come from locations for which you haven't
+    #   record set for which the value of `CountryCode` is `*`. Two groups
+    #   of queries are routed to the resource that you specify in this
+    #   record: queries that come from locations for which you haven't
     #   created geolocation resource record sets and queries from IP
     #   addresses that aren't mapped to a location. If you don't create a
     #   `*` resource record set, Route 53 returns a "no answer" response
@@ -5655,8 +5710,8 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #   @return [String]
     #
     # @!attribute [rw] multi_value_answer
@@ -5744,7 +5799,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #   @return [Types::AliasTarget]
     #
     # @!attribute [rw] health_check_id
@@ -5873,8 +5928,8 @@ module Aws::Route53
     #
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
-    #   [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #   @return [String]
     #
     # @!attribute [rw] traffic_policy_instance_id
@@ -6667,8 +6722,13 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port on the endpoint on which you want Amazon Route 53 to
-    #   perform health checks.
+    #   The port on the endpoint that you want Amazon Route 53 to perform
+    #   health checks on.
+    #
+    #   <note markdown="1"> Don't specify a value for `Port` when you specify a value for
+    #   `Type` of `CLOUDWATCH_METRIC` or `CALCULATED`.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] resource_path
@@ -6758,7 +6818,7 @@ module Aws::Route53
     #   @return [String]
     #
     # @!attribute [rw] search_string
-    #   If the value of `Type` is `HTTP_STR_MATCH` or `HTTP_STR_MATCH`, the
+    #   If the value of `Type` is `HTTP_STR_MATCH` or `HTTPS_STR_MATCH`, the
     #   string that you want Amazon Route 53 to search for in the response
     #   body from the specified resource. If the string appears in the
     #   response body, Route 53 considers the resource healthy. (You can't
@@ -6777,7 +6837,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #   @return [Integer]
     #
     # @!attribute [rw] inverted

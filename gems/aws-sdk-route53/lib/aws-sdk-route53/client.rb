@@ -313,18 +313,30 @@ module Aws::Route53
 
     # Associates an Amazon VPC with a private hosted zone.
     #
-    # To perform the association, the VPC and the private hosted zone must
-    # already exist. You can't convert a public hosted zone into a private
-    # hosted zone.
-    #
-    # <note markdown="1"> If you want to associate a VPC that was created by using one AWS
-    # account with a private hosted zone that was created by using a
-    # different account, the AWS account that created the private hosted
-    # zone must first submit a `CreateVPCAssociationAuthorization` request.
-    # Then the account that created the VPC must submit an
-    # `AssociateVPCWithHostedZone` request.
+    # <note markdown="1"> To perform the association, the VPC and the private hosted zone must
+    # already exist. Also, you can't convert a public hosted zone into a
+    # private hosted zone.
     #
     #  </note>
+    #
+    # If you want to associate a VPC that was created by one AWS account
+    # with a private hosted zone that was created by a different account, do
+    # one of the following:
+    #
+    # * Use the AWS account that created the private hosted zone to submit a
+    #   [CreateVPCAssociationAuthorization][1] request. Then use the account
+    #   that created the VPC to submit an `AssociateVPCWithHostedZone`
+    #   request.
+    #
+    # * If a subnet in the VPC was shared with another account, you can use
+    #   the account that the subnet was shared with to submit an
+    #   `AssociateVPCWithHostedZone` request. For more information about
+    #   sharing subnets, see [Working with Shared VPCs][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateVPCAssociationAuthorization.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the private hosted zone that you want to associate an Amazon
@@ -483,7 +495,7 @@ module Aws::Route53
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html
     # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html
     # [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
     #
@@ -1264,7 +1276,7 @@ module Aws::Route53
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResourceRecordSet.html#Route53-Type-ResourceRecordSet-HealthCheckId
     # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html
-    # [3]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html
     #
     # @option params [required, String] :caller_reference
     #   A unique string that identifies the request and that allows you to
@@ -1393,11 +1405,11 @@ module Aws::Route53
     # * You can't create a hosted zone for a top-level domain (TLD) such as
     #   .com.
     #
-    # * For public hosted zones, Amazon Route 53 automatically creates a
-    #   default SOA record and four NS records for the zone. For more
-    #   information about SOA and NS records, see [NS and SOA Records that
-    #   Route 53 Creates for a Hosted Zone][2] in the *Amazon Route 53
-    #   Developer Guide*.
+    # * For public hosted zones, Route 53 automatically creates a default
+    #   SOA record and four NS records for the zone. For more information
+    #   about SOA and NS records, see [NS and SOA Records that Route 53
+    #   Creates for a Hosted Zone][2] in the *Amazon Route 53 Developer
+    #   Guide*.
     #
     #   If you want to use the same name servers for multiple public hosted
     #   zones, you can optionally associate a reusable delegation set with
@@ -1418,8 +1430,8 @@ module Aws::Route53
     #
     #
     # [1]: http://aws.amazon.com/route53/pricing/
-    # [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
-    # [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html
     #
     # @option params [required, String] :name
     #   The name of the domain. Specify a fully qualified domain name, for
@@ -1704,9 +1716,12 @@ module Aws::Route53
     end
 
     # Creates a delegation set (a group of four name servers) that can be
-    # reused by multiple hosted zones. If a hosted zoned ID is specified,
-    # `CreateReusableDelegationSet` marks the delegation set associated with
-    # that zone as reusable.
+    # reused by multiple hosted zones that were created by the same AWS
+    # account.
+    #
+    # You can also create a reusable delegation set that uses the four name
+    # servers that are associated with an existing hosted zone. Specify the
+    # hosted zone ID in the `CreateReusableDelegationSet` request.
     #
     # <note markdown="1"> You can't associate a reusable delegation set with a private hosted
     # zone.
@@ -1755,7 +1770,7 @@ module Aws::Route53
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html
     #
     # @option params [required, String] :caller_reference
     #   A unique string that identifies the request, and that allows you to
@@ -2039,9 +2054,16 @@ module Aws::Route53
     # see [Replacing and Deleting Health Checks][1] in the *Amazon Route 53
     # Developer Guide*.
     #
+    # If you're using AWS Cloud Map and you configured Cloud Map to create
+    # a Route 53 health check when you register an instance, you can't use
+    # the Route 53 `DeleteHealthCheck` command to delete the health check.
+    # The health check is deleted automatically when you deregister the
+    # instance; there can be a delay of several hours before the health
+    # check is deleted from Route 53.
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html
     #
     # @option params [required, String] :health_check_id
     #   The ID of the health check that you want to delete.
@@ -2487,7 +2509,7 @@ module Aws::Route53
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html
     #
     # @return [Types::GetCheckerIpRangesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2528,7 +2550,9 @@ module Aws::Route53
     # code&subdivisioncode=subdivision code `
     #
     # @option params [String] :continent_code
-    #   Amazon Route 53 supports the following continent codes:
+    #   For geolocation resource record sets, a two-letter abbreviation that
+    #   identifies a continent. Amazon Route 53 supports the following
+    #   continent codes:
     #
     #   * **AF**\: Africa
     #
@@ -2553,14 +2577,17 @@ module Aws::Route53
     #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #
     # @option params [String] :subdivision_code
-    #   Amazon Route 53 uses the one- to three-letter subdivision codes that
-    #   are specified in [ISO standard 3166-1 alpha-2][1]. Route 53 doesn't
-    #   support subdivision codes for all countries. If you specify
-    #   `subdivisioncode`, you must also specify `countrycode`.
+    #   For `SubdivisionCode`, Amazon Route 53 supports only states of the
+    #   United States. For a list of state abbreviations, see [Appendix B:
+    #   Two–Letter State and Possession Abbreviations][1] on the United States
+    #   Postal Service website.
+    #
+    #   If you specify `subdivisioncode`, you must also specify `US` for
+    #   `CountryCode`.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #   [1]: https://pe.usps.com/text/pub28/28apb.htm
     #
     # @return [Types::GetGeoLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3139,6 +3166,13 @@ module Aws::Route53
     # provinces), the subdivisions for that country are listed in
     # alphabetical order immediately after the corresponding country.
     #
+    # For a list of supported geolocation codes, see the [GeoLocation][1]
+    # data type.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html
+    #
     # @option params [String] :start_continent_code
     #   The code for the continent with which you want to start listing
     #   locations that Amazon Route 53 supports for geolocation. If Route 53
@@ -3159,23 +3193,15 @@ module Aws::Route53
     #   value, enter that value in `startcountrycode` to return the next page
     #   of results.
     #
-    #   Route 53 uses the two-letter country codes that are specified in [ISO
-    #   standard 3166-1 alpha-2][1].
-    #
-    #
-    #
-    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-    #
     # @option params [String] :start_subdivision_code
-    #   The code for the subdivision (for example, state or province) with
-    #   which you want to start listing locations that Amazon Route 53
-    #   supports for geolocation. If Route 53 has already returned a page or
-    #   more of results, if `IsTruncated` is `true`, and if
-    #   `NextSubdivisionCode` from the previous response has a value, enter
-    #   that value in `startsubdivisioncode` to return the next page of
-    #   results.
+    #   The code for the state of the United States with which you want to
+    #   start listing locations that Amazon Route 53 supports for geolocation.
+    #   If Route 53 has already returned a page or more of results, if
+    #   `IsTruncated` is `true`, and if `NextSubdivisionCode` from the
+    #   previous response has a value, enter that value in
+    #   `startsubdivisioncode` to return the next page of results.
     #
-    #   To list subdivisions of a country, you must include both
+    #   To list subdivisions (U.S. states), you must include both
     #   `startcountrycode` and `startsubdivisioncode`.
     #
     # @option params [Integer] :max_items
@@ -3448,7 +3474,7 @@ module Aws::Route53
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
     #
     # @option params [String] :dns_name
     #   (Optional) For your first request to `ListHostedZonesByName`, include
@@ -3677,7 +3703,9 @@ module Aws::Route53
     #
     # @option params [String] :start_record_name
     #   The first name in the lexicographic ordering of resource record sets
-    #   that you want to list.
+    #   that you want to list. If the specified record name doesn't exist,
+    #   the results begin with the first resource record set that has a name
+    #   greater than the value of `name`.
     #
     # @option params [String] :start_record_type
     #   The type of resource record set to begin the record listing from.
@@ -3701,9 +3729,9 @@ module Aws::Route53
     #
     #   * **Elastic Load Balancing load balancer**\: A \| AAAA
     #
-    #   * **Amazon S3 bucket**\: A
+    #   * **S3 bucket**\: A
     #
-    #   * **Amazon VPC interface VPC endpoint**\: A
+    #   * **VPC interface VPC endpoint**\: A
     #
     #   * **Another resource record set in this hosted zone:** The type of the
     #     resource record set that the alias references.
@@ -4530,7 +4558,7 @@ module Aws::Route53
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html
     #
     # @option params [required, String] :health_check_id
     #   The ID for the health check for which you want detailed information.
@@ -4617,8 +4645,13 @@ module Aws::Route53
     #   [6]: https://tools.ietf.org/html/rfc5156
     #
     # @option params [Integer] :port
-    #   The port on the endpoint on which you want Amazon Route 53 to perform
-    #   health checks.
+    #   The port on the endpoint that you want Amazon Route 53 to perform
+    #   health checks on.
+    #
+    #   <note markdown="1"> Don't specify a value for `Port` when you specify a value for `Type`
+    #   of `CLOUDWATCH_METRIC` or `CALCULATED`.
+    #
+    #    </note>
     #
     # @option params [String] :resource_path
     #   The path that you want Amazon Route 53 to request when performing
@@ -4705,7 +4738,7 @@ module Aws::Route53
     #   Route 53 doesn't pass a `Host` header.
     #
     # @option params [String] :search_string
-    #   If the value of `Type` is `HTTP_STR_MATCH` or `HTTP_STR_MATCH`, the
+    #   If the value of `Type` is `HTTP_STR_MATCH` or `HTTPS_STR_MATCH`, the
     #   string that you want Amazon Route 53 to search for in the response
     #   body from the specified resource. If the string appears in the
     #   response body, Route 53 considers the resource healthy. (You can't
@@ -4723,7 +4756,7 @@ module Aws::Route53
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #
     # @option params [Boolean] :inverted
     #   Specify whether you want Amazon Route 53 to invert the status of a
@@ -5094,7 +5127,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

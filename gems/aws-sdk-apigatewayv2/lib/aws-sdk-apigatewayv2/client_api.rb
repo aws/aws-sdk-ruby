@@ -151,7 +151,7 @@ module Aws::ApiGatewayV2
     ImportApiRequest = Shapes::StructureShape.new(name: 'ImportApiRequest')
     ImportApiResponse = Shapes::StructureShape.new(name: 'ImportApiResponse')
     IntegerWithLengthBetween0And3600 = Shapes::IntegerShape.new(name: 'IntegerWithLengthBetween0And3600')
-    IntegerWithLengthBetween50And29000 = Shapes::IntegerShape.new(name: 'IntegerWithLengthBetween50And29000')
+    IntegerWithLengthBetween50And30000 = Shapes::IntegerShape.new(name: 'IntegerWithLengthBetween50And30000')
     IntegerWithLengthBetweenMinus1And86400 = Shapes::IntegerShape.new(name: 'IntegerWithLengthBetweenMinus1And86400')
     Integration = Shapes::StructureShape.new(name: 'Integration')
     IntegrationParameters = Shapes::MapShape.new(name: 'IntegrationParameters')
@@ -482,7 +482,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationInput.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     CreateIntegrationInput.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationInput.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    CreateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    CreateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     CreateIntegrationInput.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     CreateIntegrationInput.struct_class = Types::CreateIntegrationInput
 
@@ -500,7 +500,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     CreateIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationRequest.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    CreateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    CreateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     CreateIntegrationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     CreateIntegrationRequest.struct_class = Types::CreateIntegrationRequest
 
@@ -544,7 +544,7 @@ module Aws::ApiGatewayV2
     CreateIntegrationResult.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     CreateIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     CreateIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    CreateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    CreateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     CreateIntegrationResult.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     CreateIntegrationResult.struct_class = Types::CreateIntegrationResult
 
@@ -947,7 +947,7 @@ module Aws::ApiGatewayV2
     GetIntegrationResult.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     GetIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     GetIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    GetIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    GetIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     GetIntegrationResult.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     GetIntegrationResult.struct_class = Types::GetIntegrationResult
 
@@ -1136,7 +1136,7 @@ module Aws::ApiGatewayV2
     Integration.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     Integration.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     Integration.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    Integration.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    Integration.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     Integration.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     Integration.struct_class = Types::Integration
 
@@ -1449,7 +1449,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationInput.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     UpdateIntegrationInput.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationInput.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    UpdateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    UpdateIntegrationInput.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     UpdateIntegrationInput.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     UpdateIntegrationInput.struct_class = Types::UpdateIntegrationInput
 
@@ -1468,7 +1468,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     UpdateIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationRequest.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    UpdateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    UpdateIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     UpdateIntegrationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfigInput, location_name: "tlsConfig"))
     UpdateIntegrationRequest.struct_class = Types::UpdateIntegrationRequest
 
@@ -1513,7 +1513,7 @@ module Aws::ApiGatewayV2
     UpdateIntegrationResult.add_member(:request_parameters, Shapes::ShapeRef.new(shape: IntegrationParameters, location_name: "requestParameters"))
     UpdateIntegrationResult.add_member(:request_templates, Shapes::ShapeRef.new(shape: TemplateMap, location_name: "requestTemplates"))
     UpdateIntegrationResult.add_member(:template_selection_expression, Shapes::ShapeRef.new(shape: SelectionExpression, location_name: "templateSelectionExpression"))
-    UpdateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And29000, location_name: "timeoutInMillis"))
+    UpdateIntegrationResult.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: IntegerWithLengthBetween50And30000, location_name: "timeoutInMillis"))
     UpdateIntegrationResult.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     UpdateIntegrationResult.struct_class = Types::UpdateIntegrationResult
 

@@ -763,7 +763,7 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Integer] :timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #
     # @option params [Types::TlsConfigInput] :tls_config
     #   The TLS configuration for a private integration. If you specify a TLS
@@ -3531,7 +3531,7 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Integer] :timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #
     # @option params [Types::TlsConfigInput] :tls_config
     #   The TLS configuration for a private integration. If you specify a TLS
@@ -4144,7 +4144,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

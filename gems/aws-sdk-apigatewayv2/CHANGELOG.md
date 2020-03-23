@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-03-23)
+------------------
+
+* Feature - Documentation updates to reflect that the default timeout for integrations is now 30 seconds for HTTP APIs.
+
 1.17.0 (2020-03-12)
 ------------------
 
