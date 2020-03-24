@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Athena - Updated the documentation for Amazon Athena.
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
+* Feature - Aws::RDSDataService - Updated the documentation for AWS RDS DataService.
+
 2.11.474 (2020-03-23)
 ------------------
 
