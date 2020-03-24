@@ -146,10 +146,7 @@
     "models": "codestar-connections/2019-12-01"
   },
   "CognitoIdentity": {
-    "models": "cognito-identity/2014-06-30",
-    "addPlugins": [
-      "Aws::CognitoIdentity::Plugins::WrapCognitoCredentials"
-    ]
+    "models": "cognito-identity/2014-06-30"
   },
   "CognitoIdentityProvider": {
     "models": "cognito-idp/2016-04-18"

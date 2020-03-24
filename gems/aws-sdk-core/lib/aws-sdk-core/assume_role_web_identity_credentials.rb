@@ -25,6 +25,7 @@ module Aws
     include CredentialProvider
     include RefreshingCredentials
 
+    # @param [Hash] options
     # @option options [required, String] :role_arn the IAM role
     #   to be assumed
     #

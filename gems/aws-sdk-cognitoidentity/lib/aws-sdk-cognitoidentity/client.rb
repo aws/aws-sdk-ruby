@@ -26,7 +26,6 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
-require 'aws-sdk-cognitoidentity/plugins/wrap_cognito_credentials.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cognitoidentity)
 
@@ -72,7 +71,6 @@ module Aws::CognitoIdentity
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
-    add_plugin(Aws::CognitoIdentity::Plugins::WrapCognitoCredentials)
 
     # @overload initialize(options)
     #   @param [Hash] options
