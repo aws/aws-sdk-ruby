@@ -65,9 +65,9 @@ module Aws::Signer
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name            | params                  | :delay   | :max_attempts |
-  # | ---------------------- | ----------------------- | -------- | ------------- |
-  # | successful_signing_job | {#describe_signing_job} | 20       | 25            |
+  # | waiter_name            | params                        | :delay   | :max_attempts |
+  # | ---------------------- | ----------------------------- | -------- | ------------- |
+  # | successful_signing_job | {Client#describe_signing_job} | 20       | 25            |
   #
   module Waiters
 

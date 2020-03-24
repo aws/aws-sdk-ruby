@@ -65,11 +65,11 @@ module Aws::Lambda
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name      | params                        | :delay   | :max_attempts |
-  # | ---------------- | ----------------------------- | -------- | ------------- |
-  # | function_active  | {#get_function_configuration} | 5        | 60            |
-  # | function_exists  | {#get_function}               | 1        | 20            |
-  # | function_updated | {#get_function_configuration} | 5        | 60            |
+  # | waiter_name      | params                              | :delay   | :max_attempts |
+  # | ---------------- | ----------------------------------- | -------- | ------------- |
+  # | function_active  | {Client#get_function_configuration} | 5        | 60            |
+  # | function_exists  | {Client#get_function}               | 1        | 20            |
+  # | function_updated | {Client#get_function_configuration} | 5        | 60            |
   #
   module Waiters
 

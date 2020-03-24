@@ -273,8 +273,7 @@ module Aws::EC2
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -286,7 +285,7 @@ module Aws::EC2
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -12437,7 +12436,7 @@ module Aws::EC2
     #   resp.bundle_tasks[0].update_time #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * bundle_task_complete
     #
@@ -13290,7 +13289,7 @@ module Aws::EC2
     #   resp.conversion_tasks[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * conversion_task_cancelled
     #   * conversion_task_completed
@@ -13408,7 +13407,7 @@ module Aws::EC2
     #   resp.customer_gateways[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * customer_gateway_available
     #
@@ -13821,7 +13820,7 @@ module Aws::EC2
     #   resp.export_tasks[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * export_task_cancelled
     #   * export_task_completed
@@ -15318,7 +15317,7 @@ module Aws::EC2
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * image_available
     #   * image_exists
@@ -15945,7 +15944,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * instance_status_ok
     #   * system_status_ok
@@ -16748,7 +16747,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * instance_exists
     #   * instance_running
@@ -17041,7 +17040,7 @@ module Aws::EC2
     #   resp.key_pairs[0].tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * key_pair_exists
     #
@@ -18026,7 +18025,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * nat_gateway_available
     #
@@ -18704,7 +18703,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * network_interface_available
     #
@@ -20504,7 +20503,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * security_group_exists
     #
@@ -20833,7 +20832,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * snapshot_completed
     #
@@ -21626,7 +21625,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * spot_instance_request_fulfilled
     #
@@ -22037,7 +22036,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * subnet_available
     #
@@ -23510,7 +23509,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * volume_available
     #   * volume_deleted
@@ -24463,7 +24462,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vpc_peering_connection_deleted
     #   * vpc_peering_connection_exists
@@ -24628,7 +24627,7 @@ module Aws::EC2
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vpc_available
     #   * vpc_exists
@@ -24775,7 +24774,7 @@ module Aws::EC2
     #   resp.vpn_connections[0].vgw_telemetry[0].certificate_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * vpn_connection_available
     #   * vpn_connection_deleted
@@ -27165,7 +27164,7 @@ module Aws::EC2
     #   resp.timestamp #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * password_data_available
     #
@@ -36677,40 +36676,40 @@ module Aws::EC2
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                     | params                              | :delay   | :max_attempts |
-    # | ------------------------------- | ----------------------------------- | -------- | ------------- |
-    # | bundle_task_complete            | {#describe_bundle_tasks}            | 15       | 40            |
-    # | conversion_task_cancelled       | {#describe_conversion_tasks}        | 15       | 40            |
-    # | conversion_task_completed       | {#describe_conversion_tasks}        | 15       | 40            |
-    # | conversion_task_deleted         | {#describe_conversion_tasks}        | 15       | 40            |
-    # | customer_gateway_available      | {#describe_customer_gateways}       | 15       | 40            |
-    # | export_task_cancelled           | {#describe_export_tasks}            | 15       | 40            |
-    # | export_task_completed           | {#describe_export_tasks}            | 15       | 40            |
-    # | image_available                 | {#describe_images}                  | 15       | 40            |
-    # | image_exists                    | {#describe_images}                  | 15       | 40            |
-    # | instance_exists                 | {#describe_instances}               | 5        | 40            |
-    # | instance_running                | {#describe_instances}               | 15       | 40            |
-    # | instance_status_ok              | {#describe_instance_status}         | 15       | 40            |
-    # | instance_stopped                | {#describe_instances}               | 15       | 40            |
-    # | instance_terminated             | {#describe_instances}               | 15       | 40            |
-    # | key_pair_exists                 | {#describe_key_pairs}               | 5        | 6             |
-    # | nat_gateway_available           | {#describe_nat_gateways}            | 15       | 40            |
-    # | network_interface_available     | {#describe_network_interfaces}      | 20       | 10            |
-    # | password_data_available         | {#get_password_data}                | 15       | 40            |
-    # | security_group_exists           | {#describe_security_groups}         | 5        | 6             |
-    # | snapshot_completed              | {#describe_snapshots}               | 15       | 40            |
-    # | spot_instance_request_fulfilled | {#describe_spot_instance_requests}  | 15       | 40            |
-    # | subnet_available                | {#describe_subnets}                 | 15       | 40            |
-    # | system_status_ok                | {#describe_instance_status}         | 15       | 40            |
-    # | volume_available                | {#describe_volumes}                 | 15       | 40            |
-    # | volume_deleted                  | {#describe_volumes}                 | 15       | 40            |
-    # | volume_in_use                   | {#describe_volumes}                 | 15       | 40            |
-    # | vpc_available                   | {#describe_vpcs}                    | 15       | 40            |
-    # | vpc_exists                      | {#describe_vpcs}                    | 1        | 5             |
-    # | vpc_peering_connection_deleted  | {#describe_vpc_peering_connections} | 15       | 40            |
-    # | vpc_peering_connection_exists   | {#describe_vpc_peering_connections} | 15       | 40            |
-    # | vpn_connection_available        | {#describe_vpn_connections}         | 15       | 40            |
-    # | vpn_connection_deleted          | {#describe_vpn_connections}         | 15       | 40            |
+    # | waiter_name                     | params                                    | :delay   | :max_attempts |
+    # | ------------------------------- | ----------------------------------------- | -------- | ------------- |
+    # | bundle_task_complete            | {Client#describe_bundle_tasks}            | 15       | 40            |
+    # | conversion_task_cancelled       | {Client#describe_conversion_tasks}        | 15       | 40            |
+    # | conversion_task_completed       | {Client#describe_conversion_tasks}        | 15       | 40            |
+    # | conversion_task_deleted         | {Client#describe_conversion_tasks}        | 15       | 40            |
+    # | customer_gateway_available      | {Client#describe_customer_gateways}       | 15       | 40            |
+    # | export_task_cancelled           | {Client#describe_export_tasks}            | 15       | 40            |
+    # | export_task_completed           | {Client#describe_export_tasks}            | 15       | 40            |
+    # | image_available                 | {Client#describe_images}                  | 15       | 40            |
+    # | image_exists                    | {Client#describe_images}                  | 15       | 40            |
+    # | instance_exists                 | {Client#describe_instances}               | 5        | 40            |
+    # | instance_running                | {Client#describe_instances}               | 15       | 40            |
+    # | instance_status_ok              | {Client#describe_instance_status}         | 15       | 40            |
+    # | instance_stopped                | {Client#describe_instances}               | 15       | 40            |
+    # | instance_terminated             | {Client#describe_instances}               | 15       | 40            |
+    # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
+    # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
+    # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
+    # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
+    # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
+    # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
+    # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
+    # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
+    # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
+    # | volume_available                | {Client#describe_volumes}                 | 15       | 40            |
+    # | volume_deleted                  | {Client#describe_volumes}                 | 15       | 40            |
+    # | volume_in_use                   | {Client#describe_volumes}                 | 15       | 40            |
+    # | vpc_available                   | {Client#describe_vpcs}                    | 15       | 40            |
+    # | vpc_exists                      | {Client#describe_vpcs}                    | 1        | 5             |
+    # | vpc_peering_connection_deleted  | {Client#describe_vpc_peering_connections} | 15       | 40            |
+    # | vpc_peering_connection_exists   | {Client#describe_vpc_peering_connections} | 15       | 40            |
+    # | vpn_connection_available        | {Client#describe_vpn_connections}         | 15       | 40            |
+    # | vpn_connection_deleted          | {Client#describe_vpn_connections}         | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

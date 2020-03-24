@@ -279,8 +279,7 @@ module Aws::SageMaker
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::SageMaker
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -4890,7 +4889,7 @@ module Aws::SageMaker
     #   resp.last_modified_time #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * endpoint_deleted
     #   * endpoint_in_service
@@ -5710,7 +5709,7 @@ module Aws::SageMaker
     #   resp.root_access #=> String, one of "Enabled", "Disabled"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * notebook_instance_deleted
     #   * notebook_instance_in_service
@@ -5859,7 +5858,7 @@ module Aws::SageMaker
     #   resp.training_job_arn #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * processing_job_completed_or_stopped
     #
@@ -6053,7 +6052,7 @@ module Aws::SageMaker
     #   resp.debug_rule_evaluation_statuses[0].last_modified_time #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * training_job_completed_or_stopped
     #
@@ -6136,7 +6135,7 @@ module Aws::SageMaker
     #   resp.experiment_config.trial_component_display_name #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * transform_job_completed_or_stopped
     #
@@ -10471,16 +10470,16 @@ module Aws::SageMaker
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                         | params                        | :delay   | :max_attempts |
-    # | ----------------------------------- | ----------------------------- | -------- | ------------- |
-    # | endpoint_deleted                    | {#describe_endpoint}          | 30       | 60            |
-    # | endpoint_in_service                 | {#describe_endpoint}          | 30       | 120           |
-    # | notebook_instance_deleted           | {#describe_notebook_instance} | 30       | 60            |
-    # | notebook_instance_in_service        | {#describe_notebook_instance} | 30       | 60            |
-    # | notebook_instance_stopped           | {#describe_notebook_instance} | 30       | 60            |
-    # | processing_job_completed_or_stopped | {#describe_processing_job}    | 60       | 60            |
-    # | training_job_completed_or_stopped   | {#describe_training_job}      | 120      | 180           |
-    # | transform_job_completed_or_stopped  | {#describe_transform_job}     | 60       | 60            |
+    # | waiter_name                         | params                              | :delay   | :max_attempts |
+    # | ----------------------------------- | ----------------------------------- | -------- | ------------- |
+    # | endpoint_deleted                    | {Client#describe_endpoint}          | 30       | 60            |
+    # | endpoint_in_service                 | {Client#describe_endpoint}          | 30       | 120           |
+    # | notebook_instance_deleted           | {Client#describe_notebook_instance} | 30       | 60            |
+    # | notebook_instance_in_service        | {Client#describe_notebook_instance} | 30       | 60            |
+    # | notebook_instance_stopped           | {Client#describe_notebook_instance} | 30       | 60            |
+    # | processing_job_completed_or_stopped | {Client#describe_processing_job}    | 60       | 60            |
+    # | training_job_completed_or_stopped   | {Client#describe_training_job}      | 120      | 180           |
+    # | transform_job_completed_or_stopped  | {Client#describe_transform_job}     | 60       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

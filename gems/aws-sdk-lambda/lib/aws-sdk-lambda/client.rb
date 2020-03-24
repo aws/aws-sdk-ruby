@@ -269,8 +269,7 @@ module Aws::Lambda
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::Lambda
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1738,7 +1737,7 @@ module Aws::Lambda
     #   resp.concurrency.reserved_concurrent_executions #=> Integer
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * function_exists
     #
@@ -1929,7 +1928,7 @@ module Aws::Lambda
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * function_active
     #   * function_updated
@@ -4664,11 +4663,11 @@ module Aws::Lambda
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params                        | :delay   | :max_attempts |
-    # | ---------------- | ----------------------------- | -------- | ------------- |
-    # | function_active  | {#get_function_configuration} | 5        | 60            |
-    # | function_exists  | {#get_function}               | 1        | 20            |
-    # | function_updated | {#get_function_configuration} | 5        | 60            |
+    # | waiter_name      | params                              | :delay   | :max_attempts |
+    # | ---------------- | ----------------------------------- | -------- | ------------- |
+    # | function_active  | {Client#get_function_configuration} | 5        | 60            |
+    # | function_exists  | {Client#get_function}               | 1        | 20            |
+    # | function_updated | {Client#get_function_configuration} | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

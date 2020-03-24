@@ -269,8 +269,7 @@ module Aws::DocDB
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::DocDB
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -2333,7 +2332,7 @@ module Aws::DocDB
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * db_instance_available
     #   * db_instance_deleted
@@ -4306,10 +4305,10 @@ module Aws::DocDB
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                   | :delay   | :max_attempts |
-    # | --------------------- | ------------------------ | -------- | ------------- |
-    # | db_instance_available | {#describe_db_instances} | 30       | 60            |
-    # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
+    # | waiter_name           | params                         | :delay   | :max_attempts |
+    # | --------------------- | ------------------------------ | -------- | ------------- |
+    # | db_instance_available | {Client#describe_db_instances} | 30       | 60            |
+    # | db_instance_deleted   | {Client#describe_db_instances} | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

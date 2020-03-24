@@ -3,7 +3,7 @@ require 'tempfile'
 require 'zlib'
 
 module Aws
-  module EventStream 
+  module EventStream
 
     # This class provides method for decoding binary inputs into
     # single or multiple messages (Aws::EventStream::Message).
@@ -28,7 +28,7 @@ module Aws
     #   message_pool = decoder.decode(io)
     #   message_pool.next
     #   # => Aws::EventStream::Message
-    #   
+    #
     # * {#decode_chunk} - decodes a single message from a chunk of data,
     #   returning message object followed by boolean(indicating eof status
     #   of data) in an array object
@@ -72,16 +72,16 @@ module Aws
       # and 4 bytes total message crc checksum
       OVERHEAD_LENGTH = 16
 
-      # @options options [Boolean] format (true) When `false`
-      #   disable user-friendly formatting for message header values
+      # @param [Hash] options The initialization options.
+      # @option options [Boolean] :format (true) When `false` it
+      #   disables user-friendly formatting for message header values
       #   including timestamp and uuid etc.
-      #
       def initialize(options = {})
         @format = options.fetch(:format, true)
         @message_buffer = BytesBuffer.new('')
       end
 
-      # @returns [BytesBuffer]
+      # @return [BytesBuffer]
       attr_reader :message_buffer
 
       # Decodes messages from a binary stream

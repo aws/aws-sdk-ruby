@@ -65,9 +65,9 @@ module Aws::Route53
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                  | params        | :delay   | :max_attempts |
-  # | ---------------------------- | ------------- | -------- | ------------- |
-  # | resource_record_sets_changed | {#get_change} | 30       | 60            |
+  # | waiter_name                  | params              | :delay   | :max_attempts |
+  # | ---------------------------- | ------------------- | -------- | ------------- |
+  # | resource_record_sets_changed | {Client#get_change} | 30       | 60            |
   #
   module Waiters
 

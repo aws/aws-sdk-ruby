@@ -279,8 +279,7 @@ module Aws::AppStream
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::AppStream
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1647,7 +1646,7 @@ module Aws::AppStream
     #   resp.next_token #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * fleet_started
     #   * fleet_stopped
@@ -3133,10 +3132,10 @@ module Aws::AppStream
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name   | params             | :delay   | :max_attempts |
-    # | ------------- | ------------------ | -------- | ------------- |
-    # | fleet_started | {#describe_fleets} | 30       | 40            |
-    # | fleet_stopped | {#describe_fleets} | 30       | 40            |
+    # | waiter_name   | params                   | :delay   | :max_attempts |
+    # | ------------- | ------------------------ | -------- | ------------- |
+    # | fleet_started | {Client#describe_fleets} | 30       | 40            |
+    # | fleet_stopped | {Client#describe_fleets} | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

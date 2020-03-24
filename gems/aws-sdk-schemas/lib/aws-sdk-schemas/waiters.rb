@@ -65,9 +65,9 @@ module Aws::Schemas
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name         | params                   | :delay   | :max_attempts |
-  # | ------------------- | ------------------------ | -------- | ------------- |
-  # | code_binding_exists | {#describe_code_binding} | 2        | 30            |
+  # | waiter_name         | params                         | :delay   | :max_attempts |
+  # | ------------------- | ------------------------------ | -------- | ------------- |
+  # | code_binding_exists | {Client#describe_code_binding} | 2        | 30            |
   #
   module Waiters
 

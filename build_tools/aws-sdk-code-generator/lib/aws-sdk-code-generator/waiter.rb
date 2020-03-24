@@ -61,7 +61,12 @@ module AwsSdkCodeGenerator
         table = []
         table << ['waiter_name', 'params', ':delay', ':max_attempts']
         waiters.each do |waiter|
-          table << [waiter.name, "{##{waiter.client_method}}", waiter.delay, waiter.max_attempts]
+          table << [
+            waiter.name,
+            "{Client##{waiter.client_method}}",
+            waiter.delay,
+            waiter.max_attempts
+          ]
         end
         Docstring.markdown_table(table)
       end
@@ -71,7 +76,9 @@ module AwsSdkCodeGenerator
       def acceptors(acceptors)
         acceptors.each do |acceptor|
           if acceptor['argument']
-            acceptor['argument'] = Underscore.underscore_jmespath(acceptor['argument'])
+            acceptor['argument'] = Underscore.underscore_jmespath(
+              acceptor['argument']
+            )
           end
         end
         HashFormatter.new(

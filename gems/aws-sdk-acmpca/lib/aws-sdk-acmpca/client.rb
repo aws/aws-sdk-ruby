@@ -279,8 +279,7 @@ module Aws::ACMPCA
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ACMPCA
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -744,7 +743,7 @@ module Aws::ACMPCA
     #   resp.created_at #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * audit_report_created
     #
@@ -798,7 +797,7 @@ module Aws::ACMPCA
     #   resp.certificate_chain #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * certificate_issued
     #
@@ -878,7 +877,7 @@ module Aws::ACMPCA
     #   resp.csr #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * certificate_authority_csr_created
     #
@@ -1576,11 +1575,11 @@ module Aws::ACMPCA
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                       | params                                         | :delay   | :max_attempts |
-    # | --------------------------------- | ---------------------------------------------- | -------- | ------------- |
-    # | audit_report_created              | {#describe_certificate_authority_audit_report} | 3        | 60            |
-    # | certificate_authority_csr_created | {#get_certificate_authority_csr}               | 3        | 60            |
-    # | certificate_issued                | {#get_certificate}                             | 3        | 60            |
+    # | waiter_name                       | params                                               | :delay   | :max_attempts |
+    # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
+    # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
+    # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
+    # | certificate_issued                | {Client#get_certificate}                             | 3        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

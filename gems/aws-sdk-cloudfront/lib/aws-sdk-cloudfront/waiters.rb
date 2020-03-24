@@ -65,11 +65,11 @@ module Aws::CloudFront
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                     | params                        | :delay   | :max_attempts |
-  # | ------------------------------- | ----------------------------- | -------- | ------------- |
-  # | distribution_deployed           | {#get_distribution}           | 60       | 35            |
-  # | invalidation_completed          | {#get_invalidation}           | 20       | 30            |
-  # | streaming_distribution_deployed | {#get_streaming_distribution} | 60       | 25            |
+  # | waiter_name                     | params                              | :delay   | :max_attempts |
+  # | ------------------------------- | ----------------------------------- | -------- | ------------- |
+  # | distribution_deployed           | {Client#get_distribution}           | 60       | 35            |
+  # | invalidation_completed          | {Client#get_invalidation}           | 20       | 30            |
+  # | streaming_distribution_deployed | {Client#get_streaming_distribution} | 60       | 25            |
   #
   module Waiters
 

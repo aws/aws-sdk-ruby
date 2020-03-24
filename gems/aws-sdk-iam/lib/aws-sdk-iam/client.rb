@@ -269,8 +269,7 @@ module Aws::IAM
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::IAM
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -4595,7 +4594,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].role_last_used.region #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * instance_profile_exists
     #
@@ -4913,7 +4912,7 @@ module Aws::IAM
     #   resp.policy.update_date #=> Time
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * policy_exists
     #
@@ -5090,7 +5089,7 @@ module Aws::IAM
     #   resp.role.role_last_used.region #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * role_exists
     #
@@ -5754,7 +5753,7 @@ module Aws::IAM
     #   resp.user.tags[0].value #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * user_exists
     #
@@ -11593,12 +11592,12 @@ module Aws::IAM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name             | params                  | :delay   | :max_attempts |
-    # | ----------------------- | ----------------------- | -------- | ------------- |
-    # | instance_profile_exists | {#get_instance_profile} | 1        | 40            |
-    # | policy_exists           | {#get_policy}           | 1        | 20            |
-    # | role_exists             | {#get_role}             | 1        | 20            |
-    # | user_exists             | {#get_user}             | 1        | 20            |
+    # | waiter_name             | params                        | :delay   | :max_attempts |
+    # | ----------------------- | ----------------------------- | -------- | ------------- |
+    # | instance_profile_exists | {Client#get_instance_profile} | 1        | 40            |
+    # | policy_exists           | {Client#get_policy}           | 1        | 20            |
+    # | role_exists             | {Client#get_role}             | 1        | 20            |
+    # | user_exists             | {Client#get_user}             | 1        | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -5,7 +5,7 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      # @param [Class] parser_class
+      # @param [Class] serializer_class
       # @param [Seahorse::Model::ShapeRef] rules (of eventstream member)
       def initialize(serializer_class, rules)
         @serializer_class = serializer_class
@@ -59,7 +59,7 @@ module Aws
             payload = _build_payload(streaming, m_ref, params[m_name])
           end
         end
-        
+
 
         event_ref.shape.members.each do |member_name, member_ref|
           if member_ref.eventheader && params[member_name]
@@ -69,7 +69,7 @@ module Aws
               value: header_value
             )
           elsif member_ref.eventpayload && params[member_name]
-            # explicit payload 
+            # explicit payload
             streaming, content_type = _content_type(member_ref.shape)
 
             es_headers[":content-type"] = Aws::EventStream::HeaderValue.new(
@@ -99,7 +99,7 @@ module Aws
             "Unsupport eventpayload shape: #{shape.name}")
         end
       end
-        
+
       def _header_value_type(shape, value)
         case shape
         when StringShape then "string"
@@ -107,9 +107,9 @@ module Aws
         when TimestampShape then "timestamp"
         when BlobShape then "bytes"
         when BooleanShape then !!value ? "bool_true" : "bool_false"
-        else 
+        else
           raise Aws::Errors::EventStreamBuilderError.new(
-            "Unsupported eventheader shape: #{shape.name}") 
+            "Unsupported eventheader shape: #{shape.name}")
         end
       end
 

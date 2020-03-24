@@ -65,10 +65,10 @@ module Aws::Kinesis
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name       | params             | :delay   | :max_attempts |
-  # | ----------------- | ------------------ | -------- | ------------- |
-  # | stream_exists     | {#describe_stream} | 10       | 18            |
-  # | stream_not_exists | {#describe_stream} | 10       | 18            |
+  # | waiter_name       | params                   | :delay   | :max_attempts |
+  # | ----------------- | ------------------------ | -------- | ------------- |
+  # | stream_exists     | {Client#describe_stream} | 10       | 18            |
+  # | stream_not_exists | {Client#describe_stream} | 10       | 18            |
   #
   module Waiters
 

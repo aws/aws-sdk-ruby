@@ -65,11 +65,11 @@ module Aws::ACMPCA
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                       | params                                         | :delay   | :max_attempts |
-  # | --------------------------------- | ---------------------------------------------- | -------- | ------------- |
-  # | audit_report_created              | {#describe_certificate_authority_audit_report} | 3        | 60            |
-  # | certificate_authority_csr_created | {#get_certificate_authority_csr}               | 3        | 60            |
-  # | certificate_issued                | {#get_certificate}                             | 3        | 60            |
+  # | waiter_name                       | params                                               | :delay   | :max_attempts |
+  # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
+  # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
+  # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
+  # | certificate_issued                | {Client#get_certificate}                             | 3        | 60            |
   #
   module Waiters
 

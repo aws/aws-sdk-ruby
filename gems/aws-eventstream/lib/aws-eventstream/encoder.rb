@@ -1,7 +1,7 @@
 require 'zlib'
 
 module Aws
-  module EventStream 
+  module EventStream
 
     # This class provides #encode method for encoding
     # Aws::EventStream::Message into binary.
@@ -71,7 +71,7 @@ module Aws
       # Encodes an Aws::EventStream::Message
       #   into Aws::EventStream::BytesBuffer
       #
-      # @param [Aws::EventStream::Message] msg
+      # @param [Aws::EventStream::Message] message
       #
       # @return [Aws::EventStream::BytesBuffer]
       def encode_message(message)

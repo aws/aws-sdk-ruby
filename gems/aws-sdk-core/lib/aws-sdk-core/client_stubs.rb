@@ -171,7 +171,6 @@ module Aws
     # @raise [RuntimeError] Raises a runtime error when called
     #   on a client that has not enabled response stubbing via
     #   `:stub_responses => true`.
-    #
     def stub_responses(operation_name, *stubs)
       if config.stub_responses
         apply_stubs(operation_name, stubs.flatten)
@@ -182,13 +181,15 @@ module Aws
       end
     end
 
-    # Allows you to access all of the requests that the stubbed client has made
+    # Allows you to access all of the requests that the stubbed client has made.
     #
-    # @params [Boolean] exclude_presign Setting to true for filtering out not sent requests from
-    #                 generating presigned urls. Default to false.
-    # @return [Array] Returns an array of the api requests made, each request object contains the
-    #                 :operation_name, :params, and :context of the request. 
-    # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
+    # @param [Hash] options The options for the api requests.
+    # @option options [Boolean] :exclude_presign (false) Set to true to filter
+    #   out unsent requests from generated presigned urls.
+    # @return [Array] Returns an array of the api requests made. Each request
+    #   object contains the :operation_name, :params, and :context.
+    # @raise [NotImplementedError] Raises `NotImplementedError` when the client
+    #   is not stubbed.
     def api_requests(options = {})
       if config.stub_responses
         if options[:exclude_presign]

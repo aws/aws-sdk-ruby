@@ -65,10 +65,10 @@ module Aws::CloudWatch
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name            | params             | :delay   | :max_attempts |
-  # | ---------------------- | ------------------ | -------- | ------------- |
-  # | alarm_exists           | {#describe_alarms} | 5        | 40            |
-  # | composite_alarm_exists | {#describe_alarms} | 5        | 40            |
+  # | waiter_name            | params                   | :delay   | :max_attempts |
+  # | ---------------------- | ------------------------ | -------- | ------------- |
+  # | alarm_exists           | {Client#describe_alarms} | 5        | 40            |
+  # | composite_alarm_exists | {Client#describe_alarms} | 5        | 40            |
   #
   module Waiters
 

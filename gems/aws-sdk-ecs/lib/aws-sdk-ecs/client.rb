@@ -279,8 +279,7 @@ module Aws::ECS
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ECS
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -3017,7 +3016,7 @@ module Aws::ECS
     #   resp.failures[0].detail #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * services_inactive
     #   * services_stable
@@ -3558,7 +3557,7 @@ module Aws::ECS
     #   resp.failures[0].detail #=> String
     #
     #
-    # The following waiters are defined for this operation (see {Client#wait_for} for detailed usage):
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * tasks_running
     #   * tasks_stopped
@@ -7972,12 +7971,12 @@ module Aws::ECS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params               | :delay   | :max_attempts |
-    # | ----------------- | -------------------- | -------- | ------------- |
-    # | services_inactive | {#describe_services} | 15       | 40            |
-    # | services_stable   | {#describe_services} | 15       | 40            |
-    # | tasks_running     | {#describe_tasks}    | 6        | 100           |
-    # | tasks_stopped     | {#describe_tasks}    | 6        | 100           |
+    # | waiter_name       | params                     | :delay   | :max_attempts |
+    # | ----------------- | -------------------------- | -------- | ------------- |
+    # | services_inactive | {Client#describe_services} | 15       | 40            |
+    # | services_stable   | {Client#describe_services} | 15       | 40            |
+    # | tasks_running     | {Client#describe_tasks}    | 6        | 100           |
+    # | tasks_stopped     | {Client#describe_tasks}    | 6        | 100           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
