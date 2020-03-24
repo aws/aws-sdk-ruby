@@ -30,6 +30,14 @@ module Aws
       #   identity provider. This parameter is optional for identity providers
       #   that do not support role customization.
       #
+      # @option options [Callable] before_refresh Proc called before
+      #   credentials are refreshed from Cognito.  Useful for updating logins/
+      #   auth tokens on expired
+      #
+      # @option options [Callable] token_expired proc called in
+      # near_expiration?.  If true, it will trigger a refresh and before_refresh
+      # will be called, allowing tokens in logins to be updated.
+      #
       # @option options [STS::CognitoIdentity] :client Optional CognitoIdentity
       #   client. If not provided, a client will be constructed.
       def initialize(options = {})
@@ -37,6 +45,8 @@ module Aws
         @identity_id = options.delete(:identity_id)
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
+        @before_refresh = options.delete(:before_refresh)
+        @tokens_expired = options.delete(:tokens_expired)
 
         if !@identity_pool_id && !@identity_id
           raise ArgumentError,
@@ -53,14 +63,7 @@ module Aws
       attr_reader :client
 
       # @return [Hash<String,String>]
-      attr_reader :logins
-
-      # Set the logins, triggers a refresh of credentials
-      # TODO: Trigger refresh when logins[:value] is set
-      def logins=(logins)
-        @logins = logins
-        refresh!
-      end
+      attr_accessor :logins
 
       # @return [String]
       def identity_id
@@ -72,6 +75,8 @@ module Aws
       private
 
       def refresh
+        @before_refresh.call(self) if @before_refresh
+
         resp = @client.get_credentials_for_identity(
           identity_id: identity_id,
           custom_role_arn: @custom_role_arn
@@ -83,6 +88,11 @@ module Aws
           resp.credentials.session_token
         )
         @expiration = resp.credentials.expiration
+      end
+
+      def near_expiration?
+        (@tokens_expired && @tokens_expired.call(self)) ||
+          super
       end
     end
   end
