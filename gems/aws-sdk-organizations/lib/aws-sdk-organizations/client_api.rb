@@ -18,11 +18,13 @@ module Aws::Organizations
     AccessDeniedForDependencyException = Shapes::StructureShape.new(name: 'AccessDeniedForDependencyException')
     AccessDeniedForDependencyExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedForDependencyExceptionReason')
     Account = Shapes::StructureShape.new(name: 'Account')
+    AccountAlreadyRegisteredException = Shapes::StructureShape.new(name: 'AccountAlreadyRegisteredException')
     AccountArn = Shapes::StringShape.new(name: 'AccountArn')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountJoinedMethod = Shapes::StringShape.new(name: 'AccountJoinedMethod')
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountNotFoundException = Shapes::StructureShape.new(name: 'AccountNotFoundException')
+    AccountNotRegisteredException = Shapes::StructureShape.new(name: 'AccountNotRegisteredException')
     AccountOwnerNotVerifiedException = Shapes::StructureShape.new(name: 'AccountOwnerNotVerifiedException')
     AccountStatus = Shapes::StringShape.new(name: 'AccountStatus')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
@@ -59,8 +61,13 @@ module Aws::Organizations
     CreatePolicyResponse = Shapes::StructureShape.new(name: 'CreatePolicyResponse')
     DeclineHandshakeRequest = Shapes::StructureShape.new(name: 'DeclineHandshakeRequest')
     DeclineHandshakeResponse = Shapes::StructureShape.new(name: 'DeclineHandshakeResponse')
+    DelegatedAdministrator = Shapes::StructureShape.new(name: 'DelegatedAdministrator')
+    DelegatedAdministrators = Shapes::ListShape.new(name: 'DelegatedAdministrators')
+    DelegatedService = Shapes::StructureShape.new(name: 'DelegatedService')
+    DelegatedServices = Shapes::ListShape.new(name: 'DelegatedServices')
     DeleteOrganizationalUnitRequest = Shapes::StructureShape.new(name: 'DeleteOrganizationalUnitRequest')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
+    DeregisterDelegatedAdministratorRequest = Shapes::StructureShape.new(name: 'DeregisterDelegatedAdministratorRequest')
     DescribeAccountRequest = Shapes::StructureShape.new(name: 'DescribeAccountRequest')
     DescribeAccountResponse = Shapes::StructureShape.new(name: 'DescribeAccountResponse')
     DescribeCreateAccountStatusRequest = Shapes::StructureShape.new(name: 'DescribeCreateAccountStatusRequest')
@@ -134,6 +141,10 @@ module Aws::Organizations
     ListChildrenResponse = Shapes::StructureShape.new(name: 'ListChildrenResponse')
     ListCreateAccountStatusRequest = Shapes::StructureShape.new(name: 'ListCreateAccountStatusRequest')
     ListCreateAccountStatusResponse = Shapes::StructureShape.new(name: 'ListCreateAccountStatusResponse')
+    ListDelegatedAdministratorsRequest = Shapes::StructureShape.new(name: 'ListDelegatedAdministratorsRequest')
+    ListDelegatedAdministratorsResponse = Shapes::StructureShape.new(name: 'ListDelegatedAdministratorsResponse')
+    ListDelegatedServicesForAccountRequest = Shapes::StructureShape.new(name: 'ListDelegatedServicesForAccountRequest')
+    ListDelegatedServicesForAccountResponse = Shapes::StructureShape.new(name: 'ListDelegatedServicesForAccountResponse')
     ListHandshakesForAccountRequest = Shapes::StructureShape.new(name: 'ListHandshakesForAccountRequest')
     ListHandshakesForAccountResponse = Shapes::StructureShape.new(name: 'ListHandshakesForAccountResponse')
     ListHandshakesForOrganizationRequest = Shapes::StructureShape.new(name: 'ListHandshakesForOrganizationRequest')
@@ -196,6 +207,7 @@ module Aws::Organizations
     PolicyTypeStatus = Shapes::StringShape.new(name: 'PolicyTypeStatus')
     PolicyTypeSummary = Shapes::StructureShape.new(name: 'PolicyTypeSummary')
     PolicyTypes = Shapes::ListShape.new(name: 'PolicyTypes')
+    RegisterDelegatedAdministratorRequest = Shapes::StructureShape.new(name: 'RegisterDelegatedAdministratorRequest')
     RemoveAccountFromOrganizationRequest = Shapes::StructureShape.new(name: 'RemoveAccountFromOrganizationRequest')
     RoleName = Shapes::StringShape.new(name: 'RoleName')
     Root = Shapes::StructureShape.new(name: 'Root')
@@ -251,8 +263,14 @@ module Aws::Organizations
     Account.add_member(:joined_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "JoinedTimestamp"))
     Account.struct_class = Types::Account
 
+    AccountAlreadyRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccountAlreadyRegisteredException.struct_class = Types::AccountAlreadyRegisteredException
+
     AccountNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccountNotFoundException.struct_class = Types::AccountNotFoundException
+
+    AccountNotRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccountNotRegisteredException.struct_class = Types::AccountNotRegisteredException
 
     AccountOwnerNotVerifiedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccountOwnerNotVerifiedException.struct_class = Types::AccountOwnerNotVerifiedException
@@ -351,11 +369,33 @@ module Aws::Organizations
     DeclineHandshakeResponse.add_member(:handshake, Shapes::ShapeRef.new(shape: Handshake, location_name: "Handshake"))
     DeclineHandshakeResponse.struct_class = Types::DeclineHandshakeResponse
 
+    DelegatedAdministrator.add_member(:id, Shapes::ShapeRef.new(shape: AccountId, location_name: "Id"))
+    DelegatedAdministrator.add_member(:arn, Shapes::ShapeRef.new(shape: AccountArn, location_name: "Arn"))
+    DelegatedAdministrator.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
+    DelegatedAdministrator.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
+    DelegatedAdministrator.add_member(:status, Shapes::ShapeRef.new(shape: AccountStatus, location_name: "Status"))
+    DelegatedAdministrator.add_member(:joined_method, Shapes::ShapeRef.new(shape: AccountJoinedMethod, location_name: "JoinedMethod"))
+    DelegatedAdministrator.add_member(:joined_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "JoinedTimestamp"))
+    DelegatedAdministrator.add_member(:delegation_enabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DelegationEnabledDate"))
+    DelegatedAdministrator.struct_class = Types::DelegatedAdministrator
+
+    DelegatedAdministrators.member = Shapes::ShapeRef.new(shape: DelegatedAdministrator)
+
+    DelegatedService.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
+    DelegatedService.add_member(:delegation_enabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DelegationEnabledDate"))
+    DelegatedService.struct_class = Types::DelegatedService
+
+    DelegatedServices.member = Shapes::ShapeRef.new(shape: DelegatedService)
+
     DeleteOrganizationalUnitRequest.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, required: true, location_name: "OrganizationalUnitId"))
     DeleteOrganizationalUnitRequest.struct_class = Types::DeleteOrganizationalUnitRequest
 
     DeletePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     DeletePolicyRequest.struct_class = Types::DeletePolicyRequest
+
+    DeregisterDelegatedAdministratorRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DeregisterDelegatedAdministratorRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
+    DeregisterDelegatedAdministratorRequest.struct_class = Types::DeregisterDelegatedAdministratorRequest
 
     DescribeAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DescribeAccountRequest.struct_class = Types::DescribeAccountRequest
@@ -559,6 +599,24 @@ module Aws::Organizations
     ListCreateAccountStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCreateAccountStatusResponse.struct_class = Types::ListCreateAccountStatusResponse
 
+    ListDelegatedAdministratorsRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "ServicePrincipal"))
+    ListDelegatedAdministratorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDelegatedAdministratorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListDelegatedAdministratorsRequest.struct_class = Types::ListDelegatedAdministratorsRequest
+
+    ListDelegatedAdministratorsResponse.add_member(:delegated_administrators, Shapes::ShapeRef.new(shape: DelegatedAdministrators, location_name: "DelegatedAdministrators"))
+    ListDelegatedAdministratorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDelegatedAdministratorsResponse.struct_class = Types::ListDelegatedAdministratorsResponse
+
+    ListDelegatedServicesForAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    ListDelegatedServicesForAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDelegatedServicesForAccountRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListDelegatedServicesForAccountRequest.struct_class = Types::ListDelegatedServicesForAccountRequest
+
+    ListDelegatedServicesForAccountResponse.add_member(:delegated_services, Shapes::ShapeRef.new(shape: DelegatedServices, location_name: "DelegatedServices"))
+    ListDelegatedServicesForAccountResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDelegatedServicesForAccountResponse.struct_class = Types::ListDelegatedServicesForAccountResponse
+
     ListHandshakesForAccountRequest.add_member(:filter, Shapes::ShapeRef.new(shape: HandshakeFilter, location_name: "Filter"))
     ListHandshakesForAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListHandshakesForAccountRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -732,6 +790,10 @@ module Aws::Organizations
     PolicyTypeSummary.struct_class = Types::PolicyTypeSummary
 
     PolicyTypes.member = Shapes::ShapeRef.new(shape: PolicyTypeSummary)
+
+    RegisterDelegatedAdministratorRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    RegisterDelegatedAdministratorRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
+    RegisterDelegatedAdministratorRequest.struct_class = Types::RegisterDelegatedAdministratorRequest
 
     RemoveAccountFromOrganizationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     RemoveAccountFromOrganizationRequest.struct_class = Types::RemoveAccountFromOrganizationRequest
@@ -1017,6 +1079,24 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+      end)
+
+      api.add_operation(:deregister_delegated_administrator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterDelegatedAdministrator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterDelegatedAdministratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotRegisteredException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
@@ -1360,6 +1440,50 @@ module Aws::Organizations
         )
       end)
 
+      api.add_operation(:list_delegated_administrators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDelegatedAdministrators"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDelegatedAdministratorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDelegatedAdministratorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_delegated_services_for_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDelegatedServicesForAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDelegatedServicesForAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDelegatedServicesForAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotRegisteredException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_handshakes_for_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHandshakesForAccount"
         o.http_method = "POST"
@@ -1555,6 +1679,24 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:register_delegated_administrator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterDelegatedAdministrator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterDelegatedAdministratorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountAlreadyRegisteredException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:remove_account_from_organization, Seahorse::Model::Operation.new.tap do |o|

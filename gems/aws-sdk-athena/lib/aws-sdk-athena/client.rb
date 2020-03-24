@@ -811,6 +811,8 @@ module Aws::Athena
 
     # Provides a list of available query IDs only for queries saved in the
     # specified workgroup. Requires that you have access to the workgroup.
+    # If a workgroup is not specified, lists the saved queries for the
+    # primary workgroup.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -827,8 +829,9 @@ module Aws::Athena
     #   The maximum number of queries to return in this request.
     #
     # @option params [String] :work_group
-    #   The name of the workgroup from which the named queries are being
-    #   returned.
+    #   The name of the workgroup from which the named queries are returned.
+    #   If a workgroup is not specified, the saved queries for the primary
+    #   workgroup are returned.
     #
     # @return [Types::ListNamedQueriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -861,8 +864,9 @@ module Aws::Athena
     end
 
     # Provides a list of available query execution IDs for the queries in
-    # the specified workgroup. Requires you to have access to the workgroup
-    # in which the queries ran.
+    # the specified workgroup. If a workgroup is not specified, returns a
+    # list of query execution IDs for the primary workgroup. Requires you to
+    # have access to the workgroup in which the queries ran.
     #
     # For code samples using the AWS SDK for Java, see [Examples and Code
     # Samples][1] in the *Amazon Athena User Guide*.
@@ -879,7 +883,9 @@ module Aws::Athena
     #   The maximum number of query executions to return in this request.
     #
     # @option params [String] :work_group
-    #   The name of the workgroup from which queries are being returned.
+    #   The name of the workgroup from which queries are returned. If a
+    #   workgroup is not specified, a list of available query execution IDs
+    #   for the queries in the primary workgroup is returned.
     #
     # @return [Types::ListQueryExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1248,7 +1254,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

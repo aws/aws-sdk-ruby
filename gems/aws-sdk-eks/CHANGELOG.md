@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-03-24)
+------------------
+
+* Feature - Adding new error codes: Ec2SubnetInvalidConfiguration and NodeCreationFailure for Nodegroups in EKS
+
 1.34.0 (2020-03-23)
 ------------------
 

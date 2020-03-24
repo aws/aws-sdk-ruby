@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-03-24)
+------------------
+
+* Feature - Introduces actions for giving a member account administrative Organizations permissions for an AWS service. You can run this action only for AWS services that support this feature.
+
 1.37.0 (2020-03-09)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-03-24)
+------------------
+
+* Feature - Documentation updates for Athena, including QueryExecutionStatus QUEUED and RUNNING states. QUEUED now indicates that the query has been submitted to the service. RUNNING indicates that the query is in execution phase.
+
 1.23.0 (2020-03-09)
 ------------------
 

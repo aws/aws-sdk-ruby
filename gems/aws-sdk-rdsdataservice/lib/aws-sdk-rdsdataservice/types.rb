@@ -124,7 +124,18 @@ module Aws::RDSDataService
     # @!attribute [rw] parameter_sets
     #   The parameter set for the batch operation.
     #
-    #   The maximum number of parameters in a parameter set is 1,000.
+    #   The SQL statement is executed as many times as the number of
+    #   parameter sets provided. To execute a SQL statement with no
+    #   parameters, use one of the following options:
+    #
+    #   * Specify one or more empty parameter sets.
+    #
+    #   * Use the `ExecuteStatement` operation instead of the
+    #     `BatchExecuteStatement` operation.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
     #   @return [Array<Array<Types::SqlParameter>>]
     #
     # @!attribute [rw] resource_arn
@@ -487,6 +498,10 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] parameters
     #   The parameters for the SQL statement.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
     #   @return [Array<Types::SqlParameter>]
     #
     # @!attribute [rw] resource_arn

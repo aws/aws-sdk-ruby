@@ -832,7 +832,7 @@ module Aws::EKS
     #   resp.nodegroup.resources.remote_access_security_group #=> String
     #   resp.nodegroup.disk_size #=> Integer
     #   resp.nodegroup.health.issues #=> Array
-    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "Ec2SubnetInvalidConfiguration", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "NodeCreationFailure", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
@@ -1039,7 +1039,7 @@ module Aws::EKS
     #   resp.nodegroup.resources.remote_access_security_group #=> String
     #   resp.nodegroup.disk_size #=> Integer
     #   resp.nodegroup.health.issues #=> Array
-    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "Ec2SubnetInvalidConfiguration", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "NodeCreationFailure", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
@@ -1262,7 +1262,7 @@ module Aws::EKS
     #   resp.nodegroup.resources.remote_access_security_group #=> String
     #   resp.nodegroup.disk_size #=> Integer
     #   resp.nodegroup.health.issues #=> Array
-    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "Ec2SubnetInvalidConfiguration", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "NodeCreationFailure", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
@@ -1461,8 +1461,9 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the Amazon EKS node groups associated with the specified cluster
-    # in your AWS account in the specified Region.
+    # Lists the Amazon EKS managed node groups associated with the specified
+    # cluster in your AWS account in the specified Region. Self-managed node
+    # groups are not listed.
     #
     # @option params [required, String] :cluster_name
     #   The name of the Amazon EKS cluster that you would like to list node
@@ -2054,7 +2055,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
