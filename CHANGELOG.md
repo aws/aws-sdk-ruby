@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.475 (2020-03-24)
+------------------
+
 * Feature - Aws::Athena - Updated the documentation for Amazon Athena.
 
 * Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
