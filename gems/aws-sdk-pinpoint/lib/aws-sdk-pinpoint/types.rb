@@ -7049,18 +7049,10 @@ module Aws::Pinpoint
     #   to.
     #
     #   For a Kinesis data stream, the ARN format is:
-    #   arn:aws:kinesis:<replaceable>region</replaceable>
-    #
-    #   \:<replaceable>account-id</replaceable>
-    #
-    #   \:stream/<replaceable>stream_name</replaceable>
+    #   arn:aws:kinesis:*region*\:*account-id*\:stream/*stream\_name*
     #
     #   For a Kinesis Data Firehose delivery stream, the ARN format is:
-    #   arn:aws:firehose:<replaceable>region</replaceable>
-    #
-    #   \:<replaceable>account-id</replaceable>
-    #
-    #   \:deliverystream/<replaceable>stream_name</replaceable>
+    #   arn:aws:firehose:*region*\:*account-id*\:deliverystream/*stream\_name*
     #   @return [String]
     #
     # @!attribute [rw] external_id
@@ -7313,11 +7305,7 @@ module Aws::Pinpoint
     #   S3) bucket where you want to export endpoint definitions to. This
     #   location is typically a folder that contains multiple files. The URL
     #   should be in the following format:
-    #   s3://<replaceable>bucket-name</replaceable>
-    #
-    #   /<replaceable>folder-name</replaceable>
-    #
-    #   /.
+    #   s3://*bucket-name*/*folder-name*/.
     #   @return [String]
     #
     # @!attribute [rw] segment_id
@@ -7359,11 +7347,7 @@ module Aws::Pinpoint
     #   S3) bucket where the endpoint definitions were exported to. This
     #   location is typically a folder that contains multiple files. The URL
     #   should be in the following format:
-    #   s3://<replaceable>bucket-name</replaceable>
-    #
-    #   /<replaceable>folder-name</replaceable>
-    #
-    #   /.
+    #   s3://*bucket-name*/*folder-name*/.
     #   @return [String]
     #
     # @!attribute [rw] segment_id
@@ -9565,14 +9549,9 @@ module Aws::Pinpoint
     #   location, including any subfolders that the folder contains.
     #
     #   The URL should be in the following format:
-    #   s3://<replaceable>bucket-name</replaceable>
-    #
-    #   /<replaceable>folder-name</replaceable>
-    #
-    #   /<replaceable>file-name</replaceable>
-    #
-    #   . The location can end with the key for an individual object or a
-    #   prefix that qualifies multiple objects.
+    #   s3://*bucket-name*/*folder-name*/*file-name*. The location can end
+    #   with the key for an individual object or a prefix that qualifies
+    #   multiple objects.
     #   @return [String]
     #
     # @!attribute [rw] segment_id
@@ -9648,14 +9627,9 @@ module Aws::Pinpoint
     #   location, including any subfolders that the folder contains.
     #
     #   The URL should be in the following format:
-    #   s3://<replaceable>bucket-name</replaceable>
-    #
-    #   /<replaceable>folder-name</replaceable>
-    #
-    #   /<replaceable>file-name</replaceable>
-    #
-    #   . The location can end with the key for an individual object or a
-    #   prefix that qualifies multiple objects.
+    #   s3://*bucket-name*/*folder-name*/*file-name*. The location can end
+    #   with the key for an individual object or a prefix that qualifies
+    #   multiple objects.
     #   @return [String]
     #
     # @!attribute [rw] segment_id
@@ -17981,18 +17955,10 @@ module Aws::Pinpoint
     #   publish event data to.
     #
     #   For a Kinesis data stream, the ARN format is:
-    #   arn:aws:kinesis:<replaceable>region</replaceable>
-    #
-    #   \:<replaceable>account-id</replaceable>
-    #
-    #   \:stream/<replaceable>stream_name</replaceable>
+    #   arn:aws:kinesis:*region*\:*account-id*\:stream/*stream\_name*
     #
     #   For a Kinesis Data Firehose delivery stream, the ARN format is:
-    #   arn:aws:firehose:<replaceable>region</replaceable>
-    #
-    #   \:<replaceable>account-id</replaceable>
-    #
-    #   \:deliverystream/<replaceable>stream_name</replaceable>
+    #   arn:aws:firehose:*region*\:*account-id*\:deliverystream/*stream\_name*
     #   @return [String]
     #
     # @!attribute [rw] role_arn

@@ -222,16 +222,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). ForREQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -804,16 +798,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -1314,16 +1302,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -4880,16 +4861,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -5061,11 +5035,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] issuer
     #   The base domain of the identity provider that issues JSON Web
     #   Tokens. For example, an Amazon Cognito user pool has the following
-    #   format: https://cognito-idp.<replaceable>\{region\}</replaceable>
-    #
-    #   .amazonaws.com/<replaceable>\{userPoolId\}</replaceable>
-    #
-    #    . Required for the JWT authorizer type. Supported only for HTTP
+    #   format:
+    #   https://cognito-idp.*\\\{region\\}*.amazonaws.com/*\\\{userPoolId\\}*
+    #   . Required for the JWT authorizer type. Supported only for HTTP
     #   APIs.
     #   @return [String]
     #
@@ -6132,16 +6104,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -6621,16 +6587,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -6966,21 +6925,13 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.<replaceable>\{name\}</replaceable>
-    #
-    #    , where name is a valid and unique header name. The mapped
-    #   non-static value must match the pattern of
-    #   integration.response.header.<replaceable>\{name\}</replaceable>
-    #
-    #    or
-    #   integration.response.body.<replaceable>\{JSON-expression\}</replaceable>
-    #
-    #    , where <replaceable>\{name\}</replaceable>
-    #
-    #    is a valid and unique response header name and
-    #   <replaceable>\{JSON-expression\}</replaceable>
-    #
-    #    is a valid JSON expression without the $ prefix.
+    #   method.response.header.*\\\{name\\}* , where name is a valid and
+    #   unique header name. The mapped non-static value must match the
+    #   pattern of integration.response.header.*\\\{name\\}* or
+    #   integration.response.body.*\\\{JSON-expression\\}* , where
+    #   *\\\{name\\}* is a valid and unique response header name and
+    #   *\\\{JSON-expression\\}* is a valid JSON expression without the $
+    #   prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates

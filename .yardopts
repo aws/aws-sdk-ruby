@@ -7,6 +7,5 @@
 --plugin sitemap
 --asset doc-src/images:images
 --exclude \/client_api.rb$
---no-progress
 -e doc-src/plugins/service_tag.rb
 gems/**/lib/**/*.rb
