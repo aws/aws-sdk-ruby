@@ -327,6 +327,11 @@ module Aws::ApplicationInsights
     #   When set to `true`, creates opsItems for any problems detected on an
     #   application.
     #
+    # @option params [Boolean] :cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch events
+    #   for the application resources, such as `instance terminated`, `failed
+    #   deployment`, and others.
+    #
     # @option params [String] :ops_item_sns_topic_arn
     #   The SNS topic provided to Application Insights that is associated to
     #   the created opsItem. Allows you to receive notifications for updates
@@ -346,6 +351,7 @@ module Aws::ApplicationInsights
     #   resp = client.create_application({
     #     resource_group_name: "ResourceGroupName", # required
     #     ops_center_enabled: false,
+    #     cwe_monitor_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #     tags: [
     #       {
@@ -361,6 +367,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplication AWS API Documentation
@@ -554,6 +561,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplication AWS API Documentation
@@ -749,6 +757,27 @@ module Aws::ApplicationInsights
     #   resp.observation.metric_name #=> String
     #   resp.observation.unit #=> String
     #   resp.observation.value #=> Float
+    #   resp.observation.cloud_watch_event_id #=> String
+    #   resp.observation.cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH"
+    #   resp.observation.cloud_watch_event_detail_type #=> String
+    #   resp.observation.health_event_arn #=> String
+    #   resp.observation.health_service #=> String
+    #   resp.observation.health_event_type_code #=> String
+    #   resp.observation.health_event_type_category #=> String
+    #   resp.observation.health_event_description #=> String
+    #   resp.observation.code_deploy_deployment_id #=> String
+    #   resp.observation.code_deploy_deployment_group #=> String
+    #   resp.observation.code_deploy_state #=> String
+    #   resp.observation.code_deploy_application #=> String
+    #   resp.observation.code_deploy_instance_group_id #=> String
+    #   resp.observation.ec2_state #=> String
+    #   resp.observation.x_ray_fault_percent #=> Integer
+    #   resp.observation.x_ray_throttle_percent #=> Integer
+    #   resp.observation.x_ray_error_percent #=> Integer
+    #   resp.observation.x_ray_request_count #=> Integer
+    #   resp.observation.x_ray_request_average_latency #=> Integer
+    #   resp.observation.x_ray_node_name #=> String
+    #   resp.observation.x_ray_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeObservation AWS API Documentation
     #
@@ -828,6 +857,27 @@ module Aws::ApplicationInsights
     #   resp.related_observations.observation_list[0].metric_name #=> String
     #   resp.related_observations.observation_list[0].unit #=> String
     #   resp.related_observations.observation_list[0].value #=> Float
+    #   resp.related_observations.observation_list[0].cloud_watch_event_id #=> String
+    #   resp.related_observations.observation_list[0].cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH"
+    #   resp.related_observations.observation_list[0].cloud_watch_event_detail_type #=> String
+    #   resp.related_observations.observation_list[0].health_event_arn #=> String
+    #   resp.related_observations.observation_list[0].health_service #=> String
+    #   resp.related_observations.observation_list[0].health_event_type_code #=> String
+    #   resp.related_observations.observation_list[0].health_event_type_category #=> String
+    #   resp.related_observations.observation_list[0].health_event_description #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_deployment_id #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_deployment_group #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_state #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_application #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_instance_group_id #=> String
+    #   resp.related_observations.observation_list[0].ec2_state #=> String
+    #   resp.related_observations.observation_list[0].x_ray_fault_percent #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_throttle_percent #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_error_percent #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_request_count #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_request_average_latency #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_node_name #=> String
+    #   resp.related_observations.observation_list[0].x_ray_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblemObservations AWS API Documentation
     #
@@ -869,6 +919,7 @@ module Aws::ApplicationInsights
     #   resp.application_info_list[0].life_cycle #=> String
     #   resp.application_info_list[0].ops_item_sns_topic_arn #=> String
     #   resp.application_info_list[0].ops_center_enabled #=> Boolean
+    #   resp.application_info_list[0].cwe_monitor_enabled #=> Boolean
     #   resp.application_info_list[0].remarks #=> String
     #   resp.next_token #=> String
     #
@@ -1292,6 +1343,11 @@ module Aws::ApplicationInsights
     #   When set to `true`, creates opsItems for any problems detected on an
     #   application.
     #
+    # @option params [Boolean] :cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch events
+    #   for the application resources, such as `instance terminated`, `failed
+    #   deployment`, and others.
+    #
     # @option params [String] :ops_item_sns_topic_arn
     #   The SNS topic provided to Application Insights that is associated to
     #   the created opsItem. Allows you to receive notifications for updates
@@ -1310,6 +1366,7 @@ module Aws::ApplicationInsights
     #   resp = client.update_application({
     #     resource_group_name: "ResourceGroupName", # required
     #     ops_center_enabled: false,
+    #     cwe_monitor_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #     remove_sns_topic: false,
     #   })
@@ -1320,6 +1377,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplication AWS API Documentation
@@ -1481,7 +1539,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

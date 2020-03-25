@@ -25,7 +25,9 @@ module Aws::ElasticsearchService
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {AccessDeniedException}
   # * {BaseException}
+  # * {ConflictException}
   # * {DisabledOperationException}
   # * {InternalException}
   # * {InvalidTypeException}
@@ -40,6 +42,16 @@ module Aws::ElasticsearchService
 
     extend Aws::Errors::DynamicErrors
 
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticsearchService::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class BaseException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -52,6 +64,16 @@ module Aws::ElasticsearchService
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticsearchService::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
     end
 

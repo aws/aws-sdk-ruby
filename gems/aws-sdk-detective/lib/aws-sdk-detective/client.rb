@@ -347,6 +347,13 @@ module Aws::Detective
     # account as the master account. This operation is called by the account
     # that is enabling Detective.
     #
+    # Before you try to enable Detective, make sure that your account has
+    # been enrolled in Amazon GuardDuty for at least 48 hours. If you do not
+    # meet this requirement, you cannot enable Detective. If you do meet the
+    # GuardDuty prerequisite, then when you make the request to enable
+    # Detective, it checks whether your data volume is within the Detective
+    # quota. If it exceeds the quota, then you cannot enable Detective.
+    #
     # The operation also enables Detective for the calling account in the
     # currently selected Region. It returns the ARN of the new behavior
     # graph.
@@ -437,9 +444,12 @@ module Aws::Detective
     #   resp.members[0].email_address #=> String
     #   resp.members[0].graph_arn #=> String
     #   resp.members[0].master_id #=> String
-    #   resp.members[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.members[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.members[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.members[0].invited_time #=> Time
     #   resp.members[0].updated_time #=> Time
+    #   resp.members[0].percent_of_graph_utilization #=> Float
+    #   resp.members[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -589,9 +599,12 @@ module Aws::Detective
     #   resp.member_details[0].email_address #=> String
     #   resp.member_details[0].graph_arn #=> String
     #   resp.member_details[0].master_id #=> String
-    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
     #   resp.member_details[0].updated_time #=> Time
+    #   resp.member_details[0].percent_of_graph_utilization #=> Float
+    #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -698,9 +711,12 @@ module Aws::Detective
     #   resp.invitations[0].email_address #=> String
     #   resp.invitations[0].graph_arn #=> String
     #   resp.invitations[0].master_id #=> String
-    #   resp.invitations[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.invitations[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.invitations[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.invitations[0].invited_time #=> Time
     #   resp.invitations[0].updated_time #=> Time
+    #   resp.invitations[0].percent_of_graph_utilization #=> Float
+    #   resp.invitations[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvitations AWS API Documentation
@@ -753,9 +769,12 @@ module Aws::Detective
     #   resp.member_details[0].email_address #=> String
     #   resp.member_details[0].graph_arn #=> String
     #   resp.member_details[0].master_id #=> String
-    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
     #   resp.member_details[0].updated_time #=> Time
+    #   resp.member_details[0].percent_of_graph_utilization #=> Float
+    #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListMembers AWS API Documentation
@@ -796,6 +815,44 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Sends a request to enable data ingest for a member account that has a
+    # status of `ACCEPTED_BUT_DISABLED`.
+    #
+    # For valid member accounts, the status is updated as follows.
+    #
+    # * If Detective enabled the member account, then the new status is
+    #   `ENABLED`.
+    #
+    # * If Detective cannot enable the member account, the status remains
+    #   `ACCEPTED_BUT_DISABLED`.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the behavior graph.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the member account to try to enable.
+    #
+    #   The account must be an invited member account with a status of
+    #   `ACCEPTED_BUT_DISABLED`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_monitoring_member({
+    #     graph_arn: "GraphArn", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StartMonitoringMember AWS API Documentation
+    #
+    # @overload start_monitoring_member(params = {})
+    # @param [Hash] params ({})
+    def start_monitoring_member(params = {}, options = {})
+      req = build_request(:start_monitoring_member, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -809,7 +866,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

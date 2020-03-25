@@ -1163,6 +1163,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].exceptions[0].message #=> String
     #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].fault_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].fault_root_causes[0].client_impacting #=> Boolean
     #   resp.trace_summaries[0].error_root_causes #=> Array
     #   resp.trace_summaries[0].error_root_causes[0].services #=> Array
     #   resp.trace_summaries[0].error_root_causes[0].services[0].name #=> String
@@ -1177,6 +1178,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].exceptions[0].message #=> String
     #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].error_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].error_root_causes[0].client_impacting #=> Boolean
     #   resp.trace_summaries[0].response_time_root_causes #=> Array
     #   resp.trace_summaries[0].response_time_root_causes[0].services #=> Array
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].name #=> String
@@ -1189,6 +1191,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].coverage #=> Float
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].response_time_root_causes[0].client_impacting #=> Boolean
     #   resp.trace_summaries[0].revision #=> Integer
     #   resp.trace_summaries[0].matched_event_time #=> Time
     #   resp.approximate_time #=> Time
@@ -1491,7 +1494,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -78,6 +78,15 @@ module Aws::ManagedBlockchain
     #               admin_password: "PasswordString", # required
     #             },
     #           },
+    #           log_publishing_configuration: {
+    #             fabric: {
+    #               ca_logs: {
+    #                 cloudwatch: {
+    #                   enabled: false,
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -154,6 +163,15 @@ module Aws::ManagedBlockchain
     #             fabric: {
     #               admin_username: "UsernameString", # required
     #               admin_password: "PasswordString", # required
+    #             },
+    #           },
+    #           log_publishing_configuration: {
+    #             fabric: {
+    #               ca_logs: {
+    #                 cloudwatch: {
+    #                   enabled: false,
+    #                 },
+    #               },
     #             },
     #           },
     #         },
@@ -240,6 +258,20 @@ module Aws::ManagedBlockchain
     #         node_configuration: { # required
     #           instance_type: "InstanceTypeString", # required
     #           availability_zone: "AvailabilityZoneString", # required
+    #           log_publishing_configuration: {
+    #             fabric: {
+    #               chaincode_logs: {
+    #                 cloudwatch: {
+    #                   enabled: false,
+    #                 },
+    #               },
+    #               peer_logs: {
+    #                 cloudwatch: {
+    #                   enabled: false,
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -720,7 +752,7 @@ module Aws::ManagedBlockchain
     #       {
     #         network_id: "ResourceIdString", # required
     #         name: "String",
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED
+    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED
     #         is_owned: false,
     #         max_results: 1,
     #         next_token: "PaginationToken",
@@ -854,7 +886,7 @@ module Aws::ManagedBlockchain
     #       {
     #         network_id: "ResourceIdString", # required
     #         member_id: "ResourceIdString", # required
-    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED, FAILED
+    #         status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
     #         max_results: 1,
     #         next_token: "PaginationToken",
     #       }
@@ -1012,6 +1044,48 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # A configuration for logging events.
+    #
+    # @note When making an API call, you may pass LogConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether logging is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/LogConfiguration AWS API Documentation
+    #
+    class LogConfiguration < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # A collection of log configurations.
+    #
+    # @note When making an API call, you may pass LogConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         cloudwatch: {
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloudwatch
+    #   Parameters for publishing logs to Amazon CloudWatch Logs.
+    #   @return [Types::LogConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/LogConfigurations AWS API Documentation
+    #
+    class LogConfigurations < Struct.new(
+      :cloudwatch)
+      include Aws::Structure
+    end
+
     # Member configuration properties.
     #
     # @!attribute [rw] network_id
@@ -1034,6 +1108,11 @@ module Aws::ManagedBlockchain
     #   Attributes relevant to a member for the blockchain framework that
     #   the Managed Blockchain network uses.
     #   @return [Types::MemberFrameworkAttributes]
+    #
+    # @!attribute [rw] log_publishing_configuration
+    #   Configuration properties for logging events associated with a
+    #   member.
+    #   @return [Types::MemberLogPublishingConfiguration]
     #
     # @!attribute [rw] status
     #   The status of a member.
@@ -1070,6 +1149,7 @@ module Aws::ManagedBlockchain
       :name,
       :description,
       :framework_attributes,
+      :log_publishing_configuration,
       :status,
       :creation_date)
       include Aws::Structure
@@ -1089,6 +1169,15 @@ module Aws::ManagedBlockchain
     #             admin_password: "PasswordString", # required
     #           },
     #         },
+    #         log_publishing_configuration: {
+    #           fabric: {
+    #             ca_logs: {
+    #               cloudwatch: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1104,12 +1193,16 @@ module Aws::ManagedBlockchain
     #   member.
     #   @return [Types::MemberFrameworkConfiguration]
     #
+    # @!attribute [rw] log_publishing_configuration
+    #   @return [Types::MemberLogPublishingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberConfiguration AWS API Documentation
     #
     class MemberConfiguration < Struct.new(
       :name,
       :description,
-      :framework_configuration)
+      :framework_configuration,
+      :log_publishing_configuration)
       include Aws::Structure
     end
 
@@ -1164,6 +1257,35 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # Configuration properties for logging events associated with a member
+    # of a Managed Blockchain network using the Hyperledger Fabric
+    # framework.
+    #
+    # @note When making an API call, you may pass MemberFabricLogPublishingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         ca_logs: {
+    #           cloudwatch: {
+    #             enabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ca_logs
+    #   Configuration properties for logging events associated with a
+    #   member's Certificate Authority (CA). CA logs help you determine
+    #   when a member in your account joins the network, or when new peers
+    #   register with a member CA.
+    #   @return [Types::LogConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFabricLogPublishingConfiguration AWS API Documentation
+    #
+    class MemberFabricLogPublishingConfiguration < Struct.new(
+      :ca_logs)
+      include Aws::Structure
+    end
+
     # Attributes relevant to a member for the blockchain framework that the
     # Managed Blockchain network uses.
     #
@@ -1200,6 +1322,35 @@ module Aws::ManagedBlockchain
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberFrameworkConfiguration AWS API Documentation
     #
     class MemberFrameworkConfiguration < Struct.new(
+      :fabric)
+      include Aws::Structure
+    end
+
+    # Configuration properties for logging events associated with a member
+    # of a Managed Blockchain network.
+    #
+    # @note When making an API call, you may pass MemberLogPublishingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         fabric: {
+    #           ca_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fabric
+    #   Configuration properties for logging events associated with a member
+    #   of a Managed Blockchain network using the Hyperledger Fabric
+    #   framework.
+    #   @return [Types::MemberFabricLogPublishingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/MemberLogPublishingConfiguration AWS API Documentation
+    #
+    class MemberLogPublishingConfiguration < Struct.new(
       :fabric)
       include Aws::Structure
     end
@@ -1336,7 +1487,7 @@ module Aws::ManagedBlockchain
     #
     #
     #
-    #   [1]: https://aws.amazon.com/managed-blockchain/pricing/
+    #   [1]: http://aws.amazon.com/managed-blockchain/pricing/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFabricAttributes AWS API Documentation
@@ -1362,7 +1513,7 @@ module Aws::ManagedBlockchain
     #
     #
     #
-    #   [1]: https://aws.amazon.com/managed-blockchain/pricing/
+    #   [1]: http://aws.amazon.com/managed-blockchain/pricing/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkFabricConfiguration AWS API Documentation
@@ -1480,6 +1631,9 @@ module Aws::ManagedBlockchain
     #   Attributes of the blockchain framework being used.
     #   @return [Types::NodeFrameworkAttributes]
     #
+    # @!attribute [rw] log_publishing_configuration
+    #   @return [Types::NodeLogPublishingConfiguration]
+    #
     # @!attribute [rw] status
     #   The status of the node.
     #   @return [String]
@@ -1497,6 +1651,7 @@ module Aws::ManagedBlockchain
       :instance_type,
       :availability_zone,
       :framework_attributes,
+      :log_publishing_configuration,
       :status,
       :creation_date)
       include Aws::Structure
@@ -1510,6 +1665,20 @@ module Aws::ManagedBlockchain
     #       {
     #         instance_type: "InstanceTypeString", # required
     #         availability_zone: "AvailabilityZoneString", # required
+    #         log_publishing_configuration: {
+    #           fabric: {
+    #             chaincode_logs: {
+    #               cloudwatch: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #             peer_logs: {
+    #               cloudwatch: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] instance_type
@@ -1520,11 +1689,15 @@ module Aws::ManagedBlockchain
     #   The Availability Zone in which the node exists.
     #   @return [String]
     #
+    # @!attribute [rw] log_publishing_configuration
+    #   @return [Types::NodeLogPublishingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeConfiguration AWS API Documentation
     #
     class NodeConfiguration < Struct.new(
       :instance_type,
-      :availability_zone)
+      :availability_zone,
+      :log_publishing_configuration)
       include Aws::Structure
     end
 
@@ -1549,6 +1722,49 @@ module Aws::ManagedBlockchain
       include Aws::Structure
     end
 
+    # Configuration properties for logging events associated with a peer
+    # node owned by a member in a Managed Blockchain network.
+    #
+    # @note When making an API call, you may pass NodeFabricLogPublishingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         chaincode_logs: {
+    #           cloudwatch: {
+    #             enabled: false,
+    #           },
+    #         },
+    #         peer_logs: {
+    #           cloudwatch: {
+    #             enabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] chaincode_logs
+    #   Configuration properties for logging events associated with
+    #   chaincode execution on a peer node. Chaincode logs contain the
+    #   results of instantiating, invoking, and querying the chaincode. A
+    #   peer can run multiple instances of chaincode. When enabled, a log
+    #   stream is created for all chaincodes, with an individual log stream
+    #   for each chaincode.
+    #   @return [Types::LogConfigurations]
+    #
+    # @!attribute [rw] peer_logs
+    #   Configuration properties for a peer node log. Peer node logs contain
+    #   messages generated when your client submits transaction proposals to
+    #   peer nodes, requests to join channels, enrolls an admin peer, and
+    #   lists the chaincode instances on a peer node.
+    #   @return [Types::LogConfigurations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFabricLogPublishingConfiguration AWS API Documentation
+    #
+    class NodeFabricLogPublishingConfiguration < Struct.new(
+      :chaincode_logs,
+      :peer_logs)
+      include Aws::Structure
+    end
+
     # Attributes relevant to a peer node on a Managed Blockchain network for
     # the blockchain framework that the network uses.
     #
@@ -1560,6 +1776,40 @@ module Aws::ManagedBlockchain
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeFrameworkAttributes AWS API Documentation
     #
     class NodeFrameworkAttributes < Struct.new(
+      :fabric)
+      include Aws::Structure
+    end
+
+    # Configuration properties for logging events associated with a peer
+    # node owned by a member in a Managed Blockchain network.
+    #
+    # @note When making an API call, you may pass NodeLogPublishingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         fabric: {
+    #           chaincode_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           peer_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fabric
+    #   Configuration properties for logging events associated with a node
+    #   that is owned by a member of a Managed Blockchain network using the
+    #   Hyperledger Fabric framework.
+    #   @return [Types::NodeFabricLogPublishingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NodeLogPublishingConfiguration AWS API Documentation
+    #
+    class NodeLogPublishingConfiguration < Struct.new(
       :fabric)
       include Aws::Structure
     end
@@ -1643,7 +1893,8 @@ module Aws::ManagedBlockchain
     #
     #   * `ACTION_FAILED` - One or more of the specified `ProposalActions`
     #     in a proposal that was approved could not be completed because of
-    #     an error.
+    #     an error. The `ACTION_FAILED` status occurs even if only one
+    #     ProposalAction fails and other actions are successful.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1900,6 +2151,103 @@ module Aws::ManagedBlockchain
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateMemberInput
+    #   data as a hash:
+    #
+    #       {
+    #         network_id: "ResourceIdString", # required
+    #         member_id: "ResourceIdString", # required
+    #         log_publishing_configuration: {
+    #           fabric: {
+    #             ca_logs: {
+    #               cloudwatch: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] network_id
+    #   The unique ID of the Managed Blockchain network to which the member
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The unique ID of the member.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_publishing_configuration
+    #   Configuration properties for publishing to Amazon CloudWatch Logs.
+    #   @return [Types::MemberLogPublishingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateMemberInput AWS API Documentation
+    #
+    class UpdateMemberInput < Struct.new(
+      :network_id,
+      :member_id,
+      :log_publishing_configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateMemberOutput AWS API Documentation
+    #
+    class UpdateMemberOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateNodeInput
+    #   data as a hash:
+    #
+    #       {
+    #         network_id: "ResourceIdString", # required
+    #         member_id: "ResourceIdString", # required
+    #         node_id: "ResourceIdString", # required
+    #         log_publishing_configuration: {
+    #           fabric: {
+    #             chaincode_logs: {
+    #               cloudwatch: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #             peer_logs: {
+    #               cloudwatch: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] network_id
+    #   The unique ID of the Managed Blockchain network to which the node
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_id
+    #   The unique ID of the member that owns the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique ID of the node.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_publishing_configuration
+    #   Configuration properties for publishing to Amazon CloudWatch Logs.
+    #   @return [Types::NodeLogPublishingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateNodeInput AWS API Documentation
+    #
+    class UpdateNodeInput < Struct.new(
+      :network_id,
+      :member_id,
+      :node_id,
+      :log_publishing_configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateNodeOutput AWS API Documentation
+    #
+    class UpdateNodeOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass VoteOnProposalInput
     #   data as a hash:

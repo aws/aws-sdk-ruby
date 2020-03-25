@@ -349,6 +349,15 @@ module Aws::ManagedBlockchain
     #           admin_password: "PasswordString", # required
     #         },
     #       },
+    #       log_publishing_configuration: {
+    #         fabric: {
+    #           ca_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -434,6 +443,15 @@ module Aws::ManagedBlockchain
     #           admin_password: "PasswordString", # required
     #         },
     #       },
+    #       log_publishing_configuration: {
+    #         fabric: {
+    #           ca_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -485,6 +503,20 @@ module Aws::ManagedBlockchain
     #     node_configuration: { # required
     #       instance_type: "InstanceTypeString", # required
     #       availability_zone: "AvailabilityZoneString", # required
+    #       log_publishing_configuration: {
+    #         fabric: {
+    #           chaincode_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           peer_logs: {
+    #             cloudwatch: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -662,7 +694,8 @@ module Aws::ManagedBlockchain
     #   resp.member.description #=> String
     #   resp.member.framework_attributes.fabric.admin_username #=> String
     #   resp.member.framework_attributes.fabric.ca_endpoint #=> String
-    #   resp.member.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
+    #   resp.member.log_publishing_configuration.fabric.ca_logs.cloudwatch.enabled #=> Boolean
+    #   resp.member.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED"
     #   resp.member.creation_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetMember AWS API Documentation
@@ -746,7 +779,9 @@ module Aws::ManagedBlockchain
     #   resp.node.availability_zone #=> String
     #   resp.node.framework_attributes.fabric.peer_endpoint #=> String
     #   resp.node.framework_attributes.fabric.peer_event_endpoint #=> String
-    #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED", "FAILED"
+    #   resp.node.log_publishing_configuration.fabric.chaincode_logs.cloudwatch.enabled #=> Boolean
+    #   resp.node.log_publishing_configuration.fabric.peer_logs.cloudwatch.enabled #=> Boolean
+    #   resp.node.status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.node.creation_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/GetNode AWS API Documentation
@@ -889,7 +924,7 @@ module Aws::ManagedBlockchain
     #   resp = client.list_members({
     #     network_id: "ResourceIdString", # required
     #     name: "String",
-    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED
+    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED
     #     is_owned: false,
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -901,7 +936,7 @@ module Aws::ManagedBlockchain
     #   resp.members[0].id #=> String
     #   resp.members[0].name #=> String
     #   resp.members[0].description #=> String
-    #   resp.members[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED"
+    #   resp.members[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED"
     #   resp.members[0].creation_date #=> Time
     #   resp.members[0].is_owned #=> Boolean
     #   resp.next_token #=> String
@@ -1005,7 +1040,7 @@ module Aws::ManagedBlockchain
     #   resp = client.list_nodes({
     #     network_id: "ResourceIdString", # required
     #     member_id: "ResourceIdString", # required
-    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, DELETING, DELETED, FAILED
+    #     status: "CREATING", # accepts CREATING, AVAILABLE, CREATE_FAILED, UPDATING, DELETING, DELETED, FAILED
     #     max_results: 1,
     #     next_token: "PaginationToken",
     #   })
@@ -1014,7 +1049,7 @@ module Aws::ManagedBlockchain
     #
     #   resp.nodes #=> Array
     #   resp.nodes[0].id #=> String
-    #   resp.nodes[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "DELETING", "DELETED", "FAILED"
+    #   resp.nodes[0].status #=> String, one of "CREATING", "AVAILABLE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETED", "FAILED"
     #   resp.nodes[0].creation_date #=> Time
     #   resp.nodes[0].availability_zone #=> String
     #   resp.nodes[0].instance_type #=> String
@@ -1151,6 +1186,93 @@ module Aws::ManagedBlockchain
       req.send_request(options)
     end
 
+    # Updates a member configuration with new parameters.
+    #
+    # @option params [required, String] :network_id
+    #   The unique ID of the Managed Blockchain network to which the member
+    #   belongs.
+    #
+    # @option params [required, String] :member_id
+    #   The unique ID of the member.
+    #
+    # @option params [Types::MemberLogPublishingConfiguration] :log_publishing_configuration
+    #   Configuration properties for publishing to Amazon CloudWatch Logs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_member({
+    #     network_id: "ResourceIdString", # required
+    #     member_id: "ResourceIdString", # required
+    #     log_publishing_configuration: {
+    #       fabric: {
+    #         ca_logs: {
+    #           cloudwatch: {
+    #             enabled: false,
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateMember AWS API Documentation
+    #
+    # @overload update_member(params = {})
+    # @param [Hash] params ({})
+    def update_member(params = {}, options = {})
+      req = build_request(:update_member, params)
+      req.send_request(options)
+    end
+
+    # Updates a node configuration with new parameters.
+    #
+    # @option params [required, String] :network_id
+    #   The unique ID of the Managed Blockchain network to which the node
+    #   belongs.
+    #
+    # @option params [required, String] :member_id
+    #   The unique ID of the member that owns the node.
+    #
+    # @option params [required, String] :node_id
+    #   The unique ID of the node.
+    #
+    # @option params [Types::NodeLogPublishingConfiguration] :log_publishing_configuration
+    #   Configuration properties for publishing to Amazon CloudWatch Logs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_node({
+    #     network_id: "ResourceIdString", # required
+    #     member_id: "ResourceIdString", # required
+    #     node_id: "ResourceIdString", # required
+    #     log_publishing_configuration: {
+    #       fabric: {
+    #         chaincode_logs: {
+    #           cloudwatch: {
+    #             enabled: false,
+    #           },
+    #         },
+    #         peer_logs: {
+    #           cloudwatch: {
+    #             enabled: false,
+    #           },
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/UpdateNode AWS API Documentation
+    #
+    # @overload update_node(params = {})
+    # @param [Hash] params ({})
+    def update_node(params = {}, options = {})
+      req = build_request(:update_node, params)
+      req.send_request(options)
+    end
+
     # Casts a vote for a specified `ProposalId` on behalf of a member. The
     # member to vote as, specified by `VoterMemberId`, must be in the same
     # AWS account as the principal that calls the action.
@@ -1200,7 +1322,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

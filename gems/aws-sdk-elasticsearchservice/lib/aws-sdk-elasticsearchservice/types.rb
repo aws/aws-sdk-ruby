@@ -8,6 +8,11 @@
 module Aws::ElasticsearchService
   module Types
 
+    # An error occurred because user does not have permissions to access the
+    # resource. Returns HTTP status code 403.
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # The configured access rules for the domain's document and search
     # endpoints, and the current status of those rules.
     #
@@ -191,6 +196,42 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for request parameters to ` AssociatePackage ` operation.
+    #
+    # @note When making an API call, you may pass AssociatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain that you want to associate the package with.
+    #   @return [String]
+    #
+    class AssociatePackageRequest < Struct.new(
+      :package_id,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` AssociatePackage ` operation.
+    #
+    # @!attribute [rw] domain_package_details
+    #   `DomainPackageDetails`
+    #   @return [Types::DomainPackageDetails]
+    #
+    class AssociatePackageResponse < Struct.new(
+      :domain_package_details)
+      include Aws::Structure
+    end
+
     # An error occurred while processing the request.
     #
     # @!attribute [rw] message
@@ -313,6 +354,11 @@ module Aws::ElasticsearchService
       :target_versions)
       include Aws::Structure
     end
+
+    # An error occurred because the client attempts to remove a resource
+    # that is currently in use. Returns HTTP status code 409.
+    #
+    class ConflictException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateElasticsearchDomainRequest
     #   data as a hash:
@@ -506,6 +552,56 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for request parameters to ` CreatePackage ` operation.
+    #
+    # @note When making an API call, you may pass CreatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_name: "PackageName", # required
+    #         package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
+    #         package_description: "PackageDescription",
+    #         package_source: { # required
+    #           s3_bucket_name: "S3BucketName",
+    #           s3_key: "S3Key",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] package_name
+    #   Unique identifier for the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   Type of package. Currently supports only TXT-DICTIONARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_description
+    #   Description of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_source
+    #   The customer S3 location `PackageSource` for importing the package.
+    #   @return [Types::PackageSource]
+    #
+    class CreatePackageRequest < Struct.new(
+      :package_name,
+      :package_type,
+      :package_description,
+      :package_source)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` CreatePackage ` operation.
+    #
+    # @!attribute [rw] package_details
+    #   Information about the package `PackageDetails`.
+    #   @return [Types::PackageDetails]
+    #
+    class CreatePackageResponse < Struct.new(
+      :package_details)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `DeleteElasticsearchDomain`
     # operation. Specifies the name of the Elasticsearch domain that you
     # want to delete.
@@ -537,6 +633,36 @@ module Aws::ElasticsearchService
     #
     class DeleteElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` DeletePackage ` operation.
+    #
+    # @note When making an API call, you may pass DeletePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to delete. Use
+    #   `DescribePackages` to find this value.
+    #   @return [String]
+    #
+    class DeletePackageRequest < Struct.new(
+      :package_id)
+      include Aws::Structure
+    end
+
+    # Container for response parameters to ` DeletePackage ` operation.
+    #
+    # @!attribute [rw] package_details
+    #   `PackageDetails`
+    #   @return [Types::PackageDetails]
+    #
+    class DeletePackageResponse < Struct.new(
+      :package_details)
       include Aws::Structure
     end
 
@@ -687,6 +813,83 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Filter to apply in `DescribePackage` response.
+    #
+    # @note When making an API call, you may pass DescribePackagesFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #         value: ["DescribePackagesFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Any field from `PackageDetails`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A list of values for the specified field.
+    #   @return [Array<String>]
+    #
+    class DescribePackagesFilter < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` DescribePackage ` operation.
+    #
+    # @note When making an API call, you may pass DescribePackagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #             value: ["DescribePackagesFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Only returns packages that match the `DescribePackagesFilterList`
+    #   values.
+    #   @return [Array<Types::DescribePackagesFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of packages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class DescribePackagesRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` DescribePackages ` operation.
+    #
+    # @!attribute [rw] package_details_list
+    #   List of `PackageDetails` objects.
+    #   @return [Array<Types::PackageDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class DescribePackagesResponse < Struct.new(
+      :package_details_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Container for parameters to
     # `DescribeReservedElasticsearchInstanceOfferings`
     #
@@ -794,6 +997,42 @@ module Aws::ElasticsearchService
     #
     class DisabledOperationException < Aws::EmptyStructure; end
 
+    # Container for request parameters to ` DissociatePackage ` operation.
+    #
+    # @note When making an API call, you may pass DissociatePackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain that you want to associate the package with.
+    #   @return [String]
+    #
+    class DissociatePackageRequest < Struct.new(
+      :package_id,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` DissociatePackage ` operation.
+    #
+    # @!attribute [rw] domain_package_details
+    #   `DomainPackageDetails`
+    #   @return [Types::DomainPackageDetails]
+    #
+    class DissociatePackageResponse < Struct.new(
+      :domain_package_details)
+      include Aws::Structure
+    end
+
     # Options to configure endpoint for the Elasticsearch domain.
     #
     # @note When making an API call, you may pass DomainEndpointOptions
@@ -849,6 +1088,55 @@ module Aws::ElasticsearchService
     #
     class DomainInfo < Struct.new(
       :domain_name)
+      include Aws::Structure
+    end
+
+    # Information on a package that is associated with a domain.
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_name
+    #   User specified name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   Currently supports only TXT-DICTIONARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   Timestamp of the most-recent update to the association status.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the domain you've associated a package with.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_package_status
+    #   State of the association. Values are
+    #   ASSOCIATING/ASSOCIATION\_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION\_FAILED.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_path
+    #   The relative path on Amazon ES nodes, which can be used as
+    #   synonym\_path when the package is synonym file.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_details
+    #   Additional information if the package is in an error state. Null
+    #   otherwise.
+    #   @return [Types::ErrorDetails]
+    #
+    class DomainPackageDetails < Struct.new(
+      :package_id,
+      :package_name,
+      :package_type,
+      :last_updated,
+      :domain_name,
+      :domain_package_status,
+      :reference_path,
+      :error_details)
       include Aws::Structure
     end
 
@@ -1327,6 +1615,18 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # @!attribute [rw] error_type
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    class ErrorDetails < Struct.new(
+      :error_type,
+      :error_message)
+      include Aws::Structure
+    end
+
     # Container for request parameters to `
     # GetCompatibleElasticsearchVersions ` operation.
     #
@@ -1552,6 +1852,55 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for request parameters to ` ListDomainsForPackage `
+    # operation.
+    #
+    # @note When making an API call, you may pass ListDomainsForPackageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         package_id: "PackageID", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] package_id
+    #   The package for which to list domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of domains.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class ListDomainsForPackageRequest < Struct.new(
+      :package_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response parameters to ` ListDomainsForPackage `
+    # operation.
+    #
+    # @!attribute [rw] domain_package_details_list
+    #   List of `DomainPackageDetails` objects.
+    #   @return [Array<Types::DomainPackageDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class ListDomainsForPackageResponse < Struct.new(
+      :domain_package_details_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the ` ListElasticsearchInstanceTypes `
     # operation.
     #
@@ -1664,6 +2013,58 @@ module Aws::ElasticsearchService
     #
     class ListElasticsearchVersionsResponse < Struct.new(
       :elasticsearch_versions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` ListPackagesForDomain `
+    # operation.
+    #
+    # @note When making an API call, you may pass ListPackagesForDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain for which you want to list associated
+    #   packages.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits results to a maximum number of packages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Used for pagination. Only necessary if a previous API call includes
+    #   a non-null NextToken value. If provided, returns results for the
+    #   next page.
+    #   @return [String]
+    #
+    class ListPackagesForDomainRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response parameters to ` ListPackagesForDomain `
+    # operation.
+    #
+    # @!attribute [rw] domain_package_details_list
+    #   List of `DomainPackageDetails` objects.
+    #   @return [Array<Types::DomainPackageDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token that needs to be supplied to the next call to get
+    #   the next page of results.
+    #   @return [String]
+    #
+    class ListPackagesForDomainResponse < Struct.new(
+      :domain_package_details_list,
       :next_token)
       include Aws::Structure
     end
@@ -1846,6 +2247,74 @@ module Aws::ElasticsearchService
       :update_version,
       :state,
       :pending_deletion)
+      include Aws::Structure
+    end
+
+    # Basic information about a package.
+    #
+    # @!attribute [rw] package_id
+    #   Internal ID of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_name
+    #   User specified name of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   Currently supports only TXT-DICTIONARY.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_description
+    #   User-specified description of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_status
+    #   Current state of the package. Values are
+    #   COPYING/COPY\_FAILED/AVAILABLE/DELETING/DELETE\_FAILED
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Timestamp which tells creation date of the package.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_details
+    #   Additional information if the package is in an error state. Null
+    #   otherwise.
+    #   @return [Types::ErrorDetails]
+    #
+    class PackageDetails < Struct.new(
+      :package_id,
+      :package_name,
+      :package_type,
+      :package_description,
+      :package_status,
+      :created_at,
+      :error_details)
+      include Aws::Structure
+    end
+
+    # The S3 location for importing the package specified as `S3BucketName`
+    # and `S3Key`
+    #
+    # @note When making an API call, you may pass PackageSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_name: "S3BucketName",
+    #         s3_key: "S3Key",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   Name of the bucket containing the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   Key (file name) of the package.
+    #   @return [String]
+    #
+    class PackageSource < Struct.new(
+      :s3_bucket_name,
+      :s3_key)
       include Aws::Structure
     end
 

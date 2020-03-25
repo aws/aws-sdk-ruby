@@ -23,7 +23,7 @@ module Aws::CostExplorer
     # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
-    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
     # (Section 1.10).</b> </i>
     #
     # The structure of Cost Categories. This includes detailed metadata and
@@ -70,7 +70,7 @@ module Aws::CostExplorer
     # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
-    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
     # (Section 1.10).</b> </i>
     #
     # A reference to a Cost Category containing only enough information to
@@ -108,7 +108,7 @@ module Aws::CostExplorer
     # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
-    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
     # (Section 1.10).</b> </i>
     #
     # Rules are processed in order. If there are multiple rules that match
@@ -164,7 +164,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryRule AWS API Documentation
@@ -178,7 +178,7 @@ module Aws::CostExplorer
     # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
-    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
     # (Section 1.10).</b> </i>
     #
     # The values that are available for Cost Categories.
@@ -599,7 +599,7 @@ module Aws::CostExplorer
     #   <i> <b>Cost Category is in public beta for AWS Billing and Cost
     #   Management and is subject to change. Your use of Cost Categories is
     #   subject to the Beta Service Participation terms of the <a
-    #   href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    #   href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
     #   (Section 1.10).</b> </i>
     #
     #   The structure of Cost Categories. This includes detailed metadata
@@ -1058,7 +1058,7 @@ module Aws::CostExplorer
     #   <i> <b>Cost Category is in public beta for AWS Billing and Cost
     #   Management and is subject to change. Your use of Cost Categories is
     #   subject to the Beta Service Participation terms of the <a
-    #   href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    #   href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
     #   (Section 1.10).</b> </i>
     #
     #   The specific `CostCategory` used for `Expression`.
@@ -1173,7 +1173,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -1199,7 +1199,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #   [1]: http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
     #   @return [Array<String>]
     #
     # @!attribute [rw] group_by
@@ -1469,7 +1469,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #   [1]: http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
     #   @return [String]
     #
     # @!attribute [rw] granularity
@@ -1944,7 +1944,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -2023,12 +2023,11 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] account_scope
-    #   The account scope that you want recommendations for. `PAYER` means
-    #   that AWS includes the master account and any member accounts when it
-    #   calculates its recommendations. `LINKED` means that AWS includes
-    #   only member accounts when it calculates its recommendations.
-    #
-    #   Valid values are `PAYER` and `LINKED`.
+    #   The account scope that you want your recommendations for. Amazon Web
+    #   Services calculates recommendations including the payer account and
+    #   linked accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual linked
+    #   accounts only.
     #   @return [String]
     #
     # @!attribute [rw] lookback_period_in_days
@@ -2197,7 +2196,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] next_page_token
@@ -2462,7 +2461,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] metrics
@@ -2519,9 +2518,37 @@ module Aws::CostExplorer
     #         savings_plans_type: "COMPUTE_SP", # required, accepts COMPUTE_SP, EC2_INSTANCE_SP
     #         term_in_years: "ONE_YEAR", # required, accepts ONE_YEAR, THREE_YEARS
     #         payment_option: "NO_UPFRONT", # required, accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
+    #         account_scope: "PAYER", # accepts PAYER, LINKED
     #         next_page_token: "NextPageToken",
     #         page_size: 1,
     #         lookback_period_in_days: "SEVEN_DAYS", # required, accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
+    #         filter: {
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] savings_plans_type
@@ -2535,6 +2562,14 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] payment_option
     #   The payment option used to generate these recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_scope
+    #   The account scope that you want your recommendations for. Amazon Web
+    #   Services calculates recommendations including the payer account and
+    #   linked accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual linked
+    #   accounts only.
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
@@ -2552,15 +2587,32 @@ module Aws::CostExplorer
     #   The lookback period used to generate the recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] filter
+    #   You can filter your recommendations by Account ID with the
+    #   `LINKED_ACCOUNT` dimension. To filter your recommendations by
+    #   Account ID, specify `Key` as `LINKED_ACCOUNT` and `Value` as the
+    #   comma-separated Acount ID(s) for which you want to see Savings Plans
+    #   purchase recommendations.
+    #
+    #   For GetSavingsPlansPurchaseRecommendation, the `Filter` does not
+    #   include `CostCategories` or `Tags`. It only includes `Dimensions`.
+    #   With `Dimensions`, `Key` must be `LINKED_ACCOUNT` and `Value` can be
+    #   a single Account ID or multiple comma-separated Account IDs for
+    #   which you want to see Savings Plans Purchase Recommendations. `AND`
+    #   and `OR` operators are not supported.
+    #   @return [Types::Expression]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansPurchaseRecommendationRequest AWS API Documentation
     #
     class GetSavingsPlansPurchaseRecommendationRequest < Struct.new(
       :savings_plans_type,
       :term_in_years,
       :payment_option,
+      :account_scope,
       :next_page_token,
       :page_size,
-      :lookback_period_in_days)
+      :lookback_period_in_days,
+      :filter)
       include Aws::Structure
     end
 
@@ -2654,7 +2706,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @!attribute [rw] next_token
@@ -2782,7 +2834,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #   @return [Types::Expression]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetSavingsPlansUtilizationRequest AWS API Documentation
@@ -3904,6 +3956,14 @@ module Aws::CostExplorer
     # Contains your request parameters, Savings Plan Recommendations
     # Summary, and Details.
     #
+    # @!attribute [rw] account_scope
+    #   The account scope that you want your recommendations for. Amazon Web
+    #   Services calculates recommendations including the payer account and
+    #   linked accounts if the value is set to `PAYER`. If the value is
+    #   `LINKED`, recommendations are calculated for individual linked
+    #   accounts only.
+    #   @return [String]
+    #
     # @!attribute [rw] savings_plans_type
     #   The requested Savings Plans recommendation type.
     #   @return [String]
@@ -3933,6 +3993,7 @@ module Aws::CostExplorer
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/SavingsPlansPurchaseRecommendation AWS API Documentation
     #
     class SavingsPlansPurchaseRecommendation < Struct.new(
+      :account_scope,
       :savings_plans_type,
       :term_in_years,
       :payment_option,

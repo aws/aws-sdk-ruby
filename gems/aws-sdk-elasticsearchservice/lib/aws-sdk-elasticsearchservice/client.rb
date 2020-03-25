@@ -344,6 +344,45 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Associates a package with an Amazon ES domain.
+    #
+    # @option params [required, String] :package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the domain that you want to associate the package with.
+    #
+    # @return [Types::AssociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociatePackageResponse#domain_package_details #domain_package_details} => Types::DomainPackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_package({
+    #     package_id: "PackageID", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details.package_id #=> String
+    #   resp.domain_package_details.package_name #=> String
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.last_updated #=> Time
+    #   resp.domain_package_details.domain_name #=> String
+    #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.reference_path #=> String
+    #   resp.domain_package_details.error_details.error_type #=> String
+    #   resp.domain_package_details.error_details.error_message #=> String
+    #
+    # @overload associate_package(params = {})
+    # @param [Hash] params ({})
+    def associate_package(params = {}, options = {})
+      req = build_request(:associate_package, params)
+      req.send_request(options)
+    end
+
     # Cancels a scheduled service software update for an Amazon ES domain.
     # You can only perform this operation before the `AutomatedUpdateDate`
     # and when the `UpdateStatus` is in the `PENDING_UPDATE` state.
@@ -605,6 +644,54 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Create a package for use with Amazon ES domains.
+    #
+    # @option params [required, String] :package_name
+    #   Unique identifier for the package.
+    #
+    # @option params [required, String] :package_type
+    #   Type of package. Currently supports only TXT-DICTIONARY.
+    #
+    # @option params [String] :package_description
+    #   Description of the package.
+    #
+    # @option params [required, Types::PackageSource] :package_source
+    #   The customer S3 location `PackageSource` for importing the package.
+    #
+    # @return [Types::CreatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePackageResponse#package_details #package_details} => Types::PackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_package({
+    #     package_name: "PackageName", # required
+    #     package_type: "TXT-DICTIONARY", # required, accepts TXT-DICTIONARY
+    #     package_description: "PackageDescription",
+    #     package_source: { # required
+    #       s3_bucket_name: "S3BucketName",
+    #       s3_key: "S3Key",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details.package_id #=> String
+    #   resp.package_details.package_name #=> String
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_description #=> String
+    #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details.created_at #=> Time
+    #   resp.package_details.error_details.error_type #=> String
+    #   resp.package_details.error_details.error_message #=> String
+    #
+    # @overload create_package(params = {})
+    # @param [Hash] params ({})
+    def create_package(params = {}, options = {})
+      req = build_request(:create_package, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes the specified Elasticsearch domain and all of its
     # data. Once a domain is deleted, it cannot be recovered.
     #
@@ -706,6 +793,40 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def delete_elasticsearch_service_role(params = {}, options = {})
       req = build_request(:delete_elasticsearch_service_role, params)
+      req.send_request(options)
+    end
+
+    # Delete the package.
+    #
+    # @option params [required, String] :package_id
+    #   Internal ID of the package that you want to delete. Use
+    #   `DescribePackages` to find this value.
+    #
+    # @return [Types::DeletePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePackageResponse#package_details #package_details} => Types::PackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_package({
+    #     package_id: "PackageID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details.package_id #=> String
+    #   resp.package_details.package_name #=> String
+    #   resp.package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details.package_description #=> String
+    #   resp.package_details.package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details.created_at #=> Time
+    #   resp.package_details.error_details.error_type #=> String
+    #   resp.package_details.error_details.error_message #=> String
+    #
+    # @overload delete_package(params = {})
+    # @param [Hash] params ({})
+    def delete_package(params = {}, options = {})
+      req = build_request(:delete_package, params)
       req.send_request(options)
     end
 
@@ -1062,6 +1183,61 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Describes all packages available to Amazon ES. Includes options for
+    # filtering, limiting the number of results, and pagination.
+    #
+    # @option params [Array<Types::DescribePackagesFilter>] :filters
+    #   Only returns packages that match the `DescribePackagesFilterList`
+    #   values.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of packages.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::DescribePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePackagesResponse#package_details_list #package_details_list} => Array&lt;Types::PackageDetails&gt;
+    #   * {Types::DescribePackagesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_packages({
+    #     filters: [
+    #       {
+    #         name: "PackageID", # accepts PackageID, PackageName, PackageStatus
+    #         value: ["DescribePackagesFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.package_details_list #=> Array
+    #   resp.package_details_list[0].package_id #=> String
+    #   resp.package_details_list[0].package_name #=> String
+    #   resp.package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.package_details_list[0].package_description #=> String
+    #   resp.package_details_list[0].package_status #=> String, one of "COPYING", "COPY_FAILED", "VALIDATING", "VALIDATION_FAILED", "AVAILABLE", "DELETING", "DELETED", "DELETE_FAILED"
+    #   resp.package_details_list[0].created_at #=> Time
+    #   resp.package_details_list[0].error_details.error_type #=> String
+    #   resp.package_details_list[0].error_details.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_packages(params = {})
+    # @param [Hash] params ({})
+    def describe_packages(params = {}, options = {})
+      req = build_request(:describe_packages, params)
+      req.send_request(options)
+    end
+
     # Lists available reserved Elasticsearch instance offerings.
     #
     # @option params [String] :reserved_elasticsearch_instance_offering_id
@@ -1169,6 +1345,45 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def describe_reserved_elasticsearch_instances(params = {}, options = {})
       req = build_request(:describe_reserved_elasticsearch_instances, params)
+      req.send_request(options)
+    end
+
+    # Dissociates a package from the Amazon ES domain.
+    #
+    # @option params [required, String] :package_id
+    #   Internal ID of the package that you want to associate with a domain.
+    #   Use `DescribePackages` to find this value.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the domain that you want to associate the package with.
+    #
+    # @return [Types::DissociatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DissociatePackageResponse#domain_package_details #domain_package_details} => Types::DomainPackageDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.dissociate_package({
+    #     package_id: "PackageID", # required
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details.package_id #=> String
+    #   resp.domain_package_details.package_name #=> String
+    #   resp.domain_package_details.package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details.last_updated #=> Time
+    #   resp.domain_package_details.domain_name #=> String
+    #   resp.domain_package_details.domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details.reference_path #=> String
+    #   resp.domain_package_details.error_details.error_type #=> String
+    #   resp.domain_package_details.error_details.error_message #=> String
+    #
+    # @overload dissociate_package(params = {})
+    # @param [Hash] params ({})
+    def dissociate_package(params = {}, options = {})
+      req = build_request(:dissociate_package, params)
       req.send_request(options)
     end
 
@@ -1312,6 +1527,55 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Lists all Amazon ES domains associated with the package.
+    #
+    # @option params [required, String] :package_id
+    #   The package for which to list domains.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of domains.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::ListDomainsForPackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainsForPackageResponse#domain_package_details_list #domain_package_details_list} => Array&lt;Types::DomainPackageDetails&gt;
+    #   * {Types::ListDomainsForPackageResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domains_for_package({
+    #     package_id: "PackageID", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details_list #=> Array
+    #   resp.domain_package_details_list[0].package_id #=> String
+    #   resp.domain_package_details_list[0].package_name #=> String
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].last_updated #=> Time
+    #   resp.domain_package_details_list[0].domain_name #=> String
+    #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].reference_path #=> String
+    #   resp.domain_package_details_list[0].error_details.error_type #=> String
+    #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_domains_for_package(params = {})
+    # @param [Hash] params ({})
+    def list_domains_for_package(params = {}, options = {})
+      req = build_request(:list_domains_for_package, params)
+      req.send_request(options)
+    end
+
     # List all Elasticsearch instance types that are supported for given
     # ElasticsearchVersion
     #
@@ -1396,6 +1660,55 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def list_elasticsearch_versions(params = {}, options = {})
       req = build_request(:list_elasticsearch_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists all packages associated with the Amazon ES domain.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain for which you want to list associated packages.
+    #
+    # @option params [Integer] :max_results
+    #   Limits results to a maximum number of packages.
+    #
+    # @option params [String] :next_token
+    #   Used for pagination. Only necessary if a previous API call includes a
+    #   non-null NextToken value. If provided, returns results for the next
+    #   page.
+    #
+    # @return [Types::ListPackagesForDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPackagesForDomainResponse#domain_package_details_list #domain_package_details_list} => Array&lt;Types::DomainPackageDetails&gt;
+    #   * {Types::ListPackagesForDomainResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_packages_for_domain({
+    #     domain_name: "DomainName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_package_details_list #=> Array
+    #   resp.domain_package_details_list[0].package_id #=> String
+    #   resp.domain_package_details_list[0].package_name #=> String
+    #   resp.domain_package_details_list[0].package_type #=> String, one of "TXT-DICTIONARY"
+    #   resp.domain_package_details_list[0].last_updated #=> Time
+    #   resp.domain_package_details_list[0].domain_name #=> String
+    #   resp.domain_package_details_list[0].domain_package_status #=> String, one of "ASSOCIATING", "ASSOCIATION_FAILED", "ACTIVE", "DISSOCIATING", "DISSOCIATION_FAILED"
+    #   resp.domain_package_details_list[0].reference_path #=> String
+    #   resp.domain_package_details_list[0].error_details.error_type #=> String
+    #   resp.domain_package_details_list[0].error_details.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_packages_for_domain(params = {})
+    # @param [Hash] params ({})
+    def list_packages_for_domain(params = {}, options = {})
+      req = build_request(:list_packages_for_domain, params)
       req.send_request(options)
     end
 
@@ -1822,7 +2135,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

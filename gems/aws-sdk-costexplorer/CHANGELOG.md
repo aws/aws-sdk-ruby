@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-03-25)
+------------------
+
+* Feature - Customers can now receive Savings Plans recommendations at the member (linked) account level.
+
 1.37.0 (2020-03-09)
 ------------------
 

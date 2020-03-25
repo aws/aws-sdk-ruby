@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-03-25)
+------------------
+
+* Feature - Adding support for customer packages (dictionary files) to Amazon Elasticsearch Service
+
 1.31.0 (2020-03-09)
 ------------------
 
