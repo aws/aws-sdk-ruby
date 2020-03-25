@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationInsights - Updated the API, and documentation for Amazon CloudWatch Application Insights.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::Detective - Updated the API, and documentation for Amazon Detective.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::ManagedBlockchain - Updated the API, and documentation for Amazon Managed Blockchain.
+
+* Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
+
 2.11.475 (2020-03-24)
 ------------------
 
