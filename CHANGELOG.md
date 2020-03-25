@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.476 (2020-03-25)
+------------------
+
 * Feature - Aws::ApplicationInsights - Updated the API, and documentation for Amazon CloudWatch Application Insights.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
