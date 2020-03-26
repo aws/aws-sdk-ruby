@@ -139,6 +139,7 @@ module Aws::FSx
     ServiceLimitExceeded = Shapes::StructureShape.new(name: 'ServiceLimitExceeded')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     StorageCapacity = Shapes::IntegerShape.new(name: 'StorageCapacity')
+    StorageType = Shapes::StringShape.new(name: 'StorageType')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     SucceededCount = Shapes::IntegerShape.new(name: 'SucceededCount')
@@ -244,6 +245,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     CreateFileSystemFromBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFileSystemFromBackupRequest.add_member(:windows_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemWindowsConfiguration, location_name: "WindowsConfiguration"))
+    CreateFileSystemFromBackupRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     CreateFileSystemFromBackupRequest.struct_class = Types::CreateFileSystemFromBackupRequest
 
     CreateFileSystemFromBackupResponse.add_member(:file_system, Shapes::ShapeRef.new(shape: FileSystem, location_name: "FileSystem"))
@@ -260,6 +262,7 @@ module Aws::FSx
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateFileSystemRequest.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FileSystemType, required: true, location_name: "FileSystemType"))
     CreateFileSystemRequest.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, required: true, location_name: "StorageCapacity"))
+    CreateFileSystemRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     CreateFileSystemRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     CreateFileSystemRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     CreateFileSystemRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -396,6 +399,7 @@ module Aws::FSx
     FileSystem.add_member(:lifecycle, Shapes::ShapeRef.new(shape: FileSystemLifecycle, location_name: "Lifecycle"))
     FileSystem.add_member(:failure_details, Shapes::ShapeRef.new(shape: FileSystemFailureDetails, location_name: "FailureDetails"))
     FileSystem.add_member(:storage_capacity, Shapes::ShapeRef.new(shape: StorageCapacity, location_name: "StorageCapacity"))
+    FileSystem.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "StorageType"))
     FileSystem.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     FileSystem.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     FileSystem.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: NetworkInterfaceIds, location_name: "NetworkInterfaceIds"))
@@ -580,6 +584,7 @@ module Aws::FSx
         "serviceFullName" => "Amazon FSx",
         "serviceId" => "FSx",
         "signatureVersion" => "v4",
+        "signingName" => "fsx",
         "targetPrefix" => "AWSSimbaAPIService_v20180301",
         "uid" => "fsx-2018-03-01",
       }

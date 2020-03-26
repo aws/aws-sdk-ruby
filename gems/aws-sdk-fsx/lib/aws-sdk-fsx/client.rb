@@ -488,6 +488,7 @@ module Aws::FSx
     #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
+    #   resp.backup.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.backup.file_system.vpc_id #=> String
     #   resp.backup.file_system.subnet_ids #=> Array
     #   resp.backup.file_system.subnet_ids[0] #=> String
@@ -506,7 +507,7 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.backup.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
-    #   resp.backup.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.backup.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backup.file_system.windows_configuration.remote_administration_endpoint #=> String
     #   resp.backup.file_system.windows_configuration.preferred_subnet_id #=> String
     #   resp.backup.file_system.windows_configuration.preferred_file_server_ip #=> String
@@ -545,13 +546,13 @@ module Aws::FSx
     # `CreateDataRepositoryTask` operation will fail if a data repository is
     # not linked to the FSx file system. To learn more about data repository
     # tasks, see [Using Data Repository Tasks][1]. To learn more about
-    # linking a data repository to your file system, see [Step 1: Create
-    # Your Amazon FSx for Lustre File System][2].
+    # linking a data repository to your file system, see [Setting the Export
+    # Prefix][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/getting-started-step1.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix
     #
     # @option params [required, String] :type
     #   Specifies the type of data repository task to create.
@@ -559,7 +560,11 @@ module Aws::FSx
     # @option params [Array<String>] :paths
     #   (Optional) The path or paths on the Amazon FSx file system to use when
     #   the data repository task is processed. The default path is the file
-    #   system root directory.
+    #   system root directory. The paths you provide need to be relative to
+    #   the mount point of the file system. If the mount point is `/mnt/fsx`
+    #   and `/mnt/fsx/path1` is a directory or file on the file system you
+    #   want to export, then the path to provide is `path1`. If a path that
+    #   you provide isn't valid, the task fails.
     #
     # @option params [required, String] :file_system_id
     #   The globally unique ID of the file system, assigned by Amazon FSx.
@@ -568,7 +573,12 @@ module Aws::FSx
     #   Defines whether or not Amazon FSx provides a CompletionReport once the
     #   task has completed. A CompletionReport provides a detailed report on
     #   the files that Amazon FSx processed that meet the criteria specified
-    #   by the `Scope` parameter.
+    #   by the `Scope` parameter. For more information, see [Working with Task
+    #   Completion Reports][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -689,14 +699,39 @@ module Aws::FSx
     #   `LUSTRE`.
     #
     # @option params [required, Integer] :storage_capacity
-    #   The storage capacity of the file system being created.
+    #   Sets the storage capacity of the file system that you're creating.
     #
-    #   For Windows file systems, valid values are 32 GiB - 65,536 GiB.
+    #   For Lustre file systems:
     #
-    #   For `SCRATCH_1` Lustre file systems, valid values are 1,200, 2,400,
-    #   3,600, then continuing in increments of 3600 GiB. For `SCRATCH_2` and
-    #   `PERSISTENT_1` file systems, valid values are 1200, 2400, then
-    #   continuing in increments of 2400 GiB.
+    #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
+    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #
+    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
+    #     increments of 3.6 TiB.
+    #
+    #   For Windows file systems:
+    #
+    #   * If `StorageType=SSD`, valid values are 32 GiB - 65,536 GiB (64 TiB).
+    #
+    #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
+    #     TiB).
+    #
+    # @option params [String] :storage_type
+    #   Sets the storage type for the Amazon FSx for Windows file system
+    #   you're creating. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. SSD is supported on
+    #     all Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types.
+    #
+    #   Default value is `SSD`. For more information, see [ Storage Type
+    #   Options][1] in the *Amazon FSx for Windows User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type
     #
     # @option params [required, Array<String>] :subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
@@ -706,9 +741,9 @@ module Aws::FSx
     #   subnets as the preferred subnet using the `WindowsConfiguration >
     #   PreferredSubnetID` property.
     #
-    #   For Windows `SINGLE_AZ_1` file system deployment types and Lustre file
-    #   systems, provide exactly one subnet ID. The file server is launched in
-    #   that subnet's Availability Zone.
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
+    #   types and Lustre file systems, provide exactly one subnet ID. The file
+    #   server is launched in that subnet's Availability Zone.
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs specifying the security groups to apply to all network
@@ -735,11 +770,9 @@ module Aws::FSx
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
     #   The Microsoft Windows configuration for the file system being created.
-    #   This value is required if `FileSystemType` is set to `WINDOWS`.
     #
     # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
-    #   The Lustre configuration for the file system being created. This value
-    #   is required if `FileSystemType` is set to `LUSTRE`.
+    #   The Lustre configuration for the file system being created.
     #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -813,6 +846,7 @@ module Aws::FSx
     #     client_request_token: "ClientRequestToken",
     #     file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE
     #     storage_capacity: 1, # required
+    #     storage_type: "SSD", # accepts SSD, HDD
     #     subnet_ids: ["SubnetId"], # required
     #     security_group_ids: ["SecurityGroupId"],
     #     tags: [
@@ -832,7 +866,7 @@ module Aws::FSx
     #         password: "DirectoryPassword", # required
     #         dns_ips: ["IpAddress"], # required
     #       },
-    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
     #       preferred_subnet_id: "SubnetId",
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -859,6 +893,7 @@ module Aws::FSx
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_system.vpc_id #=> String
     #   resp.file_system.subnet_ids #=> Array
     #   resp.file_system.subnet_ids[0] #=> String
@@ -877,7 +912,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
-    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
     #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
     #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
@@ -956,15 +991,22 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   A list of IDs for the subnets that the file system will be accessible
-    #   from. Currently, you can specify only one subnet. The file server is
-    #   also launched in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types and
+    #   Lustre file systems, provide exactly one subnet ID. The file server is
+    #   launched in that subnet's Availability Zone.
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs for the security groups that apply to the specified
     #   network interfaces created for file system access. These security
     #   groups apply to all network interfaces. This value isn't returned in
-    #   later describe requests.
+    #   later DescribeFileSystem requests.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be applied to the file system at file system creation. The
@@ -973,6 +1015,27 @@ module Aws::FSx
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration for this Microsoft Windows file system.
+    #
+    # @option params [String] :storage_type
+    #   Sets the storage type for the Windows file system you're creating
+    #   from a backup. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. Supported on all
+    #     Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. Supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types.
+    #
+    #   Default value is `SSD`.
+    #
+    #   <note markdown="1"> HDD and SSD storage types have different minimum storage capacity
+    #   requirements. A restored file system's storage capacity is tied to
+    #   the file system that was backed up. You can create a file system that
+    #   uses HDD storage from a backup of a file system that used SSD storage
+    #   only if the original SSD file system had a storage capacity of at
+    #   least 2000 GiB.
+    #
+    #    </note>
     #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1057,7 +1120,7 @@ module Aws::FSx
     #         password: "DirectoryPassword", # required
     #         dns_ips: ["IpAddress"], # required
     #       },
-    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #       deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
     #       preferred_subnet_id: "SubnetId",
     #       throughput_capacity: 1, # required
     #       weekly_maintenance_start_time: "WeeklyTime",
@@ -1065,6 +1128,7 @@ module Aws::FSx
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #     },
+    #     storage_type: "SSD", # accepts SSD, HDD
     #   })
     #
     # @example Response structure
@@ -1076,6 +1140,7 @@ module Aws::FSx
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_system.vpc_id #=> String
     #   resp.file_system.subnet_ids #=> Array
     #   resp.file_system.subnet_ids[0] #=> String
@@ -1094,7 +1159,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
-    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
     #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
     #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
@@ -1407,6 +1472,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backups[0].file_system.failure_details.message #=> String
     #   resp.backups[0].file_system.storage_capacity #=> Integer
+    #   resp.backups[0].file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.backups[0].file_system.vpc_id #=> String
     #   resp.backups[0].file_system.subnet_ids #=> Array
     #   resp.backups[0].file_system.subnet_ids[0] #=> String
@@ -1425,7 +1491,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.backups[0].file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
-    #   resp.backups[0].file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.backups[0].file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.backups[0].file_system.windows_configuration.remote_administration_endpoint #=> String
     #   resp.backups[0].file_system.windows_configuration.preferred_subnet_id #=> String
     #   resp.backups[0].file_system.windows_configuration.preferred_file_server_ip #=> String
@@ -1659,6 +1725,7 @@ module Aws::FSx
     #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_systems[0].failure_details.message #=> String
     #   resp.file_systems[0].storage_capacity #=> Integer
+    #   resp.file_systems[0].storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_systems[0].vpc_id #=> String
     #   resp.file_systems[0].subnet_ids #=> Array
     #   resp.file_systems[0].subnet_ids[0] #=> String
@@ -1677,7 +1744,7 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_systems[0].windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
-    #   resp.file_systems[0].windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_systems[0].windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_systems[0].windows_configuration.remote_administration_endpoint #=> String
     #   resp.file_systems[0].windows_configuration.preferred_subnet_id #=> String
     #   resp.file_systems[0].windows_configuration.preferred_file_server_ip #=> String
@@ -1980,6 +2047,7 @@ module Aws::FSx
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
     #   resp.file_system.vpc_id #=> String
     #   resp.file_system.subnet_ids #=> Array
     #   resp.file_system.subnet_ids[0] #=> String
@@ -1998,7 +2066,7 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
     #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
-    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1"
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
     #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
     #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
     #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
@@ -2039,7 +2107,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

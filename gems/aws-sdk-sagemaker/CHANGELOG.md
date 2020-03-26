@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-03-26)
+------------------
+
+* Feature - This release updates Amazon Augmented AI CreateFlowDefinition API and DescribeFlowDefinition response.
+
 1.52.0 (2020-03-09)
 ------------------
 

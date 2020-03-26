@@ -714,13 +714,26 @@ module Aws::SageMaker
 
     # Creates an AutoPilot job.
     #
+    # After you run an AutoPilot job, you can find the best performing model
+    # by calling , and then deploy that model by following the steps
+    # described in [Step 6.1: Deploy the Model to Amazon SageMaker Hosting
+    # Services][1].
+    #
+    # For information about how to use AutoPilot, see [Use AutoPilot to
+    # Automate Model Development][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html
+    #
     # @option params [required, String] :auto_ml_job_name
     #   Identifies an AutoPilot job. Must be unique to your account and is
     #   case-insensitive.
     #
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
     #   Similar to InputDataConfig supported by Tuning. Format(s) supported:
-    #   CSV.
+    #   CSV. Minimum of 1000 rows.
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Similar to OutputDataConfig supported by Tuning. Format(s) supported:
@@ -956,7 +969,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, amba_cv22
+    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -1076,13 +1089,13 @@ module Aws::SageMaker
     # Creates an endpoint using the endpoint configuration specified in the
     # request. Amazon SageMaker uses the endpoint to provision resources and
     # deploy models. You create the endpoint configuration with the
-    # [CreateEndpointConfig][1] API.
+    # CreateEndpointConfig API.
     #
     # Use this API to deploy models using Amazon SageMaker hosting services.
     #
     # For an example that calls this method when deploying a model to Amazon
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
-    # Hosting Services (AWS SDK for Python (Boto 3)).][2]
+    # Hosting Services (AWS SDK for Python (Boto 3)).][1]
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` that is in use by an endpoint
     # that is live or while the `UpdateEndpoint` or `CreateEndpoint`
@@ -1102,7 +1115,7 @@ module Aws::SageMaker
     # status to `Creating`. After it creates the endpoint, it sets the
     # status to `InService`. Amazon SageMaker can then process incoming
     # requests for inferences. To check the status of an endpoint, use the
-    # [DescribeEndpoint][3] API.
+    # DescribeEndpoint API.
     #
     # If any of the models hosted at this endpoint get model data from an
     # Amazon S3 location, Amazon SageMaker uses AWS Security Token Service
@@ -1110,15 +1123,13 @@ module Aws::SageMaker
     # activated in your IAM user account by default. If you previously
     # deactivated AWS STS for a region, you need to reactivate AWS STS for
     # that region. For more information, see [Activating and Deactivating
-    # AWS STS in an AWS Region][4] in the *AWS Identity and Access
+    # AWS STS in an AWS Region][2] in the *AWS Identity and Access
     # Management User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
-    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint. The name must be unique within an AWS Region
@@ -1126,11 +1137,7 @@ module Aws::SageMaker
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of an endpoint configuration. For more information, see
-    #   [CreateEndpointConfig][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
+    #   CreateEndpointConfig.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. For more information, see [Using Cost
@@ -1175,7 +1182,7 @@ module Aws::SageMaker
     # services uses to deploy models. In the configuration, you identify one
     # or more models, created using the `CreateModel` API, to deploy and the
     # resources that you want Amazon SageMaker to provision. Then you call
-    # the [CreateEndpoint][1] API.
+    # the CreateEndpoint API.
     #
     # <note markdown="1"> Use this API if you want to use Amazon SageMaker hosting services to
     # deploy models into production.
@@ -1196,20 +1203,15 @@ module Aws::SageMaker
     #
     # For an example that calls this method when deploying a model to Amazon
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
-    # Hosting Services (AWS SDK for Python (Boto 3)).][2]
+    # Hosting Services (AWS SDK for Python (Boto 3)).][1]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
-    #   [CreateEndpoint][1] request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   CreateEndpoint request.
     #
     # @option params [required, Array<Types::ProductionVariant>] :production_variants
     #   An list of `ProductionVariant` objects, one for each model that you
@@ -1406,6 +1408,9 @@ module Aws::SageMaker
     # @option params [required, String] :flow_definition_name
     #   The name of your flow definition.
     #
+    # @option params [Types::HumanLoopRequestSource] :human_loop_request_source
+    #   Container for configuring the source of human task requests.
+    #
     # @option params [Types::HumanLoopActivationConfig] :human_loop_activation_config
     #   An object containing information about the events that trigger a human
     #   workflow.
@@ -1436,10 +1441,10 @@ module Aws::SageMaker
     #
     #   resp = client.create_flow_definition({
     #     flow_definition_name: "FlowDefinitionName", # required
+    #     human_loop_request_source: {
+    #       aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
+    #     },
     #     human_loop_activation_config: {
-    #       human_loop_request_source: { # required
-    #         aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
-    #       },
     #       human_loop_activation_conditions_config: { # required
     #         human_loop_activation_conditions: "HumanLoopActivationConditions", # required
     #       },
@@ -1552,8 +1557,12 @@ module Aws::SageMaker
     #   The HyperParameterTuningJobConfig object that describes the tuning
     #   job, including the search strategy, the objective metric used to
     #   evaluate training jobs, ranges of parameters to search, and resource
-    #   limits for the tuning job. For more information, see
-    #   automatic-model-tuning
+    #   limits for the tuning job. For more information, see [How
+    #   Hyperparameter Tuning Works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #
     # @option params [Types::HyperParameterTrainingJobDefinition] :training_job_definition
     #   The HyperParameterTrainingJobDefinition object that describes the
@@ -2145,18 +2154,17 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   A [VpcConfig][1] object that specifies the VPC that you want your
-    #   model to connect to. Control access to and from your model container
-    #   by configuring the VPC. `VpcConfig` is used in hosting services and in
+    #   A VpcConfig object that specifies the VPC that you want your model to
+    #   connect to. Control access to and from your model container by
+    #   configuring the VPC. `VpcConfig` is used in hosting services and in
     #   batch transform. For more information, see [Protect Endpoints by Using
-    #   an Amazon Virtual Private Cloud][2] and [Protect Data in Batch
-    #   Transform Jobs by Using an Amazon Virtual Private Cloud][3].
+    #   an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the model container. No inbound or outbound network calls can
@@ -2360,7 +2368,7 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags](
-    #   https://docs-aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+    #   https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
     #   in the *AWS Billing and Cost Management User Guide*.
     #
     # @return [Types::CreateMonitoringScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2794,9 +2802,10 @@ module Aws::SageMaker
     # want to have access to the notebook instance. For more information,
     # see [Limit Access to a Notebook Instance by IP Address][1].
     #
-    # <note markdown="1"> The URL that you get from a call to is valid only for 5 minutes. If
-    # you try to use the URL after the 5-minute limit expires, you are
-    # directed to the AWS console sign-in page.
+    # <note markdown="1"> The URL that you get from a call to CreatePresignedNotebookInstanceUrl
+    # is valid only for 5 minutes. If you try to use the URL after the
+    # 5-minute limit expires, you are directed to the AWS console sign-in
+    # page.
     #
     #  </note>
     #
@@ -2877,7 +2886,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
     #
     # @option params [Types::ExperimentConfig] :experiment_config
     #   Configuration for the experiment.
@@ -3397,8 +3406,8 @@ module Aws::SageMaker
     #   inference can be made on. For example, a single line in a CSV file is
     #   a record.
     #
-    #   To enable the batch strategy, you must set the `SplitType` property of
-    #   the DataProcessing object to `Line`, `RecordIO`, or `TFRecord`.
+    #   To enable the batch strategy, you must set the `SplitType` property to
+    #   `Line`, `RecordIO`, or `TFRecord`.
     #
     #   To use only one record when making an HTTP invocation request to a
     #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
@@ -4088,13 +4097,9 @@ module Aws::SageMaker
     end
 
     # Deletes a model. The `DeleteModel` API deletes only the model entry
-    # that was created in Amazon SageMaker when you called the
-    # [CreateModel][1] API. It does not delete model artifacts, inference
-    # code, or the IAM role that you specified when creating the model.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html
+    # that was created in Amazon SageMaker when you called the CreateModel
+    # API. It does not delete model artifacts, inference code, or the IAM
+    # role that you specified when creating the model.
     #
     # @option params [required, String] :model_name
     #   The name of the model to delete.
@@ -4761,7 +4766,7 @@ module Aws::SageMaker
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "amba_cv22"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -5017,6 +5022,7 @@ module Aws::SageMaker
     #   * {Types::DescribeFlowDefinitionResponse#flow_definition_name #flow_definition_name} => String
     #   * {Types::DescribeFlowDefinitionResponse#flow_definition_status #flow_definition_status} => String
     #   * {Types::DescribeFlowDefinitionResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeFlowDefinitionResponse#human_loop_request_source #human_loop_request_source} => Types::HumanLoopRequestSource
     #   * {Types::DescribeFlowDefinitionResponse#human_loop_activation_config #human_loop_activation_config} => Types::HumanLoopActivationConfig
     #   * {Types::DescribeFlowDefinitionResponse#human_loop_config #human_loop_config} => Types::HumanLoopConfig
     #   * {Types::DescribeFlowDefinitionResponse#output_config #output_config} => Types::FlowDefinitionOutputConfig
@@ -5033,9 +5039,9 @@ module Aws::SageMaker
     #
     #   resp.flow_definition_arn #=> String
     #   resp.flow_definition_name #=> String
-    #   resp.flow_definition_status #=> String, one of "Initializing", "Active", "Failed", "Deleting", "Deleted"
+    #   resp.flow_definition_status #=> String, one of "Initializing", "Active", "Failed", "Deleting"
     #   resp.creation_time #=> Time
-    #   resp.human_loop_activation_config.human_loop_request_source.aws_managed_human_loop_request_source #=> String, one of "AWS/Rekognition/DetectModerationLabels/Image/V3", "AWS/Textract/AnalyzeDocument/Forms/V1"
+    #   resp.human_loop_request_source.aws_managed_human_loop_request_source #=> String, one of "AWS/Rekognition/DetectModerationLabels/Image/V3", "AWS/Textract/AnalyzeDocument/Forms/V1"
     #   resp.human_loop_activation_config.human_loop_activation_conditions_config.human_loop_activation_conditions #=> String
     #   resp.human_loop_config.workteam_arn #=> String
     #   resp.human_loop_config.human_task_ui_arn #=> String
@@ -6939,7 +6945,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "amba_cv22"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -7253,7 +7259,7 @@ module Aws::SageMaker
     #   resp.flow_definition_summaries #=> Array
     #   resp.flow_definition_summaries[0].flow_definition_name #=> String
     #   resp.flow_definition_summaries[0].flow_definition_arn #=> String
-    #   resp.flow_definition_summaries[0].flow_definition_status #=> String, one of "Initializing", "Active", "Failed", "Deleting", "Deleted"
+    #   resp.flow_definition_summaries[0].flow_definition_status #=> String, one of "Initializing", "Active", "Failed", "Deleting"
     #   resp.flow_definition_summaries[0].creation_time #=> Time
     #   resp.flow_definition_summaries[0].failure_reason #=> String
     #   resp.next_token #=> String
@@ -7655,11 +7661,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Lists models created with the [CreateModel][1] API.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateModel.html
+    # Lists models created with the CreateModel API.
     #
     # @option params [String] :sort_by
     #   Sorts the list of results. The default is `CreationTime`.
@@ -8914,7 +8916,7 @@ module Aws::SageMaker
     #       filters: [
     #         {
     #           name: "ResourcePropertyName", # required
-    #           operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #           operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #           value: "FilterValue",
     #         },
     #       ],
@@ -8924,7 +8926,7 @@ module Aws::SageMaker
     #           filters: [ # required
     #             {
     #               name: "ResourcePropertyName", # required
-    #               operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #               operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #               value: "FilterValue",
     #             },
     #           ],
@@ -9636,7 +9638,7 @@ module Aws::SageMaker
     # When Amazon SageMaker receives the request, it sets the endpoint
     # status to `Updating`. After updating the endpoint, it sets the status
     # to `InService`. To check the status of an endpoint, use the
-    # [DescribeEndpoint][1] API.
+    # DescribeEndpoint API.
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` in use by an endpoint that is
     # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
@@ -9644,10 +9646,6 @@ module Aws::SageMaker
     # create a new `EndpointConfig`.
     #
     #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint whose configuration you want to update.
@@ -9665,16 +9663,11 @@ module Aws::SageMaker
     #
     # @option params [Array<Types::VariantProperty>] :exclude_retained_variant_properties
     #   When you are updating endpoint resources with
-    #   [RetainAllVariantProperties][1], whose value is set to `true`,
-    #   `ExcludeRetainedVariantProperties` specifies the list of type
-    #   [VariantProperty][2] to override with the values provided by
+    #   UpdateEndpointInput$RetainAllVariantProperties, whose value is set to
+    #   `true`, `ExcludeRetainedVariantProperties` specifies the list of type
+    #   VariantProperty to override with the values provided by
     #   `EndpointConfig`. If you don't specify a value for
     #   `ExcludeAllVariantProperties`, no variant properties are overridden.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VariantProperty.html
     #
     # @return [Types::UpdateEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9711,11 +9704,7 @@ module Aws::SageMaker
     # existing endpoint. When it receives the request, Amazon SageMaker sets
     # the endpoint status to `Updating`. After updating the endpoint, it
     # sets the status to `InService`. To check the status of an endpoint,
-    # use the [DescribeEndpoint][1] API.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
+    # use the DescribeEndpoint API.
     #
     # @option params [required, String] :endpoint_name
     #   The name of an existing Amazon SageMaker endpoint.
@@ -10404,7 +10393,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

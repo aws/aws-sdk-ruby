@@ -5786,8 +5786,11 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
-    #   The attribute used as the aggregator to group related findings for
-    #   the insight.
+    #   The attribute used to group the findings for the insight. The
+    #   grouping attribute identifies the type of item that the insight
+    #   applies to. For example, if an insight is grouped by resource
+    #   identifier, then the insight produces a list of resource
+    #   identifiers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateInsightRequest AWS API Documentation
@@ -6394,16 +6397,26 @@ module Aws::SecurityHub
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         enable_default_standards: false,
     #       }
     #
     # @!attribute [rw] tags
     #   The tags to add to the Hub resource when you enable Security Hub.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] enable_default_standards
+    #   Whether to enable the security standards that Security Hub has
+    #   designated as automatically enabled. If you do not provide a value
+    #   for `EnableDefaultStandards`, it is set to `true`. To not enable the
+    #   automatically enabled standards, set `EnableDefaultStandards` to
+    #   `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubRequest AWS API Documentation
     #
     class EnableSecurityHubRequest < Struct.new(
-      :tags)
+      :tags,
+      :enable_default_standards)
       include Aws::Structure
     end
 
@@ -7236,19 +7249,20 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Includes details of the list of the findings that cannot be imported.
+    # The list of the findings that cannot be imported. For each finding,
+    # the list provides the error.
     #
     # @!attribute [rw] id
-    #   The ID of the error made during the `BatchImportFindings` operation.
+    #   The identifier of the finding that could not be updated.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The code of the error made during the `BatchImportFindings`
+    #   The code of the error returned by the `BatchImportFindings`
     #   operation.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The message of the error made during the `BatchImportFindings`
+    #   The message of the error returned by the `BatchImportFindings`
     #   operation.
     #   @return [String]
     #
@@ -7278,10 +7292,11 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
-    #   The attribute that the insight's findings are grouped by. This
-    #   attribute is used as a findings aggregator for the purposes of
-    #   viewing and managing multiple related findings under a single
-    #   operand.
+    #   The grouping attribute for the insight's findings. Indicates how to
+    #   group the matching findings, and identifies the type of item that
+    #   the insight applies to. For example, if an insight is grouped by
+    #   resource identifier, then the insight produces a list of resource
+    #   identifiers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Insight AWS API Documentation
@@ -9307,12 +9322,23 @@ module Aws::SecurityHub
     #   A description of the standard.
     #   @return [String]
     #
+    # @!attribute [rw] enabled_by_default
+    #   Whether the standard is enabled by default. When Security Hub is
+    #   enabled from the console, if a standard is enabled by default, the
+    #   check box for that standard is selected by default.
+    #
+    #   When Security Hub is enabled using the `EnableSecurityHub` API
+    #   operation, the standard is enabled by default unless
+    #   `EnableDefaultStandards` is set to `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Standard AWS API Documentation
     #
     class Standard < Struct.new(
       :standards_arn,
       :name,
-      :description)
+      :description,
+      :enabled_by_default)
       include Aws::Structure
     end
 

@@ -50,18 +50,17 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies the training algorithm to use in a [CreateTrainingJob][1]
+    # Specifies the training algorithm to use in a CreateTrainingJob
     # request.
     #
     # For more information about algorithms provided by Amazon SageMaker,
-    # see [Algorithms][2]. For information about using your own algorithms,
-    # see [Using Your Own Algorithms with Amazon SageMaker][3].
+    # see [Algorithms][1]. For information about using your own algorithms,
+    # see [Using Your Own Algorithms with Amazon SageMaker][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @note When making an API call, you may pass AlgorithmSpecification
     #   data as a hash:
@@ -538,6 +537,34 @@ module Aws::SageMaker
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass`
     #
+    #   * *Multi-label image classification* - Uses a variant of the
+    #     Expectation Maximization approach to estimate the true classes of
+    #     an image based on annotations from individual workers.
+    #
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel`
+    #
     #   * *Semantic segmentation* - Treats each pixel in an image as a
     #     multi-class classification and treats pixel annotations from
     #     workers as "votes" for the correct label.
@@ -593,6 +620,34 @@ module Aws::SageMaker
     #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass`
     #
     #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass`
+    #
+    #   * *Multi-label text classification* - Uses a variant of the
+    #     Expectation Maximization approach to estimate the true classes of
+    #     text based on annotations from individual workers.
+    #
+    #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel`
+    #
+    #     `arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel`
     #
     #   * *Named entity recognition* - Groups similar selections and
     #     calculates aggregate boundaries, resolving to most-assigned label.
@@ -1023,7 +1078,11 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] s3_data_source
-    #   The Amazon S3 location of the data.
+    #   The Amazon S3 location of the input data.
+    #
+    #   <note markdown="1"> The input data must be in CSV format and contain at least 1000 rows.
+    #
+    #    </note>
     #   @return [Types::AutoMLS3DataSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLDataSource AWS API Documentation
@@ -2295,7 +2354,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] input_data_config
     #   Similar to InputDataConfig supported by Tuning. Format(s) supported:
-    #   CSV.
+    #   CSV. Minimum of 1000 rows.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -2415,7 +2474,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, amba_cv22
+    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -2642,11 +2701,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
-    #   [CreateEndpoint][1] request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    #   CreateEndpoint request.
     #   @return [String]
     #
     # @!attribute [rw] production_variants
@@ -2757,11 +2812,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] endpoint_config_name
     #   The name of an endpoint configuration. For more information, see
-    #   [CreateEndpointConfig][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
+    #   CreateEndpointConfig.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2855,10 +2906,10 @@ module Aws::SageMaker
     #
     #       {
     #         flow_definition_name: "FlowDefinitionName", # required
+    #         human_loop_request_source: {
+    #           aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
+    #         },
     #         human_loop_activation_config: {
-    #           human_loop_request_source: { # required
-    #             aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
-    #           },
     #           human_loop_activation_conditions_config: { # required
     #             human_loop_activation_conditions: "HumanLoopActivationConditions", # required
     #           },
@@ -2897,6 +2948,10 @@ module Aws::SageMaker
     #   The name of your flow definition.
     #   @return [String]
     #
+    # @!attribute [rw] human_loop_request_source
+    #   Container for configuring the source of human task requests.
+    #   @return [Types::HumanLoopRequestSource]
+    #
     # @!attribute [rw] human_loop_activation_config
     #   An object containing information about the events that trigger a
     #   human workflow.
@@ -2928,6 +2983,7 @@ module Aws::SageMaker
     #
     class CreateFlowDefinitionRequest < Struct.new(
       :flow_definition_name,
+      :human_loop_request_source,
       :human_loop_activation_config,
       :human_loop_config,
       :output_config,
@@ -3266,8 +3322,12 @@ module Aws::SageMaker
     #   The HyperParameterTuningJobConfig object that describes the tuning
     #   job, including the search strategy, the objective metric used to
     #   evaluate training jobs, ranges of parameters to search, and resource
-    #   limits for the tuning job. For more information, see
-    #   automatic-model-tuning
+    #   limits for the tuning job. For more information, see [How
+    #   Hyperparameter Tuning Works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html
     #   @return [Types::HyperParameterTuningJobConfig]
     #
     # @!attribute [rw] training_job_definition
@@ -3613,18 +3673,17 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_config
-    #   A [VpcConfig][1] object that specifies the VPC that you want your
-    #   model to connect to. Control access to and from your model container
-    #   by configuring the VPC. `VpcConfig` is used in hosting services and
-    #   in batch transform. For more information, see [Protect Endpoints by
-    #   Using an Amazon Virtual Private Cloud][2] and [Protect Data in Batch
-    #   Transform Jobs by Using an Amazon Virtual Private Cloud][3].
+    #   A VpcConfig object that specifies the VPC that you want your model
+    #   to connect to. Control access to and from your model container by
+    #   configuring the VPC. `VpcConfig` is used in hosting services and in
+    #   batch transform. For more information, see [Protect Endpoints by
+    #   Using an Amazon Virtual Private Cloud][1] and [Protect Data in Batch
+    #   Transform Jobs by Using an Amazon Virtual Private Cloud][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
-    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] enable_network_isolation
@@ -3878,7 +3937,7 @@ module Aws::SageMaker
     # @!attribute [rw] tags
     #   (Optional) An array of key-value pairs. For more information, see
     #   [Using Cost Allocation Tags](
-    #   https://docs-aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+    #   https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
     #   in the *AWS Billing and Cost Management User Guide*.
     #   @return [Array<Types::Tag>]
     #
@@ -4345,7 +4404,7 @@ module Aws::SageMaker
     #
     #
     #
-    #   [1]: https://docs-aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] experiment_config
@@ -4817,7 +4876,7 @@ module Aws::SageMaker
     #   file is a record.
     #
     #   To enable the batch strategy, you must set the `SplitType` property
-    #   of the DataProcessing object to `Line`, `RecordIO`, or `TFRecord`.
+    #   to `Line`, `RecordIO`, or `TFRecord`.
     #
     #   To use only one record when making an HTTP invocation request to a
     #   container, set `BatchStrategy` to `SingleRecord` and `SplitType` to
@@ -6875,6 +6934,10 @@ module Aws::SageMaker
     #   The timestamp when the flow definition was created.
     #   @return [Time]
     #
+    # @!attribute [rw] human_loop_request_source
+    #   Container for configuring the source of human task requests.
+    #   @return [Types::HumanLoopRequestSource]
+    #
     # @!attribute [rw] human_loop_activation_config
     #   An object containing information about what triggers a human review
     #   workflow.
@@ -6904,6 +6967,7 @@ module Aws::SageMaker
       :flow_definition_name,
       :flow_definition_status,
       :creation_time,
+      :human_loop_request_source,
       :human_loop_activation_config,
       :human_loop_config,
       :output_config,
@@ -9180,7 +9244,7 @@ module Aws::SageMaker
     #
     #       {
     #         name: "ResourcePropertyName", # required
-    #         operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #         operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #         value: "FilterValue",
     #       }
     #
@@ -9467,7 +9531,7 @@ module Aws::SageMaker
     end
 
     # Defines under what conditions SageMaker creates a human loop. Used
-    # within .
+    # within . See for the required format of activation conditions.
     #
     # @note When making an API call, you may pass HumanLoopActivationConditionsConfig
     #   data as a hash:
@@ -9480,7 +9544,14 @@ module Aws::SageMaker
     #   JSON expressing use-case specific conditions declaratively. If any
     #   condition is matched, atomic tasks are created against the
     #   configured work team. The set of conditions is different for
-    #   Rekognition and Textract.
+    #   Rekognition and Textract. For more information about how to
+    #   structure the JSON, see [JSON Schema for Human Loop Activation
+    #   Conditions in Amazon Augmented AI][1] in the *Amazon SageMaker
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-human-fallback-conditions-json-schema.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanLoopActivationConditionsConfig AWS API Documentation
@@ -9498,17 +9569,10 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         human_loop_request_source: { # required
-    #           aws_managed_human_loop_request_source: "AWS/Rekognition/DetectModerationLabels/Image/V3", # required, accepts AWS/Rekognition/DetectModerationLabels/Image/V3, AWS/Textract/AnalyzeDocument/Forms/V1
-    #         },
     #         human_loop_activation_conditions_config: { # required
     #           human_loop_activation_conditions: "HumanLoopActivationConditions", # required
     #         },
     #       }
-    #
-    # @!attribute [rw] human_loop_request_source
-    #   Container for configuring the source of human task requests.
-    #   @return [Types::HumanLoopRequestSource]
     #
     # @!attribute [rw] human_loop_activation_conditions_config
     #   Container structure for defining under what conditions SageMaker
@@ -9518,7 +9582,6 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanLoopActivationConfig AWS API Documentation
     #
     class HumanLoopActivationConfig < Struct.new(
-      :human_loop_request_source,
       :human_loop_activation_conditions_config)
       include Aws::Structure
     end
@@ -9885,9 +9948,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition`
     #
@@ -9905,9 +9972,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition`
     #
@@ -9925,9 +9996,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition`
     #
@@ -9945,9 +10020,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition`
     #
@@ -9965,9 +10044,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition`
     #
@@ -9985,9 +10068,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition`
     #
@@ -10005,9 +10092,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition`
     #
@@ -10025,9 +10116,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition`
     #
@@ -10045,9 +10140,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition`
     #
@@ -10065,9 +10164,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition`
     #
@@ -10085,9 +10188,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition`
     #
@@ -10105,9 +10212,13 @@ module Aws::SageMaker
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass`
     #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClassMultiLabel`
+    #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass`
+    #
+    #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClassMultiLabel`
     #
     #   * `arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition`
     #
@@ -10145,7 +10256,7 @@ module Aws::SageMaker
     #   The length of time that a task remains available for labeling by
     #   human workers. **If you choose the Amazon Mechanical Turk workforce,
     #   the maximum is 12 hours (43200)**. The default value is 864000
-    #   seconds (1 day). For private and vendor workforces, the maximum is
+    #   seconds (10 days). For private and vendor workforces, the maximum is
     #   as listed.
     #   @return [Integer]
     #
@@ -15397,7 +15508,7 @@ module Aws::SageMaker
     #         filters: [ # required
     #           {
     #             name: "ResourcePropertyName", # required
-    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #             value: "FilterValue",
     #           },
     #         ],
@@ -15690,7 +15801,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, amba_cv22
+    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, sitara_am57x, amba_cv22
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -17188,7 +17299,7 @@ module Aws::SageMaker
     #         filters: [
     #           {
     #             name: "ResourcePropertyName", # required
-    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #             operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #             value: "FilterValue",
     #           },
     #         ],
@@ -17198,7 +17309,7 @@ module Aws::SageMaker
     #             filters: [ # required
     #               {
     #                 name: "ResourcePropertyName", # required
-    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #                 value: "FilterValue",
     #               },
     #             ],
@@ -17209,7 +17320,7 @@ module Aws::SageMaker
     #             filters: [
     #               {
     #                 name: "ResourcePropertyName", # required
-    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #                 operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #                 value: "FilterValue",
     #               },
     #             ],
@@ -17219,7 +17330,7 @@ module Aws::SageMaker
     #                 filters: [ # required
     #                   {
     #                     name: "ResourcePropertyName", # required
-    #                     operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #                     operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #                     value: "FilterValue",
     #                   },
     #                 ],
@@ -17303,7 +17414,7 @@ module Aws::SageMaker
     #           filters: [
     #             {
     #               name: "ResourcePropertyName", # required
-    #               operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #               operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #               value: "FilterValue",
     #             },
     #           ],
@@ -17313,7 +17424,7 @@ module Aws::SageMaker
     #               filters: [ # required
     #                 {
     #                   name: "ResourcePropertyName", # required
-    #                   operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists
+    #                   operator: "Equals", # accepts Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Contains, Exists, NotExists, In
     #                   value: "FilterValue",
     #                 },
     #               ],
@@ -18280,7 +18391,11 @@ module Aws::SageMaker
     # @!attribute [rw] enable_managed_spot_training
     #   When true, enables managed spot training using Amazon EC2 Spot
     #   instances to run training jobs instead of on-demand instances. For
-    #   more information, see model-managed-spot-training.
+    #   more information, see [Managed Spot Training][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html
     #   @return [Boolean]
     #
     # @!attribute [rw] checkpoint_config
@@ -19755,7 +19870,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] content_sha_256
-    #   The SHA 256 hash that you used to create the request signature.
+    #   The SHA-256 digest of the contents of the template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiTemplateInfo AWS API Documentation
@@ -19903,16 +20018,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] exclude_retained_variant_properties
     #   When you are updating endpoint resources with
-    #   [RetainAllVariantProperties][1], whose value is set to `true`,
-    #   `ExcludeRetainedVariantProperties` specifies the list of type
-    #   [VariantProperty][2] to override with the values provided by
+    #   UpdateEndpointInput$RetainAllVariantProperties, whose value is set
+    #   to `true`, `ExcludeRetainedVariantProperties` specifies the list of
+    #   type VariantProperty to override with the values provided by
     #   `EndpointConfig`. If you don't specify a value for
     #   `ExcludeAllVariantProperties`, no variant properties are overridden.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VariantProperty.html
     #   @return [Array<Types::VariantProperty>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput AWS API Documentation
@@ -20793,15 +20903,10 @@ module Aws::SageMaker
     # Specifies a production variant property type for an Endpoint.
     #
     # If you are updating an endpoint with the
-    # [RetainAllVariantProperties][1] option set to `true`, the
-    # `VariantProperty` objects listed in
-    # [ExcludeRetainedVariantProperties][2] override the existing variant
-    # properties of the endpoint.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-ExcludeRetainedVariantProperties
+    # UpdateEndpointInput$RetainAllVariantProperties option set to `true`,
+    # the `VariantProperty` objects listed in
+    # UpdateEndpointInput$ExcludeRetainedVariantProperties override the
+    # existing variant properties of the endpoint.
     #
     # @note When making an API call, you may pass VariantProperty
     #   data as a hash:
@@ -20814,19 +20919,14 @@ module Aws::SageMaker
     #   The type of variant property. The supported values are:
     #
     #   * `DesiredInstanceCount`\: Overrides the existing variant instance
-    #     counts using the [InitialInstanceCount][1] values in the
-    #     [ProductionVariants][2].
+    #     counts using the ProductionVariant$InitialInstanceCount values in
+    #     the CreateEndpointConfigInput$ProductionVariants.
     #
     #   * `DesiredWeight`\: Overrides the existing variant weights using the
-    #     [InitialVariantWeight][3] values in the [ProductionVariants][2].
+    #     ProductionVariant$InitialVariantWeight values in the
+    #     CreateEndpointConfigInput$ProductionVariants.
     #
     #   * `DataCaptureConfig`\: (Not currently supported.)
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_ProductionVariant.html#SageMaker-Type-ProductionVariant-InitialInstanceCount
-    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html#SageMaker-CreateEndpointConfig-request-ProductionVariants
-    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_ProductionVariant.html#SageMaker-Type-ProductionVariant-InitialVariantWeight
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VariantProperty AWS API Documentation

@@ -1016,8 +1016,10 @@ module Aws::SecurityHub
     #   defined in the filters.
     #
     # @option params [required, String] :group_by_attribute
-    #   The attribute used as the aggregator to group related findings for the
-    #   insight.
+    #   The attribute used to group the findings for the insight. The grouping
+    #   attribute identifies the type of item that the insight applies to. For
+    #   example, if an insight is grouped by resource identifier, then the
+    #   insight produces a list of resource identifiers.
     #
     # @return [Types::CreateInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1980,6 +1982,7 @@ module Aws::SecurityHub
     #   resp.standards[0].standards_arn #=> String
     #   resp.standards[0].name #=> String
     #   resp.standards[0].description #=> String
+    #   resp.standards[0].enabled_by_default #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandards AWS API Documentation
@@ -2178,15 +2181,18 @@ module Aws::SecurityHub
     # Region you specify in the request.
     #
     # When you enable Security Hub, you grant to Security Hub the
-    # permissions necessary to gather findings from AWS Config, Amazon
-    # GuardDuty, Amazon Inspector, and Amazon Macie.
+    # permissions necessary to gather findings from other services that are
+    # integrated with Security Hub.
     #
     # When you use the `EnableSecurityHub` operation to enable Security Hub,
     # you also automatically enable the CIS AWS Foundations standard. You do
     # not enable the Payment Card Industry Data Security Standard (PCI DSS)
-    # standard. To enable a standard, use the ` BatchEnableStandards `
-    # operation. To disable a standard, use the ` BatchDisableStandards `
-    # operation.
+    # standard. To not enable the CIS AWS Foundations standard, set
+    # `EnableDefaultStandards` to `false`.
+    #
+    # After you enable Security Hub, to enable a standard, use the `
+    # BatchEnableStandards ` operation. To disable a standard, use the `
+    # BatchDisableStandards ` operation.
     #
     # To learn more, see [Setting Up AWS Security Hub][1] in the *AWS
     # Security Hub User Guide*.
@@ -2198,6 +2204,13 @@ module Aws::SecurityHub
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the Hub resource when you enable Security Hub.
     #
+    # @option params [Boolean] :enable_default_standards
+    #   Whether to enable the security standards that Security Hub has
+    #   designated as automatically enabled. If you do not provide a value for
+    #   `EnableDefaultStandards`, it is set to `true`. To not enable the
+    #   automatically enabled standards, set `EnableDefaultStandards` to
+    #   `false`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2206,6 +2219,7 @@ module Aws::SecurityHub
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     enable_default_standards: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub AWS API Documentation
@@ -5169,7 +5183,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

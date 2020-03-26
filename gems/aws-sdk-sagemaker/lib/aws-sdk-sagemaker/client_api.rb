@@ -1281,6 +1281,7 @@ module Aws::SageMaker
     CreateExperimentResponse.struct_class = Types::CreateExperimentResponse
 
     CreateFlowDefinitionRequest.add_member(:flow_definition_name, Shapes::ShapeRef.new(shape: FlowDefinitionName, required: true, location_name: "FlowDefinitionName"))
+    CreateFlowDefinitionRequest.add_member(:human_loop_request_source, Shapes::ShapeRef.new(shape: HumanLoopRequestSource, location_name: "HumanLoopRequestSource"))
     CreateFlowDefinitionRequest.add_member(:human_loop_activation_config, Shapes::ShapeRef.new(shape: HumanLoopActivationConfig, location_name: "HumanLoopActivationConfig"))
     CreateFlowDefinitionRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, required: true, location_name: "HumanLoopConfig"))
     CreateFlowDefinitionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: FlowDefinitionOutputConfig, required: true, location_name: "OutputConfig"))
@@ -1785,6 +1786,7 @@ module Aws::SageMaker
     DescribeFlowDefinitionResponse.add_member(:flow_definition_name, Shapes::ShapeRef.new(shape: FlowDefinitionName, required: true, location_name: "FlowDefinitionName"))
     DescribeFlowDefinitionResponse.add_member(:flow_definition_status, Shapes::ShapeRef.new(shape: FlowDefinitionStatus, required: true, location_name: "FlowDefinitionStatus"))
     DescribeFlowDefinitionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeFlowDefinitionResponse.add_member(:human_loop_request_source, Shapes::ShapeRef.new(shape: HumanLoopRequestSource, location_name: "HumanLoopRequestSource"))
     DescribeFlowDefinitionResponse.add_member(:human_loop_activation_config, Shapes::ShapeRef.new(shape: HumanLoopActivationConfig, location_name: "HumanLoopActivationConfig"))
     DescribeFlowDefinitionResponse.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, required: true, location_name: "HumanLoopConfig"))
     DescribeFlowDefinitionResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: FlowDefinitionOutputConfig, required: true, location_name: "OutputConfig"))
@@ -2223,7 +2225,6 @@ module Aws::SageMaker
     HumanLoopActivationConditionsConfig.add_member(:human_loop_activation_conditions, Shapes::ShapeRef.new(shape: HumanLoopActivationConditions, required: true, location_name: "HumanLoopActivationConditions", metadata: {"jsonvalue"=>true}))
     HumanLoopActivationConditionsConfig.struct_class = Types::HumanLoopActivationConditionsConfig
 
-    HumanLoopActivationConfig.add_member(:human_loop_request_source, Shapes::ShapeRef.new(shape: HumanLoopRequestSource, required: true, location_name: "HumanLoopRequestSource"))
     HumanLoopActivationConfig.add_member(:human_loop_activation_conditions_config, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsConfig, required: true, location_name: "HumanLoopActivationConditionsConfig"))
     HumanLoopActivationConfig.struct_class = Types::HumanLoopActivationConfig
 
