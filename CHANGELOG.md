@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.478 (2020-03-27)
+------------------
+
 * Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
 
 * Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
