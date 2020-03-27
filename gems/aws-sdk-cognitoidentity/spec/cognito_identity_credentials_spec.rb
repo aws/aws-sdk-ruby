@@ -21,7 +21,7 @@ module Aws
                access_key_id: 'akid',
                secret_access_key: 'secret',
                session_token: 'session',
-               expiration: expiration,
+               expiration: expiration
                )
       }
 
@@ -42,12 +42,19 @@ module Aws
         expect(creds.client).to be(client)
       end
 
-      it 'raises an error' do
-
+      it 'raises an argument error when identity_pool_id and identity_id are missing' do
+        expect { CognitoIdentityCredentials.new }.to raise_error(ArgumentError)
       end
 
-      it 'accepts client options' do
+      it 'sets the client when passed in and does not create a new one' do
+        test_client = client # force construction
+        expect(CognitoIdentity::Client).not_to receive(:new)
 
+        creds = CognitoIdentityCredentials.new(
+          identity_id: identity_id,
+          client: test_client
+        )
+        expect(creds.client).to be(client)
       end
 
     end
