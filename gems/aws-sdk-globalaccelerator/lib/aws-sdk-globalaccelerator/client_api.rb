@@ -23,6 +23,8 @@ module Aws::GlobalAccelerator
     AssociatedEndpointGroupFoundException = Shapes::StructureShape.new(name: 'AssociatedEndpointGroupFoundException')
     AssociatedListenerFoundException = Shapes::StructureShape.new(name: 'AssociatedListenerFoundException')
     ByoipCidr = Shapes::StructureShape.new(name: 'ByoipCidr')
+    ByoipCidrEvent = Shapes::StructureShape.new(name: 'ByoipCidrEvent')
+    ByoipCidrEvents = Shapes::ListShape.new(name: 'ByoipCidrEvents')
     ByoipCidrNotFoundException = Shapes::StructureShape.new(name: 'ByoipCidrNotFoundException')
     ByoipCidrState = Shapes::StringShape.new(name: 'ByoipCidrState')
     ByoipCidrs = Shapes::ListShape.new(name: 'ByoipCidrs')
@@ -160,7 +162,14 @@ module Aws::GlobalAccelerator
 
     ByoipCidr.add_member(:cidr, Shapes::ShapeRef.new(shape: GenericString, location_name: "Cidr"))
     ByoipCidr.add_member(:state, Shapes::ShapeRef.new(shape: ByoipCidrState, location_name: "State"))
+    ByoipCidr.add_member(:events, Shapes::ShapeRef.new(shape: ByoipCidrEvents, location_name: "Events"))
     ByoipCidr.struct_class = Types::ByoipCidr
+
+    ByoipCidrEvent.add_member(:message, Shapes::ShapeRef.new(shape: GenericString, location_name: "Message"))
+    ByoipCidrEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    ByoipCidrEvent.struct_class = Types::ByoipCidrEvent
+
+    ByoipCidrEvents.member = Shapes::ShapeRef.new(shape: ByoipCidrEvent)
 
     ByoipCidrNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ByoipCidrNotFoundException.struct_class = Types::ByoipCidrNotFoundException

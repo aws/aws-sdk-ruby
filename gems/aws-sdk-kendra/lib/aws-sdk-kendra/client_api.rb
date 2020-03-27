@@ -33,6 +33,7 @@ module Aws::Kendra
     ChangeDetectingColumns = Shapes::ListShape.new(name: 'ChangeDetectingColumns')
     ClickFeedback = Shapes::StructureShape.new(name: 'ClickFeedback')
     ClickFeedbackList = Shapes::ListShape.new(name: 'ClickFeedbackList')
+    ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -307,6 +308,7 @@ module Aws::Kendra
     CreateIndexRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateIndexRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
     CreateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateIndexRequest.struct_class = Types::CreateIndexRequest
 
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
@@ -633,6 +635,9 @@ module Aws::Kendra
     SharePointConfiguration.add_member(:urls, Shapes::ShapeRef.new(shape: SharePointUrlList, required: true, location_name: "Urls"))
     SharePointConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     SharePointConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    SharePointConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    SharePointConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    SharePointConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
     SharePointConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     SharePointConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
     SharePointConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
@@ -786,6 +791,7 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

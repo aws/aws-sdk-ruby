@@ -519,6 +519,9 @@ module Aws::Kendra
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         vpc_configuration: {
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["VpcSecurityGroupId"], # required
@@ -660,6 +663,14 @@ module Aws::Kendra
     # @option params [String] :description
     #   A description for the index.
     #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create an index.
+    #   Multiple calls to the `CreateIndex` operation with the same client
+    #   token will create only one index.”
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIndexResponse#id #id} => String
@@ -673,6 +684,7 @@ module Aws::Kendra
     #       kms_key_id: "KmsKeyId",
     #     },
     #     description: "Description",
+    #     client_token: "ClientTokenName",
     #   })
     #
     # @example Response structure
@@ -787,6 +799,11 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.urls[0] #=> String
     #   resp.configuration.share_point_configuration.secret_arn #=> String
     #   resp.configuration.share_point_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.share_point_configuration.use_change_log #=> Boolean
+    #   resp.configuration.share_point_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.share_point_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.share_point_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.share_point_configuration.exclusion_patterns[0] #=> String
     #   resp.configuration.share_point_configuration.vpc_configuration.subnet_ids #=> Array
     #   resp.configuration.share_point_configuration.vpc_configuration.subnet_ids[0] #=> String
     #   resp.configuration.share_point_configuration.vpc_configuration.security_group_ids #=> Array
@@ -1525,6 +1542,9 @@ module Aws::Kendra
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         vpc_configuration: {
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["VpcSecurityGroupId"], # required
@@ -1654,7 +1674,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

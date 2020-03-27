@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-03-27)
+------------------
+
+* Feature - Added "LocalRoleName" as an acceptable Parameter for Launch type in CreateConstraint and UpdateConstraint APIs
+
 1.36.0 (2020-03-20)
 ------------------
 
