@@ -48,6 +48,10 @@ module Aws::AccessAnalyzer
     #   The ARN of the resource that was analyzed.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner_account
+    #   The AWS account ID that owns the resource.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The type of the resource that was analyzed.
     #   @return [String]
@@ -74,6 +78,7 @@ module Aws::AccessAnalyzer
       :error,
       :is_public,
       :resource_arn,
+      :resource_owner_account,
       :resource_type,
       :shared_via,
       :status,
@@ -87,6 +92,10 @@ module Aws::AccessAnalyzer
     #   The ARN of the analyzed resource.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner_account
+    #   The AWS account ID that owns the resource.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The type of resource that was analyzed.
     #   @return [String]
@@ -95,6 +104,7 @@ module Aws::AccessAnalyzer
     #
     class AnalyzedResourceSummary < Struct.new(
       :resource_arn,
+      :resource_owner_account,
       :resource_type)
       include Aws::Structure
     end
@@ -121,6 +131,25 @@ module Aws::AccessAnalyzer
     #   The name of the analyzer.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   The status of the analyzer. An `Active` analyzer successfully
+    #   monitors supported resources and generates new findings. The
+    #   analyzer is `Disabled` when a user action, such as removing trusted
+    #   access for IAM Access Analyzer from AWS Organizations, causes the
+    #   analyzer to stop generating new findings. The status is `Creating`
+    #   when the analyzer creation is in progress and `Failed` when the
+    #   analyzer creation has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The `statusReason` provides more details about the current status of
+    #   the analyzer. For example, if the creation for the analyzer fails, a
+    #   `Failed` status is displayed. For an analyzer with organization as
+    #   the type, this failure can be due to an issue with creating the
+    #   service-linked roles required in the member accounts of the AWS
+    #   organization.
+    #   @return [Types::StatusReason]
+    #
     # @!attribute [rw] tags
     #   The tags added to the analyzer.
     #   @return [Hash<String,String>]
@@ -138,6 +167,8 @@ module Aws::AccessAnalyzer
       :last_resource_analyzed,
       :last_resource_analyzed_at,
       :name,
+      :status,
+      :status_reason,
       :tags,
       :type)
       include Aws::Structure
@@ -217,7 +248,7 @@ module Aws::AccessAnalyzer
     #         tags: {
     #           "String" => "String",
     #         },
-    #         type: "ACCOUNT", # required, accepts ACCOUNT
+    #         type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION
     #       }
     #
     # @!attribute [rw] analyzer_name
@@ -467,6 +498,10 @@ module Aws::AccessAnalyzer
     #   The resource that an external principal has access to.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner_account
+    #   The AWS account ID that owns the resource.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The type of the resource reported in the finding.
     #   @return [String]
@@ -491,6 +526,7 @@ module Aws::AccessAnalyzer
       :is_public,
       :principal,
       :resource,
+      :resource_owner_account,
       :resource_type,
       :status,
       :updated_at)
@@ -540,6 +576,10 @@ module Aws::AccessAnalyzer
     #   The resource that the external principal has access to.
     #   @return [String]
     #
+    # @!attribute [rw] resource_owner_account
+    #   The AWS account ID that owns the resource.
+    #   @return [String]
+    #
     # @!attribute [rw] resource_type
     #   The type of the resource that the external principal has access to.
     #   @return [String]
@@ -564,6 +604,7 @@ module Aws::AccessAnalyzer
       :is_public,
       :principal,
       :resource,
+      :resource_owner_account,
       :resource_type,
       :status,
       :updated_at)
@@ -838,7 +879,7 @@ module Aws::AccessAnalyzer
     #       {
     #         max_results: 1,
     #         next_token: "Token",
-    #         type: "ACCOUNT", # accepts ACCOUNT
+    #         type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION
     #       }
     #
     # @!attribute [rw] max_results
@@ -1130,6 +1171,23 @@ module Aws::AccessAnalyzer
     class StartResourceScanRequest < Struct.new(
       :analyzer_arn,
       :resource_arn)
+      include Aws::Structure
+    end
+
+    # Provides more details about the current status of the analyzer. For
+    # example, if the creation for the analyzer fails, a `Failed` status is
+    # displayed. For an analyzer with organization as the type, this failure
+    # can be due to an issue with creating the service-linked roles required
+    # in the member accounts of the AWS organization.
+    #
+    # @!attribute [rw] code
+    #   The reason code for the current status of the analyzer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/StatusReason AWS API Documentation
+    #
+    class StatusReason < Struct.new(
+      :code)
       include Aws::Structure
     end
 

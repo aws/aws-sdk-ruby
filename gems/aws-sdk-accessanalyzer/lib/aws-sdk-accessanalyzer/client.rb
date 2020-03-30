@@ -356,7 +356,7 @@ module Aws::AccessAnalyzer
     #     tags: {
     #       "String" => "String",
     #     },
-    #     type: "ACCOUNT", # required, accepts ACCOUNT
+    #     type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION
     #   })
     #
     # @example Response structure
@@ -512,6 +512,7 @@ module Aws::AccessAnalyzer
     #   resp.resource.error #=> String
     #   resp.resource.is_public #=> Boolean
     #   resp.resource.resource_arn #=> String
+    #   resp.resource.resource_owner_account #=> String
     #   resp.resource.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
     #   resp.resource.shared_via #=> Array
     #   resp.resource.shared_via[0] #=> String
@@ -549,9 +550,11 @@ module Aws::AccessAnalyzer
     #   resp.analyzer.last_resource_analyzed #=> String
     #   resp.analyzer.last_resource_analyzed_at #=> Time
     #   resp.analyzer.name #=> String
+    #   resp.analyzer.status #=> String, one of "ACTIVE", "CREATING", "DISABLED", "FAILED"
+    #   resp.analyzer.status_reason.code #=> String, one of "AWS_SERVICE_ACCESS_DISABLED", "DELEGATED_ADMINISTRATOR_DEREGISTERED", "ORGANIZATION_DELETED", "SERVICE_LINKED_ROLE_CREATION_FAILED"
     #   resp.analyzer.tags #=> Hash
     #   resp.analyzer.tags["String"] #=> String
-    #   resp.analyzer.type #=> String, one of "ACCOUNT"
+    #   resp.analyzer.type #=> String, one of "ACCOUNT", "ORGANIZATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetAnalyzer AWS API Documentation
     #
@@ -637,6 +640,7 @@ module Aws::AccessAnalyzer
     #   resp.finding.principal #=> Hash
     #   resp.finding.principal["String"] #=> String
     #   resp.finding.resource #=> String
+    #   resp.finding.resource_owner_account #=> String
     #   resp.finding.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
     #   resp.finding.status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.finding.updated_at #=> Time
@@ -685,6 +689,7 @@ module Aws::AccessAnalyzer
     #
     #   resp.analyzed_resources #=> Array
     #   resp.analyzed_resources[0].resource_arn #=> String
+    #   resp.analyzed_resources[0].resource_owner_account #=> String
     #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
     #   resp.next_token #=> String
     #
@@ -720,7 +725,7 @@ module Aws::AccessAnalyzer
     #   resp = client.list_analyzers({
     #     max_results: 1,
     #     next_token: "Token",
-    #     type: "ACCOUNT", # accepts ACCOUNT
+    #     type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION
     #   })
     #
     # @example Response structure
@@ -731,9 +736,11 @@ module Aws::AccessAnalyzer
     #   resp.analyzers[0].last_resource_analyzed #=> String
     #   resp.analyzers[0].last_resource_analyzed_at #=> Time
     #   resp.analyzers[0].name #=> String
+    #   resp.analyzers[0].status #=> String, one of "ACTIVE", "CREATING", "DISABLED", "FAILED"
+    #   resp.analyzers[0].status_reason.code #=> String, one of "AWS_SERVICE_ACCESS_DISABLED", "DELEGATED_ADMINISTRATOR_DEREGISTERED", "ORGANIZATION_DELETED", "SERVICE_LINKED_ROLE_CREATION_FAILED"
     #   resp.analyzers[0].tags #=> Hash
     #   resp.analyzers[0].tags["String"] #=> String
-    #   resp.analyzers[0].type #=> String, one of "ACCOUNT"
+    #   resp.analyzers[0].type #=> String, one of "ACCOUNT", "ORGANIZATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzers AWS API Documentation
@@ -855,6 +862,7 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].principal #=> Hash
     #   resp.findings[0].principal["String"] #=> String
     #   resp.findings[0].resource #=> String
+    #   resp.findings[0].resource_owner_account #=> String
     #   resp.findings[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.findings[0].updated_at #=> Time
@@ -1081,7 +1089,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
