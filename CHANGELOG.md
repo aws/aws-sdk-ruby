@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AccessAnalyzer - Updated the API, and documentation for Access Analyzer.
+
 2.11.478 (2020-03-27)
 ------------------
 
