@@ -441,7 +441,7 @@ module Aws
       def event_string_to_sign(datetime, headers, payload, prior_signature, encoder)
         encoded_headers = encoder.encode_headers(
           Aws::EventStream::Message.new(headers: headers, payload: payload)
-        ).read
+        )
         [
           "AWS4-HMAC-SHA256-PAYLOAD",
           datetime,
