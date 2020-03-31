@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-03-31)
+------------------
+
+* Feature - Removing the notes that Detective is in preview, in preparation for the Detective GA release.
+
 1.3.0 (2020-03-25)
 ------------------
 

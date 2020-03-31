@@ -900,6 +900,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -928,6 +929,11 @@ module Aws::AppConfig
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1355,6 +1361,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -1389,6 +1396,11 @@ module Aws::AppConfig
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1431,6 +1443,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -1459,6 +1472,11 @@ module Aws::AppConfig
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1835,7 +1853,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

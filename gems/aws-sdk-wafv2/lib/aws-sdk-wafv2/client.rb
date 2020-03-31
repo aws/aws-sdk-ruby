@@ -329,9 +329,11 @@ module Aws::WAFV2
     # the resource. A regional application can be an Application Load
     # Balancer (ALB) or an API Gateway stage.
     #
-    # For AWS CloudFront, you can associate the Web ACL by providing the
-    # `ARN` of the WebACL to the CloudFront API call `UpdateDistribution`.
-    # For information, see [UpdateDistribution][2].
+    # For AWS CloudFront, don't use this call. Instead, use your CloudFront
+    # distribution configuration. To associate a Web ACL, in the CloudFront
+    # call `UpdateDistribution`, set the web ACL ID to the Amazon Resource
+    # Name (ARN) of the Web ACL. For information, see
+    # [UpdateDistribution][2].
     #
     #
     #
@@ -405,7 +407,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -666,8 +668,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet` after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -677,14 +679,14 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [String] :description
-    #   A friendly description of the IP set. You cannot change the
-    #   description of an IP set after you create it.
+    #   A description of the IP set that helps with identification. You cannot
+    #   change the description of an IP set after you create it.
     #
     # @option params [required, String] :ip_address_version
     #   Specify IPV4 or IPV6.
@@ -777,8 +779,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -788,14 +790,14 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [String] :description
-    #   A friendly description of the set. You cannot change the description
-    #   of a set after you create it.
+    #   A description of the set that helps with identification. You cannot
+    #   change the description of a set after you create it.
     #
     # @option params [required, Array<Types::Regex>] :regular_expression_list
     #   Array of regular expression strings.
@@ -863,8 +865,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule group
+    #   after you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -874,7 +876,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -897,8 +899,8 @@ module Aws::WAFV2
     #   ACLs is 1,500.
     #
     # @option params [String] :description
-    #   A friendly description of the rule group. You cannot change the
-    #   description of a rule group after you create it.
+    #   A description of the rule group that helps with identification. You
+    #   cannot change the description of a rule group after you create it.
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
@@ -1189,8 +1191,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -1200,7 +1202,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1210,8 +1212,8 @@ module Aws::WAFV2
     #   match.
     #
     # @option params [String] :description
-    #   A friendly description of the Web ACL. You cannot change the
-    #   description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification. You
+    #   cannot change the description of a Web ACL after you create it.
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
@@ -1483,6 +1485,49 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Deletes all rule groups that are managed by AWS Firewall Manager for
+    # the specified web ACL.
+    #
+    # You can only use this if `ManagedByFirewallManager` is false in the
+    # specified WebACL.
+    #
+    # @option params [required, String] :web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL.
+    #
+    # @option params [required, String] :web_acl_lock_token
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time of
+    #   the request. To make changes to the entity associated with the token,
+    #   you provide the token to operations like update and delete. AWS WAF
+    #   uses the token to ensure that no changes have been made to the entity
+    #   since you last retrieved it. If a change has been made, the update
+    #   fails with a `WAFOptimisticLockException`. If this happens, perform
+    #   another get, and use the new token returned by that operation.
+    #
+    # @return [Types::DeleteFirewallManagerRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFirewallManagerRuleGroupsResponse#next_web_acl_lock_token #next_web_acl_lock_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_firewall_manager_rule_groups({
+    #     web_acl_arn: "ResourceArn", # required
+    #     web_acl_lock_token: "LockToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_web_acl_lock_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteFirewallManagerRuleGroups AWS API Documentation
+    #
+    # @overload delete_firewall_manager_rule_groups(params = {})
+    # @param [Hash] params ({})
+    def delete_firewall_manager_rule_groups(params = {}, options = {})
+      req = build_request(:delete_firewall_manager_rule_groups, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
     # in November, 2019. For information, including how to migrate your AWS
     # WAF resources from the prior release, see the [AWS WAF Developer
@@ -1497,8 +1542,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet` after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -1508,7 +1553,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1582,6 +1627,33 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Permanently deletes an IAM policy from the specified rule group.
+    #
+    # You must be the owner of the rule group to perform this operation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the rule group from which you want
+    #   to delete the policy.
+    #
+    #   You must be the owner of the rule group to perform this operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_permission_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeletePermissionPolicy AWS API Documentation
+    #
+    # @overload delete_permission_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_permission_policy(params = {}, options = {})
+      req = build_request(:delete_permission_policy, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
     # in November, 2019. For information, including how to migrate your AWS
     # WAF resources from the prior release, see the [AWS WAF Developer
@@ -1596,8 +1668,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -1607,7 +1679,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1661,8 +1733,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule group
+    #   after you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -1672,7 +1744,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1721,13 +1793,16 @@ module Aws::WAFV2
     #
     # Deletes the specified WebACL.
     #
+    # You can only use this if `ManagedByFirewallManager` is false in the
+    # specified WebACL.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -1737,7 +1812,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1807,7 +1882,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1851,8 +1926,9 @@ module Aws::WAFV2
     # regional application can be an Application Load Balancer (ALB) or an
     # API Gateway stage.
     #
-    # For AWS CloudFront, you can disassociate the Web ACL by providing an
-    # empty web ACL ARN in the CloudFront API call `UpdateDistribution`. For
+    # For AWS CloudFront, don't use this call. Instead, use your CloudFront
+    # distribution configuration. To disassociate a Web ACL, provide an
+    # empty web ACL ID in the CloudFront call `UpdateDistribution`. For
     # information, see [UpdateDistribution][2].
     #
     #
@@ -1904,8 +1980,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet` after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -1915,7 +1991,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2003,6 +2079,37 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Returns the IAM policy that is attached to the specified rule group.
+    #
+    # You must be the owner of the rule group to perform this operation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the rule group for which you want to
+    #   get the policy.
+    #
+    # @return [Types::GetPermissionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPermissionPolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_permission_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetPermissionPolicy AWS API Documentation
+    #
+    # @overload get_permission_policy(params = {})
+    # @param [Hash] params ({})
+    def get_permission_policy(params = {}, options = {})
+      req = build_request(:get_permission_policy, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
     # in November, 2019. For information, including how to migrate your AWS
     # WAF resources from the prior release, see the [AWS WAF Developer
@@ -2027,14 +2134,14 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #
     # @option params [required, String] :web_acl_name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
+    #   you create it.
     #
     # @option params [required, String] :web_acl_id
     #   The unique identifier for the Web ACL. This ID is returned in the
@@ -2090,8 +2197,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -2101,7 +2208,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2157,8 +2264,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule group
+    #   after you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -2168,7 +2275,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2306,7 +2413,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2386,8 +2493,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -2397,7 +2504,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2484,6 +2591,33 @@ module Aws::WAFV2
     #   resp.web_acl.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.visibility_config.metric_name #=> String
     #   resp.web_acl.capacity #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].visibility_config.sampled_requests_enabled #=> Boolean
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].visibility_config.metric_name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].visibility_config.sampled_requests_enabled #=> Boolean
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].visibility_config.metric_name #=> String
+    #   resp.web_acl.managed_by_firewall_manager #=> Boolean
     #   resp.lock_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACL AWS API Documentation
@@ -2585,6 +2719,33 @@ module Aws::WAFV2
     #   resp.web_acl.visibility_config.cloud_watch_metrics_enabled #=> Boolean
     #   resp.web_acl.visibility_config.metric_name #=> String
     #   resp.web_acl.capacity #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].priority #=> Integer
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].visibility_config.sampled_requests_enabled #=> Boolean
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].visibility_config.metric_name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].priority #=> Integer
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.vendor_name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].visibility_config.sampled_requests_enabled #=> Boolean
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].visibility_config.cloud_watch_metrics_enabled #=> Boolean
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].visibility_config.metric_name #=> String
+    #   resp.web_acl.managed_by_firewall_manager #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLForResource AWS API Documentation
     #
@@ -2618,7 +2779,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2688,7 +2849,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2759,7 +2920,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2832,7 +2993,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2953,7 +3114,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3084,7 +3245,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3149,7 +3310,7 @@ module Aws::WAFV2
     #
     # 1.  Create an Amazon Kinesis Data Firehose.
     #
-    #     Create the data firehose with a PUT source and in the region that
+    #     Create the data firehose with a PUT source and in the Region that
     #     you are operating. If you are capturing logs for Amazon
     #     CloudFront, always create the firehose in US East (N. Virginia).
     #
@@ -3222,6 +3383,68 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def put_logging_configuration(params = {}, options = {})
       req = build_request(:put_logging_configuration, params)
+      req.send_request(options)
+    end
+
+    # Attaches an IAM policy to the specified resource. Use this to share a
+    # rule group across accounts.
+    #
+    # You must be the owner of the rule group to perform this operation.
+    #
+    # This action is subject to the following restrictions:
+    #
+    # * You can attach only one policy with each `PutPermissionPolicy`
+    #   request.
+    #
+    # * The ARN in the request must be a valid WAF RuleGroup ARN and the
+    #   rule group must exist in the same region.
+    #
+    # * The user making the request must be the owner of the rule group.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
+    #   attach the policy.
+    #
+    # @option params [required, String] :policy
+    #   The policy to attach to the specified rule group.
+    #
+    #   The policy specifications must conform to the following:
+    #
+    #   * The policy must be composed using IAM Policy version 2012-10-17 or
+    #     version 2015-01-01.
+    #
+    #   * The policy must include specifications for `Effect`, `Action`, and
+    #     `Principal`.
+    #
+    #   * `Effect` must specify `Allow`.
+    #
+    #   * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
+    #     and `wafv2:PutFirewallManagerRuleGroups`. AWS WAF rejects any extra
+    #     actions or wildcard actions in the policy.
+    #
+    #   * The policy must not include a `Resource` parameter.
+    #
+    #   For more information, see [IAM Policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_permission_policy({
+    #     resource_arn: "ResourceArn", # required
+    #     policy: "PolicyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutPermissionPolicy AWS API Documentation
+    #
+    # @overload put_permission_policy(params = {})
+    # @param [Hash] params ({})
+    def put_permission_policy(params = {}, options = {})
+      req = build_request(:put_permission_policy, params)
       req.send_request(options)
     end
 
@@ -3327,8 +3550,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet` after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -3338,7 +3561,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3349,8 +3572,8 @@ module Aws::WAFV2
     #   and delete.
     #
     # @option params [String] :description
-    #   A friendly description of the IP set. You cannot change the
-    #   description of an IP set after you create it.
+    #   A description of the IP set that helps with identification. You cannot
+    #   change the description of an IP set after you create it.
     #
     # @option params [required, Array<String>] :addresses
     #   Contains an array of strings that specify one or more IP addresses or
@@ -3436,8 +3659,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -3447,7 +3670,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3458,8 +3681,8 @@ module Aws::WAFV2
     #   and delete.
     #
     # @option params [String] :description
-    #   A friendly description of the set. You cannot change the description
-    #   of a set after you create it.
+    #   A description of the set that helps with identification. You cannot
+    #   change the description of a set after you create it.
     #
     # @option params [required, Array<Types::Regex>] :regular_expression_list
     #
@@ -3525,8 +3748,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule group
+    #   after you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -3536,7 +3759,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3547,8 +3770,8 @@ module Aws::WAFV2
     #   like update and delete.
     #
     # @option params [String] :description
-    #   A friendly description of the rule group. You cannot change the
-    #   description of a rule group after you create it.
+    #   A description of the rule group that helps with identification. You
+    #   cannot change the description of a rule group after you create it.
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
@@ -3837,8 +4060,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @option params [required, String] :name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL after
+    #   you create it.
     #
     # @option params [required, String] :scope
     #   Specifies whether this is for an AWS CloudFront distribution or for a
@@ -3848,7 +4071,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East (N.
     #   Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3863,8 +4086,8 @@ module Aws::WAFV2
     #   match.
     #
     # @option params [String] :description
-    #   A friendly description of the Web ACL. You cannot change the
-    #   description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification. You
+    #   cannot change the description of a Web ACL after you create it.
     #
     # @option params [Array<Types::Rule>] :rules
     #   The Rule statements used to identify the web requests that you want to
@@ -4148,7 +4371,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

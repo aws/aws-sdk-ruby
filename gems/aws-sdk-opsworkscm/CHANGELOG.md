@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-03-31)
+------------------
+
+* Feature - Documentation updates for OpsWorks-CM CreateServer values.
+
 1.30.0 (2020-03-09)
 ------------------
 

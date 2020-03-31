@@ -27,6 +27,7 @@ module Aws::StorageGateway
     AssignTapePoolOutput = Shapes::StructureShape.new(name: 'AssignTapePoolOutput')
     AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
     AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
+    AuditDestinationARN = Shapes::StringShape.new(name: 'AuditDestinationARN')
     Authentication = Shapes::StringShape.new(name: 'Authentication')
     AvailabilityMonitorTestStatus = Shapes::StringShape.new(name: 'AvailabilityMonitorTestStatus')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
@@ -468,6 +469,7 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    CreateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
     CreateSMBFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSMBFileShareInput.struct_class = Types::CreateSMBFileShareInput
@@ -1008,6 +1010,7 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    SMBFileShareInfo.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
     SMBFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
@@ -1201,6 +1204,7 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    UpdateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     UpdateSMBFileShareInput.struct_class = Types::UpdateSMBFileShareInput
 
     UpdateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))

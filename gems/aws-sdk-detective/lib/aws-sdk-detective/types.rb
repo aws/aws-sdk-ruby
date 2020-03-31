@@ -29,8 +29,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # An AWS account that is the master of or a member of a behavior graph.
     #
     # @note When making an API call, you may pass Account
@@ -274,8 +272,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # A behavior graph in Detective.
     #
     # @!attribute [rw] arn
@@ -459,8 +455,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Details about a member account that was invited to contribute to a
     # behavior graph.
     #
@@ -503,9 +497,9 @@ module Aws::Detective
     #     invitation to contribute to the behavior graph.
     #
     #   * `ACCEPTED_BUT_DISABLED` - Indicates that the member account
-    #     accepted the invitation, but is blocked from contributing data to
+    #     accepted the invitation but is prevented from contributing data to
     #     the behavior graph. `DisabledReason` provides the reason why the
-    #     member account is blocked.
+    #     member account is not enabled.
     #
     #   Member accounts that declined an invitation or that were removed
     #   from the behavior graph are not included.
@@ -513,16 +507,16 @@ module Aws::Detective
     #
     # @!attribute [rw] disabled_reason
     #   For member accounts with a status of `ACCEPTED_BUT_DISABLED`, the
-    #   reason that the member account is blocked.
+    #   reason that the member account is not enabled.
     #
     #   The reason can have one of the following values:
     #
     #   * `VOLUME_TOO_HIGH` - Indicates that adding the member account would
-    #     cause the data rate for the behavior graph to be too high.
+    #     cause the data volume for the behavior graph to be too high.
     #
     #   * `VOLUME_UNKNOWN` - Indicates that Detective is unable to verify
-    #     the data rate for the member account. This is usually because the
-    #     member account is not enrolled in Amazon GuardDuty.
+    #     the data volume for the member account. This is usually because
+    #     the member account is not enrolled in Amazon GuardDuty.
     #   @return [String]
     #
     # @!attribute [rw] invited_time
@@ -654,8 +648,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # A member account that was included in a request but for which the
     # request could not be processed.
     #

@@ -32,6 +32,9 @@ module Aws::AppConfig
     DeleteDeploymentStrategyRequest = Shapes::StructureShape.new(name: 'DeleteDeploymentStrategyRequest')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
+    DeploymentEvent = Shapes::StructureShape.new(name: 'DeploymentEvent')
+    DeploymentEventType = Shapes::StringShape.new(name: 'DeploymentEventType')
+    DeploymentEvents = Shapes::ListShape.new(name: 'DeploymentEvents')
     DeploymentList = Shapes::ListShape.new(name: 'DeploymentList')
     DeploymentState = Shapes::StringShape.new(name: 'DeploymentState')
     DeploymentStrategies = Shapes::StructureShape.new(name: 'DeploymentStrategies')
@@ -83,6 +86,7 @@ module Aws::AppConfig
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TriggeredBy = Shapes::StringShape.new(name: 'TriggeredBy')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateConfigurationProfileRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationProfileRequest')
@@ -201,10 +205,19 @@ module Aws::AppConfig
     Deployment.add_member(:growth_factor, Shapes::ShapeRef.new(shape: Percentage, location_name: "GrowthFactor"))
     Deployment.add_member(:final_bake_time_in_minutes, Shapes::ShapeRef.new(shape: MinutesBetween0And24Hours, location_name: "FinalBakeTimeInMinutes"))
     Deployment.add_member(:state, Shapes::ShapeRef.new(shape: DeploymentState, location_name: "State"))
+    Deployment.add_member(:event_log, Shapes::ShapeRef.new(shape: DeploymentEvents, location_name: "EventLog"))
     Deployment.add_member(:percentage_complete, Shapes::ShapeRef.new(shape: Percentage, location_name: "PercentageComplete"))
     Deployment.add_member(:started_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "StartedAt"))
     Deployment.add_member(:completed_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "CompletedAt"))
     Deployment.struct_class = Types::Deployment
+
+    DeploymentEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: DeploymentEventType, location_name: "EventType"))
+    DeploymentEvent.add_member(:triggered_by, Shapes::ShapeRef.new(shape: TriggeredBy, location_name: "TriggeredBy"))
+    DeploymentEvent.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DeploymentEvent.add_member(:occurred_at, Shapes::ShapeRef.new(shape: Iso8601DateTime, location_name: "OccurredAt"))
+    DeploymentEvent.struct_class = Types::DeploymentEvent
+
+    DeploymentEvents.member = Shapes::ShapeRef.new(shape: DeploymentEvent)
 
     DeploymentList.member = Shapes::ShapeRef.new(shape: DeploymentSummary)
 

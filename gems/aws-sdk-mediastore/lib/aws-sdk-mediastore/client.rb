@@ -472,6 +472,31 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Deletes the metric policy that is associated with the specified
+    # container. If there is no metric policy associated with the container,
+    # MediaStore doesn't send metrics to CloudWatch.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that is associated with the metric policy
+    #   that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_metric_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteMetricPolicy AWS API Documentation
+    #
+    # @overload delete_metric_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_metric_policy(params = {}, options = {})
+      req = build_request(:delete_metric_policy, params)
+      req.send_request(options)
+    end
+
     # Retrieves the properties of the requested container. This request is
     # commonly used to retrieve the endpoint of a container. An endpoint is
     # a value assigned by the service when a new container is created. A
@@ -613,6 +638,37 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def get_lifecycle_policy(params = {}, options = {})
       req = build_request(:get_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns the metric policy for the specified container.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that is associated with the metric policy.
+    #
+    # @return [Types::GetMetricPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricPolicyOutput#metric_policy #metric_policy} => Types::MetricPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_policy.container_level_metrics #=> String, one of "ENABLED", "DISABLED"
+    #   resp.metric_policy.metric_policy_rules #=> Array
+    #   resp.metric_policy.metric_policy_rules[0].object_group #=> String
+    #   resp.metric_policy.metric_policy_rules[0].object_group_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetMetricPolicy AWS API Documentation
+    #
+    # @overload get_metric_policy(params = {})
+    # @param [Hash] params ({})
+    def get_metric_policy(params = {}, options = {})
+      req = build_request(:get_metric_policy, params)
       req.send_request(options)
     end
 
@@ -834,6 +890,59 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # The metric policy that you want to add to the container. A metric
+    # policy allows AWS Elemental MediaStore to send metrics to Amazon
+    # CloudWatch. It takes up to 20 minutes for the new policy to take
+    # effect.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to add the metric policy to.
+    #
+    # @option params [required, Types::MetricPolicy] :metric_policy
+    #   The metric policy that you want to associate with the container. In
+    #   the policy, you must indicate whether you want MediaStore to send
+    #   container-level metrics. You can also include up to five rules to
+    #   define groups of objects that you want MediaStore to send object-level
+    #   metrics for. If you include rules in the policy, construct each rule
+    #   with both of the following:
+    #
+    #   * An object group that defines which objects to include in the group.
+    #     The definition can be a path or a file name, but it can't have more
+    #     than 900 characters. Valid characters are: a-z, A-Z, 0-9, \_
+    #     (underscore), = (equal), : (colon), . (period), - (hyphen), ~
+    #     (tilde), / (forward slash), and * (asterisk). Wildcards (*) are
+    #     acceptable.
+    #
+    #   * An object group name that allows you to refer to the object group.
+    #     The name can't have more than 30 characters. Valid characters are:
+    #     a-z, A-Z, 0-9, and \_ (underscore).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_metric_policy({
+    #     container_name: "ContainerName", # required
+    #     metric_policy: { # required
+    #       container_level_metrics: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       metric_policy_rules: [
+    #         {
+    #           object_group: "ObjectGroup", # required
+    #           object_group_name: "ObjectGroupName", # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutMetricPolicy AWS API Documentation
+    #
+    # @overload put_metric_policy(params = {})
+    # @param [Hash] params ({})
+    def put_metric_policy(params = {}, options = {})
+      req = build_request(:put_metric_policy, params)
+      req.send_request(options)
+    end
+
     # Starts access logging on the specified container. When you enable
     # access logging on a container, MediaStore delivers access logs for
     # objects stored in that container to Amazon CloudWatch Logs.
@@ -975,7 +1084,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

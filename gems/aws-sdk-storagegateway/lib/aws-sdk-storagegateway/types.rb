@@ -1023,6 +1023,7 @@ module Aws::StorageGateway
     #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
+    #         audit_destination_arn: "AuditDestinationARN",
     #         authentication: "Authentication",
     #         tags: [
     #           {
@@ -1038,8 +1039,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
-    #   The Amazon Resource Name (ARN) of the file gateway on which you want
-    #   to create a file share.
+    #   The ARN of the file gateway on which you want to create a file
+    #   share.
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
@@ -1134,6 +1135,11 @@ module Aws::StorageGateway
     #   Authentication is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit
+    #   logs.
+    #   @return [String]
+    #
     # @!attribute [rw] authentication
     #   The authentication method that users use to access the file share.
     #
@@ -1171,6 +1177,7 @@ module Aws::StorageGateway
       :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
+      :audit_destination_arn,
       :authentication,
       :tags)
       include Aws::Structure
@@ -4625,6 +4632,11 @@ module Aws::StorageGateway
     #   Authentication is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit
+    #   logs.
+    #   @return [String]
+    #
     # @!attribute [rw] authentication
     #   The authentication method of the file share.
     #
@@ -4660,6 +4672,7 @@ module Aws::StorageGateway
       :admin_user_list,
       :valid_user_list,
       :invalid_user_list,
+      :audit_destination_arn,
       :authentication,
       :tags)
       include Aws::Structure
@@ -5737,6 +5750,7 @@ module Aws::StorageGateway
     #         admin_user_list: ["FileShareUser"],
     #         valid_user_list: ["FileShareUser"],
     #         invalid_user_list: ["FileShareUser"],
+    #         audit_destination_arn: "AuditDestinationARN",
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -5824,6 +5838,11 @@ module Aws::StorageGateway
     #   Authentication is set to `ActiveDirectory`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit
+    #   logs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput AWS API Documentation
     #
     class UpdateSMBFileShareInput < Struct.new(
@@ -5838,7 +5857,8 @@ module Aws::StorageGateway
       :smbacl_enabled,
       :admin_user_list,
       :valid_user_list,
-      :invalid_user_list)
+      :invalid_user_list,
+      :audit_destination_arn)
       include Aws::Structure
     end
 

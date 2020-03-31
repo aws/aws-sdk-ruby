@@ -2393,6 +2393,7 @@ module Aws::Pinpoint
 
     SMSMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     SMSMessage.add_member(:keyword, Shapes::ShapeRef.new(shape: __string, location_name: "Keyword"))
+    SMSMessage.add_member(:media_url, Shapes::ShapeRef.new(shape: __string, location_name: "MediaUrl"))
     SMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     SMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))

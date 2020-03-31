@@ -308,8 +308,6 @@ module Aws::Detective
 
     # @!group API Operations
 
-    # Amazon Detective is currently in preview.
-    #
     # Accepts an invitation for the member account to contribute data to a
     # behavior graph. This operation can only be called by an invited member
     # account.
@@ -341,8 +339,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Creates a new behavior graph for the calling account, and sets that
     # account as the master account. This operation is called by the account
     # that is enabling Detective.
@@ -383,8 +379,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Sends a request to invite the specified AWS accounts to be member
     # accounts in the behavior graph. This operation can only be called by
     # the master account for a behavior graph.
@@ -463,8 +457,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Disables the specified behavior graph and queues it to be deleted.
     # This operation removes the graph from each member account's list of
     # behavior graphs.
@@ -492,8 +484,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Deletes one or more member accounts from the master account behavior
     # graph. This operation can only be called by a Detective master
     # account. That account cannot use `DeleteMembers` to delete their own
@@ -536,8 +526,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Removes the member account from the specified behavior graph. This
     # operation can only be called by a member account that has the
     # `ENABLED` status.
@@ -565,8 +553,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Returns the membership details for specified member accounts for a
     # behavior graph.
     #
@@ -618,8 +604,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Returns the list of behavior graphs that the calling account is a
     # master of. This operation can only be called by a master account.
     #
@@ -666,8 +650,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Retrieves the list of open and accepted behavior graph invitations for
     # the member account. This operation can only be called by a member
     # account.
@@ -728,8 +710,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Retrieves the list of member accounts for a behavior graph. Does not
     # return member accounts that were removed from the behavior graph.
     #
@@ -786,8 +766,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Rejects an invitation to contribute the account data to a behavior
     # graph. This operation must be called by a member account that has the
     # `INVITED` status.
@@ -866,7 +844,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

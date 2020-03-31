@@ -1645,8 +1645,9 @@ module Aws::Organizations
     # for the specified AWS service.
     #
     # You can run this action only for AWS services that support this
-    # feature. For a current list of services that support it, see [AWS
-    # Services That Support Using Delegated Administrators][1] in the *AWS
+    # feature. For a current list of services that support it, see the
+    # column *Supports Delegated Administrator* in the table at [AWS
+    # Services that you can use with AWS Organizations][1] in the *AWS
     # Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
@@ -1654,7 +1655,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html#services-that-support-delegated-admin
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
     #
     # @option params [required, String] :account_id
     #   The account ID number of the member account in the organization that
@@ -4680,8 +4681,9 @@ module Aws::Organizations
     # permissions to access and administer the AWS service.
     #
     # You can run this action only for AWS services that support this
-    # feature. For a current list of services that support it, see [AWS
-    # Services That Support Using Delegated Administrators][1] in the *AWS
+    # feature. For a current list of services that support it, see the
+    # column *Supports Delegated Administrator* in the table at [AWS
+    # Services that you can use with AWS Organizations][1] in the *AWS
     # Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
@@ -4689,7 +4691,7 @@ module Aws::Organizations
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html#services-that-support-delegated-admin
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
     #
     # @option params [required, String] :account_id
     #   The account ID number of the member account in the organization to
@@ -5068,7 +5070,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

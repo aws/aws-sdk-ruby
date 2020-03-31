@@ -5488,6 +5488,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           keyword: "__string",
+    #           media_url: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #           origination_number: "__string",
     #           sender_id: "__string",
@@ -10898,6 +10899,7 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             keyword: "__string",
+    #             media_url: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #             origination_number: "__string",
     #             sender_id: "__string",
@@ -12580,6 +12582,7 @@ module Aws::Pinpoint
     #       {
     #         body: "__string",
     #         keyword: "__string",
+    #         media_url: "__string",
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #         origination_number: "__string",
     #         sender_id: "__string",
@@ -12595,6 +12598,10 @@ module Aws::Pinpoint
     # @!attribute [rw] keyword
     #   The SMS program name that you provided to AWS Support when you
     #   requested your dedicated number.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_url
+    #   The URL of an image or video to display in the SMS message.
     #   @return [String]
     #
     # @!attribute [rw] message_type
@@ -12628,6 +12635,7 @@ module Aws::Pinpoint
     class SMSMessage < Struct.new(
       :body,
       :keyword,
+      :media_url,
       :message_type,
       :origination_number,
       :sender_id,
@@ -13735,6 +13743,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               keyword: "__string",
+    #               media_url: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",
@@ -13949,6 +13958,7 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             keyword: "__string",
+    #             media_url: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #             origination_number: "__string",
     #             sender_id: "__string",
@@ -14215,6 +14225,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               keyword: "__string",
+    #               media_url: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
     #               origination_number: "__string",
     #               sender_id: "__string",

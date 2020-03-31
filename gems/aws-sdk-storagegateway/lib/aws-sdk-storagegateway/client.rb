@@ -1274,8 +1274,7 @@ module Aws::StorageGateway
     #   ensure idempotent file share creation.
     #
     # @option params [required, String] :gateway_arn
-    #   The Amazon Resource Name (ARN) of the file gateway on which you want
-    #   to create a file share.
+    #   The ARN of the file gateway on which you want to create a file share.
     #
     # @option params [Boolean] :kms_encrypted
     #   True to use Amazon S3 server side encryption with your own AWS KMS
@@ -1355,6 +1354,9 @@ module Aws::StorageGateway
     #   character. For example `@group1`. Can only be set if Authentication is
     #   set to `ActiveDirectory`.
     #
+    # @option params [String] :audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit logs.
+    #
     # @option params [String] :authentication
     #   The authentication method that users use to access the file share.
     #
@@ -1394,6 +1396,7 @@ module Aws::StorageGateway
     #     admin_user_list: ["FileShareUser"],
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
+    #     audit_destination_arn: "AuditDestinationARN",
     #     authentication: "Authentication",
     #     tags: [
     #       {
@@ -2992,6 +2995,7 @@ module Aws::StorageGateway
     #   resp.smb_file_share_info_list[0].valid_user_list[0] #=> String
     #   resp.smb_file_share_info_list[0].invalid_user_list #=> Array
     #   resp.smb_file_share_info_list[0].invalid_user_list[0] #=> String
+    #   resp.smb_file_share_info_list[0].audit_destination_arn #=> String
     #   resp.smb_file_share_info_list[0].authentication #=> String
     #   resp.smb_file_share_info_list[0].tags #=> Array
     #   resp.smb_file_share_info_list[0].tags[0].key #=> String
@@ -5676,6 +5680,9 @@ module Aws::StorageGateway
     #   character. For example `@group1`. Can only be set if Authentication is
     #   set to `ActiveDirectory`.
     #
+    # @option params [String] :audit_destination_arn
+    #   The Amazon Resource Name (ARN) of the storage used for the audit logs.
+    #
     # @return [Types::UpdateSMBFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSMBFileShareOutput#file_share_arn #file_share_arn} => String
@@ -5695,6 +5702,7 @@ module Aws::StorageGateway
     #     admin_user_list: ["FileShareUser"],
     #     valid_user_list: ["FileShareUser"],
     #     invalid_user_list: ["FileShareUser"],
+    #     audit_destination_arn: "AuditDestinationARN",
     #   })
     #
     # @example Response structure
@@ -5923,7 +5931,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

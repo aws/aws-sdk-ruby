@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-03-31)
+------------------
+
+* Feature - AWS Lambda now supports .NET Core 3.1
+
 1.37.0 (2020-03-09)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-03-31)
+------------------
+
+* Feature - This release adds an event log to deployments. In the case of a deployment rollback, the event log details the rollback reason.
+
 1.3.0 (2020-03-13)
 ------------------
 

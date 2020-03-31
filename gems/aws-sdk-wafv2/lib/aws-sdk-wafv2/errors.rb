@@ -28,7 +28,9 @@ module Aws::WAFV2
   # * {WAFAssociatedItemException}
   # * {WAFDuplicateItemException}
   # * {WAFInternalErrorException}
+  # * {WAFInvalidOperationException}
   # * {WAFInvalidParameterException}
+  # * {WAFInvalidPermissionPolicyException}
   # * {WAFInvalidResourceException}
   # * {WAFLimitsExceededException}
   # * {WAFNonexistentItemException}
@@ -90,6 +92,21 @@ module Aws::WAFV2
       end
     end
 
+    class WAFInvalidOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFV2::Types::WAFInvalidOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class WAFInvalidParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -117,6 +134,21 @@ module Aws::WAFV2
       # @return [String]
       def reason
         @data[:reason]
+      end
+    end
+
+    class WAFInvalidPermissionPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFV2::Types::WAFInvalidPermissionPolicyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

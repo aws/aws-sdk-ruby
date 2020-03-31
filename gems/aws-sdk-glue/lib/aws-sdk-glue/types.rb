@@ -1242,7 +1242,8 @@ module Aws::Glue
     #
     #   * `INSTANCE_ID` - The instance ID to use.
     #
-    #   * `JDBC_CONNECTION_URL` - The URL for the JDBC connection.
+    #   * `JDBC_CONNECTION_URL` - The URL for connecting to a JDBC data
+    #     source.
     #
     #   * `JDBC_ENFORCE_SSL` - A Boolean string (true, false) specifying
     #     whether Secure Sockets Layer (SSL) with hostname matching is
@@ -1270,6 +1271,9 @@ module Aws::Glue
     #     man-in-the-middle attack. In Oracle database, this is used as the
     #     `SSL_SERVER_CERT_DN`; in Microsoft SQL Server, this is used as the
     #     `hostNameInCertificate`.
+    #
+    #   * `CONNECTION_URL` - The URL for connecting to a general (non-JDBC)
+    #     data source.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1314,7 +1318,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -1335,8 +1339,15 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the connection. Currently, only JDBC is supported; SFTP
-    #   is not supported.
+    #   The type of the connection. Currently, these types are supported:
+    #
+    #   * `JDBC` - Designates a connection to a database through Java
+    #     Database Connectivity (JDBC).
+    #
+    #   * `MONGODB` - Designates a connection to a MongoDB document
+    #     database.
+    #
+    #   SFTP is not supported.
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -1811,7 +1822,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -4933,7 +4944,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -4961,7 +4972,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -11255,7 +11266,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",

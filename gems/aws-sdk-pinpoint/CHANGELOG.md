@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-03-31)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces MMS support for SMS messages.
+
 1.36.0 (2020-03-09)
 ------------------
 

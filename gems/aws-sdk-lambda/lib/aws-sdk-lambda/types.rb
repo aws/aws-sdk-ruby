@@ -196,13 +196,10 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] source_account
-    #   For AWS services, the ID of the account that owns the resource. Use
-    #   this instead of `SourceArn` to grant permission to resources that
-    #   are owned by another account (for example, all of an account's
-    #   Amazon S3 buckets). Or use it together with `SourceArn` to ensure
-    #   that the resource is owned by the specified account. For example, an
-    #   Amazon S3 bucket could be deleted by its owner and recreated by
-    #   another account.
+    #   For Amazon S3, the ID of the account that owns the resource. Use
+    #   this together with `SourceArn` to ensure that the resource is owned
+    #   by the specified account. It is possible for an Amazon S3 bucket to
+    #   be deleted by its owner and recreated by another account.
     #   @return [String]
     #
     # @!attribute [rw] event_source_token
@@ -490,8 +487,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum amount of time to gather records before invoking the
-    #   function, in seconds.
+    #   (Streams) The maximum amount of time to gather records before
+    #   invoking the function, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -553,7 +550,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -1151,8 +1148,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum amount of time to gather records before invoking the
-    #   function, in seconds.
+    #   (Streams) The maximum amount of time to gather records before
+    #   invoking the function, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -2786,7 +2783,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #         layer_name: "LayerName", # required
     #         marker: "String",
     #         max_items: 1,
@@ -2839,7 +2836,7 @@ module Aws::Lambda
     #   data as a hash:
     #
     #       {
-    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #         marker: "String",
     #         max_items: 1,
     #       }
@@ -3187,7 +3184,7 @@ module Aws::Lambda
     #           s3_object_version: "S3ObjectVersion",
     #           zip_file: "data",
     #         },
-    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #         license_info: "LicenseInfo",
     #       }
     #
@@ -4015,8 +4012,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum amount of time to gather records before invoking the
-    #   function, in seconds.
+    #   (Streams) The maximum amount of time to gather records before
+    #   invoking the function, in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_config
@@ -4159,7 +4156,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },

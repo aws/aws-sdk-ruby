@@ -355,23 +355,23 @@ module Aws::OpsWorksCM
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_domain
-    #   Supported on servers running Chef Automate 2. An optional public
-    #   endpoint of a server, such as `https://aws.my-company.com`. To
-    #   access the server, create a CNAME DNS record in your preferred DNS
-    #   service that points the custom domain to the endpoint that is
-    #   generated when the server is created (the value of the CreateServer
-    #   Endpoint attribute). You cannot access the server by using the
-    #   generated `Endpoint` value if the server is using a custom domain.
-    #   If you specify a custom domain, you must also specify values for
-    #   `CustomCertificate` and `CustomPrivateKey`.
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. To access the server, create a CNAME
+    #   DNS record in your preferred DNS service that points the custom
+    #   domain to the endpoint that is generated when the server is created
+    #   (the value of the CreateServer Endpoint attribute). You cannot
+    #   access the server by using the generated `Endpoint` value if the
+    #   server is using a custom domain. If you specify a custom domain, you
+    #   must also specify values for `CustomCertificate` and
+    #   `CustomPrivateKey`.
     #   @return [String]
     #
     # @!attribute [rw] custom_certificate
-    #   Supported on servers running Chef Automate 2. A PEM-formatted HTTPS
-    #   certificate. The value can be be a single, self-signed certificate,
-    #   or a certificate chain. If you specify a custom certificate, you
-    #   must also specify values for `CustomDomain` and `CustomPrivateKey`.
-    #   The following are requirements for the `CustomCertificate` value:
+    #   A PEM-formatted HTTPS certificate. The value can be be a single,
+    #   self-signed certificate, or a certificate chain. If you specify a
+    #   custom certificate, you must also specify values for `CustomDomain`
+    #   and `CustomPrivateKey`. The following are requirements for the
+    #   `CustomCertificate` value:
     #
     #   * You can provide either a self-signed, custom certificate, or the
     #     full certificate chain.
@@ -391,11 +391,11 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] custom_private_key
-    #   Supported on servers running Chef Automate 2. A private key in PEM
-    #   format for connecting to the server by using HTTPS. The private key
-    #   must not be encrypted; it cannot be protected by a password or
-    #   passphrase. If you specify a custom private key, you must also
-    #   specify values for `CustomDomain` and `CustomCertificate`.
+    #   A private key in PEM format for connecting to the server by using
+    #   HTTPS. The private key must not be encrypted; it cannot be protected
+    #   by a password or passphrase. If you specify a custom private key,
+    #   you must also specify values for `CustomDomain` and
+    #   `CustomCertificate`.
     #   @return [String]
     #
     # @!attribute [rw] disable_automated_backup
@@ -415,8 +415,8 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The major release version of the engine that you want to use. For a
-    #   Chef server, the valid value for EngineVersion is currently `12`.
-    #   For a Puppet server, the valid value is `2017`.
+    #   Chef server, the valid value for EngineVersion is currently `2`. For
+    #   a Puppet server, the valid value is `2017`.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
@@ -489,10 +489,11 @@ module Aws::OpsWorksCM
     # @!attribute [rw] preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
     #   OpsWorks CM performs maintenance on the instance. Valid values must
-    #   be specified in the following format: `DDD:HH:MM`. The specified
-    #   time is in coordinated universal time (UTC). The default value is a
-    #   random one-hour period on Tuesday, Wednesday, or Friday. See
-    #   `TimeWindowDefinition` for more information.
+    #   be specified in the following format: `DDD:HH:MM`. `MM` must be
+    #   specified as `00`. The specified time is in coordinated universal
+    #   time (UTC). The default value is a random one-hour period on
+    #   Tuesday, Wednesday, or Friday. See `TimeWindowDefinition` for more
+    #   information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
@@ -508,8 +509,9 @@ module Aws::OpsWorksCM
     #
     #   * `DDD:HH:MM` for weekly backups
     #
-    #   The specified time is in coordinated universal time (UTC). The
-    #   default value is a random, daily start time.
+    #   `MM` must be specified as `00`. The specified time is in coordinated
+    #   universal time (UTC). The default value is a random, daily start
+    #   time.
     #
     #   **Example:** `08:00`, which represents a daily start time of 08:00
     #   UTC.
@@ -568,11 +570,11 @@ module Aws::OpsWorksCM
     #
     #   * The key can be a maximum of 127 characters, and can contain only
     #     Unicode letters, numbers, or separators, or the following special
-    #     characters: `+ - = . _ : /`
+    #     characters: `+ - = . _ : / @`
     #
     #   * The value can be a maximum 255 characters, and contain only
     #     Unicode letters, numbers, or separators, or the following special
-    #     characters: `+ - = . _ : /`
+    #     characters: `+ - = . _ : / @`
     #
     #   * Leading and trailing white spaces are trimmed from both the key
     #     and value.
@@ -1335,7 +1337,7 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine_version
     #   The engine version of the server. For a Chef server, the valid value
-    #   for EngineVersion is currently `12`. For a Puppet server, the valid
+    #   for EngineVersion is currently `2`. For a Puppet server, the valid
     #   value is `2017`.
     #   @return [String]
     #

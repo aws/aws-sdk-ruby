@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-03-31)
+------------------
+
+* Feature - Add two enums for MongoDB connection: Added "CONNECTION_URL" to "ConnectionPropertyKey" and added "MONGODB" to "ConnectionType"
+
 1.50.0 (2020-03-09)
 ------------------
 

@@ -558,7 +558,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -644,7 +644,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -812,7 +812,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -930,7 +930,7 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
@@ -963,7 +963,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -1064,7 +1064,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

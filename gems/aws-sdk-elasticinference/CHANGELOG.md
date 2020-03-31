@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-03-31)
+------------------
+
+* Feature - This release includes improvements for the Amazon Elastic Inference service.
+
 1.1.0 (2020-03-09)
 ------------------
 

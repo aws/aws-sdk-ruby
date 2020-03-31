@@ -584,6 +584,11 @@ module Aws::AppConfig
     #   The state of the deployment.
     #   @return [String]
     #
+    # @!attribute [rw] event_log
+    #   A list containing all events related to a deployment. The most
+    #   recent events are displayed first.
+    #   @return [Array<Types::DeploymentEvent>]
+    #
     # @!attribute [rw] percentage_complete
     #   The percentage of targets for which the deployment is available.
     #   @return [Float]
@@ -613,9 +618,47 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :state,
+      :event_log,
       :percentage_complete,
       :started_at,
       :completed_at)
+      include Aws::Structure
+    end
+
+    # An object that describes a deployment event.
+    #
+    # @!attribute [rw] event_type
+    #   The type of deployment event. Deployment event types include the
+    #   start, stop, or completion of a deployment; a percentage update; the
+    #   start or stop of a bake period; the start or completion of a
+    #   rollback.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggered_by
+    #   The entity that triggered the deployment event. Events can be
+    #   triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or
+    #   an internal error.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the deployment event. Descriptions include, but are
+    #   not limited to, the user account or the CloudWatch alarm ARN that
+    #   initiated a rollback, the percentage of hosts that received the
+    #   deployment, or in the case of an internal error, a recommendation to
+    #   attempt a new deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurred_at
+    #   The date and time the event occurred.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeploymentEvent AWS API Documentation
+    #
+    class DeploymentEvent < Struct.new(
+      :event_type,
+      :triggered_by,
+      :description,
+      :occurred_at)
       include Aws::Structure
     end
 

@@ -60,6 +60,10 @@ module Aws::Rekognition
     DeleteCollectionResponse = Shapes::StructureShape.new(name: 'DeleteCollectionResponse')
     DeleteFacesRequest = Shapes::StructureShape.new(name: 'DeleteFacesRequest')
     DeleteFacesResponse = Shapes::StructureShape.new(name: 'DeleteFacesResponse')
+    DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
+    DeleteProjectResponse = Shapes::StructureShape.new(name: 'DeleteProjectResponse')
+    DeleteProjectVersionRequest = Shapes::StructureShape.new(name: 'DeleteProjectVersionRequest')
+    DeleteProjectVersionResponse = Shapes::StructureShape.new(name: 'DeleteProjectVersionResponse')
     DeleteStreamProcessorRequest = Shapes::StructureShape.new(name: 'DeleteStreamProcessorRequest')
     DeleteStreamProcessorResponse = Shapes::StructureShape.new(name: 'DeleteStreamProcessorResponse')
     DescribeCollectionRequest = Shapes::StructureShape.new(name: 'DescribeCollectionRequest')
@@ -437,6 +441,18 @@ module Aws::Rekognition
 
     DeleteFacesResponse.add_member(:deleted_faces, Shapes::ShapeRef.new(shape: FaceIdList, location_name: "DeletedFaces"))
     DeleteFacesResponse.struct_class = Types::DeleteFacesResponse
+
+    DeleteProjectRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, required: true, location_name: "ProjectArn"))
+    DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
+
+    DeleteProjectResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "Status"))
+    DeleteProjectResponse.struct_class = Types::DeleteProjectResponse
+
+    DeleteProjectVersionRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
+    DeleteProjectVersionRequest.struct_class = Types::DeleteProjectVersionRequest
+
+    DeleteProjectVersionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProjectVersionStatus, location_name: "Status"))
+    DeleteProjectVersionResponse.struct_class = Types::DeleteProjectVersionResponse
 
     DeleteStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
     DeleteStreamProcessorRequest.struct_class = Types::DeleteStreamProcessorRequest
@@ -1270,6 +1286,36 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_project, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProject"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+      end)
+
+      api.add_operation(:delete_project_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProjectVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProjectVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteProjectVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
       end)
 
       api.add_operation(:delete_stream_processor, Seahorse::Model::Operation.new.tap do |o|

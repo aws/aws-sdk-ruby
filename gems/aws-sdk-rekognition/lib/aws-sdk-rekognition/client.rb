@@ -908,6 +908,73 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Deletes an Amazon Rekognition Custom Labels project. To delete a
+    # project you must first delete all versions of the model associated
+    # with the project. To delete a version of a model, see
+    # DeleteProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProject` action.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that you want to delete.
+    #
+    # @return [Types::DeleteProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project({
+    #     project_arn: "ProjectArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATING", "CREATED", "DELETING"
+    #
+    # @overload delete_project(params = {})
+    # @param [Hash] params ({})
+    def delete_project(params = {}, options = {})
+      req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes a version of a model.
+    #
+    # You must first stop the model before you can delete it. To check if a
+    # model is running, use the `Status` field returned from
+    # DescribeProjectVersions. To stop a running model call
+    # StopProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProjectVersion` action.
+    #
+    # @option params [required, String] :project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #
+    # @return [Types::DeleteProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project_version({
+    #     project_version_arn: "ProjectVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #
+    # @overload delete_project_version(params = {})
+    # @param [Hash] params ({})
+    def delete_project_version(params = {}, options = {})
+      req = build_request(:delete_project_version, params)
+      req.send_request(options)
+    end
+
     # Deletes the stream processor identified by `Name`. You assign the
     # value for `Name` when you create the stream processor with
     # CreateStreamProcessor. You might not be able to use the same name for
@@ -4589,7 +4656,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

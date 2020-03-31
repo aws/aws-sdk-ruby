@@ -67,7 +67,7 @@ module Aws::ElasticInference
 
       api.metadata = {
         "apiVersion" => "2017-07-25",
-        "endpointPrefix" => "api.elastic-inference",
+        "endpointPrefix" => "elastic-inference",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceAbbreviation" => "Amazon Elastic Inference",

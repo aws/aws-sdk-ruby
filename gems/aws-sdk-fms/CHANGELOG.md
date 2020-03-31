@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-03-31)
+------------------
+
+* Feature - This release contains FMS wafv2 support.
+
 1.22.0 (2020-03-09)
 ------------------
 

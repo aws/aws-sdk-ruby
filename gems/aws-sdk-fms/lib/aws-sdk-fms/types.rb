@@ -681,7 +681,7 @@ module Aws::FMS
     #         policy_name: "ResourceName", # required
     #         policy_update_token: "PolicyUpdateToken",
     #         security_service_policy_data: { # required
-    #           type: "WAF", # required, accepts WAF, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
     #           managed_service_data: "ManagedServiceData",
     #         },
     #         resource_type: "ResourceType", # required
@@ -992,7 +992,7 @@ module Aws::FMS
     #           policy_name: "ResourceName", # required
     #           policy_update_token: "PolicyUpdateToken",
     #           security_service_policy_data: { # required
-    #             type: "WAF", # required, accepts WAF, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
     #             managed_service_data: "ManagedServiceData",
     #           },
     #           resource_type: "ResourceType", # required
@@ -1109,7 +1109,7 @@ module Aws::FMS
     #   data as a hash:
     #
     #       {
-    #         type: "WAF", # required, accepts WAF, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
     #         managed_service_data: "ManagedServiceData",
     #       }
     #
@@ -1128,9 +1128,26 @@ module Aws::FMS
     #   JSON format. For service type `SHIELD_ADVANCED`, this is an empty
     #   string.
     #
+    #   * Example: `WAFV2`
+    #
+    #     `"SecurityServicePolicyData": "\{ "type": "WAFV2",
+    #     "postProcessRuleGroups": [ \{ "managedRuleGroupIdentifier": \{
+    #     "managedRuleGroupName":
+    #     "AWSManagedRulesAdminProtectionRuleSet", "vendor": "AWS" \}
+    #     "ruleGroupARN": "rule group arn", "overrideAction": \{
+    #     "type": "COUNT|" \}, "excludedRules": [ \{ "name" :
+    #     "EntityName" \} ], "type": "ManagedRuleGroup|RuleGroup" \}
+    #     ], "preProcessRuleGroups": [ \{ "managedRuleGroupIdentifier":
+    #     \{ "managedRuleGroupName":
+    #     "AWSManagedRulesAdminProtectionRuleSet", "vendor": "AWS" \}
+    #     "ruleGroupARN": "rule group arn", "overrideAction": \{
+    #     "type": "COUNT" \}, "excludedRules": [ \{ "name" :
+    #     "EntityName" \} ], "type": "ManagedRuleGroup|RuleGroup" \}
+    #     ], "defaultAction": \{ "type": "BLOCK" \}\}" `
+    #
     #   * Example: `WAF`
     #
-    #     `ManagedServiceData": "\{"type": "WAF", "ruleGroups":
+    #     `"ManagedServiceData": "\{"type": "WAF", "ruleGroups":
     #     [\{"id": "12345678-1bcd-9012-efga-0987654321ab",
     #     "overrideAction" : \{"type": "COUNT"\}\}],
     #     "defaultAction": \{"type": "BLOCK"\}\}`
