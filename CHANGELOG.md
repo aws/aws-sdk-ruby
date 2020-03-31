@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.480 (2020-03-31)
+------------------
+
 * Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
 
 * Feature - Aws::Detective - Updated the documentation for Amazon Detective.
