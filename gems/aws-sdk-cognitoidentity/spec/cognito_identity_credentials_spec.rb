@@ -5,25 +5,26 @@ module Aws
   module CognitoIdentity
     describe CognitoIdentityCredentials do
 
-      let(:client) {
+      let(:client) do
         CognitoIdentity::Client.new(
           region: 'us-west-2',
           stub_responses: true
         )
-      }
+      end
 
       let(:in_one_hour) { Time.now + 60 * 60 }
 
       let(:expiration) { in_one_hour }
 
-      let(:cognito_creds) {
-        double('credentials',
-               access_key_id: 'akid',
-               secret_key: 'secret',
-               session_token: 'session',
-               expiration: expiration
-               )
-      }
+      let(:cognito_creds) do
+        double(
+          'credentials',
+          access_key_id: 'akid',
+          secret_key: 'secret',
+          session_token: 'session',
+          expiration: expiration
+         )
+      end
 
       let(:identity_id) { 'identity_id' }
       let(:identity_pool_id) { 'pool_id' }
@@ -111,7 +112,7 @@ module Aws
             expect(cred_provider).to be_instance_of(CognitoIdentityCredentials)
           end
           
-          creds = CognitoIdentityCredentials.new(
+          CognitoIdentityCredentials.new(
             client: client,
             identity_id: identity_id,
             before_refresh: before_refresh

@@ -16,18 +16,18 @@ module Aws
     #
     # In addition, if this credential provider is used to provide authenticated
     # login, the `logins` map may be set to the tokens provided by the
-    # respective identity providers. See {constructor} for an example on
+    # respective identity providers. See {#initialize} for an example on
     # creating a credentials object with proper property values.
     #
     # ## Refreshing Credentials from Identity Service
     #
-    # the CognitoIdentityCredentials will auto-refresh the AWS credentials from
+    # The CognitoIdentityCredentials will auto-refresh the AWS credentials from
     # Cognito.  In addition to AWS credentials expiring after a given amount of
     # time, the login token from the identity provider will also expire.
     # Once this token expires, it will not be usable to refresh AWS credentials,
     # and another token will be needed. The SDK does not manage refreshing of
     # the token value, but this can be done through a "refresh token"
-    #  supported by most identity providers. Consult the documentation for
+    # supported by most identity providers. Consult the documentation for
     # the identity provider for refreshing tokens. Once the refreshed token is
     # acquired, you should make sure to update this new token in the
     # CognitoIdentityCredentials object's {logins} property. The following
@@ -60,7 +60,7 @@ module Aws
       #   The name-value pair will follow the syntax
       #   "provider_name": "provider_user_identifier".
       #
-      # @option options [String] :custom_role_arn (optional) The Amazon Resource
+      # @option options [String] :custom_role_arn  The Amazon Resource
       #   Name (ARN) of the role to be assumed when multiple roles were received
       #   in the token from the identity provider. For example, a SAML-based
       #   identity provider. This parameter is optional for identity providers
