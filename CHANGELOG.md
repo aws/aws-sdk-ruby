@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
+
+* Feature - Aws::Detective - Updated the documentation for Amazon Detective.
+
+* Feature - Aws::ElasticInference - Updated the API for Amazon Elastic  Inference.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::MediaStore - Updated the API, and documentation for AWS Elemental MediaStore.
+
+* Feature - Aws::OpsWorksCM - Updated the documentation for AWS OpsWorks CM.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::WAFV2 - Updated the API, and documentation for AWS WAFV2.
+
 2.11.479 (2020-03-30)
 ------------------
 
