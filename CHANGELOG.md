@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.481 (2020-04-01)
+------------------
+
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
 
 * Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
