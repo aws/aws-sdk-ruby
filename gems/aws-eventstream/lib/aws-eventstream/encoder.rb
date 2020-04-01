@@ -69,7 +69,7 @@ module Aws
       end
 
       # Encodes an Aws::EventStream::Message
-      #   into Aws::EventStream::BytesBuffer
+      #   into String
       #
       # @param [Aws::EventStream::Message] message
       #
@@ -100,7 +100,7 @@ module Aws
       end
 
       # Encodes headers part of an Aws::EventStream::Message
-      #   into Aws::EventStream::BytesBuffer
+      #   into String
       #
       # @param [Aws::EventStream::Message] message
       #
