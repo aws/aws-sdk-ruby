@@ -77,16 +77,16 @@ module Aws
       def encode_message(message)
         # create context buffer with encode headers
         encoded_header = encode_headers(message)
-        headers_len = encoded_header.bytesize
+        header_length = encoded_header.bytesize
         # encode payload
         if message.payload.length > MAX_PAYLOAD_LENGTH
           raise Aws::EventStream::Errors::EventPayloadLengthExceedError.new
         end
         encoded_payload = message.payload.read
-        total_len = headers_len + encoded_payload.bytesize + OVERHEAD_LENGTH
+        total_length = header_length + encoded_payload.bytesize + OVERHEAD_LENGTH
 
         # create message buffer with prelude section
-        encoded_prelude = encode_prelude(total_len, headers_len)
+        encoded_prelude = encode_prelude(total_length, header_length)
 
         # append message context (headers, payload)
         encoded_content = [
@@ -130,8 +130,8 @@ module Aws
 
       private
 
-      def encode_prelude(total_len, headers_len)
-        prelude_body = [total_len, headers_len].pack('NN')
+      def encode_prelude(total_length, headers_length)
+        prelude_body = [total_length, headers_length].pack('NN')
         checksum = Zlib.crc32(prelude_body)
         [prelude_body, checksum].pack('a*N')
       end

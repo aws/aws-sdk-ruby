@@ -116,7 +116,7 @@ module Aws
       #   and boolean pair, the boolean flag indicates whether this chunk
       #   has been fully consumed, unused data is tracked at #message_buffer
       def decode_chunk(chunk = nil)
-        @message_buffer = "#{@message_buffer}#{chunk}" if chunk
+        @message_buffer = [@message_buffer, chunk].pack('a*a*') if chunk
         decode_message(@message_buffer)
       end
 
@@ -135,22 +135,22 @@ module Aws
         prelude, content = raw_message.unpack("a#{PRELUDE_LENGTH}a*")
 
         # decode prelude
-        total_len, headers_len = decode_prelude(prelude)
+        total_length, header_length = decode_prelude(prelude)
 
         # incomplete message received, leave it in the buffer
-        return [nil, true] if raw_message.bytesize < total_len
+        return [nil, true] if raw_message.bytesize < total_length
 
-        content, checksum, remaining = content.unpack("a#{total_len - PRELUDE_LENGTH - CRC32_LENGTH}Na*")
+        content, checksum, remaining = content.unpack("a#{total_length - PRELUDE_LENGTH - CRC32_LENGTH}Na*")
         unless Zlib.crc32([prelude, content].pack('a*a*')) == checksum
           raise Errors::MessageChecksumError
         end
 
         # decode headers and payload
-        headers, payload = decode_context(content, headers_len)
+        headers, payload = decode_context(content, header_length)
 
         @message_buffer = remaining
 
-        [Message.new(headers: headers, payload: payload), remaining.bytesize == 0]
+        [Message.new(headers: headers, payload: payload), remaining.empty?]
       end
 
       def decode_prelude(prelude)
@@ -174,19 +174,19 @@ module Aws
         headers = {}
         until scanner.bytesize == 0
           # header key
-          key_len, scanner = scanner.unpack('Ca*')
-          key, scanner = scanner.unpack("a#{key_len}a*")
+          key_length, scanner = scanner.unpack('Ca*')
+          key, scanner = scanner.unpack("a#{key_length}a*")
 
           # header value
           type_index, scanner = scanner.unpack('Ca*')
           value_type = Types.types[type_index]
-          unpack_pattern, value_len = Types.pattern[value_type]
+          unpack_pattern, value_length = Types.pattern[value_type]
           value = if !!unpack_pattern == unpack_pattern
             # boolean types won't have value specified
             unpack_pattern
           else
-            value_len, scanner = scanner.unpack('S>a*') unless value_len
-            unpacked_value, scanner = scanner.unpack("#{unpack_pattern || "a#{value_len}"}a*")
+            value_length, scanner = scanner.unpack('S>a*') unless value_length
+            unpacked_value, scanner = scanner.unpack("#{unpack_pattern || "a#{value_length}"}a*")
             unpacked_value
           end
 
