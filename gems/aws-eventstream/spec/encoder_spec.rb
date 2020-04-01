@@ -17,14 +17,16 @@ module Aws
           msg_raw = SpecHelper.convert_msg(path) # msg to be encoded
 
           it "encode suit: #{suit_name} correctly" do
-            file = Tempfile.new('foo')
-            Encoder.new.encode(msg_raw, file)
-            expect(FileUtils.compare_file(file.path, expect_path)).to be(true)
-            file.unlink
+            Tempfile.open('foo') do |file|
+              Encoder.new.encode(msg_raw, file)
+              [file.path, expect_path].map do |file_path|
+                File.read(file_path, mode: 'rb')
+              end.tap do |actual, expectation|
+                expect(actual).to eq(expectation)
+              end
+            end
           end
-
         end
-
       end
 
       describe "#encode error" do
