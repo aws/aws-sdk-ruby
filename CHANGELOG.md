@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.482 (2020-04-02)
+------------------
+
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
 
 * Feature - Aws::MediaLive - Updated the API, documentation, and waiters for AWS Elemental MediaLive.
