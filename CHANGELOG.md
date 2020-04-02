@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::MediaLive - Updated the API, documentation, and waiters for AWS Elemental MediaLive.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
 2.11.481 (2020-04-01)
 ------------------
 
