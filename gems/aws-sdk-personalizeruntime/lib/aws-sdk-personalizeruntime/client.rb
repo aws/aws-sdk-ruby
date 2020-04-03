@@ -334,8 +334,7 @@ module Aws::PersonalizeRuntime
     #   The contextual metadata to use when getting recommendations.
     #   Contextual metadata includes any interaction information that might be
     #   relevant when getting a user's recommendations, such as the user's
-    #   current location or device type. For more information, see Contextual
-    #   Metadata.
+    #   current location or device type.
     #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -356,6 +355,7 @@ module Aws::PersonalizeRuntime
     #
     #   resp.personalized_ranking #=> Array
     #   resp.personalized_ranking[0].item_id #=> String
+    #   resp.personalized_ranking[0].score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
     #
@@ -401,8 +401,7 @@ module Aws::PersonalizeRuntime
     #   The contextual metadata to use when getting recommendations.
     #   Contextual metadata includes any interaction information that might be
     #   relevant when getting a user's recommendations, such as the user's
-    #   current location or device type. For more information, see Contextual
-    #   Metadata.
+    #   current location or device type.
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -424,6 +423,7 @@ module Aws::PersonalizeRuntime
     #
     #   resp.item_list #=> Array
     #   resp.item_list[0].item_id #=> String
+    #   resp.item_list[0].score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
     #
@@ -447,7 +447,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
