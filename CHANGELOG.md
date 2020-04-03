@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.483 (2020-04-03)
+------------------
+
 * Feature - Aws::PersonalizeRuntime - Updated the API, and documentation for Amazon Personalize Runtime.
 
 * Feature - Aws::RoboMaker - Updated the API, and documentation for AWS RoboMaker.
