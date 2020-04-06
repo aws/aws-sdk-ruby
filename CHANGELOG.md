@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.484 (2020-04-06)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
