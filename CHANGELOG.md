@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
 2.11.483 (2020-04-03)
 ------------------
 
