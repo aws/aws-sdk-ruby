@@ -145,7 +145,7 @@ module Aws::ElasticBeanstalk
 
     # The resource lifecycle configuration for an application. Defines
     # lifecycle settings for resources that belong to the application, and
-    # the service role that Elastic Beanstalk assumes in order to apply
+    # the service role that AWS Elastic Beanstalk assumes in order to apply
     # lifecycle settings. The version lifecycle configuration defines
     # lifecycle settings for application versions.
     #
@@ -184,7 +184,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] version_lifecycle_config
-    #   The application version lifecycle configuration.
+    #   Defines lifecycle settings for application versions.
     #   @return [Types::ApplicationVersionLifecycleConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationResourceLifecycleConfig AWS API Documentation
@@ -787,8 +787,9 @@ module Aws::ElasticBeanstalk
     end
 
     # A specification identifying an individual configuration option along
-    # with its current value. For a list of possible option values, go to
-    # [Option Values][1] in the *AWS Elastic Beanstalk Developer Guide*.
+    # with its current value. For a list of possible namespaces and option
+    # values, see [Option Values][1] in the *AWS Elastic Beanstalk Developer
+    # Guide*.
     #
     #
     #
@@ -805,12 +806,12 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] resource_name
-    #   A unique resource name for a time-based scaling configuration
-    #   option.
+    #   A unique resource name for the option setting. Use it for a
+    #   time–based scaling configuration option.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   A unique namespace identifying the option's associated AWS
+    #   A unique namespace that identifies the option's associated AWS
     #   resource.
     #   @return [String]
     #
@@ -840,7 +841,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -863,7 +864,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] application_name
@@ -991,19 +992,15 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of the application.
-    #
-    #   Constraint: This name must be unique within your account. If the
-    #   specified name already exists, the action returns an
-    #   `InvalidParameterValue` error.
+    #   The name of the application. Must be unique within your account.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Describes the application.
+    #   Your description of the application.
     #   @return [String]
     #
     # @!attribute [rw] resource_lifecycle_config
-    #   Specify an application resource lifecycle configuration to prevent
+    #   Specifies an application resource lifecycle configuration to prevent
     #   your application from accumulating too many versions.
     #   @return [Types::ApplicationResourceLifecycleConfig]
     #
@@ -1074,7 +1071,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Describes this version.
+    #   A description of this application version.
     #   @return [String]
     #
     # @!attribute [rw] source_build_information
@@ -1179,74 +1176,91 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of the application to associate with this configuration
-    #   template. If no application is found with this name, AWS Elastic
-    #   Beanstalk returns an `InvalidParameterValue` error.
+    #   The name of the Elastic Beanstalk application to associate with this
+    #   configuration template.
     #   @return [String]
     #
     # @!attribute [rw] template_name
     #   The name of the configuration template.
     #
     #   Constraint: This name must be unique per application.
-    #
-    #   Default: If a configuration template already exists with this name,
-    #   AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
     #   @return [String]
     #
     # @!attribute [rw] solution_stack_name
-    #   The name of the solution stack used by this configuration. The
-    #   solution stack specifies the operating system, architecture, and
-    #   application server for a configuration template. It determines the
-    #   set of configuration options as well as the possible and default
-    #   values.
+    #   The name of an Elastic Beanstalk solution stack (platform version)
+    #   that this configuration uses. For example, `64bit Amazon Linux
+    #   2013.09 running Tomcat 7 Java 7`. A solution stack specifies the
+    #   operating system, runtime, and application server for a
+    #   configuration template. It also determines the set of configuration
+    #   options as well as the possible and default values. For more
+    #   information, see [Supported Platforms][1] in the *AWS Elastic
+    #   Beanstalk Developer Guide*.
     #
-    #   Use ListAvailableSolutionStacks to obtain a list of available
-    #   solution stacks.
+    #   You must specify `SolutionStackName` if you don't specify
+    #   `PlatformArn`, `EnvironmentId`, or `SourceConfiguration`.
     #
-    #   A solution stack name or a source configuration parameter must be
-    #   specified, otherwise AWS Elastic Beanstalk returns an
-    #   `InvalidParameterValue` error.
+    #   Use the [ `ListAvailableSolutionStacks` ][2] API to obtain a list of
+    #   available solution stacks.
     #
-    #   If a solution stack name is not specified and the source
-    #   configuration parameter is specified, AWS Elastic Beanstalk uses the
-    #   same solution stack as the source configuration template.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #   [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custom platform.
+    #   The Amazon Resource Name (ARN) of the custom platform. For more
+    #   information, see [ Custom Platforms][1] in the *AWS Elastic
+    #   Beanstalk Developer Guide*.
+    #
+    #   <note markdown="1"> If you specify `PlatformArn`, then don't specify
+    #   `SolutionStackName`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] source_configuration
-    #   If specified, AWS Elastic Beanstalk uses the configuration values
-    #   from the specified configuration template to create a new
-    #   configuration.
+    #   An Elastic Beanstalk configuration template to base this one on. If
+    #   specified, Elastic Beanstalk uses the configuration values from the
+    #   specified configuration template to create a new configuration.
     #
-    #   Values specified in the `OptionSettings` parameter of this call
-    #   overrides any values obtained from the `SourceConfiguration`.
+    #   Values specified in `OptionSettings` override any values obtained
+    #   from the `SourceConfiguration`.
     #
-    #   If no configuration template is found, returns an
-    #   `InvalidParameterValue` error.
+    #   You must specify `SourceConfiguration` if you don't specify
+    #   `PlatformArn`, `EnvironmentId`, or `SolutionStackName`.
     #
-    #   Constraint: If both the solution stack name parameter and the source
-    #   configuration parameters are specified, the solution stack of the
-    #   source configuration template must match the specified solution
-    #   stack name or else AWS Elastic Beanstalk returns an
-    #   `InvalidParameterCombination` error.
+    #   Constraint: If both solution stack name and source configuration are
+    #   specified, the solution stack of the source configuration template
+    #   must match the specified solution stack name.
     #   @return [Types::SourceConfiguration]
     #
     # @!attribute [rw] environment_id
-    #   The ID of the environment used with this configuration template.
+    #   The ID of an environment whose settings you want to use to create
+    #   the configuration template. You must specify `EnvironmentId` if you
+    #   don't specify `PlatformArn`, `SolutionStackName`, or
+    #   `SourceConfiguration`.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Describes this configuration.
+    #   An optional description for this configuration.
     #   @return [String]
     #
     # @!attribute [rw] option_settings
-    #   If specified, AWS Elastic Beanstalk sets the specified configuration
-    #   option to the requested value. The new value overrides the value
+    #   Option values for the Elastic Beanstalk configuration, such as the
+    #   instance type. If specified, these values override the values
     #   obtained from the solution stack or the source configuration
-    #   template.
+    #   template. For a complete list of Elastic Beanstalk configuration
+    #   options, see [Option Values][1] in the *AWS Elastic Beanstalk
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html
     #   @return [Array<Types::ConfigurationOptionSetting>]
     #
     # @!attribute [rw] tags
@@ -1310,24 +1324,20 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] application_name
-    #   The name of the application that contains the version to be
-    #   deployed.
-    #
-    #   If no application is found with this name, `CreateEnvironment`
-    #   returns an `InvalidParameterValue` error.
+    #   The name of the application that is associated with this
+    #   environment.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   A unique name for the deployment environment. Used in the
-    #   application URL.
+    #   A unique name for the environment.
     #
     #   Constraint: Must be from 4 to 40 characters in length. The name can
-    #   contain only letters, numbers, and hyphens. It cannot start or end
+    #   contain only letters, numbers, and hyphens. It can't start or end
     #   with a hyphen. This name must be unique within a region in your
-    #   account. If the specified name already exists in the region, AWS
-    #   Elastic Beanstalk returns an `InvalidParameterValue` error.
+    #   account. If the specified name already exists in the region, Elastic
+    #   Beanstalk returns an `InvalidParameterValue` error.
     #
-    #   Default: If the CNAME parameter is not specified, the environment
+    #   If you don't specify the `CNAMEPrefix` parameter, the environment
     #   name becomes part of the CNAME, and therefore part of the visible
     #   URL for your application.
     #   @return [String]
@@ -1344,18 +1354,22 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Describes this environment.
+    #   Your description for this environment.
     #   @return [String]
     #
     # @!attribute [rw] cname_prefix
     #   If specified, the environment attempts to use this value as the
-    #   prefix for the CNAME. If not specified, the CNAME is generated
-    #   automatically by appending a random alphanumeric string to the
-    #   environment name.
+    #   prefix for the CNAME in your Elastic Beanstalk environment URL. If
+    #   not specified, the CNAME is generated automatically by appending a
+    #   random alphanumeric string to the environment name.
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   This specifies the tier to use for creating this environment.
+    #   Specifies the tier to use in creating this environment. The
+    #   environment tier that you choose determines whether Elastic
+    #   Beanstalk provisions resources to support a web application that
+    #   handles HTTP(S) requests or a web application that handles
+    #   background-processing tasks.
     #   @return [Types::EnvironmentTier]
     #
     # @!attribute [rw] tags
@@ -1365,35 +1379,50 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] version_label
     #   The name of the application version to deploy.
     #
-    #   If the specified application has no associated application versions,
-    #   AWS Elastic Beanstalk `UpdateEnvironment` returns an
-    #   `InvalidParameterValue` error.
-    #
-    #   Default: If not specified, AWS Elastic Beanstalk attempts to launch
-    #   the sample application in the container.
+    #   Default: If not specified, Elastic Beanstalk attempts to deploy the
+    #   sample application.
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The name of the configuration template to use in deployment. If no
-    #   configuration template is found with this name, AWS Elastic
-    #   Beanstalk returns an `InvalidParameterValue` error.
+    #   The name of the Elastic Beanstalk configuration template to use with
+    #   the environment.
+    #
+    #   <note markdown="1"> If you specify `TemplateName`, then don't specify
+    #   `SolutionStackName`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] solution_stack_name
-    #   This is an alternative to specifying a template name. If specified,
-    #   AWS Elastic Beanstalk sets the configuration values to the default
-    #   values associated with the specified solution stack.
+    #   The name of an Elastic Beanstalk solution stack (platform version)
+    #   to use with the environment. If specified, Elastic Beanstalk sets
+    #   the configuration values to the default values associated with the
+    #   specified solution stack. For a list of current solution stacks, see
+    #   [Elastic Beanstalk Supported Platforms][1] in the *AWS Elastic
+    #   Beanstalk Platforms* guide.
     #
-    #   For a list of current solution stacks, see [Elastic Beanstalk
-    #   Supported Platforms][1].
+    #   <note markdown="1"> If you specify `SolutionStackName`, don't specify `PlatformArn` or
+    #   `TemplateName`.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The Amazon Resource Name (ARN) of the custom platform to use with
+    #   the environment. For more information, see [ Custom Platforms][1] in
+    #   the *AWS Elastic Beanstalk Developer Guide*.
+    #
+    #   <note markdown="1"> If you specify `PlatformArn`, don't specify `SolutionStackName`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] option_settings
@@ -2276,7 +2305,9 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the version of the custom platform.
+    #   The ARN of a custom platform version. If specified, AWS Elastic
+    #   Beanstalk restricts the returned descriptions to those associated
+    #   with this custom platform version.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -2404,7 +2435,7 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the version of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersionRequest AWS API Documentation
@@ -2415,7 +2446,7 @@ module Aws::ElasticBeanstalk
     end
 
     # @!attribute [rw] platform_description
-    #   Detailed information about the version of the platform.
+    #   Detailed information about the platform version.
     #   @return [Types::PlatformDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersionResult AWS API Documentation
@@ -2461,7 +2492,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] template_name
@@ -2821,7 +2852,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -3056,6 +3087,101 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListPlatformBranchesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             attribute: "SearchFilterAttribute",
+    #             operator: "SearchFilterOperator",
+    #             values: ["SearchFilterValue"],
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Criteria for restricting the resulting list of platform branches.
+    #   The filter is evaluated as a logical conjunction (AND) of the
+    #   separate `SearchFilter` terms.
+    #
+    #   The following list shows valid attribute values for each of the
+    #   `SearchFilter` terms. Most operators take a single value. The `in`
+    #   and `not_in` operators can take multiple values.
+    #
+    #   * `Attribute = BranchName`\:
+    #
+    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #       `contains` \| `in` \| `not_in`
+    #
+    #     ^
+    #
+    #   * `Attribute = LifecycleState`\:
+    #
+    #     * `Operator`\: `=` \| `!=` \| `in` \| `not_in`
+    #
+    #     * `Values`\: `beta` \| `supported` \| `deprecated` \| `retired`
+    #
+    #   * `Attribute = PlatformName`\:
+    #
+    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #       `contains` \| `in` \| `not_in`
+    #
+    #     ^
+    #
+    #   * `Attribute = TierType`\:
+    #
+    #     * `Operator`\: `=` \| `!=`
+    #
+    #     * `Values`\: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #
+    #   Array size: limited to 10 `SearchFilter` objects.
+    #
+    #   Within each `SearchFilter` item, the `Values` array is limited to 10
+    #   items.
+    #   @return [Array<Types::SearchFilter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of platform branch values returned in one call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   For a paginated request. Specify a token from a previous response
+    #   page to retrieve the next response page. All other parameter values
+    #   must be identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformBranchesRequest AWS API Documentation
+    #
+    class ListPlatformBranchesRequest < Struct.new(
+      :filters,
+      :max_records,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] platform_branch_summary_list
+    #   Summary information about the platform branches.
+    #   @return [Array<Types::PlatformBranchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   In a paginated request, if this value isn't `null`, it's the token
+    #   that you can pass in a subsequent request to get the next response
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformBranchesResult AWS API Documentation
+    #
+    class ListPlatformBranchesResult < Struct.new(
+      :platform_branch_summary_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPlatformVersionsRequest
     #   data as a hash:
     #
@@ -3072,17 +3198,21 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] filters
-    #   List only the platforms where the platform member value relates to
-    #   one of the supplied values.
+    #   Criteria for restricting the resulting list of platform versions.
+    #   The filter is interpreted as a logical conjunction (AND) of the
+    #   separate `PlatformFilter` terms.
     #   @return [Array<Types::PlatformFilter>]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of platform values returned in one call.
+    #   The maximum number of platform version values returned in one call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The starting index into the remaining list of platforms. Use the
-    #   `NextToken` value from a previous `ListPlatformVersion` call.
+    #   For a paginated request. Specify a token from a previous response
+    #   page to retrieve the next response page. All other parameter values
+    #   must be identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersionsRequest AWS API Documentation
@@ -3095,13 +3225,13 @@ module Aws::ElasticBeanstalk
     end
 
     # @!attribute [rw] platform_summary_list
-    #   Detailed information about the platforms.
+    #   Summary information about the platform versions.
     #   @return [Array<Types::PlatformSummary>]
     #
     # @!attribute [rw] next_token
-    #   The starting index into the remaining list of platforms. if this
-    #   value is not `null`, you can use it in a subsequent
-    #   `ListPlatformVersion` call.
+    #   In a paginated request, if this value isn't `null`, it's the token
+    #   that you can pass in a subsequent request to get the next response
+    #   page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersionsResult AWS API Documentation
@@ -3123,7 +3253,7 @@ module Aws::ElasticBeanstalk
     #   The Amazon Resource Name (ARN) of the resouce for which a tag list
     #   is requested.
     #
-    #   Must be the ARN of an Elastic Beanstalk environment.
+    #   Must be the ARN of an Elastic Beanstalk resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListTagsForResourceMessage AWS API Documentation
@@ -3405,79 +3535,142 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Detailed information about a platform.
+    # Summary information about a platform branch.
+    #
+    # @!attribute [rw] platform_name
+    #   The name of the platform to which this platform branch belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the platform branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_state
+    #   The support life cycle state of the platform branch.
+    #
+    #   Possible values: `beta` \| `supported` \| `deprecated` \| `retired`
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_order
+    #   An ordinal number that designates the order in which platform
+    #   branches have been added to a platform. This can be helpful, for
+    #   example, if your code calls the `ListPlatformBranches` action and
+    #   then displays a list of platform branches.
+    #
+    #   A larger `BranchOrder` value designates a newer platform branch
+    #   within the platform.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] supported_tier_list
+    #   The environment tiers that platform versions in this branch support.
+    #
+    #   Possible values: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformBranchSummary AWS API Documentation
+    #
+    class PlatformBranchSummary < Struct.new(
+      :platform_name,
+      :branch_name,
+      :lifecycle_state,
+      :branch_order,
+      :supported_tier_list)
+      include Aws::Structure
+    end
+
+    # Detailed information about a platform version.
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_owner
-    #   The AWS account ID of the person who created the platform.
+    #   The AWS account ID of the person who created the platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_name
-    #   The name of the platform.
+    #   The name of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_version
-    #   The version of the platform.
+    #   The version of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] solution_stack_name
-    #   The name of the solution stack used by the platform.
+    #   The name of the solution stack used by the platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_status
-    #   The status of the platform.
+    #   The status of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] date_created
-    #   The date when the platform was created.
+    #   The date when the platform version was created.
     #   @return [Time]
     #
     # @!attribute [rw] date_updated
-    #   The date when the platform was last updated.
+    #   The date when the platform version was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] platform_category
-    #   The category of the platform.
+    #   The category of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the platform.
+    #   The description of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] maintainer
-    #   Information about the maintainer of the platform.
+    #   Information about the maintainer of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_name
-    #   The operating system used by the platform.
+    #   The operating system used by the platform version.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_version
-    #   The version of the operating system used by the platform.
+    #   The version of the operating system used by the platform version.
     #   @return [String]
     #
     # @!attribute [rw] programming_languages
-    #   The programming languages supported by the platform.
+    #   The programming languages supported by the platform version.
     #   @return [Array<Types::PlatformProgrammingLanguage>]
     #
     # @!attribute [rw] frameworks
-    #   The frameworks supported by the platform.
+    #   The frameworks supported by the platform version.
     #   @return [Array<Types::PlatformFramework>]
     #
     # @!attribute [rw] custom_ami_list
-    #   The custom AMIs supported by the platform.
+    #   The custom AMIs supported by the platform version.
     #   @return [Array<Types::CustomAmi>]
     #
     # @!attribute [rw] supported_tier_list
-    #   The tiers supported by the platform.
+    #   The tiers supported by the platform version.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_addon_list
-    #   The additions supported by the platform.
+    #   The additions supported by the platform version.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] platform_lifecycle_state
+    #   The state of the platform version in its lifecycle.
+    #
+    #   Possible values: `Recommended` \| `null`
+    #
+    #   If a null value is returned, the platform version isn't the
+    #   recommended one for its branch. Each platform branch has a single
+    #   recommended platform version, typically the most recent one.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_branch_name
+    #   The platform branch to which the platform version belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_branch_lifecycle_state
+    #   The state of the platform version's branch in its lifecycle.
+    #
+    #   Possible values: `Beta` \| `Supported` \| `Deprecated` \| `Retired`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformDescription AWS API Documentation
     #
@@ -3499,16 +3692,17 @@ module Aws::ElasticBeanstalk
       :frameworks,
       :custom_ami_list,
       :supported_tier_list,
-      :supported_addon_list)
+      :supported_addon_list,
+      :platform_lifecycle_state,
+      :platform_branch_name,
+      :platform_branch_lifecycle_state)
       include Aws::Structure
     end
 
-    # Specify criteria to restrict the results when listing custom
-    # platforms.
+    # Describes criteria to restrict the results when listing platform
+    # versions.
     #
-    # The filter is evaluated as the expression:
-    #
-    # `Type` `Operator` `Values[i]`
+    # The filter is evaluated as follows: `Type Operator Values[1]`
     #
     # @note When making an API call, you may pass PlatformFilter
     #   data as a hash:
@@ -3520,24 +3714,38 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] type
-    #   The custom platform attribute to which the filter values are
+    #   The platform version attribute to which the filter values are
     #   applied.
     #
-    #   Valid Values: `PlatformName` \| `PlatformVersion` \|
-    #   `PlatformStatus` \| `PlatformOwner`
+    #   Valid values: `PlatformName` \| `PlatformVersion` \|
+    #   `PlatformStatus` \| `PlatformBranchName` \| `PlatformLifecycleState`
+    #   \| `PlatformOwner` \| `SupportedTier` \| `SupportedAddon` \|
+    #   `ProgrammingLanguageName` \| `OperatingSystemName`
     #   @return [String]
     #
     # @!attribute [rw] operator
     #   The operator to apply to the `Type` with each of the `Values`.
     #
-    #   Valid Values: `=` (equal to) \| `!=` (not equal to) \| `<` (less
-    #   than) \| `<=` (less than or equal to) \| `>` (greater than) \| `>=`
-    #   (greater than or equal to) \| `contains` \| `begins_with` \|
-    #   `ends_with`
+    #   Valid values: `=` \| `!=` \| `<` \| `<=` \| `>` \| `>=` \|
+    #   `contains` \| `begins_with` \| `ends_with`
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The list of values applied to the custom platform attribute.
+    #   The list of values applied to the filtering platform version
+    #   attribute. Only one value is supported for all current operators.
+    #
+    #   The following list shows valid filter values for some filter
+    #   attributes.
+    #
+    #   * `PlatformStatus`\: `Creating` \| `Failed` \| `Ready` \| `Deleting`
+    #     \| `Deleted`
+    #
+    #   * `PlatformLifecycleState`\: `recommended`
+    #
+    #   * `SupportedTier`\: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #
+    #   * `SupportedAddon`\: `Log/S3` \| `Monitoring/Healthd` \|
+    #     `WorkerDaemon/SQSD`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformFilter AWS API Documentation
@@ -3549,7 +3757,7 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # A framework supported by the custom platform.
+    # A framework supported by the platform.
     #
     # @!attribute [rw] name
     #   The name of the framework.
@@ -3585,40 +3793,63 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Detailed information about a platform.
+    # Summary information about a platform version.
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the platform.
+    #   The ARN of the platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_owner
-    #   The AWS account ID of the person who created the platform.
+    #   The AWS account ID of the person who created the platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_status
-    #   The status of the platform. You can create an environment from the
-    #   platform once it is ready.
+    #   The status of the platform version. You can create an environment
+    #   from the platform version once it is ready.
     #   @return [String]
     #
     # @!attribute [rw] platform_category
-    #   The category of platform.
+    #   The category of platform version.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_name
-    #   The operating system used by the platform.
+    #   The operating system used by the platform version.
     #   @return [String]
     #
     # @!attribute [rw] operating_system_version
-    #   The version of the operating system used by the platform.
+    #   The version of the operating system used by the platform version.
     #   @return [String]
     #
     # @!attribute [rw] supported_tier_list
-    #   The tiers in which the platform runs.
+    #   The tiers in which the platform version runs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_addon_list
-    #   The additions associated with the platform.
+    #   The additions associated with the platform version.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] platform_lifecycle_state
+    #   The state of the platform version in its lifecycle.
+    #
+    #   Possible values: `recommended` \| empty
+    #
+    #   If an empty value is returned, the platform version is supported but
+    #   isn't the recommended one for its branch.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_version
+    #   The version string of the platform version.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_branch_name
+    #   The platform branch to which the platform version belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_branch_lifecycle_state
+    #   The state of the platform version's branch in its lifecycle.
+    #
+    #   Possible values: `beta` \| `supported` \| `deprecated` \| `retired`
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformSummary AWS API Documentation
     #
@@ -3630,7 +3861,11 @@ module Aws::ElasticBeanstalk
       :operating_system_name,
       :operating_system_version,
       :supported_tier_list,
-      :supported_addon_list)
+      :supported_addon_list,
+      :platform_lifecycle_state,
+      :platform_version,
+      :platform_branch_name,
+      :platform_branch_lifecycle_state)
       include Aws::Structure
     end
 
@@ -3797,7 +4032,7 @@ module Aws::ElasticBeanstalk
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resouce for which a tag list
+    #   The Amazon Resource Name (ARN) of the resource for which a tag list
     #   was requested.
     #   @return [String]
     #
@@ -3957,6 +4192,53 @@ module Aws::ElasticBeanstalk
     #
     class S3SubscriptionRequiredException < Aws::EmptyStructure; end
 
+    # Describes criteria to restrict a list of results.
+    #
+    # For operators that apply a single value to the attribute, the filter
+    # is evaluated as follows: `Attribute Operator Values[1]`
+    #
+    # Some operators, e.g. `in`, can apply multiple values. In this case,
+    # the filter is evaluated as a logical union (OR) of applications of the
+    # operator to the attribute with each one of the values: `(Attribute
+    # Operator Values[1]) OR (Attribute Operator Values[2]) OR ...`
+    #
+    # The valid values for attributes of `SearchFilter` depend on the API
+    # action. For valid values, see the reference page for the API action
+    # you're calling that takes a `SearchFilter` parameter.
+    #
+    # @note When making an API call, you may pass SearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         attribute: "SearchFilterAttribute",
+    #         operator: "SearchFilterOperator",
+    #         values: ["SearchFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] attribute
+    #   The result attribute to which the filter values are applied. Valid
+    #   values vary by API action.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to apply to the `Attribute` with each of the `Values`.
+    #   Valid values vary by `Attribute`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The list of values applied to the `Attribute` and `Operator`
+    #   attributes. Number of values and valid values vary by `Attribute`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SearchFilter AWS API Documentation
+    #
+    class SearchFilter < Struct.new(
+      :attribute,
+      :operator,
+      :values)
+      include Aws::Structure
+    end
+
     # Detailed health information about an Amazon EC2 instance in your
     # Elastic Beanstalk environment.
     #
@@ -4102,7 +4384,7 @@ module Aws::ElasticBeanstalk
     #
     class SourceBundleDeletionException < Aws::EmptyStructure; end
 
-    # A specification for an environment configuration
+    # A specification for an environment configuration.
     #
     # @note When making an API call, you may pass SourceConfiguration
     #   data as a hash:
@@ -4731,7 +5013,7 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resouce to be updated.
     #
-    #   Must be the ARN of an Elastic Beanstalk environment.
+    #   Must be the ARN of an Elastic Beanstalk resource.
     #   @return [String]
     #
     # @!attribute [rw] tags_to_add

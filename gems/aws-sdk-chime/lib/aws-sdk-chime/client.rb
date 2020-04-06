@@ -1023,6 +1023,71 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, Array<String>] :participant_phone_numbers
+    #
+    # @option params [String] :name
+    #
+    # @option params [Integer] :expiry_minutes
+    #
+    # @option params [required, Array<String>] :capabilities
+    #
+    # @option params [String] :number_selection_behavior
+    #
+    # @option params [String] :geo_match_level
+    #
+    # @option params [Types::GeoMatchParams] :geo_match_params
+    #
+    # @return [Types::CreateProxySessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProxySessionResponse#proxy_session #proxy_session} => Types::ProxySession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_proxy_session({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     participant_phone_numbers: ["E164PhoneNumber"], # required
+    #     name: "ProxySessionNameString",
+    #     expiry_minutes: 1,
+    #     capabilities: ["Voice"], # required, accepts Voice, SMS
+    #     number_selection_behavior: "PreferSticky", # accepts PreferSticky, AvoidSticky
+    #     geo_match_level: "Country", # accepts Country, AreaCode
+    #     geo_match_params: {
+    #       country: "Country", # required
+    #       area_code: "AreaCode", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_session.voice_connector_id #=> String
+    #   resp.proxy_session.proxy_session_id #=> String
+    #   resp.proxy_session.name #=> String
+    #   resp.proxy_session.status #=> String, one of "Open", "InProgress", "Closed"
+    #   resp.proxy_session.expiry_minutes #=> Integer
+    #   resp.proxy_session.capabilities #=> Array
+    #   resp.proxy_session.capabilities[0] #=> String, one of "Voice", "SMS"
+    #   resp.proxy_session.created_timestamp #=> Time
+    #   resp.proxy_session.updated_timestamp #=> Time
+    #   resp.proxy_session.ended_timestamp #=> Time
+    #   resp.proxy_session.participants #=> Array
+    #   resp.proxy_session.participants[0].phone_number #=> String
+    #   resp.proxy_session.participants[0].proxy_phone_number #=> String
+    #   resp.proxy_session.number_selection_behavior #=> String, one of "PreferSticky", "AvoidSticky"
+    #   resp.proxy_session.geo_match_level #=> String, one of "Country", "AreaCode"
+    #   resp.proxy_session.geo_match_params.country #=> String
+    #   resp.proxy_session.geo_match_params.area_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateProxySession AWS API Documentation
+    #
+    # @overload create_proxy_session(params = {})
+    # @param [Hash] params ({})
+    def create_proxy_session(params = {}, options = {})
+      req = build_request(:create_proxy_session, params)
+      req.send_request(options)
+    end
+
     # Creates a chat room for the specified Amazon Chime Enterprise account.
     #
     # @option params [required, String] :account_id
@@ -1424,6 +1489,28 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :proxy_session_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_proxy_session({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     proxy_session_id: "NonEmptyString128", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteProxySession AWS API Documentation
+    #
+    # @overload delete_proxy_session(params = {})
+    # @param [Hash] params ({})
+    def delete_proxy_session(params = {}, options = {})
+      req = build_request(:delete_proxy_session, params)
+      req.send_request(options)
+    end
+
     # Deletes a chat room in an Amazon Chime Enterprise account.
     #
     # @option params [required, String] :account_id
@@ -1549,6 +1636,25 @@ module Aws::Chime
     # @param [Hash] params ({})
     def delete_voice_connector_origination(params = {}, options = {})
       req = build_request(:delete_voice_connector_origination, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_voice_connector_proxy({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorProxy AWS API Documentation
+    #
+    # @overload delete_voice_connector_proxy(params = {})
+    # @param [Hash] params ({})
+    def delete_voice_connector_proxy(params = {}, options = {})
+      req = build_request(:delete_voice_connector_proxy, params)
       req.send_request(options)
     end
 
@@ -2114,6 +2220,50 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :proxy_session_id
+    #
+    # @return [Types::GetProxySessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProxySessionResponse#proxy_session #proxy_session} => Types::ProxySession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_proxy_session({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     proxy_session_id: "NonEmptyString128", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_session.voice_connector_id #=> String
+    #   resp.proxy_session.proxy_session_id #=> String
+    #   resp.proxy_session.name #=> String
+    #   resp.proxy_session.status #=> String, one of "Open", "InProgress", "Closed"
+    #   resp.proxy_session.expiry_minutes #=> Integer
+    #   resp.proxy_session.capabilities #=> Array
+    #   resp.proxy_session.capabilities[0] #=> String, one of "Voice", "SMS"
+    #   resp.proxy_session.created_timestamp #=> Time
+    #   resp.proxy_session.updated_timestamp #=> Time
+    #   resp.proxy_session.ended_timestamp #=> Time
+    #   resp.proxy_session.participants #=> Array
+    #   resp.proxy_session.participants[0].phone_number #=> String
+    #   resp.proxy_session.participants[0].proxy_phone_number #=> String
+    #   resp.proxy_session.number_selection_behavior #=> String, one of "PreferSticky", "AvoidSticky"
+    #   resp.proxy_session.geo_match_level #=> String, one of "Country", "AreaCode"
+    #   resp.proxy_session.geo_match_params.country #=> String
+    #   resp.proxy_session.geo_match_params.area_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetProxySession AWS API Documentation
+    #
+    # @overload get_proxy_session(params = {})
+    # @param [Hash] params ({})
+    def get_proxy_session(params = {}, options = {})
+      req = build_request(:get_proxy_session, params)
+      req.send_request(options)
+    end
+
     # Retrieves room details, such as the room name, for a room in an Amazon
     # Chime Enterprise account.
     #
@@ -2368,6 +2518,35 @@ module Aws::Chime
     # @param [Hash] params ({})
     def get_voice_connector_origination(params = {}, options = {})
       req = build_request(:get_voice_connector_origination, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @return [Types::GetVoiceConnectorProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVoiceConnectorProxyResponse#proxy #proxy} => Types::Proxy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_voice_connector_proxy({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy.default_session_expiry_minutes #=> Integer
+    #   resp.proxy.disabled #=> Boolean
+    #   resp.proxy.fall_back_phone_number #=> String
+    #   resp.proxy.phone_number_countries #=> Array
+    #   resp.proxy.phone_number_countries[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorProxy AWS API Documentation
+    #
+    # @overload get_voice_connector_proxy(params = {})
+    # @param [Hash] params ({})
+    def get_voice_connector_proxy(params = {}, options = {})
+      req = build_request(:get_voice_connector_proxy, params)
       req.send_request(options)
     end
 
@@ -2839,6 +3018,61 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [String] :status
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @return [Types::ListProxySessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProxySessionsResponse#proxy_sessions #proxy_sessions} => Array&lt;Types::ProxySession&gt;
+    #   * {Types::ListProxySessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_proxy_sessions({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     status: "Open", # accepts Open, InProgress, Closed
+    #     next_token: "NextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_sessions #=> Array
+    #   resp.proxy_sessions[0].voice_connector_id #=> String
+    #   resp.proxy_sessions[0].proxy_session_id #=> String
+    #   resp.proxy_sessions[0].name #=> String
+    #   resp.proxy_sessions[0].status #=> String, one of "Open", "InProgress", "Closed"
+    #   resp.proxy_sessions[0].expiry_minutes #=> Integer
+    #   resp.proxy_sessions[0].capabilities #=> Array
+    #   resp.proxy_sessions[0].capabilities[0] #=> String, one of "Voice", "SMS"
+    #   resp.proxy_sessions[0].created_timestamp #=> Time
+    #   resp.proxy_sessions[0].updated_timestamp #=> Time
+    #   resp.proxy_sessions[0].ended_timestamp #=> Time
+    #   resp.proxy_sessions[0].participants #=> Array
+    #   resp.proxy_sessions[0].participants[0].phone_number #=> String
+    #   resp.proxy_sessions[0].participants[0].proxy_phone_number #=> String
+    #   resp.proxy_sessions[0].number_selection_behavior #=> String, one of "PreferSticky", "AvoidSticky"
+    #   resp.proxy_sessions[0].geo_match_level #=> String, one of "Country", "AreaCode"
+    #   resp.proxy_sessions[0].geo_match_params.country #=> String
+    #   resp.proxy_sessions[0].geo_match_params.area_code #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListProxySessions AWS API Documentation
+    #
+    # @overload list_proxy_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_proxy_sessions(params = {}, options = {})
+      req = build_request(:list_proxy_sessions, params)
+      req.send_request(options)
+    end
+
     # Lists the membership details for the specified room in an Amazon Chime
     # Enterprise account, such as the members' IDs, email addresses, and
     # names.
@@ -3283,6 +3517,47 @@ module Aws::Chime
     # @param [Hash] params ({})
     def put_voice_connector_origination(params = {}, options = {})
       req = build_request(:put_voice_connector_origination, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, Integer] :default_session_expiry_minutes
+    #
+    # @option params [required, Array<String>] :phone_number_pool_countries
+    #
+    # @option params [String] :fall_back_phone_number
+    #
+    # @option params [Boolean] :disabled
+    #
+    # @return [Types::PutVoiceConnectorProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutVoiceConnectorProxyResponse#proxy #proxy} => Types::Proxy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_voice_connector_proxy({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     default_session_expiry_minutes: 1, # required
+    #     phone_number_pool_countries: ["Country"], # required
+    #     fall_back_phone_number: "E164PhoneNumber",
+    #     disabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy.default_session_expiry_minutes #=> Integer
+    #   resp.proxy.disabled #=> Boolean
+    #   resp.proxy.fall_back_phone_number #=> String
+    #   resp.proxy.phone_number_countries #=> Array
+    #   resp.proxy.phone_number_countries[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorProxy AWS API Documentation
+    #
+    # @overload put_voice_connector_proxy(params = {})
+    # @param [Hash] params ({})
+    def put_voice_connector_proxy(params = {}, options = {})
+      req = build_request(:put_voice_connector_proxy, params)
       req.send_request(options)
     end
 
@@ -3835,6 +4110,56 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # @option params [required, String] :voice_connector_id
+    #
+    # @option params [required, String] :proxy_session_id
+    #
+    # @option params [required, Array<String>] :capabilities
+    #
+    # @option params [Integer] :expiry_minutes
+    #
+    # @return [Types::UpdateProxySessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateProxySessionResponse#proxy_session #proxy_session} => Types::ProxySession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_proxy_session({
+    #     voice_connector_id: "NonEmptyString128", # required
+    #     proxy_session_id: "NonEmptyString128", # required
+    #     capabilities: ["Voice"], # required, accepts Voice, SMS
+    #     expiry_minutes: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.proxy_session.voice_connector_id #=> String
+    #   resp.proxy_session.proxy_session_id #=> String
+    #   resp.proxy_session.name #=> String
+    #   resp.proxy_session.status #=> String, one of "Open", "InProgress", "Closed"
+    #   resp.proxy_session.expiry_minutes #=> Integer
+    #   resp.proxy_session.capabilities #=> Array
+    #   resp.proxy_session.capabilities[0] #=> String, one of "Voice", "SMS"
+    #   resp.proxy_session.created_timestamp #=> Time
+    #   resp.proxy_session.updated_timestamp #=> Time
+    #   resp.proxy_session.ended_timestamp #=> Time
+    #   resp.proxy_session.participants #=> Array
+    #   resp.proxy_session.participants[0].phone_number #=> String
+    #   resp.proxy_session.participants[0].proxy_phone_number #=> String
+    #   resp.proxy_session.number_selection_behavior #=> String, one of "PreferSticky", "AvoidSticky"
+    #   resp.proxy_session.geo_match_level #=> String, one of "Country", "AreaCode"
+    #   resp.proxy_session.geo_match_params.country #=> String
+    #   resp.proxy_session.geo_match_params.area_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateProxySession AWS API Documentation
+    #
+    # @overload update_proxy_session(params = {})
+    # @param [Hash] params ({})
+    def update_proxy_session(params = {}, options = {})
+      req = build_request(:update_proxy_session, params)
+      req.send_request(options)
+    end
+
     # Updates room details, such as the room name, for a room in an Amazon
     # Chime Enterprise account.
     #
@@ -4131,7 +4456,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -21,10 +21,13 @@ module Aws::TranscribeService
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     DataAccessRoleArn = Shapes::StringShape.new(name: 'DataAccessRoleArn')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DeleteMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteMedicalTranscriptionJobRequest')
     DeleteTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteTranscriptionJobRequest')
     DeleteVocabularyFilterRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyFilterRequest')
     DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    GetMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobRequest')
+    GetMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobResponse')
     GetTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetTranscriptionJobRequest')
     GetTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetTranscriptionJobResponse')
     GetVocabularyFilterRequest = Shapes::StructureShape.new(name: 'GetVocabularyFilterRequest')
@@ -36,6 +39,8 @@ module Aws::TranscribeService
     KMSKeyId = Shapes::StringShape.new(name: 'KMSKeyId')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListMedicalTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsRequest')
+    ListMedicalTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsResponse')
     ListTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListTranscriptionJobsRequest')
     ListTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListTranscriptionJobsResponse')
     ListVocabulariesRequest = Shapes::StructureShape.new(name: 'ListVocabulariesRequest')
@@ -48,6 +53,11 @@ module Aws::TranscribeService
     Media = Shapes::StructureShape.new(name: 'Media')
     MediaFormat = Shapes::StringShape.new(name: 'MediaFormat')
     MediaSampleRateHertz = Shapes::IntegerShape.new(name: 'MediaSampleRateHertz')
+    MedicalTranscript = Shapes::StructureShape.new(name: 'MedicalTranscript')
+    MedicalTranscriptionJob = Shapes::StructureShape.new(name: 'MedicalTranscriptionJob')
+    MedicalTranscriptionJobSummaries = Shapes::ListShape.new(name: 'MedicalTranscriptionJobSummaries')
+    MedicalTranscriptionJobSummary = Shapes::StructureShape.new(name: 'MedicalTranscriptionJobSummary')
+    MedicalTranscriptionSetting = Shapes::StructureShape.new(name: 'MedicalTranscriptionSetting')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OutputBucketName = Shapes::StringShape.new(name: 'OutputBucketName')
@@ -57,6 +67,9 @@ module Aws::TranscribeService
     RedactionOutput = Shapes::StringShape.new(name: 'RedactionOutput')
     RedactionType = Shapes::StringShape.new(name: 'RedactionType')
     Settings = Shapes::StructureShape.new(name: 'Settings')
+    Specialty = Shapes::StringShape.new(name: 'Specialty')
+    StartMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'StartMedicalTranscriptionJobRequest')
+    StartMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'StartMedicalTranscriptionJobResponse')
     StartTranscriptionJobRequest = Shapes::StructureShape.new(name: 'StartTranscriptionJobRequest')
     StartTranscriptionJobResponse = Shapes::StructureShape.new(name: 'StartTranscriptionJobResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -66,6 +79,7 @@ module Aws::TranscribeService
     TranscriptionJobStatus = Shapes::StringShape.new(name: 'TranscriptionJobStatus')
     TranscriptionJobSummaries = Shapes::ListShape.new(name: 'TranscriptionJobSummaries')
     TranscriptionJobSummary = Shapes::StructureShape.new(name: 'TranscriptionJobSummary')
+    Type = Shapes::StringShape.new(name: 'Type')
     UpdateVocabularyFilterRequest = Shapes::StructureShape.new(name: 'UpdateVocabularyFilterRequest')
     UpdateVocabularyFilterResponse = Shapes::StructureShape.new(name: 'UpdateVocabularyFilterResponse')
     UpdateVocabularyRequest = Shapes::StructureShape.new(name: 'UpdateVocabularyRequest')
@@ -116,6 +130,9 @@ module Aws::TranscribeService
     CreateVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
 
+    DeleteMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
+    DeleteMedicalTranscriptionJobRequest.struct_class = Types::DeleteMedicalTranscriptionJobRequest
+
     DeleteTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     DeleteTranscriptionJobRequest.struct_class = Types::DeleteTranscriptionJobRequest
 
@@ -124,6 +141,12 @@ module Aws::TranscribeService
 
     DeleteVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     DeleteVocabularyRequest.struct_class = Types::DeleteVocabularyRequest
+
+    GetMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
+    GetMedicalTranscriptionJobRequest.struct_class = Types::GetMedicalTranscriptionJobRequest
+
+    GetMedicalTranscriptionJobResponse.add_member(:medical_transcription_job, Shapes::ShapeRef.new(shape: MedicalTranscriptionJob, location_name: "MedicalTranscriptionJob"))
+    GetMedicalTranscriptionJobResponse.struct_class = Types::GetMedicalTranscriptionJobResponse
 
     GetTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     GetTranscriptionJobRequest.struct_class = Types::GetTranscriptionJobRequest
@@ -161,6 +184,17 @@ module Aws::TranscribeService
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListMedicalTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
+    ListMedicalTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
+    ListMedicalTranscriptionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMedicalTranscriptionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMedicalTranscriptionJobsRequest.struct_class = Types::ListMedicalTranscriptionJobsRequest
+
+    ListMedicalTranscriptionJobsResponse.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
+    ListMedicalTranscriptionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMedicalTranscriptionJobsResponse.add_member(:medical_transcription_job_summaries, Shapes::ShapeRef.new(shape: MedicalTranscriptionJobSummaries, location_name: "MedicalTranscriptionJobSummaries"))
+    ListMedicalTranscriptionJobsResponse.struct_class = Types::ListMedicalTranscriptionJobsResponse
+
     ListTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
     ListTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
     ListTranscriptionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -195,6 +229,46 @@ module Aws::TranscribeService
     Media.add_member(:media_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "MediaFileUri"))
     Media.struct_class = Types::Media
 
+    MedicalTranscript.add_member(:transcript_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "TranscriptFileUri"))
+    MedicalTranscript.struct_class = Types::MedicalTranscript
+
+    MedicalTranscriptionJob.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "MedicalTranscriptionJobName"))
+    MedicalTranscriptionJob.add_member(:transcription_job_status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "TranscriptionJobStatus"))
+    MedicalTranscriptionJob.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    MedicalTranscriptionJob.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
+    MedicalTranscriptionJob.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
+    MedicalTranscriptionJob.add_member(:media, Shapes::ShapeRef.new(shape: Media, location_name: "Media"))
+    MedicalTranscriptionJob.add_member(:transcript, Shapes::ShapeRef.new(shape: MedicalTranscript, location_name: "Transcript"))
+    MedicalTranscriptionJob.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    MedicalTranscriptionJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    MedicalTranscriptionJob.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
+    MedicalTranscriptionJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    MedicalTranscriptionJob.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
+    MedicalTranscriptionJob.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, location_name: "Specialty"))
+    MedicalTranscriptionJob.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    MedicalTranscriptionJob.struct_class = Types::MedicalTranscriptionJob
+
+    MedicalTranscriptionJobSummaries.member = Shapes::ShapeRef.new(shape: MedicalTranscriptionJobSummary)
+
+    MedicalTranscriptionJobSummary.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "MedicalTranscriptionJobName"))
+    MedicalTranscriptionJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreationTime"))
+    MedicalTranscriptionJobSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "StartTime"))
+    MedicalTranscriptionJobSummary.add_member(:completion_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "CompletionTime"))
+    MedicalTranscriptionJobSummary.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    MedicalTranscriptionJobSummary.add_member(:transcription_job_status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "TranscriptionJobStatus"))
+    MedicalTranscriptionJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    MedicalTranscriptionJobSummary.add_member(:output_location_type, Shapes::ShapeRef.new(shape: OutputLocationType, location_name: "OutputLocationType"))
+    MedicalTranscriptionJobSummary.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, location_name: "Specialty"))
+    MedicalTranscriptionJobSummary.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    MedicalTranscriptionJobSummary.struct_class = Types::MedicalTranscriptionJobSummary
+
+    MedicalTranscriptionSetting.add_member(:show_speaker_labels, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowSpeakerLabels"))
+    MedicalTranscriptionSetting.add_member(:max_speaker_labels, Shapes::ShapeRef.new(shape: MaxSpeakers, location_name: "MaxSpeakerLabels"))
+    MedicalTranscriptionSetting.add_member(:channel_identification, Shapes::ShapeRef.new(shape: Boolean, location_name: "ChannelIdentification"))
+    MedicalTranscriptionSetting.add_member(:show_alternatives, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowAlternatives"))
+    MedicalTranscriptionSetting.add_member(:max_alternatives, Shapes::ShapeRef.new(shape: MaxAlternatives, location_name: "MaxAlternatives"))
+    MedicalTranscriptionSetting.struct_class = Types::MedicalTranscriptionSetting
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -209,6 +283,21 @@ module Aws::TranscribeService
     Settings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
     Settings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: VocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
     Settings.struct_class = Types::Settings
+
+    StartMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
+    StartMedicalTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartMedicalTranscriptionJobRequest.add_member(:media_sample_rate_hertz, Shapes::ShapeRef.new(shape: MediaSampleRateHertz, location_name: "MediaSampleRateHertz"))
+    StartMedicalTranscriptionJobRequest.add_member(:media_format, Shapes::ShapeRef.new(shape: MediaFormat, location_name: "MediaFormat"))
+    StartMedicalTranscriptionJobRequest.add_member(:media, Shapes::ShapeRef.new(shape: Media, required: true, location_name: "Media"))
+    StartMedicalTranscriptionJobRequest.add_member(:output_bucket_name, Shapes::ShapeRef.new(shape: OutputBucketName, required: true, location_name: "OutputBucketName"))
+    StartMedicalTranscriptionJobRequest.add_member(:output_encryption_kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "OutputEncryptionKMSKeyId"))
+    StartMedicalTranscriptionJobRequest.add_member(:settings, Shapes::ShapeRef.new(shape: MedicalTranscriptionSetting, location_name: "Settings"))
+    StartMedicalTranscriptionJobRequest.add_member(:specialty, Shapes::ShapeRef.new(shape: Specialty, required: true, location_name: "Specialty"))
+    StartMedicalTranscriptionJobRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
+    StartMedicalTranscriptionJobRequest.struct_class = Types::StartMedicalTranscriptionJobRequest
+
+    StartMedicalTranscriptionJobResponse.add_member(:medical_transcription_job, Shapes::ShapeRef.new(shape: MedicalTranscriptionJob, location_name: "MedicalTranscriptionJob"))
+    StartMedicalTranscriptionJobResponse.struct_class = Types::StartMedicalTranscriptionJobResponse
 
     StartTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     StartTranscriptionJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
@@ -340,6 +429,17 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMedicalTranscriptionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMedicalTranscriptionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:delete_transcription_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteTranscriptionJob"
         o.http_method = "POST"
@@ -373,6 +473,18 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:get_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMedicalTranscriptionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMedicalTranscriptionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMedicalTranscriptionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_transcription_job, Seahorse::Model::Operation.new.tap do |o|
@@ -409,6 +521,23 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:list_medical_transcription_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMedicalTranscriptionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMedicalTranscriptionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMedicalTranscriptionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_transcription_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -460,6 +589,18 @@ module Aws::TranscribeService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:start_medical_transcription_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMedicalTranscriptionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMedicalTranscriptionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMedicalTranscriptionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:start_transcription_job, Seahorse::Model::Operation.new.tap do |o|
