@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the documentation for Amazon API Gateway.
+
+* Feature - Aws::CodeGuruReviewer - Updated the API for Amazon CodeGuru Reviewer.
+
+* Feature - Aws::MediaConnect - Updated the API, and documentation for AWS MediaConnect.
+
 2.11.484 (2020-04-06)
 ------------------
 
