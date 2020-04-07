@@ -70,8 +70,7 @@ module Aws
       PRELUDE_LENGTH = 12
       private_constant :PRELUDE_LENGTH
 
-      # bytes of total overhead in a message, including prelude
-      # and 4 bytes total message crc checksum
+      # 4 bytes message crc checksum
       CRC32_LENGTH = 4
       private_constant :CRC32_LENGTH
 
@@ -82,11 +81,6 @@ module Aws
       def initialize(options = {})
         @format = options.fetch(:format, true)
         @message_buffer = ''
-      end
-
-      # exposed for testing
-      def _message_buffer
-        @message_buffer
       end
 
       # Decodes messages from a binary stream
@@ -121,6 +115,9 @@ module Aws
       end
 
       private
+
+      # exposed via object.send for testing
+      attr_reader :message_buffer
 
       def wrap_as_enumerator(decoded_message)
         Enumerator.new do |yielder|

@@ -54,7 +54,7 @@ module Aws
           end
           expect(eof).to be false
 
-          expect(decoder._message_buffer).to eq(second_message)
+          expect(decoder.send(:message_buffer)).to eq(second_message)
 
           msg, eof = decoder.decode_chunk
           expect_msg = SpecHelper.expected_decoded_message(files[2])
@@ -79,7 +79,7 @@ module Aws
           expect(msg).to be_nil
           expect(eof).to be true
 
-          expect(decoder._message_buffer).to eq(first_part)
+          expect(decoder.send(:message_buffer)).to eq(first_part)
 
           msg, eof = decoder.decode_chunk(second_part)
           expect_msg = SpecHelper.expected_decoded_message(file)
@@ -105,7 +105,7 @@ module Aws
           expect(msg).to be_nil
           expect(eof).to be true
 
-          expect(decoder._message_buffer).to eq(first_part)
+          expect(decoder.send(:message_buffer)).to eq(first_part)
 
           msg, eof = decoder.decode_chunk(second_part)
           expect_msg = SpecHelper.expected_decoded_message(file)
