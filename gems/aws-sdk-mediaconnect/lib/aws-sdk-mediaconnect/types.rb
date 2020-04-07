@@ -53,6 +53,9 @@ module Aws::MediaConnect
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
+    #             vpc_interface_attachment: {
+    #               vpc_interface_name: "__string",
+    #             },
     #           },
     #         ],
     #       }
@@ -237,6 +240,9 @@ module Aws::MediaConnect
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
+    #         vpc_interface_attachment: {
+    #           vpc_interface_name: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] cidr_allow_list
@@ -292,6 +298,10 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #   @return [Types::VpcInterfaceAttachment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -305,7 +315,8 @@ module Aws::MediaConnect
       :protocol,
       :remote_id,
       :smoothing_latency,
-      :stream_id)
+      :stream_id,
+      :vpc_interface_attachment)
       include Aws::Structure
     end
 
@@ -388,6 +399,9 @@ module Aws::MediaConnect
     #             remote_id: "__string",
     #             smoothing_latency: 1,
     #             stream_id: "__string",
+    #             vpc_interface_attachment: {
+    #               vpc_interface_name: "__string",
+    #             },
     #           },
     #         ],
     #         source: {
@@ -1241,6 +1255,10 @@ module Aws::MediaConnect
     #   output.
     #   @return [Types::Transport]
     #
+    # @!attribute [rw] vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #   @return [Types::VpcInterfaceAttachment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Output AWS API Documentation
     #
     class Output < Struct.new(
@@ -1253,7 +1271,8 @@ module Aws::MediaConnect
       :name,
       :output_arn,
       :port,
-      :transport)
+      :transport,
+      :vpc_interface_attachment)
       include Aws::Structure
     end
 
@@ -2034,6 +2053,9 @@ module Aws::MediaConnect
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
+    #         vpc_interface_attachment: {
+    #           vpc_interface_name: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] cidr_allow_list
@@ -2090,6 +2112,10 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #   @return [Types::VpcInterfaceAttachment]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
@@ -2104,7 +2130,8 @@ module Aws::MediaConnect
       :protocol,
       :remote_id,
       :smoothing_latency,
-      :stream_id)
+      :stream_id,
+      :vpc_interface_attachment)
       include Aws::Structure
     end
 
@@ -2325,6 +2352,26 @@ module Aws::MediaConnect
       :role_arn,
       :security_group_ids,
       :subnet_id)
+      include Aws::Structure
+    end
+
+    # The settings for attaching a VPC interface to an output.
+    #
+    # @note When making an API call, you may pass VpcInterfaceAttachment
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_interface_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface to use for this output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterfaceAttachment AWS API Documentation
+    #
+    class VpcInterfaceAttachment < Struct.new(
+      :vpc_interface_name)
       include Aws::Structure
     end
 

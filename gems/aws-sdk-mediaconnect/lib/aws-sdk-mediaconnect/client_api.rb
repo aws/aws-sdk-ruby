@@ -86,6 +86,7 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest = Shapes::StructureShape.new(name: 'UpdateFlowSourceRequest')
     UpdateFlowSourceResponse = Shapes::StructureShape.new(name: 'UpdateFlowSourceResponse')
     VpcInterface = Shapes::StructureShape.new(name: 'VpcInterface')
+    VpcInterfaceAttachment = Shapes::StructureShape.new(name: 'VpcInterfaceAttachment')
     VpcInterfaceRequest = Shapes::StructureShape.new(name: 'VpcInterfaceRequest')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -146,6 +147,7 @@ module Aws::MediaConnect
     AddOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     AddOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     AddOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    AddOutputRequest.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
     AddOutputRequest.struct_class = Types::AddOutputRequest
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
@@ -293,6 +295,7 @@ module Aws::MediaConnect
     Output.add_member(:output_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "outputArn"))
     Output.add_member(:port, Shapes::ShapeRef.new(shape: __integer, location_name: "port"))
     Output.add_member(:transport, Shapes::ShapeRef.new(shape: Transport, location_name: "transport"))
+    Output.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
     Output.struct_class = Types::Output
 
     RemoveFlowOutputRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
@@ -432,6 +435,7 @@ module Aws::MediaConnect
     UpdateFlowOutputRequest.add_member(:remote_id, Shapes::ShapeRef.new(shape: __string, location_name: "remoteId"))
     UpdateFlowOutputRequest.add_member(:smoothing_latency, Shapes::ShapeRef.new(shape: __integer, location_name: "smoothingLatency"))
     UpdateFlowOutputRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    UpdateFlowOutputRequest.add_member(:vpc_interface_attachment, Shapes::ShapeRef.new(shape: VpcInterfaceAttachment, location_name: "vpcInterfaceAttachment"))
     UpdateFlowOutputRequest.struct_class = Types::UpdateFlowOutputRequest
 
     UpdateFlowOutputResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
@@ -469,6 +473,9 @@ module Aws::MediaConnect
     VpcInterface.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "securityGroupIds"))
     VpcInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "subnetId"))
     VpcInterface.struct_class = Types::VpcInterface
+
+    VpcInterfaceAttachment.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
+    VpcInterfaceAttachment.struct_class = Types::VpcInterfaceAttachment
 
     VpcInterfaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     VpcInterfaceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))

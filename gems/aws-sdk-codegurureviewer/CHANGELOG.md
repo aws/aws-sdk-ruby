@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-04-07)
+------------------
+
+* Feature - API updates for CodeGuruReviewer
+
 1.1.0 (2020-03-09)
 ------------------
 

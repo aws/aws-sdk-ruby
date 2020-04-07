@@ -331,7 +331,8 @@ module Aws::APIGateway
     #
     # @option params [Boolean] :generate_distinct_id
     #   Specifies whether (`true`) or not (`false`) the key identifier is
-    #   distinct from the created API key value.
+    #   distinct from the created API key value. This parameter is deprecated
+    #   and should not be used.
     #
     # @option params [String] :value
     #   Specifies a value of the API key.
@@ -561,8 +562,8 @@ module Aws::APIGateway
     #
     # @option params [String] :stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Specify '(none)' if you do not want callers to explicitly specify
-    #   the stage name after any base path name.
+    #   Specify '(none)' if you want callers to explicitly specify the stage
+    #   name after any base path name.
     #
     # @return [Types::BasePathMapping] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1464,9 +1465,9 @@ module Aws::APIGateway
     #   The description of the VPC link.
     #
     # @option params [required, Array<String>] :target_arns
-    #   \[Required\] The ARNs of network load balancers of the VPC targeted by
-    #   the VPC link. The network load balancers must be owned by the same AWS
-    #   account of the API owner.
+    #   \[Required\] The ARN of the network load balancer of the VPC targeted
+    #   by the VPC link. The network load balancer must be owned by the same
+    #   AWS account of the API owner.
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value map of strings. The valid character set is
@@ -4131,8 +4132,7 @@ module Aws::APIGateway
     # Gets the Tags collection for a given resource.
     #
     # @option params [required, String] :resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #
     # @option params [String] :position
     #   (Not currently supported) The current pagination position in the paged
@@ -5375,8 +5375,7 @@ module Aws::APIGateway
     # Adds or updates a tag on a given resource.
     #
     # @option params [required, String] :resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #
     # @option params [required, Hash<String,String>] :tags
     #   \[Required\] The key-value map of strings. The valid character set is
@@ -5585,8 +5584,7 @@ module Aws::APIGateway
     # Removes a tag from a given resource.
     #
     # @option params [required, String] :resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #
     # @option params [required, Array<String>] :tag_keys
     #   \[Required\] The Tag keys to delete.
@@ -6993,7 +6991,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

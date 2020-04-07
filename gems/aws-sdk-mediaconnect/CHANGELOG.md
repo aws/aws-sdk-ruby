@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-04-07)
+------------------
+
+* Feature - You can now send content from your MediaConnect flow to your virtual private cloud (VPC) without going over the public internet.
+
 1.19.0 (2020-04-01)
 ------------------
 

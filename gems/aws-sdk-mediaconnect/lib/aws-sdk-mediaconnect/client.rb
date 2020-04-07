@@ -348,6 +348,9 @@ module Aws::MediaConnect
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
+    #         vpc_interface_attachment: {
+    #           vpc_interface_name: "__string",
+    #         },
     #       },
     #     ],
     #   })
@@ -381,6 +384,7 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.remote_id #=> String
     #   resp.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.outputs[0].transport.stream_id #=> String
+    #   resp.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowOutputs AWS API Documentation
     #
@@ -600,6 +604,9 @@ module Aws::MediaConnect
     #         remote_id: "__string",
     #         smoothing_latency: 1,
     #         stream_id: "__string",
+    #         vpc_interface_attachment: {
+    #           vpc_interface_name: "__string",
+    #         },
     #       },
     #     ],
     #     source: {
@@ -713,6 +720,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -882,6 +890,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -1457,6 +1466,7 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.remote_id #=> String
     #   resp.flow.outputs[0].transport.smoothing_latency #=> Integer
     #   resp.flow.outputs[0].transport.stream_id #=> String
+    #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.source.data_transfer_subscriber_fee_percent #=> Integer
     #   resp.flow.source.decryption.algorithm #=> String, one of "aes128", "aes192", "aes256"
     #   resp.flow.source.decryption.constant_initialization_vector #=> String
@@ -1648,6 +1658,9 @@ module Aws::MediaConnect
     #   The stream ID that you want to use for this transport. This parameter
     #   applies only to Zixi-based streams.
     #
+    # @option params [Types::VpcInterfaceAttachment] :vpc_interface_attachment
+    #   The name of the VPC interface attachment to use for this output.
+    #
     # @return [Types::UpdateFlowOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowOutputResponse#flow_arn #flow_arn} => String
@@ -1678,6 +1691,9 @@ module Aws::MediaConnect
     #     remote_id: "__string",
     #     smoothing_latency: 1,
     #     stream_id: "__string",
+    #     vpc_interface_attachment: {
+    #       vpc_interface_name: "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1708,6 +1724,7 @@ module Aws::MediaConnect
     #   resp.output.transport.remote_id #=> String
     #   resp.output.transport.smoothing_latency #=> Integer
     #   resp.output.transport.stream_id #=> String
+    #   resp.output.vpc_interface_attachment.vpc_interface_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutput AWS API Documentation
     #
@@ -1845,7 +1862,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
