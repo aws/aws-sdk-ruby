@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.485 (2020-04-07)
+------------------
+
 * Feature - Aws::APIGateway - Updated the documentation for Amazon API Gateway.
 
 * Feature - Aws::CodeGuruReviewer - Updated the API for Amazon CodeGuru Reviewer.
