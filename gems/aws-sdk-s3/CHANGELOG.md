@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.2 (2020-04-03)
+------------------
+
+* Issue - Add `put_bucket_lifecycle_configuration` and `put_bucket_replication` as required operations used in the MD5 plugin.
+
 1.61.1 (2020-03-10)
 ------------------
 

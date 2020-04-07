@@ -428,6 +428,7 @@ module Aws::MediaConnect
     #         name: "__string",
     #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         stream_id: "__string",
+    #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
     #       },
     #     ],
@@ -461,6 +462,7 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.remote_id #=> String
     #   resp.sources[0].transport.smoothing_latency #=> Integer
     #   resp.sources[0].transport.stream_id #=> String
+    #   resp.sources[0].vpc_interface_name #=> String
     #   resp.sources[0].whitelist_cidr #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowSources AWS API Documentation
@@ -469,6 +471,53 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def add_flow_sources(params = {}, options = {})
       req = build_request(:add_flow_sources, params)
+      req.send_request(options)
+    end
+
+    # Adds VPC interfaces to flow
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, Array<Types::VpcInterfaceRequest>] :vpc_interfaces
+    #   A list of VPC interfaces that you want to add.
+    #
+    # @return [Types::AddFlowVpcInterfacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddFlowVpcInterfacesResponse#flow_arn #flow_arn} => String
+    #   * {Types::AddFlowVpcInterfacesResponse#vpc_interfaces #vpc_interfaces} => Array&lt;Types::VpcInterface&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_flow_vpc_interfaces({
+    #     flow_arn: "__string", # required
+    #     vpc_interfaces: [ # required
+    #       {
+    #         name: "__string", # required
+    #         role_arn: "__string", # required
+    #         security_group_ids: ["__string"], # required
+    #         subnet_id: "__string", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.vpc_interfaces #=> Array
+    #   resp.vpc_interfaces[0].name #=> String
+    #   resp.vpc_interfaces[0].network_interface_ids #=> Array
+    #   resp.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.vpc_interfaces[0].role_arn #=> String
+    #   resp.vpc_interfaces[0].security_group_ids #=> Array
+    #   resp.vpc_interfaces[0].security_group_ids[0] #=> String
+    #   resp.vpc_interfaces[0].subnet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowVpcInterfaces AWS API Documentation
+    #
+    # @overload add_flow_vpc_interfaces(params = {})
+    # @param [Hash] params ({})
+    def add_flow_vpc_interfaces(params = {}, options = {})
+      req = build_request(:add_flow_vpc_interfaces, params)
       req.send_request(options)
     end
 
@@ -496,6 +545,9 @@ module Aws::MediaConnect
     #   The settings for source failover
     #
     # @option params [Array<Types::SetSourceRequest>] :sources
+    #
+    # @option params [Array<Types::VpcInterfaceRequest>] :vpc_interfaces
+    #   The VPC interfaces you want on the flow.
     #
     # @return [Types::CreateFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -570,6 +622,7 @@ module Aws::MediaConnect
     #       name: "__string",
     #       protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #       stream_id: "__string",
+    #       vpc_interface_name: "__string",
     #       whitelist_cidr: "__string",
     #     },
     #     source_failover_config: {
@@ -597,7 +650,16 @@ module Aws::MediaConnect
     #         name: "__string",
     #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         stream_id: "__string",
+    #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
+    #       },
+    #     ],
+    #     vpc_interfaces: [
+    #       {
+    #         name: "__string", # required
+    #         role_arn: "__string", # required
+    #         security_group_ids: ["__string"], # required
+    #         subnet_id: "__string", # required
     #       },
     #     ],
     #   })
@@ -675,6 +737,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
+    #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source_failover_config.recovery_window #=> Integer
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
@@ -703,8 +766,17 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
+    #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
+    #   resp.flow.vpc_interfaces #=> Array
+    #   resp.flow.vpc_interfaces[0].name #=> String
+    #   resp.flow.vpc_interfaces[0].network_interface_ids #=> Array
+    #   resp.flow.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].role_arn #=> String
+    #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
+    #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].subnet_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlow AWS API Documentation
     #
@@ -834,6 +906,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
+    #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source_failover_config.recovery_window #=> Integer
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
@@ -862,8 +935,17 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
+    #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
+    #   resp.flow.vpc_interfaces #=> Array
+    #   resp.flow.vpc_interfaces[0].name #=> String
+    #   resp.flow.vpc_interfaces[0].network_interface_ids #=> Array
+    #   resp.flow.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].role_arn #=> String
+    #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
+    #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].subnet_id #=> String
     #   resp.messages.errors #=> Array
     #   resp.messages.errors[0] #=> String
     #
@@ -1118,6 +1200,45 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Removes a VPC Interface from an existing flow. This request can be
+    # made only on a VPC interface that does not have a Source or Output
+    # associated with it. If the VPC interface is referenced by a Source or
+    # Output, you must first delete or update the Source or Output to no
+    # longer reference the VPC interface.
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @option params [required, String] :vpc_interface_name
+    #
+    # @return [Types::RemoveFlowVpcInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveFlowVpcInterfaceResponse#flow_arn #flow_arn} => String
+    #   * {Types::RemoveFlowVpcInterfaceResponse#non_deleted_network_interface_ids #non_deleted_network_interface_ids} => Array&lt;String&gt;
+    #   * {Types::RemoveFlowVpcInterfaceResponse#vpc_interface_name #vpc_interface_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_flow_vpc_interface({
+    #     flow_arn: "__string", # required
+    #     vpc_interface_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.non_deleted_network_interface_ids #=> Array
+    #   resp.non_deleted_network_interface_ids[0] #=> String
+    #   resp.vpc_interface_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowVpcInterface AWS API Documentation
+    #
+    # @overload remove_flow_vpc_interface(params = {})
+    # @param [Hash] params ({})
+    def remove_flow_vpc_interface(params = {}, options = {})
+      req = build_request(:remove_flow_vpc_interface, params)
+      req.send_request(options)
+    end
+
     # Revokes an entitlement from a flow. Once an entitlement is revoked,
     # the content becomes unavailable to the subscriber and the associated
     # output is removed.
@@ -1360,6 +1481,7 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.remote_id #=> String
     #   resp.flow.source.transport.smoothing_latency #=> Integer
     #   resp.flow.source.transport.stream_id #=> String
+    #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source_failover_config.recovery_window #=> Integer
     #   resp.flow.source_failover_config.state #=> String, one of "ENABLED", "DISABLED"
@@ -1388,8 +1510,17 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.remote_id #=> String
     #   resp.flow.sources[0].transport.smoothing_latency #=> Integer
     #   resp.flow.sources[0].transport.stream_id #=> String
+    #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.status #=> String, one of "STANDBY", "ACTIVE", "UPDATING", "DELETING", "STARTING", "STOPPING", "ERROR"
+    #   resp.flow.vpc_interfaces #=> Array
+    #   resp.flow.vpc_interfaces[0].name #=> String
+    #   resp.flow.vpc_interfaces[0].network_interface_ids #=> Array
+    #   resp.flow.vpc_interfaces[0].network_interface_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].role_arn #=> String
+    #   resp.flow.vpc_interfaces[0].security_group_ids #=> Array
+    #   resp.flow.vpc_interfaces[0].security_group_ids[0] #=> String
+    #   resp.flow.vpc_interfaces[0].subnet_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlow AWS API Documentation
     #
@@ -1622,6 +1753,9 @@ module Aws::MediaConnect
     #   The stream ID that you want to use for this transport. This parameter
     #   applies only to Zixi-based streams.
     #
+    # @option params [String] :vpc_interface_name
+    #   The name of the VPC Interface to configure this Source with.
+    #
     # @option params [String] :whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute content
     #   to your source. These IP addresses should be in the form of a
@@ -1655,6 +1789,7 @@ module Aws::MediaConnect
     #     protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #     source_arn: "__string", # required
     #     stream_id: "__string",
+    #     vpc_interface_name: "__string",
     #     whitelist_cidr: "__string",
     #   })
     #
@@ -1685,6 +1820,7 @@ module Aws::MediaConnect
     #   resp.source.transport.remote_id #=> String
     #   resp.source.transport.smoothing_latency #=> Integer
     #   resp.source.transport.stream_id #=> String
+    #   resp.source.vpc_interface_name #=> String
     #   resp.source.whitelist_cidr #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowSource AWS API Documentation
@@ -1709,7 +1845,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

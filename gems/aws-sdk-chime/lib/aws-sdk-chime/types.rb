@@ -980,6 +980,71 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateProxySessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #         participant_phone_numbers: ["E164PhoneNumber"], # required
+    #         name: "ProxySessionNameString",
+    #         expiry_minutes: 1,
+    #         capabilities: ["Voice"], # required, accepts Voice, SMS
+    #         number_selection_behavior: "PreferSticky", # accepts PreferSticky, AvoidSticky
+    #         geo_match_level: "Country", # accepts Country, AreaCode
+    #         geo_match_params: {
+    #           country: "Country", # required
+    #           area_code: "AreaCode", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_phone_numbers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_minutes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] number_selection_behavior
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_level
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_params
+    #   @return [Types::GeoMatchParams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateProxySessionRequest AWS API Documentation
+    #
+    class CreateProxySessionRequest < Struct.new(
+      :voice_connector_id,
+      :participant_phone_numbers,
+      :name,
+      :expiry_minutes,
+      :capabilities,
+      :number_selection_behavior,
+      :geo_match_level,
+      :geo_match_params)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proxy_session
+    #   @return [Types::ProxySession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateProxySessionResponse AWS API Documentation
+    #
+    class CreateProxySessionResponse < Struct.new(
+      :proxy_session)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRoomMembershipRequest
     #   data as a hash:
     #
@@ -1336,6 +1401,28 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteProxySessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #         proxy_session_id: "NonEmptyString128", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_session_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteProxySessionRequest AWS API Documentation
+    #
+    class DeleteProxySessionRequest < Struct.new(
+      :voice_connector_id,
+      :proxy_session_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRoomMembershipRequest
     #   data as a hash:
     #
@@ -1422,6 +1509,23 @@ module Aws::Chime
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorOriginationRequest AWS API Documentation
     #
     class DeleteVoiceConnectorOriginationRequest < Struct.new(
+      :voice_connector_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVoiceConnectorProxyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DeleteVoiceConnectorProxyRequest AWS API Documentation
+    #
+    class DeleteVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id)
       include Aws::Structure
     end
@@ -1674,6 +1778,28 @@ module Aws::Chime
     class ForbiddenException < Struct.new(
       :code,
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GeoMatchParams
+    #   data as a hash:
+    #
+    #       {
+    #         country: "Country", # required
+    #         area_code: "AreaCode", # required
+    #       }
+    #
+    # @!attribute [rw] country
+    #   @return [String]
+    #
+    # @!attribute [rw] area_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GeoMatchParams AWS API Documentation
+    #
+    class GeoMatchParams < Struct.new(
+      :country,
+      :area_code)
       include Aws::Structure
     end
 
@@ -1959,6 +2085,38 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetProxySessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #         proxy_session_id: "NonEmptyString128", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_session_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetProxySessionRequest AWS API Documentation
+    #
+    class GetProxySessionRequest < Struct.new(
+      :voice_connector_id,
+      :proxy_session_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proxy_session
+    #   @return [Types::ProxySession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetProxySessionResponse AWS API Documentation
+    #
+    class GetProxySessionResponse < Struct.new(
+      :proxy_session)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetRoomRequest
     #   data as a hash:
     #
@@ -2148,6 +2306,33 @@ module Aws::Chime
     #
     class GetVoiceConnectorOriginationResponse < Struct.new(
       :origination)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVoiceConnectorProxyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorProxyRequest AWS API Documentation
+    #
+    class GetVoiceConnectorProxyRequest < Struct.new(
+      :voice_connector_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proxy
+    #   @return [Types::Proxy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorProxyResponse AWS API Documentation
+    #
+    class GetVoiceConnectorProxyResponse < Struct.new(
+      :proxy)
       include Aws::Structure
     end
 
@@ -2623,6 +2808,52 @@ module Aws::Chime
     #
     class ListPhoneNumbersResponse < Struct.new(
       :phone_numbers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListProxySessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #         status: "Open", # accepts Open, InProgress, Closed
+    #         next_token: "NextTokenString",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListProxySessionsRequest AWS API Documentation
+    #
+    class ListProxySessionsRequest < Struct.new(
+      :voice_connector_id,
+      :status,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proxy_sessions
+    #   @return [Array<Types::ProxySession>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListProxySessionsResponse AWS API Documentation
+    #
+    class ListProxySessionsResponse < Struct.new(
+      :proxy_sessions,
       :next_token)
       include Aws::Structure
     end
@@ -3253,6 +3484,20 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @!attribute [rw] phone_number
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_phone_number
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Participant AWS API Documentation
+    #
+    class Participant < Struct.new(
+      :phone_number,
+      :proxy_phone_number)
+      include Aws::Structure
+    end
+
     # A phone number used for Amazon Chime Business Calling or an Amazon
     # Chime Voice Connector.
     #
@@ -3457,6 +3702,86 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @!attribute [rw] default_session_expiry_minutes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] disabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fall_back_phone_number
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_countries
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Proxy AWS API Documentation
+    #
+    class Proxy < Struct.new(
+      :default_session_expiry_minutes,
+      :disabled,
+      :fall_back_phone_number,
+      :phone_number_countries)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_session_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_minutes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] participants
+    #   @return [Array<Types::Participant>]
+    #
+    # @!attribute [rw] number_selection_behavior
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_level
+    #   @return [String]
+    #
+    # @!attribute [rw] geo_match_params
+    #   @return [Types::GeoMatchParams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ProxySession AWS API Documentation
+    #
+    class ProxySession < Struct.new(
+      :voice_connector_id,
+      :proxy_session_id,
+      :name,
+      :status,
+      :expiry_minutes,
+      :capabilities,
+      :created_timestamp,
+      :updated_timestamp,
+      :ended_timestamp,
+      :participants,
+      :number_selection_behavior,
+      :geo_match_level,
+      :geo_match_params)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutEventsConfigurationRequest
     #   data as a hash:
     #
@@ -3585,6 +3910,53 @@ module Aws::Chime
     #
     class PutVoiceConnectorOriginationResponse < Struct.new(
       :origination)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutVoiceConnectorProxyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #         default_session_expiry_minutes: 1, # required
+    #         phone_number_pool_countries: ["Country"], # required
+    #         fall_back_phone_number: "E164PhoneNumber",
+    #         disabled: false,
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] default_session_expiry_minutes
+    #   @return [Integer]
+    #
+    # @!attribute [rw] phone_number_pool_countries
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] fall_back_phone_number
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorProxyRequest AWS API Documentation
+    #
+    class PutVoiceConnectorProxyRequest < Struct.new(
+      :voice_connector_id,
+      :default_session_expiry_minutes,
+      :phone_number_pool_countries,
+      :fall_back_phone_number,
+      :disabled)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proxy
+    #   @return [Types::Proxy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorProxyResponse AWS API Documentation
+    #
+    class PutVoiceConnectorProxyResponse < Struct.new(
+      :proxy)
       include Aws::Structure
     end
 
@@ -4405,6 +4777,48 @@ module Aws::Chime
     #
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateProxySessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         voice_connector_id: "NonEmptyString128", # required
+    #         proxy_session_id: "NonEmptyString128", # required
+    #         capabilities: ["Voice"], # required, accepts Voice, SMS
+    #         expiry_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] voice_connector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] proxy_session_id
+    #   @return [String]
+    #
+    # @!attribute [rw] capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] expiry_minutes
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateProxySessionRequest AWS API Documentation
+    #
+    class UpdateProxySessionRequest < Struct.new(
+      :voice_connector_id,
+      :proxy_session_id,
+      :capabilities,
+      :expiry_minutes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] proxy_session
+    #   @return [Types::ProxySession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateProxySessionResponse AWS API Documentation
+    #
+    class UpdateProxySessionResponse < Struct.new(
+      :proxy_session)
       include Aws::Structure
     end
 

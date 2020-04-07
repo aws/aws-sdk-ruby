@@ -42,13 +42,6 @@ module Aws::TranscribeService
 
     # Settings for content redaction within a transcription job.
     #
-    # You can redact transcripts in US English (en-us). For more information
-    # see: [Automatic Content Redaction][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/content-redaction.html
-    #
     # @note When making an API call, you may pass ContentRedaction
     #   data as a hash:
     #
@@ -63,15 +56,14 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] redaction_output
-    #   Request parameter where you choose whether to output only the
-    #   redacted transcript or generate an additional unredacted transcript.
+    #   The output transcript file stored in either the default S3 bucket or
+    #   in a bucket you specify.
     #
-    #   When you choose `redacted` Amazon Transcribe outputs a JSON file
-    #   with only the redacted transcript and related information.
+    #   When you choose `redacted` Amazon Transcribe outputs only the
+    #   redacted transcript.
     #
     #   When you choose `redacted_and_unredacted` Amazon Transcribe outputs
-    #   a JSON file with the unredacted transcript and related information
-    #   in addition to the JSON file with the redacted transcript.
+    #   both the redacted and unredacted transcripts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ContentRedaction AWS API Documentation
@@ -256,6 +248,25 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteMedicalTranscriptionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         medical_transcription_job_name: "TranscriptionJobName", # required
+    #       }
+    #
+    # @!attribute [rw] medical_transcription_job_name
+    #   The name you provide to the `DeleteMedicalTranscriptionJob` object
+    #   to delete a transcription job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteMedicalTranscriptionJobRequest AWS API Documentation
+    #
+    class DeleteMedicalTranscriptionJobRequest < Struct.new(
+      :medical_transcription_job_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteTranscriptionJobRequest
     #   data as a hash:
     #
@@ -307,6 +318,36 @@ module Aws::TranscribeService
     #
     class DeleteVocabularyRequest < Struct.new(
       :vocabulary_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMedicalTranscriptionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         medical_transcription_job_name: "TranscriptionJobName", # required
+    #       }
+    #
+    # @!attribute [rw] medical_transcription_job_name
+    #   The name of the medical transcription job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalTranscriptionJobRequest AWS API Documentation
+    #
+    class GetMedicalTranscriptionJobRequest < Struct.new(
+      :medical_transcription_job_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] medical_transcription_job
+    #   An object that contains the results of the medical transcription
+    #   job.
+    #   @return [Types::MedicalTranscriptionJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalTranscriptionJobResponse AWS API Documentation
+    #
+    class GetMedicalTranscriptionJobResponse < Struct.new(
+      :medical_transcription_job)
       include Aws::Structure
     end
 
@@ -470,10 +511,10 @@ module Aws::TranscribeService
     # @!attribute [rw] allow_deferred_execution
     #   Indicates whether a job should be queued by Amazon Transcribe when
     #   the concurrent execution limit is exceeded. When the
-    #   `AllowDeferredExecution` field is true, jobs are queued and will be
-    #   executed when the number of executing jobs falls below the
-    #   concurrent execution limit. If the field is false, Amazon Transcribe
-    #   returns a `LimitExceededException` exception.
+    #   `AllowDeferredExecution` field is true, jobs are queued and executed
+    #   when the number of executing jobs falls below the concurrent
+    #   execution limit. If the field is false, Amazon Transcribe returns a
+    #   `LimitExceededException` exception.
     #
     #   If you specify the `AllowDeferredExecution` field, you must specify
     #   the `DataAccessRoleArn` field.
@@ -481,10 +522,10 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] data_access_role_arn
     #   The Amazon Resource Name (ARN) of a role that has access to the S3
-    #   bucket that contains the input files. Amazon Transcribe will assume
-    #   this role to read queued media files. If you have specified an
-    #   output S3 bucket for the transcription results, this role should
-    #   have access to the output bucket as well.
+    #   bucket that contains the input files. Amazon Transcribe assumes this
+    #   role to read queued media files. If you have specified an output S3
+    #   bucket for the transcription results, this role should have access
+    #   to the output bucket as well.
     #
     #   If you specify the `AllowDeferredExecution` field, you must specify
     #   the `DataAccessRoleArn` field.
@@ -509,6 +550,78 @@ module Aws::TranscribeService
     #
     class LimitExceededException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMedicalTranscriptionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
+    #         job_name_contains: "TranscriptionJobName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   When specified, returns only medical transcription jobs with the
+    #   specified status. Jobs are ordered by creation date, with the newest
+    #   jobs returned first. If you don't specify a status, Amazon
+    #   Transcribe Medical returns all transcription jobs ordered by
+    #   creation date.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name_contains
+    #   When specified, the jobs returned in the list are limited to jobs
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you a receive a truncated result in the previous request of
+    #   `ListMedicalTranscriptionJobs`, include `NextToken` to fetch the
+    #   next set of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of medical transcription jobs to return in the
+    #   response. IF there are fewer results in the list, this response
+    #   contains only the actual results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalTranscriptionJobsRequest AWS API Documentation
+    #
+    class ListMedicalTranscriptionJobsRequest < Struct.new(
+      :status,
+      :job_name_contains,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The requested status of the medical transcription jobs returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `ListMedicalTranscriptionJobs` operation returns a page of jobs
+    #   at a time. The maximum size of the page is set by the `MaxResults`
+    #   parameter. If the number of jobs exceeds what can fit on a page,
+    #   Amazon Transcribe Medical returns the `NextPage` token. Include the
+    #   token in the next request to the `ListMedicalTranscriptionJobs`
+    #   operation to return in the next page of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] medical_transcription_job_summaries
+    #   A list of objects containing summary information for a transcription
+    #   job.
+    #   @return [Array<Types::MedicalTranscriptionJobSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalTranscriptionJobsResponse AWS API Documentation
+    #
+    class ListMedicalTranscriptionJobsResponse < Struct.new(
+      :status,
+      :next_token,
+      :medical_transcription_job_summaries)
       include Aws::Structure
     end
 
@@ -611,8 +724,8 @@ module Aws::TranscribeService
     # @!attribute [rw] name_contains
     #   When specified, the vocabularies returned in the list are limited to
     #   vocabularies whose name contains the specified string. The search is
-    #   case-insensitive, `ListVocabularies` will return both
-    #   "vocabularyname" and "VocabularyName" in the response list.
+    #   case-insensitive, `ListVocabularies` returns both "vocabularyname"
+    #   and "VocabularyName" in the response list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabulariesRequest AWS API Documentation
@@ -697,7 +810,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filters
-    #   The list of vocabulary filters. It will contain at most `MaxResults`
+    #   The list of vocabulary filters. It contains at most `MaxResults`
     #   number of filters. If there are more filters, call the
     #   `ListVocabularyFilters` operation again with the `NextToken`
     #   parameter in the request set to the value of the `NextToken` field
@@ -746,6 +859,298 @@ module Aws::TranscribeService
     #
     class Media < Struct.new(
       :media_file_uri)
+      include Aws::Structure
+    end
+
+    # Identifies the location of a medical transcript.
+    #
+    # @!attribute [rw] transcript_file_uri
+    #   The S3 object location of the medical transcript.
+    #
+    #   Use this URI to access the medical transcript. This URI points to
+    #   the S3 bucket you created to store the medical transcript.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscript AWS API Documentation
+    #
+    class MedicalTranscript < Struct.new(
+      :transcript_file_uri)
+      include Aws::Structure
+    end
+
+    # The data structure that containts the information for a medical
+    # transcription job.
+    #
+    # @!attribute [rw] medical_transcription_job_name
+    #   The name for a given medical transcription job.
+    #   @return [String]
+    #
+    # @!attribute [rw] transcription_job_status
+    #   The completion status of a medical transcription job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code for the language spoken in the source audio file.
+    #   US English (en-US) is the only supported language for medical
+    #   transcriptions. Any other value you enter for language code results
+    #   in a `BadRequestException` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate, in Hertz, of the source audio containing medical
+    #   information.
+    #
+    #   If you don't specify the sample rate, Amazon Transcribe Medical
+    #   determines it for you. If you choose to specify the sample rate, it
+    #   must match the rate detected by Amazon Transcribe Medical. In most
+    #   cases, you should leave the `MediaSampleHertz` blank and let Amazon
+    #   Transcribe Medical determine the sample rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_format
+    #   The format of the input media file.
+    #   @return [String]
+    #
+    # @!attribute [rw] media
+    #   Describes the input media file in a transcription request.
+    #   @return [Types::Media]
+    #
+    # @!attribute [rw] transcript
+    #   An object that contains the `MedicalTranscript`. The
+    #   `MedicalTranscript` contains the `TranscriptFileUri`.
+    #   @return [Types::MedicalTranscript]
+    #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows when the job started processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   A timestamp that shows when the job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `TranscriptionJobStatus` field is `FAILED`, this field
+    #   contains information about why the job failed.
+    #
+    #   The `FailureReason` field contains one of the following values:
+    #
+    #   * `Unsupported media format`- The media format specified in the
+    #     `MediaFormat` field of the request isn't valid. See the
+    #     description of the `MediaFormat` field for a list of valid values.
+    #
+    #   * `The media format provided does not match the detected media
+    #     format`- The media format of the audio file doesn't match the
+    #     format specified in the `MediaFormat` field in the request. Check
+    #     the media format of your media file and make sure the two values
+    #     match.
+    #
+    #   * `Invalid sample rate for audio file`- The sample rate specified in
+    #     the `MediaSampleRateHertz` of the request isn't valid. The sample
+    #     rate must be between 8000 and 48000 Hertz.
+    #
+    #   * `The sample rate provided does not match the detected sample
+    #     rate`- The sample rate in the audio file doesn't match the sample
+    #     rate specified in the `MediaSampleRateHertz` field in the request.
+    #     Check the sample rate of your media file and make sure that the
+    #     two values match.
+    #
+    #   * `Invalid file size: file size too large`- The size of your audio
+    #     file is larger than what Amazon Transcribe Medical can process.
+    #     For more information, see [Guidlines and Quotas][1] in the *Amazon
+    #     Transcribe Medical Guide*
+    #
+    #   * `Invalid number of channels: number of channels too large`- Your
+    #     audio contains more channels than Amazon Transcribe Medical is
+    #     configured to process. To request additional channels, see [Amazon
+    #     Transcribe Medical Endpoints and Quotas][2] in the *Amazon Web
+    #     Services General Reference*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/transcribe-medical.html
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Object that contains object.
+    #   @return [Types::MedicalTranscriptionSetting]
+    #
+    # @!attribute [rw] specialty
+    #   The medical specialty of any clinicians providing a dictation or
+    #   having a conversation. `PRIMARYCARE` is the only available setting
+    #   for this object. This specialty enables you to generate
+    #   transcriptions for the following medical fields:
+    #
+    #   * Family Medicine
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of speech in the transcription job. `CONVERSATION` is
+    #   generally used for patient-physician dialogues. `DICTATION` is the
+    #   setting for physicians speaking their notes after seeing a patient.
+    #   For more information, see how-it-works-med
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionJob AWS API Documentation
+    #
+    class MedicalTranscriptionJob < Struct.new(
+      :medical_transcription_job_name,
+      :transcription_job_status,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_format,
+      :media,
+      :transcript,
+      :start_time,
+      :creation_time,
+      :completion_time,
+      :failure_reason,
+      :settings,
+      :specialty,
+      :type)
+      include Aws::Structure
+    end
+
+    # Provides summary information about a transcription job.
+    #
+    # @!attribute [rw] medical_transcription_job_name
+    #   The name of a medical transcription job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that shows when the medical transcription job was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows when the job began processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_time
+    #   A timestamp that shows when the job was completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the transcript in the source audio file.
+    #   @return [String]
+    #
+    # @!attribute [rw] transcription_job_status
+    #   The status of the medical transcription job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `TranscriptionJobStatus` field is `FAILED`, a description of
+    #   the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_location_type
+    #   Indicates the location of the transcription job's output.
+    #
+    #   The `CUSTOMER_BUCKET` is the S3 location provided in the
+    #   `OutputBucketName` field when the
+    #   @return [String]
+    #
+    # @!attribute [rw] specialty
+    #   The medical specialty of the transcription job. `Primary care` is
+    #   the only valid value.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The speech of the clinician in the input audio.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionJobSummary AWS API Documentation
+    #
+    class MedicalTranscriptionJobSummary < Struct.new(
+      :medical_transcription_job_name,
+      :creation_time,
+      :start_time,
+      :completion_time,
+      :language_code,
+      :transcription_job_status,
+      :failure_reason,
+      :output_location_type,
+      :specialty,
+      :type)
+      include Aws::Structure
+    end
+
+    # Optional settings for the StartMedicalTranscriptionJob operation.
+    #
+    # @note When making an API call, you may pass MedicalTranscriptionSetting
+    #   data as a hash:
+    #
+    #       {
+    #         show_speaker_labels: false,
+    #         max_speaker_labels: 1,
+    #         channel_identification: false,
+    #         show_alternatives: false,
+    #         max_alternatives: 1,
+    #       }
+    #
+    # @!attribute [rw] show_speaker_labels
+    #   Determines whether the transcription job uses speaker recognition to
+    #   identify different speakers in the input audio. Speaker recongition
+    #   labels individual speakers in the audio file. If you set the
+    #   `ShowSpeakerLabels` field to true, you must also set the maximum
+    #   number of speaker labels in the `MaxSpeakerLabels` field.
+    #
+    #   You can't set both `ShowSpeakerLabels` and `ChannelIdentification`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_speaker_labels
+    #   The maximum number of speakers to identify in the input audio. If
+    #   there are more speakers in the audio than this number, multiple
+    #   speakers are identified as a single speaker. If you specify the
+    #   `MaxSpeakerLabels` field, you must set the `ShowSpeakerLabels` field
+    #   to true.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channel_identification
+    #   Instructs Amazon Transcribe Medical to process each audio channel
+    #   separately and then merge the transcription output of each channel
+    #   into a single transcription.
+    #
+    #   Amazon Transcribe Medical also produces a transcription of each item
+    #   detected on an audio channel, including the start time and end time
+    #   of the item and alternative transcriptions of item. The alternative
+    #   transcriptions also come with confidence scores provided by Amazon
+    #   Transcribe Medical.
+    #
+    #   You can't set both `ShowSpeakerLabels` and `ChannelIdentification`
+    #   in the same request. If you set both, your request returns a
+    #   `BadRequestException`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] show_alternatives
+    #   Determines whether alternative transcripts are generated along with
+    #   the transcript that has the highest confidence. If you set
+    #   `ShowAlternatives` field to true, you must also set the maximum
+    #   number of alternatives to return in the `MaxAlternatives` field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_alternatives
+    #   The maximum number of alternatives that you tell the service to
+    #   return. If you specify the `MaxAlternatives` field, you must set the
+    #   `ShowAlternatives` field to true.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionSetting AWS API Documentation
+    #
+    class MedicalTranscriptionSetting < Struct.new(
+      :show_speaker_labels,
+      :max_speaker_labels,
+      :channel_identification,
+      :show_alternatives,
+      :max_alternatives)
       include Aws::Structure
     end
 
@@ -798,7 +1203,7 @@ module Aws::TranscribeService
     # @!attribute [rw] max_speaker_labels
     #   The maximum number of speakers to identify in the input audio. If
     #   there are more speakers in the audio than this number, multiple
-    #   speakers will be identified as a single speaker. If you specify the
+    #   speakers are identified as a single speaker. If you specify the
     #   `MaxSpeakerLabels` field, you must set the `ShowSpeakerLabels` field
     #   to true.
     #   @return [Integer]
@@ -855,6 +1260,158 @@ module Aws::TranscribeService
       :max_alternatives,
       :vocabulary_filter_name,
       :vocabulary_filter_method)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartMedicalTranscriptionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         medical_transcription_job_name: "TranscriptionJobName", # required
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         media_sample_rate_hertz: 1,
+    #         media_format: "mp3", # accepts mp3, mp4, wav, flac
+    #         media: { # required
+    #           media_file_uri: "Uri",
+    #         },
+    #         output_bucket_name: "OutputBucketName", # required
+    #         output_encryption_kms_key_id: "KMSKeyId",
+    #         settings: {
+    #           show_speaker_labels: false,
+    #           max_speaker_labels: 1,
+    #           channel_identification: false,
+    #           show_alternatives: false,
+    #           max_alternatives: 1,
+    #         },
+    #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
+    #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
+    #       }
+    #
+    # @!attribute [rw] medical_transcription_job_name
+    #   The name of the medical transcription job. You can't use the
+    #   strings "." or ".." by themselves as the job name. The name must
+    #   also be unique within an AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code for the language spoken in the input media file.
+    #   US English (en-US) is the valid value for medical transcription
+    #   jobs. Any other value you enter for language code results in a
+    #   `BadRequestException` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_sample_rate_hertz
+    #   The sample rate, in Hertz, of the audio track in the input media
+    #   file.
+    #
+    #   If you do not specify the media sample rate, Amazon Transcribe
+    #   Medical determines the sample rate. If you specify the sample rate,
+    #   it must match the rate detected by Amazon Transcribe Medical. In
+    #   most cases, you should leave the `MediaSampleRateHertz` field blank
+    #   and let Amazon Transcribe Medical determine the sample rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] media_format
+    #   The audio format of the input media file.
+    #   @return [String]
+    #
+    # @!attribute [rw] media
+    #   Describes the input media file in a transcription request.
+    #   @return [Types::Media]
+    #
+    # @!attribute [rw] output_bucket_name
+    #   The Amazon S3 location where the transcription is stored.
+    #
+    #   You must set `OutputBucketName` for Amazon Transcribe Medical to
+    #   store the transcription results. Your transcript appears in the S3
+    #   location you specify. When you call the GetMedicalTranscriptionJob,
+    #   the operation returns this location in the `TranscriptFileUri`
+    #   field. The S3 bucket must have permissions that allow Amazon
+    #   Transcribe Medical to put files in the bucket. For more information,
+    #   see [Permissions Required for IAM User Roles][1].
+    #
+    #   You can specify an AWS Key Management Service (KMS) key to encrypt
+    #   the output of your transcription using the
+    #   `OutputEncryptionKMSKeyId` parameter. If you don't specify a KMS
+    #   key, Amazon Transcribe Medical uses the default Amazon S3 key for
+    #   server-side encryption of transcripts that are placed in your S3
+    #   bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user
+    #   @return [String]
+    #
+    # @!attribute [rw] output_encryption_kms_key_id
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (KMS) key used to encrypt the output of the transcription job. The
+    #   user calling the StartMedicalTranscriptionJob operation must have
+    #   permission to use the specified KMS key.
+    #
+    #   You use either of the following to identify a KMS key in the current
+    #   account:
+    #
+    #   * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * KMS Key Alias: "alias/ExampleAlias"
+    #
+    #   You can use either of the following to identify a KMS key in the
+    #   current account or another account:
+    #
+    #   * Amazon Resource Name (ARN) of a KMS key in the current account or
+    #     another account: "arn:aws:kms:region:account
+    #     ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
+    #     ID:alias/ExampleAlias"
+    #
+    #   If you don't specify an encryption key, the output of the medical
+    #   transcription job is encrypted with the default Amazon S3 key
+    #   (SSE-S3).
+    #
+    #   If you specify a KMS key to encrypt your output, you must also
+    #   specify an output location in the `OutputBucketName` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Optional settings for the medical transcription job.
+    #   @return [Types::MedicalTranscriptionSetting]
+    #
+    # @!attribute [rw] specialty
+    #   The medical specialty of any clinician speaking in the input media.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The speech of clinician in the input audio. `CONVERSATION` refers to
+    #   conversations clinicians have with patients. `DICTATION` refers to
+    #   medical professionals dictating their notes about a patient
+    #   encounter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalTranscriptionJobRequest AWS API Documentation
+    #
+    class StartMedicalTranscriptionJobRequest < Struct.new(
+      :medical_transcription_job_name,
+      :language_code,
+      :media_sample_rate_hertz,
+      :media_format,
+      :media,
+      :output_bucket_name,
+      :output_encryption_kms_key_id,
+      :settings,
+      :specialty,
+      :type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] medical_transcription_job
+    #   A batch job submitted to transcribe medical speech to text.
+    #   @return [Types::MedicalTranscriptionJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalTranscriptionJobResponse AWS API Documentation
+    #
+    class StartMedicalTranscriptionJobResponse < Struct.new(
+      :medical_transcription_job)
       include Aws::Structure
     end
 

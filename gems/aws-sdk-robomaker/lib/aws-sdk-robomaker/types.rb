@@ -147,6 +147,45 @@ module Aws::RoboMaker
     #
     class CancelSimulationJobResponse < Aws::EmptyStructure; end
 
+    # Compute information for the simulation job.
+    #
+    # @note When making an API call, you may pass Compute
+    #   data as a hash:
+    #
+    #       {
+    #         simulation_unit_limit: 1,
+    #       }
+    #
+    # @!attribute [rw] simulation_unit_limit
+    #   The simulation unit limit. Your simulation is allocated CPU and
+    #   memory proportional to the supplied simulation unit limit. A
+    #   simulation unit is 1 vcpu and 2GB of memory. You are only billed for
+    #   the SU utilization you consume up to the maximim value provided.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/Compute AWS API Documentation
+    #
+    class Compute < Struct.new(
+      :simulation_unit_limit)
+      include Aws::Structure
+    end
+
+    # Compute information for the simulation job
+    #
+    # @!attribute [rw] simulation_unit_limit
+    #   The simulation unit limit. Your simulation is allocated CPU and
+    #   memory proportional to the supplied simulation unit limit. A
+    #   simulation unit is 1 vcpu and 2GB of memory. You are only billed for
+    #   the SU utilization you consume up to the maximim value provided.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ComputeResponse AWS API Documentation
+    #
+    class ComputeResponse < Struct.new(
+      :simulation_unit_limit)
+      include Aws::Structure
+    end
+
     # The failure percentage threshold percentage was met.
     #
     # @!attribute [rw] message
@@ -920,6 +959,9 @@ module Aws::RoboMaker
     #           security_groups: ["NonEmptyString"],
     #           assign_public_ip: false,
     #         },
+    #         compute: {
+    #           simulation_unit_limit: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -994,6 +1036,10 @@ module Aws::RoboMaker
     #   security group and one subnet ID.
     #   @return [Types::VPCConfig]
     #
+    # @!attribute [rw] compute
+    #   Compute information for the simulation job.
+    #   @return [Types::Compute]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJobRequest AWS API Documentation
     #
     class CreateSimulationJobRequest < Struct.new(
@@ -1007,7 +1053,8 @@ module Aws::RoboMaker
       :simulation_applications,
       :data_sources,
       :tags,
-      :vpc_config)
+      :vpc_config,
+      :compute)
       include Aws::Structure
     end
 
@@ -1144,6 +1191,10 @@ module Aws::RoboMaker
     #   Information about the vpc configuration.
     #   @return [Types::VPCConfigResponse]
     #
+    # @!attribute [rw] compute
+    #   Compute information for the simulation job.
+    #   @return [Types::ComputeResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJobResponse AWS API Documentation
     #
     class CreateSimulationJobResponse < Struct.new(
@@ -1163,7 +1214,8 @@ module Aws::RoboMaker
       :simulation_applications,
       :data_sources,
       :tags,
-      :vpc_config)
+      :vpc_config,
+      :compute)
       include Aws::Structure
     end
 
@@ -2224,6 +2276,10 @@ module Aws::RoboMaker
     #   The network interface information for the simulation job.
     #   @return [Types::NetworkInterface]
     #
+    # @!attribute [rw] compute
+    #   Compute information for the simulation job.
+    #   @return [Types::ComputeResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJobResponse AWS API Documentation
     #
     class DescribeSimulationJobResponse < Struct.new(
@@ -2246,7 +2302,8 @@ module Aws::RoboMaker
       :data_sources,
       :tags,
       :vpc_config,
-      :network_interface)
+      :network_interface,
+      :compute)
       include Aws::Structure
     end
 
@@ -3744,6 +3801,10 @@ module Aws::RoboMaker
     #   Information about a network interface.
     #   @return [Types::NetworkInterface]
     #
+    # @!attribute [rw] compute
+    #   Compute information for the simulation job
+    #   @return [Types::ComputeResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJob AWS API Documentation
     #
     class SimulationJob < Struct.new(
@@ -3766,7 +3827,8 @@ module Aws::RoboMaker
       :data_sources,
       :tags,
       :vpc_config,
-      :network_interface)
+      :network_interface,
+      :compute)
       include Aws::Structure
     end
 
@@ -3939,6 +4001,9 @@ module Aws::RoboMaker
     #           security_groups: ["NonEmptyString"],
     #           assign_public_ip: false,
     #         },
+    #         compute: {
+    #           simulation_unit_limit: 1,
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -4007,6 +4072,10 @@ module Aws::RoboMaker
     #   security group and two subnet IDs.
     #   @return [Types::VPCConfig]
     #
+    # @!attribute [rw] compute
+    #   Compute information for the simulation job
+    #   @return [Types::Compute]
+    #
     # @!attribute [rw] tags
     #   A map that contains tag keys and tag values that are attached to the
     #   simulation job request.
@@ -4025,6 +4094,7 @@ module Aws::RoboMaker
       :simulation_applications,
       :data_sources,
       :vpc_config,
+      :compute,
       :tags)
       include Aws::Structure
     end
@@ -4238,6 +4308,9 @@ module Aws::RoboMaker
     #               subnets: ["NonEmptyString"], # required
     #               security_groups: ["NonEmptyString"],
     #               assign_public_ip: false,
+    #             },
+    #             compute: {
+    #               simulation_unit_limit: 1,
     #             },
     #             tags: {
     #               "TagKey" => "TagValue",

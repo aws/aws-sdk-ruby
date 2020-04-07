@@ -119,6 +119,7 @@ module Aws::MediaConnect
     #             name: "__string",
     #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #             stream_id: "__string",
+    #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
     #           },
     #         ],
@@ -155,6 +156,57 @@ module Aws::MediaConnect
     class AddFlowSourcesResponse < Struct.new(
       :flow_arn,
       :sources)
+      include Aws::Structure
+    end
+
+    # Adds VPC interfaces to an existing flow.
+    #
+    # @note When making an API call, you may pass AddFlowVpcInterfacesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         vpc_interfaces: [ # required
+    #           {
+    #             name: "__string", # required
+    #             role_arn: "__string", # required
+    #             security_group_ids: ["__string"], # required
+    #             subnet_id: "__string", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_interfaces
+    #   A list of VPC interfaces that you want to add.
+    #   @return [Array<Types::VpcInterfaceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowVpcInterfacesRequest AWS API Documentation
+    #
+    class AddFlowVpcInterfacesRequest < Struct.new(
+      :flow_arn,
+      :vpc_interfaces)
+      include Aws::Structure
+    end
+
+    # The result of a successful AddFlowVpcInterfaces request. The response
+    # includes the details of the newly added VPC interfaces.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that these VPC interfaces were added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_interfaces
+    #   The details of the newly added VPC interfaces.
+    #   @return [Array<Types::VpcInterface>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddFlowVpcInterfacesResponse AWS API Documentation
+    #
+    class AddFlowVpcInterfacesResponse < Struct.new(
+      :flow_arn,
+      :vpc_interfaces)
       include Aws::Structure
     end
 
@@ -358,6 +410,7 @@ module Aws::MediaConnect
     #           name: "__string",
     #           protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #           stream_id: "__string",
+    #           vpc_interface_name: "__string",
     #           whitelist_cidr: "__string",
     #         },
     #         source_failover_config: {
@@ -385,7 +438,16 @@ module Aws::MediaConnect
     #             name: "__string",
     #             protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #             stream_id: "__string",
+    #             vpc_interface_name: "__string",
     #             whitelist_cidr: "__string",
+    #           },
+    #         ],
+    #         vpc_interfaces: [
+    #           {
+    #             name: "__string", # required
+    #             role_arn: "__string", # required
+    #             security_group_ids: ["__string"], # required
+    #             subnet_id: "__string", # required
     #           },
     #         ],
     #       }
@@ -419,6 +481,10 @@ module Aws::MediaConnect
     # @!attribute [rw] sources
     #   @return [Array<Types::SetSourceRequest>]
     #
+    # @!attribute [rw] vpc_interfaces
+    #   The VPC interfaces you want on the flow.
+    #   @return [Array<Types::VpcInterfaceRequest>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateFlowRequest AWS API Documentation
     #
     class CreateFlowRequest < Struct.new(
@@ -428,7 +494,8 @@ module Aws::MediaConnect
       :outputs,
       :source,
       :source_failover_config,
-      :sources)
+      :sources,
+      :vpc_interfaces)
       include Aws::Structure
     end
 
@@ -719,6 +786,10 @@ module Aws::MediaConnect
     #   The current status of the flow.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interfaces
+    #   The VPC Interfaces for this flow.
+    #   @return [Array<Types::VpcInterface>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Flow AWS API Documentation
     #
     class Flow < Struct.new(
@@ -732,7 +803,8 @@ module Aws::MediaConnect
       :source,
       :source_failover_config,
       :sources,
-      :status)
+      :status,
+      :vpc_interfaces)
       include Aws::Structure
     end
 
@@ -1267,6 +1339,54 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RemoveFlowVpcInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         flow_arn: "__string", # required
+    #         vpc_interface_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] flow_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_interface_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowVpcInterfaceRequest AWS API Documentation
+    #
+    class RemoveFlowVpcInterfaceRequest < Struct.new(
+      :flow_arn,
+      :vpc_interface_name)
+      include Aws::Structure
+    end
+
+    # The result of a successful RemoveFlowVpcInterface request including
+    # the flow ARN and the VPC interface name that was removed.
+    #
+    # @!attribute [rw] flow_arn
+    #   The ARN of the flow that is associated with the VPC interface you
+    #   removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] non_deleted_network_interface_ids
+    #   IDs of network interfaces associated with the removed VPC interface
+    #   that Media Connect was unable to remove.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface that was removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RemoveFlowVpcInterfaceResponse AWS API Documentation
+    #
+    class RemoveFlowVpcInterfaceResponse < Struct.new(
+      :flow_arn,
+      :non_deleted_network_interface_ids,
+      :vpc_interface_name)
+      include Aws::Structure
+    end
+
     # Exception raised by AWS Elemental MediaConnect. See the error message
     # and documentation for the operation for more information on the cause
     # of this exception.
@@ -1363,6 +1483,7 @@ module Aws::MediaConnect
     #         name: "__string",
     #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         stream_id: "__string",
+    #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
     #       }
     #
@@ -1408,6 +1529,10 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC interface to use for this source.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
     #   content to your source. These IP addresses should be in the form of
@@ -1427,6 +1552,7 @@ module Aws::MediaConnect
       :name,
       :protocol,
       :stream_id,
+      :vpc_interface_name,
       :whitelist_cidr)
       include Aws::Structure
     end
@@ -1477,6 +1603,10 @@ module Aws::MediaConnect
     #   source.
     #   @return [Types::Transport]
     #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC Interface this Source is configured with.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
     #   content to your source. These IP addresses should be in the form of
@@ -1496,6 +1626,7 @@ module Aws::MediaConnect
       :name,
       :source_arn,
       :transport,
+      :vpc_interface_name,
       :whitelist_cidr)
       include Aws::Structure
     end
@@ -2064,6 +2195,7 @@ module Aws::MediaConnect
     #         protocol: "zixi-push", # accepts zixi-push, rtp-fec, rtp, zixi-pull, rist
     #         source_arn: "__string", # required
     #         stream_id: "__string",
+    #         vpc_interface_name: "__string",
     #         whitelist_cidr: "__string",
     #       }
     #
@@ -2111,6 +2243,10 @@ module Aws::MediaConnect
     #   parameter applies only to Zixi-based streams.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_interface_name
+    #   The name of the VPC Interface to configure this Source with.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_cidr
     #   The range of IP addresses that should be allowed to contribute
     #   content to your source. These IP addresses should be in the form of
@@ -2131,6 +2267,7 @@ module Aws::MediaConnect
       :protocol,
       :source_arn,
       :stream_id,
+      :vpc_interface_name,
       :whitelist_cidr)
       include Aws::Structure
     end
@@ -2152,6 +2289,82 @@ module Aws::MediaConnect
     class UpdateFlowSourceResponse < Struct.new(
       :flow_arn,
       :source)
+      include Aws::Structure
+    end
+
+    # The settings for a VPC Source.
+    #
+    # @!attribute [rw] name
+    #   Immutable and has to be a unique against other VpcInterfaces in this
+    #   Flow
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_ids
+    #   IDs of the network interfaces created in customer's account by
+    #   MediaConnect.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   Role Arn MediaConnect can assumes to create ENIs in customer's
+    #   account
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Security Group IDs to be used on ENI.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   Subnet must be in the AZ of the Flow
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterface AWS API Documentation
+    #
+    class VpcInterface < Struct.new(
+      :name,
+      :network_interface_ids,
+      :role_arn,
+      :security_group_ids,
+      :subnet_id)
+      include Aws::Structure
+    end
+
+    # Desired VPC Interface for a Flow
+    #
+    # @note When making an API call, you may pass VpcInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string", # required
+    #         role_arn: "__string", # required
+    #         security_group_ids: ["__string"], # required
+    #         subnet_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC Interface. This value must be unique within the
+    #   current flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Role Arn MediaConnect can assumes to create ENIs in customer's
+    #   account
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   Security Group IDs to be used on ENI.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   Subnet must be in the AZ of the Flow
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcInterfaceRequest AWS API Documentation
+    #
+    class VpcInterfaceRequest < Struct.new(
+      :name,
+      :role_arn,
+      :security_group_ids,
+      :subnet_id)
       include Aws::Structure
     end
 

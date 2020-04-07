@@ -383,6 +383,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].network_interface.network_interface_id #=> String
     #   resp.jobs[0].network_interface.private_ip_address #=> String
     #   resp.jobs[0].network_interface.public_ip_address #=> String
+    #   resp.jobs[0].compute.simulation_unit_limit #=> Integer
     #   resp.unprocessed_jobs #=> Array
     #   resp.unprocessed_jobs[0] #=> String
     #
@@ -1020,6 +1021,9 @@ module Aws::RoboMaker
     #   These must belong to the same VPC. You must provide at least one
     #   security group and one subnet ID.
     #
+    # @option params [Types::Compute] :compute
+    #   Compute information for the simulation job.
+    #
     # @return [Types::CreateSimulationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSimulationJobResponse#arn #arn} => String
@@ -1039,6 +1043,7 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationJobResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
     #   * {Types::CreateSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
+    #   * {Types::CreateSimulationJobResponse#compute #compute} => Types::ComputeResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -1115,6 +1120,9 @@ module Aws::RoboMaker
     #       security_groups: ["NonEmptyString"],
     #       assign_public_ip: false,
     #     },
+    #     compute: {
+    #       simulation_unit_limit: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1170,6 +1178,7 @@ module Aws::RoboMaker
     #   resp.vpc_config.security_groups[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.assign_public_ip #=> Boolean
+    #   resp.compute.simulation_unit_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJob AWS API Documentation
     #
@@ -1616,6 +1625,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
     #   * {Types::DescribeSimulationJobResponse#network_interface #network_interface} => Types::NetworkInterface
+    #   * {Types::DescribeSimulationJobResponse#compute #compute} => Types::ComputeResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -1681,6 +1691,7 @@ module Aws::RoboMaker
     #   resp.network_interface.network_interface_id #=> String
     #   resp.network_interface.private_ip_address #=> String
     #   resp.network_interface.public_ip_address #=> String
+    #   resp.compute.simulation_unit_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJob AWS API Documentation
     #
@@ -1770,6 +1781,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
     #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.compute.simulation_unit_limit #=> Integer
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
@@ -1817,6 +1829,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].vpc_config.security_groups #=> Array
     #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
     #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.pending_requests[0].compute.simulation_unit_limit #=> Integer
     #   resp.pending_requests[0].tags #=> Hash
     #   resp.pending_requests[0].tags["TagKey"] #=> String
     #   resp.created_requests #=> Array
@@ -2542,6 +2555,9 @@ module Aws::RoboMaker
     #           security_groups: ["NonEmptyString"],
     #           assign_public_ip: false,
     #         },
+    #         compute: {
+    #           simulation_unit_limit: 1,
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -2604,6 +2620,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
     #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.compute.simulation_unit_limit #=> Integer
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
@@ -2651,6 +2668,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].vpc_config.security_groups #=> Array
     #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
     #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.pending_requests[0].compute.simulation_unit_limit #=> Integer
     #   resp.pending_requests[0].tags #=> Hash
     #   resp.pending_requests[0].tags["TagKey"] #=> String
     #   resp.created_requests #=> Array
@@ -2982,7 +3000,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

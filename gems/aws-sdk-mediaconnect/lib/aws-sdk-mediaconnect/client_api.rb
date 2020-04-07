@@ -16,6 +16,8 @@ module Aws::MediaConnect
     AddFlowOutputsResponse = Shapes::StructureShape.new(name: 'AddFlowOutputsResponse')
     AddFlowSourcesRequest = Shapes::StructureShape.new(name: 'AddFlowSourcesRequest')
     AddFlowSourcesResponse = Shapes::StructureShape.new(name: 'AddFlowSourcesResponse')
+    AddFlowVpcInterfacesRequest = Shapes::StructureShape.new(name: 'AddFlowVpcInterfacesRequest')
+    AddFlowVpcInterfacesResponse = Shapes::StructureShape.new(name: 'AddFlowVpcInterfacesResponse')
     AddOutputRequest = Shapes::StructureShape.new(name: 'AddOutputRequest')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -54,6 +56,8 @@ module Aws::MediaConnect
     RemoveFlowOutputResponse = Shapes::StructureShape.new(name: 'RemoveFlowOutputResponse')
     RemoveFlowSourceRequest = Shapes::StructureShape.new(name: 'RemoveFlowSourceRequest')
     RemoveFlowSourceResponse = Shapes::StructureShape.new(name: 'RemoveFlowSourceResponse')
+    RemoveFlowVpcInterfaceRequest = Shapes::StructureShape.new(name: 'RemoveFlowVpcInterfaceRequest')
+    RemoveFlowVpcInterfaceResponse = Shapes::StructureShape.new(name: 'RemoveFlowVpcInterfaceResponse')
     ResponseError = Shapes::StructureShape.new(name: 'ResponseError')
     RevokeFlowEntitlementRequest = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementRequest')
     RevokeFlowEntitlementResponse = Shapes::StructureShape.new(name: 'RevokeFlowEntitlementResponse')
@@ -81,6 +85,8 @@ module Aws::MediaConnect
     UpdateFlowResponse = Shapes::StructureShape.new(name: 'UpdateFlowResponse')
     UpdateFlowSourceRequest = Shapes::StructureShape.new(name: 'UpdateFlowSourceRequest')
     UpdateFlowSourceResponse = Shapes::StructureShape.new(name: 'UpdateFlowSourceResponse')
+    VpcInterface = Shapes::StructureShape.new(name: 'VpcInterface')
+    VpcInterfaceRequest = Shapes::StructureShape.new(name: 'VpcInterfaceRequest')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -92,6 +98,8 @@ module Aws::MediaConnect
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfSetSourceRequest = Shapes::ListShape.new(name: '__listOfSetSourceRequest')
     __listOfSource = Shapes::ListShape.new(name: '__listOfSource')
+    __listOfVpcInterface = Shapes::ListShape.new(name: '__listOfVpcInterface')
+    __listOfVpcInterfaceRequest = Shapes::ListShape.new(name: '__listOfVpcInterfaceRequest')
     __listOf__integer = Shapes::ListShape.new(name: '__listOf__integer')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
@@ -119,6 +127,14 @@ module Aws::MediaConnect
     AddFlowSourcesResponse.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSource, location_name: "sources"))
     AddFlowSourcesResponse.struct_class = Types::AddFlowSourcesResponse
 
+    AddFlowVpcInterfacesRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    AddFlowVpcInterfacesRequest.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterfaceRequest, required: true, location_name: "vpcInterfaces"))
+    AddFlowVpcInterfacesRequest.struct_class = Types::AddFlowVpcInterfacesRequest
+
+    AddFlowVpcInterfacesResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    AddFlowVpcInterfacesResponse.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
+    AddFlowVpcInterfacesResponse.struct_class = Types::AddFlowVpcInterfacesResponse
+
     AddOutputRequest.add_member(:cidr_allow_list, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "cidrAllowList"))
     AddOutputRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     AddOutputRequest.add_member(:destination, Shapes::ShapeRef.new(shape: __string, location_name: "destination"))
@@ -145,6 +161,7 @@ module Aws::MediaConnect
     CreateFlowRequest.add_member(:source, Shapes::ShapeRef.new(shape: SetSourceRequest, location_name: "source"))
     CreateFlowRequest.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: FailoverConfig, location_name: "sourceFailoverConfig"))
     CreateFlowRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSetSourceRequest, location_name: "sources"))
+    CreateFlowRequest.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterfaceRequest, location_name: "vpcInterfaces"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -198,6 +215,7 @@ module Aws::MediaConnect
     Flow.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: FailoverConfig, location_name: "sourceFailoverConfig"))
     Flow.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSource, location_name: "sources"))
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    Flow.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
     Flow.struct_class = Types::Flow
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
@@ -293,6 +311,15 @@ module Aws::MediaConnect
     RemoveFlowSourceResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceArn"))
     RemoveFlowSourceResponse.struct_class = Types::RemoveFlowSourceResponse
 
+    RemoveFlowVpcInterfaceRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
+    RemoveFlowVpcInterfaceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "vpcInterfaceName"))
+    RemoveFlowVpcInterfaceRequest.struct_class = Types::RemoveFlowVpcInterfaceRequest
+
+    RemoveFlowVpcInterfaceResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
+    RemoveFlowVpcInterfaceResponse.add_member(:non_deleted_network_interface_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "nonDeletedNetworkInterfaceIds"))
+    RemoveFlowVpcInterfaceResponse.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
+    RemoveFlowVpcInterfaceResponse.struct_class = Types::RemoveFlowVpcInterfaceResponse
+
     ResponseError.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ResponseError.struct_class = Types::ResponseError
 
@@ -316,6 +343,7 @@ module Aws::MediaConnect
     SetSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     SetSourceRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     SetSourceRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    SetSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     SetSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
     SetSourceRequest.struct_class = Types::SetSourceRequest
 
@@ -328,6 +356,7 @@ module Aws::MediaConnect
     Source.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Source.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceArn"))
     Source.add_member(:transport, Shapes::ShapeRef.new(shape: Transport, location_name: "transport"))
+    Source.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     Source.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
     Source.struct_class = Types::Source
 
@@ -426,12 +455,26 @@ module Aws::MediaConnect
     UpdateFlowSourceRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "protocol"))
     UpdateFlowSourceRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceArn"))
     UpdateFlowSourceRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: __string, location_name: "streamId"))
+    UpdateFlowSourceRequest.add_member(:vpc_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "vpcInterfaceName"))
     UpdateFlowSourceRequest.add_member(:whitelist_cidr, Shapes::ShapeRef.new(shape: __string, location_name: "whitelistCidr"))
     UpdateFlowSourceRequest.struct_class = Types::UpdateFlowSourceRequest
 
     UpdateFlowSourceResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     UpdateFlowSourceResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     UpdateFlowSourceResponse.struct_class = Types::UpdateFlowSourceResponse
+
+    VpcInterface.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    VpcInterface.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "networkInterfaceIds"))
+    VpcInterface.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
+    VpcInterface.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "securityGroupIds"))
+    VpcInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "subnetId"))
+    VpcInterface.struct_class = Types::VpcInterface
+
+    VpcInterfaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    VpcInterfaceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
+    VpcInterfaceRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "securityGroupIds"))
+    VpcInterfaceRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "subnetId"))
+    VpcInterfaceRequest.struct_class = Types::VpcInterfaceRequest
 
     __listOfAddOutputRequest.member = Shapes::ShapeRef.new(shape: AddOutputRequest)
 
@@ -448,6 +491,10 @@ module Aws::MediaConnect
     __listOfSetSourceRequest.member = Shapes::ShapeRef.new(shape: SetSourceRequest)
 
     __listOfSource.member = Shapes::ShapeRef.new(shape: Source)
+
+    __listOfVpcInterface.member = Shapes::ShapeRef.new(shape: VpcInterface)
+
+    __listOfVpcInterfaceRequest.member = Shapes::ShapeRef.new(shape: VpcInterfaceRequest)
 
     __listOf__integer.member = Shapes::ShapeRef.new(shape: __integer)
 
@@ -495,6 +542,20 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/flows/{flowArn}/source"
         o.input = Shapes::ShapeRef.new(shape: AddFlowSourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: AddFlowSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:add_flow_vpc_interfaces, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddFlowVpcInterfaces"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/flows/{flowArn}/vpcInterfaces"
+        o.input = Shapes::ShapeRef.new(shape: AddFlowVpcInterfacesRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddFlowVpcInterfacesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -627,6 +688,20 @@ module Aws::MediaConnect
         o.http_request_uri = "/v1/flows/{flowArn}/source/{sourceArn}"
         o.input = Shapes::ShapeRef.new(shape: RemoveFlowSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: RemoveFlowSourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:remove_flow_vpc_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveFlowVpcInterface"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/flows/{flowArn}/vpcInterfaces/{vpcInterfaceName}"
+        o.input = Shapes::ShapeRef.new(shape: RemoveFlowVpcInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveFlowVpcInterfaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

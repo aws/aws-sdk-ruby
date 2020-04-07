@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-04-06)
+------------------
+
+* Feature - This release adds support for batch transcription jobs within Amazon Transcribe Medical.
+
 1.38.0 (2020-03-10)
 ------------------
 

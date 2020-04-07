@@ -960,6 +960,68 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Create a dimension that you can use to limit the scope of a metric
+    # used in a security profile for AWS IoT Device Defender. For example,
+    # using a `TOPIC_FILTER` dimension, you can narrow down the scope of the
+    # metric only to MQTT topics whose name match the pattern specified in
+    # the dimension.
+    #
+    # @option params [required, String] :name
+    #   A unique identifier for the dimension. Choose something that describes
+    #   the type and value to make it easy to remember what it does.
+    #
+    # @option params [required, String] :type
+    #   Specifies the type of dimension. Supported types: `TOPIC_FILTER.`
+    #
+    # @option params [required, Array<String>] :string_values
+    #   Specifies the value or list of values for the dimension. For
+    #   `TOPIC_FILTER` dimensions, this is a pattern used to match the MQTT
+    #   topic (for example, "admin/#").
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata that can be used to manage the dimension.
+    #
+    # @option params [required, String] :client_request_token
+    #   Each dimension must have a unique client request token. If you try to
+    #   create a new dimension with the same token as a dimension that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateDimensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDimensionResponse#name #name} => String
+    #   * {Types::CreateDimensionResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dimension({
+    #     name: "DimensionName", # required
+    #     type: "TOPIC_FILTER", # required, accepts TOPIC_FILTER
+    #     string_values: ["DimensionStringValue"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #
+    # @overload create_dimension(params = {})
+    # @param [Hash] params ({})
+    def create_dimension(params = {}, options = {})
+      req = build_request(:create_dimension, params)
+      req.send_request(options)
+    end
+
     # Creates a domain configuration.
     #
     # <note markdown="1"> The domain configuration feature is in public preview and is subject
@@ -1837,6 +1899,14 @@ module Aws::IoT
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
     #
+    #   **Note:** This API field is deprecated. Please use
+    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+    #
+    # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data is
+    #   retained for any metric used in the profile's `behaviors`, but it is
+    #   also retained for any metric specified here.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the security profile.
     #
@@ -1854,6 +1924,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -1877,6 +1951,15 @@ module Aws::IoT
     #       },
     #     },
     #     additional_metrics_to_retain: ["BehaviorMetric"],
+    #     additional_metrics_to_retain_v2: [
+    #       {
+    #         metric: "BehaviorMetric", # required
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -2620,6 +2703,26 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified dimension from your AWS account.
+    #
+    # @option params [required, String] :name
+    #   The unique identifier for the dimension that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dimension({
+    #     name: "DimensionName", # required
+    #   })
+    #
+    # @overload delete_dimension(params = {})
+    # @param [Hash] params ({})
+    def delete_dimension(params = {}, options = {})
+      req = build_request(:delete_dimension, params)
       req.send_request(options)
     end
 
@@ -3570,6 +3673,44 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Provides details about a dimension that is defined in your AWS
+    # account.
+    #
+    # @option params [required, String] :name
+    #   The unique identifier for the dimension.
+    #
+    # @return [Types::DescribeDimensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDimensionResponse#name #name} => String
+    #   * {Types::DescribeDimensionResponse#arn #arn} => String
+    #   * {Types::DescribeDimensionResponse#type #type} => String
+    #   * {Types::DescribeDimensionResponse#string_values #string_values} => Array&lt;String&gt;
+    #   * {Types::DescribeDimensionResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeDimensionResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dimension({
+    #     name: "DimensionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.type #=> String, one of "TOPIC_FILTER"
+    #   resp.string_values #=> Array
+    #   resp.string_values[0] #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_dimension(params = {})
+    # @param [Hash] params ({})
+    def describe_dimension(params = {}, options = {})
+      req = build_request(:describe_dimension, params)
+      req.send_request(options)
+    end
+
     # Gets summary information about a domain configuration.
     #
     # <note markdown="1"> The domain configuration feature is in public preview and is subject
@@ -4038,6 +4179,7 @@ module Aws::IoT
     #   * {Types::DescribeSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
     #   * {Types::DescribeSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
     #   * {Types::DescribeSecurityProfileResponse#additional_metrics_to_retain #additional_metrics_to_retain} => Array&lt;String&gt;
+    #   * {Types::DescribeSecurityProfileResponse#additional_metrics_to_retain_v2 #additional_metrics_to_retain_v2} => Array&lt;Types::MetricToRetain&gt;
     #   * {Types::DescribeSecurityProfileResponse#version #version} => Integer
     #   * {Types::DescribeSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::DescribeSecurityProfileResponse#last_modified_date #last_modified_date} => Time
@@ -4056,6 +4198,8 @@ module Aws::IoT
     #   resp.behaviors #=> Array
     #   resp.behaviors[0].name #=> String
     #   resp.behaviors[0].metric #=> String
+    #   resp.behaviors[0].metric_dimension.dimension_name #=> String
+    #   resp.behaviors[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.behaviors[0].criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.behaviors[0].criteria.value.count #=> Integer
     #   resp.behaviors[0].criteria.value.cidrs #=> Array
@@ -4071,6 +4215,10 @@ module Aws::IoT
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
     #   resp.additional_metrics_to_retain #=> Array
     #   resp.additional_metrics_to_retain[0] #=> String
+    #   resp.additional_metrics_to_retain_v2 #=> Array
+    #   resp.additional_metrics_to_retain_v2[0].metric #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
@@ -5162,6 +5310,8 @@ module Aws::IoT
     #   resp.active_violations[0].security_profile_name #=> String
     #   resp.active_violations[0].behavior.name #=> String
     #   resp.active_violations[0].behavior.metric #=> String
+    #   resp.active_violations[0].behavior.metric_dimension.dimension_name #=> String
+    #   resp.active_violations[0].behavior.metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.active_violations[0].behavior.criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.active_violations[0].behavior.criteria.value.count #=> Integer
     #   resp.active_violations[0].behavior.criteria.value.cidrs #=> Array
@@ -5722,6 +5872,39 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_certificates_by_ca(params = {}, options = {})
       req = build_request(:list_certificates_by_ca, params)
+      req.send_request(options)
+    end
+
+    # List the set of dimensions that are defined for your AWS account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve at one time.
+    #
+    # @return [Types::ListDimensionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDimensionsResponse#dimension_names #dimension_names} => Array&lt;String&gt;
+    #   * {Types::ListDimensionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dimensions({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dimension_names #=> Array
+    #   resp.dimension_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_dimensions(params = {})
+    # @param [Hash] params ({})
+    def list_dimensions(params = {}, options = {})
+      req = build_request(:list_dimensions, params)
       req.send_request(options)
     end
 
@@ -6452,6 +6635,10 @@ module Aws::IoT
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
     #
+    # @option params [String] :dimension_name
+    #   A filter to limit results to the security profiles that use the
+    #   defined dimension.
+    #
     # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSecurityProfilesResponse#security_profile_identifiers #security_profile_identifiers} => Array&lt;Types::SecurityProfileIdentifier&gt;
@@ -6462,6 +6649,7 @@ module Aws::IoT
     #   resp = client.list_security_profiles({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     dimension_name: "DimensionName",
     #   })
     #
     # @example Response structure
@@ -7215,6 +7403,8 @@ module Aws::IoT
     #   resp.violation_events[0].security_profile_name #=> String
     #   resp.violation_events[0].behavior.name #=> String
     #   resp.violation_events[0].behavior.metric #=> String
+    #   resp.violation_events[0].behavior.metric_dimension.dimension_name #=> String
+    #   resp.violation_events[0].behavior.metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.violation_events[0].behavior.criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.violation_events[0].behavior.criteria.value.count #=> Integer
     #   resp.violation_events[0].behavior.criteria.value.cidrs #=> Array
@@ -8621,6 +8811,51 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates the definition for a dimension. You cannot change the type of
+    # a dimension after it is created (you can delete it and re-create it).
+    #
+    # @option params [required, String] :name
+    #   A unique identifier for the dimension. Choose something that describes
+    #   the type and value to make it easy to remember what it does.
+    #
+    # @option params [required, Array<String>] :string_values
+    #   Specifies the value or list of values for the dimension. For
+    #   `TOPIC_FILTER` dimensions, this is a pattern used to match the MQTT
+    #   topic (for example, "admin/#").
+    #
+    # @return [Types::UpdateDimensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDimensionResponse#name #name} => String
+    #   * {Types::UpdateDimensionResponse#arn #arn} => String
+    #   * {Types::UpdateDimensionResponse#type #type} => String
+    #   * {Types::UpdateDimensionResponse#string_values #string_values} => Array&lt;String&gt;
+    #   * {Types::UpdateDimensionResponse#creation_date #creation_date} => Time
+    #   * {Types::UpdateDimensionResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dimension({
+    #     name: "DimensionName", # required
+    #     string_values: ["DimensionStringValue"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.type #=> String, one of "TOPIC_FILTER"
+    #   resp.string_values #=> Array
+    #   resp.string_values[0] #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload update_dimension(params = {})
+    # @param [Hash] params ({})
+    def update_dimension(params = {}, options = {})
+      req = build_request(:update_dimension, params)
+      req.send_request(options)
+    end
+
     # Updates values stored in the domain configuration. Domain
     # configurations for default endpoints can't be updated.
     #
@@ -9085,6 +9320,14 @@ module Aws::IoT
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
     #
+    #   **Note:** This API field is deprecated. Please use
+    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+    #
+    # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data is
+    #   retained for any metric used in the profile's behaviors, but it is
+    #   also retained for any metric specified here.
+    #
     # @option params [Boolean] :delete_behaviors
     #   If true, delete all `behaviors` defined for this security profile. If
     #   any `behaviors` are defined in the current invocation, an exception
@@ -9114,6 +9357,7 @@ module Aws::IoT
     #   * {Types::UpdateSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
     #   * {Types::UpdateSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
     #   * {Types::UpdateSecurityProfileResponse#additional_metrics_to_retain #additional_metrics_to_retain} => Array&lt;String&gt;
+    #   * {Types::UpdateSecurityProfileResponse#additional_metrics_to_retain_v2 #additional_metrics_to_retain_v2} => Array&lt;Types::MetricToRetain&gt;
     #   * {Types::UpdateSecurityProfileResponse#version #version} => Integer
     #   * {Types::UpdateSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::UpdateSecurityProfileResponse#last_modified_date #last_modified_date} => Time
@@ -9127,6 +9371,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -9150,6 +9398,15 @@ module Aws::IoT
     #       },
     #     },
     #     additional_metrics_to_retain: ["BehaviorMetric"],
+    #     additional_metrics_to_retain_v2: [
+    #       {
+    #         metric: "BehaviorMetric", # required
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
+    #       },
+    #     ],
     #     delete_behaviors: false,
     #     delete_alert_targets: false,
     #     delete_additional_metrics_to_retain: false,
@@ -9164,6 +9421,8 @@ module Aws::IoT
     #   resp.behaviors #=> Array
     #   resp.behaviors[0].name #=> String
     #   resp.behaviors[0].metric #=> String
+    #   resp.behaviors[0].metric_dimension.dimension_name #=> String
+    #   resp.behaviors[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.behaviors[0].criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.behaviors[0].criteria.value.count #=> Integer
     #   resp.behaviors[0].criteria.value.cidrs #=> Array
@@ -9179,6 +9438,10 @@ module Aws::IoT
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
     #   resp.additional_metrics_to_retain #=> Array
     #   resp.additional_metrics_to_retain[0] #=> String
+    #   resp.additional_metrics_to_retain_v2 #=> Array
+    #   resp.additional_metrics_to_retain_v2[0].metric #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
@@ -9445,6 +9708,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -9489,7 +9756,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
