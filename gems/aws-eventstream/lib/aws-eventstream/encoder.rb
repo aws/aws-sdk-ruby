@@ -59,7 +59,7 @@ module Aws
       #   will be returned. Else, encoded binary string is
       #   returned.
       def encode(message, io = nil)
-        encoded = encode_message(message).read
+        encoded = encode_message(message)
         if io
           io.write(encoded)
           io.close
@@ -69,92 +69,72 @@ module Aws
       end
 
       # Encodes an Aws::EventStream::Message
-      #   into Aws::EventStream::BytesBuffer
+      #   into String
       #
       # @param [Aws::EventStream::Message] message
       #
-      # @return [Aws::EventStream::BytesBuffer]
+      # @return [String]
       def encode_message(message)
         # create context buffer with encode headers
-        ctx_buffer = encode_headers(message)
-        headers_len = ctx_buffer.bytesize
+        encoded_header = encode_headers(message)
+        header_length = encoded_header.bytesize
         # encode payload
         if message.payload.length > MAX_PAYLOAD_LENGTH
           raise Aws::EventStream::Errors::EventPayloadLengthExceedError.new
         end
-        ctx_buffer << message.payload.read
-        total_len = ctx_buffer.bytesize + OVERHEAD_LENGTH
+        encoded_payload = message.payload.read
+        total_length = header_length + encoded_payload.bytesize + OVERHEAD_LENGTH
 
         # create message buffer with prelude section
-        buffer = prelude(total_len, headers_len)
+        encoded_prelude = encode_prelude(total_length, header_length)
 
         # append message context (headers, payload)
-        buffer << ctx_buffer.read
+        encoded_content = [
+          encoded_prelude,
+          encoded_header,
+          encoded_payload,
+        ].pack('a*a*a*')
         # append message checksum
-        buffer << pack_uint32(Zlib.crc32(buffer.read))
-
-        # write buffered message to io
-        buffer.rewind
-        buffer
+        message_checksum = Zlib.crc32(encoded_content)
+        [encoded_content, message_checksum].pack('a*N')
       end
 
       # Encodes headers part of an Aws::EventStream::Message
-      #   into Aws::EventStream::BytesBuffer
+      #   into String
       #
-      # @param [Aws::EventStream::Message] msg
+      # @param [Aws::EventStream::Message] message
       #
-      # @return [Aws::EventStream::BytesBuffer]
-      def encode_headers(msg)
-        buffer = BytesBuffer.new('')
-        msg.headers.each do |k, v|
-          # header key
-          buffer << pack_uint8(k.bytesize)
-          buffer << k
+      # @return [String]
+      def encode_headers(message)
+        header_entries = message.headers.map do |key, value|
+          encoded_key = [key.bytesize, key].pack('Ca*')
 
           # header value
-          pattern, val_len, idx = Types.pattern[v.type]
-          buffer << pack_uint8(idx)
+          pattern, value_length, type_index = Types.pattern[value.type]
+          encoded_value = [type_index].pack('C')
           # boolean types doesn't need to specify value
-          next if !!pattern == pattern
-          buffer << pack_uint16(v.value.bytesize) unless val_len
-          pattern ? buffer << [v.value].pack(pattern) :
-            buffer << v.value
+          next [encoded_key, encoded_value].pack('a*a*') if !!pattern == pattern
+          encoded_value = [encoded_value, value.value.bytesize].pack('a*S>') unless value_length
+
+          [
+            encoded_key,
+            encoded_value,
+            pattern ? [value.value].pack(pattern) : value.value,
+          ].pack('a*a*a*')
         end
-        if buffer.bytesize > MAX_HEADERS_LENGTH
+        header_entries.join.tap do |encoded_header|
+          break encoded_header if encoded_header.bytesize <= MAX_HEADERS_LENGTH
           raise Aws::EventStream::Errors::EventHeadersLengthExceedError.new
         end
-        buffer
       end
 
       private
 
-      def prelude(total_len, headers_len)
-        BytesBuffer.new(pack_uint32([
-          total_len,
-          headers_len,
-          Zlib.crc32(pack_uint32([total_len, headers_len]))
-        ]))
+      def encode_prelude(total_length, headers_length)
+        prelude_body = [total_length, headers_length].pack('NN')
+        checksum = Zlib.crc32(prelude_body)
+        [prelude_body, checksum].pack('a*N')
       end
-
-      # overhead encode helpers
-
-      def pack_uint8(val)
-        [val].pack('C')
-      end
-
-      def pack_uint16(val)
-        [val].pack('S>')
-      end
-
-      def pack_uint32(val)
-        if val.respond_to?(:each)
-          val.pack('N*')
-        else
-          [val].pack('N')
-        end
-      end
-
     end
-
   end
 end

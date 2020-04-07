@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update dependency on aws-eventstream
+
 3.93.0 (2020-04-06)
 ------------------
 
