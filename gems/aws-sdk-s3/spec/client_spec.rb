@@ -739,6 +739,25 @@ module Aws
           expect(resp.context.retries).to eq(3)
           expect(resp.data).to be(nil)
         end
+
+        it 'handles 200 http response with empty body '\
+            "as errors from #{operation_name}" do
+          client.handlers
+          .remove(Seahorse::Client::Plugins::RaiseResponseErrors::Handler)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_headers(200, {})
+            context.http_response.signal_data("\n\n\n")
+            context.http_response.signal_done
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.send(operation_name, {
+                                               bucket: 'bucket',
+                                               key: 'key'
+                                             }.merge(params))
+          expect(resp.error).not_to be_nil
+          expect(resp.context.retries).to eq(3)
+          expect(resp.data).to be(nil)
+        end
       end
 
       context 'metadata stubbing' do

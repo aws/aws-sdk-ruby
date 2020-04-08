@@ -27,6 +27,8 @@ module Aws
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
+            elsif xml.strip == ''
+              S3::Errors.error_class('InternalError').new(context, 'Empty response body')
             end
           end
 
