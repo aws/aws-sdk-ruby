@@ -746,7 +746,7 @@ module Aws
           .remove(Seahorse::Client::Plugins::RaiseResponseErrors::Handler)
           client.handle(step: :send) do |context|
             context.http_response.signal_headers(200, {})
-            context.http_response.signal_data("\n\n\n")
+            context.http_response.signal_data("\r\n\r\n\r\n")
             context.http_response.signal_done
             Seahorse::Client::Response.new(context: context)
           end
