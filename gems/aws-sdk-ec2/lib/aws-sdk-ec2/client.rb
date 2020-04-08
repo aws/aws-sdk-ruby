@@ -11717,6 +11717,55 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deregisters tag keys to prevent tags that have the specified tag keys
+    # from being included in scheduled event notifications for resources in
+    # the Region.
+    #
+    # For more information, see [Customizing Scheduled Event
+    # Notifications][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html#customizing_scheduled_event_notifications
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Types::DeregisterInstanceTagAttributeRequest] :instance_tag_attribute
+    #   Information about the tag keys to deregister.
+    #
+    # @return [Types::DeregisterInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterInstanceEventNotificationAttributesResult#instance_tag_attribute #instance_tag_attribute} => Types::InstanceTagNotificationAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_instance_event_notification_attributes({
+    #     dry_run: false,
+    #     instance_tag_attribute: {
+    #       include_all_tags_of_instance: false,
+    #       instance_tag_keys: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_tag_attribute.instance_tag_keys #=> Array
+    #   resp.instance_tag_attribute.instance_tag_keys[0] #=> String
+    #   resp.instance_tag_attribute.include_all_tags_of_instance #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceEventNotificationAttributes AWS API Documentation
+    #
+    # @overload deregister_instance_event_notification_attributes(params = {})
+    # @param [Hash] params ({})
+    def deregister_instance_event_notification_attributes(params = {}, options = {})
+      req = build_request(:deregister_instance_event_notification_attributes, params)
+      req.send_request(options)
+    end
+
     # Deregisters the specified members (network interfaces) from the
     # transit gateway multicast group.
     #
@@ -15740,6 +15789,40 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_instance_credit_specifications(params = {}, options = {})
       req = build_request(:describe_instance_credit_specifications, params)
+      req.send_request(options)
+    end
+
+    # Describes the tag keys that are registered to appear in scheduled
+    # event notifications for resources in the current Region.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceEventNotificationAttributesResult#instance_tag_attribute #instance_tag_attribute} => Types::InstanceTagNotificationAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_event_notification_attributes({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_tag_attribute.instance_tag_keys #=> Array
+    #   resp.instance_tag_attribute.instance_tag_keys[0] #=> String
+    #   resp.instance_tag_attribute.include_all_tags_of_instance #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceEventNotificationAttributes AWS API Documentation
+    #
+    # @overload describe_instance_event_notification_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_event_notification_attributes(params = {}, options = {})
+      req = build_request(:describe_instance_event_notification_attributes, params)
       req.send_request(options)
     end
 
@@ -21319,7 +21402,7 @@ module Aws::EC2
     # Instance by examining the response. If the status of the Spot Instance
     # is `fulfilled`, the instance ID appears in the response and contains
     # the identifier of the instance. Alternatively, you can use
-    # DescribeInstances with a filter to look for instances where the
+    # [DescribeInstances][1] with a filter to look for instances where the
     # instance lifecycle is `spot`.
     #
     # We recommend that you set `MaxResults` to a value between 5 and 1000
@@ -21332,6 +21415,10 @@ module Aws::EC2
     #
     # Spot Instance requests are deleted four hours after they are canceled
     # and their instances are terminated.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -32246,6 +32333,54 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Registers a set of tag keys to include in scheduled event
+    # notifications for your resources. For more information, see
+    # [Customizing Scheduled Event Notifications][1].
+    #
+    # To remove tags, use .
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html#customizing_scheduled_event_notifications
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Types::RegisterInstanceTagAttributeRequest] :instance_tag_attribute
+    #   Information about the tag keys to register.
+    #
+    # @return [Types::RegisterInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterInstanceEventNotificationAttributesResult#instance_tag_attribute #instance_tag_attribute} => Types::InstanceTagNotificationAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_instance_event_notification_attributes({
+    #     dry_run: false,
+    #     instance_tag_attribute: {
+    #       include_all_tags_of_instance: false,
+    #       instance_tag_keys: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_tag_attribute.instance_tag_keys #=> Array
+    #   resp.instance_tag_attribute.instance_tag_keys[0] #=> String
+    #   resp.instance_tag_attribute.include_all_tags_of_instance #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceEventNotificationAttributes AWS API Documentation
+    #
+    # @overload register_instance_event_notification_attributes(params = {})
+    # @param [Hash] params ({})
+    def register_instance_event_notification_attributes(params = {}, options = {})
+      req = build_request(:register_instance_event_notification_attributes, params)
+      req.send_request(options)
+    end
+
     # Registers members (network interfaces) with the transit gateway
     # multicast group. A member is a network interface associated with a
     # supported EC2 instance that receives multicast traffic. For
@@ -36610,7 +36745,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

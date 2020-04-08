@@ -184,9 +184,7 @@ module Aws::MediaConvert
     end
 
     # Accelerated transcoding can significantly speed up jobs with long,
-    # visually complex content. Outputs that use this feature incur pro-tier
-    # pricing. For information about feature limitations, see the AWS
-    # Elemental MediaConvert User Guide.
+    # visually complex content.
     #
     # @note When making an API call, you may pass AccelerationSettings
     #   data as a hash:
@@ -2500,6 +2498,13 @@ module Aws::MediaConvert
     #         },
     #         billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #         client_request_token: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1,
+    #           },
+    #         ],
     #         job_template: "__string",
     #         priority: 1,
     #         queue: "__string",
@@ -3474,10 +3479,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] acceleration_settings
-    #   Accelerated transcoding can significantly speed up jobs with long,
-    #   visually complex content. Outputs that use this feature incur
-    #   pro-tier pricing. For information about feature limitations, see the
-    #   AWS Elemental MediaConvert User Guide.
+    #   Optional. Accelerated transcoding can significantly speed up jobs
+    #   with long, visually complex content. Outputs that use this feature
+    #   incur pro-tier pricing. For information about feature limitations,
+    #   see the AWS Elemental MediaConvert User Guide.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] billing_tags_source
@@ -3490,21 +3495,29 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the
+    #   backlog of the queue that you submit your job to. Specify an
+    #   alternate queue and the maximum time that your job will wait in the
+    #   initial queue before hopping. For more information about this
+    #   feature, see the AWS Elemental MediaConvert User Guide.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] job_template
-    #   When you create a job, you can either specify a job template or
-    #   specify the transcoding settings individually
+    #   Optional. When you create a job, you can either specify a job
+    #   template or specify the transcoding settings individually.
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   Specify the relative priority for this job. In any given queue, the
-    #   service begins processing the job with the highest value first. When
-    #   more than one job has the same priority, the service begins
-    #   processing the job that you submitted first. If you don't specify a
-    #   priority, the service uses the default value 0.
+    #   Optional. Specify the relative priority for this job. In any given
+    #   queue, the service begins processing the job with the highest value
+    #   first. When more than one job has the same priority, the service
+    #   begins processing the job that you submitted first. If you don't
+    #   specify a priority, the service uses the default value 0.
     #   @return [Integer]
     #
     # @!attribute [rw] queue
@@ -3525,28 +3538,28 @@ module Aws::MediaConvert
     #   @return [Types::JobSettings]
     #
     # @!attribute [rw] simulate_reserved_queue
-    #   Enable this setting when you run a test job to estimate how many
-    #   reserved transcoding slots (RTS) you need. When this is enabled,
-    #   MediaConvert runs your job from an on-demand queue with similar
-    #   performance to what you will see with one RTS in a reserved queue.
-    #   This setting is disabled by default.
+    #   Optional. Enable this setting when you run a test job to estimate
+    #   how many reserved transcoding slots (RTS) you need. When this is
+    #   enabled, MediaConvert runs your job from an on-demand queue with
+    #   similar performance to what you will see with one RTS in a reserved
+    #   queue. This setting is disabled by default.
     #   @return [String]
     #
     # @!attribute [rw] status_update_interval
-    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
-    #   CloudWatch Events. Set the interval, in seconds, between status
-    #   updates. MediaConvert sends an update at this interval from the time
-    #   the service begins processing your job to the time it completes the
-    #   transcode or encounters an error.
+    #   Optional. Specify how often MediaConvert sends STATUS\_UPDATE events
+    #   to Amazon CloudWatch Events. Set the interval, in seconds, between
+    #   status updates. MediaConvert sends an update at this interval from
+    #   the time the service begins processing your job to the time it
+    #   completes the transcode or encounters an error.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags that you want to add to the resource. You can tag resources
-    #   with a key-value pair or with only a key.
+    #   Optional. The tags that you want to add to the resource. You can tag
+    #   resources with a key-value pair or with only a key.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_metadata
-    #   User-defined metadata that you want to associate with an
+    #   Optional. User-defined metadata that you want to associate with an
     #   MediaConvert job. You specify metadata in key/value pairs.
     #   @return [Hash<String,String>]
     #
@@ -3556,6 +3569,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :billing_tags_source,
       :client_request_token,
+      :hop_destinations,
       :job_template,
       :priority,
       :queue,
@@ -3597,6 +3611,13 @@ module Aws::MediaConvert
     #         },
     #         category: "__string",
     #         description: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1,
+    #           },
+    #         ],
     #         name: "__string", # required
     #         priority: 1,
     #         queue: "__string",
@@ -4572,6 +4593,14 @@ module Aws::MediaConvert
     #   Optional. A description of the job template you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the
+    #   backlog of the queue that you submit your job to. Specify an
+    #   alternate queue and the maximum time that your job will wait in the
+    #   initial queue before hopping. For more information about this
+    #   feature, see the AWS Elemental MediaConvert User Guide.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] name
     #   The name of the job template you are creating.
     #   @return [String]
@@ -4614,6 +4643,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :hop_destinations,
       :name,
       :priority,
       :queue,
@@ -8468,6 +8498,49 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Optional. Configuration for a destination queue to which the job can
+    # hop once a customer-defined minimum wait time has passed.
+    #
+    # @note When making an API call, you may pass HopDestination
+    #   data as a hash:
+    #
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] priority
+    #   Optional. When you set up a job to use queue hopping, you can
+    #   specify a different relative priority for the job in the destination
+    #   queue. If you don't specify, the relative priority will remain the
+    #   same as in the previous queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue
+    #   Optional unless the job is submitted on the default queue. When you
+    #   set up a job to use queue hopping, you can specify a destination
+    #   queue. This queue cannot be the original queue to which the job is
+    #   submitted. If the original queue isn't the default queue and you
+    #   don't specify the destination queue, the job will move to the
+    #   default queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] wait_minutes
+    #   Required for setting up a job to use queue hopping. Minimum wait
+    #   time in minutes until the job can hop to the destination queue.
+    #   Valid range is 1 to 1440 minutes, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HopDestination AWS API Documentation
+    #
+    class HopDestination < Struct.new(
+      :priority,
+      :queue,
+      :wait_minutes)
+      include Aws::Structure
+    end
+
     # To insert ID3 tags in your output, specify two values. Use ID3 tag
     # (Id3) to specify the base 64 encoded string and use Timecode
     # (TimeCode) to specify the time when the tag should be inserted. To
@@ -9410,12 +9483,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] billing_tags_source
-    #   Optional. Choose a tag type that AWS Billing and Cost Management
-    #   will use to sort your AWS Elemental MediaConvert costs on any
-    #   billing report that you set up. Any transcoding outputs that don't
-    #   have an associated tag will appear in your billing report unsorted.
-    #   If you don't choose a valid value for this field, your job outputs
-    #   will appear on the billing report unsorted.
+    #   The tag type that AWS Billing and Cost Management will use to sort
+    #   your AWS Elemental MediaConvert costs on any billing report that you
+    #   set up.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -9433,6 +9503,10 @@ module Aws::MediaConvert
     # @!attribute [rw] error_message
     #   Error message of Job
     #   @return [String]
+    #
+    # @!attribute [rw] hop_destinations
+    #   Optional list of hop destinations.
+    #   @return [Array<Types::HopDestination>]
     #
     # @!attribute [rw] id
     #   A portion of the job's ARN, unique within your AWS Elemental
@@ -9471,11 +9545,15 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] queue
-    #   Optional. When you create a job, you can specify a queue to send it
-    #   to. If you don't specify, the job will go to the default queue. For
-    #   more about queues, see the User Guide topic at
+    #   When you create a job, you can specify a queue to send it to. If you
+    #   don't specify, the job will go to the default queue. For more about
+    #   queues, see the User Guide topic at
     #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [String]
+    #
+    # @!attribute [rw] queue_transitions
+    #   The job's queue hopping history.
+    #   @return [Array<Types::QueueTransition>]
     #
     # @!attribute [rw] retry_count
     #   The number of times that the service automatically attempted to
@@ -9534,6 +9612,7 @@ module Aws::MediaConvert
       :current_phase,
       :error_code,
       :error_message,
+      :hop_destinations,
       :id,
       :job_percent_complete,
       :job_template,
@@ -9541,6 +9620,7 @@ module Aws::MediaConvert
       :output_group_details,
       :priority,
       :queue,
+      :queue_transitions,
       :retry_count,
       :role,
       :settings,
@@ -10640,6 +10720,10 @@ module Aws::MediaConvert
     #   An optional description you create for each job template.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional list of hop destinations.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] last_updated
     #   The timestamp in epoch seconds when the Job template was last
     #   updated.
@@ -10686,6 +10770,7 @@ module Aws::MediaConvert
       :category,
       :created_at,
       :description,
+      :hop_destinations,
       :last_updated,
       :name,
       :priority,
@@ -11771,7 +11856,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
@@ -11829,23 +11914,24 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Use this string, provided with the response to a previous request,
-    #   to request the next batch of jobs.
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
     #
     # @!attribute [rw] queue
-    #   Provide a queue name to get back only jobs from that queue.
+    #   Optional. Provide a queue name to get back only jobs from that
+    #   queue.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED,
-    #   or ERROR.
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobsRequest AWS API Documentation
@@ -11917,7 +12003,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
@@ -11984,7 +12070,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
@@ -16197,6 +16283,31 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Description of the source and destination queues between which the job
+    # has moved, along with the timestamp of the move
+    #
+    # @!attribute [rw] destination_queue
+    #   The queue that the job was on after the transition.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_queue
+    #   The queue that the job was on before the transition.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in Unix epoch format, that the job moved from the source
+    #   queue to the destination queue.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/QueueTransition AWS API Documentation
+    #
+    class QueueTransition < Struct.new(
+      :destination_queue,
+      :source_queue,
+      :timestamp)
+      include Aws::Structure
+    end
+
     # Use Rectangle to identify a specific area of the video frame.
     #
     # @note When making an API call, you may pass Rectangle
@@ -17058,6 +17169,13 @@ module Aws::MediaConvert
     #         },
     #         category: "__string",
     #         description: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1,
+    #           },
+    #         ],
     #         name: "__string", # required
     #         priority: 1,
     #         queue: "__string",
@@ -18030,6 +18148,10 @@ module Aws::MediaConvert
     #   The new description for the job template, if you are changing it.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional list of hop destinations.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] name
     #   The name of the job template you are modifying
     #   @return [String]
@@ -18065,6 +18187,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :hop_destinations,
       :name,
       :priority,
       :queue,

@@ -363,8 +363,7 @@ module Aws::MigrationHubConfig
       req.send_request(options)
     end
 
-    # This API permits filtering on the `ControlId`, `HomeRegion`, and
-    # `RegionControlScope` fields.
+    # This API permits filtering on the `ControlId` and `HomeRegion` fields.
     #
     # @option params [String] :control_id
     #   The `ControlID` is a unique identifier string of your
@@ -462,7 +461,7 @@ module Aws::MigrationHubConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubconfig'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

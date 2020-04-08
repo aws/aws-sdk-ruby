@@ -11189,6 +11189,77 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeregisterInstanceEventNotificationAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_tag_attribute: {
+    #           include_all_tags_of_instance: false,
+    #           instance_tag_keys: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_attribute
+    #   Information about the tag keys to deregister.
+    #   @return [Types::DeregisterInstanceTagAttributeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceEventNotificationAttributesRequest AWS API Documentation
+    #
+    class DeregisterInstanceEventNotificationAttributesRequest < Struct.new(
+      :dry_run,
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_tag_attribute
+    #   The resulting set of tag keys.
+    #   @return [Types::InstanceTagNotificationAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceEventNotificationAttributesResult AWS API Documentation
+    #
+    class DeregisterInstanceEventNotificationAttributesResult < Struct.new(
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # Information about the tag keys to deregister for the current Region.
+    # You can either specify individual tag keys or deregister all tag keys
+    # in the current Region. You must specify either
+    # `IncludeAllTagsOfInstance` or `InstanceTagKeys` in the request
+    #
+    # @note When making an API call, you may pass DeregisterInstanceTagAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         include_all_tags_of_instance: false,
+    #         instance_tag_keys: ["String"],
+    #       }
+    #
+    # @!attribute [rw] include_all_tags_of_instance
+    #   Indicates whether to deregister all tag keys in the current Region.
+    #   Specify `false` to deregister all tag keys.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_keys
+    #   Information about the tag keys to deregister.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceTagAttributeRequest AWS API Documentation
+    #
+    class DeregisterInstanceTagAttributeRequest < Struct.new(
+      :include_all_tags_of_instance,
+      :instance_tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeregisterTransitGatewayMulticastGroupMembersRequest
     #   data as a hash:
     #
@@ -14447,6 +14518,38 @@ module Aws::EC2
     class DescribeInstanceCreditSpecificationsResult < Struct.new(
       :instance_credit_specifications,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceEventNotificationAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceEventNotificationAttributesRequest AWS API Documentation
+    #
+    class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_tag_attribute
+    #   Information about the registered tag keys.
+    #   @return [Types::InstanceTagNotificationAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceEventNotificationAttributesResult AWS API Documentation
+    #
+    class DescribeInstanceEventNotificationAttributesResult < Struct.new(
+      :instance_tag_attribute)
       include Aws::Structure
     end
 
@@ -28976,6 +29079,26 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the registered tag keys for the current Region.
+    #
+    # @!attribute [rw] instance_tag_keys
+    #   The registered tag keys.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_all_tags_of_instance
+    #   Indicates wheter all tag keys in the current Region are registered
+    #   to appear in scheduled event notifications. `true` indicates that
+    #   all tag keys in the current Region are registered.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTagNotificationAttribute AWS API Documentation
+    #
+    class InstanceTagNotificationAttribute < Struct.new(
+      :instance_tag_keys,
+      :include_all_tags_of_instance)
+      include Aws::Structure
+    end
+
     # Describes the instance type.
     #
     # @!attribute [rw] instance_type
@@ -35678,14 +35801,23 @@ module Aws::EC2
     #   If not specified, an Availability Zone will be automatically chosen
     #   for you based on the load balancing criteria for the Region.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] affinity
     #   The affinity setting for the instance on the Dedicated Host. This
-    #   parameter is not supported for the ImportInstance command.
+    #   parameter is not supported for the [ImportInstance][1] command.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -35696,29 +35828,47 @@ module Aws::EC2
     #   The number of the partition the instance is in. Valid only if the
     #   placement group strategy is set to `partition`.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [Integer]
     #
     # @!attribute [rw] host_id
     #   The ID of the Dedicated Host on which the instance resides. This
-    #   parameter is not supported for the ImportInstance command.
+    #   parameter is not supported for the [ImportInstance][1] command.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the ImportInstance
-    #   command.
+    #   hardware. The `host` tenancy is not supported for the
+    #   [ImportInstance][1] command.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
     #   Reserved for future use.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] host_resource_group_arn
@@ -35726,7 +35876,11 @@ module Aws::EC2
     #   If you specify a host resource group ARN, omit the **Tenancy**
     #   parameter or set it to `host`.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
@@ -36850,6 +37004,77 @@ module Aws::EC2
     #
     class RegisterImageResult < Struct.new(
       :image_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterInstanceEventNotificationAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_tag_attribute: {
+    #           include_all_tags_of_instance: false,
+    #           instance_tag_keys: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_attribute
+    #   Information about the tag keys to register.
+    #   @return [Types::RegisterInstanceTagAttributeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceEventNotificationAttributesRequest AWS API Documentation
+    #
+    class RegisterInstanceEventNotificationAttributesRequest < Struct.new(
+      :dry_run,
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_tag_attribute
+    #   The resulting set of tag keys.
+    #   @return [Types::InstanceTagNotificationAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceEventNotificationAttributesResult AWS API Documentation
+    #
+    class RegisterInstanceEventNotificationAttributesResult < Struct.new(
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # Information about the tag keys to register for the current Region. You
+    # can either specify individual tag keys or register all tag keys in the
+    # current Region. You must specify either `IncludeAllTagsOfInstance` or
+    # `InstanceTagKeys` in the request
+    #
+    # @note When making an API call, you may pass RegisterInstanceTagAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         include_all_tags_of_instance: false,
+    #         instance_tag_keys: ["String"],
+    #       }
+    #
+    # @!attribute [rw] include_all_tags_of_instance
+    #   Indicates whether to register all tag keys in the current Region.
+    #   Specify `true` to register all tag keys.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_keys
+    #   The tag keys to register.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceTagAttributeRequest AWS API Documentation
+    #
+    class RegisterInstanceTagAttributeRequest < Struct.new(
+      :include_all_tags_of_instance,
+      :instance_tag_keys)
       include Aws::Structure
     end
 
@@ -43057,12 +43282,13 @@ module Aws::EC2
     #   more information, see [Spot Fleet Prerequisites][1] in the *Amazon
     #   EC2 User Guide for Linux Instances*. Spot Fleet can terminate Spot
     #   Instances on your behalf when you cancel its Spot Fleet request
-    #   using CancelSpotFleetRequests or when the Spot Fleet request
+    #   using [CancelSpotFleetRequests][2] or when the Spot Fleet request
     #   expires, if you set `TerminateInstancesWithExpiration`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CancelSpotFleetRequests
     #   @return [String]
     #
     # @!attribute [rw] launch_specifications
@@ -43458,10 +43684,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_type
-    #   The Spot Instance request type. For RunInstances, persistent Spot
-    #   Instance requests are only supported when
+    #   The Spot Instance request type. For [RunInstances][1], persistent
+    #   Spot Instance requests are only supported when
     #   **InstanceInterruptionBehavior** is set to either `hibernate` or
     #   `stop`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
@@ -44352,7 +44582,13 @@ module Aws::EC2
     # launch instances until it reaches the maximum amount that you're
     # willing to pay. When the maximum amount you're willing to pay is
     # reached, the fleet stops launching instances even if it hasn’t met the
-    # target capacity. The `MaxTotalPrice` parameters are located in and
+    # target capacity. The `MaxTotalPrice` parameters are located in
+    # [OnDemandOptions][1] and [SpotOptions][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptions.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions
     #
     # @!attribute [rw] total_target_capacity
     #   The number of units to request, filled using
@@ -44401,7 +44637,12 @@ module Aws::EC2
     # amount that you're willing to pay. When the maximum amount you're
     # willing to pay is reached, the fleet stops launching instances even if
     # it hasn’t met the target capacity. The `MaxTotalPrice` parameters are
-    # located in and .
+    # located in [OnDemandOptionsRequest][1] and [SpotOptionsRequest][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptionsRequest
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest
     #
     # @note When making an API call, you may pass TargetCapacitySpecificationRequest
     #   data as a hash:

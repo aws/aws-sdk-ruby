@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2020-04-08)
+------------------
+
+* Feature - This release provides the ability to include tags in EC2 event notifications.
+
 1.151.0 (2020-03-12)
 ------------------
 

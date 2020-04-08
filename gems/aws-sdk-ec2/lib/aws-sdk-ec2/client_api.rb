@@ -451,6 +451,9 @@ module Aws::EC2
     DeprovisionByoipCidrRequest = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrRequest')
     DeprovisionByoipCidrResult = Shapes::StructureShape.new(name: 'DeprovisionByoipCidrResult')
     DeregisterImageRequest = Shapes::StructureShape.new(name: 'DeregisterImageRequest')
+    DeregisterInstanceEventNotificationAttributesRequest = Shapes::StructureShape.new(name: 'DeregisterInstanceEventNotificationAttributesRequest')
+    DeregisterInstanceEventNotificationAttributesResult = Shapes::StructureShape.new(name: 'DeregisterInstanceEventNotificationAttributesResult')
+    DeregisterInstanceTagAttributeRequest = Shapes::StructureShape.new(name: 'DeregisterInstanceTagAttributeRequest')
     DeregisterTransitGatewayMulticastGroupMembersRequest = Shapes::StructureShape.new(name: 'DeregisterTransitGatewayMulticastGroupMembersRequest')
     DeregisterTransitGatewayMulticastGroupMembersResult = Shapes::StructureShape.new(name: 'DeregisterTransitGatewayMulticastGroupMembersResult')
     DeregisterTransitGatewayMulticastGroupSourcesRequest = Shapes::StructureShape.new(name: 'DeregisterTransitGatewayMulticastGroupSourcesRequest')
@@ -557,6 +560,8 @@ module Aws::EC2
     DescribeInstanceCreditSpecificationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeInstanceCreditSpecificationsMaxResults')
     DescribeInstanceCreditSpecificationsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsRequest')
     DescribeInstanceCreditSpecificationsResult = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsResult')
+    DescribeInstanceEventNotificationAttributesRequest = Shapes::StructureShape.new(name: 'DescribeInstanceEventNotificationAttributesRequest')
+    DescribeInstanceEventNotificationAttributesResult = Shapes::StructureShape.new(name: 'DescribeInstanceEventNotificationAttributesResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
     DescribeInstanceStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceStatusResult')
     DescribeInstanceTypeOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceTypeOfferingsRequest')
@@ -1106,6 +1111,8 @@ module Aws::EC2
     InstanceStatusSummary = Shapes::StructureShape.new(name: 'InstanceStatusSummary')
     InstanceStorageFlag = Shapes::BooleanShape.new(name: 'InstanceStorageFlag')
     InstanceStorageInfo = Shapes::StructureShape.new(name: 'InstanceStorageInfo')
+    InstanceTagKeySet = Shapes::ListShape.new(name: 'InstanceTagKeySet')
+    InstanceTagNotificationAttribute = Shapes::StructureShape.new(name: 'InstanceTagNotificationAttribute')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     InstanceTypeHypervisor = Shapes::StringShape.new(name: 'InstanceTypeHypervisor')
     InstanceTypeInfo = Shapes::StructureShape.new(name: 'InstanceTypeInfo')
@@ -1518,6 +1525,9 @@ module Aws::EC2
     RegionNameStringList = Shapes::ListShape.new(name: 'RegionNameStringList')
     RegisterImageRequest = Shapes::StructureShape.new(name: 'RegisterImageRequest')
     RegisterImageResult = Shapes::StructureShape.new(name: 'RegisterImageResult')
+    RegisterInstanceEventNotificationAttributesRequest = Shapes::StructureShape.new(name: 'RegisterInstanceEventNotificationAttributesRequest')
+    RegisterInstanceEventNotificationAttributesResult = Shapes::StructureShape.new(name: 'RegisterInstanceEventNotificationAttributesResult')
+    RegisterInstanceTagAttributeRequest = Shapes::StructureShape.new(name: 'RegisterInstanceTagAttributeRequest')
     RegisterTransitGatewayMulticastGroupMembersRequest = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupMembersRequest')
     RegisterTransitGatewayMulticastGroupMembersResult = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupMembersResult')
     RegisterTransitGatewayMulticastGroupSourcesRequest = Shapes::StructureShape.new(name: 'RegisterTransitGatewayMulticastGroupSourcesRequest')
@@ -3729,6 +3739,17 @@ module Aws::EC2
     DeregisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeregisterImageRequest.struct_class = Types::DeregisterImageRequest
 
+    DeregisterInstanceEventNotificationAttributesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeregisterInstanceEventNotificationAttributesRequest.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: DeregisterInstanceTagAttributeRequest, location_name: "InstanceTagAttribute"))
+    DeregisterInstanceEventNotificationAttributesRequest.struct_class = Types::DeregisterInstanceEventNotificationAttributesRequest
+
+    DeregisterInstanceEventNotificationAttributesResult.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: InstanceTagNotificationAttribute, location_name: "instanceTagAttribute"))
+    DeregisterInstanceEventNotificationAttributesResult.struct_class = Types::DeregisterInstanceEventNotificationAttributesResult
+
+    DeregisterInstanceTagAttributeRequest.add_member(:include_all_tags_of_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeAllTagsOfInstance"))
+    DeregisterInstanceTagAttributeRequest.add_member(:instance_tag_keys, Shapes::ShapeRef.new(shape: InstanceTagKeySet, location_name: "InstanceTagKey"))
+    DeregisterInstanceTagAttributeRequest.struct_class = Types::DeregisterInstanceTagAttributeRequest
+
     DeregisterTransitGatewayMulticastGroupMembersRequest.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainId, location_name: "TransitGatewayMulticastDomainId"))
     DeregisterTransitGatewayMulticastGroupMembersRequest.add_member(:group_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "GroupIpAddress"))
     DeregisterTransitGatewayMulticastGroupMembersRequest.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: TransitGatewayNetworkInterfaceIdList, location_name: "NetworkInterfaceIds"))
@@ -4173,6 +4194,12 @@ module Aws::EC2
     DescribeInstanceCreditSpecificationsResult.add_member(:instance_credit_specifications, Shapes::ShapeRef.new(shape: InstanceCreditSpecificationList, location_name: "instanceCreditSpecificationSet"))
     DescribeInstanceCreditSpecificationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeInstanceCreditSpecificationsResult.struct_class = Types::DescribeInstanceCreditSpecificationsResult
+
+    DescribeInstanceEventNotificationAttributesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceEventNotificationAttributesRequest.struct_class = Types::DescribeInstanceEventNotificationAttributesRequest
+
+    DescribeInstanceEventNotificationAttributesResult.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: InstanceTagNotificationAttribute, location_name: "instanceTagAttribute"))
+    DescribeInstanceEventNotificationAttributesResult.struct_class = Types::DescribeInstanceEventNotificationAttributesResult
 
     DescribeInstanceStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeInstanceStatusRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
@@ -6381,6 +6408,12 @@ module Aws::EC2
     InstanceStorageInfo.add_member(:disks, Shapes::ShapeRef.new(shape: DiskInfoList, location_name: "disks"))
     InstanceStorageInfo.struct_class = Types::InstanceStorageInfo
 
+    InstanceTagKeySet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    InstanceTagNotificationAttribute.add_member(:instance_tag_keys, Shapes::ShapeRef.new(shape: InstanceTagKeySet, location_name: "instanceTagKeySet"))
+    InstanceTagNotificationAttribute.add_member(:include_all_tags_of_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeAllTagsOfInstance"))
+    InstanceTagNotificationAttribute.struct_class = Types::InstanceTagNotificationAttribute
+
     InstanceTypeInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
     InstanceTypeInfo.add_member(:current_generation, Shapes::ShapeRef.new(shape: CurrentGenerationFlag, location_name: "currentGeneration"))
     InstanceTypeInfo.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: FreeTierEligibleFlag, location_name: "freeTierEligible"))
@@ -7821,6 +7854,17 @@ module Aws::EC2
 
     RegisterImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     RegisterImageResult.struct_class = Types::RegisterImageResult
+
+    RegisterInstanceEventNotificationAttributesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RegisterInstanceEventNotificationAttributesRequest.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: RegisterInstanceTagAttributeRequest, location_name: "InstanceTagAttribute"))
+    RegisterInstanceEventNotificationAttributesRequest.struct_class = Types::RegisterInstanceEventNotificationAttributesRequest
+
+    RegisterInstanceEventNotificationAttributesResult.add_member(:instance_tag_attribute, Shapes::ShapeRef.new(shape: InstanceTagNotificationAttribute, location_name: "instanceTagAttribute"))
+    RegisterInstanceEventNotificationAttributesResult.struct_class = Types::RegisterInstanceEventNotificationAttributesResult
+
+    RegisterInstanceTagAttributeRequest.add_member(:include_all_tags_of_instance, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeAllTagsOfInstance"))
+    RegisterInstanceTagAttributeRequest.add_member(:instance_tag_keys, Shapes::ShapeRef.new(shape: InstanceTagKeySet, location_name: "InstanceTagKey"))
+    RegisterInstanceTagAttributeRequest.struct_class = Types::RegisterInstanceTagAttributeRequest
 
     RegisterTransitGatewayMulticastGroupMembersRequest.add_member(:transit_gateway_multicast_domain_id, Shapes::ShapeRef.new(shape: TransitGatewayMulticastDomainId, location_name: "TransitGatewayMulticastDomainId"))
     RegisterTransitGatewayMulticastGroupMembersRequest.add_member(:group_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "GroupIpAddress"))
@@ -10881,6 +10925,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:deregister_instance_event_notification_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterInstanceEventNotificationAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterInstanceEventNotificationAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterInstanceEventNotificationAttributesResult)
+      end)
+
       api.add_operation(:deregister_transit_gateway_multicast_group_members, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeregisterTransitGatewayMulticastGroupMembers"
         o.http_method = "POST"
@@ -11353,6 +11405,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_instance_event_notification_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceEventNotificationAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceEventNotificationAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceEventNotificationAttributesResult)
       end)
 
       api.add_operation(:describe_instance_status, Seahorse::Model::Operation.new.tap do |o|
@@ -13080,6 +13140,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RegisterImageRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterImageResult)
+      end)
+
+      api.add_operation(:register_instance_event_notification_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterInstanceEventNotificationAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterInstanceEventNotificationAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterInstanceEventNotificationAttributesResult)
       end)
 
       api.add_operation(:register_transit_gateway_multicast_group_members, Seahorse::Model::Operation.new.tap do |o|

@@ -270,5 +270,22 @@ module Aws::MigrationHubConfig
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds the caller should wait before retrying.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhub-config-2019-06-30/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :retry_after_seconds)
+      include Aws::Structure
+    end
+
   end
 end

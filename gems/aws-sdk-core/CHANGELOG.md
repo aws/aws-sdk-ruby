@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.94.0 (2020-04-08)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Issue - Update dependency on aws-eventstream
 
 3.93.0 (2020-04-06)

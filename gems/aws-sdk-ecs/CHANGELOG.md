@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2020-04-08)
+------------------
+
+* Feature - This release provides native support for specifying Amazon EFS file systems as volumes in your Amazon ECS task definitions.
+
 1.59.0 (2020-03-16)
 ------------------
 

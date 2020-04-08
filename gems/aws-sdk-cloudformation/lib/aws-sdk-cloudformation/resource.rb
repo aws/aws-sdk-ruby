@@ -77,7 +77,7 @@ module Aws::CloudFormation
     # @param [Hash] options ({})
     # @option options [required, String] :stack_name
     #   The name that is associated with the stack. The name must be unique in
-    #   the region in which you are creating the stack.
+    #   the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case sensitive)
     #   and hyphens. It must start with an alphabetic character and cannot be
@@ -273,7 +273,7 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     # @option options [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. AWS CloudFormation also
