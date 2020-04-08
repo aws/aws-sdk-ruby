@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.486 (2020-04-08)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
