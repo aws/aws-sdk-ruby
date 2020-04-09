@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-04-08)
+------------------
+
+* Feature - Amazon CloudWatch Contributor Insights adds support for tags and tagging on resource creation.
+
 1.34.0 (2020-03-09)
 ------------------
 
@@ -237,4 +242,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-cloudwatch` gem.
-

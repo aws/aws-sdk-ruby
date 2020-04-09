@@ -50,6 +50,7 @@ module Aws::MediaLive
     AudioSelectorSettings = Shapes::StructureShape.new(name: 'AudioSelectorSettings')
     AudioType = Shapes::StringShape.new(name: 'AudioType')
     AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
+    AutomaticInputFailoverSettings = Shapes::StructureShape.new(name: 'AutomaticInputFailoverSettings')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     AvailBlankingState = Shapes::StringShape.new(name: 'AvailBlankingState')
     AvailConfiguration = Shapes::StructureShape.new(name: 'AvailConfiguration')
@@ -194,6 +195,7 @@ module Aws::MediaLive
     H264ColorSpaceSettings = Shapes::StructureShape.new(name: 'H264ColorSpaceSettings')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
     H264FlickerAq = Shapes::StringShape.new(name: 'H264FlickerAq')
+    H264ForceFieldPictures = Shapes::StringShape.new(name: 'H264ForceFieldPictures')
     H264FramerateControl = Shapes::StringShape.new(name: 'H264FramerateControl')
     H264GopBReference = Shapes::StringShape.new(name: 'H264GopBReference')
     H264GopSizeUnits = Shapes::StringShape.new(name: 'H264GopSizeUnits')
@@ -282,6 +284,7 @@ module Aws::MediaLive
     InputLossBehavior = Shapes::StructureShape.new(name: 'InputLossBehavior')
     InputLossImageType = Shapes::StringShape.new(name: 'InputLossImageType')
     InputMaximumBitrate = Shapes::StringShape.new(name: 'InputMaximumBitrate')
+    InputPreference = Shapes::StringShape.new(name: 'InputPreference')
     InputResolution = Shapes::StringShape.new(name: 'InputResolution')
     InputSecurityGroup = Shapes::StructureShape.new(name: 'InputSecurityGroup')
     InputSecurityGroupState = Shapes::StringShape.new(name: 'InputSecurityGroupState')
@@ -731,6 +734,10 @@ module Aws::MediaLive
     AudioSelectorSettings.add_member(:audio_language_selection, Shapes::ShapeRef.new(shape: AudioLanguageSelection, location_name: "audioLanguageSelection"))
     AudioSelectorSettings.add_member(:audio_pid_selection, Shapes::ShapeRef.new(shape: AudioPidSelection, location_name: "audioPidSelection"))
     AudioSelectorSettings.struct_class = Types::AudioSelectorSettings
+
+    AutomaticInputFailoverSettings.add_member(:input_preference, Shapes::ShapeRef.new(shape: InputPreference, location_name: "inputPreference"))
+    AutomaticInputFailoverSettings.add_member(:secondary_input_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secondaryInputId"))
+    AutomaticInputFailoverSettings.struct_class = Types::AutomaticInputFailoverSettings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
     AvailBlanking.add_member(:state, Shapes::ShapeRef.new(shape: AvailBlankingState, location_name: "state"))
@@ -1342,6 +1349,7 @@ module Aws::MediaLive
     H264Settings.add_member(:entropy_encoding, Shapes::ShapeRef.new(shape: H264EntropyEncoding, location_name: "entropyEncoding"))
     H264Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     H264Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H264FlickerAq, location_name: "flickerAq"))
+    H264Settings.add_member(:force_field_pictures, Shapes::ShapeRef.new(shape: H264ForceFieldPictures, location_name: "forceFieldPictures"))
     H264Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: H264FramerateControl, location_name: "framerateControl"))
     H264Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "framerateDenominator"))
     H264Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "framerateNumerator"))
@@ -1530,6 +1538,7 @@ module Aws::MediaLive
     Input.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     Input.struct_class = Types::Input
 
+    InputAttachment.add_member(:automatic_input_failover_settings, Shapes::ShapeRef.new(shape: AutomaticInputFailoverSettings, location_name: "automaticInputFailoverSettings"))
     InputAttachment.add_member(:input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentName"))
     InputAttachment.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, location_name: "inputId"))
     InputAttachment.add_member(:input_settings, Shapes::ShapeRef.new(shape: InputSettings, location_name: "inputSettings"))
