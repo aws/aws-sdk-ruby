@@ -878,6 +878,34 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # The settings for Automatic Input Failover.
+    #
+    # @note When making an API call, you may pass AutomaticInputFailoverSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #         secondary_input_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_preference
+    #   Input preference when deciding which input to make active when a
+    #   previously failed input has recovered.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_input_id
+    #   The input ID of the secondary input in the automatic input failover
+    #   pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AutomaticInputFailoverSettings AWS API Documentation
+    #
+    class AutomaticInputFailoverSettings < Struct.new(
+      :input_preference,
+      :secondary_input_id)
+      include Aws::Structure
+    end
+
     # Avail Blanking
     #
     # @note When making an API call, you may pass AvailBlanking
@@ -2879,6 +2907,7 @@ module Aws::MediaLive
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -2961,6 +2990,10 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             automatic_input_failover_settings: {
+    #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #               secondary_input_id: "__string", # required
+    #             },
     #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
@@ -5630,6 +5663,7 @@ module Aws::MediaLive
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                 force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -6109,6 +6143,7 @@ module Aws::MediaLive
     #         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #         force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
@@ -6189,6 +6224,17 @@ module Aws::MediaLive
     # @!attribute [rw] flicker_aq
     #   If set to enabled, adjust quantization within each frame to reduce
     #   flicker or 'pop' on I-frames.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_field_pictures
+    #   This setting applies only when scan type is "interlaced." It
+    #   controls whether coding is on a field basis or a frame basis. (When
+    #   the video is progressive, the coding is always on a frame basis.)
+    #   enabled: Always code on a field basis, so that odd and even sets of
+    #   fields are coded separately. disabled: Code the two sets of fields
+    #   separately (on a field basis) or together (on a frame basis, using
+    #   PAFF or MBAFF), depending on what is most appropriate for the
+    #   content.
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -6379,6 +6425,7 @@ module Aws::MediaLive
       :entropy_encoding,
       :fixed_afd,
       :flicker_aq,
+      :force_field_pictures,
       :framerate_control,
       :framerate_denominator,
       :framerate_numerator,
@@ -7710,6 +7757,10 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         automatic_input_failover_settings: {
+    #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #           secondary_input_id: "__string", # required
+    #         },
     #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
@@ -7785,6 +7836,11 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] automatic_input_failover_settings
+    #   User-specified settings for defining what the conditions are for
+    #   declaring the input unhealthy and failing over to a different input.
+    #   @return [Types::AutomaticInputFailoverSettings]
+    #
     # @!attribute [rw] input_attachment_name
     #   User-specified name for the attachment. This is required if the user
     #   wants to use this input in an input switch action.
@@ -7801,6 +7857,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment AWS API Documentation
     #
     class InputAttachment < Struct.new(
+      :automatic_input_failover_settings,
       :input_attachment_name,
       :input_id,
       :input_settings)
@@ -14713,6 +14770,7 @@ module Aws::MediaLive
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -14795,6 +14853,10 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             automatic_input_failover_settings: {
+    #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #               secondary_input_id: "__string", # required
+    #             },
     #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
@@ -15368,6 +15430,7 @@ module Aws::MediaLive
     #           entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #           force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -15490,6 +15553,7 @@ module Aws::MediaLive
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
     #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #             force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,

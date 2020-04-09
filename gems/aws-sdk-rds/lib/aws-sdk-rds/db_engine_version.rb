@@ -103,13 +103,19 @@ module Aws::RDS
       data[:supports_log_exports_to_cloudwatch_logs]
     end
 
-    # Indicates whether the database engine version supports Read Replicas.
+    # Indicates whether the database engine version supports read replicas.
     # @return [Boolean]
     def supports_read_replica
       data[:supports_read_replica]
     end
 
     # A list of the supported DB engine modes.
+    #
+    # <note markdown="1"> `global` engine mode only applies for global database clusters created
+    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    # the clusters in a global database use `provisioned` engine mode.
+    #
+    #  </note>
     # @return [Array<String>]
     def supported_engine_modes
       data[:supported_engine_modes]
