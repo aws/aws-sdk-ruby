@@ -48,7 +48,7 @@ module Aws
           when true, false then { bool: obj }
           when nil then { null: true }
           else
-            msg = "unsupported type, expected Hash, Array, Set, String, Numeric, "\
+            msg = 'unsupported type, expected Hash, Array, Set, String, Numeric, '\
                   "IO, true, false, or nil, got #{obj.class.name}"
             raise ArgumentError, msg
           end
@@ -64,7 +64,7 @@ module Aws
           when Numeric then { ns: set.map(&:to_s) }
           when StringIO, IO then { bs: set.to_a }
           else
-            msg = "set types only support String, Numeric, or IO objects"
+            msg = 'set types only support String, Numeric, or IO objects'
             raise ArgumentError, msg
           end
         end

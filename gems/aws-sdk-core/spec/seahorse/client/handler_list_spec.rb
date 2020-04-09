@@ -86,22 +86,22 @@ module Seahorse
         describe 'errors' do
 
           it 'raises an error if :step is not valid' do
-            msg = "invalid :step `:bogus', must be one of :initialize, "\
-                  ":validate, :build, :sign or :send"
+            msg = 'invalid :step `:bogus\', must be one of :initialize, '\
+                  ':validate, :build, :sign or :send'
             expect {
               handlers.add('handler', step: :bogus)
             }.to raise_error(ArgumentError, msg)
           end
 
           it 'raises an error if :priority is less than 0' do
-            msg = "invalid :priority `-1', must be between 0 and 99"
+            msg = 'invalid :priority `-1\', must be between 0 and 99'
             expect {
               handlers.add('handler', priority: -1)
             }.to raise_error(ArgumentError, msg)
           end
 
           it 'raises an error if :priority is greater than 99' do
-            msg = "invalid :priority `100', must be between 0 and 99"
+            msg = 'invalid :priority `100\', must be between 0 and 99'
             expect {
               handlers.add('handler', priority: 100)
             }.to raise_error(ArgumentError, msg)

@@ -324,7 +324,7 @@ module Aws::EC2
       value = args[0] || options.delete(:id)
       case value
       when String then value
-      when nil then raise ArgumentError, "missing required option :id"
+      when nil then raise ArgumentError, 'missing required option :id'
       else
         msg = "expected :id to be a String, got #{value.class}"
         raise ArgumentError, msg
@@ -333,8 +333,8 @@ module Aws::EC2
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "\
-              "yielding the waiter is deprecated"
+        msg = 'pass options to configure the waiter; '\
+              'yielding the waiter is deprecated'
         warn(msg)
         @waiter_block_warned = true
       end

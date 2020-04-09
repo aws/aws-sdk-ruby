@@ -87,7 +87,7 @@ module Seahorse
           @step = step
         else
           msg = "invalid :step `%s', must be one of :initialize, :validate, "\
-                ":build, :sign or :send"
+                ':build, :sign or :send'
           raise ArgumentError, msg % step.inspect
         end
       end

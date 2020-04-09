@@ -34,7 +34,7 @@ module Seahorse
           if endpoint.nil? or URI::HTTP === endpoint or URI::HTTPS === endpoint
             @endpoint = endpoint
           else
-            msg = "invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, "\
+            msg = 'invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, '\
                   "got #{endpoint.inspect}"
             raise ArgumentError, msg
           end

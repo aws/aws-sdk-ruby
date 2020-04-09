@@ -814,7 +814,7 @@ module Aws::EC2
     def accepted_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "accepter-vpc-info.vpc-id",
+          name: 'accepter-vpc-info.vpc-id',
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
@@ -1145,7 +1145,7 @@ module Aws::EC2
     def instances(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "vpc-id",
+          name: 'vpc-id',
           values: [@id]
         }])
         resp = @client.describe_instances(options)
@@ -1215,7 +1215,7 @@ module Aws::EC2
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "attachment.vpc-id",
+          name: 'attachment.vpc-id',
           values: [@id]
         }])
         resp = @client.describe_internet_gateways(options)
@@ -1313,7 +1313,7 @@ module Aws::EC2
     def network_acls(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "vpc-id",
+          name: 'vpc-id',
           values: [@id]
         }])
         resp = @client.describe_network_acls(options)
@@ -1470,7 +1470,7 @@ module Aws::EC2
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "vpc-id",
+          name: 'vpc-id',
           values: [@id]
         }])
         resp = @client.describe_network_interfaces(options)
@@ -1555,7 +1555,7 @@ module Aws::EC2
     def requested_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "requester-vpc-info.vpc-id",
+          name: 'requester-vpc-info.vpc-id',
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
@@ -1671,7 +1671,7 @@ module Aws::EC2
     def route_tables(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "vpc-id",
+          name: 'vpc-id',
           values: [@id]
         }])
         resp = @client.describe_route_tables(options)
@@ -1804,7 +1804,7 @@ module Aws::EC2
     def security_groups(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "vpc-id",
+          name: 'vpc-id',
           values: [@id]
         }])
         resp = @client.describe_security_groups(options)
@@ -1898,7 +1898,7 @@ module Aws::EC2
     def subnets(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, filters: [{
-          name: "vpc-id",
+          name: 'vpc-id',
           values: [@id]
         }])
         resp = @client.describe_subnets(options)
@@ -1930,7 +1930,7 @@ module Aws::EC2
       value = args[0] || options.delete(:id)
       case value
       when String then value
-      when nil then raise ArgumentError, "missing required option :id"
+      when nil then raise ArgumentError, 'missing required option :id'
       else
         msg = "expected :id to be a String, got #{value.class}"
         raise ArgumentError, msg
@@ -1939,8 +1939,8 @@ module Aws::EC2
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "\
-              "yielding the waiter is deprecated"
+        msg = 'pass options to configure the waiter; '\
+              'yielding the waiter is deprecated'
         warn(msg)
         @waiter_block_warned = true
       end

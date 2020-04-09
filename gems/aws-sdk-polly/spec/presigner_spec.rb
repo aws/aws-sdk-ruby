@@ -40,15 +40,15 @@ module Aws
 
         it 'can presign #synthesize_speech correctly' do
           expected_url =
-            "https://polly.us-west-2.amazonaws.com/v1/speech?"\
-            "LexiconNames=mno&LexiconNames=abc&OutputFormat=mp3&SampleRate=128&"\
-            "Text=Hello%20World&TextType=text&VoiceId=Ewa&"\
-            "X-Amz-Algorithm=AWS4-HMAC-SHA256&"\
-            "X-Amz-Credential=akid%2F20160101%2F"\
-            "us-west-2%2Fpolly%2Faws4_request&"\
-            "X-Amz-Date=20160101T112233Z&X-Amz-Expires=900&"\
-            "X-Amz-SignedHeaders=host&"\
-            "X-Amz-Signature=956ef486286b12f43ffc02dd09eae03cfea4cd8dfb30e0fab3f23de4e131195a"
+            'https://polly.us-west-2.amazonaws.com/v1/speech?'\
+            'LexiconNames=mno&LexiconNames=abc&OutputFormat=mp3&SampleRate=128&'\
+            'Text=Hello%20World&TextType=text&VoiceId=Ewa&'\
+            'X-Amz-Algorithm=AWS4-HMAC-SHA256&'\
+            'X-Amz-Credential=akid%2F20160101%2F'\
+            'us-west-2%2Fpolly%2Faws4_request&'\
+            'X-Amz-Date=20160101T112233Z&X-Amz-Expires=900&'\
+            'X-Amz-SignedHeaders=host&'\
+            'X-Amz-Signature=956ef486286b12f43ffc02dd09eae03cfea4cd8dfb30e0fab3f23de4e131195a'
 
           pre = Presigner.new(region: region, credentials: credentials)
           params = {

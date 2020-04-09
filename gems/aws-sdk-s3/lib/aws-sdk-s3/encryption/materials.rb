@@ -32,14 +32,14 @@ module Aws
             if [32, 24, 16].include?(key.bytesize)
               key
             else
-              msg = "invalid key, symmetric key required to be 16, 24, or "\
-                    "32 bytes in length, saw length " + key.bytesize.to_s
+              msg = 'invalid key, symmetric key required to be 16, 24, or '\
+                    '32 bytes in length, saw length ' + key.bytesize.to_s
               raise ArgumentError, msg
             end
           else
-            msg = "invalid encryption key, expected an OpenSSL::PKey::RSA key "\
-                  "(for asymmetric encryption) or a String (for symmetric "\
-                  "encryption)."
+            msg = 'invalid encryption key, expected an OpenSSL::PKey::RSA key '\
+                  '(for asymmetric encryption) or a String (for symmetric '\
+                  'encryption).'
             raise ArgumentError, msg
           end
         end
@@ -48,7 +48,7 @@ module Aws
           Json.load(description)
           description
         rescue Json::ParseError, EncodingError
-          msg = "expected description to be a valid JSON document string"
+          msg = 'expected description to be a valid JSON document string'
           raise ArgumentError, msg
         end
 

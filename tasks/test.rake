@@ -11,7 +11,7 @@ end
 desc 'Executes every spec file, one at a time.'
 task 'test:spec:each' do
   failures = []
-  ::Dir.glob('**/spec/**/*_spec.rb').reject(&vendor_selector).each do |spec_file|
+  Dir.glob('**/spec/**/*_spec.rb').reject(&vendor_selector).each do |spec_file|
     sh("bundle exec rspec #{spec_file}") do |ok, _|
       failures << spec_file unless ok
     end
@@ -38,7 +38,7 @@ end
 
 desc 'Execute spec tests.'
 task 'test:spec' do
-  ::Dir.glob('**/spec').reject(&vendor_selector).tap do |spec_file_list|
+  Dir.glob('**/spec').reject(&vendor_selector).tap do |spec_file_list|
     sh("bundle exec rspec #{spec_file_list.join(' ')}")
   end
 end
