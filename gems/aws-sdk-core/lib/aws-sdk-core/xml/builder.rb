@@ -11,7 +11,7 @@ module Aws
         @xml = options[:target] || []
         indent = options[:indent] || '  '
         pad = options[:pad] || ''
-        @builder = DocBuilder.new(target:@xml, indent:indent, pad:pad)
+        @builder = DocBuilder.new(target: @xml, indent: indent, pad: pad)
       end
 
       def to_xml(params)

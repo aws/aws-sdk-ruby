@@ -2,7 +2,7 @@ language: ruby
 
 before_install:
   - gem install bundler -v '< 2'
-  - "find . -type f -iname '*.rb' -exec sed -i '1s/^/# frozen_string_literal: true\\n\\n/' \"{}\" +;"
+  - "find . -type f -iname '*.rb' -exec sed -i '1s/^/# frozen_string_literal: true\\n/' \"{}\" +;"
 
 dist: trusty
 

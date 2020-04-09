@@ -113,7 +113,7 @@ module Aws
 
       def read_to_part_body(read_pipe)
         return if read_pipe.closed?
-        temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new
+        temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new(String.new)
         temp_io.binmode
         bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
         temp_io.rewind

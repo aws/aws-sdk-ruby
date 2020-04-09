@@ -35,7 +35,7 @@ module Seahorse
             @endpoint = endpoint
           else
             msg = "invalid endpoint, expected URI::HTTP, URI::HTTPS, or nil, "\
-              "got #{endpoint.inspect}"
+                  "got #{endpoint.inspect}"
             raise ArgumentError, msg
           end
         end
@@ -55,7 +55,7 @@ module Seahorse
 
         # @param [#read, #size, #rewind] io
         def body=(io)
-          @body =case io
+          @body = case io
             when nil then StringIO.new('')
             when String then StringIO.new(io)
             else io
