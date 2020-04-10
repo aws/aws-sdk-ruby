@@ -33,7 +33,6 @@ describe 'ensure no hard-coded region' do
 
       file = File.open(path, 'r', encoding: 'UTF-8', &:read)
       lines = file.lines.to_a
-      lines_inserted = 2 # for string immutability tests
 
       it "#{path} has no hard-coded region" do
         lines.each_with_index do |val, idx|
@@ -42,9 +41,7 @@ describe 'ensure no hard-coded region' do
 
           # skip known whitelists
           next if whitelist[key] &&
-                  (((idx - lines_inserted)..idx).include?(
-                    whitelist[key][File.basename(path)]
-                  ) ||
+                  (whitelist[key][File.basename(path)] == idx ||
                   whitelist[key][File.basename(path)] == 'SKIP_FILE')
 
           # If we use \w+ we will get false positives for uid fields
