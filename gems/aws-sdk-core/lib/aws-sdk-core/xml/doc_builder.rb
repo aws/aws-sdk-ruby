@@ -6,7 +6,11 @@ module Aws
       # @option options [String] :pad ('')
       # @option options [String] :indent ('')
       def initialize(options = {})
-        @target = options[:target] || String.new
+        @target = options[:target] || (
+          # The String has to be mutable
+          # because @target implements `<<` method.
+          String.new
+        )
         @indent = options[:indent] || ''
         @pad = options[:pad] || ''
         @end_of_line = @indent == '' ? '' : "\n"
