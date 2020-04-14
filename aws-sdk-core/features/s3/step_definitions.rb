@@ -258,7 +258,7 @@ When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |conten
 end
 
 When(/^the response should have a (\d+) status code$/) do |code|
-  expect(@resp.code).to eq(code)
+  expect(@resp.code.to_i).to eq(code)
 end
 
 Then(/^the object "([^"]*)" should have a "([^"]*)" storage class$/) do |key, sc|
