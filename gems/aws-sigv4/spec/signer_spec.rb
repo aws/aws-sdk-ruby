@@ -115,21 +115,66 @@ module Aws
           expect(creds.session_token).to eq('token')
         end
 
+        it 'accepts empty credentials' do
+          signer = Signer.new(options.merge(
+            access_key_id: '',
+            secret_access_key: ''
+          ))
+          creds = signer.credentials_provider.credentials
+          expect(creds.access_key_id).to eq('')
+          expect(creds.secret_access_key).to eq('')
+        end
+
       end
 
       context '#sign_request' do
 
-        it 'populates the Host header' do
-          signature = Signer.new(options).sign_request(
+        let(:request) do
+          {
             http_method: 'GET',
             url: 'http://domain.com'
-          )
+          }
+        end
+
+        it 'populates the Host header' do
+          signature = Signer.new(options).sign_request(request)
+
           expect(signature.headers['host']).to eq('domain.com')
+        end
+
+        context 'when credentials are nil' do
+          let(:creds) { double(access_key_id: nil, secret_access_key: nil) }
+
+          it 'raises a MissingCredentialsError' do
+            signer = Signer.new(
+              options.merge(
+                credentials_provider: StaticCredentialsProvider.new(
+                  credentials: creds
+                )
+              ))
+            expect { signer.sign_request(request) }
+              .to raise_error(Errors::MissingCredentialsError)
+          end
+        end
+
+        context 'when credentials are empty' do
+          let(:creds) { double(access_key_id: '', secret_access_key: '') }
+
+          it 'raises a MissingCredentialsError' do
+            signer = Signer.new(
+              options.merge(
+                credentials_provider: StaticCredentialsProvider.new(
+                  credentials: creds
+                )
+              ))
+            expect { signer.sign_request(request) }
+              .to raise_error(Errors::MissingCredentialsError)
+          end
         end
 
         context 'when URI schema is known' do
 
-          it 'ommits port in Host when port not provided' do
+          it 'omits port in Host when port not provided' do
             signature = Signer.new(options).sign_request(
               http_method: 'GET',
               url: 'https://domain.com'
@@ -137,7 +182,7 @@ module Aws
             expect(signature.headers['host']).to eq('domain.com')
           end
 
-          it 'ommits port in Host when default port and uri port are the same' do
+          it 'omits port in Host when default port and uri port are the same' do
             signature = Signer.new(options).sign_request(
               http_method: 'GET',
               url: 'https://domain.com:443'
@@ -157,7 +202,7 @@ module Aws
 
         context 'when URI schema is unknown' do
 
-          it 'ommits port in Host when uri port not provided' do
+          it 'omits port in Host when uri port not provided' do
             signature = Signer.new(options).sign_request(
               http_method: 'GET',
               url: 'abcd://domain.com'
