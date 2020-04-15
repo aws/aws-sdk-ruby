@@ -3,15 +3,21 @@ require_relative '../spec_helper'
 module Aws
   module S3
     describe Object do
+      let(:client) do
+        Aws::S3::Client.new(
+          region: 'us-east-1',
+          access_key_id: 'ACCESS_KEY_ID',
+          secret_access_key: 'SECRET_ACCESS_KEY'
+        )
+      end
+
       describe '#presigned_url' do
         # from http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
         it 'generates a valid presigned url' do
           obj = Object.new(
             bucket_name: 'examplebucket',
             key: 'test.txt',
-            access_key_id: 'ACCESS_KEY_ID',
-            secret_access_key: 'SECRET_ACCESS_KEY',
-            region: 'us-east-1'
+            client: client
           )
 
           now = Time.parse('20130524T000000Z')
@@ -30,27 +36,23 @@ module Aws
           obj = Object.new(
             bucket_name: 'my.bucket.com',
             key: 'test.txt',
-            access_key_id: 'ACCESS_KEY_ID',
-            secret_access_key: 'SECRET_ACCESS_KEY',
-            region: 'us-east-1'
+            client: client
           )
 
           url = obj.presigned_url(:get, virtual_host: true)
-          expect(url).to match(%r{^http://my\.bucket\.com(:80)?/})
+          expect(url).to match(%r{^https://my\.bucket\.com(:443)?/})
         end
 
         it 'rejects empty keys' do
           obj = Object.new(
             'bucket-name',
             '',
-            region: 'us-west-1',
-            access_key_id: 'ACCESS_KEY_ID',
-            secret_access_key: 'SECRET_ACCESS_KEY'
+            client: client
           )
           expect(obj.key).to eq('')
           expect do
             obj.presigned_url(:get)
-          end.to raise_error(ArgumentError, /key must not be blank/)
+          end.to raise_error(ArgumentError)
         end
       end
     end
