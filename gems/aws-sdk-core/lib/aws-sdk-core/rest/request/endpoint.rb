@@ -35,15 +35,10 @@ module Aws
         end
 
         def param_value_for_placeholder(placeholder, params)
-          name = param_name(placeholder)
-          value = params[name].to_s
-          raise ArgumentError, ":#{name} must not be empty" if value.empty?
-
-          if placeholder.include?('+')
-            value.gsub(/[^\/]+/) { |v| escape(v) }
-          else
+          value = params[param_name(placeholder)].to_s
+          placeholder.include?('+') ?
+            value.gsub(/[^\/]+/) { |v| escape(v) } :
             escape(value)
-          end
         end
 
         def param_name(placeholder)

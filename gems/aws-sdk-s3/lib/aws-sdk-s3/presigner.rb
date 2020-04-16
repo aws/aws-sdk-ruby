@@ -128,6 +128,9 @@ module Aws
       private
 
       def _presigned_request(method, params, hoist = true)
+        if params[:key].nil? or params[:key] == ''
+          raise ArgumentError, ":key must not be blank"
+        end
         virtual_host = params.delete(:virtual_host)
         time = params.delete(:time)
         unsigned_headers = unsigned_headers(params)

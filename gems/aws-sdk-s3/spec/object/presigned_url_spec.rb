@@ -43,7 +43,6 @@ module Aws
           expect(url).to match(%r{^https://my\.bucket\.com(:443)?/})
         end
 
-        # Only tests validation in Aws::Rest::Request::Endpoint
         it 'rejects empty keys' do
           obj = Object.new(
             'bucket-name',
@@ -53,7 +52,7 @@ module Aws
           expect(obj.key).to eq('')
           expect do
             obj.presigned_url(:get)
-          end.to raise_error(ArgumentError, /:key must not be empty/)
+          end.to raise_error(ArgumentError, /:key must not be blank/)
         end
       end
     end
