@@ -77,11 +77,15 @@ module Aws
         url
       end
 
-      # Allows you to create presigned URLs for S3 operations.
+      # Allows you to create presigned URL requests for S3 operations. This
+      # method returns a tuple containing the URL and the signed X-amz-* headers
+      # to be used with the presigned url.
       #
       # @example
       #  signer = Aws::S3::Presigner.new
-      #  url = signer.presigned_url(:get_object, bucket: "bucket", key: "key")
+      #  url, headers = signer.presigned_request(
+      #    :get_object, bucket: "bucket", key: "key"
+      #  )
       #
       # @param [Symbol] :method Symbolized method name of the operation you want
       #   to presign.

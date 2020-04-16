@@ -52,7 +52,7 @@ module Aws
           expect(obj.key).to eq('')
           expect do
             obj.presigned_url(:get)
-          end.to raise_error(ArgumentError)
+          end.to raise_error(ArgumentError, /key must not be blank/)
         end
       end
     end
