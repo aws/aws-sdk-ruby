@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Raise errors when credentials are not set (nil or empty)
+
 1.1.1 (2020-02-26)
 ------------------
 

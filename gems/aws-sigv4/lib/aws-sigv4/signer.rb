@@ -654,9 +654,7 @@ module Aws
 
       def fetch_credentials
         credentials = @credentials_provider.credentials
-        # ensure credentials are not blank
-        if credentials.access_key_id =~/[^[:space:]]/ &&
-           credentials.secret_access_key =~ /[^[:space:]]/
+        if credentials.set?
           credentials
         else
           raise Errors::MissingCredentialsError,

@@ -142,23 +142,8 @@ module Aws
           expect(signature.headers['host']).to eq('domain.com')
         end
 
-        context 'when credentials are nil' do
-          let(:creds) { double(access_key_id: nil, secret_access_key: nil) }
-
-          it 'raises a MissingCredentialsError' do
-            signer = Signer.new(
-              options.merge(
-                credentials_provider: StaticCredentialsProvider.new(
-                  credentials: creds
-                )
-              ))
-            expect { signer.sign_request(request) }
-              .to raise_error(Errors::MissingCredentialsError)
-          end
-        end
-
-        context 'when credentials are empty' do
-          let(:creds) { double(access_key_id: '', secret_access_key: '') }
+        context 'when credentials are not set' do
+          let(:creds) { double(set?: false) }
 
           it 'raises a MissingCredentialsError' do
             signer = Signer.new(
