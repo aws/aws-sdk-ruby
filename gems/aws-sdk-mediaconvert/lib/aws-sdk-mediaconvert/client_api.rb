@@ -75,6 +75,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionDestinationType = Shapes::StringShape.new(name: 'CaptionDestinationType')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
+    CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
     CaptionSourceType = Shapes::StringShape.new(name: 'CaptionSourceType')
     ChannelMapping = Shapes::StructureShape.new(name: 'ChannelMapping')
@@ -528,6 +529,7 @@ module Aws::MediaConvert
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
+    __integerMin1Max60000 = Shapes::IntegerShape.new(name: '__integerMin1Max60000')
     __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
     __integerMin22050Max48000 = Shapes::IntegerShape.new(name: '__integerMin22050Max48000')
     __integerMin24Max60000 = Shapes::IntegerShape.new(name: '__integerMin24Max60000')
@@ -794,6 +796,10 @@ module Aws::MediaConvert
     CaptionSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionSelector.add_member(:source_settings, Shapes::ShapeRef.new(shape: CaptionSourceSettings, location_name: "sourceSettings"))
     CaptionSelector.struct_class = Types::CaptionSelector
+
+    CaptionSourceFramerate.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
+    CaptionSourceFramerate.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max60000, location_name: "framerateNumerator"))
+    CaptionSourceFramerate.struct_class = Types::CaptionSourceFramerate
 
     CaptionSourceSettings.add_member(:ancillary_source_settings, Shapes::ShapeRef.new(shape: AncillarySourceSettings, location_name: "ancillarySourceSettings"))
     CaptionSourceSettings.add_member(:dvb_sub_source_settings, Shapes::ShapeRef.new(shape: DvbSubSourceSettings, location_name: "dvbSubSourceSettings"))
@@ -1099,6 +1105,7 @@ module Aws::MediaConvert
     FileGroupSettings.struct_class = Types::FileGroupSettings
 
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
+    FileSourceSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: CaptionSourceFramerate, location_name: "framerate"))
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.struct_class = Types::FileSourceSettings

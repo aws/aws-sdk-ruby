@@ -30,7 +30,7 @@ module Aws::AugmentedAIRuntime
     #       }
     #
     # @!attribute [rw] human_loop_name
-    #   The name of the human loop you want to delete.
+    #   The name of the human loop that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/DeleteHumanLoopRequest AWS API Documentation
@@ -52,7 +52,7 @@ module Aws::AugmentedAIRuntime
     #       }
     #
     # @!attribute [rw] human_loop_name
-    #   The unique name of the human loop.
+    #   The name of the human loop that you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/DescribeHumanLoopRequest AWS API Documentation
@@ -67,20 +67,22 @@ module Aws::AugmentedAIRuntime
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
-    #   The reason why a human loop has failed. The failure reason is
-    #   returned when the human loop status is `Failed`.
+    #   The reason why a human loop failed. The failure reason is returned
+    #   when the status of the human loop is `Failed`.
     #   @return [String]
     #
     # @!attribute [rw] failure_code
-    #   A failure code denoting a specific type of failure.
+    #   A failure code that identifies the type of failure.
     #   @return [String]
     #
     # @!attribute [rw] human_loop_status
-    #   The status of the human loop. Valid values:
+    #   The status of the human loop.
     #   @return [String]
     #
     # @!attribute [rw] human_loop_name
-    #   The name of the human loop.
+    #   The name of the human loop. The name must be lowercase, unique
+    #   within the Region in your account, and can have up to 63 characters.
+    #   Valid characters: a-z, 0-9, and - (hyphen).
     #   @return [String]
     #
     # @!attribute [rw] human_loop_arn
@@ -92,7 +94,8 @@ module Aws::AugmentedAIRuntime
     #   @return [String]
     #
     # @!attribute [rw] human_loop_output
-    #   An object containing information about the output of the human loop.
+    #   An object that contains information about the output of the human
+    #   loop.
     #   @return [Types::HumanLoopOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/DescribeHumanLoopResponse AWS API Documentation
@@ -176,7 +179,7 @@ module Aws::AugmentedAIRuntime
     #   @return [String]
     #
     # @!attribute [rw] human_loop_status
-    #   The status of the human loop. Valid values:
+    #   The status of the human loop.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -185,11 +188,12 @@ module Aws::AugmentedAIRuntime
     #
     # @!attribute [rw] failure_reason
     #   The reason why the human loop failed. A failure reason is returned
-    #   only when the status of the human loop is `Failed`.
+    #   when the status of the human loop is `Failed`.
     #   @return [String]
     #
     # @!attribute [rw] flow_definition_arn
-    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   The Amazon Resource Name (ARN) of the flow definition used to
+    #   configure the human loop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/HumanLoopSummary AWS API Documentation
@@ -203,7 +207,8 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # Your request could not be processed.
+    # We couldn't process your request because of an issue with the server.
+    # Try again later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -242,19 +247,19 @@ module Aws::AugmentedAIRuntime
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   An optional value that specifies whether you want the results sorted
-    #   in `Ascending` or `Descending` order.
+    #   Optional. The order for displaying results. Valid values:
+    #   `Ascending` and `Descending`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A token to resume pagination.
+    #   A token to display the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The total number of items to return. If the total number of
     #   available items is more than the value specified in `MaxResults`,
-    #   then a `NextToken` will be provided in the output that you can use
-    #   to resume pagination.
+    #   then a `NextToken` is returned in the output. You can use this token
+    #   to display the next page of results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/ListHumanLoopsRequest AWS API Documentation
@@ -270,11 +275,11 @@ module Aws::AugmentedAIRuntime
     end
 
     # @!attribute [rw] human_loop_summaries
-    #   An array of objects containing information about the human loops.
+    #   An array of objects that contain information about the human loops.
     #   @return [Array<Types::HumanLoopSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to resume pagination.
+    #   A token to display the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/ListHumanLoopsResponse AWS API Documentation
@@ -285,7 +290,7 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # We were unable to find the requested resource.
+    # We couldn't find the requested resource.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -297,9 +302,8 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # You have exceeded your service quota. To perform the requested action,
-    # remove some of the relevant resources, or request a service quota
-    # increase.
+    # You exceeded your service quota. Delete some resources or request an
+    # increase in your service quota.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -330,15 +334,18 @@ module Aws::AugmentedAIRuntime
     #   @return [String]
     #
     # @!attribute [rw] flow_definition_arn
-    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   The Amazon Resource Name (ARN) of the flow definition associated
+    #   with this human loop.
     #   @return [String]
     #
     # @!attribute [rw] human_loop_input
-    #   An object containing information about the human loop.
+    #   An object that contains information about the human loop.
     #   @return [Types::HumanLoopInput]
     #
     # @!attribute [rw] data_attributes
-    #   Attributes of the data specified by the customer.
+    #   Attributes of the specified data. Use `DataAttributes` to specify if
+    #   your data is free of personally identifiable information and/or free
+    #   of adult content.
     #   @return [Types::HumanLoopDataAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/StartHumanLoopRequest AWS API Documentation
@@ -370,7 +377,7 @@ module Aws::AugmentedAIRuntime
     #       }
     #
     # @!attribute [rw] human_loop_name
-    #   The name of the human loop you want to stop.
+    #   The name of the human loop that you want to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/StopHumanLoopRequest AWS API Documentation
@@ -384,7 +391,7 @@ module Aws::AugmentedAIRuntime
     #
     class StopHumanLoopResponse < Aws::EmptyStructure; end
 
-    # Your request has exceeded the allowed amount of requests.
+    # You exceeded the maximum number of requests.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -396,7 +403,7 @@ module Aws::AugmentedAIRuntime
       include Aws::Structure
     end
 
-    # Your request was not valid. Check the syntax and try again.
+    # The request isn't valid. Check the syntax and try again.
     #
     # @!attribute [rw] message
     #   @return [String]

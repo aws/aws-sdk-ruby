@@ -11,6 +11,7 @@ module Aws::MediaTailor
 
     include Seahorse::Model
 
+    AvailSuppression = Shapes::StructureShape.new(name: 'AvailSuppression')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     CdnConfiguration = Shapes::StructureShape.new(name: 'CdnConfiguration')
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
@@ -25,6 +26,7 @@ module Aws::MediaTailor
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LivePreRollConfiguration = Shapes::StructureShape.new(name: 'LivePreRollConfiguration')
+    Mode = Shapes::StringShape.new(name: 'Mode')
     OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
     PlaybackConfiguration = Shapes::StructureShape.new(name: 'PlaybackConfiguration')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
@@ -44,6 +46,10 @@ module Aws::MediaTailor
     __string = Shapes::StringShape.new(name: '__string')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
+
+    AvailSuppression.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
+    AvailSuppression.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "Value"))
+    AvailSuppression.struct_class = Types::AvailSuppression
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -70,6 +76,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationRequest.struct_class = Types::GetPlaybackConfigurationRequest
 
     GetPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
+    GetPlaybackConfigurationResponse.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
     GetPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     GetPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
@@ -122,6 +129,7 @@ module Aws::MediaTailor
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
 
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
+    PutPlaybackConfigurationRequest.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
     PutPlaybackConfigurationRequest.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:personalization_threshold_seconds, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "PersonalizationThresholdSeconds"))
     PutPlaybackConfigurationRequest.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfigurationForPut, location_name: "DashConfiguration"))
@@ -134,6 +142,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.struct_class = Types::PutPlaybackConfigurationRequest
 
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
+    PutPlaybackConfigurationResponse.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
     PutPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))

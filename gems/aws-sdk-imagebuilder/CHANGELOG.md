@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-04-16)
+------------------
+
+* Feature - This release includes support for additional OS Versions within EC2 Image Builder.
+
 1.3.0 (2020-03-09)
 ------------------
 

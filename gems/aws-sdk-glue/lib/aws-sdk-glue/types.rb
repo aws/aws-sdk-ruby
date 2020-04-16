@@ -6799,7 +6799,7 @@ module Aws::Glue
     #
     #       {
     #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
+    #         database_name: "NameString",
     #         pattern: "NameString", # required
     #         next_token: "Token",
     #         max_results: 1,

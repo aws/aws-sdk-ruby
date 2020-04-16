@@ -4490,9 +4490,8 @@ module Aws::RDS
     # @option params [required, String] :engine_family
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
-    #   it interprets network traffic to and from the database. Currently,
-    #   this value is always `MYSQL`. The engine family applies to both RDS
-    #   MySQL and Aurora MySQL.
+    #   it interprets network traffic to and from the database. The engine
+    #   family applies to MySQL and PostgreSQL for both RDS and Aurora.
     #
     # @option params [required, Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
@@ -4538,7 +4537,7 @@ module Aws::RDS
     #
     #   resp = client.create_db_proxy({
     #     db_proxy_name: "String", # required
-    #     engine_family: "MYSQL", # required, accepts MYSQL
+    #     engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL
     #     auth: [ # required
     #       {
     #         description: "String",
@@ -4566,7 +4565,7 @@ module Aws::RDS
     #
     #   resp.db_proxy.db_proxy_name #=> String
     #   resp.db_proxy.db_proxy_arn #=> String
-    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
@@ -5991,7 +5990,7 @@ module Aws::RDS
     #
     #   resp.db_proxy.db_proxy_name #=> String
     #   resp.db_proxy.db_proxy_arn #=> String
-    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
@@ -8305,7 +8304,7 @@ module Aws::RDS
     #   resp.db_proxies #=> Array
     #   resp.db_proxies[0].db_proxy_name #=> String
     #   resp.db_proxies[0].db_proxy_arn #=> String
-    #   resp.db_proxies[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxies[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxies[0].engine_family #=> String
     #   resp.db_proxies[0].vpc_security_group_ids #=> Array
     #   resp.db_proxies[0].vpc_security_group_ids[0] #=> String
@@ -8479,6 +8478,9 @@ module Aws::RDS
     #   resp.targets[0].rds_resource_id #=> String
     #   resp.targets[0].port #=> Integer
     #   resp.targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
+    #   resp.targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY"
+    #   resp.targets[0].target_health.description #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargets AWS API Documentation
@@ -12873,7 +12875,7 @@ module Aws::RDS
     #
     #   resp.db_proxy.db_proxy_name #=> String
     #   resp.db_proxy.db_proxy_arn #=> String
-    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
@@ -14199,6 +14201,9 @@ module Aws::RDS
     #   resp.db_proxy_targets[0].rds_resource_id #=> String
     #   resp.db_proxy_targets[0].port #=> Integer
     #   resp.db_proxy_targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.db_proxy_targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
+    #   resp.db_proxy_targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY"
+    #   resp.db_proxy_targets[0].target_health.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargets AWS API Documentation
     #
@@ -17969,17 +17974,19 @@ module Aws::RDS
     #   provided, all the snapshot data is exported. Valid values are the
     #   following:
     #
-    #   * `database` - Export all the data of the snapshot.
+    #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #   * `database.table` *table-name* - Export a table of the snapshot. This
+    #     format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora
+    #     MySQL.
     #
-    #   * `database.schema [schema-name]` - Export a database schema of the
-    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema` *schema-name* - Export a database schema of the
+    #     snapshot. This format is valid only for RDS for PostgreSQL and
+    #     Aurora PostgreSQL.
     #
-    #   * `database.schema.table [table-name]` - Export a table of the
-    #     database schema. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema.table` *table-name* - Export a table of the
+    #     database schema. This format is valid only for RDS for PostgreSQL
+    #     and Aurora PostgreSQL.
     #
     # @return [Types::ExportTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18379,7 +18386,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

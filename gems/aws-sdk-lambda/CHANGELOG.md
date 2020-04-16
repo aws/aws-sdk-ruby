@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-04-16)
+------------------
+
+* Feature - Sample code for AWS Lambda operations
+
 1.38.0 (2020-03-31)
 ------------------
 

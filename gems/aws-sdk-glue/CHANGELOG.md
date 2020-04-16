@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for querying GetUserDefinedFunctions API without databaseName.
+
 1.51.0 (2020-03-31)
 ------------------
 

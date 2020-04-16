@@ -8,6 +8,31 @@
 module Aws::MediaTailor
   module Types
 
+    # @note When making an API call, you may pass AvailSuppression
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
+    #         value: "__string",
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Sets the mode for avail suppression, also known as ad suppression.
+    #   By default, ad suppression is off and all ad breaks are filled by
+    #   MediaTailor with ads or slate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AvailSuppression AWS API Documentation
+    #
+    class AvailSuppression < Struct.new(
+      :mode,
+      :value)
+      include Aws::Structure
+    end
+
     # One of the parameters in the request is invalid.
     #
     # @!attribute [rw] message
@@ -184,6 +209,10 @@ module Aws::MediaTailor
     #   maximum length is 25,000 characters.
     #   @return [String]
     #
+    # @!attribute [rw] avail_suppression
+    #   The configuration for Avail Suppression.
+    #   @return [Types::AvailSuppression]
+    #
     # @!attribute [rw] cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
     #   Amazon CloudFront, for content and ad segment management.
@@ -254,6 +283,7 @@ module Aws::MediaTailor
     #
     class GetPlaybackConfigurationResponse < Struct.new(
       :ad_decision_server_url,
+      :avail_suppression,
       :cdn_configuration,
       :personalization_threshold_seconds,
       :dash_configuration,
@@ -454,6 +484,10 @@ module Aws::MediaTailor
     #
     #       {
     #         ad_decision_server_url: "__string",
+    #         avail_suppression: {
+    #           mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
+    #           value: "__string",
+    #         },
     #         cdn_configuration: {
     #           ad_segment_url_prefix: "__string",
     #           content_segment_url_prefix: "__string",
@@ -484,6 +518,10 @@ module Aws::MediaTailor
     #   Alternately, for testing you can provide a static VAST URL. The
     #   maximum length is 25,000 characters.
     #   @return [String]
+    #
+    # @!attribute [rw] avail_suppression
+    #   The configuration for Avail Suppression.
+    #   @return [Types::AvailSuppression]
     #
     # @!attribute [rw] cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
@@ -537,6 +575,7 @@ module Aws::MediaTailor
     #
     class PutPlaybackConfigurationRequest < Struct.new(
       :ad_decision_server_url,
+      :avail_suppression,
       :cdn_configuration,
       :personalization_threshold_seconds,
       :dash_configuration,
@@ -551,6 +590,9 @@ module Aws::MediaTailor
 
     # @!attribute [rw] ad_decision_server_url
     #   @return [String]
+    #
+    # @!attribute [rw] avail_suppression
+    #   @return [Types::AvailSuppression]
     #
     # @!attribute [rw] cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
@@ -597,6 +639,7 @@ module Aws::MediaTailor
     #
     class PutPlaybackConfigurationResponse < Struct.new(
       :ad_decision_server_url,
+      :avail_suppression,
       :cdn_configuration,
       :dash_configuration,
       :hls_configuration,

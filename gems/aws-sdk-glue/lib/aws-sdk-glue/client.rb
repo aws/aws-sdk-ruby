@@ -5512,7 +5512,7 @@ module Aws::Glue
     #   The ID of the Data Catalog where the functions to be retrieved are
     #   located. If none is provided, the AWS account ID is used by default.
     #
-    # @option params [required, String] :database_name
+    # @option params [String] :database_name
     #   The name of the catalog database where the functions are located.
     #
     # @option params [required, String] :pattern
@@ -5536,7 +5536,7 @@ module Aws::Glue
     #
     #   resp = client.get_user_defined_functions({
     #     catalog_id: "CatalogIdString",
-    #     database_name: "NameString", # required
+    #     database_name: "NameString",
     #     pattern: "NameString", # required
     #     next_token: "Token",
     #     max_results: 1,
@@ -8127,7 +8127,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2020-04-16)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on ml.g4dn and ml.c5n instance types. Amazon SageMaker supports in "IN" operation for Search now.
+
 1.53.0 (2020-03-26)
 ------------------
 

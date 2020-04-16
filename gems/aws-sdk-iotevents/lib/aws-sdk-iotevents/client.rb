@@ -363,9 +363,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -380,17 +388,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -408,9 +454,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -425,17 +479,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -456,9 +548,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -473,17 +573,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -503,9 +641,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -520,17 +666,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -699,18 +883,44 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_variable.variable_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_variable.value #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sns.target_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sns.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sns.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_topic_publish.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_topic_publish.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].lambda.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].lambda.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_events.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_events.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sqs.queue_url #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sqs.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].sqs.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].firehose.delivery_stream_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].firehose.separator #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].firehose.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].firehose.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.hash_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.hash_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.hash_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.range_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.range_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.range_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.operation #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.payload_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_db.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_d_bv_2.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].event_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].condition #=> String
@@ -718,18 +928,44 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_variable.variable_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_variable.value #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sns.target_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sns.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sns.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_topic_publish.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_topic_publish.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].lambda.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].lambda.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_events.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_events.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sqs.queue_url #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sqs.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].sqs.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].firehose.delivery_stream_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].firehose.separator #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].firehose.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].firehose.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.hash_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.hash_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.hash_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.range_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.range_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.range_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.operation #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.payload_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_db.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_d_bv_2.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].next_state #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].event_name #=> String
@@ -738,18 +974,44 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_variable.variable_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_variable.value #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sns.target_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sns.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sns.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_topic_publish.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_topic_publish.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].lambda.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].lambda.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_events.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_events.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sqs.queue_url #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sqs.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].sqs.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].firehose.delivery_stream_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].firehose.separator #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].firehose.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].firehose.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.hash_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.hash_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.hash_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.range_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.range_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.range_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.operation #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.payload_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_db.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_d_bv_2.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].event_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].condition #=> String
@@ -757,18 +1019,44 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_variable.variable_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_variable.value #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sns.target_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sns.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sns.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_topic_publish.mqtt_topic #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_topic_publish.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_topic_publish.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.seconds #=> Integer
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].set_timer.duration_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].clear_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].reset_timer.timer_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].lambda.function_arn #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].lambda.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].lambda.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_events.input_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_events.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_events.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sqs.queue_url #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sqs.use_base_64 #=> Boolean
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sqs.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].sqs.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].firehose.delivery_stream_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].firehose.separator #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].firehose.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].firehose.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.hash_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.hash_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.hash_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.range_key_type #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.range_key_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.range_key_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.operation #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.payload_field #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_db.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_d_bv_2.table_name #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
     #   resp.detector_model.detector_model_definition.initial_state_name #=> String
     #   resp.detector_model.detector_model_configuration.detector_model_name #=> String
     #   resp.detector_model.detector_model_configuration.detector_model_version #=> String
@@ -1125,9 +1413,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -1142,17 +1438,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -1170,9 +1504,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -1187,17 +1529,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -1218,9 +1598,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -1235,17 +1623,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -1265,9 +1691,17 @@ module Aws::IoTEvents
     #                     },
     #                     sns: {
     #                       target_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_topic_publish: {
     #                       mqtt_topic: "MQTTTopic", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     set_timer: {
     #                       timer_name: "TimerName", # required
@@ -1282,17 +1716,55 @@ module Aws::IoTEvents
     #                     },
     #                     lambda: {
     #                       function_arn: "AmazonResourceName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     iot_events: {
     #                       input_name: "InputName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     sqs: {
     #                       queue_url: "QueueUrl", # required
     #                       use_base_64: false,
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                     firehose: {
     #                       delivery_stream_name: "DeliveryStreamName", # required
     #                       separator: "FirehoseSeparator",
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_db: {
+    #                       hash_key_type: "DynamoKeyType",
+    #                       hash_key_field: "DynamoKeyField", # required
+    #                       hash_key_value: "DynamoKeyValue", # required
+    #                       range_key_type: "DynamoKeyType",
+    #                       range_key_field: "DynamoKeyField",
+    #                       range_key_value: "DynamoKeyValue",
+    #                       operation: "DynamoOperation",
+    #                       payload_field: "DynamoKeyField",
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     dynamo_d_bv_2: {
+    #                       table_name: "DynamoTableName", # required
+    #                       payload: {
+    #                         content_expression: "ContentExpression", # required
+    #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
     #                     },
     #                   },
     #                 ],
@@ -1386,7 +1858,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -522,6 +522,12 @@ module Aws::Imagebuilder
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
     #   The image tests configuration of the image.
     #
+    # @option params [Boolean] :enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags of the image.
     #
@@ -547,6 +553,7 @@ module Aws::Imagebuilder
     #       image_tests_enabled: false,
     #       timeout_minutes: 1,
     #     },
+    #     enhanced_image_metadata_enabled: false,
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -593,6 +600,12 @@ module Aws::Imagebuilder
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
     #   The image test configuration of the image pipeline.
     #
+    # @option params [Boolean] :enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #
     # @option params [Types::Schedule] :schedule
     #   The schedule of the image pipeline.
     #
@@ -626,6 +639,7 @@ module Aws::Imagebuilder
     #       image_tests_enabled: false,
     #       timeout_minutes: 1,
     #     },
+    #     enhanced_image_metadata_enabled: false,
     #     schedule: {
     #       schedule_expression: "NonEmptyString",
     #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
@@ -668,7 +682,16 @@ module Aws::Imagebuilder
     #   The components of the image recipe.
     #
     # @option params [required, String] :parent_image
-    #   The parent image of the image recipe.
+    #   The parent image of the image recipe. The value of the string can be
+    #   the ARN of the parent image or an AMI ID. The format for the ARN
+    #   follows this example:
+    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x`.
+    #   The ARN ends with `/20xx.x.x`, which communicates to EC2 Image Builder
+    #   that you want to use the latest AMI created in 20xx (year). You can
+    #   provide the specific version that you want to use, or you can use a
+    #   wildcard in all of the fields. If you enter an AMI ID for the string
+    #   value, you must have access to the AMI, and the AMI must be in the
+    #   same Region in which you are using Image Builder.
     #
     # @option params [Array<Types::InstanceBlockDeviceMapping>] :block_device_mappings
     #   The block device mappings of the image recipe.
@@ -1165,6 +1188,8 @@ module Aws::Imagebuilder
     #   resp.image.name #=> String
     #   resp.image.version #=> String
     #   resp.image.platform #=> String, one of "Windows", "Linux"
+    #   resp.image.enhanced_image_metadata_enabled #=> Boolean
+    #   resp.image.os_version #=> String
     #   resp.image.state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image.state.reason #=> String
     #   resp.image.image_recipe.arn #=> String
@@ -1276,6 +1301,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.name #=> String
     #   resp.image_pipeline.description #=> String
     #   resp.image_pipeline.platform #=> String, one of "Windows", "Linux"
+    #   resp.image_pipeline.enhanced_image_metadata_enabled #=> Boolean
     #   resp.image_pipeline.image_recipe_arn #=> String
     #   resp.image_pipeline.infrastructure_configuration_arn #=> String
     #   resp.image_pipeline.distribution_configuration_arn #=> String
@@ -1776,6 +1802,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].name #=> String
     #   resp.image_summary_list[0].version #=> String
     #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_summary_list[0].os_version #=> String
     #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image_summary_list[0].state.reason #=> String
     #   resp.image_summary_list[0].owner #=> String
@@ -1846,6 +1873,7 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].name #=> String
     #   resp.image_summary_list[0].version #=> String
     #   resp.image_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_summary_list[0].os_version #=> String
     #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED"
     #   resp.image_summary_list[0].state.reason #=> String
     #   resp.image_summary_list[0].owner #=> String
@@ -1911,6 +1939,7 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].name #=> String
     #   resp.image_pipeline_list[0].description #=> String
     #   resp.image_pipeline_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_pipeline_list[0].enhanced_image_metadata_enabled #=> Boolean
     #   resp.image_pipeline_list[0].image_recipe_arn #=> String
     #   resp.image_pipeline_list[0].infrastructure_configuration_arn #=> String
     #   resp.image_pipeline_list[0].distribution_configuration_arn #=> String
@@ -2050,6 +2079,7 @@ module Aws::Imagebuilder
     #   resp.image_version_list[0].name #=> String
     #   resp.image_version_list[0].version #=> String
     #   resp.image_version_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.image_version_list[0].os_version #=> String
     #   resp.image_version_list[0].owner #=> String
     #   resp.image_version_list[0].date_created #=> String
     #   resp.next_token #=> String
@@ -2148,7 +2178,16 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to a component.
+    # Applies a policy to a component. We recommend that you call the RAM
+    # API [CreateResourceShare][1] to share resources. If you call the Image
+    # Builder API `PutComponentPolicy`, you must also call the RAM API
+    # [PromoteResourceShareCreatedFromPolicy][2] in order for the resource
+    # to be visible to all principals with whom the resource is shared.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
+    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     #
     # @option params [required, String] :component_arn
     #   The Amazon Resource Name (ARN) of the component that this policy
@@ -2183,7 +2222,16 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to an image.
+    # Applies a policy to an image. We recommend that you call the RAM API
+    # [CreateResourceShare][1] to share resources. If you call the Image
+    # Builder API `PutImagePolicy`, you must also call the RAM API
+    # [PromoteResourceShareCreatedFromPolicy][2] in order for the resource
+    # to be visible to all principals with whom the resource is shared.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
+    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     #
     # @option params [required, String] :image_arn
     #   The Amazon Resource Name (ARN) of the image that this policy should be
@@ -2218,7 +2266,17 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to an image recipe.
+    # Applies a policy to an image recipe. We recommend that you call the
+    # RAM API [CreateResourceShare][1] to share resources. If you call the
+    # Image Builder API `PutImageRecipePolicy`, you must also call the RAM
+    # API [PromoteResourceShareCreatedFromPolicy][2] in order for the
+    # resource to be visible to all principals with whom the resource is
+    # shared.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
+    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     #
     # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that this policy
@@ -2438,6 +2496,12 @@ module Aws::Imagebuilder
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
     #   The image test configuration of the image pipeline.
     #
+    # @option params [Boolean] :enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #
     # @option params [Types::Schedule] :schedule
     #   The schedule of the image pipeline.
     #
@@ -2468,6 +2532,7 @@ module Aws::Imagebuilder
     #       image_tests_enabled: false,
     #       timeout_minutes: 1,
     #     },
+    #     enhanced_image_metadata_enabled: false,
     #     schedule: {
     #       schedule_expression: "NonEmptyString",
     #       pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
@@ -2595,7 +2660,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -790,6 +790,8 @@ module Aws::RDS
     #   the separator. You can also include multiple variables in a single
     #   `SET` statement, such as `SET x=1, y=2`.
     #
+    #   `InitQuery` is not currently supported for PostgreSQL.
+    #
     #   Default: no initialization query
     #   @return [String]
     #
@@ -853,6 +855,8 @@ module Aws::RDS
     #   multiple statements, use semicolons as the separator. You can also
     #   include multiple variables in a single `SET` statement, such as `SET
     #   x=1, y=2`.
+    #
+    #   `InitQuery` is not currently supported for PostgreSQL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
@@ -3961,7 +3965,7 @@ module Aws::RDS
     #
     #       {
     #         db_proxy_name: "String", # required
-    #         engine_family: "MYSQL", # required, accepts MYSQL
+    #         engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL
     #         auth: [ # required
     #           {
     #             description: "String",
@@ -3996,9 +4000,8 @@ module Aws::RDS
     # @!attribute [rw] engine_family
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
-    #   it interprets network traffic to and from the database. Currently,
-    #   this value is always `MYSQL`. The engine family applies to both RDS
-    #   MySQL and Aurora MySQL.
+    #   it interprets network traffic to and from the database. The engine
+    #   family applies to MySQL and PostgreSQL for both RDS and Aurora.
     #   @return [String]
     #
     # @!attribute [rw] auth
@@ -6716,8 +6719,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_family
-    #   Currently, this value is always `MYSQL`. The engine family applies
-    #   to both RDS MySQL and Aurora MySQL.
+    #   The engine family applies to MySQL and PostgreSQL for both RDS and
+    #   Aurora.
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -6863,6 +6866,10 @@ module Aws::RDS
     #   Aurora DB cluster, that the target represents.
     #   @return [String]
     #
+    # @!attribute [rw] target_health
+    #   Information about the connection health of the RDS Proxy target.
+    #   @return [Types::TargetHealth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTarget AWS API Documentation
     #
     class DBProxyTarget < Struct.new(
@@ -6871,7 +6878,8 @@ module Aws::RDS
       :tracked_cluster_id,
       :rds_resource_id,
       :port,
-      :type)
+      :type,
+      :target_health)
       include Aws::Structure
     end
 
@@ -11315,17 +11323,19 @@ module Aws::RDS
     # @!attribute [rw] export_only
     #   The data exported from the snapshot. Valid values are the following:
     #
-    #   * `database` - Export all the data of the snapshot.
+    #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #   * `database.table` *table-name* - Export a table of the snapshot.
+    #     This format is valid only for RDS for MySQL, RDS for MariaDB, and
+    #     Aurora MySQL.
     #
-    #   * `database.schema [schema-name]` - Export a database schema of the
-    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema` *schema-name* - Export a database schema of the
+    #     snapshot. This format is valid only for RDS for PostgreSQL and
+    #     Aurora PostgreSQL.
     #
-    #   * `database.schema.table [table-name]` - Export a table of the
-    #     database schema. This value isn't valid for RDS for MySQL, RDS
-    #     for MariaDB, or Aurora MySQL.
+    #   * `database.schema.table` *table-name* - Export a table of the
+    #     database schema. This format is valid only for RDS for PostgreSQL
+    #     and Aurora PostgreSQL.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_time
@@ -18877,17 +18887,19 @@ module Aws::RDS
     #   provided, all the snapshot data is exported. Valid values are the
     #   following:
     #
-    #   * `database` - Export all the data of the snapshot.
+    #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #   * `database.table` *table-name* - Export a table of the snapshot.
+    #     This format is valid only for RDS for MySQL, RDS for MariaDB, and
+    #     Aurora MySQL.
     #
-    #   * `database.schema [schema-name]` - Export a database schema of the
-    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema` *schema-name* - Export a database schema of the
+    #     snapshot. This format is valid only for RDS for PostgreSQL and
+    #     Aurora PostgreSQL.
     #
-    #   * `database.schema.table [table-name]` - Export a table of the
-    #     database schema. This value isn't valid for RDS for MySQL, RDS
-    #     for MariaDB, or Aurora MySQL.
+    #   * `database.schema.table` *table-name* - Export a table of the
+    #     database schema. This format is valid only for RDS for PostgreSQL
+    #     and Aurora PostgreSQL.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartExportTaskMessage AWS API Documentation
@@ -19136,6 +19148,40 @@ module Aws::RDS
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Information about the connection health of an RDS Proxy target.
+    #
+    # @!attribute [rw] state
+    #   The current state of the connection health lifecycle for the RDS
+    #   Proxy target. The following is a typical lifecycle example for the
+    #   states of an RDS Proxy target:
+    #
+    #   `registering` &gt; `unavailable` &gt; `available` &gt; `unavailable`
+    #   &gt; `available`
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the current health `State` of the RDS Proxy target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the health of the RDS Proxy target. If the `State`
+    #   is `AVAILABLE`, a description is not included.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TargetHealth AWS API Documentation
+    #
+    class TargetHealth < Struct.new(
+      :state,
+      :reason,
+      :description)
       include Aws::Structure
     end
 

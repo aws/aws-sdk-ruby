@@ -520,6 +520,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -1495,6 +1499,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -2295,6 +2301,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -3239,6 +3249,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -5210,6 +5222,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -5938,6 +5952,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -7181,6 +7197,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -7945,6 +7963,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -9381,6 +9401,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -10322,6 +10346,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -12059,7 +12085,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

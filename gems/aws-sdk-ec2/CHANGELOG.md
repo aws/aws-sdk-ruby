@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2020-04-16)
+------------------
+
+* Feature - Amazon EC2 now supports adding AWS resource tags for placement groups and key pairs, at creation time. The CreatePlacementGroup API will now return placement group information when created successfully. The DeleteKeyPair API now supports deletion by resource ID.
+
 1.152.0 (2020-04-08)
 ------------------
 
