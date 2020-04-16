@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Glue - Updated the API for AWS Glue.
+
+* Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
+
+* Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
+
+* Feature - Aws::Lambda - Updated the documentation for AWS Lambda.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::AugmentedAIRuntime - Updated the API, and documentation for Amazon Augmented AI Runtime.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::Snowball - Updated the API for Amazon Import/Export Snowball.
+
 2.11.486 (2020-04-08)
 ------------------
 
