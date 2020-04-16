@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.487 (2020-04-16)
+------------------
+
 * Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
