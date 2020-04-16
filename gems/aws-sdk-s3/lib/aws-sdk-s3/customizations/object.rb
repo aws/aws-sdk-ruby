@@ -183,8 +183,6 @@ module Aws
       # @return [String]
       #
       def presigned_url(http_method, params = {})
-        raise ArgumentError, ':key must not be blank' if key == ''
-
         presigner = Presigner.new(client: client)
         presigner.presigned_url(
           "#{http_method.downcase}_object",

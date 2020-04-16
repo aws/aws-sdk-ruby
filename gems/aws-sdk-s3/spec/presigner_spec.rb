@@ -156,7 +156,10 @@ module Aws
         it 'supports virtual hosting' do
           signer = Presigner.new(client: client)
           url = signer.presigned_url(
-            :get_object, bucket: 'my.website.com', key: 'foo', virtual_host: true
+            :get_object,
+            bucket: 'my.website.com',
+            key: 'foo',
+            virtual_host: true
           )
           expect(url).to match(/^https:\/\/my.website.com\/foo/)
         end
@@ -202,7 +205,7 @@ module Aws
             key: key,
             expires_in: 86_400
           }
-          actual_url, _ = pre.presigned_request(:get_object, params)
+          actual_url, = pre.presigned_request(:get_object, params)
           expect(actual_url).to eq(expected_url)
         end
 
@@ -217,7 +220,7 @@ module Aws
             expires_in: 86_400,
             time: Time.utc(1969, 4, 20)
           }
-          actual_url, _ = pre.presigned_request(:get_object, params)
+          actual_url, = pre.presigned_request(:get_object, params)
           expect(actual_url).to include('&X-Amz-Date=19690420T000000Z')
         end
 
@@ -232,7 +235,7 @@ module Aws
             expires_in: 86_400,
             whitelist_headers: ['user-agent']
           }
-          actual_url, _ = pre.presigned_request(:get_object, params)
+          actual_url, = pre.presigned_request(:get_object, params)
           expect(actual_url).to include(
             '&X-Amz-SignedHeaders=host%3Buser-agent'
           )
@@ -268,7 +271,7 @@ module Aws
 
         it 'can generate http (non-secure) urls' do
           signer = Presigner.new(client: client)
-          url, _ = signer.presigned_request(
+          url, = signer.presigned_request(
             :get_object, bucket: 'aws-sdk', key: 'foo', secure: false
           )
           expect(url).to match(/^http:/)
@@ -277,7 +280,7 @@ module Aws
         it 'uses the configured :endpoint scheme' do
           client.config.endpoint = URI('http://example.com')
           signer = Presigner.new(client: client)
-          url, _ = signer.presigned_request(
+          url, = signer.presigned_request(
             :get_object, bucket: 'aws-sdk', key: 'foo'
           )
           expect(url).to match(/^http:/)
@@ -285,8 +288,11 @@ module Aws
 
         it 'supports virtual hosting' do
           signer = Presigner.new(client: client)
-          url, _ = signer.presigned_request(
-            :get_object, bucket: 'my.website.com', key: 'foo', virtual_host: true
+          url, = signer.presigned_request(
+            :get_object,
+            bucket: 'my.website.com',
+            key: 'foo',
+            virtual_host: true
           )
           expect(url).to match(/^https:\/\/my.website.com\/foo/)
         end
