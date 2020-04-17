@@ -23,6 +23,32 @@ module Aws
         }.to raise_error(Aws::Errors::MissingRegionError)
       end
 
+      context 'when requests are signed' do
+
+        let(:client_class) do
+          ApiHelper
+            .sample_service(metadata: {'signatureVersion' => 'v4'})
+            .const_get(:Client)
+        end
+
+        it 'raises an error when credentials are nil' do
+          creds = Credentials.new(nil, nil)
+          client = client_class.new(credentials: creds, region: 'us-east-1', stub_responses: true)
+          expect do
+            client.example_operation
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
+        end
+
+
+        it 'raises an error when credentials are empty' do
+          creds = Credentials.new('', '')
+          client = client_class.new(credentials: creds, region: 'us-east-1', stub_responses: true)
+          expect do
+            client.example_operation
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
+        end
+      end
+
       it 'raises a helpful error on possible incorrect regions' do
 
         # simulate an error from connecting to an unknown endpoint
