@@ -25,6 +25,7 @@ module Aws::FraudDetector
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
   # * {ThrottlingException}
@@ -35,6 +36,21 @@ module Aws::FraudDetector
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FraudDetector::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class InternalServerException < ServiceError
 

@@ -590,8 +590,8 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :engine_version
     #   The major release version of the engine that you want to use. For a
-    #   Chef server, the valid value for EngineVersion is currently `2`. For a
-    #   Puppet server, the valid value is `2017`.
+    #   Chef server, the valid value for EngineVersion is currently `12`. For
+    #   a Puppet server, the valid value is `2017`.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
     #   Optional engine attributes on a specified server.
@@ -657,10 +657,10 @@ module Aws::OpsWorksCM
     # @option params [String] :preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
     #   OpsWorks CM performs maintenance on the instance. Valid values must be
-    #   specified in the following format: `DDD:HH:MM`. `MM` must be specified
-    #   as `00`. The specified time is in coordinated universal time (UTC).
-    #   The default value is a random one-hour period on Tuesday, Wednesday,
-    #   or Friday. See `TimeWindowDefinition` for more information.
+    #   specified in the following format: `DDD:HH:MM`. The specified time is
+    #   in coordinated universal time (UTC). The default value is a random
+    #   one-hour period on Tuesday, Wednesday, or Friday. See
+    #   `TimeWindowDefinition` for more information.
     #
     #   **Example:** `Mon:08:00`, which represents a start time of every
     #   Monday at 08:00 UTC. (8:00 a.m.)
@@ -675,8 +675,8 @@ module Aws::OpsWorksCM
     #
     #   * `DDD:HH:MM` for weekly backups
     #
-    #   `MM` must be specified as `00`. The specified time is in coordinated
-    #   universal time (UTC). The default value is a random, daily start time.
+    #   The specified time is in coordinated universal time (UTC). The default
+    #   value is a random, daily start time.
     #
     #   **Example:** `08:00`, which represents a daily start time of 08:00
     #   UTC.
@@ -940,6 +940,8 @@ module Aws::OpsWorksCM
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
     #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_backups({
@@ -1022,6 +1024,8 @@ module Aws::OpsWorksCM
     #
     #   * {Types::DescribeEventsResponse#server_events #server_events} => Array&lt;Types::ServerEvent&gt;
     #   * {Types::DescribeEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1120,6 +1124,8 @@ module Aws::OpsWorksCM
     #
     #   * {Types::DescribeServersResponse#servers #servers} => Array&lt;Types::Server&gt;
     #   * {Types::DescribeServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1338,6 +1344,8 @@ module Aws::OpsWorksCM
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1757,7 +1765,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
