@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.489 (2020-04-17)
+------------------
+
 * Feature - Aws::FraudDetector - Updated the API, and documentation for Amazon Fraud Detector.
 
 * Feature - Aws::OpsWorksCM - Updated the documentation, and API for AWS OpsWorks CM.
