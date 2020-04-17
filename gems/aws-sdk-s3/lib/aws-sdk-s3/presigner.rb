@@ -210,9 +210,9 @@ module Aws
           http_req.headers.each do |key, value|
             next unless key =~ /^x-amz/i
 
-            value = Aws::Sigv4::Signer.uri_escape(value)
-            key = Aws::Sigv4::Signer.uri_escape(key)
             if hoist
+              value = Aws::Sigv4::Signer.uri_escape(value)
+              key = Aws::Sigv4::Signer.uri_escape(key)
               # hoist x-amz-* headers to the querystring
               http_req.headers.delete(key)
               query << "#{key}=#{value}"
