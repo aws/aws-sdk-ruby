@@ -76,7 +76,7 @@ module Seahorse
               tcp, addr = _tcp_socket(endpoint) 
               debug_output("opening connection to #{endpoint.host}:#{endpoint.port} ...")
               _nonblocking_connect(tcp, addr)
-              debug_output("opened")
+              debug_output('opened')
 
               @socket = OpenSSL::SSL::SSLSocket.new(tcp, _tls_context)
               @socket.sync_close = true
@@ -84,12 +84,12 @@ module Seahorse
 
               debug_output("starting TLS for #{endpoint.host}:#{endpoint.port} ...")
               @socket.connect
-              debug_output("TLS established")
+              debug_output('TLS established')
               _register_h2_callbacks
               @status = :active
             elsif @status == :closed
-              msg = "Async Client HTTP2 Connection is closed, you may"\
-                " use #new_connection to create a new HTTP2 Connection for this client"
+              msg = 'Async Client HTTP2 Connection is closed, you may'\
+                    ' use #new_connection to create a new HTTP2 Connection for this client'
               raise Http2ConnectionClosedError.new(msg)
             end
           }
@@ -106,7 +106,7 @@ module Seahorse
                 rescue IO::WaitReadable
                   begin
                     unless IO.select([@socket], nil, nil, connection_read_timeout)
-                      self.debug_output("socket connection read time out")
+                      self.debug_output('socket connection read time out')
                       self.close!
                     else
                       # available, retry to start reading
@@ -132,7 +132,7 @@ module Seahorse
 
         def close!
           @mutex.synchronize {
-            self.debug_output("closing connection ...")
+            self.debug_output('closing connection ...')
             if @socket
               @socket.close
               @socket = nil
@@ -151,10 +151,10 @@ module Seahorse
 
         def debug_output(msg, type = nil)
           prefix = case type
-            when :send then "-> "
-            when :receive then "<- "
+            when :send then '-> '
+            when :receive then '<- '
             else
-              ""
+              ''
             end
           return unless @logger
           _debug_entry(prefix + msg)
@@ -170,8 +170,8 @@ module Seahorse
         def _register_h2_callbacks
           @h2_client.on(:frame) do |bytes|
             if @socket.nil?
-              msg = "Connection is closed due to errors, "\
-                "you can find errors at async_client.connection.errors"
+              msg = 'Connection is closed due to errors, '\
+                    'you can find errors at async_client.connection.errors'
               raise Http2ConnectionClosedError.new(msg)
             else
               @socket.print(bytes)
@@ -223,7 +223,7 @@ module Seahorse
             ssl_ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
           if enable_alpn
-            debug_output("enabling ALPN for TLS ...")
+            debug_output('enabling ALPN for TLS ...')
             ssl_ctx.alpn_protocols = ['h2']
           end
           ssl_ctx

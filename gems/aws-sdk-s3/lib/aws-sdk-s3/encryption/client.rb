@@ -331,7 +331,7 @@ module Aws
           elsif options[:encryption_key]
             DefaultKeyProvider.new(options)
           else
-            msg = "you must pass a :kms_key_id, :key_provider, or :encryption_key"
+            msg = 'you must pass a :kms_key_id, :key_provider, or :encryption_key'
             raise ArgumentError, msg
           end
         end
@@ -351,8 +351,8 @@ module Aws
           if [:metadata, :instruction_file].include?(location)
             location
           else
-            msg = ":envelope_location must be :metadata or :instruction_file "
-            msg << "got #{location.inspect}"
+            msg = ':envelope_location must be :metadata or :instruction_file '\
+                  "got #{location.inspect}"
             raise ArgumentError, msg
           end
         end
@@ -362,7 +362,7 @@ module Aws
           if String === suffix
             suffix
           else
-            msg = ":instruction_file_suffix must be a String"
+            msg = ':instruction_file_suffix must be a String'
             raise ArgumentError, msg
           end
         end
