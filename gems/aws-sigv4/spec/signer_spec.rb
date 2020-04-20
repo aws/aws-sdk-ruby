@@ -143,7 +143,9 @@ module Aws
         end
 
         context 'when credentials are not set' do
-          let(:creds) { double(set?: false) }
+          let(:creds) do
+            Credentials.new(access_key_id: '', secret_access_key: '')
+          end
 
           it 'raises a MissingCredentialsError' do
             signer = Signer.new(

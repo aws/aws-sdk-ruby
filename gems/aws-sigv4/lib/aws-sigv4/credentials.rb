@@ -28,9 +28,13 @@ module Aws
       # @return [String, nil]
       attr_reader :session_token
 
-      # @return [Boolean]
+      # @return [Boolean] Returns `true` if the access key id and secret
+      #   access key are both set.
       def set?
-        !!(access_key_id && secret_access_key)
+        !access_key_id.nil? &&
+          !access_key_id.empty? &&
+          !secret_access_key.nil? &&
+          !secret_access_key.empty?
       end
 
     end
@@ -45,13 +49,35 @@ module Aws
       # @option options [String] :secret_access_key
       # @option options [String] :session_token (nil)
       def initialize(options = {})
-        @credentials = options[:credentials] ?
-          options[:credentials] :
-          Credentials.new(options)
+        @credentials = ensure_credentials(options[:credentials]) ||
+                       Credentials.new(options)
       end
 
       # @return [Credentials]
       attr_reader :credentials
+
+      private
+
+      # return credentials if they are valid:
+      # is_a? Credentials or can be used to create Credentials
+      # Return nil otherwise
+      def ensure_credentials(credentials)
+        return unless credentials
+
+        return credentials if credentials.is_a? Credentials
+
+        if credentials.respond_to?(:access_key_id) &&
+           credentials.respond_to?(:secret_access_key) &&
+           credentials.respond_to?(:session_token)
+          Credentials.new(
+            access_key_id: credentials.access_key_id,
+            secret_access_key: credentials.secret_access_key,
+            session_token: credentials.session_token
+          )
+        else
+          raise ArgumentError, 'Invalid credentials option provided'
+        end
+      end
 
     end
 
