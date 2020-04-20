@@ -826,6 +826,10 @@
     "models": "support/2013-04-15",
     "endpoint": "support"
   },
+  "Synthetics": {
+    "models": "synthetics/2017-10-11",
+    "endpoint": "synthetics"
+  },
   "Textract": {
     "models": "textract/2018-06-27",
     "endpoint": "textract"

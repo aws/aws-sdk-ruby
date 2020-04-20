@@ -230,6 +230,7 @@ module Aws
     States
     StorageGateway
     Support
+    Synthetics
     Textract
     TranscribeService
     Transfer

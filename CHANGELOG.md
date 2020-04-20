@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
+
+* Feature - Aws::Synthetics - Added support for a new service, Synthetics.
+
 2.11.489 (2020-04-17)
 ------------------
 
