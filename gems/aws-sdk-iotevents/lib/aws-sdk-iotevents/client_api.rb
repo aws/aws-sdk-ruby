@@ -14,6 +14,20 @@ module Aws::IoTEvents
     Action = Shapes::StructureShape.new(name: 'Action')
     Actions = Shapes::ListShape.new(name: 'Actions')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AssetId = Shapes::StringShape.new(name: 'AssetId')
+    AssetPropertyAlias = Shapes::StringShape.new(name: 'AssetPropertyAlias')
+    AssetPropertyBooleanValue = Shapes::StringShape.new(name: 'AssetPropertyBooleanValue')
+    AssetPropertyDoubleValue = Shapes::StringShape.new(name: 'AssetPropertyDoubleValue')
+    AssetPropertyEntryId = Shapes::StringShape.new(name: 'AssetPropertyEntryId')
+    AssetPropertyId = Shapes::StringShape.new(name: 'AssetPropertyId')
+    AssetPropertyIntegerValue = Shapes::StringShape.new(name: 'AssetPropertyIntegerValue')
+    AssetPropertyOffsetInNanos = Shapes::StringShape.new(name: 'AssetPropertyOffsetInNanos')
+    AssetPropertyQuality = Shapes::StringShape.new(name: 'AssetPropertyQuality')
+    AssetPropertyStringValue = Shapes::StringShape.new(name: 'AssetPropertyStringValue')
+    AssetPropertyTimeInSeconds = Shapes::StringShape.new(name: 'AssetPropertyTimeInSeconds')
+    AssetPropertyTimestamp = Shapes::StructureShape.new(name: 'AssetPropertyTimestamp')
+    AssetPropertyValue = Shapes::StructureShape.new(name: 'AssetPropertyValue')
+    AssetPropertyVariant = Shapes::StructureShape.new(name: 'AssetPropertyVariant')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeJsonPath = Shapes::StringShape.new(name: 'AttributeJsonPath')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
@@ -74,6 +88,7 @@ module Aws::IoTEvents
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IotEventsAction = Shapes::StructureShape.new(name: 'IotEventsAction')
+    IotSiteWiseAction = Shapes::StructureShape.new(name: 'IotSiteWiseAction')
     IotTopicPublishAction = Shapes::StructureShape.new(name: 'IotTopicPublishAction')
     KeyValue = Shapes::StringShape.new(name: 'KeyValue')
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
@@ -118,6 +133,23 @@ module Aws::IoTEvents
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagrisAccessDeniedException = Shapes::StructureShape.new(name: 'TagrisAccessDeniedException')
+    TagrisAccountId = Shapes::StringShape.new(name: 'TagrisAccountId')
+    TagrisAmazonResourceName = Shapes::StringShape.new(name: 'TagrisAmazonResourceName')
+    TagrisExceptionMessage = Shapes::StringShape.new(name: 'TagrisExceptionMessage')
+    TagrisInternalId = Shapes::StringShape.new(name: 'TagrisInternalId')
+    TagrisInternalServiceException = Shapes::StructureShape.new(name: 'TagrisInternalServiceException')
+    TagrisInvalidArnException = Shapes::StructureShape.new(name: 'TagrisInvalidArnException')
+    TagrisInvalidParameterException = Shapes::StructureShape.new(name: 'TagrisInvalidParameterException')
+    TagrisPartialResourcesExistResultsException = Shapes::StructureShape.new(name: 'TagrisPartialResourcesExistResultsException')
+    TagrisStatus = Shapes::StringShape.new(name: 'TagrisStatus')
+    TagrisSweepList = Shapes::ListShape.new(name: 'TagrisSweepList')
+    TagrisSweepListItem = Shapes::StructureShape.new(name: 'TagrisSweepListItem')
+    TagrisSweepListResult = Shapes::MapShape.new(name: 'TagrisSweepListResult')
+    TagrisThrottledException = Shapes::StructureShape.new(name: 'TagrisThrottledException')
+    TagrisVerifyResourcesExistInput = Shapes::StructureShape.new(name: 'TagrisVerifyResourcesExistInput')
+    TagrisVerifyResourcesExistOutput = Shapes::StructureShape.new(name: 'TagrisVerifyResourcesExistOutput')
+    TagrisVersion = Shapes::IntegerShape.new(name: 'TagrisVersion')
     Tags = Shapes::ListShape.new(name: 'Tags')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimerName = Shapes::StringShape.new(name: 'TimerName')
@@ -150,9 +182,25 @@ module Aws::IoTEvents
     Action.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseAction, location_name: "firehose"))
     Action.add_member(:dynamo_db, Shapes::ShapeRef.new(shape: DynamoDBAction, location_name: "dynamoDB"))
     Action.add_member(:dynamo_d_bv_2, Shapes::ShapeRef.new(shape: DynamoDBv2Action, location_name: "dynamoDBv2"))
+    Action.add_member(:iot_site_wise, Shapes::ShapeRef.new(shape: IotSiteWiseAction, location_name: "iotSiteWise"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
+
+    AssetPropertyTimestamp.add_member(:time_in_seconds, Shapes::ShapeRef.new(shape: AssetPropertyTimeInSeconds, required: true, location_name: "timeInSeconds"))
+    AssetPropertyTimestamp.add_member(:offset_in_nanos, Shapes::ShapeRef.new(shape: AssetPropertyOffsetInNanos, location_name: "offsetInNanos"))
+    AssetPropertyTimestamp.struct_class = Types::AssetPropertyTimestamp
+
+    AssetPropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: AssetPropertyVariant, required: true, location_name: "value"))
+    AssetPropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: AssetPropertyTimestamp, location_name: "timestamp"))
+    AssetPropertyValue.add_member(:quality, Shapes::ShapeRef.new(shape: AssetPropertyQuality, location_name: "quality"))
+    AssetPropertyValue.struct_class = Types::AssetPropertyValue
+
+    AssetPropertyVariant.add_member(:string_value, Shapes::ShapeRef.new(shape: AssetPropertyStringValue, location_name: "stringValue"))
+    AssetPropertyVariant.add_member(:integer_value, Shapes::ShapeRef.new(shape: AssetPropertyIntegerValue, location_name: "integerValue"))
+    AssetPropertyVariant.add_member(:double_value, Shapes::ShapeRef.new(shape: AssetPropertyDoubleValue, location_name: "doubleValue"))
+    AssetPropertyVariant.add_member(:boolean_value, Shapes::ShapeRef.new(shape: AssetPropertyBooleanValue, location_name: "booleanValue"))
+    AssetPropertyVariant.struct_class = Types::AssetPropertyVariant
 
     Attribute.add_member(:json_path, Shapes::ShapeRef.new(shape: AttributeJsonPath, required: true, location_name: "jsonPath"))
     Attribute.struct_class = Types::Attribute
@@ -319,6 +367,13 @@ module Aws::IoTEvents
     IotEventsAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     IotEventsAction.struct_class = Types::IotEventsAction
 
+    IotSiteWiseAction.add_member(:entry_id, Shapes::ShapeRef.new(shape: AssetPropertyEntryId, location_name: "entryId"))
+    IotSiteWiseAction.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "assetId"))
+    IotSiteWiseAction.add_member(:property_id, Shapes::ShapeRef.new(shape: AssetPropertyId, location_name: "propertyId"))
+    IotSiteWiseAction.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
+    IotSiteWiseAction.add_member(:property_value, Shapes::ShapeRef.new(shape: AssetPropertyValue, required: true, location_name: "propertyValue"))
+    IotSiteWiseAction.struct_class = Types::IotSiteWiseAction
+
     IotTopicPublishAction.add_member(:mqtt_topic, Shapes::ShapeRef.new(shape: MQTTTopic, required: true, location_name: "mqttTopic"))
     IotTopicPublishAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     IotTopicPublishAction.struct_class = Types::IotTopicPublishAction
@@ -438,6 +493,43 @@ module Aws::IoTEvents
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TagrisAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
+    TagrisAccessDeniedException.struct_class = Types::TagrisAccessDeniedException
+
+    TagrisInternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
+    TagrisInternalServiceException.struct_class = Types::TagrisInternalServiceException
+
+    TagrisInvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
+    TagrisInvalidArnException.add_member(:sweep_list_item, Shapes::ShapeRef.new(shape: TagrisSweepListItem, location_name: "sweepListItem"))
+    TagrisInvalidArnException.struct_class = Types::TagrisInvalidArnException
+
+    TagrisInvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
+    TagrisInvalidParameterException.struct_class = Types::TagrisInvalidParameterException
+
+    TagrisPartialResourcesExistResultsException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
+    TagrisPartialResourcesExistResultsException.add_member(:resource_existence_information, Shapes::ShapeRef.new(shape: TagrisSweepListResult, location_name: "resourceExistenceInformation"))
+    TagrisPartialResourcesExistResultsException.struct_class = Types::TagrisPartialResourcesExistResultsException
+
+    TagrisSweepList.member = Shapes::ShapeRef.new(shape: TagrisSweepListItem)
+
+    TagrisSweepListItem.add_member(:tagris_account_id, Shapes::ShapeRef.new(shape: TagrisAccountId, location_name: "TagrisAccountId"))
+    TagrisSweepListItem.add_member(:tagris_amazon_resource_name, Shapes::ShapeRef.new(shape: TagrisAmazonResourceName, location_name: "TagrisAmazonResourceName"))
+    TagrisSweepListItem.add_member(:tagris_internal_id, Shapes::ShapeRef.new(shape: TagrisInternalId, location_name: "TagrisInternalId"))
+    TagrisSweepListItem.add_member(:tagris_version, Shapes::ShapeRef.new(shape: TagrisVersion, location_name: "TagrisVersion"))
+    TagrisSweepListItem.struct_class = Types::TagrisSweepListItem
+
+    TagrisSweepListResult.key = Shapes::ShapeRef.new(shape: TagrisAmazonResourceName)
+    TagrisSweepListResult.value = Shapes::ShapeRef.new(shape: TagrisStatus)
+
+    TagrisThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
+    TagrisThrottledException.struct_class = Types::TagrisThrottledException
+
+    TagrisVerifyResourcesExistInput.add_member(:tagris_sweep_list, Shapes::ShapeRef.new(shape: TagrisSweepList, required: true, location_name: "TagrisSweepList"))
+    TagrisVerifyResourcesExistInput.struct_class = Types::TagrisVerifyResourcesExistInput
+
+    TagrisVerifyResourcesExistOutput.add_member(:tagris_sweep_list_result, Shapes::ShapeRef.new(shape: TagrisSweepListResult, required: true, location_name: "TagrisSweepListResult"))
+    TagrisVerifyResourcesExistOutput.struct_class = Types::TagrisVerifyResourcesExistOutput
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
@@ -709,6 +801,20 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:verify_resources_exist_for_tagris, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "VerifyResourcesExistForTagris"
+        o.http_method = "GET"
+        o.http_request_uri = "/internal/tags/resource-status"
+        o.input = Shapes::ShapeRef.new(shape: TagrisVerifyResourcesExistInput)
+        o.output = Shapes::ShapeRef.new(shape: TagrisVerifyResourcesExistOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagrisAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TagrisInternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TagrisInvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: TagrisInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: TagrisPartialResourcesExistResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: TagrisThrottledException)
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-04-20)
+------------------
+
+* Feature - Added a new ConnectionType "KAFKA" and a ConnectionProperty "KAFKA_BOOTSTRAP_SERVERS" to support Kafka connection.
+
 1.52.0 (2020-04-16)
 ------------------
 

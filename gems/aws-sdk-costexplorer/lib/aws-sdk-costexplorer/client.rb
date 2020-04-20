@@ -318,12 +318,6 @@ module Aws::CostExplorer
 
     # @!group API Operations
 
-    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
-    # Management and is subject to change. Your use of Cost Categories is
-    # subject to the Beta Service Participation terms of the <a
-    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
-    # (Section 1.10).</b> </i>
-    #
     # Creates a new Cost Category with the requested name and rules.
     #
     # @option params [required, String] :name
@@ -333,16 +327,12 @@ module Aws::CostExplorer
     #   The rule schema version in this particular Cost Category.
     #
     # @option params [required, Array<Types::CostCategoryRule>] :rules
-    #   `CreateCostCategoryDefinition` supports dimensions, Tags, and nested
-    #   expressions. Currently the only dimensions supported is
-    #   `LINKED_ACCOUNT`.
+    #   The Cost Category rules used to categorize costs. For more
+    #   information, see [CostCategoryRule][1].
     #
-    #   Root level `OR` is not supported. We recommend you create a separate
-    #   rule instead.
     #
-    #   Rules are processed in order. If there are multiple rules that match
-    #   the line item, then the first rule to match is used to determine that
-    #   Cost Category value.
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
     #
     # @return [Types::CreateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -372,12 +362,14 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #           tags: {
     #             key: "TagKey",
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
@@ -402,12 +394,6 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
-    # Management and is subject to change. Your use of Cost Categories is
-    # subject to the Beta Service Participation terms of the <a
-    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
-    # (Section 1.10).</b> </i>
-    #
     # Deletes a Cost Category. Expenses from this month going forward will
     # no longer be categorized with this Cost Category.
     #
@@ -439,12 +425,6 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
-    # Management and is subject to change. Your use of Cost Categories is
-    # subject to the Beta Service Participation terms of the <a
-    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
-    # (Section 1.10).</b> </i>
-    #
     # Returns the name, ARN, rules, definition, and effective dates of a
     # Cost Category that's defined in the account.
     #
@@ -485,12 +465,16 @@ module Aws::CostExplorer
     #   resp.cost_category.rules[0].rule.and #=> Array
     #   resp.cost_category.rules[0].rule.and[0] #=> Types::Expression
     #   resp.cost_category.rules[0].rule.not #=> Types::Expression
-    #   resp.cost_category.rules[0].rule.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION"
+    #   resp.cost_category.rules[0].rule.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION"
     #   resp.cost_category.rules[0].rule.dimensions.values #=> Array
     #   resp.cost_category.rules[0].rule.dimensions.values[0] #=> String
+    #   resp.cost_category.rules[0].rule.dimensions.match_options #=> Array
+    #   resp.cost_category.rules[0].rule.dimensions.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.cost_category.rules[0].rule.tags.key #=> String
     #   resp.cost_category.rules[0].rule.tags.values #=> Array
     #   resp.cost_category.rules[0].rule.tags.values[0] #=> String
+    #   resp.cost_category.rules[0].rule.tags.match_options #=> Array
+    #   resp.cost_category.rules[0].rule.tags.match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.cost_category.rules[0].rule.cost_categories.key #=> String
     #   resp.cost_category.rules[0].rule.cost_categories.values #=> Array
     #   resp.cost_category.rules[0].rule.cost_categories.values[0] #=> String
@@ -610,12 +594,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -680,7 +666,7 @@ module Aws::CostExplorer
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
     # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html
     #
     # @option params [required, Types::DateInterval] :time_period
@@ -709,7 +695,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Array<String>] :metrics
     #   Which metrics are returned in the query. For more information about
@@ -734,7 +720,7 @@ module Aws::CostExplorer
     #
     #
     #
-    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #   [1]: http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group Amazon Web Services costs using up to two different
@@ -774,12 +760,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -901,12 +889,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -1082,7 +1072,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #     context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS, SAVINGS_PLANS
     #     next_page_token: "NextPageToken",
     #   })
@@ -1110,7 +1100,8 @@ module Aws::CostExplorer
     # to see how much of your Amazon Elastic Compute Cloud, Amazon
     # ElastiCache, Amazon Relational Database Service, or Amazon Redshift
     # usage is covered by a reservation. An organization's master account
-    # can see the coverage of the associated member accounts. For any time
+    # can see the coverage of the associated member accounts. This supports
+    # dimensions, Cost Categories, and nested expressions. For any time
     # period, you can filter data about reservation usage by the following
     # dimensions:
     #
@@ -1220,6 +1211,8 @@ module Aws::CostExplorer
     #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
     #   EC2.
     #
+    #   Cost category is also supported.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
@@ -1270,12 +1263,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -1589,12 +1584,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -1762,12 +1759,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -1795,6 +1794,8 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].current_instance.tags[0].key #=> String
     #   resp.rightsizing_recommendations[0].current_instance.tags[0].values #=> Array
     #   resp.rightsizing_recommendations[0].current_instance.tags[0].values[0] #=> String
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].match_options #=> Array
+    #   resp.rightsizing_recommendations[0].current_instance.tags[0].match_options[0] #=> String, one of "EQUALS", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CASE_SENSITIVE", "CASE_INSENSITIVE"
     #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.hourly_on_demand_rate #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.instance_type #=> String
     #   resp.rightsizing_recommendations[0].current_instance.resource_details.ec2_resource_details.platform #=> String
@@ -1847,7 +1848,8 @@ module Aws::CostExplorer
     # Retrieves the Savings Plans covered for your account. This enables you
     # to see how much of your cost is covered by a Savings Plan. An
     # organization’s master account can see the coverage of the associated
-    # member accounts. For any time period, you can filter data for Savings
+    # member accounts. This supports dimensions, Cost Categories, and nested
+    # expressions. For any time period, you can filter data for Savings
     # Plans usage with the following dimensions:
     #
     # * `LINKED_ACCOUNT`
@@ -1893,6 +1895,8 @@ module Aws::CostExplorer
     #   `GetSavingsPlansCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension. If
     #   there are multiple values for a dimension, they are OR'd together.
+    #
+    #   Cost category is also supported.
     #
     #
     #
@@ -1947,12 +1951,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -2063,12 +2069,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -2203,12 +2211,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -2332,12 +2342,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -2511,12 +2523,14 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       tags: {
     #         key: "TagKey",
     #         values: ["Value"],
+    #         match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #       },
     #       cost_categories: {
     #         key: "CostCategoryName",
@@ -2546,18 +2560,14 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
-    # Management and is subject to change. Your use of Cost Categories is
-    # subject to the Beta Service Participation terms of the <a
-    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
-    # (Section 1.10).</b> </i>
-    #
-    # Returns the name, ARN and effective dates of all Cost Categories
-    # defined in the account. You have the option to use `EffectiveOn` to
-    # return a list of Cost Categories that were active on a specific date.
-    # If there is no `EffectiveOn` specified, you’ll see Cost Categories
-    # that are effective on the current date. If Cost Category is still
-    # effective, `EffectiveEnd` is omitted in the response.
+    # Returns the name, ARN, `NumberOfRules` and effective dates of all Cost
+    # Categories defined in the account. You have the option to use
+    # `EffectiveOn` to return a list of Cost Categories that were active on
+    # a specific date. If there is no `EffectiveOn` specified, you’ll see
+    # Cost Categories that are effective on the current date. If Cost
+    # Category is still effective, `EffectiveEnd` is omitted in the
+    # response. `ListCostCategoryDefinitions` supports pagination. The
+    # request can have a `MaxResults` range up to 100.
     #
     # @option params [String] :effective_on
     #   The date when the Cost Category was effective.
@@ -2567,19 +2577,22 @@ module Aws::CostExplorer
     #   provides the token when the response from a previous call has more
     #   results than the maximum page size.
     #
-    #   You can use this information to retrieve the full Cost Category
-    #   information using `DescribeCostCategory`.
+    # @option params [Integer] :max_results
+    #   The number of entries a paginated response contains.
     #
     # @return [Types::ListCostCategoryDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCostCategoryDefinitionsResponse#cost_category_references #cost_category_references} => Array&lt;Types::CostCategoryReference&gt;
     #   * {Types::ListCostCategoryDefinitionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_cost_category_definitions({
     #     effective_on: "ZonedDateTime",
     #     next_token: "NextPageToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -2589,6 +2602,7 @@ module Aws::CostExplorer
     #   resp.cost_category_references[0].name #=> String
     #   resp.cost_category_references[0].effective_start #=> String
     #   resp.cost_category_references[0].effective_end #=> String
+    #   resp.cost_category_references[0].number_of_rules #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions AWS API Documentation
@@ -2600,12 +2614,6 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
-    # Management and is subject to change. Your use of Cost Categories is
-    # subject to the Beta Service Participation terms of the <a
-    # href="http://aws.amazon.com/service-terms/">AWS Service Terms</a>
-    # (Section 1.10).</b> </i>
-    #
     # Updates an existing Cost Category. Changes made to the Cost Category
     # rules will be used to categorize the current month’s expenses and
     # future expenses. This won’t change categorization for the previous
@@ -2618,16 +2626,12 @@ module Aws::CostExplorer
     #   The rule schema version in this particular Cost Category.
     #
     # @option params [required, Array<Types::CostCategoryRule>] :rules
-    #   `UpdateCostCategoryDefinition` supports dimensions, Tags, and nested
-    #   expressions. Currently the only dimensions supported is
-    #   `LINKED_ACCOUNT`.
+    #   The `Expression` object used to categorize costs. For more
+    #   information, see [CostCategoryRule ][1].
     #
-    #   Root level `OR` is not supported. We recommend you create a separate
-    #   rule instead.
     #
-    #   Rules are processed in order. If there are multiple rules that match
-    #   the line item, then the first rule to match is used to determine that
-    #   Cost Category value.
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html
     #
     # @return [Types::UpdateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2657,12 +2661,14 @@ module Aws::CostExplorer
     #             # recursive Expression
     #           },
     #           dimensions: {
-    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, LINKED_ACCOUNT_NAME, OPERATION, PURCHASE_TYPE, REGION, SERVICE, SERVICE_CODE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #           tags: {
     #             key: "TagKey",
     #             values: ["Value"],
+    #             match_options: ["EQUALS"], # accepts EQUALS, STARTS_WITH, ENDS_WITH, CONTAINS, CASE_SENSITIVE, CASE_INSENSITIVE
     #           },
     #           cost_categories: {
     #             key: "CostCategoryName",
@@ -2700,7 +2706,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

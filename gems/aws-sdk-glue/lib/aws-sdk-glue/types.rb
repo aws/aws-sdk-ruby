@@ -1274,6 +1274,11 @@ module Aws::Glue
     #
     #   * `CONNECTION_URL` - The URL for connecting to a general (non-JDBC)
     #     data source.
+    #
+    #   * `KAFKA_BOOTSTRAP_SERVERS` - A comma-separated list of host and
+    #     port pairs that are the addresses of the Apache Kafka brokers in a
+    #     Kafka cluster to which a Kafka client will connect to and
+    #     bootstrap itself.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1318,7 +1323,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -1343,6 +1348,9 @@ module Aws::Glue
     #
     #   * `JDBC` - Designates a connection to a database through Java
     #     Database Connectivity (JDBC).
+    #
+    #   * `KAFKA` - Designates a connection to an Apache Kafka streaming
+    #     platform.
     #
     #   * `MONGODB` - Designates a connection to a MongoDB document
     #     database.
@@ -1822,7 +1830,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -4944,7 +4952,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -4972,7 +4980,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -11266,7 +11274,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",

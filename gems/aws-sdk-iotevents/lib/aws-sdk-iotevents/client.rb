@@ -438,6 +438,25 @@ module Aws::IoTEvents
     #                         type: "STRING", # required, accepts STRING, JSON
     #                       },
     #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -527,6 +546,25 @@ module Aws::IoTEvents
     #                       payload: {
     #                         content_expression: "ContentExpression", # required
     #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
     #                       },
     #                     },
     #                   },
@@ -623,6 +661,25 @@ module Aws::IoTEvents
     #                         type: "STRING", # required, accepts STRING, JSON
     #                       },
     #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -714,6 +771,25 @@ module Aws::IoTEvents
     #                       payload: {
     #                         content_expression: "ContentExpression", # required
     #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
     #                       },
     #                     },
     #                   },
@@ -921,6 +997,17 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_d_bv_2.table_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.entry_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.asset_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_alias #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.value.string_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.value.integer_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.value.double_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.value.boolean_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.timestamp.time_in_seconds #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.timestamp.offset_in_nanos #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.events[0].actions[0].iot_site_wise.property_value.quality #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].event_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].condition #=> String
@@ -966,6 +1053,17 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_d_bv_2.table_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.entry_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.asset_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_alias #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.value.string_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.value.integer_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.value.double_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.value.boolean_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.timestamp.time_in_seconds #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.timestamp.offset_in_nanos #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].actions[0].iot_site_wise.property_value.quality #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_input.transition_events[0].next_state #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].event_name #=> String
@@ -1012,6 +1110,17 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_d_bv_2.table_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.entry_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.asset_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_alias #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.value.string_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.value.integer_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.value.double_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.value.boolean_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.timestamp.time_in_seconds #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.timestamp.offset_in_nanos #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_enter.events[0].actions[0].iot_site_wise.property_value.quality #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events #=> Array
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].event_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].condition #=> String
@@ -1057,6 +1166,17 @@ module Aws::IoTEvents
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_d_bv_2.table_name #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_d_bv_2.payload.content_expression #=> String
     #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].dynamo_d_bv_2.payload.type #=> String, one of "STRING", "JSON"
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.entry_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.asset_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_id #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_alias #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.value.string_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.value.integer_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.value.double_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.value.boolean_value #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.timestamp.time_in_seconds #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.timestamp.offset_in_nanos #=> String
+    #   resp.detector_model.detector_model_definition.states[0].on_exit.events[0].actions[0].iot_site_wise.property_value.quality #=> String
     #   resp.detector_model.detector_model_definition.initial_state_name #=> String
     #   resp.detector_model.detector_model_configuration.detector_model_name #=> String
     #   resp.detector_model.detector_model_configuration.detector_model_version #=> String
@@ -1488,6 +1608,25 @@ module Aws::IoTEvents
     #                         type: "STRING", # required, accepts STRING, JSON
     #                       },
     #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -1577,6 +1716,25 @@ module Aws::IoTEvents
     #                       payload: {
     #                         content_expression: "ContentExpression", # required
     #                         type: "STRING", # required, accepts STRING, JSON
+    #                       },
+    #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
     #                       },
     #                     },
     #                   },
@@ -1673,6 +1831,25 @@ module Aws::IoTEvents
     #                         type: "STRING", # required, accepts STRING, JSON
     #                       },
     #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -1766,6 +1943,25 @@ module Aws::IoTEvents
     #                         type: "STRING", # required, accepts STRING, JSON
     #                       },
     #                     },
+    #                     iot_site_wise: {
+    #                       entry_id: "AssetPropertyEntryId",
+    #                       asset_id: "AssetId",
+    #                       property_id: "AssetPropertyId",
+    #                       property_alias: "AssetPropertyAlias",
+    #                       property_value: { # required
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: {
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     },
     #                   },
     #                 ],
     #               },
@@ -1845,6 +2041,37 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
+    # @option params [required, Array<Types::TagrisSweepListItem>] :tagris_sweep_list
+    #
+    # @return [Types::TagrisVerifyResourcesExistOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TagrisVerifyResourcesExistOutput#tagris_sweep_list_result #tagris_sweep_list_result} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_resources_exist_for_tagris({
+    #     tagris_sweep_list: [ # required
+    #       {
+    #         tagris_account_id: "TagrisAccountId",
+    #         tagris_amazon_resource_name: "TagrisAmazonResourceName",
+    #         tagris_internal_id: "TagrisInternalId",
+    #         tagris_version: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tagris_sweep_list_result #=> Hash
+    #   resp.tagris_sweep_list_result["TagrisAmazonResourceName"] #=> String, one of "ACTIVE", "NOT_ACTIVE"
+    #
+    # @overload verify_resources_exist_for_tagris(params = {})
+    # @param [Hash] params ({})
+    def verify_resources_exist_for_tagris(params = {}, options = {})
+      req = build_request(:verify_resources_exist_for_tagris, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1858,7 +2085,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

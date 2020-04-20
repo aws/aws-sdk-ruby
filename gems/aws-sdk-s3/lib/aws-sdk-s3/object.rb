@@ -1310,7 +1310,7 @@ module Aws::S3
       value = args[0] || options.delete(:bucket_name)
       case value
       when String then value
-      when nil then raise ArgumentError, 'missing required option :bucket_name'
+      when nil then raise ArgumentError, "missing required option :bucket_name"
       else
         msg = "expected :bucket_name to be a String, got #{value.class}"
         raise ArgumentError, msg
@@ -1321,7 +1321,7 @@ module Aws::S3
       value = args[1] || options.delete(:key)
       case value
       when String then value
-      when nil then raise ArgumentError, 'missing required option :key'
+      when nil then raise ArgumentError, "missing required option :key"
       else
         msg = "expected :key to be a String, got #{value.class}"
         raise ArgumentError, msg
@@ -1330,8 +1330,8 @@ module Aws::S3
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = 'pass options to configure the waiter; '\
-              'yielding the waiter is deprecated'
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end

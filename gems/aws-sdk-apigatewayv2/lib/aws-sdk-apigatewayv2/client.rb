@@ -1720,6 +1720,47 @@ module Aws::ApiGatewayV2
       req.send_request(options)
     end
 
+    # Exports a definition of an API in a particular output format and
+    # specification.
+    #
+    # @option params [required, String] :api_id
+    #
+    # @option params [String] :export_version
+    #
+    # @option params [Boolean] :include_extensions
+    #
+    # @option params [required, String] :output_type
+    #
+    # @option params [required, String] :specification
+    #
+    # @option params [String] :stage_name
+    #
+    # @return [Types::ExportApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportApiResponse#body #body} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_api({
+    #     api_id: "__string", # required
+    #     export_version: "__string",
+    #     include_extensions: false,
+    #     output_type: "__string", # required
+    #     specification: "__string", # required
+    #     stage_name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.body #=> String
+    #
+    # @overload export_api(params = {})
+    # @param [Hash] params ({})
+    def export_api(params = {}, options = {})
+      req = build_request(:export_api, params)
+      req.send_request(options)
+    end
+
     # Gets an Api resource.
     #
     # @option params [required, String] :api_id
@@ -4143,7 +4184,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

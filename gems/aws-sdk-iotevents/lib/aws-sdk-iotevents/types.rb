@@ -95,6 +95,25 @@ module Aws::IoTEvents
     #             type: "STRING", # required, accepts STRING, JSON
     #           },
     #         },
+    #         iot_site_wise: {
+    #           entry_id: "AssetPropertyEntryId",
+    #           asset_id: "AssetId",
+    #           property_id: "AssetPropertyId",
+    #           property_alias: "AssetPropertyAlias",
+    #           property_value: { # required
+    #             value: { # required
+    #               string_value: "AssetPropertyStringValue",
+    #               integer_value: "AssetPropertyIntegerValue",
+    #               double_value: "AssetPropertyDoubleValue",
+    #               boolean_value: "AssetPropertyBooleanValue",
+    #             },
+    #             timestamp: {
+    #               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #             },
+    #             quality: "AssetPropertyQuality",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] set_variable
@@ -173,6 +192,11 @@ module Aws::IoTEvents
     #   [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html
     #   @return [Types::DynamoDBv2Action]
     #
+    # @!attribute [rw] iot_site_wise
+    #   Sends information about the detector model instance and the event
+    #   that triggered the action to an AWS IoT SiteWise asset property.
+    #   @return [Types::IotSiteWiseAction]
+    #
     class Action < Struct.new(
       :set_variable,
       :sns,
@@ -185,7 +209,175 @@ module Aws::IoTEvents
       :sqs,
       :firehose,
       :dynamo_db,
-      :dynamo_d_bv_2)
+      :dynamo_d_bv_2,
+      :iot_site_wise)
+      include Aws::Structure
+    end
+
+    # A structure that contains timestamp information. For more information,
+    # see [TimeInNanos][1] in the *AWS IoT SiteWise API Reference*.
+    #
+    # For parameters that are string data type, you can specify the
+    # following options:
+    #
+    # * Use a string. For example, the `timeInSeconds` value can be
+    #   `'1586400675'`.
+    #
+    # * Use an expression. For example, the `timeInSeconds` value can be
+    #   `'$\{$input.TemperatureInput.sensorData.timestamp/1000\}'`.
+    #
+    #   For more information, see [Expressions][2] in the *AWS IoT Events
+    #   Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html
+    # [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+    #
+    # @note When making an API call, you may pass AssetPropertyTimestamp
+    #   data as a hash:
+    #
+    #       {
+    #         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #       }
+    #
+    # @!attribute [rw] time_in_seconds
+    #   The timestamp, in seconds, in the Unix epoch format. The valid range
+    #   is between 1-31556889864403199. You can also specify an expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] offset_in_nanos
+    #   The nanosecond offset converted from `timeInSeconds`. The valid
+    #   range is between 0-999999999. You can also specify an expression.
+    #   @return [String]
+    #
+    class AssetPropertyTimestamp < Struct.new(
+      :time_in_seconds,
+      :offset_in_nanos)
+      include Aws::Structure
+    end
+
+    # A structure that contains value information. For more information, see
+    # [AssetPropertyValue][1] in the *AWS IoT SiteWise API Reference*.
+    #
+    # For parameters that are string data type, you can specify the
+    # following options:
+    #
+    # * Use a string. For example, the `quality` value can be `'GOOD'`.
+    #
+    # * Use an expression. For example, the `quality` value can be
+    #   `$input.TemperatureInput.sensorData.quality` .
+    #
+    #   For more information, see [Expressions][2] in the *AWS IoT Events
+    #   Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html
+    # [2]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+    #
+    # @note When making an API call, you may pass AssetPropertyValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: { # required
+    #           string_value: "AssetPropertyStringValue",
+    #           integer_value: "AssetPropertyIntegerValue",
+    #           double_value: "AssetPropertyDoubleValue",
+    #           boolean_value: "AssetPropertyBooleanValue",
+    #         },
+    #         timestamp: {
+    #           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #         },
+    #         quality: "AssetPropertyQuality",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value to send to an asset property.
+    #   @return [Types::AssetPropertyVariant]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp associated with the asset property value. The default
+    #   is the current event time.
+    #   @return [Types::AssetPropertyTimestamp]
+    #
+    # @!attribute [rw] quality
+    #   The quality of the asset property value. The value must be `GOOD`,
+    #   `BAD`, or `UNCERTAIN`. You can also specify an expression.
+    #   @return [String]
+    #
+    class AssetPropertyValue < Struct.new(
+      :value,
+      :timestamp,
+      :quality)
+      include Aws::Structure
+    end
+
+    # A structure that contains an asset property value. For more
+    # information, see [Variant][1] in the *AWS IoT SiteWise API Reference*.
+    #
+    # You must specify one of the following value types, depending on the
+    # `dataType` of the specified asset property. For more information, see
+    # [AssetProperty][2] in the *AWS IoT SiteWise API Reference*.
+    #
+    # For parameters that are string data type, you can specify the
+    # following options:
+    #
+    # * Use a string. For example, the `doubleValue` value can be `'47.9'`.
+    #
+    # * Use an expression. For example, the `doubleValue` value can be
+    #   `$input.TemperatureInput.sensorData.temperature`.
+    #
+    #   For more information, see [Expressions][3] in the *AWS IoT Events
+    #   Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html
+    # [3]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+    #
+    # @note When making an API call, you may pass AssetPropertyVariant
+    #   data as a hash:
+    #
+    #       {
+    #         string_value: "AssetPropertyStringValue",
+    #         integer_value: "AssetPropertyIntegerValue",
+    #         double_value: "AssetPropertyDoubleValue",
+    #         boolean_value: "AssetPropertyBooleanValue",
+    #       }
+    #
+    # @!attribute [rw] string_value
+    #   The asset property value is a string. You can also specify an
+    #   expression. If you use an expression, the evaluated result should be
+    #   a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] integer_value
+    #   The asset property value is an integer. You can also specify an
+    #   expression. If you use an expression, the evaluated result should be
+    #   an integer.
+    #   @return [String]
+    #
+    # @!attribute [rw] double_value
+    #   The asset property value is a double. You can also specify an
+    #   expression. If you use an expression, the evaluated result should be
+    #   a double.
+    #   @return [String]
+    #
+    # @!attribute [rw] boolean_value
+    #   The asset property value is a Boolean value that must be `TRUE` or
+    #   `FALSE`. You can also specify an expression. If you use an
+    #   expression, the evaluated result should be a Boolean value.
+    #   @return [String]
+    #
+    class AssetPropertyVariant < Struct.new(
+      :string_value,
+      :integer_value,
+      :double_value,
+      :boolean_value)
       include Aws::Structure
     end
 
@@ -334,6 +526,25 @@ module Aws::IoTEvents
     #                             type: "STRING", # required, accepts STRING, JSON
     #                           },
     #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -423,6 +634,25 @@ module Aws::IoTEvents
     #                           payload: {
     #                             content_expression: "ContentExpression", # required
     #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
     #                           },
     #                         },
     #                       },
@@ -519,6 +749,25 @@ module Aws::IoTEvents
     #                             type: "STRING", # required, accepts STRING, JSON
     #                           },
     #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -610,6 +859,25 @@ module Aws::IoTEvents
     #                           payload: {
     #                             content_expression: "ContentExpression", # required
     #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
     #                           },
     #                         },
     #                       },
@@ -1054,6 +1322,25 @@ module Aws::IoTEvents
     #                           type: "STRING", # required, accepts STRING, JSON
     #                         },
     #                       },
+    #                       iot_site_wise: {
+    #                         entry_id: "AssetPropertyEntryId",
+    #                         asset_id: "AssetId",
+    #                         property_id: "AssetPropertyId",
+    #                         property_alias: "AssetPropertyAlias",
+    #                         property_value: { # required
+    #                           value: { # required
+    #                             string_value: "AssetPropertyStringValue",
+    #                             integer_value: "AssetPropertyIntegerValue",
+    #                             double_value: "AssetPropertyDoubleValue",
+    #                             boolean_value: "AssetPropertyBooleanValue",
+    #                           },
+    #                           timestamp: {
+    #                             time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                             offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                           },
+    #                           quality: "AssetPropertyQuality",
+    #                         },
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -1143,6 +1430,25 @@ module Aws::IoTEvents
     #                         payload: {
     #                           content_expression: "ContentExpression", # required
     #                           type: "STRING", # required, accepts STRING, JSON
+    #                         },
+    #                       },
+    #                       iot_site_wise: {
+    #                         entry_id: "AssetPropertyEntryId",
+    #                         asset_id: "AssetId",
+    #                         property_id: "AssetPropertyId",
+    #                         property_alias: "AssetPropertyAlias",
+    #                         property_value: { # required
+    #                           value: { # required
+    #                             string_value: "AssetPropertyStringValue",
+    #                             integer_value: "AssetPropertyIntegerValue",
+    #                             double_value: "AssetPropertyDoubleValue",
+    #                             boolean_value: "AssetPropertyBooleanValue",
+    #                           },
+    #                           timestamp: {
+    #                             time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                             offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                           },
+    #                           quality: "AssetPropertyQuality",
     #                         },
     #                       },
     #                     },
@@ -1239,6 +1545,25 @@ module Aws::IoTEvents
     #                           type: "STRING", # required, accepts STRING, JSON
     #                         },
     #                       },
+    #                       iot_site_wise: {
+    #                         entry_id: "AssetPropertyEntryId",
+    #                         asset_id: "AssetId",
+    #                         property_id: "AssetPropertyId",
+    #                         property_alias: "AssetPropertyAlias",
+    #                         property_value: { # required
+    #                           value: { # required
+    #                             string_value: "AssetPropertyStringValue",
+    #                             integer_value: "AssetPropertyIntegerValue",
+    #                             double_value: "AssetPropertyDoubleValue",
+    #                             boolean_value: "AssetPropertyBooleanValue",
+    #                           },
+    #                           timestamp: {
+    #                             time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                             offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                           },
+    #                           quality: "AssetPropertyQuality",
+    #                         },
+    #                       },
     #                     },
     #                   ],
     #                 },
@@ -1330,6 +1655,25 @@ module Aws::IoTEvents
     #                         payload: {
     #                           content_expression: "ContentExpression", # required
     #                           type: "STRING", # required, accepts STRING, JSON
+    #                         },
+    #                       },
+    #                       iot_site_wise: {
+    #                         entry_id: "AssetPropertyEntryId",
+    #                         asset_id: "AssetId",
+    #                         property_id: "AssetPropertyId",
+    #                         property_alias: "AssetPropertyAlias",
+    #                         property_value: { # required
+    #                           value: { # required
+    #                             string_value: "AssetPropertyStringValue",
+    #                             integer_value: "AssetPropertyIntegerValue",
+    #                             double_value: "AssetPropertyDoubleValue",
+    #                             boolean_value: "AssetPropertyBooleanValue",
+    #                           },
+    #                           timestamp: {
+    #                             time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                             offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                           },
+    #                           quality: "AssetPropertyQuality",
     #                         },
     #                       },
     #                     },
@@ -1719,6 +2063,25 @@ module Aws::IoTEvents
     #                 type: "STRING", # required, accepts STRING, JSON
     #               },
     #             },
+    #             iot_site_wise: {
+    #               entry_id: "AssetPropertyEntryId",
+    #               asset_id: "AssetId",
+    #               property_id: "AssetPropertyId",
+    #               property_alias: "AssetPropertyAlias",
+    #               property_value: { # required
+    #                 value: { # required
+    #                   string_value: "AssetPropertyStringValue",
+    #                   integer_value: "AssetPropertyIntegerValue",
+    #                   double_value: "AssetPropertyDoubleValue",
+    #                   boolean_value: "AssetPropertyBooleanValue",
+    #                 },
+    #                 timestamp: {
+    #                   time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                   offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                 },
+    #                 quality: "AssetPropertyQuality",
+    #               },
+    #             },
     #           },
     #         ],
     #       }
@@ -1948,6 +2311,87 @@ module Aws::IoTEvents
     class IotEventsAction < Struct.new(
       :input_name,
       :payload)
+      include Aws::Structure
+    end
+
+    # Sends information about the detector model instance and the event that
+    # triggered the action to a specified asset property in AWS IoT
+    # SiteWise.
+    #
+    # You must specify either `propertyAlias` or both `assetId` and
+    # `propertyId` to identify the target asset property in AWS IoT
+    # SiteWise.
+    #
+    # For parameters that are string data type, you can specify the
+    # following options:
+    #
+    # * Use a string. For example, the `propertyAlias` value can be
+    #   `'/company/windfarm/3/turbine/7/temperature'`.
+    #
+    # * Use an expression. For example, the `propertyAlias` value can be
+    #   `'company/windfarm/$\{$input.TemperatureInput.sensorData.windfarmID\}/turbine/$\{$input.TemperatureInput.sensorData.turbineID\}/temperature'`.
+    #
+    #   For more information, see [Expressions][1] in the *AWS IoT Events
+    #   Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html
+    #
+    # @note When making an API call, you may pass IotSiteWiseAction
+    #   data as a hash:
+    #
+    #       {
+    #         entry_id: "AssetPropertyEntryId",
+    #         asset_id: "AssetId",
+    #         property_id: "AssetPropertyId",
+    #         property_alias: "AssetPropertyAlias",
+    #         property_value: { # required
+    #           value: { # required
+    #             string_value: "AssetPropertyStringValue",
+    #             integer_value: "AssetPropertyIntegerValue",
+    #             double_value: "AssetPropertyDoubleValue",
+    #             boolean_value: "AssetPropertyBooleanValue",
+    #           },
+    #           timestamp: {
+    #             time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #             offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #           },
+    #           quality: "AssetPropertyQuality",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] entry_id
+    #   A unique identifier for this entry. You can use the entry ID to
+    #   track which data entry causes an error in case of failure. The
+    #   default is a new unique identifier. You can also specify an
+    #   expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset that has the specified property. You can specify
+    #   an expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property. You can specify an expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_alias
+    #   The alias of the asset property. You can also specify an expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_value
+    #   The value to send to the asset property. This value contains
+    #   timestamp, quality, and value (TQV) information.
+    #   @return [Types::AssetPropertyValue]
+    #
+    class IotSiteWiseAction < Struct.new(
+      :entry_id,
+      :asset_id,
+      :property_id,
+      :property_alias,
+      :property_value)
       include Aws::Structure
     end
 
@@ -2301,6 +2745,25 @@ module Aws::IoTEvents
     #                     type: "STRING", # required, accepts STRING, JSON
     #                   },
     #                 },
+    #                 iot_site_wise: {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_value: { # required
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: {
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -2409,6 +2872,25 @@ module Aws::IoTEvents
     #                   payload: {
     #                     content_expression: "ContentExpression", # required
     #                     type: "STRING", # required, accepts STRING, JSON
+    #                   },
+    #                 },
+    #                 iot_site_wise: {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_value: { # required
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: {
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
     #                   },
     #                 },
     #               },
@@ -2521,6 +3003,25 @@ module Aws::IoTEvents
     #                     type: "STRING", # required, accepts STRING, JSON
     #                   },
     #                 },
+    #                 iot_site_wise: {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_value: { # required
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: {
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
+    #                   },
+    #                 },
     #               },
     #             ],
     #           },
@@ -2610,6 +3111,25 @@ module Aws::IoTEvents
     #                   payload: {
     #                     content_expression: "ContentExpression", # required
     #                     type: "STRING", # required, accepts STRING, JSON
+    #                   },
+    #                 },
+    #                 iot_site_wise: {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_value: { # required
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: {
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
     #                   },
     #                 },
     #               },
@@ -2991,6 +3511,25 @@ module Aws::IoTEvents
     #                       type: "STRING", # required, accepts STRING, JSON
     #                     },
     #                   },
+    #                   iot_site_wise: {
+    #                     entry_id: "AssetPropertyEntryId",
+    #                     asset_id: "AssetId",
+    #                     property_id: "AssetPropertyId",
+    #                     property_alias: "AssetPropertyAlias",
+    #                     property_value: { # required
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: {
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -3080,6 +3619,25 @@ module Aws::IoTEvents
     #                     payload: {
     #                       content_expression: "ContentExpression", # required
     #                       type: "STRING", # required, accepts STRING, JSON
+    #                     },
+    #                   },
+    #                   iot_site_wise: {
+    #                     entry_id: "AssetPropertyEntryId",
+    #                     asset_id: "AssetId",
+    #                     property_id: "AssetPropertyId",
+    #                     property_alias: "AssetPropertyAlias",
+    #                     property_value: { # required
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: {
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
     #                     },
     #                   },
     #                 },
@@ -3176,6 +3734,25 @@ module Aws::IoTEvents
     #                       type: "STRING", # required, accepts STRING, JSON
     #                     },
     #                   },
+    #                   iot_site_wise: {
+    #                     entry_id: "AssetPropertyEntryId",
+    #                     asset_id: "AssetId",
+    #                     property_id: "AssetPropertyId",
+    #                     property_alias: "AssetPropertyAlias",
+    #                     property_value: { # required
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: {
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -3269,6 +3846,25 @@ module Aws::IoTEvents
     #                       type: "STRING", # required, accepts STRING, JSON
     #                     },
     #                   },
+    #                   iot_site_wise: {
+    #                     entry_id: "AssetPropertyEntryId",
+    #                     asset_id: "AssetId",
+    #                     property_id: "AssetPropertyId",
+    #                     property_alias: "AssetPropertyAlias",
+    #                     property_value: { # required
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: {
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
+    #                     },
+    #                   },
     #                 },
     #               ],
     #             },
@@ -3355,6 +3951,122 @@ module Aws::IoTEvents
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TagrisAccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TagrisInternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] sweep_list_item
+    #   @return [Types::TagrisSweepListItem]
+    #
+    class TagrisInvalidArnException < Struct.new(
+      :message,
+      :sweep_list_item)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TagrisInvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_existence_information
+    #   @return [Hash<String,String>]
+    #
+    class TagrisPartialResourcesExistResultsException < Struct.new(
+      :message,
+      :resource_existence_information)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagrisSweepListItem
+    #   data as a hash:
+    #
+    #       {
+    #         tagris_account_id: "TagrisAccountId",
+    #         tagris_amazon_resource_name: "TagrisAmazonResourceName",
+    #         tagris_internal_id: "TagrisInternalId",
+    #         tagris_version: 1,
+    #       }
+    #
+    # @!attribute [rw] tagris_account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] tagris_amazon_resource_name
+    #   @return [String]
+    #
+    # @!attribute [rw] tagris_internal_id
+    #   @return [String]
+    #
+    # @!attribute [rw] tagris_version
+    #   @return [Integer]
+    #
+    class TagrisSweepListItem < Struct.new(
+      :tagris_account_id,
+      :tagris_amazon_resource_name,
+      :tagris_internal_id,
+      :tagris_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TagrisThrottledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagrisVerifyResourcesExistInput
+    #   data as a hash:
+    #
+    #       {
+    #         tagris_sweep_list: [ # required
+    #           {
+    #             tagris_account_id: "TagrisAccountId",
+    #             tagris_amazon_resource_name: "TagrisAmazonResourceName",
+    #             tagris_internal_id: "TagrisInternalId",
+    #             tagris_version: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] tagris_sweep_list
+    #   @return [Array<Types::TagrisSweepListItem>]
+    #
+    class TagrisVerifyResourcesExistInput < Struct.new(
+      :tagris_sweep_list)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tagris_sweep_list_result
+    #   @return [Hash<String,String>]
+    #
+    class TagrisVerifyResourcesExistOutput < Struct.new(
+      :tagris_sweep_list_result)
+      include Aws::Structure
+    end
 
     # The request could not be completed due to throttling.
     #
@@ -3457,6 +4169,25 @@ module Aws::IoTEvents
     #               payload: {
     #                 content_expression: "ContentExpression", # required
     #                 type: "STRING", # required, accepts STRING, JSON
+    #               },
+    #             },
+    #             iot_site_wise: {
+    #               entry_id: "AssetPropertyEntryId",
+    #               asset_id: "AssetId",
+    #               property_id: "AssetPropertyId",
+    #               property_alias: "AssetPropertyAlias",
+    #               property_value: { # required
+    #                 value: { # required
+    #                   string_value: "AssetPropertyStringValue",
+    #                   integer_value: "AssetPropertyIntegerValue",
+    #                   double_value: "AssetPropertyDoubleValue",
+    #                   boolean_value: "AssetPropertyBooleanValue",
+    #                 },
+    #                 timestamp: {
+    #                   time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                   offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                 },
+    #                 quality: "AssetPropertyQuality",
     #               },
     #             },
     #           },
@@ -3621,6 +4352,25 @@ module Aws::IoTEvents
     #                             type: "STRING", # required, accepts STRING, JSON
     #                           },
     #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -3710,6 +4460,25 @@ module Aws::IoTEvents
     #                           payload: {
     #                             content_expression: "ContentExpression", # required
     #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
     #                           },
     #                         },
     #                       },
@@ -3806,6 +4575,25 @@ module Aws::IoTEvents
     #                             type: "STRING", # required, accepts STRING, JSON
     #                           },
     #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
+    #                           },
+    #                         },
     #                       },
     #                     ],
     #                   },
@@ -3897,6 +4685,25 @@ module Aws::IoTEvents
     #                           payload: {
     #                             content_expression: "ContentExpression", # required
     #                             type: "STRING", # required, accepts STRING, JSON
+    #                           },
+    #                         },
+    #                         iot_site_wise: {
+    #                           entry_id: "AssetPropertyEntryId",
+    #                           asset_id: "AssetId",
+    #                           property_id: "AssetPropertyId",
+    #                           property_alias: "AssetPropertyAlias",
+    #                           property_value: { # required
+    #                             value: { # required
+    #                               string_value: "AssetPropertyStringValue",
+    #                               integer_value: "AssetPropertyIntegerValue",
+    #                               double_value: "AssetPropertyDoubleValue",
+    #                               boolean_value: "AssetPropertyBooleanValue",
+    #                             },
+    #                             timestamp: {
+    #                               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                             },
+    #                             quality: "AssetPropertyQuality",
     #                           },
     #                         },
     #                       },

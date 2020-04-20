@@ -715,6 +715,9 @@
   "Support": {
     "models": "support/2013-04-15"
   },
+  "Synthetics": {
+    "models": "synthetics/2017-10-11"
+  },
   "Textract": {
     "models": "textract/2018-06-27"
   },

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.299.0 (2020-04-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Synthetics`.
+
 1.298.0 (2020-04-17)
 ------------------
 

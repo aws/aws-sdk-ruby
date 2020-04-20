@@ -21,6 +21,7 @@ module Aws::CostExplorer
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
+    CostCategoryMaxResults = Shapes::IntegerShape.new(name: 'CostCategoryMaxResults')
     CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
     CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
     CostCategoryReferencesList = Shapes::ListShape.new(name: 'CostCategoryReferencesList')
@@ -108,6 +109,8 @@ module Aws::CostExplorer
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
     ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
+    MatchOption = Shapes::StringShape.new(name: 'MatchOption')
+    MatchOptions = Shapes::ListShape.new(name: 'MatchOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metric = Shapes::StringShape.new(name: 'Metric')
     MetricAmount = Shapes::StringShape.new(name: 'MetricAmount')
@@ -226,6 +229,7 @@ module Aws::CostExplorer
     CostCategoryReference.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Name"))
     CostCategoryReference.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
     CostCategoryReference.add_member(:effective_end, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveEnd"))
+    CostCategoryReference.add_member(:number_of_rules, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "NumberOfRules"))
     CostCategoryReference.struct_class = Types::CostCategoryReference
 
     CostCategoryReferencesList.member = Shapes::ShapeRef.new(shape: CostCategoryReference)
@@ -311,6 +315,7 @@ module Aws::CostExplorer
 
     DimensionValues.add_member(:key, Shapes::ShapeRef.new(shape: Dimension, location_name: "Key"))
     DimensionValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    DimensionValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
     DimensionValues.struct_class = Types::DimensionValues
 
     DimensionValuesWithAttributes.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
@@ -585,11 +590,14 @@ module Aws::CostExplorer
 
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListCostCategoryDefinitionsRequest.struct_class = Types::ListCostCategoryDefinitionsRequest
 
     ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, Shapes::ShapeRef.new(shape: CostCategoryReferencesList, location_name: "CostCategoryReferences"))
     ListCostCategoryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsResponse.struct_class = Types::ListCostCategoryDefinitionsResponse
+
+    MatchOptions.member = Shapes::ShapeRef.new(shape: MatchOption)
 
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
@@ -845,6 +853,7 @@ module Aws::CostExplorer
 
     TagValues.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     TagValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    TagValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
     TagValues.struct_class = Types::TagValues
 
     TagValuesList.member = Shapes::ShapeRef.new(shape: TagValues)
@@ -1111,6 +1120,12 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|

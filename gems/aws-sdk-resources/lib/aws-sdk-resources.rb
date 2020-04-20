@@ -210,6 +210,7 @@ module Aws
   autoload :States, 'aws-sdk-states'
   autoload :StorageGateway, 'aws-sdk-storagegateway'
   autoload :Support, 'aws-sdk-support'
+  autoload :Synthetics, 'aws-sdk-synthetics'
   autoload :Textract, 'aws-sdk-textract'
   autoload :TranscribeService, 'aws-sdk-transcribeservice'
   autoload :TranscribeStreamingService, 'aws-sdk-transcribestreamingservice'

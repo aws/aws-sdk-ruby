@@ -48,7 +48,7 @@ module Aws::S3
     # @raise [NotImplementedError]
     # @api private
     def load
-      msg = '#load is not implemented, data only available via enumeration'
+      msg = "#load is not implemented, data only available via enumeration"
       raise NotImplementedError, msg
     end
     alias :reload :load
@@ -820,7 +820,7 @@ module Aws::S3
       value = args[0] || options.delete(:name)
       case value
       when String then value
-      when nil then raise ArgumentError, 'missing required option :name'
+      when nil then raise ArgumentError, "missing required option :name"
       else
         msg = "expected :name to be a String, got #{value.class}"
         raise ArgumentError, msg
@@ -829,8 +829,8 @@ module Aws::S3
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = 'pass options to configure the waiter; '\
-              'yielding the waiter is deprecated'
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-04-20)
+------------------
+
+* Feature - You can now export an OpenAPI 3.0 compliant API definition file for Amazon API Gateway HTTP APIs using the Export API.
+
 1.18.0 (2020-03-23)
 ------------------
 
