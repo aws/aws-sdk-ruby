@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.490 (2020-04-20)
+------------------
+
 * Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
