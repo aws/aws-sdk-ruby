@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `presigned_request` method to the `Presigner` class. This method returns a URL and headers necessary rather than hoisting them onto the query string.
+* Feature - Force HTTPS when using `virtual_host: true` on the `Presigner` class.
+
 1.62.0 (2020-04-20)
 ------------------
 
