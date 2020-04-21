@@ -1268,7 +1268,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -3143,6 +3143,57 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportApiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         export_version: "__string",
+    #         include_extensions: false,
+    #         output_type: "__string", # required
+    #         specification: "__string", # required
+    #         stage_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] export_version
+    #   @return [String]
+    #
+    # @!attribute [rw] include_extensions
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_type
+    #   @return [String]
+    #
+    # @!attribute [rw] specification
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   @return [String]
+    #
+    class ExportApiRequest < Struct.new(
+      :api_id,
+      :export_version,
+      :include_extensions,
+      :output_type,
+      :specification,
+      :stage_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] body
+    #   Represents an exported definition of an API in a particular output
+    #   format, for example, YAML. The API is serialized to the requested
+    #   specification, for example, OpenAPI 3.0.
+    #   @return [String]
+    #
+    class ExportApiResponse < Struct.new(
+      :body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApiMappingRequest
     #   data as a hash:
     #
@@ -4828,7 +4879,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -6555,7 +6606,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior

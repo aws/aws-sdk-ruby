@@ -167,8 +167,8 @@ module Aws
 
     # @api private
     def eager_autoload!(*args)
-      msg = 'Aws.eager_autoload is no longer needed, usage of '
-      msg << 'autoload has been replaced with require statements'
+      msg = 'Aws.eager_autoload is no longer needed, usage of '\
+            'autoload has been replaced with require statements'
       warn(msg)
     end
 

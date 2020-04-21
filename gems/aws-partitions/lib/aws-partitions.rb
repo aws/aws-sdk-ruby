@@ -426,6 +426,7 @@ module Aws
             'States' => 'states',
             'StorageGateway' => 'storagegateway',
             'Support' => 'support',
+            'Synthetics' => 'synthetics',
             'Textract' => 'textract',
             'TranscribeService' => 'transcribe',
             'TranscribeStreamingService' => 'transcribestreaming',

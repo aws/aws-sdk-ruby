@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+
 1.81.0 (2020-04-08)
 ------------------
 

@@ -543,7 +543,10 @@ module Aws::RDS
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
     TargetGroupList = Shapes::ListShape.new(name: 'TargetGroupList')
+    TargetHealth = Shapes::StructureShape.new(name: 'TargetHealth')
+    TargetHealthReason = Shapes::StringShape.new(name: 'TargetHealthReason')
     TargetList = Shapes::ListShape.new(name: 'TargetList')
+    TargetState = Shapes::StringShape.new(name: 'TargetState')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     Timezone = Shapes::StructureShape.new(name: 'Timezone')
     UpgradeTarget = Shapes::StructureShape.new(name: 'UpgradeTarget')
@@ -1413,6 +1416,7 @@ module Aws::RDS
     DBProxyTarget.add_member(:rds_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "RdsResourceId"))
     DBProxyTarget.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
     DBProxyTarget.add_member(:type, Shapes::ShapeRef.new(shape: TargetType, location_name: "Type"))
+    DBProxyTarget.add_member(:target_health, Shapes::ShapeRef.new(shape: TargetHealth, location_name: "TargetHealth"))
     DBProxyTarget.struct_class = Types::DBProxyTarget
 
     DBProxyTargetAlreadyRegisteredFault.struct_class = Types::DBProxyTargetAlreadyRegisteredFault
@@ -3111,6 +3115,11 @@ module Aws::RDS
 
     TargetGroupList.member = Shapes::ShapeRef.new(shape: DBProxyTargetGroup)
 
+    TargetHealth.add_member(:state, Shapes::ShapeRef.new(shape: TargetState, location_name: "State"))
+    TargetHealth.add_member(:reason, Shapes::ShapeRef.new(shape: TargetHealthReason, location_name: "Reason"))
+    TargetHealth.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    TargetHealth.struct_class = Types::TargetHealth
+
     TargetList.member = Shapes::ShapeRef.new(shape: DBProxyTarget)
 
     Timezone.add_member(:timezone_name, Shapes::ShapeRef.new(shape: String, location_name: "TimezoneName"))
@@ -3231,8 +3240,10 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: AddTagsToResourceMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
       end)
 
       api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -4286,6 +4297,8 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
       end)
 
       api.add_operation(:modify_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -4595,6 +4608,8 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
       end)
 
       api.add_operation(:reset_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|

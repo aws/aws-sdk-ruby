@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-04-17)
+------------------
+
+* Feature - Documentation updates for opsworkscm
+
 1.31.0 (2020-03-31)
 ------------------
 

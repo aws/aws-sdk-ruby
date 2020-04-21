@@ -32,6 +32,12 @@ module Aws::IoTEvents
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
   # * {ServiceUnavailableException}
+  # * {TagrisAccessDeniedException}
+  # * {TagrisInternalServiceException}
+  # * {TagrisInvalidArnException}
+  # * {TagrisInvalidParameterException}
+  # * {TagrisPartialResourcesExistResultsException}
+  # * {TagrisThrottledException}
   # * {ThrottlingException}
   # * {UnsupportedOperationException}
   #
@@ -146,6 +152,106 @@ module Aws::IoTEvents
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::IoTEvents::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisAccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTEvents::Types::TagrisAccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisInternalServiceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTEvents::Types::TagrisInternalServiceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisInvalidArnException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTEvents::Types::TagrisInvalidArnException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def sweep_list_item
+        @data[:sweep_list_item]
+      end
+    end
+
+    class TagrisInvalidParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTEvents::Types::TagrisInvalidParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisPartialResourcesExistResultsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTEvents::Types::TagrisPartialResourcesExistResultsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_existence_information
+        @data[:resource_existence_information]
+      end
+    end
+
+    class TagrisThrottledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IoTEvents::Types::TagrisThrottledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-04-16)
+------------------
+
+* Feature - Adding ThrottlingException
+
 1.21.0 (2020-03-09)
 ------------------
 

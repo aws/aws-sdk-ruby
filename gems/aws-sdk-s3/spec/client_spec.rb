@@ -20,14 +20,6 @@ module Aws
         S3::BUCKET_REGIONS.clear
       end
 
-      it 'raises an error when credentials are missing' do
-        creds = Credentials.new(nil, nil)
-        client = Client.new(credentials: creds)
-        expect do
-          client.list_buckets
-        end.to raise_error(Aws::Errors::MissingCredentialsError)
-      end
-
       it 'raises an error when region is missing' do
         expect do
           Client.new(region: nil)

@@ -532,6 +532,17 @@ module Aws::EC2
     #   keypair = ec2.create_key_pair({
     #     key_name: "String", # required
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :key_name
@@ -543,6 +554,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new key pair.
     # @return [KeyPair]
     def create_key_pair(options = {})
       resp = @client.create_key_pair(options)
@@ -723,6 +736,17 @@ module Aws::EC2
     #     group_name: "String",
     #     strategy: "cluster", # accepts cluster, spread, partition
     #     partition_count: 1,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -740,6 +764,8 @@ module Aws::EC2
     # @option options [Integer] :partition_count
     #   The number of partitions. Valid only when **Strategy** is set to
     #   `partition`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new placement group.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
       resp = @client.create_placement_group(options)
@@ -1238,6 +1264,17 @@ module Aws::EC2
     #     dry_run: false,
     #     key_name: "String", # required
     #     public_key_material: "data", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -1250,6 +1287,8 @@ module Aws::EC2
     # @option options [required, String, IO] :public_key_material
     #   The public key. For API calls, the text must be base64-encoded. For
     #   command line tools, base64 encoding is performed for you.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the imported key pair.
     # @return [KeyPairInfo]
     def import_key_pair(options = {})
       resp = @client.import_key_pair(options)
@@ -2088,9 +2127,21 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `key-pair-id` - The ID of the key pair.
+    #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     # @option options [Array<String>] :key_names
     #   The key pair names.
     #
@@ -2486,6 +2537,16 @@ module Aws::EC2
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
     #     `spread` \| `partition`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

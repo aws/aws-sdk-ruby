@@ -93,6 +93,9 @@ module Aws::ApiGatewayV2
     DomainNameStatus = Shapes::StringShape.new(name: 'DomainNameStatus')
     DomainNames = Shapes::StructureShape.new(name: 'DomainNames')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    ExportApiRequest = Shapes::StructureShape.new(name: 'ExportApiRequest')
+    ExportApiResponse = Shapes::StructureShape.new(name: 'ExportApiResponse')
+    ExportedApi = Shapes::BlobShape.new(name: 'ExportedApi')
     GetApiMappingRequest = Shapes::StructureShape.new(name: 'GetApiMappingRequest')
     GetApiMappingResponse = Shapes::StructureShape.new(name: 'GetApiMappingResponse')
     GetApiMappingsRequest = Shapes::StructureShape.new(name: 'GetApiMappingsRequest')
@@ -795,6 +798,19 @@ module Aws::ApiGatewayV2
     DomainNames.add_member(:items, Shapes::ShapeRef.new(shape: __listOfDomainName, location_name: "items"))
     DomainNames.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DomainNames.struct_class = Types::DomainNames
+
+    ExportApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiId"))
+    ExportApiRequest.add_member(:export_version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "exportVersion"))
+    ExportApiRequest.add_member(:include_extensions, Shapes::ShapeRef.new(shape: __boolean, location: "querystring", location_name: "includeExtensions"))
+    ExportApiRequest.add_member(:output_type, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "outputType", metadata: {"enum"=>["YAML", "JSON"]}))
+    ExportApiRequest.add_member(:specification, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "specification", metadata: {"enum"=>["OAS30"]}))
+    ExportApiRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "stageName"))
+    ExportApiRequest.struct_class = Types::ExportApiRequest
+
+    ExportApiResponse.add_member(:body, Shapes::ShapeRef.new(shape: ExportedApi, location_name: "body"))
+    ExportApiResponse.struct_class = Types::ExportApiResponse
+    ExportApiResponse[:payload] = :body
+    ExportApiResponse[:payload_member] = ExportApiResponse.member(:body)
 
     GetApiMappingRequest.add_member(:api_mapping_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "apiMappingId"))
     GetApiMappingRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "domainName"))
@@ -2020,6 +2036,17 @@ module Aws::ApiGatewayV2
         o.output = Shapes::ShapeRef.new(shape: DeleteVpcLinkResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:export_api, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportApi"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/apis/{apiId}/exports/{specification}"
+        o.input = Shapes::ShapeRef.new(shape: ExportApiRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportApiResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:get_api, Seahorse::Model::Operation.new.tap do |o|

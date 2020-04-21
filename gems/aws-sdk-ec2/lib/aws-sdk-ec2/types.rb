@@ -5885,6 +5885,17 @@ module Aws::EC2
     #       {
     #         key_name: "String", # required
     #         dry_run: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] key_name
@@ -5900,11 +5911,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new key pair.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPairRequest AWS API Documentation
     #
     class CreateKeyPairRequest < Struct.new(
       :key_name,
-      :dry_run)
+      :dry_run,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -6844,6 +6860,17 @@ module Aws::EC2
     #         group_name: "String",
     #         strategy: "cluster", # accepts cluster, spread, partition
     #         partition_count: 1,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -6869,13 +6896,29 @@ module Aws::EC2
     #   `partition`.
     #   @return [Integer]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new placement group.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupRequest AWS API Documentation
     #
     class CreatePlacementGroupRequest < Struct.new(
       :dry_run,
       :group_name,
       :strategy,
-      :partition_count)
+      :partition_count,
+      :tag_specifications)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] placement_group
+    #   Describes a placement group.
+    #   @return [Types::PlacementGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupResult AWS API Documentation
+    #
+    class CreatePlacementGroupResult < Struct.new(
+      :placement_group)
       include Aws::Structure
     end
 
@@ -9672,12 +9715,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         key_name: "KeyPairName", # required
+    #         key_name: "KeyPairName",
+    #         key_pair_id: "KeyPairId",
     #         dry_run: false,
     #       }
     #
     # @!attribute [rw] key_name
     #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_id
+    #   The ID of the key pair.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -9691,6 +9739,7 @@ module Aws::EC2
     #
     class DeleteKeyPairRequest < Struct.new(
       :key_name,
+      :key_pair_id,
       :dry_run)
       include Aws::Structure
     end
@@ -13946,7 +13995,7 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance.
     #
     #   * `state` - The state of the association (`associating` \|
-    #     `associated` \| `disassociating` \| `disassociated`).
+    #     `associated` \| `disassociating`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -15453,9 +15502,21 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
+    #   * `key-pair-id` - The ID of the key pair.
+    #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] key_names
@@ -16759,6 +16820,16 @@ module Aws::EC2
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
     #     `spread` \| `partition`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -19086,13 +19157,14 @@ module Aws::EC2
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
     #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
-    #     `fpga-image` \| `image` \| `instance` \| `host-reservation` \|
-    #     `internet-gateway` \| `launch-template` \| `natgateway` \|
-    #     `network-acl` \| `network-interface` \| `placement-group` \|
-    #     `reserved-instances` \| `route-table` \| `security-group` \|
-    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
-    #     `vpc` \| `vpc-endpoint` \| `vpc-endpoint-service` \|
-    #     `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`).
+    #     `fpga-image` \| `host-reservation` \| `image` \| `instance` \|
+    #     `internet-gateway` \| `key-pair` \| `launch-template` \|
+    #     `natgateway` \| `network-acl` \| `network-interface` \|
+    #     `placement-group` \| `reserved-instances` \| `route-table` \|
+    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
+    #     `subnet` \| `volume` \| `vpc` \| `vpc-endpoint` \|
+    #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
+    #     `vpn-connection` \| `vpn-gateway`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA"
@@ -27384,6 +27456,17 @@ module Aws::EC2
     #         dry_run: false,
     #         key_name: "String", # required
     #         public_key_material: "data", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -27402,12 +27485,17 @@ module Aws::EC2
     #   command line tools, base64 encoding is performed for you.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the imported key pair.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairRequest AWS API Documentation
     #
     class ImportKeyPairRequest < Struct.new(
       :dry_run,
       :key_name,
-      :public_key_material)
+      :public_key_material,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -27420,11 +27508,21 @@ module Aws::EC2
     #   The key pair name you provided.
     #   @return [String]
     #
+    # @!attribute [rw] key_pair_id
+    #   The ID of the resulting key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags applied to the imported key pair.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairResult AWS API Documentation
     #
     class ImportKeyPairResult < Struct.new(
       :key_fingerprint,
-      :key_name)
+      :key_name,
+      :key_pair_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -29566,13 +29664,18 @@ module Aws::EC2
     #   The ID of the key pair.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags applied to the key pair.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPair AWS API Documentation
     #
     class KeyPair < Struct.new(
       :key_fingerprint,
       :key_material,
       :key_name,
-      :key_pair_id)
+      :key_pair_id,
+      :tags)
       include Aws::Structure
     end
 

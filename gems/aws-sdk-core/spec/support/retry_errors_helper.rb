@@ -37,7 +37,7 @@ def handle_with_retry(test_cases)
   expect(i).to(
     eq(test_cases.size),
     "Wrong number of retries. Handler was called #{i} times but "\
-            "#{test_cases.size} test cases were defined."
+    "#{test_cases.size} test cases were defined."
   )
 
   # Handle has finished called.  Apply final expectations.

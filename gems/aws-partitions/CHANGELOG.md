@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.299.0 (2020-04-20)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Synthetics`.
+
+1.298.0 (2020-04-17)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.297.0 (2020-04-16)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.296.0 (2020-04-08)
 ------------------
 

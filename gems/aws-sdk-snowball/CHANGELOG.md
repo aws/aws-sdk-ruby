@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-04-16)
+------------------
+
+* Feature - An update to the Snowball Edge Storage Optimized device has been launched. Like the previous version, it has 80 TB of capacity for data transfer. Now it has 40 vCPUs, 80 GiB, and a 1 TiB SATA SSD of memory for EC2 compatible compute. The 80 TB of capacity can also be used for EBS-like volumes for AMIs.
+
 1.24.0 (2020-03-09)
 ------------------
 

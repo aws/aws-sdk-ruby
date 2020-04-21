@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-04-16)
+------------------
+
+* Feature - AWS Elemental MediaConvert now allows you to specify your input captions frame rate for SCC captions sources.
+
 1.45.0 (2020-04-08)
 ------------------
 

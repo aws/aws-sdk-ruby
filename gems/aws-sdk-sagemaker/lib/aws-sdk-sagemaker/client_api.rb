@@ -657,6 +657,7 @@ module Aws::SageMaker
     ProcessingInputs = Shapes::ListShape.new(name: 'ProcessingInputs')
     ProcessingInstanceCount = Shapes::IntegerShape.new(name: 'ProcessingInstanceCount')
     ProcessingInstanceType = Shapes::StringShape.new(name: 'ProcessingInstanceType')
+    ProcessingJob = Shapes::StructureShape.new(name: 'ProcessingJob')
     ProcessingJobArn = Shapes::StringShape.new(name: 'ProcessingJobArn')
     ProcessingJobName = Shapes::StringShape.new(name: 'ProcessingJobName')
     ProcessingJobStatus = Shapes::StringShape.new(name: 'ProcessingJobStatus')
@@ -3135,6 +3136,30 @@ module Aws::SageMaker
 
     ProcessingInputs.member = Shapes::ShapeRef.new(shape: ProcessingInput)
 
+    ProcessingJob.add_member(:processing_inputs, Shapes::ShapeRef.new(shape: ProcessingInputs, location_name: "ProcessingInputs"))
+    ProcessingJob.add_member(:processing_output_config, Shapes::ShapeRef.new(shape: ProcessingOutputConfig, location_name: "ProcessingOutputConfig"))
+    ProcessingJob.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, location_name: "ProcessingJobName"))
+    ProcessingJob.add_member(:processing_resources, Shapes::ShapeRef.new(shape: ProcessingResources, location_name: "ProcessingResources"))
+    ProcessingJob.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: ProcessingStoppingCondition, location_name: "StoppingCondition"))
+    ProcessingJob.add_member(:app_specification, Shapes::ShapeRef.new(shape: AppSpecification, location_name: "AppSpecification"))
+    ProcessingJob.add_member(:environment, Shapes::ShapeRef.new(shape: ProcessingEnvironmentMap, location_name: "Environment"))
+    ProcessingJob.add_member(:network_config, Shapes::ShapeRef.new(shape: NetworkConfig, location_name: "NetworkConfig"))
+    ProcessingJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    ProcessingJob.add_member(:experiment_config, Shapes::ShapeRef.new(shape: ExperimentConfig, location_name: "ExperimentConfig"))
+    ProcessingJob.add_member(:processing_job_arn, Shapes::ShapeRef.new(shape: ProcessingJobArn, location_name: "ProcessingJobArn"))
+    ProcessingJob.add_member(:processing_job_status, Shapes::ShapeRef.new(shape: ProcessingJobStatus, location_name: "ProcessingJobStatus"))
+    ProcessingJob.add_member(:exit_message, Shapes::ShapeRef.new(shape: ExitMessage, location_name: "ExitMessage"))
+    ProcessingJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    ProcessingJob.add_member(:processing_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProcessingEndTime"))
+    ProcessingJob.add_member(:processing_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProcessingStartTime"))
+    ProcessingJob.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ProcessingJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    ProcessingJob.add_member(:monitoring_schedule_arn, Shapes::ShapeRef.new(shape: MonitoringScheduleArn, location_name: "MonitoringScheduleArn"))
+    ProcessingJob.add_member(:auto_ml_job_arn, Shapes::ShapeRef.new(shape: AutoMLJobArn, location_name: "AutoMLJobArn"))
+    ProcessingJob.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, location_name: "TrainingJobArn"))
+    ProcessingJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ProcessingJob.struct_class = Types::ProcessingJob
+
     ProcessingJobSummaries.member = Shapes::ShapeRef.new(shape: ProcessingJobSummary)
 
     ProcessingJobSummary.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, required: true, location_name: "ProcessingJobName"))
@@ -3598,6 +3623,7 @@ module Aws::SageMaker
 
     TrialComponentSourceDetail.add_member(:source_arn, Shapes::ShapeRef.new(shape: TrialComponentSourceArn, location_name: "SourceArn"))
     TrialComponentSourceDetail.add_member(:training_job, Shapes::ShapeRef.new(shape: TrainingJob, location_name: "TrainingJob"))
+    TrialComponentSourceDetail.add_member(:processing_job, Shapes::ShapeRef.new(shape: ProcessingJob, location_name: "ProcessingJob"))
     TrialComponentSourceDetail.struct_class = Types::TrialComponentSourceDetail
 
     TrialComponentStatus.add_member(:primary_status, Shapes::ShapeRef.new(shape: TrialComponentPrimaryStatus, location_name: "PrimaryStatus"))

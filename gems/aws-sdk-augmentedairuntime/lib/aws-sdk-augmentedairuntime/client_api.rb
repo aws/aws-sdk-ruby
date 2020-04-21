@@ -177,6 +177,7 @@ module Aws::AugmentedAIRuntime
         o.input = Shapes::ShapeRef.new(shape: ListHumanLoopsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListHumanLoopsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(

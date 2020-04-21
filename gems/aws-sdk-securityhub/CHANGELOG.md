@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-04-16)
+------------------
+
+* Feature - Added a new BatchUpdateFindings action, which allows customers to update selected information about their findings. Security Hub customers use BatchUpdateFindings to track their investigation into a finding. BatchUpdateFindings is intended to replace the UpdateFindings action, which is deprecated.
+
 1.22.0 (2020-03-26)
 ------------------
 

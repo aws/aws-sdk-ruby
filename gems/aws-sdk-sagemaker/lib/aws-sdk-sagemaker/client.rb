@@ -507,7 +507,7 @@ module Aws::SageMaker
     #           default_value: "ParameterValue",
     #         },
     #       ],
-    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #       supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #       supports_distributed_training: false,
     #       metric_definitions: [
     #         {
@@ -588,7 +588,7 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
@@ -965,7 +965,7 @@ module Aws::SageMaker
     #     input_config: { # required
     #       s3_uri: "S3Uri", # required
     #       data_input_config: "DataInputConfig", # required
-    #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST
+    #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
@@ -1409,7 +1409,9 @@ module Aws::SageMaker
     #   The name of your flow definition.
     #
     # @option params [Types::HumanLoopRequestSource] :human_loop_request_source
-    #   Container for configuring the source of human task requests.
+    #   Container for configuring the source of human task requests. Use to
+    #   specify if Amazon Rekognition or Amazon Textract is used as an
+    #   integration source.
     #
     # @option params [Types::HumanLoopActivationConfig] :human_loop_activation_config
     #   An object containing information about the events that trigger a human
@@ -1732,7 +1734,7 @@ module Aws::SageMaker
     #         s3_output_path: "S3Uri", # required
     #       },
     #       resource_config: { # required
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -1830,7 +1832,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -3252,7 +3254,7 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
@@ -3660,7 +3662,7 @@ module Aws::SageMaker
     #     trial_component_name: "ExperimentEntityName", # required
     #     display_name: "ExperimentEntityName",
     #     status: {
-    #       primary_status: "InProgress", # accepts InProgress, Completed, Failed
+    #       primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #       message: "TrialComponentStatusMessage",
     #     },
     #     start_time: Time.now,
@@ -4420,7 +4422,7 @@ module Aws::SageMaker
     #   resp.training_specification.supported_hyper_parameters[0].is_required #=> Boolean
     #   resp.training_specification.supported_hyper_parameters[0].default_value #=> String
     #   resp.training_specification.supported_training_instance_types #=> Array
-    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.training_specification.supported_training_instance_types[0] #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.training_specification.supports_distributed_training #=> Boolean
     #   resp.training_specification.metric_definitions #=> Array
     #   resp.training_specification.metric_definitions[0].name #=> String
@@ -4476,7 +4478,7 @@ module Aws::SageMaker
     #   resp.validation_specification.validation_profiles[0].training_job_definition.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.validation_specification.validation_profiles[0].training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.instance_count #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.validation_specification.validation_profiles[0].training_job_definition.resource_config.volume_kms_key_id #=> String
@@ -4764,7 +4766,7 @@ module Aws::SageMaker
     #   resp.role_arn #=> String
     #   resp.input_config.s3_uri #=> String
     #   resp.input_config.data_input_config #=> String
-    #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
+    #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST", "TFLITE"
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv22"
     #
@@ -5206,7 +5208,7 @@ module Aws::SageMaker
     #   resp.training_job_definition.vpc_config.subnets[0] #=> String
     #   resp.training_job_definition.output_data_config.kms_key_id #=> String
     #   resp.training_job_definition.output_data_config.s3_output_path #=> String
-    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.training_job_definition.resource_config.instance_count #=> Integer
     #   resp.training_job_definition.resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
@@ -5266,7 +5268,7 @@ module Aws::SageMaker
     #   resp.training_job_definitions[0].vpc_config.subnets[0] #=> String
     #   resp.training_job_definitions[0].output_data_config.kms_key_id #=> String
     #   resp.training_job_definitions[0].output_data_config.s3_output_path #=> String
-    #   resp.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.training_job_definitions[0].resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.training_job_definitions[0].resource_config.instance_count #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_size_in_gb #=> Integer
     #   resp.training_job_definitions[0].resource_config.volume_kms_key_id #=> String
@@ -5998,7 +6000,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
-    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
@@ -6239,7 +6241,7 @@ module Aws::SageMaker
     #   resp.display_name #=> String
     #   resp.source.source_arn #=> String
     #   resp.source.source_type #=> String
-    #   resp.status.primary_status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.status.primary_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.status.message #=> String
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
@@ -6477,7 +6479,7 @@ module Aws::SageMaker
     # `HyperParameters`, `Tags`, and `Metrics`.
     #
     # @option params [required, String] :resource
-    #   The name of the Amazon SageMaker resource to Search for.
+    #   The name of the Amazon SageMaker resource to search for.
     #
     # @option params [Types::SuggestionQuery] :suggestion_query
     #   Limits the property names that are included in the response.
@@ -8593,7 +8595,7 @@ module Aws::SageMaker
     #   resp.trial_component_summaries[0].display_name #=> String
     #   resp.trial_component_summaries[0].trial_component_source.source_arn #=> String
     #   resp.trial_component_summaries[0].trial_component_source.source_type #=> String
-    #   resp.trial_component_summaries[0].status.primary_status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.trial_component_summaries[0].status.primary_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.trial_component_summaries[0].status.message #=> String
     #   resp.trial_component_summaries[0].start_time #=> Time
     #   resp.trial_component_summaries[0].end_time #=> Time
@@ -8866,9 +8868,9 @@ module Aws::SageMaker
     end
 
     # Finds Amazon SageMaker resources that match a search query. Matching
-    # resource objects are returned as a list of `SearchResult` objects in
-    # the response. You can sort the search results by any resource property
-    # in a ascending or descending order.
+    # resources are returned as a list of `SearchRecord` objects in the
+    # response. You can sort the search results by any resource property in
+    # a ascending or descending order.
     #
     # You can query against the following value types: numeric, text,
     # Boolean, and timestamp.
@@ -8877,9 +8879,9 @@ module Aws::SageMaker
     #   The name of the Amazon SageMaker resource to search for.
     #
     # @option params [Types::SearchExpression] :search_expression
-    #   A Boolean conditional statement. Resource objects must satisfy this
-    #   condition to be included in search results. You must provide at least
-    #   one subexpression, filter, or nested filter. The maximum number of
+    #   A Boolean conditional statement. Resources must satisfy this condition
+    #   to be included in search results. You must provide at least one
+    #   subexpression, filter, or nested filter. The maximum number of
     #   recursive `SubExpressions`, `NestedFilters`, and `Filters` that can be
     #   included in a `SearchExpression` object is 50.
     #
@@ -8892,14 +8894,13 @@ module Aws::SageMaker
     #   `Descending`. The default is `Descending`.
     #
     # @option params [String] :next_token
-    #   If more than `MaxResults` resource objects match the specified
-    #   `SearchExpression`, the `SearchResponse` includes a `NextToken`. The
+    #   If more than `MaxResults` resources match the specified
+    #   `SearchExpression`, the response includes a `NextToken`. The
     #   `NextToken` can be passed to the next `SearchRequest` to continue
-    #   retrieving results for the specified `SearchExpression` and `Sort`
-    #   parameters.
+    #   retrieving results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in a `SearchResponse`.
+    #   The maximum number of results to return.
     #
     # @return [Types::SearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8985,7 +8986,7 @@ module Aws::SageMaker
     #   resp.results[0].training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].training_job.output_data_config.s3_output_path #=> String
-    #   resp.results[0].training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.results[0].training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.results[0].training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].training_job.resource_config.volume_kms_key_id #=> String
@@ -9094,7 +9095,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.trial_component_arn #=> String
     #   resp.results[0].trial_component.source.source_arn #=> String
     #   resp.results[0].trial_component.source.source_type #=> String
-    #   resp.results[0].trial_component.status.primary_status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.results[0].trial_component.status.primary_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.results[0].trial_component.status.message #=> String
     #   resp.results[0].trial_component.start_time #=> Time
     #   resp.results[0].trial_component.end_time #=> Time
@@ -9163,7 +9164,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.input_data_config[0].shuffle_config.seed #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.output_data_config.kms_key_id #=> String
     #   resp.results[0].trial_component.source_detail.training_job.output_data_config.s3_output_path #=> String
-    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.g4dn.xlarge", "ml.g4dn.2xlarge", "ml.g4dn.4xlarge", "ml.g4dn.8xlarge", "ml.g4dn.12xlarge", "ml.g4dn.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.p3dn.24xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.c5n.xlarge", "ml.c5n.2xlarge", "ml.c5n.4xlarge", "ml.c5n.9xlarge", "ml.c5n.18xlarge"
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.instance_count #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.volume_size_in_gb #=> Integer
     #   resp.results[0].trial_component.source_detail.training_job.resource_config.volume_kms_key_id #=> String
@@ -9224,6 +9225,56 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.training_job.tags #=> Array
     #   resp.results[0].trial_component.source_detail.training_job.tags[0].key #=> String
     #   resp.results[0].trial_component.source_detail.training_job.tags[0].value #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].input_name #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].s3_input.s3_uri #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].s3_input.local_path #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].s3_input.s3_data_type #=> String, one of "ManifestFile", "S3Prefix"
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].s3_input.s3_input_mode #=> String, one of "Pipe", "File"
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].s3_input.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_inputs[0].s3_input.s3_compression_type #=> String, one of "None", "Gzip"
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_output_config.outputs #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_output_config.outputs[0].output_name #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_output_config.outputs[0].s3_output.s3_uri #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_output_config.outputs[0].s3_output.local_path #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_output_config.outputs[0].s3_output.s3_upload_mode #=> String, one of "Continuous", "EndOfJob"
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_output_config.kms_key_id #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_job_name #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_resources.cluster_config.instance_count #=> Integer
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_resources.cluster_config.instance_type #=> String, one of "ml.t3.medium", "ml.t3.large", "ml.t3.xlarge", "ml.t3.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.r5.large", "ml.r5.xlarge", "ml.r5.2xlarge", "ml.r5.4xlarge", "ml.r5.8xlarge", "ml.r5.12xlarge", "ml.r5.16xlarge", "ml.r5.24xlarge"
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_resources.cluster_config.volume_size_in_gb #=> Integer
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_resources.cluster_config.volume_kms_key_id #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.results[0].trial_component.source_detail.processing_job.app_specification.image_uri #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.app_specification.container_entrypoint #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.app_specification.container_entrypoint[0] #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.app_specification.container_arguments #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.app_specification.container_arguments[0] #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.environment #=> Hash
+    #   resp.results[0].trial_component.source_detail.processing_job.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.network_config.enable_network_isolation #=> Boolean
+    #   resp.results[0].trial_component.source_detail.processing_job.network_config.vpc_config.security_group_ids #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.network_config.vpc_config.security_group_ids[0] #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.network_config.vpc_config.subnets #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.network_config.vpc_config.subnets[0] #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.role_arn #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.experiment_config.experiment_name #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.experiment_config.trial_name #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.experiment_config.trial_component_display_name #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_job_arn #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.results[0].trial_component.source_detail.processing_job.exit_message #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.failure_reason #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_end_time #=> Time
+    #   resp.results[0].trial_component.source_detail.processing_job.processing_start_time #=> Time
+    #   resp.results[0].trial_component.source_detail.processing_job.last_modified_time #=> Time
+    #   resp.results[0].trial_component.source_detail.processing_job.creation_time #=> Time
+    #   resp.results[0].trial_component.source_detail.processing_job.monitoring_schedule_arn #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.auto_ml_job_arn #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.training_job_arn #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.tags #=> Array
+    #   resp.results[0].trial_component.source_detail.processing_job.tags[0].key #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.tags[0].value #=> String
     #   resp.results[0].trial_component.tags #=> Array
     #   resp.results[0].trial_component.tags[0].key #=> String
     #   resp.results[0].trial_component.tags[0].value #=> String
@@ -10150,7 +10201,7 @@ module Aws::SageMaker
     #     trial_component_name: "ExperimentEntityName", # required
     #     display_name: "ExperimentEntityName",
     #     status: {
-    #       primary_status: "InProgress", # accepts InProgress, Completed, Failed
+    #       primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #       message: "TrialComponentStatusMessage",
     #     },
     #     start_time: Time.now,
@@ -10393,7 +10444,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

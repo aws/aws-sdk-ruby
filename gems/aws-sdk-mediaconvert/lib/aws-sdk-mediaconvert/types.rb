@@ -1696,6 +1696,10 @@ module Aws::MediaConvert
     #           },
     #           file_source_settings: {
     #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #             },
     #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #             time_delta: 1,
     #           },
@@ -1746,6 +1750,45 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Ignore this setting unless your input captions format is SCC. To have
+    # the service compensate for differing framerates between your input
+    # captions and input video, specify the framerate of the captions file.
+    # Specify this value as a fraction, using the settings Framerate
+    # numerator (framerateNumerator) and Framerate denominator
+    # (framerateDenominator). For example, you might specify 24 / 1 for 24
+    # fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001
+    # for 29.97 fps.
+    #
+    # @note When making an API call, you may pass CaptionSourceFramerate
+    #   data as a hash:
+    #
+    #       {
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #       }
+    #
+    # @!attribute [rw] framerate_denominator
+    #   Specify the denominator of the fraction that represents the
+    #   framerate for the setting Caption source framerate
+    #   (CaptionSourceFramerate). Use this setting along with the setting
+    #   Framerate numerator (framerateNumerator).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   Specify the numerator of the fraction that represents the framerate
+    #   for the setting Caption source framerate (CaptionSourceFramerate).
+    #   Use this setting along with the setting Framerate denominator
+    #   (framerateDenominator).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSourceFramerate AWS API Documentation
+    #
+    class CaptionSourceFramerate < Struct.new(
+      :framerate_denominator,
+      :framerate_numerator)
+      include Aws::Structure
+    end
+
     # If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml
     # file, specify the URI of the input captions source file. If your input
     # captions are IMSC in an IMF package, use TrackSourceSettings instead
@@ -1771,6 +1814,10 @@ module Aws::MediaConvert
     #         },
     #         file_source_settings: {
     #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #           },
     #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #           time_delta: 1,
     #         },
@@ -2575,6 +2622,10 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
@@ -3687,6 +3738,10 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
@@ -6832,6 +6887,10 @@ module Aws::MediaConvert
     #
     #       {
     #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #         framerate: {
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #         },
     #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #         time_delta: 1,
     #       }
@@ -6843,6 +6902,17 @@ module Aws::MediaConvert
     #   608 data through using the 608 compatibility bytes fields of the 708
     #   wrapper, and it also translates the 608 data into 708.
     #   @return [String]
+    #
+    # @!attribute [rw] framerate
+    #   Ignore this setting unless your input captions format is SCC. To
+    #   have the service compensate for differing framerates between your
+    #   input captions and input video, specify the framerate of the
+    #   captions file. Specify this value as a fraction, using the settings
+    #   Framerate numerator (framerateNumerator) and Framerate denominator
+    #   (framerateDenominator). For example, you might specify 24 / 1 for 24
+    #   fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001
+    #   for 29.97 fps.
+    #   @return [Types::CaptionSourceFramerate]
     #
     # @!attribute [rw] source_file
     #   External caption file used for loading captions. Accepted file
@@ -6859,6 +6929,7 @@ module Aws::MediaConvert
     #
     class FileSourceSettings < Struct.new(
       :convert_608_to_708,
+      :framerate,
       :source_file,
       :time_delta)
       include Aws::Structure
@@ -8688,6 +8759,10 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                 framerate: {
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                 },
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
@@ -9108,6 +9183,10 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                 framerate: {
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                 },
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
@@ -9724,6 +9803,10 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                     framerate: {
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                     },
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
@@ -10853,6 +10936,10 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                     framerate: {
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                     },
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
@@ -17245,6 +17332,10 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },

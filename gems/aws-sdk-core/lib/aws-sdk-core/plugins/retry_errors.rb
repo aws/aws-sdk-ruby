@@ -167,8 +167,8 @@ a clock skew correction and retry requests with skewed client clocks.
         # Raise if provided value is not one of the retry modes
         if value != 'legacy' && value != 'standard' && value != 'adaptive'
           raise ArgumentError,
-                'Must provide either `legacy`, `standard`, or `adaptive` for '\
-                'retry_mode profile option or for ENV[\'AWS_RETRY_MODE\']'
+            'Must provide either `legacy`, `standard`, or `adaptive` for '\
+            'retry_mode profile option or for ENV[\'AWS_RETRY_MODE\']'
         end
         value
       end
@@ -180,8 +180,8 @@ a clock skew correction and retry requests with skewed client clocks.
         # Raise if provided value is not a positive integer
         if !value.is_a?(Integer) || value <= 0
           raise ArgumentError,
-                'Must provide a positive integer for max_attempts profile '\
-                'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+            'Must provide a positive integer for max_attempts profile '\
+            'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
         end
         value
       end
@@ -194,9 +194,9 @@ a clock skew correction and retry requests with skewed client clocks.
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
           raise ArgumentError,
-                'Must provide either `true` or `false` for '\
-                'adaptive_retry_wait_to_fill profile option or for '\
-                'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
+            'Must provide either `true` or `false` for '\
+            'adaptive_retry_wait_to_fill profile option or for '\
+            'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
         end
 
         value == 'true'
@@ -210,9 +210,9 @@ a clock skew correction and retry requests with skewed client clocks.
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
           raise ArgumentError,
-                'Must provide either `true` or `false` for '\
-                'correct_clock_skew profile option or for '\
-                'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
+            'Must provide either `true` or `false` for '\
+            'correct_clock_skew profile option or for '\
+            'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
         end
 
         value == 'true'

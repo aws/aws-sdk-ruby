@@ -6,7 +6,7 @@ module Aws
       class ReadBytesExceedLengthError < RuntimeError
         def initialize(target_byte, total_len)
           msg = "Attempting reading bytes to offset #{target_byte} exceeds"\
-            " buffer length of #{total_len}"
+                " buffer length of #{total_len}"
           super(msg)
         end
       end
