@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.491 (2020-04-21)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
