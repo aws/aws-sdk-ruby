@@ -52,6 +52,12 @@ module Aws::EC2
       data[:instance_type]
     end
 
+    # Region which is associated with the instance
+    # @return [String]
+    def current_region
+      data.placement.availability_zone.chop
+    end
+
     # The kernel associated with this instance, if applicable.
     # @return [String]
     def kernel_id
