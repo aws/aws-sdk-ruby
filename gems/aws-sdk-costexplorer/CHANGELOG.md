@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-04-21)
+------------------
+
+* Feature - Cost Explorer Rightsizing Recommendations integrates with Compute Optimizer and begins offering across instance family rightsizing recommendations, adding to existing support for within instance family rightsizing recommendations.
+
 1.39.0 (2020-04-20)
 ------------------
 

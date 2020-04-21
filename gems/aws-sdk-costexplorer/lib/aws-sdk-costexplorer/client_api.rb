@@ -134,6 +134,7 @@ module Aws::CostExplorer
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
     PurchasedUnits = Shapes::StringShape.new(name: 'PurchasedUnits')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
+    RecommendationTarget = Shapes::StringShape.new(name: 'RecommendationTarget')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
     ReservationAggregates = Shapes::StructureShape.new(name: 'ReservationAggregates')
@@ -157,6 +158,7 @@ module Aws::CostExplorer
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
     RightsizingRecommendation = Shapes::StructureShape.new(name: 'RightsizingRecommendation')
+    RightsizingRecommendationConfiguration = Shapes::StructureShape.new(name: 'RightsizingRecommendationConfiguration')
     RightsizingRecommendationList = Shapes::ListShape.new(name: 'RightsizingRecommendationList')
     RightsizingRecommendationMetadata = Shapes::StructureShape.new(name: 'RightsizingRecommendationMetadata')
     RightsizingRecommendationSummary = Shapes::StructureShape.new(name: 'RightsizingRecommendationSummary')
@@ -478,6 +480,7 @@ module Aws::CostExplorer
     GetReservationUtilizationResponse.struct_class = Types::GetReservationUtilizationResponse
 
     GetRightsizingRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetRightsizingRecommendationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RightsizingRecommendationConfiguration, location_name: "Configuration"))
     GetRightsizingRecommendationRequest.add_member(:service, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Service"))
     GetRightsizingRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
     GetRightsizingRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
@@ -487,6 +490,7 @@ module Aws::CostExplorer
     GetRightsizingRecommendationResponse.add_member(:summary, Shapes::ShapeRef.new(shape: RightsizingRecommendationSummary, location_name: "Summary"))
     GetRightsizingRecommendationResponse.add_member(:rightsizing_recommendations, Shapes::ShapeRef.new(shape: RightsizingRecommendationList, location_name: "RightsizingRecommendations"))
     GetRightsizingRecommendationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetRightsizingRecommendationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RightsizingRecommendationConfiguration, location_name: "Configuration"))
     GetRightsizingRecommendationResponse.struct_class = Types::GetRightsizingRecommendationResponse
 
     GetSavingsPlansCoverageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
@@ -728,6 +732,10 @@ module Aws::CostExplorer
     RightsizingRecommendation.add_member(:modify_recommendation_detail, Shapes::ShapeRef.new(shape: ModifyRecommendationDetail, location_name: "ModifyRecommendationDetail"))
     RightsizingRecommendation.add_member(:terminate_recommendation_detail, Shapes::ShapeRef.new(shape: TerminateRecommendationDetail, location_name: "TerminateRecommendationDetail"))
     RightsizingRecommendation.struct_class = Types::RightsizingRecommendation
+
+    RightsizingRecommendationConfiguration.add_member(:recommendation_target, Shapes::ShapeRef.new(shape: RecommendationTarget, required: true, location_name: "RecommendationTarget"))
+    RightsizingRecommendationConfiguration.add_member(:benefits_considered, Shapes::ShapeRef.new(shape: GenericBoolean, required: true, location_name: "BenefitsConsidered"))
+    RightsizingRecommendationConfiguration.struct_class = Types::RightsizingRecommendationConfiguration
 
     RightsizingRecommendationList.member = Shapes::ShapeRef.new(shape: RightsizingRecommendation)
 

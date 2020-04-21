@@ -2273,6 +2273,10 @@ module Aws::CostExplorer
     #             values: ["Value"],
     #           },
     #         },
+    #         configuration: {
+    #           recommendation_target: "SAME_INSTANCE_FAMILY", # required, accepts SAME_INSTANCE_FAMILY, CROSS_INSTANCE_FAMILY
+    #           benefits_considered: false, # required
+    #         },
     #         service: "GenericString", # required
     #         page_size: 1,
     #         next_page_token: "NextPageToken",
@@ -2327,6 +2331,15 @@ module Aws::CostExplorer
     #    </note>
     #   @return [Types::Expression]
     #
+    # @!attribute [rw] configuration
+    #   Enables you to customize recommendations across two attributes. You
+    #   can choose to view recommendations for instances within the same
+    #   instance families or across different instance families. You can
+    #   also choose to view your estimated savings associated with
+    #   recommendations with consideration of existing Savings Plans or RI
+    #   benefits, or niether.
+    #   @return [Types::RightsizingRecommendationConfiguration]
+    #
     # @!attribute [rw] service
     #   The specific service that you want recommendations for. The only
     #   valid value for `GetRightsizingRecommendation` is "`AmazonEC2`".
@@ -2346,6 +2359,7 @@ module Aws::CostExplorer
     #
     class GetRightsizingRecommendationRequest < Struct.new(
       :filter,
+      :configuration,
       :service,
       :page_size,
       :next_page_token)
@@ -2368,13 +2382,23 @@ module Aws::CostExplorer
     #   The token to retrieve the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   Enables you to customize recommendations across two attributes. You
+    #   can choose to view recommendations for instances within the same
+    #   instance families or across different instance families. You can
+    #   also choose to view your estimated savings associated with
+    #   recommendations with consideration of existing Savings Plans or RI
+    #   benefits, or niether.
+    #   @return [Types::RightsizingRecommendationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendationResponse AWS API Documentation
     #
     class GetRightsizingRecommendationResponse < Struct.new(
       :metadata,
       :summary,
       :rightsizing_recommendations,
-      :next_page_token)
+      :next_page_token,
+      :configuration)
       include Aws::Structure
     end
 
@@ -3801,6 +3825,40 @@ module Aws::CostExplorer
       :rightsizing_type,
       :modify_recommendation_detail,
       :terminate_recommendation_detail)
+      include Aws::Structure
+    end
+
+    # Enables you to customize recommendations across two attributes. You
+    # can choose to view recommendations for instances within the same
+    # instance families or across different instance families. You can also
+    # choose to view your estimated savings associated with recommendations
+    # with consideration of existing Savings Plans or RI benefits, or
+    # niether.
+    #
+    # @note When making an API call, you may pass RightsizingRecommendationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         recommendation_target: "SAME_INSTANCE_FAMILY", # required, accepts SAME_INSTANCE_FAMILY, CROSS_INSTANCE_FAMILY
+    #         benefits_considered: false, # required
+    #       }
+    #
+    # @!attribute [rw] recommendation_target
+    #   The option to see recommendations within the same instance family,
+    #   or recommendations for instances across other families. The default
+    #   value is `SAME_INSTANCE_FAMILY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] benefits_considered
+    #   The option to consider RI or Savings Plans discount benefits in your
+    #   savings calculation. The default value is `TRUE`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RightsizingRecommendationConfiguration AWS API Documentation
+    #
+    class RightsizingRecommendationConfiguration < Struct.new(
+      :recommendation_target,
+      :benefits_considered)
       include Aws::Structure
     end
 

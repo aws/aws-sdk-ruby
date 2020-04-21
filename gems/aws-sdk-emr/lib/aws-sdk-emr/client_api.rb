@@ -57,6 +57,8 @@ module Aws::EMR
     Command = Shapes::StructureShape.new(name: 'Command')
     CommandList = Shapes::ListShape.new(name: 'CommandList')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    ComputeLimits = Shapes::StructureShape.new(name: 'ComputeLimits')
+    ComputeLimitsUnitType = Shapes::StringShape.new(name: 'ComputeLimitsUnitType')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
     CreateSecurityConfigurationInput = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationInput')
@@ -87,6 +89,8 @@ module Aws::EMR
     FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     GetBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationInput')
     GetBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'GetBlockPublicAccessConfigurationOutput')
+    GetManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyInput')
+    GetManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'GetManagedScalingPolicyOutput')
     HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
     HadoopStepConfig = Shapes::StructureShape.new(name: 'HadoopStepConfig')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -165,6 +169,7 @@ module Aws::EMR
     ListStepsInput = Shapes::StructureShape.new(name: 'ListStepsInput')
     ListStepsOutput = Shapes::StructureShape.new(name: 'ListStepsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    ManagedScalingPolicy = Shapes::StructureShape.new(name: 'ManagedScalingPolicy')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
@@ -184,8 +189,12 @@ module Aws::EMR
     PutAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyOutput')
     PutBlockPublicAccessConfigurationInput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationInput')
     PutBlockPublicAccessConfigurationOutput = Shapes::StructureShape.new(name: 'PutBlockPublicAccessConfigurationOutput')
+    PutManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyInput')
+    PutManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutManagedScalingPolicyOutput')
     RemoveAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyInput')
     RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
+    RemoveManagedScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveManagedScalingPolicyInput')
+    RemoveManagedScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveManagedScalingPolicyOutput')
     RemoveTagsInput = Shapes::StructureShape.new(name: 'RemoveTagsInput')
     RemoveTagsOutput = Shapes::StructureShape.new(name: 'RemoveTagsOutput')
     RepoUpgradeOnBoot = Shapes::StringShape.new(name: 'RepoUpgradeOnBoot')
@@ -370,8 +379,8 @@ module Aws::EMR
     Cluster.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     Cluster.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
     Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ClusterArn"))
-    Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     Cluster.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "OutpostArn"))
+    Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -406,6 +415,12 @@ module Aws::EMR
     Command.struct_class = Types::Command
 
     CommandList.member = Shapes::ShapeRef.new(shape: Command)
+
+    ComputeLimits.add_member(:unit_type, Shapes::ShapeRef.new(shape: ComputeLimitsUnitType, required: true, location_name: "UnitType"))
+    ComputeLimits.add_member(:minimum_capacity_units, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MinimumCapacityUnits"))
+    ComputeLimits.add_member(:maximum_capacity_units, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaximumCapacityUnits"))
+    ComputeLimits.add_member(:maximum_on_demand_capacity_units, Shapes::ShapeRef.new(shape: Integer, location_name: "MaximumOnDemandCapacityUnits"))
+    ComputeLimits.struct_class = Types::ComputeLimits
 
     Configuration.add_member(:classification, Shapes::ShapeRef.new(shape: String, location_name: "Classification"))
     Configuration.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
@@ -506,6 +521,12 @@ module Aws::EMR
     GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration, Shapes::ShapeRef.new(shape: BlockPublicAccessConfiguration, required: true, location_name: "BlockPublicAccessConfiguration"))
     GetBlockPublicAccessConfigurationOutput.add_member(:block_public_access_configuration_metadata, Shapes::ShapeRef.new(shape: BlockPublicAccessConfigurationMetadata, required: true, location_name: "BlockPublicAccessConfigurationMetadata"))
     GetBlockPublicAccessConfigurationOutput.struct_class = Types::GetBlockPublicAccessConfigurationOutput
+
+    GetManagedScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    GetManagedScalingPolicyInput.struct_class = Types::GetManagedScalingPolicyInput
+
+    GetManagedScalingPolicyOutput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, location_name: "ManagedScalingPolicy"))
+    GetManagedScalingPolicyOutput.struct_class = Types::GetManagedScalingPolicyOutput
 
     HadoopJarStepConfig.add_member(:properties, Shapes::ShapeRef.new(shape: KeyValueList, location_name: "Properties"))
     HadoopJarStepConfig.add_member(:jar, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Jar"))
@@ -850,6 +871,9 @@ module Aws::EMR
     ListStepsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListStepsOutput.struct_class = Types::ListStepsOutput
 
+    ManagedScalingPolicy.add_member(:compute_limits, Shapes::ShapeRef.new(shape: ComputeLimits, location_name: "ComputeLimits"))
+    ManagedScalingPolicy.struct_class = Types::ManagedScalingPolicy
+
     MetricDimension.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     MetricDimension.struct_class = Types::MetricDimension
@@ -899,11 +923,22 @@ module Aws::EMR
 
     PutBlockPublicAccessConfigurationOutput.struct_class = Types::PutBlockPublicAccessConfigurationOutput
 
+    PutManagedScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    PutManagedScalingPolicyInput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, required: true, location_name: "ManagedScalingPolicy"))
+    PutManagedScalingPolicyInput.struct_class = Types::PutManagedScalingPolicyInput
+
+    PutManagedScalingPolicyOutput.struct_class = Types::PutManagedScalingPolicyOutput
+
     RemoveAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     RemoveAutoScalingPolicyInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, required: true, location_name: "InstanceGroupId"))
     RemoveAutoScalingPolicyInput.struct_class = Types::RemoveAutoScalingPolicyInput
 
     RemoveAutoScalingPolicyOutput.struct_class = Types::RemoveAutoScalingPolicyOutput
+
+    RemoveManagedScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    RemoveManagedScalingPolicyInput.struct_class = Types::RemoveManagedScalingPolicyInput
+
+    RemoveManagedScalingPolicyOutput.struct_class = Types::RemoveManagedScalingPolicyOutput
 
     RemoveTagsInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     RemoveTagsInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TagKeys"))
@@ -935,6 +970,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
     RunJobFlowInput.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
     RunJobFlowInput.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
+    RunJobFlowInput.add_member(:managed_scaling_policy, Shapes::ShapeRef.new(shape: ManagedScalingPolicy, location_name: "ManagedScalingPolicy"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -1215,6 +1251,14 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:get_managed_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetManagedScalingPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetManagedScalingPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetManagedScalingPolicyOutput)
+      end)
+
       api.add_operation(:list_bootstrap_actions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListBootstrapActions"
         o.http_method = "POST"
@@ -1367,12 +1411,28 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
+      api.add_operation(:put_managed_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutManagedScalingPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutManagedScalingPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutManagedScalingPolicyOutput)
+      end)
+
       api.add_operation(:remove_auto_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveAutoScalingPolicy"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RemoveAutoScalingPolicyInput)
         o.output = Shapes::ShapeRef.new(shape: RemoveAutoScalingPolicyOutput)
+      end)
+
+      api.add_operation(:remove_managed_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveManagedScalingPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RemoveManagedScalingPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: RemoveManagedScalingPolicyOutput)
       end)
 
       api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|

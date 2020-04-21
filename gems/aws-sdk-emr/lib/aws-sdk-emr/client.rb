@@ -819,8 +819,8 @@ module Aws::EMR
     #   resp.cluster.kerberos_attributes.ad_domain_join_user #=> String
     #   resp.cluster.kerberos_attributes.ad_domain_join_password #=> String
     #   resp.cluster.cluster_arn #=> String
-    #   resp.cluster.step_concurrency_level #=> Integer
     #   resp.cluster.outpost_arn #=> String
+    #   resp.cluster.step_concurrency_level #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1079,6 +1079,38 @@ module Aws::EMR
     # @param [Hash] params ({})
     def get_block_public_access_configuration(params = {}, options = {})
       req = build_request(:get_block_public_access_configuration, params)
+      req.send_request(options)
+    end
+
+    # Fetches the attached managed scaling policy for an Amazon EMR cluster.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the cluster for which the managed scaling policy
+    #   will be fetched.
+    #
+    # @return [Types::GetManagedScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedScalingPolicyOutput#managed_scaling_policy #managed_scaling_policy} => Types::ManagedScalingPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_scaling_policy({
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_scaling_policy.compute_limits.unit_type #=> String, one of "InstanceFleetUnits", "Instances", "VCPU"
+    #   resp.managed_scaling_policy.compute_limits.minimum_capacity_units #=> Integer
+    #   resp.managed_scaling_policy.compute_limits.maximum_capacity_units #=> Integer
+    #   resp.managed_scaling_policy.compute_limits.maximum_on_demand_capacity_units #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicy AWS API Documentation
+    #
+    # @overload get_managed_scaling_policy(params = {})
+    # @param [Hash] params ({})
+    def get_managed_scaling_policy(params = {}, options = {})
+      req = build_request(:get_managed_scaling_policy, params)
       req.send_request(options)
     end
 
@@ -1799,6 +1831,14 @@ module Aws::EMR
     #   this by updating `BlockPublicSecurityGroupRules` to remove the
     #   exception.
     #
+    #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
+    #   2019, block public access is disabled by default in that Region. To
+    #   use this feature, you must manually enable and configure it. For
+    #   accounts that did not create an EMR cluster in a Region before this
+    #   date, block public access is enabled by default in that Region.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1821,6 +1861,44 @@ module Aws::EMR
     # @param [Hash] params ({})
     def put_block_public_access_configuration(params = {}, options = {})
       req = build_request(:put_block_public_access_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a managed scaling policy for an Amazon EMR cluster.
+    # The managed scaling policy defines the limits for resources, such as
+    # EC2 instances that can be added or terminated from a cluster. The
+    # policy only applies to the core and task nodes. The master node cannot
+    # be scaled after initial configuration.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of an EMR cluster where the managed scaling policy is
+    #   attached.
+    #
+    # @option params [required, Types::ManagedScalingPolicy] :managed_scaling_policy
+    #   Specifies the constraints for the managed scaling policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_managed_scaling_policy({
+    #     cluster_id: "ClusterId", # required
+    #     managed_scaling_policy: { # required
+    #       compute_limits: {
+    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #         minimum_capacity_units: 1, # required
+    #         maximum_capacity_units: 1, # required
+    #         maximum_on_demand_capacity_units: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutManagedScalingPolicy AWS API Documentation
+    #
+    # @overload put_managed_scaling_policy(params = {})
+    # @param [Hash] params ({})
+    def put_managed_scaling_policy(params = {}, options = {})
+      req = build_request(:put_managed_scaling_policy, params)
       req.send_request(options)
     end
 
@@ -1850,6 +1928,29 @@ module Aws::EMR
     # @param [Hash] params ({})
     def remove_auto_scaling_policy(params = {}, options = {})
       req = build_request(:remove_auto_scaling_policy, params)
+      req.send_request(options)
+    end
+
+    # Removes a managed scaling policy from a specified EMR cluster.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the cluster from which the managed scaling policy
+    #   will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_managed_scaling_policy({
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveManagedScalingPolicy AWS API Documentation
+    #
+    # @overload remove_managed_scaling_policy(params = {})
+    # @param [Hash] params ({})
+    def remove_managed_scaling_policy(params = {}, options = {})
+      req = build_request(:remove_managed_scaling_policy, params)
       req.send_request(options)
     end
 
@@ -2127,6 +2228,9 @@ module Aws::EMR
     #   Specifies the number of steps that can be executed concurrently. The
     #   default value is `1`. The maximum value is `256`.
     #
+    # @option params [Types::ManagedScalingPolicy] :managed_scaling_policy
+    #   The specified managed scaling policy for an Amazon EMR cluster.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -2356,6 +2460,14 @@ module Aws::EMR
     #       ad_domain_join_password: "XmlStringMaxLen256",
     #     },
     #     step_concurrency_level: 1,
+    #     managed_scaling_policy: {
+    #       compute_limits: {
+    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #         minimum_capacity_units: 1, # required
+    #         maximum_capacity_units: 1, # required
+    #         maximum_on_demand_capacity_units: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2508,7 +2620,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

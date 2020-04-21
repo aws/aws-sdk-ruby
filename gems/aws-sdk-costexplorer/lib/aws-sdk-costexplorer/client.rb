@@ -1722,6 +1722,14 @@ module Aws::CostExplorer
     #
     #    </note>
     #
+    # @option params [Types::RightsizingRecommendationConfiguration] :configuration
+    #   Enables you to customize recommendations across two attributes. You
+    #   can choose to view recommendations for instances within the same
+    #   instance families or across different instance families. You can also
+    #   choose to view your estimated savings associated with recommendations
+    #   with consideration of existing Savings Plans or RI benefits, or
+    #   niether.
+    #
     # @option params [required, String] :service
     #   The specific service that you want recommendations for. The only valid
     #   value for `GetRightsizingRecommendation` is "`AmazonEC2`".
@@ -1740,6 +1748,7 @@ module Aws::CostExplorer
     #   * {Types::GetRightsizingRecommendationResponse#summary #summary} => Types::RightsizingRecommendationSummary
     #   * {Types::GetRightsizingRecommendationResponse#rightsizing_recommendations #rightsizing_recommendations} => Array&lt;Types::RightsizingRecommendation&gt;
     #   * {Types::GetRightsizingRecommendationResponse#next_page_token #next_page_token} => String
+    #   * {Types::GetRightsizingRecommendationResponse#configuration #configuration} => Types::RightsizingRecommendationConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1772,6 +1781,10 @@ module Aws::CostExplorer
     #         key: "CostCategoryName",
     #         values: ["Value"],
     #       },
+    #     },
+    #     configuration: {
+    #       recommendation_target: "SAME_INSTANCE_FAMILY", # required, accepts SAME_INSTANCE_FAMILY, CROSS_INSTANCE_FAMILY
+    #       benefits_considered: false, # required
     #     },
     #     service: "GenericString", # required
     #     page_size: 1,
@@ -1835,6 +1848,8 @@ module Aws::CostExplorer
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.estimated_monthly_savings #=> String
     #   resp.rightsizing_recommendations[0].terminate_recommendation_detail.currency_code #=> String
     #   resp.next_page_token #=> String
+    #   resp.configuration.recommendation_target #=> String, one of "SAME_INSTANCE_FAMILY", "CROSS_INSTANCE_FAMILY"
+    #   resp.configuration.benefits_considered #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetRightsizingRecommendation AWS API Documentation
     #
@@ -2706,7 +2721,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

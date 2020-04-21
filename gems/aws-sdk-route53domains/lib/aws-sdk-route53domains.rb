@@ -25,7 +25,7 @@ require_relative 'aws-sdk-route53domains/customizations'
 # structure.
 #
 #     route_53_domains = Aws::Route53Domains::Client.new
-#     resp = route_53_domains.check_domain_availability(params)
+#     resp = route_53_domains.accept_domain_transfer_from_another_aws_account(params)
 #
 # See {Client} for more information.
 #
@@ -45,6 +45,6 @@ require_relative 'aws-sdk-route53domains/customizations'
 # @service
 module Aws::Route53Domains
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end
