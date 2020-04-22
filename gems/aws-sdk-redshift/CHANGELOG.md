@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-04-22)
+------------------
+
+* Feature - Amazon Redshift support for usage limits
+
 1.40.0 (2020-04-08)
 ------------------
 

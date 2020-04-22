@@ -57,6 +57,10 @@ module Aws::TranscribeStreamingService
         @event_emitter.on(:conflict_exception, block) if block_given?
       end
 
+      def on_service_unavailable_exception_event(&block)
+        @event_emitter.on(:service_unavailable_exception, block) if block_given?
+      end
+
       def on_error_event(&block)
         @event_emitter.on(:error, block) if block_given?
       end
@@ -71,6 +75,7 @@ module Aws::TranscribeStreamingService
         on_limit_exceeded_exception_event(&block)
         on_internal_failure_exception_event(&block)
         on_conflict_exception_event(&block)
+        on_service_unavailable_exception_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
       end

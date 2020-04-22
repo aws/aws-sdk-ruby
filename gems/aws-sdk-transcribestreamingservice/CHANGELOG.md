@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-04-22)
+------------------
+
+* Feature - Adding ServiceUnavailableException as one of the expected exceptions
+
 1.11.0 (2020-03-09)
 ------------------
 

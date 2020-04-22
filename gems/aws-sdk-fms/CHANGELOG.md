@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-04-22)
+------------------
+
+* Feature - This release is to support AWS Firewall Manager policy with Organizational Unit scope.
+
 1.23.0 (2020-03-31)
 ------------------
 

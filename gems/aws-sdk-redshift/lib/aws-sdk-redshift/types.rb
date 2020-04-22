@@ -2728,6 +2728,73 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateUsageLimitMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling
+    #         limit_type: "time", # required, accepts time, data-scanned
+    #         amount: 1, # required
+    #         period: "daily", # accepts daily, weekly, monthly
+    #         breach_action: "log", # accepts log, emit-metric, disable
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster that you want to limit usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The Amazon Redshift feature that you want to limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_type
+    #   The type of limit. Depending on the feature type, this can be based
+    #   on a time duration or data size. If `FeatureType` is `spectrum`,
+    #   then `LimitType` must be `data-scanned`. If `FeatureType` is
+    #   `concurrency-scaling`, then `LimitType` must be `time`.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The limit amount. If time-based, this amount is in minutes. If
+    #   data-based, this amount is in terabytes (TB). The value must be a
+    #   positive number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] period
+    #   The time period that the amount applies to. A `weekly` period begins
+    #   on Sunday. The default is `monthly`.
+    #   @return [String]
+    #
+    # @!attribute [rw] breach_action
+    #   The action that Amazon Redshift takes when the limit is reached. The
+    #   default is log. For more information about this parameter, see
+    #   UsageLimit.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag instances.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateUsageLimitMessage AWS API Documentation
+    #
+    class CreateUsageLimitMessage < Struct.new(
+      :cluster_identifier,
+      :feature_type,
+      :limit_type,
+      :amount,
+      :period,
+      :breach_action,
+      :tags)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] total_backup_size_in_mega_bytes
     #   The total amount of storage currently used for snapshots.
     #   @return [Float]
@@ -3163,6 +3230,24 @@ module Aws::Redshift
     class DeleteTagsMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUsageLimitMessage
+    #   data as a hash:
+    #
+    #       {
+    #         usage_limit_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] usage_limit_id
+    #   The identifier of the usage limit to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteUsageLimitMessage AWS API Documentation
+    #
+    class DeleteUsageLimitMessage < Struct.new(
+      :usage_limit_id)
       include Aws::Structure
     end
 
@@ -4908,6 +4993,86 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUsageLimitsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         usage_limit_id: "String",
+    #         cluster_identifier: "String",
+    #         feature_type: "spectrum", # accepts spectrum, concurrency-scaling
+    #         max_records: 1,
+    #         marker: "String",
+    #         tag_keys: ["String"],
+    #         tag_values: ["String"],
+    #       }
+    #
+    # @!attribute [rw] usage_limit_id
+    #   The identifier of the usage limit to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster for which you want to describe usage
+    #   limits.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The feature type for which you want to describe usage limits.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a DescribeUsageLimits
+    #   request exceed the value specified in `MaxRecords`, AWS returns a
+    #   value in the `Marker` field of the response. You can retrieve the
+    #   next set of response records by providing the returned marker value
+    #   in the `Marker` parameter and retrying the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A tag key or keys for which you want to return all matching usage
+    #   limit objects that are associated with the specified key or keys.
+    #   For example, suppose that you have parameter groups that are tagged
+    #   with keys called `owner` and `environment`. If you specify both of
+    #   these tag keys in the request, Amazon Redshift returns a response
+    #   with the usage limit objects have either or both of these tag keys
+    #   associated with them.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tag_values
+    #   A tag value or values for which you want to return all matching
+    #   usage limit objects that are associated with the specified tag value
+    #   or values. For example, suppose that you have parameter groups that
+    #   are tagged with values called `admin` and `test`. If you specify
+    #   both of these tag values in the request, Amazon Redshift returns a
+    #   response with the usage limit objects that have either or both of
+    #   these tag values associated with them.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeUsageLimitsMessage AWS API Documentation
+    #
+    class DescribeUsageLimitsMessage < Struct.new(
+      :usage_limit_id,
+      :cluster_identifier,
+      :feature_type,
+      :max_records,
+      :marker,
+      :tag_keys,
+      :tag_values)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableLoggingMessage
     #   data as a hash:
     #
@@ -5992,6 +6157,12 @@ module Aws::Redshift
     #
     class InvalidTagFault < Aws::EmptyStructure; end
 
+    # The usage limit is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidUsageLimitFault AWS API Documentation
+    #
+    class InvalidUsageLimitFault < Aws::EmptyStructure; end
+
     # The cluster subnet group does not cover all Availability Zones.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidVPCNetworkStateFault AWS API Documentation
@@ -6992,6 +7163,38 @@ module Aws::Redshift
     class ModifySnapshotScheduleMessage < Struct.new(
       :schedule_identifier,
       :schedule_definitions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyUsageLimitMessage
+    #   data as a hash:
+    #
+    #       {
+    #         usage_limit_id: "String", # required
+    #         amount: 1,
+    #         breach_action: "log", # accepts log, emit-metric, disable
+    #       }
+    #
+    # @!attribute [rw] usage_limit_id
+    #   The identifier of the usage limit to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The new limit amount. For more information about this parameter, see
+    #   UsageLimit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] breach_action
+    #   The new action that Amazon Redshift takes when the limit is reached.
+    #   For more information about this parameter, see UsageLimit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyUsageLimitMessage AWS API Documentation
+    #
+    class ModifyUsageLimitMessage < Struct.new(
+      :usage_limit_id,
+      :amount,
+      :breach_action)
       include Aws::Structure
     end
 
@@ -8135,7 +8338,7 @@ module Aws::Redshift
     #   size. In other words, you can only restore a dc1.large instance type
     #   into another dc1.large instance type or dc2.large instance type. You
     #   can't restore dc1.8xlarge to dc2.8xlarge. First restore to a
-    #   dc1.8xlareg cluster, then resize to a dc2.8large cluster. For more
+    #   dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more
     #   information about node types, see [ About Clusters and Nodes][1] in
     #   the *Amazon Redshift Cluster Management Guide*.
     #
@@ -9639,6 +9842,98 @@ module Aws::Redshift
       :supported_operations)
       include Aws::Structure
     end
+
+    # Describes a usage limit object for a cluster.
+    #
+    # @!attribute [rw] usage_limit_id
+    #   The identifier of the usage limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster with a usage limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] feature_type
+    #   The Amazon Redshift feature to which the limit applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_type
+    #   The type of limit. Depending on the feature type, this can be based
+    #   on a time duration or data size.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The limit amount. If time-based, this amount is in minutes. If
+    #   data-based, this amount is in terabytes (TB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] period
+    #   The time period that the amount applies to. A `weekly` period begins
+    #   on Sunday. The default is `monthly`.
+    #   @return [String]
+    #
+    # @!attribute [rw] breach_action
+    #   The action that Amazon Redshift takes when the limit is reached.
+    #   Possible values are:
+    #
+    #   * **log** - To log an event in a system table. The default is log.
+    #
+    #   * **emit-metric** - To emit CloudWatch metrics.
+    #
+    #   * **disable** - To disable the feature until the next usage period
+    #     begins.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag instances.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UsageLimit AWS API Documentation
+    #
+    class UsageLimit < Struct.new(
+      :usage_limit_id,
+      :cluster_identifier,
+      :feature_type,
+      :limit_type,
+      :amount,
+      :period,
+      :breach_action,
+      :tags)
+      include Aws::Structure
+    end
+
+    # The usage limit already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UsageLimitAlreadyExistsFault AWS API Documentation
+    #
+    class UsageLimitAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] usage_limits
+    #   Contains the output from the DescribeUsageLimits action.
+    #   @return [Array<Types::UsageLimit>]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   response records in a subsequent request. If a value is returned in
+    #   a response, you can retrieve the next set of records by providing
+    #   this returned marker value in the `Marker` parameter and retrying
+    #   the command. If the `Marker` field is empty, all response records
+    #   have been retrieved for the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UsageLimitList AWS API Documentation
+    #
+    class UsageLimitList < Struct.new(
+      :usage_limits,
+      :marker)
+      include Aws::Structure
+    end
+
+    # The usage limit identifier can't be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UsageLimitNotFoundFault AWS API Documentation
+    #
+    class UsageLimitNotFoundFault < Aws::EmptyStructure; end
 
     # Describes the members of a VPC security group.
     #
