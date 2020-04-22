@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.492 (2020-04-22)
+------------------
+
 * Feature - Aws::CodeGuruReviewer - Updated the API, and documentation for Amazon CodeGuru Reviewer.
 
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
