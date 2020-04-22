@@ -27,6 +27,7 @@ module Aws::CloudWatch
     AnomalyDetector = Shapes::StructureShape.new(name: 'AnomalyDetector')
     AnomalyDetectorConfiguration = Shapes::StructureShape.new(name: 'AnomalyDetectorConfiguration')
     AnomalyDetectorExcludedTimeRanges = Shapes::ListShape.new(name: 'AnomalyDetectorExcludedTimeRanges')
+    AnomalyDetectorMetricStat = Shapes::StringShape.new(name: 'AnomalyDetectorMetricStat')
     AnomalyDetectorMetricTimezone = Shapes::StringShape.new(name: 'AnomalyDetectorMetricTimezone')
     AnomalyDetectorStateValue = Shapes::StringShape.new(name: 'AnomalyDetectorStateValue')
     AnomalyDetectors = Shapes::ListShape.new(name: 'AnomalyDetectors')
@@ -240,7 +241,7 @@ module Aws::CloudWatch
     AnomalyDetector.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     AnomalyDetector.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     AnomalyDetector.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, location_name: "Stat"))
+    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, location_name: "Stat"))
     AnomalyDetector.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     AnomalyDetector.add_member(:state_value, Shapes::ShapeRef.new(shape: AnomalyDetectorStateValue, location_name: "StateValue"))
     AnomalyDetector.struct_class = Types::AnomalyDetector
@@ -322,7 +323,7 @@ module Aws::CloudWatch
     DeleteAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     DeleteAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     DeleteAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, required: true, location_name: "Stat"))
     DeleteAnomalyDetectorInput.struct_class = Types::DeleteAnomalyDetectorInput
 
     DeleteAnomalyDetectorOutput.struct_class = Types::DeleteAnomalyDetectorOutput
@@ -671,7 +672,7 @@ module Aws::CloudWatch
     PutAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     PutAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     PutAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, required: true, location_name: "Stat"))
     PutAnomalyDetectorInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     PutAnomalyDetectorInput.struct_class = Types::PutAnomalyDetectorInput
 
@@ -697,6 +698,7 @@ module Aws::CloudWatch
     PutInsightRuleInput.add_member(:rule_name, Shapes::ShapeRef.new(shape: InsightRuleName, required: true, location_name: "RuleName"))
     PutInsightRuleInput.add_member(:rule_state, Shapes::ShapeRef.new(shape: InsightRuleState, location_name: "RuleState"))
     PutInsightRuleInput.add_member(:rule_definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "RuleDefinition"))
+    PutInsightRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutInsightRuleInput.struct_class = Types::PutInsightRuleInput
 
     PutInsightRuleOutput.struct_class = Types::PutInsightRuleOutput

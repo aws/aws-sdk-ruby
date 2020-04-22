@@ -184,9 +184,9 @@ module Aws
         credential_source ||= prof_cfg['credential_source']
         if opts[:source_profile] && credential_source
           raise Errors::CredentialSourceConflictError,
-                "Profile #{profile} has a source_profile, and "\
-                'a credential_source. For assume role credentials, must '\
-                'provide only source_profile or credential_source, not both.'
+            "Profile #{profile} has a source_profile, and "\
+            'a credential_source. For assume role credentials, must '\
+            'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
           opts[:credentials] = resolve_source_profile(opts[:source_profile], opts)
           if opts[:credentials]
@@ -199,8 +199,9 @@ module Aws
             opts[:profile] = opts.delete(:source_profile)
             AssumeRoleCredentials.new(opts)
           else
-            raise Errors::NoSourceProfileError, "Profile #{profile} has a role_arn, and source_profile, but the"\
-                ' source_profile does not have credentials.'
+            raise Errors::NoSourceProfileError,
+              "Profile #{profile} has a role_arn, and source_profile, but the"\
+              ' source_profile does not have credentials.'
           end
         elsif credential_source
           opts[:credentials] = credentials_from_source(
@@ -217,8 +218,9 @@ module Aws
             opts.delete(:source_profile) # Cleanup
             AssumeRoleCredentials.new(opts)
           else
-            raise Errors::NoSourceCredentials, "Profile #{profile} could not get source credentials from"\
-                " provider #{credential_source}"
+            raise Errors::NoSourceCredentials,
+              "Profile #{profile} could not get source credentials from"\
+              " provider #{credential_source}"
           end
         elsif prof_cfg['role_arn']
           raise Errors::NoSourceProfileError, "Profile #{profile} has a role_arn, but no source_profile."
@@ -306,8 +308,8 @@ module Aws
     def validate_profile_exists(profile)
       unless (@parsed_credentials && @parsed_credentials[profile]) ||
              (@parsed_config && @parsed_config[profile])
-        msg = "Profile `#{profile}' not found in #{@credentials_path}"
-        msg << " or #{@config_path}" if @config_path
+        msg = "Profile `#{profile}' not found in #{@credentials_path}"\
+              "#{" or #{@config_path}" if @config_path}"
         raise Errors::NoSuchProfileError, msg
       end
     end

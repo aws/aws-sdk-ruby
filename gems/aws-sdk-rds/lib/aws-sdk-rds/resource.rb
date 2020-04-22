@@ -247,7 +247,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
-    #   if this DB cluster is created as a Read Replica.
+    #   if this DB cluster is created as a read replica.
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
     # @option options [Boolean] :storage_encrypted
@@ -275,9 +275,9 @@ module Aws::RDS
     #   AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another AWS
+    #   If you create a read replica of an encrypted DB cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the Read Replica
+    #   destination AWS Region. This key is used to encrypt the read replica
     #   in that AWS Region.
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
@@ -299,8 +299,8 @@ module Aws::RDS
     #     action that is called in the destination AWS Region, and the action
     #     contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that Aurora Read
-    #     Replica will be created in.
+    #   * `DestinationRegion` - The name of the AWS Region that Aurora read
+    #     replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
@@ -362,6 +362,12 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
+    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    #   the clusters in a global database use `provisioned` engine mode.
+    #
+    #    </note>
+    #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
@@ -414,12 +420,12 @@ module Aws::RDS
     #
     #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
     #   Authentication to authenticate users that connect to the DB cluster.
-    #   For more information, see [Using Kerberos Authentication for Aurora
-    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
@@ -954,7 +960,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -992,7 +998,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -1000,7 +1006,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -1008,7 +1014,7 @@ module Aws::RDS
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -1016,20 +1022,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     # @option options [Boolean] :multi_az
@@ -1206,12 +1212,10 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
-    #
-    #
     #
     #
     #

@@ -383,7 +383,7 @@ module Aws::RDS
     #   encrypted DB cluster snapshot in the same AWS Region.
     #
     #   The pre-signed URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the source
+    #   `CopyDBClusterSnapshot` API action that can be executed in the source
     #   AWS Region that contains the encrypted DB cluster snapshot to be
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:

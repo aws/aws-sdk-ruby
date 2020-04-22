@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-04-16)
+------------------
+
+* Feature - This release updates Amazon Augmented AI ListHumanLoops and StartHumanLoop APIs.
+
 1.2.0 (2020-03-09)
 ------------------
 

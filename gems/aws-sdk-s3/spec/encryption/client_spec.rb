@@ -344,7 +344,7 @@ module Aws
                   end
                 end
               end
-              data = StringIO.new
+              data = StringIO.new(String.new)
               client.get_object(
                 bucket: 'bucket', key: 'key', response_target: data
               )
@@ -355,7 +355,7 @@ module Aws
               stub_encrypted_get
               data = ''
               client.get_object(bucket: 'bucket', key: 'key') do |chunk|
-                data << chunk
+                data += chunk
               end
               expect(data).to eq('secret')
             end

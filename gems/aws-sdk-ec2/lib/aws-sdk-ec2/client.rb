@@ -5154,12 +5154,16 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new key pair.
+    #
     # @return [Types::KeyPair] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::KeyPair#key_fingerprint #key_fingerprint} => String
     #   * {Types::KeyPair#key_material #key_material} => String
     #   * {Types::KeyPair#key_name #key_name} => String
     #   * {Types::KeyPair#key_pair_id #key_pair_id} => String
+    #   * {Types::KeyPair#tags #tags} => Array&lt;Types::Tag&gt;
     #
     #
     # @example Example: To create a key pair
@@ -5175,6 +5179,17 @@ module Aws::EC2
     #   resp = client.create_key_pair({
     #     key_name: "String", # required
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -5183,6 +5198,9 @@ module Aws::EC2
     #   resp.key_material #=> String
     #   resp.key_name #=> String
     #   resp.key_pair_id #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPair AWS API Documentation
     #
@@ -6529,7 +6547,12 @@ module Aws::EC2
     #   The number of partitions. Valid only when **Strategy** is set to
     #   `partition`.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new placement group.
+    #
+    # @return [Types::CreatePlacementGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePlacementGroupResult#placement_group #placement_group} => Types::PlacementGroup
     #
     #
     # @example Example: To create a placement group
@@ -6552,7 +6575,29 @@ module Aws::EC2
     #     group_name: "String",
     #     strategy: "cluster", # accepts cluster, spread, partition
     #     partition_count: 1,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.placement_group.group_name #=> String
+    #   resp.placement_group.state #=> String, one of "pending", "available", "deleting", "deleted"
+    #   resp.placement_group.strategy #=> String, one of "cluster", "spread", "partition"
+    #   resp.placement_group.partition_count #=> Integer
+    #   resp.placement_group.group_id #=> String
+    #   resp.placement_group.tags #=> Array
+    #   resp.placement_group.tags[0].key #=> String
+    #   resp.placement_group.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup AWS API Documentation
     #
@@ -9910,8 +9955,11 @@ module Aws::EC2
     # Deletes the specified key pair, by removing the public key from Amazon
     # EC2.
     #
-    # @option params [required, String] :key_name
+    # @option params [String] :key_name
     #   The name of the key pair.
+    #
+    # @option params [String] :key_pair_id
+    #   The ID of the key pair.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9933,7 +9981,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_key_pair({
-    #     key_name: "KeyPairName", # required
+    #     key_name: "KeyPairName",
+    #     key_pair_id: "KeyPairId",
     #     dry_run: false,
     #   })
     #
@@ -11714,6 +11763,48 @@ module Aws::EC2
     # @param [Hash] params ({})
     def deregister_image(params = {}, options = {})
       req = build_request(:deregister_image, params)
+      req.send_request(options)
+    end
+
+    # Deregisters tag keys to prevent tags that have the specified tag keys
+    # from being included in scheduled event notifications for resources in
+    # the Region.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Types::DeregisterInstanceTagAttributeRequest] :instance_tag_attribute
+    #   Information about the tag keys to deregister.
+    #
+    # @return [Types::DeregisterInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterInstanceEventNotificationAttributesResult#instance_tag_attribute #instance_tag_attribute} => Types::InstanceTagNotificationAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_instance_event_notification_attributes({
+    #     dry_run: false,
+    #     instance_tag_attribute: {
+    #       include_all_tags_of_instance: false,
+    #       instance_tag_keys: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_tag_attribute.instance_tag_keys #=> Array
+    #   resp.instance_tag_attribute.instance_tag_keys[0] #=> String
+    #   resp.instance_tag_attribute.include_all_tags_of_instance #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceEventNotificationAttributes AWS API Documentation
+    #
+    # @overload deregister_instance_event_notification_attributes(params = {})
+    # @param [Hash] params ({})
+    def deregister_instance_event_notification_attributes(params = {}, options = {})
+      req = build_request(:deregister_instance_event_notification_attributes, params)
       req.send_request(options)
     end
 
@@ -14778,7 +14869,7 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance.
     #
     #   * `state` - The state of the association (`associating` \|
-    #     `associated` \| `disassociating` \| `disassociated`).
+    #     `associated` \| `disassociating`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
@@ -15740,6 +15831,40 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_instance_credit_specifications(params = {}, options = {})
       req = build_request(:describe_instance_credit_specifications, params)
+      req.send_request(options)
+    end
+
+    # Describes the tag keys that are registered to appear in scheduled
+    # event notifications for resources in the current Region.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstanceEventNotificationAttributesResult#instance_tag_attribute #instance_tag_attribute} => Types::InstanceTagNotificationAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_event_notification_attributes({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_tag_attribute.instance_tag_keys #=> Array
+    #   resp.instance_tag_attribute.instance_tag_keys[0] #=> String
+    #   resp.instance_tag_attribute.include_all_tags_of_instance #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceEventNotificationAttributes AWS API Documentation
+    #
+    # @overload describe_instance_event_notification_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_event_notification_attributes(params = {}, options = {})
+      req = build_request(:describe_instance_event_notification_attributes, params)
       req.send_request(options)
     end
 
@@ -16972,9 +17097,21 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `key-pair-id` - The ID of the key pair.
+    #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     # @option params [Array<String>] :key_names
     #   The key pair names.
@@ -18734,6 +18871,16 @@ module Aws::EC2
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
     #     `spread` \| `partition`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21319,7 +21466,7 @@ module Aws::EC2
     # Instance by examining the response. If the status of the Spot Instance
     # is `fulfilled`, the instance ID appears in the response and contains
     # the identifier of the instance. Alternatively, you can use
-    # DescribeInstances with a filter to look for instances where the
+    # [DescribeInstances][1] with a filter to look for instances where the
     # instance lifecycle is `spot`.
     #
     # We recommend that you set `MaxResults` to a value between 5 and 1000
@@ -21332,6 +21479,10 @@ module Aws::EC2
     #
     # Spot Instance requests are deleted four hours after they are canceled
     # and their instances are terminated.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -22073,13 +22224,14 @@ module Aws::EC2
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
     #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
-    #     `fpga-image` \| `image` \| `instance` \| `host-reservation` \|
-    #     `internet-gateway` \| `launch-template` \| `natgateway` \|
-    #     `network-acl` \| `network-interface` \| `placement-group` \|
-    #     `reserved-instances` \| `route-table` \| `security-group` \|
-    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
-    #     `vpc` \| `vpc-endpoint` \| `vpc-endpoint-service` \|
-    #     `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`).
+    #     `fpga-image` \| `host-reservation` \| `image` \| `instance` \|
+    #     `internet-gateway` \| `key-pair` \| `launch-template` \|
+    #     `natgateway` \| `network-acl` \| `network-interface` \|
+    #     `placement-group` \| `reserved-instances` \| `route-table` \|
+    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
+    #     `subnet` \| `volume` \| `vpc` \| `vpc-endpoint` \|
+    #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
+    #     `vpn-connection` \| `vpn-gateway`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA" for
@@ -27945,10 +28097,15 @@ module Aws::EC2
     #   The public key. For API calls, the text must be base64-encoded. For
     #   command line tools, base64 encoding is performed for you.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the imported key pair.
+    #
     # @return [Types::ImportKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportKeyPairResult#key_fingerprint #key_fingerprint} => String
     #   * {Types::ImportKeyPairResult#key_name #key_name} => String
+    #   * {Types::ImportKeyPairResult#key_pair_id #key_pair_id} => String
+    #   * {Types::ImportKeyPairResult#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -27956,12 +28113,27 @@ module Aws::EC2
     #     dry_run: false,
     #     key_name: "String", # required
     #     public_key_material: "data", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.key_fingerprint #=> String
     #   resp.key_name #=> String
+    #   resp.key_pair_id #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPair AWS API Documentation
     #
@@ -32243,6 +32415,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def register_image(params = {}, options = {})
       req = build_request(:register_image, params)
+      req.send_request(options)
+    end
+
+    # Registers a set of tag keys to include in scheduled event
+    # notifications for your resources.
+    #
+    # To remove tags, use .
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Types::RegisterInstanceTagAttributeRequest] :instance_tag_attribute
+    #   Information about the tag keys to register.
+    #
+    # @return [Types::RegisterInstanceEventNotificationAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterInstanceEventNotificationAttributesResult#instance_tag_attribute #instance_tag_attribute} => Types::InstanceTagNotificationAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_instance_event_notification_attributes({
+    #     dry_run: false,
+    #     instance_tag_attribute: {
+    #       include_all_tags_of_instance: false,
+    #       instance_tag_keys: ["String"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_tag_attribute.instance_tag_keys #=> Array
+    #   resp.instance_tag_attribute.instance_tag_keys[0] #=> String
+    #   resp.instance_tag_attribute.include_all_tags_of_instance #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceEventNotificationAttributes AWS API Documentation
+    #
+    # @overload register_instance_event_notification_attributes(params = {})
+    # @param [Hash] params ({})
+    def register_instance_event_notification_attributes(params = {}, options = {})
+      req = build_request(:register_instance_event_notification_attributes, params)
       req.send_request(options)
     end
 
@@ -36610,7 +36825,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.154.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

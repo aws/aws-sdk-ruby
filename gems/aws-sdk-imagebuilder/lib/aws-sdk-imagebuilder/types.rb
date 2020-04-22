@@ -572,6 +572,7 @@ module Aws::Imagebuilder
     #           image_tests_enabled: false,
     #           timeout_minutes: 1,
     #         },
+    #         enhanced_image_metadata_enabled: false,
     #         schedule: {
     #           schedule_expression: "NonEmptyString",
     #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
@@ -611,6 +612,13 @@ module Aws::Imagebuilder
     #   The image test configuration of the image pipeline.
     #   @return [Types::ImageTestsConfiguration]
     #
+    # @!attribute [rw] enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the image pipeline.
     #   @return [Types::Schedule]
@@ -639,6 +647,7 @@ module Aws::Imagebuilder
       :infrastructure_configuration_arn,
       :distribution_configuration_arn,
       :image_tests_configuration,
+      :enhanced_image_metadata_enabled,
       :schedule,
       :status,
       :tags,
@@ -720,7 +729,16 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentConfiguration>]
     #
     # @!attribute [rw] parent_image
-    #   The parent image of the image recipe.
+    #   The parent image of the image recipe. The value of the string can be
+    #   the ARN of the parent image or an AMI ID. The format for the ARN
+    #   follows this example:
+    #   `arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x`.
+    #   The ARN ends with `/20xx.x.x`, which communicates to EC2 Image
+    #   Builder that you want to use the latest AMI created in 20xx (year).
+    #   You can provide the specific version that you want to use, or you
+    #   can use a wildcard in all of the fields. If you enter an AMI ID for
+    #   the string value, you must have access to the AMI, and the AMI must
+    #   be in the same Region in which you are using Image Builder.
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -785,6 +803,7 @@ module Aws::Imagebuilder
     #           image_tests_enabled: false,
     #           timeout_minutes: 1,
     #         },
+    #         enhanced_image_metadata_enabled: false,
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -811,6 +830,13 @@ module Aws::Imagebuilder
     #   The image tests configuration of the image.
     #   @return [Types::ImageTestsConfiguration]
     #
+    # @!attribute [rw] enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tags of the image.
     #   @return [Hash<String,String>]
@@ -829,6 +855,7 @@ module Aws::Imagebuilder
       :distribution_configuration_arn,
       :infrastructure_configuration_arn,
       :image_tests_configuration,
+      :enhanced_image_metadata_enabled,
       :tags,
       :client_token)
       include Aws::Structure
@@ -1770,6 +1797,18 @@ module Aws::Imagebuilder
     #   The platform of the image.
     #   @return [String]
     #
+    # @!attribute [rw] enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] os_version
+    #   The operating system version of the instance. For example, Amazon
+    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The state of the image.
     #   @return [Types::ImageState]
@@ -1818,6 +1857,8 @@ module Aws::Imagebuilder
       :name,
       :version,
       :platform,
+      :enhanced_image_metadata_enabled,
+      :os_version,
       :state,
       :image_recipe,
       :source_pipeline_name,
@@ -1848,6 +1889,13 @@ module Aws::Imagebuilder
     # @!attribute [rw] platform
     #   The platform of the image pipeline.
     #   @return [String]
+    #
+    # @!attribute [rw] enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #   @return [Boolean]
     #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe associated with
@@ -1903,6 +1951,7 @@ module Aws::Imagebuilder
       :name,
       :description,
       :platform,
+      :enhanced_image_metadata_enabled,
       :image_recipe_arn,
       :infrastructure_configuration_arn,
       :distribution_configuration_arn,
@@ -2060,6 +2109,11 @@ module Aws::Imagebuilder
     #   The platform of the image.
     #   @return [String]
     #
+    # @!attribute [rw] os_version
+    #   The operating system version of the instance. For example, Amazon
+    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The state of the image.
     #   @return [Types::ImageState]
@@ -2087,6 +2141,7 @@ module Aws::Imagebuilder
       :name,
       :version,
       :platform,
+      :os_version,
       :state,
       :owner,
       :date_created,
@@ -2139,6 +2194,11 @@ module Aws::Imagebuilder
     #   The platform of the image semantic version.
     #   @return [String]
     #
+    # @!attribute [rw] os_version
+    #   The operating system version of the instance. For example, Amazon
+    #   Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+    #   @return [String]
+    #
     # @!attribute [rw] owner
     #   The owner of the image semantic version.
     #   @return [String]
@@ -2154,6 +2214,7 @@ module Aws::Imagebuilder
       :name,
       :version,
       :platform,
+      :os_version,
       :owner,
       :date_created)
       include Aws::Structure
@@ -3661,6 +3722,7 @@ module Aws::Imagebuilder
     #           image_tests_enabled: false,
     #           timeout_minutes: 1,
     #         },
+    #         enhanced_image_metadata_enabled: false,
     #         schedule: {
     #           schedule_expression: "NonEmptyString",
     #           pipeline_execution_start_condition: "EXPRESSION_MATCH_ONLY", # accepts EXPRESSION_MATCH_ONLY, EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE
@@ -3698,6 +3760,13 @@ module Aws::Imagebuilder
     #   The image test configuration of the image pipeline.
     #   @return [Types::ImageTestsConfiguration]
     #
+    # @!attribute [rw] enhanced_image_metadata_enabled
+    #   Collects additional information about the image being created,
+    #   including the operating system (OS) version and package list. This
+    #   information is used to enhance the overall experience of using EC2
+    #   Image Builder. Enabled by default.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule of the image pipeline.
     #   @return [Types::Schedule]
@@ -3722,6 +3791,7 @@ module Aws::Imagebuilder
       :infrastructure_configuration_arn,
       :distribution_configuration_arn,
       :image_tests_configuration,
+      :enhanced_image_metadata_enabled,
       :schedule,
       :status,
       :client_token)

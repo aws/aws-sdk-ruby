@@ -184,6 +184,19 @@ module Aws::TranscribeStreamingService
       include Aws::Structure
     end
 
+    # Service is currently unavailable. Try your request later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartStreamTranscriptionRequest
     #   data as a hash:
     #
@@ -355,7 +368,8 @@ module Aws::TranscribeStreamingService
           :bad_request_exception,
           :limit_exceeded_exception,
           :internal_failure_exception,
-          :conflict_exception
+          :conflict_exception,
+          :service_unavailable_exception
         ]
       end
 

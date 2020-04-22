@@ -5,7 +5,8 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::SFN
+module Aws::Synthetics
+
   class Resource
 
     # @param options ({})

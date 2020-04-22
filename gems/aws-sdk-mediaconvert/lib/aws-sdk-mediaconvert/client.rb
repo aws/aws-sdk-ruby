@@ -360,10 +360,10 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @option params [Types::AccelerationSettings] :acceleration_settings
-    #   Accelerated transcoding can significantly speed up jobs with long,
-    #   visually complex content. Outputs that use this feature incur pro-tier
-    #   pricing. For information about feature limitations, see the AWS
-    #   Elemental MediaConvert User Guide.
+    #   Optional. Accelerated transcoding can significantly speed up jobs with
+    #   long, visually complex content. Outputs that use this feature incur
+    #   pro-tier pricing. For information about feature limitations, see the
+    #   AWS Elemental MediaConvert User Guide.
     #
     # @option params [String] :billing_tags_source
     #   Optional. Choose a tag type that AWS Billing and Cost Management will
@@ -374,19 +374,26 @@ module Aws::MediaConvert
     #   appear on the billing report unsorted.
     #
     # @option params [String] :client_request_token
-    #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the backlog
+    #   of the queue that you submit your job to. Specify an alternate queue
+    #   and the maximum time that your job will wait in the initial queue
+    #   before hopping. For more information about this feature, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [String] :job_template
-    #   When you create a job, you can either specify a job template or
-    #   specify the transcoding settings individually
+    #   Optional. When you create a job, you can either specify a job template
+    #   or specify the transcoding settings individually.
     #
     # @option params [Integer] :priority
-    #   Specify the relative priority for this job. In any given queue, the
-    #   service begins processing the job with the highest value first. When
-    #   more than one job has the same priority, the service begins processing
-    #   the job that you submitted first. If you don't specify a priority,
-    #   the service uses the default value 0.
+    #   Optional. Specify the relative priority for this job. In any given
+    #   queue, the service begins processing the job with the highest value
+    #   first. When more than one job has the same priority, the service
+    #   begins processing the job that you submitted first. If you don't
+    #   specify a priority, the service uses the default value 0.
     #
     # @option params [String] :queue
     #   Optional. When you create a job, you can specify a queue to send it
@@ -403,26 +410,26 @@ module Aws::MediaConvert
     #   JobSettings contains all the transcode settings for a job.
     #
     # @option params [String] :simulate_reserved_queue
-    #   Enable this setting when you run a test job to estimate how many
-    #   reserved transcoding slots (RTS) you need. When this is enabled,
+    #   Optional. Enable this setting when you run a test job to estimate how
+    #   many reserved transcoding slots (RTS) you need. When this is enabled,
     #   MediaConvert runs your job from an on-demand queue with similar
     #   performance to what you will see with one RTS in a reserved queue.
     #   This setting is disabled by default.
     #
     # @option params [String] :status_update_interval
-    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
-    #   CloudWatch Events. Set the interval, in seconds, between status
-    #   updates. MediaConvert sends an update at this interval from the time
-    #   the service begins processing your job to the time it completes the
-    #   transcode or encounters an error.
+    #   Optional. Specify how often MediaConvert sends STATUS\_UPDATE events
+    #   to Amazon CloudWatch Events. Set the interval, in seconds, between
+    #   status updates. MediaConvert sends an update at this interval from the
+    #   time the service begins processing your job to the time it completes
+    #   the transcode or encounters an error.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags that you want to add to the resource. You can tag resources
-    #   with a key-value pair or with only a key.
+    #   Optional. The tags that you want to add to the resource. You can tag
+    #   resources with a key-value pair or with only a key.
     #
     # @option params [Hash<String,String>] :user_metadata
-    #   User-defined metadata that you want to associate with an MediaConvert
-    #   job. You specify metadata in key/value pairs.
+    #   Optional. User-defined metadata that you want to associate with an
+    #   MediaConvert job. You specify metadata in key/value pairs.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -436,6 +443,13 @@ module Aws::MediaConvert
     #     },
     #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #     client_request_token: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     job_template: "__string",
     #     priority: 1,
     #     queue: "__string",
@@ -506,6 +520,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -1419,6 +1437,10 @@ module Aws::MediaConvert
     #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
+    #   resp.job.hop_destinations #=> Array
+    #   resp.job.hop_destinations[0].priority #=> Integer
+    #   resp.job.hop_destinations[0].queue #=> String
+    #   resp.job.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job.id #=> String
     #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
@@ -1433,6 +1455,10 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.queue_transitions #=> Array
+    #   resp.job.queue_transitions[0].destination_queue #=> String
+    #   resp.job.queue_transitions[0].source_queue #=> String
+    #   resp.job.queue_transitions[0].timestamp #=> Time
     #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
@@ -1473,6 +1499,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -2149,6 +2177,13 @@ module Aws::MediaConvert
     # @option params [String] :description
     #   Optional. A description of the job template you are creating.
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the backlog
+    #   of the queue that you submit your job to. Specify an alternate queue
+    #   and the maximum time that your job will wait in the initial queue
+    #   before hopping. For more information about this feature, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [required, String] :name
     #   The name of the job template you are creating.
     #
@@ -2190,6 +2225,13 @@ module Aws::MediaConvert
     #     },
     #     category: "__string",
     #     description: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     name: "__string", # required
     #     priority: 1,
     #     queue: "__string",
@@ -2259,6 +2301,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -3157,6 +3203,10 @@ module Aws::MediaConvert
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
     #   resp.job_template.priority #=> Integer
@@ -3199,6 +3249,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -5108,6 +5160,10 @@ module Aws::MediaConvert
     #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
+    #   resp.job.hop_destinations #=> Array
+    #   resp.job.hop_destinations[0].priority #=> Integer
+    #   resp.job.hop_destinations[0].queue #=> String
+    #   resp.job.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job.id #=> String
     #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
@@ -5122,6 +5178,10 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.queue_transitions #=> Array
+    #   resp.job.queue_transitions[0].destination_queue #=> String
+    #   resp.job.queue_transitions[0].source_queue #=> String
+    #   resp.job.queue_transitions[0].timestamp #=> Time
     #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
@@ -5162,6 +5222,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -5844,6 +5906,10 @@ module Aws::MediaConvert
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
     #   resp.job_template.priority #=> Integer
@@ -5886,6 +5952,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -7054,9 +7122,9 @@ module Aws::MediaConvert
     #   request the next batch of job templates.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListJobTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7083,6 +7151,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].category #=> String
     #   resp.job_templates[0].created_at #=> Time
     #   resp.job_templates[0].description #=> String
+    #   resp.job_templates[0].hop_destinations #=> Array
+    #   resp.job_templates[0].hop_destinations[0].priority #=> Integer
+    #   resp.job_templates[0].hop_destinations[0].queue #=> String
+    #   resp.job_templates[0].hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_templates[0].last_updated #=> Time
     #   resp.job_templates[0].name #=> String
     #   resp.job_templates[0].priority #=> Integer
@@ -7125,6 +7197,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -7784,20 +7858,20 @@ module Aws::MediaConvert
     #   time.
     #
     # @option params [String] :next_token
-    #   Use this string, provided with the response to a previous request, to
-    #   request the next batch of jobs.
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @option params [String] :queue
-    #   Provide a queue name to get back only jobs from that queue.
+    #   Optional. Provide a queue name to get back only jobs from that queue.
     #
     # @option params [String] :status
-    #   A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or
-    #   ERROR.
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7827,6 +7901,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.jobs[0].error_code #=> Integer
     #   resp.jobs[0].error_message #=> String
+    #   resp.jobs[0].hop_destinations #=> Array
+    #   resp.jobs[0].hop_destinations[0].priority #=> Integer
+    #   resp.jobs[0].hop_destinations[0].queue #=> String
+    #   resp.jobs[0].hop_destinations[0].wait_minutes #=> Integer
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].job_percent_complete #=> Integer
     #   resp.jobs[0].job_template #=> String
@@ -7841,6 +7919,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].queue #=> String
+    #   resp.jobs[0].queue_transitions #=> Array
+    #   resp.jobs[0].queue_transitions[0].destination_queue #=> String
+    #   resp.jobs[0].queue_transitions[0].source_queue #=> String
+    #   resp.jobs[0].queue_transitions[0].timestamp #=> Time
     #   resp.jobs[0].retry_count #=> Integer
     #   resp.jobs[0].role #=> String
     #   resp.jobs[0].settings.ad_avail_offset #=> Integer
@@ -7881,6 +7963,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -8565,9 +8649,9 @@ module Aws::MediaConvert
     #   request the next batch of presets.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListPresetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9046,9 +9130,9 @@ module Aws::MediaConvert
     #   request the next batch of queues.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9202,6 +9286,9 @@ module Aws::MediaConvert
     # @option params [String] :description
     #   The new description for the job template, if you are changing it.
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional list of hop destinations.
+    #
     # @option params [required, String] :name
     #   The name of the job template you are modifying
     #
@@ -9238,6 +9325,13 @@ module Aws::MediaConvert
     #     },
     #     category: "__string",
     #     description: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     name: "__string", # required
     #     priority: 1,
     #     queue: "__string",
@@ -9307,6 +9401,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -10202,6 +10300,10 @@ module Aws::MediaConvert
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
     #   resp.job_template.priority #=> Integer
@@ -10244,6 +10346,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -11981,7 +12085,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

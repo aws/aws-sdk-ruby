@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2020-04-22)
+------------------
+
+* Feature - Add `presigned_request` method to the `Presigner` class. This method returns a URL and headers necessary rather than hoisting them onto the query string.
+* Feature - Force HTTPS when using `virtual_host: true` on the `Presigner` class.
+
+1.62.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.2 (2020-04-03)
 ------------------
 

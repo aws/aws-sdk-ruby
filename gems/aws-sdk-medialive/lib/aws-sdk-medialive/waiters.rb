@@ -68,9 +68,9 @@ module Aws::MediaLive
   # | waiter_name       | params                      | :delay   | :max_attempts |
   # | ----------------- | --------------------------- | -------- | ------------- |
   # | channel_created   | {Client#describe_channel}   | 3        | 5             |
-  # | channel_deleted   | {Client#describe_channel}   | 5        | 20            |
+  # | channel_deleted   | {Client#describe_channel}   | 5        | 84            |
   # | channel_running   | {Client#describe_channel}   | 5        | 120           |
-  # | channel_stopped   | {Client#describe_channel}   | 5        | 28            |
+  # | channel_stopped   | {Client#describe_channel}   | 5        | 60            |
   # | multiplex_created | {Client#describe_multiplex} | 3        | 5             |
   # | multiplex_deleted | {Client#describe_multiplex} | 5        | 20            |
   # | multiplex_running | {Client#describe_multiplex} | 5        | 120           |
@@ -139,14 +139,14 @@ module Aws::MediaLive
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :max_attempts (84)
       # @option options [Integer] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 20,
+          max_attempts: 84,
           delay: 5,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_channel,
@@ -239,14 +239,14 @@ module Aws::MediaLive
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (28)
+      # @option options [Integer] :max_attempts (60)
       # @option options [Integer] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 28,
+          max_attempts: 60,
           delay: 5,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_channel,

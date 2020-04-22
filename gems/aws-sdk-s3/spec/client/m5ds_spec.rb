@@ -51,7 +51,7 @@ module Aws
           it 'computes the MD5 by reading the body 1MB at a time' do
             body = StringIO.new('.' * 5 * 1024 * 1024) # 5MB
             allow(body).to receive(:read)
-              .with(1024 * 1024, instance_of(String)).and_call_original
+              .with(1024 * 1024, any_args).and_call_original
             client = Client.new(stub_responses: true)
             resp = client.put_object(
               bucket: 'bucket-name',
@@ -105,7 +105,7 @@ module Aws
           it 'computes the MD5 by reading the body 1MB at a time' do
             body = StringIO.new('.' * 5 * 1024 * 1024) # 5MB
             allow(body).to receive(:read)
-              .with(1024 * 1024, instance_of(String)).and_call_original
+              .with(1024 * 1024, any_args).and_call_original
             client = Client.new(stub_responses: true)
             resp = client.upload_part(
               bucket: 'bucket-name',

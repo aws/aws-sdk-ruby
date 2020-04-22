@@ -11,6 +11,6 @@ $:.unshift(File.expand_path('../../../aws-sdk-core/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'features_helper'
-require 'aws-sdk-sfn'
+require 'aws-sdk-synthetics'
 
-Aws::SFN::Client.add_plugin(ApiCallTracker)
+Aws::Synthetics::Client.add_plugin(ApiCallTracker)

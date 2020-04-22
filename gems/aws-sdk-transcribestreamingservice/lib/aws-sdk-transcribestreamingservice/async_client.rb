@@ -292,6 +292,9 @@ module Aws::TranscribeStreamingService
     #       out_stream.on_conflict_exception_event do |event|
     #         event # => Aws::TranscribeStreamingService::Types::ConflictException
     #       end
+    #       out_stream.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #       end
     #
     #     end
     #     # => returns Aws::Seahorse::Client::AsyncResponse
@@ -326,6 +329,9 @@ module Aws::TranscribeStreamingService
     #     end
     #     output_stream.on_conflict_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #     end
+    #     output_stream.on_service_unavailable_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
     #     end
     #     output_stream.on_error_event do |event|
     #       # catch unmodeled error event in the stream
@@ -373,7 +379,7 @@ module Aws::TranscribeStreamingService
     #   resp.session_id #=> String
     #   All events are available at resp.transcript_result_stream:
     #   resp.transcript_result_stream #=> Enumerator
-    #   resp.transcript_result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception]
+    #   resp.transcript_result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     #
     #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript.results #=> Array
@@ -399,6 +405,9 @@ module Aws::TranscribeStreamingService
     #   event.message #=> String
     #
     #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
@@ -444,7 +453,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -457,8 +466,8 @@ module Aws::TranscribeStreamingService
       when nil then event_stream_class.new
       else
         msg = "expected #{type}_event_stream_handler to be a block or "\
-          "instance of Aws::TranscribeStreamingService::#{event_stream_class}"\
-          ", got `#{handler.inspect}` instead"
+              "instance of Aws::TranscribeStreamingService::#{event_stream_class}"\
+              ", got `#{handler.inspect}` instead"
         raise ArgumentError, msg
       end
     end

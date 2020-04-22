@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2020-04-16)
+------------------
+
+* Feature - AWS Elemental MediaConvert now allows you to specify your input captions frame rate for SCC captions sources.
+
+1.45.0 (2020-04-08)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK adds support for queue hopping. Jobs can now hop from their original queue to a specified alternate queue, based on the maximum wait time that you specify in the job settings.
+
 1.44.0 (2020-03-17)
 ------------------
 

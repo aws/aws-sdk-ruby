@@ -19,6 +19,9 @@ module Aws::GuardDuty
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
     Action = Shapes::StructureShape.new(name: 'Action')
+    AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
+    AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
+    AdminStatus = Shapes::StringShape.new(name: 'AdminStatus')
     ArchiveFindingsRequest = Shapes::StructureShape.new(name: 'ArchiveFindingsRequest')
     ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
@@ -60,6 +63,8 @@ module Aws::GuardDuty
     DeletePublishingDestinationResponse = Shapes::StructureShape.new(name: 'DeletePublishingDestinationResponse')
     DeleteThreatIntelSetRequest = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetRequest')
     DeleteThreatIntelSetResponse = Shapes::StructureShape.new(name: 'DeleteThreatIntelSetResponse')
+    DescribeOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationRequest')
+    DescribeOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationConfigurationResponse')
     DescribePublishingDestinationRequest = Shapes::StructureShape.new(name: 'DescribePublishingDestinationRequest')
     DescribePublishingDestinationResponse = Shapes::StructureShape.new(name: 'DescribePublishingDestinationResponse')
     Destination = Shapes::StructureShape.new(name: 'Destination')
@@ -69,6 +74,8 @@ module Aws::GuardDuty
     DetectorId = Shapes::StringShape.new(name: 'DetectorId')
     DetectorIds = Shapes::ListShape.new(name: 'DetectorIds')
     DetectorStatus = Shapes::StringShape.new(name: 'DetectorStatus')
+    DisableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountRequest')
+    DisableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'DisableOrganizationAdminAccountResponse')
     DisassociateFromMasterAccountRequest = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountRequest')
     DisassociateFromMasterAccountResponse = Shapes::StructureShape.new(name: 'DisassociateFromMasterAccountResponse')
     DisassociateMembersRequest = Shapes::StructureShape.new(name: 'DisassociateMembersRequest')
@@ -77,6 +84,8 @@ module Aws::GuardDuty
     DomainDetails = Shapes::StructureShape.new(name: 'DomainDetails')
     Double = Shapes::FloatShape.new(name: 'Double')
     Email = Shapes::StringShape.new(name: 'Email')
+    EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
+    EnableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountResponse')
     Eq = Shapes::ListShape.new(name: 'Eq')
     Equals = Shapes::ListShape.new(name: 'Equals')
     Evidence = Shapes::StructureShape.new(name: 'Evidence')
@@ -141,6 +150,8 @@ module Aws::GuardDuty
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListOrganizationAdminAccountsRequest = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsRequest')
+    ListOrganizationAdminAccountsResponse = Shapes::StructureShape.new(name: 'ListOrganizationAdminAccountsResponse')
     ListPublishingDestinationsRequest = Shapes::StructureShape.new(name: 'ListPublishingDestinationsRequest')
     ListPublishingDestinationsResponse = Shapes::StructureShape.new(name: 'ListPublishingDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -211,6 +222,8 @@ module Aws::GuardDuty
     UpdateFindingsFeedbackResponse = Shapes::StructureShape.new(name: 'UpdateFindingsFeedbackResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
     UpdateIPSetResponse = Shapes::StructureShape.new(name: 'UpdateIPSetResponse')
+    UpdateOrganizationConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationRequest')
+    UpdateOrganizationConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateOrganizationConfigurationResponse')
     UpdatePublishingDestinationRequest = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationRequest')
     UpdatePublishingDestinationResponse = Shapes::StructureShape.new(name: 'UpdatePublishingDestinationResponse')
     UpdateThreatIntelSetRequest = Shapes::StructureShape.new(name: 'UpdateThreatIntelSetRequest')
@@ -243,6 +256,12 @@ module Aws::GuardDuty
     Action.add_member(:network_connection_action, Shapes::ShapeRef.new(shape: NetworkConnectionAction, location_name: "networkConnectionAction"))
     Action.add_member(:port_probe_action, Shapes::ShapeRef.new(shape: PortProbeAction, location_name: "portProbeAction"))
     Action.struct_class = Types::Action
+
+    AdminAccount.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: String, location_name: "adminAccountId"))
+    AdminAccount.add_member(:admin_status, Shapes::ShapeRef.new(shape: AdminStatus, location_name: "adminStatus"))
+    AdminAccount.struct_class = Types::AdminAccount
+
+    AdminAccounts.member = Shapes::ShapeRef.new(shape: AdminAccount)
 
     ArchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
@@ -404,6 +423,13 @@ module Aws::GuardDuty
 
     DeleteThreatIntelSetResponse.struct_class = Types::DeleteThreatIntelSetResponse
 
+    DescribeOrganizationConfigurationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    DescribeOrganizationConfigurationRequest.struct_class = Types::DescribeOrganizationConfigurationRequest
+
+    DescribeOrganizationConfigurationResponse.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
+    DescribeOrganizationConfigurationResponse.add_member(:member_account_limit_reached, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "memberAccountLimitReached"))
+    DescribeOrganizationConfigurationResponse.struct_class = Types::DescribeOrganizationConfigurationResponse
+
     DescribePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DescribePublishingDestinationRequest.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "destinationId"))
     DescribePublishingDestinationRequest.struct_class = Types::DescribePublishingDestinationRequest
@@ -428,6 +454,11 @@ module Aws::GuardDuty
 
     DetectorIds.member = Shapes::ShapeRef.new(shape: DetectorId)
 
+    DisableOrganizationAdminAccountRequest.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminAccountId"))
+    DisableOrganizationAdminAccountRequest.struct_class = Types::DisableOrganizationAdminAccountRequest
+
+    DisableOrganizationAdminAccountResponse.struct_class = Types::DisableOrganizationAdminAccountResponse
+
     DisassociateFromMasterAccountRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DisassociateFromMasterAccountRequest.struct_class = Types::DisassociateFromMasterAccountRequest
 
@@ -445,6 +476,11 @@ module Aws::GuardDuty
 
     DomainDetails.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
     DomainDetails.struct_class = Types::DomainDetails
+
+    EnableOrganizationAdminAccountRequest.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminAccountId"))
+    EnableOrganizationAdminAccountRequest.struct_class = Types::EnableOrganizationAdminAccountRequest
+
+    EnableOrganizationAdminAccountResponse.struct_class = Types::EnableOrganizationAdminAccountResponse
 
     Eq.member = Shapes::ShapeRef.new(shape: String)
 
@@ -668,6 +704,14 @@ module Aws::GuardDuty
     ListMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: Members, location_name: "members"))
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
+
+    ListOrganizationAdminAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOrganizationAdminAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListOrganizationAdminAccountsRequest.struct_class = Types::ListOrganizationAdminAccountsRequest
+
+    ListOrganizationAdminAccountsResponse.add_member(:admin_accounts, Shapes::ShapeRef.new(shape: AdminAccounts, location_name: "adminAccounts"))
+    ListOrganizationAdminAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListOrganizationAdminAccountsResponse.struct_class = Types::ListOrganizationAdminAccountsResponse
 
     ListPublishingDestinationsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     ListPublishingDestinationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -905,6 +949,12 @@ module Aws::GuardDuty
 
     UpdateIPSetResponse.struct_class = Types::UpdateIPSetResponse
 
+    UpdateOrganizationConfigurationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
+    UpdateOrganizationConfigurationRequest.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
+    UpdateOrganizationConfigurationRequest.struct_class = Types::UpdateOrganizationConfigurationRequest
+
+    UpdateOrganizationConfigurationResponse.struct_class = Types::UpdateOrganizationConfigurationResponse
+
     UpdatePublishingDestinationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     UpdatePublishingDestinationRequest.add_member(:destination_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "destinationId"))
     UpdatePublishingDestinationRequest.add_member(:destination_properties, Shapes::ShapeRef.new(shape: DestinationProperties, location_name: "destinationProperties"))
@@ -1109,12 +1159,32 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:describe_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOrganizationConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/admin"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOrganizationConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
       api.add_operation(:describe_publishing_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribePublishingDestination"
         o.http_method = "GET"
         o.http_request_uri = "/detector/{detectorId}/publishingDestination/{destinationId}"
         o.input = Shapes::ShapeRef.new(shape: DescribePublishingDestinationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePublishingDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:disable_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableOrganizationAdminAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/admin/disable"
+        o.input = Shapes::ShapeRef.new(shape: DisableOrganizationAdminAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableOrganizationAdminAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -1135,6 +1205,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/member/disassociate"
         o.input = Shapes::ShapeRef.new(shape: DisassociateMembersRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateMembersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:enable_organization_admin_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableOrganizationAdminAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/admin/enable"
+        o.input = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableOrganizationAdminAccountResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -1335,6 +1415,22 @@ module Aws::GuardDuty
         )
       end)
 
+      api.add_operation(:list_organization_admin_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationAdminAccounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/admin"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationAdminAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationAdminAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_publishing_destinations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPublishingDestinations"
         o.http_method = "GET"
@@ -1463,6 +1559,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}/ipset/{ipSetId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateIPSetRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateIPSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_organization_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOrganizationConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/admin"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOrganizationConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOrganizationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)

@@ -890,7 +890,8 @@ module Aws::Redshift
     #   Cluster Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
+    #   `ra3.16xlarge`
     #
     #
     #
@@ -2095,7 +2096,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Creates a snapshot schedule with the rate of every 12 hours.
+    # Create a snapshot schedule that can be associated to a cluster and
+    # which overrides the default system backup schedule.
     #
     # @option params [Array<String>] :schedule_definitions
     #   The definition of the snapshot schedule. The definition is made up of
@@ -2208,6 +2210,89 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def create_tags(params = {}, options = {})
       req = build_request(:create_tags, params)
+      req.send_request(options)
+    end
+
+    # Creates a usage limit for a specified Amazon Redshift feature on a
+    # cluster. The usage limit is identified by the returned usage limit
+    # identifier.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster that you want to limit usage.
+    #
+    # @option params [required, String] :feature_type
+    #   The Amazon Redshift feature that you want to limit.
+    #
+    # @option params [required, String] :limit_type
+    #   The type of limit. Depending on the feature type, this can be based on
+    #   a time duration or data size. If `FeatureType` is `spectrum`, then
+    #   `LimitType` must be `data-scanned`. If `FeatureType` is
+    #   `concurrency-scaling`, then `LimitType` must be `time`.
+    #
+    # @option params [required, Integer] :amount
+    #   The limit amount. If time-based, this amount is in minutes. If
+    #   data-based, this amount is in terabytes (TB). The value must be a
+    #   positive number.
+    #
+    # @option params [String] :period
+    #   The time period that the amount applies to. A `weekly` period begins
+    #   on Sunday. The default is `monthly`.
+    #
+    # @option params [String] :breach_action
+    #   The action that Amazon Redshift takes when the limit is reached. The
+    #   default is log. For more information about this parameter, see
+    #   UsageLimit.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tag instances.
+    #
+    # @return [Types::UsageLimit] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UsageLimit#usage_limit_id #usage_limit_id} => String
+    #   * {Types::UsageLimit#cluster_identifier #cluster_identifier} => String
+    #   * {Types::UsageLimit#feature_type #feature_type} => String
+    #   * {Types::UsageLimit#limit_type #limit_type} => String
+    #   * {Types::UsageLimit#amount #amount} => Integer
+    #   * {Types::UsageLimit#period #period} => String
+    #   * {Types::UsageLimit#breach_action #breach_action} => String
+    #   * {Types::UsageLimit#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_usage_limit({
+    #     cluster_identifier: "String", # required
+    #     feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling
+    #     limit_type: "time", # required, accepts time, data-scanned
+    #     amount: 1, # required
+    #     period: "daily", # accepts daily, weekly, monthly
+    #     breach_action: "log", # accepts log, emit-metric, disable
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_limit_id #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.limit_type #=> String, one of "time", "data-scanned"
+    #   resp.amount #=> Integer
+    #   resp.period #=> String, one of "daily", "weekly", "monthly"
+    #   resp.breach_action #=> String, one of "log", "emit-metric", "disable"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateUsageLimit AWS API Documentation
+    #
+    # @overload create_usage_limit(params = {})
+    # @param [Hash] params ({})
+    def create_usage_limit(params = {}, options = {})
+      req = build_request(:create_usage_limit, params)
       req.send_request(options)
     end
 
@@ -2736,6 +2821,28 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_tags(params = {}, options = {})
       req = build_request(:delete_tags, params)
+      req.send_request(options)
+    end
+
+    # Deletes a usage limit from a cluster.
+    #
+    # @option params [required, String] :usage_limit_id
+    #   The identifier of the usage limit to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_usage_limit({
+    #     usage_limit_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteUsageLimit AWS API Documentation
+    #
+    # @overload delete_usage_limit(params = {})
+    # @param [Hash] params ({})
+    def delete_usage_limit(params = {}, options = {})
+      req = build_request(:delete_usage_limit, params)
       req.send_request(options)
     end
 
@@ -5245,6 +5352,114 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Shows usage limits on a cluster. Results are filtered based on the
+    # combination of input usage limit identifier, cluster identifier, and
+    # feature type parameters:
+    #
+    # * If usage limit identifier, cluster identifier, and feature type are
+    #   not provided, then all usage limit objects for the current account
+    #   in the current region are returned.
+    #
+    # * If usage limit identifier is provided, then the corresponding usage
+    #   limit object is returned.
+    #
+    # * If cluster identifier is provided, then all usage limit objects for
+    #   the specified cluster are returned.
+    #
+    # * If cluster identifier and feature type are provided, then all usage
+    #   limit objects for the combination of cluster and feature are
+    #   returned.
+    #
+    # @option params [String] :usage_limit_id
+    #   The identifier of the usage limit to describe.
+    #
+    # @option params [String] :cluster_identifier
+    #   The identifier of the cluster for which you want to describe usage
+    #   limits.
+    #
+    # @option params [String] :feature_type
+    #   The feature type for which you want to describe usage limits.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a DescribeUsageLimits
+    #   request exceed the value specified in `MaxRecords`, AWS returns a
+    #   value in the `Marker` field of the response. You can retrieve the next
+    #   set of response records by providing the returned marker value in the
+    #   `Marker` parameter and retrying the request.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   A tag key or keys for which you want to return all matching usage
+    #   limit objects that are associated with the specified key or keys. For
+    #   example, suppose that you have parameter groups that are tagged with
+    #   keys called `owner` and `environment`. If you specify both of these
+    #   tag keys in the request, Amazon Redshift returns a response with the
+    #   usage limit objects have either or both of these tag keys associated
+    #   with them.
+    #
+    # @option params [Array<String>] :tag_values
+    #   A tag value or values for which you want to return all matching usage
+    #   limit objects that are associated with the specified tag value or
+    #   values. For example, suppose that you have parameter groups that are
+    #   tagged with values called `admin` and `test`. If you specify both of
+    #   these tag values in the request, Amazon Redshift returns a response
+    #   with the usage limit objects that have either or both of these tag
+    #   values associated with them.
+    #
+    # @return [Types::UsageLimitList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UsageLimitList#usage_limits #usage_limits} => Array&lt;Types::UsageLimit&gt;
+    #   * {Types::UsageLimitList#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_usage_limits({
+    #     usage_limit_id: "String",
+    #     cluster_identifier: "String",
+    #     feature_type: "spectrum", # accepts spectrum, concurrency-scaling
+    #     max_records: 1,
+    #     marker: "String",
+    #     tag_keys: ["String"],
+    #     tag_values: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_limits #=> Array
+    #   resp.usage_limits[0].usage_limit_id #=> String
+    #   resp.usage_limits[0].cluster_identifier #=> String
+    #   resp.usage_limits[0].feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.usage_limits[0].limit_type #=> String, one of "time", "data-scanned"
+    #   resp.usage_limits[0].amount #=> Integer
+    #   resp.usage_limits[0].period #=> String, one of "daily", "weekly", "monthly"
+    #   resp.usage_limits[0].breach_action #=> String, one of "log", "emit-metric", "disable"
+    #   resp.usage_limits[0].tags #=> Array
+    #   resp.usage_limits[0].tags[0].key #=> String
+    #   resp.usage_limits[0].tags[0].value #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeUsageLimits AWS API Documentation
+    #
+    # @overload describe_usage_limits(params = {})
+    # @param [Hash] params ({})
+    def describe_usage_limits(params = {}, options = {})
+      req = build_request(:describe_usage_limits, params)
+      req.send_request(options)
+    end
+
     # Stops logging information, such as queries and connection attempts,
     # for the specified Amazon Redshift cluster.
     #
@@ -5910,7 +6125,8 @@ module Aws::Redshift
     #   Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
+    #   `ra3.16xlarge`
     #
     #
     #
@@ -7322,6 +7538,61 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modifies a usage limit in a cluster. You can't modify the feature
+    # type or period of a usage limit.
+    #
+    # @option params [required, String] :usage_limit_id
+    #   The identifier of the usage limit to modify.
+    #
+    # @option params [Integer] :amount
+    #   The new limit amount. For more information about this parameter, see
+    #   UsageLimit.
+    #
+    # @option params [String] :breach_action
+    #   The new action that Amazon Redshift takes when the limit is reached.
+    #   For more information about this parameter, see UsageLimit.
+    #
+    # @return [Types::UsageLimit] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UsageLimit#usage_limit_id #usage_limit_id} => String
+    #   * {Types::UsageLimit#cluster_identifier #cluster_identifier} => String
+    #   * {Types::UsageLimit#feature_type #feature_type} => String
+    #   * {Types::UsageLimit#limit_type #limit_type} => String
+    #   * {Types::UsageLimit#amount #amount} => Integer
+    #   * {Types::UsageLimit#period #period} => String
+    #   * {Types::UsageLimit#breach_action #breach_action} => String
+    #   * {Types::UsageLimit#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_usage_limit({
+    #     usage_limit_id: "String", # required
+    #     amount: 1,
+    #     breach_action: "log", # accepts log, emit-metric, disable
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_limit_id #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.limit_type #=> String, one of "time", "data-scanned"
+    #   resp.amount #=> Integer
+    #   resp.period #=> String, one of "daily", "weekly", "monthly"
+    #   resp.breach_action #=> String, one of "log", "emit-metric", "disable"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyUsageLimit AWS API Documentation
+    #
+    # @overload modify_usage_limit(params = {})
+    # @param [Hash] params ({})
+    def modify_usage_limit(params = {}, options = {})
+      req = build_request(:modify_usage_limit, params)
+      req.send_request(options)
+    end
+
     # Pauses a cluster.
     #
     # @option params [required, String] :cluster_identifier
@@ -7716,6 +7987,8 @@ module Aws::Redshift
     #
     #   * ds2.8xlarge
     #
+    #   * ra3.4xlarge
+    #
     #   * ra3.16xlarge
     #
     # * The type of nodes that you add must match the node type for the
@@ -8045,7 +8318,7 @@ module Aws::Redshift
     #   restore into that same instance type and size. In other words, you can
     #   only restore a dc1.large instance type into another dc1.large instance
     #   type or dc2.large instance type. You can't restore dc1.8xlarge to
-    #   dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a
+    #   dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a
     #   dc2.8large cluster. For more information about node types, see [ About
     #   Clusters and Nodes][1] in the *Amazon Redshift Cluster Management
     #   Guide*.
@@ -8749,7 +9022,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,7 @@ module Aws::MigrationHubConfig
   # * {InternalServerError}
   # * {InvalidInputException}
   # * {ServiceUnavailableException}
+  # * {ThrottlingException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -109,6 +110,26 @@ module Aws::MigrationHubConfig
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MigrationHubConfig::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
       end
     end
 

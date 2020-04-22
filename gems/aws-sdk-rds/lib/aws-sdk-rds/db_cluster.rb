@@ -195,13 +195,13 @@ module Aws::RDS
     end
 
     # Contains the identifier of the source DB cluster if this DB cluster is
-    # a Read Replica.
+    # a read replica.
     # @return [String]
     def replication_source_identifier
       data[:replication_source_identifier]
     end
 
-    # Contains one or more identifiers of the Read Replicas associated with
+    # Contains one or more identifiers of the read replicas associated with
     # this DB cluster.
     # @return [Array<String>]
     def read_replica_identifiers
@@ -334,6 +334,15 @@ module Aws::RDS
 
     # The DB engine mode of the DB cluster, either `provisioned`,
     # `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    # <note markdown="1"> `global` engine mode only applies for global database clusters created
+    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    # the clusters in a global database use `provisioned` engine mode. To
+    # check if a DB cluster is part of a global database, use
+    # `DescribeGlobalClusters` instead of checking the `EngineMode` return
+    # value from `DescribeDBClusters`.
+    #
+    #  </note>
     # @return [String]
     def engine_mode
       data[:engine_mode]
@@ -763,7 +772,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
-    #   if this DB cluster is created as a Read Replica.
+    #   if this DB cluster is created as a read replica.
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
     # @option options [Boolean] :storage_encrypted
@@ -791,9 +800,9 @@ module Aws::RDS
     #   AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another AWS
+    #   If you create a read replica of an encrypted DB cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the Read Replica
+    #   destination AWS Region. This key is used to encrypt the read replica
     #   in that AWS Region.
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
@@ -815,8 +824,8 @@ module Aws::RDS
     #     action that is called in the destination AWS Region, and the action
     #     contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that Aurora Read
-    #     Replica will be created in.
+    #   * `DestinationRegion` - The name of the AWS Region that Aurora read
+    #     replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
@@ -878,6 +887,12 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
+    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    #   the clusters in a global database use `provisioned` engine mode.
+    #
+    #    </note>
+    #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
@@ -930,12 +945,12 @@ module Aws::RDS
     #
     #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
     #   Authentication to authenticate users that connect to the DB cluster.
-    #   For more information, see [Using Kerberos Authentication for Aurora
-    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
@@ -1519,12 +1534,12 @@ module Aws::RDS
     #
     #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
     #   Authentication to authenticate users that connect to the DB cluster.
-    #   For more information, see [Using Kerberos Authentication for Aurora
-    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.

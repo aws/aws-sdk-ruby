@@ -437,6 +437,28 @@ module Aws::SecurityHub
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
     #
+    # After a finding is created, `BatchImportFindings` cannot be used to
+    # update the following finding fields and objects, which Security Hub
+    # customers use to manage their investigation workflow.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `Note`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
+    #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
     #   must follow the [AWS Security Finding Format][1]. Maximum of 100
@@ -958,6 +980,172 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def batch_import_findings(params = {}, options = {})
       req = build_request(:batch_import_findings, params)
+      req.send_request(options)
+    end
+
+    # Used by Security Hub customers to update information about their
+    # investigation into a finding. Requested by master accounts or member
+    # accounts. Master accounts can update findings for their account and
+    # their member accounts. Member accounts can update findings for their
+    # account.
+    #
+    # Updates from `BatchUpdateFindings` do not affect the value of
+    # `UpdatedAt` for a finding.
+    #
+    # Master accounts can use `BatchUpdateFindings` to update the following
+    # finding fields and objects.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `Note`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
+    #
+    # Member accounts can only use `BatchUpdateFindings` to update the Note
+    # object.
+    #
+    # @option params [required, Array<Types::AwsSecurityFindingIdentifier>] :finding_identifiers
+    #   The list of findings to update. `BatchUpdateFindings` can be used to
+    #   update up to 100 findings at a time.
+    #
+    #   For each finding, the list provides the finding identifier and the ARN
+    #   of the finding provider.
+    #
+    # @option params [Types::NoteUpdate] :note
+    #   The updated note.
+    #
+    # @option params [Types::SeverityUpdate] :severity
+    #   Used to update the finding severity.
+    #
+    # @option params [String] :verification_state
+    #   Indicates the veracity of a finding.
+    #
+    #   The available values for `VerificationState` are as follows.
+    #
+    #   * `UNKNOWN` – The default disposition of a security finding
+    #
+    #   * `TRUE_POSITIVE` – The security finding is confirmed
+    #
+    #   * `FALSE_POSITIVE` – The security finding was determined to be a false
+    #     alarm
+    #
+    #   * `BENIGN_POSITIVE` – A special case of `TRUE_POSITIVE` where the
+    #     finding doesn't pose any threat, is expected, or both
+    #
+    # @option params [Integer] :confidence
+    #   The updated value for the finding confidence. Confidence is defined as
+    #   the likelihood that a finding accurately identifies the behavior or
+    #   issue that it was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #
+    # @option params [Integer] :criticality
+    #   The updated value for the level of importance assigned to the
+    #   resources associated with the findings.
+    #
+    #   A score of 0 means that the underlying resources have no criticality,
+    #   and a score of 100 is reserved for the most critical resources.
+    #
+    # @option params [Array<String>] :types
+    #   One or more finding types in the format of
+    #   namespace/category/classifier that classify a finding.
+    #
+    #   Valid namespace values are as follows.
+    #
+    #   * Software and Configuration Checks
+    #
+    #   * TTPs
+    #
+    #   * Effects
+    #
+    #   * Unusual Behaviors
+    #
+    #   * Sensitive Data Identifications
+    #
+    # @option params [Hash<String,String>] :user_defined_fields
+    #   A list of name/value string pairs associated with the finding. These
+    #   are custom, user-defined fields added to a finding.
+    #
+    # @option params [Types::WorkflowUpdate] :workflow
+    #   Used to update the workflow status of a finding.
+    #
+    #   The workflow status indicates the progress of the investigation into
+    #   the finding.
+    #
+    # @option params [Array<Types::RelatedFinding>] :related_findings
+    #   A list of findings that are related to the updated findings.
+    #
+    # @return [Types::BatchUpdateFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateFindingsResponse#processed_findings #processed_findings} => Array&lt;Types::AwsSecurityFindingIdentifier&gt;
+    #   * {Types::BatchUpdateFindingsResponse#unprocessed_findings #unprocessed_findings} => Array&lt;Types::BatchUpdateFindingsUnprocessedFinding&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_findings({
+    #     finding_identifiers: [ # required
+    #       {
+    #         id: "NonEmptyString", # required
+    #         product_arn: "NonEmptyString", # required
+    #       },
+    #     ],
+    #     note: {
+    #       text: "NonEmptyString", # required
+    #       updated_by: "NonEmptyString", # required
+    #     },
+    #     severity: {
+    #       normalized: 1,
+    #       product: 1.0,
+    #       label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #     },
+    #     verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
+    #     confidence: 1,
+    #     criticality: 1,
+    #     types: ["NonEmptyString"],
+    #     user_defined_fields: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
+    #     workflow: {
+    #       status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #     },
+    #     related_findings: [
+    #       {
+    #         product_arn: "NonEmptyString", # required
+    #         id: "NonEmptyString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.processed_findings #=> Array
+    #   resp.processed_findings[0].id #=> String
+    #   resp.processed_findings[0].product_arn #=> String
+    #   resp.unprocessed_findings #=> Array
+    #   resp.unprocessed_findings[0].finding_identifier.id #=> String
+    #   resp.unprocessed_findings[0].finding_identifier.product_arn #=> String
+    #   resp.unprocessed_findings[0].error_code #=> String
+    #   resp.unprocessed_findings[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindings AWS API Documentation
+    #
+    # @overload batch_update_findings(params = {})
+    # @param [Hash] params ({})
+    def batch_update_findings(params = {}, options = {})
+      req = build_request(:batch_update_findings, params)
       req.send_request(options)
     end
 
@@ -3959,6 +4147,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # `UpdateFindings` is deprecated. Instead of `UpdateFindings`, use
+    # `BatchUpdateFindings`.
+    #
     # Updates the `Note` and `RecordState` of the Security Hub-aggregated
     # findings that the filter attributes specify. Any member account that
     # can view the finding also sees the update to the finding.
@@ -5183,7 +5374,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

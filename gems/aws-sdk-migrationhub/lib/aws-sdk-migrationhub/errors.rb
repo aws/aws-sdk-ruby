@@ -33,6 +33,7 @@ module Aws::MigrationHub
   # * {PolicyErrorException}
   # * {ResourceNotFoundException}
   # * {ServiceUnavailableException}
+  # * {ThrottlingException}
   # * {UnauthorizedOperation}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -158,6 +159,26 @@ module Aws::MigrationHub
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MigrationHub::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
       end
     end
 

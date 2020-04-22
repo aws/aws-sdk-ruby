@@ -11239,8 +11239,8 @@ module Aws::S3
         when nil then EventStreams::SelectObjectContentEventStream.new
         else
           msg = "expected :event_stream_handler to be a block or "\
-            "instance of Aws::S3::EventStreams::SelectObjectContentEventStream"\
-            ", got `#{handler.inspect}` instead"
+                "instance of Aws::S3::EventStreams::SelectObjectContentEventStream"\
+                ", got `#{handler.inspect}` instead"
           raise ArgumentError, msg
         end
 
@@ -11789,7 +11789,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.61.2'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

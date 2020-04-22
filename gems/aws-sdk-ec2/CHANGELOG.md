@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.153.0 (2020-04-16)
+------------------
+
+* Feature - Amazon EC2 now supports adding AWS resource tags for placement groups and key pairs, at creation time. The CreatePlacementGroup API will now return placement group information when created successfully. The DeleteKeyPair API now supports deletion by resource ID.
+
+1.152.0 (2020-04-08)
+------------------
+
+* Feature - This release provides the ability to include tags in EC2 event notifications.
+
 1.151.0 (2020-03-12)
 ------------------
 

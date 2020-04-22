@@ -290,7 +290,7 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
@@ -403,7 +403,7 @@ module Aws::SageMaker
     #                 s3_output_path: "S3Uri", # required
     #               },
     #               resource_config: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #                 instance_count: 1, # required
     #                 volume_size_in_gb: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
@@ -2022,7 +2022,7 @@ module Aws::SageMaker
     #               default_value: "ParameterValue",
     #             },
     #           ],
-    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           supports_distributed_training: false,
     #           metric_definitions: [
     #             {
@@ -2103,7 +2103,7 @@ module Aws::SageMaker
     #                   s3_output_path: "S3Uri", # required
     #                 },
     #                 resource_config: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #                   instance_count: 1, # required
     #                   volume_size_in_gb: 1, # required
     #                   volume_kms_key_id: "KmsKeyId",
@@ -2470,7 +2470,7 @@ module Aws::SageMaker
     #         input_config: { # required
     #           s3_uri: "S3Uri", # required
     #           data_input_config: "DataInputConfig", # required
-    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST
+    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
@@ -2949,7 +2949,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] human_loop_request_source
-    #   Container for configuring the source of human task requests.
+    #   Container for configuring the source of human task requests. Use to
+    #   specify if Amazon Rekognition or Amazon Textract is used as an
+    #   integration source.
     #   @return [Types::HumanLoopRequestSource]
     #
     # @!attribute [rw] human_loop_activation_config
@@ -3178,7 +3180,7 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
@@ -3276,7 +3278,7 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
@@ -4491,7 +4493,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -4971,7 +4973,7 @@ module Aws::SageMaker
     #         trial_component_name: "ExperimentEntityName", # required
     #         display_name: "ExperimentEntityName",
     #         status: {
-    #           primary_status: "InProgress", # accepts InProgress, Completed, Failed
+    #           primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #           message: "TrialComponentStatusMessage",
     #         },
     #         start_time: Time.now,
@@ -6935,7 +6937,9 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] human_loop_request_source
-    #   Container for configuring the source of human task requests.
+    #   Container for configuring the source of human task requests. Used to
+    #   specify if Amazon Rekognition or Amazon Textract is used as an
+    #   integration source.
     #   @return [Types::HumanLoopRequestSource]
     #
     # @!attribute [rw] human_loop_activation_config
@@ -8991,8 +8995,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A summary of the properties of an experiment as returned by the Search
-    # API.
+    # The properties of an experiment as returned by the Search API.
     #
     # @!attribute [rw] experiment_name
     #   The name of the experiment.
@@ -9186,15 +9189,11 @@ module Aws::SageMaker
     end
 
     # A conditional statement for a search expression that includes a
-    # resource property, a Boolean operator, and a value.
-    #
-    # If you don't specify an `Operator` and a `Value`, the filter searches
-    # for only the specified property. For example, defining a `Filter` for
-    # the `FailureReason` for the `TrainingJob` `Resource` searches for
-    # training job objects that have a value in the `FailureReason` field.
+    # resource property, a Boolean operator, and a value. Resources that
+    # match the statement are returned in the results from the Search API.
     #
     # If you specify a `Value`, but not an `Operator`, Amazon SageMaker uses
-    # the equals operator as the default.
+    # the equals operator.
     #
     # In search, there are several property types:
     #
@@ -9209,7 +9208,7 @@ module Aws::SageMaker
     #
     #   `"Name": "Metrics.accuracy",`
     #
-    #   `"Operator": "GREATER_THAN",`
+    #   `"Operator": "GreaterThan",`
     #
     #   `"Value": "0.9"`
     #
@@ -9229,7 +9228,7 @@ module Aws::SageMaker
     #
     #   ` "Name": "HyperParameters.learning_rate",`
     #
-    #   ` "Operator": "LESS_THAN",`
+    #   ` "Operator": "LessThan",`
     #
     #   ` "Value": "0.5"`
     #
@@ -9237,7 +9236,7 @@ module Aws::SageMaker
     #
     # Tags
     #
-    # : To define a tag filter, enter a value with the form `"Tags.<key>"`.
+    # : To define a tag filter, enter a value with the form `Tags.<key>`.
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -9249,10 +9248,9 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] name
-    #   A property name. For example, `TrainingJobName`. For the list of
-    #   valid property names returned in a search result for each supported
-    #   resource, see TrainingJob properties. You must specify a valid
-    #   property name for the resource.
+    #   A resource property name. For example, `TrainingJobName`. For valid
+    #   property names, see SearchRecord. You must specify a valid property
+    #   for the resource.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -9261,44 +9259,54 @@ module Aws::SageMaker
     #
     #   Equals
     #
-    #   : The specified resource in `Name` equals the specified `Value`.
+    #   : The value of `Name` equals `Value`.
     #
     #   NotEquals
     #
-    #   : The specified resource in `Name` does not equal the specified
-    #     `Value`.
+    #   : The value of `Name` doesn't equal `Value`.
     #
     #   GreaterThan
     #
-    #   : The specified resource in `Name` is greater than the specified
-    #     `Value`. Not supported for text-based properties.
+    #   : The value of `Name` is greater than `Value`. Not supported for
+    #     text properties.
     #
     #   GreaterThanOrEqualTo
     #
-    #   : The specified resource in `Name` is greater than or equal to the
-    #     specified `Value`. Not supported for text-based properties.
+    #   : The value of `Name` is greater than or equal to `Value`. Not
+    #     supported for text properties.
     #
     #   LessThan
     #
-    #   : The specified resource in `Name` is less than the specified
-    #     `Value`. Not supported for text-based properties.
+    #   : The value of `Name` is less than `Value`. Not supported for text
+    #     properties.
     #
     #   LessThanOrEqualTo
     #
-    #   : The specified resource in `Name` is less than or equal to the
-    #     specified `Value`. Not supported for text-based properties.
+    #   : The value of `Name` is less than or equal to `Value`. Not
+    #     supported for text properties.
     #
     #   Contains
     #
-    #   : Only supported for text-based properties. The word-list of the
-    #     property contains the specified `Value`. A `SearchExpression` can
-    #     include only one `Contains` operator.
+    #   : The value of `Name` contains the string `Value`. A
+    #     `SearchExpression` can include only one `Contains` operator. Only
+    #     supported for text properties.
     #
-    #   If you have specified a filter `Value`, the default is `Equals`.
+    #   Exists
+    #
+    #   : The `Name` property exists.
+    #
+    #   NotExists
+    #
+    #   : The `Name` property does not exist.
+    #
+    #   In
+    #
+    #   : The value of `Name` is one of the comma delimited strings in
+    #     `Value`. Only supported for text properties.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A value used with `Resource` and `Operator` to determine if objects
+    #   A value used with `Name` and `Operator` to determine which resources
     #   satisfy the filter's condition. For numerical properties, `Value`
     #   must be an integer or floating-point decimal. For timestamp
     #   properties, `Value` must be an ISO 8601 date-time string of the
@@ -9439,7 +9447,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] resource
-    #   The name of the Amazon SageMaker resource to Search for.
+    #   The name of the Amazon SageMaker resource to search for.
     #   @return [String]
     #
     # @!attribute [rw] suggestion_query
@@ -10549,7 +10557,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -11153,7 +11161,7 @@ module Aws::SageMaker
     #       {
     #         s3_uri: "S3Uri", # required
     #         data_input_config: "DataInputConfig", # required
-    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST
+    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST, TFLITE
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -15481,24 +15489,19 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines a list of `NestedFilters` objects. To satisfy the conditions
-    # specified in the `NestedFilters` call, a resource must satisfy the
-    # conditions of all of the filters.
+    # A list of nested Filter objects. A resource must satisfy the
+    # conditions of all filters to be included in the results returned from
+    # the Search API.
     #
-    # For example, you could define a `NestedFilters` using the training
-    # job's `InputDataConfig` property to filter on `Channel` objects.
+    # For example, to filter on a training job's `InputDataConfig` property
+    # with a specific channel name and `S3Uri` prefix, define the following
+    # filters:
     #
-    # A `NestedFilters` object contains multiple filters. For example, to
-    # find all training jobs whose name contains `train` and that have
-    # `cat/data` in their `S3Uri` (specified in `InputDataConfig`), you need
-    # to create a `NestedFilters` object that specifies the
-    # `InputDataConfig` property with the following `Filter` objects:
-    #
-    # * `'\{Name:"InputDataConfig.ChannelName", "Operator":"EQUALS",
+    # * `'\{Name:"InputDataConfig.ChannelName", "Operator":"Equals",
     #   "Value":"train"\}',`
     #
     # * `'\{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri",
-    #   "Operator":"CONTAINS", "Value":"cat/data"\}'`
+    #   "Operator":"Contains", "Value":"mybucket/catdata"\}'`
     #
     # @note When making an API call, you may pass NestedFilters
     #   data as a hash:
@@ -16121,6 +16124,149 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # An Amazon SageMaker processing job that is used to analyze data and
+    # evaluate models. For more information, see [Process Data and Evaluate
+    # Models][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html
+    #
+    # @!attribute [rw] processing_inputs
+    #   For each input, data is downloaded from S3 into the processing
+    #   container before the processing job begins running if
+    #   "S3InputMode" is set to `File`.
+    #   @return [Array<Types::ProcessingInput>]
+    #
+    # @!attribute [rw] processing_output_config
+    #   The output configuration for the processing job.
+    #   @return [Types::ProcessingOutputConfig]
+    #
+    # @!attribute [rw] processing_job_name
+    #   The name of the processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] processing_resources
+    #   Identifies the resources, ML compute instances, and ML storage
+    #   volumes to deploy for a processing job. In distributed training, you
+    #   specify more than one instance.
+    #   @return [Types::ProcessingResources]
+    #
+    # @!attribute [rw] stopping_condition
+    #   Specifies a time limit for how long the processing job is allowed to
+    #   run.
+    #   @return [Types::ProcessingStoppingCondition]
+    #
+    # @!attribute [rw] app_specification
+    #   Configuration to run a processing job in a specified container
+    #   image.
+    #   @return [Types::AppSpecification]
+    #
+    # @!attribute [rw] environment
+    #   Sets the environment variables in the Docker container.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] network_config
+    #   Networking options for a job, such as network traffic encryption
+    #   between containers, whether to allow inbound and outbound network
+    #   calls to and from containers, and the VPC subnets and security
+    #   groups to use for VPC-enabled jobs.
+    #   @return [Types::NetworkConfig]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role used to create the processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] experiment_config
+    #   Configuration for the experiment.
+    #   @return [Types::ExperimentConfig]
+    #
+    # @!attribute [rw] processing_job_arn
+    #   The ARN of the processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] processing_job_status
+    #   The status of the processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] exit_message
+    #   A string, up to one KB in size, that contains metadata from the
+    #   processing container when the processing job exits.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   A string, up to one KB in size, that contains the reason a
+    #   processing job failed, if it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] processing_end_time
+    #   The time that the processing job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] processing_start_time
+    #   The time that the processing job started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time the processing job was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the processing job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitoring_schedule_arn
+    #   The ARN of a monitoring schedule for an endpoint associated with
+    #   this processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_ml_job_arn
+    #   The Amazon Resource Name (ARN) of the AutoML job associated with
+    #   this processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_job_arn
+    #   The ARN of the training job associated with this processing job.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. For more information, see [Using Cost
+    #   Allocation Tags][1] in the *AWS Billing and Cost Management User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingJob AWS API Documentation
+    #
+    class ProcessingJob < Struct.new(
+      :processing_inputs,
+      :processing_output_config,
+      :processing_job_name,
+      :processing_resources,
+      :stopping_condition,
+      :app_specification,
+      :environment,
+      :network_config,
+      :role_arn,
+      :experiment_config,
+      :processing_job_arn,
+      :processing_job_status,
+      :exit_message,
+      :failure_reason,
+      :processing_end_time,
+      :processing_start_time,
+      :last_modified_time,
+      :creation_time,
+      :monitoring_schedule_arn,
+      :auto_ml_job_arn,
+      :training_job_arn,
+      :tags)
+      include Aws::Structure
+    end
+
     # Summary of information about a processing job.
     #
     # @!attribute [rw] processing_job_name
@@ -16305,7 +16451,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_input_mode
-    #   Wether to use `File` or `Pipe` input mode. In `File` mode, Amazon
+    #   Whether to use `File` or `Pipe` input mode. In `File` mode, Amazon
     #   SageMaker copies the data from the input source onto the local
     #   Amazon Elastic Block Store (Amazon EBS) volumes before starting your
     #   training algorithm. This is the most commonly used input mode. In
@@ -16319,7 +16465,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_compression_type
-    #   Whether to use `Gzip` compresion for Amazon S3 storage.
+    #   Whether to use `Gzip` compression for Amazon S3 storage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProcessingS3Input AWS API Documentation
@@ -16894,7 +17040,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -17375,24 +17521,22 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # An individual search result record that contains a single resource
-    # object.
+    # A single resource returned as part of the Search API response.
     #
     # @!attribute [rw] training_job
-    #   A `TrainingJob` object that is returned as part of a `Search`
-    #   request.
+    #   The properties of a training job.
     #   @return [Types::TrainingJob]
     #
     # @!attribute [rw] experiment
-    #   A summary of the properties of an experiment.
+    #   The properties of an experiment.
     #   @return [Types::Experiment]
     #
     # @!attribute [rw] trial
-    #   A summary of the properties of a trial.
+    #   The properties of a trial.
     #   @return [Types::Trial]
     #
     # @!attribute [rw] trial_component
-    #   A summary of the properties of a trial component.
+    #   The properties of a trial component.
     #   @return [Types::TrialComponent]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
@@ -17448,7 +17592,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] search_expression
-    #   A Boolean conditional statement. Resource objects must satisfy this
+    #   A Boolean conditional statement. Resources must satisfy this
     #   condition to be included in search results. You must provide at
     #   least one subexpression, filter, or nested filter. The maximum
     #   number of recursive `SubExpressions`, `NestedFilters`, and `Filters`
@@ -17466,15 +17610,14 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   If more than `MaxResults` resource objects match the specified
-    #   `SearchExpression`, the `SearchResponse` includes a `NextToken`. The
+    #   If more than `MaxResults` resources match the specified
+    #   `SearchExpression`, the response includes a `NextToken`. The
     #   `NextToken` can be passed to the next `SearchRequest` to continue
-    #   retrieving results for the specified `SearchExpression` and `Sort`
-    #   parameters.
+    #   retrieving results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in a `SearchResponse`.
+    #   The maximum number of results to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest AWS API Documentation
@@ -17490,7 +17633,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] results
-    #   A list of `SearchResult` objects.
+    #   A list of `SearchRecord` objects.
     #   @return [Array<Types::SearchRecord>]
     #
     # @!attribute [rw] next_token
@@ -18525,7 +18668,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -18705,7 +18848,7 @@ module Aws::SageMaker
     #             default_value: "ParameterValue",
     #           },
     #         ],
-    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5n.xlarge, ml.c5n.2xlarge, ml.c5n.4xlarge, ml.c5n.9xlarge, ml.c5n.18xlarge
     #         supports_distributed_training: false,
     #         metric_definitions: [
     #           {
@@ -19243,7 +19386,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A summary of the properties of a trial as returned by the Search API.
+    # The properties of a trial as returned by the Search API.
     #
     # @!attribute [rw] trial_name
     #   The name of the trial.
@@ -19311,8 +19454,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A summary of the properties of a trial component as returned by the
-    # Search API.
+    # The properties of a trial component as returned by the Search API.
     #
     # @!attribute [rw] trial_component_name
     #   The name of the trial component.
@@ -19328,7 +19470,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The source of the trial component.
+    #   The Amazon Resource Name (ARN) and job type of the source of the
+    #   component.
     #   @return [Types::TrialComponentSource]
     #
     # @!attribute [rw] status
@@ -19378,7 +19521,7 @@ module Aws::SageMaker
     #   @return [Array<Types::TrialComponentMetricSummary>]
     #
     # @!attribute [rw] source_detail
-    #   The source of the trial component.&gt;
+    #   Details of the source of the component.
     #   @return [Types::TrialComponentSourceDetail]
     #
     # @!attribute [rw] tags
@@ -19549,7 +19692,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] trial_component_source
-    #   The source of the trial component.
+    #   The Amazon Resource Name (ARN) and job type of the source of a trial
+    #   component.
     #   @return [Types::TrialComponentSource]
     #
     # @!attribute [rw] creation_time
@@ -19572,10 +19716,11 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The source of the trial component.
+    # The Amazon Resource Name (ARN) and job type of the source of a trial
+    # component.
     #
     # @!attribute [rw] source_arn
-    #   The Amazon Resource Name (ARN) of the source.
+    #   The source ARN.
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -19590,21 +19735,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Detailed information about the source of a trial component.
+    # Detailed information about the source of a trial component. Either
+    # `ProcessingJob` or `TrainingJob` is returned.
     #
     # @!attribute [rw] source_arn
     #   The Amazon Resource Name (ARN) of the source.
     #   @return [String]
     #
     # @!attribute [rw] training_job
-    #   Contains information about a training job.
+    #   Information about a training job that's the source of a trial
+    #   component.
     #   @return [Types::TrainingJob]
+    #
+    # @!attribute [rw] processing_job
+    #   Information about a processing job that's the source of a trial
+    #   component.
+    #   @return [Types::ProcessingJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrialComponentSourceDetail AWS API Documentation
     #
     class TrialComponentSourceDetail < Struct.new(
       :source_arn,
-      :training_job)
+      :training_job,
+      :processing_job)
       include Aws::Structure
     end
 
@@ -19614,7 +19767,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         primary_status: "InProgress", # accepts InProgress, Completed, Failed
+    #         primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #         message: "TrialComponentStatusMessage",
     #       }
     #
@@ -19652,7 +19805,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] trial_component_source
-    #   The source of the trial component.
+    #   The Amazon Resource Name (ARN) and job type of the source of a trial
+    #   component.
     #   @return [Types::TrialComponentSource]
     #
     # @!attribute [rw] status
@@ -20452,7 +20606,7 @@ module Aws::SageMaker
     #         trial_component_name: "ExperimentEntityName", # required
     #         display_name: "ExperimentEntityName",
     #         status: {
-    #           primary_status: "InProgress", # accepts InProgress, Completed, Failed
+    #           primary_status: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
     #           message: "TrialComponentStatusMessage",
     #         },
     #         start_time: Time.now,

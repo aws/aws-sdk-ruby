@@ -75,6 +75,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings = Shapes::StructureShape.new(name: 'CaptionDestinationSettings')
     CaptionDestinationType = Shapes::StringShape.new(name: 'CaptionDestinationType')
     CaptionSelector = Shapes::StructureShape.new(name: 'CaptionSelector')
+    CaptionSourceFramerate = Shapes::StructureShape.new(name: 'CaptionSourceFramerate')
     CaptionSourceSettings = Shapes::StructureShape.new(name: 'CaptionSourceSettings')
     CaptionSourceType = Shapes::StringShape.new(name: 'CaptionSourceType')
     ChannelMapping = Shapes::StructureShape.new(name: 'ChannelMapping')
@@ -281,6 +282,7 @@ module Aws::MediaConvert
     HlsSettings = Shapes::StructureShape.new(name: 'HlsSettings')
     HlsStreamInfResolution = Shapes::StringShape.new(name: 'HlsStreamInfResolution')
     HlsTimedMetadataId3Frame = Shapes::StringShape.new(name: 'HlsTimedMetadataId3Frame')
+    HopDestination = Shapes::StructureShape.new(name: 'HopDestination')
     Id3Insertion = Shapes::StructureShape.new(name: 'Id3Insertion')
     ImageInserter = Shapes::StructureShape.new(name: 'ImageInserter')
     ImscDestinationSettings = Shapes::StructureShape.new(name: 'ImscDestinationSettings')
@@ -412,6 +414,7 @@ module Aws::MediaConvert
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueListBy = Shapes::StringShape.new(name: 'QueueListBy')
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
+    QueueTransition = Shapes::StructureShape.new(name: 'QueueTransition')
     Rectangle = Shapes::StructureShape.new(name: 'Rectangle')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
     RenewalType = Shapes::StringShape.new(name: 'RenewalType')
@@ -526,6 +529,7 @@ module Aws::MediaConvert
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
+    __integerMin1Max60000 = Shapes::IntegerShape.new(name: '__integerMin1Max60000')
     __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
     __integerMin22050Max48000 = Shapes::IntegerShape.new(name: '__integerMin22050Max48000')
     __integerMin24Max60000 = Shapes::IntegerShape.new(name: '__integerMin24Max60000')
@@ -562,6 +566,7 @@ module Aws::MediaConvert
     __listOfHlsAdMarkers = Shapes::ListShape.new(name: '__listOfHlsAdMarkers')
     __listOfHlsAdditionalManifest = Shapes::ListShape.new(name: '__listOfHlsAdditionalManifest')
     __listOfHlsCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfHlsCaptionLanguageMapping')
+    __listOfHopDestination = Shapes::ListShape.new(name: '__listOfHopDestination')
     __listOfId3Insertion = Shapes::ListShape.new(name: '__listOfId3Insertion')
     __listOfInput = Shapes::ListShape.new(name: '__listOfInput')
     __listOfInputClipping = Shapes::ListShape.new(name: '__listOfInputClipping')
@@ -577,6 +582,7 @@ module Aws::MediaConvert
     __listOfOutputGroupDetail = Shapes::ListShape.new(name: '__listOfOutputGroupDetail')
     __listOfPreset = Shapes::ListShape.new(name: '__listOfPreset')
     __listOfQueue = Shapes::ListShape.new(name: '__listOfQueue')
+    __listOfQueueTransition = Shapes::ListShape.new(name: '__listOfQueueTransition')
     __listOfTeletextPageType = Shapes::ListShape.new(name: '__listOfTeletextPageType')
     __listOf__integerMin1Max2147483647 = Shapes::ListShape.new(name: '__listOf__integerMin1Max2147483647')
     __listOf__integerMin32Max8182 = Shapes::ListShape.new(name: '__listOf__integerMin32Max8182')
@@ -791,6 +797,10 @@ module Aws::MediaConvert
     CaptionSelector.add_member(:source_settings, Shapes::ShapeRef.new(shape: CaptionSourceSettings, location_name: "sourceSettings"))
     CaptionSelector.struct_class = Types::CaptionSelector
 
+    CaptionSourceFramerate.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
+    CaptionSourceFramerate.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max60000, location_name: "framerateNumerator"))
+    CaptionSourceFramerate.struct_class = Types::CaptionSourceFramerate
+
     CaptionSourceSettings.add_member(:ancillary_source_settings, Shapes::ShapeRef.new(shape: AncillarySourceSettings, location_name: "ancillarySourceSettings"))
     CaptionSourceSettings.add_member(:dvb_sub_source_settings, Shapes::ShapeRef.new(shape: DvbSubSourceSettings, location_name: "dvbSubSourceSettings"))
     CaptionSourceSettings.add_member(:embedded_source_settings, Shapes::ShapeRef.new(shape: EmbeddedSourceSettings, location_name: "embeddedSourceSettings"))
@@ -864,6 +874,7 @@ module Aws::MediaConvert
     CreateJobRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobRequest.add_member(:billing_tags_source, Shapes::ShapeRef.new(shape: BillingTagsSource, location_name: "billingTagsSource"))
     CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: __string, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateJobRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobRequest.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
     CreateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
     CreateJobRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
@@ -881,6 +892,7 @@ module Aws::MediaConvert
     CreateJobTemplateRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     CreateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     CreateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    CreateJobTemplateRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     CreateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateJobTemplateRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
     CreateJobTemplateRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
@@ -1093,6 +1105,7 @@ module Aws::MediaConvert
     FileGroupSettings.struct_class = Types::FileGroupSettings
 
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
+    FileSourceSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: CaptionSourceFramerate, location_name: "framerate"))
     FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
@@ -1290,6 +1303,11 @@ module Aws::MediaConvert
     HlsSettings.add_member(:segment_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "segmentModifier"))
     HlsSettings.struct_class = Types::HlsSettings
 
+    HopDestination.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
+    HopDestination.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
+    HopDestination.add_member(:wait_minutes, Shapes::ShapeRef.new(shape: __integer, location_name: "waitMinutes"))
+    HopDestination.struct_class = Types::HopDestination
+
     Id3Insertion.add_member(:id_3, Shapes::ShapeRef.new(shape: __stringPatternAZaZ0902, location_name: "id3"))
     Id3Insertion.add_member(:timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "timecode"))
     Id3Insertion.struct_class = Types::Id3Insertion
@@ -1373,6 +1391,7 @@ module Aws::MediaConvert
     Job.add_member(:current_phase, Shapes::ShapeRef.new(shape: JobPhase, location_name: "currentPhase"))
     Job.add_member(:error_code, Shapes::ShapeRef.new(shape: __integer, location_name: "errorCode"))
     Job.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
+    Job.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     Job.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Job.add_member(:job_percent_complete, Shapes::ShapeRef.new(shape: __integer, location_name: "jobPercentComplete"))
     Job.add_member(:job_template, Shapes::ShapeRef.new(shape: __string, location_name: "jobTemplate"))
@@ -1380,6 +1399,7 @@ module Aws::MediaConvert
     Job.add_member(:output_group_details, Shapes::ShapeRef.new(shape: __listOfOutputGroupDetail, location_name: "outputGroupDetails"))
     Job.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
     Job.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
+    Job.add_member(:queue_transitions, Shapes::ShapeRef.new(shape: __listOfQueueTransition, location_name: "queueTransitions"))
     Job.add_member(:retry_count, Shapes::ShapeRef.new(shape: __integer, location_name: "retryCount"))
     Job.add_member(:role, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "role"))
     Job.add_member(:settings, Shapes::ShapeRef.new(shape: JobSettings, required: true, location_name: "settings"))
@@ -1410,6 +1430,7 @@ module Aws::MediaConvert
     JobTemplate.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     JobTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "createdAt"))
     JobTemplate.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    JobTemplate.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     JobTemplate.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "lastUpdated"))
     JobTemplate.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     JobTemplate.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
@@ -1739,6 +1760,11 @@ module Aws::MediaConvert
     Queue.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     Queue.struct_class = Types::Queue
 
+    QueueTransition.add_member(:destination_queue, Shapes::ShapeRef.new(shape: __string, location_name: "destinationQueue"))
+    QueueTransition.add_member(:source_queue, Shapes::ShapeRef.new(shape: __string, location_name: "sourceQueue"))
+    QueueTransition.add_member(:timestamp, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "timestamp"))
+    QueueTransition.struct_class = Types::QueueTransition
+
     Rectangle.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin2Max2147483647, location_name: "height"))
     Rectangle.add_member(:width, Shapes::ShapeRef.new(shape: __integerMin2Max2147483647, location_name: "width"))
     Rectangle.add_member(:x, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "x"))
@@ -1850,6 +1876,7 @@ module Aws::MediaConvert
     UpdateJobTemplateRequest.add_member(:acceleration_settings, Shapes::ShapeRef.new(shape: AccelerationSettings, location_name: "accelerationSettings"))
     UpdateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     UpdateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
+    UpdateJobTemplateRequest.add_member(:hop_destinations, Shapes::ShapeRef.new(shape: __listOfHopDestination, location_name: "hopDestinations"))
     UpdateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "name"))
     UpdateJobTemplateRequest.add_member(:priority, Shapes::ShapeRef.new(shape: __integerMinNegative50Max50, location_name: "priority"))
     UpdateJobTemplateRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
@@ -1949,6 +1976,8 @@ module Aws::MediaConvert
 
     __listOfHlsCaptionLanguageMapping.member = Shapes::ShapeRef.new(shape: HlsCaptionLanguageMapping)
 
+    __listOfHopDestination.member = Shapes::ShapeRef.new(shape: HopDestination)
+
     __listOfId3Insertion.member = Shapes::ShapeRef.new(shape: Id3Insertion)
 
     __listOfInput.member = Shapes::ShapeRef.new(shape: Input)
@@ -1978,6 +2007,8 @@ module Aws::MediaConvert
     __listOfPreset.member = Shapes::ShapeRef.new(shape: Preset)
 
     __listOfQueue.member = Shapes::ShapeRef.new(shape: Queue)
+
+    __listOfQueueTransition.member = Shapes::ShapeRef.new(shape: QueueTransition)
 
     __listOfTeletextPageType.member = Shapes::ShapeRef.new(shape: TeletextPageType)
 

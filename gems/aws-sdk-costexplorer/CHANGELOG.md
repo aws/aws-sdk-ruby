@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-04-21)
+------------------
+
+* Feature - Cost Explorer Rightsizing Recommendations integrates with Compute Optimizer and begins offering across instance family rightsizing recommendations, adding to existing support for within instance family rightsizing recommendations.
+
+1.39.0 (2020-04-20)
+------------------
+
+* Feature - Cost Categories API is now General Available with new dimensions and operations support. You can map costs by account name, service, and charge type dimensions as well as use contains, starts with, and ends with operations. Cost Categories can also be used in RI and SP coverage reports.
+
 1.38.0 (2020-03-25)
 ------------------
 

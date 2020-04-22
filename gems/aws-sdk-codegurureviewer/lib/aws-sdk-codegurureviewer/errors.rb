@@ -29,6 +29,7 @@ module Aws::CodeGuruReviewer
   # * {ConflictException}
   # * {InternalServerException}
   # * {NotFoundException}
+  # * {ResourceNotFoundException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -88,6 +89,21 @@ module Aws::CodeGuruReviewer
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeGuruReviewer::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeGuruReviewer::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

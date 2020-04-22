@@ -765,7 +765,7 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :stack_name
     #   The name that is associated with the stack. The name must be unique in
-    #   the region in which you are creating the stack.
+    #   the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case sensitive)
     #   and hyphens. It must start with an alphabetic character and cannot be
@@ -974,7 +974,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1079,8 +1079,8 @@ module Aws::CloudFormation
     end
 
     # Creates stack instances for the specified accounts, within the
-    # specified regions. A stack instance refers to a stack in a specific
-    # account and region. You must specify at least one value for either
+    # specified Regions. A stack instance refers to a stack in a specific
+    # account and Region. You must specify at least one value for either
     # `Accounts` or `DeploymentTargets`, and you must specify at least one
     # value for `Regions`.
     #
@@ -1089,8 +1089,8 @@ module Aws::CloudFormation
     #   instances from.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more AWS accounts
-    #   that you want to create stack instances in the specified region(s)
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified Region(s)
     #   for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
@@ -1102,7 +1102,7 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
-    #   The names of one or more regions where you want to create stack
+    #   The names of one or more Regions where you want to create stack
     #   instances using the specified AWS account(s).
     #
     # @option params [Array<Types::Parameter>] :parameter_overrides
@@ -1110,7 +1110,7 @@ module Aws::CloudFormation
     #   the selected stack instances.
     #
     #   Any overridden parameter values will be applied to all stack instances
-    #   in the specified accounts and regions. When specifying parameters and
+    #   in the specified accounts and Regions. When specifying parameters and
     #   their values, be aware of how AWS CloudFormation sets parameter values
     #   during stack instance operations:
     #
@@ -1215,7 +1215,7 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :stack_set_name
     #   The name to associate with the stack set. The name must be unique in
-    #   the region where you create your stack set.
+    #   the Region where you create your stack set.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case-sensitive)
     #   and hyphens. It must start with an alphabetic character and can't be
@@ -1389,9 +1389,6 @@ module Aws::CloudFormation
     #   accounts that are added to the target organization or organizational
     #   unit (OU). Specify only if `PermissionModel` is `SERVICE_MANAGED`.
     #
-    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets` or
-    #   `Regions`.
-    #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1555,14 +1552,14 @@ module Aws::CloudFormation
     end
 
     # Deletes stack instances for the specified accounts, in the specified
-    # regions.
+    # Regions.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to delete stack
     #   instances for.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of the AWS accounts that you
+    #   \[`Self-managed` permissions\] The names of the AWS accounts that you
     #   want to delete stack instances for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
@@ -1574,7 +1571,7 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
-    #   The regions where you want to delete stack set instances.
+    #   The Regions where you want to delete stack set instances.
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
     #   Preferences for how AWS CloudFormation performs this stack set
@@ -2005,7 +2002,7 @@ module Aws::CloudFormation
     end
 
     # Returns the stack instance that's associated with the specified stack
-    # set, AWS account, and region.
+    # set, AWS account, and Region.
     #
     # For a list of stack instances that are associated with a specific
     # stack set, use ListStackInstances.
@@ -2018,7 +2015,7 @@ module Aws::CloudFormation
     #   The ID of an AWS account that's associated with this stack instance.
     #
     # @option params [required, String] :stack_instance_region
-    #   The name of a region that's associated with this stack instance.
+    #   The name of a Region that's associated with this stack instance.
     #
     # @return [Types::DescribeStackInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3251,7 +3248,7 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Lists all exported output values in the account and region in which
+    # Lists all exported output values in the account and Region in which
     # you call this action. Use this action to see the exported output
     # values that you can import into other stacks. To import values, use
     # the [ `Fn::ImportValue` ][1] function.
@@ -3350,7 +3347,7 @@ module Aws::CloudFormation
 
     # Returns summary information about stack instances that are associated
     # with the specified stack set. You can filter for stack instances that
-    # are associated with a specific AWS account name or region.
+    # are associated with a specific AWS account name or Region.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
@@ -3374,7 +3371,7 @@ module Aws::CloudFormation
     #   The name of the AWS account that you want to list stack instances for.
     #
     # @option params [String] :stack_instance_region
-    #   The name of the region where you want to list stack instances.
+    #   The name of the Region where you want to list stack instances.
     #
     # @return [Types::ListStackInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4048,6 +4045,11 @@ module Aws::CloudFormation
     # registeration, see [Creating Resource Providers][1] in the
     # *CloudFormation CLI User Guide*.
     #
+    # You can have a maximum of 50 resource type versions registered at a
+    # time. This maximum is per account and per region. Use
+    # [DeregisterType](AWSCloudFormation/latest/APIReference/API_DeregisterType.html)
+    # to deregister specific resource type versions if necessary.
+    #
     # Once you have initiated a registration request using ` RegisterType `,
     # you can use ` DescribeTypeRegistration ` to monitor the progress of
     # the registration request.
@@ -4175,7 +4177,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -4382,7 +4384,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -4537,7 +4539,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect a
@@ -4639,10 +4641,10 @@ module Aws::CloudFormation
     end
 
     # Updates the parameter values for stack instances for the specified
-    # accounts, within the specified regions. A stack instance refers to a
-    # stack in a specific account and region.
+    # accounts, within the specified Regions. A stack instance refers to a
+    # stack in a specific account and Region.
     #
-    # You can only update stack instances in regions and accounts where they
+    # You can only update stack instances in Regions and accounts where they
     # already exist; to create additional stack instances, use
     # [CreateStackInstances][1].
     #
@@ -4669,10 +4671,10 @@ module Aws::CloudFormation
     #   instances.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more AWS accounts for
-    #   which you want to update parameter values for stack instances. The
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   for which you want to update parameter values for stack instances. The
     #   overridden parameter values will be applied to all stack instances in
-    #   the specified accounts and regions.
+    #   the specified accounts and Regions.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
@@ -4687,16 +4689,16 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
-    #   The names of one or more regions in which you want to update parameter
+    #   The names of one or more Regions in which you want to update parameter
     #   values for stack instances. The overridden parameter values will be
-    #   applied to all stack instances in the specified accounts and regions.
+    #   applied to all stack instances in the specified accounts and Regions.
     #
     # @option params [Array<Types::Parameter>] :parameter_overrides
     #   A list of input parameters whose values you want to update for the
     #   specified stack instances.
     #
     #   Any overridden parameter values will be applied to all stack instances
-    #   in the specified accounts and regions. When specifying parameters and
+    #   in the specified accounts and Regions. When specifying parameters and
     #   their values, be aware of how AWS CloudFormation sets parameter values
     #   during stack instance update operations:
     #
@@ -4801,7 +4803,7 @@ module Aws::CloudFormation
     end
 
     # Updates the stack set, and associated stack instances in the specified
-    # accounts and regions.
+    # accounts and Regions.
     #
     # Even if the stack set operation created by updating the stack set
     # fails (completely or partially, below or above a specified failure
@@ -5056,9 +5058,9 @@ module Aws::CloudFormation
     #   not need to pass this option.**
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The accounts in which to update
+    #   \[`Self-managed` permissions\] The accounts in which to update
     #   associated stack instances. If you specify accounts, you must also
-    #   specify the regions in which to update stack set instances.
+    #   specify the Regions in which to update stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set, do
     #   not specify the `Accounts` or `Regions` properties.
@@ -5067,15 +5069,15 @@ module Aws::CloudFormation
     #   the `TemplateBody` or `TemplateURL` properties are specified), or the
     #   `Parameters` property, AWS CloudFormation marks all stack instances
     #   with a status of `OUTDATED` prior to updating the stack instances in
-    #   the specified accounts and regions. If the stack set update does not
+    #   the specified accounts and Regions. If the stack set update does not
     #   include changes to the template or parameters, AWS CloudFormation
-    #   updates the stack instances in the specified accounts and regions,
+    #   updates the stack instances in the specified accounts and Regions,
     #   while leaving all other stack instances with their existing stack
     #   instance status.
     #
     # @option params [Array<String>] :regions
-    #   The regions in which to update associated stack instances. If you
-    #   specify regions, you must also specify accounts in which to update
+    #   The Regions in which to update associated stack instances. If you
+    #   specify Regions, you must also specify accounts in which to update
     #   stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set, do
@@ -5085,9 +5087,9 @@ module Aws::CloudFormation
     #   the `TemplateBody` or `TemplateURL` properties are specified), or the
     #   `Parameters` property, AWS CloudFormation marks all stack instances
     #   with a status of `OUTDATED` prior to updating the stack instances in
-    #   the specified accounts and regions. If the stack set update does not
+    #   the specified accounts and Regions. If the stack set update does not
     #   include changes to the template or parameters, AWS CloudFormation
-    #   updates the stack instances in the specified accounts and regions,
+    #   updates the stack instances in the specified accounts and Regions,
     #   while leaving all other stack instances with their existing stack
     #   instance status.
     #
@@ -5280,7 +5282,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

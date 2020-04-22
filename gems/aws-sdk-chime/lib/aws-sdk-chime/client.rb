@@ -481,6 +481,12 @@ module Aws::Chime
     #     attendees: [ # required
     #       {
     #         external_user_id: "ExternalUserIdType", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -845,6 +851,9 @@ module Aws::Chime
     #   The Amazon Chime SDK external user ID. Links the attendee to an
     #   identity managed by a builder application.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
     # @return [Types::CreateAttendeeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAttendeeResponse#attendee #attendee} => Types::Attendee
@@ -854,6 +863,12 @@ module Aws::Chime
     #   resp = client.create_attendee({
     #     meeting_id: "GuidString", # required
     #     external_user_id: "ExternalUserIdType", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -931,6 +946,9 @@ module Aws::Chime
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :external_meeting_id
+    #   The external meeting ID.
+    #
     # @option params [String] :meeting_host_id
     #   Reserved.
     #
@@ -939,6 +957,9 @@ module Aws::Chime
     #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
     #   `eu-central-1`, `eu-north-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
     #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
     #
     # @option params [Types::MeetingNotificationConfiguration] :notifications_configuration
     #   The configuration for resource targets to receive notifications when
@@ -952,8 +973,15 @@ module Aws::Chime
     #
     #   resp = client.create_meeting({
     #     client_request_token: "ClientRequestToken", # required
+    #     external_meeting_id: "ExternalMeetingIdType",
     #     meeting_host_id: "ExternalUserIdType",
     #     media_region: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #     notifications_configuration: {
     #       sns_topic_arn: "Arn",
     #       sqs_queue_arn: "Arn",
@@ -963,6 +991,7 @@ module Aws::Chime
     # @example Response structure
     #
     #   resp.meeting.meeting_id #=> String
+    #   resp.meeting.external_meeting_id #=> String
     #   resp.meeting.media_placement.audio_host_url #=> String
     #   resp.meeting.media_placement.audio_fallback_url #=> String
     #   resp.meeting.media_placement.screen_data_url #=> String
@@ -1023,21 +1052,34 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Creates a proxy session on the specified Amazon Chime Voice Connector
+    # for the specified participant phone numbers.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @option params [required, Array<String>] :participant_phone_numbers
+    #   The participant phone numbers.
     #
     # @option params [String] :name
+    #   The name of the proxy session.
     #
     # @option params [Integer] :expiry_minutes
+    #   The number of minutes allowed for the proxy session.
     #
     # @option params [required, Array<String>] :capabilities
+    #   The proxy session capabilities.
     #
     # @option params [String] :number_selection_behavior
+    #   The preference for proxy phone number reuse, or stickiness, between
+    #   the same participants across sessions.
     #
     # @option params [String] :geo_match_level
+    #   The preference for matching the country or area code of the proxy
+    #   phone number with that of the first participant.
     #
     # @option params [Types::GeoMatchParams] :geo_match_params
+    #   The country and area code for the proxy phone number.
     #
     # @return [Types::CreateProxySessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1489,9 +1531,14 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Deletes the specified proxy session from the specified Amazon Chime
+    # Voice Connector.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @option params [required, String] :proxy_session_id
+    #   The proxy session ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1639,7 +1686,11 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Deletes the proxy configuration from the specified Amazon Chime Voice
+    # Connector.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime Voice Connector ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2095,6 +2146,7 @@ module Aws::Chime
     # @example Response structure
     #
     #   resp.meeting.meeting_id #=> String
+    #   resp.meeting.external_meeting_id #=> String
     #   resp.meeting.media_placement.audio_host_url #=> String
     #   resp.meeting.media_placement.audio_fallback_url #=> String
     #   resp.meeting.media_placement.screen_data_url #=> String
@@ -2220,9 +2272,14 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets the specified proxy session details for the specified Amazon
+    # Chime Voice Connector.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @option params [required, String] :proxy_session_id
+    #   The proxy session ID.
     #
     # @return [Types::GetProxySessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2521,7 +2578,11 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets the proxy configuration details for the specified Amazon Chime
+    # Voice Connector.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @return [Types::GetVoiceConnectorProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2748,6 +2809,40 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Lists the tags applied to an Amazon Chime SDK attendee resource.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, String] :attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #
+    # @return [Types::ListAttendeeTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttendeeTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attendee_tags({
+    #     meeting_id: "GuidString", # required
+    #     attendee_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAttendeeTags AWS API Documentation
+    #
+    # @overload list_attendee_tags(params = {})
+    # @param [Hash] params ({})
+    def list_attendee_tags(params = {}, options = {})
+      req = build_request(:list_attendee_tags, params)
+      req.send_request(options)
+    end
+
     # Lists the attendees for the specified Amazon Chime SDK meeting. For
     # more information about the Amazon Chime SDK, see [Using the Amazon
     # Chime SDK][1] in the *Amazon Chime Developer Guide*.
@@ -2848,6 +2943,36 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Lists the tags applied to an Amazon Chime SDK meeting resource.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @return [Types::ListMeetingTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMeetingTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_meeting_tags({
+    #     meeting_id: "GuidString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListMeetingTags AWS API Documentation
+    #
+    # @overload list_meeting_tags(params = {})
+    # @param [Hash] params ({})
+    def list_meeting_tags(params = {}, options = {})
+      req = build_request(:list_meeting_tags, params)
+      req.send_request(options)
+    end
+
     # Lists up to 100 active Amazon Chime SDK meetings. For more information
     # about the Amazon Chime SDK, see [Using the Amazon Chime SDK][1] in the
     # *Amazon Chime Developer Guide*.
@@ -2880,6 +3005,7 @@ module Aws::Chime
     #
     #   resp.meetings #=> Array
     #   resp.meetings[0].meeting_id #=> String
+    #   resp.meetings[0].external_meeting_id #=> String
     #   resp.meetings[0].media_placement.audio_host_url #=> String
     #   resp.meetings[0].media_placement.audio_fallback_url #=> String
     #   resp.meetings[0].media_placement.screen_data_url #=> String
@@ -3018,13 +3144,20 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Lists the proxy sessions for the specified Amazon Chime Voice
+    # Connector.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @option params [String] :status
+    #   The proxy session status.
     #
     # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListProxySessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3177,6 +3310,36 @@ module Aws::Chime
     # @param [Hash] params ({})
     def list_rooms(params = {}, options = {})
       req = build_request(:list_rooms, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags applied to an Amazon Chime SDK meeting resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -3520,15 +3683,24 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Puts the specified proxy configuration to the specified Amazon Chime
+    # Voice Connector.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @option params [required, Integer] :default_session_expiry_minutes
+    #   The default number of minutes allowed for proxy sessions.
     #
     # @option params [required, Array<String>] :phone_number_pool_countries
+    #   The countries for proxy phone numbers to be selected from.
     #
     # @option params [String] :fall_back_phone_number
+    #   The phone number to route calls to after a proxy session expires.
     #
     # @option params [Boolean] :disabled
+    #   When true, stops proxy sessions from being created on the specified
+    #   Amazon Chime Voice Connector.
     #
     # @return [Types::PutVoiceConnectorProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3865,6 +4037,188 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Applies the specified tags to the specified Amazon Chime SDK attendee.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, String] :attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_attendee({
+    #     meeting_id: "GuidString", # required
+    #     attendee_id: "GuidString", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TagAttendee AWS API Documentation
+    #
+    # @overload tag_attendee(params = {})
+    # @param [Hash] params ({})
+    def tag_attendee(params = {}, options = {})
+      req = build_request(:tag_attendee, params)
+      req.send_request(options)
+    end
+
+    # Applies the specified tags to the specified Amazon Chime SDK meeting.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_meeting({
+    #     meeting_id: "GuidString", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TagMeeting AWS API Documentation
+    #
+    # @overload tag_meeting(params = {})
+    # @param [Hash] params ({})
+    def tag_meeting(params = {}, options = {})
+      req = build_request(:tag_meeting, params)
+      req.send_request(options)
+    end
+
+    # Applies the specified tags to the specified Amazon Chime SDK meeting
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tag key-value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untags the specified tags from the specified Amazon Chime SDK
+    # attendee.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, String] :attendee_id
+    #   The Amazon Chime SDK attendee ID.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_attendee({
+    #     meeting_id: "GuidString", # required
+    #     attendee_id: "GuidString", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UntagAttendee AWS API Documentation
+    #
+    # @overload untag_attendee(params = {})
+    # @param [Hash] params ({})
+    def untag_attendee(params = {}, options = {})
+      req = build_request(:untag_attendee, params)
+      req.send_request(options)
+    end
+
+    # Untags the specified tags from the specified Amazon Chime SDK meeting.
+    #
+    # @option params [required, String] :meeting_id
+    #   The Amazon Chime SDK meeting ID.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_meeting({
+    #     meeting_id: "GuidString", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UntagMeeting AWS API Documentation
+    #
+    # @overload untag_meeting(params = {})
+    # @param [Hash] params ({})
+    def untag_meeting(params = {}, options = {})
+      req = build_request(:untag_meeting, params)
+      req.send_request(options)
+    end
+
+    # Untags the specified tags from the specified Amazon Chime SDK meeting
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates account details for the specified Amazon Chime account.
     # Currently, only account name updates are supported for this action.
     #
@@ -4110,13 +4464,20 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Updates the specified proxy session details, such as voice or SMS
+    # capabilities.
+    #
     # @option params [required, String] :voice_connector_id
+    #   The Amazon Chime voice connector ID.
     #
     # @option params [required, String] :proxy_session_id
+    #   The proxy session ID.
     #
     # @option params [required, Array<String>] :capabilities
+    #   The proxy session capabilities.
     #
     # @option params [Integer] :expiry_minutes
+    #   The number of minutes allowed for the proxy session.
     #
     # @return [Types::UpdateProxySessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4456,7 +4817,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

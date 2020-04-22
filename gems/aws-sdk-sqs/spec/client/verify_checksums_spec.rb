@@ -26,7 +26,7 @@ module Aws
           },
           'öther_encodings' => {
             data_type: 'String',
-            string_value: 'Tüst'.encode!('ISO-8859-1')
+            string_value: 'Tüst'.encode('ISO-8859-1')
           }
         }}
 
@@ -99,7 +99,7 @@ module Aws
 
             before(:each) do
               message_attributes.keys.each do |attribute_name|
-                message_attributes[attribute_name][:data_type] << '.test'
+                message_attributes[attribute_name][:data_type] += '.test'
               end
             end
 

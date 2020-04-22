@@ -2588,6 +2588,12 @@ module Aws::ElasticsearchService
     #   your service software.
     #   @return [Time]
     #
+    # @!attribute [rw] optional_deployment
+    #   `True` if a service software is never automatically updated. `False`
+    #   if a service software is automatically updated after
+    #   `AutomatedUpdateDate`.
+    #   @return [Boolean]
+    #
     class ServiceSoftwareOptions < Struct.new(
       :current_version,
       :new_version,
@@ -2595,7 +2601,8 @@ module Aws::ElasticsearchService
       :cancellable,
       :update_status,
       :description,
-      :automated_update_date)
+      :automated_update_date,
+      :optional_deployment)
       include Aws::Structure
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+
+1.81.0 (2020-04-08)
+------------------
+
+* Feature - Documentation updates for RDS: creating read replicas is now supported for SQL Server DB instances
+
 1.80.0 (2020-03-18)
 ------------------
 
@@ -502,4 +512,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-rds` gem.
-

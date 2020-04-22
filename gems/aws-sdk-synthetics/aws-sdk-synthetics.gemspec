@@ -7,10 +7,10 @@
 
 Gem::Specification.new do |spec|
 
-  spec.name          = 'aws-sdk-sfn'
+  spec.name          = 'aws-sdk-synthetics'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = 'AWS SDK for Ruby - AWS SFN'
-  spec.description   = 'This gem is deprecated, please use `aws-sdk-states` instead. This gem is part of the AWS SDK for Ruby.'
+  spec.summary       = 'AWS SDK for Ruby - Synthetics'
+  spec.description   = 'Official AWS Ruby gem for Synthetics. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -18,7 +18,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = Dir['lib/**/*.rb']
 
-  spec.add_dependency('aws-sdk-core', '3.0.0.rc1')
-  spec.add_dependency('aws-sigv4', '~> 1.0')
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-synthetics',
+    'changelog_uri'   => 'https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-synthetics/CHANGELOG.md'
+  }
+
+  spec.add_dependency('aws-sdk-core', '~> 3', '>= 3.71.0')
+  spec.add_dependency('aws-sigv4', '~> 1.1')
 
 end

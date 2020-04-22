@@ -322,8 +322,7 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] capacity_provider
-    #   The short name or full Amazon Resource Name (ARN) of the capacity
-    #   provider.
+    #   The short name of the capacity provider.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -1653,10 +1652,10 @@ module Aws::ECS
     #   @return [Types::LogConfiguration]
     #
     # @!attribute [rw] health_check
-    #   The health check command and associated configuration parameters for
-    #   the container. This parameter maps to `HealthCheck` in the [Create a
-    #   container][1] section of the [Docker Remote API][2] and the
-    #   `HEALTHCHECK` parameter of [docker run][3].
+    #   The container health check command and associated configuration
+    #   parameters for the container. This parameter maps to `HealthCheck`
+    #   in the [Create a container][1] section of the [Docker Remote API][2]
+    #   and the `HEALTHCHECK` parameter of [docker run][3].
     #
     #
     #
@@ -2307,8 +2306,8 @@ module Aws::ECS
     #   @return [Array<Types::ClusterSetting>]
     #
     # @!attribute [rw] capacity_providers
-    #   The short name or full Amazon Resource Name (ARN) of one or more
-    #   capacity providers to associate with the cluster.
+    #   The short name of one or more capacity providers to associate with
+    #   the cluster.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must already be created and not already
@@ -2712,10 +2711,12 @@ module Aws::ECS
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
     #     on each active container instance that meets all of the task
-    #     placement constraints that you specify in your cluster. When
-    #     you're using this strategy, you don't need to specify a desired
-    #     number of tasks, a task placement strategy, or use Service Auto
-    #     Scaling policies.
+    #     placement constraints that you specify in your cluster. The
+    #     service scheduler also evaluates the task placement constraints
+    #     for running tasks and will stop tasks that do not meet the
+    #     placement constraints. When you're using this strategy, you
+    #     don't need to specify a desired number of tasks, a task placement
+    #     strategy, or use Service Auto Scaling policies.
     #
     #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` or
     #     `EXTERNAL` deployment controller types don't support the `DAEMON`
@@ -4207,19 +4208,60 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The authorization configuration details for the Amazon EFS file
+    # system.
+    #
+    # @note When making an API call, you may pass EFSAuthorizationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         access_point_id: "String",
+    #         iam: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] access_point_id
+    #   The Amazon EFS access point ID to use. If an access point is
+    #   specified, the root directory value specified in the
+    #   `EFSVolumeConfiguration` will be relative to the directory set for
+    #   the access point. If an access point is used, transit encryption
+    #   must be enabled in the `EFSVolumeConfiguration`. For more
+    #   information, see [Working with Amazon EFS Access Points][1] in the
+    #   *Amazon Elastic File System User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
+    #   @return [String]
+    #
+    # @!attribute [rw] iam
+    #   Whether or not to use the Amazon ECS task IAM role defined in a task
+    #   definition when mounting the Amazon EFS file system. If enabled,
+    #   transit encryption must be enabled in the `EFSVolumeConfiguration`.
+    #   If this parameter is omitted, the default value of `DISABLED` is
+    #   used. For more information, see [Using Amazon EFS Access Points][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EFSAuthorizationConfig AWS API Documentation
+    #
+    class EFSAuthorizationConfig < Struct.new(
+      :access_point_id,
+      :iam)
+      include Aws::Structure
+    end
+
     # This parameter is specified when you are using an Amazon Elastic File
-    # System (Amazon EFS) file storage. Amazon EFS file systems are only
-    # supported when you are using the EC2 launch type.
-    #
-    # `EFSVolumeConfiguration` remains in preview and is a Beta Service as
-    # defined by and subject to the Beta Service Participation Service Terms
-    # located at [https://aws.amazon.com/service-terms][1] ("Beta Terms").
-    # These Beta Terms apply to your participation in this preview of
-    # `EFSVolumeConfiguration`.
+    # System file system for task storage. For more information, see [Amazon
+    # EFS Volumes][1] in the *Amazon Elastic Container Service Developer
+    # Guide*.
     #
     #
     #
-    # [1]: https://aws.amazon.com/service-terms
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html
     #
     # @note When making an API call, you may pass EFSVolumeConfiguration
     #   data as a hash:
@@ -4227,6 +4269,12 @@ module Aws::ECS
     #       {
     #         file_system_id: "String", # required
     #         root_directory: "String",
+    #         transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #         transit_encryption_port: 1,
+    #         authorization_config: {
+    #           access_point_id: "String",
+    #           iam: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       }
     #
     # @!attribute [rw] file_system_id
@@ -4235,14 +4283,49 @@ module Aws::ECS
     #
     # @!attribute [rw] root_directory
     #   The directory within the Amazon EFS file system to mount as the root
-    #   directory inside the host.
+    #   directory inside the host. If this parameter is omitted, the root of
+    #   the Amazon EFS volume will be used. Specifying `/` will have the
+    #   same effect as omitting this parameter.
     #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption
+    #   Whether or not to enable encryption for Amazon EFS data in transit
+    #   between the Amazon ECS host and the Amazon EFS server. Transit
+    #   encryption must be enabled if Amazon EFS IAM authorization is used.
+    #   If this parameter is omitted, the default value of `DISABLED` is
+    #   used. For more information, see [Encrypting Data in Transit][1] in
+    #   the *Amazon Elastic File System User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_encryption_port
+    #   The port to use when sending encrypted data between the Amazon ECS
+    #   host and the Amazon EFS server. If you do not specify a transit
+    #   encryption port, it will use the port selection strategy that the
+    #   Amazon EFS mount helper uses. For more information, see [EFS Mount
+    #   Helper][1] in the *Amazon Elastic File System User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authorization_config
+    #   The authorization configuration details for the Amazon EFS file
+    #   system.
+    #   @return [Types::EFSAuthorizationConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EFSVolumeConfiguration AWS API Documentation
     #
     class EFSVolumeConfiguration < Struct.new(
       :file_system_id,
-      :root_directory)
+      :root_directory,
+      :transit_encryption,
+      :transit_encryption_port,
+      :authorization_config)
       include Aws::Structure
     end
 
@@ -4321,6 +4404,39 @@ module Aws::ECS
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
     # specified in a parent image or from the image's Dockerfile).
+    #
+    # You can view the health status of both individual containers and a
+    # task with the DescribeTasks API operation or when viewing the task
+    # details in the console.
+    #
+    # The following describes the possible `healthStatus` values for a
+    # container:
+    #
+    # * `HEALTHY`-The container health check has passed successfully.
+    #
+    # * `UNHEALTHY`-The container health check has failed.
+    #
+    # * `UNKNOWN`-The container health check is being evaluated or there is
+    #   no container health check defined.
+    #
+    # The following describes the possible `healthStatus` values for a task.
+    # The container health check status of nonessential containers do not
+    # have an effect on the health status of a task.
+    #
+    # * `HEALTHY`-All essential containers within the task have passed their
+    #   health checks.
+    #
+    # * `UNHEALTHY`-One or more essential containers have failed their
+    #   health check.
+    #
+    # * `UNKNOWN`-The essential containers within the task are still having
+    #   their health checks evaluated or there are no container health
+    #   checks defined.
+    #
+    # If a task is run manually, and not as part of a service, the task will
+    # continue its lifecycle regardless of its health status. For tasks that
+    # are part of a service, if the task reports as unhealthy then the task
+    # will be stopped and the service scheduler will replace it.
     #
     # The following are notes about container health check support:
     #
@@ -6849,6 +6965,12 @@ module Aws::ECS
     #             efs_volume_configuration: {
     #               file_system_id: "String", # required
     #               root_directory: "String",
+    #               transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #               transit_encryption_port: 1,
+    #               authorization_config: {
+    #                 access_point_id: "String",
+    #                 iam: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
     #             },
     #           },
     #         ],
@@ -7914,9 +8036,11 @@ module Aws::ECS
     #     placement decisions.
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
-    #     on each container instance in your cluster. When you are using
-    #     this strategy, do not specify a desired number of tasks or any
-    #     task placement strategies.
+    #     on each active container instance that meets all of the task
+    #     placement constraints that you specify in your cluster. The
+    #     service scheduler also evaluates the task placement constraints
+    #     for running tasks and will stop tasks that do not meet the
+    #     placement constraints.
     #
     #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
     #
@@ -9152,7 +9276,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_IAM_role.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
     #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
     #   @return [String]
     #
@@ -10165,9 +10289,31 @@ module Aws::ECS
     #
     #   If the service is using the default capacity provider strategy for
     #   the cluster, the service can be updated to use one or more capacity
-    #   providers. However, when a service is using a non-default capacity
-    #   provider strategy, the service cannot be updated to use the
-    #   cluster's default capacity provider strategy.
+    #   providers as opposed to the default capacity provider strategy.
+    #   However, when a service is using a capacity provider strategy that
+    #   is not the default capacity provider strategy, the service cannot be
+    #   updated to use the cluster's default capacity provider strategy.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in
+    #   a capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
     #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] deployment_configuration
@@ -10395,6 +10541,12 @@ module Aws::ECS
     #         efs_volume_configuration: {
     #           file_system_id: "String", # required
     #           root_directory: "String",
+    #           transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #           transit_encryption_port: 1,
+    #           authorization_config: {
+    #             access_point_id: "String",
+    #             iam: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #       }
     #

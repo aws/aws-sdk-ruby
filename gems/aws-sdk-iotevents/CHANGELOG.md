@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2020-04-20)
+------------------
+
+* Feature - API update that allows users to add AWS Iot SiteWise actions while creating Detector Model in AWS Iot Events
+
+1.11.0 (2020-04-16)
+------------------
+
+* Feature - API update that allows users to customize event action payloads, and adds support for Amazon DynamoDB actions.
+
 1.10.0 (2020-03-10)
 ------------------
 

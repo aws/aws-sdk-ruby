@@ -311,7 +311,7 @@ module Aws::AugmentedAIRuntime
     # Deletes the specified human loop for a flow definition.
     #
     # @option params [required, String] :human_loop_name
-    #   The name of the human loop you want to delete.
+    #   The name of the human loop that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -333,7 +333,7 @@ module Aws::AugmentedAIRuntime
     # Returns information about the specified human loop.
     #
     # @option params [required, String] :human_loop_name
-    #   The unique name of the human loop.
+    #   The name of the human loop that you want information about.
     #
     # @return [Types::DescribeHumanLoopResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -387,17 +387,17 @@ module Aws::AugmentedAIRuntime
     #   The Amazon Resource Name (ARN) of a flow definition.
     #
     # @option params [String] :sort_order
-    #   An optional value that specifies whether you want the results sorted
-    #   in `Ascending` or `Descending` order.
+    #   Optional. The order for displaying results. Valid values: `Ascending`
+    #   and `Descending`.
     #
     # @option params [String] :next_token
-    #   A token to resume pagination.
+    #   A token to display the next page of results.
     #
     # @option params [Integer] :max_results
     #   The total number of items to return. If the total number of available
     #   items is more than the value specified in `MaxResults`, then a
-    #   `NextToken` will be provided in the output that you can use to resume
-    #   pagination.
+    #   `NextToken` is returned in the output. You can use this token to
+    #   display the next page of results.
     #
     # @return [Types::ListHumanLoopsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -443,13 +443,16 @@ module Aws::AugmentedAIRuntime
     #   The name of the human loop.
     #
     # @option params [required, String] :flow_definition_arn
-    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   The Amazon Resource Name (ARN) of the flow definition associated with
+    #   this human loop.
     #
     # @option params [required, Types::HumanLoopInput] :human_loop_input
-    #   An object containing information about the human loop.
+    #   An object that contains information about the human loop.
     #
     # @option params [Types::HumanLoopDataAttributes] :data_attributes
-    #   Attributes of the data specified by the customer.
+    #   Attributes of the specified data. Use `DataAttributes` to specify if
+    #   your data is free of personally identifiable information and/or free
+    #   of adult content.
     #
     # @return [Types::StartHumanLoopResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -484,7 +487,7 @@ module Aws::AugmentedAIRuntime
     # Stops the specified human loop.
     #
     # @option params [required, String] :human_loop_name
-    #   The name of the human loop you want to stop.
+    #   The name of the human loop that you want to stop.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -516,7 +519,7 @@ module Aws::AugmentedAIRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-augmentedairuntime'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

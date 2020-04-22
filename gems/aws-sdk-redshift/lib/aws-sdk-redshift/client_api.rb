@@ -119,6 +119,7 @@ module Aws::Redshift
     CreateSnapshotCopyGrantResult = Shapes::StructureShape.new(name: 'CreateSnapshotCopyGrantResult')
     CreateSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'CreateSnapshotScheduleMessage')
     CreateTagsMessage = Shapes::StructureShape.new(name: 'CreateTagsMessage')
+    CreateUsageLimitMessage = Shapes::StructureShape.new(name: 'CreateUsageLimitMessage')
     CustomerStorageMessage = Shapes::StructureShape.new(name: 'CustomerStorageMessage')
     DataTransferProgress = Shapes::StructureShape.new(name: 'DataTransferProgress')
     DbGroupList = Shapes::ListShape.new(name: 'DbGroupList')
@@ -140,6 +141,7 @@ module Aws::Redshift
     DeleteSnapshotCopyGrantMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotCopyGrantMessage')
     DeleteSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotScheduleMessage')
     DeleteTagsMessage = Shapes::StructureShape.new(name: 'DeleteTagsMessage')
+    DeleteUsageLimitMessage = Shapes::StructureShape.new(name: 'DeleteUsageLimitMessage')
     DependentServiceRequestThrottlingFault = Shapes::StructureShape.new(name: 'DependentServiceRequestThrottlingFault')
     DependentServiceUnavailableFault = Shapes::StructureShape.new(name: 'DependentServiceUnavailableFault')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
@@ -171,6 +173,7 @@ module Aws::Redshift
     DescribeSnapshotSchedulesOutputMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotSchedulesOutputMessage')
     DescribeTableRestoreStatusMessage = Shapes::StructureShape.new(name: 'DescribeTableRestoreStatusMessage')
     DescribeTagsMessage = Shapes::StructureShape.new(name: 'DescribeTagsMessage')
+    DescribeUsageLimitsMessage = Shapes::StructureShape.new(name: 'DescribeUsageLimitsMessage')
     DisableLoggingMessage = Shapes::StructureShape.new(name: 'DisableLoggingMessage')
     DisableSnapshotCopyMessage = Shapes::StructureShape.new(name: 'DisableSnapshotCopyMessage')
     DisableSnapshotCopyResult = Shapes::StructureShape.new(name: 'DisableSnapshotCopyResult')
@@ -248,6 +251,7 @@ module Aws::Redshift
     InvalidSubscriptionStateFault = Shapes::StructureShape.new(name: 'InvalidSubscriptionStateFault')
     InvalidTableRestoreArgumentFault = Shapes::StructureShape.new(name: 'InvalidTableRestoreArgumentFault')
     InvalidTagFault = Shapes::StructureShape.new(name: 'InvalidTagFault')
+    InvalidUsageLimitFault = Shapes::StructureShape.new(name: 'InvalidUsageLimitFault')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
     LoggingStatus = Shapes::StructureShape.new(name: 'LoggingStatus')
@@ -275,6 +279,7 @@ module Aws::Redshift
     ModifySnapshotCopyRetentionPeriodMessage = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodMessage')
     ModifySnapshotCopyRetentionPeriodResult = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodResult')
     ModifySnapshotScheduleMessage = Shapes::StructureShape.new(name: 'ModifySnapshotScheduleMessage')
+    ModifyUsageLimitMessage = Shapes::StructureShape.new(name: 'ModifyUsageLimitMessage')
     NodeConfigurationOption = Shapes::StructureShape.new(name: 'NodeConfigurationOption')
     NodeConfigurationOptionList = Shapes::ListShape.new(name: 'NodeConfigurationOptionList')
     NodeConfigurationOptionsFilter = Shapes::StructureShape.new(name: 'NodeConfigurationOptionsFilter')
@@ -421,6 +426,15 @@ module Aws::Redshift
     UnsupportedOperationFault = Shapes::StructureShape.new(name: 'UnsupportedOperationFault')
     UnsupportedOptionFault = Shapes::StructureShape.new(name: 'UnsupportedOptionFault')
     UpdateTarget = Shapes::StructureShape.new(name: 'UpdateTarget')
+    UsageLimit = Shapes::StructureShape.new(name: 'UsageLimit')
+    UsageLimitAlreadyExistsFault = Shapes::StructureShape.new(name: 'UsageLimitAlreadyExistsFault')
+    UsageLimitBreachAction = Shapes::StringShape.new(name: 'UsageLimitBreachAction')
+    UsageLimitFeatureType = Shapes::StringShape.new(name: 'UsageLimitFeatureType')
+    UsageLimitLimitType = Shapes::StringShape.new(name: 'UsageLimitLimitType')
+    UsageLimitList = Shapes::StructureShape.new(name: 'UsageLimitList')
+    UsageLimitNotFoundFault = Shapes::StructureShape.new(name: 'UsageLimitNotFoundFault')
+    UsageLimitPeriod = Shapes::StringShape.new(name: 'UsageLimitPeriod')
+    UsageLimits = Shapes::ListShape.new(name: 'UsageLimits')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
@@ -866,6 +880,15 @@ module Aws::Redshift
     CreateTagsMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     CreateTagsMessage.struct_class = Types::CreateTagsMessage
 
+    CreateUsageLimitMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    CreateUsageLimitMessage.add_member(:feature_type, Shapes::ShapeRef.new(shape: UsageLimitFeatureType, required: true, location_name: "FeatureType"))
+    CreateUsageLimitMessage.add_member(:limit_type, Shapes::ShapeRef.new(shape: UsageLimitLimitType, required: true, location_name: "LimitType"))
+    CreateUsageLimitMessage.add_member(:amount, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "Amount"))
+    CreateUsageLimitMessage.add_member(:period, Shapes::ShapeRef.new(shape: UsageLimitPeriod, location_name: "Period"))
+    CreateUsageLimitMessage.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
+    CreateUsageLimitMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateUsageLimitMessage.struct_class = Types::CreateUsageLimitMessage
+
     CustomerStorageMessage.add_member(:total_backup_size_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "TotalBackupSizeInMegaBytes"))
     CustomerStorageMessage.add_member(:total_provisioned_storage_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "TotalProvisionedStorageInMegaBytes"))
     CustomerStorageMessage.struct_class = Types::CustomerStorageMessage
@@ -940,6 +963,9 @@ module Aws::Redshift
     DeleteTagsMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     DeleteTagsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     DeleteTagsMessage.struct_class = Types::DeleteTagsMessage
+
+    DeleteUsageLimitMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UsageLimitId"))
+    DeleteUsageLimitMessage.struct_class = Types::DeleteUsageLimitMessage
 
     DependentServiceRequestThrottlingFault.struct_class = Types::DependentServiceRequestThrottlingFault
 
@@ -1126,6 +1152,15 @@ module Aws::Redshift
     DescribeTagsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
     DescribeTagsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeTagsMessage.struct_class = Types::DescribeTagsMessage
+
+    DescribeUsageLimitsMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, location_name: "UsageLimitId"))
+    DescribeUsageLimitsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    DescribeUsageLimitsMessage.add_member(:feature_type, Shapes::ShapeRef.new(shape: UsageLimitFeatureType, location_name: "FeatureType"))
+    DescribeUsageLimitsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeUsageLimitsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeUsageLimitsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
+    DescribeUsageLimitsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
+    DescribeUsageLimitsMessage.struct_class = Types::DescribeUsageLimitsMessage
 
     DisableLoggingMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     DisableLoggingMessage.struct_class = Types::DisableLoggingMessage
@@ -1351,6 +1386,8 @@ module Aws::Redshift
 
     InvalidTagFault.struct_class = Types::InvalidTagFault
 
+    InvalidUsageLimitFault.struct_class = Types::InvalidUsageLimitFault
+
     InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
 
     LimitExceededFault.struct_class = Types::LimitExceededFault
@@ -1479,6 +1516,11 @@ module Aws::Redshift
     ModifySnapshotScheduleMessage.add_member(:schedule_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduleIdentifier"))
     ModifySnapshotScheduleMessage.add_member(:schedule_definitions, Shapes::ShapeRef.new(shape: ScheduleDefinitionList, required: true, location_name: "ScheduleDefinitions"))
     ModifySnapshotScheduleMessage.struct_class = Types::ModifySnapshotScheduleMessage
+
+    ModifyUsageLimitMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UsageLimitId"))
+    ModifyUsageLimitMessage.add_member(:amount, Shapes::ShapeRef.new(shape: LongOptional, location_name: "Amount"))
+    ModifyUsageLimitMessage.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
+    ModifyUsageLimitMessage.struct_class = Types::ModifyUsageLimitMessage
 
     NodeConfigurationOption.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     NodeConfigurationOption.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
@@ -1999,6 +2041,26 @@ module Aws::Redshift
     UpdateTarget.add_member(:supported_operations, Shapes::ShapeRef.new(shape: SupportedOperationList, location_name: "SupportedOperations"))
     UpdateTarget.struct_class = Types::UpdateTarget
 
+    UsageLimit.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, location_name: "UsageLimitId"))
+    UsageLimit.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    UsageLimit.add_member(:feature_type, Shapes::ShapeRef.new(shape: UsageLimitFeatureType, location_name: "FeatureType"))
+    UsageLimit.add_member(:limit_type, Shapes::ShapeRef.new(shape: UsageLimitLimitType, location_name: "LimitType"))
+    UsageLimit.add_member(:amount, Shapes::ShapeRef.new(shape: Long, location_name: "Amount"))
+    UsageLimit.add_member(:period, Shapes::ShapeRef.new(shape: UsageLimitPeriod, location_name: "Period"))
+    UsageLimit.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
+    UsageLimit.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UsageLimit.struct_class = Types::UsageLimit
+
+    UsageLimitAlreadyExistsFault.struct_class = Types::UsageLimitAlreadyExistsFault
+
+    UsageLimitList.add_member(:usage_limits, Shapes::ShapeRef.new(shape: UsageLimits, location_name: "UsageLimits"))
+    UsageLimitList.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    UsageLimitList.struct_class = Types::UsageLimitList
+
+    UsageLimitNotFoundFault.struct_class = Types::UsageLimitNotFoundFault
+
+    UsageLimits.member = Shapes::ShapeRef.new(shape: UsageLimit)
+
     ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
@@ -2291,6 +2353,21 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:create_usage_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUsageLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUsageLimitMessage)
+        o.output = Shapes::ShapeRef.new(shape: UsageLimit)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: UsageLimitAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUsageLimitFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "POST"
@@ -2413,6 +2490,16 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
+      end)
+
+      api.add_operation(:delete_usage_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUsageLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUsageLimitMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UsageLimitNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:describe_account_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -2783,6 +2870,22 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:describe_usage_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeUsageLimits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeUsageLimitsMessage)
+        o.output = Shapes::ShapeRef.new(shape: UsageLimitList)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:disable_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableLogging"
         o.http_method = "POST"
@@ -3017,6 +3120,17 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidScheduleFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleUpdateInProgressFault)
+      end)
+
+      api.add_operation(:modify_usage_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyUsageLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyUsageLimitMessage)
+        o.output = Shapes::ShapeRef.new(shape: UsageLimit)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUsageLimitFault)
+        o.errors << Shapes::ShapeRef.new(shape: UsageLimitNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:pause_cluster, Seahorse::Model::Operation.new.tap do |o|

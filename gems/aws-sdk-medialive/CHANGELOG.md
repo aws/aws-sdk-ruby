@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-04-08)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports Automatic Input Failover. This feature provides resiliency upstream of the channel, before ingest starts.
+
 1.41.0 (2020-03-09)
 ------------------
 
@@ -215,4 +220,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-medialive`.
-

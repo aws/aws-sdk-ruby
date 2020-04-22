@@ -51,6 +51,12 @@ module Aws::EC2
       data[:key_pair_id]
     end
 
+    # Any tags applied to the key pair.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -183,9 +189,12 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   key_pair.delete({
+    #     key_pair_id: "KeyPairId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
+    # @option options [String] :key_pair_id
+    #   The ID of the key pair.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -286,7 +286,7 @@ module Aws
 
         datetime = time.utc.strftime("%Y%m%dT%H%M%SZ")
         date = datetime[0,8]
-        headers[':date'] = Aws::EventStream::HeaderValue.new(value: time.to_i*1000, type: 'timestamp')
+        headers[':date'] = Aws::EventStream::HeaderValue.new(value: time.to_i * 1000, type: 'timestamp')
 
         sts = event_string_to_sign(datetime, headers, payload, prior_signature, encoder)
         sig = event_signature(creds.secret_access_key, date, sts)
@@ -564,7 +564,9 @@ module Aws
           OpenSSL::Digest::SHA256.file(value).hexdigest
         elsif value.respond_to?(:read)
           sha256 = OpenSSL::Digest::SHA256.new
-          while chunk = value.read(1024 * 1024, buffer ||= "") # 1MB
+          loop do
+            chunk = value.read(1024 * 1024) # 1MB
+            break unless chunk
             sha256.update(chunk)
           end
           value.rewind
@@ -652,14 +654,26 @@ module Aws
         self.class.uri_escape_path(string)
       end
 
+
       def fetch_credentials
         credentials = @credentials_provider.credentials
-        if credentials.access_key_id && credentials.secret_access_key
+        if credentials_set?(credentials)
           credentials
         else
           raise Errors::MissingCredentialsError,
-                'unable to sign request without credentials set'
+          'unable to sign request without credentials set'
         end
+      end
+
+      # Returns true if credentials are set (not nil or empty)
+      # Credentials may not implement the Credentials interface
+      # and may just be credential like Client response objects
+      # (eg those returned by sts#assume_role)
+      def credentials_set?(credentials)
+        !credentials.access_key_id.nil? &&
+          !credentials.access_key_id.empty? &&
+          !credentials.secret_access_key.nil? &&
+          !credentials.secret_access_key.empty?
       end
 
       class << self

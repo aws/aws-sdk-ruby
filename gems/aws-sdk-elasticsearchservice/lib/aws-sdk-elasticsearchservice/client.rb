@@ -410,6 +410,7 @@ module Aws::ElasticsearchService
     #   resp.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.service_software_options.description #=> String
     #   resp.service_software_options.automated_update_date #=> Time
+    #   resp.service_software_options.optional_deployment #=> Boolean
     #
     # @overload cancel_elasticsearch_service_software_update(params = {})
     # @param [Hash] params ({})
@@ -632,6 +633,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
@@ -764,6 +766,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
@@ -902,6 +905,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status.service_software_options.description #=> String
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
+    #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status.advanced_security_options.enabled #=> Boolean
@@ -1119,6 +1123,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.domain_status_list[0].service_software_options.description #=> String
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
+    #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
     #   resp.domain_status_list[0].advanced_security_options.enabled #=> Boolean
@@ -1829,6 +1834,7 @@ module Aws::ElasticsearchService
     #   resp.service_software_options.update_status #=> String, one of "PENDING_UPDATE", "IN_PROGRESS", "COMPLETED", "NOT_ELIGIBLE", "ELIGIBLE"
     #   resp.service_software_options.description #=> String
     #   resp.service_software_options.automated_update_date #=> Time
+    #   resp.service_software_options.optional_deployment #=> Boolean
     #
     # @overload start_elasticsearch_service_software_update(params = {})
     # @param [Hash] params ({})
@@ -2135,7 +2141,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

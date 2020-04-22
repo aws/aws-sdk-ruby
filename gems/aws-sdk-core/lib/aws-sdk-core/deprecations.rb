@@ -48,14 +48,12 @@ module Aws
     def deprecated(method, options = {})
 
       deprecation_msg = options[:message] || begin
-        msg = "#################### DEPRECATION WARNING ####################\n"
-        msg << "Called deprecated method `#{method}` of #{self}."
-        msg << " Use `#{options[:use]}` instead.\n" if options[:use]
-        if options[:version]
-          msg << "Method `#{method}` will be removed in #{options[:version]}."
-        end
-        msg << "\n#############################################################"
-        msg
+        "#################### DEPRECATION WARNING ####################\n"\
+        "Called deprecated method `#{method}` of #{self}."\
+        "#{" Use `#{options[:use]}` instead.\n" if options[:use]}"\
+        "#{"Method `#{method}` will be removed in #{options[:version]}."\
+          if options[:version]}"\
+        "\n#############################################################"
       end
 
       alias_method(:"deprecated_#{method}", method)

@@ -30,6 +30,8 @@ module Aws::Chime
     AssociateSigninDelegateGroupsWithAccountResponse = Shapes::StructureShape.new(name: 'AssociateSigninDelegateGroupsWithAccountResponse')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
     AttendeeList = Shapes::ListShape.new(name: 'AttendeeList')
+    AttendeeTagKeyList = Shapes::ListShape.new(name: 'AttendeeTagKeyList')
+    AttendeeTagList = Shapes::ListShape.new(name: 'AttendeeTagList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BatchCreateAttendeeErrorList = Shapes::ListShape.new(name: 'BatchCreateAttendeeErrorList')
     BatchCreateAttendeeRequest = Shapes::StructureShape.new(name: 'BatchCreateAttendeeRequest')
@@ -120,6 +122,7 @@ module Aws::Chime
     EmailStatus = Shapes::StringShape.new(name: 'EmailStatus')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     EventsConfiguration = Shapes::StructureShape.new(name: 'EventsConfiguration')
+    ExternalMeetingIdType = Shapes::StringShape.new(name: 'ExternalMeetingIdType')
     ExternalUserIdType = Shapes::StringShape.new(name: 'ExternalUserIdType')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GeoMatchLevel = Shapes::StringShape.new(name: 'GeoMatchLevel')
@@ -179,10 +182,14 @@ module Aws::Chime
     LicenseList = Shapes::ListShape.new(name: 'LicenseList')
     ListAccountsRequest = Shapes::StructureShape.new(name: 'ListAccountsRequest')
     ListAccountsResponse = Shapes::StructureShape.new(name: 'ListAccountsResponse')
+    ListAttendeeTagsRequest = Shapes::StructureShape.new(name: 'ListAttendeeTagsRequest')
+    ListAttendeeTagsResponse = Shapes::StructureShape.new(name: 'ListAttendeeTagsResponse')
     ListAttendeesRequest = Shapes::StructureShape.new(name: 'ListAttendeesRequest')
     ListAttendeesResponse = Shapes::StructureShape.new(name: 'ListAttendeesResponse')
     ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
     ListBotsResponse = Shapes::StructureShape.new(name: 'ListBotsResponse')
+    ListMeetingTagsRequest = Shapes::StructureShape.new(name: 'ListMeetingTagsRequest')
+    ListMeetingTagsResponse = Shapes::StructureShape.new(name: 'ListMeetingTagsResponse')
     ListMeetingsRequest = Shapes::StructureShape.new(name: 'ListMeetingsRequest')
     ListMeetingsResponse = Shapes::StructureShape.new(name: 'ListMeetingsResponse')
     ListPhoneNumberOrdersRequest = Shapes::StructureShape.new(name: 'ListPhoneNumberOrdersRequest')
@@ -195,6 +202,8 @@ module Aws::Chime
     ListRoomMembershipsResponse = Shapes::StructureShape.new(name: 'ListRoomMembershipsResponse')
     ListRoomsRequest = Shapes::StructureShape.new(name: 'ListRoomsRequest')
     ListRoomsResponse = Shapes::StructureShape.new(name: 'ListRoomsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     ListVoiceConnectorGroupsRequest = Shapes::StructureShape.new(name: 'ListVoiceConnectorGroupsRequest')
@@ -210,6 +219,8 @@ module Aws::Chime
     Meeting = Shapes::StructureShape.new(name: 'Meeting')
     MeetingList = Shapes::ListShape.new(name: 'MeetingList')
     MeetingNotificationConfiguration = Shapes::StructureShape.new(name: 'MeetingNotificationConfiguration')
+    MeetingTagKeyList = Shapes::ListShape.new(name: 'MeetingTagKeyList')
+    MeetingTagList = Shapes::ListShape.new(name: 'MeetingTagList')
     Member = Shapes::StructureShape.new(name: 'Member')
     MemberError = Shapes::StructureShape.new(name: 'MemberError')
     MemberErrorList = Shapes::ListShape.new(name: 'MemberErrorList')
@@ -297,6 +308,14 @@ module Aws::Chime
     String = Shapes::StringShape.new(name: 'String')
     String128 = Shapes::StringShape.new(name: 'String128')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagAttendeeRequest = Shapes::StructureShape.new(name: 'TagAttendeeRequest')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagMeetingRequest = Shapes::StructureShape.new(name: 'TagMeetingRequest')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TelephonySettings = Shapes::StructureShape.new(name: 'TelephonySettings')
     Termination = Shapes::StructureShape.new(name: 'Termination')
     TerminationHealth = Shapes::StructureShape.new(name: 'TerminationHealth')
@@ -304,6 +323,9 @@ module Aws::Chime
     TollFreePrefix = Shapes::StringShape.new(name: 'TollFreePrefix')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UntagAttendeeRequest = Shapes::StructureShape.new(name: 'UntagAttendeeRequest')
+    UntagMeetingRequest = Shapes::StructureShape.new(name: 'UntagMeetingRequest')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAccountRequest = Shapes::StructureShape.new(name: 'UpdateAccountRequest')
     UpdateAccountResponse = Shapes::StructureShape.new(name: 'UpdateAccountResponse')
     UpdateAccountSettingsRequest = Shapes::StructureShape.new(name: 'UpdateAccountSettingsRequest')
@@ -412,6 +434,10 @@ module Aws::Chime
 
     AttendeeList.member = Shapes::ShapeRef.new(shape: Attendee)
 
+    AttendeeTagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    AttendeeTagList.member = Shapes::ShapeRef.new(shape: Tag)
+
     BadRequestException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
@@ -506,9 +532,11 @@ module Aws::Chime
 
     CreateAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     CreateAttendeeRequest.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserIdType, required: true, location_name: "ExternalUserId"))
+    CreateAttendeeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: AttendeeTagList, location_name: "Tags"))
     CreateAttendeeRequest.struct_class = Types::CreateAttendeeRequest
 
     CreateAttendeeRequestItem.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserIdType, required: true, location_name: "ExternalUserId"))
+    CreateAttendeeRequestItem.add_member(:tags, Shapes::ShapeRef.new(shape: AttendeeTagList, location_name: "Tags"))
     CreateAttendeeRequestItem.struct_class = Types::CreateAttendeeRequestItem
 
     CreateAttendeeRequestItemList.member = Shapes::ShapeRef.new(shape: CreateAttendeeRequestItem)
@@ -525,8 +553,10 @@ module Aws::Chime
     CreateBotResponse.struct_class = Types::CreateBotResponse
 
     CreateMeetingRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateMeetingRequest.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingIdType, location_name: "ExternalMeetingId"))
     CreateMeetingRequest.add_member(:meeting_host_id, Shapes::ShapeRef.new(shape: ExternalUserIdType, location_name: "MeetingHostId"))
     CreateMeetingRequest.add_member(:media_region, Shapes::ShapeRef.new(shape: String, location_name: "MediaRegion"))
+    CreateMeetingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MeetingTagList, location_name: "Tags"))
     CreateMeetingRequest.add_member(:notifications_configuration, Shapes::ShapeRef.new(shape: MeetingNotificationConfiguration, location_name: "NotificationsConfiguration"))
     CreateMeetingRequest.struct_class = Types::CreateMeetingRequest
 
@@ -858,6 +888,13 @@ module Aws::Chime
     ListAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAccountsResponse.struct_class = Types::ListAccountsResponse
 
+    ListAttendeeTagsRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    ListAttendeeTagsRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "attendeeId"))
+    ListAttendeeTagsRequest.struct_class = Types::ListAttendeeTagsRequest
+
+    ListAttendeeTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListAttendeeTagsResponse.struct_class = Types::ListAttendeeTagsResponse
+
     ListAttendeesRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
     ListAttendeesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListAttendeesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
@@ -875,6 +912,12 @@ module Aws::Chime
     ListBotsResponse.add_member(:bots, Shapes::ShapeRef.new(shape: BotList, location_name: "Bots"))
     ListBotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListBotsResponse.struct_class = Types::ListBotsResponse
+
+    ListMeetingTagsRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    ListMeetingTagsRequest.struct_class = Types::ListMeetingTagsRequest
+
+    ListMeetingTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListMeetingTagsResponse.struct_class = Types::ListMeetingTagsResponse
 
     ListMeetingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListMeetingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultMax, location: "querystring", location_name: "max-results"))
@@ -934,6 +977,12 @@ module Aws::Chime
     ListRoomsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListRoomsResponse.struct_class = Types::ListRoomsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListUsersRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     ListUsersRequest.add_member(:user_email, Shapes::ShapeRef.new(shape: EmailAddress, location: "querystring", location_name: "user-email"))
     ListUsersRequest.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location: "querystring", location_name: "user-type"))
@@ -986,6 +1035,7 @@ module Aws::Chime
     MediaPlacement.struct_class = Types::MediaPlacement
 
     Meeting.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "MeetingId"))
+    Meeting.add_member(:external_meeting_id, Shapes::ShapeRef.new(shape: ExternalMeetingIdType, location_name: "ExternalMeetingId"))
     Meeting.add_member(:media_placement, Shapes::ShapeRef.new(shape: MediaPlacement, location_name: "MediaPlacement"))
     Meeting.add_member(:media_region, Shapes::ShapeRef.new(shape: String, location_name: "MediaRegion"))
     Meeting.struct_class = Types::Meeting
@@ -995,6 +1045,10 @@ module Aws::Chime
     MeetingNotificationConfiguration.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SnsTopicArn"))
     MeetingNotificationConfiguration.add_member(:sqs_queue_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SqsQueueArn"))
     MeetingNotificationConfiguration.struct_class = Types::MeetingNotificationConfiguration
+
+    MeetingTagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    MeetingTagList.member = Shapes::ShapeRef.new(shape: Tag)
 
     Member.add_member(:member_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MemberId"))
     Member.add_member(:member_type, Shapes::ShapeRef.new(shape: MemberType, location_name: "MemberType"))
@@ -1247,6 +1301,27 @@ module Aws::Chime
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    TagAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "attendeeId"))
+    TagAttendeeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: AttendeeTagList, required: true, location_name: "Tags"))
+    TagAttendeeRequest.struct_class = Types::TagAttendeeRequest
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    TagMeetingRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MeetingTagList, required: true, location_name: "Tags"))
+    TagMeetingRequest.struct_class = Types::TagMeetingRequest
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
     TelephonySettings.add_member(:inbound_calling, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "InboundCalling"))
     TelephonySettings.add_member(:outbound_calling, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "OutboundCalling"))
     TelephonySettings.add_member(:sms, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "SMS"))
@@ -1274,6 +1349,19 @@ module Aws::Chime
     UnprocessableEntityException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
+    UntagAttendeeRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    UntagAttendeeRequest.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "attendeeId"))
+    UntagAttendeeRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: AttendeeTagKeyList, required: true, location_name: "TagKeys"))
+    UntagAttendeeRequest.struct_class = Types::UntagAttendeeRequest
+
+    UntagMeetingRequest.add_member(:meeting_id, Shapes::ShapeRef.new(shape: GuidString, required: true, location: "uri", location_name: "meetingId"))
+    UntagMeetingRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: MeetingTagKeyList, required: true, location_name: "TagKeys"))
+    UntagMeetingRequest.struct_class = Types::UntagMeetingRequest
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
@@ -2453,6 +2541,21 @@ module Aws::Chime
         )
       end)
 
+      api.add_operation(:list_attendee_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAttendeeTags"
+        o.http_method = "GET"
+        o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListAttendeeTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAttendeeTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:list_attendees, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAttendees"
         o.http_method = "GET"
@@ -2493,6 +2596,21 @@ module Aws::Chime
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_meeting_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMeetingTags"
+        o.http_method = "GET"
+        o.http_request_uri = "/meetings/{meetingId}/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListMeetingTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMeetingTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:list_meetings, Seahorse::Model::Operation.new.tap do |o|
@@ -2616,6 +2734,20 @@ module Aws::Chime
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
@@ -2873,6 +3005,96 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:tag_attendee, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagAttendee"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}/tags?operation=add"
+        o.input = Shapes::ShapeRef.new(shape: TagAttendeeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:tag_meeting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagMeeting"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/tags?operation=add"
+        o.input = Shapes::ShapeRef.new(shape: TagMeetingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags?operation=tag-resource"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:untag_attendee, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagAttendee"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/attendees/{attendeeId}/tags?operation=delete"
+        o.input = Shapes::ShapeRef.new(shape: UntagAttendeeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:untag_meeting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagMeeting"
+        o.http_method = "POST"
+        o.http_request_uri = "/meetings/{meetingId}/tags?operation=delete"
+        o.input = Shapes::ShapeRef.new(shape: UntagMeetingRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags?operation=untag-resource"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

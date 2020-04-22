@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.71.0 (2020-04-20)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-synthetics` gem.
+
 3.70.0 (2019-12-19)
 ------------------
 
