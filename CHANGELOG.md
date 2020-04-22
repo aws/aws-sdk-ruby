@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeGuruReviewer - Updated the API, and documentation for Amazon CodeGuru Reviewer.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
 2.11.491 (2020-04-21)
 ------------------
 
