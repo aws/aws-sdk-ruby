@@ -320,6 +320,9 @@ module Aws::MediaPackageVod
     #
     # @option params [required, String] :source_role_arn
     #
+    # @option params [Hash<String,String>] :tags
+    #   A collection of tags associated with a resource
+    #
     # @return [Types::CreateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssetResponse#arn #arn} => String
@@ -330,6 +333,7 @@ module Aws::MediaPackageVod
     #   * {Types::CreateAssetResponse#resource_id #resource_id} => String
     #   * {Types::CreateAssetResponse#source_arn #source_arn} => String
     #   * {Types::CreateAssetResponse#source_role_arn #source_role_arn} => String
+    #   * {Types::CreateAssetResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -339,6 +343,9 @@ module Aws::MediaPackageVod
     #     resource_id: "__string",
     #     source_arn: "__string", # required
     #     source_role_arn: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -353,6 +360,8 @@ module Aws::MediaPackageVod
     #   resp.resource_id #=> String
     #   resp.source_arn #=> String
     #   resp.source_role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreateAsset AWS API Documentation
     #
@@ -381,6 +390,9 @@ module Aws::MediaPackageVod
     #
     # @option params [required, String] :packaging_group_id
     #
+    # @option params [Hash<String,String>] :tags
+    #   A collection of tags associated with a resource
+    #
     # @return [Types::CreatePackagingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePackagingConfigurationResponse#arn #arn} => String
@@ -390,6 +402,7 @@ module Aws::MediaPackageVod
     #   * {Types::CreatePackagingConfigurationResponse#id #id} => String
     #   * {Types::CreatePackagingConfigurationResponse#mss_package #mss_package} => Types::MssPackage
     #   * {Types::CreatePackagingConfigurationResponse#packaging_group_id #packaging_group_id} => String
+    #   * {Types::CreatePackagingConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -492,6 +505,9 @@ module Aws::MediaPackageVod
     #       segment_duration_seconds: 1,
     #     },
     #     packaging_group_id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -556,6 +572,8 @@ module Aws::MediaPackageVod
     #   resp.mss_package.mss_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.mss_package.segment_duration_seconds #=> Integer
     #   resp.packaging_group_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingConfiguration AWS API Documentation
     #
@@ -570,16 +588,23 @@ module Aws::MediaPackageVod
     #
     # @option params [required, String] :id
     #
+    # @option params [Hash<String,String>] :tags
+    #   A collection of tags associated with a resource
+    #
     # @return [Types::CreatePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePackagingGroupResponse#arn #arn} => String
     #   * {Types::CreatePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::CreatePackagingGroupResponse#id #id} => String
+    #   * {Types::CreatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_packaging_group({
     #     id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -587,6 +612,8 @@ module Aws::MediaPackageVod
     #   resp.arn #=> String
     #   resp.domain_name #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingGroup AWS API Documentation
     #
@@ -674,6 +701,7 @@ module Aws::MediaPackageVod
     #   * {Types::DescribeAssetResponse#resource_id #resource_id} => String
     #   * {Types::DescribeAssetResponse#source_arn #source_arn} => String
     #   * {Types::DescribeAssetResponse#source_role_arn #source_role_arn} => String
+    #   * {Types::DescribeAssetResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -693,6 +721,8 @@ module Aws::MediaPackageVod
     #   resp.resource_id #=> String
     #   resp.source_arn #=> String
     #   resp.source_role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribeAsset AWS API Documentation
     #
@@ -717,6 +747,7 @@ module Aws::MediaPackageVod
     #   * {Types::DescribePackagingConfigurationResponse#id #id} => String
     #   * {Types::DescribePackagingConfigurationResponse#mss_package #mss_package} => Types::MssPackage
     #   * {Types::DescribePackagingConfigurationResponse#packaging_group_id #packaging_group_id} => String
+    #   * {Types::DescribePackagingConfigurationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -786,6 +817,8 @@ module Aws::MediaPackageVod
     #   resp.mss_package.mss_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.mss_package.segment_duration_seconds #=> Integer
     #   resp.packaging_group_id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingConfiguration AWS API Documentation
     #
@@ -805,6 +838,7 @@ module Aws::MediaPackageVod
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
     #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::DescribePackagingGroupResponse#id #id} => String
+    #   * {Types::DescribePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -817,6 +851,8 @@ module Aws::MediaPackageVod
     #   resp.arn #=> String
     #   resp.domain_name #=> String
     #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingGroup AWS API Documentation
     #
@@ -860,6 +896,8 @@ module Aws::MediaPackageVod
     #   resp.assets[0].resource_id #=> String
     #   resp.assets[0].source_arn #=> String
     #   resp.assets[0].source_role_arn #=> String
+    #   resp.assets[0].tags #=> Hash
+    #   resp.assets[0].tags["__string"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListAssets AWS API Documentation
@@ -959,6 +997,8 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].mss_package.mss_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.packaging_configurations[0].mss_package.segment_duration_seconds #=> Integer
     #   resp.packaging_configurations[0].packaging_group_id #=> String
+    #   resp.packaging_configurations[0].tags #=> Hash
+    #   resp.packaging_configurations[0].tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingConfigurations AWS API Documentation
     #
@@ -996,6 +1036,8 @@ module Aws::MediaPackageVod
     #   resp.packaging_groups[0].arn #=> String
     #   resp.packaging_groups[0].domain_name #=> String
     #   resp.packaging_groups[0].id #=> String
+    #   resp.packaging_groups[0].tags #=> Hash
+    #   resp.packaging_groups[0].tags["__string"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingGroups AWS API Documentation
     #
@@ -1003,6 +1045,78 @@ module Aws::MediaPackageVod
     # @param [Hash] params ({})
     def list_packaging_groups(params = {}, options = {})
       req = build_request(:list_packaging_groups, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :resource_arn
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["__string"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1019,7 +1133,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

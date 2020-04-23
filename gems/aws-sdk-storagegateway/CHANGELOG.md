@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-04-23)
+------------------
+
+* Feature - Added AutomaticTapeCreation APIs
+
 1.37.0 (2020-03-31)
 ------------------
 

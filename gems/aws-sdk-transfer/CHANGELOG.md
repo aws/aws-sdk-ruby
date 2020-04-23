@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-04-23)
+------------------
+
+* Feature - This release adds support for transfers over FTPS and FTP in and out of Amazon S3, which makes it easy to migrate File Transfer Protocol over SSL (FTPS) and FTP workloads to AWS, in addition to the existing support for Secure File Transfer Protocol (SFTP).
+
 1.17.0 (2020-03-09)
 ------------------
 

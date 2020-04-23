@@ -475,7 +475,7 @@ module Aws::StorageGateway
     #
     # @option params [required, Array<String>] :disk_ids
     #   An array of strings that identify disks that are to be configured as
-    #   working storage. Each string have a minimum length of 1 and maximum
+    #   working storage. Each string has a minimum length of 1 and maximum
     #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #
     # @return [Types::AddCacheOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -618,7 +618,7 @@ module Aws::StorageGateway
     #
     # @option params [required, Array<String>] :disk_ids
     #   An array of strings that identify disks that are to be configured as
-    #   working storage. Each string have a minimum length of 1 and maximum
+    #   working storage. Each string has a minimum length of 1 and maximum
     #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #
     # @return [Types::AddUploadBufferOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -685,7 +685,7 @@ module Aws::StorageGateway
     #
     # @option params [required, Array<String>] :disk_ids
     #   An array of strings that identify disks that are to be configured as
-    #   working storage. Each string have a minimum length of 1 and maximum
+    #   working storage. Each string has a minimum length of 1 and maximum
     #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #
     # @return [Types::AddWorkingStorageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -734,8 +734,8 @@ module Aws::StorageGateway
     # Assigns a tape to a tape pool for archiving. The tape assigned to a
     # pool is archived in the S3 storage class that is associated with the
     # pool. When you use your backup application to eject the tape, the tape
-    # is archived directly into the S3 storage class (Glacier or Deep
-    # Archive) that corresponds to the pool.
+    # is archived directly into the S3 storage class (S3 Glacier or S3
+    # Glacier Deep Archive) that corresponds to the pool.
     #
     # Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #
@@ -748,7 +748,7 @@ module Aws::StorageGateway
     #   The tape in this pool is archived in the S3 storage class that is
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
     #
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #
@@ -1019,12 +1019,12 @@ module Aws::StorageGateway
     #   request.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
     #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1101,11 +1101,11 @@ module Aws::StorageGateway
     # Creates a Network File System (NFS) file share on an existing file
     # gateway. In Storage Gateway, a file share is a file system mount point
     # backed by Amazon S3 cloud storage. Storage Gateway exposes file shares
-    # using a NFS interface. This operation is only supported for file
+    # using an NFS interface. This operation is only supported for file
     # gateways.
     #
     # File gateway requires AWS Security Token Service (AWS STS) to be
-    # activated to enable you create a file share. Make sure AWS STS is
+    # activated to enable you to create a file share. Make sure AWS STS is
     # activated in the AWS Region you are creating your file gateway in. If
     # AWS STS is not activated in the AWS Region, activate it. For
     # information about how to activate AWS STS, see Activating and
@@ -1127,13 +1127,13 @@ module Aws::StorageGateway
     #   to create a file share.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server
-    #   side encryption. This value can only be set when KMSEncrypted is true.
-    #   Optional.
+    #   The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3
+    #   server-side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
     #
     # @option params [required, String] :role
     #   The ARN of the AWS Identity and Access Management (IAM) role that a
@@ -1250,7 +1250,7 @@ module Aws::StorageGateway
     # Creates a Server Message Block (SMB) file share on an existing file
     # gateway. In Storage Gateway, a file share is a file system mount point
     # backed by Amazon S3 cloud storage. Storage Gateway expose file shares
-    # using a SMB interface. This operation is only supported for file
+    # using an SMB interface. This operation is only supported for file
     # gateways.
     #
     # File gateways require AWS Security Token Service (AWS STS) to be
@@ -1277,12 +1277,12 @@ module Aws::StorageGateway
     #   The ARN of the file gateway on which you want to create a file share.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
     #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [required, String] :role
@@ -1351,8 +1351,8 @@ module Aws::StorageGateway
     # @option params [Array<String>] :invalid_user_list
     #   A list of users or groups in the Active Directory that are not allowed
     #   to access the file share. A group must be prefixed with the @
-    #   character. For example `@group1`. Can only be set if Authentication is
-    #   set to `ActiveDirectory`.
+    #   character. For example, `@group1`. Can only be set if Authentication
+    #   is set to `ActiveDirectory`.
     #
     # @option params [String] :audit_destination_arn
     #   The Amazon Resource Name (ARN) of the storage used for the audit logs.
@@ -1422,12 +1422,12 @@ module Aws::StorageGateway
     # Initiates a snapshot of a volume.
     #
     # AWS Storage Gateway provides the ability to back up point-in-time
-    # snapshots of your data to Amazon Simple Storage (S3) for durable
-    # off-site recovery, as well as import the data to an Amazon Elastic
-    # Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You
-    # can take snapshots of your gateway volume on a scheduled or ad hoc
-    # basis. This API enables you to take ad-hoc snapshot. For more
-    # information, see [Editing a Snapshot Schedule][1].
+    # snapshots of your data to Amazon Simple Storage Service (Amazon S3)
+    # for durable off-site recovery, as well as import the data to an Amazon
+    # Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud
+    # (EC2). You can take snapshots of your gateway volume on a scheduled or
+    # ad hoc basis. This API enables you to take an ad hoc snapshot. For
+    # more information, see [Editing a Snapshot Schedule][1].
     #
     # In the CreateSnapshot request you identify the volume by providing its
     # Amazon Resource Name (ARN). You must also provide description for the
@@ -1684,12 +1684,12 @@ module Aws::StorageGateway
     #   Valid Values: A valid IP address.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
     #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1766,7 +1766,7 @@ module Aws::StorageGateway
 
     # Creates a virtual tape by using your own barcode. You write data to
     # the virtual tape and then archive the tape. A barcode is unique and
-    # can not be reused if it has already been used on a tape . This applies
+    # cannot be reused if it has already been used on a tape. This applies
     # to barcodes used on deleted tapes. This operation is only supported in
     # the tape gateway type.
     #
@@ -1784,7 +1784,7 @@ module Aws::StorageGateway
     # @option params [required, Integer] :tape_size_in_bytes
     #   The size, in bytes, of the virtual tape that you want to create.
     #
-    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 byte).
+    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 bytes).
     #
     #    </note>
     #
@@ -1797,12 +1797,12 @@ module Aws::StorageGateway
     #    </note>
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
-    #   The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [String] :pool_id
@@ -1810,7 +1810,7 @@ module Aws::StorageGateway
     #   The tape in this pool is archived in the S3 storage class that is
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
     #
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #
@@ -1893,7 +1893,7 @@ module Aws::StorageGateway
     # @option params [required, Integer] :tape_size_in_bytes
     #   The size, in bytes, of the virtual tapes that you want to create.
     #
-    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 byte).
+    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 bytes).
     #
     #    </note>
     #
@@ -1920,12 +1920,12 @@ module Aws::StorageGateway
     #    </note>
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
     #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [String] :pool_id
@@ -1933,7 +1933,7 @@ module Aws::StorageGateway
     #   The tape in this pool is archived in the S3 storage class that is
     #   associated with the pool. When you use your backup application to
     #   eject the tape, the tape is archived directly into the storage class
-    #   (Glacier or Deep Archive) that corresponds to the pool.
+    #   (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
     #
     #   Valid values: "GLACIER", "DEEP\_ARCHIVE"
     #
@@ -2004,6 +2004,39 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def create_tapes(params = {}, options = {})
       req = build_request(:create_tapes, params)
+      req.send_request(options)
+    end
+
+    # Deletes the automatic tape creation policy of a gateway. If you delete
+    # this policy, new virtual tapes must be created manually. Use the
+    # Amazon Resource Name (ARN) of the gateway in your request to remove
+    # the policy.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::DeleteAutomaticTapeCreationPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAutomaticTapeCreationPolicyOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_automatic_tape_creation_policy({
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteAutomaticTapeCreationPolicy AWS API Documentation
+    #
+    # @overload delete_automatic_tape_creation_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_automatic_tape_creation_policy(params = {}, options = {})
+      req = build_request(:delete_automatic_tape_creation_policy, params)
       req.send_request(options)
     end
 
@@ -2230,14 +2263,16 @@ module Aws::StorageGateway
     # providing its Amazon Resource Name (ARN). This operation is only
     # supported in stored and cached volume gateway types.
     #
-    # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. in
-    # *Amazon Elastic Compute Cloud API Reference*.
+    # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
+    # more information, go to [DescribeSnapshots][2] in the *Amazon Elastic
+    # Compute Cloud API Reference*.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
     #
     # @option params [required, String] :volume_arn
     #   The volume which snapshot schedule to delete.
@@ -2533,7 +2568,7 @@ module Aws::StorageGateway
     end
 
     # Returns information about the cache of a gateway. This operation is
-    # only supported in the cached volume, tape and file gateway types.
+    # only supported in the cached volume, tape, and file gateway types.
     #
     # The response includes disk IDs that are configured as cache, and it
     # includes the amount of cache allocated and used.
@@ -2606,14 +2641,14 @@ module Aws::StorageGateway
     # This operation is only supported in the cached volume gateway types.
     #
     # The list of gateway volumes in the request must be from one gateway.
-    # In the response Amazon Storage Gateway returns volume information
-    # sorted by volume Amazon Resource Name (ARN).
+    # In the response, AWS Storage Gateway returns volume information sorted
+    # by volume Amazon Resource Name (ARN).
     #
     # @option params [required, Array<String>] :volume_arns
     #   An array of strings where each string represents the Amazon Resource
     #   Name (ARN) of a cached volume. All of the specified cached volumes
-    #   must from the same gateway. Use ListVolumes to get volume ARNs for a
-    #   gateway.
+    #   must be from the same gateway. Use ListVolumes to get volume ARNs for
+    #   a gateway.
     #
     # @return [Types::DescribeCachediSCSIVolumesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3115,15 +3150,15 @@ module Aws::StorageGateway
 
     # Returns the description of the gateway volumes specified in the
     # request. The list of gateway volumes in the request must be from one
-    # gateway. In the response Amazon Storage Gateway returns volume
+    # gateway. In the response AWS Storage Gateway returns volume
     # information sorted by volume ARNs. This operation is only supported in
     # stored volume gateway type.
     #
     # @option params [required, Array<String>] :volume_arns
     #   An array of strings where each string represents the Amazon Resource
     #   Name (ARN) of a stored volume. All of the specified stored volumes
-    #   must from the same gateway. Use ListVolumes to get volume ARNs for a
-    #   gateway.
+    #   must be from the same gateway. Use ListVolumes to get volume ARNs for
+    #   a gateway.
     #
     # @return [Types::DescribeStorediSCSIVolumesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3216,7 +3251,7 @@ module Aws::StorageGateway
     #   describing virtual tapes.
     #
     # @option params [Integer] :limit
-    #   Specifies that the number of virtual tapes descried be limited to the
+    #   Specifies that the number of virtual tapes described be limited to the
     #   specified number.
     #
     # @return [Types::DescribeTapeArchivesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3811,7 +3846,7 @@ module Aws::StorageGateway
     # functioning. This operation is only supported in the tape gateway
     # type.
     #
-    # Once a gateway is disabled it cannot be enabled.
+    # After a gateway is disabled, it cannot be enabled.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -3924,12 +3959,52 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Lists the automatic tape creation policies for a gateway. If there are
+    # no automatic tape creation policies for the gateway, it returns an
+    # empty list.
+    #
+    # This operation is only supported for tape gateways.
+    #
+    # @option params [String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::ListAutomaticTapeCreationPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAutomaticTapeCreationPoliciesOutput#automatic_tape_creation_policy_infos #automatic_tape_creation_policy_infos} => Array&lt;Types::AutomaticTapeCreationPolicyInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_automatic_tape_creation_policies({
+    #     gateway_arn: "GatewayARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.automatic_tape_creation_policy_infos #=> Array
+    #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules #=> Array
+    #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].tape_barcode_prefix #=> String
+    #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].pool_id #=> String
+    #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].tape_size_in_bytes #=> Integer
+    #   resp.automatic_tape_creation_policy_infos[0].automatic_tape_creation_rules[0].minimum_num_tapes #=> Integer
+    #   resp.automatic_tape_creation_policy_infos[0].gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListAutomaticTapeCreationPolicies AWS API Documentation
+    #
+    # @overload list_automatic_tape_creation_policies(params = {})
+    # @param [Hash] params ({})
+    def list_automatic_tape_creation_policies(params = {}, options = {})
+      req = build_request(:list_automatic_tape_creation_policies, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the file shares for a specific file gateway, or the
     # list of file shares that belong to the calling user account. This
     # operation is only supported for file gateways.
     #
     # @option params [String] :gateway_arn
-    #   The Amazon resource Name (ARN) of the gateway whose file shares you
+    #   The Amazon Resource Name (ARN) of the gateway whose file shares you
     #   want to list. If this field is not present, all file shares under your
     #   account are listed.
     #
@@ -4610,7 +4685,7 @@ module Aws::StorageGateway
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags you want to remove from the specified resource. A
-    #   tag is composed of a key/value pair.
+    #   tag is composed of a key-value pair.
     #
     # @return [Types::RemoveTagsFromResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4654,13 +4729,13 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Resets all cache disks that have encountered a error and makes the
+    # Resets all cache disks that have encountered an error and makes the
     # disks available for reconfiguration as cache storage. If your cache
-    # disk encounters a error, the gateway prevents read and write
+    # disk encounters an error, the gateway prevents read and write
     # operations on virtual tapes in the gateway. For example, an error can
     # occur when a disk is corrupted or removed from the gateway. When a
-    # cache is reset, the gateway loses its cache storage. At this point you
-    # can reconfigure the disks as cache disks. This operation is only
+    # cache is reset, the gateway loses its cache storage. At this point,
+    # you can reconfigure the disks as cache disks. This operation is only
     # supported in the cached volume and tape types.
     #
     # If the cache disk you are resetting contains data that has not been
@@ -4937,7 +5012,7 @@ module Aws::StorageGateway
     #  </note>
     #
     # After the gateway is shutdown, you cannot call any other API except
-    # StartGateway, DescribeGatewayInformation, and ListGateways. For more
+    # StartGateway, DescribeGatewayInformation and ListGateways. For more
     # information, see ActivateGateway. Your applications cannot read from
     # or write to the gateway's storage volumes, and there are no snapshots
     # taken.
@@ -5091,6 +5166,57 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def start_gateway(params = {}, options = {})
       req = build_request(:start_gateway, params)
+      req.send_request(options)
+    end
+
+    # Updates the automatic tape creation policy of a gateway. Use this to
+    # update the policy with a new set of automatic tape creation rules.
+    # This is only supported for tape gateways.
+    #
+    # By default, there is no automatic tape creation policy.
+    #
+    # <note markdown="1"> A gateway can have only one automatic tape creation policy.
+    #
+    #  </note>
+    #
+    # @option params [required, Array<Types::AutomaticTapeCreationRule>] :automatic_tape_creation_rules
+    #   An automatic tape creation policy consists of a list of automatic tape
+    #   creation rules. The rules determine when and how to automatically
+    #   create new tapes.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and AWS
+    #   Region.
+    #
+    # @return [Types::UpdateAutomaticTapeCreationPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAutomaticTapeCreationPolicyOutput#gateway_arn #gateway_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_automatic_tape_creation_policy({
+    #     automatic_tape_creation_rules: [ # required
+    #       {
+    #         tape_barcode_prefix: "TapeBarcodePrefix", # required
+    #         pool_id: "PoolId", # required
+    #         tape_size_in_bytes: 1, # required
+    #         minimum_num_tapes: 1, # required
+    #       },
+    #     ],
+    #     gateway_arn: "GatewayARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateAutomaticTapeCreationPolicy AWS API Documentation
+    #
+    # @overload update_automatic_tape_creation_policy(params = {})
+    # @param [Hash] params ({})
+    def update_automatic_tape_creation_policy(params = {}, options = {})
+      req = build_request(:update_automatic_tape_creation_policy, params)
       req.send_request(options)
     end
 
@@ -5489,12 +5615,12 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the file share to be updated.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
     #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [Types::NFSFileShareDefaults] :nfs_file_share_defaults
@@ -5612,12 +5738,12 @@ module Aws::StorageGateway
     #   update.
     #
     # @option params [Boolean] :kms_encrypted
-    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   True to use Amazon S3 server-side encryption with your own AWS KMS
     #   key, or false to use a key managed by Amazon S3. Optional.
     #
     # @option params [String] :kms_key
     #   The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3
-    #   server side encryption. This value can only be set when KMSEncrypted
+    #   server-side encryption. This value can only be set when KMSEncrypted
     #   is true. Optional.
     #
     # @option params [String] :default_storage_class
@@ -5931,7 +6057,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

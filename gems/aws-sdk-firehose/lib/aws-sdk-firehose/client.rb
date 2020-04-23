@@ -481,7 +481,7 @@ module Aws::Firehose
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -503,7 +503,7 @@ module Aws::Firehose
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -539,7 +539,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -624,7 +624,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -661,7 +661,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -704,7 +704,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -736,6 +736,11 @@ module Aws::Firehose
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
     #       },
+    #       vpc_configuration: {
+    #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         role_arn: "RoleARN", # required
+    #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #       },
     #     },
     #     splunk_destination_configuration: {
     #       hec_endpoint: "HECEndpoint", # required
@@ -755,7 +760,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -902,12 +907,12 @@ module Aws::Firehose
     #   resp.delivery_stream_description.delivery_stream_name #=> String
     #   resp.delivery_stream_description.delivery_stream_arn #=> String
     #   resp.delivery_stream_description.delivery_stream_status #=> String, one of "CREATING", "CREATING_FAILED", "DELETING", "DELETING_FAILED", "ACTIVE"
-    #   resp.delivery_stream_description.failure_description.type #=> String, one of "RETIRE_KMS_GRANT_FAILED", "CREATE_KMS_GRANT_FAILED", "KMS_ACCESS_DENIED", "DISABLED_KMS_KEY", "INVALID_KMS_KEY", "KMS_KEY_NOT_FOUND", "KMS_OPT_IN_REQUIRED", "UNKNOWN_ERROR"
+    #   resp.delivery_stream_description.failure_description.type #=> String, one of "RETIRE_KMS_GRANT_FAILED", "CREATE_KMS_GRANT_FAILED", "KMS_ACCESS_DENIED", "DISABLED_KMS_KEY", "INVALID_KMS_KEY", "KMS_KEY_NOT_FOUND", "KMS_OPT_IN_REQUIRED", "CREATE_ENI_FAILED", "DELETE_ENI_FAILED", "SUBNET_NOT_FOUND", "SECURITY_GROUP_NOT_FOUND", "ENI_ACCESS_DENIED", "SUBNET_ACCESS_DENIED", "SECURITY_GROUP_ACCESS_DENIED", "UNKNOWN_ERROR"
     #   resp.delivery_stream_description.failure_description.details #=> String
     #   resp.delivery_stream_description.delivery_stream_encryption_configuration.key_arn #=> String
     #   resp.delivery_stream_description.delivery_stream_encryption_configuration.key_type #=> String, one of "AWS_OWNED_CMK", "CUSTOMER_MANAGED_CMK"
     #   resp.delivery_stream_description.delivery_stream_encryption_configuration.status #=> String, one of "ENABLED", "ENABLING", "ENABLING_FAILED", "DISABLED", "DISABLING", "DISABLING_FAILED"
-    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.failure_description.type #=> String, one of "RETIRE_KMS_GRANT_FAILED", "CREATE_KMS_GRANT_FAILED", "KMS_ACCESS_DENIED", "DISABLED_KMS_KEY", "INVALID_KMS_KEY", "KMS_KEY_NOT_FOUND", "KMS_OPT_IN_REQUIRED", "UNKNOWN_ERROR"
+    #   resp.delivery_stream_description.delivery_stream_encryption_configuration.failure_description.type #=> String, one of "RETIRE_KMS_GRANT_FAILED", "CREATE_KMS_GRANT_FAILED", "KMS_ACCESS_DENIED", "DISABLED_KMS_KEY", "INVALID_KMS_KEY", "KMS_KEY_NOT_FOUND", "KMS_OPT_IN_REQUIRED", "CREATE_ENI_FAILED", "DELETE_ENI_FAILED", "SUBNET_NOT_FOUND", "SECURITY_GROUP_NOT_FOUND", "ENI_ACCESS_DENIED", "SUBNET_ACCESS_DENIED", "SECURITY_GROUP_ACCESS_DENIED", "UNKNOWN_ERROR"
     #   resp.delivery_stream_description.delivery_stream_encryption_configuration.failure_description.details #=> String
     #   resp.delivery_stream_description.delivery_stream_type #=> String, one of "DirectPut", "KinesisStreamAsSource"
     #   resp.delivery_stream_description.version_id #=> String
@@ -924,7 +929,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -936,7 +941,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -955,7 +960,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -1004,7 +1009,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -1023,7 +1028,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.s3_backup_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -1048,7 +1053,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -1063,6 +1068,12 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.subnet_ids #=> Array
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.subnet_ids[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.security_group_ids #=> Array
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.security_group_ids[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.vpc_configuration_description.vpc_id #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_endpoint_type #=> String, one of "Raw", "Event"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.hec_token #=> String
@@ -1075,7 +1086,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.error_output_prefix #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.buffering_hints.size_in_m_bs #=> Integer
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.buffering_hints.interval_in_seconds #=> Integer
-    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy"
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.compression_format #=> String, one of "UNCOMPRESSED", "GZIP", "ZIP", "Snappy", "HADOOP_SNAPPY"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.encryption_configuration.no_encryption_config #=> String, one of "NoEncryption"
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.encryption_configuration.kms_encryption_config.awskms_key_arn #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
@@ -1425,10 +1436,12 @@ module Aws::Firehose
     #
     # Even if encryption is currently enabled for a delivery stream, you can
     # still invoke this operation on it to change the ARN of the CMK or both
-    # its type and ARN. In this case, Kinesis Data Firehose schedules the
-    # grant it had on the old CMK for retirement and creates a grant that
-    # enables it to use the new CMK to encrypt and decrypt data and to
-    # manage the grant.
+    # its type and ARN. If you invoke this method to change the CMK, and the
+    # old CMK is of type `CUSTOMER_MANAGED_CMK`, Kinesis Data Firehose
+    # schedules the grant it had on the old CMK for retirement. If the new
+    # CMK is of type `CUSTOMER_MANAGED_CMK`, Kinesis Data Firehose creates a
+    # grant that enables it to use the new CMK to encrypt and decrypt data
+    # and to manage the grant.
     #
     # If a delivery stream already has encryption enabled and then you
     # invoke this operation to change the ARN of the CMK or both its type
@@ -1437,10 +1450,12 @@ module Aws::Firehose
     # enabled with the old CMK.
     #
     # If the encryption status of your delivery stream is `ENABLING_FAILED`,
-    # you can invoke this operation again.
+    # you can invoke this operation again with a valid CMK. The CMK must be
+    # enabled and the key policy mustn't explicitly deny the permission for
+    # Kinesis Data Firehose to invoke KMS encrypt and decrypt operations.
     #
-    # You can only enable SSE for a delivery stream that uses `DirectPut` as
-    # its source.
+    # You can enable SSE for a delivery stream only if it's a delivery
+    # stream that uses `DirectPut` as its source.
     #
     # The `StartDeliveryStreamEncryption` and `StopDeliveryStreamEncryption`
     # operations have a combined limit of 25 calls per delivery stream per
@@ -1691,7 +1706,7 @@ module Aws::Firehose
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -1713,7 +1728,7 @@ module Aws::Firehose
     #         size_in_m_bs: 1,
     #         interval_in_seconds: 1,
     #       },
-    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #       compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #       encryption_configuration: {
     #         no_encryption_config: "NoEncryption", # accepts NoEncryption
     #         kms_encryption_config: {
@@ -1749,7 +1764,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1834,7 +1849,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1871,7 +1886,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1913,7 +1928,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1964,7 +1979,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -2021,7 +2036,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
