@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::MediaPackageVod - Updated the API, and documentation for AWS Elemental MediaPackage VOD.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::RAM - Updated the API, and documentation for AWS Resource Access Manager.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer Family.
+
 2.11.492 (2020-04-22)
 ------------------
 

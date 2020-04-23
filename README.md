@@ -354,7 +354,7 @@ to be backwards compatible.
 | AWS Step Functions                                    | States                          | 2016-11-23  |
 | AWS Storage Gateway                                   | StorageGateway                  | 2013-06-30  |
 | AWS Support                                           | Support                         | 2013-04-15  |
-| AWS Transfer for SFTP                                 | Transfer                        | 2018-11-05  |
+| AWS Transfer Family                                   | Transfer                        | 2018-11-05  |
 | AWS WAF                                               | WAF                             | 2015-08-24  |
 | AWS WAF Regional                                      | WAFRegional                     | 2016-11-28  |
 | AWS WAFV2                                             | WAFV2                           | 2019-07-29  |
