@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.493 (2020-04-23)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
