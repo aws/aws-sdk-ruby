@@ -6318,6 +6318,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: NotConfiguredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:set_v2_logging_options, Seahorse::Model::Operation.new.tap do |o|

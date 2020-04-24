@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-04-24)
+------------------
+
+* Feature - This release adds a new exception type to the AWS IoT SetV2LoggingLevel API.
+
 1.46.0 (2020-04-01)
 ------------------
 

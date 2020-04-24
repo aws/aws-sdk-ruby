@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.303.0 (2020-04-24)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ElasticInference`.
+
 1.302.0 (2020-04-23)
 ------------------
 

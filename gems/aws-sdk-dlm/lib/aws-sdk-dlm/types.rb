@@ -135,8 +135,8 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] interval
-    #   The interval between snapshots. The supported values are 2, 3, 4, 6,
-    #   8, 12, and 24.
+    #   The interval between snapshots. The supported values are 1, 2, 3, 4,
+    #   6, 8, 12, and 24.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_unit
