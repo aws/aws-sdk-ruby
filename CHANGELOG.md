@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DLM - Updated the documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::ElasticInference - Updated the API, and documentation for Amazon Elastic  Inference.
+
+* Feature - Aws::IoT - Updated the API for AWS IoT.
+
 2.11.493 (2020-04-23)
 ------------------
 
