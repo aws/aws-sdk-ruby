@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.494 (2020-04-24)
+------------------
+
 * Feature - Aws::DLM - Updated the documentation for Amazon Data Lifecycle Manager.
 
 * Feature - Aws::ElasticInference - Updated the API, and documentation for Amazon Elastic  Inference.
