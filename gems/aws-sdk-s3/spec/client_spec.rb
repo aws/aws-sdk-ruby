@@ -748,7 +748,7 @@ module Aws
               bucket: 'bucket',
               key: 'key'
             }.merge(params))
-            expect(resp.error).to be_kind_of(S3::Errors::InternalError)
+            expect(resp.error).to be_kind_of(Seahorse::Client::NetworkingError)
             expect(resp.context.retries).to eq(3)
             expect(resp.data).to be(nil)
           end

@@ -28,9 +28,11 @@ module Aws
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
             elsif incomplete_response?(xml, context)
-              S3::Errors
+              Seahorse::Client::NetworkingError.new(
+                S3::Errors
                   .error_class('InternalError')
-                  .new(context, 'Incomplete or empty response body')
+                  .new(context, 'Empty response body')
+              )
             end
           end
 
