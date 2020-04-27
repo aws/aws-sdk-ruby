@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AccessAnalyzer - Updated the API, and documentation for Access Analyzer.
+
+* Feature - Aws::DataExchange - Updated the API, and documentation for AWS Data Exchange.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
 2.11.494 (2020-04-24)
 ------------------
 
