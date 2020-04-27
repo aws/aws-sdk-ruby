@@ -755,29 +755,6 @@ module Aws
         end
       end
 
-
-      # TODO: TEST METHOD.  Remove me
-      it 'TEST METHOD: handles 200 http response with empty body as error' do
-        client.handlers.remove(
-          Seahorse::Client::Plugins::RaiseResponseErrors::Handler
-        )
-        params = { copy_source: 'bucket/key' }
-        client.handle(step: :send) do |context|
-          context.http_response.signal_headers(200, {})
-          context.http_response.signal_data("<?xml version='1.0' encoding='UTF-8'?>\n\n\n<Incomplete />")
-          context.http_response.signal_done
-          Seahorse::Client::Response.new(context: context)
-        end
-        resp = client.send(:copy_object, {
-                                           bucket: 'bucket',
-                                           key: 'key'
-                                         }.merge(params))
-        expect(resp.error).to be_kind_of(S3::Errors::InternalError)
-
-        expect(resp.context.retries).to eq(3)
-
-      end
-
       context 'metadata stubbing' do
         it 'returns metadata from head operations' do
           stub_client = S3::Client.new(
