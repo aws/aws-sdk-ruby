@@ -1098,10 +1098,13 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:CapacityReservation` \| `ec2:Subnet` \|
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `license-manager:LicenseConfiguration` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverRule` I `resource-groups:Group`
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -1201,6 +1204,44 @@ module Aws::RAM
       req.send_request(options)
     end
 
+    # Lists the shareable resource types supported by AWS RAM.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceTypesResponse#resource_types #resource_types} => Array&lt;Types::ServiceNameAndResourceType&gt;
+    #   * {Types::ListResourceTypesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_types({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_types #=> Array
+    #   resp.resource_types[0].resource_type #=> String
+    #   resp.resource_types[0].service_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypes AWS API Documentation
+    #
+    # @overload list_resource_types(params = {})
+    # @param [Hash] params ({})
+    def list_resource_types(params = {}, options = {})
+      req = build_request(:list_resource_types, params)
+      req.send_request(options)
+    end
+
     # Lists the resources that you added to a resource shares or the
     # resources that are shared with you.
     #
@@ -1213,10 +1254,13 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:CapacityReservation` \| `ec2:Subnet` \|
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `license-manager:LicenseConfiguration` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverRule` \| `resource-groups:Group`
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -1487,7 +1531,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

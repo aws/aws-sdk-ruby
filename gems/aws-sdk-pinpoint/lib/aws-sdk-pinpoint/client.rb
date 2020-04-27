@@ -365,6 +365,10 @@ module Aws::Pinpoint
     #     write_campaign_request: { # required
     #       additional_treatments: [
     #         {
+    #           custom_delivery_configuration: {
+    #             delivery_uri: "__string", # required
+    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           },
     #           message_configuration: {
     #             adm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -407,6 +411,9 @@ module Aws::Pinpoint
     #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
+    #             },
+    #             custom_message: {
+    #               data: "__string",
     #             },
     #             default_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -503,6 +510,10 @@ module Aws::Pinpoint
     #           treatment_name: "__string",
     #         },
     #       ],
+    #       custom_delivery_configuration: {
+    #         delivery_uri: "__string", # required
+    #         endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #       },
     #       description: "__string",
     #       holdout_percent: 1,
     #       hook: {
@@ -559,6 +570,9 @@ module Aws::Pinpoint
     #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
+    #         },
+    #         custom_message: {
+    #           data: "__string",
     #         },
     #         default_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -664,6 +678,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.campaign_response.additional_treatments #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -701,6 +718,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -765,6 +783,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
+    #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -814,6 +835,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.message_configuration.custom_message.data #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -2288,6 +2310,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.campaign_response.additional_treatments #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -2325,6 +2350,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -2389,6 +2415,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
+    #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -2438,6 +2467,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.message_configuration.custom_message.data #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -3710,6 +3740,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.campaign_response.additional_treatments #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -3747,6 +3780,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -3811,6 +3845,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
+    #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -3860,6 +3897,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.message_configuration.custom_message.data #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -4070,6 +4108,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.campaign_response.additional_treatments #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4107,6 +4148,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -4171,6 +4213,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
+    #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -4220,6 +4265,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.message_configuration.custom_message.data #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -4324,6 +4370,9 @@ module Aws::Pinpoint
     #
     #   resp.campaigns_response.item #=> Array
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4361,6 +4410,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -4425,6 +4475,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].application_id #=> String
     #   resp.campaigns_response.item[0].arn #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
@@ -4474,6 +4527,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.custom_message.data #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.image_icon_url #=> String
@@ -4577,6 +4631,9 @@ module Aws::Pinpoint
     #
     #   resp.campaigns_response.item #=> Array
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4614,6 +4671,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -4678,6 +4736,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].application_id #=> String
     #   resp.campaigns_response.item[0].arn #=> String
     #   resp.campaigns_response.item[0].creation_date #=> String
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
@@ -4727,6 +4788,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.title #=> String
     #   resp.campaigns_response.item[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaigns_response.item[0].message_configuration.custom_message.data #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].message_configuration.default_message.body #=> String
     #   resp.campaigns_response.item[0].message_configuration.default_message.image_icon_url #=> String
@@ -8087,6 +8149,10 @@ module Aws::Pinpoint
     #     write_campaign_request: { # required
     #       additional_treatments: [
     #         {
+    #           custom_delivery_configuration: {
+    #             delivery_uri: "__string", # required
+    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           },
     #           message_configuration: {
     #             adm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -8129,6 +8195,9 @@ module Aws::Pinpoint
     #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
+    #             },
+    #             custom_message: {
+    #               data: "__string",
     #             },
     #             default_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -8225,6 +8294,10 @@ module Aws::Pinpoint
     #           treatment_name: "__string",
     #         },
     #       ],
+    #       custom_delivery_configuration: {
+    #         delivery_uri: "__string", # required
+    #         endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #       },
     #       description: "__string",
     #       holdout_percent: 1,
     #       hook: {
@@ -8281,6 +8354,9 @@ module Aws::Pinpoint
     #           time_to_live: 1,
     #           title: "__string",
     #           url: "__string",
+    #         },
+    #         custom_message: {
+    #           data: "__string",
     #         },
     #         default_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -8386,6 +8462,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.campaign_response.additional_treatments #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -8423,6 +8502,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.additional_treatments[0].message_configuration.custom_message.data #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.body #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.default_message.image_icon_url #=> String
@@ -8487,6 +8567,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.application_id #=> String
     #   resp.campaign_response.arn #=> String
     #   resp.campaign_response.creation_date #=> String
+    #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -8536,6 +8619,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.message_configuration.baidu_message.time_to_live #=> Integer
     #   resp.campaign_response.message_configuration.baidu_message.title #=> String
     #   resp.campaign_response.message_configuration.baidu_message.url #=> String
+    #   resp.campaign_response.message_configuration.custom_message.data #=> String
     #   resp.campaign_response.message_configuration.default_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.message_configuration.default_message.body #=> String
     #   resp.campaign_response.message_configuration.default_message.image_icon_url #=> String
@@ -8717,8 +8801,10 @@ module Aws::Pinpoint
 
     # Creates a new endpoint for an application or updates the settings and
     # attributes of an existing endpoint for an application. You can also
-    # use this operation to define custom attributes (Attributes, Metrics,
-    # and UserAttributes properties) for an endpoint.
+    # use this operation to define custom attributes for an endpoint. If an
+    # update includes one or more values for a custom attribute, Amazon
+    # Pinpoint replaces (overwrites) any existing values with the new
+    # values.
     #
     # @option params [required, String] :application_id
     #
@@ -8793,8 +8879,9 @@ module Aws::Pinpoint
     # Creates a new batch of endpoints for an application or updates the
     # settings and attributes of a batch of existing endpoints for an
     # application. You can also use this operation to define custom
-    # attributes (Attributes, Metrics, and UserAttributes properties) for a
-    # batch of endpoints.
+    # attributes for a batch of endpoints. If an update includes one or more
+    # values for a custom attribute, Amazon Pinpoint replaces (overwrites)
+    # any existing values with the new values.
     #
     # @option params [required, String] :application_id
     #
@@ -10223,7 +10310,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

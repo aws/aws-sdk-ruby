@@ -922,10 +922,13 @@ module Aws::RAM
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:CapacityReservation` \| `ec2:Subnet` \|
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `license-manager:LicenseConfiguration` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverRule` I `resource-groups:Group`
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration`
+    #   I `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #   @return [String]
     #
     # @!attribute [rw] resource_share_arns
@@ -1021,6 +1024,49 @@ module Aws::RAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListResourceTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypesRequest AWS API Documentation
+    #
+    class ListResourceTypesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_types
+    #   The shareable resource types supported by AWS RAM.
+    #   @return [Array<Types::ServiceNameAndResourceType>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypesResponse AWS API Documentation
+    #
+    class ListResourceTypesResponse < Struct.new(
+      :resource_types,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListResourcesRequest
     #   data as a hash:
     #
@@ -1045,10 +1091,13 @@ module Aws::RAM
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:CapacityReservation` \| `ec2:Subnet` \|
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `license-manager:LicenseConfiguration` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverRule` \| `resource-groups:Group`
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration`
+    #   I `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -1656,6 +1705,25 @@ module Aws::RAM
     #
     class ServerInternalException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Information about the shareable resource types and the AWS services to
+    # which they belong.
+    #
+    # @!attribute [rw] resource_type
+    #   The shareable resource types.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS services to which the resources belong.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ServiceNameAndResourceType AWS API Documentation
+    #
+    class ServiceNameAndResourceType < Struct.new(
+      :resource_type,
+      :service_name)
       include Aws::Structure
     end
 

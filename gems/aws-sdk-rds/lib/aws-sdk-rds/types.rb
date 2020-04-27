@@ -10430,6 +10430,7 @@ module Aws::RDS
     #         engine_version: "String",
     #         db_instance_class: "String",
     #         license_model: "String",
+    #         availability_zone_group: "String",
     #         vpc: false,
     #         filters: [
     #           {
@@ -10459,6 +10460,15 @@ module Aws::RDS
     # @!attribute [rw] license_model
     #   The license model filter value. Specify this parameter to show only
     #   the available offerings matching the specified license model.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_group
+    #   The Availability Zone group associated with a Local Zone. Specify
+    #   this parameter to retrieve available offerings for the Local Zones
+    #   in the group.
+    #
+    #   Omit this parameter to show the available offerings in the specified
+    #   AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -10495,6 +10505,7 @@ module Aws::RDS
       :engine_version,
       :db_instance_class,
       :license_model,
+      :availability_zone_group,
       :vpc,
       :filters,
       :max_records,
@@ -14644,6 +14655,10 @@ module Aws::RDS
     #   The license model for a DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_group
+    #   The Availability Zone group for a DB instance.
+    #   @return [String]
+    #
     # @!attribute [rw] availability_zones
     #   A list of Availability Zones for a DB instance.
     #   @return [Array<Types::AvailabilityZone>]
@@ -14728,8 +14743,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] supports_storage_autoscaling
-    #   Whether or not Amazon RDS can automatically scale storage for DB
-    #   instances that use the specified instance class.
+    #   Whether Amazon RDS can automatically scale storage for DB instances
+    #   that use the specified DB instance class.
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_kerberos_authentication
@@ -14743,6 +14758,7 @@ module Aws::RDS
       :engine_version,
       :db_instance_class,
       :license_model,
+      :availability_zone_group,
       :availability_zones,
       :multi_az_capable,
       :read_replica_capable,

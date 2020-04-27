@@ -9930,6 +9930,14 @@ module Aws::RDS
     #   The license model filter value. Specify this parameter to show only
     #   the available offerings matching the specified license model.
     #
+    # @option params [String] :availability_zone_group
+    #   The Availability Zone group associated with a Local Zone. Specify this
+    #   parameter to retrieve available offerings for the Local Zones in the
+    #   group.
+    #
+    #   Omit this parameter to show the available offerings in the specified
+    #   AWS Region.
+    #
     # @option params [Boolean] :vpc
     #   A value that indicates whether to show only VPC or non-VPC offerings.
     #
@@ -9984,6 +9992,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     db_instance_class: "String",
     #     license_model: "String",
+    #     availability_zone_group: "String",
     #     vpc: false,
     #     filters: [
     #       {
@@ -10002,6 +10011,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].engine_version #=> String
     #   resp.orderable_db_instance_options[0].db_instance_class #=> String
     #   resp.orderable_db_instance_options[0].license_model #=> String
+    #   resp.orderable_db_instance_options[0].availability_zone_group #=> String
     #   resp.orderable_db_instance_options[0].availability_zones #=> Array
     #   resp.orderable_db_instance_options[0].availability_zones[0].name #=> String
     #   resp.orderable_db_instance_options[0].multi_az_capable #=> Boolean
@@ -14662,6 +14672,18 @@ module Aws::RDS
     # described in [ Migrating Data to an Amazon Aurora MySQL DB Cluster][1]
     # in the *Amazon Aurora User Guide*.
     #
+    # <note markdown="1"> This action only restores the DB cluster, not the DB instances for
+    # that DB cluster. You must invoke the `CreateDBInstance` action to
+    # create DB instances for the restored DB cluster, specifying the
+    # identifier of the restored DB cluster in `DBClusterIdentifier`. You
+    # can create DB instances only after the `RestoreDBClusterFromS3` action
+    # has completed and the DB cluster is available.
+    #
+    #  </note>
+    #
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][2] in the *Amazon Aurora User Guide.*
+    #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
     #  </note>
@@ -14669,6 +14691,7 @@ module Aws::RDS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
     # @option params [Array<String>] :availability_zones
     #   A list of Availability Zones (AZs) where instances in the restored DB
@@ -15107,6 +15130,10 @@ module Aws::RDS
     #
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
+    #
+    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    #
+    #  </note>
     #
     #
     #
@@ -18386,7 +18413,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

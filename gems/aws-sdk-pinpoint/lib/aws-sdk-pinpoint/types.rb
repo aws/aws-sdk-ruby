@@ -1795,7 +1795,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -1870,8 +1870,9 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] campaign_hook
-    #   The settings for the AWS Lambda function to use by default as a code
-    #   hook for campaigns in the application.
+    #   The settings for the AWS Lambda function to invoke by default as a
+    #   code hook for campaigns in the application. You can use this hook to
+    #   customize segments that are used by campaigns in the application.
     #   @return [Types::CampaignHook]
     #
     # @!attribute [rw] last_modified_date
@@ -1880,7 +1881,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] limits
-    #   The default sending limits for campaigns in the application.
+    #   The default sending limits for campaigns and journeys in the
+    #   application.
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
@@ -2276,6 +2278,28 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the contents of a message that's sent through a custom
+    # channel to recipients of a campaign.
+    #
+    # @note When making an API call, you may pass CampaignCustomMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data: "__string",
+    #       }
+    #
+    # @!attribute [rw] data
+    #   The raw, JSON-formatted string to use as the payload for the
+    #   message. The maximum size is 5 KB.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignCustomMessage AWS API Documentation
+    #
+    class CampaignCustomMessage < Struct.new(
+      :data)
+      include Aws::Structure
+    end
+
     # Provides the results of a query that retrieved the data for a standard
     # metric that applies to a campaign, and provides information about that
     # query.
@@ -2305,7 +2329,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -2431,8 +2455,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the AWS Lambda function to use as a code hook for a
-    # campaign.
+    # Specifies settings for invoking an AWS Lambda function that customizes
+    # a segment for a campaign.
     #
     # @note When making an API call, you may pass CampaignHook
     #   data as a hash:
@@ -2445,12 +2469,21 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] lambda_function_name
     #   The name or Amazon Resource Name (ARN) of the AWS Lambda function
-    #   that Amazon Pinpoint invokes to send messages for a campaign.
+    #   that Amazon Pinpoint invokes to customize a segment for a campaign.
     #   @return [String]
     #
     # @!attribute [rw] mode
-    #   Specifies which Lambda mode to use when invoking the AWS Lambda
-    #   function.
+    #   The mode that Amazon Pinpoint uses to invoke the AWS Lambda
+    #   function. Possible values are:
+    #
+    #   * FILTER - Invoke the function to customize the segment that's used
+    #     by a campaign.
+    #
+    #   * DELIVERY - (Deprecated) Previously, invoked the function to send a
+    #     campaign through a custom channel. This functionality is not
+    #     supported anymore. To send a campaign through a custom channel,
+    #     use the CustomDeliveryConfiguration and CampaignCustomMessage
+    #     objects of the campaign.
     #   @return [String]
     #
     # @!attribute [rw] web_url
@@ -2467,7 +2500,9 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies limits on the messages that a campaign can send.
+    # For a campaign, specifies limits on the messages that the campaign can
+    # send. For an application, specifies the default limits for messages
+    # that campaigns and journeys in the application can send.
     #
     # @note When making an API call, you may pass CampaignLimits
     #   data as a hash:
@@ -2481,7 +2516,10 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] daily
     #   The maximum number of messages that a campaign can send to a single
-    #   endpoint during a 24-hour period. The maximum value is 100.
+    #   endpoint during a 24-hour period. For an application, this value
+    #   specifies the default limit for the number of messages that
+    #   campaigns and journeys can send to a single endpoint during a
+    #   24-hour period. The maximum value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_duration
@@ -2492,13 +2530,16 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] messages_per_second
     #   The maximum number of messages that a campaign can send each second.
+    #   For an application, this value specifies the default limit for the
+    #   number of messages that campaigns and journeys can send each second.
     #   The minimum value is 50. The maximum value is 20,000.
     #   @return [Integer]
     #
     # @!attribute [rw] total
     #   The maximum number of messages that a campaign can send to a single
-    #   endpoint during the course of the campaign. The maximum value is
-    #   100.
+    #   endpoint during the course of the campaign. If a campaign recurs,
+    #   this setting applies to all runs of the campaign. The maximum value
+    #   is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignLimits AWS API Documentation
@@ -2532,10 +2573,14 @@ module Aws::Pinpoint
     #   The date, in ISO 8601 format, when the campaign was created.
     #   @return [String]
     #
+    # @!attribute [rw] custom_delivery_configuration
+    #   The delivery configuration settings for sending the campaign through
+    #   a custom channel.
+    #   @return [Types::CustomDeliveryConfiguration]
+    #
     # @!attribute [rw] default_state
     #   The current status of the campaign's default treatment. This value
-    #   exists only for campaigns that have more than one treatment, to
-    #   support A/B testing.
+    #   exists only for campaigns that have more than one treatment.
     #   @return [Types::CampaignState]
     #
     # @!attribute [rw] description
@@ -2549,7 +2594,8 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] hook
     #   The settings for the AWS Lambda function to use as a code hook for
-    #   the campaign.
+    #   the campaign. You can use this hook to customize the segment that's
+    #   used by the campaign.
     #   @return [Types::CampaignHook]
     #
     # @!attribute [rw] id
@@ -2606,13 +2652,13 @@ module Aws::Pinpoint
     #   @return [Types::TemplateConfiguration]
     #
     # @!attribute [rw] treatment_description
-    #   The custom description of a variation of the campaign that's used
-    #   for A/B testing.
+    #   The custom description of the default treatment for the campaign.
     #   @return [String]
     #
     # @!attribute [rw] treatment_name
-    #   The custom name of a variation of the campaign that's used for A/B
-    #   testing.
+    #   The custom name of the default treatment for the campaign, if the
+    #   campaign has multiple treatments. A *treatment* is a variation of a
+    #   campaign that's used for A/B testing.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2626,6 +2672,7 @@ module Aws::Pinpoint
       :application_id,
       :arn,
       :creation_date,
+      :custom_delivery_configuration,
       :default_state,
       :description,
       :holdout_percent,
@@ -2689,9 +2736,12 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] campaign_status
     #   The current status of the campaign, or the current status of a
-    #   treatment that belongs to an A/B test campaign. If a campaign uses
-    #   A/B testing, the campaign has a status of COMPLETED only if all
-    #   campaign treatments have a status of COMPLETED.
+    #   treatment that belongs to an A/B test campaign.
+    #
+    #   If a campaign uses A/B testing, the campaign has a status of
+    #   COMPLETED only if all campaign treatments have a status of
+    #   COMPLETED. If you delete the segment that's associated with a
+    #   campaign, the campaign fails and has a status of DELETED.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignState AWS API Documentation
@@ -3137,6 +3187,10 @@ module Aws::Pinpoint
     #         write_campaign_request: { # required
     #           additional_treatments: [
     #             {
+    #               custom_delivery_configuration: {
+    #                 delivery_uri: "__string", # required
+    #                 endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               },
     #               message_configuration: {
     #                 adm_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -3179,6 +3233,9 @@ module Aws::Pinpoint
     #                   time_to_live: 1,
     #                   title: "__string",
     #                   url: "__string",
+    #                 },
+    #                 custom_message: {
+    #                   data: "__string",
     #                 },
     #                 default_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -3275,6 +3332,10 @@ module Aws::Pinpoint
     #               treatment_name: "__string",
     #             },
     #           ],
+    #           custom_delivery_configuration: {
+    #             delivery_uri: "__string", # required
+    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           },
     #           description: "__string",
     #           holdout_percent: 1,
     #           hook: {
@@ -3331,6 +3392,9 @@ module Aws::Pinpoint
     #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
+    #             },
+    #             custom_message: {
+    #               data: "__string",
     #             },
     #             default_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -4013,17 +4077,18 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] attributes
     #   A map of key-value pairs that defines 1-10 custom endpoint or user
-    #   attributes, depending on the value for the RecommenderUserIdType
-    #   property. Each of these attributes temporarily stores a recommended
-    #   item that's retrieved from the recommender model and sent to an AWS
-    #   Lambda function for additional processing. Each attribute can be
-    #   used as a message variable in a message template.
+    #   attributes, depending on the value for the
+    #   RecommendationProviderIdType property. Each of these attributes
+    #   temporarily stores a recommended item that's retrieved from the
+    #   recommender model and sent to an AWS Lambda function for additional
+    #   processing. Each attribute can be used as a message variable in a
+    #   message template.
     #
     #   In the map, the key is the name of a custom attribute and the value
     #   is a custom display name for that attribute. The display name
-    #   appears in the **Attribute finder** pane of the template editor on
-    #   the Amazon Pinpoint console. The following restrictions apply to
-    #   these names:
+    #   appears in the **Attribute finder** of the template editor on the
+    #   Amazon Pinpoint console. The following restrictions apply to these
+    #   names:
     #
     #   * An attribute name must start with a letter or number and it can
     #     contain up to 50 characters. The characters can be letters,
@@ -4035,13 +4100,14 @@ module Aws::Pinpoint
     #     numbers, spaces, underscores (\_), or hyphens (-).
     #
     #   This object is required if the configuration invokes an AWS Lambda
-    #   function (LambdaFunctionArn) to process recommendation data.
-    #   Otherwise, don't include this object in your request.
+    #   function (RecommendationTransformerUri) to process recommendation
+    #   data. Otherwise, don't include this object in your request.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] description
     #   A custom description of the configuration for the recommender model.
-    #   The description can contain up to 128 characters.
+    #   The description can contain up to 128 characters. The characters can
+    #   be letters, numbers, spaces, or the following symbols: \_ ; () , ‐.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -4066,7 +4132,7 @@ module Aws::Pinpoint
     #     particular user and endpoint in Amazon Pinpoint. The data is
     #     correlated based on user IDs in Amazon Pinpoint. If you specify
     #     this value, an endpoint definition in Amazon Pinpoint has to
-    #     specify a both a user ID (UserId) and an endpoint ID. Otherwise,
+    #     specify both a user ID (UserId) and an endpoint ID. Otherwise,
     #     messages won’t be sent to the user's endpoint.
     #   @return [String]
     #
@@ -4090,15 +4156,15 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] recommendations_display_name
     #   A custom display name for the standard endpoint or user attribute
-    #   (RecommendationItems) that temporarily stores a recommended item for
+    #   (RecommendationItems) that temporarily stores recommended items for
     #   each endpoint or user, depending on the value for the
-    #   RecommenderUserIdType property. This value is required if the
+    #   RecommendationProviderIdType property. This value is required if the
     #   configuration doesn't invoke an AWS Lambda function
-    #   (LambdaFunctionArn) to perform additional processing of
+    #   (RecommendationTransformerUri) to perform additional processing of
     #   recommendation data.
     #
-    #   This name appears in the **Attribute finder** pane of the template
-    #   editor on the Amazon Pinpoint console. The name can contain up to 25
+    #   This name appears in the **Attribute finder** of the template editor
+    #   on the Amazon Pinpoint console. The name can contain up to 25
     #   characters. The characters can be letters, numbers, spaces,
     #   underscores (\_), or hyphens (-). These restrictions don't apply to
     #   attribute values.
@@ -4107,14 +4173,14 @@ module Aws::Pinpoint
     # @!attribute [rw] recommendations_per_message
     #   The number of recommended items to retrieve from the model for each
     #   endpoint or user, depending on the value for the
-    #   RecommenderUserIdType property. This number determines how many
-    #   recommended attributes are available for use as message variables in
-    #   message templates. The minimum value is 1. The maximum value is 5.
-    #   The default value is 5.
+    #   RecommendationProviderIdType property. This number determines how
+    #   many recommended items are available for use in message variables.
+    #   The minimum value is 1. The maximum value is 5. The default value is
+    #   5.
     #
     #   To use multiple recommended items and custom attributes with message
     #   variables, you have to use an AWS Lambda function
-    #   (LambdaFunctionArn) to perform additional processing of
+    #   (RecommendationTransformerUri) to perform additional processing of
     #   recommendation data.
     #   @return [Integer]
     #
@@ -4475,6 +4541,45 @@ module Aws::Pinpoint
     #
     class CreateVoiceTemplateResponse < Struct.new(
       :create_template_message_body)
+      include Aws::Structure
+    end
+
+    # Specifies the delivery configuration settings for sending a campaign
+    # or campaign treatment through a custom channel. This object is
+    # required if you use the CampaignCustomMessage object to define the
+    # message to send for the campaign or campaign treatment.
+    #
+    # @note When making an API call, you may pass CustomDeliveryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_uri: "__string", # required
+    #         endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #       }
+    #
+    # @!attribute [rw] delivery_uri
+    #   The destination to send the campaign or treatment to. This value can
+    #   be one of the following:
+    #
+    #   * The name or Amazon Resource Name (ARN) of an AWS Lambda function
+    #     to invoke to handle delivery of the campaign or treatment.
+    #
+    #   * The URL for a web application or service that supports HTTPS and
+    #     can receive the message. The URL has to be a full URL, including
+    #     the HTTPS protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_types
+    #   The types of endpoints to send the campaign or treatment to. Each
+    #   valid value maps to a type of channel that you can associate with an
+    #   endpoint by using the ChannelType property of an endpoint.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CustomDeliveryConfiguration AWS API Documentation
+    #
+    class CustomDeliveryConfiguration < Struct.new(
+      :delivery_uri,
+      :endpoint_types)
       include Aws::Structure
     end
 
@@ -5587,9 +5692,12 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] configuration_set
-    #   The configuration set that you want to apply to email that you send
-    #   through the channel by using the [Amazon Pinpoint Email
-    #   API](emailAPIreference.html).
+    #   The [Amazon SES configuration set][1] that you want to apply to
+    #   messages that you send through the channel.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html
     #   @return [String]
     #
     # @!attribute [rw] enabled
@@ -5633,9 +5741,12 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] configuration_set
-    #   The configuration set that's applied to email that's sent through
-    #   the channel by using the [Amazon Pinpoint Email
-    #   API](emailAPIreference.html).
+    #   The [Amazon SES configuration set][1] that's applied to messages
+    #   that are sent through the channel.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -5648,7 +5759,7 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] from_address
-    #   The verified email address that you send email from when you send
+    #   The verified email address that email is sent from when you send
     #   email through the channel.
     #   @return [String]
     #
@@ -5664,7 +5775,7 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] identity
     #   The Amazon Resource Name (ARN) of the identity, verified with Amazon
-    #   Simple Email Service (Amazon SES), that you use when you send email
+    #   Simple Email Service (Amazon SES), that's used when you send email
     #   through the channel.
     #   @return [String]
     #
@@ -5682,7 +5793,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] messages_per_second
-    #   The maximum number of emails that you can send through the channel
+    #   The maximum number of emails that can be sent through the channel
     #   each second.
     #   @return [Integer]
     #
@@ -6151,7 +6262,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   One or more custom user attributes that describe the user who's
+    #   One or more custom attributes that describe the user who's
     #   associated with the endpoint.
     #   @return [Types::EndpointUser]
     #
@@ -6566,7 +6677,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   One or more custom user attributes that describe the user who's
+    #   One or more custom attributes that describe the user who's
     #   associated with the endpoint.
     #   @return [Types::EndpointUser]
     #
@@ -9835,7 +9946,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
     #   @return [String]
     #
     # @!attribute [rw] kpi_result
@@ -10635,6 +10746,9 @@ module Aws::Pinpoint
     #           title: "__string",
     #           url: "__string",
     #         },
+    #         custom_message: {
+    #           data: "__string",
+    #         },
     #         default_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
     #           body: "__string",
@@ -10678,19 +10792,28 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] adm_message
     #   The message that the campaign sends through the ADM (Amazon Device
-    #   Messaging) channel. This message overrides the default message.
+    #   Messaging) channel. If specified, this message overrides the default
+    #   message.
     #   @return [Types::Message]
     #
     # @!attribute [rw] apns_message
     #   The message that the campaign sends through the APNs (Apple Push
-    #   Notification service) channel. This message overrides the default
-    #   message.
+    #   Notification service) channel. If specified, this message overrides
+    #   the default message.
     #   @return [Types::Message]
     #
     # @!attribute [rw] baidu_message
     #   The message that the campaign sends through the Baidu (Baidu Cloud
-    #   Push) channel. This message overrides the default message.
+    #   Push) channel. If specified, this message overrides the default
+    #   message.
     #   @return [Types::Message]
+    #
+    # @!attribute [rw] custom_message
+    #   The message that the campaign sends through a custom channel, as
+    #   specified by the delivery configuration
+    #   (CustomDeliveryConfiguration) settings for the campaign. If
+    #   specified, this message overrides the default message.
+    #   @return [Types::CampaignCustomMessage]
     #
     # @!attribute [rw] default_message
     #   The default message that the campaign sends through all the channels
@@ -10698,18 +10821,21 @@ module Aws::Pinpoint
     #   @return [Types::Message]
     #
     # @!attribute [rw] email_message
-    #   The message that the campaign sends through the email channel.
+    #   The message that the campaign sends through the email channel. If
+    #   specified, this message overrides the default message.
     #   @return [Types::CampaignEmailMessage]
     #
     # @!attribute [rw] gcm_message
     #   The message that the campaign sends through the GCM channel, which
     #   enables Amazon Pinpoint to send push notifications through the
     #   Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging
-    #   (GCM), service. This message overrides the default message.
+    #   (GCM), service. If specified, this message overrides the default
+    #   message.
     #   @return [Types::Message]
     #
     # @!attribute [rw] sms_message
-    #   The message that the campaign sends through the SMS channel.
+    #   The message that the campaign sends through the SMS channel. If
+    #   specified, this message overrides the default message.
     #   @return [Types::CampaignSmsMessage]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageConfiguration AWS API Documentation
@@ -10718,6 +10844,7 @@ module Aws::Pinpoint
       :adm_message,
       :apns_message,
       :baidu_message,
+      :custom_message,
       :default_message,
       :email_message,
       :gcm_message,
@@ -12243,15 +12370,15 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] attributes
     #   A map that defines 1-10 custom endpoint or user attributes,
-    #   depending on the value for the RecommenderUserIdType property. Each
-    #   of these attributes temporarily stores a recommended item that's
-    #   retrieved from the recommender model and sent to an AWS Lambda
-    #   function for additional processing. Each attribute can be used as a
-    #   message variable in a message template.
+    #   depending on the value for the RecommendationProviderIdType
+    #   property. Each of these attributes temporarily stores a recommended
+    #   item that's retrieved from the recommender model and sent to an AWS
+    #   Lambda function for additional processing. Each attribute can be
+    #   used as a message variable in a message template.
     #
     #   This value is null if the configuration doesn't invoke an AWS
-    #   Lambda function (LambdaFunctionArn) to perform additional processing
-    #   of recommendation data.
+    #   Lambda function (RecommendationTransformerUri) to perform additional
+    #   processing of recommendation data.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] creation_date
@@ -12316,22 +12443,22 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] recommendations_display_name
     #   The custom display name for the standard endpoint or user attribute
-    #   (RecommendationItems) that temporarily stores a recommended item for
+    #   (RecommendationItems) that temporarily stores recommended items for
     #   each endpoint or user, depending on the value for the
-    #   RecommenderUserIdType property. This name appears in the **Attribute
-    #   finder** pane of the template editor on the Amazon Pinpoint console.
+    #   RecommendationProviderIdType property. This name appears in the
+    #   **Attribute finder** of the template editor on the Amazon Pinpoint
+    #   console.
     #
     #   This value is null if the configuration doesn't invoke an AWS
-    #   Lambda function (LambdaFunctionArn) to perform additional processing
-    #   of recommendation data.
+    #   Lambda function (RecommendationTransformerUri) to perform additional
+    #   processing of recommendation data.
     #   @return [String]
     #
     # @!attribute [rw] recommendations_per_message
     #   The number of recommended items that are retrieved from the model
     #   for each endpoint or user, depending on the value for the
-    #   RecommenderUserIdType property. This number determines how many
-    #   recommended attributes are available for use as message variables in
-    #   message templates.
+    #   RecommendationProviderIdType property. This number determines how
+    #   many recommended items are available for use in message variables.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RecommenderConfigurationResponse AWS API Documentation
@@ -14979,8 +15106,15 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the settings for a campaign treatment. A treatment is a
+    # Specifies the settings for a campaign treatment. A *treatment* is a
     # variation of a campaign that's used for A/B testing of a campaign.
+    #
+    # @!attribute [rw] custom_delivery_configuration
+    #   The delivery configuration settings for sending the treatment
+    #   through a custom channel. This object is required if the
+    #   MessageConfiguration object for the treatment specifies a
+    #   CustomMessage object.
+    #   @return [Types::CustomDeliveryConfiguration]
     #
     # @!attribute [rw] id
     #   The unique identifier for the treatment.
@@ -15012,13 +15146,13 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] treatment_name
-    #   The custom name of the treatment. A treatment is a variation of a
-    #   campaign that's used for A/B testing of a campaign.
+    #   The custom name of the treatment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TreatmentResource AWS API Documentation
     #
     class TreatmentResource < Struct.new(
+      :custom_delivery_configuration,
       :id,
       :message_configuration,
       :schedule,
@@ -15400,6 +15534,10 @@ module Aws::Pinpoint
     #         write_campaign_request: { # required
     #           additional_treatments: [
     #             {
+    #               custom_delivery_configuration: {
+    #                 delivery_uri: "__string", # required
+    #                 endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               },
     #               message_configuration: {
     #                 adm_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -15442,6 +15580,9 @@ module Aws::Pinpoint
     #                   time_to_live: 1,
     #                   title: "__string",
     #                   url: "__string",
+    #                 },
+    #                 custom_message: {
+    #                   data: "__string",
     #                 },
     #                 default_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -15538,6 +15679,10 @@ module Aws::Pinpoint
     #               treatment_name: "__string",
     #             },
     #           ],
+    #           custom_delivery_configuration: {
+    #             delivery_uri: "__string", # required
+    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           },
     #           description: "__string",
     #           holdout_percent: 1,
     #           hook: {
@@ -15594,6 +15739,9 @@ module Aws::Pinpoint
     #               time_to_live: 1,
     #               title: "__string",
     #               url: "__string",
+    #             },
+    #             custom_message: {
+    #               data: "__string",
     #             },
     #             default_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -16493,17 +16641,18 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] attributes
     #   A map of key-value pairs that defines 1-10 custom endpoint or user
-    #   attributes, depending on the value for the RecommenderUserIdType
-    #   property. Each of these attributes temporarily stores a recommended
-    #   item that's retrieved from the recommender model and sent to an AWS
-    #   Lambda function for additional processing. Each attribute can be
-    #   used as a message variable in a message template.
+    #   attributes, depending on the value for the
+    #   RecommendationProviderIdType property. Each of these attributes
+    #   temporarily stores a recommended item that's retrieved from the
+    #   recommender model and sent to an AWS Lambda function for additional
+    #   processing. Each attribute can be used as a message variable in a
+    #   message template.
     #
     #   In the map, the key is the name of a custom attribute and the value
     #   is a custom display name for that attribute. The display name
-    #   appears in the **Attribute finder** pane of the template editor on
-    #   the Amazon Pinpoint console. The following restrictions apply to
-    #   these names:
+    #   appears in the **Attribute finder** of the template editor on the
+    #   Amazon Pinpoint console. The following restrictions apply to these
+    #   names:
     #
     #   * An attribute name must start with a letter or number and it can
     #     contain up to 50 characters. The characters can be letters,
@@ -16515,13 +16664,14 @@ module Aws::Pinpoint
     #     numbers, spaces, underscores (\_), or hyphens (-).
     #
     #   This object is required if the configuration invokes an AWS Lambda
-    #   function (LambdaFunctionArn) to process recommendation data.
-    #   Otherwise, don't include this object in your request.
+    #   function (RecommendationTransformerUri) to process recommendation
+    #   data. Otherwise, don't include this object in your request.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] description
     #   A custom description of the configuration for the recommender model.
-    #   The description can contain up to 128 characters.
+    #   The description can contain up to 128 characters. The characters can
+    #   be letters, numbers, spaces, or the following symbols: \_ ; () , ‐.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -16546,7 +16696,7 @@ module Aws::Pinpoint
     #     particular user and endpoint in Amazon Pinpoint. The data is
     #     correlated based on user IDs in Amazon Pinpoint. If you specify
     #     this value, an endpoint definition in Amazon Pinpoint has to
-    #     specify a both a user ID (UserId) and an endpoint ID. Otherwise,
+    #     specify both a user ID (UserId) and an endpoint ID. Otherwise,
     #     messages won’t be sent to the user's endpoint.
     #   @return [String]
     #
@@ -16570,15 +16720,15 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] recommendations_display_name
     #   A custom display name for the standard endpoint or user attribute
-    #   (RecommendationItems) that temporarily stores a recommended item for
+    #   (RecommendationItems) that temporarily stores recommended items for
     #   each endpoint or user, depending on the value for the
-    #   RecommenderUserIdType property. This value is required if the
+    #   RecommendationProviderIdType property. This value is required if the
     #   configuration doesn't invoke an AWS Lambda function
-    #   (LambdaFunctionArn) to perform additional processing of
+    #   (RecommendationTransformerUri) to perform additional processing of
     #   recommendation data.
     #
-    #   This name appears in the **Attribute finder** pane of the template
-    #   editor on the Amazon Pinpoint console. The name can contain up to 25
+    #   This name appears in the **Attribute finder** of the template editor
+    #   on the Amazon Pinpoint console. The name can contain up to 25
     #   characters. The characters can be letters, numbers, spaces,
     #   underscores (\_), or hyphens (-). These restrictions don't apply to
     #   attribute values.
@@ -16587,14 +16737,14 @@ module Aws::Pinpoint
     # @!attribute [rw] recommendations_per_message
     #   The number of recommended items to retrieve from the model for each
     #   endpoint or user, depending on the value for the
-    #   RecommenderUserIdType property. This number determines how many
-    #   recommended attributes are available for use as message variables in
-    #   message templates. The minimum value is 1. The maximum value is 5.
-    #   The default value is 5.
+    #   RecommendationProviderIdType property. This number determines how
+    #   many recommended items are available for use in message variables.
+    #   The minimum value is 1. The maximum value is 5. The default value is
+    #   5.
     #
     #   To use multiple recommended items and custom attributes with message
     #   variables, you have to use an AWS Lambda function
-    #   (LambdaFunctionArn) to perform additional processing of
+    #   (RecommendationTransformerUri) to perform additional processing of
     #   recommendation data.
     #   @return [Integer]
     #
@@ -17490,13 +17640,15 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] campaign_hook
-    #   The settings for the AWS Lambda function to use by default as a code
-    #   hook for campaigns in the application. To override these settings
-    #   for a specific campaign, use the <link
+    #   The settings for the AWS Lambda function to invoke by default as a
+    #   code hook for campaigns in the application. You can use this hook to
+    #   customize segments that are used by campaigns in the application.
+    #
+    #   To override these settings and define custom settings for a specific
+    #   campaign, use the CampaignHook object of the <link
     #   linkend="apps-application-id-campaigns-campaign-id" />
     #
-    #   Campaign</link> resource to define custom Lambda function settings
-    #   for the campaign.
+    #   Campaign</link> resource.
     #   @return [Types::CampaignHook]
     #
     # @!attribute [rw] cloud_watch_metrics_enabled
@@ -17505,11 +17657,15 @@ module Aws::Pinpoint
     #   @return [Boolean]
     #
     # @!attribute [rw] limits
-    #   The default sending limits for campaigns in the application. To
-    #   override these limits for a specific campaign, use the <link
+    #   The default sending limits for campaigns and journeys in the
+    #   application. To override these limits and define custom limits for a
+    #   specific campaign or journey, use the <link
     #   linkend="apps-application-id-campaigns-campaign-id" />
     #
-    #   Campaign</link> resource to define custom limits for the campaign.
+    #   Campaign</link> resource or the <link
+    #   linkend="apps-application-id-journeys-journey-id" />
+    #
+    #   Journey</link> resource, respectively.
     #   @return [Types::CampaignLimits]
     #
     # @!attribute [rw] quiet_time
@@ -17563,6 +17719,10 @@ module Aws::Pinpoint
     #       {
     #         additional_treatments: [
     #           {
+    #             custom_delivery_configuration: {
+    #               delivery_uri: "__string", # required
+    #               endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             },
     #             message_configuration: {
     #               adm_message: {
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -17605,6 +17765,9 @@ module Aws::Pinpoint
     #                 time_to_live: 1,
     #                 title: "__string",
     #                 url: "__string",
+    #               },
+    #               custom_message: {
+    #                 data: "__string",
     #               },
     #               default_message: {
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -17701,6 +17864,10 @@ module Aws::Pinpoint
     #             treatment_name: "__string",
     #           },
     #         ],
+    #         custom_delivery_configuration: {
+    #           delivery_uri: "__string", # required
+    #           endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         },
     #         description: "__string",
     #         holdout_percent: 1,
     #         hook: {
@@ -17757,6 +17924,9 @@ module Aws::Pinpoint
     #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
+    #           },
+    #           custom_message: {
+    #             data: "__string",
     #           },
     #           default_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -17863,6 +18033,13 @@ module Aws::Pinpoint
     #   campaign, in addition to the default treatment for the campaign.
     #   @return [Array<Types::WriteTreatmentResource>]
     #
+    # @!attribute [rw] custom_delivery_configuration
+    #   The delivery configuration settings for sending the campaign through
+    #   a custom channel. This object is required if the
+    #   MessageConfiguration object for the campaign specifies a
+    #   CustomMessage object.
+    #   @return [Types::CustomDeliveryConfiguration]
+    #
     # @!attribute [rw] description
     #   A custom description of the campaign.
     #   @return [String]
@@ -17873,13 +18050,14 @@ module Aws::Pinpoint
     #   @return [Integer]
     #
     # @!attribute [rw] hook
-    #   The settings for the AWS Lambda function to use as a code hook for
-    #   the campaign.
+    #   The settings for the AWS Lambda function to invoke as a code hook
+    #   for the campaign. You can use this hook to customize the segment
+    #   that's used by the campaign.
     #   @return [Types::CampaignHook]
     #
     # @!attribute [rw] is_paused
     #   Specifies whether to pause the campaign. A paused campaign doesn't
-    #   run unless you resume it by setting this value to false.
+    #   run unless you resume it by changing this value to false.
     #   @return [Boolean]
     #
     # @!attribute [rw] limits
@@ -17918,19 +18096,20 @@ module Aws::Pinpoint
     #   @return [Types::TemplateConfiguration]
     #
     # @!attribute [rw] treatment_description
-    #   A custom description of a variation of the campaign to use for A/B
-    #   testing.
+    #   A custom description of the default treatment for the campaign.
     #   @return [String]
     #
     # @!attribute [rw] treatment_name
-    #   A custom name for a variation of the campaign to use for A/B
-    #   testing.
+    #   A custom name of the default treatment for the campaign, if the
+    #   campaign has multiple treatments. A *treatment* is a variation of a
+    #   campaign that's used for A/B testing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteCampaignRequest AWS API Documentation
     #
     class WriteCampaignRequest < Struct.new(
       :additional_treatments,
+      :custom_delivery_configuration,
       :description,
       :holdout_percent,
       :hook,
@@ -18561,13 +18740,17 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the settings for a campaign treatment. A treatment is a
+    # Specifies the settings for a campaign treatment. A *treatment* is a
     # variation of a campaign that's used for A/B testing of a campaign.
     #
     # @note When making an API call, you may pass WriteTreatmentResource
     #   data as a hash:
     #
     #       {
+    #         custom_delivery_configuration: {
+    #           delivery_uri: "__string", # required
+    #           endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         },
     #         message_configuration: {
     #           adm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -18610,6 +18793,9 @@ module Aws::Pinpoint
     #             time_to_live: 1,
     #             title: "__string",
     #             url: "__string",
+    #           },
+    #           custom_message: {
+    #             data: "__string",
     #           },
     #           default_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -18706,6 +18892,13 @@ module Aws::Pinpoint
     #         treatment_name: "__string",
     #       }
     #
+    # @!attribute [rw] custom_delivery_configuration
+    #   The delivery configuration settings for sending the treatment
+    #   through a custom channel. This object is required if the
+    #   MessageConfiguration object for the treatment specifies a
+    #   CustomMessage object.
+    #   @return [Types::CustomDeliveryConfiguration]
+    #
     # @!attribute [rw] message_configuration
     #   The message configuration settings for the treatment.
     #   @return [Types::MessageConfiguration]
@@ -18728,13 +18921,13 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] treatment_name
-    #   A custom name for the treatment. A treatment is a variation of a
-    #   campaign that's used for A/B testing of a campaign.
+    #   A custom name for the treatment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteTreatmentResource AWS API Documentation
     #
     class WriteTreatmentResource < Struct.new(
+      :custom_delivery_configuration,
       :message_configuration,
       :schedule,
       :size_percent,

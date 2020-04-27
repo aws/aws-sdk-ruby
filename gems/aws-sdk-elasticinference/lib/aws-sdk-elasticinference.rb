@@ -25,7 +25,7 @@ require_relative 'aws-sdk-elasticinference/customizations'
 # structure.
 #
 #     elastic_inference = Aws::ElasticInference::Client.new
-#     resp = elastic_inference.list_tags_for_resource(params)
+#     resp = elastic_inference.describe_accelerator_offerings(params)
 #
 # See {Client} for more information.
 #
@@ -45,6 +45,6 @@ require_relative 'aws-sdk-elasticinference/customizations'
 # @service
 module Aws::ElasticInference
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end

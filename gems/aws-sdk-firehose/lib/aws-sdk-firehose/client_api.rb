@@ -147,6 +147,7 @@ module Aws::Firehose
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
     SchemaConfiguration = Shapes::StructureShape.new(name: 'SchemaConfiguration')
+    SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Serializer = Shapes::StructureShape.new(name: 'Serializer')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
@@ -161,6 +162,7 @@ module Aws::Firehose
     StartDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StartDeliveryStreamEncryptionOutput')
     StopDeliveryStreamEncryptionInput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionInput')
     StopDeliveryStreamEncryptionOutput = Shapes::StructureShape.new(name: 'StopDeliveryStreamEncryptionOutput')
+    SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDeliveryStreamInput = Shapes::StructureShape.new(name: 'TagDeliveryStreamInput')
     TagDeliveryStreamInputTagList = Shapes::ListShape.new(name: 'TagDeliveryStreamInputTagList')
@@ -174,6 +176,8 @@ module Aws::Firehose
     UpdateDestinationInput = Shapes::StructureShape.new(name: 'UpdateDestinationInput')
     UpdateDestinationOutput = Shapes::StructureShape.new(name: 'UpdateDestinationOutput')
     Username = Shapes::StringShape.new(name: 'Username')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
+    VpcConfigurationDescription = Shapes::StructureShape.new(name: 'VpcConfigurationDescription')
 
     BufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: SizeInMBs, location_name: "SizeInMBs"))
     BufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: IntervalInSeconds, location_name: "IntervalInSeconds"))
@@ -286,6 +290,7 @@ module Aws::Firehose
     ElasticsearchDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
     ElasticsearchDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    ElasticsearchDestinationConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     ElasticsearchDestinationConfiguration.struct_class = Types::ElasticsearchDestinationConfiguration
 
     ElasticsearchDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -300,6 +305,7 @@ module Aws::Firehose
     ElasticsearchDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
     ElasticsearchDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    ElasticsearchDestinationDescription.add_member(:vpc_configuration_description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "VpcConfigurationDescription"))
     ElasticsearchDestinationDescription.struct_class = Types::ElasticsearchDestinationDescription
 
     ElasticsearchDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -578,6 +584,8 @@ module Aws::Firehose
     SchemaConfiguration.add_member(:version_id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "VersionId"))
     SchemaConfiguration.struct_class = Types::SchemaConfiguration
 
+    SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
+
     Serializer.add_member(:parquet_ser_de, Shapes::ShapeRef.new(shape: ParquetSerDe, location_name: "ParquetSerDe"))
     Serializer.add_member(:orc_ser_de, Shapes::ShapeRef.new(shape: OrcSerDe, location_name: "OrcSerDe"))
     Serializer.struct_class = Types::Serializer
@@ -635,6 +643,8 @@ module Aws::Firehose
 
     StopDeliveryStreamEncryptionOutput.struct_class = Types::StopDeliveryStreamEncryptionOutput
 
+    SubnetIdList.member = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -666,6 +676,17 @@ module Aws::Firehose
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput
 
     UpdateDestinationOutput.struct_class = Types::UpdateDestinationOutput
+
+    VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "SubnetIds"))
+    VpcConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    VpcConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "SecurityGroupIds"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
+    VpcConfigurationDescription.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "SubnetIds"))
+    VpcConfigurationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    VpcConfigurationDescription.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "SecurityGroupIds"))
+    VpcConfigurationDescription.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, required: true, location_name: "VpcId"))
+    VpcConfigurationDescription.struct_class = Types::VpcConfigurationDescription
 
 
     # @api private

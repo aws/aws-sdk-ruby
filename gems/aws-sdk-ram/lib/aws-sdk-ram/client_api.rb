@@ -55,6 +55,8 @@ module Aws::RAM
     ListPrincipalsResponse = Shapes::StructureShape.new(name: 'ListPrincipalsResponse')
     ListResourceSharePermissionsRequest = Shapes::StructureShape.new(name: 'ListResourceSharePermissionsRequest')
     ListResourceSharePermissionsResponse = Shapes::StructureShape.new(name: 'ListResourceSharePermissionsResponse')
+    ListResourceTypesRequest = Shapes::StructureShape.new(name: 'ListResourceTypesRequest')
+    ListResourceTypesResponse = Shapes::StructureShape.new(name: 'ListResourceTypesResponse')
     ListResourcesRequest = Shapes::StructureShape.new(name: 'ListResourcesRequest')
     ListResourcesResponse = Shapes::StructureShape.new(name: 'ListResourcesResponse')
     MalformedArnException = Shapes::StructureShape.new(name: 'MalformedArnException')
@@ -99,6 +101,8 @@ module Aws::RAM
     ResourceShareStatus = Shapes::StringShape.new(name: 'ResourceShareStatus')
     ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
     ServerInternalException = Shapes::StructureShape.new(name: 'ServerInternalException')
+    ServiceNameAndResourceType = Shapes::StructureShape.new(name: 'ServiceNameAndResourceType')
+    ServiceNameAndResourceTypeList = Shapes::ListShape.new(name: 'ServiceNameAndResourceTypeList')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -306,6 +310,14 @@ module Aws::RAM
     ListResourceSharePermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListResourceSharePermissionsResponse.struct_class = Types::ListResourceSharePermissionsResponse
 
+    ListResourceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListResourceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListResourceTypesRequest.struct_class = Types::ListResourceTypesRequest
+
+    ListResourceTypesResponse.add_member(:resource_types, Shapes::ShapeRef.new(shape: ServiceNameAndResourceTypeList, location_name: "resourceTypes"))
+    ListResourceTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListResourceTypesResponse.struct_class = Types::ListResourceTypesResponse
+
     ListResourcesRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, required: true, location_name: "resourceOwner"))
     ListResourcesRequest.add_member(:principal, Shapes::ShapeRef.new(shape: String, location_name: "principal"))
     ListResourcesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
@@ -456,6 +468,12 @@ module Aws::RAM
 
     ServerInternalException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServerInternalException.struct_class = Types::ServerInternalException
+
+    ServiceNameAndResourceType.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    ServiceNameAndResourceType.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
+    ServiceNameAndResourceType.struct_class = Types::ServiceNameAndResourceType
+
+    ServiceNameAndResourceTypeList.member = Shapes::ShapeRef.new(shape: ServiceNameAndResourceType)
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -681,6 +699,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceArnNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
@@ -721,6 +740,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationArnNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
@@ -824,6 +844,18 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
+      api.add_operation(:list_resource_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/listresourcetypes"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:list_resources, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListResources"
         o.http_method = "POST"
@@ -857,6 +889,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
       end)
 
       api.add_operation(:reject_resource_share_invitation, Seahorse::Model::Operation.new.tap do |o|

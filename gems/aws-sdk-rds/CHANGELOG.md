@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2020-04-23)
+------------------
+
+* Feature - Adds support for AWS Local Zones, including a new optional parameter AvailabilityZoneGroup for the DescribeOrderableDBInstanceOptions operation.
+
 1.82.0 (2020-04-16)
 ------------------
 

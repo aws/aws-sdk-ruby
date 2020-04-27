@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-04-23)
+------------------
+
+* Feature - This release supports Auto Scaling in Amazon Keyspaces for Apache Cassandra.
+
 1.36.0 (2020-03-09)
 ------------------
 
