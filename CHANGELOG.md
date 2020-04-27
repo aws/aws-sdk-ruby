@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.495 (2020-04-27)
+------------------
+
 * Feature - Aws::AccessAnalyzer - Updated the API, and documentation for Access Analyzer.
 
 * Feature - Aws::DataExchange - Updated the API, and documentation for AWS Data Exchange.
