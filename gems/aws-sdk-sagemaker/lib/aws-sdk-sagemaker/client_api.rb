@@ -333,7 +333,6 @@ module Aws::SageMaker
     EndpointSummaryList = Shapes::ListShape.new(name: 'EndpointSummaryList')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
-    EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
     EnvironmentKey = Shapes::StringShape.new(name: 'EnvironmentKey')
     EnvironmentMap = Shapes::MapShape.new(name: 'EnvironmentMap')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
@@ -722,6 +721,7 @@ module Aws::SageMaker
     S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
     S3DataType = Shapes::StringShape.new(name: 'S3DataType')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SageMakerImageArn = Shapes::StringShape.new(name: 'SageMakerImageArn')
     SamplingPercentage = Shapes::IntegerShape.new(name: 'SamplingPercentage')
     ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
@@ -3278,7 +3278,7 @@ module Aws::SageMaker
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
-    ResourceSpec.add_member(:environment_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "EnvironmentArn"))
+    ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: SageMakerImageArn, location_name: "SageMakerImageArn"))
     ResourceSpec.add_member(:instance_type, Shapes::ShapeRef.new(shape: AppInstanceType, location_name: "InstanceType"))
     ResourceSpec.struct_class = Types::ResourceSpec
 

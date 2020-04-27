@@ -143,6 +143,7 @@ module Aws::DatabaseMigrationService
     ModifyReplicationTaskMessage = Shapes::StructureShape.new(name: 'ModifyReplicationTaskMessage')
     ModifyReplicationTaskResponse = Shapes::StructureShape.new(name: 'ModifyReplicationTaskResponse')
     MongoDbSettings = Shapes::StructureShape.new(name: 'MongoDbSettings')
+    NeptuneSettings = Shapes::StructureShape.new(name: 'NeptuneSettings')
     NestingLevelValue = Shapes::StringShape.new(name: 'NestingLevelValue')
     OrderableReplicationInstance = Shapes::StructureShape.new(name: 'OrderableReplicationInstance')
     OrderableReplicationInstanceList = Shapes::ListShape.new(name: 'OrderableReplicationInstanceList')
@@ -295,6 +296,7 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
     CreateEndpointMessage.add_member(:kafka_settings, Shapes::ShapeRef.new(shape: KafkaSettings, location_name: "KafkaSettings"))
     CreateEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
+    CreateEndpointMessage.add_member(:neptune_settings, Shapes::ShapeRef.new(shape: NeptuneSettings, location_name: "NeptuneSettings"))
     CreateEndpointMessage.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
     CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
@@ -352,6 +354,7 @@ module Aws::DatabaseMigrationService
     CreateReplicationTaskMessage.add_member(:cdc_start_position, Shapes::ShapeRef.new(shape: String, location_name: "CdcStartPosition"))
     CreateReplicationTaskMessage.add_member(:cdc_stop_position, Shapes::ShapeRef.new(shape: String, location_name: "CdcStopPosition"))
     CreateReplicationTaskMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateReplicationTaskMessage.add_member(:task_data, Shapes::ShapeRef.new(shape: String, location_name: "TaskData"))
     CreateReplicationTaskMessage.struct_class = Types::CreateReplicationTaskMessage
 
     CreateReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
@@ -602,6 +605,7 @@ module Aws::DatabaseMigrationService
     Endpoint.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
     Endpoint.add_member(:kafka_settings, Shapes::ShapeRef.new(shape: KafkaSettings, location_name: "KafkaSettings"))
     Endpoint.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
+    Endpoint.add_member(:neptune_settings, Shapes::ShapeRef.new(shape: NeptuneSettings, location_name: "NeptuneSettings"))
     Endpoint.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
     Endpoint.struct_class = Types::Endpoint
 
@@ -727,6 +731,7 @@ module Aws::DatabaseMigrationService
     ModifyEndpointMessage.add_member(:kinesis_settings, Shapes::ShapeRef.new(shape: KinesisSettings, location_name: "KinesisSettings"))
     ModifyEndpointMessage.add_member(:kafka_settings, Shapes::ShapeRef.new(shape: KafkaSettings, location_name: "KafkaSettings"))
     ModifyEndpointMessage.add_member(:elasticsearch_settings, Shapes::ShapeRef.new(shape: ElasticsearchSettings, location_name: "ElasticsearchSettings"))
+    ModifyEndpointMessage.add_member(:neptune_settings, Shapes::ShapeRef.new(shape: NeptuneSettings, location_name: "NeptuneSettings"))
     ModifyEndpointMessage.add_member(:redshift_settings, Shapes::ShapeRef.new(shape: RedshiftSettings, location_name: "RedshiftSettings"))
     ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
@@ -775,6 +780,7 @@ module Aws::DatabaseMigrationService
     ModifyReplicationTaskMessage.add_member(:cdc_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CdcStartTime"))
     ModifyReplicationTaskMessage.add_member(:cdc_start_position, Shapes::ShapeRef.new(shape: String, location_name: "CdcStartPosition"))
     ModifyReplicationTaskMessage.add_member(:cdc_stop_position, Shapes::ShapeRef.new(shape: String, location_name: "CdcStopPosition"))
+    ModifyReplicationTaskMessage.add_member(:task_data, Shapes::ShapeRef.new(shape: String, location_name: "TaskData"))
     ModifyReplicationTaskMessage.struct_class = Types::ModifyReplicationTaskMessage
 
     ModifyReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
@@ -793,6 +799,15 @@ module Aws::DatabaseMigrationService
     MongoDbSettings.add_member(:auth_source, Shapes::ShapeRef.new(shape: String, location_name: "AuthSource"))
     MongoDbSettings.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     MongoDbSettings.struct_class = Types::MongoDbSettings
+
+    NeptuneSettings.add_member(:service_access_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "ServiceAccessRoleArn"))
+    NeptuneSettings.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
+    NeptuneSettings.add_member(:s3_bucket_folder, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketFolder"))
+    NeptuneSettings.add_member(:error_retry_duration, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ErrorRetryDuration"))
+    NeptuneSettings.add_member(:max_file_size, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxFileSize"))
+    NeptuneSettings.add_member(:max_retry_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRetryCount"))
+    NeptuneSettings.add_member(:iam_auth_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "IamAuthEnabled"))
+    NeptuneSettings.struct_class = Types::NeptuneSettings
 
     OrderableReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     OrderableReplicationInstance.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
@@ -954,6 +969,7 @@ module Aws::DatabaseMigrationService
     ReplicationTask.add_member(:recovery_checkpoint, Shapes::ShapeRef.new(shape: String, location_name: "RecoveryCheckpoint"))
     ReplicationTask.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
     ReplicationTask.add_member(:replication_task_stats, Shapes::ShapeRef.new(shape: ReplicationTaskStats, location_name: "ReplicationTaskStats"))
+    ReplicationTask.add_member(:task_data, Shapes::ShapeRef.new(shape: String, location_name: "TaskData"))
     ReplicationTask.struct_class = Types::ReplicationTask
 
     ReplicationTaskAssessmentResult.add_member(:replication_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIdentifier"))
@@ -1069,6 +1085,7 @@ module Aws::DatabaseMigrationService
     SupportedEndpointType.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineName"))
     SupportedEndpointType.add_member(:supports_cdc, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsCDC"))
     SupportedEndpointType.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, location_name: "EndpointType"))
+    SupportedEndpointType.add_member(:replication_instance_engine_minimum_version, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceEngineMinimumVersion"))
     SupportedEndpointType.add_member(:engine_display_name, Shapes::ShapeRef.new(shape: String, location_name: "EngineDisplayName"))
     SupportedEndpointType.struct_class = Types::SupportedEndpointType
 

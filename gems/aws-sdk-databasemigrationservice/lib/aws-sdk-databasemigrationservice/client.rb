@@ -551,34 +551,33 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::MongoDbSettings] :mongo_db_settings
     #   Settings in JSON format for the source MongoDB endpoint. For more
-    #   information about the available settings, see the configuration
-    #   properties section in [Using MongoDB as a Target for AWS Database
-    #   Migration Service][1] in the *AWS Database Migration Service User
-    #   Guide.*
+    #   information about the available settings, see [Using MongoDB as a
+    #   Target for AWS Database Migration Service][1] in the *AWS Database
+    #   Migration Service User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
-    #   Data Streams. For information about other available settings, see
-    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
-    #   the *AWS Database Migration User Guide.*
+    #   Data Streams. For more information about the available settings, see
+    #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html
     #
     # @option params [Types::KafkaSettings] :kafka_settings
-    #   Settings in JSON format for the target Apache Kafka endpoint. For
-    #   information about other available settings, see [Using Object Mapping
-    #   to Migrate Data to Apache Kafka][1] in the *AWS Database Migration
-    #   User Guide.*
+    #   Settings in JSON format for the target Apache Kafka endpoint. For more
+    #   information about the available settings, see [Using Apache Kafka as a
+    #   Target for AWS Database Migration Service][1] in the *AWS Database
+    #   Migration User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -589,6 +588,16 @@ module Aws::DatabaseMigrationService
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #
+    # @option params [Types::NeptuneSettings] :neptune_settings
+    #   Settings in JSON format for the target Amazon Neptune endpoint. For
+    #   more information about the available settings, see
+    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings
     #
     # @option params [Types::RedshiftSettings] :redshift_settings
     #   Provides information that defines an Amazon Redshift endpoint.
@@ -725,6 +734,15 @@ module Aws::DatabaseMigrationService
     #       full_load_error_percentage: 1,
     #       error_retry_duration: 1,
     #     },
+    #     neptune_settings: {
+    #       service_access_role_arn: "String",
+    #       s3_bucket_name: "String", # required
+    #       s3_bucket_folder: "String", # required
+    #       error_retry_duration: 1,
+    #       max_file_size: 1,
+    #       max_retry_count: 1,
+    #       iam_auth_enabled: false,
+    #     },
     #     redshift_settings: {
     #       accept_any_date: false,
     #       after_connect_script: "String",
@@ -823,6 +841,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoint.neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.max_file_size #=> Integer
+    #   resp.endpoint.neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoint.neptune_settings.iam_auth_enabled #=> Boolean
     #   resp.endpoint.redshift_settings.accept_any_date #=> Boolean
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
@@ -1344,7 +1369,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :table_mappings
     #   The table mappings for the task, in JSON format. For more information,
-    #   see [Table Mapping][1] in the *AWS Database Migration User Guide.*
+    #   see [Using Table Mapping to Specify Task Settings][1] in the *AWS
+    #   Database Migration User Guide.*
     #
     #
     #
@@ -1352,7 +1378,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :replication_task_settings
     #   Overall settings for the task, in JSON format. For more information,
-    #   see [Task Settings][1] in the *AWS Database Migration User Guide.*
+    #   see [Specifying Task Settings for AWS Database Migration Service
+    #   Tasks][1] in the *AWS Database Migration User Guide.*
     #
     #
     #
@@ -1405,6 +1432,16 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to be assigned to the replication task.
+    #
+    # @option params [String] :task_data
+    #   Supplemental information that the task requires to migrate the data
+    #   for certain source and target endpoints. For more information, see
+    #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
+    #   Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
     #
     # @return [Types::CreateReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1467,6 +1504,7 @@ module Aws::DatabaseMigrationService
     #         value: "String",
     #       },
     #     ],
+    #     task_data: "String",
     #   })
     #
     # @example Response structure
@@ -1498,6 +1536,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.stop_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask AWS API Documentation
     #
@@ -1729,6 +1768,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoint.neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.max_file_size #=> Integer
+    #   resp.endpoint.neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoint.neptune_settings.iam_auth_enabled #=> Boolean
     #   resp.endpoint.redshift_settings.accept_any_date #=> Boolean
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
@@ -2040,6 +2086,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.stop_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask AWS API Documentation
     #
@@ -2381,6 +2428,7 @@ module Aws::DatabaseMigrationService
     #   resp.supported_endpoint_types[0].engine_name #=> String
     #   resp.supported_endpoint_types[0].supports_cdc #=> Boolean
     #   resp.supported_endpoint_types[0].endpoint_type #=> String, one of "source", "target"
+    #   resp.supported_endpoint_types[0].replication_instance_engine_minimum_version #=> String
     #   resp.supported_endpoint_types[0].engine_display_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes AWS API Documentation
@@ -2533,6 +2581,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoints[0].elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoints[0].elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoints[0].neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoints[0].neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoints[0].neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoints[0].neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoints[0].neptune_settings.max_file_size #=> Integer
+    #   resp.endpoints[0].neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoints[0].neptune_settings.iam_auth_enabled #=> Boolean
     #   resp.endpoints[0].redshift_settings.accept_any_date #=> Boolean
     #   resp.endpoints[0].redshift_settings.after_connect_script #=> String
     #   resp.endpoints[0].redshift_settings.bucket_folder #=> String
@@ -3163,6 +3218,8 @@ module Aws::DatabaseMigrationService
     # @option params [Array<Types::Filter>] :filters
     #   Filters applied to the describe action.
     #
+    #   Valid filter names: replication-subnet-group-id
+    #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified `MaxRecords` value, a pagination
@@ -3415,6 +3472,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.stop_date #=> Time
     #   resp.replication_tasks[0].replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_tasks[0].replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_tasks[0].task_data #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3843,23 +3901,23 @@ module Aws::DatabaseMigrationService
     #
     # @option params [Types::KinesisSettings] :kinesis_settings
     #   Settings in JSON format for the target endpoint for Amazon Kinesis
-    #   Data Streams. For information about other available settings, see
-    #   [Using Object Mapping to Migrate Data to a Kinesis Data Stream][1] in
-    #   the *AWS Database Migration User Guide.*
+    #   Data Streams. For more information about the available settings, see
+    #   [Using Amazon Kinesis Data Streams as a Target for AWS Database
+    #   Migration Service][1] in the *AWS Database Migration User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html
     #
     # @option params [Types::KafkaSettings] :kafka_settings
-    #   Settings in JSON format for the target Apache Kafka endpoint. For
-    #   information about other available settings, see [Using Object Mapping
-    #   to Migrate Data to Apache Kafka][1] in the *AWS Database Migration
-    #   User Guide.*
+    #   Settings in JSON format for the target Apache Kafka endpoint. For more
+    #   information about the available settings, see [Using Apache Kafka as a
+    #   Target for AWS Database Migration Service][1] in the *AWS Database
+    #   Migration User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html
     #
     # @option params [Types::ElasticsearchSettings] :elasticsearch_settings
     #   Settings in JSON format for the target Elasticsearch endpoint. For
@@ -3870,6 +3928,16 @@ module Aws::DatabaseMigrationService
     #
     #
     #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration
+    #
+    # @option params [Types::NeptuneSettings] :neptune_settings
+    #   Settings in JSON format for the target Amazon Neptune endpoint. For
+    #   more information about the available settings, see
+    #   [https://docs.aws.amazon.com/dms/latest/userguide/CHAP\_Target.Neptune.html#CHAP\_Target.Neptune.EndpointSettings][1]
+    #   in the *AWS Database Migration Service User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings
     #
     # @option params [Types::RedshiftSettings] :redshift_settings
     #   Provides information that defines an Amazon Redshift endpoint.
@@ -3985,6 +4053,15 @@ module Aws::DatabaseMigrationService
     #       full_load_error_percentage: 1,
     #       error_retry_duration: 1,
     #     },
+    #     neptune_settings: {
+    #       service_access_role_arn: "String",
+    #       s3_bucket_name: "String", # required
+    #       s3_bucket_folder: "String", # required
+    #       error_retry_duration: 1,
+    #       max_file_size: 1,
+    #       max_retry_count: 1,
+    #       iam_auth_enabled: false,
+    #     },
     #     redshift_settings: {
     #       accept_any_date: false,
     #       after_connect_script: "String",
@@ -4083,6 +4160,13 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.elasticsearch_settings.endpoint_uri #=> String
     #   resp.endpoint.elasticsearch_settings.full_load_error_percentage #=> Integer
     #   resp.endpoint.elasticsearch_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.service_access_role_arn #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_name #=> String
+    #   resp.endpoint.neptune_settings.s3_bucket_folder #=> String
+    #   resp.endpoint.neptune_settings.error_retry_duration #=> Integer
+    #   resp.endpoint.neptune_settings.max_file_size #=> Integer
+    #   resp.endpoint.neptune_settings.max_retry_count #=> Integer
+    #   resp.endpoint.neptune_settings.iam_auth_enabled #=> Boolean
     #   resp.endpoint.redshift_settings.accept_any_date #=> Boolean
     #   resp.endpoint.redshift_settings.after_connect_script #=> String
     #   resp.endpoint.redshift_settings.bucket_folder #=> String
@@ -4504,7 +4588,7 @@ module Aws::DatabaseMigrationService
     #   value, for example: `--table-mappings file://mappingfile.json`
     #
     # @option params [String] :replication_task_settings
-    #   JSON file that contains settings for the task, such as target metadata
+    #   JSON file that contains settings for the task, such as task metadata
     #   settings.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
@@ -4552,6 +4636,16 @@ module Aws::DatabaseMigrationService
     #   Commit time example: --cdc-stop-position “commit\_time:
     #   3018-02-09T12:12:12 “
     #
+    # @option params [String] :task_data
+    #   Supplemental information that the task requires to migrate the data
+    #   for certain source and target endpoints. For more information, see
+    #   [Specifying Supplemental Data for Task Settings][1] in the *AWS
+    #   Database Migration User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
+    #
     # @return [Types::ModifyReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
@@ -4567,6 +4661,7 @@ module Aws::DatabaseMigrationService
     #     cdc_start_time: Time.now,
     #     cdc_start_position: "String",
     #     cdc_stop_position: "String",
+    #     task_data: "String",
     #   })
     #
     # @example Response structure
@@ -4598,6 +4693,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.stop_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask AWS API Documentation
     #
@@ -4956,6 +5052,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.stop_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask AWS API Documentation
     #
@@ -5011,6 +5108,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.stop_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskAssessment AWS API Documentation
     #
@@ -5090,6 +5188,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.stop_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_start_date #=> Time
     #   resp.replication_task.replication_task_stats.full_load_finish_date #=> Time
+    #   resp.replication_task.task_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask AWS API Documentation
     #
@@ -5168,7 +5267,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -642,6 +642,9 @@ module Aws::AccessAnalyzer
     #   resp.finding.resource #=> String
     #   resp.finding.resource_owner_account #=> String
     #   resp.finding.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.finding.sources #=> Array
+    #   resp.finding.sources[0].detail.access_point_arn #=> String
+    #   resp.finding.sources[0].type #=> String, one of "BUCKET_ACL", "POLICY", "S3_ACCESS_POINT"
     #   resp.finding.status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.finding.updated_at #=> Time
     #
@@ -864,6 +867,9 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].resource #=> String
     #   resp.findings[0].resource_owner_account #=> String
     #   resp.findings[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.findings[0].sources #=> Array
+    #   resp.findings[0].sources[0].detail.access_point_arn #=> String
+    #   resp.findings[0].sources[0].type #=> String, one of "BUCKET_ACL", "POLICY", "S3_ACCESS_POINT"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.findings[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -1089,7 +1095,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

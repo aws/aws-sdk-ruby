@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-04-27)
+------------------
+
+* Feature - Adding minimum replication engine version for describe-endpoint-types api.
+
 1.31.0 (2020-03-09)
 ------------------
 

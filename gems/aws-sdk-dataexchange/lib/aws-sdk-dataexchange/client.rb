@@ -436,6 +436,10 @@ module Aws::DataExchange
     #           },
     #         ],
     #         data_set_id: "Id", # required
+    #         encryption: {
+    #           kms_key_arn: "__string", # required
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
     #         revision_id: "Id", # required
     #       },
     #       import_asset_from_signed_url: {
@@ -472,6 +476,8 @@ module Aws::DataExchange
     #   resp.details.export_assets_to_s3.asset_destinations[0].bucket #=> String
     #   resp.details.export_assets_to_s3.asset_destinations[0].key #=> String
     #   resp.details.export_assets_to_s3.data_set_id #=> String
+    #   resp.details.export_assets_to_s3.encryption.kms_key_arn #=> String
+    #   resp.details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.details.export_assets_to_s3.revision_id #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
@@ -773,6 +779,8 @@ module Aws::DataExchange
     #   resp.details.export_assets_to_s3.asset_destinations[0].bucket #=> String
     #   resp.details.export_assets_to_s3.asset_destinations[0].key #=> String
     #   resp.details.export_assets_to_s3.data_set_id #=> String
+    #   resp.details.export_assets_to_s3.encryption.kms_key_arn #=> String
+    #   resp.details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.details.export_assets_to_s3.revision_id #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
@@ -995,6 +1003,8 @@ module Aws::DataExchange
     #   resp.jobs[0].details.export_assets_to_s3.asset_destinations[0].bucket #=> String
     #   resp.jobs[0].details.export_assets_to_s3.asset_destinations[0].key #=> String
     #   resp.jobs[0].details.export_assets_to_s3.data_set_id #=> String
+    #   resp.jobs[0].details.export_assets_to_s3.encryption.kms_key_arn #=> String
+    #   resp.jobs[0].details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.jobs[0].details.export_assets_to_s3.revision_id #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.asset_name #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.data_set_id #=> String
@@ -1360,7 +1370,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

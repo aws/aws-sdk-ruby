@@ -35,6 +35,10 @@ module Aws::AccessAnalyzer
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingIdList = Shapes::ListShape.new(name: 'FindingIdList')
+    FindingSource = Shapes::StructureShape.new(name: 'FindingSource')
+    FindingSourceDetail = Shapes::StructureShape.new(name: 'FindingSourceDetail')
+    FindingSourceList = Shapes::ListShape.new(name: 'FindingSourceList')
+    FindingSourceType = Shapes::StringShape.new(name: 'FindingSourceType')
     FindingStatus = Shapes::StringShape.new(name: 'FindingStatus')
     FindingStatusUpdate = Shapes::StringShape.new(name: 'FindingStatusUpdate')
     FindingSummary = Shapes::StructureShape.new(name: 'FindingSummary')
@@ -191,11 +195,21 @@ module Aws::AccessAnalyzer
     Finding.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
     Finding.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
     Finding.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    Finding.add_member(:sources, Shapes::ShapeRef.new(shape: FindingSourceList, location_name: "sources"))
     Finding.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, required: true, location_name: "status"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
 
     FindingIdList.member = Shapes::ShapeRef.new(shape: FindingId)
+
+    FindingSource.add_member(:detail, Shapes::ShapeRef.new(shape: FindingSourceDetail, location_name: "detail"))
+    FindingSource.add_member(:type, Shapes::ShapeRef.new(shape: FindingSourceType, required: true, location_name: "type"))
+    FindingSource.struct_class = Types::FindingSource
+
+    FindingSourceDetail.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "accessPointArn"))
+    FindingSourceDetail.struct_class = Types::FindingSourceDetail
+
+    FindingSourceList.member = Shapes::ShapeRef.new(shape: FindingSource)
 
     FindingSummary.add_member(:action, Shapes::ShapeRef.new(shape: ActionList, location_name: "action"))
     FindingSummary.add_member(:analyzed_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "analyzedAt"))
@@ -208,6 +222,7 @@ module Aws::AccessAnalyzer
     FindingSummary.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
     FindingSummary.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
     FindingSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    FindingSummary.add_member(:sources, Shapes::ShapeRef.new(shape: FindingSourceList, location_name: "sources"))
     FindingSummary.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, required: true, location_name: "status"))
     FindingSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     FindingSummary.struct_class = Types::FindingSummary

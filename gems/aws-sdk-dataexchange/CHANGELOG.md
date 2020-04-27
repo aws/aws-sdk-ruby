@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-04-27)
+------------------
+
+* Feature - This release introduces AWS Data Exchange support for configurable encryption parameters when exporting data sets to Amazon S3.
+
 1.1.0 (2020-03-09)
 ------------------
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.1.3 (2020-04-27)
+------------------
+
 * Issue - Don't rely on the set? method of credentials.
 
 1.1.2 (2020-04-17)

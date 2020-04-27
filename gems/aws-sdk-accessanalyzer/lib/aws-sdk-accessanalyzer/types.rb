@@ -57,7 +57,8 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] shared_via
-    #   Indicates how the access that generated the finding is granted.
+    #   Indicates how the access that generated the finding is granted. This
+    #   is populated for Amazon S3 bucket findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
@@ -506,6 +507,12 @@ module Aws::AccessAnalyzer
     #   The type of the resource reported in the finding.
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   The sources of the finding. This indicates how the access that
+    #   generated the finding is granted. It is populated for Amazon S3
+    #   bucket findings.
+    #   @return [Array<Types::FindingSource>]
+    #
     # @!attribute [rw] status
     #   The current status of the finding.
     #   @return [String]
@@ -528,8 +535,44 @@ module Aws::AccessAnalyzer
       :resource,
       :resource_owner_account,
       :resource_type,
+      :sources,
       :status,
       :updated_at)
+      include Aws::Structure
+    end
+
+    # The source of the finding. This indicates how the access that
+    # generated the finding is granted. It is populated for Amazon S3 bucket
+    # findings.
+    #
+    # @!attribute [rw] detail
+    #   Includes details about how the access that generated the finding is
+    #   granted. This is populated for Amazon S3 bucket findings.
+    #   @return [Types::FindingSourceDetail]
+    #
+    # @!attribute [rw] type
+    #   Indicates the type of access that generated the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingSource AWS API Documentation
+    #
+    class FindingSource < Struct.new(
+      :detail,
+      :type)
+      include Aws::Structure
+    end
+
+    # Includes details about how the access that generated the finding is
+    # granted. This is populated for Amazon S3 bucket findings.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The ARN of the access point that generated the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/FindingSourceDetail AWS API Documentation
+    #
+    class FindingSourceDetail < Struct.new(
+      :access_point_arn)
       include Aws::Structure
     end
 
@@ -584,6 +627,12 @@ module Aws::AccessAnalyzer
     #   The type of the resource that the external principal has access to.
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   The sources of the finding. This indicates how the access that
+    #   generated the finding is granted. It is populated for Amazon S3
+    #   bucket findings.
+    #   @return [Array<Types::FindingSource>]
+    #
     # @!attribute [rw] status
     #   The status of the finding.
     #   @return [String]
@@ -606,6 +655,7 @@ module Aws::AccessAnalyzer
       :resource,
       :resource_owner_account,
       :resource_type,
+      :sources,
       :status,
       :updated_at)
       include Aws::Structure
