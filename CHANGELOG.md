@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
+
+* Feature - Aws::KinesisVideo - Updated the API, and documentation for Amazon Kinesis Video Streams.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.495 (2020-04-27)
 ------------------
 
