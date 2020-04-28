@@ -48,6 +48,8 @@ module Aws::MediaLive
     AudioPidSelection = Shapes::StructureShape.new(name: 'AudioPidSelection')
     AudioSelector = Shapes::StructureShape.new(name: 'AudioSelector')
     AudioSelectorSettings = Shapes::StructureShape.new(name: 'AudioSelectorSettings')
+    AudioTrack = Shapes::StructureShape.new(name: 'AudioTrack')
+    AudioTrackSelection = Shapes::StructureShape.new(name: 'AudioTrackSelection')
     AudioType = Shapes::StringShape.new(name: 'AudioType')
     AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
     AutomaticInputFailoverSettings = Shapes::StructureShape.new(name: 'AutomaticInputFailoverSettings')
@@ -177,6 +179,8 @@ module Aws::MediaLive
     FixedAfd = Shapes::StringShape.new(name: 'FixedAfd')
     FixedModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FixedModeScheduleActionStartSettings')
     Fmp4HlsSettings = Shapes::StructureShape.new(name: 'Fmp4HlsSettings')
+    Fmp4NielsenId3Behavior = Shapes::StringShape.new(name: 'Fmp4NielsenId3Behavior')
+    Fmp4TimedMetadataBehavior = Shapes::StringShape.new(name: 'Fmp4TimedMetadataBehavior')
     FollowModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FollowModeScheduleActionStartSettings')
     FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
@@ -194,6 +198,7 @@ module Aws::MediaLive
     H264ColorMetadata = Shapes::StringShape.new(name: 'H264ColorMetadata')
     H264ColorSpaceSettings = Shapes::StructureShape.new(name: 'H264ColorSpaceSettings')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
+    H264FilterSettings = Shapes::StructureShape.new(name: 'H264FilterSettings')
     H264FlickerAq = Shapes::StringShape.new(name: 'H264FlickerAq')
     H264ForceFieldPictures = Shapes::StringShape.new(name: 'H264ForceFieldPictures')
     H264FramerateControl = Shapes::StringShape.new(name: 'H264FramerateControl')
@@ -203,6 +208,7 @@ module Aws::MediaLive
     H264LookAheadRateControl = Shapes::StringShape.new(name: 'H264LookAheadRateControl')
     H264ParControl = Shapes::StringShape.new(name: 'H264ParControl')
     H264Profile = Shapes::StringShape.new(name: 'H264Profile')
+    H264QualityLevel = Shapes::StringShape.new(name: 'H264QualityLevel')
     H264RateControlMode = Shapes::StringShape.new(name: 'H264RateControlMode')
     H264ScanType = Shapes::StringShape.new(name: 'H264ScanType')
     H264SceneChangeDetect = Shapes::StringShape.new(name: 'H264SceneChangeDetect')
@@ -488,6 +494,9 @@ module Aws::MediaLive
     TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
     TeletextSourceSettings = Shapes::StructureShape.new(name: 'TeletextSourceSettings')
+    TemporalFilterPostFilterSharpening = Shapes::StringShape.new(name: 'TemporalFilterPostFilterSharpening')
+    TemporalFilterSettings = Shapes::StructureShape.new(name: 'TemporalFilterSettings')
+    TemporalFilterStrength = Shapes::StringShape.new(name: 'TemporalFilterStrength')
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
     TimecodeConfigSource = Shapes::StringShape.new(name: 'TimecodeConfigSource')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -593,6 +602,7 @@ module Aws::MediaLive
     __listOfAudioChannelMapping = Shapes::ListShape.new(name: '__listOfAudioChannelMapping')
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
     __listOfAudioSelector = Shapes::ListShape.new(name: '__listOfAudioSelector')
+    __listOfAudioTrack = Shapes::ListShape.new(name: '__listOfAudioTrack')
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfCaptionLanguageMapping')
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
@@ -733,7 +743,14 @@ module Aws::MediaLive
 
     AudioSelectorSettings.add_member(:audio_language_selection, Shapes::ShapeRef.new(shape: AudioLanguageSelection, location_name: "audioLanguageSelection"))
     AudioSelectorSettings.add_member(:audio_pid_selection, Shapes::ShapeRef.new(shape: AudioPidSelection, location_name: "audioPidSelection"))
+    AudioSelectorSettings.add_member(:audio_track_selection, Shapes::ShapeRef.new(shape: AudioTrackSelection, location_name: "audioTrackSelection"))
     AudioSelectorSettings.struct_class = Types::AudioSelectorSettings
+
+    AudioTrack.add_member(:track, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "track"))
+    AudioTrack.struct_class = Types::AudioTrack
+
+    AudioTrackSelection.add_member(:tracks, Shapes::ShapeRef.new(shape: __listOfAudioTrack, required: true, location_name: "tracks"))
+    AudioTrackSelection.struct_class = Types::AudioTrackSelection
 
     AutomaticInputFailoverSettings.add_member(:input_preference, Shapes::ShapeRef.new(shape: InputPreference, location_name: "inputPreference"))
     AutomaticInputFailoverSettings.add_member(:secondary_input_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secondaryInputId"))
@@ -1304,6 +1321,8 @@ module Aws::MediaLive
     FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
     Fmp4HlsSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
+    Fmp4HlsSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: Fmp4NielsenId3Behavior, location_name: "nielsenId3Behavior"))
+    Fmp4HlsSettings.add_member(:timed_metadata_behavior, Shapes::ShapeRef.new(shape: Fmp4TimedMetadataBehavior, location_name: "timedMetadataBehavior"))
     Fmp4HlsSettings.struct_class = Types::Fmp4HlsSettings
 
     FollowModeScheduleActionStartSettings.add_member(:follow_point, Shapes::ShapeRef.new(shape: FollowPoint, required: true, location_name: "followPoint"))
@@ -1339,6 +1358,9 @@ module Aws::MediaLive
     H264ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
     H264ColorSpaceSettings.struct_class = Types::H264ColorSpaceSettings
 
+    H264FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
+    H264FilterSettings.struct_class = Types::H264FilterSettings
+
     H264Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H264AdaptiveQuantization, location_name: "adaptiveQuantization"))
     H264Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
     H264Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000, location_name: "bitrate"))
@@ -1347,6 +1369,7 @@ module Aws::MediaLive
     H264Settings.add_member(:color_metadata, Shapes::ShapeRef.new(shape: H264ColorMetadata, location_name: "colorMetadata"))
     H264Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: H264ColorSpaceSettings, location_name: "colorSpaceSettings"))
     H264Settings.add_member(:entropy_encoding, Shapes::ShapeRef.new(shape: H264EntropyEncoding, location_name: "entropyEncoding"))
+    H264Settings.add_member(:filter_settings, Shapes::ShapeRef.new(shape: H264FilterSettings, location_name: "filterSettings"))
     H264Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     H264Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H264FlickerAq, location_name: "flickerAq"))
     H264Settings.add_member(:force_field_pictures, Shapes::ShapeRef.new(shape: H264ForceFieldPictures, location_name: "forceFieldPictures"))
@@ -1367,6 +1390,7 @@ module Aws::MediaLive
     H264Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
     H264Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integer, location_name: "parNumerator"))
     H264Settings.add_member(:profile, Shapes::ShapeRef.new(shape: H264Profile, location_name: "profile"))
+    H264Settings.add_member(:quality_level, Shapes::ShapeRef.new(shape: H264QualityLevel, location_name: "qualityLevel"))
     H264Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
     H264Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H264RateControlMode, location_name: "rateControlMode"))
     H264Settings.add_member(:scan_type, Shapes::ShapeRef.new(shape: H264ScanType, location_name: "scanType"))
@@ -2328,6 +2352,10 @@ module Aws::MediaLive
     TeletextSourceSettings.add_member(:page_number, Shapes::ShapeRef.new(shape: __string, location_name: "pageNumber"))
     TeletextSourceSettings.struct_class = Types::TeletextSourceSettings
 
+    TemporalFilterSettings.add_member(:post_filter_sharpening, Shapes::ShapeRef.new(shape: TemporalFilterPostFilterSharpening, location_name: "postFilterSharpening"))
+    TemporalFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: TemporalFilterStrength, location_name: "strength"))
+    TemporalFilterSettings.struct_class = Types::TemporalFilterSettings
+
     TimecodeConfig.add_member(:source, Shapes::ShapeRef.new(shape: TimecodeConfigSource, required: true, location_name: "source"))
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))
     TimecodeConfig.struct_class = Types::TimecodeConfig
@@ -2509,6 +2537,8 @@ module Aws::MediaLive
     __listOfAudioDescription.member = Shapes::ShapeRef.new(shape: AudioDescription)
 
     __listOfAudioSelector.member = Shapes::ShapeRef.new(shape: AudioSelector)
+
+    __listOfAudioTrack.member = Shapes::ShapeRef.new(shape: AudioTrack)
 
     __listOfCaptionDescription.member = Shapes::ShapeRef.new(shape: CaptionDescription)
 

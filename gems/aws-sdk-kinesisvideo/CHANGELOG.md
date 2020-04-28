@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-04-28)
+------------------
+
+* Feature - Add "GET_CLIP" to the list of supported API names for the GetDataEndpoint API.
+
 1.22.0 (2020-03-09)
 ------------------
 

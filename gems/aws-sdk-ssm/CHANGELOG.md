@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2020-04-28)
+------------------
+
+* Feature - SSM State Manager support for adding list association filter for Resource Group and manual mode of managing compliance for an association.
+
 1.73.0 (2020-03-16)
 ------------------
 

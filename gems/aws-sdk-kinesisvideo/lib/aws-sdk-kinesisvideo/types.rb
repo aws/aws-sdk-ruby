@@ -53,7 +53,7 @@ module Aws::KinesisVideo
     #   @return [String]
     #
     # @!attribute [rw] channel_arn
-    #   The ARN of the signaling channel.
+    #   The Amazon Resource Name (ARN) of the signaling channel.
     #   @return [String]
     #
     # @!attribute [rw] channel_type
@@ -153,7 +153,7 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] channel_name
     #   A name for the signaling channel that you are creating. It must be
-    #   unique for each account and region.
+    #   unique for each AWS account and AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] channel_type
@@ -167,7 +167,7 @@ module Aws::KinesisVideo
     #   @return [Types::SingleMasterConfiguration]
     #
     # @!attribute [rw] tags
-    #   A set of tags (key/value pairs) that you want to associate with this
+    #   A set of tags (key-value pairs) that you want to associate with this
     #   channel.
     #   @return [Array<Types::Tag>]
     #
@@ -182,7 +182,7 @@ module Aws::KinesisVideo
     end
 
     # @!attribute [rw] channel_arn
-    #   The ARN of the created channel.
+    #   The Amazon Resource Name (ARN) of the created channel.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateSignalingChannelOutput AWS API Documentation
@@ -306,13 +306,15 @@ module Aws::KinesisVideo
     #       }
     #
     # @!attribute [rw] channel_arn
-    #   The ARN of the signaling channel that you want to delete.
+    #   The Amazon Resource Name (ARN) of the signaling channel that you
+    #   want to delete.
     #   @return [String]
     #
     # @!attribute [rw] current_version
     #   The current version of the signaling channel that you want to
     #   delete. You can obtain the current version by invoking the
-    #   `DescribeSignalingChannel` or `ListSignalingChannels` APIs.
+    #   `DescribeSignalingChannel` or `ListSignalingChannels` API
+    #   operations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteSignalingChannelInput AWS API Documentation
@@ -452,7 +454,7 @@ module Aws::KinesisVideo
     #       {
     #         stream_name: "StreamName",
     #         stream_arn: "ResourceARN",
-    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL
+    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP
     #       }
     #
     # @!attribute [rw] stream_name
@@ -503,8 +505,8 @@ module Aws::KinesisVideo
     #       }
     #
     # @!attribute [rw] channel_arn
-    #   The ARN of the signalling channel for which you want to get an
-    #   endpoint.
+    #   The Amazon Resource Name (ARN) of the signalling channel for which
+    #   you want to get an endpoint.
     #   @return [String]
     #
     # @!attribute [rw] single_master_channel_endpoint_configuration
@@ -690,13 +692,14 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] next_token
     #   If you specify this parameter and the result of a
-    #   ListTagsForResource call is truncated, the response includes a token
-    #   that you can use in the next request to fetch the next batch of
-    #   tags.
+    #   `ListTagsForResource` call is truncated, the response includes a
+    #   token that you can use in the next request to fetch the next batch
+    #   of tags.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the signaling channel for which you want to list tags.
+    #   The Amazon Resource Name (ARN) of the signaling channel for which
+    #   you want to list tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForResourceInput AWS API Documentation
@@ -709,8 +712,9 @@ module Aws::KinesisVideo
 
     # @!attribute [rw] next_token
     #   If you specify this parameter and the result of a
-    #   ListTagsForResource call is truncated, the response includes a token
-    #   that you can use in the next request to fetch the next set of tags.
+    #   `ListTagsForResource` call is truncated, the response includes a
+    #   token that you can use in the next request to fetch the next set of
+    #   tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -811,7 +815,7 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # The stream is currently not available for this operation.
+    # The signaling channel is currently not available for this operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1023,7 +1027,8 @@ module Aws::KinesisVideo
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the signaling channel to which you want to add tags.
+    #   The Amazon Resource Name (ARN) of the signaling channel to which you
+    #   want to add tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1103,7 +1108,8 @@ module Aws::KinesisVideo
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the signaling channel from which you want to remove tags.
+    #   The Amazon Resource Name (ARN) of the signaling channel from which
+    #   you want to remove tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_key_list
@@ -1221,7 +1227,8 @@ module Aws::KinesisVideo
     #       }
     #
     # @!attribute [rw] channel_arn
-    #   The ARN of the signaling channel that you want to update.
+    #   The Amazon Resource Name (ARN) of the signaling channel that you
+    #   want to update.
     #   @return [String]
     #
     # @!attribute [rw] current_version

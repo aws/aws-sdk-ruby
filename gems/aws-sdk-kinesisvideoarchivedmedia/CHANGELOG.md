@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-04-28)
+------------------
+
+* Feature - Add support for the GetClip API for retrieving media from a video stream in the MP4 format.
+
 1.21.0 (2020-03-09)
 ------------------
 

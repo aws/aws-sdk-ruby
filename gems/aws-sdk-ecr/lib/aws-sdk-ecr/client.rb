@@ -321,15 +321,12 @@ module Aws::ECR
     # Checks the availability of one or more image layers in a repository.
     #
     # When an image is pushed to a repository, each image layer is checked
-    # to verify if it has been uploaded before. If it is, then the image
-    # layer is skipped.
+    # to verify if it has been uploaded before. If it has been uploaded,
+    # then the image layer is skipped.
     #
-    # When an image is pulled from a repository, each image layer is checked
-    # once to verify it is available to be pulled.
-    #
-    # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers for pulling and pushing images. In most
-    # cases, you should use the `docker` CLI to pull, tag, and push images.
+    # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
+    # used by customers for pulling and pushing images. In most cases, you
+    # should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -455,7 +452,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage AWS API Documentation
@@ -555,7 +552,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage AWS API Documentation
@@ -575,9 +572,9 @@ module Aws::ECR
     # When an image is pushed, the CompleteLayerUpload API is called once
     # per each new image layer to verify that the upload has completed.
     #
-    # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers for pulling and pushing images. In most
-    # cases, you should use the `docker` CLI to pull, tag, and push images.
+    # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
+    # used by customers for pulling and pushing images. In most cases, you
+    # should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -1239,11 +1236,11 @@ module Aws::ECR
     # referenced in an image.
     #
     # When an image is pulled, the GetDownloadUrlForLayer API is called once
-    # per image layer.
+    # per image layer that is not already cached.
     #
-    # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers for pulling and pushing images. In most
-    # cases, you should use the `docker` CLI to pull, tag, and push images.
+    # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
+    # used by customers for pulling and pushing images. In most cases, you
+    # should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -1483,13 +1480,13 @@ module Aws::ECR
     # Notifies Amazon ECR that you intend to upload an image layer.
     #
     # When an image is pushed, the InitiateLayerUpload API is called once
-    # per image layer that has not already been uploaded. Whether an image
-    # layer has been uploaded before is determined by the
+    # per image layer that has not already been uploaded. Whether or not an
+    # image layer has been uploaded is determined by the
     # BatchCheckLayerAvailability API action.
     #
-    # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers for pulling and pushing images. In most
-    # cases, you should use the `docker` CLI to pull, tag, and push images.
+    # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
+    # used by customers for pulling and pushing images. In most cases, you
+    # should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -1662,11 +1659,11 @@ module Aws::ECR
     #
     # When an image is pushed and all new image layers have been uploaded,
     # the PutImage API is called once to create or update the image manifest
-    # and tags associated with the image.
+    # and the tags associated with the image.
     #
-    # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers for pulling and pushing images. In most
-    # cases, you should use the `docker` CLI to pull, tag, and push images.
+    # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
+    # used by customers for pulling and pushing images. In most cases, you
+    # should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -2098,9 +2095,9 @@ module Aws::ECR
     # about 20MB). The UploadLayerPart API is called once per each new image
     # layer part.
     #
-    # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers for pulling and pushing images. In most
-    # cases, you should use the `docker` CLI to pull, tag, and push images.
+    # <note markdown="1"> This operation is used by the Amazon ECR proxy and is not generally
+    # used by customers for pulling and pushing images. In most cases, you
+    # should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -2172,7 +2169,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

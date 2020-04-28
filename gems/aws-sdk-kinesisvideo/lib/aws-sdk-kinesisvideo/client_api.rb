@@ -407,6 +407,7 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:delete_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -420,6 +421,7 @@ module Aws::KinesisVideo
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: VersionMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:describe_signaling_channel, Seahorse::Model::Operation.new.tap do |o|
