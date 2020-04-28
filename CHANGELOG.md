@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.496 (2020-04-28)
+------------------
+
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
 
 * Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
