@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.497 (2020-04-29)
+------------------
+
 * Feature - Aws::ServiceDiscovery - Updated the documentation for AWS Cloud Map.
 
 * Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
