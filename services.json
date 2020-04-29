@@ -364,6 +364,9 @@
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
   },
+  "IoTSiteWise": {
+    "models": "iotsitewise/2019-12-02"
+  },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
   },

@@ -318,12 +318,87 @@ module Aws::TranscribeService
 
     # @!group API Operations
 
+    # Creates a new custom vocabulary that you can use to change how Amazon
+    # Transcribe Medical transcribes your audio file.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the custom vocabulary. This case-sensitive name must be
+    #   unique within an AWS account. If you try to create a vocabulary with
+    #   the same name as a previous vocabulary you will receive a
+    #   `ConflictException` error.
+    #
+    # @option params [required, String] :language_code
+    #   The language code used for the entries within your custom vocabulary.
+    #   The language code of your custom vocabulary must match the language
+    #   code of your transcription job. US English (en-US) is the only
+    #   language code available for Amazon Transcribe Medical.
+    #
+    # @option params [required, String] :vocabulary_file_uri
+    #   The Amazon S3 location of the text file you use to define your custom
+    #   vocabulary. The URI must be in the same AWS region as the API endpoint
+    #   you're calling. Enter information about your `VocabularyFileUri` in
+    #   the following format:
+    #
+    #   `
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   This is an example of a vocabulary file uri location in Amazon S3:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Medical Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #
+    # @return [Types::CreateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMedicalVocabularyResponse#vocabulary_name #vocabulary_name} => String
+    #   * {Types::CreateMedicalVocabularyResponse#language_code #language_code} => String
+    #   * {Types::CreateMedicalVocabularyResponse#vocabulary_state #vocabulary_state} => String
+    #   * {Types::CreateMedicalVocabularyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateMedicalVocabularyResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_medical_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     vocabulary_file_uri: "Uri", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateMedicalVocabulary AWS API Documentation
+    #
+    # @overload create_medical_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def create_medical_vocabulary(params = {}, options = {})
+      req = build_request(:create_medical_vocabulary, params)
+      req.send_request(options)
+    end
+
     # Creates a new custom vocabulary that you can use to change the way
     # Amazon Transcribe handles transcription of an audio file.
     #
     # @option params [required, String] :vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. The name is case-sensitive.
+    #   account. The name is case-sensitive. If you try to create a vocabulary
+    #   with the same name as a previous vocabulary you will receive a
+    #   `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries.
@@ -394,7 +469,9 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :vocabulary_filter_name
     #   The vocabulary filter name. The name must be unique within the account
-    #   that contains it.
+    #   that contains it.If you try to create a vocabulary filter with the
+    #   same name as a previous vocabulary filter you will receive a
+    #   `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code of the words in the vocabulary filter. All words in
@@ -480,6 +557,28 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def delete_medical_transcription_job(params = {}, options = {})
       req = build_request(:delete_medical_transcription_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a vocabulary from Amazon Transcribe Medical.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary you are choosing to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_medical_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteMedicalVocabulary AWS API Documentation
+    #
+    # @overload delete_medical_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def delete_medical_vocabulary(params = {}, options = {})
+      req = build_request(:delete_medical_vocabulary, params)
       req.send_request(options)
     end
 
@@ -587,6 +686,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.settings.channel_identification #=> Boolean
     #   resp.medical_transcription_job.settings.show_alternatives #=> Boolean
     #   resp.medical_transcription_job.settings.max_alternatives #=> Integer
+    #   resp.medical_transcription_job.settings.vocabulary_name #=> String
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
     #
@@ -596,6 +696,45 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def get_medical_transcription_job(params = {}, options = {})
       req = build_request(:get_medical_transcription_job, params)
+      req.send_request(options)
+    end
+
+    # Retrieve information about a medical vocabulary.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary you are trying to get information about.
+    #   The value you enter for this request is case-sensitive.
+    #
+    # @return [Types::GetMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMedicalVocabularyResponse#vocabulary_name #vocabulary_name} => String
+    #   * {Types::GetMedicalVocabularyResponse#language_code #language_code} => String
+    #   * {Types::GetMedicalVocabularyResponse#vocabulary_state #vocabulary_state} => String
+    #   * {Types::GetMedicalVocabularyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetMedicalVocabularyResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetMedicalVocabularyResponse#download_uri #download_uri} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_medical_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.download_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalVocabulary AWS API Documentation
+    #
+    # @overload get_medical_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def get_medical_vocabulary(params = {}, options = {})
+      req = build_request(:get_medical_vocabulary, params)
       req.send_request(options)
     end
 
@@ -793,6 +932,63 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Returns a list of vocabularies that match the specified criteria. You
+    # get the entire list of vocabularies if you don't enter a value in any
+    # of the request parameters.
+    #
+    # @option params [String] :next_token
+    #   If the result of your previous request to `ListMedicalVocabularies`
+    #   was truncated, include the `NextToken` to fetch the next set of jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of vocabularies to return in the response.
+    #
+    # @option params [String] :state_equals
+    #   When specified, only returns vocabularies with the `VocabularyState`
+    #   equal to the specified vocabulary state.
+    #
+    # @option params [String] :name_contains
+    #   Returns vocabularies in the list whose name contains the specified
+    #   string. The search is case-insensitive, `ListMedicalVocabularies`
+    #   returns both "vocabularyname" and "VocabularyName" in the response
+    #   list.
+    #
+    # @return [Types::ListMedicalVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMedicalVocabulariesResponse#status #status} => String
+    #   * {Types::ListMedicalVocabulariesResponse#next_token #next_token} => String
+    #   * {Types::ListMedicalVocabulariesResponse#vocabularies #vocabularies} => Array&lt;Types::VocabularyInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_medical_vocabularies({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     state_equals: "PENDING", # accepts PENDING, READY, FAILED
+    #     name_contains: "VocabularyName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "READY", "FAILED"
+    #   resp.next_token #=> String
+    #   resp.vocabularies #=> Array
+    #   resp.vocabularies[0].vocabulary_name #=> String
+    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabularies[0].last_modified_time #=> Time
+    #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalVocabularies AWS API Documentation
+    #
+    # @overload list_medical_vocabularies(params = {})
+    # @param [Hash] params ({})
+    def list_medical_vocabularies(params = {}, options = {})
+      req = build_request(:list_medical_vocabularies, params)
+      req.send_request(options)
+    end
+
     # Lists transcription jobs with the specified status.
     #
     # @option params [String] :status
@@ -897,7 +1093,7 @@ module Aws::TranscribeService
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "PENDING", "READY", "FAILED"
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
@@ -967,7 +1163,9 @@ module Aws::TranscribeService
     # @option params [required, String] :medical_transcription_job_name
     #   The name of the medical transcription job. You can't use the strings
     #   "." or ".." by themselves as the job name. The name must also be
-    #   unique within an AWS account.
+    #   unique within an AWS account. If you try to create a medical
+    #   transcription job with the same name as a previous medical
+    #   transcription job you will receive a `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code for the language spoken in the input media file. US
@@ -1048,9 +1246,10 @@ module Aws::TranscribeService
     #   The medical specialty of any clinician speaking in the input media.
     #
     # @option params [required, String] :type
-    #   The speech of clinician in the input audio. `CONVERSATION` refers to
-    #   conversations clinicians have with patients. `DICTATION` refers to
-    #   medical professionals dictating their notes about a patient encounter.
+    #   The type of speech in the input audio. `CONVERSATION` refers to
+    #   conversations between two or more speakers, e.g., a conversations
+    #   between doctors and patients. `DICTATION` refers to single-speaker
+    #   dictated speech, e.g., for clinical notes.
     #
     # @return [Types::StartMedicalTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1074,6 +1273,7 @@ module Aws::TranscribeService
     #       channel_identification: false,
     #       show_alternatives: false,
     #       max_alternatives: 1,
+    #       vocabulary_name: "VocabularyName",
     #     },
     #     specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #     type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
@@ -1097,6 +1297,7 @@ module Aws::TranscribeService
     #   resp.medical_transcription_job.settings.channel_identification #=> Boolean
     #   resp.medical_transcription_job.settings.show_alternatives #=> Boolean
     #   resp.medical_transcription_job.settings.max_alternatives #=> Integer
+    #   resp.medical_transcription_job.settings.vocabulary_name #=> String
     #   resp.medical_transcription_job.specialty #=> String, one of "PRIMARYCARE"
     #   resp.medical_transcription_job.type #=> String, one of "CONVERSATION", "DICTATION"
     #
@@ -1114,7 +1315,9 @@ module Aws::TranscribeService
     # @option params [required, String] :transcription_job_name
     #   The name of the job. Note that you can't use the strings "." or
     #   ".." by themselves as the job name. The name must also be unique
-    #   within an AWS account.
+    #   within an AWS account. If you try to create a transcription job with
+    #   the same name as a previous transcription job you will receive a
+    #   `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code for the language used in the input media file.
@@ -1278,12 +1481,83 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Updates an existing vocabulary with new values in a different text
+    # file. The `UpdateMedicalVocabulary` operation overwrites all of the
+    # existing information with the values that you provide in the request.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary to update. The name is case-sensitive. If
+    #   you try to update a vocabulary with the same name as a previous
+    #   vocabulary you will receive a `ConflictException` error.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the entries in the updated vocabulary. US English
+    #   (en-US) is the only valid language code in Amazon Transcribe Medical.
+    #
+    # @option params [String] :vocabulary_file_uri
+    #   The Amazon S3 location of the text file containing the definition of
+    #   the custom vocabulary. The URI must be in the same AWS region as the
+    #   API endpoint you are calling. You can see the fields you need to enter
+    #   for you Amazon S3 location in the example URI here:
+    #
+    #   `
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies in Amazon Transcribe
+    #   Medical, see [Medical Custom Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #
+    # @return [Types::UpdateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMedicalVocabularyResponse#vocabulary_name #vocabulary_name} => String
+    #   * {Types::UpdateMedicalVocabularyResponse#language_code #language_code} => String
+    #   * {Types::UpdateMedicalVocabularyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateMedicalVocabularyResponse#vocabulary_state #vocabulary_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_medical_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     vocabulary_file_uri: "Uri",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.last_modified_time #=> Time
+    #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateMedicalVocabulary AWS API Documentation
+    #
+    # @overload update_medical_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def update_medical_vocabulary(params = {}, options = {})
+      req = build_request(:update_medical_vocabulary, params)
+      req.send_request(options)
+    end
+
     # Updates an existing vocabulary with new values. The `UpdateVocabulary`
     # operation overwrites all of the existing information with the values
     # that you provide in the request.
     #
     # @option params [required, String] :vocabulary_name
-    #   The name of the vocabulary to update. The name is case-sensitive.
+    #   The name of the vocabulary to update. The name is case-sensitive. If
+    #   you try to update a vocabulary with the same name as a previous
+    #   vocabulary you will receive a `ConflictException` error.
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries.
@@ -1350,7 +1624,9 @@ module Aws::TranscribeService
     # Updates a vocabulary filter with a new list of filtered words.
     #
     # @option params [required, String] :vocabulary_filter_name
-    #   The name of the vocabulary filter to update.
+    #   The name of the vocabulary filter to update. If you try to update a
+    #   vocabulary filter with the same name as a previous vocabulary filter
+    #   you will receive a `ConflictException` error.
     #
     # @option params [Array<String>] :words
     #   The words to use in the vocabulary filter. Only use characters from
@@ -1422,7 +1698,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

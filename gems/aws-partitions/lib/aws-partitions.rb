@@ -330,6 +330,7 @@ module Aws
             'IoTEventsData' => 'data.iotevents',
             'IoTJobsDataPlane' => 'data.jobs.iot',
             'IoTSecureTunneling' => 'api.tunneling.iot',
+            'IoTSiteWise' => 'iotsitewise',
             'IoTThingsGraph' => 'iotthingsgraph',
             'KMS' => 'kms',
             'Kafka' => 'kafka',

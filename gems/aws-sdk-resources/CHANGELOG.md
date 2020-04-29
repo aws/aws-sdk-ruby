@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.72.0 (2020-04-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotsitewise` gem.
+
 3.71.0 (2020-04-20)
 ------------------
 

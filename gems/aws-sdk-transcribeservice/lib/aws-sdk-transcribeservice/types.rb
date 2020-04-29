@@ -23,12 +23,7 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # When you are using the `CreateVocabulary` operation, the `JobName`
-    # field is a duplicate of a previously entered job name. Resend your
-    # request with a different name.
-    #
-    # When you are using the `UpdateVocabulary` operation, there are two
-    # jobs running at the same time. Resend the second request later.
+    # The resource name already exists.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -74,6 +69,101 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateMedicalVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         vocabulary_file_uri: "Uri", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the custom vocabulary. This case-sensitive name must be
+    #   unique within an AWS account. If you try to create a vocabulary with
+    #   the same name as a previous vocabulary you will receive a
+    #   `ConflictException` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code used for the entries within your custom
+    #   vocabulary. The language code of your custom vocabulary must match
+    #   the language code of your transcription job. US English (en-US) is
+    #   the only language code available for Amazon Transcribe Medical.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_file_uri
+    #   The Amazon S3 location of the text file you use to define your
+    #   custom vocabulary. The URI must be in the same AWS region as the API
+    #   endpoint you're calling. Enter information about your
+    #   `VocabularyFileUri` in the following format:
+    #
+    #   `
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   This is an example of a vocabulary file uri location in Amazon S3:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies, see [Medical Custom
+    #   Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateMedicalVocabularyRequest AWS API Documentation
+    #
+    class CreateMedicalVocabularyRequest < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :vocabulary_file_uri)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary. The name must be unique within an AWS
+    #   account. It is also case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code you chose to describe the entries in your custom
+    #   vocabulary. US English (en-US) is the only valid language code for
+    #   Amazon Transcribe Medical.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of your custom vocabulary in Amazon Transcribe
+    #   Medical. If the state is `READY` you can use the vocabulary in a
+    #   `StartMedicalTranscriptionJob` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time you created the vocabulary.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `VocabularyState` field is `FAILED`, this field contains
+    #   information about why the job failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateMedicalVocabularyResponse AWS API Documentation
+    #
+    class CreateMedicalVocabularyResponse < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :vocabulary_state,
+      :last_modified_time,
+      :failure_reason)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVocabularyFilterRequest
     #   data as a hash:
     #
@@ -86,7 +176,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The vocabulary filter name. The name must be unique within the
-    #   account that contains it.
+    #   account that contains it.If you try to create a vocabulary filter
+    #   with the same name as a previous vocabulary filter you will receive
+    #   a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -168,7 +260,9 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] vocabulary_name
     #   The name of the vocabulary. The name must be unique within an AWS
-    #   account. The name is case-sensitive.
+    #   account. The name is case-sensitive. If you try to create a
+    #   vocabulary with the same name as a previous vocabulary you will
+    #   receive a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -267,6 +361,24 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteMedicalVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary you are choosing to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteMedicalVocabularyRequest AWS API Documentation
+    #
+    class DeleteMedicalVocabularyRequest < Struct.new(
+      :vocabulary_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteTranscriptionJobRequest
     #   data as a hash:
     #
@@ -348,6 +460,65 @@ module Aws::TranscribeService
     #
     class GetMedicalTranscriptionJobResponse < Struct.new(
       :medical_transcription_job)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMedicalVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary you are trying to get information about.
+    #   The value you enter for this request is case-sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalVocabularyRequest AWS API Documentation
+    #
+    class GetMedicalVocabularyRequest < Struct.new(
+      :vocabulary_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_name
+    #   The valid name that Amazon Transcribe Medical returns.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The valid language code returned for your vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of the vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the vocabulary was last modified with a text file
+    #   different from what was previously used.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `VocabularyState` is `FAILED`, this field contains
+    #   information about why the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_uri
+    #   The Amazon S3 location where the vocabulary is stored. Use this URI
+    #   to get the contents of the vocabulary. You can download your
+    #   vocabulary from the URI for a limited time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetMedicalVocabularyResponse AWS API Documentation
+    #
+    class GetMedicalVocabularyResponse < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :vocabulary_state,
+      :last_modified_time,
+      :failure_reason,
+      :download_uri)
       include Aws::Structure
     end
 
@@ -622,6 +793,75 @@ module Aws::TranscribeService
       :status,
       :next_token,
       :medical_transcription_job_summaries)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMedicalVocabulariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         state_equals: "PENDING", # accepts PENDING, READY, FAILED
+    #         name_contains: "VocabularyName",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of your previous request to `ListMedicalVocabularies`
+    #   was truncated, include the `NextToken` to fetch the next set of
+    #   jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of vocabularies to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state_equals
+    #   When specified, only returns vocabularies with the `VocabularyState`
+    #   equal to the specified vocabulary state.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   Returns vocabularies in the list whose name contains the specified
+    #   string. The search is case-insensitive, `ListMedicalVocabularies`
+    #   returns both "vocabularyname" and "VocabularyName" in the
+    #   response list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalVocabulariesRequest AWS API Documentation
+    #
+    class ListMedicalVocabulariesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :state_equals,
+      :name_contains)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The requested vocabulary state.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `ListMedicalVocabularies` operation returns a page of
+    #   vocabularies at a time. The maximum size of the page is set by the
+    #   `MaxResults` parameter. If there are more jobs in the list than the
+    #   page size, Amazon Transcribe Medical returns the `NextPage` token.
+    #   Include the token in the next request to the
+    #   `ListMedicalVocabularies` operation to return the next page of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabularies
+    #   A list of objects that describe the vocabularies that match the
+    #   search criteria in the request.
+    #   @return [Array<Types::VocabularyInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListMedicalVocabulariesResponse AWS API Documentation
+    #
+    class ListMedicalVocabulariesResponse < Struct.new(
+      :status,
+      :next_token,
+      :vocabularies)
       include Aws::Structure
     end
 
@@ -1092,6 +1332,7 @@ module Aws::TranscribeService
     #         channel_identification: false,
     #         show_alternatives: false,
     #         max_alternatives: 1,
+    #         vocabulary_name: "VocabularyName",
     #       }
     #
     # @!attribute [rw] show_speaker_labels
@@ -1143,6 +1384,11 @@ module Aws::TranscribeService
     #   `ShowAlternatives` field to true.
     #   @return [Integer]
     #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary to use when processing a medical
+    #   transcription job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/MedicalTranscriptionSetting AWS API Documentation
     #
     class MedicalTranscriptionSetting < Struct.new(
@@ -1150,7 +1396,8 @@ module Aws::TranscribeService
       :max_speaker_labels,
       :channel_identification,
       :show_alternatives,
-      :max_alternatives)
+      :max_alternatives,
+      :vocabulary_name)
       include Aws::Structure
     end
 
@@ -1282,6 +1529,7 @@ module Aws::TranscribeService
     #           channel_identification: false,
     #           show_alternatives: false,
     #           max_alternatives: 1,
+    #           vocabulary_name: "VocabularyName",
     #         },
     #         specialty: "PRIMARYCARE", # required, accepts PRIMARYCARE
     #         type: "CONVERSATION", # required, accepts CONVERSATION, DICTATION
@@ -1290,7 +1538,9 @@ module Aws::TranscribeService
     # @!attribute [rw] medical_transcription_job_name
     #   The name of the medical transcription job. You can't use the
     #   strings "." or ".." by themselves as the job name. The name must
-    #   also be unique within an AWS account.
+    #   also be unique within an AWS account. If you try to create a medical
+    #   transcription job with the same name as a previous medical
+    #   transcription job you will receive a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1382,10 +1632,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The speech of clinician in the input audio. `CONVERSATION` refers to
-    #   conversations clinicians have with patients. `DICTATION` refers to
-    #   medical professionals dictating their notes about a patient
-    #   encounter.
+    #   The type of speech in the input audio. `CONVERSATION` refers to
+    #   conversations between two or more speakers, e.g., a conversations
+    #   between doctors and patients. `DICTATION` refers to single-speaker
+    #   dictated speech, e.g., for clinical notes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartMedicalTranscriptionJobRequest AWS API Documentation
@@ -1451,7 +1701,9 @@ module Aws::TranscribeService
     # @!attribute [rw] transcription_job_name
     #   The name of the job. Note that you can't use the strings "." or
     #   ".." by themselves as the job name. The name must also be unique
-    #   within an AWS account.
+    #   within an AWS account. If you try to create a transcription job with
+    #   the same name as a previous transcription job you will receive a
+    #   `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1800,6 +2052,92 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateMedicalVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         vocabulary_file_uri: "Uri",
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary to update. The name is case-sensitive. If
+    #   you try to update a vocabulary with the same name as a previous
+    #   vocabulary you will receive a `ConflictException` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the entries in the updated vocabulary. US
+    #   English (en-US) is the only valid language code in Amazon Transcribe
+    #   Medical.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_file_uri
+    #   The Amazon S3 location of the text file containing the definition of
+    #   the custom vocabulary. The URI must be in the same AWS region as the
+    #   API endpoint you are calling. You can see the fields you need to
+    #   enter for you Amazon S3 location in the example URI here:
+    #
+    #   `
+    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #   For more information about custom vocabularies in Amazon Transcribe
+    #   Medical, see [Medical Custom Vocabularies][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
+    #   [2]: http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateMedicalVocabularyRequest AWS API Documentation
+    #
+    class UpdateMedicalVocabularyRequest < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :vocabulary_file_uri)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_name
+    #   The name of the updated vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code for the text file used to update the custom
+    #   vocabulary. US English (en-US) is the only language supported in
+    #   Amazon Transcribe Medical.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the vocabulary was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of the update to the vocabulary. When the
+    #   `VocabularyState` field is `READY` the vocabulary is ready to be
+    #   used in a `StartMedicalTranscriptionJob` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateMedicalVocabularyResponse AWS API Documentation
+    #
+    class UpdateMedicalVocabularyResponse < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :last_modified_time,
+      :vocabulary_state)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateVocabularyFilterRequest
     #   data as a hash:
     #
@@ -1810,7 +2148,9 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_filter_name
-    #   The name of the vocabulary filter to update.
+    #   The name of the vocabulary filter to update. If you try to update a
+    #   vocabulary filter with the same name as a previous vocabulary filter
+    #   you will receive a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] words
@@ -1884,7 +2224,9 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] vocabulary_name
-    #   The name of the vocabulary to update. The name is case-sensitive.
+    #   The name of the vocabulary to update. The name is case-sensitive. If
+    #   you try to update a vocabulary with the same name as a previous
+    #   vocabulary you will receive a `ConflictException` error.
     #   @return [String]
     #
     # @!attribute [rw] language_code

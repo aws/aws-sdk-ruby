@@ -27,6 +27,7 @@ module Aws::WAFRegional
   # ## Error Classes
   # * {WAFBadRequestException}
   # * {WAFDisallowedNameException}
+  # * {WAFEntityMigrationException}
   # * {WAFInternalErrorException}
   # * {WAFInvalidAccountException}
   # * {WAFInvalidOperationException}
@@ -78,6 +79,31 @@ module Aws::WAFRegional
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class WAFEntityMigrationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFRegional::Types::WAFEntityMigrationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def migration_error_type
+        @data[:migration_error_type]
+      end
+
+      # @return [String]
+      def migration_error_reason
+        @data[:migration_error_reason]
       end
     end
 

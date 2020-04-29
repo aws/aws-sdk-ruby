@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.306.0 (2020-04-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTSiteWise`.
+
 1.305.0 (2020-04-28)
 ------------------
 

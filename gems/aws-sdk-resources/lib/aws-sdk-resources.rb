@@ -114,6 +114,7 @@ module Aws
   autoload :IoTEventsData, 'aws-sdk-ioteventsdata'
   autoload :IoTJobsDataPlane, 'aws-sdk-iotjobsdataplane'
   autoload :IoTSecureTunneling, 'aws-sdk-iotsecuretunneling'
+  autoload :IoTSiteWise, 'aws-sdk-iotsitewise'
   autoload :IoTThingsGraph, 'aws-sdk-iotthingsgraph'
   autoload :KMS, 'aws-sdk-kms'
   autoload :Kafka, 'aws-sdk-kafka'

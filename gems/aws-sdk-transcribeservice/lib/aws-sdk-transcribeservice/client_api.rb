@@ -15,6 +15,8 @@ module Aws::TranscribeService
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentRedaction = Shapes::StructureShape.new(name: 'ContentRedaction')
+    CreateMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'CreateMedicalVocabularyRequest')
+    CreateMedicalVocabularyResponse = Shapes::StructureShape.new(name: 'CreateMedicalVocabularyResponse')
     CreateVocabularyFilterRequest = Shapes::StructureShape.new(name: 'CreateVocabularyFilterRequest')
     CreateVocabularyFilterResponse = Shapes::StructureShape.new(name: 'CreateVocabularyFilterResponse')
     CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
@@ -22,12 +24,15 @@ module Aws::TranscribeService
     DataAccessRoleArn = Shapes::StringShape.new(name: 'DataAccessRoleArn')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteMedicalTranscriptionJobRequest')
+    DeleteMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteMedicalVocabularyRequest')
     DeleteTranscriptionJobRequest = Shapes::StructureShape.new(name: 'DeleteTranscriptionJobRequest')
     DeleteVocabularyFilterRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyFilterRequest')
     DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GetMedicalTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobRequest')
     GetMedicalTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetMedicalTranscriptionJobResponse')
+    GetMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'GetMedicalVocabularyRequest')
+    GetMedicalVocabularyResponse = Shapes::StructureShape.new(name: 'GetMedicalVocabularyResponse')
     GetTranscriptionJobRequest = Shapes::StructureShape.new(name: 'GetTranscriptionJobRequest')
     GetTranscriptionJobResponse = Shapes::StructureShape.new(name: 'GetTranscriptionJobResponse')
     GetVocabularyFilterRequest = Shapes::StructureShape.new(name: 'GetVocabularyFilterRequest')
@@ -41,6 +46,8 @@ module Aws::TranscribeService
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListMedicalTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsRequest')
     ListMedicalTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListMedicalTranscriptionJobsResponse')
+    ListMedicalVocabulariesRequest = Shapes::StructureShape.new(name: 'ListMedicalVocabulariesRequest')
+    ListMedicalVocabulariesResponse = Shapes::StructureShape.new(name: 'ListMedicalVocabulariesResponse')
     ListTranscriptionJobsRequest = Shapes::StructureShape.new(name: 'ListTranscriptionJobsRequest')
     ListTranscriptionJobsResponse = Shapes::StructureShape.new(name: 'ListTranscriptionJobsResponse')
     ListVocabulariesRequest = Shapes::StructureShape.new(name: 'ListVocabulariesRequest')
@@ -80,6 +87,8 @@ module Aws::TranscribeService
     TranscriptionJobSummaries = Shapes::ListShape.new(name: 'TranscriptionJobSummaries')
     TranscriptionJobSummary = Shapes::StructureShape.new(name: 'TranscriptionJobSummary')
     Type = Shapes::StringShape.new(name: 'Type')
+    UpdateMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'UpdateMedicalVocabularyRequest')
+    UpdateMedicalVocabularyResponse = Shapes::StructureShape.new(name: 'UpdateMedicalVocabularyResponse')
     UpdateVocabularyFilterRequest = Shapes::StructureShape.new(name: 'UpdateVocabularyFilterRequest')
     UpdateVocabularyFilterResponse = Shapes::StructureShape.new(name: 'UpdateVocabularyFilterResponse')
     UpdateVocabularyRequest = Shapes::StructureShape.new(name: 'UpdateVocabularyRequest')
@@ -105,6 +114,18 @@ module Aws::TranscribeService
     ContentRedaction.add_member(:redaction_type, Shapes::ShapeRef.new(shape: RedactionType, required: true, location_name: "RedactionType"))
     ContentRedaction.add_member(:redaction_output, Shapes::ShapeRef.new(shape: RedactionOutput, required: true, location_name: "RedactionOutput"))
     ContentRedaction.struct_class = Types::ContentRedaction
+
+    CreateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
+    CreateMedicalVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    CreateMedicalVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "VocabularyFileUri"))
+    CreateMedicalVocabularyRequest.struct_class = Types::CreateMedicalVocabularyRequest
+
+    CreateMedicalVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    CreateMedicalVocabularyResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    CreateMedicalVocabularyResponse.add_member(:vocabulary_state, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "VocabularyState"))
+    CreateMedicalVocabularyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    CreateMedicalVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    CreateMedicalVocabularyResponse.struct_class = Types::CreateMedicalVocabularyResponse
 
     CreateVocabularyFilterRequest.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, required: true, location_name: "VocabularyFilterName"))
     CreateVocabularyFilterRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
@@ -133,6 +154,9 @@ module Aws::TranscribeService
     DeleteMedicalTranscriptionJobRequest.add_member(:medical_transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "MedicalTranscriptionJobName"))
     DeleteMedicalTranscriptionJobRequest.struct_class = Types::DeleteMedicalTranscriptionJobRequest
 
+    DeleteMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
+    DeleteMedicalVocabularyRequest.struct_class = Types::DeleteMedicalVocabularyRequest
+
     DeleteTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     DeleteTranscriptionJobRequest.struct_class = Types::DeleteTranscriptionJobRequest
 
@@ -147,6 +171,17 @@ module Aws::TranscribeService
 
     GetMedicalTranscriptionJobResponse.add_member(:medical_transcription_job, Shapes::ShapeRef.new(shape: MedicalTranscriptionJob, location_name: "MedicalTranscriptionJob"))
     GetMedicalTranscriptionJobResponse.struct_class = Types::GetMedicalTranscriptionJobResponse
+
+    GetMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
+    GetMedicalVocabularyRequest.struct_class = Types::GetMedicalVocabularyRequest
+
+    GetMedicalVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    GetMedicalVocabularyResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    GetMedicalVocabularyResponse.add_member(:vocabulary_state, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "VocabularyState"))
+    GetMedicalVocabularyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    GetMedicalVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    GetMedicalVocabularyResponse.add_member(:download_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "DownloadUri"))
+    GetMedicalVocabularyResponse.struct_class = Types::GetMedicalVocabularyResponse
 
     GetTranscriptionJobRequest.add_member(:transcription_job_name, Shapes::ShapeRef.new(shape: TranscriptionJobName, required: true, location_name: "TranscriptionJobName"))
     GetTranscriptionJobRequest.struct_class = Types::GetTranscriptionJobRequest
@@ -195,6 +230,17 @@ module Aws::TranscribeService
     ListMedicalTranscriptionJobsResponse.add_member(:medical_transcription_job_summaries, Shapes::ShapeRef.new(shape: MedicalTranscriptionJobSummaries, location_name: "MedicalTranscriptionJobSummaries"))
     ListMedicalTranscriptionJobsResponse.struct_class = Types::ListMedicalTranscriptionJobsResponse
 
+    ListMedicalVocabulariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMedicalVocabulariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMedicalVocabulariesRequest.add_member(:state_equals, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "StateEquals"))
+    ListMedicalVocabulariesRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "NameContains"))
+    ListMedicalVocabulariesRequest.struct_class = Types::ListMedicalVocabulariesRequest
+
+    ListMedicalVocabulariesResponse.add_member(:status, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "Status"))
+    ListMedicalVocabulariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMedicalVocabulariesResponse.add_member(:vocabularies, Shapes::ShapeRef.new(shape: Vocabularies, location_name: "Vocabularies"))
+    ListMedicalVocabulariesResponse.struct_class = Types::ListMedicalVocabulariesResponse
+
     ListTranscriptionJobsRequest.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
     ListTranscriptionJobsRequest.add_member(:job_name_contains, Shapes::ShapeRef.new(shape: TranscriptionJobName, location_name: "JobNameContains"))
     ListTranscriptionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -212,7 +258,7 @@ module Aws::TranscribeService
     ListVocabulariesRequest.add_member(:name_contains, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "NameContains"))
     ListVocabulariesRequest.struct_class = Types::ListVocabulariesRequest
 
-    ListVocabulariesResponse.add_member(:status, Shapes::ShapeRef.new(shape: TranscriptionJobStatus, location_name: "Status"))
+    ListVocabulariesResponse.add_member(:status, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "Status"))
     ListVocabulariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListVocabulariesResponse.add_member(:vocabularies, Shapes::ShapeRef.new(shape: Vocabularies, location_name: "Vocabularies"))
     ListVocabulariesResponse.struct_class = Types::ListVocabulariesResponse
@@ -267,6 +313,7 @@ module Aws::TranscribeService
     MedicalTranscriptionSetting.add_member(:channel_identification, Shapes::ShapeRef.new(shape: Boolean, location_name: "ChannelIdentification"))
     MedicalTranscriptionSetting.add_member(:show_alternatives, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowAlternatives"))
     MedicalTranscriptionSetting.add_member(:max_alternatives, Shapes::ShapeRef.new(shape: MaxAlternatives, location_name: "MaxAlternatives"))
+    MedicalTranscriptionSetting.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
     MedicalTranscriptionSetting.struct_class = Types::MedicalTranscriptionSetting
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -347,6 +394,17 @@ module Aws::TranscribeService
     TranscriptionJobSummary.add_member(:content_redaction, Shapes::ShapeRef.new(shape: ContentRedaction, location_name: "ContentRedaction"))
     TranscriptionJobSummary.struct_class = Types::TranscriptionJobSummary
 
+    UpdateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
+    UpdateMedicalVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    UpdateMedicalVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFileUri"))
+    UpdateMedicalVocabularyRequest.struct_class = Types::UpdateMedicalVocabularyRequest
+
+    UpdateMedicalVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
+    UpdateMedicalVocabularyResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    UpdateMedicalVocabularyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    UpdateMedicalVocabularyResponse.add_member(:vocabulary_state, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "VocabularyState"))
+    UpdateMedicalVocabularyResponse.struct_class = Types::UpdateMedicalVocabularyResponse
+
     UpdateVocabularyFilterRequest.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, required: true, location_name: "VocabularyFilterName"))
     UpdateVocabularyFilterRequest.add_member(:words, Shapes::ShapeRef.new(shape: Words, location_name: "Words"))
     UpdateVocabularyFilterRequest.add_member(:vocabulary_filter_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFilterFileUri"))
@@ -405,6 +463,18 @@ module Aws::TranscribeService
         "uid" => "transcribe-2017-10-26",
       }
 
+      api.add_operation(:create_medical_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMedicalVocabulary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateMedicalVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMedicalVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_vocabulary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateVocabulary"
         o.http_method = "POST"
@@ -435,6 +505,18 @@ module Aws::TranscribeService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteMedicalTranscriptionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:delete_medical_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMedicalVocabulary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMedicalVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -487,6 +569,18 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:get_medical_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMedicalVocabulary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMedicalVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMedicalVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_transcription_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTranscriptionJob"
         o.http_method = "POST"
@@ -529,6 +623,23 @@ module Aws::TranscribeService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListMedicalTranscriptionJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMedicalTranscriptionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_medical_vocabularies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMedicalVocabularies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMedicalVocabulariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMedicalVocabulariesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
@@ -612,6 +723,19 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_medical_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMedicalVocabulary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMedicalVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMedicalVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
