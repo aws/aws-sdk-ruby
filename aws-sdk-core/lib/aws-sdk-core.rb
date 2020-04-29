@@ -134,6 +134,7 @@ module Aws
     IoTEventsData
     IoTJobsDataPlane
     IoTSecureTunneling
+    IoTSiteWise
     IoTThingsGraph
     KMS
     Kafka

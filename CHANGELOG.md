@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ServiceDiscovery - Updated the documentation for AWS Cloud Map.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
+* Feature - Aws::IoTSiteWise - Added support for a new service, AWS IoT SiteWise.
+
 2.11.496 (2020-04-28)
 ------------------
 

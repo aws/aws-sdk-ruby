@@ -314,6 +314,7 @@ to be backwards compatible.
 | AWS IoT Events Data                                   | IoTEventsData                   | 2018-10-23  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS IoT Secure Tunneling                              | IoTSecureTunneling              | 2018-10-05  |
+| AWS IoT SiteWise                                      | IoTSiteWise                     | 2019-12-02  |
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |

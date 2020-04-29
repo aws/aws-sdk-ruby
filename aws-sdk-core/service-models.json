@@ -442,6 +442,10 @@
     "models": "iotsecuretunneling/2018-10-05",
     "endpoint": "api.tunneling.iot"
   },
+  "IoTSiteWise": {
+    "models": "iotsitewise/2019-12-02",
+    "endpoint": "iotsitewise"
+  },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06",
     "endpoint": "iotthingsgraph"
