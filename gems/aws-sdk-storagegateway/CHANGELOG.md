@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-04-30)
+------------------
+
+* Feature - Adding support for S3_INTELLIGENT_TIERING as a storage class option
+
 1.38.0 (2020-04-23)
 ------------------
 

@@ -2041,37 +2041,6 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
-    # @option params [required, Array<Types::TagrisSweepListItem>] :tagris_sweep_list
-    #
-    # @return [Types::TagrisVerifyResourcesExistOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::TagrisVerifyResourcesExistOutput#tagris_sweep_list_result #tagris_sweep_list_result} => Hash&lt;String,String&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.verify_resources_exist_for_tagris({
-    #     tagris_sweep_list: [ # required
-    #       {
-    #         tagris_account_id: "TagrisAccountId",
-    #         tagris_amazon_resource_name: "TagrisAmazonResourceName",
-    #         tagris_internal_id: "TagrisInternalId",
-    #         tagris_version: 1,
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.tagris_sweep_list_result #=> Hash
-    #   resp.tagris_sweep_list_result["TagrisAmazonResourceName"] #=> String, one of "ACTIVE", "NOT_ACTIVE"
-    #
-    # @overload verify_resources_exist_for_tagris(params = {})
-    # @param [Hash] params ({})
-    def verify_resources_exist_for_tagris(params = {}, options = {})
-      req = build_request(:verify_resources_exist_for_tagris, params)
-      req.send_request(options)
-    end
-
     # @!endgroup
 
     # @param params ({})
@@ -2085,7 +2054,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

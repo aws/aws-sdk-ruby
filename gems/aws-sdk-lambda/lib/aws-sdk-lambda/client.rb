@@ -1021,7 +1021,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
-    # @example Example: To update an asynchronous invocation configuration
+    # @example Example: To create a function
     #
     #   # The following example creates a function with a deployment package in Amazon S3 and enables X-Ray tracing and
     #   # environment variable encryption.
@@ -5358,7 +5358,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

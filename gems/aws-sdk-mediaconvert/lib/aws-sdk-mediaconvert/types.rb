@@ -2472,6 +2472,9 @@ module Aws::MediaConvert
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
+    #         mxf_settings: {
+    #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #         },
     #       }
     #
     # @!attribute [rw] cmfc_settings
@@ -2519,6 +2522,10 @@ module Aws::MediaConvert
     #   Settings for MP4 segments in DASH
     #   @return [Types::MpdSettings]
     #
+    # @!attribute [rw] mxf_settings
+    #   MXF settings
+    #   @return [Types::MxfSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ContainerSettings AWS API Documentation
     #
     class ContainerSettings < Struct.new(
@@ -2529,7 +2536,8 @@ module Aws::MediaConvert
       :m3u_8_settings,
       :mov_settings,
       :mp_4_settings,
-      :mpd_settings)
+      :mpd_settings,
+      :mxf_settings)
       include Aws::Structure
     end
 
@@ -3224,6 +3232,9 @@ module Aws::MediaConvert
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #                     },
     #                   },
     #                   extension: "__string",
@@ -4333,6 +4344,9 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     },
     #                   },
     #                   extension: "__string",
     #                   name_modifier: "__stringMin1",
@@ -5012,6 +5026,9 @@ module Aws::MediaConvert
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #             },
+    #             mxf_settings: {
+    #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #             },
     #           },
     #           video_description: {
@@ -8691,8 +8708,8 @@ module Aws::MediaConvert
     # @!attribute [rw] style_passthrough
     #   Keep this setting enabled to have MediaConvert use the font style
     #   and position information from the captions source in the output.
-    #   This option is available only when your input captions are CFF-TT,
-    #   IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output
+    #   This option is available only when your input captions are IMSC,
+    #   SMPTE-TT, or TTML. Disable this setting for simplified output
     #   captions.
     #   @return [String]
     #
@@ -10406,6 +10423,9 @@ module Aws::MediaConvert
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
+    #                   mxf_settings: {
+    #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                   },
     #                 },
     #                 extension: "__string",
     #                 name_modifier: "__stringMin1",
@@ -11530,6 +11550,9 @@ module Aws::MediaConvert
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                   },
+    #                   mxf_settings: {
+    #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #                   },
     #                 },
     #                 extension: "__string",
@@ -13557,6 +13580,35 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # MXF settings
+    #
+    # @note When making an API call, you may pass MxfSettings
+    #   data as a hash:
+    #
+    #       {
+    #         afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #       }
+    #
+    # @!attribute [rw] afd_signaling
+    #   Optional. When you have AFD signaling set up in your output video
+    #   stream, use this setting to choose whether to also include it in the
+    #   MXF wrapper. Choose Don't copy (NO\_COPY) to exclude AFD signaling
+    #   from the MXF wrapper. Choose Copy from video stream
+    #   (COPY\_FROM\_VIDEO) to copy the AFD values from the video stream for
+    #   this output to the MXF wrapper. Regardless of which option you
+    #   choose, the AFD values remain in the video stream. Related settings:
+    #   To set up your output to include or exclude AFD values, see
+    #   AfdSignaling, under VideoDescription. On the console, find AFD
+    #   signaling under the output's video encoding settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MxfSettings AWS API Documentation
+    #
+    class MxfSettings < Struct.new(
+      :afd_signaling)
+      include Aws::Structure
+    end
+
     # Settings for your Nielsen configuration. If you don't do Nielsen
     # measurement and analytics, ignore these settings. When you enable
     # Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM
@@ -14046,6 +14098,9 @@ module Aws::MediaConvert
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           },
+    #           mxf_settings: {
+    #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #           },
     #         },
     #         extension: "__string",
@@ -14928,6 +14983,9 @@ module Aws::MediaConvert
     #                 caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #               },
+    #               mxf_settings: {
+    #                 afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #               },
     #             },
     #             extension: "__string",
@@ -15873,6 +15931,9 @@ module Aws::MediaConvert
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           },
+    #           mxf_settings: {
+    #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #           },
     #         },
     #         video_description: {
@@ -17196,7 +17257,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] style_passthrough
     #   Pass through style and position information from a TTML-like input
-    #   source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+    #   source (TTML, SMPTE-TT) to the TTML output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings AWS API Documentation
@@ -17927,6 +17988,9 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     },
     #                   },
     #                   extension: "__string",
     #                   name_modifier: "__stringMin1",
@@ -18593,6 +18657,9 @@ module Aws::MediaConvert
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #             },
+    #             mxf_settings: {
+    #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
     #             },
     #           },
     #           video_description: {

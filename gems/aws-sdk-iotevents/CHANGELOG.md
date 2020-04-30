@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-04-30)
+------------------
+
+* Feature - Doc only update to correct APIs and related descriptions
+
 1.12.0 (2020-04-20)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-04-30)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for including AFD signaling in MXF wrapper.
+
 1.46.0 (2020-04-16)
 ------------------
 

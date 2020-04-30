@@ -133,23 +133,6 @@ module Aws::IoTEvents
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
-    TagrisAccessDeniedException = Shapes::StructureShape.new(name: 'TagrisAccessDeniedException')
-    TagrisAccountId = Shapes::StringShape.new(name: 'TagrisAccountId')
-    TagrisAmazonResourceName = Shapes::StringShape.new(name: 'TagrisAmazonResourceName')
-    TagrisExceptionMessage = Shapes::StringShape.new(name: 'TagrisExceptionMessage')
-    TagrisInternalId = Shapes::StringShape.new(name: 'TagrisInternalId')
-    TagrisInternalServiceException = Shapes::StructureShape.new(name: 'TagrisInternalServiceException')
-    TagrisInvalidArnException = Shapes::StructureShape.new(name: 'TagrisInvalidArnException')
-    TagrisInvalidParameterException = Shapes::StructureShape.new(name: 'TagrisInvalidParameterException')
-    TagrisPartialResourcesExistResultsException = Shapes::StructureShape.new(name: 'TagrisPartialResourcesExistResultsException')
-    TagrisStatus = Shapes::StringShape.new(name: 'TagrisStatus')
-    TagrisSweepList = Shapes::ListShape.new(name: 'TagrisSweepList')
-    TagrisSweepListItem = Shapes::StructureShape.new(name: 'TagrisSweepListItem')
-    TagrisSweepListResult = Shapes::MapShape.new(name: 'TagrisSweepListResult')
-    TagrisThrottledException = Shapes::StructureShape.new(name: 'TagrisThrottledException')
-    TagrisVerifyResourcesExistInput = Shapes::StructureShape.new(name: 'TagrisVerifyResourcesExistInput')
-    TagrisVerifyResourcesExistOutput = Shapes::StructureShape.new(name: 'TagrisVerifyResourcesExistOutput')
-    TagrisVersion = Shapes::IntegerShape.new(name: 'TagrisVersion')
     Tags = Shapes::ListShape.new(name: 'Tags')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimerName = Shapes::StringShape.new(name: 'TimerName')
@@ -494,43 +477,6 @@ module Aws::IoTEvents
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    TagrisAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisAccessDeniedException.struct_class = Types::TagrisAccessDeniedException
-
-    TagrisInternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisInternalServiceException.struct_class = Types::TagrisInternalServiceException
-
-    TagrisInvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisInvalidArnException.add_member(:sweep_list_item, Shapes::ShapeRef.new(shape: TagrisSweepListItem, location_name: "sweepListItem"))
-    TagrisInvalidArnException.struct_class = Types::TagrisInvalidArnException
-
-    TagrisInvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisInvalidParameterException.struct_class = Types::TagrisInvalidParameterException
-
-    TagrisPartialResourcesExistResultsException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisPartialResourcesExistResultsException.add_member(:resource_existence_information, Shapes::ShapeRef.new(shape: TagrisSweepListResult, location_name: "resourceExistenceInformation"))
-    TagrisPartialResourcesExistResultsException.struct_class = Types::TagrisPartialResourcesExistResultsException
-
-    TagrisSweepList.member = Shapes::ShapeRef.new(shape: TagrisSweepListItem)
-
-    TagrisSweepListItem.add_member(:tagris_account_id, Shapes::ShapeRef.new(shape: TagrisAccountId, location_name: "TagrisAccountId"))
-    TagrisSweepListItem.add_member(:tagris_amazon_resource_name, Shapes::ShapeRef.new(shape: TagrisAmazonResourceName, location_name: "TagrisAmazonResourceName"))
-    TagrisSweepListItem.add_member(:tagris_internal_id, Shapes::ShapeRef.new(shape: TagrisInternalId, location_name: "TagrisInternalId"))
-    TagrisSweepListItem.add_member(:tagris_version, Shapes::ShapeRef.new(shape: TagrisVersion, location_name: "TagrisVersion"))
-    TagrisSweepListItem.struct_class = Types::TagrisSweepListItem
-
-    TagrisSweepListResult.key = Shapes::ShapeRef.new(shape: TagrisAmazonResourceName)
-    TagrisSweepListResult.value = Shapes::ShapeRef.new(shape: TagrisStatus)
-
-    TagrisThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisThrottledException.struct_class = Types::TagrisThrottledException
-
-    TagrisVerifyResourcesExistInput.add_member(:tagris_sweep_list, Shapes::ShapeRef.new(shape: TagrisSweepList, required: true, location_name: "TagrisSweepList"))
-    TagrisVerifyResourcesExistInput.struct_class = Types::TagrisVerifyResourcesExistInput
-
-    TagrisVerifyResourcesExistOutput.add_member(:tagris_sweep_list_result, Shapes::ShapeRef.new(shape: TagrisSweepListResult, required: true, location_name: "TagrisSweepListResult"))
-    TagrisVerifyResourcesExistOutput.struct_class = Types::TagrisVerifyResourcesExistOutput
-
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -801,20 +747,6 @@ module Aws::IoTEvents
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
-      end)
-
-      api.add_operation(:verify_resources_exist_for_tagris, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "VerifyResourcesExistForTagris"
-        o.http_method = "GET"
-        o.http_request_uri = "/internal/tags/resource-status"
-        o.input = Shapes::ShapeRef.new(shape: TagrisVerifyResourcesExistInput)
-        o.output = Shapes::ShapeRef.new(shape: TagrisVerifyResourcesExistOutput)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisAccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisInternalServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisInvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisPartialResourcesExistResultsException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisThrottledException)
       end)
     end
 

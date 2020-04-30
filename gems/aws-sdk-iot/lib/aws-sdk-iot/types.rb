@@ -1134,7 +1134,7 @@ module Aws::IoT
     #
     #       {
     #         action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
-    #         resources: ["Resource"],
+    #         resources: ["Resource"], # required
     #       }
     #
     # @!attribute [rw] action_type
@@ -1758,6 +1758,10 @@ module Aws::IoT
     #   used.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_mode
+    #   The mode of the certificate.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date and time the certificate was created.
     #   @return [Time]
@@ -1766,6 +1770,7 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       :status,
+      :certificate_mode,
       :creation_date)
       include Aws::Structure
     end
@@ -1839,6 +1844,10 @@ module Aws::IoT
     #   When the certificate is valid.
     #   @return [Types::CertificateValidity]
     #
+    # @!attribute [rw] certificate_mode
+    #   The mode of the certificate.
+    #   @return [String]
+    #
     class CertificateDescription < Struct.new(
       :certificate_arn,
       :certificate_id,
@@ -1852,7 +1861,8 @@ module Aws::IoT
       :customer_version,
       :transfer_data,
       :generation_id,
-      :validity)
+      :validity,
+      :certificate_mode)
       include Aws::Structure
     end
 
@@ -2174,6 +2184,12 @@ module Aws::IoT
     #           "KeyName" => "KeyValue",
     #         },
     #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         signing_disabled: false,
     #       }
     #
@@ -2199,6 +2215,21 @@ module Aws::IoT
     #   The status of the create authorizer request.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the custom authorizer.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] signing_disabled
     #   Specifies whether AWS IoT validates the token signature in an
     #   authorization request.
@@ -2210,6 +2241,7 @@ module Aws::IoT
       :token_key_name,
       :token_signing_public_keys,
       :status,
+      :tags,
       :signing_disabled)
       include Aws::Structure
     end
@@ -2238,7 +2270,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2338,7 +2370,7 @@ module Aws::IoT
     #         string_values: ["DimensionStringValue"], # required
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2411,6 +2443,12 @@ module Aws::IoT
     #           allow_authorizer_override: false,
     #         },
     #         service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain_configuration_name
@@ -2441,7 +2479,26 @@ module Aws::IoT
     #
     # @!attribute [rw] service_type
     #   The type of service delivered by the endpoint.
+    #
+    #   <note markdown="1"> AWS IoT Core currently supports only the `DATA` service type.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the domain configuration.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
     #
     class CreateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
@@ -2449,7 +2506,8 @@ module Aws::IoT
       :server_certificate_arns,
       :validation_certificate_arn,
       :authorizer_config,
-      :service_type)
+      :service_type,
+      :tags)
       include Aws::Structure
     end
 
@@ -2486,7 +2544,7 @@ module Aws::IoT
     #         query_version: "QueryVersion",
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2615,7 +2673,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2797,7 +2855,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2912,7 +2970,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3023,6 +3081,12 @@ module Aws::IoT
     #       {
     #         policy_name: "PolicyName", # required
     #         policy_document: "PolicyDocument", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] policy_name
@@ -3035,9 +3099,25 @@ module Aws::IoT
     #   whitespace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the policy.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     class CreatePolicyRequest < Struct.new(
       :policy_name,
-      :policy_document)
+      :policy_document,
+      :tags)
       include Aws::Structure
     end
 
@@ -3176,9 +3256,13 @@ module Aws::IoT
     #         template_body: "TemplateBody", # required
     #         enabled: false,
     #         provisioning_role_arn: "RoleArn", # required
+    #         pre_provisioning_hook: {
+    #           payload_version: "PayloadVersion",
+    #           target_arn: "TargetArn", # required
+    #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3205,6 +3289,10 @@ module Aws::IoT
     #   template. This IoT role grants permission to provision a device.
     #   @return [String]
     #
+    # @!attribute [rw] pre_provisioning_hook
+    #   Creates a pre-provisioning hook template.
+    #   @return [Types::ProvisioningHook]
+    #
     # @!attribute [rw] tags
     #   Metadata which can be used to manage the fleet provisioning
     #   template.
@@ -3227,6 +3315,7 @@ module Aws::IoT
       :template_body,
       :enabled,
       :provisioning_role_arn,
+      :pre_provisioning_hook,
       :tags)
       include Aws::Structure
     end
@@ -3310,6 +3399,12 @@ module Aws::IoT
     #         role_alias: "RoleAlias", # required
     #         role_arn: "RoleArn", # required
     #         credential_duration_seconds: 1,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] role_alias
@@ -3325,10 +3420,26 @@ module Aws::IoT
     #   How long (in seconds) the credentials will be valid.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the role alias.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     class CreateRoleAliasRequest < Struct.new(
       :role_alias,
       :role_arn,
-      :credential_duration_seconds)
+      :credential_duration_seconds,
+      :tags)
       include Aws::Structure
     end
 
@@ -3357,7 +3468,7 @@ module Aws::IoT
     #         scheduled_audit_name: "ScheduledAuditName", # required
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3468,7 +3579,7 @@ module Aws::IoT
     #         ],
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3556,7 +3667,7 @@ module Aws::IoT
     #         role_arn: "RoleArn", # required
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3633,7 +3744,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3701,6 +3812,10 @@ module Aws::IoT
     #
     # @!attribute [rw] thing_name
     #   The name of the thing to create.
+    #
+    #   You can't change a thing's name after you create it. To change a
+    #   thing's name, you must create a new thing, give it the new name,
+    #   and then delete the old thing.
     #   @return [String]
     #
     # @!attribute [rw] thing_type_name
@@ -3760,7 +3875,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -5631,6 +5746,10 @@ module Aws::IoT
     #   IoT role grants permission to provision a device.
     #   @return [String]
     #
+    # @!attribute [rw] pre_provisioning_hook
+    #   Gets information about a pre-provisioned hook.
+    #   @return [Types::ProvisioningHook]
+    #
     class DescribeProvisioningTemplateResponse < Struct.new(
       :template_arn,
       :template_name,
@@ -5640,7 +5759,8 @@ module Aws::IoT
       :default_version_id,
       :template_body,
       :enabled,
-      :provisioning_role_arn)
+      :provisioning_role_arn,
+      :pre_provisioning_hook)
       include Aws::Structure
     end
 
@@ -6055,7 +6175,16 @@ module Aws::IoT
     # The output from the DescribeThing operation.
     #
     # @!attribute [rw] default_client_id
-    #   The default client ID.
+    #   The default MQTT client ID. For a typical device, the thing name is
+    #   also used as the default MQTT client ID. Although we don’t require a
+    #   mapping between a thing's registry name and its use of MQTT client
+    #   IDs, certificates, or shadow state, we recommend that you choose a
+    #   thing name and use it as the MQTT client ID for the registry and the
+    #   Device Shadow service.
+    #
+    #   This lets you better organize your AWS IoT fleet without removing
+    #   the flexibility of the underlying device certificate model or
+    #   shadows.
     #   @return [String]
     #
     # @!attribute [rw] thing_name
@@ -10519,9 +10648,9 @@ module Aws::IoT
     #
     # @!attribute [rw] operator
     #   Defines how the `dimensionValues` of a dimension are interpreted.
-    #   For example, for DimensionType TOPIC\_FILTER, with `IN` operator, a
+    #   For example, for dimension type TOPIC\_FILTER, the `IN` operator, a
     #   message will be counted only if its topic matches one of the topic
-    #   filters. With `NOT_IN` Operator, a message will be counted only if
+    #   filters. With `NOT_IN` operator, a message will be counted only if
     #   it doesn't match any of the topic filters. The operator is
     #   optional: if it's not provided (is `null`), it will be interpreted
     #   as `IN`.
@@ -11117,6 +11246,34 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Structure that contains `payloadVersion` and `targetArn`.
+    #
+    # @note When making an API call, you may pass ProvisioningHook
+    #   data as a hash:
+    #
+    #       {
+    #         payload_version: "PayloadVersion",
+    #         target_arn: "TargetArn", # required
+    #       }
+    #
+    # @!attribute [rw] payload_version
+    #   The payload that was sent to the target function.
+    #
+    #   *Note:* Only Lambda functions are currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the target function.
+    #
+    #   *Note:* Only Lambda functions are currently supported.
+    #   @return [String]
+    #
+    class ProvisioningHook < Struct.new(
+      :payload_version,
+      :target_arn)
+      include Aws::Structure
+    end
+
     # A summary of information about a fleet provisioning template.
     #
     # @!attribute [rw] template_arn
@@ -11321,6 +11478,12 @@ module Aws::IoT
     #           template_body: "TemplateBody",
     #           role_arn: "RoleArn",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] ca_certificate
@@ -11345,12 +11508,28 @@ module Aws::IoT
     #   Information about the registration configuration.
     #   @return [Types::RegistrationConfig]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the CA certificate.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     class RegisterCACertificateRequest < Struct.new(
       :ca_certificate,
       :verification_certificate,
       :set_as_active,
       :allow_auto_registration,
-      :registration_config)
+      :registration_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -11423,6 +11602,43 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RegisterCertificateWithoutCARequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_pem: "CertificatePem", # required
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
+    #       }
+    #
+    # @!attribute [rw] certificate_pem
+    #   The certificate data, in PEM format.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the register certificate request.
+    #   @return [String]
+    #
+    class RegisterCertificateWithoutCARequest < Struct.new(
+      :certificate_pem,
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the registered certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The ID of the registered certificate. (The last part of the
+    #   certificate ARN contains the certificate ID.
+    #   @return [String]
+    #
+    class RegisterCertificateWithoutCAResponse < Struct.new(
+      :certificate_arn,
+      :certificate_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterThingRequest
     #   data as a hash:
     #
@@ -11443,12 +11659,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters for provisioning a thing. See [Programmatic
-    #   Provisioning][1] for more information.
+    #   The parameters for provisioning a thing. See [Provisioning
+    #   Templates][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
     #   @return [Hash<String,String>]
     #
     class RegisterThingRequest < Struct.new(
@@ -11458,7 +11674,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] certificate_pem
-    #   .
+    #   The certificate data, in PEM format.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -13137,7 +13353,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       }
     #
@@ -13162,7 +13378,7 @@ module Aws::IoT
     #         resource_arn: "ResourceArn", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -13283,7 +13499,7 @@ module Aws::IoT
     #         auth_infos: [ # required
     #           {
     #             action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
-    #             resources: ["Resource"],
+    #             resources: ["Resource"], # required
     #           },
     #         ],
     #         client_id: "ClientId",
@@ -13371,7 +13587,7 @@ module Aws::IoT
     #
     # @!attribute [rw] token_signature
     #   The signature made with the token and your custom authentication
-    #   service's private key.
+    #   service's private key. This value must be Base-64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] http_context
@@ -15209,6 +15425,11 @@ module Aws::IoT
     #         enabled: false,
     #         default_version_id: 1,
     #         provisioning_role_arn: "RoleArn",
+    #         pre_provisioning_hook: {
+    #           payload_version: "PayloadVersion",
+    #           target_arn: "TargetArn", # required
+    #         },
+    #         remove_pre_provisioning_hook: false,
     #       }
     #
     # @!attribute [rw] template_name
@@ -15232,12 +15453,22 @@ module Aws::IoT
     #   IoT role grants permission to provision a device.
     #   @return [String]
     #
+    # @!attribute [rw] pre_provisioning_hook
+    #   Updates the pre-provisioning hook template.
+    #   @return [Types::ProvisioningHook]
+    #
+    # @!attribute [rw] remove_pre_provisioning_hook
+    #   Removes pre-provisioning hook template.
+    #   @return [Boolean]
+    #
     class UpdateProvisioningTemplateRequest < Struct.new(
       :template_name,
       :description,
       :enabled,
       :default_version_id,
-      :provisioning_role_arn)
+      :provisioning_role_arn,
+      :pre_provisioning_hook,
+      :remove_pre_provisioning_hook)
       include Aws::Structure
     end
 
@@ -15706,6 +15937,10 @@ module Aws::IoT
     #
     # @!attribute [rw] thing_name
     #   The name of the thing to update.
+    #
+    #   You can't change a thing's name. To change a thing's name, you
+    #   must create a new thing, give it the new name, and then delete the
+    #   old thing.
     #   @return [String]
     #
     # @!attribute [rw] thing_type_name

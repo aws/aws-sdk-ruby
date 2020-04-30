@@ -400,6 +400,10 @@ module Aws::Schemas
 
     # Creates a schema definition.
     #
+    # <note markdown="1">Inactive schemas will be deleted after two years.
+    #
+    # </note>
+    #
     # @option params [required, String] :content
     #
     # @option params [String] :description
@@ -497,6 +501,27 @@ module Aws::Schemas
     # @param [Hash] params ({})
     def delete_registry(params = {}, options = {})
       req = build_request(:delete_registry, params)
+      req.send_request(options)
+    end
+
+    # Delete the resource-based policy attached to the specified registry.
+    #
+    # @option params [String] :registry_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     registry_name: "__string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -786,6 +811,35 @@ module Aws::Schemas
       req.send_request(options)
     end
 
+    # Retrieves the resource-based policy attached to a given registry.
+    #
+    # @option params [String] :registry_name
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #   * {Types::GetResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     registry_name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # List the discoverers.
     #
     # @option params [String] :discoverer_id_prefix
@@ -993,44 +1047,6 @@ module Aws::Schemas
       req.send_request(options)
     end
 
-    # @option params [required, String] :role_arn
-    #
-    # @option params [required, Integer] :timeout
-    #
-    # @return [Types::LockServiceLinkedRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::LockServiceLinkedRoleResponse#can_be_deleted #can_be_deleted} => Boolean
-    #   * {Types::LockServiceLinkedRoleResponse#reason_of_failure #reason_of_failure} => String
-    #   * {Types::LockServiceLinkedRoleResponse#related_resources #related_resources} => Array&lt;Types::DiscovererSummary&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.lock_service_linked_role({
-    #     role_arn: "__stringMin1Max1600", # required
-    #     timeout: 1, # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.can_be_deleted #=> Boolean
-    #   resp.reason_of_failure #=> String
-    #   resp.related_resources #=> Array
-    #   resp.related_resources[0].discoverer_arn #=> String
-    #   resp.related_resources[0].discoverer_id #=> String
-    #   resp.related_resources[0].source_arn #=> String
-    #   resp.related_resources[0].state #=> String, one of "STARTED", "STOPPED"
-    #   resp.related_resources[0].tags #=> Hash
-    #   resp.related_resources[0].tags["__string"] #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/LockServiceLinkedRole AWS API Documentation
-    #
-    # @overload lock_service_linked_role(params = {})
-    # @param [Hash] params ({})
-    def lock_service_linked_role(params = {}, options = {})
-      req = build_request(:lock_service_linked_role, params)
-      req.send_request(options)
-    end
-
     # Put code binding URI
     #
     # @option params [required, String] :language
@@ -1070,6 +1086,44 @@ module Aws::Schemas
     # @param [Hash] params ({})
     def put_code_binding(params = {}, options = {})
       req = build_request(:put_code_binding, params)
+      req.send_request(options)
+    end
+
+    # The name of the policy.
+    #
+    # @option params [required, String] :policy
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @option params [String] :registry_name
+    #
+    # @option params [String] :revision_id
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy #policy} => String
+    #   * {Types::PutResourcePolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy: "__string", # required
+    #     registry_name: "__string",
+    #     revision_id: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -1204,25 +1258,6 @@ module Aws::Schemas
       req.send_request(options)
     end
 
-    # @option params [required, String] :role_arn
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.unlock_service_linked_role({
-    #     role_arn: "__stringMin1Max1600", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UnlockServiceLinkedRole AWS API Documentation
-    #
-    # @overload unlock_service_linked_role(params = {})
-    # @param [Hash] params ({})
-    def unlock_service_linked_role(params = {}, options = {})
-      req = build_request(:unlock_service_linked_role, params)
-      req.send_request(options)
-    end
-
     # Removes tags from a resource.
     #
     # @option params [required, String] :resource_arn
@@ -1327,6 +1362,10 @@ module Aws::Schemas
 
     # Updates the schema definition
     #
+    # <note markdown="1">Inactive schemas will be deleted after two years.
+    #
+    # </note>
+    #
     # @option params [String] :client_token_id
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1397,7 +1436,7 @@ module Aws::Schemas
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-schemas'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

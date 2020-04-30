@@ -1317,8 +1317,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] timeout
-    #   The amount of time that Lambda allows a function to run before
-    #   stopping it.
+    #   The amount of time in seconds that Lambda allows a function to run
+    #   before stopping it.
     #   @return [Integer]
     #
     # @!attribute [rw] memory_size

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-04-30)
+------------------
+
+* Feature - Documentation updates for Lambda
+
 1.39.0 (2020-04-16)
 ------------------
 

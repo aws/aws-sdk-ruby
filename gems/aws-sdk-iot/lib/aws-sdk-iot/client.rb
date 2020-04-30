@@ -800,6 +800,20 @@ module Aws::IoT
     # @option params [String] :status
     #   The status of the create authorizer request.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the custom authorizer.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @option params [Boolean] :signing_disabled
     #   Specifies whether AWS IoT validates the token signature in an
     #   authorization request.
@@ -819,6 +833,12 @@ module Aws::IoT
     #       "KeyName" => "KeyValue",
     #     },
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     signing_disabled: false,
     #   })
     #
@@ -860,7 +880,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1003,7 +1023,7 @@ module Aws::IoT
     #     string_values: ["DimensionStringValue"], # required
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1053,6 +1073,24 @@ module Aws::IoT
     # @option params [String] :service_type
     #   The type of service delivered by the endpoint.
     #
+    #   <note markdown="1"> AWS IoT Core currently supports only the `DATA` service type.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the domain configuration.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1070,6 +1108,12 @@ module Aws::IoT
     #       allow_authorizer_override: false,
     #     },
     #     service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1146,7 +1190,7 @@ module Aws::IoT
     #     query_version: "QueryVersion",
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1271,7 +1315,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1384,7 +1428,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1521,7 +1565,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1556,6 +1600,20 @@ module Aws::IoT
     #   have a minimum length of 1, with a maximum length of 2048, excluding
     #   whitespace.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the policy.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::CreatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyResponse#policy_name #policy_name} => String
@@ -1568,6 +1626,12 @@ module Aws::IoT
     #   resp = client.create_policy({
     #     policy_name: "PolicyName", # required
     #     policy_document: "PolicyDocument", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1688,6 +1752,9 @@ module Aws::IoT
     #   The role ARN for the role associated with the fleet provisioning
     #   template. This IoT role grants permission to provision a device.
     #
+    # @option params [Types::ProvisioningHook] :pre_provisioning_hook
+    #   Creates a pre-provisioning hook template.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the fleet provisioning template.
     #
@@ -1716,9 +1783,13 @@ module Aws::IoT
     #     template_body: "TemplateBody", # required
     #     enabled: false,
     #     provisioning_role_arn: "RoleArn", # required
+    #     pre_provisioning_hook: {
+    #       payload_version: "PayloadVersion",
+    #       target_arn: "TargetArn", # required
+    #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1789,6 +1860,20 @@ module Aws::IoT
     # @option params [Integer] :credential_duration_seconds
     #   How long (in seconds) the credentials will be valid.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the role alias.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::CreateRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoleAliasResponse#role_alias #role_alias} => String
@@ -1800,6 +1885,12 @@ module Aws::IoT
     #     role_alias: "RoleAlias", # required
     #     role_arn: "RoleArn", # required
     #     credential_duration_seconds: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1860,7 +1951,7 @@ module Aws::IoT
     #     scheduled_audit_name: "ScheduledAuditName", # required
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1962,7 +2053,7 @@ module Aws::IoT
     #     ],
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -2026,7 +2117,7 @@ module Aws::IoT
     #     role_arn: "RoleArn", # required
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -2062,6 +2153,10 @@ module Aws::IoT
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
+    #
+    #   You can't change a thing's name after you create it. To change a
+    #   thing's name, you must create a new thing, give it the new name, and
+    #   then delete the old thing.
     #
     # @option params [String] :thing_type_name
     #   The name of the thing type associated with the new thing.
@@ -2153,7 +2248,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -2201,7 +2296,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -3639,6 +3734,7 @@ module Aws::IoT
     #   resp.certificate_description.generation_id #=> String
     #   resp.certificate_description.validity.not_before #=> Time
     #   resp.certificate_description.validity.not_after #=> Time
+    #   resp.certificate_description.certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
@@ -4035,6 +4131,7 @@ module Aws::IoT
     #   * {Types::DescribeProvisioningTemplateResponse#template_body #template_body} => String
     #   * {Types::DescribeProvisioningTemplateResponse#enabled #enabled} => Boolean
     #   * {Types::DescribeProvisioningTemplateResponse#provisioning_role_arn #provisioning_role_arn} => String
+    #   * {Types::DescribeProvisioningTemplateResponse#pre_provisioning_hook #pre_provisioning_hook} => Types::ProvisioningHook
     #
     # @example Request syntax with placeholder values
     #
@@ -4053,6 +4150,8 @@ module Aws::IoT
     #   resp.template_body #=> String
     #   resp.enabled #=> Boolean
     #   resp.provisioning_role_arn #=> String
+    #   resp.pre_provisioning_hook.payload_version #=> String
+    #   resp.pre_provisioning_hook.target_arn #=> String
     #
     # @overload describe_provisioning_template(params = {})
     # @param [Hash] params ({})
@@ -5819,6 +5918,7 @@ module Aws::IoT
     #   resp.certificates[0].certificate_arn #=> String
     #   resp.certificates[0].certificate_id #=> String
     #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
+    #   resp.certificates[0].certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.certificates[0].creation_date #=> Time
     #   resp.next_marker #=> String
     #
@@ -5865,6 +5965,7 @@ module Aws::IoT
     #   resp.certificates[0].certificate_arn #=> String
     #   resp.certificates[0].certificate_id #=> String
     #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
+    #   resp.certificates[0].certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.certificates[0].creation_date #=> Time
     #   resp.next_marker #=> String
     #
@@ -7456,6 +7557,20 @@ module Aws::IoT
     # @option params [Types::RegistrationConfig] :registration_config
     #   Information about the registration configuration.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the CA certificate.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::RegisterCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterCACertificateResponse#certificate_arn #certificate_arn} => String
@@ -7472,6 +7587,12 @@ module Aws::IoT
     #       template_body: "TemplateBody",
     #       role_arn: "RoleArn",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7530,6 +7651,39 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Register a certificate that does not have a certificate authority
+    # (CA).
+    #
+    # @option params [required, String] :certificate_pem
+    #   The certificate data, in PEM format.
+    #
+    # @option params [String] :status
+    #   The status of the register certificate request.
+    #
+    # @return [Types::RegisterCertificateWithoutCAResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterCertificateWithoutCAResponse#certificate_arn #certificate_arn} => String
+    #   * {Types::RegisterCertificateWithoutCAResponse#certificate_id #certificate_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_certificate_without_ca({
+    #     certificate_pem: "CertificatePem", # required
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_arn #=> String
+    #   resp.certificate_id #=> String
+    #
+    # @overload register_certificate_without_ca(params = {})
+    # @param [Hash] params ({})
+    def register_certificate_without_ca(params = {}, options = {})
+      req = build_request(:register_certificate_without_ca, params)
+      req.send_request(options)
+    end
+
     # Provisions a thing in the device registry. RegisterThing calls other
     # AWS IoT control plane APIs. These calls might exceed your account
     # level [ AWS IoT Throttling Limits][1] and cause throttle errors.
@@ -7550,12 +7704,12 @@ module Aws::IoT
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html
     #
     # @option params [Hash<String,String>] :parameters
-    #   The parameters for provisioning a thing. See [Programmatic
-    #   Provisioning][1] for more information.
+    #   The parameters for provisioning a thing. See [Provisioning
+    #   Templates][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
     #
     # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8363,7 +8517,7 @@ module Aws::IoT
     #     resource_arn: "ResourceArn", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -8414,7 +8568,7 @@ module Aws::IoT
     #     auth_infos: [ # required
     #       {
     #         action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
-    #         resources: ["Resource"],
+    #         resources: ["Resource"], # required
     #       },
     #     ],
     #     client_id: "ClientId",
@@ -8460,7 +8614,7 @@ module Aws::IoT
     #
     # @option params [String] :token_signature
     #   The signature made with the token and your custom authentication
-    #   service's private key.
+    #   service's private key. This value must be Base-64-encoded.
     #
     # @option params [Types::HttpContext] :http_context
     #   Specifies a test HTTP authorization request.
@@ -9190,6 +9344,12 @@ module Aws::IoT
     #   The ARN of the role associated with the provisioning template. This
     #   IoT role grants permission to provision a device.
     #
+    # @option params [Types::ProvisioningHook] :pre_provisioning_hook
+    #   Updates the pre-provisioning hook template.
+    #
+    # @option params [Boolean] :remove_pre_provisioning_hook
+    #   Removes pre-provisioning hook template.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -9200,6 +9360,11 @@ module Aws::IoT
     #     enabled: false,
     #     default_version_id: 1,
     #     provisioning_role_arn: "RoleArn",
+    #     pre_provisioning_hook: {
+    #       payload_version: "PayloadVersion",
+    #       target_arn: "TargetArn", # required
+    #     },
+    #     remove_pre_provisioning_hook: false,
     #   })
     #
     # @overload update_provisioning_template(params = {})
@@ -9513,6 +9678,10 @@ module Aws::IoT
     # @option params [required, String] :thing_name
     #   The name of the thing to update.
     #
+    #   You can't change a thing's name. To change a thing's name, you must
+    #   create a new thing, give it the new name, and then delete the old
+    #   thing.
+    #
     # @option params [String] :thing_type_name
     #   The name of the thing type.
     #
@@ -9756,7 +9925,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

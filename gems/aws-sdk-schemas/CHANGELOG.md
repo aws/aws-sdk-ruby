@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-04-30)
+------------------
+
+* Feature - Add support for resource policies for Amazon EventBridge Schema Registry, which is now generally available.
+
 1.1.0 (2020-03-09)
 ------------------
 

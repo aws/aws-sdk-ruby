@@ -194,7 +194,7 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] iot_site_wise
     #   Sends information about the detector model instance and the event
-    #   that triggered the action to an AWS IoT SiteWise asset property.
+    #   that triggered the action to an asset property in AWS IoT SiteWise .
     #   @return [Types::IotSiteWiseAction]
     #
     class Action < Struct.new(
@@ -3951,122 +3951,6 @@ module Aws::IoTEvents
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    class TagrisAccessDeniedException < Struct.new(
-      :message)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    class TagrisInternalServiceException < Struct.new(
-      :message)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] sweep_list_item
-    #   @return [Types::TagrisSweepListItem]
-    #
-    class TagrisInvalidArnException < Struct.new(
-      :message,
-      :sweep_list_item)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    class TagrisInvalidParameterException < Struct.new(
-      :message)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_existence_information
-    #   @return [Hash<String,String>]
-    #
-    class TagrisPartialResourcesExistResultsException < Struct.new(
-      :message,
-      :resource_existence_information)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass TagrisSweepListItem
-    #   data as a hash:
-    #
-    #       {
-    #         tagris_account_id: "TagrisAccountId",
-    #         tagris_amazon_resource_name: "TagrisAmazonResourceName",
-    #         tagris_internal_id: "TagrisInternalId",
-    #         tagris_version: 1,
-    #       }
-    #
-    # @!attribute [rw] tagris_account_id
-    #   @return [String]
-    #
-    # @!attribute [rw] tagris_amazon_resource_name
-    #   @return [String]
-    #
-    # @!attribute [rw] tagris_internal_id
-    #   @return [String]
-    #
-    # @!attribute [rw] tagris_version
-    #   @return [Integer]
-    #
-    class TagrisSweepListItem < Struct.new(
-      :tagris_account_id,
-      :tagris_amazon_resource_name,
-      :tagris_internal_id,
-      :tagris_version)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    class TagrisThrottledException < Struct.new(
-      :message)
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass TagrisVerifyResourcesExistInput
-    #   data as a hash:
-    #
-    #       {
-    #         tagris_sweep_list: [ # required
-    #           {
-    #             tagris_account_id: "TagrisAccountId",
-    #             tagris_amazon_resource_name: "TagrisAmazonResourceName",
-    #             tagris_internal_id: "TagrisInternalId",
-    #             tagris_version: 1,
-    #           },
-    #         ],
-    #       }
-    #
-    # @!attribute [rw] tagris_sweep_list
-    #   @return [Array<Types::TagrisSweepListItem>]
-    #
-    class TagrisVerifyResourcesExistInput < Struct.new(
-      :tagris_sweep_list)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tagris_sweep_list_result
-    #   @return [Hash<String,String>]
-    #
-    class TagrisVerifyResourcesExistOutput < Struct.new(
-      :tagris_sweep_list_result)
-      include Aws::Structure
-    end
 
     # The request could not be completed due to throttling.
     #
