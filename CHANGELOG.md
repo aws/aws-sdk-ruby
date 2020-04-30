@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.498 (2020-04-30)
+------------------
+
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
 
 * Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
