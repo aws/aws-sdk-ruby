@@ -27,30 +27,15 @@ module Aws
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
-            elsif incomplete_response?(xml, context)
+            elsif !xml.match(/<[\w_]/) # Must have the start of an XML Tag
+              # Other incomplete xml bodies will result in XML ParsingError
               Seahorse::Client::NetworkingError.new(
                 S3::Errors
                   .error_class('InternalError')
-                  .new(context, 'Empty response body')
+                  .new(context, 'Empty or incomplete response body')
               )
             end
           end
-
-          private
-
-          # An S3 response is considered complete only if all output shapes
-          # expected in the body are present
-          def incomplete_response?(xml, context)
-            output_shapes = context.operation.output.shape.members
-            body_shapes = output_shapes.select do |symbol, shape_ref|
-              shape_ref.location.nil?
-            end
-
-            body_shapes.any? do |symbol, shape_ref|
-              !xml.include? "<#{shape_ref.location_name}"
-            end
-          end
-
         end
 
         handler(Handler,
