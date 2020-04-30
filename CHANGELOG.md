@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::IoTEvents - Updated the API, and documentation for AWS IoT Events.
+
+* Feature - Aws::Lambda - Updated the documentation for AWS Lambda.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::Schemas - Updated the API, and documentation for Schemas.
+
+* Feature - Aws::StorageGateway - Updated the API for AWS Storage Gateway.
+
 2.11.497 (2020-04-29)
 ------------------
 
