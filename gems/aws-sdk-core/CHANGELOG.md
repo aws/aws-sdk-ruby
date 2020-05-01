@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - When handling errors in XML responses, don't set a new error on the response if one is already set.
+
 3.94.0 (2020-04-08)
 ------------------
 

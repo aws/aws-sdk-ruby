@@ -6,7 +6,7 @@ module Aws
 
       def call(context)
         @handler.call(context).on(300..599) do |response|
-          response.error = error(context)
+          response.error = error(context) unless response.error
           response.data = nil
         end
       end
