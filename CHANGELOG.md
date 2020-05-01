@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.499 (2020-05-01)
+------------------
+
 * Feature - Aws::EFS - Updated the API for Amazon Elastic File System.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
