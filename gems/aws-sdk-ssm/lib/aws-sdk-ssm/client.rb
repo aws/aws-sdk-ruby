@@ -335,10 +335,11 @@ module Aws::SSM
     # for each resource type. Using a consistent set of tag keys makes it
     # easier for you to manage your resources. You can search and filter the
     # resources based on the tags you add. Tags don't have any semantic
-    # meaning to and are interpreted strictly as a string of characters.
+    # meaning to Amazon EC2 and are interpreted strictly as a string of
+    # characters.
     #
-    # For more information about using tags with EC2 instances, see [Tagging
-    # your Amazon EC2 resources][1] in the *Amazon EC2 User Guide*.
+    # For more information about tags, see [Tagging your Amazon EC2
+    # resources][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -928,17 +929,16 @@ module Aws::SSM
     #   For examples, see the following topics in the *AWS Systems Manager
     #   User Guide*.
     #
-    #   * [Create an SSM document (console)][1]
+    #   * [Create an SSM document (AWS API)][1]
     #
     #   * [Create an SSM document (AWS CLI)][2]
     #
-    #   * [Create an SSM document (API)][3]
+    #   * [Create an SSM document (API)][1]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-console.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html
     #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html
-    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html
     #
     # @option params [Array<Types::DocumentRequires>] :requires
     #   A list of SSM documents required by a document. This parameter is used
@@ -1277,7 +1277,7 @@ module Aws::SSM
     #   impacted resource.
     #
     # @option params [required, String] :source
-    #   The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
+    #   The origin of the OpsItem, such as EC2 or Systems Manager.
     #
     #   <note markdown="1"> The source name can't contain the following strings: aws, amazon, and
     #   amzn.
@@ -5915,8 +5915,7 @@ module Aws::SSM
     #
     # @option params [Array<Types::CommandFilter>] :filters
     #   (Optional) One or more filters. Use a filter to return a more specific
-    #   list of results. Note that the `DocumentName` filter is not supported
-    #   for ListCommandInvocations.
+    #   list of results.
     #
     # @option params [Boolean] :details
     #   (Optional) If set this returns the response of the command executions
@@ -6070,6 +6069,7 @@ module Aws::SSM
     #   resp.commands[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
     #   resp.commands[0].cloud_watch_output_config.cloud_watch_log_group_name #=> String
     #   resp.commands[0].cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.commands[0].timeout_seconds #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands AWS API Documentation
@@ -6281,10 +6281,10 @@ module Aws::SSM
     #   One or more DocumentKeyValuesFilter objects. Use a filter to return a
     #   more specific list of results. For keys, you can specify one or more
     #   key-value pair tags that have been applied to a document. Other valid
-    #   keys include `Owner`, `Name`, `PlatformTypes`, and `DocumentType`. For
-    #   example, to return documents you own use `Key=Owner,Values=Self`. To
-    #   specify a custom key-value pair, use the format
-    #   `Key=tag:tagName,Values=valueName`.
+    #   keys include `Owner`, `Name`, `PlatformTypes`, `DocumentType`, and
+    #   `TargetType`. For example, to return documents you own use
+    #   `Key=Owner,Values=Self`. To specify a custom key-value pair, use the
+    #   format `Key=tag:tagName,Values=valueName`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -7823,6 +7823,7 @@ module Aws::SSM
     #   resp.command.notification_config.notification_type #=> String, one of "Command", "Invocation"
     #   resp.command.cloud_watch_output_config.cloud_watch_log_group_name #=> String
     #   resp.command.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
+    #   resp.command.timeout_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand AWS API Documentation
     #
@@ -9481,7 +9482,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

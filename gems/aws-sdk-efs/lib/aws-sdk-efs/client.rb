@@ -1970,7 +1970,7 @@ module Aws::EFS
     # @option params [required, String] :resource_id
     #   Specifies the EFS resource that you want to remove tags from.
     #
-    # @option params [Array<String>] :tag_keys
+    # @option params [required, Array<String>] :tag_keys
     #   The keys of the key:value tag pairs that you want to remove from the
     #   specified EFS resource.
     #
@@ -1980,7 +1980,7 @@ module Aws::EFS
     #
     #   resp = client.untag_resource({
     #     resource_id: "ResourceId", # required
-    #     tag_keys: ["TagKey"],
+    #     tag_keys: ["TagKey"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UntagResource AWS API Documentation
@@ -2081,7 +2081,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

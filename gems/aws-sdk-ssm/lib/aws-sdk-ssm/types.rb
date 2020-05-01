@@ -1556,6 +1556,10 @@ module Aws::SSM
     #   the command output.
     #   @return [Types::CloudWatchOutputConfig]
     #
+    # @!attribute [rw] timeout_seconds
+    #   The `TimeoutSeconds` value specified for a command.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command AWS API Documentation
     #
     class Command < Struct.new(
@@ -1581,7 +1585,8 @@ module Aws::SSM
       :delivery_timed_out_count,
       :service_role,
       :notification_config,
-      :cloud_watch_output_config)
+      :cloud_watch_output_config,
+      :timeout_seconds)
       include Aws::Structure
     end
 
@@ -2777,17 +2782,16 @@ module Aws::SSM
     #   For examples, see the following topics in the *AWS Systems Manager
     #   User Guide*.
     #
-    #   * [Create an SSM document (console)][1]
+    #   * [Create an SSM document (AWS API)][1]
     #
     #   * [Create an SSM document (AWS CLI)][2]
     #
-    #   * [Create an SSM document (API)][3]
+    #   * [Create an SSM document (API)][1]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-console.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html
     #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html
-    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html
     #   @return [String]
     #
     # @!attribute [rw] requires
@@ -3121,7 +3125,7 @@ module Aws::SSM
     #   @return [Array<Types::RelatedOpsItem>]
     #
     # @!attribute [rw] source
-    #   The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
+    #   The origin of the OpsItem, such as EC2 or Systems Manager.
     #
     #   <note markdown="1"> The source name can't contain the following strings: aws, amazon,
     #   and amzn.
@@ -6283,8 +6287,8 @@ module Aws::SSM
     # For keys, you can specify one or more tags that have been applied to a
     # document.
     #
-    # Other valid values include Owner, Name, PlatformTypes, and
-    # DocumentType.
+    # Other valid values include `Owner`, `Name`, `PlatformTypes`,
+    # `DocumentType`, and `TargetType`.
     #
     # Note that only one Owner can be specified in a request. For example:
     # `Key=Owner,Values=Self`.
@@ -10229,8 +10233,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   (Optional) One or more filters. Use a filter to return a more
-    #   specific list of results. Note that the `DocumentName` filter is not
-    #   supported for ListCommandInvocations.
+    #   specific list of results.
     #   @return [Array<Types::CommandFilter>]
     #
     # @!attribute [rw] details
@@ -10545,8 +10548,8 @@ module Aws::SSM
     #   One or more DocumentKeyValuesFilter objects. Use a filter to return
     #   a more specific list of results. For keys, you can specify one or
     #   more key-value pair tags that have been applied to a document. Other
-    #   valid keys include `Owner`, `Name`, `PlatformTypes`, and
-    #   `DocumentType`. For example, to return documents you own use
+    #   valid keys include `Owner`, `Name`, `PlatformTypes`, `DocumentType`,
+    #   and `TargetType`. For example, to return documents you own use
     #   `Key=Owner,Values=Self`. To specify a custom key-value pair, use the
     #   format `Key=tag:tagName,Values=valueName`.
     #   @return [Array<Types::DocumentKeyValuesFilter>]

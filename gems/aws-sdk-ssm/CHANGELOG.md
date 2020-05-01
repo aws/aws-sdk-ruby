@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2020-05-01)
+------------------
+
+* Feature - Added TimeoutSeconds as part of ListCommands API response.
+
 1.74.0 (2020-04-28)
 ------------------
 
