@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the documentation for Amazon API Gateway.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::S3Control - Updated the API, and documentation for AWS S3 Control.
+
 2.11.499 (2020-05-01)
 ------------------
 
