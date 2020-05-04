@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.500 (2020-05-04)
+------------------
+
 * Feature - Aws::APIGateway - Updated the documentation for Amazon API Gateway.
 
 * Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
