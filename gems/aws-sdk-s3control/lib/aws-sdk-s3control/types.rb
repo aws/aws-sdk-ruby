@@ -16,15 +16,15 @@ module Aws::S3Control
     #
     # @!attribute [rw] network_origin
     #   Indicates whether this access point allows access from the public
-    #   Internet. If `VpcConfiguration` is specified for this access point,
+    #   internet. If `VpcConfiguration` is specified for this access point,
     #   then `NetworkOrigin` is `VPC`, and the access point doesn't allow
-    #   access from the public Internet. Otherwise, `NetworkOrigin` is
+    #   access from the public internet. Otherwise, `NetworkOrigin` is
     #   `Internet`, and the access point allows access from the public
-    #   Internet, subject to the access point and bucket access policies.
+    #   internet, subject to the access point and bucket access policies.
     #   @return [String]
     #
     # @!attribute [rw] vpc_configuration
-    #   The Virtual Private Cloud (VPC) configuration for this access point,
+    #   The virtual private cloud (VPC) configuration for this access point,
     #   if one exists.
     #   @return [Types::VpcConfiguration]
     #
@@ -86,7 +86,7 @@ module Aws::S3Control
     #
     # @!attribute [rw] vpc_configuration
     #   If you include this field, Amazon S3 restricts access to this access
-    #   point to requests from the specified Virtual Private Cloud (VPC).
+    #   point to requests from the specified virtual private cloud (VPC).
     #   @return [Types::VpcConfiguration]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -120,7 +120,7 @@ module Aws::S3Control
     #         confirmation_required: false,
     #         operation: { # required
     #           lambda_invoke: {
-    #             function_arn: "NonEmptyMaxLength1024String",
+    #             function_arn: "FunctionArnString",
     #           },
     #           s3_put_object_copy: {
     #             target_resource: "S3BucketArnString",
@@ -154,8 +154,8 @@ module Aws::S3Control
     #             },
     #             new_object_tagging: [
     #               {
-    #                 key: "NonEmptyMaxLength1024String", # required
-    #                 value: "MaxLength1024String", # required
+    #                 key: "TagKeyString", # required
+    #                 value: "TagValueString", # required
     #               },
     #             ],
     #             redirect_location: "NonEmptyMaxLength2048String",
@@ -192,14 +192,26 @@ module Aws::S3Control
     #           s3_put_object_tagging: {
     #             tag_set: [
     #               {
-    #                 key: "NonEmptyMaxLength1024String", # required
-    #                 value: "MaxLength1024String", # required
+    #                 key: "TagKeyString", # required
+    #                 value: "TagValueString", # required
     #               },
     #             ],
     #           },
     #           s3_initiate_restore_object: {
     #             expiration_in_days: 1,
     #             glacier_job_tier: "BULK", # accepts BULK, STANDARD
+    #           },
+    #           s3_put_object_legal_hold: {
+    #             legal_hold: { # required
+    #               status: "OFF", # required, accepts OFF, ON
+    #             },
+    #           },
+    #           s3_put_object_retention: {
+    #             bypass_governance_retention: false,
+    #             retention: { # required
+    #               retain_until_date: Time.now,
+    #               mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #             },
     #           },
     #         },
     #         report: { # required
@@ -226,8 +238,8 @@ module Aws::S3Control
     #         role_arn: "IAMRoleArn", # required
     #         tags: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #       }
@@ -281,14 +293,14 @@ module Aws::S3Control
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) for the Identity and Access
-    #   Management (IAM) Role that batch operations will use to execute this
+    #   The Amazon Resource Name (ARN) for the AWS Identity and Access
+    #   Management (IAM) role that Batch Operations will use to execute this
     #   job's operation on each object in the manifest.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   An optional set of tags to associate with the job when it is
-    #   created.
+    #   A set of tags to associate with the Amazon S3 Batch Operations job.
+    #   This is an optional parameter.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateJobRequest AWS API Documentation
@@ -376,12 +388,13 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the Amazon Web Services account associated with
-    #   the Amazon S3 batch operations job you want to remove tags from.
+    #   The AWS account ID associated with the Amazon S3 Batch Operations
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The ID for the job whose tags you want to delete.
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteJobTaggingRequest AWS API Documentation
@@ -556,15 +569,15 @@ module Aws::S3Control
     #
     # @!attribute [rw] network_origin
     #   Indicates whether this access point allows access from the public
-    #   Internet. If `VpcConfiguration` is specified for this access point,
+    #   internet. If `VpcConfiguration` is specified for this access point,
     #   then `NetworkOrigin` is `VPC`, and the access point doesn't allow
-    #   access from the public Internet. Otherwise, `NetworkOrigin` is
+    #   access from the public internet. Otherwise, `NetworkOrigin` is
     #   `Internet`, and the access point allows access from the public
-    #   Internet, subject to the access point and bucket access policies.
+    #   internet, subject to the access point and bucket access policies.
     #   @return [String]
     #
     # @!attribute [rw] vpc_configuration
-    #   Contains the Virtual Private Cloud (VPC) configuration for the
+    #   Contains the virtual private cloud (VPC) configuration for the
     #   specified access point.
     #   @return [Types::VpcConfiguration]
     #
@@ -605,12 +618,13 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the Amazon Web Services account associated with
-    #   the Amazon S3 batch operations job you want to retrieve tags for.
+    #   The AWS account ID associated with the Amazon S3 Batch Operations
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The ID for the job whose tags you want to retrieve.
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTaggingRequest AWS API Documentation
@@ -622,7 +636,7 @@ module Aws::S3Control
     end
 
     # @!attribute [rw] tags
-    #   The set of tags associated with the job.
+    #   The set of tags associated with the Amazon S3 Batch Operations job.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTaggingResult AWS API Documentation
@@ -773,8 +787,8 @@ module Aws::S3Control
     #   @return [Time]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) for the Identity and Access
-    #   Management (IAM) Role assigned to execute the tasks for this job.
+    #   The Amazon Resource Name (ARN) for the AWS Identity and Access
+    #   Management (IAM) role assigned to execute the tasks for this job.
     #   @return [String]
     #
     # @!attribute [rw] suspended_date
@@ -998,7 +1012,7 @@ module Aws::S3Control
     #
     #       {
     #         lambda_invoke: {
-    #           function_arn: "NonEmptyMaxLength1024String",
+    #           function_arn: "FunctionArnString",
     #         },
     #         s3_put_object_copy: {
     #           target_resource: "S3BucketArnString",
@@ -1032,8 +1046,8 @@ module Aws::S3Control
     #           },
     #           new_object_tagging: [
     #             {
-    #               key: "NonEmptyMaxLength1024String", # required
-    #               value: "MaxLength1024String", # required
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
     #             },
     #           ],
     #           redirect_location: "NonEmptyMaxLength2048String",
@@ -1070,14 +1084,26 @@ module Aws::S3Control
     #         s3_put_object_tagging: {
     #           tag_set: [
     #             {
-    #               key: "NonEmptyMaxLength1024String", # required
-    #               value: "MaxLength1024String", # required
+    #               key: "TagKeyString", # required
+    #               value: "TagValueString", # required
     #             },
     #           ],
     #         },
     #         s3_initiate_restore_object: {
     #           expiration_in_days: 1,
     #           glacier_job_tier: "BULK", # accepts BULK, STANDARD
+    #         },
+    #         s3_put_object_legal_hold: {
+    #           legal_hold: { # required
+    #             status: "OFF", # required, accepts OFF, ON
+    #           },
+    #         },
+    #         s3_put_object_retention: {
+    #           bypass_governance_retention: false,
+    #           retention: { # required
+    #             retain_until_date: Time.now,
+    #             mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #           },
     #         },
     #       }
     #
@@ -1106,6 +1132,28 @@ module Aws::S3Control
     #   call on each object in the manifest.
     #   @return [Types::S3InitiateRestoreObjectOperation]
     #
+    # @!attribute [rw] s3_put_object_legal_hold
+    #   Contains the configuration parameters for a Set Object Legal Hold
+    #   operation. Amazon S3 Batch Operations passes each value through to
+    #   the underlying PUT Object Legal Hold API. For more information about
+    #   the parameters for this operation, see [PUT Object Legal Hold][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds
+    #   @return [Types::S3SetObjectLegalHoldOperation]
+    #
+    # @!attribute [rw] s3_put_object_retention
+    #   Contains the configuration parameters for a Set Object Retention
+    #   operation. Amazon S3 Batch Operations passes each value through to
+    #   the underlying PUT Object Retention API. For more information about
+    #   the parameters for this operation, see [PUT Object Retention][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes
+    #   @return [Types::S3SetObjectRetentionOperation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/JobOperation AWS API Documentation
     #
     class JobOperation < Struct.new(
@@ -1113,7 +1161,9 @@ module Aws::S3Control
       :s3_put_object_copy,
       :s3_put_object_acl,
       :s3_put_object_tagging,
-      :s3_initiate_restore_object)
+      :s3_initiate_restore_object,
+      :s3_put_object_legal_hold,
+      :s3_put_object_retention)
       include Aws::Structure
     end
 
@@ -1205,7 +1255,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         function_arn: "NonEmptyMaxLength1024String",
+    #         function_arn: "FunctionArnString",
     #       }
     #
     # @!attribute [rw] function_arn
@@ -1291,7 +1341,7 @@ module Aws::S3Control
     #       {
     #         account_id: "AccountId", # required
     #         job_statuses: ["Active"], # accepts Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended
-    #         next_token: "NonEmptyMaxLength1024String",
+    #         next_token: "StringForNextToken",
     #         max_results: 1,
     #       }
     #
@@ -1511,23 +1561,25 @@ module Aws::S3Control
     #         job_id: "JobId", # required
     #         tags: [ # required
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the Amazon Web Services account associated with
-    #   the Amazon S3 batch operations job you want to replace tags on.
+    #   The AWS account ID associated with the Amazon S3 Batch Operations
+    #   job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   The ID for the job whose tags you want to replace.
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   replace.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The set of tags to associate with the job.
+    #   The set of tags to associate with the Amazon S3 Batch Operations
+    #   job.
     #   @return [Array<Types::S3Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutJobTaggingRequest AWS API Documentation
@@ -1646,7 +1698,7 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for a PUT Copy object operation.
-    # Amazon S3 batch operations passes each value through to the underlying
+    # Amazon S3 Batch Operations passes each value through to the underlying
     # PUT Copy object API. For more information about the parameters for
     # this operation, see [PUT Object - Copy][1].
     #
@@ -1689,8 +1741,8 @@ module Aws::S3Control
     #         },
     #         new_object_tagging: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #         redirect_location: "NonEmptyMaxLength2048String",
@@ -1744,12 +1796,18 @@ module Aws::S3Control
     #   @return [String]
     #
     # @!attribute [rw] object_lock_legal_hold_status
+    #   The Legal Hold status to be applied to all objects in the Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
+    #   The Retention mode to be applied to all objects in the Batch
+    #   Operations job.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_retain_until_date
+    #   The date when the applied Object Retention configuration will expire
+    #   on all objects in the Batch Operations job.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
@@ -1828,7 +1886,7 @@ module Aws::S3Control
     end
 
     # Contains the configuration parameters for an Initiate Glacier Restore
-    # job. Amazon S3 batch operations passes each value through to the
+    # job. Amazon S3 Batch Operations passes each value through to the
     # underlying POST Object restore API. For more information about the
     # parameters for this operation, see [Restoring Archives][1].
     #
@@ -1855,6 +1913,25 @@ module Aws::S3Control
     class S3InitiateRestoreObjectOperation < Struct.new(
       :expiration_in_days,
       :glacier_job_tier)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass S3ObjectLockLegalHold
+    #   data as a hash:
+    #
+    #       {
+    #         status: "OFF", # required, accepts OFF, ON
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The Legal Hold status to be applied to all objects in the Batch
+    #   Operations job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectLockLegalHold AWS API Documentation
+    #
+    class S3ObjectLockLegalHold < Struct.new(
+      :status)
       include Aws::Structure
     end
 
@@ -1949,8 +2026,34 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass S3Retention
+    #   data as a hash:
+    #
+    #       {
+    #         retain_until_date: Time.now,
+    #         mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #       }
+    #
+    # @!attribute [rw] retain_until_date
+    #   The date when the applied Object Retention will expire on all
+    #   objects in the Batch Operations job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] mode
+    #   The Retention mode to be applied to all objects in the Batch
+    #   Operations job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Retention AWS API Documentation
+    #
+    class S3Retention < Struct.new(
+      :retain_until_date,
+      :mode)
+      include Aws::Structure
+    end
+
     # Contains the configuration parameters for a Set Object ACL operation.
-    # Amazon S3 batch operations passes each value through to the underlying
+    # Amazon S3 Batch Operations passes each value through to the underlying
     # PUT Object acl API. For more information about the parameters for this
     # operation, see [PUT Object acl][1].
     #
@@ -1993,8 +2096,77 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Contains the configuration parameters for a Set Object Legal Hold
+    # operation. Amazon S3 Batch Operations passes each value through to the
+    # underlying PUT Object Legal Hold API. For more information about the
+    # parameters for this operation, see [PUT Object Legal Hold][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds
+    #
+    # @note When making an API call, you may pass S3SetObjectLegalHoldOperation
+    #   data as a hash:
+    #
+    #       {
+    #         legal_hold: { # required
+    #           status: "OFF", # required, accepts OFF, ON
+    #         },
+    #       }
+    #
+    # @!attribute [rw] legal_hold
+    #   The Legal Hold contains the status to be applied to all objects in
+    #   the Batch Operations job.
+    #   @return [Types::S3ObjectLockLegalHold]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3SetObjectLegalHoldOperation AWS API Documentation
+    #
+    class S3SetObjectLegalHoldOperation < Struct.new(
+      :legal_hold)
+      include Aws::Structure
+    end
+
+    # Contains the configuration parameters for a Set Object Retention
+    # operation. Amazon S3 Batch Operations passes each value through to the
+    # underlying PUT Object Retention API. For more information about the
+    # parameters for this operation, see [PUT Object Retention][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes
+    #
+    # @note When making an API call, you may pass S3SetObjectRetentionOperation
+    #   data as a hash:
+    #
+    #       {
+    #         bypass_governance_retention: false,
+    #         retention: { # required
+    #           retain_until_date: Time.now,
+    #           mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bypass_governance_retention
+    #   Indicates if the operation should be applied to objects in the Batch
+    #   Operations job even if they have Governance-type Object Lock in
+    #   place.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention
+    #   Amazon S3 object lock Retention contains the retention mode to be
+    #   applied to all objects in the Batch Operations job.
+    #   @return [Types::S3Retention]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3SetObjectRetentionOperation AWS API Documentation
+    #
+    class S3SetObjectRetentionOperation < Struct.new(
+      :bypass_governance_retention,
+      :retention)
+      include Aws::Structure
+    end
+
     # Contains the configuration parameters for a Set Object Tagging
-    # operation. Amazon S3 batch operations passes each value through to the
+    # operation. Amazon S3 Batch Operations passes each value through to the
     # underlying PUT Object tagging API. For more information about the
     # parameters for this operation, see [PUT Object tagging][1].
     #
@@ -2008,8 +2180,8 @@ module Aws::S3Control
     #       {
     #         tag_set: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #       }
@@ -2028,8 +2200,8 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         key: "NonEmptyMaxLength1024String", # required
-    #         value: "MaxLength1024String", # required
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
     #       }
     #
     # @!attribute [rw] key
@@ -2169,7 +2341,7 @@ module Aws::S3Control
       include Aws::Structure
     end
 
-    # The Virtual Private Cloud (VPC) configuration for an access point.
+    # The virtual private cloud (VPC) configuration for an access point.
     #
     # @note When making an API call, you may pass VpcConfiguration
     #   data as a hash:

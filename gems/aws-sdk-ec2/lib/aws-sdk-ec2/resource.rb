@@ -1246,7 +1246,7 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [required, String] :association_id
     #   The association ID representing the current association between the
-    #   route table and subnet.
+    #   route table and subnet or gateway.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-05-04)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports Object Lock.
+
 1.16.0 (2020-03-16)
 ------------------
 

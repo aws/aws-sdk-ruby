@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.63.1 (2020-05-04)
+------------------
+
 * Issue - Handle copy_object, complete_multipart_upload, and upload_part_copy http responses with 200 OK and incomplete bodies as errors.
 
 1.63.0 (2020-04-22)

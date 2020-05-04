@@ -4702,9 +4702,6 @@ module Aws::EC2
     #   spaces. For the AWS CLI, use single quotation marks (' ') to
     #   surround the parameter value.
     #
-    #   Only applicable to flow logs that are published to an Amazon S3
-    #   bucket.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
@@ -25558,6 +25555,8 @@ module Aws::EC2
     # For more information, see [ClassicLink][1] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
+    # You must specify a VPC ID in the request.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
@@ -25761,7 +25760,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Disassociates a subnet from a route table.
+    # Disassociates a subnet or gateway from a route table.
     #
     # After you perform this action, the subnet no longer uses the routes in
     # the route table. Instead, it uses the routes in the VPC's main route
@@ -25774,7 +25773,7 @@ module Aws::EC2
     #
     # @option params [required, String] :association_id
     #   The association ID representing the current association between the
-    #   route table and subnet.
+    #   route table and subnet or gateway.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -26294,6 +26293,8 @@ module Aws::EC2
     # VPC resolves to its private IP address when addressed from a linked
     # EC2-Classic instance. For more information, see [ClassicLink][1] in
     # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # You must specify a VPC ID in the request.
     #
     #
     #
@@ -36825,7 +36826,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

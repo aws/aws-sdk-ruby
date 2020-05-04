@@ -6583,7 +6583,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference-guide.html
+    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference.html
     #   @return [String]
     #
     class Template < Struct.new(

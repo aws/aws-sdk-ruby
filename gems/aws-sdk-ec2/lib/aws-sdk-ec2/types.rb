@@ -5542,9 +5542,6 @@ module Aws::EC2
     #   spaces. For the AWS CLI, use single quotation marks (' ') to
     #   surround the parameter value.
     #
-    #   Only applicable to flow logs that are published to an Amazon S3
-    #   bucket.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
@@ -22240,7 +22237,7 @@ module Aws::EC2
     #
     # @!attribute [rw] association_id
     #   The association ID representing the current association between the
-    #   route table and subnet.
+    #   route table and subnet or gateway.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
