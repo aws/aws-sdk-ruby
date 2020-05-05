@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::Support - Updated the documentation for AWS Support.
+
 2.11.500 (2020-05-04)
 ------------------
 
