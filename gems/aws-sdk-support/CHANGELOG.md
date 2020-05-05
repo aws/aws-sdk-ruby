@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-05-05)
+------------------
+
+* Feature - Documentation updates for support
+
 1.18.0 (2020-03-09)
 ------------------
 

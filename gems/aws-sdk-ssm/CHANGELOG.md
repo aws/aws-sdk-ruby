@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2020-05-05)
+------------------
+
+* Feature - AWS Systems Manager Parameter Store launches new data type to support aliases in EC2 APIs
+
 1.75.0 (2020-05-01)
 ------------------
 

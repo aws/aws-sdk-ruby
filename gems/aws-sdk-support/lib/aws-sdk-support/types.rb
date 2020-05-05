@@ -29,8 +29,14 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] attachments
-    #   One or more attachments to add to the set. The limit is 3
-    #   attachments per set, and the size limit is 5 MB per attachment.
+    #   One or more attachments to add to the set. You can add up to three
+    #   attachments per set. The size limit is 5 MB per attachment.
+    #
+    #   In the `Attachment` object, use the `data` parameter to specify the
+    #   contents of the attachment file. In the previous request syntax, the
+    #   value for `data` appear as `blob`, which is represented as a
+    #   base64-encoded string. The value for `fileName` is the name of the
+    #   attachment, such as `troubleshoot-screenshot.png`.
     #   @return [Array<Types::Attachment>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetRequest AWS API Documentation
@@ -199,7 +205,7 @@ module Aws::Support
     #
     # @!attribute [rw] message
     #   The expiration time of the attachment set has passed. The set
-    #   expires 1 hour after it is created.
+    #   expires one hour after it is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetExpired AWS API Documentation
@@ -223,11 +229,11 @@ module Aws::Support
     end
 
     # A limit for the size of an attachment set has been exceeded. The
-    # limits are 3 attachments and 5 MB per attachment.
+    # limits are three attachments and 5 MB per attachment.
     #
     # @!attribute [rw] message
     #   A limit for the size of an attachment set has been exceeded. The
-    #   limits are 3 attachments and 5 MB per attachment.
+    #   limits are three attachments and 5 MB per attachment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentSetSizeLimitExceeded AWS API Documentation
@@ -285,9 +291,20 @@ module Aws::Support
     #   The possible values are: `low`, `normal`, `high`, `urgent`, and
     #   `critical`.
     #
-    # * **status.** The status of the case in the AWS Support Center. The
-    #   possible values are: `resolved`, `pending-customer-action`,
-    #   `opened`, `unassigned`, and `work-in-progress`.
+    # * **status.** The status of the case in the AWS Support Center. Valid
+    #   values:
+    #
+    #   * `opened`
+    #
+    #   * `pending-customer-action`
+    #
+    #   * `reopened`
+    #
+    #   * `resolved`
+    #
+    #   * `unassigned`
+    #
+    #   * `work-in-progress`
     #
     # * **subject.** The subject line of the case.
     #
@@ -312,9 +329,21 @@ module Aws::Support
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the case. Valid values: `resolved` \|
-    #   `pending-customer-action` \| `opened` \| `unassigned` \|
-    #   `work-in-progress`.
+    #   The status of the case.
+    #
+    #   Valid values:
+    #
+    #   * `opened`
+    #
+    #   * `pending-customer-action`
+    #
+    #   * `reopened`
+    #
+    #   * `resolved`
+    #
+    #   * `unassigned`
+    #
+    #   * `work-in-progress`
     #   @return [String]
     #
     # @!attribute [rw] service_code
@@ -467,63 +496,81 @@ module Aws::Support
     #       }
     #
     # @!attribute [rw] subject
-    #   The title of the AWS Support case.
+    #   The title of the AWS Support case. The title appears in the
+    #   **Subject** field on the AWS Support Center [Create Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   The code for the AWS service returned by the call to
-    #   DescribeServices.
+    #   The code for the AWS service. You can use the DescribeServices
+    #   operation to get the possible `serviceCode` values.
     #   @return [String]
     #
     # @!attribute [rw] severity_code
-    #   The code for the severity level returned by the call to
-    #   DescribeSeverityLevels.
+    #   A value that indicates the urgency of the case. This value
+    #   determines the response time according to your service level
+    #   agreement with AWS Support. You can use the DescribeSeverityLevels
+    #   operation to get the possible values for `severityCode`.
+    #
+    #   For more information, see SeverityLevel and [Choosing a Severity][1]
+    #   in the *AWS Support User Guide*.
     #
     #   <note markdown="1"> The availability of severity levels depends on the support plan for
-    #   the account.
+    #   the AWS account.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
     #   @return [String]
     #
     # @!attribute [rw] category_code
-    #   The category of problem for the AWS Support case.
+    #   The category of problem for the AWS Support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each AWS service defines its own set of category codes.
     #   @return [String]
     #
     # @!attribute [rw] communication_body
-    #   The communication body text when you create an AWS Support case by
-    #   calling CreateCase.
+    #   The communication body text that describes the issue. This text
+    #   appears in the **Description** field on the AWS Support Center
+    #   [Create Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #   @return [String]
     #
     # @!attribute [rw] cc_email_addresses
     #   A list of email addresses that AWS Support copies on case
-    #   correspondence.
+    #   correspondence. AWS Support identifies the account that creates the
+    #   case when you specify your AWS credentials in an HTTP POST method or
+    #   use the [AWS SDKs][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/tools/
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
-    #   The ISO 639-1 code for the language in which AWS provides support.
-    #   AWS Support currently supports English ("en") and Japanese
-    #   ("ja"). Language parameters must be passed explicitly for
-    #   operations that take them.
+    #   The language in which AWS Support handles the case. You must specify
+    #   the ISO 639-1 code for the `language` parameter if you want support
+    #   in that language. Currently, English ("en") and Japanese ("ja")
+    #   are supported.
     #   @return [String]
     #
     # @!attribute [rw] issue_type
-    #   The type of issue for the case. You can specify either
-    #   "customer-service" or "technical." If you do not indicate a
-    #   value, the default is "technical."
-    #
-    #   <note markdown="1"> Service limit increases are not supported by the Support API; you
-    #   must submit service limit increase requests in [Support Center][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/support
+    #   The type of issue for the case. You can specify `customer-service`
+    #   or `technical`. If you don't specify a value, the default is
+    #   `technical`.
     #   @return [String]
     #
     # @!attribute [rw] attachment_set_id
     #   The ID of a set of one or more attachments for the case. Create the
-    #   set by using AddAttachmentsToSet.
+    #   set by using the AddAttachmentsToSet operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseRequest AWS API Documentation
@@ -546,7 +593,7 @@ module Aws::Support
     #
     # @!attribute [rw] case_id
     #   The AWS Support case ID requested or returned in the call. The case
-    #   ID is an alphanumeric string formatted as shown in this example:
+    #   ID is an alphanumeric string in the following format:
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
@@ -595,7 +642,12 @@ module Aws::Support
     # DescribeAttachment operation.
     #
     # @!attribute [rw] attachment
-    #   The attachment content and file name.
+    #   This object includes the attachment content and file name.
+    #
+    #   In the previous response syntax, the value for the `data` parameter
+    #   appears as `blob`, which is represented as a base64-encoded string.
+    #   The value for `fileName` is the name of the attachment, such as
+    #   `troubleshoot-screenshot.png`.
     #   @return [Types::Attachment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentResponse AWS API Documentation
@@ -1197,7 +1249,7 @@ module Aws::Support
     #
     # @!attribute [rw] description
     #   The description of the Trusted Advisor check, which includes the
-    #   alert criteria and recommended actions (contains HTML markup).
+    #   alert criteria and recommended operations (contains HTML markup).
     #   @return [String]
     #
     # @!attribute [rw] category
@@ -1347,16 +1399,16 @@ module Aws::Support
     end
 
     # The estimated cost savings that might be realized if the recommended
-    # actions are taken.
+    # operations are taken.
     #
     # @!attribute [rw] estimated_monthly_savings
     #   The estimated monthly savings that might be realized if the
-    #   recommended actions are taken.
+    #   recommended operations are taken.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_percent_monthly_savings
     #   The estimated percentage of savings that might be realized if the
-    #   recommended actions are taken.
+    #   recommended operations are taken.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCostOptimizingSummary AWS API Documentation

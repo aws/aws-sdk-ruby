@@ -906,6 +906,9 @@ module Aws::EC2
     #   that support Local Zones, see [Available Regions][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
+    #   To create a subnet in an Outpost, set this value to the Availability
+    #   Zone for the Outpost and specify the Outpost ARN.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions

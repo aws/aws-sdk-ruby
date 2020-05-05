@@ -4090,6 +4090,8 @@ module Aws::EC2
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.default_for_az #=> Boolean
     #   resp.subnet.map_public_ip_on_launch #=> Boolean
+    #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
+    #   resp.subnet.customer_owned_ipv_4_pool #=> String
     #   resp.subnet.state #=> String, one of "pending", "available"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
@@ -7372,6 +7374,9 @@ module Aws::EC2
     #   that support Local Zones, see [Available Regions][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
+    #   To create a subnet in an Outpost, set this value to the Availability
+    #   Zone for the Outpost and specify the Outpost ARN.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
@@ -7446,6 +7451,8 @@ module Aws::EC2
     #   resp.subnet.cidr_block #=> String
     #   resp.subnet.default_for_az #=> Boolean
     #   resp.subnet.map_public_ip_on_launch #=> Boolean
+    #   resp.subnet.map_customer_owned_ip_on_launch #=> Boolean
+    #   resp.subnet.customer_owned_ipv_4_pool #=> String
     #   resp.subnet.state #=> String, one of "pending", "available"
     #   resp.subnet.subnet_id #=> String
     #   resp.subnet.vpc_id #=> String
@@ -22166,6 +22173,8 @@ module Aws::EC2
     #   resp.subnets[0].cidr_block #=> String
     #   resp.subnets[0].default_for_az #=> Boolean
     #   resp.subnets[0].map_public_ip_on_launch #=> Boolean
+    #   resp.subnets[0].map_customer_owned_ip_on_launch #=> Boolean
+    #   resp.subnets[0].customer_owned_ipv_4_pool #=> String
     #   resp.subnets[0].state #=> String, one of "pending", "available"
     #   resp.subnets[0].subnet_id #=> String
     #   resp.subnets[0].vpc_id #=> String
@@ -30307,11 +30316,26 @@ module Aws::EC2
     #   created using version `2016-11-15` or later of the Amazon EC2 API.
     #
     # @option params [Types::AttributeBooleanValue] :map_public_ip_on_launch
-    #   Specify `true` to indicate that ENIs attached to instances created in
-    #   the specified subnet should be assigned a public IPv4 address.
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a public
+    #   IPv4 address.
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
+    #
+    # @option params [Types::AttributeBooleanValue] :map_customer_owned_ip_on_launch
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   customer-owned IPv4 address.
+    #
+    #   When this value is `true`, you must specify the customer-owned IP pool
+    #   using `CustomerOwnedIpv4Pool`.
+    #
+    # @option params [String] :customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #
+    #   You must set this value when you specify `true` for
+    #   `MapCustomerOwnedIpOnLaunch`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -30338,6 +30362,10 @@ module Aws::EC2
     #       value: false,
     #     },
     #     subnet_id: "SubnetId", # required
+    #     map_customer_owned_ip_on_launch: {
+    #       value: false,
+    #     },
+    #     customer_owned_ipv_4_pool: "CoipPoolId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
@@ -36826,7 +36854,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.156.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

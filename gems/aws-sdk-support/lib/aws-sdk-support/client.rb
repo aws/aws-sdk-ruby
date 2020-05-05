@@ -318,17 +318,12 @@ module Aws::Support
 
     # @!group API Operations
 
-    # Adds one or more attachments to an attachment set. If an
-    # `attachmentSetId` is not specified, a new attachment set is created,
-    # and the ID of the set is returned in the response. If an
-    # `attachmentSetId` is specified, the attachments are added to the
-    # specified set, if it exists.
+    # Adds one or more attachments to an attachment set.
     #
-    # An attachment set is a temporary container for attachments that are to
-    # be added to a case or case communication. The set is available for one
-    # hour after it is created; the `expiryTime` returned in the response
-    # indicates when the set expires. The maximum number of attachments in a
-    # set is 3, and the maximum size of any attachment in the set is 5 MB.
+    # An attachment set is a temporary container for attachments that you
+    # add to a case or case communication. The set is available for 1 hour
+    # after it's created. The `expiryTime` returned in the response is when
+    # the set expires.
     #
     # @option params [String] :attachment_set_id
     #   The ID of the attachment set. If an `attachmentSetId` is not
@@ -337,8 +332,14 @@ module Aws::Support
     #   attachments are added to the specified set, if it exists.
     #
     # @option params [required, Array<Types::Attachment>] :attachments
-    #   One or more attachments to add to the set. The limit is 3 attachments
-    #   per set, and the size limit is 5 MB per attachment.
+    #   One or more attachments to add to the set. You can add up to three
+    #   attachments per set. The size limit is 5 MB per attachment.
+    #
+    #   In the `Attachment` object, use the `data` parameter to specify the
+    #   contents of the attachment file. In the previous request syntax, the
+    #   value for `data` appear as `blob`, which is represented as a
+    #   base64-encoded string. The value for `fileName` is the name of the
+    #   attachment, such as `troubleshoot-screenshot.png`.
     #
     # @return [Types::AddAttachmentsToSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -424,122 +425,105 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Creates a new case in the AWS Support Center. This operation is
-    # modeled on the behavior of the AWS Support Center [Create Case][1]
-    # page. Its parameters require you to specify the following information:
+    # Creates a case in the AWS Support Center. This operation is similar to
+    # how you create a case in the AWS Support Center [Create Case][1] page.
     #
-    # * **issueType.** The type of issue for the case. You can specify
-    #   either "customer-service" or "technical." If you do not indicate
-    #   a value, the default is "technical."
+    # The AWS Support API doesn't support requesting service limit
+    # increases. You can submit a service limit increase in the following
+    # ways:
     #
-    #   <note markdown="1"> Service limit increases are not supported by the Support API; you
-    #   must submit service limit increase requests in [Support Center][2].
+    # * Submit a request from the AWS Support Center [Create Case][1] page.
     #
-    #    The `caseId` is not the `displayId` that appears in [Support
-    #   Center][2]. You can use the DescribeCases API to get the
-    #   `displayId`.
-    #
-    #    </note>
-    #
-    # * **serviceCode.** The code for an AWS service. You can get the
-    #   possible `serviceCode` values by calling DescribeServices.
-    #
-    # * **categoryCode.** The category for the service defined for the
-    #   `serviceCode` value. You also get the category code for a service by
-    #   calling DescribeServices. Each AWS service defines its own set of
-    #   category codes.
-    #
-    # * **severityCode.** A value that indicates the urgency of the case,
-    #   which in turn determines the response time according to your service
-    #   level agreement with AWS Support. You can get the possible
-    #   `severityCode` values by calling DescribeSeverityLevels. For more
-    #   information about the meaning of the codes, see SeverityLevel and
-    #   [Choosing a Severity][3].
-    #
-    # * **subject.** The **Subject** field on the AWS Support Center [Create
-    #   Case][1] page.
-    #
-    # * **communicationBody.** The **Description** field on the AWS Support
-    #   Center [Create Case][1] page.
-    #
-    # * **attachmentSetId.** The ID of a set of attachments that has been
-    #   created by using AddAttachmentsToSet.
-    #
-    # * **language.** The human language in which AWS Support handles the
-    #   case. English and Japanese are currently supported.
-    #
-    # * **ccEmailAddresses.** The AWS Support Center **CC** field on the
-    #   [Create Case][1] page. You can list email addresses to be copied on
-    #   any correspondence about the case. The account that opens the case
-    #   is already identified by passing the AWS Credentials in the HTTP
-    #   POST method or in a method or function call from one of the
-    #   programming languages supported by an [AWS SDK][4].
-    #
-    # <note markdown="1"> To add additional communication or attachments to an existing case,
-    # use AddCommunicationToCase.
-    #
-    #  </note>
+    # * Use the Service Quotas [RequestServiceQuotaIncrease][2] operation.
     #
     # A successful CreateCase request returns an AWS Support case number.
-    # Case numbers are used by the DescribeCases operation to retrieve
-    # existing AWS Support cases.
+    # You can use the DescribeCases operation and specify the case number to
+    # get existing AWS Support cases. After you create a case, you can use
+    # the AddCommunicationToCase operation to add additional communication
+    # or attachments to an existing case.
+    #
+    # <note markdown="1"> * The `caseId` is separate from the `displayId` that appears in the
+    #   [Support Center][3]. You can use the DescribeCases operation to get
+    #   the `displayId`.
+    #
+    # ^
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://console.aws.amazon.com/support/home#/case/create
-    # [2]: https://console.aws.amazon.com/support
-    # [3]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
-    # [4]: http://aws.amazon.com/tools/
+    # [2]: https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_RequestServiceQuotaIncrease.html
+    # [3]: https://console.aws.amazon.com/support
     #
     # @option params [required, String] :subject
-    #   The title of the AWS Support case.
+    #   The title of the AWS Support case. The title appears in the
+    #   **Subject** field on the AWS Support Center [Create Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #
     # @option params [String] :service_code
-    #   The code for the AWS service returned by the call to DescribeServices.
+    #   The code for the AWS service. You can use the DescribeServices
+    #   operation to get the possible `serviceCode` values.
     #
     # @option params [String] :severity_code
-    #   The code for the severity level returned by the call to
-    #   DescribeSeverityLevels.
+    #   A value that indicates the urgency of the case. This value determines
+    #   the response time according to your service level agreement with AWS
+    #   Support. You can use the DescribeSeverityLevels operation to get the
+    #   possible values for `severityCode`.
+    #
+    #   For more information, see SeverityLevel and [Choosing a Severity][1]
+    #   in the *AWS Support User Guide*.
     #
     #   <note markdown="1"> The availability of severity levels depends on the support plan for
-    #   the account.
+    #   the AWS account.
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity
+    #
     # @option params [String] :category_code
-    #   The category of problem for the AWS Support case.
+    #   The category of problem for the AWS Support case. You also use the
+    #   DescribeServices operation to get the category code for a service.
+    #   Each AWS service defines its own set of category codes.
     #
     # @option params [required, String] :communication_body
-    #   The communication body text when you create an AWS Support case by
-    #   calling CreateCase.
+    #   The communication body text that describes the issue. This text
+    #   appears in the **Description** field on the AWS Support Center [Create
+    #   Case][1] page.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #
     # @option params [Array<String>] :cc_email_addresses
     #   A list of email addresses that AWS Support copies on case
-    #   correspondence.
+    #   correspondence. AWS Support identifies the account that creates the
+    #   case when you specify your AWS credentials in an HTTP POST method or
+    #   use the [AWS SDKs][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/tools/
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The language in which AWS Support handles the case. You must specify
+    #   the ISO 639-1 code for the `language` parameter if you want support in
+    #   that language. Currently, English ("en") and Japanese ("ja") are
+    #   supported.
     #
     # @option params [String] :issue_type
-    #   The type of issue for the case. You can specify either
-    #   "customer-service" or "technical." If you do not indicate a value,
-    #   the default is "technical."
-    #
-    #   <note markdown="1"> Service limit increases are not supported by the Support API; you must
-    #   submit service limit increase requests in [Support Center][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/support
+    #   The type of issue for the case. You can specify `customer-service` or
+    #   `technical`. If you don't specify a value, the default is
+    #   `technical`.
     #
     # @option params [String] :attachment_set_id
     #   The ID of a set of one or more attachments for the case. Create the
-    #   set by using AddAttachmentsToSet.
+    #   set by using the AddAttachmentsToSet operation.
     #
     # @return [Types::CreateCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -572,10 +556,11 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the attachment that has the specified ID. Attachment IDs are
-    # generated by the case management system when you add an attachment to
-    # a case or case communication. Attachment IDs are returned in the
-    # AttachmentDetails objects that are returned by the
+    # Returns the attachment that has the specified ID. Attachments can
+    # include screenshots, error logs, or other files that describe your
+    # issue. Attachment IDs are generated by the case management system when
+    # you add an attachment to a case or case communication. Attachment IDs
+    # are returned in the AttachmentDetails objects that are returned by the
     # DescribeCommunications operation.
     #
     # @option params [required, String] :attachment_id
@@ -1185,7 +1170,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

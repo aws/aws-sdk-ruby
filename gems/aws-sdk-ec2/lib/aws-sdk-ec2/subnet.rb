@@ -72,6 +72,20 @@ module Aws::EC2
       data[:map_public_ip_on_launch]
     end
 
+    # Indicates whether a network interface created in this subnet
+    # (including a network interface created by RunInstances) receives a
+    # customer-owned IPv4 address.
+    # @return [Boolean]
+    def map_customer_owned_ip_on_launch
+      data[:map_customer_owned_ip_on_launch]
+    end
+
+    # The customer-owned IPv4 address pool associated with the subnet.
+    # @return [String]
+    def customer_owned_ipv_4_pool
+      data[:customer_owned_ipv_4_pool]
+    end
+
     # The current state of the subnet.
     # @return [String]
     def state

@@ -335,11 +335,10 @@ module Aws::SSM
     # for each resource type. Using a consistent set of tag keys makes it
     # easier for you to manage your resources. You can search and filter the
     # resources based on the tags you add. Tags don't have any semantic
-    # meaning to Amazon EC2 and are interpreted strictly as a string of
-    # characters.
+    # meaning to and are interpreted strictly as a string of characters.
     #
-    # For more information about tags, see [Tagging your Amazon EC2
-    # resources][1] in the *Amazon EC2 User Guide*.
+    # For more information about using tags with EC2 instances, see [Tagging
+    # your Amazon EC2 resources][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -1277,7 +1276,7 @@ module Aws::SSM
     #   impacted resource.
     #
     # @option params [required, String] :source
-    #   The origin of the OpsItem, such as EC2 or Systems Manager.
+    #   The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
     #
     #   <note markdown="1"> The source name can't contain the following strings: aws, amazon, and
     #   amzn.
@@ -3939,6 +3938,7 @@ module Aws::SSM
     #   resp.parameters[0].policies[0].policy_text #=> String
     #   resp.parameters[0].policies[0].policy_type #=> String
     #   resp.parameters[0].policies[0].policy_status #=> String
+    #   resp.parameters[0].data_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters AWS API Documentation
@@ -5314,6 +5314,7 @@ module Aws::SSM
     #   resp.parameter.source_result #=> String
     #   resp.parameter.last_modified_date #=> Time
     #   resp.parameter.arn #=> String
+    #   resp.parameter.data_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter AWS API Documentation
     #
@@ -5377,6 +5378,7 @@ module Aws::SSM
     #   resp.parameters[0].policies[0].policy_text #=> String
     #   resp.parameters[0].policies[0].policy_type #=> String
     #   resp.parameters[0].policies[0].policy_status #=> String
+    #   resp.parameters[0].data_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
@@ -5422,6 +5424,7 @@ module Aws::SSM
     #   resp.parameters[0].source_result #=> String
     #   resp.parameters[0].last_modified_date #=> Time
     #   resp.parameters[0].arn #=> String
+    #   resp.parameters[0].data_type #=> String
     #   resp.invalid_parameters #=> Array
     #   resp.invalid_parameters[0] #=> String
     #
@@ -5514,6 +5517,7 @@ module Aws::SSM
     #   resp.parameters[0].source_result #=> String
     #   resp.parameters[0].last_modified_date #=> Time
     #   resp.parameters[0].arn #=> String
+    #   resp.parameters[0].data_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath AWS API Documentation
@@ -6879,7 +6883,7 @@ module Aws::SSM
     #   parameters have a value limit of 4 KB. Advanced parameters have a
     #   value limit of 8 KB.
     #
-    # @option params [required, String] :type
+    # @option params [String] :type
     #   The type of parameter that you want to add to the system.
     #
     #   Items in a `StringList` must be separated by a comma (,). You can't
@@ -7042,6 +7046,26 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #
+    # @option params [String] :data_type
+    #   The data type for a String parameter. Supported data types include
+    #   plain text and Amazon Machine Image IDs.
+    #
+    #   **The following data type values are supported.**
+    #
+    #   * `text`
+    #
+    #   * `aws:ec2:image`
+    #
+    #   When you create a String parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value you provide against that
+    #   data type. The required format is `ami-12345abcdeEXAMPLE`. For more
+    #   information, see [Native parameter support for Amazon Machine Image
+    #   IDs][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #
     # @return [Types::PutParameterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutParameterResult#version #version} => Integer
@@ -7053,7 +7077,7 @@ module Aws::SSM
     #     name: "PSParameterName", # required
     #     description: "ParameterDescription",
     #     value: "PSParameterValue", # required
-    #     type: "String", # required, accepts String, StringList, SecureString
+    #     type: "String", # accepts String, StringList, SecureString
     #     key_id: "ParameterKeyId",
     #     overwrite: false,
     #     allowed_pattern: "AllowedPattern",
@@ -7065,6 +7089,7 @@ module Aws::SSM
     #     ],
     #     tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
     #     policies: "ParameterPolicies",
+    #     data_type: "ParameterDataType",
     #   })
     #
     # @example Response structure
@@ -9482,7 +9507,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

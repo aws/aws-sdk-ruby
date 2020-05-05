@@ -7386,6 +7386,9 @@ module Aws::EC2
     #   Regions that support Local Zones, see [Available Regions][1] in the
     #   *Amazon Elastic Compute Cloud User Guide*.
     #
+    #   To create a subnet in an Outpost, set this value to the Availability
+    #   Zone for the Outpost and specify the Outpost ARN.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
@@ -33334,6 +33337,10 @@ module Aws::EC2
     #           value: false,
     #         },
     #         subnet_id: "SubnetId", # required
+    #         map_customer_owned_ip_on_launch: {
+    #           value: false,
+    #         },
+    #         customer_owned_ipv_4_pool: "CoipPoolId",
     #       }
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
@@ -33348,12 +33355,29 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] map_public_ip_on_launch
-    #   Specify `true` to indicate that ENIs attached to instances created
-    #   in the specified subnet should be assigned a public IPv4 address.
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   public IPv4 address.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] map_customer_owned_ip_on_launch
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   customer-owned IPv4 address.
+    #
+    #   When this value is `true`, you must specify the customer-owned IP
+    #   pool using `CustomerOwnedIpv4Pool`.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #
+    #   You must set this value when you specify `true` for
+    #   `MapCustomerOwnedIpOnLaunch`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
@@ -33361,7 +33385,9 @@ module Aws::EC2
     class ModifySubnetAttributeRequest < Struct.new(
       :assign_ipv_6_address_on_creation,
       :map_public_ip_on_launch,
-      :subnet_id)
+      :subnet_id,
+      :map_customer_owned_ip_on_launch,
+      :customer_owned_ipv_4_pool)
       include Aws::Structure
     end
 
@@ -44415,6 +44441,16 @@ module Aws::EC2
     #   IPv4 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] map_customer_owned_ip_on_launch
+    #   Indicates whether a network interface created in this subnet
+    #   (including a network interface created by RunInstances) receives a
+    #   customer-owned IPv4 address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The current state of the subnet.
     #   @return [String]
@@ -44462,6 +44498,8 @@ module Aws::EC2
       :cidr_block,
       :default_for_az,
       :map_public_ip_on_launch,
+      :map_customer_owned_ip_on_launch,
+      :customer_owned_ipv_4_pool,
       :state,
       :subnet_id,
       :vpc_id,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.156.0 (2020-05-05)
+------------------
+
+* Feature - With this release, you can call ModifySubnetAttribute with two new parameters: MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool, to map a customerOwnedIpv4Pool to a subnet. You will also see these two new fields in the DescribeSubnets response. If your subnet has a customerOwnedIpv4Pool mapped, your network interface will get an auto assigned customerOwnedIpv4 address when placed onto an instance.
+
 1.155.0 (2020-05-04)
 ------------------
 

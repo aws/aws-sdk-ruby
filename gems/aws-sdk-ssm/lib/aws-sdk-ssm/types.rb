@@ -3125,7 +3125,7 @@ module Aws::SSM
     #   @return [Array<Types::RelatedOpsItem>]
     #
     # @!attribute [rw] source
-    #   The origin of the OpsItem, such as EC2 or Systems Manager.
+    #   The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
     #
     #   <note markdown="1"> The source name can't contain the following strings: aws, amazon,
     #   and amzn.
@@ -12416,6 +12416,11 @@ module Aws::SSM
     #   The Amazon Resource Name (ARN) of the parameter.
     #   @return [String]
     #
+    # @!attribute [rw] data_type
+    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
+    #   The default is `text`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
@@ -12426,7 +12431,8 @@ module Aws::SSM
       :selector,
       :source_result,
       :last_modified_date,
-      :arn)
+      :arn,
+      :data_type)
       include Aws::Structure
     end
 
@@ -12502,6 +12508,11 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
+    # @!attribute [rw] data_type
+    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
+    #   The default is `text`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
@@ -12516,7 +12527,8 @@ module Aws::SSM
       :version,
       :labels,
       :tier,
-      :policies)
+      :policies,
+      :data_type)
       include Aws::Structure
     end
 
@@ -12619,6 +12631,11 @@ module Aws::SSM
     #   A list of policies associated with a parameter.
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
+    # @!attribute [rw] data_type
+    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
+    #   The default is `text`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
     #
     class ParameterMetadata < Struct.new(
@@ -12631,7 +12648,8 @@ module Aws::SSM
       :allowed_pattern,
       :version,
       :tier,
-      :policies)
+      :policies,
+      :data_type)
       include Aws::Structure
     end
 
@@ -13423,7 +13441,7 @@ module Aws::SSM
     #         name: "PSParameterName", # required
     #         description: "ParameterDescription",
     #         value: "PSParameterValue", # required
-    #         type: "String", # required, accepts String, StringList, SecureString
+    #         type: "String", # accepts String, StringList, SecureString
     #         key_id: "ParameterKeyId",
     #         overwrite: false,
     #         allowed_pattern: "AllowedPattern",
@@ -13435,6 +13453,7 @@ module Aws::SSM
     #         ],
     #         tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
     #         policies: "ParameterPolicies",
+    #         data_type: "ParameterDataType",
     #       }
     #
     # @!attribute [rw] name
@@ -13665,6 +13684,27 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #   @return [String]
     #
+    # @!attribute [rw] data_type
+    #   The data type for a String parameter. Supported data types include
+    #   plain text and Amazon Machine Image IDs.
+    #
+    #   **The following data type values are supported.**
+    #
+    #   * `text`
+    #
+    #   * `aws:ec2:image`
+    #
+    #   When you create a String parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value you provide against
+    #   that data type. The required format is `ami-12345abcdeEXAMPLE`. For
+    #   more information, see [Native parameter support for Amazon Machine
+    #   Image IDs][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
     #
     class PutParameterRequest < Struct.new(
@@ -13677,7 +13717,8 @@ module Aws::SSM
       :allowed_pattern,
       :tags,
       :tier,
-      :policies)
+      :policies,
+      :data_type)
       include Aws::Structure
     end
 
