@@ -110,6 +110,7 @@ module Aws
     def config=(config)
       if Hash === config
         @config = config
+        Aws.config.update({region: ENV['AWS_REGION']}) unless Aws.config.has_key?(:region)
       else
         raise ArgumentError, 'configuration object must be a hash'
       end
