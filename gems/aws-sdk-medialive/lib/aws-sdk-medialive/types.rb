@@ -826,6 +826,13 @@ module Aws::MediaLive
     #           audio_pid_selection: {
     #             pid: 1, # required
     #           },
+    #           audio_track_selection: {
+    #             tracks: [ # required
+    #               {
+    #                 track: 1, # required
+    #               },
+    #             ],
+    #           },
     #         },
     #       }
     #
@@ -860,6 +867,13 @@ module Aws::MediaLive
     #         audio_pid_selection: {
     #           pid: 1, # required
     #         },
+    #         audio_track_selection: {
+    #           tracks: [ # required
+    #             {
+    #               track: 1, # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] audio_language_selection
@@ -870,11 +884,88 @@ module Aws::MediaLive
     #   Audio Pid Selection
     #   @return [Types::AudioPidSelection]
     #
+    # @!attribute [rw] audio_track_selection
+    #   Audio Track Selection
+    #   @return [Types::AudioTrackSelection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioSelectorSettings AWS API Documentation
     #
     class AudioSelectorSettings < Struct.new(
       :audio_language_selection,
-      :audio_pid_selection)
+      :audio_pid_selection,
+      :audio_track_selection)
+      include Aws::Structure
+    end
+
+    # Audio Track
+    #
+    # @note When making an API call, you may pass AudioTrack
+    #   data as a hash:
+    #
+    #       {
+    #         track: 1, # required
+    #       }
+    #
+    # @!attribute [rw] track
+    #   1-based integer value that maps to a specific audio track
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioTrack AWS API Documentation
+    #
+    class AudioTrack < Struct.new(
+      :track)
+      include Aws::Structure
+    end
+
+    # Audio Track Selection
+    #
+    # @note When making an API call, you may pass AudioTrackSelection
+    #   data as a hash:
+    #
+    #       {
+    #         tracks: [ # required
+    #           {
+    #             track: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] tracks
+    #   Selects one or more unique audio tracks from within an mp4 source.
+    #   @return [Array<Types::AudioTrack>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioTrackSelection AWS API Documentation
+    #
+    class AudioTrackSelection < Struct.new(
+      :tracks)
+      include Aws::Structure
+    end
+
+    # The settings for Automatic Input Failover.
+    #
+    # @note When making an API call, you may pass AutomaticInputFailoverSettings
+    #   data as a hash:
+    #
+    #       {
+    #         input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #         secondary_input_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] input_preference
+    #   Input preference when deciding which input to make active when a
+    #   previously failed input has recovered.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_input_id
+    #   The input ID of the secondary input in the automatic input failover
+    #   pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AutomaticInputFailoverSettings AWS API Documentation
+    #
+    class AutomaticInputFailoverSettings < Struct.new(
+      :input_preference,
+      :secondary_input_id)
       include Aws::Structure
     end
 
@@ -2614,7 +2705,7 @@ module Aws::MediaLive
     #                   restart_delay: 1,
     #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                   send_delay_ms: 1,
-    #                   sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #                   sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #                   stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #                   timestamp_offset: "__string",
     #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -2725,6 +2816,8 @@ module Aws::MediaLive
     #                         },
     #                         fmp_4_hls_settings: {
     #                           audio_rendition_sets: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
@@ -2877,8 +2970,15 @@ module Aws::MediaLive
     #                     },
     #                   },
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #                   filter_settings: {
+    #                     temporal_filter_settings: {
+    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                     },
+    #                   },
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -2896,6 +2996,7 @@ module Aws::MediaLive
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                   quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #                   qvbr_quality_level: 1,
     #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -2961,6 +3062,10 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             automatic_input_failover_settings: {
+    #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #               secondary_input_id: "__string", # required
+    #             },
     #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
@@ -2974,6 +3079,13 @@ module Aws::MediaLive
     #                     },
     #                     audio_pid_selection: {
     #                       pid: 1, # required
+    #                     },
+    #                     audio_track_selection: {
+    #                       tracks: [ # required
+    #                         {
+    #                           track: 1, # required
+    #                         },
+    #                       ],
     #                     },
     #                   },
     #                 },
@@ -5365,7 +5477,7 @@ module Aws::MediaLive
     #                 restart_delay: 1,
     #                 segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                 send_delay_ms: 1,
-    #                 sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #                 sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #                 stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #                 timestamp_offset: "__string",
     #                 timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -5476,6 +5588,8 @@ module Aws::MediaLive
     #                       },
     #                       fmp_4_hls_settings: {
     #                         audio_rendition_sets: "__string",
+    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       },
     #                       standard_hls_settings: {
     #                         audio_rendition_sets: "__string",
@@ -5628,8 +5742,15 @@ module Aws::MediaLive
     #                   },
     #                 },
     #                 entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #                 filter_settings: {
+    #                   temporal_filter_settings: {
+    #                     post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                     strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                   },
+    #                 },
     #                 fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                 flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                 force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -5647,6 +5768,7 @@ module Aws::MediaLive
     #                 par_denominator: 1,
     #                 par_numerator: 1,
     #                 profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                 quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #                 qvbr_quality_level: 1,
     #                 rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #                 scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -5836,6 +5958,8 @@ module Aws::MediaLive
     #
     #       {
     #         audio_rendition_sets: "__string",
+    #         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #       }
     #
     # @!attribute [rw] audio_rendition_sets
@@ -5844,10 +5968,23 @@ module Aws::MediaLive
     #   video, separate by ','.
     #   @return [String]
     #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] timed_metadata_behavior
+    #   When set to passthrough, timed metadata is passed through from input
+    #   to output.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Fmp4HlsSettings AWS API Documentation
     #
     class Fmp4HlsSettings < Struct.new(
-      :audio_rendition_sets)
+      :audio_rendition_sets,
+      :nielsen_id_3_behavior,
+      :timed_metadata_behavior)
       include Aws::Structure
     end
 
@@ -6086,6 +6223,29 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # H264 Filter Settings
+    #
+    # @note When making an API call, you may pass H264FilterSettings
+    #   data as a hash:
+    #
+    #       {
+    #         temporal_filter_settings: {
+    #           post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #           strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #         },
+    #       }
+    #
+    # @!attribute [rw] temporal_filter_settings
+    #   Temporal Filter Settings
+    #   @return [Types::TemporalFilterSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264FilterSettings AWS API Documentation
+    #
+    class H264FilterSettings < Struct.new(
+      :temporal_filter_settings)
+      include Aws::Structure
+    end
+
     # H264 Settings
     #
     # @note When making an API call, you may pass H264Settings
@@ -6107,8 +6267,15 @@ module Aws::MediaLive
     #           },
     #         },
     #         entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #         filter_settings: {
+    #           temporal_filter_settings: {
+    #             post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #             strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #           },
+    #         },
     #         fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #         flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #         force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #         framerate_denominator: 1,
     #         framerate_numerator: 1,
@@ -6126,6 +6293,7 @@ module Aws::MediaLive
     #         par_denominator: 1,
     #         par_numerator: 1,
     #         profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #         quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #         qvbr_quality_level: 1,
     #         rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #         scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -6181,6 +6349,10 @@ module Aws::MediaLive
     #   or cavlc.
     #   @return [String]
     #
+    # @!attribute [rw] filter_settings
+    #   Settings associated with the specified filter.
+    #   @return [Types::H264FilterSettings]
+    #
     # @!attribute [rw] fixed_afd
     #   Four bit AFD value to write on all frames of video in the output
     #   stream. Only valid when afdSignaling is set to 'Fixed'.
@@ -6189,6 +6361,17 @@ module Aws::MediaLive
     # @!attribute [rw] flicker_aq
     #   If set to enabled, adjust quantization within each frame to reduce
     #   flicker or 'pop' on I-frames.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_field_pictures
+    #   This setting applies only when scan type is "interlaced." It
+    #   controls whether coding is performed on a field basis or on a frame
+    #   basis. (When the video is progressive, the coding is always
+    #   performed on a frame basis.) enabled: Force MediaLive to code on a
+    #   field basis, so that odd and even sets of fields are coded
+    #   separately. disabled: Code the two sets of fields separately (on a
+    #   field basis) or together (on a frame basis using PAFF), depending on
+    #   what is most appropriate for the content.
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
@@ -6290,6 +6473,12 @@ module Aws::MediaLive
     #   H.264 Profile.
     #   @return [String]
     #
+    # @!attribute [rw] quality_level
+    #   If set to "ENHANCEDQUALITY," improves visual quality at an
+    #   increased output cost. If this video is being delivered to a
+    #   MediaLive Multiplex, "ENHANCEDQUALITY" is always used.
+    #   @return [String]
+    #
     # @!attribute [rw] qvbr_quality_level
     #   Controls the target quality for the video encode. Applies only when
     #   the rate control mode is QVBR. Set values for the QVBR quality level
@@ -6377,8 +6566,10 @@ module Aws::MediaLive
       :color_metadata,
       :color_space_settings,
       :entropy_encoding,
+      :filter_settings,
       :fixed_afd,
       :flicker_aq,
+      :force_field_pictures,
       :framerate_control,
       :framerate_denominator,
       :framerate_numerator,
@@ -6396,6 +6587,7 @@ module Aws::MediaLive
       :par_denominator,
       :par_numerator,
       :profile,
+      :quality_level,
       :qvbr_quality_level,
       :rate_control_mode,
       :scan_type,
@@ -7161,7 +7353,9 @@ module Aws::MediaLive
     # @!attribute [rw] output_selection
     #   MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if
     #   applicable, and media manifests) for this output group.
-    #   SEGMENTSONLY: Does not generate any manifests for this output group.
+    #   VARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this
+    #   output group, but not a master manifest. SEGMENTSONLY: Does not
+    #   generate any manifests for this output group.
     #   @return [String]
     #
     # @!attribute [rw] program_date_time
@@ -7421,6 +7615,8 @@ module Aws::MediaLive
     #           },
     #           fmp_4_hls_settings: {
     #             audio_rendition_sets: "__string",
+    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           },
     #           standard_hls_settings: {
     #             audio_rendition_sets: "__string",
@@ -7497,6 +7693,8 @@ module Aws::MediaLive
     #         },
     #         fmp_4_hls_settings: {
     #           audio_rendition_sets: "__string",
+    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #         },
     #         standard_hls_settings: {
     #           audio_rendition_sets: "__string",
@@ -7611,8 +7809,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings to configure an action so that it occurs immediately. This is
-    # only supported for input switch actions currently.
+    # Settings to configure an action so that it occurs as soon as possible.
     #
     # @api private
     #
@@ -7710,6 +7907,10 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         automatic_input_failover_settings: {
+    #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #           secondary_input_id: "__string", # required
+    #         },
     #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
@@ -7723,6 +7924,13 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                 },
+    #                 audio_track_selection: {
+    #                   tracks: [ # required
+    #                     {
+    #                       track: 1, # required
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             },
@@ -7785,6 +7993,11 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] automatic_input_failover_settings
+    #   User-specified settings for defining what the conditions are for
+    #   declaring the input unhealthy and failing over to a different input.
+    #   @return [Types::AutomaticInputFailoverSettings]
+    #
     # @!attribute [rw] input_attachment_name
     #   User-specified name for the attachment. This is required if the user
     #   wants to use this input in an input switch action.
@@ -7801,6 +8014,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputAttachment AWS API Documentation
     #
     class InputAttachment < Struct.new(
+      :automatic_input_failover_settings,
       :input_attachment_name,
       :input_id,
       :input_settings)
@@ -8110,6 +8324,13 @@ module Aws::MediaLive
     #               },
     #               audio_pid_selection: {
     #                 pid: 1, # required
+    #               },
+    #               audio_track_selection: {
+    #                 tracks: [ # required
+    #                   {
+    #                     track: 1, # required
+    #                   },
+    #                 ],
     #               },
     #             },
     #           },
@@ -9678,7 +9899,7 @@ module Aws::MediaLive
     #         restart_delay: 1,
     #         segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #         send_delay_ms: 1,
-    #         sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #         sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #         stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #         timestamp_offset: "__string",
     #         timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -9768,7 +9989,10 @@ module Aws::MediaLive
     #
     # @!attribute [rw] sparse_track_type
     #   If set to scte35, use incoming SCTE-35 messages to generate a sparse
-    #   track in this group of MS-Smooth outputs.
+    #   track in this group of MS-Smooth outputs. scte35WithoutSegmentation
+    #   is the same as scte35, except EML will not start a new segment at a
+    #   SCTE-35 marker. It will still encode an IDR frame at a SCTE-35
+    #   marker.
     #   @return [String]
     #
     # @!attribute [rw] stream_manifest_behavior
@@ -10593,6 +10817,8 @@ module Aws::MediaLive
     #               },
     #               fmp_4_hls_settings: {
     #                 audio_rendition_sets: "__string",
+    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               },
     #               standard_hls_settings: {
     #                 audio_rendition_sets: "__string",
@@ -10970,7 +11196,7 @@ module Aws::MediaLive
     #             restart_delay: 1,
     #             segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #             send_delay_ms: 1,
-    #             sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #             sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #             stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #             timestamp_offset: "__string",
     #             timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -11081,6 +11307,8 @@ module Aws::MediaLive
     #                   },
     #                   fmp_4_hls_settings: {
     #                     audio_rendition_sets: "__string",
+    #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                     timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                   },
     #                   standard_hls_settings: {
     #                     audio_rendition_sets: "__string",
@@ -11357,7 +11585,7 @@ module Aws::MediaLive
     #           restart_delay: 1,
     #           segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #           send_delay_ms: 1,
-    #           sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #           sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #           stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #           timestamp_offset: "__string",
     #           timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -11534,6 +11762,8 @@ module Aws::MediaLive
     #             },
     #             fmp_4_hls_settings: {
     #               audio_rendition_sets: "__string",
+    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #             },
     #             standard_hls_settings: {
     #               audio_rendition_sets: "__string",
@@ -13645,6 +13875,34 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Temporal Filter Settings
+    #
+    # @note When making an API call, you may pass TemporalFilterSettings
+    #   data as a hash:
+    #
+    #       {
+    #         post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #         strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #       }
+    #
+    # @!attribute [rw] post_filter_sharpening
+    #   If set to "ENABLED," applies post-filter sharpening to improve
+    #   visual quality. This is most beneficial when using a noisy or
+    #   compressed input source and low output bitrates.
+    #   @return [String]
+    #
+    # @!attribute [rw] strength
+    #   Filter strength. A higher value produces stronger filtering.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TemporalFilterSettings AWS API Documentation
+    #
+    class TemporalFilterSettings < Struct.new(
+      :post_filter_sharpening,
+      :strength)
+      include Aws::Structure
+    end
+
     # Timecode Config
     #
     # @note When making an API call, you may pass TimecodeConfig
@@ -14448,7 +14706,7 @@ module Aws::MediaLive
     #                   restart_delay: 1,
     #                   segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #                   send_delay_ms: 1,
-    #                   sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #                   sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #                   stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #                   timestamp_offset: "__string",
     #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -14559,6 +14817,8 @@ module Aws::MediaLive
     #                         },
     #                         fmp_4_hls_settings: {
     #                           audio_rendition_sets: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
@@ -14711,8 +14971,15 @@ module Aws::MediaLive
     #                     },
     #                   },
     #                   entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #                   filter_settings: {
+    #                     temporal_filter_settings: {
+    #                       post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                       strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                     },
+    #                   },
     #                   fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #                   flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #                   force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -14730,6 +14997,7 @@ module Aws::MediaLive
     #                   par_denominator: 1,
     #                   par_numerator: 1,
     #                   profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #                   quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #                   qvbr_quality_level: 1,
     #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #                   scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -14795,6 +15063,10 @@ module Aws::MediaLive
     #         },
     #         input_attachments: [
     #           {
+    #             automatic_input_failover_settings: {
+    #               input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #               secondary_input_id: "__string", # required
+    #             },
     #             input_attachment_name: "__string",
     #             input_id: "__string",
     #             input_settings: {
@@ -14808,6 +15080,13 @@ module Aws::MediaLive
     #                     },
     #                     audio_pid_selection: {
     #                       pid: 1, # required
+    #                     },
+    #                     audio_track_selection: {
+    #                       tracks: [ # required
+    #                         {
+    #                           track: 1, # required
+    #                         },
+    #                       ],
     #                     },
     #                   },
     #                 },
@@ -15366,8 +15645,15 @@ module Aws::MediaLive
     #             },
     #           },
     #           entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #           filter_settings: {
+    #             temporal_filter_settings: {
+    #               post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #               strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #             },
+    #           },
     #           fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #           flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #           force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -15385,6 +15671,7 @@ module Aws::MediaLive
     #           par_denominator: 1,
     #           par_numerator: 1,
     #           profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #           quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #           qvbr_quality_level: 1,
     #           rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #           scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -15488,8 +15775,15 @@ module Aws::MediaLive
     #               },
     #             },
     #             entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #             filter_settings: {
+    #               temporal_filter_settings: {
+    #                 post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                 strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #               },
+    #             },
     #             fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #             flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #             force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -15507,6 +15801,7 @@ module Aws::MediaLive
     #             par_denominator: 1,
     #             par_numerator: 1,
     #             profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #             quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #             qvbr_quality_level: 1,
     #             rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #             scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE

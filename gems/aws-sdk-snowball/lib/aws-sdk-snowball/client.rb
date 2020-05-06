@@ -279,8 +279,7 @@ module Aws::Snowball
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::Snowball
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -612,7 +611,7 @@ module Aws::Snowball
     #     address_id: "AddressId", # required
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN", # required
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
     #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -814,7 +813,7 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     kms_key_arn: "KmsKeyARN",
     #     role_arn: "RoleARN",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     notification: {
     #       sns_topic_arn: "SnsTopicARN",
@@ -822,7 +821,7 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #     cluster_id: "ClusterId",
-    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
     #     forwarding_address_id: "AddressId",
     #     tax_documents: {
     #       ind: {
@@ -927,6 +926,8 @@ module Aws::Snowball
     #
     #   * {Types::DescribeAddressesResult#addresses #addresses} => Array&lt;Types::Address&gt;
     #   * {Types::DescribeAddressesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe all the addresses you've created for AWS Snowball
@@ -1052,7 +1053,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.role_arn #=> String
     #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
     #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG"
+    #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
     #   resp.cluster_metadata.creation_date #=> Time
     #   resp.cluster_metadata.resources.s3_resources #=> Array
     #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1148,7 +1149,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_id #=> String
     #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG"
+    #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
     #   resp.job_metadata.creation_date #=> Time
     #   resp.job_metadata.resources.s3_resources #=> Array
     #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
@@ -1170,7 +1171,7 @@ module Aws::Snowball
     #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
     #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "NoPreference"
+    #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "NoPreference"
     #   resp.job_metadata.notification.sns_topic_arn #=> String
     #   resp.job_metadata.notification.job_states_to_notify #=> Array
     #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1189,7 +1190,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG"
+    #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
     #   resp.sub_job_metadata[0].creation_date #=> Time
     #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
     #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
@@ -1211,7 +1212,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
     #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "NoPreference"
+    #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "T42", "T98", "NoPreference"
     #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
     #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
     #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1538,7 +1539,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1679,6 +1680,8 @@ module Aws::Snowball
     #   * {Types::ListJobsResult#job_list_entries #job_list_entries} => Array&lt;Types::JobListEntry&gt;
     #   * {Types::ListJobsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get a list of jobs that you've created for AWS Snowball
     #
@@ -1718,7 +1721,7 @@ module Aws::Snowball
     #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.job_list_entries[0].is_master #=> Boolean
     #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
-    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG"
+    #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE", "EDGE_C", "EDGE_CG", "EDGE_S"
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
@@ -1936,7 +1939,7 @@ module Aws::Snowball
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
-    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
     #     forwarding_address_id: "AddressId",
     #   })
     #
@@ -1962,7 +1965,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -279,8 +279,7 @@ module Aws::Rekognition
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::Rekognition
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -909,6 +908,73 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Deletes an Amazon Rekognition Custom Labels project. To delete a
+    # project you must first delete all versions of the model associated
+    # with the project. To delete a version of a model, see
+    # DeleteProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProject` action.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that you want to delete.
+    #
+    # @return [Types::DeleteProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project({
+    #     project_arn: "ProjectArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATING", "CREATED", "DELETING"
+    #
+    # @overload delete_project(params = {})
+    # @param [Hash] params ({})
+    def delete_project(params = {}, options = {})
+      req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes a version of a model.
+    #
+    # You must first stop the model before you can delete it. To check if a
+    # model is running, use the `Status` field returned from
+    # DescribeProjectVersions. To stop a running model call
+    # StopProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProjectVersion` action.
+    #
+    # @option params [required, String] :project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #
+    # @return [Types::DeleteProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project_version({
+    #     project_version_arn: "ProjectVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #
+    # @overload delete_project_version(params = {})
+    # @param [Hash] params ({})
+    def delete_project_version(params = {}, options = {})
+      req = build_request(:delete_project_version, params)
+      req.send_request(options)
+    end
+
     # Deletes the stream processor identified by `Name`. You assign the
     # value for `Name` when you create the stream processor with
     # CreateStreamProcessor. You might not be able to use the same name for
@@ -1005,6 +1071,8 @@ module Aws::Rekognition
     #   * {Types::DescribeProjectVersionsResponse#project_version_descriptions #project_version_descriptions} => Array&lt;Types::ProjectVersionDescription&gt;
     #   * {Types::DescribeProjectVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_project_versions({
@@ -1050,6 +1118,12 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.version #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * project_version_running
+    #   * project_version_training_completed
+    #
     # @overload describe_project_versions(params = {})
     # @param [Hash] params ({})
     def describe_project_versions(params = {}, options = {})
@@ -1079,6 +1153,8 @@ module Aws::Rekognition
     #
     #   * {Types::DescribeProjectsResponse#project_descriptions #project_descriptions} => Array&lt;Types::ProjectDescription&gt;
     #   * {Types::DescribeProjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1941,6 +2017,8 @@ module Aws::Rekognition
     #   * {Types::GetCelebrityRecognitionResponse#next_token #next_token} => String
     #   * {Types::GetCelebrityRecognitionResponse#celebrities #celebrities} => Array&lt;Types::CelebrityRecognition&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_celebrity_recognition({
@@ -2084,6 +2162,8 @@ module Aws::Rekognition
     #   * {Types::GetContentModerationResponse#next_token #next_token} => String
     #   * {Types::GetContentModerationResponse#moderation_model_version #moderation_model_version} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_content_moderation({
@@ -2165,6 +2245,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceDetectionResponse#next_token #next_token} => String
     #   * {Types::GetFaceDetectionResponse#faces #faces} => Array&lt;Types::FaceDetection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2294,6 +2376,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceSearchResponse#next_token #next_token} => String
     #   * {Types::GetFaceSearchResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceSearchResponse#persons #persons} => Array&lt;Types::PersonMatch&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2441,6 +2525,8 @@ module Aws::Rekognition
     #   * {Types::GetLabelDetectionResponse#labels #labels} => Array&lt;Types::LabelDetection&gt;
     #   * {Types::GetLabelDetectionResponse#label_model_version #label_model_version} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_label_detection({
@@ -2551,6 +2637,8 @@ module Aws::Rekognition
     #   * {Types::GetPersonTrackingResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetPersonTrackingResponse#next_token #next_token} => String
     #   * {Types::GetPersonTrackingResponse#persons #persons} => Array&lt;Types::PersonDetection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2676,6 +2764,8 @@ module Aws::Rekognition
     #   * {Types::GetTextDetectionResponse#text_detections #text_detections} => Array&lt;Types::TextDetectionResult&gt;
     #   * {Types::GetTextDetectionResponse#next_token #next_token} => String
     #   * {Types::GetTextDetectionResponse#text_model_version #text_model_version} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3171,6 +3261,8 @@ module Aws::Rekognition
     #   * {Types::ListCollectionsResponse#next_token #next_token} => String
     #   * {Types::ListCollectionsResponse#face_model_versions #face_model_versions} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the collections
     #
@@ -3234,6 +3326,8 @@ module Aws::Rekognition
     #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
     #   * {Types::ListFacesResponse#next_token #next_token} => String
     #   * {Types::ListFacesResponse#face_model_version #face_model_version} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the faces in a collection
@@ -3418,6 +3512,8 @@ module Aws::Rekognition
     #
     #   * {Types::ListStreamProcessorsResponse#next_token #next_token} => String
     #   * {Types::ListStreamProcessorsResponse#stream_processors #stream_processors} => Array&lt;Types::StreamProcessor&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4560,7 +4656,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4626,10 +4722,10 @@ module Aws::Rekognition
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                        | params                       | :delay   | :max_attempts |
-    # | ---------------------------------- | ---------------------------- | -------- | ------------- |
-    # | project_version_running            | {#describe_project_versions} | 30       | 40            |
-    # | project_version_training_completed | {#describe_project_versions} | 120      | 360           |
+    # | waiter_name                        | params                             | :delay   | :max_attempts |
+    # | ---------------------------------- | ---------------------------------- | -------- | ------------- |
+    # | project_version_running            | {Client#describe_project_versions} | 30       | 40            |
+    # | project_version_training_completed | {Client#describe_project_versions} | 120      | 360           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

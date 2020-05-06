@@ -279,8 +279,7 @@ module Aws::Glue
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::Glue
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1293,7 +1292,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -3124,6 +3123,8 @@ module Aws::Glue
     #   * {Types::GetClassifiersResponse#classifiers #classifiers} => Array&lt;Types::Classifier&gt;
     #   * {Types::GetClassifiersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_classifiers({
@@ -3207,7 +3208,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -3257,13 +3258,15 @@ module Aws::Glue
     #   * {Types::GetConnectionsResponse#connection_list #connection_list} => Array&lt;Types::Connection&gt;
     #   * {Types::GetConnectionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_connections({
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -3275,7 +3278,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -3380,6 +3383,8 @@ module Aws::Glue
     #   * {Types::GetCrawlerMetricsResponse#crawler_metrics_list #crawler_metrics_list} => Array&lt;Types::CrawlerMetrics&gt;
     #   * {Types::GetCrawlerMetricsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_crawler_metrics({
@@ -3422,6 +3427,8 @@ module Aws::Glue
     #
     #   * {Types::GetCrawlersResponse#crawlers #crawlers} => Array&lt;Types::Crawler&gt;
     #   * {Types::GetCrawlersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3574,6 +3581,8 @@ module Aws::Glue
     #
     #   * {Types::GetDatabasesResponse#database_list #database_list} => Array&lt;Types::Database&gt;
     #   * {Types::GetDatabasesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3728,6 +3737,8 @@ module Aws::Glue
     #
     #   * {Types::GetDevEndpointsResponse#dev_endpoints #dev_endpoints} => Array&lt;Types::DevEndpoint&gt;
     #   * {Types::GetDevEndpointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3944,6 +3955,8 @@ module Aws::Glue
     #   * {Types::GetJobRunsResponse#job_runs #job_runs} => Array&lt;Types::JobRun&gt;
     #   * {Types::GetJobRunsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_job_runs({
@@ -4003,6 +4016,8 @@ module Aws::Glue
     #
     #   * {Types::GetJobsResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::GetJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4141,6 +4156,8 @@ module Aws::Glue
     #
     #   * {Types::GetMLTaskRunsResponse#task_runs #task_runs} => Array&lt;Types::TaskRun&gt;
     #   * {Types::GetMLTaskRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4300,6 +4317,8 @@ module Aws::Glue
     #
     #   * {Types::GetMLTransformsResponse#transforms #transforms} => Array&lt;Types::MLTransform&gt;
     #   * {Types::GetMLTransformsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4648,6 +4667,8 @@ module Aws::Glue
     #   * {Types::GetPartitionsResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
     #   * {Types::GetPartitionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_partitions({
@@ -4873,6 +4894,8 @@ module Aws::Glue
     #
     #   * {Types::GetSecurityConfigurationsResponse#security_configurations #security_configurations} => Array&lt;Types::SecurityConfiguration&gt;
     #   * {Types::GetSecurityConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5115,6 +5138,8 @@ module Aws::Glue
     #   * {Types::GetTableVersionsResponse#table_versions #table_versions} => Array&lt;Types::TableVersion&gt;
     #   * {Types::GetTableVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_table_versions({
@@ -5216,6 +5241,8 @@ module Aws::Glue
     #
     #   * {Types::GetTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
     #   * {Types::GetTablesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -5389,6 +5416,8 @@ module Aws::Glue
     #   * {Types::GetTriggersResponse#triggers #triggers} => Array&lt;Types::Trigger&gt;
     #   * {Types::GetTriggersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_triggers({
@@ -5483,7 +5512,7 @@ module Aws::Glue
     #   The ID of the Data Catalog where the functions to be retrieved are
     #   located. If none is provided, the AWS account ID is used by default.
     #
-    # @option params [required, String] :database_name
+    # @option params [String] :database_name
     #   The name of the catalog database where the functions are located.
     #
     # @option params [required, String] :pattern
@@ -5501,11 +5530,13 @@ module Aws::Glue
     #   * {Types::GetUserDefinedFunctionsResponse#user_defined_functions #user_defined_functions} => Array&lt;Types::UserDefinedFunction&gt;
     #   * {Types::GetUserDefinedFunctionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_user_defined_functions({
     #     catalog_id: "CatalogIdString",
-    #     database_name: "NameString", # required
+    #     database_name: "NameString",
     #     pattern: "NameString", # required
     #     next_token: "Token",
     #     max_results: 1,
@@ -5870,6 +5901,8 @@ module Aws::Glue
     #   * {Types::GetWorkflowRunsResponse#runs #runs} => Array&lt;Types::WorkflowRun&gt;
     #   * {Types::GetWorkflowRunsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workflow_runs({
@@ -6014,6 +6047,8 @@ module Aws::Glue
     #   * {Types::ListCrawlersResponse#crawler_names #crawler_names} => Array&lt;String&gt;
     #   * {Types::ListCrawlersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_crawlers({
@@ -6063,6 +6098,8 @@ module Aws::Glue
     #   * {Types::ListDevEndpointsResponse#dev_endpoint_names #dev_endpoint_names} => Array&lt;String&gt;
     #   * {Types::ListDevEndpointsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dev_endpoints({
@@ -6110,6 +6147,8 @@ module Aws::Glue
     #
     #   * {Types::ListJobsResponse#job_names #job_names} => Array&lt;String&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6164,6 +6203,8 @@ module Aws::Glue
     #
     #   * {Types::ListMLTransformsResponse#transform_ids #transform_ids} => Array&lt;String&gt;
     #   * {Types::ListMLTransformsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6238,6 +6279,8 @@ module Aws::Glue
     #   * {Types::ListTriggersResponse#trigger_names #trigger_names} => Array&lt;String&gt;
     #   * {Types::ListTriggersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_triggers({
@@ -6276,6 +6319,8 @@ module Aws::Glue
     #
     #   * {Types::ListWorkflowsResponse#workflows #workflows} => Array&lt;String&gt;
     #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6492,6 +6537,8 @@ module Aws::Glue
     #
     #   * {Types::SearchTablesResponse#next_token #next_token} => String
     #   * {Types::SearchTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7238,7 +7285,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -8080,7 +8127,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

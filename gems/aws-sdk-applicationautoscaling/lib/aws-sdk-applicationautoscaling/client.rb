@@ -279,8 +279,7 @@ module Aws::ApplicationAutoScaling
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ApplicationAutoScaling
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -330,9 +329,6 @@ module Aws::ApplicationAutoScaling
     # [Delete a Target Tracking Scaling Policy][2] in the *Application Auto
     # Scaling User Guide*.
     #
-    # To create a scaling policy or update an existing one, see
-    # PutScalingPolicy.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy
@@ -342,14 +338,9 @@ module Aws::ApplicationAutoScaling
     #   The name of the scaling policy.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -400,6 +391,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -449,6 +444,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -472,9 +473,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.delete_scaling_policy({
     #     policy_name: "ResourceIdMaxLen1600", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy AWS API Documentation
@@ -497,14 +498,9 @@ module Aws::ApplicationAutoScaling
     # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html#delete-scheduled-action
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action.
@@ -558,6 +554,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -607,15 +607,21 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scheduled_action({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     scheduled_action_name: "ResourceIdMaxLen1600", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledAction AWS API Documentation
@@ -627,23 +633,23 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Deregisters an Application Auto Scaling scalable target.
+    # Deregisters an Application Auto Scaling scalable target when you have
+    # finished using it. To see which resources have been registered, use
+    # [DescribeScalableTargets][1].
     #
-    # Deregistering a scalable target deletes the scaling policies that are
-    # associated with it.
+    # <note markdown="1"> Deregistering a scalable target deletes the scaling policies and the
+    # scheduled actions that are associated with it.
     #
-    # To create a scalable target or update an existing one, see
-    # RegisterScalableTarget.
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scalable target.
@@ -693,6 +699,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the function name with a function version
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
+    #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
     #
     #
     #
@@ -744,6 +754,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -765,9 +781,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget AWS API Documentation
@@ -785,19 +801,10 @@ module Aws::ApplicationAutoScaling
     # You can filter the results using `ResourceIds` and
     # `ScalableDimension`.
     #
-    # To create a scalable target or update an existing one, see
-    # RegisterScalableTarget. If you are no longer using a scalable target,
-    # you can deregister it using DeregisterScalableTarget.
-    #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [Array<String>] :resource_ids
     #   The identifier of the resource associated with the scalable target.
@@ -848,6 +855,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the function name with a function version
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
+    #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
     #
     #
     #
@@ -900,6 +911,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of scalable targets. This value can be between 1
     #   and 50. The default value is 50.
@@ -918,10 +935,12 @@ module Aws::ApplicationAutoScaling
     #   * {Types::DescribeScalableTargetsResponse#scalable_targets #scalable_targets} => Array&lt;Types::ScalableTarget&gt;
     #   * {Types::DescribeScalableTargetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe scalable targets
     #
-    #   # This example describes the scalable targets for the ecs service namespace.
+    #   # This example describes the scalable targets for the ECS service namespace.
     #
     #   resp = client.describe_scalable_targets({
     #     service_namespace: "ecs", 
@@ -931,7 +950,7 @@ module Aws::ApplicationAutoScaling
     #   {
     #     scalable_targets: [
     #       {
-    #         creation_time: Time.parse("2016-05-06T11:21:46.199Z"), 
+    #         creation_time: Time.parse("2019-05-06T11:21:46.199Z"), 
     #         max_capacity: 10, 
     #         min_capacity: 1, 
     #         resource_id: "service/default/web-app", 
@@ -950,9 +969,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scalable_targets({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_ids: ["ResourceIdMaxLen1600"],
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -960,9 +979,9 @@ module Aws::ApplicationAutoScaling
     # @example Response structure
     #
     #   resp.scalable_targets #=> Array
-    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda"
+    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda", "cassandra"
     #   resp.scalable_targets[0].resource_id #=> String
-    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency"
+    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency", "cassandra:table:ReadCapacityUnits", "cassandra:table:WriteCapacityUnits"
     #   resp.scalable_targets[0].min_capacity #=> Integer
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
@@ -986,20 +1005,10 @@ module Aws::ApplicationAutoScaling
     #
     # You can filter the results using `ResourceId` and `ScalableDimension`.
     #
-    # Scaling activities are triggered by CloudWatch alarms that are
-    # associated with scaling policies. To view the scaling policies for a
-    # service namespace, see DescribeScalingPolicies. To create a scaling
-    # policy or update an existing one, see PutScalingPolicy.
-    #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling activity.
@@ -1051,6 +1060,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1101,6 +1114,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of scalable targets. This value can be between 1
     #   and 50. The default value is 50.
@@ -1118,6 +1137,8 @@ module Aws::ApplicationAutoScaling
     #
     #   * {Types::DescribeScalingActivitiesResponse#scaling_activities #scaling_activities} => Array&lt;Types::ScalingActivity&gt;
     #   * {Types::DescribeScalingActivitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe scaling activities for a scalable target
@@ -1138,11 +1159,11 @@ module Aws::ApplicationAutoScaling
     #         activity_id: "e6c5f7d1-dbbb-4a3f-89b2-51f33e766399", 
     #         cause: "monitor alarm web-app-cpu-lt-25 in state ALARM triggered policy web-app-cpu-lt-25", 
     #         description: "Setting desired count to 1.", 
-    #         end_time: Time.parse("2016-05-06T16:04:32.111Z"), 
+    #         end_time: Time.parse("2019-05-06T16:04:32.111Z"), 
     #         resource_id: "service/default/web-app", 
     #         scalable_dimension: "ecs:service:DesiredCount", 
     #         service_namespace: "ecs", 
-    #         start_time: Time.parse("2016-05-06T16:03:58.171Z"), 
+    #         start_time: Time.parse("2019-05-06T16:03:58.171Z"), 
     #         status_code: "Successful", 
     #         status_message: "Successfully set desired count to 1. Change successfully fulfilled by ecs.", 
     #       }, 
@@ -1152,9 +1173,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scaling_activities({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -1163,9 +1184,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp.scaling_activities #=> Array
     #   resp.scaling_activities[0].activity_id #=> String
-    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda"
+    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda", "cassandra"
     #   resp.scaling_activities[0].resource_id #=> String
-    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency"
+    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency", "cassandra:table:ReadCapacityUnits", "cassandra:table:WriteCapacityUnits"
     #   resp.scaling_activities[0].description #=> String
     #   resp.scaling_activities[0].cause #=> String
     #   resp.scaling_activities[0].start_time #=> Time
@@ -1190,22 +1211,22 @@ module Aws::ApplicationAutoScaling
     # You can filter the results using `ResourceId`, `ScalableDimension`,
     # and `PolicyNames`.
     #
-    # To create a scaling policy or update an existing one, see
-    # PutScalingPolicy. If you are no longer using a scaling policy, you can
-    # delete it using DeleteScalingPolicy.
+    # For more information, see [Target Tracking Scaling Policies][1] and
+    # [Step Scaling Policies][2] in the *Application Auto Scaling User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
     #
     # @option params [Array<String>] :policy_names
     #   The names of the scaling policies to describe.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
@@ -1257,6 +1278,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1307,6 +1332,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of scalable targets. This value can be between 1
     #   and 50. The default value is 50.
@@ -1325,10 +1356,12 @@ module Aws::ApplicationAutoScaling
     #   * {Types::DescribeScalingPoliciesResponse#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
     #   * {Types::DescribeScalingPoliciesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe scaling policies
     #
-    #   # This example describes the scaling policies for the ecs service namespace.
+    #   # This example describes the scaling policies for the ECS service namespace.
     #
     #   resp = client.describe_scaling_policies({
     #     service_namespace: "ecs", 
@@ -1345,7 +1378,7 @@ module Aws::ApplicationAutoScaling
     #             alarm_name: "web-app-cpu-gt-75", 
     #           }, 
     #         ], 
-    #         creation_time: Time.parse("2016-05-06T12:11:39.230Z"), 
+    #         creation_time: Time.parse("2019-05-06T12:11:39.230Z"), 
     #         policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75", 
     #         policy_name: "web-app-cpu-gt-75", 
     #         policy_type: "StepScaling", 
@@ -1370,9 +1403,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.describe_scaling_policies({
     #     policy_names: ["ResourceIdMaxLen1600"],
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -1382,9 +1415,9 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies #=> Array
     #   resp.scaling_policies[0].policy_arn #=> String
     #   resp.scaling_policies[0].policy_name #=> String
-    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda"
+    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda", "cassandra"
     #   resp.scaling_policies[0].resource_id #=> String
-    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency"
+    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency", "cassandra:table:ReadCapacityUnits", "cassandra:table:WriteCapacityUnits"
     #   resp.scaling_policies[0].policy_type #=> String, one of "StepScaling", "TargetTrackingScaling"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.adjustment_type #=> String, one of "ChangeInCapacity", "PercentChangeInCapacity", "ExactCapacity"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.step_adjustments #=> Array
@@ -1395,7 +1428,7 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].step_scaling_policy_configuration.cooldown #=> Integer
     #   resp.scaling_policies[0].step_scaling_policy_configuration.metric_aggregation_type #=> String, one of "Average", "Minimum", "Maximum"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization", "ALBRequestCountPerTarget", "RDSReaderAverageCPUUtilization", "RDSReaderAverageDatabaseConnections", "EC2SpotFleetRequestAverageCPUUtilization", "EC2SpotFleetRequestAverageNetworkIn", "EC2SpotFleetRequestAverageNetworkOut", "SageMakerVariantInvocationsPerInstance", "ECSServiceAverageCPUUtilization", "ECSServiceAverageMemoryUtilization", "AppStreamAverageCapacityUtilization", "ComprehendInferenceUtilization", "LambdaProvisionedConcurrencyUtilization"
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization", "ALBRequestCountPerTarget", "RDSReaderAverageCPUUtilization", "RDSReaderAverageDatabaseConnections", "EC2SpotFleetRequestAverageCPUUtilization", "EC2SpotFleetRequestAverageNetworkIn", "EC2SpotFleetRequestAverageNetworkOut", "SageMakerVariantInvocationsPerInstance", "ECSServiceAverageCPUUtilization", "ECSServiceAverageMemoryUtilization", "AppStreamAverageCapacityUtilization", "ComprehendInferenceUtilization", "LambdaProvisionedConcurrencyUtilization", "CassandraReadCapacityUtilization", "CassandraWriteCapacityUtilization"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.resource_label #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metric_name #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.namespace #=> String
@@ -1428,22 +1461,20 @@ module Aws::ApplicationAutoScaling
     # You can filter the results using the `ResourceId`,
     # `ScalableDimension`, and `ScheduledActionNames` parameters.
     #
-    # To create a scheduled action or update an existing one, see
-    # PutScheduledAction. If you are no longer using a scheduled action, you
-    # can delete it using DeleteScheduledAction.
+    # For more information, see [Scheduled Scaling][1] in the *Application
+    # Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
     #
     # @option params [Array<String>] :scheduled_action_names
     #   The names of the scheduled actions to describe.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [String] :resource_id
     #   The identifier of the resource associated with the scheduled action.
@@ -1495,6 +1526,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1545,6 +1580,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of scheduled action results. This value can be
     #   between 1 and 50. The default value is 50.
@@ -1563,13 +1604,15 @@ module Aws::ApplicationAutoScaling
     #   * {Types::DescribeScheduledActionsResponse#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
     #   * {Types::DescribeScheduledActionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scheduled_actions({
     #     scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -1579,10 +1622,10 @@ module Aws::ApplicationAutoScaling
     #   resp.scheduled_actions #=> Array
     #   resp.scheduled_actions[0].scheduled_action_name #=> String
     #   resp.scheduled_actions[0].scheduled_action_arn #=> String
-    #   resp.scheduled_actions[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda"
+    #   resp.scheduled_actions[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream", "dynamodb", "rds", "sagemaker", "custom-resource", "comprehend", "lambda", "cassandra"
     #   resp.scheduled_actions[0].schedule #=> String
     #   resp.scheduled_actions[0].resource_id #=> String
-    #   resp.scheduled_actions[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency"
+    #   resp.scheduled_actions[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity", "dynamodb:table:ReadCapacityUnits", "dynamodb:table:WriteCapacityUnits", "dynamodb:index:ReadCapacityUnits", "dynamodb:index:WriteCapacityUnits", "rds:cluster:ReadReplicaCount", "sagemaker:variant:DesiredInstanceCount", "custom-resource:ResourceType:Property", "comprehend:document-classifier-endpoint:DesiredInferenceUnits", "lambda:function:ProvisionedConcurrency", "cassandra:table:ReadCapacityUnits", "cassandra:table:WriteCapacityUnits"
     #   resp.scheduled_actions[0].start_time #=> Time
     #   resp.scheduled_actions[0].end_time #=> Time
     #   resp.scheduled_actions[0].scalable_target_action.min_capacity #=> Integer
@@ -1599,22 +1642,14 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Creates or updates a policy for an Application Auto Scaling scalable
-    # target.
+    # Creates or updates a scaling policy for an Application Auto Scaling
+    # scalable target.
     #
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scaling policy applies to the scalable
     # target identified by those three attributes. You cannot create a
     # scaling policy until you have registered the resource as a scalable
-    # target using RegisterScalableTarget.
-    #
-    # To update a policy, specify its policy name and the parameters that
-    # you want to change. Any parameters that you don't specify are not
-    # changed by this update request.
-    #
-    # You can view the scaling policies for a service namespace using
-    # DescribeScalingPolicies. If you are no longer using a scaling policy,
-    # you can delete it using DeleteScalingPolicy.
+    # target.
     #
     # Multiple scaling policies can be in force at the same time for the
     # same scalable target. You can have one or more target tracking scaling
@@ -1628,25 +1663,28 @@ module Aws::ApplicationAutoScaling
     # the policy with the highest calculated capacity (200% of 10 = 20) and
     # scales out to 30.
     #
-    # Learn more about how to work with scaling policies in the [Application
-    # Auto Scaling User Guide][1].
+    # For more information, see [Target Tracking Scaling Policies][1] and
+    # [Step Scaling Policies][2] in the *Application Auto Scaling User
+    # Guide*.
+    #
+    # <note markdown="1"> If a scalable target is deregistered, the scalable target is no longer
+    # available to execute scaling policies. Any scaling policies that were
+    # specified for the scalable target are deleted.
+    #
+    #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
     #
     # @option params [required, String] :policy_name
     #   The name of the scaling policy.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scaling policy.
@@ -1697,6 +1735,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1746,6 +1788,12 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [String] :policy_type
     #   The policy type. This parameter is required if you are creating a
     #   scaling policy.
@@ -1754,8 +1802,8 @@ module Aws::ApplicationAutoScaling
     #
     #   `TargetTrackingScaling`—Not supported for Amazon EMR
     #
-    #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, or AWS
-    #   Lambda
+    #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
+    #   or Amazon Keyspaces for Apache Cassandra.
     #
     #   For more information, see [Target Tracking Scaling Policies][1] and
     #   [Step Scaling Policies][2] in the *Application Auto Scaling User
@@ -1822,150 +1870,13 @@ module Aws::ApplicationAutoScaling
     #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/cpu75-target-tracking-scaling-policy", 
     #   }
     #
-    # @example Example: To apply a target tracking scaling policy with a customized metric specification
-    #
-    #   # The following example applies a target tracking scaling policy with a customized metric specification to an Amazon ECS
-    #   # service called web-app in the default cluster. The policy keeps the average utilization of the service at 75 percent,
-    #   # with scale-out and scale-in cooldown periods of 60 seconds. 
-    #
-    #   resp = client.put_scaling_policy({
-    #     policy_name: "cms75-target-tracking-scaling-policy", 
-    #     policy_type: "TargetTrackingScaling", 
-    #     resource_id: "service/default/web-app", 
-    #     scalable_dimension: "ecs:service:DesiredCount", 
-    #     service_namespace: "ecs", 
-    #     target_tracking_scaling_policy_configuration: {
-    #       customized_metric_specification: {
-    #         dimensions: [
-    #           {
-    #             name: "MyOptionalMetricDimensionName", 
-    #             value: "MyOptionalMetricDimensionValue", 
-    #           }, 
-    #         ], 
-    #         metric_name: "MyUtilizationMetric", 
-    #         namespace: "MyNamespace", 
-    #         statistic: "Average", 
-    #         unit: "Percent", 
-    #       }, 
-    #       scale_in_cooldown: 60, 
-    #       scale_out_cooldown: 60, 
-    #       target_value: 75, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     alarms: [
-    #       {
-    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-9bc77b56-0571-4276-ba0f-d4178882e0a0", 
-    #         alarm_name: "TargetTracking-service/default/web-app-AlarmHigh-9bc77b56-0571-4276-ba0f-d4178882e0a0", 
-    #       }, 
-    #       {
-    #         alarm_arn: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmLow-9b6ad934-6d37-438e-9e05-02836ddcbdc4", 
-    #         alarm_name: "TargetTracking-service/default/web-app-AlarmLow-9b6ad934-6d37-438e-9e05-02836ddcbdc4", 
-    #       }, 
-    #     ], 
-    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy: 8784a896-b2ba-47a1-b08c-27301cc499a1:resource/ecs/service/default/web-app:policyName/cms75-target-tracking-scaling-policy", 
-    #   }
-    #
-    # @example Example: To apply a target tracking scaling policy for scale out only
-    #
-    #   # The following example applies a target tracking scaling policy to an Amazon ECS service called web-app in the default
-    #   # cluster. The policy is used to scale out the ECS service when the RequestCountPerTarget metric from the Application Load
-    #   # Balancer exceeds the threshold.
-    #
-    #   resp = client.put_scaling_policy({
-    #     policy_name: "alb-scale-out-target-tracking-scaling-policy", 
-    #     policy_type: "TargetTrackingScaling", 
-    #     resource_id: "service/default/web-app", 
-    #     scalable_dimension: "ecs:service:DesiredCount", 
-    #     service_namespace: "ecs", 
-    #     target_tracking_scaling_policy_configuration: {
-    #       disable_scale_in: true, 
-    #       predefined_metric_specification: {
-    #         predefined_metric_type: "ALBRequestCountPerTarget", 
-    #         resource_label: "app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d", 
-    #       }, 
-    #       scale_in_cooldown: 60, 
-    #       scale_out_cooldown: 60, 
-    #       target_value: 1000, 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     alarms: [
-    #       {
-    #         alarm_arn: "TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
-    #         alarm_name: "arn:aws:cloudwatch:us-west-2:012345678910:alarm:TargetTracking-service/default/web-app-AlarmHigh-d4f0770c-b46e-434a-a60f-3b36d653feca", 
-    #       }, 
-    #     ], 
-    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/alb-scale-out-target-tracking-scaling-policy", 
-    #   }
-    #
-    # @example Example: To apply a step scaling policy to an Amazon ECS service
-    #
-    #   # This example applies a step scaling policy to an Amazon ECS service called web-app in the default cluster. The policy
-    #   # increases the desired count of the service by 200%, with a cool down period of 60 seconds.
-    #
-    #   resp = client.put_scaling_policy({
-    #     policy_name: "web-app-cpu-gt-75", 
-    #     policy_type: "StepScaling", 
-    #     resource_id: "service/default/web-app", 
-    #     scalable_dimension: "ecs:service:DesiredCount", 
-    #     service_namespace: "ecs", 
-    #     step_scaling_policy_configuration: {
-    #       adjustment_type: "PercentChangeInCapacity", 
-    #       cooldown: 60, 
-    #       step_adjustments: [
-    #         {
-    #           metric_interval_lower_bound: 0, 
-    #           scaling_adjustment: 200, 
-    #         }, 
-    #       ], 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     policy_arn: "arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75", 
-    #   }
-    #
-    # @example Example: To apply a step scaling policy to an Amazon EC2 Spot fleet
-    #
-    #   # This example applies a step scaling policy to an Amazon EC2 Spot fleet. The policy increases the target capacity of the
-    #   # spot fleet by 200%, with a cool down period of 180 seconds.",
-    #
-    #   resp = client.put_scaling_policy({
-    #     policy_name: "fleet-cpu-gt-75", 
-    #     policy_type: "StepScaling", 
-    #     resource_id: "spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3", 
-    #     scalable_dimension: "ec2:spot-fleet-request:TargetCapacity", 
-    #     service_namespace: "ec2", 
-    #     step_scaling_policy_configuration: {
-    #       adjustment_type: "PercentChangeInCapacity", 
-    #       cooldown: 180, 
-    #       step_adjustments: [
-    #         {
-    #           metric_interval_lower_bound: 0, 
-    #           scaling_adjustment: 200, 
-    #         }, 
-    #       ], 
-    #     }, 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     policy_arn: "arn:aws:autoscaling:us-east-1:012345678910:scalingPolicy:89406401-0cb7-4130-b770-d97cca0e446b:resource/ec2/spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3:policyName/fleet-cpu-gt-75", 
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "PolicyName", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #     step_scaling_policy_configuration: {
     #       adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -1983,7 +1894,7 @@ module Aws::ApplicationAutoScaling
     #     target_tracking_scaling_policy_configuration: {
     #       target_value: 1.0, # required
     #       predefined_metric_specification: {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, AppStreamAverageCapacityUtilization, ComprehendInferenceUtilization, LambdaProvisionedConcurrencyUtilization, CassandraReadCapacityUtilization, CassandraWriteCapacityUtilization
     #         resource_label: "ResourceLabel",
     #       },
     #       customized_metric_specification: {
@@ -2027,33 +1938,33 @@ module Aws::ApplicationAutoScaling
     # ID, and scalable dimension. A scheduled action applies to the scalable
     # target identified by those three attributes. You cannot create a
     # scheduled action until you have registered the resource as a scalable
-    # target using RegisterScalableTarget.
+    # target.
     #
-    # To update an action, specify its name and the parameters that you want
-    # to change. If you don't specify start and end times, the old values
-    # are deleted. Any other parameters that you don't specify are not
-    # changed by this update request.
+    # When start and end times are specified with a recurring schedule using
+    # a cron expression or rates, they form the boundaries of when the
+    # recurring action starts and stops.
     #
-    # You can view the scheduled actions using DescribeScheduledActions. If
-    # you are no longer using a scheduled action, you can delete it using
-    # DeleteScheduledAction.
+    # To update a scheduled action, specify the parameters that you want to
+    # change. If you don't specify start and end times, the old values are
+    # deleted.
     #
-    # Learn more about how to work with scheduled actions in the
-    # [Application Auto Scaling User Guide][1].
+    # For more information, see [Scheduled Scaling][1] in the *Application
+    # Auto Scaling User Guide*.
+    #
+    # <note markdown="1"> If a scalable target is deregistered, the scalable target is no longer
+    # available to run scheduled actions. Any scheduled actions that were
+    # specified for the scalable target are deleted.
+    #
+    #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [String] :schedule
     #   The schedule for this action. The following formats are supported:
@@ -2064,7 +1975,7 @@ module Aws::ApplicationAutoScaling
     #
     #   * Cron expressions - "`cron(fields)`"
     #
-    #   At expressions are useful for one-time schedules. Specify the time, in
+    #   At expressions are useful for one-time schedules. Specify the time in
     #   UTC.
     #
     #   For rate expressions, *value* is a positive integer and *unit* is
@@ -2073,12 +1984,17 @@ module Aws::ApplicationAutoScaling
     #   For more information about cron expressions, see [Cron Expressions][1]
     #   in the *Amazon CloudWatch Events User Guide*.
     #
+    #   For examples of using these expressions, see [Scheduled Scaling][2] in
+    #   the *Application Auto Scaling User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   [2]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html
     #
     # @option params [required, String] :scheduled_action_name
-    #   The name of the scheduled action.
+    #   The name of the scheduled action. This name must be unique among all
+    #   other scheduled actions on the specified scalable target.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource associated with the scheduled action.
@@ -2129,6 +2045,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2178,15 +2098,21 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   The date and time for the scheduled action to start.
+    #   The date and time for this scheduled action to start.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time for the scheduled action to end.
+    #   The date and time for the recurring schedule to end.
     #
     # @option params [Types::ScalableTargetAction] :scalable_target_action
     #   The new minimum and maximum capacity. You can set both values or just
-    #   one. During the scheduled time, if the current capacity is below the
+    #   one. At the scheduled time, if the current capacity is below the
     #   minimum capacity, Application Auto Scaling scales out to the minimum
     #   capacity. If the current capacity is above the maximum capacity,
     #   Application Auto Scaling scales in to the maximum capacity.
@@ -2196,11 +2122,11 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_scheduled_action({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     schedule: "ResourceIdMaxLen1600",
     #     scheduled_action_name: "ScheduledActionName", # required
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     scalable_target_action: {
@@ -2218,38 +2144,38 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Registers or updates a scalable target. A scalable target is a
-    # resource that Application Auto Scaling can scale out and scale in.
-    # Scalable targets are uniquely identified by the combination of
-    # resource ID, scalable dimension, and namespace.
+    # Registers or updates a scalable target.
+    #
+    # A scalable target is a resource that Application Auto Scaling can
+    # scale out and scale in. Scalable targets are uniquely identified by
+    # the combination of resource ID, scalable dimension, and namespace.
     #
     # When you register a new scalable target, you must specify values for
-    # minimum and maximum capacity. Application Auto Scaling will not scale
-    # capacity to values that are outside of this range.
-    #
-    # To update a scalable target, specify the parameter that you want to
-    # change as well as the following parameters that identify the scalable
-    # target: resource ID, scalable dimension, and namespace. Any parameters
-    # that you don't specify are not changed by this update request.
+    # minimum and maximum capacity. Application Auto Scaling scaling
+    # policies will not scale capacity to values that are outside of this
+    # range.
     #
     # After you register a scalable target, you do not need to register it
     # again to use other Application Auto Scaling operations. To see which
-    # resources have been registered, use DescribeScalableTargets. You can
-    # also view the scaling policies for a service namespace by using
-    # DescribeScalableTargets.
+    # resources have been registered, use [DescribeScalableTargets][1]. You
+    # can also view the scaling policies for a service namespace by using
+    # [DescribeScalableTargets][1]. If you no longer need a scalable target,
+    # you can deregister it by using [DeregisterScalableTarget][2].
     #
-    # If you no longer need a scalable target, you can deregister it by
-    # using DeregisterScalableTarget.
+    # To update a scalable target, specify the parameters that you want to
+    # change. Include the parameters that identify the scalable target:
+    # resource ID, scalable dimension, and namespace. Any parameters that
+    # you don't specify are not changed by this update request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service that provides the resource or
-    #   `custom-resource` for a resource provided by your own application or
-    #   service. For more information, see [AWS Service Namespaces][1] in the
-    #   *Amazon Web Services General Reference*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+    #   The namespace of the AWS service that provides the resource. For a
+    #   resource provided by your own application or service, use
+    #   `custom-resource` instead.
     #
     # @option params [required, String] :resource_id
     #   The identifier of the resource that is associated with the scalable
@@ -2301,6 +2227,10 @@ module Aws::ApplicationAutoScaling
     #     or alias name suffix that is not `$LATEST`. Example:
     #     `function:my-function:prod` or `function:my-function:1`.
     #
+    #   * Amazon Keyspaces table - The resource type is `table` and the unique
+    #     identifier is the table name. Example:
+    #     `keyspace/mykeyspace/table/mytable`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2351,27 +2281,41 @@ module Aws::ApplicationAutoScaling
     #   * `lambda:function:ProvisionedConcurrency` - The provisioned
     #     concurrency for a Lambda function.
     #
+    #   * `cassandra:table:ReadCapacityUnits` - The provisioned read capacity
+    #     for an Amazon Keyspaces table.
+    #
+    #   * `cassandra:table:WriteCapacityUnits` - The provisioned write
+    #     capacity for an Amazon Keyspaces table.
+    #
     # @option params [Integer] :min_capacity
-    #   The minimum value to scale to in response to a scale-in event.
-    #   `MinCapacity` is required to register a scalable target.
+    #   The minimum value that you plan to scale in to. When a scaling policy
+    #   is in effect, Application Auto Scaling can scale in (contract) as
+    #   needed to the minimum capacity limit in response to changing demand.
+    #
+    #   This parameter is required if you are registering a scalable target.
+    #   For Lambda provisioned concurrency, the minimum value allowed is 0.
+    #   For all other resources, the minimum value allowed is 1.
     #
     # @option params [Integer] :max_capacity
-    #   The maximum value to scale to in response to a scale-out event.
-    #   `MaxCapacity` is required to register a scalable target.
+    #   The maximum value that you plan to scale out to. When a scaling policy
+    #   is in effect, Application Auto Scaling can scale out (expand) as
+    #   needed to the maximum capacity limit in response to changing demand.
+    #
+    #   This parameter is required if you are registering a scalable target.
     #
     # @option params [String] :role_arn
-    #   Application Auto Scaling creates a service-linked role that grants it
-    #   permissions to modify the scalable target on your behalf. For more
-    #   information, see [Service-Linked Roles for Application Auto
-    #   Scaling][1].
-    #
-    #   For Amazon EMR, this parameter is required, and it must specify the
-    #   ARN of an IAM role that allows Application Auto Scaling to modify the
+    #   This parameter is required for services that do not support
+    #   service-linked roles (such as Amazon EMR), and it must specify the ARN
+    #   of an IAM role that allows Application Auto Scaling to modify the
     #   scalable target on your behalf.
     #
+    #   If the service supports service-linked roles, Application Auto Scaling
+    #   uses a service-linked role, which it creates if it does not yet exist.
+    #   For more information, see [Application Auto Scaling IAM Roles][1].
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-service-linked-roles.html
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-roles
     #
     # @option params [Types::SuspendedState] :suspended_state
     #   An embedded object that contains attributes and attribute values that
@@ -2416,29 +2360,12 @@ module Aws::ApplicationAutoScaling
     #     service_namespace: "ecs", 
     #   })
     #
-    # @example Example: To register an EC2 Spot fleet as a scalable target
-    #
-    #   # This example registers a scalable target from an Amazon EC2 Spot fleet with a minimum target capacity of 1 and a maximum
-    #   # of 10.
-    #
-    #   resp = client.register_scalable_target({
-    #     max_capacity: 10, 
-    #     min_capacity: 1, 
-    #     resource_id: "spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3", 
-    #     scalable_dimension: "ec2:spot-fleet-request:TargetCapacity", 
-    #     service_namespace: "ec2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #   }
-    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker, custom-resource, comprehend, lambda, cassandra
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount, custom-resource:ResourceType:Property, comprehend:document-classifier-endpoint:DesiredInferenceUnits, lambda:function:ProvisionedConcurrency, cassandra:table:ReadCapacityUnits, cassandra:table:WriteCapacityUnits
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
@@ -2471,7 +2398,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

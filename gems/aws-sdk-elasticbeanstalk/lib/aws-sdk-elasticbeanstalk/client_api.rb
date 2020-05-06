@@ -44,6 +44,8 @@ module Aws::ElasticBeanstalk
     AvailableSolutionStackNamesList = Shapes::ListShape.new(name: 'AvailableSolutionStackNamesList')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInt = Shapes::IntegerShape.new(name: 'BoxedInt')
+    BranchName = Shapes::StringShape.new(name: 'BranchName')
+    BranchOrder = Shapes::IntegerShape.new(name: 'BranchOrder')
     BuildConfiguration = Shapes::StructureShape.new(name: 'BuildConfiguration')
     Builder = Shapes::StructureShape.new(name: 'Builder')
     CPUUtilization = Shapes::StructureShape.new(name: 'CPUUtilization')
@@ -170,6 +172,8 @@ module Aws::ElasticBeanstalk
     LaunchTemplateList = Shapes::ListShape.new(name: 'LaunchTemplateList')
     LaunchedAt = Shapes::TimestampShape.new(name: 'LaunchedAt')
     ListAvailableSolutionStacksResultMessage = Shapes::StructureShape.new(name: 'ListAvailableSolutionStacksResultMessage')
+    ListPlatformBranchesRequest = Shapes::StructureShape.new(name: 'ListPlatformBranchesRequest')
+    ListPlatformBranchesResult = Shapes::StructureShape.new(name: 'ListPlatformBranchesResult')
     ListPlatformVersionsRequest = Shapes::StructureShape.new(name: 'ListPlatformVersionsRequest')
     ListPlatformVersionsResult = Shapes::StructureShape.new(name: 'ListPlatformVersionsResult')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
@@ -206,6 +210,10 @@ module Aws::ElasticBeanstalk
     OptionSpecification = Shapes::StructureShape.new(name: 'OptionSpecification')
     OptionsSpecifierList = Shapes::ListShape.new(name: 'OptionsSpecifierList')
     PlatformArn = Shapes::StringShape.new(name: 'PlatformArn')
+    PlatformBranchLifecycleState = Shapes::StringShape.new(name: 'PlatformBranchLifecycleState')
+    PlatformBranchMaxRecords = Shapes::IntegerShape.new(name: 'PlatformBranchMaxRecords')
+    PlatformBranchSummary = Shapes::StructureShape.new(name: 'PlatformBranchSummary')
+    PlatformBranchSummaryList = Shapes::ListShape.new(name: 'PlatformBranchSummaryList')
     PlatformCategory = Shapes::StringShape.new(name: 'PlatformCategory')
     PlatformDescription = Shapes::StructureShape.new(name: 'PlatformDescription')
     PlatformFilter = Shapes::StructureShape.new(name: 'PlatformFilter')
@@ -216,6 +224,7 @@ module Aws::ElasticBeanstalk
     PlatformFilters = Shapes::ListShape.new(name: 'PlatformFilters')
     PlatformFramework = Shapes::StructureShape.new(name: 'PlatformFramework')
     PlatformFrameworks = Shapes::ListShape.new(name: 'PlatformFrameworks')
+    PlatformLifecycleState = Shapes::StringShape.new(name: 'PlatformLifecycleState')
     PlatformMaxRecords = Shapes::IntegerShape.new(name: 'PlatformMaxRecords')
     PlatformName = Shapes::StringShape.new(name: 'PlatformName')
     PlatformOwner = Shapes::StringShape.new(name: 'PlatformOwner')
@@ -252,6 +261,12 @@ module Aws::ElasticBeanstalk
     S3LocationNotInServiceRegionException = Shapes::StructureShape.new(name: 'S3LocationNotInServiceRegionException')
     S3SubscriptionRequiredException = Shapes::StructureShape.new(name: 'S3SubscriptionRequiredException')
     SampleTimestamp = Shapes::TimestampShape.new(name: 'SampleTimestamp')
+    SearchFilter = Shapes::StructureShape.new(name: 'SearchFilter')
+    SearchFilterAttribute = Shapes::StringShape.new(name: 'SearchFilterAttribute')
+    SearchFilterOperator = Shapes::StringShape.new(name: 'SearchFilterOperator')
+    SearchFilterValue = Shapes::StringShape.new(name: 'SearchFilterValue')
+    SearchFilterValues = Shapes::ListShape.new(name: 'SearchFilterValues')
+    SearchFilters = Shapes::ListShape.new(name: 'SearchFilters')
     SingleInstanceHealth = Shapes::StructureShape.new(name: 'SingleInstanceHealth')
     SolutionStackDescription = Shapes::StructureShape.new(name: 'SolutionStackDescription')
     SolutionStackFileTypeList = Shapes::ListShape.new(name: 'SolutionStackFileTypeList')
@@ -813,6 +828,15 @@ module Aws::ElasticBeanstalk
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stack_details, Shapes::ShapeRef.new(shape: AvailableSolutionStackDetailsList, location_name: "SolutionStackDetails"))
     ListAvailableSolutionStacksResultMessage.struct_class = Types::ListAvailableSolutionStacksResultMessage
 
+    ListPlatformBranchesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilters, location_name: "Filters"))
+    ListPlatformBranchesRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: PlatformBranchMaxRecords, location_name: "MaxRecords"))
+    ListPlatformBranchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPlatformBranchesRequest.struct_class = Types::ListPlatformBranchesRequest
+
+    ListPlatformBranchesResult.add_member(:platform_branch_summary_list, Shapes::ShapeRef.new(shape: PlatformBranchSummaryList, location_name: "PlatformBranchSummaryList"))
+    ListPlatformBranchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPlatformBranchesResult.struct_class = Types::ListPlatformBranchesResult
+
     ListPlatformVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PlatformFilters, location_name: "Filters"))
     ListPlatformVersionsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: PlatformMaxRecords, location_name: "MaxRecords"))
     ListPlatformVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
@@ -889,6 +913,15 @@ module Aws::ElasticBeanstalk
 
     OptionsSpecifierList.member = Shapes::ShapeRef.new(shape: OptionSpecification)
 
+    PlatformBranchSummary.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, location_name: "PlatformName"))
+    PlatformBranchSummary.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "BranchName"))
+    PlatformBranchSummary.add_member(:lifecycle_state, Shapes::ShapeRef.new(shape: PlatformBranchLifecycleState, location_name: "LifecycleState"))
+    PlatformBranchSummary.add_member(:branch_order, Shapes::ShapeRef.new(shape: BranchOrder, location_name: "BranchOrder"))
+    PlatformBranchSummary.add_member(:supported_tier_list, Shapes::ShapeRef.new(shape: SupportedTierList, location_name: "SupportedTierList"))
+    PlatformBranchSummary.struct_class = Types::PlatformBranchSummary
+
+    PlatformBranchSummaryList.member = Shapes::ShapeRef.new(shape: PlatformBranchSummary)
+
     PlatformDescription.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     PlatformDescription.add_member(:platform_owner, Shapes::ShapeRef.new(shape: PlatformOwner, location_name: "PlatformOwner"))
     PlatformDescription.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, location_name: "PlatformName"))
@@ -907,6 +940,9 @@ module Aws::ElasticBeanstalk
     PlatformDescription.add_member(:custom_ami_list, Shapes::ShapeRef.new(shape: CustomAmiList, location_name: "CustomAmiList"))
     PlatformDescription.add_member(:supported_tier_list, Shapes::ShapeRef.new(shape: SupportedTierList, location_name: "SupportedTierList"))
     PlatformDescription.add_member(:supported_addon_list, Shapes::ShapeRef.new(shape: SupportedAddonList, location_name: "SupportedAddonList"))
+    PlatformDescription.add_member(:platform_lifecycle_state, Shapes::ShapeRef.new(shape: PlatformLifecycleState, location_name: "PlatformLifecycleState"))
+    PlatformDescription.add_member(:platform_branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "PlatformBranchName"))
+    PlatformDescription.add_member(:platform_branch_lifecycle_state, Shapes::ShapeRef.new(shape: PlatformBranchLifecycleState, location_name: "PlatformBranchLifecycleState"))
     PlatformDescription.struct_class = Types::PlatformDescription
 
     PlatformFilter.add_member(:type, Shapes::ShapeRef.new(shape: PlatformFilterType, location_name: "Type"))
@@ -938,6 +974,10 @@ module Aws::ElasticBeanstalk
     PlatformSummary.add_member(:operating_system_version, Shapes::ShapeRef.new(shape: OperatingSystemVersion, location_name: "OperatingSystemVersion"))
     PlatformSummary.add_member(:supported_tier_list, Shapes::ShapeRef.new(shape: SupportedTierList, location_name: "SupportedTierList"))
     PlatformSummary.add_member(:supported_addon_list, Shapes::ShapeRef.new(shape: SupportedAddonList, location_name: "SupportedAddonList"))
+    PlatformSummary.add_member(:platform_lifecycle_state, Shapes::ShapeRef.new(shape: PlatformLifecycleState, location_name: "PlatformLifecycleState"))
+    PlatformSummary.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
+    PlatformSummary.add_member(:platform_branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "PlatformBranchName"))
+    PlatformSummary.add_member(:platform_branch_lifecycle_state, Shapes::ShapeRef.new(shape: PlatformBranchLifecycleState, location_name: "PlatformBranchLifecycleState"))
     PlatformSummary.struct_class = Types::PlatformSummary
 
     PlatformSummaryList.member = Shapes::ShapeRef.new(shape: PlatformSummary)
@@ -996,6 +1036,15 @@ module Aws::ElasticBeanstalk
     S3LocationNotInServiceRegionException.struct_class = Types::S3LocationNotInServiceRegionException
 
     S3SubscriptionRequiredException.struct_class = Types::S3SubscriptionRequiredException
+
+    SearchFilter.add_member(:attribute, Shapes::ShapeRef.new(shape: SearchFilterAttribute, location_name: "Attribute"))
+    SearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: SearchFilterOperator, location_name: "Operator"))
+    SearchFilter.add_member(:values, Shapes::ShapeRef.new(shape: SearchFilterValues, location_name: "Values"))
+    SearchFilter.struct_class = Types::SearchFilter
+
+    SearchFilterValues.member = Shapes::ShapeRef.new(shape: SearchFilterValue)
+
+    SearchFilters.member = Shapes::ShapeRef.new(shape: SearchFilter)
 
     SingleInstanceHealth.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     SingleInstanceHealth.add_member(:health_status, Shapes::ShapeRef.new(shape: String, location_name: "HealthStatus"))
@@ -1436,6 +1485,20 @@ module Aws::ElasticBeanstalk
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: ListAvailableSolutionStacksResultMessage)
+      end)
+
+      api.add_operation(:list_platform_branches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPlatformBranches"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPlatformBranchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPlatformBranchesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_platform_versions, Seahorse::Model::Operation.new.tap do |o|

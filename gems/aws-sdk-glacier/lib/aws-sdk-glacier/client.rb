@@ -280,8 +280,7 @@ module Aws::Glacier
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -293,7 +292,7 @@ module Aws::Glacier
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1287,6 +1286,12 @@ module Aws::Glacier
     #   resp.number_of_archives #=> Integer
     #   resp.size_in_bytes #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * vault_exists
+    #   * vault_not_exists
+    #
     # @overload describe_vault(params = {})
     # @param [Hash] params ({})
     def describe_vault(params = {}, options = {})
@@ -2174,6 +2179,8 @@ module Aws::Glacier
     #   * {Types::ListJobsOutput#job_list #job_list} => Array&lt;Types::GlacierJobDescription&gt;
     #   * {Types::ListJobsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list jobs for a vault
     #
@@ -2359,6 +2366,8 @@ module Aws::Glacier
     #   * {Types::ListMultipartUploadsOutput#uploads_list #uploads_list} => Array&lt;Types::UploadListElement&gt;
     #   * {Types::ListMultipartUploadsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list all the in-progress multipart uploads for a vault
     #
@@ -2490,6 +2499,8 @@ module Aws::Glacier
     #   * {Types::ListPartsOutput#creation_date #creation_date} => Time
     #   * {Types::ListPartsOutput#parts #parts} => Array&lt;Types::PartListElement&gt;
     #   * {Types::ListPartsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the parts of an archive that have been uploaded in a multipart upload
@@ -2720,6 +2731,8 @@ module Aws::Glacier
     #
     #   * {Types::ListVaultsOutput#vault_list #vault_list} => Array&lt;Types::DescribeVaultOutput&gt;
     #   * {Types::ListVaultsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list all vaults owned by the calling user's account
@@ -3412,10 +3425,10 @@ module Aws::Glacier
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params            | :delay   | :max_attempts |
-    # | ---------------- | ----------------- | -------- | ------------- |
-    # | vault_exists     | {#describe_vault} | 3        | 15            |
-    # | vault_not_exists | {#describe_vault} | 3        | 15            |
+    # | waiter_name      | params                  | :delay   | :max_attempts |
+    # | ---------------- | ----------------------- | -------- | ------------- |
+    # | vault_exists     | {Client#describe_vault} | 3        | 15            |
+    # | vault_not_exists | {Client#describe_vault} | 3        | 15            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

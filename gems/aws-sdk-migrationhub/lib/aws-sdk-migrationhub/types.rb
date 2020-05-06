@@ -1157,6 +1157,24 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The number of seconds the caller should wait before retrying.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :retry_after_seconds)
+      include Aws::Structure
+    end
+
     # Exception raised to indicate a request was not authorized when the
     # `DryRun` flag is set to "true".
     #

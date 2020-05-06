@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2020-03-25)
+------------------
+
+* Feature - Amazon Managed Blockchain now has support to publish Hyperledger Fabric peer node, chaincode, and certificate authority (CA) logs to Amazon CloudWatch Logs.
+
 1.8.0 (2020-03-09)
 ------------------
 

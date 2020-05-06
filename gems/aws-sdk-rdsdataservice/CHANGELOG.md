@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-03-24)
+------------------
+
+* Feature - Documentation updates for rds-data
+
 1.15.0 (2020-03-09)
 ------------------
 

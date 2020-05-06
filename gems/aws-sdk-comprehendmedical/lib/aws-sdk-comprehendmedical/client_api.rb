@@ -22,8 +22,12 @@ module Aws::ComprehendMedical
     ComprehendMedicalAsyncJobPropertiesList = Shapes::ListShape.new(name: 'ComprehendMedicalAsyncJobPropertiesList')
     DescribeEntitiesDetectionV2JobRequest = Shapes::StructureShape.new(name: 'DescribeEntitiesDetectionV2JobRequest')
     DescribeEntitiesDetectionV2JobResponse = Shapes::StructureShape.new(name: 'DescribeEntitiesDetectionV2JobResponse')
+    DescribeICD10CMInferenceJobRequest = Shapes::StructureShape.new(name: 'DescribeICD10CMInferenceJobRequest')
+    DescribeICD10CMInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeICD10CMInferenceJobResponse')
     DescribePHIDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribePHIDetectionJobRequest')
     DescribePHIDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribePHIDetectionJobResponse')
+    DescribeRxNormInferenceJobRequest = Shapes::StructureShape.new(name: 'DescribeRxNormInferenceJobRequest')
+    DescribeRxNormInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeRxNormInferenceJobResponse')
     DetectEntitiesRequest = Shapes::StructureShape.new(name: 'DetectEntitiesRequest')
     DetectEntitiesResponse = Shapes::StructureShape.new(name: 'DetectEntitiesResponse')
     DetectEntitiesV2Request = Shapes::StructureShape.new(name: 'DetectEntitiesV2Request')
@@ -64,8 +68,12 @@ module Aws::ComprehendMedical
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListEntitiesDetectionV2JobsRequest = Shapes::StructureShape.new(name: 'ListEntitiesDetectionV2JobsRequest')
     ListEntitiesDetectionV2JobsResponse = Shapes::StructureShape.new(name: 'ListEntitiesDetectionV2JobsResponse')
+    ListICD10CMInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListICD10CMInferenceJobsRequest')
+    ListICD10CMInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListICD10CMInferenceJobsResponse')
     ListPHIDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListPHIDetectionJobsRequest')
     ListPHIDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListPHIDetectionJobsResponse')
+    ListRxNormInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListRxNormInferenceJobsRequest')
+    ListRxNormInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListRxNormInferenceJobsResponse')
     ManifestFilePath = Shapes::StringShape.new(name: 'ManifestFilePath')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     ModelVersion = Shapes::StringShape.new(name: 'ModelVersion')
@@ -90,12 +98,20 @@ module Aws::ComprehendMedical
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartEntitiesDetectionV2JobRequest = Shapes::StructureShape.new(name: 'StartEntitiesDetectionV2JobRequest')
     StartEntitiesDetectionV2JobResponse = Shapes::StructureShape.new(name: 'StartEntitiesDetectionV2JobResponse')
+    StartICD10CMInferenceJobRequest = Shapes::StructureShape.new(name: 'StartICD10CMInferenceJobRequest')
+    StartICD10CMInferenceJobResponse = Shapes::StructureShape.new(name: 'StartICD10CMInferenceJobResponse')
     StartPHIDetectionJobRequest = Shapes::StructureShape.new(name: 'StartPHIDetectionJobRequest')
     StartPHIDetectionJobResponse = Shapes::StructureShape.new(name: 'StartPHIDetectionJobResponse')
+    StartRxNormInferenceJobRequest = Shapes::StructureShape.new(name: 'StartRxNormInferenceJobRequest')
+    StartRxNormInferenceJobResponse = Shapes::StructureShape.new(name: 'StartRxNormInferenceJobResponse')
     StopEntitiesDetectionV2JobRequest = Shapes::StructureShape.new(name: 'StopEntitiesDetectionV2JobRequest')
     StopEntitiesDetectionV2JobResponse = Shapes::StructureShape.new(name: 'StopEntitiesDetectionV2JobResponse')
+    StopICD10CMInferenceJobRequest = Shapes::StructureShape.new(name: 'StopICD10CMInferenceJobRequest')
+    StopICD10CMInferenceJobResponse = Shapes::StructureShape.new(name: 'StopICD10CMInferenceJobResponse')
     StopPHIDetectionJobRequest = Shapes::StructureShape.new(name: 'StopPHIDetectionJobRequest')
     StopPHIDetectionJobResponse = Shapes::StructureShape.new(name: 'StopPHIDetectionJobResponse')
+    StopRxNormInferenceJobRequest = Shapes::StructureShape.new(name: 'StopRxNormInferenceJobRequest')
+    StopRxNormInferenceJobResponse = Shapes::StructureShape.new(name: 'StopRxNormInferenceJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -150,11 +166,23 @@ module Aws::ComprehendMedical
     DescribeEntitiesDetectionV2JobResponse.add_member(:comprehend_medical_async_job_properties, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobProperties, location_name: "ComprehendMedicalAsyncJobProperties"))
     DescribeEntitiesDetectionV2JobResponse.struct_class = Types::DescribeEntitiesDetectionV2JobResponse
 
+    DescribeICD10CMInferenceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeICD10CMInferenceJobRequest.struct_class = Types::DescribeICD10CMInferenceJobRequest
+
+    DescribeICD10CMInferenceJobResponse.add_member(:comprehend_medical_async_job_properties, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobProperties, location_name: "ComprehendMedicalAsyncJobProperties"))
+    DescribeICD10CMInferenceJobResponse.struct_class = Types::DescribeICD10CMInferenceJobResponse
+
     DescribePHIDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribePHIDetectionJobRequest.struct_class = Types::DescribePHIDetectionJobRequest
 
     DescribePHIDetectionJobResponse.add_member(:comprehend_medical_async_job_properties, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobProperties, location_name: "ComprehendMedicalAsyncJobProperties"))
     DescribePHIDetectionJobResponse.struct_class = Types::DescribePHIDetectionJobResponse
+
+    DescribeRxNormInferenceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeRxNormInferenceJobRequest.struct_class = Types::DescribeRxNormInferenceJobRequest
+
+    DescribeRxNormInferenceJobResponse.add_member(:comprehend_medical_async_job_properties, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobProperties, location_name: "ComprehendMedicalAsyncJobProperties"))
+    DescribeRxNormInferenceJobResponse.struct_class = Types::DescribeRxNormInferenceJobResponse
 
     DetectEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Text"))
     DetectEntitiesRequest.struct_class = Types::DetectEntitiesRequest
@@ -272,6 +300,15 @@ module Aws::ComprehendMedical
     ListEntitiesDetectionV2JobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEntitiesDetectionV2JobsResponse.struct_class = Types::ListEntitiesDetectionV2JobsResponse
 
+    ListICD10CMInferenceJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobFilter, location_name: "Filter"))
+    ListICD10CMInferenceJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListICD10CMInferenceJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListICD10CMInferenceJobsRequest.struct_class = Types::ListICD10CMInferenceJobsRequest
+
+    ListICD10CMInferenceJobsResponse.add_member(:comprehend_medical_async_job_properties_list, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobPropertiesList, location_name: "ComprehendMedicalAsyncJobPropertiesList"))
+    ListICD10CMInferenceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListICD10CMInferenceJobsResponse.struct_class = Types::ListICD10CMInferenceJobsResponse
+
     ListPHIDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobFilter, location_name: "Filter"))
     ListPHIDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListPHIDetectionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -280,6 +317,15 @@ module Aws::ComprehendMedical
     ListPHIDetectionJobsResponse.add_member(:comprehend_medical_async_job_properties_list, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobPropertiesList, location_name: "ComprehendMedicalAsyncJobPropertiesList"))
     ListPHIDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListPHIDetectionJobsResponse.struct_class = Types::ListPHIDetectionJobsResponse
+
+    ListRxNormInferenceJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobFilter, location_name: "Filter"))
+    ListRxNormInferenceJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRxNormInferenceJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListRxNormInferenceJobsRequest.struct_class = Types::ListRxNormInferenceJobsRequest
+
+    ListRxNormInferenceJobsResponse.add_member(:comprehend_medical_async_job_properties_list, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobPropertiesList, location_name: "ComprehendMedicalAsyncJobPropertiesList"))
+    ListRxNormInferenceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListRxNormInferenceJobsResponse.struct_class = Types::ListRxNormInferenceJobsResponse
 
     OutputDataConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
     OutputDataConfig.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
@@ -342,6 +388,18 @@ module Aws::ComprehendMedical
     StartEntitiesDetectionV2JobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartEntitiesDetectionV2JobResponse.struct_class = Types::StartEntitiesDetectionV2JobResponse
 
+    StartICD10CMInferenceJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartICD10CMInferenceJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartICD10CMInferenceJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartICD10CMInferenceJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartICD10CMInferenceJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartICD10CMInferenceJobRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    StartICD10CMInferenceJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartICD10CMInferenceJobRequest.struct_class = Types::StartICD10CMInferenceJobRequest
+
+    StartICD10CMInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartICD10CMInferenceJobResponse.struct_class = Types::StartICD10CMInferenceJobResponse
+
     StartPHIDetectionJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     StartPHIDetectionJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
     StartPHIDetectionJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
@@ -354,17 +412,41 @@ module Aws::ComprehendMedical
     StartPHIDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartPHIDetectionJobResponse.struct_class = Types::StartPHIDetectionJobResponse
 
+    StartRxNormInferenceJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartRxNormInferenceJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartRxNormInferenceJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartRxNormInferenceJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartRxNormInferenceJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartRxNormInferenceJobRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    StartRxNormInferenceJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartRxNormInferenceJobRequest.struct_class = Types::StartRxNormInferenceJobRequest
+
+    StartRxNormInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartRxNormInferenceJobResponse.struct_class = Types::StartRxNormInferenceJobResponse
+
     StopEntitiesDetectionV2JobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     StopEntitiesDetectionV2JobRequest.struct_class = Types::StopEntitiesDetectionV2JobRequest
 
     StopEntitiesDetectionV2JobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StopEntitiesDetectionV2JobResponse.struct_class = Types::StopEntitiesDetectionV2JobResponse
 
+    StopICD10CMInferenceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StopICD10CMInferenceJobRequest.struct_class = Types::StopICD10CMInferenceJobRequest
+
+    StopICD10CMInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StopICD10CMInferenceJobResponse.struct_class = Types::StopICD10CMInferenceJobResponse
+
     StopPHIDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     StopPHIDetectionJobRequest.struct_class = Types::StopPHIDetectionJobRequest
 
     StopPHIDetectionJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StopPHIDetectionJobResponse.struct_class = Types::StopPHIDetectionJobResponse
+
+    StopRxNormInferenceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StopRxNormInferenceJobRequest.struct_class = Types::StopRxNormInferenceJobRequest
+
+    StopRxNormInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StopRxNormInferenceJobResponse.struct_class = Types::StopRxNormInferenceJobResponse
 
     TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
@@ -419,12 +501,36 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_icd10cm_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeICD10CMInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeICD10CMInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeICD10CMInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_phi_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribePHIDetectionJob"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePHIDetectionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePHIDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_rx_norm_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRxNormInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRxNormInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRxNormInferenceJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -514,12 +620,36 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:list_icd10cm_inference_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListICD10CMInferenceJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListICD10CMInferenceJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListICD10CMInferenceJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_phi_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPHIDetectionJobs"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPHIDetectionJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPHIDetectionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_rx_norm_inference_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRxNormInferenceJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListRxNormInferenceJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListRxNormInferenceJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -538,12 +668,36 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_icd10cm_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartICD10CMInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartICD10CMInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartICD10CMInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:start_phi_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartPHIDetectionJob"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartPHIDetectionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartPHIDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_rx_norm_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRxNormInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartRxNormInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRxNormInferenceJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -561,12 +715,34 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:stop_icd10cm_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopICD10CMInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopICD10CMInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopICD10CMInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:stop_phi_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopPHIDetectionJob"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopPHIDetectionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StopPHIDetectionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_rx_norm_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopRxNormInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopRxNormInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopRxNormInferenceJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

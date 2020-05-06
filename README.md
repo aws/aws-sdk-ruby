@@ -356,6 +356,7 @@ to be backwards compatible.
 | AWS IoT Events Data                                   | Aws::IoTEventsData                   | aws-sdk-ioteventsdata                   | 2018-10-23  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling              | aws-sdk-iotsecuretunneling              | 2018-10-05  |
+| AWS IoT SiteWise                                      | Aws::IoTSiteWise                     | aws-sdk-iotsitewise                     | 2019-12-02  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
@@ -396,7 +397,7 @@ to be backwards compatible.
 | AWS Step Functions                                    | Aws::States                          | aws-sdk-states                          | 2016-11-23  |
 | AWS Storage Gateway                                   | Aws::StorageGateway                  | aws-sdk-storagegateway                  | 2013-06-30  |
 | AWS Support                                           | Aws::Support                         | aws-sdk-support                         | 2013-04-15  |
-| AWS Transfer for SFTP                                 | Aws::Transfer                        | aws-sdk-transfer                        | 2018-11-05  |
+| AWS Transfer Family                                   | Aws::Transfer                        | aws-sdk-transfer                        | 2018-11-05  |
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
 | AWS WAFV2                                             | Aws::WAFV2                           | aws-sdk-wafv2                           | 2019-07-29  |
@@ -490,8 +491,8 @@ to be backwards compatible.
 | Amazon Route 53 Resolver                              | Aws::Route53Resolver                 | aws-sdk-route53resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
 | Amazon Simple Email Service                           | Aws::SES                             | aws-sdk-ses                             | 2010-12-01  |
+| Amazon Simple Email Service                           | Aws::SESV2                           | aws-sdk-sesv2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | Aws::SNS                             | aws-sdk-sns                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | Aws::SQS                             | aws-sdk-sqs                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | Aws::S3                              | aws-sdk-s3                              | 2006-03-01  |
@@ -513,12 +514,13 @@ to be backwards compatible.
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
+| Synthetics                                            | Aws::Synthetics                      | aws-sdk-synthetics                      | 2017-10-11  |
 
 ## License
 

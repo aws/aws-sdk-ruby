@@ -8,8 +8,12 @@
 module Aws::CodeStarconnections
   module Types
 
-    # The configuration that allows a service such as CodePipeline to
-    # connect to a third-party code repository.
+    # The AWS::CodeStarConnections::Connection resource can be used to
+    # connect external source providers with services like AWS CodePipeline.
+    #
+    # Note: A connection created through CloudFormation is in `PENDING`
+    # status by default. You can make its status `AVAILABLE` by editing
+    # the connection in the CodePipeline console.
     #
     # @!attribute [rw] connection_name
     #   The name of the connection. Connection names must be unique in an
@@ -33,7 +37,7 @@ module Aws::CodeStarconnections
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   The name of the external provider where your third-party code
+    #   The identifier of the external provider where your third-party code
     #   repository is configured. For Bitbucket, this is the account ID of
     #   the owner of the Bitbucket repository.
     #   @return [String]
@@ -59,6 +63,12 @@ module Aws::CodeStarconnections
     #       {
     #         provider_type: "Bitbucket", # required, accepts Bitbucket
     #         connection_name: "ConnectionName", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] provider_type
@@ -72,11 +82,16 @@ module Aws::CodeStarconnections
     #   the calling AWS account.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pair to use when tagging the resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateConnectionInput AWS API Documentation
     #
     class CreateConnectionInput < Struct.new(
       :provider_type,
-      :connection_name)
+      :connection_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -90,10 +105,15 @@ module Aws::CodeStarconnections
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateConnectionOutput AWS API Documentation
     #
     class CreateConnectionOutput < Struct.new(
-      :connection_arn)
+      :connection_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -218,6 +238,37 @@ module Aws::CodeStarconnections
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   get information about tags, if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with the specified
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Resource not found. Verify the connection resource ARN and try again.
     #
     # @!attribute [rw] message
@@ -229,6 +280,96 @@ module Aws::CodeStarconnections
       :message)
       include Aws::Structure
     end
+
+    # A tag is a key-value pair that is used to manage the resource.
+    #
+    # This tag is available for use by AWS services that support tags.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you want to modify or add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of keys for the tags to be removed from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
   end
 end

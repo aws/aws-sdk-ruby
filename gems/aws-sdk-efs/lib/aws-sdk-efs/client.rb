@@ -269,8 +269,7 @@ module Aws::EFS
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::EFS
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1166,6 +1165,8 @@ module Aws::EFS
     #   * {Types::DescribeAccessPointsResponse#access_points #access_points} => Array&lt;Types::AccessPointDescription&gt;
     #   * {Types::DescribeAccessPointsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_access_points({
@@ -1293,6 +1294,8 @@ module Aws::EFS
     #   * {Types::DescribeFileSystemsResponse#marker #marker} => String
     #   * {Types::DescribeFileSystemsResponse#file_systems #file_systems} => Array&lt;Types::FileSystemDescription&gt;
     #   * {Types::DescribeFileSystemsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe an EFS file system
@@ -1613,6 +1616,8 @@ module Aws::EFS
     #   * {Types::DescribeTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeTagsResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe the tags for a file system
     #
@@ -1680,6 +1685,8 @@ module Aws::EFS
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1963,7 +1970,7 @@ module Aws::EFS
     # @option params [required, String] :resource_id
     #   Specifies the EFS resource that you want to remove tags from.
     #
-    # @option params [Array<String>] :tag_keys
+    # @option params [required, Array<String>] :tag_keys
     #   The keys of the key:value tag pairs that you want to remove from the
     #   specified EFS resource.
     #
@@ -1973,7 +1980,7 @@ module Aws::EFS
     #
     #   resp = client.untag_resource({
     #     resource_id: "ResourceId", # required
-    #     tag_keys: ["TagKey"],
+    #     tag_keys: ["TagKey"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UntagResource AWS API Documentation
@@ -2074,7 +2081,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

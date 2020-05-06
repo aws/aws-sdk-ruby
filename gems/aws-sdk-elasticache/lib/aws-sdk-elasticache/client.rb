@@ -269,8 +269,7 @@ module Aws::ElastiCache
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::ElastiCache
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -3313,6 +3312,8 @@ module Aws::ElastiCache
     #   * {Types::CacheClusterMessage#marker #marker} => String
     #   * {Types::CacheClusterMessage#cache_clusters #cache_clusters} => Array&lt;Types::CacheCluster&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: DescribeCacheClusters
     #
@@ -3486,6 +3487,12 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].transit_encryption_enabled #=> Boolean
     #   resp.cache_clusters[0].at_rest_encryption_enabled #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * cache_cluster_available
+    #   * cache_cluster_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters AWS API Documentation
     #
     # @overload describe_cache_clusters(params = {})
@@ -3544,6 +3551,8 @@ module Aws::ElastiCache
     #
     #   * {Types::CacheEngineVersionMessage#marker #marker} => String
     #   * {Types::CacheEngineVersionMessage#cache_engine_versions #cache_engine_versions} => Array&lt;Types::CacheEngineVersion&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeCacheEngineVersions
@@ -3774,6 +3783,8 @@ module Aws::ElastiCache
     #   * {Types::CacheParameterGroupsMessage#marker #marker} => String
     #   * {Types::CacheParameterGroupsMessage#cache_parameter_groups #cache_parameter_groups} => Array&lt;Types::CacheParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: DescribeCacheParameterGroups
     #
@@ -3853,6 +3864,8 @@ module Aws::ElastiCache
     #   * {Types::CacheParameterGroupDetails#marker #marker} => String
     #   * {Types::CacheParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::CacheParameterGroupDetails#cache_node_type_specific_parameters #cache_node_type_specific_parameters} => Array&lt;Types::CacheNodeTypeSpecificParameter&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeCacheParameters
@@ -4328,6 +4341,8 @@ module Aws::ElastiCache
     #   * {Types::CacheSecurityGroupMessage#marker #marker} => String
     #   * {Types::CacheSecurityGroupMessage#cache_security_groups #cache_security_groups} => Array&lt;Types::CacheSecurityGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: DescribeCacheSecurityGroups
     #
@@ -4395,6 +4410,8 @@ module Aws::ElastiCache
     #
     #   * {Types::CacheSubnetGroupMessage#marker #marker} => String
     #   * {Types::CacheSubnetGroupMessage#cache_subnet_groups #cache_subnet_groups} => Array&lt;Types::CacheSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeCacheSubnetGroups
@@ -4499,6 +4516,8 @@ module Aws::ElastiCache
     # @return [Types::DescribeEngineDefaultParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeEngineDefaultParameters
@@ -5209,6 +5228,8 @@ module Aws::ElastiCache
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: DescribeEvents
     #
@@ -5364,6 +5385,8 @@ module Aws::ElastiCache
     #   * {Types::DescribeGlobalReplicationGroupsResult#marker #marker} => String
     #   * {Types::DescribeGlobalReplicationGroupsResult#global_replication_groups #global_replication_groups} => Array&lt;Types::GlobalReplicationGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_replication_groups({
@@ -5441,6 +5464,8 @@ module Aws::ElastiCache
     #
     #   * {Types::ReplicationGroupMessage#marker #marker} => String
     #   * {Types::ReplicationGroupMessage#replication_groups #replication_groups} => Array&lt;Types::ReplicationGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeReplicationGroups
@@ -5556,6 +5581,12 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].transit_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].at_rest_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].kms_key_id #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * replication_group_available
+    #   * replication_group_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups AWS API Documentation
     #
@@ -5690,6 +5721,8 @@ module Aws::ElastiCache
     #
     #   * {Types::ReservedCacheNodeMessage#marker #marker} => String
     #   * {Types::ReservedCacheNodeMessage#reserved_cache_nodes #reserved_cache_nodes} => Array&lt;Types::ReservedCacheNode&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeReservedCacheNodes
@@ -5865,6 +5898,8 @@ module Aws::ElastiCache
     #
     #   * {Types::ReservedCacheNodesOfferingMessage#marker #marker} => String
     #   * {Types::ReservedCacheNodesOfferingMessage#reserved_cache_nodes_offerings #reserved_cache_nodes_offerings} => Array&lt;Types::ReservedCacheNodesOffering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeReseredCacheNodeOfferings
@@ -6244,6 +6279,8 @@ module Aws::ElastiCache
     #   * {Types::ServiceUpdatesMessage#marker #marker} => String
     #   * {Types::ServiceUpdatesMessage#service_updates #service_updates} => Array&lt;Types::ServiceUpdate&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_service_updates({
@@ -6331,6 +6368,8 @@ module Aws::ElastiCache
     #
     #   * {Types::DescribeSnapshotsListMessage#marker #marker} => String
     #   * {Types::DescribeSnapshotsListMessage#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: DescribeSnapshots
@@ -6480,6 +6519,8 @@ module Aws::ElastiCache
     #
     #   * {Types::UpdateActionsMessage#marker #marker} => String
     #   * {Types::UpdateActionsMessage#update_actions #update_actions} => Array&lt;Types::UpdateAction&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8909,12 +8950,12 @@ module Aws::ElastiCache
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                 | params                         | :delay   | :max_attempts |
-    # | --------------------------- | ------------------------------ | -------- | ------------- |
-    # | cache_cluster_available     | {#describe_cache_clusters}     | 15       | 40            |
-    # | cache_cluster_deleted       | {#describe_cache_clusters}     | 15       | 40            |
-    # | replication_group_available | {#describe_replication_groups} | 15       | 40            |
-    # | replication_group_deleted   | {#describe_replication_groups} | 15       | 40            |
+    # | waiter_name                 | params                               | :delay   | :max_attempts |
+    # | --------------------------- | ------------------------------------ | -------- | ------------- |
+    # | cache_cluster_available     | {Client#describe_cache_clusters}     | 15       | 40            |
+    # | cache_cluster_deleted       | {Client#describe_cache_clusters}     | 15       | 40            |
+    # | replication_group_available | {Client#describe_replication_groups} | 15       | 40            |
+    # | replication_group_deleted   | {Client#describe_replication_groups} | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

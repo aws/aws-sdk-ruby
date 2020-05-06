@@ -126,6 +126,31 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # An exception indicating there was a conflict during a delete
+    # operation. The following delete operations can cause a conflict
+    # exception:
+    #
+    # * DeleteDetector: A conflict exception will occur if the detector has
+    #   associated `Rules` or `DetectorVersions`. You can only delete a
+    #   detector if it has no `Rules` or `DetectorVersions`.
+    #
+    # * DeleteDetectorVersion: A conflict exception will occur if the
+    #   `DetectorVersion` status is `ACTIVE`.
+    #
+    # * DeleteRuleVersion: A conflict exception will occur if the
+    #   `RuleVersion` is in use by an associated `ACTIVE` or `INACTIVE
+    #   DetectorVersion`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDetectorVersionRequest
     #   data as a hash:
     #
@@ -147,6 +172,7 @@ module Aws::FraudDetector
     #             model_version_number: "nonEmptyString", # required
     #           },
     #         ],
+    #         rule_execution_mode: "ALL_MATCHED", # accepts ALL_MATCHED, FIRST_MATCHED
     #       }
     #
     # @!attribute [rw] detector_id
@@ -170,6 +196,24 @@ module Aws::FraudDetector
     #   The model versions to include in the detector version.
     #   @return [Array<Types::ModelVersion>]
     #
+    # @!attribute [rw] rule_execution_mode
+    #   The rule execution mode for the rules included in the detector
+    #   version.
+    #
+    #   You can define and edit the rule mode at the detector version level,
+    #   when it is in draft status.
+    #
+    #   If you specify `FIRST_MATCHED`, Amazon Fraud Detector evaluates
+    #   rules sequentially, first to last, stopping at the first matched
+    #   rule. Amazon Fraud dectector then provides the outcomes for that
+    #   single rule.
+    #
+    #   If you specifiy `ALL_MATCHED`, Amazon Fraud Detector evaluates all
+    #   rules and returns the outcomes for all matched rules.
+    #
+    #   The default behavior is `FIRST_MATCHED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/CreateDetectorVersionRequest AWS API Documentation
     #
     class CreateDetectorVersionRequest < Struct.new(
@@ -177,7 +221,8 @@ module Aws::FraudDetector
       :description,
       :external_model_endpoints,
       :rules,
-      :model_versions)
+      :model_versions,
+      :rule_execution_mode)
       include Aws::Structure
     end
 
@@ -369,6 +414,28 @@ module Aws::FraudDetector
     #
     class CreateVariableResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteDetectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "identifier", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteDetectorRequest AWS API Documentation
+    #
+    class DeleteDetectorRequest < Struct.new(
+      :detector_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteDetectorResult AWS API Documentation
+    #
+    class DeleteDetectorResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteDetectorVersionRequest
     #   data as a hash:
     #
@@ -418,6 +485,40 @@ module Aws::FraudDetector
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteEventResult AWS API Documentation
     #
     class DeleteEventResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteRuleVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "identifier", # required
+    #         rule_id: "identifier", # required
+    #         rule_version: "nonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector that includes the rule version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The rule ID of the rule version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_version
+    #   The rule version to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteRuleVersionRequest AWS API Documentation
+    #
+    class DeleteRuleVersionRequest < Struct.new(
+      :detector_id,
+      :rule_id,
+      :rule_version)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteRuleVersionResult AWS API Documentation
+    #
+    class DeleteRuleVersionResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeDetectorRequest
     #   data as a hash:
@@ -693,6 +794,20 @@ module Aws::FraudDetector
     #   The timestamp when the detector version was created.
     #   @return [String]
     #
+    # @!attribute [rw] rule_execution_mode
+    #   The execution mode of the rule in the dectector
+    #
+    #   `FIRST_MATCHED` indicates that Amazon Fraud Detector evaluates rules
+    #   sequentially, first to last, stopping at the first matched rule.
+    #   Amazon Fraud dectector then provides the outcomes for that single
+    #   rule.
+    #
+    #   `ALL_MATCHED` indicates that Amazon Fraud Detector evaluates all
+    #   rules and returns the outcomes for all matched rules. You can define
+    #   and edit the rule mode at the detector version level, when it is in
+    #   draft status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetDetectorVersionResult AWS API Documentation
     #
     class GetDetectorVersionResult < Struct.new(
@@ -704,7 +819,8 @@ module Aws::FraudDetector
       :rules,
       :status,
       :last_updated_time,
-      :created_time)
+      :created_time,
+      :rule_execution_mode)
       include Aws::Structure
     end
 
@@ -1018,11 +1134,16 @@ module Aws::FraudDetector
     #   The model scores for models used in the detector version.
     #   @return [Array<Types::ModelScores>]
     #
+    # @!attribute [rw] rule_results
+    #   The rule results in the prediction.
+    #   @return [Array<Types::RuleResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetPredictionResult AWS API Documentation
     #
     class GetPredictionResult < Struct.new(
       :outcomes,
-      :model_scores)
+      :model_scores,
+      :rule_results)
       include Aws::Structure
     end
 
@@ -1827,6 +1948,24 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The rule results.
+    #
+    # @!attribute [rw] rule_id
+    #   The rule ID that was matched, based on the rule execution mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcomes
+    #   The outcomes of the matched rule, based on the rule execution mode.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/RuleResult AWS API Documentation
+    #
+    class RuleResult < Struct.new(
+      :rule_id,
+      :outcomes)
+      include Aws::Structure
+    end
+
     # An exception indicating a throttling error.
     #
     # @!attribute [rw] message
@@ -1921,6 +2060,7 @@ module Aws::FraudDetector
     #             model_version_number: "nonEmptyString", # required
     #           },
     #         ],
+    #         rule_execution_mode: "ALL_MATCHED", # accepts ALL_MATCHED, FIRST_MATCHED
     #       }
     #
     # @!attribute [rw] detector_id
@@ -1948,6 +2088,22 @@ module Aws::FraudDetector
     #   The model versions to include in the detector version.
     #   @return [Array<Types::ModelVersion>]
     #
+    # @!attribute [rw] rule_execution_mode
+    #   The rule execution mode to add to the detector.
+    #
+    #   If you specify `FIRST_MATCHED`, Amazon Fraud Detector evaluates
+    #   rules sequentially, first to last, stopping at the first matched
+    #   rule. Amazon Fraud dectector then provides the outcomes for that
+    #   single rule.
+    #
+    #   If you specifiy `ALL_MATCHED`, Amazon Fraud Detector evaluates all
+    #   rules and returns the outcomes for all matched rules. You can define
+    #   and edit the rule mode at the detector version level, when it is in
+    #   draft status.
+    #
+    #   The default behavior is `FIRST_MATCHED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateDetectorVersionRequest AWS API Documentation
     #
     class UpdateDetectorVersionRequest < Struct.new(
@@ -1956,7 +2112,8 @@ module Aws::FraudDetector
       :external_model_endpoints,
       :rules,
       :description,
-      :model_versions)
+      :model_versions,
+      :rule_execution_mode)
       include Aws::Structure
     end
 

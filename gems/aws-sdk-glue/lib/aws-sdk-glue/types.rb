@@ -1242,7 +1242,8 @@ module Aws::Glue
     #
     #   * `INSTANCE_ID` - The instance ID to use.
     #
-    #   * `JDBC_CONNECTION_URL` - The URL for the JDBC connection.
+    #   * `JDBC_CONNECTION_URL` - The URL for connecting to a JDBC data
+    #     source.
     #
     #   * `JDBC_ENFORCE_SSL` - A Boolean string (true, false) specifying
     #     whether Secure Sockets Layer (SSL) with hostname matching is
@@ -1270,6 +1271,14 @@ module Aws::Glue
     #     man-in-the-middle attack. In Oracle database, this is used as the
     #     `SSL_SERVER_CERT_DN`; in Microsoft SQL Server, this is used as the
     #     `hostNameInCertificate`.
+    #
+    #   * `CONNECTION_URL` - The URL for connecting to a general (non-JDBC)
+    #     data source.
+    #
+    #   * `KAFKA_BOOTSTRAP_SERVERS` - A comma-separated list of host and
+    #     port pairs that are the addresses of the Apache Kafka brokers in a
+    #     Kafka cluster to which a Kafka client will connect to and
+    #     bootstrap itself.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1314,7 +1323,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -1335,8 +1344,18 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the connection. Currently, only JDBC is supported; SFTP
-    #   is not supported.
+    #   The type of the connection. Currently, these types are supported:
+    #
+    #   * `JDBC` - Designates a connection to a database through Java
+    #     Database Connectivity (JDBC).
+    #
+    #   * `KAFKA` - Designates a connection to an Apache Kafka streaming
+    #     platform.
+    #
+    #   * `MONGODB` - Designates a connection to a MongoDB document
+    #     database.
+    #
+    #   SFTP is not supported.
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -1811,7 +1830,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -4933,7 +4952,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -4961,7 +4980,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -6788,7 +6807,7 @@ module Aws::Glue
     #
     #       {
     #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
+    #         database_name: "NameString",
     #         pattern: "NameString", # required
     #         next_token: "Token",
     #         max_results: 1,
@@ -11255,7 +11274,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",

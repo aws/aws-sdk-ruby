@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-04-21)
+------------------
+
+* Feature - AWS GuardDuty now supports using AWS Organizations delegated administrators to create and manage GuardDuty master and member accounts.  The feature also allows GuardDuty to be automatically enabled on associated organization accounts.
+
 1.28.0 (2020-03-09)
 ------------------
 

@@ -22,7 +22,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
-    #   The ARN of the CloudWatch Logs log group to receive access logs.
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group or
+    #   Kinesis Data Firehose delivery stream to receive access logs. If you
+    #   specify a Kinesis Data Firehose delivery stream, the stream name
+    #   must begin with `amazon-apigateway-`.
     #   @return [String]
     #
     class AccessLogSettings < Struct.new(
@@ -634,7 +637,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] generate_distinct_id
     #   Specifies whether (`true`) or not (`false`) the key identifier is
-    #   distinct from the created API key value.
+    #   distinct from the created API key value. This parameter is
+    #   deprecated and should not be used.
     #   @return [Boolean]
     #
     # @!attribute [rw] value
@@ -822,8 +826,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Specify '(none)' if you do not want callers to explicitly specify
-    #   the stage name after any base path name.
+    #   Specify '(none)' if you want callers to explicitly specify the
+    #   stage name after any base path name.
     #   @return [String]
     #
     class CreateBasePathMappingRequest < Struct.new(
@@ -1534,9 +1538,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] target_arns
-    #   \[Required\] The ARNs of network load balancers of the VPC targeted
-    #   by the VPC link. The network load balancers must be owned by the
-    #   same AWS account of the API owner.
+    #   \[Required\] The ARN of the network load balancer of the VPC
+    #   targeted by the VPC link. The network load balancer must be owned by
+    #   the same AWS account of the API owner.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -4100,8 +4104,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -5097,7 +5100,9 @@ module Aws::APIGateway
     #   Specifies the logging level for this method, which affects the log
     #   entries pushed to Amazon CloudWatch Logs. The PATCH path for this
     #   setting is `/\{method_setting_key\}/logging/loglevel`, and the
-    #   available levels are `OFF`, `ERROR`, and `INFO`.
+    #   available levels are `OFF`, `ERROR`, and `INFO`. Choose `ERROR` to
+    #   write only error-level entries to CloudWatch Logs, or choose `INFO`
+    #   to include all `ERROR` events as well as extra informational events.
     #   @return [String]
     #
     # @!attribute [rw] data_trace_enabled
@@ -6533,8 +6538,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6579,7 +6583,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference-guide.html
+    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference.html
     #   @return [String]
     #
     class Template < Struct.new(
@@ -6897,8 +6901,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded.
+    #   \[Required\] The ARN of a resource that can be tagged.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -7977,7 +7980,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # A API Gateway VPC link for a RestApi to access resources in an Amazon
+    # An API Gateway VPC link for a RestApi to access resources in an Amazon
     # Virtual Private Cloud (VPC).
     #
     # <div class="remarks" markdown="1">
@@ -8006,8 +8009,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] target_arns
-    #   The ARNs of network load balancers of the VPC targeted by the VPC
-    #   link. The network load balancers must be owned by the same AWS
+    #   The ARN of the network load balancer of the VPC targeted by the VPC
+    #   link. The network load balancer must be owned by the same AWS
     #   account of the API owner.
     #   @return [Array<String>]
     #

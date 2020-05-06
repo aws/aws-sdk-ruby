@@ -269,8 +269,7 @@ module Aws::SecurityHub
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::SecurityHub
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -437,6 +436,28 @@ module Aws::SecurityHub
     #
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
+    #
+    # After a finding is created, `BatchImportFindings` cannot be used to
+    # update the following finding fields and objects, which Security Hub
+    # customers use to manage their investigation workflow.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `Note`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
@@ -962,6 +983,172 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Used by Security Hub customers to update information about their
+    # investigation into a finding. Requested by master accounts or member
+    # accounts. Master accounts can update findings for their account and
+    # their member accounts. Member accounts can update findings for their
+    # account.
+    #
+    # Updates from `BatchUpdateFindings` do not affect the value of
+    # `UpdatedAt` for a finding.
+    #
+    # Master accounts can use `BatchUpdateFindings` to update the following
+    # finding fields and objects.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `Note`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
+    #
+    # Member accounts can only use `BatchUpdateFindings` to update the Note
+    # object.
+    #
+    # @option params [required, Array<Types::AwsSecurityFindingIdentifier>] :finding_identifiers
+    #   The list of findings to update. `BatchUpdateFindings` can be used to
+    #   update up to 100 findings at a time.
+    #
+    #   For each finding, the list provides the finding identifier and the ARN
+    #   of the finding provider.
+    #
+    # @option params [Types::NoteUpdate] :note
+    #   The updated note.
+    #
+    # @option params [Types::SeverityUpdate] :severity
+    #   Used to update the finding severity.
+    #
+    # @option params [String] :verification_state
+    #   Indicates the veracity of a finding.
+    #
+    #   The available values for `VerificationState` are as follows.
+    #
+    #   * `UNKNOWN` – The default disposition of a security finding
+    #
+    #   * `TRUE_POSITIVE` – The security finding is confirmed
+    #
+    #   * `FALSE_POSITIVE` – The security finding was determined to be a false
+    #     alarm
+    #
+    #   * `BENIGN_POSITIVE` – A special case of `TRUE_POSITIVE` where the
+    #     finding doesn't pose any threat, is expected, or both
+    #
+    # @option params [Integer] :confidence
+    #   The updated value for the finding confidence. Confidence is defined as
+    #   the likelihood that a finding accurately identifies the behavior or
+    #   issue that it was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #
+    # @option params [Integer] :criticality
+    #   The updated value for the level of importance assigned to the
+    #   resources associated with the findings.
+    #
+    #   A score of 0 means that the underlying resources have no criticality,
+    #   and a score of 100 is reserved for the most critical resources.
+    #
+    # @option params [Array<String>] :types
+    #   One or more finding types in the format of
+    #   namespace/category/classifier that classify a finding.
+    #
+    #   Valid namespace values are as follows.
+    #
+    #   * Software and Configuration Checks
+    #
+    #   * TTPs
+    #
+    #   * Effects
+    #
+    #   * Unusual Behaviors
+    #
+    #   * Sensitive Data Identifications
+    #
+    # @option params [Hash<String,String>] :user_defined_fields
+    #   A list of name/value string pairs associated with the finding. These
+    #   are custom, user-defined fields added to a finding.
+    #
+    # @option params [Types::WorkflowUpdate] :workflow
+    #   Used to update the workflow status of a finding.
+    #
+    #   The workflow status indicates the progress of the investigation into
+    #   the finding.
+    #
+    # @option params [Array<Types::RelatedFinding>] :related_findings
+    #   A list of findings that are related to the updated findings.
+    #
+    # @return [Types::BatchUpdateFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateFindingsResponse#processed_findings #processed_findings} => Array&lt;Types::AwsSecurityFindingIdentifier&gt;
+    #   * {Types::BatchUpdateFindingsResponse#unprocessed_findings #unprocessed_findings} => Array&lt;Types::BatchUpdateFindingsUnprocessedFinding&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_findings({
+    #     finding_identifiers: [ # required
+    #       {
+    #         id: "NonEmptyString", # required
+    #         product_arn: "NonEmptyString", # required
+    #       },
+    #     ],
+    #     note: {
+    #       text: "NonEmptyString", # required
+    #       updated_by: "NonEmptyString", # required
+    #     },
+    #     severity: {
+    #       normalized: 1,
+    #       product: 1.0,
+    #       label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #     },
+    #     verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
+    #     confidence: 1,
+    #     criticality: 1,
+    #     types: ["NonEmptyString"],
+    #     user_defined_fields: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
+    #     workflow: {
+    #       status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #     },
+    #     related_findings: [
+    #       {
+    #         product_arn: "NonEmptyString", # required
+    #         id: "NonEmptyString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.processed_findings #=> Array
+    #   resp.processed_findings[0].id #=> String
+    #   resp.processed_findings[0].product_arn #=> String
+    #   resp.unprocessed_findings #=> Array
+    #   resp.unprocessed_findings[0].finding_identifier.id #=> String
+    #   resp.unprocessed_findings[0].finding_identifier.product_arn #=> String
+    #   resp.unprocessed_findings[0].error_code #=> String
+    #   resp.unprocessed_findings[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindings AWS API Documentation
+    #
+    # @overload batch_update_findings(params = {})
+    # @param [Hash] params ({})
+    def batch_update_findings(params = {}, options = {})
+      req = build_request(:batch_update_findings, params)
+      req.send_request(options)
+    end
+
     # Creates a custom action target in Security Hub.
     #
     # You can use custom actions on findings and insights in Security Hub to
@@ -1017,8 +1204,10 @@ module Aws::SecurityHub
     #   defined in the filters.
     #
     # @option params [required, String] :group_by_attribute
-    #   The attribute used as the aggregator to group related findings for the
-    #   insight.
+    #   The attribute used to group the findings for the insight. The grouping
+    #   attribute identifies the type of item that the insight applies to. For
+    #   example, if an insight is grouped by resource identifier, then the
+    #   insight produces a list of resource identifiers.
     #
     # @return [Types::CreateInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1831,6 +2020,8 @@ module Aws::SecurityHub
     #   * {Types::DescribeActionTargetsResponse#action_targets #action_targets} => Array&lt;Types::ActionTarget&gt;
     #   * {Types::DescribeActionTargetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_action_targets({
@@ -1908,6 +2099,8 @@ module Aws::SecurityHub
     #   * {Types::DescribeProductsResponse#products #products} => Array&lt;Types::Product&gt;
     #   * {Types::DescribeProductsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_products({
@@ -1962,6 +2155,8 @@ module Aws::SecurityHub
     #   * {Types::DescribeStandardsResponse#standards #standards} => Array&lt;Types::Standard&gt;
     #   * {Types::DescribeStandardsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_standards({
@@ -1975,6 +2170,7 @@ module Aws::SecurityHub
     #   resp.standards[0].standards_arn #=> String
     #   resp.standards[0].name #=> String
     #   resp.standards[0].description #=> String
+    #   resp.standards[0].enabled_by_default #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandards AWS API Documentation
@@ -2012,6 +2208,8 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeStandardsControlsResponse#controls #controls} => Array&lt;Types::StandardsControl&gt;
     #   * {Types::DescribeStandardsControlsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2171,15 +2369,18 @@ module Aws::SecurityHub
     # Region you specify in the request.
     #
     # When you enable Security Hub, you grant to Security Hub the
-    # permissions necessary to gather findings from AWS Config, Amazon
-    # GuardDuty, Amazon Inspector, and Amazon Macie.
+    # permissions necessary to gather findings from other services that are
+    # integrated with Security Hub.
     #
     # When you use the `EnableSecurityHub` operation to enable Security Hub,
     # you also automatically enable the CIS AWS Foundations standard. You do
     # not enable the Payment Card Industry Data Security Standard (PCI DSS)
-    # standard. To enable a standard, use the ` BatchEnableStandards `
-    # operation. To disable a standard, use the ` BatchDisableStandards `
-    # operation.
+    # standard. To not enable the CIS AWS Foundations standard, set
+    # `EnableDefaultStandards` to `false`.
+    #
+    # After you enable Security Hub, to enable a standard, use the `
+    # BatchEnableStandards ` operation. To disable a standard, use the `
+    # BatchDisableStandards ` operation.
     #
     # To learn more, see [Setting Up AWS Security Hub][1] in the *AWS
     # Security Hub User Guide*.
@@ -2191,6 +2392,13 @@ module Aws::SecurityHub
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the Hub resource when you enable Security Hub.
     #
+    # @option params [Boolean] :enable_default_standards
+    #   Whether to enable the security standards that Security Hub has
+    #   designated as automatically enabled. If you do not provide a value for
+    #   `EnableDefaultStandards`, it is set to `true`. To not enable the
+    #   automatically enabled standards, set `EnableDefaultStandards` to
+    #   `false`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2199,6 +2407,7 @@ module Aws::SecurityHub
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     enable_default_standards: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub AWS API Documentation
@@ -2232,6 +2441,8 @@ module Aws::SecurityHub
     #
     #   * {Types::GetEnabledStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
     #   * {Types::GetEnabledStandardsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2284,6 +2495,8 @@ module Aws::SecurityHub
     #
     #   * {Types::GetFindingsResponse#findings #findings} => Array&lt;Types::AwsSecurityFinding&gt;
     #   * {Types::GetFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3238,6 +3451,8 @@ module Aws::SecurityHub
     #   * {Types::GetInsightsResponse#insights #insights} => Array&lt;Types::Insight&gt;
     #   * {Types::GetInsightsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_insights({
@@ -3686,6 +3901,8 @@ module Aws::SecurityHub
     #   * {Types::ListEnabledProductsForImportResponse#product_subscriptions #product_subscriptions} => Array&lt;String&gt;
     #   * {Types::ListEnabledProductsForImportResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_enabled_products_for_import({
@@ -3727,6 +3944,8 @@ module Aws::SecurityHub
     #
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::Invitation&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3783,6 +4002,8 @@ module Aws::SecurityHub
     #
     #   * {Types::ListMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3926,6 +4147,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # `UpdateFindings` is deprecated. Instead of `UpdateFindings`, use
+    # `BatchUpdateFindings`.
+    #
     # Updates the `Note` and `RecordState` of the Security Hub-aggregated
     # findings that the filter attributes specify. Any member account that
     # can view the finding also sees the update to the finding.
@@ -5150,7 +5374,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

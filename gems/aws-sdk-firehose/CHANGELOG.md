@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-04-23)
+------------------
+
+* Feature - You can now deliver streaming data to an Amazon Elasticsearch Service domain in an Amazon VPC. You can now compress streaming data delivered to S3 using Hadoop-Snappy in addition to Gzip, Zip and Snappy formats.
+
 1.25.0 (2020-03-09)
 ------------------
 

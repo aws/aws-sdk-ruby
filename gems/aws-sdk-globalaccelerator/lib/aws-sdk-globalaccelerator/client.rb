@@ -279,8 +279,7 @@ module Aws::GlobalAccelerator
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::GlobalAccelerator
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -355,6 +354,9 @@ module Aws::GlobalAccelerator
     #
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #   resp.byoip_cidr.events #=> Array
+    #   resp.byoip_cidr.events[0].message #=> String
+    #   resp.byoip_cidr.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AdvertiseByoipCidr AWS API Documentation
     #
@@ -788,6 +790,9 @@ module Aws::GlobalAccelerator
     #
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #   resp.byoip_cidr.events #=> Array
+    #   resp.byoip_cidr.events[0].message #=> String
+    #   resp.byoip_cidr.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeprovisionByoipCidr AWS API Documentation
     #
@@ -871,7 +876,8 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe an endpoint group.
+    # Describe an endpoint group. To see an AWS CLI example of describing an
+    # endpoint group, scroll down to **Example**.
     #
     # @option params [required, String] :endpoint_group_arn
     #   The Amazon Resource Name (ARN) of the endpoint group to describe.
@@ -997,7 +1003,8 @@ module Aws::GlobalAccelerator
     end
 
     # Lists the IP address ranges that were specified in calls to
-    # [ProvisionByoipCidr][1].
+    # [ProvisionByoipCidr][1], including the current state and a history of
+    # state changes.
     #
     # To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down
     # to **Example**.
@@ -1031,6 +1038,9 @@ module Aws::GlobalAccelerator
     #   resp.byoip_cidrs #=> Array
     #   resp.byoip_cidrs[0].cidr #=> String
     #   resp.byoip_cidrs[0].state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #   resp.byoip_cidrs[0].events #=> Array
+    #   resp.byoip_cidrs[0].events[0].message #=> String
+    #   resp.byoip_cidrs[0].events[0].timestamp #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListByoipCidrs AWS API Documentation
@@ -1229,6 +1239,9 @@ module Aws::GlobalAccelerator
     #
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #   resp.byoip_cidr.events #=> Array
+    #   resp.byoip_cidr.events[0].message #=> String
+    #   resp.byoip_cidr.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ProvisionByoipCidr AWS API Documentation
     #
@@ -1647,6 +1660,9 @@ module Aws::GlobalAccelerator
     #
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #   resp.byoip_cidr.events #=> Array
+    #   resp.byoip_cidr.events[0].message #=> String
+    #   resp.byoip_cidr.events[0].timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidr AWS API Documentation
     #
@@ -1670,7 +1686,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

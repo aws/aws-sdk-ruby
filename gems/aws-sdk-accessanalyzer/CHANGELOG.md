@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-04-27)
+------------------
+
+* Feature - This release adds support for inclusion of S3 Access Point policies in IAM Access Analyzer evaluation of S3 bucket access. IAM Access Analyzer now reports findings for buckets shared through access points and identifies the access point that permits access.
+
+1.4.0 (2020-03-30)
+------------------
+
+* Feature - This release adds support for the creation and management of IAM Access Analyzer analyzers with type organization. An analyzer with type organization continuously monitors all supported resources within the AWS organization and reports findings when they allow access from outside the organization.
+
 1.3.0 (2020-03-09)
 ------------------
 

@@ -279,8 +279,7 @@ module Aws::Route53Domains
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::Route53Domains
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -319,16 +318,140 @@ module Aws::Route53Domains
 
     # @!group API Operations
 
+    # Accepts the transfer of a domain from another AWS account to the
+    # current AWS account. You initiate a transfer between AWS accounts
+    # using [TransferDomainToAnotherAwsAccount][1].
+    #
+    # Use either [ListOperations][2] or [GetOperationDetail][3] to determine
+    # whether the operation succeeded. [GetOperationDetail][3] provides
+    # additional information, for example, `Domain Transfer from Aws Account
+    # 111122223333 has been cancelled`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that was specified when another AWS account
+    #   submitted a [TransferDomainToAnotherAwsAccount][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    #
+    # @option params [required, String] :password
+    #   The password that was returned by the
+    #   [TransferDomainToAnotherAwsAccount][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    #
+    # @return [Types::AcceptDomainTransferFromAnotherAwsAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptDomainTransferFromAnotherAwsAccountResponse#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_domain_transfer_from_another_aws_account({
+    #     domain_name: "DomainName", # required
+    #     password: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/AcceptDomainTransferFromAnotherAwsAccount AWS API Documentation
+    #
+    # @overload accept_domain_transfer_from_another_aws_account(params = {})
+    # @param [Hash] params ({})
+    def accept_domain_transfer_from_another_aws_account(params = {}, options = {})
+      req = build_request(:accept_domain_transfer_from_another_aws_account, params)
+      req.send_request(options)
+    end
+
+    # Cancels the transfer of a domain from the current AWS account to
+    # another AWS account. You initiate a transfer between AWS accounts
+    # using [TransferDomainToAnotherAwsAccount][1].
+    #
+    # You must cancel the transfer before the other AWS account accepts the
+    # transfer using [AcceptDomainTransferFromAnotherAwsAccount][2].
+    #
+    # Use either [ListOperations][3] or [GetOperationDetail][4] to determine
+    # whether the operation succeeded. [GetOperationDetail][4] provides
+    # additional information, for example, `Domain Transfer from Aws Account
+    # 111122223333 has been cancelled`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html
+    # [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain for which you want to cancel the transfer to
+    #   another AWS account.
+    #
+    # @return [Types::CancelDomainTransferToAnotherAwsAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelDomainTransferToAnotherAwsAccountResponse#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_domain_transfer_to_another_aws_account({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CancelDomainTransferToAnotherAwsAccount AWS API Documentation
+    #
+    # @overload cancel_domain_transfer_to_another_aws_account(params = {})
+    # @param [Hash] params ({})
+    def cancel_domain_transfer_to_another_aws_account(params = {}, options = {})
+      req = build_request(:cancel_domain_transfer_to_another_aws_account, params)
+      req.send_request(options)
+    end
+
     # This operation checks the availability of one domain name. Note that
     # if the availability status of a domain is pending, you must submit
     # another request to determine the availability of the domain name.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain that you want to get availability for.
+    #   The name of the domain that you want to get availability for. The
+    #   top-level domain (TLD), such as .com, must be a TLD that Route 53
+    #   supports. For a list of supported TLDs, see [Domains that You Can
+    #   Register with Amazon Route 53][1] in the *Amazon Route 53 Developer
+    #   Guide*.
     #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
+    #   The domain name can contain only the following characters:
+    #
+    #   * Letters a through z. Domain names are not case sensitive.
+    #
+    #   * Numbers 0 through 9.
+    #
+    #   * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+    #     label.
+    #
+    #   * Period (.) to separate the labels in the name, such as the `.` in
+    #     `example.com`.
+    #
+    #   Internationalized domain names are not supported for some top-level
+    #   domains. To determine whether the TLD that you want to use supports
+    #   internationalized domain names, see [Domains that You Can Register
+    #   with Amazon Route 53][1]. For more information, see [Formatting
+    #   Internationalized Domain Names][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns
     #
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
@@ -360,11 +483,27 @@ module Aws::Route53Domains
     # Checks whether a domain name can be transferred to Amazon Route 53.
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain that you want to transfer to Amazon Route 53.
+    #   The name of the domain that you want to transfer to Route 53. The
+    #   top-level domain (TLD), such as .com, must be a TLD that Route 53
+    #   supports. For a list of supported TLDs, see [Domains that You Can
+    #   Register with Amazon Route 53][1] in the *Amazon Route 53 Developer
+    #   Guide*.
     #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
+    #   The domain name can contain only the following characters:
+    #
+    #   * Letters a through z. Domain names are not case sensitive.
+    #
+    #   * Numbers 0 through 9.
+    #
+    #   * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+    #     label.
+    #
+    #   * Period (.) to separate the labels in the name, such as the `.` in
+    #     `example.com`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [String] :auth_code
     #   If the registrar for the top-level domain (TLD) requires an
@@ -486,15 +625,14 @@ module Aws::Route53Domains
     # renewing your domain registration is billed to your AWS account.
     #
     # The period during which you can renew a domain name varies by TLD. For
-    # a list of TLDs and their renewal policies, see ["Renewal,
-    # restoration, and deletion times"][1] on the website for our registrar
-    # associate, Gandi. Amazon Route 53 requires that you renew before the
-    # end of the renewal period that is listed on the Gandi website so we
-    # can complete processing before the deadline.
+    # a list of TLDs and their renewal policies, see [Domains That You Can
+    # Register with Amazon Route 53][1] in the *Amazon Route 53 Developer
+    # Guide*. Route 53 requires that you renew before the end of the renewal
+    # period so we can complete processing before the deadline.
     #
     #
     #
-    # [1]: http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want to enable automatic renewal for.
@@ -646,7 +784,7 @@ module Aws::Route53Domains
     #   resp.admin_contact.email #=> String
     #   resp.admin_contact.fax #=> String
     #   resp.admin_contact.extra_params #=> Array
-    #   resp.admin_contact.extra_params[0].name #=> String, one of "DUNS_NUMBER", "BRAND_NUMBER", "BIRTH_DEPARTMENT", "BIRTH_DATE_IN_YYYY_MM_DD", "BIRTH_COUNTRY", "BIRTH_CITY", "DOCUMENT_NUMBER", "AU_ID_NUMBER", "AU_ID_TYPE", "CA_LEGAL_TYPE", "CA_BUSINESS_ENTITY_TYPE", "ES_IDENTIFICATION", "ES_IDENTIFICATION_TYPE", "ES_LEGAL_FORM", "FI_BUSINESS_NUMBER", "FI_ID_NUMBER", "FI_NATIONALITY", "FI_ORGANIZATION_TYPE", "IT_PIN", "IT_REGISTRANT_ENTITY_TYPE", "RU_PASSPORT_DATA", "SE_ID_NUMBER", "SG_ID_NUMBER", "VAT_NUMBER", "UK_CONTACT_TYPE", "UK_COMPANY_NUMBER"
+    #   resp.admin_contact.extra_params[0].name #=> String, one of "DUNS_NUMBER", "BRAND_NUMBER", "BIRTH_DEPARTMENT", "BIRTH_DATE_IN_YYYY_MM_DD", "BIRTH_COUNTRY", "BIRTH_CITY", "DOCUMENT_NUMBER", "AU_ID_NUMBER", "AU_ID_TYPE", "CA_LEGAL_TYPE", "CA_BUSINESS_ENTITY_TYPE", "CA_LEGAL_REPRESENTATIVE", "CA_LEGAL_REPRESENTATIVE_CAPACITY", "ES_IDENTIFICATION", "ES_IDENTIFICATION_TYPE", "ES_LEGAL_FORM", "FI_BUSINESS_NUMBER", "FI_ID_NUMBER", "FI_NATIONALITY", "FI_ORGANIZATION_TYPE", "IT_NATIONALITY", "IT_PIN", "IT_REGISTRANT_ENTITY_TYPE", "RU_PASSPORT_DATA", "SE_ID_NUMBER", "SG_ID_NUMBER", "VAT_NUMBER", "UK_CONTACT_TYPE", "UK_COMPANY_NUMBER"
     #   resp.admin_contact.extra_params[0].value #=> String
     #   resp.registrant_contact.first_name #=> String
     #   resp.registrant_contact.last_name #=> String
@@ -662,7 +800,7 @@ module Aws::Route53Domains
     #   resp.registrant_contact.email #=> String
     #   resp.registrant_contact.fax #=> String
     #   resp.registrant_contact.extra_params #=> Array
-    #   resp.registrant_contact.extra_params[0].name #=> String, one of "DUNS_NUMBER", "BRAND_NUMBER", "BIRTH_DEPARTMENT", "BIRTH_DATE_IN_YYYY_MM_DD", "BIRTH_COUNTRY", "BIRTH_CITY", "DOCUMENT_NUMBER", "AU_ID_NUMBER", "AU_ID_TYPE", "CA_LEGAL_TYPE", "CA_BUSINESS_ENTITY_TYPE", "ES_IDENTIFICATION", "ES_IDENTIFICATION_TYPE", "ES_LEGAL_FORM", "FI_BUSINESS_NUMBER", "FI_ID_NUMBER", "FI_NATIONALITY", "FI_ORGANIZATION_TYPE", "IT_PIN", "IT_REGISTRANT_ENTITY_TYPE", "RU_PASSPORT_DATA", "SE_ID_NUMBER", "SG_ID_NUMBER", "VAT_NUMBER", "UK_CONTACT_TYPE", "UK_COMPANY_NUMBER"
+    #   resp.registrant_contact.extra_params[0].name #=> String, one of "DUNS_NUMBER", "BRAND_NUMBER", "BIRTH_DEPARTMENT", "BIRTH_DATE_IN_YYYY_MM_DD", "BIRTH_COUNTRY", "BIRTH_CITY", "DOCUMENT_NUMBER", "AU_ID_NUMBER", "AU_ID_TYPE", "CA_LEGAL_TYPE", "CA_BUSINESS_ENTITY_TYPE", "CA_LEGAL_REPRESENTATIVE", "CA_LEGAL_REPRESENTATIVE_CAPACITY", "ES_IDENTIFICATION", "ES_IDENTIFICATION_TYPE", "ES_LEGAL_FORM", "FI_BUSINESS_NUMBER", "FI_ID_NUMBER", "FI_NATIONALITY", "FI_ORGANIZATION_TYPE", "IT_NATIONALITY", "IT_PIN", "IT_REGISTRANT_ENTITY_TYPE", "RU_PASSPORT_DATA", "SE_ID_NUMBER", "SG_ID_NUMBER", "VAT_NUMBER", "UK_CONTACT_TYPE", "UK_COMPANY_NUMBER"
     #   resp.registrant_contact.extra_params[0].value #=> String
     #   resp.tech_contact.first_name #=> String
     #   resp.tech_contact.last_name #=> String
@@ -678,7 +816,7 @@ module Aws::Route53Domains
     #   resp.tech_contact.email #=> String
     #   resp.tech_contact.fax #=> String
     #   resp.tech_contact.extra_params #=> Array
-    #   resp.tech_contact.extra_params[0].name #=> String, one of "DUNS_NUMBER", "BRAND_NUMBER", "BIRTH_DEPARTMENT", "BIRTH_DATE_IN_YYYY_MM_DD", "BIRTH_COUNTRY", "BIRTH_CITY", "DOCUMENT_NUMBER", "AU_ID_NUMBER", "AU_ID_TYPE", "CA_LEGAL_TYPE", "CA_BUSINESS_ENTITY_TYPE", "ES_IDENTIFICATION", "ES_IDENTIFICATION_TYPE", "ES_LEGAL_FORM", "FI_BUSINESS_NUMBER", "FI_ID_NUMBER", "FI_NATIONALITY", "FI_ORGANIZATION_TYPE", "IT_PIN", "IT_REGISTRANT_ENTITY_TYPE", "RU_PASSPORT_DATA", "SE_ID_NUMBER", "SG_ID_NUMBER", "VAT_NUMBER", "UK_CONTACT_TYPE", "UK_COMPANY_NUMBER"
+    #   resp.tech_contact.extra_params[0].name #=> String, one of "DUNS_NUMBER", "BRAND_NUMBER", "BIRTH_DEPARTMENT", "BIRTH_DATE_IN_YYYY_MM_DD", "BIRTH_COUNTRY", "BIRTH_CITY", "DOCUMENT_NUMBER", "AU_ID_NUMBER", "AU_ID_TYPE", "CA_LEGAL_TYPE", "CA_BUSINESS_ENTITY_TYPE", "CA_LEGAL_REPRESENTATIVE", "CA_LEGAL_REPRESENTATIVE_CAPACITY", "ES_IDENTIFICATION", "ES_IDENTIFICATION_TYPE", "ES_LEGAL_FORM", "FI_BUSINESS_NUMBER", "FI_ID_NUMBER", "FI_NATIONALITY", "FI_ORGANIZATION_TYPE", "IT_NATIONALITY", "IT_PIN", "IT_REGISTRANT_ENTITY_TYPE", "RU_PASSPORT_DATA", "SE_ID_NUMBER", "SG_ID_NUMBER", "VAT_NUMBER", "UK_CONTACT_TYPE", "UK_COMPANY_NUMBER"
     #   resp.tech_contact.extra_params[0].value #=> String
     #   resp.admin_privacy #=> Boolean
     #   resp.registrant_privacy #=> Boolean
@@ -707,30 +845,46 @@ module Aws::Route53Domains
     end
 
     # The GetDomainSuggestions operation returns a list of suggested domain
-    # names given a string, which can either be a domain name or simply a
-    # word or phrase (without spaces).
+    # names.
     #
     # @option params [required, String] :domain_name
     #   A domain name that you want to use as the basis for a list of possible
-    #   domain names. The domain name must contain a top-level domain (TLD),
-    #   such as .com, that Amazon Route 53 supports. For a list of TLDs, see
-    #   [Domains that You Can Register with Amazon Route 53][1] in the *Amazon
-    #   Route 53 Developer Guide*.
+    #   domain names. The top-level domain (TLD), such as .com, must be a TLD
+    #   that Route 53 supports. For a list of supported TLDs, see [Domains
+    #   that You Can Register with Amazon Route 53][1] in the *Amazon Route 53
+    #   Developer Guide*.
+    #
+    #   The domain name can contain only the following characters:
+    #
+    #   * Letters a through z. Domain names are not case sensitive.
+    #
+    #   * Numbers 0 through 9.
+    #
+    #   * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+    #     label.
+    #
+    #   * Period (.) to separate the labels in the name, such as the `.` in
+    #     `example.com`.
+    #
+    #   Internationalized domain names are not supported for some top-level
+    #   domains. To determine whether the TLD that you want to use supports
+    #   internationalized domain names, see [Domains that You Can Register
+    #   with Amazon Route 53][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [required, Integer] :suggestion_count
-    #   The number of suggested domain names that you want Amazon Route 53 to
-    #   return.
+    #   The number of suggested domain names that you want Route 53 to return.
+    #   Specify a value between 1 and 50.
     #
     # @option params [required, Boolean] :only_available
-    #   If `OnlyAvailable` is `true`, Amazon Route 53 returns only domain
-    #   names that are available. If `OnlyAvailable` is `false`, Amazon Route
-    #   53 returns domain names without checking whether they're available to
-    #   be registered. To determine whether the domain is available, you can
-    #   call `checkDomainAvailability` for each suggestion.
+    #   If `OnlyAvailable` is `true`, Route 53 returns only domain names that
+    #   are available. If `OnlyAvailable` is `false`, Route 53 returns domain
+    #   names without checking whether they're available to be registered. To
+    #   determine whether the domain is available, you can call
+    #   `checkDomainAvailability` for each suggestion.
     #
     # @return [Types::GetDomainSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -764,8 +918,8 @@ module Aws::Route53Domains
     #
     # @option params [required, String] :operation_id
     #   The identifier for the operation for which you want to get the status.
-    #   Amazon Route 53 returned the identifier in the response to the
-    #   original request.
+    #   Route 53 returned the identifier in the response to the original
+    #   request.
     #
     # @return [Types::GetOperationDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -788,7 +942,7 @@ module Aws::Route53Domains
     #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "ERROR", "SUCCESSFUL", "FAILED"
     #   resp.message #=> String
     #   resp.domain_name #=> String
-    #   resp.type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK", "ENABLE_AUTORENEW", "DISABLE_AUTORENEW", "ADD_DNSSEC", "REMOVE_DNSSEC", "EXPIRE_DOMAIN", "TRANSFER_OUT_DOMAIN", "CHANGE_DOMAIN_OWNER", "RENEW_DOMAIN", "PUSH_DOMAIN"
+    #   resp.type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK", "ENABLE_AUTORENEW", "DISABLE_AUTORENEW", "ADD_DNSSEC", "REMOVE_DNSSEC", "EXPIRE_DOMAIN", "TRANSFER_OUT_DOMAIN", "CHANGE_DOMAIN_OWNER", "RENEW_DOMAIN", "PUSH_DOMAIN", "INTERNAL_TRANSFER_OUT_DOMAIN", "INTERNAL_TRANSFER_IN_DOMAIN"
     #   resp.submitted_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail AWS API Documentation
@@ -825,6 +979,8 @@ module Aws::Route53Domains
     #   * {Types::ListDomainsResponse#domains #domains} => Array&lt;Types::DomainSummary&gt;
     #   * {Types::ListDomainsResponse#next_page_marker #next_page_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domains({
@@ -850,13 +1006,15 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
-    # This operation returns the operation IDs of operations that are not
-    # yet complete.
+    # Returns information about all of the operations that return an
+    # operation ID and that have ever been performed on domains that were
+    # registered by the current account.
     #
     # @option params [Time,DateTime,Date,Integer,String] :submitted_since
     #   An optional parameter that lets you get information about all the
     #   operations that you submitted after a specified date and time. Specify
-    #   the date and time in Coordinated Universal time (UTC).
+    #   the date and time in Unix time format and Coordinated Universal time
+    #   (UTC).
     #
     # @option params [String] :marker
     #   For an initial request for a list of operations, omit this element. If
@@ -876,6 +1034,8 @@ module Aws::Route53Domains
     #   * {Types::ListOperationsResponse#operations #operations} => Array&lt;Types::OperationSummary&gt;
     #   * {Types::ListOperationsResponse#next_page_marker #next_page_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_operations({
@@ -889,7 +1049,7 @@ module Aws::Route53Domains
     #   resp.operations #=> Array
     #   resp.operations[0].operation_id #=> String
     #   resp.operations[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "ERROR", "SUCCESSFUL", "FAILED"
-    #   resp.operations[0].type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK", "ENABLE_AUTORENEW", "DISABLE_AUTORENEW", "ADD_DNSSEC", "REMOVE_DNSSEC", "EXPIRE_DOMAIN", "TRANSFER_OUT_DOMAIN", "CHANGE_DOMAIN_OWNER", "RENEW_DOMAIN", "PUSH_DOMAIN"
+    #   resp.operations[0].type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK", "ENABLE_AUTORENEW", "DISABLE_AUTORENEW", "ADD_DNSSEC", "REMOVE_DNSSEC", "EXPIRE_DOMAIN", "TRANSFER_OUT_DOMAIN", "CHANGE_DOMAIN_OWNER", "RENEW_DOMAIN", "PUSH_DOMAIN", "INTERNAL_TRANSFER_OUT_DOMAIN", "INTERNAL_TRANSFER_IN_DOMAIN"
     #   resp.operations[0].submitted_date #=> Time
     #   resp.next_page_marker #=> String
     #
@@ -943,10 +1103,10 @@ module Aws::Route53Domains
     #
     # When you register a domain, Amazon Route 53 does the following:
     #
-    # * Creates a Amazon Route 53 hosted zone that has the same name as the
-    #   domain. Amazon Route 53 assigns four name servers to your hosted
-    #   zone and automatically updates your domain registration with the
-    #   names of these name servers.
+    # * Creates a Route 53 hosted zone that has the same name as the domain.
+    #   Route 53 assigns four name servers to your hosted zone and
+    #   automatically updates your domain registration with the names of
+    #   these name servers.
     #
     # * Enables autorenew, so your domain registration will renew
     #   automatically each year. We'll notify you in advance of the renewal
@@ -972,11 +1132,33 @@ module Aws::Route53Domains
     # [1]: http://aws.amazon.com/route53/pricing/
     #
     # @option params [required, String] :domain_name
-    #   The domain name that you want to register.
+    #   The domain name that you want to register. The top-level domain (TLD),
+    #   such as .com, must be a TLD that Route 53 supports. For a list of
+    #   supported TLDs, see [Domains that You Can Register with Amazon Route
+    #   53][1] in the *Amazon Route 53 Developer Guide*.
     #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
+    #   The domain name can contain only the following characters:
+    #
+    #   * Letters a through z. Domain names are not case sensitive.
+    #
+    #   * Numbers 0 through 9.
+    #
+    #   * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+    #     label.
+    #
+    #   * Period (.) to separate the labels in the name, such as the `.` in
+    #     `example.com`.
+    #
+    #   Internationalized domain names are not supported for some top-level
+    #   domains. To determine whether the TLD that you want to use supports
+    #   internationalized domain names, see [Domains that You Can Register
+    #   with Amazon Route 53][1]. For more information, see [Formatting
+    #   Internationalized Domain Names][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html#domain-name-format-idns
     #
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
@@ -992,7 +1174,7 @@ module Aws::Route53Domains
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [Boolean] :auto_renew
     #   Indicates whether the domain will be automatically renewed (`true`) or
@@ -1002,13 +1184,28 @@ module Aws::Route53Domains
     #   Default: `true`
     #
     # @option params [required, Types::ContactDetail] :admin_contact
-    #   Provides detailed contact information.
+    #   Provides detailed contact information. For information about the
+    #   values that you specify for each element, see [ContactDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html
     #
     # @option params [required, Types::ContactDetail] :registrant_contact
-    #   Provides detailed contact information.
+    #   Provides detailed contact information. For information about the
+    #   values that you specify for each element, see [ContactDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html
     #
     # @option params [required, Types::ContactDetail] :tech_contact
-    #   Provides detailed contact information.
+    #   Provides detailed contact information. For information about the
+    #   values that you specify for each element, see [ContactDetail][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html
     #
     # @option params [Boolean] :privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
@@ -1067,7 +1264,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1088,7 +1285,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1109,7 +1306,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1132,6 +1329,52 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
+    # Rejects the transfer of a domain from another AWS account to the
+    # current AWS account. You initiate a transfer between AWS accounts
+    # using [TransferDomainToAnotherAwsAccount][1].
+    #
+    # Use either [ListOperations][2] or [GetOperationDetail][3] to determine
+    # whether the operation succeeded. [GetOperationDetail][3] provides
+    # additional information, for example, `Domain Transfer from Aws Account
+    # 111122223333 has been cancelled`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that was specified when another AWS account
+    #   submitted a [TransferDomainToAnotherAwsAccount][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    #
+    # @return [Types::RejectDomainTransferFromAnotherAwsAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectDomainTransferFromAnotherAwsAccountResponse#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_domain_transfer_from_another_aws_account({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RejectDomainTransferFromAnotherAwsAccount AWS API Documentation
+    #
+    # @overload reject_domain_transfer_from_another_aws_account(params = {})
+    # @param [Hash] params ({})
+    def reject_domain_transfer_from_another_aws_account(params = {}, options = {})
+      req = build_request(:reject_domain_transfer_from_another_aws_account, params)
+      req.send_request(options)
+    end
+
     # This operation renews a domain for the specified number of years. The
     # cost of renewing your domain is billed to your AWS account.
     #
@@ -1139,11 +1382,12 @@ module Aws::Route53Domains
     # expiration date. Some TLD registries delete domains before the
     # expiration date if you haven't renewed far enough in advance. For
     # more information about renewing domain registration, see [Renewing
-    # Registration for a Domain][1] in the Amazon Route 53 Developer Guide.
+    # Registration for a Domain][1] in the *Amazon Route 53 Developer
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want to renew.
@@ -1158,7 +1402,7 @@ module Aws::Route53Domains
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [required, Integer] :current_expiry_year
     #   The year when the registration for the domain is set to expire. This
@@ -1195,7 +1439,7 @@ module Aws::Route53Domains
     # address for the registrant contact.
     #
     # @option params [String] :domain_name
-    #   The name of the domain for which you want Amazon Route 53 to resend a
+    #   The name of the domain for which you want Route 53 to resend a
     #   confirmation email to the registrant contact.
     #
     # @return [Types::ResendContactReachabilityEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1255,23 +1499,33 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
-    # This operation transfers a domain from another registrar to Amazon
-    # Route 53. When the transfer is complete, the domain is registered
-    # either with Amazon Registrar (for .com, .net, and .org domains) or
-    # with our registrar associate, Gandi (for all other TLDs).
+    # Transfers a domain from another registrar to Amazon Route 53. When the
+    # transfer is complete, the domain is registered either with Amazon
+    # Registrar (for .com, .net, and .org domains) or with our registrar
+    # associate, Gandi (for all other TLDs).
     #
-    # For transfer requirements, a detailed procedure, and information about
-    # viewing the status of a domain transfer, see [Transferring
-    # Registration for a Domain to Amazon Route 53][1] in the *Amazon Route
-    # 53 Developer Guide*.
+    # For more information about transferring domains, see the following
+    # topics:
+    #
+    # * For transfer requirements, a detailed procedure, and information
+    #   about viewing the status of a domain that you're transferring to
+    #   Route 53, see [Transferring Registration for a Domain to Amazon
+    #   Route 53][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    # * For information about how to transfer a domain from one AWS account
+    #   to another, see [TransferDomainToAnotherAwsAccount][2].
+    #
+    # * For information about how to transfer a domain to another domain
+    #   registrar, see [Transferring a Domain from Amazon Route 53 to
+    #   Another Registrar][3] in the *Amazon Route 53 Developer Guide*.
     #
     # If the registrar for your domain is also the DNS service provider for
-    # the domain, we highly recommend that you consider transferring your
-    # DNS service to Amazon Route 53 or to another DNS service provider
-    # before you transfer your registration. Some registrars provide free
-    # DNS service when you purchase a domain registration. When you transfer
-    # the registration, the previous registrar will not renew your domain
-    # registration and could end your DNS service at any time.
+    # the domain, we highly recommend that you transfer your DNS service to
+    # Route 53 or to another DNS service provider before you transfer your
+    # registration. Some registrars provide free DNS service when you
+    # purchase a domain registration. When you transfer the registration,
+    # the previous registrar will not renew your domain registration and
+    # could end your DNS service at any time.
     #
     # If the registrar for your domain is also the DNS service provider for
     # the domain and you don't transfer DNS service to another provider,
@@ -1285,14 +1539,32 @@ module Aws::Route53Domains
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html
     #
     # @option params [required, String] :domain_name
-    #   The name of the domain that you want to transfer to Amazon Route 53.
+    #   The name of the domain that you want to transfer to Route 53. The
+    #   top-level domain (TLD), such as .com, must be a TLD that Route 53
+    #   supports. For a list of supported TLDs, see [Domains that You Can
+    #   Register with Amazon Route 53][1] in the *Amazon Route 53 Developer
+    #   Guide*.
     #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
+    #   The domain name can contain only the following characters:
+    #
+    #   * Letters a through z. Domain names are not case sensitive.
+    #
+    #   * Numbers 0 through 9.
+    #
+    #   * Hyphen (-). You can't specify a hyphen at the beginning or end of a
+    #     label.
+    #
+    #   * Period (.) to separate the labels in the name, such as the `.` in
+    #     `example.com`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
@@ -1391,7 +1663,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1412,7 +1684,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1433,7 +1705,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1453,6 +1725,76 @@ module Aws::Route53Domains
     # @param [Hash] params ({})
     def transfer_domain(params = {}, options = {})
       req = build_request(:transfer_domain, params)
+      req.send_request(options)
+    end
+
+    # Transfers a domain from the current AWS account to another AWS
+    # account. Note the following:
+    #
+    # * The AWS account that you're transferring the domain to must accept
+    #   the transfer. If the other account doesn't accept the transfer
+    #   within 3 days, we cancel the transfer. See
+    #   [AcceptDomainTransferFromAnotherAwsAccount][1].
+    #
+    # * You can cancel the transfer before the other account accepts it. See
+    #   [CancelDomainTransferToAnotherAwsAccount][2].
+    #
+    # * The other account can reject the transfer. See
+    #   [RejectDomainTransferFromAnotherAwsAccount][3].
+    #
+    # When you transfer a domain from one AWS account to another, Route 53
+    # doesn't transfer the hosted zone that is associated with the domain.
+    # DNS resolution isn't affected if the domain and the hosted zone are
+    # owned by separate accounts, so transferring the hosted zone is
+    # optional. For information about transferring the hosted zone to
+    # another AWS account, see [Migrating a Hosted Zone to a Different AWS
+    # Account][4] in the *Amazon Route 53 Developer Guide*.
+    #
+    # Use either [ListOperations][5] or [GetOperationDetail][6] to determine
+    # whether the operation succeeded. [GetOperationDetail][6] provides
+    # additional information, for example, `Domain Transfer from Aws Account
+    # 111122223333 has been cancelled`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_CancelDomainTransferToAnotherAwsAccount.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_RejectDomainTransferFromAnotherAwsAccount.html
+    # [4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-migrating.html
+    # [5]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html
+    # [6]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that you want to transfer from the current AWS
+    #   account to another account.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the AWS account that you want to transfer the domain
+    #   to, for example, `111122223333`.
+    #
+    # @return [Types::TransferDomainToAnotherAwsAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransferDomainToAnotherAwsAccountResponse#operation_id #operation_id} => String
+    #   * {Types::TransferDomainToAnotherAwsAccountResponse#password #password} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transfer_domain_to_another_aws_account({
+    #     domain_name: "DomainName", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #   resp.password #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainToAnotherAwsAccount AWS API Documentation
+    #
+    # @overload transfer_domain_to_another_aws_account(params = {})
+    # @param [Hash] params ({})
+    def transfer_domain_to_another_aws_account(params = {}, options = {})
+      req = build_request(:transfer_domain_to_another_aws_account, params)
       req.send_request(options)
     end
 
@@ -1502,7 +1844,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1523,7 +1865,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1544,7 +1886,7 @@ module Aws::Route53Domains
     #       fax: "ContactNumber",
     #       extra_params: [
     #         {
-    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
+    #           name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, CA_LEGAL_REPRESENTATIVE, CA_LEGAL_REPRESENTATIVE_CAPACITY, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, FI_ORGANIZATION_TYPE, IT_NATIONALITY, IT_PIN, IT_REGISTRANT_ENTITY_TYPE, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER, UK_CONTACT_TYPE, UK_COMPANY_NUMBER
     #           value: "ExtraParamValue", # required
     #         },
     #       ],
@@ -1573,9 +1915,24 @@ module Aws::Route53Domains
     # This operation affects only the contact information for the specified
     # contact type (registrant, administrator, or tech). If the request
     # succeeds, Amazon Route 53 returns an operation ID that you can use
-    # with GetOperationDetail to track the progress and completion of the
-    # action. If the request doesn't complete successfully, the domain
+    # with [GetOperationDetail][1] to track the progress and completion of
+    # the action. If the request doesn't complete successfully, the domain
     # registrant will be notified by email.
+    #
+    # By disabling the privacy service via API, you consent to the
+    # publication of the contact information provided for this domain via
+    # the public WHOIS database. You certify that you are the registrant of
+    # this domain name and have the authority to make this decision. You may
+    # withdraw your consent at any time by enabling privacy protection using
+    # either `UpdateDomainContactPrivacy` or the Route 53 console. Enabling
+    # privacy protection removes the contact information provided for this
+    # domain from the WHOIS database. For more information on our privacy
+    # practices, see [https://aws.amazon.com/privacy/][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    # [2]: https://aws.amazon.com/privacy/
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want to update the privacy setting
@@ -1721,13 +2078,13 @@ module Aws::Route53Domains
     #
     # @option params [Time,DateTime,Date,Integer,String] :start
     #   The beginning date and time for the time period for which you want a
-    #   list of billing records. Specify the date and time in Coordinated
-    #   Universal time (UTC).
+    #   list of billing records. Specify the date and time in Unix time format
+    #   and Coordinated Universal time (UTC).
     #
     # @option params [Time,DateTime,Date,Integer,String] :end
     #   The end date and time for the time period for which you want a list of
-    #   billing records. Specify the date and time in Coordinated Universal
-    #   time (UTC).
+    #   billing records. Specify the date and time in Unix time format and
+    #   Coordinated Universal time (UTC).
     #
     # @option params [String] :marker
     #   For an initial request for a list of billing records, omit this
@@ -1765,7 +2122,7 @@ module Aws::Route53Domains
     #   resp.next_page_marker #=> String
     #   resp.billing_records #=> Array
     #   resp.billing_records[0].domain_name #=> String
-    #   resp.billing_records[0].operation #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK", "ENABLE_AUTORENEW", "DISABLE_AUTORENEW", "ADD_DNSSEC", "REMOVE_DNSSEC", "EXPIRE_DOMAIN", "TRANSFER_OUT_DOMAIN", "CHANGE_DOMAIN_OWNER", "RENEW_DOMAIN", "PUSH_DOMAIN"
+    #   resp.billing_records[0].operation #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK", "ENABLE_AUTORENEW", "DISABLE_AUTORENEW", "ADD_DNSSEC", "REMOVE_DNSSEC", "EXPIRE_DOMAIN", "TRANSFER_OUT_DOMAIN", "CHANGE_DOMAIN_OWNER", "RENEW_DOMAIN", "PUSH_DOMAIN", "INTERNAL_TRANSFER_OUT_DOMAIN", "INTERNAL_TRANSFER_IN_DOMAIN"
     #   resp.billing_records[0].invoice_id #=> String
     #   resp.billing_records[0].bill_date #=> Time
     #   resp.billing_records[0].price #=> Float
@@ -1792,7 +2149,7 @@ module Aws::Route53Domains
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

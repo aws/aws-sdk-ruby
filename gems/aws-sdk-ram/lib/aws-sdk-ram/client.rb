@@ -269,8 +269,7 @@ module Aws::RAM
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::RAM
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -746,6 +745,8 @@ module Aws::RAM
     #   * {Types::GetResourcePoliciesResponse#policies #policies} => Array&lt;String&gt;
     #   * {Types::GetResourcePoliciesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_policies({
@@ -805,6 +806,8 @@ module Aws::RAM
     #   * {Types::GetResourceShareAssociationsResponse#resource_share_associations #resource_share_associations} => Array&lt;Types::ResourceShareAssociation&gt;
     #   * {Types::GetResourceShareAssociationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_share_associations({
@@ -860,6 +863,8 @@ module Aws::RAM
     #
     #   * {Types::GetResourceShareInvitationsResponse#resource_share_invitations #resource_share_invitations} => Array&lt;Types::ResourceShareInvitation&gt;
     #   * {Types::GetResourceShareInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -932,6 +937,8 @@ module Aws::RAM
     #   * {Types::GetResourceSharesResponse#resource_shares #resource_shares} => Array&lt;Types::ResourceShare&gt;
     #   * {Types::GetResourceSharesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_shares({
@@ -993,6 +1000,8 @@ module Aws::RAM
     #
     #   * {Types::ListPendingInvitationResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::ListPendingInvitationResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1089,10 +1098,13 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:CapacityReservation` \| `ec2:Subnet` \|
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `license-manager:LicenseConfiguration` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverRule` I `resource-groups:Group`
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_share_arns
     #   The Amazon Resource Names (ARN) of the resource shares.
@@ -1109,6 +1121,8 @@ module Aws::RAM
     #
     #   * {Types::ListPrincipalsResponse#principals #principals} => Array&lt;Types::Principal&gt;
     #   * {Types::ListPrincipalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1190,6 +1204,44 @@ module Aws::RAM
       req.send_request(options)
     end
 
+    # Lists the shareable resource types supported by AWS RAM.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @return [Types::ListResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceTypesResponse#resource_types #resource_types} => Array&lt;Types::ServiceNameAndResourceType&gt;
+    #   * {Types::ListResourceTypesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_types({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_types #=> Array
+    #   resp.resource_types[0].resource_type #=> String
+    #   resp.resource_types[0].service_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypes AWS API Documentation
+    #
+    # @overload list_resource_types(params = {})
+    # @param [Hash] params ({})
+    def list_resource_types(params = {}, options = {})
+      req = build_request(:list_resource_types, params)
+      req.send_request(options)
+    end
+
     # Lists the resources that you added to a resource shares or the
     # resources that are shared with you.
     #
@@ -1202,10 +1254,13 @@ module Aws::RAM
     # @option params [String] :resource_type
     #   The resource type.
     #
-    #   Valid values: `ec2:CapacityReservation` \| `ec2:Subnet` \|
+    #   Valid values: `codebuild:Project` \| `codebuild:ReportGroup` \|
+    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \| `ec2:Subnet` \|
     #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `license-manager:LicenseConfiguration` \| `rds:Cluster` \|
-    #   `route53resolver:ResolverRule` \| `resource-groups:Group`
+    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
+    #   `imagebuilder:ImageRecipe` \| `license-manager:LicenseConfiguration` I
+    #   `resource-groups:Group` \| `rds:Cluster` \|
+    #   `route53resolver:ResolverRule`
     #
     # @option params [Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -1225,6 +1280,8 @@ module Aws::RAM
     #
     #   * {Types::ListResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::ListResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1474,7 +1531,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

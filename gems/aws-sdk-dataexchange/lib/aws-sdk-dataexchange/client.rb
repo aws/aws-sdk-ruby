@@ -269,8 +269,7 @@ module Aws::DataExchange
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::DataExchange
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -437,6 +436,10 @@ module Aws::DataExchange
     #           },
     #         ],
     #         data_set_id: "Id", # required
+    #         encryption: {
+    #           kms_key_arn: "__string", # required
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
     #         revision_id: "Id", # required
     #       },
     #       import_asset_from_signed_url: {
@@ -473,6 +476,8 @@ module Aws::DataExchange
     #   resp.details.export_assets_to_s3.asset_destinations[0].bucket #=> String
     #   resp.details.export_assets_to_s3.asset_destinations[0].key #=> String
     #   resp.details.export_assets_to_s3.data_set_id #=> String
+    #   resp.details.export_assets_to_s3.encryption.kms_key_arn #=> String
+    #   resp.details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.details.export_assets_to_s3.revision_id #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
@@ -774,6 +779,8 @@ module Aws::DataExchange
     #   resp.details.export_assets_to_s3.asset_destinations[0].bucket #=> String
     #   resp.details.export_assets_to_s3.asset_destinations[0].key #=> String
     #   resp.details.export_assets_to_s3.data_set_id #=> String
+    #   resp.details.export_assets_to_s3.encryption.kms_key_arn #=> String
+    #   resp.details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.details.export_assets_to_s3.revision_id #=> String
     #   resp.details.import_asset_from_signed_url.asset_name #=> String
     #   resp.details.import_asset_from_signed_url.data_set_id #=> String
@@ -872,6 +879,8 @@ module Aws::DataExchange
     #   * {Types::ListDataSetRevisionsResponse#next_token #next_token} => String
     #   * {Types::ListDataSetRevisionsResponse#revisions #revisions} => Array&lt;Types::RevisionEntry&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_set_revisions({
@@ -917,6 +926,8 @@ module Aws::DataExchange
     #
     #   * {Types::ListDataSetsResponse#data_sets #data_sets} => Array&lt;Types::DataSetEntry&gt;
     #   * {Types::ListDataSetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -966,6 +977,8 @@ module Aws::DataExchange
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::JobEntry&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
@@ -990,6 +1003,8 @@ module Aws::DataExchange
     #   resp.jobs[0].details.export_assets_to_s3.asset_destinations[0].bucket #=> String
     #   resp.jobs[0].details.export_assets_to_s3.asset_destinations[0].key #=> String
     #   resp.jobs[0].details.export_assets_to_s3.data_set_id #=> String
+    #   resp.jobs[0].details.export_assets_to_s3.encryption.kms_key_arn #=> String
+    #   resp.jobs[0].details.export_assets_to_s3.encryption.type #=> String, one of "aws:kms", "AES256"
     #   resp.jobs[0].details.export_assets_to_s3.revision_id #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.asset_name #=> String
     #   resp.jobs[0].details.import_asset_from_signed_url.data_set_id #=> String
@@ -1043,6 +1058,8 @@ module Aws::DataExchange
     #
     #   * {Types::ListRevisionAssetsResponse#assets #assets} => Array&lt;Types::AssetEntry&gt;
     #   * {Types::ListRevisionAssetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1353,7 +1370,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -14,11 +14,26 @@ module Aws::IoTEvents
     Action = Shapes::StructureShape.new(name: 'Action')
     Actions = Shapes::ListShape.new(name: 'Actions')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AssetId = Shapes::StringShape.new(name: 'AssetId')
+    AssetPropertyAlias = Shapes::StringShape.new(name: 'AssetPropertyAlias')
+    AssetPropertyBooleanValue = Shapes::StringShape.new(name: 'AssetPropertyBooleanValue')
+    AssetPropertyDoubleValue = Shapes::StringShape.new(name: 'AssetPropertyDoubleValue')
+    AssetPropertyEntryId = Shapes::StringShape.new(name: 'AssetPropertyEntryId')
+    AssetPropertyId = Shapes::StringShape.new(name: 'AssetPropertyId')
+    AssetPropertyIntegerValue = Shapes::StringShape.new(name: 'AssetPropertyIntegerValue')
+    AssetPropertyOffsetInNanos = Shapes::StringShape.new(name: 'AssetPropertyOffsetInNanos')
+    AssetPropertyQuality = Shapes::StringShape.new(name: 'AssetPropertyQuality')
+    AssetPropertyStringValue = Shapes::StringShape.new(name: 'AssetPropertyStringValue')
+    AssetPropertyTimeInSeconds = Shapes::StringShape.new(name: 'AssetPropertyTimeInSeconds')
+    AssetPropertyTimestamp = Shapes::StructureShape.new(name: 'AssetPropertyTimestamp')
+    AssetPropertyValue = Shapes::StructureShape.new(name: 'AssetPropertyValue')
+    AssetPropertyVariant = Shapes::StructureShape.new(name: 'AssetPropertyVariant')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeJsonPath = Shapes::StringShape.new(name: 'AttributeJsonPath')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
     ClearTimerAction = Shapes::StructureShape.new(name: 'ClearTimerAction')
     Condition = Shapes::StringShape.new(name: 'Condition')
+    ContentExpression = Shapes::StringShape.new(name: 'ContentExpression')
     CreateDetectorModelRequest = Shapes::StructureShape.new(name: 'CreateDetectorModelRequest')
     CreateDetectorModelResponse = Shapes::StructureShape.new(name: 'CreateDetectorModelResponse')
     CreateInputRequest = Shapes::StructureShape.new(name: 'CreateInputRequest')
@@ -48,6 +63,13 @@ module Aws::IoTEvents
     DetectorModelVersionStatus = Shapes::StringShape.new(name: 'DetectorModelVersionStatus')
     DetectorModelVersionSummaries = Shapes::ListShape.new(name: 'DetectorModelVersionSummaries')
     DetectorModelVersionSummary = Shapes::StructureShape.new(name: 'DetectorModelVersionSummary')
+    DynamoDBAction = Shapes::StructureShape.new(name: 'DynamoDBAction')
+    DynamoDBv2Action = Shapes::StructureShape.new(name: 'DynamoDBv2Action')
+    DynamoKeyField = Shapes::StringShape.new(name: 'DynamoKeyField')
+    DynamoKeyType = Shapes::StringShape.new(name: 'DynamoKeyType')
+    DynamoKeyValue = Shapes::StringShape.new(name: 'DynamoKeyValue')
+    DynamoOperation = Shapes::StringShape.new(name: 'DynamoOperation')
+    DynamoTableName = Shapes::StringShape.new(name: 'DynamoTableName')
     EvaluationMethod = Shapes::StringShape.new(name: 'EvaluationMethod')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventName = Shapes::StringShape.new(name: 'EventName')
@@ -66,6 +88,7 @@ module Aws::IoTEvents
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IotEventsAction = Shapes::StructureShape.new(name: 'IotEventsAction')
+    IotSiteWiseAction = Shapes::StructureShape.new(name: 'IotSiteWiseAction')
     IotTopicPublishAction = Shapes::StructureShape.new(name: 'IotTopicPublishAction')
     KeyValue = Shapes::StringShape.new(name: 'KeyValue')
     LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
@@ -87,6 +110,8 @@ module Aws::IoTEvents
     OnEnterLifecycle = Shapes::StructureShape.new(name: 'OnEnterLifecycle')
     OnExitLifecycle = Shapes::StructureShape.new(name: 'OnExitLifecycle')
     OnInputLifecycle = Shapes::StructureShape.new(name: 'OnInputLifecycle')
+    Payload = Shapes::StructureShape.new(name: 'Payload')
+    PayloadType = Shapes::StringShape.new(name: 'PayloadType')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
     QueueUrl = Shapes::StringShape.new(name: 'QueueUrl')
     ResetTimerAction = Shapes::StructureShape.new(name: 'ResetTimerAction')
@@ -138,9 +163,27 @@ module Aws::IoTEvents
     Action.add_member(:iot_events, Shapes::ShapeRef.new(shape: IotEventsAction, location_name: "iotEvents"))
     Action.add_member(:sqs, Shapes::ShapeRef.new(shape: SqsAction, location_name: "sqs"))
     Action.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseAction, location_name: "firehose"))
+    Action.add_member(:dynamo_db, Shapes::ShapeRef.new(shape: DynamoDBAction, location_name: "dynamoDB"))
+    Action.add_member(:dynamo_d_bv_2, Shapes::ShapeRef.new(shape: DynamoDBv2Action, location_name: "dynamoDBv2"))
+    Action.add_member(:iot_site_wise, Shapes::ShapeRef.new(shape: IotSiteWiseAction, location_name: "iotSiteWise"))
     Action.struct_class = Types::Action
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
+
+    AssetPropertyTimestamp.add_member(:time_in_seconds, Shapes::ShapeRef.new(shape: AssetPropertyTimeInSeconds, required: true, location_name: "timeInSeconds"))
+    AssetPropertyTimestamp.add_member(:offset_in_nanos, Shapes::ShapeRef.new(shape: AssetPropertyOffsetInNanos, location_name: "offsetInNanos"))
+    AssetPropertyTimestamp.struct_class = Types::AssetPropertyTimestamp
+
+    AssetPropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: AssetPropertyVariant, required: true, location_name: "value"))
+    AssetPropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: AssetPropertyTimestamp, location_name: "timestamp"))
+    AssetPropertyValue.add_member(:quality, Shapes::ShapeRef.new(shape: AssetPropertyQuality, location_name: "quality"))
+    AssetPropertyValue.struct_class = Types::AssetPropertyValue
+
+    AssetPropertyVariant.add_member(:string_value, Shapes::ShapeRef.new(shape: AssetPropertyStringValue, location_name: "stringValue"))
+    AssetPropertyVariant.add_member(:integer_value, Shapes::ShapeRef.new(shape: AssetPropertyIntegerValue, location_name: "integerValue"))
+    AssetPropertyVariant.add_member(:double_value, Shapes::ShapeRef.new(shape: AssetPropertyDoubleValue, location_name: "doubleValue"))
+    AssetPropertyVariant.add_member(:boolean_value, Shapes::ShapeRef.new(shape: AssetPropertyBooleanValue, location_name: "booleanValue"))
+    AssetPropertyVariant.struct_class = Types::AssetPropertyVariant
 
     Attribute.add_member(:json_path, Shapes::ShapeRef.new(shape: AttributeJsonPath, required: true, location_name: "jsonPath"))
     Attribute.struct_class = Types::Attribute
@@ -244,6 +287,22 @@ module Aws::IoTEvents
     DetectorModelVersionSummary.add_member(:evaluation_method, Shapes::ShapeRef.new(shape: EvaluationMethod, location_name: "evaluationMethod"))
     DetectorModelVersionSummary.struct_class = Types::DetectorModelVersionSummary
 
+    DynamoDBAction.add_member(:hash_key_type, Shapes::ShapeRef.new(shape: DynamoKeyType, location_name: "hashKeyType"))
+    DynamoDBAction.add_member(:hash_key_field, Shapes::ShapeRef.new(shape: DynamoKeyField, required: true, location_name: "hashKeyField"))
+    DynamoDBAction.add_member(:hash_key_value, Shapes::ShapeRef.new(shape: DynamoKeyValue, required: true, location_name: "hashKeyValue"))
+    DynamoDBAction.add_member(:range_key_type, Shapes::ShapeRef.new(shape: DynamoKeyType, location_name: "rangeKeyType"))
+    DynamoDBAction.add_member(:range_key_field, Shapes::ShapeRef.new(shape: DynamoKeyField, location_name: "rangeKeyField"))
+    DynamoDBAction.add_member(:range_key_value, Shapes::ShapeRef.new(shape: DynamoKeyValue, location_name: "rangeKeyValue"))
+    DynamoDBAction.add_member(:operation, Shapes::ShapeRef.new(shape: DynamoOperation, location_name: "operation"))
+    DynamoDBAction.add_member(:payload_field, Shapes::ShapeRef.new(shape: DynamoKeyField, location_name: "payloadField"))
+    DynamoDBAction.add_member(:table_name, Shapes::ShapeRef.new(shape: DynamoTableName, required: true, location_name: "tableName"))
+    DynamoDBAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
+    DynamoDBAction.struct_class = Types::DynamoDBAction
+
+    DynamoDBv2Action.add_member(:table_name, Shapes::ShapeRef.new(shape: DynamoTableName, required: true, location_name: "tableName"))
+    DynamoDBv2Action.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
+    DynamoDBv2Action.struct_class = Types::DynamoDBv2Action
+
     Event.add_member(:event_name, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "eventName"))
     Event.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "condition"))
     Event.add_member(:actions, Shapes::ShapeRef.new(shape: Actions, location_name: "actions"))
@@ -253,6 +312,7 @@ module Aws::IoTEvents
 
     FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
     FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
+    FirehoseAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     FirehoseAction.struct_class = Types::FirehoseAction
 
     Input.add_member(:input_configuration, Shapes::ShapeRef.new(shape: InputConfiguration, location_name: "inputConfiguration"))
@@ -287,12 +347,22 @@ module Aws::IoTEvents
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
     IotEventsAction.add_member(:input_name, Shapes::ShapeRef.new(shape: InputName, required: true, location_name: "inputName"))
+    IotEventsAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     IotEventsAction.struct_class = Types::IotEventsAction
 
+    IotSiteWiseAction.add_member(:entry_id, Shapes::ShapeRef.new(shape: AssetPropertyEntryId, location_name: "entryId"))
+    IotSiteWiseAction.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, location_name: "assetId"))
+    IotSiteWiseAction.add_member(:property_id, Shapes::ShapeRef.new(shape: AssetPropertyId, location_name: "propertyId"))
+    IotSiteWiseAction.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
+    IotSiteWiseAction.add_member(:property_value, Shapes::ShapeRef.new(shape: AssetPropertyValue, required: true, location_name: "propertyValue"))
+    IotSiteWiseAction.struct_class = Types::IotSiteWiseAction
+
     IotTopicPublishAction.add_member(:mqtt_topic, Shapes::ShapeRef.new(shape: MQTTTopic, required: true, location_name: "mqttTopic"))
+    IotTopicPublishAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     IotTopicPublishAction.struct_class = Types::IotTopicPublishAction
 
     LambdaAction.add_member(:function_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "functionArn"))
+    LambdaAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     LambdaAction.struct_class = Types::LambdaAction
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -345,6 +415,10 @@ module Aws::IoTEvents
     OnInputLifecycle.add_member(:transition_events, Shapes::ShapeRef.new(shape: TransitionEvents, location_name: "transitionEvents"))
     OnInputLifecycle.struct_class = Types::OnInputLifecycle
 
+    Payload.add_member(:content_expression, Shapes::ShapeRef.new(shape: ContentExpression, required: true, location_name: "contentExpression"))
+    Payload.add_member(:type, Shapes::ShapeRef.new(shape: PayloadType, required: true, location_name: "type"))
+    Payload.struct_class = Types::Payload
+
     PutLoggingOptionsRequest.add_member(:logging_options, Shapes::ShapeRef.new(shape: LoggingOptions, required: true, location_name: "loggingOptions"))
     PutLoggingOptionsRequest.struct_class = Types::PutLoggingOptionsRequest
 
@@ -363,6 +437,7 @@ module Aws::IoTEvents
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SNSTopicPublishAction.add_member(:target_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "targetArn"))
+    SNSTopicPublishAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     SNSTopicPublishAction.struct_class = Types::SNSTopicPublishAction
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -379,6 +454,7 @@ module Aws::IoTEvents
 
     SqsAction.add_member(:queue_url, Shapes::ShapeRef.new(shape: QueueUrl, required: true, location_name: "queueUrl"))
     SqsAction.add_member(:use_base_64, Shapes::ShapeRef.new(shape: UseBase64, location_name: "useBase64"))
+    SqsAction.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     SqsAction.struct_class = Types::SqsAction
 
     State.add_member(:state_name, Shapes::ShapeRef.new(shape: StateName, required: true, location_name: "stateName"))

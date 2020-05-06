@@ -6,13 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::PI
-  # This class provides a resource oriented interface for PI.
-  # To create a resource object:
-  #     resource = Aws::PI::Resource.new(region: 'us-west-2')
-  # You can supply a client object with custom configuration that will be used for all resource operations.
-  # If you do not pass +:client+, a default client will be constructed.
-  #     client = Aws::PI::Client.new(region: 'us-west-2')
-  #     resource = Aws::PI::Resource.new(client: client)
+
   class Resource
 
     # @param options ({})

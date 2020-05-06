@@ -6,13 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::FMS
-  # This class provides a resource oriented interface for FMS.
-  # To create a resource object:
-  #     resource = Aws::FMS::Resource.new(region: 'us-west-2')
-  # You can supply a client object with custom configuration that will be used for all resource operations.
-  # If you do not pass +:client+, a default client will be constructed.
-  #     client = Aws::FMS::Client.new(region: 'us-west-2')
-  #     resource = Aws::FMS::Resource.new(client: client)
+
   class Resource
 
     # @param options ({})

@@ -303,6 +303,22 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "CreateDimension":{
+      "name":"CreateDimension",
+      "http":{
+        "method":"POST",
+        "requestUri":"/dimensions/{name}"
+      },
+      "input":{"shape":"CreateDimensionRequest"},
+      "output":{"shape":"CreateDimensionResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "CreateDomainConfiguration":{
       "name":"CreateDomainConfiguration",
       "http":{
@@ -729,6 +745,20 @@
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "DeleteDimension":{
+      "name":"DeleteDimension",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/dimensions/{name}"
+      },
+      "input":{"shape":"DeleteDimensionRequest"},
+      "output":{"shape":"DeleteDimensionResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "DeleteDomainConfiguration":{
@@ -1228,6 +1258,21 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "DescribeDimension":{
+      "name":"DescribeDimension",
+      "http":{
+        "method":"GET",
+        "requestUri":"/dimensions/{name}"
+      },
+      "input":{"shape":"DescribeDimensionRequest"},
+      "output":{"shape":"DescribeDimensionResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "DescribeDomainConfiguration":{
       "name":"DescribeDomainConfiguration",
       "http":{
@@ -1239,6 +1284,7 @@
       "errors":[
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
+        {"shape":"InvalidRequestException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"}
@@ -1992,6 +2038,20 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "ListDimensions":{
+      "name":"ListDimensions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/dimensions"
+      },
+      "input":{"shape":"ListDimensionsRequest"},
+      "output":{"shape":"ListDimensionsResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "ListDomainConfigurations":{
       "name":"ListDomainConfigurations",
       "http":{
@@ -2273,7 +2333,8 @@
       "errors":[
         {"shape":"InvalidRequestException"},
         {"shape":"ThrottlingException"},
-        {"shape":"InternalFailureException"}
+        {"shape":"InternalFailureException"},
+        {"shape":"ResourceNotFoundException"}
       ]
     },
     "ListSecurityProfilesForTarget":{
@@ -2583,6 +2644,25 @@
         {"shape":"CertificateValidationException"},
         {"shape":"CertificateStateException"},
         {"shape":"CertificateConflictException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"InternalFailureException"}
+      ]
+    },
+    "RegisterCertificateWithoutCA":{
+      "name":"RegisterCertificateWithoutCA",
+      "http":{
+        "method":"POST",
+        "requestUri":"/certificate/register-no-ca"
+      },
+      "input":{"shape":"RegisterCertificateWithoutCARequest"},
+      "output":{"shape":"RegisterCertificateWithoutCAResponse"},
+      "errors":[
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"CertificateStateException"},
+        {"shape":"CertificateValidationException"},
         {"shape":"ThrottlingException"},
         {"shape":"UnauthorizedException"},
         {"shape":"ServiceUnavailableException"},
@@ -2990,6 +3070,21 @@
         {"shape":"UnauthorizedException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"InternalFailureException"}
+      ]
+    },
+    "UpdateDimension":{
+      "name":"UpdateDimension",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/dimensions/{name}"
+      },
+      "input":{"shape":"UpdateDimensionRequest"},
+      "output":{"shape":"UpdateDimensionResponse"},
+      "errors":[
+        {"shape":"InternalFailureException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "UpdateDomainConfiguration":{
@@ -3400,6 +3495,10 @@
     "AdditionalMetricsToRetainList":{
       "type":"list",
       "member":{"shape":"BehaviorMetric"}
+    },
+    "AdditionalMetricsToRetainV2List":{
+      "type":"list",
+      "member":{"shape":"MetricToRetain"}
     },
     "AdditionalParameterMap":{
       "type":"map",
@@ -3845,6 +3944,7 @@
     },
     "AuthInfo":{
       "type":"structure",
+      "required":["resources"],
       "members":{
         "actionType":{"shape":"ActionType"},
         "resources":{"shape":"Resources"}
@@ -3956,6 +4056,7 @@
       "members":{
         "name":{"shape":"BehaviorName"},
         "metric":{"shape":"BehaviorMetric"},
+        "metricDimension":{"shape":"MetricDimension"},
         "criteria":{"shape":"BehaviorCriteria"}
       }
     },
@@ -4176,6 +4277,7 @@
         "certificateArn":{"shape":"CertificateArn"},
         "certificateId":{"shape":"CertificateId"},
         "status":{"shape":"CertificateStatus"},
+        "certificateMode":{"shape":"CertificateMode"},
         "creationDate":{"shape":"DateType"}
       }
     },
@@ -4203,7 +4305,8 @@
         "customerVersion":{"shape":"CustomerVersion"},
         "transferData":{"shape":"TransferData"},
         "generationId":{"shape":"GenerationId"},
-        "validity":{"shape":"CertificateValidity"}
+        "validity":{"shape":"CertificateValidity"},
+        "certificateMode":{"shape":"CertificateMode"}
       }
     },
     "CertificateId":{
@@ -4211,6 +4314,13 @@
       "max":64,
       "min":64,
       "pattern":"(0x)?[a-fA-F0-9]+"
+    },
+    "CertificateMode":{
+      "type":"string",
+      "enum":[
+        "DEFAULT",
+        "SNI_ONLY"
+      ]
     },
     "CertificateName":{"type":"string"},
     "CertificatePathOnDevice":{"type":"string"},
@@ -4439,6 +4549,7 @@
         "tokenKeyName":{"shape":"TokenKeyName"},
         "tokenSigningPublicKeys":{"shape":"PublicKeyMap"},
         "status":{"shape":"AuthorizerStatus"},
+        "tags":{"shape":"TagList"},
         "signingDisabled":{"shape":"BooleanKey"}
       }
     },
@@ -4490,6 +4601,36 @@
         "certificatePem":{"shape":"CertificatePem"}
       }
     },
+    "CreateDimensionRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "type",
+        "stringValues",
+        "clientRequestToken"
+      ],
+      "members":{
+        "name":{
+          "shape":"DimensionName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "type":{"shape":"DimensionType"},
+        "stringValues":{"shape":"DimensionStringValues"},
+        "tags":{"shape":"TagList"},
+        "clientRequestToken":{
+          "shape":"ClientRequestToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "CreateDimensionResponse":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"DimensionName"},
+        "arn":{"shape":"DimensionArn"}
+      }
+    },
     "CreateDomainConfigurationRequest":{
       "type":"structure",
       "required":["domainConfigurationName"],
@@ -4503,7 +4644,8 @@
         "serverCertificateArns":{"shape":"ServerCertificateArns"},
         "validationCertificateArn":{"shape":"AcmCertificateArn"},
         "authorizerConfig":{"shape":"AuthorizerConfig"},
-        "serviceType":{"shape":"ServiceType"}
+        "serviceType":{"shape":"ServiceType"},
+        "tags":{"shape":"TagList"}
       }
     },
     "CreateDomainConfigurationResponse":{
@@ -4667,7 +4809,8 @@
           "location":"uri",
           "locationName":"policyName"
         },
-        "policyDocument":{"shape":"PolicyDocument"}
+        "policyDocument":{"shape":"PolicyDocument"},
+        "tags":{"shape":"TagList"}
       }
     },
     "CreatePolicyResponse":{
@@ -4741,6 +4884,7 @@
         "templateBody":{"shape":"TemplateBody"},
         "enabled":{"shape":"Enabled"},
         "provisioningRoleArn":{"shape":"RoleArn"},
+        "preProvisioningHook":{"shape":"ProvisioningHook"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -4794,7 +4938,8 @@
           "locationName":"roleAlias"
         },
         "roleArn":{"shape":"RoleArn"},
-        "credentialDurationSeconds":{"shape":"CredentialDurationSeconds"}
+        "credentialDurationSeconds":{"shape":"CredentialDurationSeconds"},
+        "tags":{"shape":"TagList"}
       }
     },
     "CreateRoleAliasResponse":{
@@ -4842,7 +4987,12 @@
         "securityProfileDescription":{"shape":"SecurityProfileDescription"},
         "behaviors":{"shape":"Behaviors"},
         "alertTargets":{"shape":"AlertTargets"},
-        "additionalMetricsToRetain":{"shape":"AdditionalMetricsToRetainList"},
+        "additionalMetricsToRetain":{
+          "shape":"AdditionalMetricsToRetainList",
+          "deprecated":true,
+          "deprecatedMessage":"Use additionalMetricsToRetainV2."
+        },
+        "additionalMetricsToRetainV2":{"shape":"AdditionalMetricsToRetainV2List"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -5111,6 +5261,22 @@
       },
       "error":{"httpStatusCode":409},
       "exception":true
+    },
+    "DeleteDimensionRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"DimensionName",
+          "location":"uri",
+          "locationName":"name"
+        }
+      }
+    },
+    "DeleteDimensionResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "DeleteDomainConfigurationRequest":{
       "type":"structure",
@@ -5678,6 +5844,28 @@
         "authorizerDescription":{"shape":"AuthorizerDescription"}
       }
     },
+    "DescribeDimensionRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"DimensionName",
+          "location":"uri",
+          "locationName":"name"
+        }
+      }
+    },
+    "DescribeDimensionResponse":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"DimensionName"},
+        "arn":{"shape":"DimensionArn"},
+        "type":{"shape":"DimensionType"},
+        "stringValues":{"shape":"DimensionStringValues"},
+        "creationDate":{"shape":"Timestamp"},
+        "lastModifiedDate":{"shape":"Timestamp"}
+      }
+    },
     "DescribeDomainConfigurationRequest":{
       "type":"structure",
       "required":["domainConfigurationName"],
@@ -5844,7 +6032,8 @@
         "defaultVersionId":{"shape":"TemplateVersionId"},
         "templateBody":{"shape":"TemplateBody"},
         "enabled":{"shape":"Enabled"},
-        "provisioningRoleArn":{"shape":"RoleArn"}
+        "provisioningRoleArn":{"shape":"RoleArn"},
+        "preProvisioningHook":{"shape":"ProvisioningHook"}
       }
     },
     "DescribeProvisioningTemplateVersionRequest":{
@@ -5933,7 +6122,12 @@
         "securityProfileDescription":{"shape":"SecurityProfileDescription"},
         "behaviors":{"shape":"Behaviors"},
         "alertTargets":{"shape":"AlertTargets"},
-        "additionalMetricsToRetain":{"shape":"AdditionalMetricsToRetainList"},
+        "additionalMetricsToRetain":{
+          "shape":"AdditionalMetricsToRetainList",
+          "deprecated":true,
+          "deprecatedMessage":"Use additionalMetricsToRetainV2."
+        },
+        "additionalMetricsToRetainV2":{"shape":"AdditionalMetricsToRetainV2List"},
         "version":{"shape":"Version"},
         "creationDate":{"shape":"Timestamp"},
         "lastModifiedDate":{"shape":"Timestamp"}
@@ -6169,6 +6363,39 @@
       "type":"string",
       "max":128,
       "min":1
+    },
+    "DimensionArn":{"type":"string"},
+    "DimensionName":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9:_-]+"
+    },
+    "DimensionNames":{
+      "type":"list",
+      "member":{"shape":"DimensionName"}
+    },
+    "DimensionStringValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "DimensionStringValues":{
+      "type":"list",
+      "member":{"shape":"DimensionStringValue"},
+      "max":100,
+      "min":1
+    },
+    "DimensionType":{
+      "type":"string",
+      "enum":["TOPIC_FILTER"]
+    },
+    "DimensionValueOperator":{
+      "type":"string",
+      "enum":[
+        "IN",
+        "NOT_IN"
+      ]
     },
     "DisableAllLogs":{"type":"boolean"},
     "DisableTopicRuleRequest":{
@@ -7534,6 +7761,28 @@
         "nextMarker":{"shape":"Marker"}
       }
     },
+    "ListDimensionsRequest":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "maxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"maxResults"
+        }
+      }
+    },
+    "ListDimensionsResponse":{
+      "type":"structure",
+      "members":{
+        "dimensionNames":{"shape":"DimensionNames"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
     "ListDomainConfigurationsRequest":{
       "type":"structure",
       "members":{
@@ -8054,6 +8303,11 @@
           "shape":"MaxResults",
           "location":"querystring",
           "locationName":"maxResults"
+        },
+        "dimensionName":{
+          "shape":"DimensionName",
+          "location":"querystring",
+          "locationName":"dimensionName"
         }
       }
     },
@@ -8628,6 +8882,7 @@
     },
     "MaxJobExecutionsPerMin":{
       "type":"integer",
+      "max":1000,
       "min":1
     },
     "MaxResults":{
@@ -8655,6 +8910,22 @@
     "MessageId":{
       "type":"string",
       "max":128
+    },
+    "MetricDimension":{
+      "type":"structure",
+      "required":["dimensionName"],
+      "members":{
+        "dimensionName":{"shape":"DimensionName"},
+        "operator":{"shape":"DimensionValueOperator"}
+      }
+    },
+    "MetricToRetain":{
+      "type":"structure",
+      "required":["metric"],
+      "members":{
+        "metric":{"shape":"BehaviorMetric"},
+        "metricDimension":{"shape":"MetricDimension"}
+      }
     },
     "MetricValue":{
       "type":"structure",
@@ -8882,6 +9153,12 @@
     },
     "PartitionKey":{"type":"string"},
     "PayloadField":{"type":"string"},
+    "PayloadVersion":{
+      "type":"string",
+      "max":32,
+      "min":10,
+      "pattern":"^[0-9-]+$"
+    },
     "Percent":{
       "type":"double",
       "max":100,
@@ -9020,6 +9297,14 @@
       "max":2,
       "min":1
     },
+    "ProvisioningHook":{
+      "type":"structure",
+      "required":["targetArn"],
+      "members":{
+        "payloadVersion":{"shape":"PayloadVersion"},
+        "targetArn":{"shape":"TargetArn"}
+      }
+    },
     "ProvisioningTemplateListing":{
       "type":"list",
       "member":{"shape":"ProvisioningTemplateSummary"}
@@ -9146,7 +9431,8 @@
           "location":"querystring",
           "locationName":"allowAutoRegistration"
         },
-        "registrationConfig":{"shape":"RegistrationConfig"}
+        "registrationConfig":{"shape":"RegistrationConfig"},
+        "tags":{"shape":"TagList"}
       }
     },
     "RegisterCACertificateResponse":{
@@ -9172,6 +9458,21 @@
       }
     },
     "RegisterCertificateResponse":{
+      "type":"structure",
+      "members":{
+        "certificateArn":{"shape":"CertificateArn"},
+        "certificateId":{"shape":"CertificateId"}
+      }
+    },
+    "RegisterCertificateWithoutCARequest":{
+      "type":"structure",
+      "required":["certificatePem"],
+      "members":{
+        "certificatePem":{"shape":"CertificatePem"},
+        "status":{"shape":"CertificateStatus"}
+      }
+    },
+    "RegisterCertificateWithoutCAResponse":{
       "type":"structure",
       "members":{
         "certificateArn":{"shape":"CertificateArn"},
@@ -9258,6 +9559,7 @@
     },
     "RemoveAuthorizerConfig":{"type":"boolean"},
     "RemoveAutoRegistration":{"type":"boolean"},
+    "RemoveHook":{"type":"boolean"},
     "RemoveThingFromBillingGroupRequest":{
       "type":"structure",
       "members":{
@@ -10015,12 +10317,18 @@
     "TableName":{"type":"string"},
     "Tag":{
       "type":"structure",
+      "required":["Key"],
       "members":{
         "Key":{"shape":"TagKey"},
         "Value":{"shape":"TagValue"}
       }
     },
-    "TagKey":{"type":"string"},
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
     "TagKeyList":{
       "type":"list",
       "member":{"shape":"TagKey"}
@@ -10045,9 +10353,16 @@
       "members":{
       }
     },
-    "TagValue":{"type":"string"},
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "Target":{"type":"string"},
-    "TargetArn":{"type":"string"},
+    "TargetArn":{
+      "type":"string",
+      "max":2048
+    },
     "TargetAuditCheckNames":{
       "type":"list",
       "member":{"shape":"AuditCheckName"}
@@ -10688,6 +11003,32 @@
         "action":{"shape":"DeviceCertificateUpdateAction"}
       }
     },
+    "UpdateDimensionRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "stringValues"
+      ],
+      "members":{
+        "name":{
+          "shape":"DimensionName",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "stringValues":{"shape":"DimensionStringValues"}
+      }
+    },
+    "UpdateDimensionResponse":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"DimensionName"},
+        "arn":{"shape":"DimensionArn"},
+        "type":{"shape":"DimensionType"},
+        "stringValues":{"shape":"DimensionStringValues"},
+        "creationDate":{"shape":"Timestamp"},
+        "lastModifiedDate":{"shape":"Timestamp"}
+      }
+    },
     "UpdateDomainConfigurationRequest":{
       "type":"structure",
       "required":["domainConfigurationName"],
@@ -10805,7 +11146,9 @@
         "description":{"shape":"TemplateDescription"},
         "enabled":{"shape":"Enabled"},
         "defaultVersionId":{"shape":"TemplateVersionId"},
-        "provisioningRoleArn":{"shape":"RoleArn"}
+        "provisioningRoleArn":{"shape":"RoleArn"},
+        "preProvisioningHook":{"shape":"ProvisioningHook"},
+        "removePreProvisioningHook":{"shape":"RemoveHook"}
       }
     },
     "UpdateProvisioningTemplateResponse":{
@@ -10866,7 +11209,12 @@
         "securityProfileDescription":{"shape":"SecurityProfileDescription"},
         "behaviors":{"shape":"Behaviors"},
         "alertTargets":{"shape":"AlertTargets"},
-        "additionalMetricsToRetain":{"shape":"AdditionalMetricsToRetainList"},
+        "additionalMetricsToRetain":{
+          "shape":"AdditionalMetricsToRetainList",
+          "deprecated":true,
+          "deprecatedMessage":"Use additionalMetricsToRetainV2."
+        },
+        "additionalMetricsToRetainV2":{"shape":"AdditionalMetricsToRetainV2List"},
         "deleteBehaviors":{"shape":"DeleteBehaviors"},
         "deleteAlertTargets":{"shape":"DeleteAlertTargets"},
         "deleteAdditionalMetricsToRetain":{"shape":"DeleteAdditionalMetricsToRetain"},
@@ -10885,7 +11233,12 @@
         "securityProfileDescription":{"shape":"SecurityProfileDescription"},
         "behaviors":{"shape":"Behaviors"},
         "alertTargets":{"shape":"AlertTargets"},
-        "additionalMetricsToRetain":{"shape":"AdditionalMetricsToRetainList"},
+        "additionalMetricsToRetain":{
+          "shape":"AdditionalMetricsToRetainList",
+          "deprecated":true,
+          "deprecatedMessage":"Use additionalMetricsToRetainV2."
+        },
+        "additionalMetricsToRetainV2":{"shape":"AdditionalMetricsToRetainV2List"},
         "version":{"shape":"Version"},
         "creationDate":{"shape":"Timestamp"},
         "lastModifiedDate":{"shape":"Timestamp"}

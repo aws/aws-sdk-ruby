@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-04-23)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API enhances support for sending campaigns through custom channels to locations such as AWS Lambda functions or web applications. Campaigns can now use CustomDeliveryConfiguration and CampaignCustomMessage to configure custom channel settings for a campaign.
+
+1.37.0 (2020-03-31)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces MMS support for SMS messages.
+
 1.36.0 (2020-03-09)
 ------------------
 

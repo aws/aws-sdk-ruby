@@ -269,8 +269,7 @@ module Aws::Batch
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::Batch
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -866,6 +865,8 @@ module Aws::Batch
     #   * {Types::DescribeComputeEnvironmentsResponse#compute_environments #compute_environments} => Array&lt;Types::ComputeEnvironmentDetail&gt;
     #   * {Types::DescribeComputeEnvironmentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a compute environment
     #
@@ -1008,6 +1009,8 @@ module Aws::Batch
     #
     #   * {Types::DescribeJobDefinitionsResponse#job_definitions #job_definitions} => Array&lt;Types::JobDefinition&gt;
     #   * {Types::DescribeJobDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe active job definitions
@@ -1182,6 +1185,8 @@ module Aws::Batch
     #
     #   * {Types::DescribeJobQueuesResponse#job_queues #job_queues} => Array&lt;Types::JobQueueDetail&gt;
     #   * {Types::DescribeJobQueuesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a job queue
@@ -1493,6 +1498,8 @@ module Aws::Batch
     #
     #   * {Types::ListJobsResponse#job_summary_list #job_summary_list} => Array&lt;Types::JobSummary&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list running jobs

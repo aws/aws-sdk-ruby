@@ -11,10 +11,15 @@ module Aws::Route53Domains
 
     include Seahorse::Model
 
+    AcceptDomainTransferFromAnotherAwsAccountRequest = Shapes::StructureShape.new(name: 'AcceptDomainTransferFromAnotherAwsAccountRequest')
+    AcceptDomainTransferFromAnotherAwsAccountResponse = Shapes::StructureShape.new(name: 'AcceptDomainTransferFromAnotherAwsAccountResponse')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     AddressLine = Shapes::StringShape.new(name: 'AddressLine')
     BillingRecord = Shapes::StructureShape.new(name: 'BillingRecord')
     BillingRecords = Shapes::ListShape.new(name: 'BillingRecords')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelDomainTransferToAnotherAwsAccountRequest = Shapes::StructureShape.new(name: 'CancelDomainTransferToAnotherAwsAccountRequest')
+    CancelDomainTransferToAnotherAwsAccountResponse = Shapes::StructureShape.new(name: 'CancelDomainTransferToAnotherAwsAccountResponse')
     CheckDomainAvailabilityRequest = Shapes::StructureShape.new(name: 'CheckDomainAvailabilityRequest')
     CheckDomainAvailabilityResponse = Shapes::StructureShape.new(name: 'CheckDomainAvailabilityResponse')
     CheckDomainTransferabilityRequest = Shapes::StructureShape.new(name: 'CheckDomainTransferabilityRequest')
@@ -96,6 +101,8 @@ module Aws::Route53Domains
     RegistrarUrl = Shapes::StringShape.new(name: 'RegistrarUrl')
     RegistrarWhoIsServer = Shapes::StringShape.new(name: 'RegistrarWhoIsServer')
     RegistryDomainId = Shapes::StringShape.new(name: 'RegistryDomainId')
+    RejectDomainTransferFromAnotherAwsAccountRequest = Shapes::StructureShape.new(name: 'RejectDomainTransferFromAnotherAwsAccountRequest')
+    RejectDomainTransferFromAnotherAwsAccountResponse = Shapes::StructureShape.new(name: 'RejectDomainTransferFromAnotherAwsAccountResponse')
     RenewDomainRequest = Shapes::StructureShape.new(name: 'RenewDomainRequest')
     RenewDomainResponse = Shapes::StructureShape.new(name: 'RenewDomainResponse')
     Reseller = Shapes::StringShape.new(name: 'Reseller')
@@ -114,6 +121,8 @@ module Aws::Route53Domains
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TransferDomainRequest = Shapes::StructureShape.new(name: 'TransferDomainRequest')
     TransferDomainResponse = Shapes::StructureShape.new(name: 'TransferDomainResponse')
+    TransferDomainToAnotherAwsAccountRequest = Shapes::StructureShape.new(name: 'TransferDomainToAnotherAwsAccountRequest')
+    TransferDomainToAnotherAwsAccountResponse = Shapes::StructureShape.new(name: 'TransferDomainToAnotherAwsAccountResponse')
     Transferable = Shapes::StringShape.new(name: 'Transferable')
     UnsupportedTLD = Shapes::StructureShape.new(name: 'UnsupportedTLD')
     UpdateDomainContactPrivacyRequest = Shapes::StructureShape.new(name: 'UpdateDomainContactPrivacyRequest')
@@ -128,6 +137,13 @@ module Aws::Route53Domains
     ViewBillingResponse = Shapes::StructureShape.new(name: 'ViewBillingResponse')
     ZipCode = Shapes::StringShape.new(name: 'ZipCode')
 
+    AcceptDomainTransferFromAnotherAwsAccountRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    AcceptDomainTransferFromAnotherAwsAccountRequest.add_member(:password, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Password"))
+    AcceptDomainTransferFromAnotherAwsAccountRequest.struct_class = Types::AcceptDomainTransferFromAnotherAwsAccountRequest
+
+    AcceptDomainTransferFromAnotherAwsAccountResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    AcceptDomainTransferFromAnotherAwsAccountResponse.struct_class = Types::AcceptDomainTransferFromAnotherAwsAccountResponse
+
     BillingRecord.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     BillingRecord.add_member(:operation, Shapes::ShapeRef.new(shape: OperationType, location_name: "Operation"))
     BillingRecord.add_member(:invoice_id, Shapes::ShapeRef.new(shape: InvoiceId, location_name: "InvoiceId"))
@@ -136,6 +152,12 @@ module Aws::Route53Domains
     BillingRecord.struct_class = Types::BillingRecord
 
     BillingRecords.member = Shapes::ShapeRef.new(shape: BillingRecord)
+
+    CancelDomainTransferToAnotherAwsAccountRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    CancelDomainTransferToAnotherAwsAccountRequest.struct_class = Types::CancelDomainTransferToAnotherAwsAccountRequest
+
+    CancelDomainTransferToAnotherAwsAccountResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    CancelDomainTransferToAnotherAwsAccountResponse.struct_class = Types::CancelDomainTransferToAnotherAwsAccountResponse
 
     CheckDomainAvailabilityRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CheckDomainAvailabilityRequest.add_member(:idn_lang_code, Shapes::ShapeRef.new(shape: LangCode, location_name: "IdnLangCode"))
@@ -338,6 +360,12 @@ module Aws::Route53Domains
     RegisterDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
     RegisterDomainResponse.struct_class = Types::RegisterDomainResponse
 
+    RejectDomainTransferFromAnotherAwsAccountRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    RejectDomainTransferFromAnotherAwsAccountRequest.struct_class = Types::RejectDomainTransferFromAnotherAwsAccountRequest
+
+    RejectDomainTransferFromAnotherAwsAccountResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    RejectDomainTransferFromAnotherAwsAccountResponse.struct_class = Types::RejectDomainTransferFromAnotherAwsAccountResponse
+
     RenewDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     RenewDomainRequest.add_member(:duration_in_years, Shapes::ShapeRef.new(shape: DurationInYears, location_name: "DurationInYears"))
     RenewDomainRequest.add_member(:current_expiry_year, Shapes::ShapeRef.new(shape: CurrentExpiryYear, required: true, location_name: "CurrentExpiryYear"))
@@ -387,6 +415,14 @@ module Aws::Route53Domains
 
     TransferDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
     TransferDomainResponse.struct_class = Types::TransferDomainResponse
+
+    TransferDomainToAnotherAwsAccountRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    TransferDomainToAnotherAwsAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    TransferDomainToAnotherAwsAccountRequest.struct_class = Types::TransferDomainToAnotherAwsAccountRequest
+
+    TransferDomainToAnotherAwsAccountResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    TransferDomainToAnotherAwsAccountResponse.add_member(:password, Shapes::ShapeRef.new(shape: String, location_name: "Password"))
+    TransferDomainToAnotherAwsAccountResponse.struct_class = Types::TransferDomainToAnotherAwsAccountResponse
 
     UnsupportedTLD.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     UnsupportedTLD.struct_class = Types::UnsupportedTLD
@@ -445,10 +481,32 @@ module Aws::Route53Domains
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Route 53 Domains",
+        "serviceId" => "Route 53 Domains",
         "signatureVersion" => "v4",
         "targetPrefix" => "Route53Domains_v20140515",
         "uid" => "route53domains-2014-05-15",
       }
+
+      api.add_operation(:accept_domain_transfer_from_another_aws_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptDomainTransferFromAnotherAwsAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AcceptDomainTransferFromAnotherAwsAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptDomainTransferFromAnotherAwsAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: DomainLimitExceeded)
+      end)
+
+      api.add_operation(:cancel_domain_transfer_to_another_aws_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDomainTransferToAnotherAwsAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelDomainTransferToAnotherAwsAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDomainTransferToAnotherAwsAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+      end)
 
       api.add_operation(:check_domain_availability, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CheckDomainAvailability"
@@ -623,6 +681,16 @@ module Aws::Route53Domains
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
       end)
 
+      api.add_operation(:reject_domain_transfer_from_another_aws_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectDomainTransferFromAnotherAwsAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RejectDomainTransferFromAnotherAwsAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectDomainTransferFromAnotherAwsAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+      end)
+
       api.add_operation(:renew_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RenewDomain"
         o.http_method = "POST"
@@ -669,6 +737,17 @@ module Aws::Route53Domains
         o.errors << Shapes::ShapeRef.new(shape: TLDRulesViolation)
         o.errors << Shapes::ShapeRef.new(shape: DomainLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+      end)
+
+      api.add_operation(:transfer_domain_to_another_aws_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TransferDomainToAnotherAwsAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TransferDomainToAnotherAwsAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: TransferDomainToAnotherAwsAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
       end)
 
       api.add_operation(:update_domain_contact, Seahorse::Model::Operation.new.tap do |o|

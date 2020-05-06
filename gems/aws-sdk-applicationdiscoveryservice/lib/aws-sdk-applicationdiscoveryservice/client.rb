@@ -279,8 +279,7 @@ module Aws::ApplicationDiscoveryService
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ApplicationDiscoveryService
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -647,6 +646,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::DescribeContinuousExportsResponse#descriptions #descriptions} => Array&lt;Types::ContinuousExportDescription&gt;
     #   * {Types::DescribeContinuousExportsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_continuous_exports({
@@ -813,6 +814,8 @@ module Aws::ApplicationDiscoveryService
     #
     #   * {Types::DescribeImportTasksResponse#next_token #next_token} => String
     #   * {Types::DescribeImportTasksResponse#tasks #tasks} => Array&lt;Types::ImportTask&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

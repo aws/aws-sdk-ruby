@@ -279,8 +279,7 @@ module Aws::FraudDetector
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::FraudDetector
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -419,6 +418,23 @@ module Aws::FraudDetector
     # @option params [Array<Types::ModelVersion>] :model_versions
     #   The model versions to include in the detector version.
     #
+    # @option params [String] :rule_execution_mode
+    #   The rule execution mode for the rules included in the detector
+    #   version.
+    #
+    #   You can define and edit the rule mode at the detector version level,
+    #   when it is in draft status.
+    #
+    #   If you specify `FIRST_MATCHED`, Amazon Fraud Detector evaluates rules
+    #   sequentially, first to last, stopping at the first matched rule.
+    #   Amazon Fraud dectector then provides the outcomes for that single
+    #   rule.
+    #
+    #   If you specifiy `ALL_MATCHED`, Amazon Fraud Detector evaluates all
+    #   rules and returns the outcomes for all matched rules.
+    #
+    #   The default behavior is `FIRST_MATCHED`.
+    #
     # @return [Types::CreateDetectorVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDetectorVersionResult#detector_id #detector_id} => String
@@ -445,6 +461,7 @@ module Aws::FraudDetector
     #         model_version_number: "nonEmptyString", # required
     #       },
     #     ],
+    #     rule_execution_mode: "ALL_MATCHED", # accepts ALL_MATCHED, FIRST_MATCHED
     #   })
     #
     # @example Response structure
@@ -596,7 +613,32 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
-    # Deletes the detector version.
+    # Deletes the detector. Before deleting a detector, you must first
+    # delete all detector versions and rule versions associated with the
+    # detector.
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the detector to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_detector({
+    #     detector_id: "identifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteDetector AWS API Documentation
+    #
+    # @overload delete_detector(params = {})
+    # @param [Hash] params ({})
+    def delete_detector(params = {}, options = {})
+      req = build_request(:delete_detector, params)
+      req.send_request(options)
+    end
+
+    # Deletes the detector version. You cannot delete detector versions that
+    # are in `ACTIVE` status.
     #
     # @option params [required, String] :detector_id
     #   The ID of the parent detector for the detector version to delete.
@@ -641,6 +683,37 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def delete_event(params = {}, options = {})
       req = build_request(:delete_event, params)
+      req.send_request(options)
+    end
+
+    # Deletes the rule version. You cannot delete a rule version if it is
+    # used by an `ACTIVE` or `INACTIVE` detector version.
+    #
+    # @option params [required, String] :detector_id
+    #   The ID of the detector that includes the rule version to delete.
+    #
+    # @option params [required, String] :rule_id
+    #   The rule ID of the rule version to delete.
+    #
+    # @option params [required, String] :rule_version
+    #   The rule version to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rule_version({
+    #     detector_id: "identifier", # required
+    #     rule_id: "identifier", # required
+    #     rule_version: "nonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/DeleteRuleVersion AWS API Documentation
+    #
+    # @overload delete_rule_version(params = {})
+    # @param [Hash] params ({})
+    def delete_rule_version(params = {}, options = {})
+      req = build_request(:delete_rule_version, params)
       req.send_request(options)
     end
 
@@ -712,6 +785,8 @@ module Aws::FraudDetector
     #   * {Types::DescribeModelVersionsResult#model_version_details #model_version_details} => Array&lt;Types::ModelVersionDetail&gt;
     #   * {Types::DescribeModelVersionsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_model_versions({
@@ -775,6 +850,7 @@ module Aws::FraudDetector
     #   * {Types::GetDetectorVersionResult#status #status} => String
     #   * {Types::GetDetectorVersionResult#last_updated_time #last_updated_time} => String
     #   * {Types::GetDetectorVersionResult#created_time #created_time} => String
+    #   * {Types::GetDetectorVersionResult#rule_execution_mode #rule_execution_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -801,6 +877,7 @@ module Aws::FraudDetector
     #   resp.status #=> String, one of "DRAFT", "ACTIVE", "INACTIVE"
     #   resp.last_updated_time #=> String
     #   resp.created_time #=> String
+    #   resp.rule_execution_mode #=> String, one of "ALL_MATCHED", "FIRST_MATCHED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetDetectorVersion AWS API Documentation
     #
@@ -831,6 +908,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetDetectorsResult#detectors #detectors} => Array&lt;Types::Detector&gt;
     #   * {Types::GetDetectorsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -880,6 +959,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetExternalModelsResult#external_models #external_models} => Array&lt;Types::ExternalModel&gt;
     #   * {Types::GetExternalModelsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -984,6 +1065,8 @@ module Aws::FraudDetector
     #   * {Types::GetModelsResult#next_token #next_token} => String
     #   * {Types::GetModelsResult#models #models} => Array&lt;Types::Model&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_models({
@@ -1042,6 +1125,8 @@ module Aws::FraudDetector
     #   * {Types::GetOutcomesResult#outcomes #outcomes} => Array&lt;Types::Outcome&gt;
     #   * {Types::GetOutcomesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_outcomes({
@@ -1092,6 +1177,7 @@ module Aws::FraudDetector
     #
     #   * {Types::GetPredictionResult#outcomes #outcomes} => Array&lt;String&gt;
     #   * {Types::GetPredictionResult#model_scores #model_scores} => Array&lt;Types::ModelScores&gt;
+    #   * {Types::GetPredictionResult#rule_results #rule_results} => Array&lt;Types::RuleResult&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1120,6 +1206,10 @@ module Aws::FraudDetector
     #   resp.model_scores[0].model_version.model_version_number #=> String
     #   resp.model_scores[0].scores #=> Hash
     #   resp.model_scores[0].scores["string"] #=> Float
+    #   resp.rule_results #=> Array
+    #   resp.rule_results[0].rule_id #=> String
+    #   resp.rule_results[0].outcomes #=> Array
+    #   resp.rule_results[0].outcomes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetPrediction AWS API Documentation
     #
@@ -1151,6 +1241,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetRulesResult#rule_details #rule_details} => Array&lt;Types::RuleDetail&gt;
     #   * {Types::GetRulesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1206,6 +1298,8 @@ module Aws::FraudDetector
     #
     #   * {Types::GetVariablesResult#variables #variables} => Array&lt;Types::Variable&gt;
     #   * {Types::GetVariablesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1427,6 +1521,21 @@ module Aws::FraudDetector
     # @option params [Array<Types::ModelVersion>] :model_versions
     #   The model versions to include in the detector version.
     #
+    # @option params [String] :rule_execution_mode
+    #   The rule execution mode to add to the detector.
+    #
+    #   If you specify `FIRST_MATCHED`, Amazon Fraud Detector evaluates rules
+    #   sequentially, first to last, stopping at the first matched rule.
+    #   Amazon Fraud dectector then provides the outcomes for that single
+    #   rule.
+    #
+    #   If you specifiy `ALL_MATCHED`, Amazon Fraud Detector evaluates all
+    #   rules and returns the outcomes for all matched rules. You can define
+    #   and edit the rule mode at the detector version level, when it is in
+    #   draft status.
+    #
+    #   The default behavior is `FIRST_MATCHED`.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1450,6 +1559,7 @@ module Aws::FraudDetector
     #         model_version_number: "nonEmptyString", # required
     #       },
     #     ],
+    #     rule_execution_mode: "ALL_MATCHED", # accepts ALL_MATCHED, FIRST_MATCHED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/UpdateDetectorVersion AWS API Documentation
@@ -1695,7 +1805,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -279,8 +279,7 @@ module Aws::Personalize
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::Personalize
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1773,6 +1772,8 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.auto_ml_config.recipe_list[0] #=> String
     #   resp.solution_version.training_hours #=> Float
     #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
+    #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters #=> Hash
+    #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters["ParameterName"] #=> String
     #   resp.solution_version.status #=> String
     #   resp.solution_version.failure_reason #=> String
     #   resp.solution_version.creation_date_time #=> Time
@@ -1838,6 +1839,8 @@ module Aws::Personalize
     #   * {Types::ListBatchInferenceJobsResponse#batch_inference_jobs #batch_inference_jobs} => Array&lt;Types::BatchInferenceJobSummary&gt;
     #   * {Types::ListBatchInferenceJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_batch_inference_jobs({
@@ -1855,6 +1858,7 @@ module Aws::Personalize
     #   resp.batch_inference_jobs[0].creation_date_time #=> Time
     #   resp.batch_inference_jobs[0].last_updated_date_time #=> Time
     #   resp.batch_inference_jobs[0].failure_reason #=> String
+    #   resp.batch_inference_jobs[0].solution_version_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListBatchInferenceJobs AWS API Documentation
@@ -1888,6 +1892,8 @@ module Aws::Personalize
     #
     #   * {Types::ListCampaignsResponse#campaigns #campaigns} => Array&lt;Types::CampaignSummary&gt;
     #   * {Types::ListCampaignsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1932,6 +1938,8 @@ module Aws::Personalize
     #
     #   * {Types::ListDatasetGroupsResponse#dataset_groups #dataset_groups} => Array&lt;Types::DatasetGroupSummary&gt;
     #   * {Types::ListDatasetGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1983,6 +1991,8 @@ module Aws::Personalize
     #   * {Types::ListDatasetImportJobsResponse#dataset_import_jobs #dataset_import_jobs} => Array&lt;Types::DatasetImportJobSummary&gt;
     #   * {Types::ListDatasetImportJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dataset_import_jobs({
@@ -2032,6 +2042,8 @@ module Aws::Personalize
     #   * {Types::ListDatasetsResponse#datasets #datasets} => Array&lt;Types::DatasetSummary&gt;
     #   * {Types::ListDatasetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_datasets({
@@ -2080,6 +2092,8 @@ module Aws::Personalize
     #   * {Types::ListEventTrackersResponse#event_trackers #event_trackers} => Array&lt;Types::EventTrackerSummary&gt;
     #   * {Types::ListEventTrackersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_trackers({
@@ -2126,6 +2140,8 @@ module Aws::Personalize
     #   * {Types::ListRecipesResponse#recipes #recipes} => Array&lt;Types::RecipeSummary&gt;
     #   * {Types::ListRecipesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_recipes({
@@ -2168,6 +2184,8 @@ module Aws::Personalize
     #
     #   * {Types::ListSchemasResponse#schemas #schemas} => Array&lt;Types::DatasetSchemaSummary&gt;
     #   * {Types::ListSchemasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2214,6 +2232,8 @@ module Aws::Personalize
     #
     #   * {Types::ListSolutionVersionsResponse#solution_versions #solution_versions} => Array&lt;Types::SolutionVersionSummary&gt;
     #   * {Types::ListSolutionVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2262,6 +2282,8 @@ module Aws::Personalize
     #
     #   * {Types::ListSolutionsResponse#solutions #solutions} => Array&lt;Types::SolutionSummary&gt;
     #   * {Types::ListSolutionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2351,7 +2373,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

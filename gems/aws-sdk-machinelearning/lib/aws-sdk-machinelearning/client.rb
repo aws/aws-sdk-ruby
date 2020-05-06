@@ -281,8 +281,7 @@ module Aws::MachineLearning
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -294,7 +293,7 @@ module Aws::MachineLearning
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1316,6 +1315,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeBatchPredictionsOutput#results #results} => Array&lt;Types::BatchPrediction&gt;
     #   * {Types::DescribeBatchPredictionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_batch_predictions({
@@ -1352,6 +1353,11 @@ module Aws::MachineLearning
     #   resp.results[0].total_record_count #=> Integer
     #   resp.results[0].invalid_record_count #=> Integer
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * batch_prediction_available
     #
     # @overload describe_batch_predictions(params = {})
     # @param [Hash] params ({})
@@ -1441,6 +1447,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeDataSourcesOutput#results #results} => Array&lt;Types::DataSource&gt;
     #   * {Types::DescribeDataSourcesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_data_sources({
@@ -1488,6 +1496,11 @@ module Aws::MachineLearning
     #   resp.results[0].finished_at #=> Time
     #   resp.results[0].started_at #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * data_source_available
     #
     # @overload describe_data_sources(params = {})
     # @param [Hash] params ({})
@@ -1582,6 +1595,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeEvaluationsOutput#results #results} => Array&lt;Types::Evaluation&gt;
     #   * {Types::DescribeEvaluationsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_evaluations({
@@ -1617,6 +1632,11 @@ module Aws::MachineLearning
     #   resp.results[0].finished_at #=> Time
     #   resp.results[0].started_at #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * evaluation_available
     #
     # @overload describe_evaluations(params = {})
     # @param [Hash] params ({})
@@ -1714,6 +1734,8 @@ module Aws::MachineLearning
     #   * {Types::DescribeMLModelsOutput#results #results} => Array&lt;Types::MLModel&gt;
     #   * {Types::DescribeMLModelsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_ml_models({
@@ -1757,6 +1779,11 @@ module Aws::MachineLearning
     #   resp.results[0].finished_at #=> Time
     #   resp.results[0].started_at #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * ml_model_available
     #
     # @overload describe_ml_models(params = {})
     # @param [Hash] params ({})
@@ -2356,12 +2383,12 @@ module Aws::MachineLearning
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                | params                        | :delay   | :max_attempts |
-    # | -------------------------- | ----------------------------- | -------- | ------------- |
-    # | batch_prediction_available | {#describe_batch_predictions} | 30       | 60            |
-    # | data_source_available      | {#describe_data_sources}      | 30       | 60            |
-    # | evaluation_available       | {#describe_evaluations}       | 30       | 60            |
-    # | ml_model_available         | {#describe_ml_models}         | 30       | 60            |
+    # | waiter_name                | params                              | :delay   | :max_attempts |
+    # | -------------------------- | ----------------------------------- | -------- | ------------- |
+    # | batch_prediction_available | {Client#describe_batch_predictions} | 30       | 60            |
+    # | data_source_available      | {Client#describe_data_sources}      | 30       | 60            |
+    # | evaluation_available       | {Client#describe_evaluations}       | 30       | 60            |
+    # | ml_model_available         | {Client#describe_ml_models}         | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

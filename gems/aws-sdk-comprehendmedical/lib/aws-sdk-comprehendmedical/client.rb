@@ -279,8 +279,7 @@ module Aws::ComprehendMedical
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ComprehendMedical
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -365,6 +364,52 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Gets the properties associated with an InferICD10CM job. Use this
+    # operation to get the status of an inference job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   `The StartICD10CMInferenceJob` operation returns this identifier in
+    #   its response.
+    #
+    # @return [Types::DescribeICD10CMInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeICD10CMInferenceJobResponse#comprehend_medical_async_job_properties #comprehend_medical_async_job_properties} => Types::ComprehendMedicalAsyncJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_icd10cm_inference_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comprehend_medical_async_job_properties.job_id #=> String
+    #   resp.comprehend_medical_async_job_properties.job_name #=> String
+    #   resp.comprehend_medical_async_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "PARTIAL_SUCCESS", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.comprehend_medical_async_job_properties.message #=> String
+    #   resp.comprehend_medical_async_job_properties.submit_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.end_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.expiration_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.input_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties.input_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties.output_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties.output_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties.language_code #=> String, one of "en"
+    #   resp.comprehend_medical_async_job_properties.data_access_role_arn #=> String
+    #   resp.comprehend_medical_async_job_properties.manifest_file_path #=> String
+    #   resp.comprehend_medical_async_job_properties.kms_key #=> String
+    #   resp.comprehend_medical_async_job_properties.model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeICD10CMInferenceJob AWS API Documentation
+    #
+    # @overload describe_icd10cm_inference_job(params = {})
+    # @param [Hash] params ({})
+    def describe_icd10cm_inference_job(params = {}, options = {})
+      req = build_request(:describe_icd10cm_inference_job, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a protected health information
     # (PHI) detection job. Use this operation to get the status of a
     # detection job.
@@ -409,6 +454,52 @@ module Aws::ComprehendMedical
     # @param [Hash] params ({})
     def describe_phi_detection_job(params = {}, options = {})
       req = build_request(:describe_phi_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with an InferRxNorm job. Use this
+    # operation to get the status of an inference job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   The StartRxNormInferenceJob operation returns this identifier in its
+    #   response.
+    #
+    # @return [Types::DescribeRxNormInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRxNormInferenceJobResponse#comprehend_medical_async_job_properties #comprehend_medical_async_job_properties} => Types::ComprehendMedicalAsyncJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_rx_norm_inference_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comprehend_medical_async_job_properties.job_id #=> String
+    #   resp.comprehend_medical_async_job_properties.job_name #=> String
+    #   resp.comprehend_medical_async_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "PARTIAL_SUCCESS", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.comprehend_medical_async_job_properties.message #=> String
+    #   resp.comprehend_medical_async_job_properties.submit_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.end_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.expiration_time #=> Time
+    #   resp.comprehend_medical_async_job_properties.input_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties.input_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties.output_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties.output_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties.language_code #=> String, one of "en"
+    #   resp.comprehend_medical_async_job_properties.data_access_role_arn #=> String
+    #   resp.comprehend_medical_async_job_properties.manifest_file_path #=> String
+    #   resp.comprehend_medical_async_job_properties.kms_key #=> String
+    #   resp.comprehend_medical_async_job_properties.model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeRxNormInferenceJob AWS API Documentation
+    #
+    # @overload describe_rx_norm_inference_job(params = {})
+    # @param [Hash] params ({})
+    def describe_rx_norm_inference_job(params = {}, options = {})
+      req = build_request(:describe_rx_norm_inference_job, params)
       req.send_request(options)
     end
 
@@ -818,6 +909,68 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Gets a list of InferICD10CM jobs that you have submitted.
+    #
+    # @option params [Types::ComprehendMedicalAsyncJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs based on their
+    #   names, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListICD10CMInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListICD10CMInferenceJobsResponse#comprehend_medical_async_job_properties_list #comprehend_medical_async_job_properties_list} => Array&lt;Types::ComprehendMedicalAsyncJobProperties&gt;
+    #   * {Types::ListICD10CMInferenceJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_icd10cm_inference_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comprehend_medical_async_job_properties_list #=> Array
+    #   resp.comprehend_medical_async_job_properties_list[0].job_id #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].job_name #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "PARTIAL_SUCCESS", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.comprehend_medical_async_job_properties_list[0].message #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].submit_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].end_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].expiration_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].input_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].input_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].output_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].output_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].language_code #=> String, one of "en"
+    #   resp.comprehend_medical_async_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].manifest_file_path #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].kms_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].model_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListICD10CMInferenceJobs AWS API Documentation
+    #
+    # @overload list_icd10cm_inference_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_icd10cm_inference_jobs(params = {}, options = {})
+      req = build_request(:list_icd10cm_inference_jobs, params)
+      req.send_request(options)
+    end
+
     # Gets a list of protected health information (PHI) detection jobs that
     # you have submitted.
     #
@@ -878,6 +1031,67 @@ module Aws::ComprehendMedical
     # @param [Hash] params ({})
     def list_phi_detection_jobs(params = {}, options = {})
       req = build_request(:list_phi_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of InferRxNorm jobs that you have submitted.
+    #
+    # @option params [Types::ComprehendMedicalAsyncJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs based on their
+    #   names, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   Identifies the next page of results to return.
+    #
+    # @return [Types::ListRxNormInferenceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRxNormInferenceJobsResponse#comprehend_medical_async_job_properties_list #comprehend_medical_async_job_properties_list} => Array&lt;Types::ComprehendMedicalAsyncJobProperties&gt;
+    #   * {Types::ListRxNormInferenceJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rx_norm_inference_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.comprehend_medical_async_job_properties_list #=> Array
+    #   resp.comprehend_medical_async_job_properties_list[0].job_id #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].job_name #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "PARTIAL_SUCCESS", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.comprehend_medical_async_job_properties_list[0].message #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].submit_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].end_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].expiration_time #=> Time
+    #   resp.comprehend_medical_async_job_properties_list[0].input_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].input_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].output_data_config.s3_bucket #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].output_data_config.s3_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].language_code #=> String, one of "en"
+    #   resp.comprehend_medical_async_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].manifest_file_path #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].kms_key #=> String
+    #   resp.comprehend_medical_async_job_properties_list[0].model_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListRxNormInferenceJobs AWS API Documentation
+    #
+    # @overload list_rx_norm_inference_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_rx_norm_inference_jobs(params = {}, options = {})
+      req = build_request(:list_rx_norm_inference_jobs, params)
       req.send_request(options)
     end
 
@@ -954,6 +1168,79 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Starts an asynchronous job to detect medical conditions and link them
+    # to the ICD-10-CM ontology. Use the `DescribeICD10CMInferenceJob`
+    # operation to track the status of a job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend Medical generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :kms_key
+    #   An AWS Key Management Service key to encrypt your output files. If you
+    #   do not specify a key, the files are written in plain text.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. All documents must be in the same
+    #   language.
+    #
+    # @return [Types::StartICD10CMInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartICD10CMInferenceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_icd10cm_inference_job({
+    #     input_data_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     output_data_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     client_request_token: "ClientRequestTokenString",
+    #     kms_key: "KMSKey",
+    #     language_code: "en", # required, accepts en
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartICD10CMInferenceJob AWS API Documentation
+    #
+    # @overload start_icd10cm_inference_job(params = {})
+    # @param [Hash] params ({})
+    def start_icd10cm_inference_job(params = {}, options = {})
+      req = build_request(:start_icd10cm_inference_job, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous job to detect protected health information
     # (PHI). Use the `DescribePHIDetectionJob` operation to track the status
     # of a job.
@@ -1027,6 +1314,79 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Starts an asynchronous job to detect medication entities and link them
+    # to the RxNorm ontology. Use the `DescribeRxNormInferenceJob` operation
+    # to track the status of a job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend Medical generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :kms_key
+    #   An AWS Key Management Service key to encrypt your output files. If you
+    #   do not specify a key, the files are written in plain text.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. All documents must be in the same
+    #   language.
+    #
+    # @return [Types::StartRxNormInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRxNormInferenceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_rx_norm_inference_job({
+    #     input_data_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     output_data_config: { # required
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key",
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     client_request_token: "ClientRequestTokenString",
+    #     kms_key: "KMSKey",
+    #     language_code: "en", # required, accepts en
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartRxNormInferenceJob AWS API Documentation
+    #
+    # @overload start_rx_norm_inference_job(params = {})
+    # @param [Hash] params ({})
+    def start_rx_norm_inference_job(params = {}, options = {})
+      req = build_request(:start_rx_norm_inference_job, params)
+      req.send_request(options)
+    end
+
     # Stops a medical entities detection job in progress.
     #
     # @option params [required, String] :job_id
@@ -1052,6 +1412,34 @@ module Aws::ComprehendMedical
     # @param [Hash] params ({})
     def stop_entities_detection_v2_job(params = {}, options = {})
       req = build_request(:stop_entities_detection_v2_job, params)
+      req.send_request(options)
+    end
+
+    # Stops an InferICD10CM inference job in progress.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the job.
+    #
+    # @return [Types::StopICD10CMInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopICD10CMInferenceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_icd10cm_inference_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopICD10CMInferenceJob AWS API Documentation
+    #
+    # @overload stop_icd10cm_inference_job(params = {})
+    # @param [Hash] params ({})
+    def stop_icd10cm_inference_job(params = {}, options = {})
+      req = build_request(:stop_icd10cm_inference_job, params)
       req.send_request(options)
     end
 
@@ -1083,6 +1471,34 @@ module Aws::ComprehendMedical
       req.send_request(options)
     end
 
+    # Stops an InferRxNorm inference job in progress.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the job.
+    #
+    # @return [Types::StopRxNormInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopRxNormInferenceJobResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_rx_norm_inference_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopRxNormInferenceJob AWS API Documentation
+    #
+    # @overload stop_rx_norm_inference_job(params = {})
+    # @param [Hash] params ({})
+    def stop_rx_norm_inference_job(params = {}, options = {})
+      req = build_request(:stop_rx_norm_inference_job, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1096,7 +1512,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

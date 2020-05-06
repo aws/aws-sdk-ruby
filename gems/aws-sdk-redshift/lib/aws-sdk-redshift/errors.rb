@@ -86,6 +86,7 @@ module Aws::Redshift
   # * {InvalidSubscriptionStateFault}
   # * {InvalidTableRestoreArgumentFault}
   # * {InvalidTagFault}
+  # * {InvalidUsageLimitFault}
   # * {InvalidVPCNetworkStateFault}
   # * {LimitExceededFault}
   # * {NumberOfNodesPerClusterLimitExceededFault}
@@ -129,6 +130,8 @@ module Aws::Redshift
   # * {UnknownSnapshotCopyRegionFault}
   # * {UnsupportedOperationFault}
   # * {UnsupportedOptionFault}
+  # * {UsageLimitAlreadyExistsFault}
+  # * {UsageLimitNotFoundFault}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -746,6 +749,16 @@ module Aws::Redshift
       end
     end
 
+    class InvalidUsageLimitFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::InvalidUsageLimitFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidVPCNetworkStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1171,6 +1184,26 @@ module Aws::Redshift
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Redshift::Types::UnsupportedOptionFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UsageLimitAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::UsageLimitAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class UsageLimitNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Redshift::Types::UsageLimitNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

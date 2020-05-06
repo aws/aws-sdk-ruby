@@ -269,8 +269,7 @@ module Aws::ApiGatewayV2
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::ApiGatewayV2
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -763,7 +762,7 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Integer] :timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #
     # @option params [Types::TlsConfigInput] :tls_config
     #   The TLS configuration for a private integration. If you specify a TLS
@@ -1718,6 +1717,47 @@ module Aws::ApiGatewayV2
     # @param [Hash] params ({})
     def delete_vpc_link(params = {}, options = {})
       req = build_request(:delete_vpc_link, params)
+      req.send_request(options)
+    end
+
+    # Exports a definition of an API in a particular output format and
+    # specification.
+    #
+    # @option params [required, String] :api_id
+    #
+    # @option params [String] :export_version
+    #
+    # @option params [Boolean] :include_extensions
+    #
+    # @option params [required, String] :output_type
+    #
+    # @option params [required, String] :specification
+    #
+    # @option params [String] :stage_name
+    #
+    # @return [Types::ExportApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportApiResponse#body #body} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_api({
+    #     api_id: "__string", # required
+    #     export_version: "__string",
+    #     include_extensions: false,
+    #     output_type: "__string", # required
+    #     specification: "__string", # required
+    #     stage_name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.body #=> String
+    #
+    # @overload export_api(params = {})
+    # @param [Hash] params ({})
+    def export_api(params = {}, options = {})
+      req = build_request(:export_api, params)
       req.send_request(options)
     end
 
@@ -3531,7 +3571,7 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #
     # @option params [Integer] :timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #
     # @option params [Types::TlsConfigInput] :tls_config
     #   The TLS configuration for a private integration. If you specify a TLS
@@ -4144,7 +4184,7 @@ module Aws::ApiGatewayV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigatewayv2'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,7 @@ module Aws::PersonalizeRuntime
     NumResults = Shapes::IntegerShape.new(name: 'NumResults')
     PredictedItem = Shapes::StructureShape.new(name: 'PredictedItem')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    Score = Shapes::FloatShape.new(name: 'Score')
     UserID = Shapes::StringShape.new(name: 'UserID')
 
     Context.key = Shapes::ShapeRef.new(shape: AttributeName)
@@ -59,6 +60,7 @@ module Aws::PersonalizeRuntime
     ItemList.member = Shapes::ShapeRef.new(shape: PredictedItem)
 
     PredictedItem.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemID, location_name: "itemId"))
+    PredictedItem.add_member(:score, Shapes::ShapeRef.new(shape: Score, location_name: "score"))
     PredictedItem.struct_class = Types::PredictedItem
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))

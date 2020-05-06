@@ -29,10 +29,12 @@ module Aws::MigrationHubConfig
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     RequestedTime = Shapes::TimestampShape.new(name: 'RequestedTime')
+    RetryAfterSeconds = Shapes::IntegerShape.new(name: 'RetryAfterSeconds')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Target = Shapes::StructureShape.new(name: 'Target')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
     TargetType = Shapes::StringShape.new(name: 'TargetType')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Token = Shapes::StringShape.new(name: 'Token')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -86,6 +88,10 @@ module Aws::MigrationHubConfig
     Target.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, location_name: "Id"))
     Target.struct_class = Types::Target
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "Message"))
+    ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location_name: "RetryAfterSeconds"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -114,6 +120,7 @@ module Aws::MigrationHubConfig
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: DryRunOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
@@ -127,6 +134,7 @@ module Aws::MigrationHubConfig
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -145,6 +153,7 @@ module Aws::MigrationHubConfig
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
     end

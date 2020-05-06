@@ -269,8 +269,7 @@ module Aws::Lambda
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::Lambda
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -352,6 +351,25 @@ module Aws::Lambda
     #   * {Types::AddLayerVersionPermissionResponse#statement #statement} => String
     #   * {Types::AddLayerVersionPermissionResponse#revision_id #revision_id} => String
     #
+    #
+    # @example Example: To add permissions to a layer version
+    #
+    #   # The following example grants permission for the account 223456789012 to use version 1 of a layer named my-layer.
+    #
+    #   resp = client.add_layer_version_permission({
+    #     action: "lambda:GetLayerVersion", 
+    #     layer_name: "my-layer", 
+    #     principal: "223456789012", 
+    #     statement_id: "xaccount", 
+    #     version_number: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     revision_id: "35d87451-f796-4a3f-a618-95a3671b0a0c", 
+    #     statement: "{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::223456789012:root\"},\"Action\":\"lambda:GetLayerVersion\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1\"}", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_layer_version_permission({
@@ -387,11 +405,11 @@ module Aws::Lambda
     # To grant permission to another account, specify the account ID as the
     # `Principal`. For AWS services, the principal is a domain-style
     # identifier defined by the service, like `s3.amazonaws.com` or
-    # `sns.amazonaws.com`. For AWS services, you can also specify the ARN or
-    # owning account of the associated resource as the `SourceArn` or
-    # `SourceAccount`. If you grant permission to a service principal
-    # without specifying the source, other accounts could potentially
-    # configure resources in their account to invoke your Lambda function.
+    # `sns.amazonaws.com`. For AWS services, you can also specify the ARN of
+    # the associated resource as the `SourceArn`. If you grant permission to
+    # a service principal without specifying the source, other accounts
+    # could potentially configure resources in their account to invoke your
+    # Lambda function.
     #
     # This action adds a statement to a resource-based permissions policy
     # for the function. For more information about function policies, see
@@ -436,12 +454,10 @@ module Aws::Lambda
     #   function. For example, an Amazon S3 bucket or Amazon SNS topic.
     #
     # @option params [String] :source_account
-    #   For AWS services, the ID of the account that owns the resource. Use
-    #   this instead of `SourceArn` to grant permission to resources that are
-    #   owned by another account (for example, all of an account's Amazon S3
-    #   buckets). Or use it together with `SourceArn` to ensure that the
-    #   resource is owned by the specified account. For example, an Amazon S3
-    #   bucket could be deleted by its owner and recreated by another account.
+    #   For Amazon S3, the ID of the account that owns the resource. Use this
+    #   together with `SourceArn` to ensure that the resource is owned by the
+    #   specified account. It is possible for an Amazon S3 bucket to be
+    #   deleted by its owner and recreated by another account.
     #
     # @option params [String] :event_source_token
     #   For Alexa Smart Home functions, a token that must be supplied by the
@@ -461,22 +477,39 @@ module Aws::Lambda
     #   * {Types::AddPermissionResponse#statement #statement} => String
     #
     #
-    # @example Example: add-permission
+    # @example Example: To grant Amazon S3 permission to invoke a function
     #
-    #   # This example adds a permission for an S3 bucket to invoke a Lambda function.
+    #   # The following example adds permission for Amazon S3 to invoke a Lambda function named my-function for notifications from
+    #   # a bucket named my-bucket-1xpuxmplzrlbh in account 123456789012.
     #
     #   resp = client.add_permission({
     #     action: "lambda:InvokeFunction", 
-    #     function_name: "MyFunction", 
+    #     function_name: "my-function", 
     #     principal: "s3.amazonaws.com", 
     #     source_account: "123456789012", 
-    #     source_arn: "arn:aws:s3:::examplebucket/*", 
-    #     statement_id: "ID-1", 
+    #     source_arn: "arn:aws:s3:::my-bucket-1xpuxmplzrlbh/*", 
+    #     statement_id: "s3", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     statement: "ID-1", 
+    #     statement: "{\"Sid\":\"s3\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\",\"Condition\":{\"StringEquals\":{\"AWS:SourceAccount\":\"123456789012\"},\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:s3:::my-bucket-1xpuxmplzrlbh\"}}}", 
+    #   }
+    #
+    # @example Example: To grant another account permission to invoke a function
+    #
+    #   # The following example adds permission for account 223456789012 invoke a Lambda function named my-function.
+    #
+    #   resp = client.add_permission({
+    #     action: "lambda:InvokeFunction", 
+    #     function_name: "my-function", 
+    #     principal: "223456789012", 
+    #     statement_id: "xaccount", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     statement: "{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::223456789012:root\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\"}", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -557,6 +590,27 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#description #description} => String
     #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
     #   * {Types::AliasConfiguration#revision_id #revision_id} => String
+    #
+    #
+    # @example Example: To create an alias for a Lambda function
+    #
+    #   # The following example creates an alias named LIVE that points to version 1 of the my-function Lambda function.
+    #
+    #   resp = client.create_alias({
+    #     description: "alias for live version of function", 
+    #     function_name: "my-function", 
+    #     function_version: "1", 
+    #     name: "LIVE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     alias_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:LIVE", 
+    #     description: "alias for live version of function", 
+    #     function_version: "1", 
+    #     name: "LIVE", 
+    #     revision_id: "873282ed-xmpl-4dc8-a069-d0c647e470c6", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -667,8 +721,8 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
-    #   The maximum amount of time to gather records before invoking the
-    #   function, in seconds.
+    #   (Streams) The maximum amount of time to gather records before invoking
+    #   the function, in seconds.
     #
     # @option params [Integer] :parallelization_factor
     #   (Streams) The number of batches to process from each shard
@@ -715,6 +769,28 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
     #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #
+    #
+    # @example Example: To create a mapping between an event source and an AWS Lambda function
+    #
+    #   # The following example creates a mapping between an SQS queue and the my-function Lambda function.
+    #
+    #   resp = client.create_event_source_mapping({
+    #     batch_size: 5, 
+    #     event_source_arn: "arn:aws:sqs:us-west-2:123456789012:my-queue", 
+    #     function_name: "my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     batch_size: 5, 
+    #     event_source_arn: "arn:aws:sqs:us-west-2:123456789012:my-queue", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #     last_modified: Time.parse(1569284520.333), 
+    #     state: "Creating", 
+    #     state_transition_reason: "USER_INITIATED", 
+    #     uuid: "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -945,48 +1021,73 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
-    # @example Example: create-function
+    # @example Example: To create a function
     #
-    #   # This example creates a Lambda function.
+    #   # The following example creates a function with a deployment package in Amazon S3 and enables X-Ray tracing and
+    #   # environment variable encryption.
     #
     #   resp = client.create_function({
     #     code: {
+    #       s3_bucket: "my-bucket-1xpuxmplzrlbh", 
+    #       s3_key: "function.zip", 
     #     }, 
-    #     description: "", 
-    #     function_name: "MyFunction", 
-    #     handler: "souce_file.handler_name", # is of the form of the name of your source file and then name of your function handler
-    #     memory_size: 128, 
+    #     description: "Process image objects from Amazon S3.", 
+    #     environment: {
+    #       variables: {
+    #         "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #         "PREFIX" => "inbound", 
+    #       }, 
+    #     }, 
+    #     function_name: "my-function", 
+    #     handler: "index.handler", 
+    #     kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #     memory_size: 256, 
     #     publish: true, 
-    #     role: "arn:aws:iam::123456789012:role/service-role/role-name", # replace with the actual arn of the execution role you created
+    #     role: "arn:aws:iam::123456789012:role/lambda-role", 
     #     runtime: "nodejs12.x", 
+    #     tags: {
+    #       "DEPARTMENT" => "Assets", 
+    #     }, 
     #     timeout: 15, 
-    #     vpc_config: {
+    #     tracing_config: {
+    #       mode: "Active", 
     #     }, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     code_sha_256: "", 
-    #     code_size: 123, 
-    #     description: "", 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:MyFunction", 
-    #     function_name: "MyFunction", 
-    #     handler: "source_file.handler_name", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #     memory_size: 128, 
-    #     role: "arn:aws:iam::123456789012:role/service-role/role-name", 
-    #     runtime: "nodejs12.x", 
-    #     timeout: 123, 
-    #     version: "1", 
-    #     vpc_config: {
+    #     code_sha_256: "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=", 
+    #     code_size: 5797206, 
+    #     description: "Process image objects from Amazon S3.", 
+    #     environment: {
+    #       variables: {
+    #         "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #         "PREFIX" => "inbound", 
+    #       }, 
     #     }, 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #     function_name: "my-function", 
+    #     handler: "index.handler", 
+    #     kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #     last_modified: Time.parse("2020-04-10T19:06:32.563+0000"), 
+    #     last_update_status: "Successful", 
+    #     memory_size: 256, 
+    #     revision_id: "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727", 
+    #     role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #     runtime: "nodejs12.x", 
+    #     state: "Active", 
+    #     timeout: 15, 
+    #     tracing_config: {
+    #       mode: "Active", 
+    #     }, 
+    #     version: "1", 
     #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     role: "RoleArn", # required
     #     handler: "Handler", # required
     #     code: { # required
@@ -1025,7 +1126,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1097,11 +1198,11 @@ module Aws::Lambda
     #
     # @example Example: To delete a Lambda function alias
     #
-    #   # This operation deletes a Lambda function alias
+    #   # The following example deletes an alias named BLUE from a function named my-function
     #
     #   resp = client.delete_alias({
-    #     function_name: "myFunction", 
-    #     name: "alias", 
+    #     function_name: "my-function", 
+    #     name: "BLUE", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -1153,22 +1254,21 @@ module Aws::Lambda
     #
     # @example Example: To delete a Lambda function event source mapping
     #
-    #   # This operation deletes a Lambda function event source mapping
+    #   # The following example deletes an event source mapping. To get a mapping's UUID, use ListEventSourceMappings.
     #
     #   resp = client.delete_event_source_mapping({
-    #     uuid: "12345kxodurf3443", 
+    #     uuid: "14e0db71-xmpl-4eb5-b481-8945cf9d10c2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     batch_size: 123, 
-    #     event_source_arn: "arn:aws:s3:::examplebucket/*", 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #     last_processing_result: "", 
-    #     state: "", 
-    #     state_transition_reason: "", 
-    #     uuid: "12345kxodurf3443", 
+    #     batch_size: 5, 
+    #     event_source_arn: "arn:aws:sqs:us-west-2:123456789012:my-queue", 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function", 
+    #     last_modified: Time.parse("${timestamp}"), 
+    #     state: "Enabled", 
+    #     state_transition_reason: "USER_INITIATED", 
+    #     uuid: "14e0db71-xmpl-4eb5-b481-8945cf9d10c2", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1237,12 +1337,12 @@ module Aws::Lambda
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To delete a Lambda function
+    # @example Example: To delete a version of a Lambda function
     #
-    #   # This operation deletes a Lambda function
+    #   # The following example deletes version 1 of a Lambda function named my-function.
     #
     #   resp = client.delete_function({
-    #     function_name: "myFunction", 
+    #     function_name: "my-function", 
     #     qualifier: "1", 
     #   })
     #
@@ -1280,6 +1380,15 @@ module Aws::Lambda
     #   only the function name, it is limited to 64 characters in length.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove the reserved concurrent execution limit from a function
+    #
+    #   # The following example deletes the reserved concurrent execution limit from a function named my-function.
+    #
+    #   resp = client.delete_function_concurrency({
+    #     function_name: "my-function", 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1324,6 +1433,17 @@ module Aws::Lambda
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete an asynchronous invocation configuration
+    #
+    #   # The following example deletes the asynchronous invocation configuration for the GREEN alias of a function named
+    #   # my-function.
+    #
+    #   resp = client.delete_function_event_invoke_config({
+    #     function_name: "my-function", 
+    #     qualifier: "GREEN", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_function_event_invoke_config({
@@ -1355,6 +1475,16 @@ module Aws::Lambda
     #   The version number.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a version of a Lambda layer
+    #
+    #   # The following example deletes version 2 of a layer named my-layer.
+    #
+    #   resp = client.delete_layer_version({
+    #     layer_name: "my-layer", 
+    #     version_number: 2, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -1394,6 +1524,17 @@ module Aws::Lambda
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To delete a provisioned concurrency configuration
+    #
+    #   # The following example deletes the provisioned concurrency configuration for the GREEN alias of a function named
+    #   # my-function.
+    #
+    #   resp = client.delete_provisioned_concurrency_config({
+    #     function_name: "my-function", 
+    #     qualifier: "GREEN", 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_provisioned_concurrency_config({
@@ -1423,9 +1564,9 @@ module Aws::Lambda
     #   * {Types::GetAccountSettingsResponse#account_usage #account_usage} => Types::AccountUsage
     #
     #
-    # @example Example: To retrieves a Lambda customer's account settings
+    # @example Example: To get account settings
     #
-    #   # This operation retrieves a Lambda customer's account settings
+    #   # This operation takes no parameters and returns details about storage and concurrency quotas in the current Region.
     #
     #   resp = client.get_account_settings({
     #   })
@@ -1433,8 +1574,15 @@ module Aws::Lambda
     #   resp.to_h outputs the following:
     #   {
     #     account_limit: {
+    #       code_size_unzipped: 262144000, 
+    #       code_size_zipped: 52428800, 
+    #       concurrent_executions: 1000, 
+    #       total_code_size: 80530636800, 
+    #       unreserved_concurrent_executions: 1000, 
     #     }, 
     #     account_usage: {
+    #       function_count: 4, 
+    #       total_code_size: 9426, 
     #     }, 
     #   }
     #
@@ -1491,21 +1639,22 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#revision_id #revision_id} => String
     #
     #
-    # @example Example: To retrieve a Lambda function alias
+    # @example Example: To get a Lambda function alias
     #
-    #   # This operation retrieves a Lambda function alias
+    #   # The following example returns details about an alias named BLUE for a function named my-function
     #
     #   resp = client.get_alias({
-    #     function_name: "myFunction", 
-    #     name: "myFunctionAlias", 
+    #     function_name: "my-function", 
+    #     name: "BLUE", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunctionAlias", 
-    #     description: "", 
-    #     function_version: "1", 
-    #     name: "myFunctionAlias", 
+    #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE", 
+    #     description: "Production environment BLUE.", 
+    #     function_version: "3", 
+    #     name: "BLUE", 
+    #     revision_id: "594f41fb-xmpl-4c20-95c7-6ca5f2a92c93", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1558,24 +1707,30 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #
     #
-    # @example Example: To retrieve a Lambda function's event source mapping
+    # @example Example: To get a Lambda function's event source mapping
     #
-    #   # This operation retrieves a Lambda function's event source mapping
+    #   # The following example returns details about an event source mapping. To get a mapping's UUID, use
+    #   # ListEventSourceMappings.
     #
     #   resp = client.get_event_source_mapping({
-    #     uuid: "123489-xxxxx-kdla8d89d7", 
+    #     uuid: "14e0db71-xmpl-4eb5-b481-8945cf9d10c2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     batch_size: 123, 
-    #     event_source_arn: "arn:aws:iam::123456789012:eventsource", 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #     last_processing_result: "", 
-    #     state: "", 
-    #     state_transition_reason: "", 
-    #     uuid: "123489-xxxxx-kdla8d89d7", 
+    #     batch_size: 500, 
+    #     bisect_batch_on_function_error: false, 
+    #     destination_config: {
+    #     }, 
+    #     event_source_arn: "arn:aws:sqs:us-east-2:123456789012:mySQSqueue", 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:myFunction", 
+    #     last_modified: Time.parse("${timestamp}"), 
+    #     last_processing_result: "No records processed", 
+    #     maximum_record_age_in_seconds: 604800, 
+    #     maximum_retry_attempts: 10000, 
+    #     state: "Creating", 
+    #     state_transition_reason: "User action", 
+    #     uuid: "14e0db71-xmpl-4eb5-b481-8945cf9d10c2", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1645,45 +1800,50 @@ module Aws::Lambda
     #   * {Types::GetFunctionResponse#concurrency #concurrency} => Types::Concurrency
     #
     #
-    # @example Example: To retrieve a Lambda function's event source mapping
+    # @example Example: To get a Lambda function
     #
-    #   # This operation retrieves a Lambda function's event source mapping
+    #   # The following example returns code and configuration details for version 1 of a function named my-function.
     #
     #   resp = client.get_function({
-    #     function_name: "myFunction", 
+    #     function_name: "my-function", 
     #     qualifier: "1", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     code: {
-    #       location: "somelocation", 
+    #       location: "https://awslambda-us-west-2-tasks.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-function-e7d9d1ed-xmpl-4f79-904a-4b87f2681f30?versionId=sH3TQwBOaUy...", 
     #       repository_type: "S3", 
     #     }, 
     #     configuration: {
-    #       code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
-    #       code_size: 262, 
-    #       description: "A starter AWS Lambda function.", 
+    #       code_sha_256: "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=", 
+    #       code_size: 5797206, 
+    #       description: "Process image objects from Amazon S3.", 
     #       environment: {
     #         variables: {
-    #           "S3_BUCKET" => "test", 
+    #           "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #           "PREFIX" => "inbound", 
     #         }, 
     #       }, 
-    #       function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #       function_name: "myFunction", 
+    #       function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #       function_name: "my-function", 
     #       handler: "index.handler", 
-    #       last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #       memory_size: 128, 
-    #       role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
+    #       kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #       last_modified: Time.parse("2020-04-10T19:06:32.563+0000"), 
+    #       last_update_status: "Successful", 
+    #       memory_size: 256, 
+    #       revision_id: "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727", 
+    #       role: "arn:aws:iam::123456789012:role/lambda-role", 
     #       runtime: "nodejs12.x", 
-    #       timeout: 3, 
-    #       version: "$LATEST", 
-    #       vpc_config: {
-    #         security_group_ids: [
-    #         ], 
-    #         subnet_ids: [
-    #         ], 
+    #       state: "Active", 
+    #       timeout: 15, 
+    #       tracing_config: {
+    #         mode: "Active", 
     #       }, 
+    #       version: "$LATEST", 
+    #     }, 
+    #     tags: {
+    #       "DEPARTMENT" => "Assets", 
     #     }, 
     #   }
     #
@@ -1698,7 +1858,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -1737,6 +1897,11 @@ module Aws::Lambda
     #   resp.tags["TagKey"] #=> String
     #   resp.concurrency.reserved_concurrent_executions #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * function_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction AWS API Documentation
     #
     # @overload get_function(params = {})
@@ -1768,6 +1933,20 @@ module Aws::Lambda
     # @return [Types::GetFunctionConcurrencyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetFunctionConcurrencyResponse#reserved_concurrent_executions #reserved_concurrent_executions} => Integer
+    #
+    #
+    # @example Example: To get the reserved concurrency setting for a function
+    #
+    #   # The following example returns the reserved concurrency setting for a function named my-function.
+    #
+    #   resp = client.get_function_concurrency({
+    #     function_name: "my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     reserved_concurrent_executions: 250, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1846,36 +2025,42 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
-    # @example Example: To retrieve a Lambda function's event source mapping
+    # @example Example: To get a Lambda function's event source mapping
     #
-    #   # This operation retrieves a Lambda function's event source mapping
+    #   # The following example returns and configuration details for version 1 of a function named my-function.
     #
     #   resp = client.get_function_configuration({
-    #     function_name: "myFunction", 
+    #     function_name: "my-function", 
     #     qualifier: "1", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
-    #     code_size: 123, 
-    #     dead_letter_config: {
-    #     }, 
-    #     description: "", 
+    #     code_sha_256: "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=", 
+    #     code_size: 5797206, 
+    #     description: "Process image objects from Amazon S3.", 
     #     environment: {
+    #       variables: {
+    #         "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #         "PREFIX" => "inbound", 
+    #       }, 
     #     }, 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     function_name: "myFunction", 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #     function_name: "my-function", 
     #     handler: "index.handler", 
-    #     kms_key_arn: "", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #     memory_size: 128, 
-    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
-    #     runtime: "python2.7", 
-    #     timeout: 123, 
-    #     version: "1", 
-    #     vpc_config: {
+    #     kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #     last_modified: Time.parse("2020-04-10T19:06:32.563+0000"), 
+    #     last_update_status: "Successful", 
+    #     memory_size: 256, 
+    #     revision_id: "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727", 
+    #     role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #     runtime: "nodejs12.x", 
+    #     state: "Active", 
+    #     timeout: 15, 
+    #     tracing_config: {
+    #       mode: "Active", 
     #     }, 
+    #     version: "$LATEST", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1889,7 +2074,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1922,6 +2107,12 @@ module Aws::Lambda
     #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.last_update_status_reason #=> String
     #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses", "InvalidSubnet", "InvalidSecurityGroup"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * function_active
+    #   * function_updated
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -1965,6 +2156,32 @@ module Aws::Lambda
     #   * {Types::FunctionEventInvokeConfig#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #   * {Types::FunctionEventInvokeConfig#maximum_event_age_in_seconds #maximum_event_age_in_seconds} => Integer
     #   * {Types::FunctionEventInvokeConfig#destination_config #destination_config} => Types::DestinationConfig
+    #
+    #
+    # @example Example: To get an asynchronous invocation configuration
+    #
+    #   # The following example returns the asynchronous invocation configuration for the BLUE alias of a function named
+    #   # my-function.
+    #
+    #   resp = client.get_function_event_invoke_config({
+    #     function_name: "my-function", 
+    #     qualifier: "BLUE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     destination_config: {
+    #       on_failure: {
+    #         destination: "arn:aws:sqs:us-east-2:123456789012:failed-invocations", 
+    #       }, 
+    #       on_success: {
+    #       }, 
+    #     }, 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE", 
+    #     last_modified: Time.parse("${timestamp}"), 
+    #     maximum_event_age_in_seconds: 3600, 
+    #     maximum_retry_attempts: 0, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2015,6 +2232,35 @@ module Aws::Lambda
     #   * {Types::GetLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
     #   * {Types::GetLayerVersionResponse#license_info #license_info} => String
     #
+    #
+    # @example Example: To get information about a Lambda layer version
+    #
+    #   # The following example returns information for version 1 of a layer named my-layer.
+    #
+    #   resp = client.get_layer_version({
+    #     layer_name: "my-layer", 
+    #     version_number: 1, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compatible_runtimes: [
+    #       "python3.6", 
+    #       "python3.7", 
+    #     ], 
+    #     content: {
+    #       code_sha_256: "tv9jJO+rPbXUUXuRKi7CwHzKtLDkDRJLB3cC3Z/ouXo=", 
+    #       code_size: 169, 
+    #       location: "https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...", 
+    #     }, 
+    #     created_date: Time.parse("2018-11-14T23:03:52.894+0000"), 
+    #     description: "My Python layer", 
+    #     layer_arn: "arn:aws:lambda:us-east-2:123456789012:layer:my-layer", 
+    #     layer_version_arn: "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1", 
+    #     license_info: "MIT", 
+    #     version: 1, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_layer_version({
@@ -2033,7 +2279,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersion AWS API Documentation
@@ -2066,6 +2312,32 @@ module Aws::Lambda
     #   * {Types::GetLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
     #   * {Types::GetLayerVersionResponse#license_info #license_info} => String
     #
+    #
+    # @example Example: To get information about a Lambda layer version
+    #
+    #   # The following example returns information about the layer version with the specified Amazon Resource Name (ARN).
+    #
+    #   resp = client.get_layer_version_by_arn({
+    #     arn: "arn:aws:lambda:ca-central-1:123456789012:layer:blank-python-lib:3", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compatible_runtimes: [
+    #       "python3.8", 
+    #     ], 
+    #     content: {
+    #       code_sha_256: "6x+xmpl/M3BnQUk7gS9sGmfeFsR/npojXoA3fZUv4eU=", 
+    #       code_size: 9529009, 
+    #       location: "https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/blank-python-lib-e5212378-xmpl-44ee-8398-9d8ec5113949?versionId=WbZnvf...", 
+    #     }, 
+    #     created_date: Time.parse("2020-03-31T00:35:18.949+0000"), 
+    #     description: "Dependencies for the blank-python sample app.", 
+    #     layer_arn: "arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib", 
+    #     layer_version_arn: "arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib:3", 
+    #     version: 3, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_layer_version_by_arn({
@@ -2083,7 +2355,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn AWS API Documentation
@@ -2169,16 +2441,17 @@ module Aws::Lambda
     #
     # @example Example: To retrieve a Lambda function policy
     #
-    #   # This operation retrieves a Lambda function policy
+    #   # The following example returns the resource-based policy for version 1 of a Lambda function named my-function.
     #
     #   resp = client.get_policy({
-    #     function_name: "myFunction", 
+    #     function_name: "my-function", 
     #     qualifier: "1", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     policy: "", 
+    #     policy: "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function:1\"}]}", 
+    #     revision_id: "4843f2f6-7c59-4fda-b484-afd0bc0e22b8", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2231,6 +2504,45 @@ module Aws::Lambda
     #   * {Types::GetProvisionedConcurrencyConfigResponse#status #status} => String
     #   * {Types::GetProvisionedConcurrencyConfigResponse#status_reason #status_reason} => String
     #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
+    #
+    #
+    # @example Example: To get a provisioned concurrency configuration
+    #
+    #   # The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # function.
+    #
+    #   resp = client.get_provisioned_concurrency_config({
+    #     function_name: "my-function", 
+    #     qualifier: "BLUE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     allocated_provisioned_concurrent_executions: 100, 
+    #     available_provisioned_concurrent_executions: 100, 
+    #     last_modified: Time.parse("2019-12-31T20:28:49+0000"), 
+    #     requested_provisioned_concurrent_executions: 100, 
+    #     status: "READY", 
+    #   }
+    #
+    # @example Example: To view a provisioned concurrency configuration
+    #
+    #   # The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified
+    #   # function.
+    #
+    #   resp = client.get_provisioned_concurrency_config({
+    #     function_name: "my-function", 
+    #     qualifier: "BLUE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     allocated_provisioned_concurrent_executions: 100, 
+    #     available_provisioned_concurrent_executions: 100, 
+    #     last_modified: Time.parse("2019-12-31T20:28:49+0000"), 
+    #     requested_provisioned_concurrent_executions: 100, 
+    #     status: "READY", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2293,7 +2605,7 @@ module Aws::Lambda
     # your HTTP client, SDK, firewall, proxy, or operating system to allow
     # for long connections with timeout or keep-alive settings.
     #
-    # This operation requires permission for the `lambda:InvokeFunction`
+    # This operation requires permission for the [lambda:InvokeFunction][8]
     # action.
     #
     #
@@ -2305,6 +2617,7 @@ module Aws::Lambda
     # [5]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     # [7]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function, version, or alias.
@@ -2363,23 +2676,35 @@ module Aws::Lambda
     #
     # @example Example: To invoke a Lambda function
     #
-    #   # This operation invokes a Lambda function
+    #   # The following example invokes version 1 of a function named my-function with an empty event payload.
     #
     #   resp = client.invoke({
-    #     client_context: "MyApp", 
-    #     function_name: "MyFunction", 
-    #     invocation_type: "Event", 
-    #     log_type: "Tail", 
-    #     payload: "fileb://file-path/input.json", 
+    #     function_name: "my-function", 
+    #     payload: "{}", 
     #     qualifier: "1", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     function_error: "", 
-    #     log_result: "", 
-    #     payload: "?", 
-    #     status_code: 123, 
+    #     payload: "200 SUCCESS", 
+    #     status_code: 200, 
+    #   }
+    #
+    # @example Example: To invoke a Lambda function asynchronously
+    #
+    #   # The following example invokes version 1 of a function named my-function asynchronously.
+    #
+    #   resp = client.invoke({
+    #     function_name: "my-function", 
+    #     invocation_type: "Event", 
+    #     payload: "{}", 
+    #     qualifier: "1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     payload: "", 
+    #     status_code: 202, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2439,16 +2764,16 @@ module Aws::Lambda
     #
     # @example Example: To invoke a Lambda function asynchronously
     #
-    #   # This operation invokes a Lambda function asynchronously
+    #   # The following example invokes a Lambda function asynchronously
     #
     #   resp = client.invoke_async({
-    #     function_name: "myFunction", 
-    #     invoke_args: "fileb://file-path/input.json", 
+    #     function_name: "my-function", 
+    #     invoke_args: "{}", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     status: 123, 
+    #     status: 202, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2508,23 +2833,40 @@ module Aws::Lambda
     #   * {Types::ListAliasesResponse#next_marker #next_marker} => String
     #   * {Types::ListAliasesResponse#aliases #aliases} => Array&lt;Types::AliasConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    # @example Example: To retrieve a Lambda function aliases
     #
-    #   # This operation retrieves a Lambda function's aliases
+    # @example Example: To list a function's aliases
+    #
+    #   # The following example returns a list of aliases for a function named my-function.
     #
     #   resp = client.list_aliases({
-    #     function_name: "myFunction", 
-    #     function_version: "1", 
-    #     marker: "", 
-    #     max_items: 123, 
+    #     function_name: "my-function", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     aliases: [
+    #       {
+    #         alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function:BETA", 
+    #         description: "Production environment BLUE.", 
+    #         function_version: "2", 
+    #         name: "BLUE", 
+    #         revision_id: "a410117f-xmpl-494e-8035-7e204bb7933b", 
+    #         routing_config: {
+    #           additional_version_weights: {
+    #             "1" => 0.7, 
+    #           }, 
+    #         }, 
+    #       }, 
+    #       {
+    #         alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function:LIVE", 
+    #         description: "Production environment GREEN.", 
+    #         function_version: "1", 
+    #         name: "GREEN", 
+    #         revision_id: "21d40116-xmpl-40ba-9360-3ea284da1bb5", 
+    #       }, 
     #     ], 
-    #     next_marker: "", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -2599,6 +2941,32 @@ module Aws::Lambda
     #   * {Types::ListEventSourceMappingsResponse#next_marker #next_marker} => String
     #   * {Types::ListEventSourceMappingsResponse#event_source_mappings #event_source_mappings} => Array&lt;Types::EventSourceMappingConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the event source mappings for a function
+    #
+    #   # The following example returns a list of the event source mappings for a function named my-function.
+    #
+    #   resp = client.list_event_source_mappings({
+    #     function_name: "my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     event_source_mappings: [
+    #       {
+    #         batch_size: 5, 
+    #         event_source_arn: "arn:aws:sqs:us-west-2:123456789012:mySQSqueue", 
+    #         function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #         last_modified: Time.parse(1569284520.333), 
+    #         state: "Enabled", 
+    #         state_transition_reason: "USER_INITIATED", 
+    #         uuid: "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_event_source_mappings({
@@ -2670,6 +3038,35 @@ module Aws::Lambda
     #   * {Types::ListFunctionEventInvokeConfigsResponse#function_event_invoke_configs #function_event_invoke_configs} => Array&lt;Types::FunctionEventInvokeConfig&gt;
     #   * {Types::ListFunctionEventInvokeConfigsResponse#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To view a list of asynchronous invocation configurations
+    #
+    #   # The following example returns a list of asynchronous invocation configurations for a function named my-function.
+    #
+    #   resp = client.list_function_event_invoke_configs({
+    #     function_name: "my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     function_event_invoke_configs: [
+    #       {
+    #         function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN", 
+    #         last_modified: Time.parse(1577824406.719), 
+    #         maximum_event_age_in_seconds: 1800, 
+    #         maximum_retry_attempts: 2, 
+    #       }, 
+    #       {
+    #         function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE", 
+    #         last_modified: Time.parse(1577824396.653), 
+    #         maximum_event_age_in_seconds: 3600, 
+    #         maximum_retry_attempts: 0, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_function_event_invoke_configs({
@@ -2727,19 +3124,62 @@ module Aws::Lambda
     #   * {Types::ListFunctionsResponse#next_marker #next_marker} => String
     #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    # @example Example: To retrieve a list of Lambda functions
     #
-    #   # This operation retrieves a Lambda functions
+    # @example Example: To get a list of Lambda functions
+    #
+    #   # This operation returns a list of Lambda functions.
     #
     #   resp = client.list_functions({
-    #     marker: "", 
-    #     max_items: 25, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     functions: [
+    #       {
+    #         code_sha_256: "dBG9m8SGdmlEjw/JYXlhhvCrAv5TxvXsbL/RMr0fT/I=", 
+    #         code_size: 294, 
+    #         description: "", 
+    #         function_arn: "arn:aws:lambda:us-west-2:123456789012:function:helloworld", 
+    #         function_name: "helloworld", 
+    #         handler: "helloworld.handler", 
+    #         last_modified: Time.parse("2019-09-23T18:32:33.857+0000"), 
+    #         memory_size: 128, 
+    #         revision_id: "1718e831-badf-4253-9518-d0644210af7b", 
+    #         role: "arn:aws:iam::123456789012:role/service-role/MyTestFunction-role-zgur6bf4", 
+    #         runtime: "nodejs10.x", 
+    #         timeout: 3, 
+    #         tracing_config: {
+    #           mode: "PassThrough", 
+    #         }, 
+    #         version: "$LATEST", 
+    #       }, 
+    #       {
+    #         code_sha_256: "sU0cJ2/hOZevwV/lTxCuQqK3gDZP3i8gUoqUUVRmY6E=", 
+    #         code_size: 266, 
+    #         description: "", 
+    #         function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #         function_name: "my-function", 
+    #         handler: "index.handler", 
+    #         last_modified: Time.parse("2019-10-01T16:47:28.490+0000"), 
+    #         memory_size: 256, 
+    #         revision_id: "93017fc9-59cb-41dc-901b-4845ce4bf668", 
+    #         role: "arn:aws:iam::123456789012:role/service-role/helloWorldPython-role-uy3l9qyq", 
+    #         runtime: "nodejs10.x", 
+    #         timeout: 3, 
+    #         tracing_config: {
+    #           mode: "PassThrough", 
+    #         }, 
+    #         version: "$LATEST", 
+    #         vpc_config: {
+    #           security_group_ids: [
+    #           ], 
+    #           subnet_ids: [
+    #           ], 
+    #           vpc_id: "", 
+    #         }, 
+    #       }, 
     #     ], 
     #     next_marker: "", 
     #   }
@@ -2759,7 +3199,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -2829,10 +3269,45 @@ module Aws::Lambda
     #   * {Types::ListLayerVersionsResponse#next_marker #next_marker} => String
     #   * {Types::ListLayerVersionsResponse#layer_versions #layer_versions} => Array&lt;Types::LayerVersionsListItem&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list versions of a layer
+    #
+    #   # The following example displays information about the versions for the layer named blank-java-lib
+    #
+    #   resp = client.list_layer_versions({
+    #     layer_name: "blank-java-lib", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     layer_versions: [
+    #       {
+    #         compatible_runtimes: [
+    #           "java8", 
+    #         ], 
+    #         created_date: Time.parse("2020-03-18T23:38:42.284+0000"), 
+    #         description: "Dependencies for the blank-java sample app.", 
+    #         layer_version_arn: "arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:7", 
+    #         version: 7, 
+    #       }, 
+    #       {
+    #         compatible_runtimes: [
+    #           "java8", 
+    #         ], 
+    #         created_date: Time.parse("2020-03-17T07:24:21.960+0000"), 
+    #         description: "Dependencies for the blank-java sample app.", 
+    #         layer_version_arn: "arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:6", 
+    #         version: 6, 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -2847,7 +3322,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.layer_versions[0].license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions AWS API Documentation
@@ -2882,10 +3357,41 @@ module Aws::Lambda
     #   * {Types::ListLayersResponse#next_marker #next_marker} => String
     #   * {Types::ListLayersResponse#layers #layers} => Array&lt;Types::LayersListItem&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list the layers that are compatible with your function's runtime
+    #
+    #   # The following example returns information about layers that are compatible with the Python 3.7 runtime.
+    #
+    #   resp = client.list_layers({
+    #     compatible_runtime: "python3.7", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     layers: [
+    #       {
+    #         latest_matching_version: {
+    #           compatible_runtimes: [
+    #             "python3.6", 
+    #             "python3.7", 
+    #           ], 
+    #           created_date: Time.parse("2018-11-15T00:37:46.592+0000"), 
+    #           description: "My layer", 
+    #           layer_version_arn: "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2", 
+    #           version: 2, 
+    #         }, 
+    #         layer_arn: "arn:aws:lambda:us-east-2:123456789012:layer:my-layer", 
+    #         layer_name: "my-layer", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     marker: "String",
     #     max_items: 1,
     #   })
@@ -2901,7 +3407,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers AWS API Documentation
@@ -2942,6 +3448,39 @@ module Aws::Lambda
     #
     #   * {Types::ListProvisionedConcurrencyConfigsResponse#provisioned_concurrency_configs #provisioned_concurrency_configs} => Array&lt;Types::ProvisionedConcurrencyConfigListItem&gt;
     #   * {Types::ListProvisionedConcurrencyConfigsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get a list of provisioned concurrency configurations
+    #
+    #   # The following example returns a list of provisioned concurrency configurations for a function named my-function.
+    #
+    #   resp = client.list_provisioned_concurrency_configs({
+    #     function_name: "my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     provisioned_concurrency_configs: [
+    #       {
+    #         allocated_provisioned_concurrent_executions: 100, 
+    #         available_provisioned_concurrent_executions: 100, 
+    #         function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN", 
+    #         last_modified: Time.parse("2019-12-31T20:29:00+0000"), 
+    #         requested_provisioned_concurrent_executions: 100, 
+    #         status: "READY", 
+    #       }, 
+    #       {
+    #         allocated_provisioned_concurrent_executions: 100, 
+    #         available_provisioned_concurrent_executions: 100, 
+    #         function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE", 
+    #         last_modified: Time.parse("2019-12-31T20:28:49+0000"), 
+    #         requested_provisioned_concurrent_executions: 100, 
+    #         status: "READY", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2985,6 +3524,23 @@ module Aws::Lambda
     # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To retrieve the list of tags for a Lambda function
+    #
+    #   # The following example displays the tags attached to the my-function Lambda function.
+    #
+    #   resp = client.list_tags({
+    #     resource: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "Category" => "Web Tools", 
+    #       "Department" => "Sales", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3040,21 +3596,70 @@ module Aws::Lambda
     #   * {Types::ListVersionsByFunctionResponse#next_marker #next_marker} => String
     #   * {Types::ListVersionsByFunctionResponse#versions #versions} => Array&lt;Types::FunctionConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
-    # @example Example: To retrieve a list of Lambda function versions
     #
-    #   # This operation retrieves a Lambda function versions
+    # @example Example: To list versions of a function
+    #
+    #   # The following example returns a list of versions of a function named my-function
     #
     #   resp = client.list_versions_by_function({
-    #     function_name: "myFunction", 
-    #     marker: "", 
-    #     max_items: 25, 
+    #     function_name: "my-function", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     next_marker: "", 
     #     versions: [
+    #       {
+    #         code_sha_256: "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=", 
+    #         code_size: 5797206, 
+    #         description: "Process image objects from Amazon S3.", 
+    #         environment: {
+    #           variables: {
+    #             "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #             "PREFIX" => "inbound", 
+    #           }, 
+    #         }, 
+    #         function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #         function_name: "my-function", 
+    #         handler: "index.handler", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #         last_modified: Time.parse("2020-04-10T19:06:32.563+0000"), 
+    #         memory_size: 256, 
+    #         revision_id: "850ca006-2d98-4ff4-86db-8766e9d32fe9", 
+    #         role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #         runtime: "nodejs12.x", 
+    #         timeout: 15, 
+    #         tracing_config: {
+    #           mode: "Active", 
+    #         }, 
+    #         version: "$LATEST", 
+    #       }, 
+    #       {
+    #         code_sha_256: "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=", 
+    #         code_size: 5797206, 
+    #         description: "Process image objects from Amazon S3.", 
+    #         environment: {
+    #           variables: {
+    #             "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #             "PREFIX" => "inbound", 
+    #           }, 
+    #         }, 
+    #         function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #         function_name: "my-function", 
+    #         handler: "index.handler", 
+    #         kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #         last_modified: Time.parse("2020-04-10T19:06:32.563+0000"), 
+    #         memory_size: 256, 
+    #         revision_id: "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727", 
+    #         role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #         runtime: "nodejs12.x", 
+    #         timeout: 5, 
+    #         tracing_config: {
+    #           mode: "Active", 
+    #         }, 
+    #         version: "1", 
+    #       }, 
     #     ], 
     #   }
     #
@@ -3072,7 +3677,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -3168,6 +3773,45 @@ module Aws::Lambda
     #   * {Types::PublishLayerVersionResponse#compatible_runtimes #compatible_runtimes} => Array&lt;String&gt;
     #   * {Types::PublishLayerVersionResponse#license_info #license_info} => String
     #
+    #
+    # @example Example: To create a Lambda layer version
+    #
+    #   # The following example creates a new Python library layer version. The command retrieves the layer content a file named
+    #   # layer.zip in the specified S3 bucket.
+    #
+    #   resp = client.publish_layer_version({
+    #     compatible_runtimes: [
+    #       "python3.6", 
+    #       "python3.7", 
+    #     ], 
+    #     content: {
+    #       s3_bucket: "lambda-layers-us-west-2-123456789012", 
+    #       s3_key: "layer.zip", 
+    #     }, 
+    #     description: "My Python layer", 
+    #     layer_name: "my-layer", 
+    #     license_info: "MIT", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     compatible_runtimes: [
+    #       "python3.6", 
+    #       "python3.7", 
+    #     ], 
+    #     content: {
+    #       code_sha_256: "tv9jJO+rPbXUUXuRKi7CwHzKtLDkDRJLB3cC3Z/ouXo=", 
+    #       code_size: 169, 
+    #       location: "https://awslambda-us-west-2-layers.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...", 
+    #     }, 
+    #     created_date: Time.parse("2018-11-14T23:03:52.894+0000"), 
+    #     description: "My Python layer", 
+    #     layer_arn: "arn:aws:lambda:us-west-2:123456789012:layer:my-layer", 
+    #     layer_version_arn: "arn:aws:lambda:us-west-2:123456789012:layer:my-layer:1", 
+    #     license_info: "MIT", 
+    #     version: 1, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.publish_layer_version({
@@ -3179,7 +3823,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     license_info: "LicenseInfo",
     #   })
     #
@@ -3194,7 +3838,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersion AWS API Documentation
@@ -3295,20 +3939,31 @@ module Aws::Lambda
     #
     #   resp.to_h outputs the following:
     #   {
-    #     code_sha_256: "", 
-    #     code_size: 123, 
-    #     description: "", 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     function_name: "myFunction", 
-    #     handler: "index.handler", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #     memory_size: 128, 
-    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
-    #     runtime: "python2.7", 
-    #     timeout: 123, 
-    #     version: "1", 
-    #     vpc_config: {
+    #     code_sha_256: "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=", 
+    #     code_size: 5797206, 
+    #     description: "Process image objects from Amazon S3.", 
+    #     environment: {
+    #       variables: {
+    #         "BUCKET" => "my-bucket-1xpuxmplzrlbh", 
+    #         "PREFIX" => "inbound", 
+    #       }, 
     #     }, 
+    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #     function_name: "my-function", 
+    #     handler: "index.handler", 
+    #     kms_key_arn: "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966", 
+    #     last_modified: Time.parse("2020-04-10T19:06:32.563+0000"), 
+    #     last_update_status: "Successful", 
+    #     memory_size: 256, 
+    #     revision_id: "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727", 
+    #     role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #     runtime: "nodejs12.x", 
+    #     state: "Active", 
+    #     timeout: 5, 
+    #     tracing_config: {
+    #       mode: "Active", 
+    #     }, 
+    #     version: "1", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3324,7 +3979,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3407,6 +4062,21 @@ module Aws::Lambda
     # @return [Types::Concurrency] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Concurrency#reserved_concurrent_executions #reserved_concurrent_executions} => Integer
+    #
+    #
+    # @example Example: To configure a reserved concurrency limit for a function
+    #
+    #   # The following example configures 100 reserved concurrent executions for the my-function function.
+    #
+    #   resp = client.put_function_concurrency({
+    #     function_name: "my-function", 
+    #     reserved_concurrent_executions: 100, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     reserved_concurrent_executions: 100, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -3502,6 +4172,31 @@ module Aws::Lambda
     #   * {Types::FunctionEventInvokeConfig#maximum_event_age_in_seconds #maximum_event_age_in_seconds} => Integer
     #   * {Types::FunctionEventInvokeConfig#destination_config #destination_config} => Types::DestinationConfig
     #
+    #
+    # @example Example: To configure error handling for asynchronous invocation
+    #
+    #   # The following example sets a maximum event age of one hour and disables retries for the specified function.
+    #
+    #   resp = client.put_function_event_invoke_config({
+    #     function_name: "my-function", 
+    #     maximum_event_age_in_seconds: 3600, 
+    #     maximum_retry_attempts: 0, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     destination_config: {
+    #       on_failure: {
+    #       }, 
+    #       on_success: {
+    #       }, 
+    #     }, 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST", 
+    #     last_modified: Time.parse("${timestamp}"), 
+    #     maximum_event_age_in_seconds: 3600, 
+    #     maximum_retry_attempts: 0, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_function_event_invoke_config({
@@ -3571,6 +4266,25 @@ module Aws::Lambda
     #   * {Types::PutProvisionedConcurrencyConfigResponse#status_reason #status_reason} => String
     #   * {Types::PutProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
     #
+    #
+    # @example Example: To allocate provisioned concurrency
+    #
+    #   # The following example allocates 100 provisioned concurrency for the BLUE alias of the specified function.
+    #
+    #   resp = client.put_provisioned_concurrency_config({
+    #     function_name: "my-function", 
+    #     provisioned_concurrent_executions: 100, 
+    #     qualifier: "BLUE", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     allocated_provisioned_concurrent_executions: 0, 
+    #     last_modified: Time.parse("2019-11-21T19:32:12+0000"), 
+    #     requested_provisioned_concurrent_executions: 100, 
+    #     status: "IN_PROGRESS", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_provisioned_concurrency_config({
@@ -3620,6 +4334,17 @@ module Aws::Lambda
     #   last read it.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete layer-version permissions
+    #
+    #   # The following example deletes permission for an account to configure a layer version.
+    #
+    #   resp = client.remove_layer_version_permission({
+    #     layer_name: "my-layer", 
+    #     statement_id: "xaccount", 
+    #     version_number: 1, 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3677,12 +4402,13 @@ module Aws::Lambda
     #
     # @example Example: To remove a Lambda function's permissions
     #
-    #   # This operation removes a Lambda function's permissions
+    #   # The following example removes a permissions statement named xaccount from the PROD alias of a function named
+    #   # my-function.
     #
     #   resp = client.remove_permission({
-    #     function_name: "myFunction", 
-    #     qualifier: "1", 
-    #     statement_id: "role-statement-id", 
+    #     function_name: "my-function", 
+    #     qualifier: "PROD", 
+    #     statement_id: "xaccount", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -3717,6 +4443,19 @@ module Aws::Lambda
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add tags to an existing Lambda function
+    #
+    #   # The following example adds a tag with the key name DEPARTMENT and a value of 'Department A' to the specified Lambda
+    #   # function.
+    #
+    #   resp = client.tag_resource({
+    #     resource: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #     tags: {
+    #       "DEPARTMENT" => "Department A", 
+    #     }, 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -3748,6 +4487,18 @@ module Aws::Lambda
     #   A list of tag keys to remove from the function.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from an existing Lambda function
+    #
+    #   # The following example removes the tag with the key name DEPARTMENT tag from the my-function Lambda function.
+    #
+    #   resp = client.untag_resource({
+    #     resource: "arn:aws:lambda:us-west-2:123456789012:function:my-function", 
+    #     tag_keys: [
+    #       "DEPARTMENT", 
+    #     ], 
+    #   })
     #
     # @example Request syntax with placeholder values
     #
@@ -3817,23 +4568,33 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#revision_id #revision_id} => String
     #
     #
-    # @example Example: To update a Lambda function alias
+    # @example Example: To update a function alias
     #
-    #   # This operation updates a Lambda function alias
+    #   # The following example updates the alias named BLUE to send 30% of traffic to version 2 and 70% to version 1.
     #
     #   resp = client.update_alias({
-    #     description: "", 
-    #     function_name: "myFunction", 
-    #     function_version: "1", 
-    #     name: "functionAlias", 
+    #     function_name: "my-function", 
+    #     function_version: "2", 
+    #     name: "BLUE", 
+    #     routing_config: {
+    #       additional_version_weights: {
+    #         "1" => 0.7, 
+    #       }, 
+    #     }, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:functionAlias", 
-    #     description: "", 
-    #     function_version: "1", 
-    #     name: "functionAlias", 
+    #     alias_arn: "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE", 
+    #     description: "Production environment BLUE.", 
+    #     function_version: "2", 
+    #     name: "BLUE", 
+    #     revision_id: "594f41fb-xmpl-4c20-95c7-6ca5f2a92c93", 
+    #     routing_config: {
+    #       additional_version_weights: {
+    #         "1" => 0.7, 
+    #       }, 
+    #     }, 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -3926,8 +4687,8 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
-    #   The maximum amount of time to gather records before invoking the
-    #   function, in seconds.
+    #   (Streams) The maximum amount of time to gather records before invoking
+    #   the function, in seconds.
     #
     # @option params [Types::DestinationConfig] :destination_config
     #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
@@ -4120,33 +4881,33 @@ module Aws::Lambda
     #
     # @example Example: To update a Lambda function's code
     #
-    #   # This operation updates a Lambda function's code
+    #   # The following example replaces the code of the unpublished ($LATEST) version of a function named my-function with the
+    #   # contents of the specified zip file in Amazon S3.
     #
     #   resp = client.update_function_code({
-    #     function_name: "myFunction", 
-    #     publish: true, 
-    #     s3_bucket: "myBucket", 
-    #     s3_key: "myKey", 
-    #     s3_object_version: "1", 
-    #     zip_file: "fileb://file-path/file.zip", 
+    #     function_name: "my-function", 
+    #     s3_bucket: "my-bucket-1xpuxmplzrlbh", 
+    #     s3_key: "function.zip", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
-    #     code_size: 123, 
+    #     code_sha_256: "PFn4S+er27qk+UuZSTKEQfNKG/XNn7QJs90mJgq6oH8=", 
+    #     code_size: 308, 
     #     description: "", 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     function_name: "myFunction", 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function", 
+    #     function_name: "my-function", 
     #     handler: "index.handler", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
+    #     last_modified: Time.parse("2019-08-14T22:26:11.234+0000"), 
     #     memory_size: 128, 
-    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
-    #     runtime: "python2.7", 
-    #     timeout: 123, 
-    #     version: "1", 
-    #     vpc_config: {
+    #     revision_id: "873282ed-xmpl-4dc8-a069-d0c647e470c6", 
+    #     role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #     runtime: "nodejs12.x", 
+    #     timeout: 3, 
+    #     tracing_config: {
+    #       mode: "PassThrough", 
     #     }, 
+    #     version: "$LATEST", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -4166,7 +4927,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4358,36 +5119,32 @@ module Aws::Lambda
     #
     # @example Example: To update a Lambda function's configuration
     #
-    #   # This operation updates a Lambda function's configuration
+    #   # The following example modifies the memory size to be 256 MB for the unpublished ($LATEST) version of a function named
+    #   # my-function.
     #
     #   resp = client.update_function_configuration({
-    #     description: "", 
-    #     function_name: "myFunction", 
-    #     handler: "index.handler", 
-    #     memory_size: 128, 
-    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
-    #     runtime: "python2.7", 
-    #     timeout: 123, 
-    #     vpc_config: {
-    #     }, 
+    #     function_name: "my-function", 
+    #     memory_size: 256, 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     code_sha_256: "LQT+0DHxxxxcfwLyQjzoEFKZtdqQjHXanlSdfXBlEW0VA=", 
-    #     code_size: 123, 
+    #     code_sha_256: "PFn4S+er27qk+UuZSTKEQfNKG/XNn7QJs90mJgq6oH8=", 
+    #     code_size: 308, 
     #     description: "", 
-    #     function_arn: "arn:aws:lambda:us-west-2:123456789012:function:myFunction", 
-    #     function_name: "myFunction", 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function", 
+    #     function_name: "my-function", 
     #     handler: "index.handler", 
-    #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
-    #     memory_size: 128, 
-    #     role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
-    #     runtime: "python2.7", 
-    #     timeout: 123, 
-    #     version: "1", 
-    #     vpc_config: {
+    #     last_modified: Time.parse("2019-08-14T22:26:11.234+0000"), 
+    #     memory_size: 256, 
+    #     revision_id: "873282ed-xmpl-4dc8-a069-d0c647e470c6", 
+    #     role: "arn:aws:iam::123456789012:role/lambda-role", 
+    #     runtime: "nodejs12.x", 
+    #     timeout: 3, 
+    #     tracing_config: {
+    #       mode: "PassThrough", 
     #     }, 
+    #     version: "$LATEST", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -4408,7 +5165,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, dotnetcore3.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -4424,7 +5181,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "dotnetcore3.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4523,6 +5280,36 @@ module Aws::Lambda
     #   * {Types::FunctionEventInvokeConfig#maximum_event_age_in_seconds #maximum_event_age_in_seconds} => Integer
     #   * {Types::FunctionEventInvokeConfig#destination_config #destination_config} => Types::DestinationConfig
     #
+    #
+    # @example Example: To update an asynchronous invocation configuration
+    #
+    #   # The following example adds an on-failure destination to the existing asynchronous invocation configuration for a
+    #   # function named my-function.
+    #
+    #   resp = client.update_function_event_invoke_config({
+    #     destination_config: {
+    #       on_failure: {
+    #         destination: "arn:aws:sqs:us-east-2:123456789012:destination", 
+    #       }, 
+    #     }, 
+    #     function_name: "my-function", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     destination_config: {
+    #       on_failure: {
+    #         destination: "arn:aws:sqs:us-east-2:123456789012:destination", 
+    #       }, 
+    #       on_success: {
+    #       }, 
+    #     }, 
+    #     function_arn: "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST", 
+    #     last_modified: Time.parse(1573687896.493), 
+    #     maximum_event_age_in_seconds: 3600, 
+    #     maximum_retry_attempts: 0, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_function_event_invoke_config({
@@ -4571,7 +5358,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4637,11 +5424,11 @@ module Aws::Lambda
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params                        | :delay   | :max_attempts |
-    # | ---------------- | ----------------------------- | -------- | ------------- |
-    # | function_active  | {#get_function_configuration} | 5        | 60            |
-    # | function_exists  | {#get_function}               | 1        | 20            |
-    # | function_updated | {#get_function_configuration} | 5        | 60            |
+    # | waiter_name      | params                              | :delay   | :max_attempts |
+    # | ---------------- | ----------------------------------- | -------- | ------------- |
+    # | function_active  | {Client#get_function_configuration} | 5        | 60            |
+    # | function_exists  | {Client#get_function}               | 1        | 20            |
+    # | function_updated | {Client#get_function_configuration} | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

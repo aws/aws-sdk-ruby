@@ -269,8 +269,7 @@ module Aws::ResourceGroups
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::ResourceGroups
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -532,6 +531,8 @@ module Aws::ResourceGroups
     #   * {Types::ListGroupResourcesOutput#next_token #next_token} => String
     #   * {Types::ListGroupResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_resources({
@@ -592,6 +593,8 @@ module Aws::ResourceGroups
     #   * {Types::ListGroupsOutput#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups({
@@ -647,6 +650,8 @@ module Aws::ResourceGroups
     #   * {Types::SearchResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::SearchResourcesOutput#next_token #next_token} => String
     #   * {Types::SearchResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

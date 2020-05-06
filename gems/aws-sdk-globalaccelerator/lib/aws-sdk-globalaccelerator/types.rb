@@ -223,7 +223,7 @@ module Aws::GlobalAccelerator
     end
 
     # Information about an IP address range that is provisioned for use with
-    # your AWS resources through bring your own IP addresses (BYOIP).
+    # your AWS resources through bring your own IP address (BYOIP).
     #
     # The following describes each BYOIP `State` that your IP address range
     # can be in.
@@ -282,11 +282,42 @@ module Aws::GlobalAccelerator
     #   The state of the address pool.
     #   @return [String]
     #
+    # @!attribute [rw] events
+    #   A history of status changes for an IP address range that that you
+    #   bring to AWS Global Accelerator through bring your own IP address
+    #   (BYOIP).
+    #   @return [Array<Types::ByoipCidrEvent>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ByoipCidr AWS API Documentation
     #
     class ByoipCidr < Struct.new(
       :cidr,
-      :state)
+      :state,
+      :events)
+      include Aws::Structure
+    end
+
+    # A complex type that contains a `Message` and a `Timestamp` value for
+    # changes that you make in the status an IP address range that you bring
+    # to AWS Global Accelerator through bring your own IP address (BYOIP).
+    #
+    # @!attribute [rw] message
+    #   A string that contains an `Event` message describing changes that
+    #   you make in the status of an IP address range that you bring to AWS
+    #   Global Accelerator through bring your own IP address (BYOIP).
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   A timestamp when you make a status change for an IP address range
+    #   that you bring to AWS Global Accelerator through bring your own IP
+    #   address (BYOIP).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ByoipCidrEvent AWS API Documentation
+    #
+    class ByoipCidrEvent < Struct.new(
+      :message,
+      :timestamp)
       include Aws::Structure
     end
 
@@ -879,13 +910,13 @@ module Aws::GlobalAccelerator
     #   applications on the Application Load Balancer endpoint fronted by
     #   the accelerator.
     #
-    #   For more information, see [ Viewing Client IP Addresses in AWS
+    #   For more information, see [ Preserve Client IP Addresses in AWS
     #   Global Accelerator][1] in the *AWS Global Accelerator Developer
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation

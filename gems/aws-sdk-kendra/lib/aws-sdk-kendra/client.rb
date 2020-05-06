@@ -279,8 +279,7 @@ module Aws::Kendra
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::Kendra
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -520,6 +519,9 @@ module Aws::Kendra
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         vpc_configuration: {
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["VpcSecurityGroupId"], # required
@@ -661,6 +663,14 @@ module Aws::Kendra
     # @option params [String] :description
     #   A description for the index.
     #
+    # @option params [String] :client_token
+    #   A token that you provide to identify the request to create an index.
+    #   Multiple calls to the `CreateIndex` operation with the same client
+    #   token will create only one index.”
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIndexResponse#id #id} => String
@@ -674,6 +684,7 @@ module Aws::Kendra
     #       kms_key_id: "KmsKeyId",
     #     },
     #     description: "Description",
+    #     client_token: "ClientTokenName",
     #   })
     #
     # @example Response structure
@@ -788,6 +799,11 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.urls[0] #=> String
     #   resp.configuration.share_point_configuration.secret_arn #=> String
     #   resp.configuration.share_point_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.share_point_configuration.use_change_log #=> Boolean
+    #   resp.configuration.share_point_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.share_point_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.share_point_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.share_point_configuration.exclusion_patterns[0] #=> String
     #   resp.configuration.share_point_configuration.vpc_configuration.subnet_ids #=> Array
     #   resp.configuration.share_point_configuration.vpc_configuration.subnet_ids[0] #=> String
     #   resp.configuration.share_point_configuration.vpc_configuration.security_group_ids #=> Array
@@ -975,6 +991,8 @@ module Aws::Kendra
     #   * {Types::ListDataSourceSyncJobsResponse#history #history} => Array&lt;Types::DataSourceSyncJob&gt;
     #   * {Types::ListDataSourceSyncJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_source_sync_jobs({
@@ -1028,6 +1046,8 @@ module Aws::Kendra
     #
     #   * {Types::ListDataSourcesResponse#summary_items #summary_items} => Array&lt;Types::DataSourceSummary&gt;
     #   * {Types::ListDataSourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1118,6 +1138,8 @@ module Aws::Kendra
     #
     #   * {Types::ListIndicesResponse#index_configuration_summary_items #index_configuration_summary_items} => Array&lt;Types::IndexConfigurationSummary&gt;
     #   * {Types::ListIndicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1520,6 +1542,9 @@ module Aws::Kendra
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         vpc_configuration: {
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["VpcSecurityGroupId"], # required
@@ -1649,7 +1674,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

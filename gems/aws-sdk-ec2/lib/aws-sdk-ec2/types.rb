@@ -5542,9 +5542,6 @@ module Aws::EC2
     #   spaces. For the AWS CLI, use single quotation marks (' ') to
     #   surround the parameter value.
     #
-    #   Only applicable to flow logs that are published to an Amazon S3
-    #   bucket.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
@@ -5885,6 +5882,17 @@ module Aws::EC2
     #       {
     #         key_name: "String", # required
     #         dry_run: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] key_name
@@ -5900,11 +5908,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new key pair.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPairRequest AWS API Documentation
     #
     class CreateKeyPairRequest < Struct.new(
       :key_name,
-      :dry_run)
+      :dry_run,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -6844,6 +6857,17 @@ module Aws::EC2
     #         group_name: "String",
     #         strategy: "cluster", # accepts cluster, spread, partition
     #         partition_count: 1,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -6869,13 +6893,29 @@ module Aws::EC2
     #   `partition`.
     #   @return [Integer]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new placement group.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupRequest AWS API Documentation
     #
     class CreatePlacementGroupRequest < Struct.new(
       :dry_run,
       :group_name,
       :strategy,
-      :partition_count)
+      :partition_count,
+      :tag_specifications)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] placement_group
+    #   Describes a placement group.
+    #   @return [Types::PlacementGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupResult AWS API Documentation
+    #
+    class CreatePlacementGroupResult < Struct.new(
+      :placement_group)
       include Aws::Structure
     end
 
@@ -7345,6 +7385,9 @@ module Aws::EC2
     #   ID, for example `us-west-2-lax-1a`. For information about the
     #   Regions that support Local Zones, see [Available Regions][1] in the
     #   *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #   To create a subnet in an Outpost, set this value to the Availability
+    #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
@@ -9672,12 +9715,17 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         key_name: "KeyPairName", # required
+    #         key_name: "KeyPairName",
+    #         key_pair_id: "KeyPairId",
     #         dry_run: false,
     #       }
     #
     # @!attribute [rw] key_name
     #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_id
+    #   The ID of the key pair.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -9691,6 +9739,7 @@ module Aws::EC2
     #
     class DeleteKeyPairRequest < Struct.new(
       :key_name,
+      :key_pair_id,
       :dry_run)
       include Aws::Structure
     end
@@ -11186,6 +11235,77 @@ module Aws::EC2
     class DeregisterImageRequest < Struct.new(
       :image_id,
       :dry_run)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeregisterInstanceEventNotificationAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_tag_attribute: {
+    #           include_all_tags_of_instance: false,
+    #           instance_tag_keys: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_attribute
+    #   Information about the tag keys to deregister.
+    #   @return [Types::DeregisterInstanceTagAttributeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceEventNotificationAttributesRequest AWS API Documentation
+    #
+    class DeregisterInstanceEventNotificationAttributesRequest < Struct.new(
+      :dry_run,
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_tag_attribute
+    #   The resulting set of tag keys.
+    #   @return [Types::InstanceTagNotificationAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceEventNotificationAttributesResult AWS API Documentation
+    #
+    class DeregisterInstanceEventNotificationAttributesResult < Struct.new(
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # Information about the tag keys to deregister for the current Region.
+    # You can either specify individual tag keys or deregister all tag keys
+    # in the current Region. You must specify either
+    # `IncludeAllTagsOfInstance` or `InstanceTagKeys` in the request
+    #
+    # @note When making an API call, you may pass DeregisterInstanceTagAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         include_all_tags_of_instance: false,
+    #         instance_tag_keys: ["String"],
+    #       }
+    #
+    # @!attribute [rw] include_all_tags_of_instance
+    #   Indicates whether to deregister all tag keys in the current Region.
+    #   Specify `false` to deregister all tag keys.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_keys
+    #   Information about the tag keys to deregister.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterInstanceTagAttributeRequest AWS API Documentation
+    #
+    class DeregisterInstanceTagAttributeRequest < Struct.new(
+      :include_all_tags_of_instance,
+      :instance_tag_keys)
       include Aws::Structure
     end
 
@@ -13875,7 +13995,7 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance.
     #
     #   * `state` - The state of the association (`associating` \|
-    #     `associated` \| `disassociating` \| `disassociated`).
+    #     `associated` \| `disassociating`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -14447,6 +14567,38 @@ module Aws::EC2
     class DescribeInstanceCreditSpecificationsResult < Struct.new(
       :instance_credit_specifications,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstanceEventNotificationAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceEventNotificationAttributesRequest AWS API Documentation
+    #
+    class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_tag_attribute
+    #   Information about the registered tag keys.
+    #   @return [Types::InstanceTagNotificationAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceEventNotificationAttributesResult AWS API Documentation
+    #
+    class DescribeInstanceEventNotificationAttributesResult < Struct.new(
+      :instance_tag_attribute)
       include Aws::Structure
     end
 
@@ -15350,9 +15502,21 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
+    #   * `key-pair-id` - The ID of the key pair.
+    #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] key_names
@@ -16656,6 +16820,16 @@ module Aws::EC2
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
     #     `spread` \| `partition`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -18983,13 +19157,14 @@ module Aws::EC2
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
     #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
-    #     `fpga-image` \| `image` \| `instance` \| `host-reservation` \|
-    #     `internet-gateway` \| `launch-template` \| `natgateway` \|
-    #     `network-acl` \| `network-interface` \| `placement-group` \|
-    #     `reserved-instances` \| `route-table` \| `security-group` \|
-    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
-    #     `vpc` \| `vpc-endpoint` \| `vpc-endpoint-service` \|
-    #     `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`).
+    #     `fpga-image` \| `host-reservation` \| `image` \| `instance` \|
+    #     `internet-gateway` \| `key-pair` \| `launch-template` \|
+    #     `natgateway` \| `network-acl` \| `network-interface` \|
+    #     `placement-group` \| `reserved-instances` \| `route-table` \|
+    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
+    #     `subnet` \| `volume` \| `vpc` \| `vpc-endpoint` \|
+    #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
+    #     `vpn-connection` \| `vpn-gateway`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA"
@@ -22065,7 +22240,7 @@ module Aws::EC2
     #
     # @!attribute [rw] association_id
     #   The association ID representing the current association between the
-    #   route table and subnet.
+    #   route table and subnet or gateway.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -27281,6 +27456,17 @@ module Aws::EC2
     #         dry_run: false,
     #         key_name: "String", # required
     #         public_key_material: "data", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -27299,12 +27485,17 @@ module Aws::EC2
     #   command line tools, base64 encoding is performed for you.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the imported key pair.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairRequest AWS API Documentation
     #
     class ImportKeyPairRequest < Struct.new(
       :dry_run,
       :key_name,
-      :public_key_material)
+      :public_key_material,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -27317,11 +27508,21 @@ module Aws::EC2
     #   The key pair name you provided.
     #   @return [String]
     #
+    # @!attribute [rw] key_pair_id
+    #   The ID of the resulting key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags applied to the imported key pair.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairResult AWS API Documentation
     #
     class ImportKeyPairResult < Struct.new(
       :key_fingerprint,
-      :key_name)
+      :key_name,
+      :key_pair_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -28976,6 +29177,26 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the registered tag keys for the current Region.
+    #
+    # @!attribute [rw] instance_tag_keys
+    #   The registered tag keys.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include_all_tags_of_instance
+    #   Indicates wheter all tag keys in the current Region are registered
+    #   to appear in scheduled event notifications. `true` indicates that
+    #   all tag keys in the current Region are registered.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTagNotificationAttribute AWS API Documentation
+    #
+    class InstanceTagNotificationAttribute < Struct.new(
+      :instance_tag_keys,
+      :include_all_tags_of_instance)
+      include Aws::Structure
+    end
+
     # Describes the instance type.
     #
     # @!attribute [rw] instance_type
@@ -29443,13 +29664,18 @@ module Aws::EC2
     #   The ID of the key pair.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags applied to the key pair.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPair AWS API Documentation
     #
     class KeyPair < Struct.new(
       :key_fingerprint,
       :key_material,
       :key_name,
-      :key_pair_id)
+      :key_pair_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -33111,6 +33337,10 @@ module Aws::EC2
     #           value: false,
     #         },
     #         subnet_id: "SubnetId", # required
+    #         map_customer_owned_ip_on_launch: {
+    #           value: false,
+    #         },
+    #         customer_owned_ipv_4_pool: "CoipPoolId",
     #       }
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
@@ -33125,12 +33355,29 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] map_public_ip_on_launch
-    #   Specify `true` to indicate that ENIs attached to instances created
-    #   in the specified subnet should be assigned a public IPv4 address.
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   public IPv4 address.
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] map_customer_owned_ip_on_launch
+    #   Specify `true` to indicate that network interfaces attached to
+    #   instances created in the specified subnet should be assigned a
+    #   customer-owned IPv4 address.
+    #
+    #   When this value is `true`, you must specify the customer-owned IP
+    #   pool using `CustomerOwnedIpv4Pool`.
+    #   @return [Types::AttributeBooleanValue]
+    #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #
+    #   You must set this value when you specify `true` for
+    #   `MapCustomerOwnedIpOnLaunch`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
@@ -33138,7 +33385,9 @@ module Aws::EC2
     class ModifySubnetAttributeRequest < Struct.new(
       :assign_ipv_6_address_on_creation,
       :map_public_ip_on_launch,
-      :subnet_id)
+      :subnet_id,
+      :map_customer_owned_ip_on_launch,
+      :customer_owned_ipv_4_pool)
       include Aws::Structure
     end
 
@@ -35678,14 +35927,23 @@ module Aws::EC2
     #   If not specified, an Availability Zone will be automatically chosen
     #   for you based on the load balancing criteria for the Region.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] affinity
     #   The affinity setting for the instance on the Dedicated Host. This
-    #   parameter is not supported for the ImportInstance command.
+    #   parameter is not supported for the [ImportInstance][1] command.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -35696,29 +35954,47 @@ module Aws::EC2
     #   The number of the partition the instance is in. Valid only if the
     #   placement group strategy is set to `partition`.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [Integer]
     #
     # @!attribute [rw] host_id
     #   The ID of the Dedicated Host on which the instance resides. This
-    #   parameter is not supported for the ImportInstance command.
+    #   parameter is not supported for the [ImportInstance][1] command.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for the ImportInstance
-    #   command.
+    #   hardware. The `host` tenancy is not supported for the
+    #   [ImportInstance][1] command.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
     #   Reserved for future use.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @!attribute [rw] host_resource_group_arn
@@ -35726,7 +36002,11 @@ module Aws::EC2
     #   If you specify a host resource group ARN, omit the **Tenancy**
     #   parameter or set it to `host`.
     #
-    #   This parameter is not supported by .
+    #   This parameter is not supported by [CreateFleet][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
@@ -36850,6 +37130,77 @@ module Aws::EC2
     #
     class RegisterImageResult < Struct.new(
       :image_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterInstanceEventNotificationAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_tag_attribute: {
+    #           include_all_tags_of_instance: false,
+    #           instance_tag_keys: ["String"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_attribute
+    #   Information about the tag keys to register.
+    #   @return [Types::RegisterInstanceTagAttributeRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceEventNotificationAttributesRequest AWS API Documentation
+    #
+    class RegisterInstanceEventNotificationAttributesRequest < Struct.new(
+      :dry_run,
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_tag_attribute
+    #   The resulting set of tag keys.
+    #   @return [Types::InstanceTagNotificationAttribute]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceEventNotificationAttributesResult AWS API Documentation
+    #
+    class RegisterInstanceEventNotificationAttributesResult < Struct.new(
+      :instance_tag_attribute)
+      include Aws::Structure
+    end
+
+    # Information about the tag keys to register for the current Region. You
+    # can either specify individual tag keys or register all tag keys in the
+    # current Region. You must specify either `IncludeAllTagsOfInstance` or
+    # `InstanceTagKeys` in the request
+    #
+    # @note When making an API call, you may pass RegisterInstanceTagAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         include_all_tags_of_instance: false,
+    #         instance_tag_keys: ["String"],
+    #       }
+    #
+    # @!attribute [rw] include_all_tags_of_instance
+    #   Indicates whether to register all tag keys in the current Region.
+    #   Specify `true` to register all tag keys.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_tag_keys
+    #   The tag keys to register.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterInstanceTagAttributeRequest AWS API Documentation
+    #
+    class RegisterInstanceTagAttributeRequest < Struct.new(
+      :include_all_tags_of_instance,
+      :instance_tag_keys)
       include Aws::Structure
     end
 
@@ -43057,12 +43408,13 @@ module Aws::EC2
     #   more information, see [Spot Fleet Prerequisites][1] in the *Amazon
     #   EC2 User Guide for Linux Instances*. Spot Fleet can terminate Spot
     #   Instances on your behalf when you cancel its Spot Fleet request
-    #   using CancelSpotFleetRequests or when the Spot Fleet request
+    #   using [CancelSpotFleetRequests][2] or when the Spot Fleet request
     #   expires, if you set `TerminateInstancesWithExpiration`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CancelSpotFleetRequests
     #   @return [String]
     #
     # @!attribute [rw] launch_specifications
@@ -43458,10 +43810,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_type
-    #   The Spot Instance request type. For RunInstances, persistent Spot
-    #   Instance requests are only supported when
+    #   The Spot Instance request type. For [RunInstances][1], persistent
+    #   Spot Instance requests are only supported when
     #   **InstanceInterruptionBehavior** is set to either `hibernate` or
     #   `stop`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
@@ -44085,6 +44441,16 @@ module Aws::EC2
     #   IPv4 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] map_customer_owned_ip_on_launch
+    #   Indicates whether a network interface created in this subnet
+    #   (including a network interface created by RunInstances) receives a
+    #   customer-owned IPv4 address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] customer_owned_ipv_4_pool
+    #   The customer-owned IPv4 address pool associated with the subnet.
+    #   @return [String]
+    #
     # @!attribute [rw] state
     #   The current state of the subnet.
     #   @return [String]
@@ -44132,6 +44498,8 @@ module Aws::EC2
       :cidr_block,
       :default_for_az,
       :map_public_ip_on_launch,
+      :map_customer_owned_ip_on_launch,
+      :customer_owned_ipv_4_pool,
       :state,
       :subnet_id,
       :vpc_id,
@@ -44352,7 +44720,13 @@ module Aws::EC2
     # launch instances until it reaches the maximum amount that you're
     # willing to pay. When the maximum amount you're willing to pay is
     # reached, the fleet stops launching instances even if it hasn’t met the
-    # target capacity. The `MaxTotalPrice` parameters are located in and
+    # target capacity. The `MaxTotalPrice` parameters are located in
+    # [OnDemandOptions][1] and [SpotOptions][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptions.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions
     #
     # @!attribute [rw] total_target_capacity
     #   The number of units to request, filled using
@@ -44401,7 +44775,12 @@ module Aws::EC2
     # amount that you're willing to pay. When the maximum amount you're
     # willing to pay is reached, the fleet stops launching instances even if
     # it hasn’t met the target capacity. The `MaxTotalPrice` parameters are
-    # located in and .
+    # located in [OnDemandOptionsRequest][1] and [SpotOptionsRequest][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptionsRequest
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest
     #
     # @note When making an API call, you may pass TargetCapacitySpecificationRequest
     #   data as a hash:

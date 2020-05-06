@@ -279,8 +279,7 @@ module Aws::CodePipeline
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::CodePipeline
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1211,6 +1210,8 @@ module Aws::CodePipeline
     #   * {Types::ListActionExecutionsOutput#action_execution_details #action_execution_details} => Array&lt;Types::ActionExecutionDetail&gt;
     #   * {Types::ListActionExecutionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_action_executions({
@@ -1285,6 +1286,8 @@ module Aws::CodePipeline
     #   * {Types::ListActionTypesOutput#action_types #action_types} => Array&lt;Types::ActionType&gt;
     #   * {Types::ListActionTypesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_action_types({
@@ -1348,6 +1351,8 @@ module Aws::CodePipeline
     #   * {Types::ListPipelineExecutionsOutput#pipeline_execution_summaries #pipeline_execution_summaries} => Array&lt;Types::PipelineExecutionSummary&gt;
     #   * {Types::ListPipelineExecutionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipeline_executions({
@@ -1393,6 +1398,8 @@ module Aws::CodePipeline
     #   * {Types::ListPipelinesOutput#pipelines #pipelines} => Array&lt;Types::PipelineSummary&gt;
     #   * {Types::ListPipelinesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipelines({
@@ -1436,6 +1443,8 @@ module Aws::CodePipeline
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
@@ -1477,6 +1486,8 @@ module Aws::CodePipeline
     #
     #   * {Types::ListWebhooksOutput#webhooks #webhooks} => Array&lt;Types::ListWebhookItem&gt;
     #   * {Types::ListWebhooksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

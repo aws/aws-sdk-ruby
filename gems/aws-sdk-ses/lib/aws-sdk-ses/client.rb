@@ -269,8 +269,7 @@ module Aws::SES
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::SES
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -2036,6 +2035,11 @@ module Aws::SES
     #   resp.verification_attributes["Identity"].verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
     #   resp.verification_attributes["Identity"].verification_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * identity_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributes AWS API Documentation
     #
     # @overload get_identity_verification_attributes(params = {})
@@ -2263,6 +2267,8 @@ module Aws::SES
     #   * {Types::ListCustomVerificationEmailTemplatesResponse#custom_verification_email_templates #custom_verification_email_templates} => Array&lt;Types::CustomVerificationEmailTemplate&gt;
     #   * {Types::ListCustomVerificationEmailTemplatesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_custom_verification_email_templates({
@@ -2311,6 +2317,8 @@ module Aws::SES
     #
     #   * {Types::ListIdentitiesResponse#identities #identities} => Array&lt;String&gt;
     #   * {Types::ListIdentitiesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: ListIdentities
@@ -5094,9 +5102,9 @@ module Aws::SES
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params                                  | :delay   | :max_attempts |
-    # | --------------- | --------------------------------------- | -------- | ------------- |
-    # | identity_exists | {#get_identity_verification_attributes} | 3        | 20            |
+    # | waiter_name     | params                                        | :delay   | :max_attempts |
+    # | --------------- | --------------------------------------------- | -------- | ------------- |
+    # | identity_exists | {Client#get_identity_verification_attributes} | 3        | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

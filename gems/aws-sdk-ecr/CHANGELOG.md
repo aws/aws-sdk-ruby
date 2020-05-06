@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-04-28)
+------------------
+
+* Feature - This release adds support for multi-architecture images also known as a manifest list
+
 1.26.0 (2020-03-09)
 ------------------
 

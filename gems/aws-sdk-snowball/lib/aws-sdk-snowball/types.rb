@@ -433,7 +433,7 @@ module Aws::Snowball
     #         address_id: "AddressId", # required
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -599,7 +599,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -607,7 +607,7 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
     #         forwarding_address_id: "AddressId",
     #         tax_documents: {
     #           ind: {
@@ -2096,7 +2096,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
     #         forwarding_address_id: "AddressId",
     #       }
     #

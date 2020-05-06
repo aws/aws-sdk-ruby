@@ -269,8 +269,7 @@ module Aws::KinesisVideo
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::KinesisVideo
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -315,7 +314,7 @@ module Aws::KinesisVideo
     #
     # @option params [required, String] :channel_name
     #   A name for the signaling channel that you are creating. It must be
-    #   unique for each account and region.
+    #   unique for each AWS account and AWS Region.
     #
     # @option params [String] :channel_type
     #   A type of the signaling channel that you are creating. Currently,
@@ -326,7 +325,7 @@ module Aws::KinesisVideo
     #   channel type.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A set of tags (key/value pairs) that you want to associate with this
+    #   A set of tags (key-value pairs) that you want to associate with this
     #   channel.
     #
     # @return [Types::CreateSignalingChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -475,12 +474,13 @@ module Aws::KinesisVideo
     # version, the most recent version is deleted.
     #
     # @option params [required, String] :channel_arn
-    #   The ARN of the signaling channel that you want to delete.
+    #   The Amazon Resource Name (ARN) of the signaling channel that you want
+    #   to delete.
     #
     # @option params [String] :current_version
     #   The current version of the signaling channel that you want to delete.
     #   You can obtain the current version by invoking the
-    #   `DescribeSignalingChannel` or `ListSignalingChannels` APIs.
+    #   `DescribeSignalingChannel` or `ListSignalingChannels` API operations.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -548,8 +548,8 @@ module Aws::KinesisVideo
     end
 
     # Returns the most current information about the signaling channel. You
-    # must specify either the name or the ARN of the channel that you want
-    # to describe.
+    # must specify either the name or the Amazon Resource Name (ARN) of the
+    # channel that you want to describe.
     #
     # @option params [String] :channel_name
     #   The name of the signaling channel that you want to describe.
@@ -662,7 +662,7 @@ module Aws::KinesisVideo
     #   resp = client.get_data_endpoint({
     #     stream_name: "StreamName",
     #     stream_arn: "ResourceARN",
-    #     api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL
+    #     api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP
     #   })
     #
     # @example Response structure
@@ -684,9 +684,9 @@ module Aws::KinesisVideo
     # consists of the `Protocols` and `Role` properties.
     #
     # `Protocols` is used to determine the communication mechanism. For
-    # example, specifying `WSS` as the protocol, results in this API
-    # producing a secure websocket endpoint, and specifying `HTTPS` as the
-    # protocol, results in this API generating an HTTPS endpoint.
+    # example, if you specify `WSS` as the protocol, this API produces a
+    # secure websocket endpoint. If you specify `HTTPS` as the protocol,
+    # this API generates an HTTPS endpoint.
     #
     # `Role` determines the messaging permissions. A `MASTER` role results
     # in this API generating an endpoint that a client can use to
@@ -695,8 +695,8 @@ module Aws::KinesisVideo
     # communicate only with a `MASTER`.
     #
     # @option params [required, String] :channel_arn
-    #   The ARN of the signalling channel for which you want to get an
-    #   endpoint.
+    #   The Amazon Resource Name (ARN) of the signalling channel for which you
+    #   want to get an endpoint.
     #
     # @option params [Types::SingleMasterChannelEndpointConfiguration] :single_master_channel_endpoint_configuration
     #   A structure containing the endpoint configuration for the
@@ -752,6 +752,8 @@ module Aws::KinesisVideo
     #
     #   * {Types::ListSignalingChannelsOutput#channel_info_list #channel_info_list} => Array&lt;Types::ChannelInfo&gt;
     #   * {Types::ListSignalingChannelsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -809,6 +811,8 @@ module Aws::KinesisVideo
     #   * {Types::ListStreamsOutput#stream_info_list #stream_info_list} => Array&lt;Types::StreamInfo&gt;
     #   * {Types::ListStreamsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_streams({
@@ -847,12 +851,13 @@ module Aws::KinesisVideo
     # channel.
     #
     # @option params [String] :next_token
-    #   If you specify this parameter and the result of a ListTagsForResource
-    #   call is truncated, the response includes a token that you can use in
-    #   the next request to fetch the next batch of tags.
+    #   If you specify this parameter and the result of a
+    #   `ListTagsForResource` call is truncated, the response includes a token
+    #   that you can use in the next request to fetch the next batch of tags.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the signaling channel for which you want to list tags.
+    #   The Amazon Resource Name (ARN) of the signaling channel for which you
+    #   want to list tags.
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -938,7 +943,8 @@ module Aws::KinesisVideo
     # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the signaling channel to which you want to add tags.
+    #   The Amazon Resource Name (ARN) of the signaling channel to which you
+    #   want to add tags.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   A list of tags to associate with the specified signaling channel. Each
@@ -1022,7 +1028,8 @@ module Aws::KinesisVideo
     # specify a tag key that does not exist, it's ignored.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the signaling channel from which you want to remove tags.
+    #   The Amazon Resource Name (ARN) of the signaling channel from which you
+    #   want to remove tags.
     #
     # @option params [required, Array<String>] :tag_key_list
     #   A list of the keys of the tags that you want to remove.
@@ -1153,12 +1160,13 @@ module Aws::KinesisVideo
     # operation and takes time to complete.
     #
     # If the `MessageTtlSeconds` value is updated (either increased or
-    # reduced), then it only applies to new messages sent via this channel
-    # after it's been updated. Existing messages are still expire as per
-    # the previous `MessageTtlSeconds` value.
+    # reduced), it only applies to new messages sent via this channel after
+    # it's been updated. Existing messages are still expired as per the
+    # previous `MessageTtlSeconds` value.
     #
     # @option params [required, String] :channel_arn
-    #   The ARN of the signaling channel that you want to update.
+    #   The Amazon Resource Name (ARN) of the signaling channel that you want
+    #   to update.
     #
     # @option params [required, String] :current_version
     #   The current version of the signaling channel that you want to update.
@@ -1271,7 +1279,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

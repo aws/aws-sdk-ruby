@@ -28,6 +28,7 @@ module Aws::KinesisVideoArchivedMedia
   # * {ClientLimitExceededException}
   # * {InvalidArgumentException}
   # * {InvalidCodecPrivateDataException}
+  # * {InvalidMediaFrameException}
   # * {MissingCodecPrivateDataException}
   # * {NoDataRetentionException}
   # * {NotAuthorizedException}
@@ -75,6 +76,21 @@ module Aws::KinesisVideoArchivedMedia
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::KinesisVideoArchivedMedia::Types::InvalidCodecPrivateDataException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidMediaFrameException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KinesisVideoArchivedMedia::Types::InvalidMediaFrameException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

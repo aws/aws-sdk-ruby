@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-04-30)
+------------------
+
+* Feature - AWS IoT Core released Fleet Provisioning for scalable onboarding of IoT devices to the cloud. This release includes support for customer's Lambda functions to validate devices during onboarding. Fleet Provisioning also allows devices to send Certificate Signing Requests (CSR) to AWS IoT Core for signing and getting a unique certificate. Lastly,  AWS IoT Core added a feature to register the same certificate for multiple accounts in the same region without needing to register the certificate authority (CA).
+
+1.47.0 (2020-04-24)
+------------------
+
+* Feature - This release adds a new exception type to the AWS IoT SetV2LoggingLevel API.
+
+1.46.0 (2020-04-01)
+------------------
+
+* Feature - This release introduces Dimensions for AWS IoT Device Defender. Dimensions can be used in Security Profiles to collect and monitor fine-grained metrics.
+
 1.45.0 (2020-03-12)
 ------------------
 

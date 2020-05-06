@@ -28,7 +28,9 @@ module Aws::Organizations
   # * {AWSOrganizationsNotInUseException}
   # * {AccessDeniedException}
   # * {AccessDeniedForDependencyException}
+  # * {AccountAlreadyRegisteredException}
   # * {AccountNotFoundException}
+  # * {AccountNotRegisteredException}
   # * {AccountOwnerNotVerifiedException}
   # * {AlreadyInOrganizationException}
   # * {ChildNotFoundException}
@@ -124,11 +126,41 @@ module Aws::Organizations
       end
     end
 
+    class AccountAlreadyRegisteredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::AccountAlreadyRegisteredException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class AccountNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Organizations::Types::AccountNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class AccountNotRegisteredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::AccountNotRegisteredException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

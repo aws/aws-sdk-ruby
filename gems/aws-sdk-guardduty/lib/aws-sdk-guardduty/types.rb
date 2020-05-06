@@ -27,7 +27,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   This value is used to validate the master account to the member
+    #   The value that is used to validate the master account to the member
     #   account.
     #   @return [String]
     #
@@ -47,7 +47,7 @@ module Aws::GuardDuty
     # Contains information about the access keys.
     #
     # @!attribute [rw] access_key_id
-    #   Access key ID of the user.
+    #   The access key ID of the user.
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -83,11 +83,11 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] account_id
-    #   Member account ID.
+    #   The member account ID.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   Member account's email address.
+    #   The email address of the member account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail AWS API Documentation
@@ -98,10 +98,10 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about action.
+    # Contains information about actions.
     #
     # @!attribute [rw] action_type
-    #   GuardDuty Finding activity type.
+    #   The GuardDuty finding activity type.
     #   @return [String]
     #
     # @!attribute [rw] aws_api_call_action
@@ -133,6 +133,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # The account within the organization specified as the GuardDuty
+    # delegated administrator.
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS account ID for the account.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_status
+    #   Indicates whether the account is enabled as the delegated
+    #   administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AdminAccount AWS API Documentation
+    #
+    class AdminAccount < Struct.new(
+      :admin_account_id,
+      :admin_status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ArchiveFindingsRequest
     #   data as a hash:
     #
@@ -147,7 +167,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
-    #   IDs of the findings that you want to archive.
+    #   The IDs of the findings that you want to archive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsRequest AWS API Documentation
@@ -165,23 +185,23 @@ module Aws::GuardDuty
     # Contains information about the API operation.
     #
     # @!attribute [rw] api
-    #   AWS API name.
+    #   The AWS API name.
     #   @return [String]
     #
     # @!attribute [rw] caller_type
-    #   AWS API caller type.
+    #   The AWS API caller type.
     #   @return [String]
     #
     # @!attribute [rw] domain_details
-    #   Domain information for the AWS API call.
+    #   The domain information for the AWS API call.
     #   @return [Types::DomainDetails]
     #
     # @!attribute [rw] remote_ip_details
-    #   Remote IP information of the connection.
+    #   The remote IP information of the connection.
     #   @return [Types::RemoteIpDetails]
     #
     # @!attribute [rw] service_name
-    #   AWS service name whose API was invoked.
+    #   The AWS service name whose API was invoked.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction AWS API Documentation
@@ -195,7 +215,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Bad request exception object.
+    # A bad request exception object.
     #
     # @!attribute [rw] message
     #   The error message.
@@ -216,7 +236,7 @@ module Aws::GuardDuty
     # Contains information about the city associated with the IP address.
     #
     # @!attribute [rw] city_name
-    #   City name of the remote IP address.
+    #   The city name of the remote IP address.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/City AWS API Documentation
@@ -247,63 +267,63 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] eq
-    #   Represents the equal condition to be applied to a single field when
-    #   querying for findings.
+    #   Represents the *equal* condition to be applied to a single field
+    #   when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] neq
-    #   Represents the not equal condition to be applied to a single field
+    #   Represents the *not equal* condition to be applied to a single field
     #   when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] gt
-    #   Represents a greater than condition to be applied to a single field
-    #   when querying for findings.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] gte
-    #   Represents a greater than equal condition to be applied to a single
+    #   Represents a *greater than* condition to be applied to a single
     #   field when querying for findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] gte
+    #   Represents a *greater than or equal* condition to be applied to a
+    #   single field when querying for findings.
+    #   @return [Integer]
+    #
     # @!attribute [rw] lt
-    #   Represents a less than condition to be applied to a single field
+    #   Represents a *less than* condition to be applied to a single field
     #   when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] lte
-    #   Represents a less than equal condition to be applied to a single
-    #   field when querying for findings.
+    #   Represents a *less than or equal* condition to be applied to a
+    #   single field when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] equals
-    #   Represents an **equal** condition to be applied to a single field
+    #   Represents an *equal* **** condition to be applied to a single field
     #   when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] not_equals
-    #   Represents an **not equal** condition to be applied to a single
+    #   Represents a *not equal* **** condition to be applied to a single
     #   field when querying for findings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] greater_than
-    #   Represents a greater than condition to be applied to a single field
-    #   when querying for findings.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] greater_than_or_equal
-    #   Represents a greater than equal condition to be applied to a single
+    #   Represents a *greater than* condition to be applied to a single
     #   field when querying for findings.
     #   @return [Integer]
     #
+    # @!attribute [rw] greater_than_or_equal
+    #   Represents a *greater than or equal* condition to be applied to a
+    #   single field when querying for findings.
+    #   @return [Integer]
+    #
     # @!attribute [rw] less_than
-    #   Represents a less than condition to be applied to a single field
+    #   Represents a *less than* condition to be applied to a single field
     #   when querying for findings.
     #   @return [Integer]
     #
     # @!attribute [rw] less_than_or_equal
-    #   Represents a less than equal condition to be applied to a single
-    #   field when querying for findings.
+    #   Represents a *less than or equal* condition to be applied to a
+    #   single field when querying for findings.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Condition AWS API Documentation
@@ -324,15 +344,15 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the country in which the remote IP address
-    # is located.
+    # Contains information about the country where the remote IP address is
+    # located.
     #
     # @!attribute [rw] country_code
-    #   Country code of the remote IP address.
+    #   The country code of the remote IP address.
     #   @return [String]
     #
     # @!attribute [rw] country_name
-    #   Country name of the remote IP address.
+    #   The country name of the remote IP address.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Country AWS API Documentation
@@ -356,7 +376,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] enable
-    #   A boolean value that specifies whether the detector is to be
+    #   A Boolean value that specifies whether the detector is to be
     #   enabled.
     #   @return [Boolean]
     #
@@ -368,8 +388,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   A enum value that specifies how frequently customer got Finding
-    #   updates published.
+    #   An enum value that specifies how frequently updated findings are
+    #   exported.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -431,8 +451,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account for which you
-    #   want to create a filter.
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to create a filter for.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -457,6 +477,115 @@ module Aws::GuardDuty
     # @!attribute [rw] finding_criteria
     #   Represents the criteria to be used in the filter for querying
     #   findings.
+    #
+    #   You can only use the following attributes to query findings:
+    #
+    #   * accountId
+    #
+    #   * region
+    #
+    #   * confidence
+    #
+    #   * id
+    #
+    #   * resource.accessKeyDetails.accessKeyId
+    #
+    #   * resource.accessKeyDetails.principalId
+    #
+    #   * resource.accessKeyDetails.userName
+    #
+    #   * resource.accessKeyDetails.userType
+    #
+    #   * resource.instanceDetails.iamInstanceProfile.id
+    #
+    #   * resource.instanceDetails.imageId
+    #
+    #   * resource.instanceDetails.instanceId
+    #
+    #   * resource.instanceDetails.outpostArn
+    #
+    #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
+    #
+    #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+    #
+    #   * resource.instanceDetails.networkInterfaces.publicDnsName
+    #
+    #   * resource.instanceDetails.networkInterfaces.publicIp
+    #
+    #   * resource.instanceDetails.networkInterfaces.securityGroups.groupId
+    #
+    #   * resource.instanceDetails.networkInterfaces.securityGroups.groupName
+    #
+    #   * resource.instanceDetails.networkInterfaces.subnetId
+    #
+    #   * resource.instanceDetails.networkInterfaces.vpcId
+    #
+    #   * resource.instanceDetails.tags.key
+    #
+    #   * resource.instanceDetails.tags.value
+    #
+    #   * resource.resourceType
+    #
+    #   * service.action.actionType
+    #
+    #   * service.action.awsApiCallAction.api
+    #
+    #   * service.action.awsApiCallAction.callerType
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.country.countryName
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.organization.asn
+    #
+    #   * service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+    #
+    #   * service.action.awsApiCallAction.serviceName
+    #
+    #   * service.action.dnsRequestAction.domain
+    #
+    #   * service.action.networkConnectionAction.blocked
+    #
+    #   * service.action.networkConnectionAction.connectionDirection
+    #
+    #   * service.action.networkConnectionAction.localPortDetails.port
+    #
+    #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.organization.asn
+    #
+    #   * service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+    #
+    #   * service.action.networkConnectionAction.remotePortDetails.port
+    #
+    #   * service.additionalInfo.threatListName
+    #
+    #   * service.archived
+    #
+    #     When this attribute is set to TRUE, only archived findings are
+    #     listed. When it's set to FALSE, only unarchived findings are
+    #     listed. When this attribute is not set, all existing findings are
+    #     listed.
+    #
+    #   * service.resourceRole
+    #
+    #   * severity
+    #
+    #   * type
+    #
+    #   * updatedAt
+    #
+    #     Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
+    #     YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains
+    #     milliseconds.
     #   @return [Types::FindingCriteria]
     #
     # @!attribute [rw] client_token
@@ -511,14 +640,15 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account for which you
-    #   want to create an IPSet.
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to create an IPSet for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The user friendly name to identify the IPSet. This name is displayed
-    #   in all findings that are triggered by activity that involves IP
-    #   addresses included in this IPSet.
+    #   The user-friendly name to identify the IPSet.
+    #
+    #   Allowed characters are alphanumerics, spaces, hyphens (-), and
+    #   underscores (\_).
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -526,12 +656,12 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example
-    #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
-    #   A boolean value that indicates whether GuardDuty is to start using
+    #   A Boolean value that indicates whether GuardDuty is to start using
     #   the uploaded IPSet.
     #   @return [Boolean]
     #
@@ -584,8 +714,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account with which
-    #   you want to associate member accounts.
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to associate member accounts with.
     #   @return [String]
     #
     # @!attribute [rw] account_details
@@ -602,8 +732,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that include the `accountIds` of the unprocessed
+    #   accounts and a result string that explains why each was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersResponse AWS API Documentation
@@ -633,12 +763,12 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] destination_type
     #   The type of resource for the publishing destination. Currently only
-    #   S3 is supported.
+    #   Amazon S3 buckets are supported.
     #   @return [String]
     #
     # @!attribute [rw] destination_properties
-    #   Properties of the publishing destination, including the ARNs for the
-    #   destination and the KMS key used for encryption.
+    #   The properties of the publishing destination, including the ARNs for
+    #   the destination and the KMS key used for encryption.
     #   @return [Types::DestinationProperties]
     #
     # @!attribute [rw] client_token
@@ -659,7 +789,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] destination_id
-    #   The ID of the publishing destination created.
+    #   The ID of the publishing destination that is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreatePublishingDestinationResponse AWS API Documentation
@@ -682,7 +812,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_types
-    #   Types of sample findings to generate.
+    #   The types of sample findings to generate.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsRequest AWS API Documentation
@@ -713,14 +843,14 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account for which you
-    #   want to create a threatIntelSet.
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to create a threatIntelSet for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A user-friendly ThreatIntelSet name that is displayed in all finding
-    #   generated by activity that involves IP addresses included in this
-    #   ThreatIntelSet.
+    #   A user-friendly ThreatIntelSet name displayed in all findings that
+    #   are generated by activity that involves IP addresses included in
+    #   this ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -728,12 +858,12 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example
-    #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
-    #   A boolean value that indicates whether GuardDuty is to start using
+    #   A Boolean value that indicates whether GuardDuty is to start using
     #   the uploaded ThreatIntelSet.
     #   @return [Boolean]
     #
@@ -745,7 +875,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be added to a new Threat List resource.
+    #   The tags to be added to a new threat list resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetRequest AWS API Documentation
@@ -793,8 +923,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain the unprocessed account and a result
+    #   string that explains why it was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsResponse AWS API Documentation
@@ -835,11 +965,11 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the filter is associated with.
+    #   The unique ID of the detector that the filter is associated with.
     #   @return [String]
     #
     # @!attribute [rw] filter_name
-    #   The name of the filter you want to delete.
+    #   The name of the filter that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilterRequest AWS API Documentation
@@ -902,8 +1032,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain the unprocessed account and a result
+    #   string that explains why it was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsResponse AWS API Documentation
@@ -988,11 +1118,12 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the threatIntelSet is associated with.
+    #   The unique ID of the detector that the threatIntelSet is associated
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
-    #   The unique ID of the threatIntelSet you want to delete.
+    #   The unique ID of the threatIntelSet that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetRequest AWS API Documentation
@@ -1006,6 +1137,43 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetResponse AWS API Documentation
     #
     class DeleteThreatIntelSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeOrganizationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector to retrieve information about the delegated
+    #   administrator from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationRequest AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationRequest < Struct.new(
+      :detector_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] auto_enable
+    #   Indicates whether GuardDuty is automatically enabled for accounts
+    #   added to the organization.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] member_account_limit_reached
+    #   Indicates whether the maximum number of allowed member accounts are
+    #   already associated with the delegated administrator master account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfigurationResponse AWS API Documentation
+    #
+    class DescribeOrganizationConfigurationResponse < Struct.new(
+      :auto_enable,
+      :member_account_limit_reached)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribePublishingDestinationRequest
     #   data as a hash:
@@ -1037,8 +1205,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] destination_type
-    #   The type of the publishing destination. Currently, only S3 is
-    #   supported.
+    #   The type of publishing destination. Currently, only Amazon S3
+    #   buckets are supported.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1066,8 +1234,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about a publishing destination, including the ID,
-    # type, and status.
+    # Contains information about the publishing destination, including the
+    # ID, type, and status.
     #
     # @!attribute [rw] destination_id
     #   The unique ID of the publishing destination.
@@ -1075,7 +1243,7 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] destination_type
     #   The type of resource used for the publishing destination. Currently,
-    #   only S3 is supported.
+    #   only Amazon S3 buckets are supported.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1091,8 +1259,9 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains the ARN of the resource to publish to, such as an S3 bucket,
-    # and the ARN of the KMS key to use to encrypt published findings.
+    # Contains the Amazon Resource Name (ARN) of the resource to publish to,
+    # such as an S3 bucket, and the ARN of the KMS key to use to encrypt
+    # published findings.
     #
     # @note When making an API call, you may pass DestinationProperties
     #   data as a hash:
@@ -1117,6 +1286,29 @@ module Aws::GuardDuty
       :kms_key_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DisableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS Account ID for the Organizations account to be disabled as a
+    #   GuardDuty delegated administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class DisableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateFromMasterAccountRequest
     #   data as a hash:
@@ -1150,12 +1342,12 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
-    #   you want to disassociate from master.
+    #   you want to disassociate from the master account.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
     #   A list of account IDs of the GuardDuty member accounts that you want
-    #   to disassociate from master.
+    #   to disassociate from the master account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersRequest AWS API Documentation
@@ -1167,8 +1359,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain the unprocessed account and a result
+    #   string that explains why it was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersResponse AWS API Documentation
@@ -1182,7 +1374,7 @@ module Aws::GuardDuty
     # finding.
     #
     # @!attribute [rw] domain
-    #   Domain information for the API request.
+    #   The domain information for the API request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction AWS API Documentation
@@ -1195,7 +1387,7 @@ module Aws::GuardDuty
     # Contains information about the domain.
     #
     # @!attribute [rw] domain
-    #   Domain information for the AWS API call.
+    #   The domain information for the AWS API call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails AWS API Documentation
@@ -1204,6 +1396,29 @@ module Aws::GuardDuty
       :domain)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableOrganizationAdminAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         admin_account_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] admin_account_id
+    #   The AWS Account ID for the Organizations account to be enabled as a
+    #   GuardDuty delegated administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EnableOrganizationAdminAccountRequest AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountRequest < Struct.new(
+      :admin_account_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EnableOrganizationAdminAccountResponse AWS API Documentation
+    #
+    class EnableOrganizationAdminAccountResponse < Aws::EmptyStructure; end
 
     # Contains information about the reason that the finding was generated.
     #
@@ -1226,7 +1441,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN for the finding.
+    #   The ARN of the finding.
     #   @return [String]
     #
     # @!attribute [rw] confidence
@@ -1234,7 +1449,7 @@ module Aws::GuardDuty
     #   @return [Float]
     #
     # @!attribute [rw] created_at
-    #   The time and date at which the finding was created.
+    #   The time and date when the finding was created.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1250,7 +1465,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The Region in which the finding was generated.
+    #   The Region where the finding was generated.
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -1271,15 +1486,15 @@ module Aws::GuardDuty
     #   @return [Float]
     #
     # @!attribute [rw] title
-    #   The title for the finding.
+    #   The title of the finding.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the finding.
+    #   The type of finding.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The time and date at which the finding was laste updated.
+    #   The time and date when the finding was last updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Finding AWS API Documentation
@@ -1342,8 +1557,8 @@ module Aws::GuardDuty
     # Contains information about finding statistics.
     #
     # @!attribute [rw] count_by_severity
-    #   Represents a map of severity to count statistic for a set of
-    #   findings
+    #   Represents a map of severity to count statistics for a set of
+    #   findings.
     #   @return [Hash<String,Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics AWS API Documentation
@@ -1356,11 +1571,11 @@ module Aws::GuardDuty
     # Contains information about the location of the remote IP address.
     #
     # @!attribute [rw] lat
-    #   Latitude information of remote IP address.
+    #   The latitude information of the remote IP address.
     #   @return [Float]
     #
     # @!attribute [rw] lon
-    #   Longitude information of remote IP address.
+    #   The longitude information of the remote IP address.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GeoLocation AWS API Documentation
@@ -1390,11 +1605,11 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] created_at
-    #   Detector creation timestamp.
+    #   The timestamp of when the detector was created.
     #   @return [String]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   Finding publishing frequency.
+    #   The publishing frequency of the finding.
     #   @return [String]
     #
     # @!attribute [rw] service_role
@@ -1406,7 +1621,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Detector last update timestamp.
+    #   The last-updated timestamp for the detector.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1434,7 +1649,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the filter is associated with.
+    #   The unique ID of the detector that the filter is associated with.
     #   @return [String]
     #
     # @!attribute [rw] filter_name
@@ -1507,7 +1722,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
-    #   IDs of the findings that you want to retrieve.
+    #   The IDs of the findings that you want to retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sort_criteria
@@ -1566,11 +1781,11 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_statistic_types
-    #   Types of finding statistics to retrieve.
+    #   The types of finding statistics to retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] finding_criteria
-    #   Represents the criteria used for querying findings.
+    #   Represents the criteria that is used for querying findings.
     #   @return [Types::FindingCriteria]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsRequest AWS API Documentation
@@ -1583,7 +1798,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] finding_statistics
-    #   Finding statistics object.
+    #   The finding statistics object.
     #   @return [Types::FindingStatistics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse AWS API Documentation
@@ -1602,7 +1817,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the ipSet is associated with.
+    #   The unique ID of the detector that the IPSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] ip_set_id
@@ -1618,7 +1833,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] name
-    #   The user friendly name for the IPSet.
+    #   The user-friendly name for the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -1626,16 +1841,16 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example
-    #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of ipSet file uploaded.
+    #   The status of IPSet file that was uploaded.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags of the IP set resource.
+    #   The tags of the IPSet resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse AWS API Documentation
@@ -1685,7 +1900,7 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] master
-    #   Master account details.
+    #   The master account details.
     #   @return [Types::Master]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse AWS API Documentation
@@ -1726,8 +1941,8 @@ module Aws::GuardDuty
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain the unprocessed account and a result
+    #   string that explains why it was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersResponse AWS API Documentation
@@ -1747,11 +1962,12 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the threatIntelSet is associated with.
+    #   The unique ID of the detector that the threatIntelSet is associated
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] threat_intel_set_id
-    #   The unique ID of the threatIntelSet you want to get.
+    #   The unique ID of the threatIntelSet that you want to get.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetRequest AWS API Documentation
@@ -1763,9 +1979,9 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] name
-    #   A user-friendly ThreatIntelSet name that is displayed in all finding
-    #   generated by activity that involves IP addresses included in this
-    #   ThreatIntelSet.
+    #   A user-friendly ThreatIntelSet name displayed in all findings that
+    #   are generated by activity that involves IP addresses included in
+    #   this ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -1773,8 +1989,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example
-    #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1782,7 +1998,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags of the Threat List resource.
+    #   The tags of the threat list resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse AWS API Documentation
@@ -1799,11 +2015,11 @@ module Aws::GuardDuty
     # Contains information about the EC2 instance profile.
     #
     # @!attribute [rw] arn
-    #   AWS EC2 instance profile ARN.
+    #   The profile ARN of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   AWS EC2 instance profile ID.
+    #   The profile ID of the EC2 instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfile AWS API Documentation
@@ -1817,7 +2033,7 @@ module Aws::GuardDuty
     # Contains information about the details of an instance.
     #
     # @!attribute [rw] availability_zone
-    #   The availability zone of the EC2 instance.
+    #   The Availability Zone of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] iam_instance_profile
@@ -1854,7 +2070,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   The network interface information of the EC2 instance.
+    #   The elastic network interface information of the EC2 instance.
     #   @return [Array<Types::NetworkInterface>]
     #
     # @!attribute [rw] platform
@@ -1888,7 +2104,7 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Internal server error exception object.
+    # An internal server error exception object.
     #
     # @!attribute [rw] message
     #   The error message.
@@ -1909,7 +2125,7 @@ module Aws::GuardDuty
     # Contains information about the invitation to become a member account.
     #
     # @!attribute [rw] account_id
-    #   The ID of the account from which the invitations was sent.
+    #   The ID of the account that the invitation was sent from.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
@@ -1923,7 +2139,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent.
+    #   The timestamp when the invitation was sent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation AWS API Documentation
@@ -1947,8 +2163,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account with which
-    #   you want to invite members.
+    #   The unique ID of the detector of the GuardDuty account that you want
+    #   to invite members with.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
@@ -1957,7 +2173,7 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     #
     # @!attribute [rw] disable_email_notification
-    #   A boolean value that specifies whether you want to disable email
+    #   A Boolean value that specifies whether you want to disable email
     #   notification to the accounts that you’re inviting to GuardDuty as
     #   members.
     #   @return [Boolean]
@@ -1978,8 +2194,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain the unprocessed account and a result
+    #   string that explains why it was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersResponse AWS API Documentation
@@ -1999,14 +2215,14 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   you want in the response. The default value is 50. The maximum value
-    #   is 50.
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
+    #   subsequent calls to the action, fill nextToken in the request with
     #   the value of NextToken from the previous response to continue
     #   listing data.
     #   @return [String]
@@ -2020,11 +2236,11 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] detector_ids
-    #   A list of detector Ids.
+    #   A list of detector IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2046,19 +2262,19 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the filter is associated with.
+    #   The unique ID of the detector that the filter is associated with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   you want in the response. The default value is 50. The maximum value
-    #   is 50.
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
+    #   subsequent calls to the action, fill nextToken in the request with
     #   the value of NextToken from the previous response to continue
     #   listing data.
     #   @return [String]
@@ -2073,11 +2289,11 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] filter_names
-    #   A list of filter names
+    #   A list of filter names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2153,8 +2369,6 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
-    #   * resource.instanceDetails.outpostArn
-    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2205,8 +2419,6 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.protocol
     #
-    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
-    #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -2252,7 +2464,7 @@ module Aws::GuardDuty
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
+    #   subsequent calls to the action, fill nextToken in the request with
     #   the value of NextToken from the previous response to continue
     #   listing data.
     #   @return [String]
@@ -2269,11 +2481,11 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] finding_ids
-    #   The IDs of the findings you are listing.
+    #   The IDs of the findings that you're listing.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2295,7 +2507,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the ipSet is associated with.
+    #   The unique ID of the detector that the IPSet is associated with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2307,7 +2519,7 @@ module Aws::GuardDuty
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
+    #   subsequent calls to the action, fill nextToken in the request with
     #   the value of NextToken from the previous response to continue
     #   listing data.
     #   @return [String]
@@ -2326,7 +2538,7 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2348,14 +2560,14 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   you want in the response. The default value is 50. The maximum value
-    #   is 50.
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
+    #   subsequent calls to the action, fill nextToken in the request with
     #   the value of NextToken from the previous response to continue
     #   listing data.
     #   @return [String]
@@ -2373,7 +2585,7 @@ module Aws::GuardDuty
     #   @return [Array<Types::Invitation>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2408,15 +2620,17 @@ module Aws::GuardDuty
     # @!attribute [rw] next_token
     #   You can use this parameter when paginating results. Set the value of
     #   this parameter to null on your first call to the list action. For
-    #   subsequent calls to the action fill nextToken in the request with
+    #   subsequent calls to the action, fill nextToken in the request with
     #   the value of NextToken from the previous response to continue
     #   listing data.
     #   @return [String]
     #
     # @!attribute [rw] only_associated
-    #   Specifies whether to only return associated members or to return all
-    #   members (including members which haven't been invited yet or have
-    #   been disassociated).
+    #   Specifies what member accounts the response includes based on their
+    #   relationship status with the master account. The default value is
+    #   "true". If set to "false" the response includes all existing
+    #   member accounts (including members who haven't been invited yet or
+    #   have been disassociated).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest AWS API Documentation
@@ -2434,7 +2648,7 @@ module Aws::GuardDuty
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2442,6 +2656,52 @@ module Aws::GuardDuty
     #
     class ListMembersResponse < Struct.new(
       :members,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOrganizationAdminAccountsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListOrganizationAdminAccountsRequest AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] admin_accounts
+    #   An AdminAccounts object that includes a list of accounts configured
+    #   as GuardDuty delegated administrators.
+    #   @return [Array<Types::AdminAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination parameter to be used on the next list operation to
+    #   retrieve more items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListOrganizationAdminAccountsResponse AWS API Documentation
+    #
+    class ListOrganizationAdminAccountsResponse < Struct.new(
+      :admin_accounts,
       :next_token)
       include Aws::Structure
     end
@@ -2464,11 +2724,11 @@ module Aws::GuardDuty
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to use for paginating results returned in the repsonse. Set
-    #   the value of this parameter to null for the first request to a list
-    #   action. For subsequent calls, use the `NextToken` value returned
-    #   from the previous request to continue listing results after the
-    #   first page.
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinationsRequest AWS API Documentation
@@ -2481,16 +2741,16 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] destinations
-    #   A `Destinations` obect that includes information about each
+    #   A `Destinations` object that includes information about each
     #   publishing destination returned.
     #   @return [Array<Types::Destination>]
     #
     # @!attribute [rw] next_token
-    #   A token to use for paginating results returned in the repsonse. Set
-    #   the value of this parameter to null for the first request to a list
-    #   action. For subsequent calls, use the `NextToken` value returned
-    #   from the previous request to continue listing results after the
-    #   first page.
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request to a list action. For subsequent calls, use the `NextToken`
+    #   value returned from the previous request to continue listing results
+    #   after the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListPublishingDestinationsResponse AWS API Documentation
@@ -2509,7 +2769,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for the given GuardDuty resource
+    #   The Amazon Resource Name (ARN) for the given GuardDuty resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListTagsForResourceRequest AWS API Documentation
@@ -2540,19 +2800,20 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector the threatIntelSet is associated with.
+    #   The unique ID of the detector that the threatIntelSet is associated
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   You can use this parameter to indicate the maximum number of items
-    #   you want in the response. The default value is 50. The maximum value
-    #   is 50.
+    #   that you want in the response. The default value is 50. The maximum
+    #   value is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   You can use this parameter to paginate results in the response. Set
     #   the value of this parameter to null on your first call to the list
-    #   action. For subsequent calls to the action fill nextToken in the
+    #   action. For subsequent calls to the action, fill nextToken in the
     #   request with the value of NextToken from the previous response to
     #   continue listing data.
     #   @return [String]
@@ -2571,7 +2832,7 @@ module Aws::GuardDuty
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination parameter to be used on the next list operation to
+    #   The pagination parameter to be used on the next list operation to
     #   retrieve more items.
     #   @return [String]
     #
@@ -2586,7 +2847,7 @@ module Aws::GuardDuty
     # Contains information about the local IP address of the connection.
     #
     # @!attribute [rw] ip_address_v4
-    #   IPV4 remote address of the connection.
+    #   The IPv4 local address of the connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalIpDetails AWS API Documentation
@@ -2599,11 +2860,11 @@ module Aws::GuardDuty
     # Contains information about the port for the local connection.
     #
     # @!attribute [rw] port
-    #   Port number of the local connection.
+    #   The port number of the local connection.
     #   @return [Integer]
     #
     # @!attribute [rw] port_name
-    #   Port name of the local connection.
+    #   The port name of the local connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalPortDetails AWS API Documentation
@@ -2614,15 +2875,14 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the Master account and invitation.
+    # Contains information about the master account and invitation.
     #
     # @!attribute [rw] account_id
-    #   The ID of the account used as the Master account.
+    #   The ID of the account used as the master account.
     #   @return [String]
     #
     # @!attribute [rw] invitation_id
-    #   This value is used to validate the master account to the member
-    #   account.
+    #   The value used to validate the master account to the member account.
     #   @return [String]
     #
     # @!attribute [rw] relationship_status
@@ -2631,7 +2891,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent.
+    #   The timestamp when the invitation was sent.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Master AWS API Documentation
@@ -2644,22 +2904,22 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Continas information about the member account
+    # Contains information about the member account.
     #
     # @!attribute [rw] account_id
-    #   Member account ID.
+    #   The ID of the member account.
     #   @return [String]
     #
     # @!attribute [rw] detector_id
-    #   Member account's detector ID.
+    #   The detector ID of the member account.
     #   @return [String]
     #
     # @!attribute [rw] master_id
-    #   Master account ID.
+    #   The master account ID.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   Member account's email address.
+    #   The email address of the member account.
     #   @return [String]
     #
     # @!attribute [rw] relationship_status
@@ -2667,11 +2927,11 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] invited_at
-    #   Timestamp at which the invitation was sent
+    #   The timestamp when the invitation was sent.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Member last updated timestamp.
+    #   The last-updated timestamp of the member.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Member AWS API Documentation
@@ -2691,31 +2951,32 @@ module Aws::GuardDuty
     # the finding.
     #
     # @!attribute [rw] blocked
-    #   Network connection blocked information.
+    #   Indicates whether EC2 blocked the network connection to your
+    #   instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] connection_direction
-    #   Network connection direction.
+    #   The network connection direction.
     #   @return [String]
     #
     # @!attribute [rw] local_port_details
-    #   Local port information of the connection.
+    #   The local port information of the connection.
     #   @return [Types::LocalPortDetails]
     #
     # @!attribute [rw] protocol
-    #   Network connection protocol.
+    #   The network connection protocol.
     #   @return [String]
     #
     # @!attribute [rw] local_ip_details
-    #   Local IP information of the connection.
+    #   The local IP information of the connection.
     #   @return [Types::LocalIpDetails]
     #
     # @!attribute [rw] remote_ip_details
-    #   Remote IP information of the connection.
+    #   The remote IP information of the connection.
     #   @return [Types::RemoteIpDetails]
     #
     # @!attribute [rw] remote_port_details
-    #   Remote port information of the connection.
+    #   The remote port information of the connection.
     #   @return [Types::RemotePortDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkConnectionAction AWS API Documentation
@@ -2731,22 +2992,23 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the network interface of the Ec2 instance.
+    # Contains information about the elastic network interface of the EC2
+    # instance.
     #
     # @!attribute [rw] ipv_6_addresses
-    #   A list of EC2 instance IPv6 address information.
+    #   A list of IPv6 addresses for the EC2 instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_id
-    #   The ID of the network interface
+    #   The ID of the network interface.
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
-    #   Private DNS name of the EC2 instance.
+    #   The private DNS name of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
-    #   Private IP address of the EC2 instance.
+    #   The private IP address of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_addresses
@@ -2754,15 +3016,15 @@ module Aws::GuardDuty
     #   @return [Array<Types::PrivateIpAddressDetails>]
     #
     # @!attribute [rw] public_dns_name
-    #   Public DNS name of the EC2 instance.
+    #   The public DNS name of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] public_ip
-    #   Public IP address of the EC2 instance.
+    #   The public IP address of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   Security groups associated with the EC2 instance.
+    #   The security groups associated with the EC2 instance.
     #   @return [Array<Types::SecurityGroup>]
     #
     # @!attribute [rw] subnet_id
@@ -2789,24 +3051,24 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Continas information about the ISP organization of the remote IP
+    # Contains information about the ISP organization of the remote IP
     # address.
     #
     # @!attribute [rw] asn
-    #   Autonomous system number of the internet provider of the remote IP
-    #   address.
+    #   The Autonomous System Number (ASN) of the internet provider of the
+    #   remote IP address.
     #   @return [String]
     #
     # @!attribute [rw] asn_org
-    #   Organization that registered this ASN.
+    #   The organization that registered this ASN.
     #   @return [String]
     #
     # @!attribute [rw] isp
-    #   ISP information for the internet provider.
+    #   The ISP information for the internet provider.
     #   @return [String]
     #
     # @!attribute [rw] org
-    #   Name of the internet provider.
+    #   The name of the internet provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Organization AWS API Documentation
@@ -2823,11 +3085,12 @@ module Aws::GuardDuty
     # finding.
     #
     # @!attribute [rw] blocked
-    #   Port probe blocked information.
+    #   Indicates whether EC2 blocked the port probe to the instance, such
+    #   as with an ACL.
     #   @return [Boolean]
     #
     # @!attribute [rw] port_probe_details
-    #   A list of port probe details objects.
+    #   A list of objects related to port probe details.
     #   @return [Array<Types::PortProbeDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeAction AWS API Documentation
@@ -2841,15 +3104,15 @@ module Aws::GuardDuty
     # Contains information about the port probe details.
     #
     # @!attribute [rw] local_port_details
-    #   Local port information of the connection.
+    #   The local port information of the connection.
     #   @return [Types::LocalPortDetails]
     #
     # @!attribute [rw] local_ip_details
-    #   Local IP information of the connection.
+    #   The local IP information of the connection.
     #   @return [Types::LocalIpDetails]
     #
     # @!attribute [rw] remote_ip_details
-    #   Remote IP information of the connection.
+    #   The remote IP information of the connection.
     #   @return [Types::RemoteIpDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeDetail AWS API Documentation
@@ -2864,11 +3127,11 @@ module Aws::GuardDuty
     # Contains other private IP address information of the EC2 instance.
     #
     # @!attribute [rw] private_dns_name
-    #   Private DNS name of the EC2 instance.
+    #   The private DNS name of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
-    #   Private IP address of the EC2 instance.
+    #   The private IP address of the EC2 instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails AWS API Documentation
@@ -2879,14 +3142,14 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the product code for the Ec2 instance.
+    # Contains information about the product code for the EC2 instance.
     #
     # @!attribute [rw] code
-    #   Product code information.
+    #   The product code information.
     #   @return [String]
     #
     # @!attribute [rw] product_type
-    #   Product code type.
+    #   The product code type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProductCode AWS API Documentation
@@ -2897,26 +3160,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Continas information about the remote IP address of the connection.
+    # Contains information about the remote IP address of the connection.
     #
     # @!attribute [rw] city
-    #   City information of the remote IP address.
+    #   The city information of the remote IP address.
     #   @return [Types::City]
     #
     # @!attribute [rw] country
-    #   Country code of the remote IP address.
+    #   The country code of the remote IP address.
     #   @return [Types::Country]
     #
     # @!attribute [rw] geo_location
-    #   Location information of the remote IP address.
+    #   The location information of the remote IP address.
     #   @return [Types::GeoLocation]
     #
     # @!attribute [rw] ip_address_v4
-    #   IPV4 remote address of the connection.
+    #   The IPv4 remote address of the connection.
     #   @return [String]
     #
     # @!attribute [rw] organization
-    #   ISP Organization information of the remote IP address.
+    #   The ISP organization information of the remote IP address.
     #   @return [Types::Organization]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemoteIpDetails AWS API Documentation
@@ -2933,11 +3196,11 @@ module Aws::GuardDuty
     # Contains information about the remote port.
     #
     # @!attribute [rw] port
-    #   Port number of the remote connection.
+    #   The port number of the remote connection.
     #   @return [Integer]
     #
     # @!attribute [rw] port_name
-    #   Port name of the remote connection.
+    #   The port name of the remote connection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemotePortDetails AWS API Documentation
@@ -2963,7 +3226,7 @@ module Aws::GuardDuty
     #   @return [Types::InstanceDetails]
     #
     # @!attribute [rw] resource_type
-    #   The type of the AWS resource.
+    #   The type of AWS resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
@@ -2979,11 +3242,11 @@ module Aws::GuardDuty
     # instance.
     #
     # @!attribute [rw] group_id
-    #   EC2 instance's security group ID.
+    #   The security group ID of the EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   EC2 instance's security group name.
+    #   The security group name of the EC2 instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityGroup AWS API Documentation
@@ -2997,7 +3260,7 @@ module Aws::GuardDuty
     # Contains additional information about the generated finding.
     #
     # @!attribute [rw] action
-    #   Information about the activity described in a finding.
+    #   Information about the activity that is described in a finding.
     #   @return [Types::Action]
     #
     # @!attribute [rw] evidence
@@ -3009,25 +3272,25 @@ module Aws::GuardDuty
     #   @return [Boolean]
     #
     # @!attribute [rw] count
-    #   Total count of the occurrences of this finding type.
+    #   The total count of the occurrences of this finding type.
     #   @return [Integer]
     #
     # @!attribute [rw] detector_id
-    #   Detector ID for the GuardDuty service.
+    #   The detector ID for the GuardDuty service.
     #   @return [String]
     #
     # @!attribute [rw] event_first_seen
-    #   First seen timestamp of the activity that prompted GuardDuty to
+    #   The first-seen timestamp of the activity that prompted GuardDuty to
     #   generate this finding.
     #   @return [String]
     #
     # @!attribute [rw] event_last_seen
-    #   Last seen timestamp of the activity that prompted GuardDuty to
+    #   The last-seen timestamp of the activity that prompted GuardDuty to
     #   generate this finding.
     #   @return [String]
     #
     # @!attribute [rw] resource_role
-    #   Resource role information for this finding.
+    #   The resource role information for this finding.
     #   @return [String]
     #
     # @!attribute [rw] service_name
@@ -3035,7 +3298,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] user_feedback
-    #   Feedback left about the finding.
+    #   Feedback that was submitted about the finding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service AWS API Documentation
@@ -3065,12 +3328,12 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] attribute_name
-    #   Represents the finding attribute (for example, accountId) by which
-    #   to sort findings.
+    #   Represents the finding attribute (for example, accountId) to sort
+    #   findings by.
     #   @return [String]
     #
     # @!attribute [rw] order_by
-    #   Order by which the sorted findings are to be displayed.
+    #   The order by which the sorted findings are to be displayed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SortCriteria AWS API Documentation
@@ -3108,8 +3371,8 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain the unprocessed account and a result
+    #   string that explains why it was unprocessed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersResponse AWS API Documentation
@@ -3128,13 +3391,12 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The unique ID of the detector of the GuardDuty account that you want
-    #   to stop from monitor members' findings.
+    #   The unique ID of the detector associated with the GuardDuty master
+    #   account that is monitoring member accounts.
     #   @return [String]
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs of the GuardDuty member accounts whose
-    #   findings you want the master account to stop monitoring.
+    #   A list of account IDs for the member accounts to stop monitoring.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersRequest AWS API Documentation
@@ -3146,8 +3408,9 @@ module Aws::GuardDuty
     end
 
     # @!attribute [rw] unprocessed_accounts
-    #   A list of objects containing the unprocessed account and a result
-    #   string explaining why it was unprocessed.
+    #   A list of objects that contain an accountId for each account that
+    #   could not be processed, and a result string that indicates why the
+    #   account was not processed.
     #   @return [Array<Types::UnprocessedAccount>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersResponse AWS API Documentation
@@ -3157,14 +3420,14 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about a tag associated with the Ec2 instance.
+    # Contains information about a tag associated with the EC2 instance.
     #
     # @!attribute [rw] key
-    #   EC2 instance tag key.
+    #   The EC2 instance tag key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   EC2 instance tag value.
+    #   The EC2 instance tag value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag AWS API Documentation
@@ -3239,7 +3502,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
-    #   IDs of the findings to unarchive.
+    #   The IDs of the findings to unarchive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsRequest AWS API Documentation
@@ -3254,10 +3517,10 @@ module Aws::GuardDuty
     #
     class UnarchiveFindingsResponse < Aws::EmptyStructure; end
 
-    # Contains information about the accounts that were not processed.
+    # Contains information about the accounts that weren't processed.
     #
     # @!attribute [rw] account_id
-    #   AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] result
@@ -3318,7 +3581,7 @@ module Aws::GuardDuty
     #   @return [Boolean]
     #
     # @!attribute [rw] finding_publishing_frequency
-    #   A enum value that specifies how frequently findings are exported,
+    #   An enum value that specifies how frequently findings are exported,
     #   such as to CloudWatch Events.
     #   @return [String]
     #
@@ -3432,7 +3695,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
-    #   IDs of the findings that you want to mark as useful or not useful.
+    #   The IDs of the findings that you want to mark as useful or not
+    #   useful.
     #   @return [Array<String>]
     #
     # @!attribute [rw] feedback
@@ -3482,12 +3746,12 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet. For example
-    #   (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
+    #   The updated URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
-    #   The updated boolean value that specifies whether the IPSet is active
+    #   The updated Boolean value that specifies whether the IPSet is active
     #   or not.
     #   @return [Boolean]
     #
@@ -3506,6 +3770,35 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateOrganizationConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "DetectorId", # required
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   The ID of the detector to update the delegated administrator for.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_enable
+    #   Indicates whether to automatically enable member accounts in the
+    #   organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationRequest AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationRequest < Struct.new(
+      :detector_id,
+      :auto_enable)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateOrganizationConfigurationResponse AWS API Documentation
+    #
+    class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdatePublishingDestinationRequest
     #   data as a hash:
     #
@@ -3519,12 +3812,12 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] detector_id
-    #   The ID of the
+    #   The ID of the detector associated with the publishing destinations
+    #   to update.
     #   @return [String]
     #
     # @!attribute [rw] destination_id
-    #   The ID of the detector associated with the publishing destinations
-    #   to update.
+    #   The ID of the publishing destination to update.
     #   @return [String]
     #
     # @!attribute [rw] destination_properties
@@ -3573,11 +3866,11 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] location
     #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
-    #   The updated boolean value that specifies whether the ThreateIntelSet
+    #   The updated Boolean value that specifies whether the ThreateIntelSet
     #   is active or not.
     #   @return [Boolean]
     #

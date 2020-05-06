@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-04-03)
+------------------
+
+* Feature - Added support for limiting simulation unit usage, giving more predictable control over simulation cost
+
 1.21.0 (2020-03-09)
 ------------------
 

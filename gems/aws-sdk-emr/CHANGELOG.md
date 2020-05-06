@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-04-21)
+------------------
+
+* Feature - Amazon EMR adds support for configuring a managed scaling policy for an Amazon EMR cluster. This enables automatic resizing of a cluster to optimize for job execution speed and reduced cluster cost.
+
 1.25.0 (2020-03-09)
 ------------------
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2020-04-20)
+------------------
+
+* Feature - Added a new ConnectionType "KAFKA" and a ConnectionProperty "KAFKA_BOOTSTRAP_SERVERS" to support Kafka connection.
+
+1.52.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for querying GetUserDefinedFunctions API without databaseName.
+
+1.51.0 (2020-03-31)
+------------------
+
+* Feature - Add two enums for MongoDB connection: Added "CONNECTION_URL" to "ConnectionPropertyKey" and added "MONGODB" to "ConnectionType"
+
 1.50.0 (2020-03-09)
 ------------------
 

@@ -1710,7 +1710,7 @@ module Aws::Glue
     GetUserDefinedFunctionResponse.struct_class = Types::GetUserDefinedFunctionResponse
 
     GetUserDefinedFunctionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
-    GetUserDefinedFunctionsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetUserDefinedFunctionsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
     GetUserDefinedFunctionsRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Pattern"))
     GetUserDefinedFunctionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetUserDefinedFunctionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))

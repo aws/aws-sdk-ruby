@@ -140,6 +140,9 @@ module AwsSdkCodeGenerator
           # <important> tag doesn't render well
           html = html.gsub(/<important>(.+?)<\/important>/){ "<p>#{$1}</p>" }
 
+          # <replaceable> doesn't render anything, so sub it out for italic
+          html = html.gsub(/<replaceable>(.+?)<\/replaceable>/) { "<i>#{$1}</i>" }
+
           markdown = Kramdown::Document.new(
             html,
             input: 'html',

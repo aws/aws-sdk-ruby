@@ -47,6 +47,8 @@ module Aws::WAF
     CreateSizeConstraintSetResponse = Shapes::StructureShape.new(name: 'CreateSizeConstraintSetResponse')
     CreateSqlInjectionMatchSetRequest = Shapes::StructureShape.new(name: 'CreateSqlInjectionMatchSetRequest')
     CreateSqlInjectionMatchSetResponse = Shapes::StructureShape.new(name: 'CreateSqlInjectionMatchSetResponse')
+    CreateWebACLMigrationStackRequest = Shapes::StructureShape.new(name: 'CreateWebACLMigrationStackRequest')
+    CreateWebACLMigrationStackResponse = Shapes::StructureShape.new(name: 'CreateWebACLMigrationStackResponse')
     CreateWebACLRequest = Shapes::StructureShape.new(name: 'CreateWebACLRequest')
     CreateWebACLResponse = Shapes::StructureShape.new(name: 'CreateWebACLResponse')
     CreateXssMatchSetRequest = Shapes::StructureShape.new(name: 'CreateXssMatchSetRequest')
@@ -79,6 +81,7 @@ module Aws::WAF
     DeleteWebACLResponse = Shapes::StructureShape.new(name: 'DeleteWebACLResponse')
     DeleteXssMatchSetRequest = Shapes::StructureShape.new(name: 'DeleteXssMatchSetRequest')
     DeleteXssMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteXssMatchSetResponse')
+    ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
@@ -145,6 +148,7 @@ module Aws::WAF
     IPSetUpdate = Shapes::StructureShape.new(name: 'IPSetUpdate')
     IPSetUpdates = Shapes::ListShape.new(name: 'IPSetUpdates')
     IPString = Shapes::StringShape.new(name: 'IPString')
+    IgnoreUnsupportedType = Shapes::BooleanShape.new(name: 'IgnoreUnsupportedType')
     ListActivatedRulesInRuleGroupRequest = Shapes::StructureShape.new(name: 'ListActivatedRulesInRuleGroupRequest')
     ListActivatedRulesInRuleGroupResponse = Shapes::StructureShape.new(name: 'ListActivatedRulesInRuleGroupResponse')
     ListByteMatchSetsRequest = Shapes::StructureShape.new(name: 'ListByteMatchSetsRequest')
@@ -185,6 +189,7 @@ module Aws::WAF
     MatchFieldData = Shapes::StringShape.new(name: 'MatchFieldData')
     MatchFieldType = Shapes::StringShape.new(name: 'MatchFieldType')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MigrationErrorType = Shapes::StringShape.new(name: 'MigrationErrorType')
     Negated = Shapes::BooleanShape.new(name: 'Negated')
     NextMarker = Shapes::StringShape.new(name: 'NextMarker')
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
@@ -233,6 +238,8 @@ module Aws::WAF
     RuleSummary = Shapes::StructureShape.new(name: 'RuleSummary')
     RuleUpdate = Shapes::StructureShape.new(name: 'RuleUpdate')
     RuleUpdates = Shapes::ListShape.new(name: 'RuleUpdates')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3ObjectUrl = Shapes::StringShape.new(name: 'S3ObjectUrl')
     SampleWeight = Shapes::IntegerShape.new(name: 'SampleWeight')
     SampledHTTPRequest = Shapes::StructureShape.new(name: 'SampledHTTPRequest')
     SampledHTTPRequests = Shapes::ListShape.new(name: 'SampledHTTPRequests')
@@ -293,6 +300,7 @@ module Aws::WAF
     UpdateXssMatchSetResponse = Shapes::StructureShape.new(name: 'UpdateXssMatchSetResponse')
     WAFBadRequestException = Shapes::StructureShape.new(name: 'WAFBadRequestException')
     WAFDisallowedNameException = Shapes::StructureShape.new(name: 'WAFDisallowedNameException')
+    WAFEntityMigrationException = Shapes::StructureShape.new(name: 'WAFEntityMigrationException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
     WAFInvalidAccountException = Shapes::StructureShape.new(name: 'WAFInvalidAccountException')
     WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
@@ -450,6 +458,14 @@ module Aws::WAF
     CreateSqlInjectionMatchSetResponse.add_member(:sql_injection_match_set, Shapes::ShapeRef.new(shape: SqlInjectionMatchSet, location_name: "SqlInjectionMatchSet"))
     CreateSqlInjectionMatchSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     CreateSqlInjectionMatchSetResponse.struct_class = Types::CreateSqlInjectionMatchSetResponse
+
+    CreateWebACLMigrationStackRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "WebACLId"))
+    CreateWebACLMigrationStackRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "S3BucketName"))
+    CreateWebACLMigrationStackRequest.add_member(:ignore_unsupported_type, Shapes::ShapeRef.new(shape: IgnoreUnsupportedType, required: true, location_name: "IgnoreUnsupportedType"))
+    CreateWebACLMigrationStackRequest.struct_class = Types::CreateWebACLMigrationStackRequest
+
+    CreateWebACLMigrationStackResponse.add_member(:s3_object_url, Shapes::ShapeRef.new(shape: S3ObjectUrl, required: true, location_name: "S3ObjectUrl"))
+    CreateWebACLMigrationStackResponse.struct_class = Types::CreateWebACLMigrationStackResponse
 
     CreateWebACLRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "Name"))
     CreateWebACLRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
@@ -1059,8 +1075,8 @@ module Aws::WAF
     SubscribedRuleGroupSummary.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     SubscribedRuleGroupSummary.struct_class = Types::SubscribedRuleGroupSummary
 
-    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
-    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagInfoForResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceARN"))
@@ -1190,6 +1206,11 @@ module Aws::WAF
 
     WAFDisallowedNameException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     WAFDisallowedNameException.struct_class = Types::WAFDisallowedNameException
+
+    WAFEntityMigrationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    WAFEntityMigrationException.add_member(:migration_error_type, Shapes::ShapeRef.new(shape: MigrationErrorType, location_name: "MigrationErrorType"))
+    WAFEntityMigrationException.add_member(:migration_error_reason, Shapes::ShapeRef.new(shape: ErrorReason, location_name: "MigrationErrorReason"))
+    WAFEntityMigrationException.struct_class = Types::WAFEntityMigrationException
 
     WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
@@ -1464,6 +1485,19 @@ module Aws::WAF
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFBadRequestException)
+      end)
+
+      api.add_operation(:create_web_acl_migration_stack, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWebACLMigrationStack"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateWebACLMigrationStackRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWebACLMigrationStackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFEntityMigrationException)
       end)
 
       api.add_operation(:create_xss_match_set, Seahorse::Model::Operation.new.tap do |o|

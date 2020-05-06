@@ -269,8 +269,7 @@ module Aws::LexModelBuildingService
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::LexModelBuildingService
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1150,6 +1149,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotAliasesResponse#bot_aliases #bot_aliases} => Array&lt;Types::BotAliasMetadata&gt;
     #   * {Types::GetBotAliasesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bot_aliases({
@@ -1281,6 +1282,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotChannelAssociationsResponse#bot_channel_associations #bot_channel_associations} => Array&lt;Types::BotChannelAssociation&gt;
     #   * {Types::GetBotChannelAssociationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bot_channel_associations({
@@ -1347,6 +1350,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotVersionsResponse#bots #bots} => Array&lt;Types::BotMetadata&gt;
     #   * {Types::GetBotVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bot_versions({
@@ -1405,6 +1410,8 @@ module Aws::LexModelBuildingService
     #
     #   * {Types::GetBotsResponse#bots #bots} => Array&lt;Types::BotMetadata&gt;
     #   * {Types::GetBotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of bots
@@ -1535,6 +1542,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBuiltinIntentsResponse#intents #intents} => Array&lt;Types::BuiltinIntentMetadata&gt;
     #   * {Types::GetBuiltinIntentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_intents({
@@ -1595,6 +1604,8 @@ module Aws::LexModelBuildingService
     #
     #   * {Types::GetBuiltinSlotTypesResponse#slot_types #slot_types} => Array&lt;Types::BuiltinSlotTypeMetadata&gt;
     #   * {Types::GetBuiltinSlotTypesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2000,6 +2011,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetIntentVersionsResponse#intents #intents} => Array&lt;Types::IntentMetadata&gt;
     #   * {Types::GetIntentVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_intent_versions({
@@ -2056,6 +2069,8 @@ module Aws::LexModelBuildingService
     #
     #   * {Types::GetIntentsResponse#intents #intents} => Array&lt;Types::IntentMetadata&gt;
     #   * {Types::GetIntentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of intents
@@ -2225,6 +2240,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetSlotTypeVersionsResponse#slot_types #slot_types} => Array&lt;Types::SlotTypeMetadata&gt;
     #   * {Types::GetSlotTypeVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_slot_type_versions({
@@ -2281,6 +2298,8 @@ module Aws::LexModelBuildingService
     #
     #   * {Types::GetSlotTypesResponse#slot_types #slot_types} => Array&lt;Types::SlotTypeMetadata&gt;
     #   * {Types::GetSlotTypesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of slot types

@@ -41,6 +41,7 @@ module Aws::ECR
   # * {LifecyclePolicyPreviewInProgressException}
   # * {LifecyclePolicyPreviewNotFoundException}
   # * {LimitExceededException}
+  # * {ReferencedImagesNotFoundException}
   # * {RepositoryAlreadyExistsException}
   # * {RepositoryNotEmptyException}
   # * {RepositoryNotFoundException}
@@ -48,6 +49,7 @@ module Aws::ECR
   # * {ScanNotFoundException}
   # * {ServerException}
   # * {TooManyTagsException}
+  # * {UnsupportedImageTypeException}
   # * {UploadNotFoundException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -316,6 +318,21 @@ module Aws::ECR
       end
     end
 
+    class ReferencedImagesNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ReferencedImagesNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class RepositoryAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -411,6 +428,21 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnsupportedImageTypeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::UnsupportedImageTypeException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

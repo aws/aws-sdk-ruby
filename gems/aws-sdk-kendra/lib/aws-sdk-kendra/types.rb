@@ -96,6 +96,15 @@ module Aws::Kendra
 
     # Provides filtering the query results based on document attributes.
     #
+    # When you use the `AndAllFilters` or `OrAllFilters`, filters you can
+    # use a total of 3 layers. For example, you can use:
+    #
+    # 1.  `<AndAllFilters>`
+    #
+    # 2.  ` <OrAllFilters>`
+    #
+    # 3.  ` <EqualTo>`
+    #
     # @note When making an API call, you may pass AttributeFilter
     #   data as a hash:
     #
@@ -801,6 +810,9 @@ module Aws::Kendra
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
+    #             use_change_log: false,
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             vpc_configuration: {
     #               subnet_ids: ["SubnetId"], # required
     #               security_group_ids: ["VpcSecurityGroupId"], # required
@@ -986,6 +998,7 @@ module Aws::Kendra
     #           kms_key_id: "KmsKeyId",
     #         },
     #         description: "Description",
+    #         client_token: "ClientTokenName",
     #       }
     #
     # @!attribute [rw] name
@@ -1009,13 +1022,23 @@ module Aws::Kendra
     #   A description for the index.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   A token that you provide to identify the request to create an index.
+    #   Multiple calls to the `CreateIndex` operation with the same client
+    #   token will create only one index.”
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndexRequest AWS API Documentation
     #
     class CreateIndexRequest < Struct.new(
       :name,
       :role_arn,
       :server_side_encryption_configuration,
-      :description)
+      :description,
+      :client_token)
       include Aws::Structure
     end
 
@@ -1053,6 +1076,9 @@ module Aws::Kendra
     #           urls: ["Url"], # required
     #           secret_arn: "SecretArn", # required
     #           crawl_attachments: false,
+    #           use_change_log: false,
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #           vpc_configuration: {
     #             subnet_ids: ["SubnetId"], # required
     #             security_group_ids: ["VpcSecurityGroupId"], # required
@@ -1697,7 +1723,13 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] blob
-    #   The contents of the document as a base-64 encoded string.
+    #   The contents of the document.
+    #
+    #   Documents passed to the `Blob` parameter must be base64 encoded.
+    #   Your code might not need to encode the document file bytes if
+    #   you're using an AWS SDK to call Amazon Kendra operations. If you
+    #   are calling the Amazon Kendra endpoint directly using REST, you must
+    #   base64 encode the contents before sending.
     #   @return [String]
     #
     # @!attribute [rw] s3_path
@@ -2909,6 +2941,9 @@ module Aws::Kendra
     #         urls: ["Url"], # required
     #         secret_arn: "SecretArn", # required
     #         crawl_attachments: false,
+    #         use_change_log: false,
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         vpc_configuration: {
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["VpcSecurityGroupId"], # required
@@ -2951,6 +2986,35 @@ module Aws::Kendra
     #   SharePoint site in the index; otherwise, `FALSE`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] use_change_log
+    #   Set to `TRUE` to use the Microsoft SharePoint change log to
+    #   determine the documents that need to be updated in the index.
+    #   Depending on the size of the SharePoint change log, it may take
+    #   longer for Amazon Kendra to use the change log than it takes it to
+    #   determine the changed documents using the Amazon Kendra document
+    #   crawler.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns. Documents that match the
+    #   patterns are included in the index. Documents that don't match the
+    #   patterns are excluded from the index. If a document matches both an
+    #   inclusion pattern and an exclusion pattern, the document is not
+    #   included in the index.
+    #
+    #   The regex is applied to the display URL of the SharePoint document.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns. Documents that match the
+    #   patterns are excluded from the index. Documents that don't match
+    #   the patterns are included in the index. If a document matches both
+    #   an exclusion pattern and an inclusion pattern, the document is not
+    #   included in the index.
+    #
+    #   The regex is applied to the display URL of the SharePoint document.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] vpc_configuration
     #   Provides information for connecting to an Amazon VPC.
     #   @return [Types::DataSourceVpcConfiguration]
@@ -2979,6 +3043,9 @@ module Aws::Kendra
       :urls,
       :secret_arn,
       :crawl_attachments,
+      :use_change_log,
+      :inclusion_patterns,
+      :exclusion_patterns,
       :vpc_configuration,
       :field_mappings,
       :document_title_field_name)
@@ -3185,6 +3252,9 @@ module Aws::Kendra
     #             urls: ["Url"], # required
     #             secret_arn: "SecretArn", # required
     #             crawl_attachments: false,
+    #             use_change_log: false,
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             vpc_configuration: {
     #               subnet_ids: ["SubnetId"], # required
     #               security_group_ids: ["VpcSecurityGroupId"], # required

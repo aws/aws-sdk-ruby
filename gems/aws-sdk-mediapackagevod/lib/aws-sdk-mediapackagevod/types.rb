@@ -42,6 +42,10 @@ module Aws::MediaPackageVod
     #   The IAM role\_arn used to access the source S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/Asset AWS API Documentation
     #
     class Asset < Struct.new(
@@ -52,7 +56,8 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :resource_id,
       :source_arn,
-      :source_role_arn)
+      :source_role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -78,6 +83,10 @@ module Aws::MediaPackageVod
     #   The IAM role ARN used to access the source S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/AssetCreateParameters AWS API Documentation
     #
     class AssetCreateParameters < Struct.new(
@@ -85,7 +94,8 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :resource_id,
       :source_arn,
-      :source_role_arn)
+      :source_role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -138,6 +148,10 @@ module Aws::MediaPackageVod
     #   The IAM role ARN used to access the source S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/AssetShallow AWS API Documentation
     #
     class AssetShallow < Struct.new(
@@ -147,7 +161,8 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :resource_id,
       :source_arn,
-      :source_role_arn)
+      :source_role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -238,6 +253,9 @@ module Aws::MediaPackageVod
     #         resource_id: "__string",
     #         source_arn: "__string", # required
     #         source_role_arn: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -255,6 +273,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] source_role_arn
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreateAssetRequest AWS API Documentation
     #
     class CreateAssetRequest < Struct.new(
@@ -262,7 +284,8 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :resource_id,
       :source_arn,
-      :source_role_arn)
+      :source_role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -290,6 +313,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] source_role_arn
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreateAssetResponse AWS API Documentation
     #
     class CreateAssetResponse < Struct.new(
@@ -300,7 +327,8 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :resource_id,
       :source_arn,
-      :source_role_arn)
+      :source_role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -406,6 +434,9 @@ module Aws::MediaPackageVod
     #           segment_duration_seconds: 1,
     #         },
     #         packaging_group_id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] cmaf_package
@@ -431,6 +462,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] packaging_group_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingConfigurationRequest AWS API Documentation
     #
     class CreatePackagingConfigurationRequest < Struct.new(
@@ -439,7 +474,8 @@ module Aws::MediaPackageVod
       :hls_package,
       :id,
       :mss_package,
-      :packaging_group_id)
+      :packaging_group_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -469,6 +505,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] packaging_group_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingConfigurationResponse AWS API Documentation
     #
     class CreatePackagingConfigurationResponse < Struct.new(
@@ -478,7 +518,8 @@ module Aws::MediaPackageVod
       :hls_package,
       :id,
       :mss_package,
-      :packaging_group_id)
+      :packaging_group_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -487,15 +528,23 @@ module Aws::MediaPackageVod
     #
     #       {
     #         id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingGroupRequest AWS API Documentation
     #
     class CreatePackagingGroupRequest < Struct.new(
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -508,12 +557,17 @@ module Aws::MediaPackageVod
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingGroupResponse AWS API Documentation
     #
     class CreatePackagingGroupResponse < Struct.new(
       :arn,
       :domain_name,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -777,6 +831,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] source_role_arn
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribeAssetResponse AWS API Documentation
     #
     class DescribeAssetResponse < Struct.new(
@@ -787,7 +845,8 @@ module Aws::MediaPackageVod
       :packaging_group_id,
       :resource_id,
       :source_arn,
-      :source_role_arn)
+      :source_role_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -834,6 +893,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] packaging_group_id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingConfigurationResponse AWS API Documentation
     #
     class DescribePackagingConfigurationResponse < Struct.new(
@@ -843,7 +906,8 @@ module Aws::MediaPackageVod
       :hls_package,
       :id,
       :mss_package,
-      :packaging_group_id)
+      :packaging_group_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -873,12 +937,17 @@ module Aws::MediaPackageVod
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingGroupResponse AWS API Documentation
     #
     class DescribePackagingGroupResponse < Struct.new(
       :arn,
       :domain_name,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1208,6 +1277,33 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A Microsoft Smooth Streaming (MSS) encryption configuration.
     #
     # @note When making an API call, you may pass MssEncryption
@@ -1352,6 +1448,10 @@ module Aws::MediaPackageVod
     #   The ID of a PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingConfiguration AWS API Documentation
     #
     class PackagingConfiguration < Struct.new(
@@ -1361,7 +1461,8 @@ module Aws::MediaPackageVod
       :hls_package,
       :id,
       :mss_package,
-      :packaging_group_id)
+      :packaging_group_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1393,6 +1494,10 @@ module Aws::MediaPackageVod
     #   The ID of a PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingConfigurationCreateParameters AWS API Documentation
     #
     class PackagingConfigurationCreateParameters < Struct.new(
@@ -1401,7 +1506,8 @@ module Aws::MediaPackageVod
       :hls_package,
       :id,
       :mss_package,
-      :packaging_group_id)
+      :packaging_group_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1438,12 +1544,17 @@ module Aws::MediaPackageVod
     #   The ID of the PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingGroup AWS API Documentation
     #
     class PackagingGroup < Struct.new(
       :arn,
       :domain_name,
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1454,10 +1565,15 @@ module Aws::MediaPackageVod
     #   The ID of the PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingGroupCreateParameters AWS API Documentation
     #
     class PackagingGroupCreateParameters < Struct.new(
-      :id)
+      :id,
+      :tags)
       include Aws::Structure
     end
 
@@ -1556,6 +1672,40 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/TagsModel AWS API Documentation
+    #
+    class TagsModel < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -1573,6 +1723,28 @@ module Aws::MediaPackageVod
     #
     class UnprocessableEntityException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-03-19)
+------------------
+
+* Feature - Documentation updates for AWS Outposts.
+
 1.2.0 (2020-03-09)
 ------------------
 

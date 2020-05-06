@@ -279,8 +279,7 @@ module Aws::EMR
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::EMR
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -820,8 +819,14 @@ module Aws::EMR
     #   resp.cluster.kerberos_attributes.ad_domain_join_user #=> String
     #   resp.cluster.kerberos_attributes.ad_domain_join_password #=> String
     #   resp.cluster.cluster_arn #=> String
-    #   resp.cluster.step_concurrency_level #=> Integer
     #   resp.cluster.outpost_arn #=> String
+    #   resp.cluster.step_concurrency_level #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * cluster_running
+    #   * cluster_terminated
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
@@ -1031,6 +1036,11 @@ module Aws::EMR
     #   resp.step.status.timeline.start_date_time #=> Time
     #   resp.step.status.timeline.end_date_time #=> Time
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * step_complete
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep AWS API Documentation
     #
     # @overload describe_step(params = {})
@@ -1072,6 +1082,38 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Fetches the attached managed scaling policy for an Amazon EMR cluster.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the cluster for which the managed scaling policy
+    #   will be fetched.
+    #
+    # @return [Types::GetManagedScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetManagedScalingPolicyOutput#managed_scaling_policy #managed_scaling_policy} => Types::ManagedScalingPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_managed_scaling_policy({
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.managed_scaling_policy.compute_limits.unit_type #=> String, one of "InstanceFleetUnits", "Instances", "VCPU"
+    #   resp.managed_scaling_policy.compute_limits.minimum_capacity_units #=> Integer
+    #   resp.managed_scaling_policy.compute_limits.maximum_capacity_units #=> Integer
+    #   resp.managed_scaling_policy.compute_limits.maximum_on_demand_capacity_units #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicy AWS API Documentation
+    #
+    # @overload get_managed_scaling_policy(params = {})
+    # @param [Hash] params ({})
+    def get_managed_scaling_policy(params = {}, options = {})
+      req = build_request(:get_managed_scaling_policy, params)
+      req.send_request(options)
+    end
+
     # Provides information about the bootstrap actions associated with a
     # cluster.
     #
@@ -1086,6 +1128,8 @@ module Aws::EMR
     #
     #   * {Types::ListBootstrapActionsOutput#bootstrap_actions #bootstrap_actions} => Array&lt;Types::Command&gt;
     #   * {Types::ListBootstrapActionsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1137,6 +1181,8 @@ module Aws::EMR
     #
     #   * {Types::ListClustersOutput#clusters #clusters} => Array&lt;Types::ClusterSummary&gt;
     #   * {Types::ListClustersOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1190,6 +1236,8 @@ module Aws::EMR
     #
     #   * {Types::ListInstanceFleetsOutput#instance_fleets #instance_fleets} => Array&lt;Types::InstanceFleet&gt;
     #   * {Types::ListInstanceFleetsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1257,6 +1305,8 @@ module Aws::EMR
     #
     #   * {Types::ListInstanceGroupsOutput#instance_groups #instance_groups} => Array&lt;Types::InstanceGroup&gt;
     #   * {Types::ListInstanceGroupsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1374,6 +1424,8 @@ module Aws::EMR
     #   * {Types::ListInstancesOutput#instances #instances} => Array&lt;Types::Instance&gt;
     #   * {Types::ListInstancesOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_instances({
@@ -1433,6 +1485,8 @@ module Aws::EMR
     #   * {Types::ListSecurityConfigurationsOutput#security_configurations #security_configurations} => Array&lt;Types::SecurityConfigurationSummary&gt;
     #   * {Types::ListSecurityConfigurationsOutput#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_security_configurations({
@@ -1478,6 +1532,8 @@ module Aws::EMR
     #
     #   * {Types::ListStepsOutput#steps #steps} => Array&lt;Types::StepSummary&gt;
     #   * {Types::ListStepsOutput#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1775,6 +1831,14 @@ module Aws::EMR
     #   this by updating `BlockPublicSecurityGroupRules` to remove the
     #   exception.
     #
+    #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
+    #   2019, block public access is disabled by default in that Region. To
+    #   use this feature, you must manually enable and configure it. For
+    #   accounts that did not create an EMR cluster in a Region before this
+    #   date, block public access is enabled by default in that Region.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1797,6 +1861,44 @@ module Aws::EMR
     # @param [Hash] params ({})
     def put_block_public_access_configuration(params = {}, options = {})
       req = build_request(:put_block_public_access_configuration, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a managed scaling policy for an Amazon EMR cluster.
+    # The managed scaling policy defines the limits for resources, such as
+    # EC2 instances that can be added or terminated from a cluster. The
+    # policy only applies to the core and task nodes. The master node cannot
+    # be scaled after initial configuration.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of an EMR cluster where the managed scaling policy is
+    #   attached.
+    #
+    # @option params [required, Types::ManagedScalingPolicy] :managed_scaling_policy
+    #   Specifies the constraints for the managed scaling policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_managed_scaling_policy({
+    #     cluster_id: "ClusterId", # required
+    #     managed_scaling_policy: { # required
+    #       compute_limits: {
+    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #         minimum_capacity_units: 1, # required
+    #         maximum_capacity_units: 1, # required
+    #         maximum_on_demand_capacity_units: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutManagedScalingPolicy AWS API Documentation
+    #
+    # @overload put_managed_scaling_policy(params = {})
+    # @param [Hash] params ({})
+    def put_managed_scaling_policy(params = {}, options = {})
+      req = build_request(:put_managed_scaling_policy, params)
       req.send_request(options)
     end
 
@@ -1826,6 +1928,29 @@ module Aws::EMR
     # @param [Hash] params ({})
     def remove_auto_scaling_policy(params = {}, options = {})
       req = build_request(:remove_auto_scaling_policy, params)
+      req.send_request(options)
+    end
+
+    # Removes a managed scaling policy from a specified EMR cluster.
+    #
+    # @option params [required, String] :cluster_id
+    #   Specifies the ID of the cluster from which the managed scaling policy
+    #   will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_managed_scaling_policy({
+    #     cluster_id: "ClusterId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveManagedScalingPolicy AWS API Documentation
+    #
+    # @overload remove_managed_scaling_policy(params = {})
+    # @param [Hash] params ({})
+    def remove_managed_scaling_policy(params = {}, options = {})
+      req = build_request(:remove_managed_scaling_policy, params)
       req.send_request(options)
     end
 
@@ -2103,6 +2228,9 @@ module Aws::EMR
     #   Specifies the number of steps that can be executed concurrently. The
     #   default value is `1`. The maximum value is `256`.
     #
+    # @option params [Types::ManagedScalingPolicy] :managed_scaling_policy
+    #   The specified managed scaling policy for an Amazon EMR cluster.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -2332,6 +2460,14 @@ module Aws::EMR
     #       ad_domain_join_password: "XmlStringMaxLen256",
     #     },
     #     step_concurrency_level: 1,
+    #     managed_scaling_policy: {
+    #       compute_limits: {
+    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #         minimum_capacity_units: 1, # required
+    #         maximum_capacity_units: 1, # required
+    #         maximum_on_demand_capacity_units: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2484,7 +2620,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2550,11 +2686,11 @@ module Aws::EMR
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name        | params              | :delay   | :max_attempts |
-    # | ------------------ | ------------------- | -------- | ------------- |
-    # | cluster_running    | {#describe_cluster} | 30       | 60            |
-    # | cluster_terminated | {#describe_cluster} | 30       | 60            |
-    # | step_complete      | {#describe_step}    | 30       | 60            |
+    # | waiter_name        | params                    | :delay   | :max_attempts |
+    # | ------------------ | ------------------------- | -------- | ------------- |
+    # | cluster_running    | {Client#describe_cluster} | 30       | 60            |
+    # | cluster_terminated | {Client#describe_cluster} | 30       | 60            |
+    # | step_complete      | {Client#describe_step}    | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

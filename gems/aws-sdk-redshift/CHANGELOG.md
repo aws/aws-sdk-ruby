@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-04-22)
+------------------
+
+* Feature - Amazon Redshift support for usage limits
+
+1.40.0 (2020-04-08)
+------------------
+
+* Feature - Documentation updates for redshift
+
+
 1.39.0 (2020-03-11)
 ------------------
 
@@ -260,4 +271,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-redshift` gem.
-

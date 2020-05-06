@@ -269,8 +269,7 @@ module Aws::RoboMaker
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::RoboMaker
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -384,6 +383,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].network_interface.network_interface_id #=> String
     #   resp.jobs[0].network_interface.private_ip_address #=> String
     #   resp.jobs[0].network_interface.public_ip_address #=> String
+    #   resp.jobs[0].compute.simulation_unit_limit #=> Integer
     #   resp.unprocessed_jobs #=> Array
     #   resp.unprocessed_jobs[0] #=> String
     #
@@ -1021,6 +1021,9 @@ module Aws::RoboMaker
     #   These must belong to the same VPC. You must provide at least one
     #   security group and one subnet ID.
     #
+    # @option params [Types::Compute] :compute
+    #   Compute information for the simulation job.
+    #
     # @return [Types::CreateSimulationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSimulationJobResponse#arn #arn} => String
@@ -1040,6 +1043,7 @@ module Aws::RoboMaker
     #   * {Types::CreateSimulationJobResponse#data_sources #data_sources} => Array&lt;Types::DataSource&gt;
     #   * {Types::CreateSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
+    #   * {Types::CreateSimulationJobResponse#compute #compute} => Types::ComputeResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -1116,6 +1120,9 @@ module Aws::RoboMaker
     #       security_groups: ["NonEmptyString"],
     #       assign_public_ip: false,
     #     },
+    #     compute: {
+    #       simulation_unit_limit: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1171,6 +1178,7 @@ module Aws::RoboMaker
     #   resp.vpc_config.security_groups[0] #=> String
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.assign_public_ip #=> Boolean
+    #   resp.compute.simulation_unit_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CreateSimulationJob AWS API Documentation
     #
@@ -1617,6 +1625,7 @@ module Aws::RoboMaker
     #   * {Types::DescribeSimulationJobResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeSimulationJobResponse#vpc_config #vpc_config} => Types::VPCConfigResponse
     #   * {Types::DescribeSimulationJobResponse#network_interface #network_interface} => Types::NetworkInterface
+    #   * {Types::DescribeSimulationJobResponse#compute #compute} => Types::ComputeResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -1682,6 +1691,7 @@ module Aws::RoboMaker
     #   resp.network_interface.network_interface_id #=> String
     #   resp.network_interface.private_ip_address #=> String
     #   resp.network_interface.public_ip_address #=> String
+    #   resp.compute.simulation_unit_limit #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJob AWS API Documentation
     #
@@ -1771,6 +1781,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
     #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.compute.simulation_unit_limit #=> Integer
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
@@ -1818,6 +1829,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].vpc_config.security_groups #=> Array
     #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
     #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.pending_requests[0].compute.simulation_unit_limit #=> Integer
     #   resp.pending_requests[0].tags #=> Hash
     #   resp.pending_requests[0].tags["TagKey"] #=> String
     #   resp.created_requests #=> Array
@@ -1875,6 +1887,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListDeploymentJobsResponse#deployment_jobs #deployment_jobs} => Array&lt;Types::DeploymentJob&gt;
     #   * {Types::ListDeploymentJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1959,6 +1973,8 @@ module Aws::RoboMaker
     #   * {Types::ListFleetsResponse#fleet_details #fleet_details} => Array&lt;Types::Fleet&gt;
     #   * {Types::ListFleetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fleets({
@@ -2025,6 +2041,8 @@ module Aws::RoboMaker
     #   * {Types::ListRobotApplicationsResponse#robot_application_summaries #robot_application_summaries} => Array&lt;Types::RobotApplicationSummary&gt;
     #   * {Types::ListRobotApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_robot_applications({
@@ -2090,6 +2108,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListRobotsResponse#robots #robots} => Array&lt;Types::Robot&gt;
     #   * {Types::ListRobotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2160,6 +2180,8 @@ module Aws::RoboMaker
     #   * {Types::ListSimulationApplicationsResponse#simulation_application_summaries #simulation_application_summaries} => Array&lt;Types::SimulationApplicationSummary&gt;
     #   * {Types::ListSimulationApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_simulation_applications({
@@ -2220,6 +2242,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListSimulationJobBatchesResponse#simulation_job_batch_summaries #simulation_job_batch_summaries} => Array&lt;Types::SimulationJobBatchSummary&gt;
     #   * {Types::ListSimulationJobBatchesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2293,6 +2317,8 @@ module Aws::RoboMaker
     #
     #   * {Types::ListSimulationJobsResponse#simulation_job_summaries #simulation_job_summaries} => Array&lt;Types::SimulationJobSummary&gt;
     #   * {Types::ListSimulationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2529,6 +2555,9 @@ module Aws::RoboMaker
     #           security_groups: ["NonEmptyString"],
     #           assign_public_ip: false,
     #         },
+    #         compute: {
+    #           simulation_unit_limit: 1,
+    #         },
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -2591,6 +2620,7 @@ module Aws::RoboMaker
     #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
     #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
     #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.compute.simulation_unit_limit #=> Integer
     #   resp.failed_requests[0].request.tags #=> Hash
     #   resp.failed_requests[0].request.tags["TagKey"] #=> String
     #   resp.failed_requests[0].failure_reason #=> String
@@ -2638,6 +2668,7 @@ module Aws::RoboMaker
     #   resp.pending_requests[0].vpc_config.security_groups #=> Array
     #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
     #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.pending_requests[0].compute.simulation_unit_limit #=> Integer
     #   resp.pending_requests[0].tags #=> Hash
     #   resp.pending_requests[0].tags["TagKey"] #=> String
     #   resp.created_requests #=> Array
@@ -2969,7 +3000,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

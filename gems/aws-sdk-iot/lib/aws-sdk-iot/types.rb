@@ -293,7 +293,7 @@ module Aws::IoT
     #   @return [Types::CloudwatchAlarmAction]
     #
     # @!attribute [rw] cloudwatch_logs
-    #   Send data to CloudWatch logs.
+    #   Send data to CloudWatch Logs.
     #   @return [Types::CloudwatchLogsAction]
     #
     # @!attribute [rw] elasticsearch
@@ -1134,7 +1134,7 @@ module Aws::IoT
     #
     #       {
     #         action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
-    #         resources: ["Resource"],
+    #         resources: ["Resource"], # required
     #       }
     #
     # @!attribute [rw] action_type
@@ -1327,6 +1327,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -1351,6 +1355,13 @@ module Aws::IoT
     #   What is measured by the behavior.
     #   @return [String]
     #
+    # @!attribute [rw] metric_dimension
+    #   The dimension for a metric in your behavior. For example, using a
+    #   `TOPIC_FILTER` dimension, you can narrow down the scope of the
+    #   metric only to MQTT topics whose name match the pattern specified in
+    #   the dimension.
+    #   @return [Types::MetricDimension]
+    #
     # @!attribute [rw] criteria
     #   The criteria that determine if a device is behaving normally in
     #   regard to the `metric`.
@@ -1359,6 +1370,7 @@ module Aws::IoT
     class Behavior < Struct.new(
       :name,
       :metric,
+      :metric_dimension,
       :criteria)
       include Aws::Structure
     end
@@ -1746,6 +1758,10 @@ module Aws::IoT
     #   used.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_mode
+    #   The mode of the certificate.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date and time the certificate was created.
     #   @return [Time]
@@ -1754,6 +1770,7 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       :status,
+      :certificate_mode,
       :creation_date)
       include Aws::Structure
     end
@@ -1827,6 +1844,10 @@ module Aws::IoT
     #   When the certificate is valid.
     #   @return [Types::CertificateValidity]
     #
+    # @!attribute [rw] certificate_mode
+    #   The mode of the certificate.
+    #   @return [String]
+    #
     class CertificateDescription < Struct.new(
       :certificate_arn,
       :certificate_id,
@@ -1840,7 +1861,8 @@ module Aws::IoT
       :customer_version,
       :transfer_data,
       :generation_id,
-      :validity)
+      :validity,
+      :certificate_mode)
       include Aws::Structure
     end
 
@@ -1925,7 +1947,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Describes an action that sends data to CloudWatch logs.
+    # Describes an action that sends data to CloudWatch Logs.
     #
     # @note When making an API call, you may pass CloudwatchLogsAction
     #   data as a hash:
@@ -2162,6 +2184,12 @@ module Aws::IoT
     #           "KeyName" => "KeyValue",
     #         },
     #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #         signing_disabled: false,
     #       }
     #
@@ -2187,6 +2215,21 @@ module Aws::IoT
     #   The status of the create authorizer request.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the custom authorizer.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @!attribute [rw] signing_disabled
     #   Specifies whether AWS IoT validates the token signature in an
     #   authorization request.
@@ -2198,6 +2241,7 @@ module Aws::IoT
       :token_key_name,
       :token_signing_public_keys,
       :status,
+      :tags,
       :signing_disabled)
       include Aws::Structure
     end
@@ -2226,7 +2270,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2317,6 +2361,75 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDimensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DimensionName", # required
+    #         type: "TOPIC_FILTER", # required, accepts TOPIC_FILTER
+    #         string_values: ["DimensionStringValue"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A unique identifier for the dimension. Choose something that
+    #   describes the type and value to make it easy to remember what it
+    #   does.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of dimension. Supported types: `TOPIC_FILTER.`
+    #   @return [String]
+    #
+    # @!attribute [rw] string_values
+    #   Specifies the value or list of values for the dimension. For
+    #   `TOPIC_FILTER` dimensions, this is a pattern used to match the MQTT
+    #   topic (for example, "admin/#").
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Metadata that can be used to manage the dimension.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each dimension must have a unique client request token. If you try
+    #   to create a new dimension with the same token as a dimension that
+    #   already exists, an exception occurs. If you omit this value, AWS
+    #   SDKs will automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateDimensionRequest < Struct.new(
+      :name,
+      :type,
+      :string_values,
+      :tags,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A unique identifier for the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon resource name) of the created dimension.
+    #   @return [String]
+    #
+    class CreateDimensionResponse < Struct.new(
+      :name,
+      :arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDomainConfigurationRequest
     #   data as a hash:
     #
@@ -2330,6 +2443,12 @@ module Aws::IoT
     #           allow_authorizer_override: false,
     #         },
     #         service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] domain_configuration_name
@@ -2360,7 +2479,26 @@ module Aws::IoT
     #
     # @!attribute [rw] service_type
     #   The type of service delivered by the endpoint.
+    #
+    #   <note markdown="1"> AWS IoT Core currently supports only the `DATA` service type.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the domain configuration.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
     #
     class CreateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
@@ -2368,7 +2506,8 @@ module Aws::IoT
       :server_certificate_arns,
       :validation_certificate_arn,
       :authorizer_config,
-      :service_type)
+      :service_type,
+      :tags)
       include Aws::Structure
     end
 
@@ -2405,7 +2544,7 @@ module Aws::IoT
     #         query_version: "QueryVersion",
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2534,7 +2673,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2716,7 +2855,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2831,7 +2970,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -2942,6 +3081,12 @@ module Aws::IoT
     #       {
     #         policy_name: "PolicyName", # required
     #         policy_document: "PolicyDocument", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] policy_name
@@ -2954,9 +3099,25 @@ module Aws::IoT
     #   whitespace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the policy.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     class CreatePolicyRequest < Struct.new(
       :policy_name,
-      :policy_document)
+      :policy_document,
+      :tags)
       include Aws::Structure
     end
 
@@ -3095,9 +3256,13 @@ module Aws::IoT
     #         template_body: "TemplateBody", # required
     #         enabled: false,
     #         provisioning_role_arn: "RoleArn", # required
+    #         pre_provisioning_hook: {
+    #           payload_version: "PayloadVersion",
+    #           target_arn: "TargetArn", # required
+    #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3124,6 +3289,10 @@ module Aws::IoT
     #   template. This IoT role grants permission to provision a device.
     #   @return [String]
     #
+    # @!attribute [rw] pre_provisioning_hook
+    #   Creates a pre-provisioning hook template.
+    #   @return [Types::ProvisioningHook]
+    #
     # @!attribute [rw] tags
     #   Metadata which can be used to manage the fleet provisioning
     #   template.
@@ -3146,6 +3315,7 @@ module Aws::IoT
       :template_body,
       :enabled,
       :provisioning_role_arn,
+      :pre_provisioning_hook,
       :tags)
       include Aws::Structure
     end
@@ -3229,6 +3399,12 @@ module Aws::IoT
     #         role_alias: "RoleAlias", # required
     #         role_arn: "RoleArn", # required
     #         credential_duration_seconds: 1,
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] role_alias
@@ -3244,10 +3420,26 @@ module Aws::IoT
     #   How long (in seconds) the credentials will be valid.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the role alias.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     class CreateRoleAliasRequest < Struct.new(
       :role_alias,
       :role_arn,
-      :credential_duration_seconds)
+      :credential_duration_seconds,
+      :tags)
       include Aws::Structure
     end
 
@@ -3276,7 +3468,7 @@ module Aws::IoT
     #         scheduled_audit_name: "ScheduledAuditName", # required
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3349,6 +3541,10 @@ module Aws::IoT
     #           {
     #             name: "BehaviorName", # required
     #             metric: "BehaviorMetric",
+    #             metric_dimension: {
+    #               dimension_name: "DimensionName", # required
+    #               operator: "IN", # accepts IN, NOT_IN
+    #             },
     #             criteria: {
     #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #               value: {
@@ -3372,9 +3568,18 @@ module Aws::IoT
     #           },
     #         },
     #         additional_metrics_to_retain: ["BehaviorMetric"],
+    #         additional_metrics_to_retain_v2: [
+    #           {
+    #             metric: "BehaviorMetric", # required
+    #             metric_dimension: {
+    #               dimension_name: "DimensionName", # required
+    #               operator: "IN", # accepts IN, NOT_IN
+    #             },
+    #           },
+    #         ],
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3403,7 +3608,16 @@ module Aws::IoT
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
+    #
+    #   **Note:** This API field is deprecated. Please use
+    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's `behaviors`, but
+    #   it is also retained for any metric specified here.
+    #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] tags
     #   Metadata that can be used to manage the security profile.
@@ -3415,6 +3629,7 @@ module Aws::IoT
       :behaviors,
       :alert_targets,
       :additional_metrics_to_retain,
+      :additional_metrics_to_retain_v2,
       :tags)
       include Aws::Structure
     end
@@ -3452,7 +3667,7 @@ module Aws::IoT
     #         role_arn: "RoleArn", # required
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3529,7 +3744,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -3597,6 +3812,10 @@ module Aws::IoT
     #
     # @!attribute [rw] thing_name
     #   The name of the thing to create.
+    #
+    #   You can't change a thing's name after you create it. To change a
+    #   thing's name, you must create a new thing, give it the new name,
+    #   and then delete the old thing.
     #   @return [String]
     #
     # @!attribute [rw] thing_type_name
@@ -3656,7 +3875,7 @@ module Aws::IoT
     #         },
     #         tags: [
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -4227,6 +4446,24 @@ module Aws::IoT
       :message)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteDimensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DimensionName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The unique identifier for the dimension that you want to delete.
+    #   @return [String]
+    #
+    class DeleteDimensionRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    class DeleteDimensionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDomainConfigurationRequest
     #   data as a hash:
@@ -5086,6 +5323,58 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDimensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DimensionName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The unique identifier for the dimension.
+    #   @return [String]
+    #
+    class DescribeDimensionRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The unique identifier for the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon resource name) for the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_values
+    #   The value or list of values used to scope the dimension. For
+    #   example, for topic filters, this is the pattern used to match the
+    #   MQTT topic name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date the dimension was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date the dimension was last modified.
+    #   @return [Time]
+    #
+    class DescribeDimensionResponse < Struct.new(
+      :name,
+      :arn,
+      :type,
+      :string_values,
+      :creation_date,
+      :last_modified_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDomainConfigurationRequest
     #   data as a hash:
     #
@@ -5457,6 +5746,10 @@ module Aws::IoT
     #   IoT role grants permission to provision a device.
     #   @return [String]
     #
+    # @!attribute [rw] pre_provisioning_hook
+    #   Gets information about a pre-provisioned hook.
+    #   @return [Types::ProvisioningHook]
+    #
     class DescribeProvisioningTemplateResponse < Struct.new(
       :template_arn,
       :template_name,
@@ -5466,7 +5759,8 @@ module Aws::IoT
       :default_version_id,
       :template_body,
       :enabled,
-      :provisioning_role_arn)
+      :provisioning_role_arn,
+      :pre_provisioning_hook)
       include Aws::Structure
     end
 
@@ -5646,7 +5940,16 @@ module Aws::IoT
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
+    #
+    #   **Note:** This API field is deprecated. Please use
+    #   DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's behaviors, but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] version
     #   The version of the security profile. A new version is generated
@@ -5668,6 +5971,7 @@ module Aws::IoT
       :behaviors,
       :alert_targets,
       :additional_metrics_to_retain,
+      :additional_metrics_to_retain_v2,
       :version,
       :creation_date,
       :last_modified_date)
@@ -5871,7 +6175,16 @@ module Aws::IoT
     # The output from the DescribeThing operation.
     #
     # @!attribute [rw] default_client_id
-    #   The default client ID.
+    #   The default MQTT client ID. For a typical device, the thing name is
+    #   also used as the default MQTT client ID. Although we don’t require a
+    #   mapping between a thing's registry name and its use of MQTT client
+    #   IDs, certificates, or shadow state, we recommend that you choose a
+    #   thing name and use it as the MQTT client ID for the registry and the
+    #   Device Shadow service.
+    #
+    #   This lets you better organize your AWS IoT fleet without removing
+    #   the flexibility of the underlying device certificate model or
+    #   shadows.
     #   @return [String]
     #
     # @!attribute [rw] thing_name
@@ -7086,7 +7399,7 @@ module Aws::IoT
     #   not specify a confirmation URL AWS IoT uses the endpoint URL as the
     #   confirmation URL. If you use substitution templates in the
     #   confirmationUrl, you must create and enable topic rule destinations
-    #   that match each possible value of the substituion template before
+    #   that match each possible value of the substitution template before
     #   traffic is allowed to your endpoint URL.
     #   @return [String]
     #
@@ -8553,6 +8866,44 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDimensionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to retrieve at one time.
+    #   @return [Integer]
+    #
+    class ListDimensionsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dimension_names
+    #   A list of the names of the defined dimensions. Use
+    #   `DescribeDimension` to get details for a dimension.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListDimensionsResponse < Struct.new(
+      :dimension_names,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDomainConfigurationsRequest
     #   data as a hash:
     #
@@ -9381,6 +9732,7 @@ module Aws::IoT
     #       {
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         dimension_name: "DimensionName",
     #       }
     #
     # @!attribute [rw] next_token
@@ -9391,9 +9743,15 @@ module Aws::IoT
     #   The maximum number of results to return at one time.
     #   @return [Integer]
     #
+    # @!attribute [rw] dimension_name
+    #   A filter to limit results to the security profiles that use the
+    #   defined dimension.
+    #   @return [String]
+    #
     class ListSecurityProfilesRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :dimension_name)
       include Aws::Structure
     end
 
@@ -10274,6 +10632,63 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The dimension of a metric.
+    #
+    # @note When making an API call, you may pass MetricDimension
+    #   data as a hash:
+    #
+    #       {
+    #         dimension_name: "DimensionName", # required
+    #         operator: "IN", # accepts IN, NOT_IN
+    #       }
+    #
+    # @!attribute [rw] dimension_name
+    #   A unique identifier for the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   Defines how the `dimensionValues` of a dimension are interpreted.
+    #   For example, for dimension type TOPIC\_FILTER, the `IN` operator, a
+    #   message will be counted only if its topic matches one of the topic
+    #   filters. With `NOT_IN` operator, a message will be counted only if
+    #   it doesn't match any of the topic filters. The operator is
+    #   optional: if it's not provided (is `null`), it will be interpreted
+    #   as `IN`.
+    #   @return [String]
+    #
+    class MetricDimension < Struct.new(
+      :dimension_name,
+      :operator)
+      include Aws::Structure
+    end
+
+    # The metric you want to retain. Dimensions are optional.
+    #
+    # @note When making an API call, you may pass MetricToRetain
+    #   data as a hash:
+    #
+    #       {
+    #         metric: "BehaviorMetric", # required
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
+    #       }
+    #
+    # @!attribute [rw] metric
+    #   What is measured by the behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_dimension
+    #   The dimension of a metric.
+    #   @return [Types::MetricDimension]
+    #
+    class MetricToRetain < Struct.new(
+      :metric,
+      :metric_dimension)
+      include Aws::Structure
+    end
+
     # The value to be compared with the `metric`.
     #
     # @note When making an API call, you may pass MetricValue
@@ -10831,6 +11246,34 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Structure that contains `payloadVersion` and `targetArn`.
+    #
+    # @note When making an API call, you may pass ProvisioningHook
+    #   data as a hash:
+    #
+    #       {
+    #         payload_version: "PayloadVersion",
+    #         target_arn: "TargetArn", # required
+    #       }
+    #
+    # @!attribute [rw] payload_version
+    #   The payload that was sent to the target function.
+    #
+    #   *Note:* Only Lambda functions are currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the target function.
+    #
+    #   *Note:* Only Lambda functions are currently supported.
+    #   @return [String]
+    #
+    class ProvisioningHook < Struct.new(
+      :payload_version,
+      :target_arn)
+      include Aws::Structure
+    end
+
     # A summary of information about a fleet provisioning template.
     #
     # @!attribute [rw] template_arn
@@ -11035,6 +11478,12 @@ module Aws::IoT
     #           template_body: "TemplateBody",
     #           role_arn: "RoleArn",
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] ca_certificate
@@ -11059,12 +11508,28 @@ module Aws::IoT
     #   Information about the registration configuration.
     #   @return [Types::RegistrationConfig]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the CA certificate.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     class RegisterCACertificateRequest < Struct.new(
       :ca_certificate,
       :verification_certificate,
       :set_as_active,
       :allow_auto_registration,
-      :registration_config)
+      :registration_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -11137,6 +11602,43 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RegisterCertificateWithoutCARequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_pem: "CertificatePem", # required
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
+    #       }
+    #
+    # @!attribute [rw] certificate_pem
+    #   The certificate data, in PEM format.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the register certificate request.
+    #   @return [String]
+    #
+    class RegisterCertificateWithoutCARequest < Struct.new(
+      :certificate_pem,
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the registered certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The ID of the registered certificate. (The last part of the
+    #   certificate ARN contains the certificate ID.
+    #   @return [String]
+    #
+    class RegisterCertificateWithoutCAResponse < Struct.new(
+      :certificate_arn,
+      :certificate_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterThingRequest
     #   data as a hash:
     #
@@ -11157,12 +11659,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters for provisioning a thing. See [Programmatic
-    #   Provisioning][1] for more information.
+    #   The parameters for provisioning a thing. See [Provisioning
+    #   Templates][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
     #   @return [Hash<String,String>]
     #
     class RegisterThingRequest < Struct.new(
@@ -11172,7 +11674,7 @@ module Aws::IoT
     end
 
     # @!attribute [rw] certificate_pem
-    #   .
+    #   The certificate data, in PEM format.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -12851,7 +13353,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       }
     #
@@ -12876,7 +13378,7 @@ module Aws::IoT
     #         resource_arn: "ResourceArn", # required
     #         tags: [ # required
     #           {
-    #             key: "TagKey",
+    #             key: "TagKey", # required
     #             value: "TagValue",
     #           },
     #         ],
@@ -12997,7 +13499,7 @@ module Aws::IoT
     #         auth_infos: [ # required
     #           {
     #             action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
-    #             resources: ["Resource"],
+    #             resources: ["Resource"], # required
     #           },
     #         ],
     #         client_id: "ClientId",
@@ -13085,7 +13587,7 @@ module Aws::IoT
     #
     # @!attribute [rw] token_signature
     #   The signature made with the token and your custom authentication
-    #   service's private key.
+    #   service's private key. This value must be Base-64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] http_context
@@ -14513,6 +15015,70 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateDimensionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DimensionName", # required
+    #         string_values: ["DimensionStringValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A unique identifier for the dimension. Choose something that
+    #   describes the type and value to make it easy to remember what it
+    #   does.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_values
+    #   Specifies the value or list of values for the dimension. For
+    #   `TOPIC_FILTER` dimensions, this is a pattern used to match the MQTT
+    #   topic (for example, "admin/#").
+    #   @return [Array<String>]
+    #
+    class UpdateDimensionRequest < Struct.new(
+      :name,
+      :string_values)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   A unique identifier for the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon resource name) of the created dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_values
+    #   The value or list of values used to scope the dimension. For
+    #   example, for topic filters, this is the pattern used to match the
+    #   MQTT topic name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time, in milliseconds since epoch, when the dimension
+    #   was initially created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date and time, in milliseconds since epoch, when the dimension
+    #   was most recently updated.
+    #   @return [Time]
+    #
+    class UpdateDimensionResponse < Struct.new(
+      :name,
+      :arn,
+      :type,
+      :string_values,
+      :creation_date,
+      :last_modified_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDomainConfigurationRequest
     #   data as a hash:
     #
@@ -14859,6 +15425,11 @@ module Aws::IoT
     #         enabled: false,
     #         default_version_id: 1,
     #         provisioning_role_arn: "RoleArn",
+    #         pre_provisioning_hook: {
+    #           payload_version: "PayloadVersion",
+    #           target_arn: "TargetArn", # required
+    #         },
+    #         remove_pre_provisioning_hook: false,
     #       }
     #
     # @!attribute [rw] template_name
@@ -14882,12 +15453,22 @@ module Aws::IoT
     #   IoT role grants permission to provision a device.
     #   @return [String]
     #
+    # @!attribute [rw] pre_provisioning_hook
+    #   Updates the pre-provisioning hook template.
+    #   @return [Types::ProvisioningHook]
+    #
+    # @!attribute [rw] remove_pre_provisioning_hook
+    #   Removes pre-provisioning hook template.
+    #   @return [Boolean]
+    #
     class UpdateProvisioningTemplateRequest < Struct.new(
       :template_name,
       :description,
       :enabled,
       :default_version_id,
-      :provisioning_role_arn)
+      :provisioning_role_arn,
+      :pre_provisioning_hook,
+      :remove_pre_provisioning_hook)
       include Aws::Structure
     end
 
@@ -15008,6 +15589,10 @@ module Aws::IoT
     #           {
     #             name: "BehaviorName", # required
     #             metric: "BehaviorMetric",
+    #             metric_dimension: {
+    #               dimension_name: "DimensionName", # required
+    #               operator: "IN", # accepts IN, NOT_IN
+    #             },
     #             criteria: {
     #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #               value: {
@@ -15031,6 +15616,15 @@ module Aws::IoT
     #           },
     #         },
     #         additional_metrics_to_retain: ["BehaviorMetric"],
+    #         additional_metrics_to_retain_v2: [
+    #           {
+    #             metric: "BehaviorMetric", # required
+    #             metric_dimension: {
+    #               dimension_name: "DimensionName", # required
+    #               operator: "IN", # accepts IN, NOT_IN
+    #             },
+    #           },
+    #         ],
     #         delete_behaviors: false,
     #         delete_alert_targets: false,
     #         delete_additional_metrics_to_retain: false,
@@ -15058,7 +15652,16 @@ module Aws::IoT
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the profile's `behaviors`, but
     #   it is also retained for any metric specified here.
+    #
+    #   **Note:** This API field is deprecated. Please use
+    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's behaviors, but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] delete_behaviors
     #   If true, delete all `behaviors` defined for this security profile.
@@ -15091,6 +15694,7 @@ module Aws::IoT
       :behaviors,
       :alert_targets,
       :additional_metrics_to_retain,
+      :additional_metrics_to_retain_v2,
       :delete_behaviors,
       :delete_alert_targets,
       :delete_additional_metrics_to_retain,
@@ -15123,7 +15727,16 @@ module Aws::IoT
     #   A list of metrics whose data is retained (stored). By default, data
     #   is retained for any metric used in the security profile's
     #   `behaviors`, but it is also retained for any metric specified here.
+    #
+    #   **Note:** This API field is deprecated. Please use
+    #   UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data
+    #   is retained for any metric used in the profile's behaviors, but it
+    #   is also retained for any metric specified here.
+    #   @return [Array<Types::MetricToRetain>]
     #
     # @!attribute [rw] version
     #   The updated version of the security profile.
@@ -15144,6 +15757,7 @@ module Aws::IoT
       :behaviors,
       :alert_targets,
       :additional_metrics_to_retain,
+      :additional_metrics_to_retain_v2,
       :version,
       :creation_date,
       :last_modified_date)
@@ -15323,6 +15937,10 @@ module Aws::IoT
     #
     # @!attribute [rw] thing_name
     #   The name of the thing to update.
+    #
+    #   You can't change a thing's name. To change a thing's name, you
+    #   must create a new thing, give it the new name, and then delete the
+    #   old thing.
     #   @return [String]
     #
     # @!attribute [rw] thing_type_name
@@ -15425,6 +16043,10 @@ module Aws::IoT
     #           {
     #             name: "BehaviorName", # required
     #             metric: "BehaviorMetric",
+    #             metric_dimension: {
+    #               dimension_name: "DimensionName", # required
+    #               operator: "IN", # accepts IN, NOT_IN
+    #             },
     #             criteria: {
     #               comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #               value: {

@@ -1178,6 +1178,9 @@ module Aws::ECR
     # @!attribute [rw] image_size_in_bytes
     #   The size, in bytes, of the image in the repository.
     #
+    #   If the image is a manifest list, this will be the max size of all
+    #   manifests in the list.
+    #
     #   <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses
     #   image layers before pushing them to a V2 Docker registry. The output
     #   of the `docker images` command shows the uncompressed image size, so
@@ -2137,6 +2140,18 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The manifest list is referencing an image that does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReferencedImagesNotFoundException AWS API Documentation
+    #
+    class ReferencedImagesNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing a repository.
     #
     # @!attribute [rw] repository_arn
@@ -2538,6 +2553,18 @@ module Aws::ECR
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TooManyTagsException AWS API Documentation
     #
     class TooManyTagsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The image is of a type that cannot be scanned.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnsupportedImageTypeException AWS API Documentation
+    #
+    class UnsupportedImageTypeException < Struct.new(
       :message)
       include Aws::Structure
     end

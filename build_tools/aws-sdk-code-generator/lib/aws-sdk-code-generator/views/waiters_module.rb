@@ -20,6 +20,16 @@ module AwsSdkCodeGenerator
         GENERATED_SRC_WARNING
       end
 
+      # @return [Boolean]
+      def waiters?
+        waiters.size > 0
+      end
+
+      # @return [String<Markdown>]
+      def waiters_markdown_table
+        Waiter.markdown_table(@waiters)
+      end
+
     end
   end
 end

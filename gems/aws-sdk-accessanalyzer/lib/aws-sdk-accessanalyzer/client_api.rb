@@ -17,6 +17,7 @@ module Aws::AccessAnalyzer
     AnalyzedResourceSummary = Shapes::StructureShape.new(name: 'AnalyzedResourceSummary')
     AnalyzedResourcesList = Shapes::ListShape.new(name: 'AnalyzedResourcesList')
     AnalyzerArn = Shapes::StringShape.new(name: 'AnalyzerArn')
+    AnalyzerStatus = Shapes::StringShape.new(name: 'AnalyzerStatus')
     AnalyzerSummary = Shapes::StructureShape.new(name: 'AnalyzerSummary')
     AnalyzersList = Shapes::ListShape.new(name: 'AnalyzersList')
     ArchiveRuleSummary = Shapes::StructureShape.new(name: 'ArchiveRuleSummary')
@@ -34,6 +35,10 @@ module Aws::AccessAnalyzer
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingIdList = Shapes::ListShape.new(name: 'FindingIdList')
+    FindingSource = Shapes::StructureShape.new(name: 'FindingSource')
+    FindingSourceDetail = Shapes::StructureShape.new(name: 'FindingSourceDetail')
+    FindingSourceList = Shapes::ListShape.new(name: 'FindingSourceList')
+    FindingSourceType = Shapes::StringShape.new(name: 'FindingSourceType')
     FindingStatus = Shapes::StringShape.new(name: 'FindingStatus')
     FindingStatusUpdate = Shapes::StringShape.new(name: 'FindingStatusUpdate')
     FindingSummary = Shapes::StructureShape.new(name: 'FindingSummary')
@@ -63,6 +68,7 @@ module Aws::AccessAnalyzer
     Name = Shapes::StringShape.new(name: 'Name')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
     PrincipalMap = Shapes::MapShape.new(name: 'PrincipalMap')
+    ReasonCode = Shapes::StringShape.new(name: 'ReasonCode')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -70,6 +76,7 @@ module Aws::AccessAnalyzer
     SharedViaList = Shapes::ListShape.new(name: 'SharedViaList')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
     StartResourceScanRequest = Shapes::StructureShape.new(name: 'StartResourceScanRequest')
+    StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -100,6 +107,7 @@ module Aws::AccessAnalyzer
     AnalyzedResource.add_member(:error, Shapes::ShapeRef.new(shape: String, location_name: "error"))
     AnalyzedResource.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isPublic"))
     AnalyzedResource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    AnalyzedResource.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
     AnalyzedResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     AnalyzedResource.add_member(:shared_via, Shapes::ShapeRef.new(shape: SharedViaList, location_name: "sharedVia"))
     AnalyzedResource.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, location_name: "status"))
@@ -107,6 +115,7 @@ module Aws::AccessAnalyzer
     AnalyzedResource.struct_class = Types::AnalyzedResource
 
     AnalyzedResourceSummary.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    AnalyzedResourceSummary.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
     AnalyzedResourceSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     AnalyzedResourceSummary.struct_class = Types::AnalyzedResourceSummary
 
@@ -117,6 +126,8 @@ module Aws::AccessAnalyzer
     AnalyzerSummary.add_member(:last_resource_analyzed, Shapes::ShapeRef.new(shape: String, location_name: "lastResourceAnalyzed"))
     AnalyzerSummary.add_member(:last_resource_analyzed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastResourceAnalyzedAt"))
     AnalyzerSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AnalyzerSummary.add_member(:status, Shapes::ShapeRef.new(shape: AnalyzerStatus, required: true, location_name: "status"))
+    AnalyzerSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
     AnalyzerSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     AnalyzerSummary.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
     AnalyzerSummary.struct_class = Types::AnalyzerSummary
@@ -182,12 +193,23 @@ module Aws::AccessAnalyzer
     Finding.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
     Finding.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalMap, location_name: "principal"))
     Finding.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    Finding.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
     Finding.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    Finding.add_member(:sources, Shapes::ShapeRef.new(shape: FindingSourceList, location_name: "sources"))
     Finding.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, required: true, location_name: "status"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
 
     FindingIdList.member = Shapes::ShapeRef.new(shape: FindingId)
+
+    FindingSource.add_member(:detail, Shapes::ShapeRef.new(shape: FindingSourceDetail, location_name: "detail"))
+    FindingSource.add_member(:type, Shapes::ShapeRef.new(shape: FindingSourceType, required: true, location_name: "type"))
+    FindingSource.struct_class = Types::FindingSource
+
+    FindingSourceDetail.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "accessPointArn"))
+    FindingSourceDetail.struct_class = Types::FindingSourceDetail
+
+    FindingSourceList.member = Shapes::ShapeRef.new(shape: FindingSource)
 
     FindingSummary.add_member(:action, Shapes::ShapeRef.new(shape: ActionList, location_name: "action"))
     FindingSummary.add_member(:analyzed_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "analyzedAt"))
@@ -198,7 +220,9 @@ module Aws::AccessAnalyzer
     FindingSummary.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
     FindingSummary.add_member(:principal, Shapes::ShapeRef.new(shape: PrincipalMap, location_name: "principal"))
     FindingSummary.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    FindingSummary.add_member(:resource_owner_account, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceOwnerAccount"))
     FindingSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    FindingSummary.add_member(:sources, Shapes::ShapeRef.new(shape: FindingSourceList, location_name: "sources"))
     FindingSummary.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, required: true, location_name: "status"))
     FindingSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     FindingSummary.struct_class = Types::FindingSummary
@@ -309,6 +333,9 @@ module Aws::AccessAnalyzer
     StartResourceScanRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "analyzerArn"))
     StartResourceScanRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     StartResourceScanRequest.struct_class = Types::StartResourceScanRequest
+
+    StatusReason.add_member(:code, Shapes::ShapeRef.new(shape: ReasonCode, required: true, location_name: "code"))
+    StatusReason.struct_class = Types::StatusReason
 
     TagKeys.member = Shapes::ShapeRef.new(shape: String)
 

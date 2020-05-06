@@ -6,13 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CostandUsageReportService
-  # This class provides a resource oriented interface for CostandUsageReportService.
-  # To create a resource object:
-  #     resource = Aws::CostandUsageReportService::Resource.new(region: 'us-west-2')
-  # You can supply a client object with custom configuration that will be used for all resource operations.
-  # If you do not pass +:client+, a default client will be constructed.
-  #     client = Aws::CostandUsageReportService::Client.new(region: 'us-west-2')
-  #     resource = Aws::CostandUsageReportService::Resource.new(client: client)
+
   class Resource
 
     # @param options ({})

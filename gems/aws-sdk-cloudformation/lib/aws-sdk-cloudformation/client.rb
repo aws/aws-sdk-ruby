@@ -269,8 +269,7 @@ module Aws::CloudFormation
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::CloudFormation
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -766,7 +765,7 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :stack_name
     #   The name that is associated with the stack. The name must be unique in
-    #   the region in which you are creating the stack.
+    #   the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case sensitive)
     #   and hyphens. It must start with an alphabetic character and cannot be
@@ -975,7 +974,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1080,8 +1079,8 @@ module Aws::CloudFormation
     end
 
     # Creates stack instances for the specified accounts, within the
-    # specified regions. A stack instance refers to a stack in a specific
-    # account and region. You must specify at least one value for either
+    # specified Regions. A stack instance refers to a stack in a specific
+    # account and Region. You must specify at least one value for either
     # `Accounts` or `DeploymentTargets`, and you must specify at least one
     # value for `Regions`.
     #
@@ -1090,8 +1089,8 @@ module Aws::CloudFormation
     #   instances from.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more AWS accounts
-    #   that you want to create stack instances in the specified region(s)
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified Region(s)
     #   for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
@@ -1103,7 +1102,7 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
-    #   The names of one or more regions where you want to create stack
+    #   The names of one or more Regions where you want to create stack
     #   instances using the specified AWS account(s).
     #
     # @option params [Array<Types::Parameter>] :parameter_overrides
@@ -1111,7 +1110,7 @@ module Aws::CloudFormation
     #   the selected stack instances.
     #
     #   Any overridden parameter values will be applied to all stack instances
-    #   in the specified accounts and regions. When specifying parameters and
+    #   in the specified accounts and Regions. When specifying parameters and
     #   their values, be aware of how AWS CloudFormation sets parameter values
     #   during stack instance operations:
     #
@@ -1216,7 +1215,7 @@ module Aws::CloudFormation
     #
     # @option params [required, String] :stack_set_name
     #   The name to associate with the stack set. The name must be unique in
-    #   the region where you create your stack set.
+    #   the Region where you create your stack set.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case-sensitive)
     #   and hyphens. It must start with an alphabetic character and can't be
@@ -1390,9 +1389,6 @@ module Aws::CloudFormation
     #   accounts that are added to the target organization or organizational
     #   unit (OU). Specify only if `PermissionModel` is `SERVICE_MANAGED`.
     #
-    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets` or
-    #   `Regions`.
-    #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1556,14 +1552,14 @@ module Aws::CloudFormation
     end
 
     # Deletes stack instances for the specified accounts, in the specified
-    # regions.
+    # Regions.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to delete stack
     #   instances for.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of the AWS accounts that you
+    #   \[`Self-managed` permissions\] The names of the AWS accounts that you
     #   want to delete stack instances for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
@@ -1575,7 +1571,7 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
-    #   The regions where you want to delete stack set instances.
+    #   The Regions where you want to delete stack set instances.
     #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
     #   Preferences for how AWS CloudFormation performs this stack set
@@ -1861,6 +1857,11 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * change_set_create_complete
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet AWS API Documentation
     #
     # @overload describe_change_set(params = {})
@@ -1966,6 +1967,8 @@ module Aws::CloudFormation
     #   * {Types::DescribeStackEventsOutput#stack_events #stack_events} => Array&lt;Types::StackEvent&gt;
     #   * {Types::DescribeStackEventsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_stack_events({
@@ -1999,7 +2002,7 @@ module Aws::CloudFormation
     end
 
     # Returns the stack instance that's associated with the specified stack
-    # set, AWS account, and region.
+    # set, AWS account, and Region.
     #
     # For a list of stack instances that are associated with a specific
     # stack set, use ListStackInstances.
@@ -2012,7 +2015,7 @@ module Aws::CloudFormation
     #   The ID of an AWS account that's associated with this stack instance.
     #
     # @option params [required, String] :stack_instance_region
-    #   The name of a region that's associated with this stack instance.
+    #   The name of a Region that's associated with this stack instance.
     #
     # @return [Types::DescribeStackInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2162,6 +2165,8 @@ module Aws::CloudFormation
     #
     #   * {Types::DescribeStackResourceDriftsOutput#stack_resource_drifts #stack_resource_drifts} => Array&lt;Types::StackResourceDrift&gt;
     #   * {Types::DescribeStackResourceDriftsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2445,6 +2450,8 @@ module Aws::CloudFormation
     #   * {Types::DescribeStacksOutput#stacks #stacks} => Array&lt;Types::Stack&gt;
     #   * {Types::DescribeStacksOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_stacks({
@@ -2494,6 +2501,15 @@ module Aws::CloudFormation
     #   resp.stacks[0].drift_information.stack_drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.stacks[0].drift_information.last_check_timestamp #=> Time
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * stack_create_complete
+    #   * stack_delete_complete
+    #   * stack_exists
+    #   * stack_import_complete
+    #   * stack_update_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks AWS API Documentation
     #
@@ -2626,6 +2642,11 @@ module Aws::CloudFormation
     #   resp.description #=> String
     #   resp.type_arn #=> String
     #   resp.type_version_arn #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * type_registration_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeTypeRegistration AWS API Documentation
     #
@@ -3227,7 +3248,7 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Lists all exported output values in the account and region in which
+    # Lists all exported output values in the account and Region in which
     # you call this action. Use this action to see the exported output
     # values that you can import into other stacks. To import values, use
     # the [ `Fn::ImportValue` ][1] function.
@@ -3248,6 +3269,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListExportsOutput#exports #exports} => Array&lt;Types::Export&gt;
     #   * {Types::ListExportsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3298,6 +3321,8 @@ module Aws::CloudFormation
     #   * {Types::ListImportsOutput#imports #imports} => Array&lt;String&gt;
     #   * {Types::ListImportsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_imports({
@@ -3322,7 +3347,7 @@ module Aws::CloudFormation
 
     # Returns summary information about stack instances that are associated
     # with the specified stack set. You can filter for stack instances that
-    # are associated with a specific AWS account name or region.
+    # are associated with a specific AWS account name or Region.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to list stack
@@ -3346,7 +3371,7 @@ module Aws::CloudFormation
     #   The name of the AWS account that you want to list stack instances for.
     #
     # @option params [String] :stack_instance_region
-    #   The name of the region where you want to list stack instances.
+    #   The name of the Region where you want to list stack instances.
     #
     # @return [Types::ListStackInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3410,6 +3435,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListStackResourcesOutput#stack_resource_summaries #stack_resource_summaries} => Array&lt;Types::StackResourceSummary&gt;
     #   * {Types::ListStackResourcesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3632,6 +3659,8 @@ module Aws::CloudFormation
     #   * {Types::ListStacksOutput#stack_summaries #stack_summaries} => Array&lt;Types::StackSummary&gt;
     #   * {Types::ListStacksOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stacks({
@@ -3707,6 +3736,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListTypeRegistrationsOutput#registration_token_list #registration_token_list} => Array&lt;String&gt;
     #   * {Types::ListTypeRegistrationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3787,6 +3818,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListTypeVersionsOutput#type_version_summaries #type_version_summaries} => Array&lt;Types::TypeVersionSummary&gt;
     #   * {Types::ListTypeVersionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3884,6 +3917,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListTypesOutput#type_summaries #type_summaries} => Array&lt;Types::TypeSummary&gt;
     #   * {Types::ListTypesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4009,6 +4044,11 @@ module Aws::CloudFormation
     # For more information on how to develop types and ready them for
     # registeration, see [Creating Resource Providers][1] in the
     # *CloudFormation CLI User Guide*.
+    #
+    # You can have a maximum of 50 resource type versions registered at a
+    # time. This maximum is per account and per region. Use
+    # [DeregisterType](AWSCloudFormation/latest/APIReference/API_DeregisterType.html)
+    # to deregister specific resource type versions if necessary.
     #
     # Once you have initiated a registration request using ` RegisterType `,
     # you can use ` DescribeTypeRegistration ` to monitor the progress of
@@ -4137,7 +4177,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -4344,7 +4384,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -4499,7 +4539,7 @@ module Aws::CloudFormation
     # @option params [String] :stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the same
-    #   region as the stack. You can specify either the `StackPolicyBody` or
+    #   Region as the stack. You can specify either the `StackPolicyBody` or
     #   the `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect a
@@ -4601,10 +4641,10 @@ module Aws::CloudFormation
     end
 
     # Updates the parameter values for stack instances for the specified
-    # accounts, within the specified regions. A stack instance refers to a
-    # stack in a specific account and region.
+    # accounts, within the specified Regions. A stack instance refers to a
+    # stack in a specific account and Region.
     #
-    # You can only update stack instances in regions and accounts where they
+    # You can only update stack instances in Regions and accounts where they
     # already exist; to create additional stack instances, use
     # [CreateStackInstances][1].
     #
@@ -4631,10 +4671,10 @@ module Aws::CloudFormation
     #   instances.
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The names of one or more AWS accounts for
-    #   which you want to update parameter values for stack instances. The
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   for which you want to update parameter values for stack instances. The
     #   overridden parameter values will be applied to all stack instances in
-    #   the specified accounts and regions.
+    #   the specified accounts and Regions.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
@@ -4649,16 +4689,16 @@ module Aws::CloudFormation
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
-    #   The names of one or more regions in which you want to update parameter
+    #   The names of one or more Regions in which you want to update parameter
     #   values for stack instances. The overridden parameter values will be
-    #   applied to all stack instances in the specified accounts and regions.
+    #   applied to all stack instances in the specified accounts and Regions.
     #
     # @option params [Array<Types::Parameter>] :parameter_overrides
     #   A list of input parameters whose values you want to update for the
     #   specified stack instances.
     #
     #   Any overridden parameter values will be applied to all stack instances
-    #   in the specified accounts and regions. When specifying parameters and
+    #   in the specified accounts and Regions. When specifying parameters and
     #   their values, be aware of how AWS CloudFormation sets parameter values
     #   during stack instance update operations:
     #
@@ -4763,7 +4803,7 @@ module Aws::CloudFormation
     end
 
     # Updates the stack set, and associated stack instances in the specified
-    # accounts and regions.
+    # accounts and Regions.
     #
     # Even if the stack set operation created by updating the stack set
     # fails (completely or partially, below or above a specified failure
@@ -5018,9 +5058,9 @@ module Aws::CloudFormation
     #   not need to pass this option.**
     #
     # @option params [Array<String>] :accounts
-    #   \[Self-managed permissions\] The accounts in which to update
+    #   \[`Self-managed` permissions\] The accounts in which to update
     #   associated stack instances. If you specify accounts, you must also
-    #   specify the regions in which to update stack set instances.
+    #   specify the Regions in which to update stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set, do
     #   not specify the `Accounts` or `Regions` properties.
@@ -5029,15 +5069,15 @@ module Aws::CloudFormation
     #   the `TemplateBody` or `TemplateURL` properties are specified), or the
     #   `Parameters` property, AWS CloudFormation marks all stack instances
     #   with a status of `OUTDATED` prior to updating the stack instances in
-    #   the specified accounts and regions. If the stack set update does not
+    #   the specified accounts and Regions. If the stack set update does not
     #   include changes to the template or parameters, AWS CloudFormation
-    #   updates the stack instances in the specified accounts and regions,
+    #   updates the stack instances in the specified accounts and Regions,
     #   while leaving all other stack instances with their existing stack
     #   instance status.
     #
     # @option params [Array<String>] :regions
-    #   The regions in which to update associated stack instances. If you
-    #   specify regions, you must also specify accounts in which to update
+    #   The Regions in which to update associated stack instances. If you
+    #   specify Regions, you must also specify accounts in which to update
     #   stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set, do
@@ -5047,9 +5087,9 @@ module Aws::CloudFormation
     #   the `TemplateBody` or `TemplateURL` properties are specified), or the
     #   `Parameters` property, AWS CloudFormation marks all stack instances
     #   with a status of `OUTDATED` prior to updating the stack instances in
-    #   the specified accounts and regions. If the stack set update does not
+    #   the specified accounts and Regions. If the stack set update does not
     #   include changes to the template or parameters, AWS CloudFormation
-    #   updates the stack instances in the specified accounts and regions,
+    #   updates the stack instances in the specified accounts and Regions,
     #   while leaving all other stack instances with their existing stack
     #   instance status.
     #
@@ -5242,7 +5282,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5308,15 +5348,15 @@ module Aws::CloudFormation
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                | params                        | :delay   | :max_attempts |
-    # | -------------------------- | ----------------------------- | -------- | ------------- |
-    # | change_set_create_complete | {#describe_change_set}        | 30       | 120           |
-    # | stack_create_complete      | {#describe_stacks}            | 30       | 120           |
-    # | stack_delete_complete      | {#describe_stacks}            | 30       | 120           |
-    # | stack_exists               | {#describe_stacks}            | 5        | 20            |
-    # | stack_import_complete      | {#describe_stacks}            | 30       | 120           |
-    # | stack_update_complete      | {#describe_stacks}            | 30       | 120           |
-    # | type_registration_complete | {#describe_type_registration} | 30       | 120           |
+    # | waiter_name                | params                              | :delay   | :max_attempts |
+    # | -------------------------- | ----------------------------------- | -------- | ------------- |
+    # | change_set_create_complete | {Client#describe_change_set}        | 30       | 120           |
+    # | stack_create_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_delete_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_exists               | {Client#describe_stacks}            | 5        | 20            |
+    # | stack_import_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_update_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | type_registration_complete | {Client#describe_type_registration} | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

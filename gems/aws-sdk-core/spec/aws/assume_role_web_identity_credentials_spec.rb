@@ -87,7 +87,7 @@ module Aws
 
       expect(client).to receive(:assume_role_with_web_identity).with(
         role_arn: 'arn',
-        web_identity_token: 'token', 
+        web_identity_token: 'token',
         role_session_name: "session-name"
       )
       AssumeRoleWebIdentityCredentials.new(

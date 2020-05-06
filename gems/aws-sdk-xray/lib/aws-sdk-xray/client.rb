@@ -269,8 +269,7 @@ module Aws::XRay
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::XRay
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -324,6 +323,8 @@ module Aws::XRay
     #   * {Types::BatchGetTracesResult#traces #traces} => Array&lt;Types::Trace&gt;
     #   * {Types::BatchGetTracesResult#unprocessed_trace_ids #unprocessed_trace_ids} => Array&lt;String&gt;
     #   * {Types::BatchGetTracesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -594,6 +595,8 @@ module Aws::XRay
     #   * {Types::GetGroupsResult#groups #groups} => Array&lt;Types::GroupSummary&gt;
     #   * {Types::GetGroupsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_groups({
@@ -626,6 +629,8 @@ module Aws::XRay
     #
     #   * {Types::GetSamplingRulesResult#sampling_rule_records #sampling_rule_records} => Array&lt;Types::SamplingRuleRecord&gt;
     #   * {Types::GetSamplingRulesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -673,6 +678,8 @@ module Aws::XRay
     #
     #   * {Types::GetSamplingStatisticSummariesResult#sampling_statistic_summaries #sampling_statistic_summaries} => Array&lt;Types::SamplingStatisticSummary&gt;
     #   * {Types::GetSamplingStatisticSummariesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -783,6 +790,8 @@ module Aws::XRay
     #   * {Types::GetServiceGraphResult#contains_old_group_versions #contains_old_group_versions} => Boolean
     #   * {Types::GetServiceGraphResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_service_graph({
@@ -887,6 +896,8 @@ module Aws::XRay
     #   * {Types::GetTimeSeriesServiceStatisticsResult#contains_old_group_versions #contains_old_group_versions} => Boolean
     #   * {Types::GetTimeSeriesServiceStatisticsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_time_series_service_statistics({
@@ -946,6 +957,8 @@ module Aws::XRay
     #
     #   * {Types::GetTraceGraphResult#services #services} => Array&lt;Types::Service&gt;
     #   * {Types::GetTraceGraphResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1068,6 +1081,8 @@ module Aws::XRay
     #   * {Types::GetTraceSummariesResult#traces_processed_count #traces_processed_count} => Integer
     #   * {Types::GetTraceSummariesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_trace_summaries({
@@ -1148,6 +1163,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].exceptions[0].message #=> String
     #   resp.trace_summaries[0].fault_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].fault_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].fault_root_causes[0].client_impacting #=> Boolean
     #   resp.trace_summaries[0].error_root_causes #=> Array
     #   resp.trace_summaries[0].error_root_causes[0].services #=> Array
     #   resp.trace_summaries[0].error_root_causes[0].services[0].name #=> String
@@ -1162,6 +1178,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].exceptions[0].message #=> String
     #   resp.trace_summaries[0].error_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].error_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].error_root_causes[0].client_impacting #=> Boolean
     #   resp.trace_summaries[0].response_time_root_causes #=> Array
     #   resp.trace_summaries[0].response_time_root_causes[0].services #=> Array
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].name #=> String
@@ -1174,6 +1191,7 @@ module Aws::XRay
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].coverage #=> Float
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].entity_path[0].remote #=> Boolean
     #   resp.trace_summaries[0].response_time_root_causes[0].services[0].inferred #=> Boolean
+    #   resp.trace_summaries[0].response_time_root_causes[0].client_impacting #=> Boolean
     #   resp.trace_summaries[0].revision #=> Integer
     #   resp.trace_summaries[0].matched_event_time #=> Time
     #   resp.approximate_time #=> Time
@@ -1476,7 +1494,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

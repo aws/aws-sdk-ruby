@@ -40,8 +40,7 @@ module Aws::PersonalizeRuntime
     #   The contextual metadata to use when getting recommendations.
     #   Contextual metadata includes any interaction information that might
     #   be relevant when getting a user's recommendations, such as the
-    #   user's current location or device type. For more information, see
-    #   Contextual Metadata.
+    #   user's current location or device type.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingRequest AWS API Documentation
@@ -105,8 +104,7 @@ module Aws::PersonalizeRuntime
     #   The contextual metadata to use when getting recommendations.
     #   Contextual metadata includes any interaction information that might
     #   be relevant when getting a user's recommendations, such as the
-    #   user's current location or device type. For more information, see
-    #   Contextual Metadata.
+    #   user's current location or device type.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation
@@ -152,10 +150,17 @@ module Aws::PersonalizeRuntime
     #   The recommended item ID.
     #   @return [String]
     #
+    # @!attribute [rw] score
+    #   A numeric representation of the model's certainty in the item's
+    #   suitability. For more information on scoring logic, see
+    #   how-scores-work.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/PredictedItem AWS API Documentation
     #
     class PredictedItem < Struct.new(
-      :item_id)
+      :item_id,
+      :score)
       include Aws::Structure
     end
 

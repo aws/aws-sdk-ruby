@@ -10,16 +10,16 @@ module Aws::CloudFormation
 
     # Structure that contains the results of the account gate function which
     # AWS CloudFormation invokes, if present, before proceeding with a stack
-    # set operation in an account and region.
+    # set operation in an account and Region.
     #
-    # For each account and region, AWS CloudFormation lets you specify a
+    # For each account and Region, AWS CloudFormation lets you specify a
     # Lamdba function that encapsulates any requirements that must be met
     # before CloudFormation can proceed with a stack set operation in that
-    # account and region. CloudFormation invokes the function each time a
-    # stack set operation is requested for that account and region; if the
+    # account and Region. CloudFormation invokes the function each time a
+    # stack set operation is requested for that account and Region; if the
     # function returns `FAILED`, CloudFormation cancels the operation in
-    # that account and region, and sets the stack set operation result
-    # status for that account and region to `FAILED`.
+    # that account and Region, and sets the stack set operation result
+    # status for that account and Region to `FAILED`.
     #
     # For more information, see [Configuring a target account gate][1].
     #
@@ -31,37 +31,37 @@ module Aws::CloudFormation
     #   The status of the account gate function.
     #
     #   * `SUCCEEDED`\: The account gate function has determined that the
-    #     account and region passes any requirements for a stack set
+    #     account and Region passes any requirements for a stack set
     #     operation to occur. AWS CloudFormation proceeds with the stack
-    #     operation in that account and region.
+    #     operation in that account and Region.
     #
     #   * `FAILED`\: The account gate function has determined that the
-    #     account and region does not meet the requirements for a stack set
+    #     account and Region does not meet the requirements for a stack set
     #     operation to occur. AWS CloudFormation cancels the stack set
-    #     operation in that account and region, and sets the stack set
-    #     operation result status for that account and region to `FAILED`.
+    #     operation in that account and Region, and sets the stack set
+    #     operation result status for that account and Region to `FAILED`.
     #
     #   * `SKIPPED`\: AWS CloudFormation has skipped calling the account
-    #     gate function for this account and region, for one of the
+    #     gate function for this account and Region, for one of the
     #     following reasons:
     #
     #     * An account gate function has not been specified for the account
-    #       and region. AWS CloudFormation proceeds with the stack set
-    #       operation in this account and region.
+    #       and Region. AWS CloudFormation proceeds with the stack set
+    #       operation in this account and Region.
     #
     #     * The `AWSCloudFormationStackSetExecutionRole` of the stack set
     #       adminstration account lacks permissions to invoke the function.
     #       AWS CloudFormation proceeds with the stack set operation in this
-    #       account and region.
+    #       account and Region.
     #
     #     * Either no action is necessary, or no action is possible, on the
     #       stack. AWS CloudFormation skips the stack set operation in this
-    #       account and region.
+    #       account and Region.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
     #   The reason for the account gate status assigned to this account and
-    #   region for the stack set operation.
+    #   Region for the stack set operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountGateResult AWS API Documentation
@@ -752,7 +752,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_name
     #   The name that is associated with the stack. The name must be unique
-    #   in the region in which you are creating the stack.
+    #   in the Region in which you are creating the stack.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters (case
     #   sensitive) and hyphens. It must start with an alphabetic character
@@ -976,7 +976,7 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the stack policy. The URL must point
     #   to a policy (maximum size: 16 KB) located in an S3 bucket in the
-    #   same region as the stack. You can specify either the
+    #   same Region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #   @return [String]
     #
@@ -1083,8 +1083,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The names of one or more AWS accounts
-    #   that you want to create stack instances in the specified region(s)
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified Region(s)
     #   for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
@@ -1098,7 +1098,7 @@ module Aws::CloudFormation
     #   @return [Types::DeploymentTargets]
     #
     # @!attribute [rw] regions
-    #   The names of one or more regions where you want to create stack
+    #   The names of one or more Regions where you want to create stack
     #   instances using the specified AWS account(s).
     #   @return [Array<String>]
     #
@@ -1107,7 +1107,7 @@ module Aws::CloudFormation
     #   the selected stack instances.
     #
     #   Any overridden parameter values will be applied to all stack
-    #   instances in the specified accounts and regions. When specifying
+    #   instances in the specified accounts and Regions. When specifying
     #   parameters and their values, be aware of how AWS CloudFormation sets
     #   parameter values during stack instance operations:
     #
@@ -1238,7 +1238,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_set_name
     #   The name to associate with the stack set. The name must be unique in
-    #   the region where you create your stack set.
+    #   the Region where you create your stack set.
     #
     #   <note markdown="1"> A stack name can contain only alphanumeric characters
     #   (case-sensitive) and hyphens. It must start with an alphabetic
@@ -1425,9 +1425,6 @@ module Aws::CloudFormation
     #   Organizations accounts that are added to the target organization or
     #   organizational unit (OU). Specify only if `PermissionModel` is
     #   `SERVICE_MANAGED`.
-    #
-    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets`
-    #   or `Regions`.
     #   @return [Types::AutoDeployment]
     #
     # @!attribute [rw] client_request_token
@@ -1611,8 +1608,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The names of the AWS accounts that you
-    #   want to delete stack instances for.
+    #   \[`Self-managed` permissions\] The names of the AWS accounts that
+    #   you want to delete stack instances for.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
@@ -1625,7 +1622,7 @@ module Aws::CloudFormation
     #   @return [Types::DeploymentTargets]
     #
     # @!attribute [rw] regions
-    #   The regions where you want to delete stack set instances.
+    #   The Regions where you want to delete stack set instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operation_preferences
@@ -1712,7 +1709,9 @@ module Aws::CloudFormation
     class DeleteStackSetOutput < Aws::EmptyStructure; end
 
     # \[`Service-managed` permissions\] The AWS Organizations accounts to
-    # which StackSets deploys.
+    # which StackSets deploys. StackSets does not deploy stack instances to
+    # the organization master account, even if the master account is in your
+    # organization or in an OU in your organization.
     #
     # For update operations, you can specify either `Accounts` or
     # `OrganizationalUnitIds`. For create and delete operations, specify
@@ -1732,7 +1731,7 @@ module Aws::CloudFormation
     #   @return [Array<String>]
     #
     # @!attribute [rw] organizational_unit_ids
-    #   The organization root ID or organizational unit (OUs) IDs to which
+    #   The organization root ID or organizational unit (OU) IDs to which
     #   StackSets deploys.
     #   @return [Array<String>]
     #
@@ -2161,7 +2160,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_region
-    #   The name of a region that's associated with this stack instance.
+    #   The name of a Region that's associated with this stack instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstanceInput AWS API Documentation
@@ -3519,7 +3518,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] stack_instance_region
-    #   The name of the region where you want to list stack instances.
+    #   The name of the Region where you want to list stack instances.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstancesInput AWS API Documentation
@@ -3658,7 +3657,7 @@ module Aws::CloudFormation
     # @!attribute [rw] summaries
     #   A list of `StackSetOperationResultSummary` structures that contain
     #   information about the specified operation results, for accounts and
-    #   regions that are included in the operation.
+    #   Regions that are included in the operation.
     #   @return [Array<Types::StackSetOperationResultSummary>]
     #
     # @!attribute [rw] next_token
@@ -5019,7 +5018,7 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the stack policy. The URL must point
     #   to a policy (maximum size: 16 KB) located in an S3 bucket in the
-    #   same region as the stack. You can specify either the
+    #   same Region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #   @return [String]
     #
@@ -5452,9 +5451,9 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # An AWS CloudFormation stack, in a specific account and region, that's
+    # An AWS CloudFormation stack, in a specific account and Region, that's
     # part of a stack set operation. A stack instance is a reference to an
-    # attempted or actual stack in a given account within a given region. A
+    # attempted or actual stack in a given account within a given Region. A
     # stack instance can exist without a stack—for example, if the stack
     # couldn't be created for some reason. A stack instance is associated
     # with only one stack set. Each stack instance contains the ID of its
@@ -5467,12 +5466,12 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region that the stack instance is associated
+    #   The name of the AWS Region that the stack instance is associated
     #   with.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   \[Self-managed permissions\] The name of the AWS account that the
+    #   \[`Self-managed` permissions\] The name of the AWS account that the
     #   stack instance is associated with.
     #   @return [String]
     #
@@ -5515,9 +5514,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_id
-    #   \[`Service-managed` permissions\] The organization root ID or
-    #   organizational unit (OU) ID that the stack instance is associated
-    #   with.
+    #   Reserved for internal use. No data returned.
     #   @return [String]
     #
     # @!attribute [rw] drift_status
@@ -5576,12 +5573,12 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region that the stack instance is associated
+    #   The name of the AWS Region that the stack instance is associated
     #   with.
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   \[Self-managed permissions\] The name of the AWS account that the
+    #   \[`Self-managed` permissions\] The name of the AWS account that the
     #   stack instance is associated with.
     #   @return [String]
     #
@@ -5619,9 +5616,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_id
-    #   \[`Service-managed` permissions\] The organization root ID or
-    #   organizational unit (OU) ID that the stack instance is associated
-    #   with.
+    #   Reserved for internal use. No data returned.
     #   @return [String]
     #
     # @!attribute [rw] drift_status
@@ -6072,7 +6067,7 @@ module Aws::CloudFormation
     end
 
     # A structure that contains information about a stack set. A stack set
-    # enables you to provision stacks into AWS accounts and across regions
+    # enables you to provision stacks into AWS accounts and across Regions
     # by using a single CloudFormation template. In the stack set, you
     # specify the template to use, as well as any parameters and
     # capabilities that the template requires.
@@ -6182,9 +6177,7 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_ids
-    #   \[`Service-managed` permissions\] The organization root ID or
-    #   organizational unit (OUs) IDs to which stacks in your stack set have
-    #   been deployed.
+    #   Reserved for internal use. No data returned.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
@@ -6357,15 +6350,15 @@ module Aws::CloudFormation
     #
     #   * `FAILED`\: The operation exceeded the specified failure tolerance.
     #     The failure tolerance value that you've set for an operation is
-    #     applied for each region during stack create and update operations.
-    #     If the number of failed stacks within a region exceeds the failure
-    #     tolerance, the status of the operation in the region is set to
+    #     applied for each Region during stack create and update operations.
+    #     If the number of failed stacks within a Region exceeds the failure
+    #     tolerance, the status of the operation in the Region is set to
     #     `FAILED`. This in turn sets the status of the operation as a whole
     #     to `FAILED`, and AWS CloudFormation cancels the operation in any
-    #     remaining regions.
+    #     remaining Regions.
     #
-    #   * `QUEUED`\: \[Service-managed permissions\] For automatic
-    #     deployments that require a sequence of operations. The operation
+    #   * `QUEUED`\: \[`Service-managed` permissions\] For automatic
+    #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
     #     set operation status codes][1] in the AWS CloudFormation User
     #     Guide.
@@ -6425,15 +6418,15 @@ module Aws::CloudFormation
     #   creation times for the stack set operation might differ from the
     #   creation time of the individual stacks themselves. This is because
     #   AWS CloudFormation needs to perform preparatory work for the
-    #   operation, such as dispatching the work to the requested regions,
+    #   operation, such as dispatching the work to the requested Regions,
     #   before actually creating the first stacks.
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The time at which the stack set operation ended, across all accounts
-    #   and regions specified. Note that this doesn't necessarily mean that
+    #   and Regions specified. Note that this doesn't necessarily mean that
     #   the stack set operation was successful, or even attempted, in each
-    #   account or region.
+    #   account or Region.
     #   @return [Time]
     #
     # @!attribute [rw] deployment_targets
@@ -6497,26 +6490,26 @@ module Aws::CloudFormation
     #       }
     #
     # @!attribute [rw] region_order
-    #   The order of the regions in where you want to perform the stack
+    #   The order of the Regions in where you want to perform the stack
     #   operation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_tolerance_count
-    #   The number of accounts, per region, for which this operation can
-    #   fail before AWS CloudFormation stops the operation in that region.
-    #   If the operation is stopped in a region, AWS CloudFormation doesn't
-    #   attempt the operation in any subsequent regions.
+    #   The number of accounts, per Region, for which this operation can
+    #   fail before AWS CloudFormation stops the operation in that Region.
+    #   If the operation is stopped in a Region, AWS CloudFormation doesn't
+    #   attempt the operation in any subsequent Regions.
     #
     #   Conditional: You must specify either `FailureToleranceCount` or
     #   `FailureTolerancePercentage` (but not both).
     #   @return [Integer]
     #
     # @!attribute [rw] failure_tolerance_percentage
-    #   The percentage of accounts, per region, for which this stack
+    #   The percentage of accounts, per Region, for which this stack
     #   operation can fail before AWS CloudFormation stops the operation in
-    #   that region. If the operation is stopped in a region, AWS
+    #   that Region. If the operation is stopped in a Region, AWS
     #   CloudFormation doesn't attempt the operation in any subsequent
-    #   regions.
+    #   Regions.
     #
     #   When calculating the number of accounts based on the specified
     #   percentage, AWS CloudFormation rounds *down* to the next whole
@@ -6571,40 +6564,40 @@ module Aws::CloudFormation
     end
 
     # The structure that contains information about a specified operation's
-    # results for a given account in a given region.
+    # results for a given account in a given Region.
     #
     # @!attribute [rw] account
-    #   \[Self-managed permissions\] The name of the AWS account for this
+    #   \[`Self-managed` permissions\] The name of the AWS account for this
     #   operation result.
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The name of the AWS region for this operation result.
+    #   The name of the AWS Region for this operation result.
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The result status of the stack set operation for the given account
-    #   in the given region.
+    #   in the given Region.
     #
-    #   * `CANCELLED`\: The operation in the specified account and region
+    #   * `CANCELLED`\: The operation in the specified account and Region
     #     has been cancelled. This is either because a user has stopped the
     #     stack set operation, or because the failure tolerance of the stack
     #     set operation has been exceeded.
     #
-    #   * `FAILED`\: The operation in the specified account and region
+    #   * `FAILED`\: The operation in the specified account and Region
     #     failed.
     #
     #     If the stack set operation fails in enough accounts within a
-    #     region, the failure tolerance for the stack set operation as a
+    #     Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
-    #   * `RUNNING`\: The operation in the specified account and region is
+    #   * `RUNNING`\: The operation in the specified account and Region is
     #     currently in progress.
     #
-    #   * `PENDING`\: The operation in the specified account and region has
+    #   * `PENDING`\: The operation in the specified account and Region has
     #     yet to start.
     #
-    #   * `SUCCEEDED`\: The operation in the specified account and region
+    #   * `SUCCEEDED`\: The operation in the specified account and Region
     #     completed successfully.
     #   @return [String]
     #
@@ -6619,8 +6612,7 @@ module Aws::CloudFormation
     #   @return [Types::AccountGateResult]
     #
     # @!attribute [rw] organizational_unit_id
-    #   \[`Service-managed` permissions\] The organization root ID or
-    #   organizational unit (OU) ID for this operation result.
+    #   Reserved for internal use. No data returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary AWS API Documentation
@@ -6655,15 +6647,15 @@ module Aws::CloudFormation
     #
     #   * `FAILED`\: The operation exceeded the specified failure tolerance.
     #     The failure tolerance value that you've set for an operation is
-    #     applied for each region during stack create and update operations.
-    #     If the number of failed stacks within a region exceeds the failure
-    #     tolerance, the status of the operation in the region is set to
+    #     applied for each Region during stack create and update operations.
+    #     If the number of failed stacks within a Region exceeds the failure
+    #     tolerance, the status of the operation in the Region is set to
     #     `FAILED`. This in turn sets the status of the operation as a whole
     #     to `FAILED`, and AWS CloudFormation cancels the operation in any
-    #     remaining regions.
+    #     remaining Regions.
     #
-    #   * `QUEUED`\: \[Service-managed permissions\] For automatic
-    #     deployments that require a sequence of operations. The operation
+    #   * `QUEUED`\: \[`Service-managed` permissions\] For automatic
+    #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
     #     set operation status codes][1] in the AWS CloudFormation User
     #     Guide.
@@ -6689,15 +6681,15 @@ module Aws::CloudFormation
     #   creation times for the stack set operation might differ from the
     #   creation time of the individual stacks themselves. This is because
     #   AWS CloudFormation needs to perform preparatory work for the
-    #   operation, such as dispatching the work to the requested regions,
+    #   operation, such as dispatching the work to the requested Regions,
     #   before actually creating the first stacks.
     #   @return [Time]
     #
     # @!attribute [rw] end_timestamp
     #   The time at which the stack set operation ended, across all accounts
-    #   and regions specified. Note that this doesn't necessarily mean that
+    #   and Regions specified. Note that this doesn't necessarily mean that
     #   the stack set operation was successful, or even attempted, in each
-    #   account or region.
+    #   account or Region.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationSummary AWS API Documentation
@@ -7179,7 +7171,7 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -7343,7 +7335,7 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the
-    #   same region as the stack. You can specify either the
+    #   same Region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect
@@ -7447,10 +7439,10 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The names of one or more AWS accounts
+    #   \[`Self-managed` permissions\] The names of one or more AWS accounts
     #   for which you want to update parameter values for stack instances.
     #   The overridden parameter values will be applied to all stack
-    #   instances in the specified accounts and regions.
+    #   instances in the specified accounts and Regions.
     #
     #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
@@ -7467,10 +7459,10 @@ module Aws::CloudFormation
     #   @return [Types::DeploymentTargets]
     #
     # @!attribute [rw] regions
-    #   The names of one or more regions in which you want to update
+    #   The names of one or more Regions in which you want to update
     #   parameter values for stack instances. The overridden parameter
     #   values will be applied to all stack instances in the specified
-    #   accounts and regions.
+    #   accounts and Regions.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parameter_overrides
@@ -7478,7 +7470,7 @@ module Aws::CloudFormation
     #   specified stack instances.
     #
     #   Any overridden parameter values will be applied to all stack
-    #   instances in the specified accounts and regions. When specifying
+    #   instances in the specified accounts and Regions. When specifying
     #   parameters and their values, be aware of how AWS CloudFormation sets
     #   parameter values during stack instance update operations:
     #
@@ -7896,9 +7888,9 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   \[Self-managed permissions\] The accounts in which to update
+    #   \[`Self-managed` permissions\] The accounts in which to update
     #   associated stack instances. If you specify accounts, you must also
-    #   specify the regions in which to update stack set instances.
+    #   specify the Regions in which to update stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set,
     #   do not specify the `Accounts` or `Regions` properties.
@@ -7907,16 +7899,16 @@ module Aws::CloudFormation
     #   if the `TemplateBody` or `TemplateURL` properties are specified), or
     #   the `Parameters` property, AWS CloudFormation marks all stack
     #   instances with a status of `OUTDATED` prior to updating the stack
-    #   instances in the specified accounts and regions. If the stack set
+    #   instances in the specified accounts and Regions. If the stack set
     #   update does not include changes to the template or parameters, AWS
     #   CloudFormation updates the stack instances in the specified accounts
-    #   and regions, while leaving all other stack instances with their
+    #   and Regions, while leaving all other stack instances with their
     #   existing stack instance status.
     #   @return [Array<String>]
     #
     # @!attribute [rw] regions
-    #   The regions in which to update associated stack instances. If you
-    #   specify regions, you must also specify accounts in which to update
+    #   The Regions in which to update associated stack instances. If you
+    #   specify Regions, you must also specify accounts in which to update
     #   stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set,
@@ -7926,10 +7918,10 @@ module Aws::CloudFormation
     #   if the `TemplateBody` or `TemplateURL` properties are specified), or
     #   the `Parameters` property, AWS CloudFormation marks all stack
     #   instances with a status of `OUTDATED` prior to updating the stack
-    #   instances in the specified accounts and regions. If the stack set
+    #   instances in the specified accounts and Regions. If the stack set
     #   update does not include changes to the template or parameters, AWS
     #   CloudFormation updates the stack instances in the specified accounts
-    #   and regions, while leaving all other stack instances with their
+    #   and Regions, while leaving all other stack instances with their
     #   existing stack instance status.
     #   @return [Array<String>]
     #

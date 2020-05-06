@@ -11,9 +11,11 @@ module Aws::Transfer
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AddressAllocationId = Shapes::StringShape.new(name: 'AddressAllocationId')
     AddressAllocationIds = Shapes::ListShape.new(name: 'AddressAllocationIds')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    Certificate = Shapes::StringShape.new(name: 'Certificate')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateServerRequest = Shapes::StructureShape.new(name: 'CreateServerRequest')
     CreateServerResponse = Shapes::StructureShape.new(name: 'CreateServerResponse')
@@ -61,6 +63,8 @@ module Aws::Transfer
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableRole = Shapes::StringShape.new(name: 'NullableRole')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    Protocol = Shapes::StringShape.new(name: 'Protocol')
+    Protocols = Shapes::ListShape.new(name: 'Protocols')
     Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceExistsException = Shapes::StructureShape.new(name: 'ResourceExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -103,17 +107,22 @@ module Aws::Transfer
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServiceErrorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AddressAllocationIds.member = Shapes::ShapeRef.new(shape: AddressAllocationId)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateServerRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     CreateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     CreateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     CreateServerRequest.add_member(:host_key, Shapes::ShapeRef.new(shape: HostKey, location_name: "HostKey"))
     CreateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     CreateServerRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     CreateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    CreateServerRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
     CreateServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
@@ -162,12 +171,14 @@ module Aws::Transfer
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
 
     DescribedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
+    DescribedServer.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     DescribedServer.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     DescribedServer.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     DescribedServer.add_member(:host_key_fingerprint, Shapes::ShapeRef.new(shape: HostKeyFingerprint, location_name: "HostKeyFingerprint"))
     DescribedServer.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     DescribedServer.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     DescribedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    DescribedServer.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
     DescribedServer.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, location_name: "ServerId"))
     DescribedServer.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
     DescribedServer.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -269,6 +280,8 @@ module Aws::Transfer
 
     ListedUsers.member = Shapes::ShapeRef.new(shape: ListedUser)
 
+    Protocols.member = Shapes::ShapeRef.new(shape: Protocol)
+
     ResourceExistsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     ResourceExistsException.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "Resource"))
     ResourceExistsException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
@@ -312,6 +325,7 @@ module Aws::Transfer
     TestIdentityProviderRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     TestIdentityProviderRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, required: true, location_name: "UserName"))
     TestIdentityProviderRequest.add_member(:user_password, Shapes::ShapeRef.new(shape: UserPassword, location_name: "UserPassword"))
+    TestIdentityProviderRequest.add_member(:server_protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "ServerProtocol"))
     TestIdentityProviderRequest.struct_class = Types::TestIdentityProviderRequest
 
     TestIdentityProviderResponse.add_member(:response, Shapes::ShapeRef.new(shape: Response, location_name: "Response"))
@@ -327,11 +341,13 @@ module Aws::Transfer
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
+    UpdateServerRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
     UpdateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     UpdateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
     UpdateServerRequest.add_member(:host_key, Shapes::ShapeRef.new(shape: HostKey, location_name: "HostKey"))
     UpdateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     UpdateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: NullableRole, location_name: "LoggingRole"))
+    UpdateServerRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
     UpdateServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateServerRequest.struct_class = Types::UpdateServerRequest
 
@@ -363,7 +379,7 @@ module Aws::Transfer
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceAbbreviation" => "AWS Transfer",
-        "serviceFullName" => "AWS Transfer for SFTP",
+        "serviceFullName" => "AWS Transfer Family",
         "serviceId" => "Transfer",
         "signatureVersion" => "v4",
         "signingName" => "transfer",
@@ -377,10 +393,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateServerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateServerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
@@ -402,6 +420,7 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteServerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -594,6 +613,7 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServerRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateServerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)

@@ -959,14 +959,14 @@ module Aws::EMR
     #   The Amazon Resource Name of the cluster.
     #   @return [String]
     #
-    # @!attribute [rw] step_concurrency_level
-    #   Specifies the number of steps that can be executed concurrently.
-    #   @return [Integer]
-    #
     # @!attribute [rw] outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost where the cluster is
     #   launched.
     #   @return [String]
+    #
+    # @!attribute [rw] step_concurrency_level
+    #   Specifies the number of steps that can be executed concurrently.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
@@ -997,8 +997,8 @@ module Aws::EMR
       :repo_upgrade_on_boot,
       :kerberos_attributes,
       :cluster_arn,
-      :step_concurrency_level,
-      :outpost_arn)
+      :outpost_arn,
+      :step_concurrency_level)
       include Aws::Structure
     end
 
@@ -1132,6 +1132,60 @@ module Aws::EMR
       :name,
       :script_path,
       :args)
+      include Aws::Structure
+    end
+
+    # The EC2 unit limits for a managed scaling policy. The managed scaling
+    # activity of a cluster can not be above or below these limits. The
+    # limit only applies to the core and task nodes. The master node cannot
+    # be scaled after initial configuration.
+    #
+    # @note When making an API call, you may pass ComputeLimits
+    #   data as a hash:
+    #
+    #       {
+    #         unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #         minimum_capacity_units: 1, # required
+    #         maximum_capacity_units: 1, # required
+    #         maximum_on_demand_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] unit_type
+    #   The unit type used for specifying a managed scaling policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_capacity_units
+    #   The lower boundary of EC2 units. It is measured through VCPU cores
+    #   or instances for instance groups and measured through units for
+    #   instance fleets. Managed scaling activities are not allowed beyond
+    #   this boundary. The limit only applies to the core and task nodes.
+    #   The master node cannot be scaled after initial configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_capacity_units
+    #   The upper boundary of EC2 units. It is measured through VCPU cores
+    #   or instances for instance groups and measured through units for
+    #   instance fleets. Managed scaling activities are not allowed beyond
+    #   this boundary. The limit only applies to the core and task nodes.
+    #   The master node cannot be scaled after initial configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_on_demand_capacity_units
+    #   The upper boundary of on-demand EC2 units. It is measured through
+    #   VCPU cores or instances for instance groups and measured through
+    #   units for instance fleets. The on-demand units are not allowed to
+    #   scale beyond this boundary. The limit only applies to the core and
+    #   task nodes. The master node cannot be scaled after initial
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ComputeLimits AWS API Documentation
+    #
+    class ComputeLimits < Struct.new(
+      :unit_type,
+      :minimum_capacity_units,
+      :maximum_capacity_units,
+      :maximum_on_demand_capacity_units)
       include Aws::Structure
     end
 
@@ -1675,6 +1729,14 @@ module Aws::EMR
     #   exception, and public access is allowed on this port. You can change
     #   this by updating the block public access configuration to remove the
     #   exception.
+    #
+    #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
+    #   2019, block public access is disabled by default in that Region. To
+    #   use this feature, you must manually enable and configure it. For
+    #   accounts that did not create an EMR cluster in a Region before this
+    #   date, block public access is enabled by default in that Region.
+    #
+    #    </note>
     #   @return [Types::BlockPublicAccessConfiguration]
     #
     # @!attribute [rw] block_public_access_configuration_metadata
@@ -1691,6 +1753,37 @@ module Aws::EMR
     class GetBlockPublicAccessConfigurationOutput < Struct.new(
       :block_public_access_configuration,
       :block_public_access_configuration_metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetManagedScalingPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the cluster for which the managed scaling policy
+    #   will be fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicyInput AWS API Documentation
+    #
+    class GetManagedScalingPolicyInput < Struct.new(
+      :cluster_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] managed_scaling_policy
+    #   Specifies the managed scaling policy that is attached to an Amazon
+    #   EMR cluster.
+    #   @return [Types::ManagedScalingPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/GetManagedScalingPolicyOutput AWS API Documentation
+    #
+    class GetManagedScalingPolicyOutput < Struct.new(
+      :managed_scaling_policy)
       include Aws::Structure
     end
 
@@ -3998,6 +4091,37 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Managed scaling policy for an Amazon EMR cluster. The policy specifies
+    # the limits for resources that can be added or terminated from a
+    # cluster. The policy only applies to the core and task nodes. The
+    # master node cannot be scaled after initial configuration.
+    #
+    # @note When making an API call, you may pass ManagedScalingPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         compute_limits: {
+    #           unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #           minimum_capacity_units: 1, # required
+    #           maximum_capacity_units: 1, # required
+    #           maximum_on_demand_capacity_units: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] compute_limits
+    #   The EC2 unit limits for a managed scaling policy. The managed
+    #   scaling activity of a cluster is not allowed to go above or below
+    #   these limits. The limit only applies to the core and task nodes. The
+    #   master node cannot be scaled after initial configuration.
+    #   @return [Types::ComputeLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ManagedScalingPolicy AWS API Documentation
+    #
+    class ManagedScalingPolicy < Struct.new(
+      :compute_limits)
+      include Aws::Structure
+    end
+
     # A CloudWatch dimension, which is specified using a `Key` (known as a
     # `Name` in CloudWatch), `Value` pair. By default, Amazon EMR uses one
     # dimension whose `Key` is `JobFlowID` and `Value` is a variable
@@ -4333,6 +4457,14 @@ module Aws::EMR
     #   exception, and public access is allowed on this port. You can change
     #   this by updating `BlockPublicSecurityGroupRules` to remove the
     #   exception.
+    #
+    #   <note markdown="1"> For accounts that created clusters in a Region before November 25,
+    #   2019, block public access is disabled by default in that Region. To
+    #   use this feature, you must manually enable and configure it. For
+    #   accounts that did not create an EMR cluster in a Region before this
+    #   date, block public access is enabled by default in that Region.
+    #
+    #    </note>
     #   @return [Types::BlockPublicAccessConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfigurationInput AWS API Documentation
@@ -4345,6 +4477,42 @@ module Aws::EMR
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutBlockPublicAccessConfigurationOutput AWS API Documentation
     #
     class PutBlockPublicAccessConfigurationOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutManagedScalingPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #         managed_scaling_policy: { # required
+    #           compute_limits: {
+    #             unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #             minimum_capacity_units: 1, # required
+    #             maximum_capacity_units: 1, # required
+    #             maximum_on_demand_capacity_units: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of an EMR cluster where the managed scaling policy
+    #   is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_scaling_policy
+    #   Specifies the constraints for the managed scaling policy.
+    #   @return [Types::ManagedScalingPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutManagedScalingPolicyInput AWS API Documentation
+    #
+    class PutManagedScalingPolicyInput < Struct.new(
+      :cluster_id,
+      :managed_scaling_policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutManagedScalingPolicyOutput AWS API Documentation
+    #
+    class PutManagedScalingPolicyOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveAutoScalingPolicyInput
     #   data as a hash:
@@ -4375,6 +4543,29 @@ module Aws::EMR
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyOutput AWS API Documentation
     #
     class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RemoveManagedScalingPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   Specifies the ID of the cluster from which the managed scaling
+    #   policy will be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveManagedScalingPolicyInput AWS API Documentation
+    #
+    class RemoveManagedScalingPolicyInput < Struct.new(
+      :cluster_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveManagedScalingPolicyOutput AWS API Documentation
+    #
+    class RemoveManagedScalingPolicyOutput < Aws::EmptyStructure; end
 
     # This input identifies a cluster and a list of tags to remove.
     #
@@ -4636,6 +4827,14 @@ module Aws::EMR
     #           ad_domain_join_password: "XmlStringMaxLen256",
     #         },
     #         step_concurrency_level: 1,
+    #         managed_scaling_policy: {
+    #           compute_limits: {
+    #             unit_type: "InstanceFleetUnits", # required, accepts InstanceFleetUnits, Instances, VCPU
+    #             minimum_capacity_units: 1, # required
+    #             maximum_capacity_units: 1, # required
+    #             maximum_on_demand_capacity_units: 1,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4863,6 +5062,10 @@ module Aws::EMR
     #   default value is `1`. The maximum value is `256`.
     #   @return [Integer]
     #
+    # @!attribute [rw] managed_scaling_policy
+    #   The specified managed scaling policy for an Amazon EMR cluster.
+    #   @return [Types::ManagedScalingPolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -4889,7 +5092,8 @@ module Aws::EMR
       :ebs_root_volume_size,
       :repo_upgrade_on_boot,
       :kerberos_attributes,
-      :step_concurrency_level)
+      :step_concurrency_level,
+      :managed_scaling_policy)
       include Aws::Structure
     end
 

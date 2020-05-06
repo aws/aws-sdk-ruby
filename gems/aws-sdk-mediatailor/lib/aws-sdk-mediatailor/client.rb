@@ -269,8 +269,7 @@ module Aws::MediaTailor
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::MediaTailor
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -337,6 +336,7 @@ module Aws::MediaTailor
     # @return [Types::GetPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
+    #   * {Types::GetPlaybackConfigurationResponse#avail_suppression #avail_suppression} => Types::AvailSuppression
     #   * {Types::GetPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
@@ -360,6 +360,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_decision_server_url #=> String
+    #   resp.avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE"
+    #   resp.avail_suppression.value #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -481,6 +483,9 @@ module Aws::MediaTailor
     #   Alternately, for testing you can provide a static VAST URL. The
     #   maximum length is 25,000 characters.
     #
+    # @option params [Types::AvailSuppression] :avail_suppression
+    #   The configuration for Avail Suppression.
+    #
     # @option params [Types::CdnConfiguration] :cdn_configuration
     #   The configuration for using a content delivery network (CDN), like
     #   Amazon CloudFront, for content and ad segment management.
@@ -523,6 +528,7 @@ module Aws::MediaTailor
     # @return [Types::PutPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
+    #   * {Types::PutPlaybackConfigurationResponse#avail_suppression #avail_suppression} => Types::AvailSuppression
     #   * {Types::PutPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
@@ -540,6 +546,10 @@ module Aws::MediaTailor
     #
     #   resp = client.put_playback_configuration({
     #     ad_decision_server_url: "__string",
+    #     avail_suppression: {
+    #       mode: "OFF", # accepts OFF, BEHIND_LIVE_EDGE
+    #       value: "__string",
+    #     },
     #     cdn_configuration: {
     #       ad_segment_url_prefix: "__string",
     #       content_segment_url_prefix: "__string",
@@ -565,6 +575,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.ad_decision_server_url #=> String
+    #   resp.avail_suppression.mode #=> String, one of "OFF", "BEHIND_LIVE_EDGE"
+    #   resp.avail_suppression.value #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
@@ -657,7 +669,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -269,8 +269,7 @@ module Aws::MediaLive
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::MediaLive
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -947,7 +946,7 @@ module Aws::MediaLive
     #               restart_delay: 1,
     #               segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #               send_delay_ms: 1,
-    #               sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #               sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #               stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #               timestamp_offset: "__string",
     #               timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -1058,6 +1057,8 @@ module Aws::MediaLive
     #                     },
     #                     fmp_4_hls_settings: {
     #                       audio_rendition_sets: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     },
     #                     standard_hls_settings: {
     #                       audio_rendition_sets: "__string",
@@ -1210,8 +1211,15 @@ module Aws::MediaLive
     #                 },
     #               },
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #               filter_settings: {
+    #                 temporal_filter_settings: {
+    #                   post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                 },
+    #               },
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -1229,6 +1237,7 @@ module Aws::MediaLive
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #               quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #               qvbr_quality_level: 1,
     #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -1294,6 +1303,10 @@ module Aws::MediaLive
     #     },
     #     input_attachments: [
     #       {
+    #         automatic_input_failover_settings: {
+    #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #           secondary_input_id: "__string", # required
+    #         },
     #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
@@ -1307,6 +1320,13 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                 },
+    #                 audio_track_selection: {
+    #                   tracks: [ # required
+    #                     {
+    #                       track: 1, # required
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             },
@@ -1623,7 +1643,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -1705,6 +1725,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -1802,8 +1824,11 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -1821,6 +1846,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -1869,6 +1895,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -1876,6 +1904,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -2510,7 +2540,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -2592,6 +2622,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -2689,8 +2721,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -2708,6 +2743,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -2756,6 +2792,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -2763,6 +2801,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -3345,7 +3385,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -3427,6 +3467,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -3524,8 +3566,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -3543,6 +3588,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -3591,6 +3637,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -3598,6 +3646,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -3638,6 +3688,14 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * channel_created
+    #   * channel_deleted
+    #   * channel_running
+    #   * channel_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeChannel AWS API Documentation
     #
@@ -3794,6 +3852,14 @@ module Aws::MediaLive
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * multiplex_created
+    #   * multiplex_deleted
+    #   * multiplex_running
+    #   * multiplex_stopped
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplex AWS API Documentation
     #
@@ -3998,6 +4064,8 @@ module Aws::MediaLive
     #   * {Types::DescribeScheduleResponse#next_token #next_token} => String
     #   * {Types::DescribeScheduleResponse#schedule_actions #schedule_actions} => Array&lt;Types::ScheduleAction&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_schedule({
@@ -4078,6 +4146,8 @@ module Aws::MediaLive
     #   * {Types::ListChannelsResponse#channels #channels} => Array&lt;Types::ChannelSummary&gt;
     #   * {Types::ListChannelsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_channels({
@@ -4105,6 +4175,8 @@ module Aws::MediaLive
     #   resp.channels[0].egress_endpoints[0].source_ip #=> String
     #   resp.channels[0].id #=> String
     #   resp.channels[0].input_attachments #=> Array
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.channels[0].input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channels[0].input_attachments[0].input_attachment_name #=> String
     #   resp.channels[0].input_attachments[0].input_id #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors #=> Array
@@ -4112,6 +4184,8 @@ module Aws::MediaLive
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.channels[0].input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channels[0].input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -4170,6 +4244,8 @@ module Aws::MediaLive
     #   * {Types::ListInputSecurityGroupsResponse#input_security_groups #input_security_groups} => Array&lt;Types::InputSecurityGroup&gt;
     #   * {Types::ListInputSecurityGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_input_security_groups({
@@ -4210,6 +4286,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListInputsResponse#inputs #inputs} => Array&lt;Types::Input&gt;
     #   * {Types::ListInputsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4271,6 +4349,8 @@ module Aws::MediaLive
     #   * {Types::ListMultiplexProgramsResponse#multiplex_programs #multiplex_programs} => Array&lt;Types::MultiplexProgramSummary&gt;
     #   * {Types::ListMultiplexProgramsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_multiplex_programs({
@@ -4305,6 +4385,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListMultiplexesResponse#multiplexes #multiplexes} => Array&lt;Types::MultiplexSummary&gt;
     #   * {Types::ListMultiplexesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4368,6 +4450,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListOfferingsResponse#next_token #next_token} => String
     #   * {Types::ListOfferingsResponse#offerings #offerings} => Array&lt;Types::Offering&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4444,6 +4528,8 @@ module Aws::MediaLive
     #
     #   * {Types::ListReservationsResponse#next_token #next_token} => String
     #   * {Types::ListReservationsResponse#reservations #reservations} => Array&lt;Types::Reservation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4866,7 +4952,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -4948,6 +5034,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -5045,8 +5133,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -5064,6 +5155,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -5112,6 +5204,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -5119,6 +5213,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -5488,7 +5584,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -5570,6 +5666,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -5667,8 +5765,11 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -5686,6 +5787,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -5734,6 +5836,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.id #=> String
     #   resp.input_attachments #=> Array
+    #   resp.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.input_attachments[0].input_attachment_name #=> String
     #   resp.input_attachments[0].input_id #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -5741,6 +5845,8 @@ module Aws::MediaLive
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -6239,7 +6345,7 @@ module Aws::MediaLive
     #               restart_delay: 1,
     #               segmentation_mode: "USE_INPUT_SEGMENTATION", # accepts USE_INPUT_SEGMENTATION, USE_SEGMENT_DURATION
     #               send_delay_ms: 1,
-    #               sparse_track_type: "NONE", # accepts NONE, SCTE_35
+    #               sparse_track_type: "NONE", # accepts NONE, SCTE_35, SCTE_35_WITHOUT_SEGMENTATION
     #               stream_manifest_behavior: "DO_NOT_SEND", # accepts DO_NOT_SEND, SEND
     #               timestamp_offset: "__string",
     #               timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
@@ -6350,6 +6456,8 @@ module Aws::MediaLive
     #                     },
     #                     fmp_4_hls_settings: {
     #                       audio_rendition_sets: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                       timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     },
     #                     standard_hls_settings: {
     #                       audio_rendition_sets: "__string",
@@ -6502,8 +6610,15 @@ module Aws::MediaLive
     #                 },
     #               },
     #               entropy_encoding: "CABAC", # accepts CABAC, CAVLC
+    #               filter_settings: {
+    #                 temporal_filter_settings: {
+    #                   post_filter_sharpening: "AUTO", # accepts AUTO, DISABLED, ENABLED
+    #                   strength: "AUTO", # accepts AUTO, STRENGTH_1, STRENGTH_10, STRENGTH_11, STRENGTH_12, STRENGTH_13, STRENGTH_14, STRENGTH_15, STRENGTH_16, STRENGTH_2, STRENGTH_3, STRENGTH_4, STRENGTH_5, STRENGTH_6, STRENGTH_7, STRENGTH_8, STRENGTH_9
+    #                 },
+    #               },
     #               fixed_afd: "AFD_0000", # accepts AFD_0000, AFD_0010, AFD_0011, AFD_0100, AFD_1000, AFD_1001, AFD_1010, AFD_1011, AFD_1101, AFD_1110, AFD_1111
     #               flicker_aq: "DISABLED", # accepts DISABLED, ENABLED
+    #               force_field_pictures: "DISABLED", # accepts DISABLED, ENABLED
     #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -6521,6 +6636,7 @@ module Aws::MediaLive
     #               par_denominator: 1,
     #               par_numerator: 1,
     #               profile: "BASELINE", # accepts BASELINE, HIGH, HIGH_10BIT, HIGH_422, HIGH_422_10BIT, MAIN
+    #               quality_level: "ENHANCED_QUALITY", # accepts ENHANCED_QUALITY, STANDARD_QUALITY
     #               qvbr_quality_level: 1,
     #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR, VBR
     #               scan_type: "INTERLACED", # accepts INTERLACED, PROGRESSIVE
@@ -6586,6 +6702,10 @@ module Aws::MediaLive
     #     },
     #     input_attachments: [
     #       {
+    #         automatic_input_failover_settings: {
+    #           input_preference: "EQUAL_INPUT_PREFERENCE", # accepts EQUAL_INPUT_PREFERENCE, PRIMARY_INPUT_PREFERRED
+    #           secondary_input_id: "__string", # required
+    #         },
     #         input_attachment_name: "__string",
     #         input_id: "__string",
     #         input_settings: {
@@ -6599,6 +6719,13 @@ module Aws::MediaLive
     #                 },
     #                 audio_pid_selection: {
     #                   pid: 1, # required
+    #                 },
+    #                 audio_track_selection: {
+    #                   tracks: [ # required
+    #                     {
+    #                       track: 1, # required
+    #                     },
+    #                   ],
     #                 },
     #               },
     #             },
@@ -6910,7 +7037,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -6992,6 +7119,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -7089,8 +7218,11 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -7108,6 +7240,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -7156,6 +7289,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -7163,6 +7298,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -7495,7 +7632,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.restart_delay #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.segmentation_mode #=> String, one of "USE_INPUT_SEGMENTATION", "USE_SEGMENT_DURATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.send_delay_ms #=> Integer
-    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.sparse_track_type #=> String, one of "NONE", "SCTE_35", "SCTE_35_WITHOUT_SEGMENTATION"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.stream_manifest_behavior #=> String, one of "DO_NOT_SEND", "SEND"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.ms_smooth_group_settings.timestamp_offset_mode #=> String, one of "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE"
@@ -7577,6 +7714,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.timed_metadata_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -7674,8 +7813,11 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.buf_size #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.color_metadata #=> String, one of "IGNORE", "INSERT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.entropy_encoding #=> String, one of "CABAC", "CAVLC"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.post_filter_sharpening #=> String, one of "AUTO", "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.filter_settings.temporal_filter_settings.strength #=> String, one of "AUTO", "STRENGTH_1", "STRENGTH_10", "STRENGTH_11", "STRENGTH_12", "STRENGTH_13", "STRENGTH_14", "STRENGTH_15", "STRENGTH_16", "STRENGTH_2", "STRENGTH_3", "STRENGTH_4", "STRENGTH_5", "STRENGTH_6", "STRENGTH_7", "STRENGTH_8", "STRENGTH_9"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.fixed_afd #=> String, one of "AFD_0000", "AFD_0010", "AFD_0011", "AFD_0100", "AFD_1000", "AFD_1001", "AFD_1010", "AFD_1011", "AFD_1101", "AFD_1110", "AFD_1111"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.flicker_aq #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.force_field_pictures #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.framerate_numerator #=> Integer
@@ -7693,6 +7835,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_denominator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.profile #=> String, one of "BASELINE", "HIGH", "HIGH_10BIT", "HIGH_422", "HIGH_422_10BIT", "MAIN"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.quality_level #=> String, one of "ENHANCED_QUALITY", "STANDARD_QUALITY"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.qvbr_quality_level #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR", "VBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.scan_type #=> String, one of "INTERLACED", "PROGRESSIVE"
@@ -7741,6 +7884,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].width #=> Integer
     #   resp.channel.id #=> String
     #   resp.channel.input_attachments #=> Array
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.input_preference #=> String, one of "EQUAL_INPUT_PREFERENCE", "PRIMARY_INPUT_PREFERRED"
+    #   resp.channel.input_attachments[0].automatic_input_failover_settings.secondary_input_id #=> String
     #   resp.channel.input_attachments[0].input_attachment_name #=> String
     #   resp.channel.input_attachments[0].input_id #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors #=> Array
@@ -7748,6 +7893,8 @@ module Aws::MediaLive
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_language_selection.language_selection_policy #=> String, one of "LOOSE", "STRICT"
     #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_pid_selection.pid #=> Integer
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks #=> Array
+    #   resp.channel.input_attachments[0].input_settings.audio_selectors[0].selector_settings.audio_track_selection.tracks[0].track #=> Integer
     #   resp.channel.input_attachments[0].input_settings.caption_selectors #=> Array
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].language_code #=> String
     #   resp.channel.input_attachments[0].input_settings.caption_selectors[0].name #=> String
@@ -8124,7 +8271,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -8190,16 +8337,16 @@ module Aws::MediaLive
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                | :delay   | :max_attempts |
-    # | ----------------- | --------------------- | -------- | ------------- |
-    # | channel_created   | {#describe_channel}   | 3        | 5             |
-    # | channel_deleted   | {#describe_channel}   | 5        | 20            |
-    # | channel_running   | {#describe_channel}   | 5        | 120           |
-    # | channel_stopped   | {#describe_channel}   | 5        | 28            |
-    # | multiplex_created | {#describe_multiplex} | 3        | 5             |
-    # | multiplex_deleted | {#describe_multiplex} | 5        | 20            |
-    # | multiplex_running | {#describe_multiplex} | 5        | 120           |
-    # | multiplex_stopped | {#describe_multiplex} | 5        | 28            |
+    # | waiter_name       | params                      | :delay   | :max_attempts |
+    # | ----------------- | --------------------------- | -------- | ------------- |
+    # | channel_created   | {Client#describe_channel}   | 3        | 5             |
+    # | channel_deleted   | {Client#describe_channel}   | 5        | 84            |
+    # | channel_running   | {Client#describe_channel}   | 5        | 120           |
+    # | channel_stopped   | {Client#describe_channel}   | 5        | 60            |
+    # | multiplex_created | {Client#describe_multiplex} | 3        | 5             |
+    # | multiplex_deleted | {Client#describe_multiplex} | 5        | 20            |
+    # | multiplex_running | {Client#describe_multiplex} | 5        | 120           |
+    # | multiplex_stopped | {Client#describe_multiplex} | 5        | 28            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

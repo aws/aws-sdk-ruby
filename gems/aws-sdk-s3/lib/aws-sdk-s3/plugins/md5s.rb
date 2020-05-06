@@ -10,7 +10,9 @@ module Aws
           :delete_objects,
           :put_bucket_cors,
           :put_bucket_lifecycle,
+          :put_bucket_lifecycle_configuration,
           :put_bucket_policy,
+          :put_bucket_replication,
           :put_bucket_tagging,
           :put_object_legal_hold,
           :put_object_lock_configuration,
@@ -47,7 +49,9 @@ module Aws
           end
 
           def update_in_chunks(digest, io)
-            while chunk = io.read(CHUNK_SIZE, buffer ||= "")
+            loop do
+              chunk = io.read(CHUNK_SIZE)
+              break unless chunk
               digest.update(chunk)
             end
             io.rewind

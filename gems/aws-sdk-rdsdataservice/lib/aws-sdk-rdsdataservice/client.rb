@@ -269,8 +269,7 @@ module Aws::RDSDataService
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::RDSDataService
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -326,7 +325,18 @@ module Aws::RDSDataService
     # @option params [Array<Array>] :parameter_sets
     #   The parameter set for the batch operation.
     #
-    #   The maximum number of parameters in a parameter set is 1,000.
+    #   The SQL statement is executed as many times as the number of parameter
+    #   sets provided. To execute a SQL statement with no parameters, use one
+    #   of the following options:
+    #
+    #   * Specify one or more empty parameter sets.
+    #
+    #   * Use the `ExecuteStatement` operation instead of the
+    #     `BatchExecuteStatement` operation.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -588,9 +598,8 @@ module Aws::RDSDataService
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
     #
-    # The response size limit is 1 MB or 1,000 records. If the call returns
-    # more than 1 MB of response data or over 1,000 records, the call is
-    # terminated.
+    # The response size limit is 1 MB. If the call returns more than 1 MB of
+    # response data, the call is terminated.
     #
     # @option params [Boolean] :continue_after_timeout
     #   A value that indicates whether to continue running the statement after
@@ -610,6 +619,10 @@ module Aws::RDSDataService
     #
     # @option params [Array<Types::SqlParameter>] :parameters
     #   The parameters for the SQL statement.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
@@ -795,7 +808,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

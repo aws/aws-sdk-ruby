@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-04-16)
+------------------
+
+* Feature - AWS Elemental MediaTailor SDK now allows configuration of Avail Suppression.
+
 1.24.0 (2020-03-09)
 ------------------
 

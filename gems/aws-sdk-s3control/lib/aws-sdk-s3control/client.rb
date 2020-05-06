@@ -279,8 +279,7 @@ module Aws::S3Control
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::S3Control
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -334,7 +333,7 @@ module Aws::S3Control
     #
     # @option params [Types::VpcConfiguration] :vpc_configuration
     #   If you include this field, Amazon S3 restricts access to this access
-    #   point to requests from the specified Virtual Private Cloud (VPC).
+    #   point to requests from the specified virtual private cloud (VPC).
     #
     # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
@@ -375,7 +374,25 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Creates an Amazon S3 batch operations job.
+    # You can use Amazon S3 Batch Operations to perform large-scale Batch
+    # Operations on Amazon S3 objects. Amazon S3 Batch Operations can
+    # execute a single operation or action on lists of Amazon S3 objects
+    # that you specify. For more information, see [Amazon S3 Batch
+    # Operations][1] in the Amazon Simple Storage Service Developer Guide.
+    #
+    # Related actions include:
+    #
+    # * DescribeJob
+    #
+    # * ListJobs
+    #
+    # * UpdateJobPriority
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -417,12 +434,13 @@ module Aws::S3Control
     #   priority.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) for the Identity and Access Management
-    #   (IAM) Role that batch operations will use to execute this job's
-    #   operation on each object in the manifest.
+    #   The Amazon Resource Name (ARN) for the AWS Identity and Access
+    #   Management (IAM) role that Batch Operations will use to execute this
+    #   job's operation on each object in the manifest.
     #
     # @option params [Array<Types::S3Tag>] :tags
-    #   An optional set of tags to associate with the job when it is created.
+    #   A set of tags to associate with the Amazon S3 Batch Operations job.
+    #   This is an optional parameter.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -435,7 +453,7 @@ module Aws::S3Control
     #     confirmation_required: false,
     #     operation: { # required
     #       lambda_invoke: {
-    #         function_arn: "NonEmptyMaxLength1024String",
+    #         function_arn: "FunctionArnString",
     #       },
     #       s3_put_object_copy: {
     #         target_resource: "S3BucketArnString",
@@ -469,8 +487,8 @@ module Aws::S3Control
     #         },
     #         new_object_tagging: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #         redirect_location: "NonEmptyMaxLength2048String",
@@ -507,14 +525,26 @@ module Aws::S3Control
     #       s3_put_object_tagging: {
     #         tag_set: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #       },
     #       s3_initiate_restore_object: {
     #         expiration_in_days: 1,
     #         glacier_job_tier: "BULK", # accepts BULK, STANDARD
+    #       },
+    #       s3_put_object_legal_hold: {
+    #         legal_hold: { # required
+    #           status: "OFF", # required, accepts OFF, ON
+    #         },
+    #       },
+    #       s3_put_object_retention: {
+    #         bypass_governance_retention: false,
+    #         retention: { # required
+    #           retain_until_date: Time.now,
+    #           mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #         },
     #       },
     #     },
     #     report: { # required
@@ -541,8 +571,8 @@ module Aws::S3Control
     #     role_arn: "IAMRoleArn", # required
     #     tags: [
     #       {
-    #         key: "NonEmptyMaxLength1024String", # required
-    #         value: "MaxLength1024String", # required
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
     #       },
     #     ],
     #   })
@@ -612,14 +642,32 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Delete the tags on a Amazon S3 batch operations job, if any.
+    # Removes the entire tag set from the specified Amazon S3 Batch
+    # Operations job. To use this operation, you must have permission to
+    # perform the `s3:DeleteJobTagging` action. For more information, see
+    # [Using Job Tags][1] in the Amazon Simple Storage Service Developer
+    # Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * GetJobTagging
+    #
+    # * PutJobTagging
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
     #
     # @option params [required, String] :account_id
-    #   The account ID for the Amazon Web Services account associated with the
-    #   Amazon S3 batch operations job you want to remove tags from.
+    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
-    #   The ID for the job whose tags you want to delete.
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -663,8 +711,25 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Retrieves the configuration parameters and status for a batch
-    # operations job.
+    # Retrieves the configuration parameters and status for a Batch
+    # Operations job. For more information, see [Amazon S3 Batch
+    # Operations][1] in the Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * ListJobs
+    #
+    # * UpdateJobPriority
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -742,6 +807,10 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_tagging.tag_set[0].value #=> String
     #   resp.job.operation.s3_initiate_restore_object.expiration_in_days #=> Integer
     #   resp.job.operation.s3_initiate_restore_object.glacier_job_tier #=> String, one of "BULK", "STANDARD"
+    #   resp.job.operation.s3_put_object_legal_hold.legal_hold.status #=> String, one of "OFF", "ON"
+    #   resp.job.operation.s3_put_object_retention.bypass_governance_retention #=> Boolean
+    #   resp.job.operation.s3_put_object_retention.retention.retain_until_date #=> Time
+    #   resp.job.operation.s3_put_object_retention.retention.mode #=> String, one of "COMPLIANCE", "GOVERNANCE"
     #   resp.job.priority #=> Integer
     #   resp.job.progress_summary.total_number_of_tasks #=> Integer
     #   resp.job.progress_summary.number_of_tasks_succeeded #=> Integer
@@ -888,14 +957,31 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Retrieve the tags on a Amazon S3 batch operations job.
+    # Returns the tags on an Amazon S3 Batch Operations job. To use this
+    # operation, you must have permission to perform the `s3:GetJobTagging`
+    # action. For more information, see [Using Job Tags][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * PutJobTagging
+    #
+    # * DeleteJobTagging
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
     #
     # @option params [required, String] :account_id
-    #   The account ID for the Amazon Web Services account associated with the
-    #   Amazon S3 batch operations job you want to retrieve tags for.
+    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
-    #   The ID for the job whose tags you want to retrieve.
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   retrieve.
     #
     # @return [Types::GetJobTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -958,10 +1044,10 @@ module Aws::S3Control
 
     # Returns a list of the access points currently associated with the
     # specified bucket. You can retrieve up to 1000 access points per call.
-    # If the specified bucket has more than 1000 access points (or the
-    # number specified in `maxResults`, whichever is less), then the
-    # response will include a continuation token that you can use to list
-    # the additional access points.
+    # If the specified bucket has more than 1,000 access points (or the
+    # number specified in `maxResults`, whichever is less), the response
+    # will include a continuation token that you can use to list the
+    # additional access points.
     #
     # @option params [required, String] :account_id
     #   The AWS account ID for owner of the bucket whose access points you
@@ -987,6 +1073,8 @@ module Aws::S3Control
     #
     #   * {Types::ListAccessPointsResult#access_point_list #access_point_list} => Array&lt;Types::AccessPoint&gt;
     #   * {Types::ListAccessPointsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1015,8 +1103,26 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Lists current jobs and jobs that have ended within the last 30 days
-    # for the AWS account making the request.
+    # Lists current Amazon S3 Batch Operations jobs and jobs that have ended
+    # within the last 30 days for the AWS account making the request. For
+    # more information, see [Amazon S3 Batch Operations][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    # Related actions include:
+    #
+    #
+    #
+    # * CreateJob
+    #
+    # * DescribeJob
+    #
+    # * UpdateJobPriority
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -1040,12 +1146,14 @@ module Aws::S3Control
     #   * {Types::ListJobsResult#next_token #next_token} => String
     #   * {Types::ListJobsResult#jobs #jobs} => Array&lt;Types::JobListDescriptor&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
     #     account_id: "AccountId", # required
     #     job_statuses: ["Active"], # accepts Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended
-    #     next_token: "NonEmptyMaxLength1024String",
+    #     next_token: "StringForNextToken",
     #     max_results: 1,
     #   })
     #
@@ -1055,7 +1163,7 @@ module Aws::S3Control
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].description #=> String
-    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3InitiateRestoreObject"
+    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention"
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].status #=> String, one of "Active", "Cancelled", "Cancelling", "Complete", "Completing", "Failed", "Failing", "New", "Paused", "Pausing", "Preparing", "Ready", "Suspended"
     #   resp.jobs[0].creation_time #=> Time
@@ -1115,17 +1223,74 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Replace the set of tags on a Amazon S3 batch operations job.
+    # Set the supplied tag-set on an Amazon S3 Batch Operations job.
+    #
+    # A tag is a key-value pair. You can associate Amazon S3 Batch
+    # Operations tags with any job by sending a PUT request against the
+    # tagging subresource that is associated with the job. To modify the
+    # existing tag set, you can either replace the existing tag set
+    # entirely, or make changes within the existing tag set by retrieving
+    # the existing tag set using GetJobTagging, modify that tag set, and use
+    # this API action to replace the tag set with the one you have
+    # modified.. For more information, see [Using Job Tags][1] in the Amazon
+    # Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # <note markdown="1"> * If you send this request with an empty tag set, Amazon S3 deletes
+    #   the existing tag set on the Batch Operations job. If you use this
+    #   method, you will be charged for a Tier 1 Request (PUT). For more
+    #   information, see [Amazon S3 pricing][2].
+    #
+    # * For deleting existing tags for your batch operations job,
+    #   DeleteJobTagging request is preferred because it achieves the same
+    #   result without incurring charges.
+    #
+    # * A few things to consider about using tags:
+    #
+    #   * Amazon S3 limits the maximum number of tags to 50 tags per job.
+    #
+    #   * You can associate up to 50 tags with a job as long as they have
+    #     unique tag keys.
+    #
+    #   * A tag key can be up to 128 Unicode characters in length, and tag
+    #     values can be up to 256 Unicode characters in length.
+    #
+    #   * The key and values are case sensitive.
+    #
+    #   * For tagging-related restrictions related to characters and
+    #     encodings, see [User-Defined Tag Restrictions][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # To use this operation, you must have permission to perform the
+    # `s3:PutJobTagging` action.
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * GetJobTagging
+    #
+    # * DeleteJobTagging
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    # [2]: http://aws.amazon.com/s3/pricing/
+    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
     #
     # @option params [required, String] :account_id
-    #   The account ID for the Amazon Web Services account associated with the
-    #   Amazon S3 batch operations job you want to replace tags on.
+    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
     #
     # @option params [required, String] :job_id
-    #   The ID for the job whose tags you want to replace.
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   replace.
     #
     # @option params [required, Array<Types::S3Tag>] :tags
-    #   The set of tags to associate with the job.
+    #   The set of tags to associate with the Amazon S3 Batch Operations job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1136,8 +1301,8 @@ module Aws::S3Control
     #     job_id: "JobId", # required
     #     tags: [ # required
     #       {
-    #         key: "NonEmptyMaxLength1024String", # required
-    #         value: "MaxLength1024String", # required
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
     #       },
     #     ],
     #   })
@@ -1185,7 +1350,25 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Updates an existing job's priority.
+    # Updates an existing Amazon S3 Batch Operations job's priority. For
+    # more information, see [Amazon S3 Batch Operations][1] in the Amazon
+    # Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * ListJobs
+    #
+    # * DescribeJob
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -1223,7 +1406,25 @@ module Aws::S3Control
     end
 
     # Updates the status for the specified job. Use this operation to
-    # confirm that you want to run a job or to cancel an existing job.
+    # confirm that you want to run a job or to cancel an existing job. For
+    # more information, see [Amazon S3 Batch Operations][1] in the Amazon
+    # Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * ListJobs
+    #
+    # * DescribeJob
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -1280,7 +1481,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

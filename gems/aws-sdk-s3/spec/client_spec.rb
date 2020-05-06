@@ -20,14 +20,6 @@ module Aws
         S3::BUCKET_REGIONS.clear
       end
 
-      it 'raises an error when credentials are missing' do
-        creds = Credentials.new(nil, nil)
-        client = Client.new(credentials: creds)
-        expect do
-          client.list_buckets
-        end.to raise_error(Aws::Errors::MissingCredentialsError)
-      end
-
       it 'raises an error when region is missing' do
         expect do
           Client.new(region: nil)
@@ -714,30 +706,52 @@ module Aws
           part_number: 1
         }
       }.each do |operation_name, params|
-        it "handles 200 http response errors from ##{operation_name}" do
-          client.handlers
-            .remove(Seahorse::Client::Plugins::RaiseResponseErrors::Handler)
-          client.handle(step: :send) do |context|
-            context.http_response.signal_headers(200, {})
-            context.http_response.signal_data(<<-XML.strip)
-              <?xml version="1.0" encoding="UTF-8"?>
-              <Error>
-                <Code>InternalError</Code>
-                <Message>We encountered an internal error. Please try again.</Message>
-                <RequestId>656c76696e6727732072657175657374</RequestId>
-                <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
-              </Error>
-            XML
-            context.http_response.signal_done
-            Seahorse::Client::Response.new(context: context)
+        describe "#{operation_name} response handling" do
+          it 'handles 200 http response errors' do
+            client.handlers.remove(
+              Seahorse::Client::Plugins::RaiseResponseErrors::Handler
+            )
+            client.handle(step: :send) do |context|
+              context.http_response.signal_headers(200, {})
+              context.http_response.signal_data(<<-XML.strip)
+                <?xml version="1.0" encoding="UTF-8"?>
+                <Error>
+                  <Code>InternalError</Code>
+                  <Message>We encountered an internal error. Please try again.</Message>
+                  <RequestId>656c76696e6727732072657175657374</RequestId>
+                  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+                </Error>
+              XML
+              context.http_response.signal_done
+              Seahorse::Client::Response.new(context: context)
+            end
+            resp = client.send(operation_name, {
+              bucket: 'bucket',
+              key: 'key'
+            }.merge(params))
+            expect(resp.error).to be_kind_of(S3::Errors::InternalError)
+            expect(resp.context.retries).to eq(3)
+            expect(resp.data).to be(nil)
           end
-          resp = client.send(operation_name, {
-            bucket: 'bucket',
-            key: 'key'
-          }.merge(params))
-          expect(resp.error).to be_kind_of(S3::Errors::InternalError)
-          expect(resp.context.retries).to eq(3)
-          expect(resp.data).to be(nil)
+
+          it 'handles 200 http response with incomplete body as error' do
+            client.handlers.remove(
+              Seahorse::Client::Plugins::RaiseResponseErrors::Handler
+            )
+            client.handle(step: :send) do |context|
+              context.http_response.signal_headers(200, {})
+              context.http_response.signal_data("<?xml version='1.0' encoding='UTF-8'?>\r\n")
+              context.http_response.signal_done
+              Seahorse::Client::Response.new(context: context)
+            end
+            resp = client.send(operation_name, {
+              bucket: 'bucket',
+              key: 'key'
+            }.merge(params))
+            expect(resp.error).to be_kind_of(Seahorse::Client::NetworkingError)
+            expect(resp.context.retries).to eq(3)
+            expect(resp.data).to be(nil)
+          end
         end
       end
 

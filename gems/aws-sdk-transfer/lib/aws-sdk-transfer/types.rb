@@ -8,9 +8,21 @@
 module Aws::Transfer
   module Types
 
-    # This exception is thrown when the `UpdatServer` is called for a server
-    # that has VPC as the endpoint type and the server's `VpcEndpointID` is
-    # not in the available state.
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is thrown when the `UpdatServer` is called for a file
+    # transfer protocol-enabled server that has VPC as the endpoint type and
+    # the server's `VpcEndpointID` is not in the available state.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -26,6 +38,7 @@ module Aws::Transfer
     #   data as a hash:
     #
     #       {
+    #         certificate: "Certificate",
     #         endpoint_details: {
     #           address_allocation_ids: ["AddressAllocationId"],
     #           subnet_ids: ["SubnetId"],
@@ -40,6 +53,7 @@ module Aws::Transfer
     #         },
     #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY
     #         logging_role: "Role",
+    #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         tags: [
     #           {
     #             key: "TagKey", # required
@@ -48,20 +62,26 @@ module Aws::Transfer
     #         ],
     #       }
     #
+    # @!attribute [rw] certificate
+    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
+    #   certificate. Required when `Protocols` is set to `FTPS`.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are
-    #   configured for your SFTP server. With a VPC endpoint, you can
-    #   restrict access to your SFTP server to resources only within your
-    #   VPC. To control incoming internet traffic, you will need to invoke
-    #   the `UpdateServer` API and attach an Elastic IP to your server's
-    #   endpoint.
+    #   configured for your file transfer protocol-enabled server. When you
+    #   host your endpoint within your VPC, you can make it accessible only
+    #   to resources within your VPC, or you can attach Elastic IPs and make
+    #   it accessible to clients over the internet. Your VPC's default
+    #   security groups are automatically assigned to your endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of VPC endpoint that you want your SFTP server to connect
-    #   to. You can choose to connect to the public internet or a virtual
-    #   private cloud (VPC) endpoint. With a VPC endpoint, you can restrict
-    #   access to your SFTP server and resources only within your VPC.
+    #   The type of VPC endpoint that you want your file transfer
+    #   protocol-enabled server to connect to. You can choose to connect to
+    #   the public internet or a virtual private cloud (VPC) endpoint. With
+    #   a VPC endpoint, you can restrict access to your server and resources
+    #   only within your VPC.
     #   @return [String]
     #
     # @!attribute [rw] host_key
@@ -69,56 +89,77 @@ module Aws::Transfer
     #   my-new-server-key` command.
     #
     #   If you aren't planning to migrate existing users from an existing
-    #   SFTP server to a new AWS SFTP server, don't update the host key.
+    #   SFTP-enabled server to a new server, don't update the host key.
     #   Accidentally changing a server's host key can be disruptive.
     #
-    #   For more information, see
-    #   "https://alpha-docs-aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
-    #   in the *AWS SFTP User Guide.*
+    #   For more information, see [Changing the Host Key for Your AWS
+    #   Transfer Family Server][1] in the *AWS Transfer Family User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_details
-    #   This parameter is required when the `IdentityProviderType` is set to
-    #   `API_GATEWAY`. Accepts an array containing all of the information
-    #   required to call a customer-supplied authentication API, including
-    #   the API Gateway URL. This property is not required when the
-    #   `IdentityProviderType` is set to `SERVICE_MANAGED`.
+    #   Required when `IdentityProviderType` is set to `API_GATEWAY`.
+    #   Accepts an array containing all of the information required to call
+    #   a customer-supplied authentication API, including the API Gateway
+    #   URL. Not required when `IdentityProviderType` is set to
+    #   `SERVICE_MANAGED`.
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] identity_provider_type
-    #   Specifies the mode of authentication for the SFTP server. The
-    #   default value is `SERVICE_MANAGED`, which allows you to store and
-    #   access SFTP user credentials within the AWS Transfer for SFTP
-    #   service. Use the `API_GATEWAY` value to integrate with an identity
-    #   provider of your choosing. The `API_GATEWAY` setting requires you to
-    #   provide an API Gateway endpoint URL to call for authentication using
-    #   the `IdentityProviderDetails` parameter.
+    #   Specifies the mode of authentication for a file transfer
+    #   protocol-enabled server. The default value is `SERVICE_MANAGED`,
+    #   which allows you to store and access user credentials within the AWS
+    #   Transfer Family service. Use the `API_GATEWAY` value to integrate
+    #   with an identity provider of your choosing. The `API_GATEWAY`
+    #   setting requires you to provide an API Gateway endpoint URL to call
+    #   for authentication using the `IdentityProviderDetails` parameter.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   A value that allows the service to write your SFTP users' activity
-    #   to your Amazon CloudWatch logs for monitoring and auditing purposes.
+    #   Allows the service to write your users' activity to your Amazon
+    #   CloudWatch logs for monitoring and auditing purposes.
     #   @return [String]
     #
+    # @!attribute [rw] protocols
+    #   Specifies the file transfer protocol or protocols over which your
+    #   file transfer protocol client can connect to your server's
+    #   endpoint. The available protocols are:
+    #
+    #   * Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer
+    #     over SSH
+    #
+    #   * File Transfer Protocol Secure (FTPS): File transfer with TLS
+    #     encryption
+    #
+    #   * File Transfer Protocol (FTP): Unencrypted file transfer
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] tags
-    #   Key-value pairs that can be used to group and search for servers.
+    #   Key-value pairs that can be used to group and search for file
+    #   transfer protocol-enabled servers.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
+      :certificate,
       :endpoint_details,
       :endpoint_type,
       :host_key,
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
+      :protocols,
       :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] server_id
-    #   The service-assigned ID of the SFTP server that is created.
+    #   The service-assigned ID of the file transfer protocol-enabled server
+    #   that is created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerResponse AWS API Documentation
@@ -155,47 +196,48 @@ module Aws::Transfer
     #
     # @!attribute [rw] home_directory
     #   The landing directory (folder) for a user when they log in to the
-    #   server using their SFTP client.
+    #   file transfer protocol-enabled server using the client.
     #
-    #   An example is &lt;`your-Amazon-S3-bucket-name>/home/username`.
+    #   An example is `your-Amazon-S3-bucket-name>/home/username`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the SFTP server. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
-    #   in their SFTP clients. If you set it `LOGICAL`, you will need to
-    #   provide mappings in the `HomeDirectoryMappings` for how you want to
-    #   make S3 paths visible to your user.
+    #   directory to be when they log into the file transfer
+    #   protocol-enabled server. If you set it to `PATH`, the user will see
+    #   the absolute Amazon S3 bucket paths as is in their file transfer
+    #   protocol clients. If you set it `LOGICAL`, you will need to provide
+    #   mappings in the `HomeDirectoryMappings` for how you want to make
+    #   Amazon S3 paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
-    #   Logical directory mappings that specify what S3 paths and keys
-    #   should be visible to your user and how you want to make them
+    #   Logical directory mappings that specify what Amazon S3 paths and
+    #   keys should be visible to your user and how you want to make them
     #   visible. You will need to specify the "`Entry`" and "`Target`"
     #   pair, where `Entry` shows how the path is made visible and `Target`
-    #   is the actual S3 path. If you only specify a target, it will be
-    #   displayed as is. You will need to also make sure that your AWS IAM
-    #   Role provides access to paths in `Target`. The following is an
+    #   is the actual Amazon S3 path. If you only specify a target, it will
+    #   be displayed as is. You will need to also make sure that your AWS
+    #   IAM Role provides access to paths in `Target`. The following is an
     #   example.
     #
     #   `'[ "/bucket2/documentation", \{ "Entry":
     #   "your-personal-report.pdf", "Target":
     #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]'`
     #
-    #   In most cases, you can use this value instead of the scope down
+    #   In most cases, you can use this value instead of the scope-down
     #   policy to lock your user down to the designated home directory
     #   ("chroot"). To do this, you can set `Entry` to '/' and set
     #   `Target` to the HomeDirectory parameter value.
     #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in S3, the
-    #   entry will be ignored. As a workaround, you can use the S3 api to
-    #   create 0 byte objects as place holders for your directory. If using
-    #   the CLI, use the s3api call instead of s3 so you can use the
-    #   put-object operation. For example, you use the following: `aws s3api
-    #   put-object --bucket bucketname --key path/to/folder/`. Make sure
-    #   that the end of the key name ends in a / for it to be considered a
-    #   folder.
+    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
+    #   S3, the entry will be ignored. As a workaround, you can use the
+    #   Amazon S3 api to create 0 byte objects as place holders for your
+    #   directory. If using the CLI, use the `s3api` call instead of `s3` so
+    #   you can use the put-object operation. For example, you use the
+    #   following: `aws s3api put-object --bucket bucketname --key
+    #   path/to/folder/`. Make sure that the end of the key name ends in a
+    #   '/' for it to be considered a folder.
     #
     #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
@@ -207,40 +249,44 @@ module Aws::Transfer
     #   inside this policy include `$\{Transfer:UserName\}`,
     #   `$\{Transfer:HomeDirectory\}`, and `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> For scope-down policies, AWS Transfer for SFTP stores the policy as
-    #   a JSON blob, instead of the Amazon Resource Name (ARN) of the
-    #   policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #   <note markdown="1"> For scope-down policies, AWS Transfer Family stores the policy as a
+    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+    #   You save the policy as a JSON blob and pass it in the `Policy`
+    #   argument.
     #
-    #    For an example of a scope-down policy, see
-    #   "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down"&gt;Creating
-    #   a Scope-Down Policy.
+    #    For an example of a scope-down policy, see [Creating a Scope-Down
+    #   Policy][1].
     #
-    #    For more information, see
-    #   "https://docs.aws.amazon.com/STS/latest/APIReference/API\_AssumeRole.html"
-    #   in the *AWS Security Token Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *AWS Security Token
+    #   Service API Reference*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down
+    #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls your user's access to your Amazon S3
+    #   The IAM role that controls your users' access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level
     #   of access you want to provide your users when transferring files
     #   into and out of your Amazon S3 bucket or buckets. The IAM role
-    #   should also contain a trust relationship that allows the SFTP server
-    #   to access your resources when servicing your SFTP user's transfer
-    #   requests.
+    #   should also contain a trust relationship that allows the file
+    #   transfer protocol-enabled server to access your resources when
+    #   servicing your users' transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server instance.
-    #   This is the specific SFTP server that you added your user to.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server instance. This is the specific server that
+    #   you added your user to.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_body
     #   The public portion of the Secure Shell (SSH) key used to
-    #   authenticate the user to the SFTP server.
+    #   authenticate the user to the file transfer protocol-enabled server.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -249,11 +295,11 @@ module Aws::Transfer
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user and is associated with a
-    #   server as specified by the `ServerId`. This user name must be a
-    #   minimum of 3 and a maximum of 32 characters long. The following are
-    #   valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user
-    #   name can't start with a hyphen.
+    #   A unique string that identifies a user and is associated with a file
+    #   transfer protocol-enabled server as specified by the `ServerId`.
+    #   This user name must be a minimum of 3 and a maximum of 32 characters
+    #   long. The following are valid characters: a-z, A-Z, 0-9, underscore,
+    #   and hyphen. The user name can't start with a hyphen.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateUserRequest AWS API Documentation
@@ -272,12 +318,13 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   The ID of the SFTP server that the user is attached to.
+    #   The ID of the file transfer protocol-enabled server that the user is
+    #   attached to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user account associated with an
-    #   SFTP server.
+    #   A unique string that identifies a user account associated with a
+    #   file transfer protocol-enabled server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateUserResponse AWS API Documentation
@@ -296,7 +343,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A unique system-assigned identifier for an SFTP server instance.
+    #   A unique system-assigned identifier for a file transfer
+    #   protocol-enabled server instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteServerRequest AWS API Documentation
@@ -316,8 +364,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a Secure File Transfer
-    #   Protocol (SFTP) server instance that has the user assigned to it.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server instance that has the user assigned to it.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_id
@@ -347,13 +395,13 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server instance that
-    #   has the user assigned to it.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server instance that has the user assigned to it.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user that is being deleted from
-    #   the server.
+    #   A unique string that identifies a user that is being deleted from a
+    #   file transfer protocol-enabled server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteUserRequest AWS API Documentation
@@ -372,7 +420,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServerRequest AWS API Documentation
@@ -383,8 +432,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server
-    #   An array containing the properties of the server with the `ServerID`
-    #   you specified.
+    #   An array containing the properties of a file transfer
+    #   protocol-enabled server with the `ServerID` you specified.
     #   @return [Types::DescribedServer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeServerResponse AWS API Documentation
@@ -403,14 +452,15 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server that has this
-    #   user assigned.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that has this user assigned.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The name of the user assigned to one or more servers. User names are
-    #   part of the sign-in credentials to use the AWS Transfer for SFTP
-    #   service and perform file transfer tasks.
+    #   The name of the user assigned to one or more file transfer
+    #   protocol-enabled servers. User names are part of the sign-in
+    #   credentials to use the AWS Transfer Family service and perform file
+    #   transfer tasks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeUserRequest AWS API Documentation
@@ -422,8 +472,8 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server that has this
-    #   user assigned.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that has this user assigned.
     #   @return [String]
     #
     # @!attribute [rw] user
@@ -439,65 +489,86 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Describes the properties of the server that was specified. Information
-    # returned includes the following: the server Amazon Resource Name
-    # (ARN), the authentication configuration and type, the logging role,
-    # the server ID and state, and assigned tags or metadata.
+    # Describes the properties of a file transfer protocol-enabled server
+    # that was specified. Information returned includes the following: the
+    # server Amazon Resource Name (ARN), the authentication configuration
+    # and type, the logging role, the server ID and state, and assigned tags
+    # or metadata.
     #
     # @!attribute [rw] arn
-    #   Specifies the unique Amazon Resource Name (ARN) for the server to be
-    #   described.
+    #   Specifies the unique Amazon Resource Name (ARN) for a file transfer
+    #   protocol-enabled server to be described.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate
+    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
+    #   certificate. Required when `Protocols` is set to `FTPS`.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that you
-    #   configured for your SFTP server.
+    #   configured for your file transfer protocol-enabled server.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of endpoint that your SFTP server is connected to. If your
-    #   SFTP server is connected to a VPC endpoint, your server isn't
-    #   accessible over the public internet.
+    #   The type of endpoint that your file transfer protocol-enabled server
+    #   is connected to. If your server is connected to a VPC endpoint, your
+    #   server isn't accessible over the public internet.
     #   @return [String]
     #
     # @!attribute [rw] host_key_fingerprint
-    #   This value contains the message-digest algorithm (MD5) hash of the
-    #   server's host key. This value is equivalent to the output of the
-    #   `ssh-keygen -l -E md5 -f my-new-server-key` command.
+    #   Contains the message-digest algorithm (MD5) hash of a file transfer
+    #   protocol-enabled server's host key. This value is equivalent to the
+    #   output of the `ssh-keygen -l -E md5 -f my-new-server-key` command.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_details
     #   Specifies information to call a customer-supplied authentication
     #   API. This field is not populated when the `IdentityProviderType` of
-    #   the server is `SERVICE_MANAGED`&gt;.
+    #   a file transfer protocol-enabled server is `SERVICE_MANAGED`.
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] identity_provider_type
-    #   This property defines the mode of authentication method enabled for
-    #   this service. A value of `SERVICE_MANAGED` means that you are using
-    #   this server to store and access SFTP user credentials within the
-    #   service. A value of `API_GATEWAY` indicates that you have integrated
-    #   an API Gateway endpoint that will be invoked for authenticating your
-    #   user into the service.
+    #   Defines the mode of authentication method enabled for this service.
+    #   A value of `SERVICE_MANAGED` means that you are using this file
+    #   transfer protocol-enabled server to store and access user
+    #   credentials within the service. A value of `API_GATEWAY` indicates
+    #   that you have integrated an API Gateway endpoint that will be
+    #   invoked for authenticating your user into the service.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   This property is an AWS Identity and Access Management (IAM) entity
-    #   that allows the server to turn on Amazon CloudWatch logging for
-    #   Amazon S3 events. When set, user activity can be viewed in your
-    #   CloudWatch logs.
+    #   An AWS Identity and Access Management (IAM) entity that allows a
+    #   file transfer protocol-enabled server to turn on Amazon CloudWatch
+    #   logging for Amazon S3 events. When set, user activity can be viewed
+    #   in your CloudWatch logs.
     #   @return [String]
     #
+    # @!attribute [rw] protocols
+    #   Specifies the file transfer protocol or protocols over which your
+    #   file transfer protocol client can connect to your server's
+    #   endpoint. The available protocols are:
+    #
+    #   * Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer
+    #     over SSH
+    #
+    #   * File Transfer Protocol Secure (FTPS): File transfer with TLS
+    #     encryption
+    #
+    #   * File Transfer Protocol (FTP): Unencrypted file transfer
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] server_id
-    #   This property is a unique system-assigned identifier for the SFTP
-    #   server that you instantiate.
+    #   Unique system-assigned identifier for a file transfer
+    #   protocol-enabled server that you instantiate.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition of the SFTP server for the server that was described.
-    #   A value of `ONLINE` indicates that the server can accept jobs and
-    #   transfer files. A `State` value of `OFFLINE` means that the server
-    #   cannot perform file transfer operations.
+    #   The condition of a file transfer protocol-enabled server for the
+    #   server that was described. A value of `ONLINE` indicates that the
+    #   server can accept jobs and transfer files. A `State` value of
+    #   `OFFLINE` means that the server cannot perform file transfer
+    #   operations.
     #
     #   The states of `STARTING` and `STOPPING` indicate that the server is
     #   in an intermediate state, either not fully able to respond, or not
@@ -506,26 +577,28 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   This property contains the key-value pairs that you can use to
-    #   search for and group servers that were assigned to the server that
-    #   was described.
+    #   Contains the key-value pairs that you can use to search for and
+    #   group file transfer protocol-enabled servers that were assigned to
+    #   the server that was described.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] user_count
-    #   The number of users that are assigned to the SFTP server you
-    #   specified with the `ServerId`.
+    #   The number of users that are assigned to a file transfer
+    #   protocol-enabled server you specified with the `ServerId`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedServer AWS API Documentation
     #
     class DescribedServer < Struct.new(
       :arn,
+      :certificate,
       :endpoint_details,
       :endpoint_type,
       :host_key_fingerprint,
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
+      :protocols,
       :server_id,
       :state,
       :tags,
@@ -536,44 +609,40 @@ module Aws::Transfer
     # Returns properties of the user that you want to describe.
     #
     # @!attribute [rw] arn
-    #   This property contains the unique Amazon Resource Name (ARN) for the
-    #   user that was requested to be described.
+    #   Contains the unique Amazon Resource Name (ARN) for the user that was
+    #   requested to be described.
     #   @return [String]
     #
     # @!attribute [rw] home_directory
-    #   This property specifies the landing directory (or folder), which is
-    #   the location that files are written to or read from in an Amazon S3
-    #   bucket for the described user. An example is `/your s3 bucket
+    #   Specifies the landing directory (or folder), which is the location
+    #   that files are written to or read from in an Amazon S3 bucket for
+    #   the described user. An example is `/your s3 bucket
     #   name/home/username `.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
-    #   Logical directory mappings that you specified for what S3 paths and
-    #   keys should be visible to your user and how you want to make them
-    #   visible. You will need to specify the "`Entry`" and "`Target`"
-    #   pair, where `Entry` shows how the path is made visible and `Target`
-    #   is the actual S3 path. If you only specify a target, it will be
-    #   displayed as is. You will need to also make sure that your AWS IAM
-    #   Role provides access to paths in `Target`.
+    #   Logical directory mappings that you specified for what Amazon S3
+    #   paths and keys should be visible to your user and how you want to
+    #   make them visible. You will need to specify the "`Entry`" and
+    #   "`Target`" pair, where `Entry` shows how the path is made visible
+    #   and `Target` is the actual Amazon S3 path. If you only specify a
+    #   target, it will be displayed as is. You will need to also make sure
+    #   that your AWS IAM Role provides access to paths in `Target`.
     #
-    #   In most cases, you can use this value instead of the scope down
-    #   policy to lock your user down to the designated home directory
-    #   ("chroot"). To do this, you can set `Entry` to '/' and set
-    #   `Target` to the HomeDirectory parameter value.
-    #
-    #   In most cases, you can use this value instead of the scope down
+    #   In most cases, you can use this value instead of the scope-down
     #   policy to lock your user down to the designated home directory
     #   ("chroot"). To do this, you can set `Entry` to '/' and set
     #   `Target` to the HomeDirectory parameter value.
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] home_directory_type
-    #   The type of landing directory (folder) you mapped for your users'
-    #   to see when they log into the SFTP server. If you set it to `PATH`,
-    #   the user will see the absolute Amazon S3 bucket paths as is in their
-    #   SFTP clients. If you set it `LOGICAL`, you will need to provide
-    #   mappings in the `HomeDirectoryMappings` for how you want to make S3
-    #   paths visible to your user.
+    #   The type of landing directory (folder) you mapped for your users to
+    #   see when they log into the file transfer protocol-enabled server. If
+    #   you set it to `PATH`, the user will see the absolute Amazon S3
+    #   bucket paths as is in their file transfer protocol clients. If you
+    #   set it `LOGICAL`, you will need to provide mappings in the
+    #   `HomeDirectoryMappings` for how you want to make Amazon S3 paths
+    #   visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -581,31 +650,30 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   This property specifies the IAM role that controls your user's
-    #   access to your Amazon S3 bucket. The policies attached to this role
-    #   will determine the level of access you want to provide your users
-    #   when transferring files into and out of your Amazon S3 bucket or
-    #   buckets. The IAM role should also contain a trust relationship that
-    #   allows the SFTP server to access your resources when servicing your
-    #   SFTP user's transfer requests.
+    #   Specifies the IAM role that controls your users' access to your
+    #   Amazon S3 bucket. The policies attached to this role will determine
+    #   the level of access you want to provide your users when transferring
+    #   files into and out of your Amazon S3 bucket or buckets. The IAM role
+    #   should also contain a trust relationship that allows a file transfer
+    #   protocol-enabled server to access your resources when servicing your
+    #   users' transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_keys
-    #   This property contains the public key portion of the Secure Shell
-    #   (SSH) keys stored for the described user.
+    #   Contains the public key portion of the Secure Shell (SSH) keys
+    #   stored for the described user.
     #   @return [Array<Types::SshPublicKey>]
     #
     # @!attribute [rw] tags
-    #   This property contains the key-value pairs for the user requested.
-    #   Tag can be used to search for and group users for a variety of
-    #   purposes.
+    #   Contains the key-value pairs for the user requested. Tag can be used
+    #   to search for and group users for a variety of purposes.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] user_name
-    #   This property is the name of the user that was requested to be
-    #   described. User names are used for authentication purposes. This is
-    #   the string that will be used by your user when they log in to your
-    #   SFTP server.
+    #   The name of the user that was requested to be described. User names
+    #   are used for authentication purposes. This is the string that will
+    #   be used by your user when they log in to your file transfer
+    #   protocol-enabled server.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedUser AWS API Documentation
@@ -624,10 +692,10 @@ module Aws::Transfer
     end
 
     # The virtual private cloud (VPC) endpoint settings that are configured
-    # for your SFTP server. With a VPC endpoint, you can restrict access to
-    # your SFTP server and resources only within your VPC. To control
-    # incoming internet traffic, invoke the `UpdateServer` API and attach an
-    # Elastic IP to your server's endpoint.
+    # for your file transfer protocol-enabled server. With a VPC endpoint,
+    # you can restrict access to your server and resources only within your
+    # VPC. To control incoming internet traffic, invoke the `UpdateServer`
+    # API and attach an Elastic IP to your server's endpoint.
     #
     # @note When making an API call, you may pass EndpointDetails
     #   data as a hash:
@@ -641,8 +709,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] address_allocation_ids
     #   A list of address allocation IDs that are required to attach an
-    #   Elastic IP address to your SFTP server's endpoint. This is only
-    #   valid in the `UpdateServer` API.
+    #   Elastic IP address to your file transfer protocol-enabled server's
+    #   endpoint. This is only valid in the `UpdateServer` API.
     #
     #   <note markdown="1"> This property can only be use when `EndpointType` is set to `VPC`.
     #
@@ -650,8 +718,8 @@ module Aws::Transfer
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet IDs that are required to host your SFTP server
-    #   endpoint in your VPC.
+    #   A list of subnet IDs that are required to host your file transfer
+    #   protocol-enabled server endpoint in your VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_endpoint_id
@@ -659,8 +727,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The VPC ID of the virtual private cloud in which the SFTP server's
-    #   endpoint will be hosted.
+    #   The VPC ID of the VPC in which a file transfer protocol-enabled
+    #   server's endpoint will be hosted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails AWS API Documentation
@@ -701,8 +769,8 @@ module Aws::Transfer
     end
 
     # Returns information related to the type of user authentication that is
-    # in use for a server's users. A server can have only one method of
-    # authentication.
+    # in use for a file transfer protocol-enabled server's users. A server
+    # can have only one method of authentication.
     #
     # @note When making an API call, you may pass IdentityProviderDetails
     #   data as a hash:
@@ -713,13 +781,13 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] url
-    #   The `Url` parameter provides contains the location of the service
-    #   endpoint used to authenticate users.
+    #   Contains the location of the service endpoint used to authenticate
+    #   users.
     #   @return [String]
     #
     # @!attribute [rw] invocation_role
-    #   The `InvocationRole` parameter provides the type of `InvocationRole`
-    #   used to authenticate the user account.
+    #   Provides the type of `InvocationRole` used to authenticate the user
+    #   account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/IdentityProviderDetails AWS API Documentation
@@ -740,7 +808,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_body
@@ -748,8 +817,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The name of the user account that is assigned to one or more
-    #   servers.
+    #   The name of the user account that is assigned to one or more file
+    #   transfer protocol-enabled servers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportSshPublicKeyRequest AWS API Documentation
@@ -761,17 +830,18 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # This response identifies the user, the server they belong to, and the
-    # identifier of the SSH public key associated with that user. A user can
-    # have more than one key on each server that they are associated with.
+    # Identifies the user, the file transfer protocol-enabled server they
+    # belong to, and the identifier of the SSH public key associated with
+    # that user. A user can have more than one key on each server that they
+    # are associated with.
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_id
-    #   This identifier is the name given to a public key by the system that
-    #   was imported.
+    #   The name given to a public key by the system that was imported.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -787,8 +857,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # This exception is thrown when an error occurs in the AWS Transfer for
-    # SFTP service.
+    # This exception is thrown when an error occurs in the AWS Transfer
+    # Family service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -833,15 +903,15 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] max_results
-    #   Specifies the number of servers to return as a response to the
-    #   `ListServers` query.
+    #   Specifies the number of file transfer protocol-enabled servers to
+    #   return as a response to the `ListServers` query.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   When additional results are obtained from the `ListServers` command,
+    #   When additional results are obtained from the`ListServers` command,
     #   a `NextToken` parameter is returned in the output. You can then pass
     #   the `NextToken` parameter in a subsequent command to continue
-    #   listing additional servers.
+    #   listing additional file transfer protocol-enabled servers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListServersRequest AWS API Documentation
@@ -856,11 +926,11 @@ module Aws::Transfer
     #   When you can get additional results from the `ListServers`
     #   operation, a `NextToken` parameter is returned in the output. In a
     #   following command, you can pass in the `NextToken` parameter to
-    #   continue listing additional servers.
+    #   continue listing additional file transfer protocol-enabled servers.
     #   @return [String]
     #
     # @!attribute [rw] servers
-    #   An array of servers that were listed.
+    #   An array of file transfer protocol-enabled servers that were listed.
     #   @return [Array<Types::ListedServer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListServersResponse AWS API Documentation
@@ -908,7 +978,7 @@ module Aws::Transfer
     end
 
     # @!attribute [rw] arn
-    #   This value is the ARN you specified to list the tags of.
+    #   The ARN you specified to list the tags of.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -955,8 +1025,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for a Secure File Transfer
-    #   Protocol (SFTP) server that has users assigned to it.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that has users assigned to it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListUsersRequest AWS API Documentation
@@ -976,8 +1046,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server that the
-    #   users are assigned to.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that the users are assigned to.
     #   @return [String]
     #
     # @!attribute [rw] users
@@ -994,40 +1064,44 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # Returns properties of the server that was specified.
+    # Returns properties of a file transfer protocol-enabled server that was
+    # specified.
     #
     # @!attribute [rw] arn
-    #   The unique Amazon Resource Name (ARN) for the server to be listed.
+    #   The unique Amazon Resource Name (ARN) for a file transfer
+    #   protocol-enabled server to be listed.
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_type
-    #   The authentication method used to validate a user for the server
-    #   that was specified. This can include Secure Shell (SSH), user name
-    #   and password combinations, or your own custom authentication method.
-    #   Valid values include `SERVICE_MANAGED` or `API_GATEWAY`.
+    #   The authentication method used to validate a user for a file
+    #   transfer protocol-enabled server that was specified. This can
+    #   include Secure Shell (SSH), user name and password combinations, or
+    #   your own custom authentication method. Valid values include
+    #   `SERVICE_MANAGED` or `API_GATEWAY`.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of VPC endpoint that your SFTP server is connected to. If
-    #   your SFTP server is connected to a VPC endpoint, your server isn't
-    #   accessible over the public internet.
+    #   The type of VPC endpoint that your file transfer protocol-enabled
+    #   server is connected to. If your server is connected to a VPC
+    #   endpoint, your server isn't accessible over the public internet.
     #   @return [String]
     #
     # @!attribute [rw] logging_role
-    #   The AWS Identity and Access Management entity that allows the server
-    #   to turn on Amazon CloudWatch logging.
+    #   The AWS Identity and Access Management (IAM) entity that allows a
+    #   file transfer protocol-enabled server to turn on Amazon CloudWatch
+    #   logging.
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   This value is the unique system assigned identifier for the SFTP
-    #   servers that were listed.
+    #   The unique system assigned identifier for a file transfer
+    #   protocol-enabled servers that were listed.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   This property describes the condition of the SFTP server for the
-    #   server that was described. A value of `ONLINE`&gt; indicates that
-    #   the server can accept jobs and transfer files. A `State` value of
-    #   `OFFLINE` means that the server cannot perform file transfer
+    #   Describes the condition of a file transfer protocol-enabled server
+    #   for the server that was described. A value of `ONLINE` indicates
+    #   that the server can accept jobs and transfer files. A `State` value
+    #   of `OFFLINE` means that the server cannot perform file transfer
     #   operations.
     #
     #   The states of `STARTING` and `STOPPING` indicate that the server is
@@ -1037,8 +1111,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] user_count
-    #   This property is a numeric value that indicates the number of users
-    #   that are assigned to the SFTP server you specified with the
+    #   A numeric value that indicates the number of users that are assigned
+    #   to a file transfer protocol-enabled server you specified with the
     #   `ServerId`.
     #   @return [Integer]
     #
@@ -1058,35 +1132,34 @@ module Aws::Transfer
     # Returns properties of the user that you specify.
     #
     # @!attribute [rw] arn
-    #   This property is the unique Amazon Resource Name (ARN) for the user
-    #   that you want to learn about.
+    #   The unique Amazon Resource Name (ARN) for the user that you want to
+    #   learn about.
     #   @return [String]
     #
     # @!attribute [rw] home_directory
-    #   This value specifies the location that files are written to or read
-    #   from an Amazon S3 bucket for the user you specify by their ARN.
+    #   Specifies the location that files are written to or read from an
+    #   Amazon S3 bucket for the user you specify by their ARN.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) you mapped for your users'
     #   home directory. If you set it to `PATH`, the user will see the
-    #   absolute Amazon S3 bucket paths as is in their SFTP clients. If you
-    #   set it `LOGICAL`, you will need to provide mappings in the
-    #   `HomeDirectoryMappings` for how you want to make S3 paths visible to
-    #   your user.
+    #   absolute Amazon S3 bucket paths as is in their file transfer
+    #   protocol clients. If you set it `LOGICAL`, you will need to provide
+    #   mappings in the `HomeDirectoryMappings` for how you want to make
+    #   Amazon S3 paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] role
     #   The role in use by this user. A *role* is an AWS Identity and Access
-    #   Management (IAM) entity that, in this case, allows the SFTP server
-    #   to act on a user's behalf. It allows the server to inherit the
-    #   trust relationship that enables that user to perform file operations
-    #   to their Amazon S3 bucket.
+    #   Management (IAM) entity that, in this case, allows a file transfer
+    #   protocol-enabled server to act on a user's behalf. It allows the
+    #   server to inherit the trust relationship that enables that user to
+    #   perform file operations to their Amazon S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key_count
-    #   This value is the number of SSH public keys stored for the user you
-    #   specified.
+    #   The number of SSH public keys stored for the user you specified.
     #   @return [Integer]
     #
     # @!attribute [rw] user_name
@@ -1127,7 +1200,7 @@ module Aws::Transfer
     end
 
     # This exception is thrown when a resource is not found by the AWS
-    # Transfer for SFTP service.
+    # Transfer Family service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1147,8 +1220,8 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # The request has failed because the AWS Transfer for SFTP service is
-    # not available.
+    # The request has failed because the AWS Transfer Family service is not
+    # available.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1161,11 +1234,11 @@ module Aws::Transfer
     end
 
     # Provides information about the public Secure Shell (SSH) key that is
-    # associated with a user account for a specific server (as identified by
-    # `ServerId`). The information returned includes the date the key was
-    # imported, the public key contents, and the public key ID. A user can
-    # store more than one SSH public key associated with their user name on
-    # a specific SFTP server.
+    # associated with a user account for the specific file transfer
+    # protocol-enabled server (as identified by `ServerId`). The information
+    # returned includes the date the key was imported, the public key
+    # contents, and the public key ID. A user can store more than one SSH
+    # public key associated with their user name on a specific server.
     #
     # @!attribute [rw] date_imported
     #   The date that the public key was added to the user account.
@@ -1197,8 +1270,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server that you
-    #   start.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that you start.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StartServerRequest AWS API Documentation
@@ -1216,8 +1289,8 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server that you
-    #   stopped.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that you stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/StopServerRequest AWS API Documentation
@@ -1247,8 +1320,8 @@ module Aws::Transfer
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   This property contains one or more values that you assigned to the
-    #   key name you create.
+    #   Contains one or more values that you assigned to the key name you
+    #   create.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/Tag AWS API Documentation
@@ -1298,19 +1371,33 @@ module Aws::Transfer
     #         server_id: "ServerId", # required
     #         user_name: "UserName", # required
     #         user_password: "UserPassword",
+    #         server_protocol: "SFTP", # accepts SFTP, FTP, FTPS
     #       }
     #
     # @!attribute [rw] server_id
-    #   A system-assigned identifier for a specific server. That server's
-    #   user authentication method is tested with a user name and password.
+    #   A system-assigned identifier for a specific file transfer
+    #   protocol-enabled server. That server's user authentication method
+    #   is tested with a user name and password.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   This request parameter is the name of the user account to be tested.
+    #   The name of the user account to be tested.
     #   @return [String]
     #
     # @!attribute [rw] user_password
     #   The password of the user account to be tested.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_protocol
+    #   The type of file transfer protocol to be tested.
+    #
+    #   The available protocols are:
+    #
+    #   * Secure Shell (SSH) File Transfer Protocol (SFTP)
+    #
+    #   * File Transfer Protocol Secure (FTPS)
+    #
+    #   * File Transfer Protocol (FTP)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TestIdentityProviderRequest AWS API Documentation
@@ -1318,7 +1405,8 @@ module Aws::Transfer
     class TestIdentityProviderRequest < Struct.new(
       :server_id,
       :user_name,
-      :user_password)
+      :user_password,
+      :server_protocol)
       include Aws::Structure
     end
 
@@ -1371,9 +1459,9 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] arn
-    #   This is the value of the resource that will have the tag removed. An
-    #   Amazon Resource Name (ARN) is an identifier for a specific AWS
-    #   resource, such as a server, user, or role.
+    #   The value of the resource that will have the tag removed. An Amazon
+    #   Resource Name (ARN) is an identifier for a specific AWS resource,
+    #   such as a server, user, or role.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -1394,6 +1482,7 @@ module Aws::Transfer
     #   data as a hash:
     #
     #       {
+    #         certificate: "Certificate",
     #         endpoint_details: {
     #           address_allocation_ids: ["AddressAllocationId"],
     #           subnet_ids: ["SubnetId"],
@@ -1407,23 +1496,29 @@ module Aws::Transfer
     #           invocation_role: "Role",
     #         },
     #         logging_role: "NullableRole",
+    #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         server_id: "ServerId", # required
     #       }
     #
+    # @!attribute [rw] certificate
+    #   The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM)
+    #   certificate. Required when `Protocols` is set to `FTPS`.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are
-    #   configured for your SFTP server. With a VPC endpoint, you can
-    #   restrict access to your SFTP server to resources only within your
-    #   VPC. To control incoming internet traffic, you will need to
-    #   associate one or more Elastic IP addresses with your server's
-    #   endpoint.
+    #   configured for your file transfer protocol-enabled server. With a
+    #   VPC endpoint, you can restrict access to your server to resources
+    #   only within your VPC. To control incoming internet traffic, you will
+    #   need to associate one or more Elastic IP addresses with your
+    #   server's endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
-    #   The type of endpoint that you want your SFTP server to connect to.
-    #   You can choose to connect to the public internet or a virtual
-    #   private cloud (VPC) endpoint. With a VPC endpoint, your SFTP server
-    #   isn't accessible over the public internet.
+    #   The type of endpoint that you want your file transfer
+    #   protocol-enabled server to connect to. You can choose to connect to
+    #   the public internet or a VPC endpoint. With a VPC endpoint, your
+    #   server isn't accessible over the public internet.
     #   @return [String]
     #
     # @!attribute [rw] host_key
@@ -1431,46 +1526,66 @@ module Aws::Transfer
     #   my-new-server-key`.
     #
     #   If you aren't planning to migrate existing users from an existing
-    #   SFTP server to a new AWS SFTP server, don't update the host key.
-    #   Accidentally changing a server's host key can be disruptive.
+    #   file transfer protocol-enabled server to a new server, don't update
+    #   the host key. Accidentally changing a server's host key can be
+    #   disruptive.
     #
-    #   For more information, see
-    #   "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key"
-    #   in the *AWS SFTP User Guide.*
+    #   For more information, see [Changing the Host Key for Your AWS
+    #   Transfer Family Server][1] in the *AWS Transfer Family User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key
     #   @return [String]
     #
     # @!attribute [rw] identity_provider_details
-    #   This response parameter is an array containing all of the
-    #   information required to call a customer's authentication API
-    #   method.
+    #   An array containing all of the information required to call a
+    #   customer's authentication API method.
     #   @return [Types::IdentityProviderDetails]
     #
     # @!attribute [rw] logging_role
-    #   A value that changes the AWS Identity and Access Management (IAM)
-    #   role that allows Amazon S3 events to be logged in Amazon CloudWatch,
-    #   turning logging on or off.
+    #   Changes the AWS Identity and Access Management (IAM) role that
+    #   allows Amazon S3 events to be logged in Amazon CloudWatch, turning
+    #   logging on or off.
     #   @return [String]
     #
+    # @!attribute [rw] protocols
+    #   Specifies the file transfer protocol or protocols over which your
+    #   file transfer protocol client can connect to your server's
+    #   endpoint. The available protocols are:
+    #
+    #   * Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer
+    #     over SSH
+    #
+    #   * File Transfer Protocol Secure (FTPS): File transfer with TLS
+    #     encryption
+    #
+    #   * File Transfer Protocol (FTP): Unencrypted file transfer
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server instance that
-    #   the user account is assigned to.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server instance that the user account is assigned
+    #   to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
     #
     class UpdateServerRequest < Struct.new(
+      :certificate,
       :endpoint_details,
       :endpoint_type,
       :host_key,
       :identity_provider_details,
       :logging_role,
+      :protocols,
       :server_id)
       include Aws::Structure
     end
 
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server that the user
-    #   account is assigned to.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server that the user account is assigned to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerResponse AWS API Documentation
@@ -1499,48 +1614,50 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] home_directory
-    #   A parameter that specifies the landing directory (folder) for a user
-    #   when they log in to the server using their client.
+    #   Specifies the landing directory (folder) for a user when they log in
+    #   to the file transfer protocol-enabled server using their file
+    #   transfer protocol client.
     #
-    #   An example is `<your-Amazon-S3-bucket-name>/home/username`.
+    #   An example is `your-Amazon-S3-bucket-name>/home/username`.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_type
     #   The type of landing directory (folder) you want your users' home
-    #   directory to be when they log into the SFTP serve. If you set it to
-    #   `PATH`, the user will see the absolute Amazon S3 bucket paths as is
-    #   in their SFTP clients. If you set it `LOGICAL`, you will need to
-    #   provide mappings in the `HomeDirectoryMappings` for how you want to
-    #   make S3 paths visible to your user.
+    #   directory to be when they log into the file transfer
+    #   protocol-enabled server. If you set it to `PATH`, the user will see
+    #   the absolute Amazon S3 bucket paths as is in their file transfer
+    #   protocol clients. If you set it `LOGICAL`, you will need to provide
+    #   mappings in the `HomeDirectoryMappings` for how you want to make
+    #   Amazon S3 paths visible to your users.
     #   @return [String]
     #
     # @!attribute [rw] home_directory_mappings
-    #   Logical directory mappings that specify what S3 paths and keys
-    #   should be visible to your user and how you want to make them
+    #   Logical directory mappings that specify what Amazon S3 paths and
+    #   keys should be visible to your user and how you want to make them
     #   visible. You will need to specify the "`Entry`" and "`Target`"
     #   pair, where `Entry` shows how the path is made visible and `Target`
-    #   is the actual S3 path. If you only specify a target, it will be
-    #   displayed as is. You will need to also make sure that your AWS IAM
-    #   Role provides access to paths in `Target`. The following is an
+    #   is the actual Amazon S3 path. If you only specify a target, it will
+    #   be displayed as is. You will need to also make sure that your AWS
+    #   IAM Role provides access to paths in `Target`. The following is an
     #   example.
     #
     #   `'[ "/bucket2/documentation", \{ "Entry":
     #   "your-personal-report.pdf", "Target":
     #   "/bucket3/customized-reports/$\{transfer:UserName\}.pdf" \} ]'`
     #
-    #   In most cases, you can use this value instead of the scope down
+    #   In most cases, you can use this value instead of the scope-down
     #   policy to lock your user down to the designated home directory
     #   ("chroot"). To do this, you can set `Entry` to '/' and set
     #   `Target` to the HomeDirectory parameter value.
     #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in S3, the
-    #   entry will be ignored. As a workaround, you can use the S3 api to
-    #   create 0 byte objects as place holders for your directory. If using
-    #   the CLI, use the s3api call instead of s3 so you can use the
-    #   put-object operation. For example, you use the following: `aws s3api
-    #   put-object --bucket bucketname --key path/to/folder/`. Make sure
-    #   that the end of the key name ends in a / for it to be considered a
-    #   folder.
+    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
+    #   S3, the entry will be ignored. As a workaround, you can use the
+    #   Amazon S3 api to create 0 byte objects as place holders for your
+    #   directory. If using the CLI, use the `s3api` call instead of `s3` so
+    #   you can use the put-object operation. For example, you use the
+    #   following: `aws s3api put-object --bucket bucketname --key
+    #   path/to/folder/`. Make sure that the end of the key name ends in a /
+    #   for it to be considered a folder.
     #
     #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
@@ -1553,44 +1670,48 @@ module Aws::Transfer
     #   include `$\{Transfer:UserName\}`, `$\{Transfer:HomeDirectory\}`, and
     #   `$\{Transfer:HomeBucket\}`.
     #
-    #   <note markdown="1"> For scope-down policies, AWS Transfer for SFTP stores the policy as
-    #   a JSON blob, instead of the Amazon Resource Name (ARN) of the
-    #   policy. You save the policy as a JSON blob and pass it in the
-    #   `Policy` argument.
+    #   <note markdown="1"> For scope-down policies, AWS Transfer Family stores the policy as a
+    #   JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+    #   You save the policy as a JSON blob and pass it in the `Policy`
+    #   argument.
     #
-    #    For an example of a scope-down policy, see
-    #   "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down"&gt;Creating
-    #   a Scope-Down Policy.
+    #    For an example of a scope-down policy, see [Creating a Scope-Down
+    #   Policy][1].
     #
-    #    For more information, see
-    #   "https://docs.aws.amazon.com/STS/latest/APIReference/API\_AssumeRole.html"
-    #   in the *AWS Security Token Service API Reference*.
+    #    For more information, see [AssumeRole][2] in the *AWS Security Token
+    #   Service API Reference*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down
+    #   [2]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The IAM role that controls your user's access to your Amazon S3
+    #   The IAM role that controls your users' access to your Amazon S3
     #   bucket. The policies attached to this role will determine the level
     #   of access you want to provide your users when transferring files
     #   into and out of your Amazon S3 bucket or buckets. The IAM role
-    #   should also contain a trust relationship that allows the Secure File
-    #   Transfer Protocol (SFTP) server to access your resources when
-    #   servicing your SFTP user's transfer requests.
+    #   should also contain a trust relationship that allows the file
+    #   transfer protocol-enabled server to access your resources when
+    #   servicing your users' transfer requests.
     #   @return [String]
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server instance that
-    #   the user account is assigned to.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server instance that the user account is assigned
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   A unique string that identifies a user and is associated with a
-    #   server as specified by the `ServerId`. This is the string that will
-    #   be used by your user when they log in to your SFTP server. This user
-    #   name is a minimum of 3 and a maximum of 32 characters long. The
-    #   following are valid characters: a-z, A-Z, 0-9, underscore, and
-    #   hyphen. The user name can't start with a hyphen.
+    #   A unique string that identifies a user and is associated with a file
+    #   transfer protocol-enabled server as specified by the `ServerId`.
+    #   This is the string that will be used by your user when they log in
+    #   to your server. This user name is a minimum of 3 and a maximum of 32
+    #   characters long. The following are valid characters: a-z, A-Z, 0-9,
+    #   underscore, and hyphen. The user name can't start with a hyphen.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserRequest AWS API Documentation
@@ -1606,17 +1727,19 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # `UpdateUserResponse` returns the user name and server identifier for
-    # the request to update a user's properties.
+    # `UpdateUserResponse` returns the user name and file transfer
+    # protocol-enabled server identifier for the request to update a user's
+    # properties.
     #
     # @!attribute [rw] server_id
-    #   A system-assigned unique identifier for an SFTP server instance that
-    #   the user account is assigned to.
+    #   A system-assigned unique identifier for a file transfer
+    #   protocol-enabled server instance that the user account is assigned
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The unique identifier for a user that is assigned to the SFTP server
-    #   instance that was specified in the request.
+    #   The unique identifier for a user that is assigned to a file transfer
+    #   protocol-enabled server instance that was specified in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateUserResponse AWS API Documentation

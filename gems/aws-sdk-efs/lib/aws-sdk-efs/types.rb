@@ -1841,7 +1841,7 @@ module Aws::EFS
     #
     #       {
     #         resource_id: "ResourceId", # required
-    #         tag_keys: ["TagKey"],
+    #         tag_keys: ["TagKey"], # required
     #       }
     #
     # @!attribute [rw] resource_id

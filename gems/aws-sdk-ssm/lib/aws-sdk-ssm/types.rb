@@ -306,8 +306,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_location
-    #   An Amazon S3 bucket where you want to store the output details of
-    #   the request.
+    #   An S3 bucket where you want to store the output details of the
+    #   request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @!attribute [rw] last_execution_date
@@ -357,6 +357,22 @@ module Aws::SSM
     #   The severity level that is assigned to the association.
     #   @return [String]
     #
+    # @!attribute [rw] sync_compliance
+    #   The mode for generating association compliance. You can specify
+    #   `AUTO` or `MANUAL`. In `AUTO` mode, the system uses the status of
+    #   the association execution to determine the compliance status. If the
+    #   association execution runs successfully, then the association is
+    #   `COMPLIANT`. If the association execution doesn't run successfully,
+    #   the association is `NON-COMPLIANT`.
+    #
+    #   In `MANUAL` mode, you must specify the `AssociationId` as a
+    #   parameter for the PutComplianceItems API action. In this case,
+    #   compliance data is not managed by State Manager. It is managed by
+    #   your direct call to the PutComplianceItems API action.
+    #
+    #   By default, all associations use `AUTO` mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -379,7 +395,8 @@ module Aws::SSM
       :association_name,
       :max_errors,
       :max_concurrency,
-      :compliance_severity)
+      :compliance_severity,
+      :sync_compliance)
       include Aws::Structure
     end
 
@@ -575,7 +592,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName
+    #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName, ResourceGroupName
     #         value: "AssociationFilterValue", # required
     #       }
     #
@@ -748,6 +765,22 @@ module Aws::SSM
     #   The severity level that is assigned to the association.
     #   @return [String]
     #
+    # @!attribute [rw] sync_compliance
+    #   The mode for generating association compliance. You can specify
+    #   `AUTO` or `MANUAL`. In `AUTO` mode, the system uses the status of
+    #   the association execution to determine the compliance status. If the
+    #   association execution runs successfully, then the association is
+    #   `COMPLIANT`. If the association execution doesn't run successfully,
+    #   the association is `NON-COMPLIANT`.
+    #
+    #   In `MANUAL` mode, you must specify the `AssociationId` as a
+    #   parameter for the PutComplianceItems API action. In this case,
+    #   compliance data is not managed by State Manager. It is managed by
+    #   your direct call to the PutComplianceItems API action.
+    #
+    #   By default, all associations use `AUTO` mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -763,7 +796,8 @@ module Aws::SSM
       :association_name,
       :max_errors,
       :max_concurrency,
-      :compliance_severity)
+      :compliance_severity,
+      :sync_compliance)
       include Aws::Structure
     end
 
@@ -1135,7 +1169,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] log_file
-    #   An Amazon S3 bucket where execution information is stored.
+    #   An S3 bucket where execution information is stored.
     #   @return [String]
     #
     # @!attribute [rw] outputs
@@ -1197,12 +1231,12 @@ module Aws::SSM
     #   Use this filter with DescribeAutomationExecutions. Specify either
     #   Local or CrossAccount. CrossAccount is an Automation that runs in
     #   multiple AWS Regions and accounts. For more information, see
-    #   [Executing Automations in Multiple AWS Regions and Accounts][1] in
-    #   the *AWS Systems Manager User Guide*.
+    #   [Running Automation workflows in multiple AWS Regions and
+    #   accounts][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata AWS API Documentation
@@ -1403,7 +1437,7 @@ module Aws::SSM
     #   more information than Status because it includes states resulting
     #   from error and concurrency control parameters. StatusDetails can
     #   show different results than Status. For more information about these
-    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   statuses, see [Understanding command statuses][1] in the *AWS
     #   Systems Manager User Guide*. StatusDetails can be one of the
     #   following values:
     #
@@ -1441,13 +1475,13 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
     #   ignores it. Instead, Systems Manager automatically determines the
-    #   Amazon S3 bucket region.
+    #   Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -1466,12 +1500,12 @@ module Aws::SSM
     #   at the same time. You can specify a number of instances, such as 10,
     #   or a percentage of instances, such as 10%. The default value is 50.
     #   For more information about how to use MaxConcurrency, see [Running
-    #   Commands Using Systems Manager Run Command][1] in the *AWS Systems
+    #   commands using Systems Manager Run Command][1] in the *AWS Systems
     #   Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -1479,12 +1513,12 @@ module Aws::SSM
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
     #   default value is 0. For more information about how to use MaxErrors,
-    #   see [Running Commands Using Systems Manager Run Command][1] in the
+    #   see [Running commands using Systems Manager Run Command][1] in the
     #   *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] target_count
@@ -1522,6 +1556,10 @@ module Aws::SSM
     #   the command output.
     #   @return [Types::CloudWatchOutputConfig]
     #
+    # @!attribute [rw] timeout_seconds
+    #   The `TimeoutSeconds` value specified for a command.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command AWS API Documentation
     #
     class Command < Struct.new(
@@ -1547,7 +1585,8 @@ module Aws::SSM
       :delivery_timed_out_count,
       :service_role,
       :notification_config,
-      :cloud_watch_output_config)
+      :cloud_watch_output_config,
+      :timeout_seconds)
       include Aws::Structure
     end
 
@@ -1632,9 +1671,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] instance_name
-    #   The name of the invocation target. For Amazon EC2 instances this is
-    #   the value for the aws:Name tag. For on-premises instances, this is
-    #   the name of the instance.
+    #   The name of the invocation target. For EC2 instances this is the
+    #   value for the aws:Name tag. For on-premises instances, this is the
+    #   name of the instance.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -1664,7 +1703,7 @@ module Aws::SSM
     #   information than Status because it includes states resulting from
     #   error and concurrency control parameters. StatusDetails can show
     #   different results than Status. For more information about these
-    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   statuses, see [Understanding command statuses][1] in the *AWS
     #   Systems Manager User Guide*. StatusDetails can be one of the
     #   following values:
     #
@@ -1709,7 +1748,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] trace_output
@@ -1717,19 +1756,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] standard_output_url
-    #   The URL to the plugin's StdOut file in Amazon S3, if the Amazon S3
-    #   bucket was defined for the parent command. For an invocation,
+    #   The URL to the plugin's StdOut file in Amazon S3, if the S3 bucket
+    #   was defined for the parent command. For an invocation,
     #   StandardOutputUrl is populated if there is just one plugin defined
-    #   for the command, and the Amazon S3 bucket was defined for the
-    #   command.
+    #   for the command, and the S3 bucket was defined for the command.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_url
-    #   The URL to the plugin's StdErr file in Amazon S3, if the Amazon S3
-    #   bucket was defined for the parent command. For an invocation,
+    #   The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket
+    #   was defined for the parent command. For an invocation,
     #   StandardErrorUrl is populated if there is just one plugin defined
-    #   for the command, and the Amazon S3 bucket was defined for the
-    #   command.
+    #   for the command, and the S3 bucket was defined for the command.
     #   @return [String]
     #
     # @!attribute [rw] command_plugins
@@ -1792,7 +1829,7 @@ module Aws::SSM
     #   more information than Status because it includes states resulting
     #   from error and concurrency control parameters. StatusDetails can
     #   show different results than Status. For more information about these
-    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   statuses, see [Understanding command statuses][1] in the *AWS
     #   Systems Manager User Guide*. StatusDetails can be one of the
     #   following values:
     #
@@ -1837,7 +1874,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] response_code
@@ -1859,8 +1896,8 @@ module Aws::SSM
     #
     # @!attribute [rw] standard_output_url
     #   The URL for the complete text written by the plugin to stdout in
-    #   Amazon S3. If the Amazon S3 bucket for the command was not
-    #   specified, then this string is empty.
+    #   Amazon S3. If the S3 bucket for the command was not specified, then
+    #   this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_url
@@ -1870,8 +1907,8 @@ module Aws::SSM
     #
     # @!attribute [rw] output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
-    #   ignores it. Instead, Systems Manager automatically determines the
-    #   Amazon S3 bucket region.
+    #   ignores it. Instead, Systems Manager automatically determines the S3
+    #   bucket region.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -1881,7 +1918,7 @@ module Aws::SSM
     #
     #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
     #
-    #   test\_folder is the name of the Amazon S3 bucket;
+    #   test\_folder is the name of the S3 bucket;
     #
     #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
@@ -1898,7 +1935,7 @@ module Aws::SSM
     #
     #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
     #
-    #   test\_folder is the name of the Amazon S3 bucket;
+    #   test\_folder is the name of the S3 bucket;
     #
     #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
@@ -1967,7 +2004,7 @@ module Aws::SSM
 
     # Information about the compliance as defined by the resource type. For
     # example, for a patch resource type, `Items` includes information about
-    # the PatchSeverity, Classification, etc.
+    # the PatchSeverity, Classification, and so on.
     #
     # @!attribute [rw] compliance_type
     #   The compliance type. For example, Association (for a State Manager
@@ -2212,12 +2249,12 @@ module Aws::SSM
     #   to assign to the managed instance. This IAM role must provide
     #   AssumeRole permissions for the Systems Manager service principal
     #   `ssm.amazonaws.com`. For more information, see [Create an IAM
-    #   Service Role for a Hybrid Environment][1] in the *AWS Systems
+    #   service role for a hybrid environment][1] in the *AWS Systems
     #   Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] registration_limit
@@ -2319,6 +2356,7 @@ module Aws::SSM
     #             max_errors: "MaxErrors",
     #             max_concurrency: "MaxConcurrency",
     #             compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
+    #             sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #           },
     #         ],
     #       }
@@ -2366,6 +2404,7 @@ module Aws::SSM
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
+    #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #       }
     #
     # @!attribute [rw] name
@@ -2419,8 +2458,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_location
-    #   An Amazon S3 bucket where you want to store the results of this
-    #   request.
+    #   An S3 bucket where you want to store the results of this request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @!attribute [rw] association_name
@@ -2462,6 +2500,22 @@ module Aws::SSM
     #   The severity level to assign to the association.
     #   @return [String]
     #
+    # @!attribute [rw] sync_compliance
+    #   The mode for generating association compliance. You can specify
+    #   `AUTO` or `MANUAL`. In `AUTO` mode, the system uses the status of
+    #   the association execution to determine the compliance status. If the
+    #   association execution runs successfully, then the association is
+    #   `COMPLIANT`. If the association execution doesn't run successfully,
+    #   the association is `NON-COMPLIANT`.
+    #
+    #   In `MANUAL` mode, you must specify the `AssociationId` as a
+    #   parameter for the PutComplianceItems API action. In this case,
+    #   compliance data is not managed by State Manager. It is managed by
+    #   your direct call to the PutComplianceItems API action.
+    #
+    #   By default, all associations use `AUTO` mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -2476,7 +2530,8 @@ module Aws::SSM
       :association_name,
       :max_errors,
       :max_concurrency,
-      :compliance_severity)
+      :compliance_severity,
+      :sync_compliance)
       include Aws::Structure
     end
 
@@ -2525,6 +2580,7 @@ module Aws::SSM
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
+    #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #       }
     #
     # @!attribute [rw] name
@@ -2575,9 +2631,15 @@ module Aws::SSM
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags) for the association. You must
-    #   specify a value for `Targets` if you don't specify a value for
-    #   `InstanceId`.
+    #   The targets for the association. You can target instances by using
+    #   tags, AWS Resource Groups, all instances in an AWS account, or
+    #   individual instance IDs. For more information about choosing targets
+    #   for an association, see [Using targets and rate controls with State
+    #   Manager associations][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] schedule_expression
@@ -2586,8 +2648,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_location
-    #   An Amazon S3 bucket where you want to store the output details of
-    #   the request.
+    #   An S3 bucket where you want to store the output details of the
+    #   request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @!attribute [rw] association_name
@@ -2635,6 +2697,22 @@ module Aws::SSM
     #   The severity level to assign to the association.
     #   @return [String]
     #
+    # @!attribute [rw] sync_compliance
+    #   The mode for generating association compliance. You can specify
+    #   `AUTO` or `MANUAL`. In `AUTO` mode, the system uses the status of
+    #   the association execution to determine the compliance status. If the
+    #   association execution runs successfully, then the association is
+    #   `COMPLIANT`. If the association execution doesn't run successfully,
+    #   the association is `NON-COMPLIANT`.
+    #
+    #   In `MANUAL` mode, you must specify the `AssociationId` as a
+    #   parameter for the PutComplianceItems API action. In this case,
+    #   compliance data is not managed by State Manager. It is managed by
+    #   your direct call to the PutComplianceItems API action.
+    #
+    #   By default, all associations use `AUTO` mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -2649,7 +2727,8 @@ module Aws::SSM
       :automation_target_parameter_name,
       :max_errors,
       :max_concurrency,
-      :compliance_severity)
+      :compliance_severity,
+      :sync_compliance)
       include Aws::Structure
     end
 
@@ -2696,13 +2775,38 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] content
-    #   A valid JSON or YAML string.
+    #   The content for the new SSM document in JSON or YAML format. We
+    #   recommend storing the contents for your new document in an external
+    #   JSON or YAML file and referencing the file in a command.
+    #
+    #   For examples, see the following topics in the *AWS Systems Manager
+    #   User Guide*.
+    #
+    #   * [Create an SSM document (AWS API)][1]
+    #
+    #   * [Create an SSM document (AWS CLI)][2]
+    #
+    #   * [Create an SSM document (API)][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html
     #   @return [String]
     #
     # @!attribute [rw] requires
-    #   A list of SSM documents required by a document. For example, an
+    #   A list of SSM documents required by a document. This parameter is
+    #   used exclusively by AWS AppConfig. When a user creates an AppConfig
+    #   configuration in an SSM document, the user must also specify a
+    #   required document for validation purposes. In this case, an
     #   `ApplicationConfiguration` document requires an
-    #   `ApplicationConfigurationSchema` document.
+    #   `ApplicationConfigurationSchema` document for validation purposes.
+    #   For more information, see [AWS AppConfig][1] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html
     #   @return [Array<Types::DocumentRequires>]
     #
     # @!attribute [rw] attachments
@@ -2713,8 +2817,8 @@ module Aws::SSM
     # @!attribute [rw] name
     #   A name for the Systems Manager document.
     #
-    #   Do not use the following to begin the names of documents you create.
-    #   They are reserved by AWS for use as document prefixes:
+    #   You can't use the following strings as document name prefixes.
+    #   These are reserved by AWS for use as document name prefixes:
     #
     #    * `aws`
     #
@@ -2745,8 +2849,8 @@ module Aws::SSM
     #   the following value: /AWS::EC2::Instance. If you specify a value of
     #   '/' the document can run on all types of resources. If you don't
     #   specify a value, the document can't run on any resources. For a
-    #   list of valid resource types, see [AWS Resource Types Reference][1]
-    #   in the *AWS CloudFormation User Guide*.
+    #   list of valid resource types, see [AWS resource and property types
+    #   reference][1] in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -2996,11 +3100,11 @@ module Aws::SSM
     #   resource in the request. Use the `/aws/automations` key in
     #   OperationalData to associate an Automation runbook with the OpsItem.
     #   To view AWS CLI example commands that use these keys, see [Creating
-    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #   OpsItems manually][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
     # @!attribute [rw] notifications
@@ -3021,8 +3125,12 @@ module Aws::SSM
     #   @return [Array<Types::RelatedOpsItem>]
     #
     # @!attribute [rw] source
-    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems
-    #   Manager.
+    #   The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
+    #
+    #   <note markdown="1"> The source name can't contain the following strings: aws, amazon,
+    #   and amzn.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] title
@@ -3033,7 +3141,7 @@ module Aws::SSM
     # @!attribute [rw] tags
     #   Optional metadata that you assign to a resource. You can restrict
     #   access to OpsItems by using an inline IAM policy that specifies
-    #   tags. For more information, see [Getting Started with OpsCenter][1]
+    #   tags. For more information, see [Getting started with OpsCenter][1]
     #   in the *AWS Systems Manager User Guide*.
     #
     #   Tags use a key-value pair. For example:
@@ -3047,7 +3155,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] category
@@ -3160,8 +3268,9 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #   and rejected patches, see [About package name formats for approved
+    #   and rejected patch lists][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -3184,8 +3293,9 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #   and rejected patches, see [About package name formats for approved
+    #   and rejected patch lists][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -3310,18 +3420,24 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] s3_destination
-    #   Amazon S3 configuration details for the sync.
+    #   Amazon S3 configuration details for the sync. This parameter is
+    #   required if the `SyncType` value is SyncToDestination.
     #   @return [Types::ResourceDataSyncS3Destination]
     #
     # @!attribute [rw] sync_type
     #   Specify `SyncToDestination` to create a resource data sync that
-    #   synchronizes data from multiple AWS Regions to an Amazon S3 bucket.
-    #   Specify `SyncFromSource` to synchronize data from multiple AWS
-    #   accounts and Regions, as listed in AWS Organizations.
+    #   synchronizes data to an S3 bucket for Inventory. If you specify
+    #   `SyncToDestination`, you must provide a value for `S3Destination`.
+    #   Specify `SyncFromSource` to synchronize data from a single account
+    #   and multiple Regions, or multiple AWS accounts and Regions, as
+    #   listed in AWS Organizations for Explorer. If you specify
+    #   `SyncFromSource`, you must provide a value for `SyncSource`. The
+    #   default value is `SyncToDestination`.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
-    #   Specify information about the data sources to synchronize.
+    #   Specify information about the data sources to synchronize. This
+    #   parameter is required if the `SyncType` value is SyncFromSource.
     #   @return [Types::ResourceDataSyncSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSyncRequest AWS API Documentation
@@ -3521,12 +3637,12 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   A summary of the delete operation. For more information about this
-    #   summary, see [Understanding the Delete Inventory Summary][1] in the
-    #   *AWS Systems Manager User Guide*.
+    #   summary, see [Deleting custom inventory][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary
     #   @return [Types::InventoryDeletionSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventoryResult AWS API Documentation
@@ -4321,8 +4437,8 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_sharing_info_list
-    #   A list of of AWS accounts where the current document is shared and
-    #   the version shared with each account.
+    #   A list of AWS accounts where the current document is shared and the
+    #   version shared with each account.
     #   @return [Array<Types::AccountSharingInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermissionResponse AWS API Documentation
@@ -4547,19 +4663,21 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_information_filter_list
     #   This is a legacy method. We recommend that you don't use this
-    #   method. Instead, use the InstanceInformationFilter action. The
-    #   `InstanceInformationFilter` action enables you to return instance
-    #   information by using tags that are specified as a key-value mapping.
+    #   method. Instead, use the `Filters` data type. `Filters` enables you
+    #   to return instance information by filtering based on tags applied to
+    #   managed instances.
     #
-    #   If you do use this method, then you can't use the
-    #   `InstanceInformationFilter` action. Using this method and the
-    #   `InstanceInformationFilter` action causes an exception error.
+    #   <note markdown="1"> Attempting to use `InstanceInformationFilterList` and `Filters`
+    #   leads to an exception error.
+    #
+    #    </note>
     #   @return [Array<Types::InstanceInformationFilter>]
     #
     # @!attribute [rw] filters
     #   One or more filters. Use a filter to return a more specific list of
-    #   instances. You can filter on Amazon EC2 tag. Specify tags by using a
-    #   key-value mapping.
+    #   instances. You can filter based on tags applied to EC2 instances.
+    #   Use this `Filters` data type instead of
+    #   `InstanceInformationFilterList`, which is deprecated.
     #   @return [Array<Types::InstanceInformationStringFilter>]
     #
     # @!attribute [rw] max_results
@@ -5393,7 +5511,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] ops_item_filters
-    #   One or more filters to limit the reponse.
+    #   One or more filters to limit the response.
     #
     #   * Key: CreatedTime
     #
@@ -6012,8 +6130,8 @@ module Aws::SSM
     # @!attribute [rw] target_type
     #   The target type which defines the kinds of resources the document
     #   can run on. For example, /AWS::EC2::Instance. For a list of valid
-    #   resource types, see [AWS Resource Types Reference][1] in the *AWS
-    #   CloudFormation User Guide*.
+    #   resource types, see [AWS resource and property types reference][1]
+    #   in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -6026,7 +6144,7 @@ module Aws::SSM
     #
     # @!attribute [rw] attachments_information
     #   Details about the document attachments, including names, locations,
-    #   sizes, etc.
+    #   sizes, and so on.
     #   @return [Array<Types::AttachmentInformation>]
     #
     # @!attribute [rw] requires
@@ -6063,7 +6181,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes a filter.
+    # This data type is deprecated. Instead, use DocumentKeyValuesFilter.
     #
     # @note When making an API call, you may pass DocumentFilter
     #   data as a hash:
@@ -6128,8 +6246,8 @@ module Aws::SSM
     # @!attribute [rw] target_type
     #   The target type which defines the kinds of resources the document
     #   can run on. For example, /AWS::EC2::Instance. For a list of valid
-    #   resource types, see [AWS Resource Types Reference][1] in the *AWS
-    #   CloudFormation User Guide*.
+    #   resource types, see [AWS resource and property types reference][1]
+    #   in the *AWS CloudFormation User Guide*.
     #
     #
     #
@@ -6169,8 +6287,8 @@ module Aws::SSM
     # For keys, you can specify one or more tags that have been applied to a
     # document.
     #
-    # Other valid values include Owner, Name, PlatformTypes, and
-    # DocumentType.
+    # Other valid values include `Owner`, `Name`, `PlatformTypes`,
+    # `DocumentType`, and `TargetType`.
     #
     # Note that only one Owner can be specified in a request. For example:
     # `Key=Owner,Values=Self`.
@@ -6187,7 +6305,7 @@ module Aws::SSM
     # values are returned in the results.
     #
     # To specify a custom key and value pair, use the format
-    # `Key=tag:[tagName],Values=[valueName]`.
+    # `Key=tag:tagName,Values=valueName`.
     #
     # For example, if you created a Key called region and are using the AWS
     # CLI to call the `list-documents` command:
@@ -6376,7 +6494,7 @@ module Aws::SSM
     # maintenance window or Patch baseline, doesn't exist.
     #
     # For information about resource quotas in Systems Manager, see [Systems
-    # Manager Service Quotas][1] in the *AWS General Reference*.
+    # Manager service quotas][1] in the *AWS General Reference*.
     #
     #
     #
@@ -6628,8 +6746,8 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_id
     #   (Required) The ID of the managed instance targeted by the command. A
-    #   managed instance can be an Amazon EC2 instance or an instance in
-    #   your hybrid environment that is configured for Systems Manager.
+    #   managed instance can be an EC2 instance or an instance in your
+    #   hybrid environment that is configured for Systems Manager.
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
@@ -6653,7 +6771,7 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_id
     #   The ID of the managed instance targeted by the command. A managed
-    #   instance can be an Amazon EC2 instance or an instance in your hybrid
+    #   instance can be an EC2 instance or an instance in your hybrid
     #   environment that is configured for Systems Manager.
     #   @return [String]
     #
@@ -6720,7 +6838,7 @@ module Aws::SSM
     #   includes states resulting from error and concurrency control
     #   parameters. StatusDetails can show different results than Status.
     #   For more information about these statuses, see [Understanding
-    #   Command Statuses][1] in the *AWS Systems Manager User Guide*.
+    #   command statuses][1] in the *AWS Systems Manager User Guide*.
     #   StatusDetails can be one of the following values:
     #
     #   * Pending: The command has not been sent to the instance.
@@ -6730,10 +6848,11 @@ module Aws::SSM
     #
     #   * Delayed: The system attempted to send the command to the target,
     #     but the target was not available. The instance might not be
-    #     available because of network issues, the instance was stopped,
-    #     etc. The system will try to deliver the command again.
+    #     available because of network issues, because the instance was
+    #     stopped, or for similar reasons. The system will try to send the
+    #     command again.
     #
-    #   * Success: The command or plugin was run successfully. This is a
+    #   * Success: The command or plugin ran successfully. This is a
     #     terminal state.
     #
     #   * Delivery Timed Out: The command was not delivered to the instance
@@ -6769,7 +6888,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] standard_output_content
@@ -6780,8 +6899,8 @@ module Aws::SSM
     #
     # @!attribute [rw] standard_output_url
     #   The URL for the complete text written by the plugin to stdout in
-    #   Amazon S3. If an Amazon S3 bucket was not specified, then this
-    #   string is empty.
+    #   Amazon S3. If an S3 bucket was not specified, then this string is
+    #   empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_content
@@ -6963,7 +7082,7 @@ module Aws::SSM
     # @!attribute [rw] version_name
     #   An optional field specifying the version of the artifact associated
     #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document, and cannot be changed.
+    #   is unique across all versions of a document and can't be changed.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -7031,7 +7150,7 @@ module Aws::SSM
     #
     # @!attribute [rw] attachments_content
     #   A description of the document attachments, including names,
-    #   locations, sizes, etc.
+    #   locations, sizes, and so on.
     #   @return [Array<Types::AttachmentContent>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentResult AWS API Documentation
@@ -8234,7 +8353,10 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] setting_id
-    #   The ID of the service setting to get.
+    #   The ID of the service setting to get. The setting ID can be
+    #   `/ssm/parameter-store/default-parameter-tier`,
+    #   `/ssm/parameter-store/high-throughput-enabled`, or
+    #   `/ssm/managed-instance/activation-tier`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetServiceSettingRequest AWS API Documentation
@@ -8258,21 +8380,21 @@ module Aws::SSM
     end
 
     # A hierarchy can have a maximum of 15 levels. For more information, see
-    # [Requirements and Constraints for Parameter Names][1] in the *AWS
+    # [Requirements and constraints for parameter names][1] in the *AWS
     # Systems Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #
     # @!attribute [rw] message
     #   A hierarchy can have a maximum of 15 levels. For more information,
-    #   see [Requirements and Constraints for Parameter Names][1] in the
+    #   see [Requirements and constraints for parameter names][1] in the
     #   *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/HierarchyLevelLimitExceededException AWS API Documentation
@@ -8283,14 +8405,15 @@ module Aws::SSM
     end
 
     # Parameter Store does not support changing a parameter type in a
-    # hierarchy. For example, you can't change a parameter from a String
-    # type to a SecureString type. You must create a new, unique parameter.
+    # hierarchy. For example, you can't change a parameter from a `String`
+    # type to a `SecureString` type. You must create a new, unique
+    # parameter.
     #
     # @!attribute [rw] message
     #   Parameter Store does not support changing a parameter type in a
-    #   hierarchy. For example, you can't change a parameter from a String
-    #   type to a SecureString type. You must create a new, unique
-    #   parameter.
+    #   hierarchy. For example, you can't change a parameter from a
+    #   `String` type to a `SecureString` type. You must create a new,
+    #   unique parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/HierarchyTypeMismatchException AWS API Documentation
@@ -8374,8 +8497,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # An Amazon S3 bucket where you want to store the results of this
-    # request.
+    # An S3 bucket where you want to store the results of this request.
     #
     # @note When making an API call, you may pass InstanceAssociationOutputLocation
     #   data as a hash:
@@ -8389,8 +8511,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] s3_location
-    #   An Amazon S3 bucket where you want to store the results of this
-    #   request.
+    #   An S3 bucket where you want to store the results of this request.
     #   @return [Types::S3OutputLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationOutputLocation AWS API Documentation
@@ -8400,12 +8521,12 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The URL of Amazon S3 bucket where you want to store the results of
-    # this request.
+    # The URL of S3 bucket where you want to store the results of this
+    # request.
     #
     # @!attribute [rw] s3_output_url
-    #   The URL of Amazon S3 bucket where you want to store the results of
-    #   this request.
+    #   The URL of S3 bucket where you want to store the results of this
+    #   request.
     #   @return [Types::S3OutputUrl]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationOutputUrl AWS API Documentation
@@ -8458,8 +8579,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_url
-    #   A URL for an Amazon S3 bucket where you want to store the results of
-    #   this request.
+    #   A URL for an S3 bucket where you want to store the results of this
+    #   request.
     #   @return [Types::InstanceAssociationOutputUrl]
     #
     # @!attribute [rw] association_name
@@ -8530,7 +8651,7 @@ module Aws::SSM
     # @!attribute [rw] iam_role
     #   The Amazon Identity and Access Management (IAM) role assigned to the
     #   on-premises Systems Manager managed instances. This call does not
-    #   return the IAM role for Amazon EC2 instances.
+    #   return the IAM role for EC2 instances.
     #   @return [String]
     #
     # @!attribute [rw] registration_date
@@ -8685,17 +8806,17 @@ module Aws::SSM
     # @!attribute [rw] install_override_list
     #   An https URL or an Amazon S3 path-style URL to a list of patches to
     #   be installed. This patch installation list, which you maintain in an
-    #   Amazon S3 bucket in YAML format and specify in the SSM document
+    #   S3 bucket in YAML format and specify in the SSM document
     #   `AWS-RunPatchBaseline`, overrides the patches specified by the
     #   default patch baseline.
     #
     #   For more information about the `InstallOverrideList` parameter, see
-    #   [About the SSM Document AWS-RunPatchBaseline][1] in the *AWS Systems
+    #   [About the SSM document AWS-RunPatchBaseline][1] in the *AWS Systems
     #   Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html
     #   @return [String]
     #
     # @!attribute [rw] owner_information
@@ -9386,7 +9507,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9412,8 +9533,8 @@ module Aws::SSM
     end
 
     # The target is not valid or does not exist. It might not be configured
-    # for EC2 Systems Manager or you might not have permission to perform
-    # the operation.
+    # for Systems Manager or you might not have permission to perform the
+    # operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -9540,12 +9661,12 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   Information about the delete operation. For more information about
-    #   this summary, see [Understanding the Delete Inventory Summary][1] in
+    #   this summary, see [Understanding the delete inventory summary][1] in
     #   the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete
     #   @return [Types::InventoryDeletionSummary]
     #
     # @!attribute [rw] last_status_update_time
@@ -9638,6 +9759,16 @@ module Aws::SSM
     #
     # @!attribute [rw] type
     #   The type of filter.
+    #
+    #   <note markdown="1"> The `Exists` filter must be used with aggregators. For more
+    #   information, see [Aggregating inventory data][1] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryFilter AWS API Documentation
@@ -9937,12 +10068,12 @@ module Aws::SSM
 
     # @!attribute [rw] invalid_labels
     #   The label does not meet the requirements. For information about
-    #   parameter label requirements, see [Labeling Parameters][1] in the
+    #   parameter label requirements, see [Labeling parameters][1] in the
     #   *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] parameter_version
@@ -10014,7 +10145,7 @@ module Aws::SSM
     #       {
     #         association_filter_list: [
     #           {
-    #             key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName
+    #             key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter, AssociationName, ResourceGroupName
     #             value: "AssociationFilterValue", # required
     #           },
     #         ],
@@ -10102,8 +10233,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   (Optional) One or more filters. Use a filter to return a more
-    #   specific list of results. Note that the `DocumentName` filter is not
-    #   supported for ListCommandInvocations.
+    #   specific list of results.
     #   @return [Array<Types::CommandFilter>]
     #
     # @!attribute [rw] details
@@ -10411,13 +10541,17 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] document_filter_list
-    #   One or more filters. Use a filter to return a more specific list of
-    #   results.
+    #   This data type is deprecated. Instead, use `Filters`.
     #   @return [Array<Types::DocumentFilter>]
     #
     # @!attribute [rw] filters
-    #   One or more filters. Use a filter to return a more specific list of
-    #   results.
+    #   One or more DocumentKeyValuesFilter objects. Use a filter to return
+    #   a more specific list of results. For keys, you can specify one or
+    #   more key-value pair tags that have been applied to a document. Other
+    #   valid keys include `Owner`, `Name`, `PlatformTypes`, `DocumentType`,
+    #   and `TargetType`. For example, to return documents you own use
+    #   `Key=Owner,Values=Self`. To specify a custom key-value pair, use the
+    #   format `Key=tag:tagName,Values=valueName`.
     #   @return [Array<Types::DocumentKeyValuesFilter>]
     #
     # @!attribute [rw] max_results
@@ -10699,7 +10833,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about an Amazon S3 bucket to write instance-level logs to.
+    # Information about an S3 bucket to write instance-level logs to.
     #
     # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
     # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
@@ -10720,15 +10854,15 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] s3_bucket_name
-    #   The name of an Amazon S3 bucket where execution logs are stored .
+    #   The name of an S3 bucket where execution logs are stored .
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
-    #   (Optional) The Amazon S3 bucket subfolder.
+    #   (Optional) The S3 bucket subfolder.
     #   @return [String]
     #
     # @!attribute [rw] s3_region
-    #   The region where the Amazon S3 bucket is located.
+    #   The Region where the S3 bucket is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LoggingInfo AWS API Documentation
@@ -11218,11 +11352,11 @@ module Aws::SSM
     #   @return [Types::NotificationConfig]
     #
     # @!attribute [rw] output_s3_bucket_name
-    #   The name of the Amazon S3 bucket.
+    #   The name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_key_prefix
-    #   The Amazon S3 bucket subfolder.
+    #   The S3 bucket subfolder.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -11406,7 +11540,7 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] logging_info
-    #   Information about an Amazon S3 bucket to write task-level logs to.
+    #   Information about an S3 bucket to write task-level logs to.
     #
     #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
     #   contain logs, instead use the `OutputS3BucketName` and
@@ -11657,12 +11791,12 @@ module Aws::SSM
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Configuring Amazon SNS Notifications for AWS Systems Manager][1] in
-    #   the *AWS Systems Manager User Guide*.
+    #   [Monitoring Systems Manager status changes using Amazon SNS
+    #   notifications][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_type
@@ -11837,7 +11971,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html
     #
     # @!attribute [rw] created_by
     #   The ARN of the AWS account that created the OpsItem.
@@ -11878,12 +12012,12 @@ module Aws::SSM
     #
     # @!attribute [rw] status
     #   The OpsItem status. Status can be `Open`, `In Progress`, or
-    #   `Resolved`. For more information, see [Editing OpsItem Details][1]
+    #   `Resolved`. For more information, see [Editing OpsItem details][1]
     #   in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
     #   @return [String]
     #
     # @!attribute [rw] ops_item_id
@@ -11901,8 +12035,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   The origin of the OpsItem, such as Amazon EC2 or AWS Systems
-    #   Manager. The impacted resource is a subset of source.
+    #   The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
+    #   The impacted resource is a subset of source.
     #   @return [String]
     #
     # @!attribute [rw] operational_data
@@ -11928,11 +12062,11 @@ module Aws::SSM
     #   resource in the request. Use the `/aws/automations` key in
     #   OperationalData to associate an Automation runbook with the OpsItem.
     #   To view AWS CLI example commands that use these keys, see [Creating
-    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #   OpsItems manually][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
     # @!attribute [rw] category
@@ -12065,7 +12199,7 @@ module Aws::SSM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits
     #
     # @!attribute [rw] resource_types
     #   @return [Array<String>]
@@ -12222,8 +12356,7 @@ module Aws::SSM
     # are stored.
     #
     # @!attribute [rw] output_source_id
-    #   The ID of the output source, for example the URL of an Amazon S3
-    #   bucket.
+    #   The ID of the output source, for example the URL of an S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_source_type
@@ -12239,15 +12372,15 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # An Amazon EC2 Systems Manager parameter in Parameter Store.
+    # An Systems Manager parameter in Parameter Store.
     #
     # @!attribute [rw] name
     #   The name of the parameter.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of parameter. Valid values include the following: String,
-    #   String list, Secure string.
+    #   The type of parameter. Valid values include the following: `String`,
+    #   `StringList`, and `SecureString`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -12283,6 +12416,11 @@ module Aws::SSM
     #   The Amazon Resource Name (ARN) of the parameter.
     #   @return [String]
     #
+    # @!attribute [rw] data_type
+    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
+    #   The default is `text`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
@@ -12293,7 +12431,8 @@ module Aws::SSM
       :selector,
       :source_result,
       :last_modified_date,
-      :arn)
+      :arn,
+      :data_type)
       include Aws::Structure
     end
 
@@ -12361,13 +12500,18 @@ module Aws::SSM
     # @!attribute [rw] policies
     #   Information about the policies assigned to a parameter.
     #
-    #   [Working with Parameter Policies][1] in the *AWS Systems Manager
-    #   User Guide*.
+    #   [Assigning parameter policies][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #   @return [Array<Types::ParameterInlinePolicy>]
+    #
+    # @!attribute [rw] data_type
+    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
+    #   The default is `text`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
@@ -12383,7 +12527,8 @@ module Aws::SSM
       :version,
       :labels,
       :tier,
-      :policies)
+      :policies,
+      :data_type)
       include Aws::Structure
     end
 
@@ -12448,7 +12593,7 @@ module Aws::SSM
     #
     # @!attribute [rw] type
     #   The type of parameter. Valid parameter types include the following:
-    #   String, String list, Secure string.
+    #   `String`, `StringList`, and `SecureString`.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -12486,6 +12631,11 @@ module Aws::SSM
     #   A list of policies associated with a parameter.
     #   @return [Array<Types::ParameterInlinePolicy>]
     #
+    # @!attribute [rw] data_type
+    #   The data type of the parameter, such as `text` or `aws:ec2:image`.
+    #   The default is `text`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
     #
     class ParameterMetadata < Struct.new(
@@ -12498,7 +12648,8 @@ module Aws::SSM
       :allowed_pattern,
       :version,
       :tier,
-      :policies)
+      :policies,
+      :data_type)
       include Aws::Structure
     end
 
@@ -12542,12 +12693,12 @@ module Aws::SSM
     # not valid: `Name`, `Path`, and `Tier`.
     #
     #  For examples of CLI commands demonstrating valid parameter filter
-    # constructions, see [Searching for Systems Manager Parameters][1] in
+    # constructions, see [Searching for Systems Manager parameters][1] in
     # the *AWS Systems Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html
     #
     # @note When making an API call, you may pass ParameterStringFilter
     #   data as a hash:
@@ -12775,12 +12926,12 @@ module Aws::SSM
     # @!attribute [rw] state
     #   The state of the patch on the instance, such as INSTALLED or FAILED.
     #
-    #   For descriptions of each patch state, see [About Patch
-    #   Compliance][1] in the *AWS Systems Manager User Guide*.
+    #   For descriptions of each patch state, see [About patch
+    #   compliance][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch
     #   @return [String]
     #
     # @!attribute [rw] installed_time
@@ -12944,19 +13095,22 @@ module Aws::SSM
     #
     # @!attribute [rw] compliance_level
     #   A compliance severity level for all approved patches in a patch
-    #   baseline. Valid compliance severity levels include the following:
-    #   Unspecified, Critical, High, Medium, Low, and Informational.
+    #   baseline.
     #   @return [String]
     #
     # @!attribute [rw] approve_after_days
     #   The number of days after the release date of each patch matched by
     #   the rule that the patch is marked as approved in the patch baseline.
     #   For example, a value of `7` means that patches are approved seven
-    #   days after they are released.
+    #   days after they are released. Not supported on Ubuntu Server.
     #   @return [Integer]
     #
     # @!attribute [rw] approve_until_date
-    #   Example API
+    #   The cutoff date for auto approval of released patches. Any patches
+    #   released on or before this date are installed automatically. Not
+    #   supported on Ubuntu Server.
+    #
+    #   Enter dates in the format `YYYY-MM-DD`. For example, `2020-12-31`.
     #   @return [String]
     #
     # @!attribute [rw] enable_non_security
@@ -13159,6 +13313,7 @@ module Aws::SSM
     #           },
     #         ],
     #         item_content_hash: "ComplianceItemContentHash",
+    #         upload_type: "COMPLETE", # accepts COMPLETE, PARTIAL
     #       }
     #
     # @!attribute [rw] resource_id
@@ -13186,7 +13341,7 @@ module Aws::SSM
     # @!attribute [rw] items
     #   Information about the compliance as defined by the resource type.
     #   For example, for a patch compliance type, `Items` includes
-    #   information about the PatchSeverity, Classification, etc.
+    #   information about the PatchSeverity, Classification, and so on.
     #   @return [Array<Types::ComplianceItemEntry>]
     #
     # @!attribute [rw] item_content_hash
@@ -13194,6 +13349,22 @@ module Aws::SSM
     #   if existing information should be overwritten or ignored. If the
     #   content hashes match, the request to put compliance information is
     #   ignored.
+    #   @return [String]
+    #
+    # @!attribute [rw] upload_type
+    #   The mode for uploading compliance items. You can specify `COMPLETE`
+    #   or `PARTIAL`. In `COMPLETE` mode, the system overwrites all existing
+    #   compliance information for the resource. You must provide a full
+    #   list of compliance items each time you send the request.
+    #
+    #   In `PARTIAL` mode, the system overwrites compliance information for
+    #   a specific association. The association must be configured with
+    #   `SyncCompliance` set to `MANUAL`. By default, all requests use
+    #   `COMPLETE` mode.
+    #
+    #   <note markdown="1"> This attribute is only valid for association compliance.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItemsRequest AWS API Documentation
@@ -13204,7 +13375,8 @@ module Aws::SSM
       :compliance_type,
       :execution_summary,
       :items,
-      :item_content_hash)
+      :item_content_hash,
+      :upload_type)
       include Aws::Structure
     end
 
@@ -13269,7 +13441,7 @@ module Aws::SSM
     #         name: "PSParameterName", # required
     #         description: "ParameterDescription",
     #         value: "PSParameterValue", # required
-    #         type: "String", # required, accepts String, StringList, SecureString
+    #         type: "String", # accepts String, StringList, SecureString
     #         key_id: "ParameterKeyId",
     #         overwrite: false,
     #         allowed_pattern: "AllowedPattern",
@@ -13281,6 +13453,7 @@ module Aws::SSM
     #         ],
     #         tier: "Standard", # accepts Standard, Advanced, Intelligent-Tiering
     #         policies: "ParameterPolicies",
+    #         data_type: "ParameterDataType",
     #       }
     #
     # @!attribute [rw] name
@@ -13309,8 +13482,8 @@ module Aws::SSM
     #     levels.
     #
     #   For additional information about valid values for parameter names,
-    #   see [Requirements and Constraints for Parameter Names][1] in the
-    #   *AWS Systems Manager User Guide*.
+    #   see [About requirements and constraints for parameter names][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -13324,7 +13497,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -13416,8 +13589,9 @@ module Aws::SSM
     #   Advanced parameters have a content size limit of 8 KB and can be
     #   configured to use parameter policies. You can create a maximum of
     #   100,000 advanced parameters for each Region in an AWS account.
-    #   Advanced parameters incur a charge. For more information, see [About
-    #   Advanced Parameters][1] in the *AWS Systems Manager User Guide*.
+    #   Advanced parameters incur a charge. For more information, see
+    #   [Standard and advanced parameter tiers][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #   You can change a standard parameter to an advanced parameter any
     #   time. But you can't revert an advanced parameter to a standard
@@ -13471,13 +13645,13 @@ module Aws::SSM
     #     the current Region.
     #
     #   For more information about configuring the default tier option, see
-    #   [Specifying a Default Parameter Tier][2] in the *AWS Systems Manager
+    #   [Specifying a default parameter tier][2] in the *AWS Systems Manager
     #   User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html
     #   @return [String]
     #
     # @!attribute [rw] policies
@@ -13503,11 +13677,32 @@ module Aws::SSM
     #
     #   All existing policies are preserved until you send new policies or
     #   an empty policy. For more information about parameter policies, see
-    #   [Working with Parameter Policies][1].
+    #   [Assigning parameter policies][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-policies.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type for a String parameter. Supported data types include
+    #   plain text and Amazon Machine Image IDs.
+    #
+    #   **The following data type values are supported.**
+    #
+    #   * `text`
+    #
+    #   * `aws:ec2:image`
+    #
+    #   When you create a String parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value you provide against
+    #   that data type. The required format is `ami-12345abcdeEXAMPLE`. For
+    #   more information, see [Native parameter support for Amazon Machine
+    #   Image IDs][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
@@ -13522,7 +13717,8 @@ module Aws::SSM
       :allowed_pattern,
       :tags,
       :tier,
-      :policies)
+      :policies,
+      :data_type)
       include Aws::Structure
     end
 
@@ -13683,8 +13879,8 @@ module Aws::SSM
     #    </note>
     #
     #   For more information about these examples formats, including the
-    #   best use case for each one, see [Examples: Register Targets with a
-    #   Maintenance Window][1] in the *AWS Systems Manager User Guide*.
+    #   best use case for each one, see [Examples: Register targets with a
+    #   maintenance window][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -13838,15 +14034,15 @@ module Aws::SSM
     #   For more information, see the following topics in the in the *AWS
     #   Systems Manager User Guide*\:
     #
-    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #   * [Using service-linked roles for Systems Manager][1]
     #
-    #   * [Should I Use a Service-Linked Role or a Custom Service Role to
-    #     Run Maintenance Window Tasks? ][2]
+    #   * [Should I use a service-linked role or a custom service role to
+    #     run maintenance window tasks? ][2]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_type
@@ -13888,8 +14084,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] logging_info
-    #   A structure containing information about an Amazon S3 bucket to
-    #   write instance-level logs to.
+    #   A structure containing information about an S3 bucket to write
+    #   instance-level logs to.
     #
     #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
     #   contain logs, instead use the `OutputS3BucketName` and
@@ -14034,7 +14230,11 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] setting_id
-    #   The ID of the service setting to reset.
+    #   The Amazon Resource Name (ARN) of the service setting to reset. The
+    #   setting ID can be `/ssm/parameter-store/default-parameter-tier`,
+    #   `/ssm/parameter-store/high-throughput-enabled`, or
+    #   `/ssm/managed-instance/activation-tier`. For example,
+    #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResetServiceSettingRequest AWS API Documentation
@@ -14203,8 +14403,8 @@ module Aws::SSM
     end
 
     # Synchronize Systems Manager Inventory data from multiple AWS accounts
-    # defined in AWS Organizations to a centralized Amazon S3 bucket. Data
-    # is synchronized to individual key prefixes in the central bucket. Each
+    # defined in AWS Organizations to a centralized S3 bucket. Data is
+    # synchronized to individual key prefixes in the central bucket. Each
     # key prefix represents a different AWS account ID.
     #
     # @note When making an API call, you may pass ResourceDataSyncDestinationDataSharing
@@ -14247,9 +14447,9 @@ module Aws::SSM
     # @!attribute [rw] sync_type
     #   The type of resource data sync. If `SyncType` is
     #   `SyncToDestination`, then the resource data sync synchronizes data
-    #   to an Amazon S3 bucket. If the `SyncType` is `SyncFromSource` then
-    #   the resource data sync synchronizes data from AWS Organizations or
-    #   from multiple AWS Regions.
+    #   to an S3 bucket. If the `SyncType` is `SyncFromSource` then the
+    #   resource data sync synchronizes data from AWS Organizations or from
+    #   multiple AWS Regions.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
@@ -14257,7 +14457,7 @@ module Aws::SSM
     #   @return [Types::ResourceDataSyncSourceWithState]
     #
     # @!attribute [rw] s3_destination
-    #   Configuration information for the target Amazon S3 bucket.
+    #   Configuration information for the target S3 bucket.
     #   @return [Types::ResourceDataSyncS3Destination]
     #
     # @!attribute [rw] last_sync_time
@@ -14341,8 +14541,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Information about the target Amazon S3 bucket for the Resource Data
-    # Sync.
+    # Information about the target S3 bucket for the Resource Data Sync.
     #
     # @note When making an API call, you may pass ResourceDataSyncS3Destination
     #   data as a hash:
@@ -14359,8 +14558,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] bucket_name
-    #   The name of the Amazon S3 bucket where the aggregated data is
-    #   stored.
+    #   The name of the S3 bucket where the aggregated data is stored.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -14373,13 +14571,13 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The AWS Region with the Amazon S3 bucket targeted by the Resource
-    #   Data Sync.
+    #   The AWS Region with the S3 bucket targeted by the Resource Data
+    #   Sync.
     #   @return [String]
     #
     # @!attribute [rw] awskms_key_arn
     #   The ARN of an encryption key for a destination in Amazon S3. Must
-    #   belong to the same Region as the destination Amazon S3 bucket.
+    #   belong to the same Region as the destination S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] destination_data_sharing
@@ -14530,7 +14728,7 @@ module Aws::SSM
     # have been created.
     #
     # For information about resource quotas in Systems Manager, see [Systems
-    # Manager Service Quotas][1] in the *AWS General Reference*.
+    # Manager service quotas][1] in the *AWS General Reference*.
     #
     #
     #
@@ -14603,7 +14801,7 @@ module Aws::SSM
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
     #   East (Ohio) Region. For a list of supported **region** values, see
-    #   the **Region** column in [Systems Manager Service Endpoints][1] in
+    #   the **Region** column in [Systems Manager service endpoints][1] in
     #   the *AWS General Reference*.
     #
     #   **session-id** represents the ID of a Session Manager session, such
@@ -14623,8 +14821,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # An Amazon S3 bucket where you want to store the results of this
-    # request.
+    # An S3 bucket where you want to store the results of this request.
     #
     # @note When making an API call, you may pass S3OutputLocation
     #   data as a hash:
@@ -14638,15 +14835,15 @@ module Aws::SSM
     # @!attribute [rw] output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
     #   ignores it. Instead, Systems Manager automatically determines the
-    #   Amazon S3 bucket region.
+    #   Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
-    #   The name of the Amazon S3 bucket.
+    #   The name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_key_prefix
-    #   The Amazon S3 bucket subfolder.
+    #   The S3 bucket subfolder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/S3OutputLocation AWS API Documentation
@@ -14658,12 +14855,12 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # A URL for the Amazon S3 bucket where you want to store the results of
-    # this request.
+    # A URL for the S3 bucket where you want to store the results of this
+    # request.
     #
     # @!attribute [rw] output_url
-    #   A URL for an Amazon S3 bucket where you want to store the results of
-    #   this request.
+    #   A URL for an S3 bucket where you want to store the results of this
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/S3OutputUrl AWS API Documentation
@@ -14792,24 +14989,25 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information
-    #   about how to use targets, see [Sending Commands to a Fleet][1] in
-    #   the *AWS Systems Manager User Guide*.
+    #   about how to use targets, see [Using targets and rate controls to
+    #   send commands to a fleet][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] targets
     #   (Optional) An array of search criteria that targets instances using
     #   a Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
-    #   information about how to use targets, see [Sending Commands to a
-    #   Fleet][1] in the *AWS Systems Manager User Guide*.
+    #   information about how to use targets, see [Sending commands to a
+    #   fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] document_name
@@ -14866,7 +15064,7 @@ module Aws::SSM
     # @!attribute [rw] output_s3_region
     #   (Deprecated) You can no longer specify this parameter. The system
     #   ignores it. Instead, Systems Manager automatically determines the
-    #   Amazon S3 bucket region.
+    #   Region of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_bucket_name
@@ -14883,12 +15081,12 @@ module Aws::SSM
     #   (Optional) The maximum number of instances that are allowed to run
     #   the command at the same time. You can specify a number such as 10 or
     #   a percentage such as 10%. The default value is 50. For more
-    #   information about how to use MaxConcurrency, see [Using Concurrency
-    #   Controls][1] in the *AWS Systems Manager User Guide*.
+    #   information about how to use MaxConcurrency, see [Using concurrency
+    #   controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -14897,11 +15095,11 @@ module Aws::SSM
     #   the systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
     #   is 0. For more information about how to use MaxErrors, see [Using
-    #   Error Controls][1] in the *AWS Systems Manager User Guide*.
+    #   error controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -15346,12 +15544,12 @@ module Aws::SSM
     #   A location is a combination of AWS Regions and/or AWS accounts where
     #   you want to run the Automation. Use this action to start an
     #   Automation in multiple Regions and multiple accounts. For more
-    #   information, see [Executing Automations in Multiple AWS Regions and
-    #   Accounts][1] in the *AWS Systems Manager User Guide*.
+    #   information, see [Running Automation workflows in multiple AWS
+    #   Regions and accounts][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
     #   @return [Array<Types::TargetLocation>]
     #
     # @!attribute [rw] tags
@@ -15454,7 +15652,7 @@ module Aws::SSM
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
     #   East (Ohio) Region. For a list of supported **region** values, see
-    #   the **Region** column in [Systems Manager Service Endpoints][1] in
+    #   the **Region** column in [Systems Manager service endpoints][1] in
     #   the *AWS General Reference*.
     #
     #   **session-id** represents the ID of a Session Manager session, such
@@ -15749,8 +15947,8 @@ module Aws::SSM
     #   `Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
     #   `
     #
-    #   This example demonstrates how to target only Amazon EC2 instances
-    #   and VPCs in your maintenance window.
+    #   This example demonstrates how to target only EC2 instances and VPCs
+    #   in your maintenance window.
     #
     # * (State Manager association targets only) `Key=InstanceIds,Values=* `
     #
@@ -15758,8 +15956,8 @@ module Aws::SSM
     #   AWS Region where the association was created.
     #
     # For information about how to send commands that target instances using
-    # `Key,Value` parameters, see [Using Targets and Rate Controls to Send
-    # Commands to a Fleet][1] in the *AWS Systems Manager User Guide*.
+    # `Key,Value` parameters, see [Targeting multiple instances][1] in the
+    # *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -15781,7 +15979,7 @@ module Aws::SSM
     # @!attribute [rw] values
     #   User-defined criteria that maps to `Key`. For example, if you
     #   specified `tag:ServerRole`, you could specify `value:WebServer` to
-    #   run a command on instances that include Amazon EC2 tags of
+    #   run a command on instances that include EC2 tags of
     #   `ServerRole,WebServer`.
     #   @return [Array<String>]
     #
@@ -15858,12 +16056,12 @@ module Aws::SSM
 
     # The specified target instance for the session is not fully configured
     # for use with Session Manager. For more information, see [Getting
-    # Started with Session Manager][1] in the *AWS Systems Manager User
+    # started with Session Manager][1] in the *AWS Systems Manager User
     # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -15951,14 +16149,14 @@ module Aws::SSM
     end
 
     # Microsoft application patching is only available on EC2 instances and
-    # Advanced Instances. To patch Microsoft applications on on-premises
-    # servers and VMs, you must enable Advanced Instances. For more
-    # information, see [Using the Advanced-Instances Tier][1] in the *AWS
+    # advanced instances. To patch Microsoft applications on on-premises
+    # servers and VMs, you must enable advanced instances. For more
+    # information, see [Using the advanced-instances tier][1] in the *AWS
     # Systems Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -16072,6 +16270,7 @@ module Aws::SSM
     #         max_errors: "MaxErrors",
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
+    #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
     #       }
     #
     # @!attribute [rw] association_id
@@ -16094,8 +16293,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] output_location
-    #   An Amazon S3 bucket where you want to store the results of this
-    #   request.
+    #   An S3 bucket where you want to store the results of this request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @!attribute [rw] name
@@ -16177,6 +16375,22 @@ module Aws::SSM
     #   The severity level to assign to the association.
     #   @return [String]
     #
+    # @!attribute [rw] sync_compliance
+    #   The mode for generating association compliance. You can specify
+    #   `AUTO` or `MANUAL`. In `AUTO` mode, the system uses the status of
+    #   the association execution to determine the compliance status. If the
+    #   association execution runs successfully, then the association is
+    #   `COMPLIANT`. If the association execution doesn't run successfully,
+    #   the association is `NON-COMPLIANT`.
+    #
+    #   In `MANUAL` mode, you must specify the `AssociationId` as a
+    #   parameter for the PutComplianceItems API action. In this case,
+    #   compliance data is not managed by State Manager. It is managed by
+    #   your direct call to the PutComplianceItems API action.
+    #
+    #   By default, all associations use `AUTO` mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -16192,7 +16406,8 @@ module Aws::SSM
       :automation_target_parameter_name,
       :max_errors,
       :max_concurrency,
-      :compliance_severity)
+      :compliance_severity,
+      :sync_compliance)
       include Aws::Structure
     end
 
@@ -16331,7 +16546,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   (Required) The version of the document that you want to update.
+    #   (Required) The latest version of the document that you want to
+    #   update. The latest document version can be specified using the
+    #   $LATEST variable or by the version number. Updating a previous
+    #   version of a document is not supported.
     #   @return [String]
     #
     # @!attribute [rw] document_format
@@ -16752,15 +16970,15 @@ module Aws::SSM
     #   For more information, see the following topics in the in the *AWS
     #   Systems Manager User Guide*\:
     #
-    #   * [Service-Linked Role Permissions for Systems Manager][1]
+    #   * [Using service-linked roles for Systems Manager][1]
     #
-    #   * [Should I Use a Service-Linked Role or a Custom Service Role to
-    #     Run Maintenance Window Tasks? ][2]
+    #   * [Should I use a service-linked role or a custom service role to
+    #     run maintenance window tasks? ][2]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
@@ -17033,11 +17251,11 @@ module Aws::SSM
     #   resource in the request. Use the `/aws/automations` key in
     #   OperationalData to associate an Automation runbook with the OpsItem.
     #   To view AWS CLI example commands that use these keys, see [Creating
-    #   OpsItems Manually][1] in the *AWS Systems Manager User Guide*.
+    #   OpsItems manually][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems
     #   @return [Hash<String,Types::OpsItemDataValue>]
     #
     # @!attribute [rw] operational_data_to_delete
@@ -17063,12 +17281,12 @@ module Aws::SSM
     #
     # @!attribute [rw] status
     #   The OpsItem status. Status can be `Open`, `In Progress`, or
-    #   `Resolved`. For more information, see [Editing OpsItem Details][1]
+    #   `Resolved`. For more information, see [Editing OpsItem details][1]
     #   in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details
     #   @return [String]
     #
     # @!attribute [rw] ops_item_id
@@ -17177,8 +17395,9 @@ module Aws::SSM
     #   A list of explicitly approved patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #   and rejected patches, see [About package name formats for approved
+    #   and rejected patch lists][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -17200,8 +17419,9 @@ module Aws::SSM
     #   A list of explicitly rejected patches for the baseline.
     #
     #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #   and rejected patches, see [About package name formats for approved
+    #   and rejected patch lists][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #
@@ -17369,11 +17589,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] sync_type
-    #   The type of resource data sync. If `SyncType` is
-    #   `SyncToDestination`, then the resource data sync synchronizes data
-    #   to an Amazon S3 bucket. If the `SyncType` is `SyncFromSource` then
-    #   the resource data sync synchronizes data from AWS Organizations or
-    #   from multiple AWS Regions.
+    #   The type of resource data sync. The supported `SyncType` is
+    #   SyncFromSource.
     #   @return [String]
     #
     # @!attribute [rw] sync_source
@@ -17404,11 +17621,32 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] setting_id
-    #   The ID of the service setting to update.
+    #   The Amazon Resource Name (ARN) of the service setting to reset. For
+    #   example,
+    #   `arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled`.
+    #   The setting ID can be one of the following.
+    #
+    #   * `/ssm/parameter-store/default-parameter-tier`
+    #
+    #   * `/ssm/parameter-store/high-throughput-enabled`
+    #
+    #   * `/ssm/managed-instance/activation-tier`
     #   @return [String]
     #
     # @!attribute [rw] setting_value
-    #   The new value to specify for the service setting.
+    #   The new value to specify for the service setting. For the
+    #   `/ssm/parameter-store/default-parameter-tier` setting ID, the
+    #   setting value can be one of the following.
+    #
+    #   * Standard
+    #
+    #   * Advanced
+    #
+    #   * Intelligent-Tiering
+    #
+    #   For the `/ssm/parameter-store/high-throughput-enabled`, and
+    #   `/ssm/managed-instance/activation-tier` setting IDs, the setting
+    #   value can be true or false.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateServiceSettingRequest AWS API Documentation

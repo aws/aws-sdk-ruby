@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2020-03-18)
+------------------
+
+* Feature - Adds support for returning hyperparameter values of the best performing model in a HPO job.
+
 1.9.0 (2020-03-09)
 ------------------
 

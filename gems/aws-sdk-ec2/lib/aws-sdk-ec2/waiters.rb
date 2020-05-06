@@ -8,6 +8,98 @@
 require 'aws-sdk-core/waiters'
 
 module Aws::EC2
+  # Waiters are utility methods that poll for a particular state to occur
+  # on a client. Waiters can fail after a number of attempts at a polling
+  # interval defined for the service client.
+  #
+  # For a list of operations that can be waited for and the
+  # client methods called for each operation, see the table below or the
+  # {Client#wait_until} field documentation for the {Client}.
+  #
+  # # Invoking a Waiter
+  # To invoke a waiter, call #wait_until on a {Client}. The first parameter
+  # is the waiter name, which is specific to the service client and indicates
+  # which operation is being waited for. The second parameter is a hash of
+  # parameters that are passed to the client method called by the waiter,
+  # which varies according to the waiter name.
+  #
+  # # Wait Failures
+  # To catch errors in a waiter, use WaiterFailed,
+  # as shown in the following example.
+  #
+  #     rescue rescue Aws::Waiters::Errors::WaiterFailed => error
+  #       puts "failed waiting for instance running: #{error.message}
+  #     end
+  #
+  # # Configuring a Waiter
+  # Each waiter has a default polling interval and a maximum number of
+  # attempts it will make before returning control to your program.
+  # To set these values, use the `max_attempts` and `delay` parameters
+  # in your `#wait_until` call.
+  # The following example waits for up to 25 seconds, polling every five seconds.
+  #
+  #     client.wait_until(...) do |w|
+  #       w.max_attempts = 5
+  #       w.delay = 5
+  #     end
+  #
+  # To disable wait failures, set the value of either of these parameters
+  # to `nil`.
+  #
+  # # Extending a Waiter
+  # To modify the behavior of waiters, you can register callbacks that are
+  # triggered before each polling attempt and before waiting.
+  #
+  # The following example implements an exponential backoff in a waiter
+  # by doubling the amount of time to wait on every attempt.
+  #
+  #     client.wait_until(...) do |w|
+  #       w.interval = 0 # disable normal sleep
+  #       w.before_wait do |n, resp|
+  #         sleep(n ** 2)
+  #       end
+  #     end
+  #
+  # # Available Waiters
+  #
+  # The following table lists the valid waiter names, the operations they call,
+  # and the default `:delay` and `:max_attempts` values.
+  #
+  # | waiter_name                     | params                                    | :delay   | :max_attempts |
+  # | ------------------------------- | ----------------------------------------- | -------- | ------------- |
+  # | bundle_task_complete            | {Client#describe_bundle_tasks}            | 15       | 40            |
+  # | conversion_task_cancelled       | {Client#describe_conversion_tasks}        | 15       | 40            |
+  # | conversion_task_completed       | {Client#describe_conversion_tasks}        | 15       | 40            |
+  # | conversion_task_deleted         | {Client#describe_conversion_tasks}        | 15       | 40            |
+  # | customer_gateway_available      | {Client#describe_customer_gateways}       | 15       | 40            |
+  # | export_task_cancelled           | {Client#describe_export_tasks}            | 15       | 40            |
+  # | export_task_completed           | {Client#describe_export_tasks}            | 15       | 40            |
+  # | image_available                 | {Client#describe_images}                  | 15       | 40            |
+  # | image_exists                    | {Client#describe_images}                  | 15       | 40            |
+  # | instance_exists                 | {Client#describe_instances}               | 5        | 40            |
+  # | instance_running                | {Client#describe_instances}               | 15       | 40            |
+  # | instance_status_ok              | {Client#describe_instance_status}         | 15       | 40            |
+  # | instance_stopped                | {Client#describe_instances}               | 15       | 40            |
+  # | instance_terminated             | {Client#describe_instances}               | 15       | 40            |
+  # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
+  # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
+  # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
+  # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
+  # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
+  # | snapshot_completed              | {Client#describe_snapshots}               | 15       | 40            |
+  # | spot_instance_request_fulfilled | {Client#describe_spot_instance_requests}  | 15       | 40            |
+  # | subnet_available                | {Client#describe_subnets}                 | 15       | 40            |
+  # | system_status_ok                | {Client#describe_instance_status}         | 15       | 40            |
+  # | volume_available                | {Client#describe_volumes}                 | 15       | 40            |
+  # | volume_deleted                  | {Client#describe_volumes}                 | 15       | 40            |
+  # | volume_in_use                   | {Client#describe_volumes}                 | 15       | 40            |
+  # | vpc_available                   | {Client#describe_vpcs}                    | 15       | 40            |
+  # | vpc_exists                      | {Client#describe_vpcs}                    | 1        | 5             |
+  # | vpc_peering_connection_deleted  | {Client#describe_vpc_peering_connections} | 15       | 40            |
+  # | vpc_peering_connection_exists   | {Client#describe_vpc_peering_connections} | 15       | 40            |
+  # | vpn_connection_available        | {Client#describe_vpn_connections}         | 15       | 40            |
+  # | vpn_connection_deleted          | {Client#describe_vpn_connections}         | 15       | 40            |
+  #
   module Waiters
 
     class BundleTaskComplete

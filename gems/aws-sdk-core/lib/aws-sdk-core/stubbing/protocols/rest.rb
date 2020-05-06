@@ -94,9 +94,9 @@ module Aws
               # Pending
               raise 'Stubbing :exception event is not supported'
             end
-            stream << Aws::EventStream::Encoder.new.encode(
-              Aws::EventStream::Message.new(opts))
-            stream
+            [stream, Aws::EventStream::Encoder.new.encode(
+              Aws::EventStream::Message.new(opts)
+            )].pack('a*a*')
           end
         end
 

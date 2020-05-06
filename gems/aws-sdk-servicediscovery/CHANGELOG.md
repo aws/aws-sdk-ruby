@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-04-29)
+------------------
+
+* Feature - Documentation updates for servicediscovery
+
 1.20.0 (2020-03-09)
 ------------------
 

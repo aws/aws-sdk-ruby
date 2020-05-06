@@ -269,8 +269,7 @@ module Aws::IoT
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::IoT
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -801,6 +800,20 @@ module Aws::IoT
     # @option params [String] :status
     #   The status of the create authorizer request.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the custom authorizer.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @option params [Boolean] :signing_disabled
     #   Specifies whether AWS IoT validates the token signature in an
     #   authorization request.
@@ -820,6 +833,12 @@ module Aws::IoT
     #       "KeyName" => "KeyValue",
     #     },
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #     signing_disabled: false,
     #   })
     #
@@ -861,7 +880,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -961,6 +980,68 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Create a dimension that you can use to limit the scope of a metric
+    # used in a security profile for AWS IoT Device Defender. For example,
+    # using a `TOPIC_FILTER` dimension, you can narrow down the scope of the
+    # metric only to MQTT topics whose name match the pattern specified in
+    # the dimension.
+    #
+    # @option params [required, String] :name
+    #   A unique identifier for the dimension. Choose something that describes
+    #   the type and value to make it easy to remember what it does.
+    #
+    # @option params [required, String] :type
+    #   Specifies the type of dimension. Supported types: `TOPIC_FILTER.`
+    #
+    # @option params [required, Array<String>] :string_values
+    #   Specifies the value or list of values for the dimension. For
+    #   `TOPIC_FILTER` dimensions, this is a pattern used to match the MQTT
+    #   topic (for example, "admin/#").
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata that can be used to manage the dimension.
+    #
+    # @option params [required, String] :client_request_token
+    #   Each dimension must have a unique client request token. If you try to
+    #   create a new dimension with the same token as a dimension that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateDimensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDimensionResponse#name #name} => String
+    #   * {Types::CreateDimensionResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_dimension({
+    #     name: "DimensionName", # required
+    #     type: "TOPIC_FILTER", # required, accepts TOPIC_FILTER
+    #     string_values: ["DimensionStringValue"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #
+    # @overload create_dimension(params = {})
+    # @param [Hash] params ({})
+    def create_dimension(params = {}, options = {})
+      req = build_request(:create_dimension, params)
+      req.send_request(options)
+    end
+
     # Creates a domain configuration.
     #
     # <note markdown="1"> The domain configuration feature is in public preview and is subject
@@ -992,6 +1073,24 @@ module Aws::IoT
     # @option params [String] :service_type
     #   The type of service delivered by the endpoint.
     #
+    #   <note markdown="1"> AWS IoT Core currently supports only the `DATA` service type.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the domain configuration.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1009,6 +1108,12 @@ module Aws::IoT
     #       allow_authorizer_override: false,
     #     },
     #     service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1085,7 +1190,7 @@ module Aws::IoT
     #     query_version: "QueryVersion",
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1210,7 +1315,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1323,7 +1428,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1460,7 +1565,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1495,6 +1600,20 @@ module Aws::IoT
     #   have a minimum length of 1, with a maximum length of 2048, excluding
     #   whitespace.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the policy.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::CreatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyResponse#policy_name #policy_name} => String
@@ -1507,6 +1626,12 @@ module Aws::IoT
     #   resp = client.create_policy({
     #     policy_name: "PolicyName", # required
     #     policy_document: "PolicyDocument", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1627,6 +1752,9 @@ module Aws::IoT
     #   The role ARN for the role associated with the fleet provisioning
     #   template. This IoT role grants permission to provision a device.
     #
+    # @option params [Types::ProvisioningHook] :pre_provisioning_hook
+    #   Creates a pre-provisioning hook template.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the fleet provisioning template.
     #
@@ -1655,9 +1783,13 @@ module Aws::IoT
     #     template_body: "TemplateBody", # required
     #     enabled: false,
     #     provisioning_role_arn: "RoleArn", # required
+    #     pre_provisioning_hook: {
+    #       payload_version: "PayloadVersion",
+    #       target_arn: "TargetArn", # required
+    #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1728,6 +1860,20 @@ module Aws::IoT
     # @option params [Integer] :credential_duration_seconds
     #   How long (in seconds) the credentials will be valid.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the role alias.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::CreateRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoleAliasResponse#role_alias #role_alias} => String
@@ -1739,6 +1885,12 @@ module Aws::IoT
     #     role_alias: "RoleAlias", # required
     #     role_arn: "RoleArn", # required
     #     credential_duration_seconds: 1,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1799,7 +1951,7 @@ module Aws::IoT
     #     scheduled_audit_name: "ScheduledAuditName", # required
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1838,6 +1990,14 @@ module Aws::IoT
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
     #
+    #   **Note:** This API field is deprecated. Please use
+    #   CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+    #
+    # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data is
+    #   retained for any metric used in the profile's `behaviors`, but it is
+    #   also retained for any metric specified here.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the security profile.
     #
@@ -1855,6 +2015,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -1878,9 +2042,18 @@ module Aws::IoT
     #       },
     #     },
     #     additional_metrics_to_retain: ["BehaviorMetric"],
+    #     additional_metrics_to_retain_v2: [
+    #       {
+    #         metric: "BehaviorMetric", # required
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
+    #       },
+    #     ],
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1944,7 +2117,7 @@ module Aws::IoT
     #     role_arn: "RoleArn", # required
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -1980,6 +2153,10 @@ module Aws::IoT
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
+    #
+    #   You can't change a thing's name after you create it. To change a
+    #   thing's name, you must create a new thing, give it the new name, and
+    #   then delete the old thing.
     #
     # @option params [String] :thing_type_name
     #   The name of the thing type associated with the new thing.
@@ -2071,7 +2248,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -2119,7 +2296,7 @@ module Aws::IoT
     #     },
     #     tags: [
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -2621,6 +2798,26 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified dimension from your AWS account.
+    #
+    # @option params [required, String] :name
+    #   The unique identifier for the dimension that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_dimension({
+    #     name: "DimensionName", # required
+    #   })
+    #
+    # @overload delete_dimension(params = {})
+    # @param [Hash] params ({})
+    def delete_dimension(params = {}, options = {})
+      req = build_request(:delete_dimension, params)
       req.send_request(options)
     end
 
@@ -3537,6 +3734,7 @@ module Aws::IoT
     #   resp.certificate_description.generation_id #=> String
     #   resp.certificate_description.validity.not_before #=> Time
     #   resp.certificate_description.validity.not_after #=> Time
+    #   resp.certificate_description.certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
@@ -3568,6 +3766,44 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_default_authorizer(params = {}, options = {})
       req = build_request(:describe_default_authorizer, params)
+      req.send_request(options)
+    end
+
+    # Provides details about a dimension that is defined in your AWS
+    # account.
+    #
+    # @option params [required, String] :name
+    #   The unique identifier for the dimension.
+    #
+    # @return [Types::DescribeDimensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDimensionResponse#name #name} => String
+    #   * {Types::DescribeDimensionResponse#arn #arn} => String
+    #   * {Types::DescribeDimensionResponse#type #type} => String
+    #   * {Types::DescribeDimensionResponse#string_values #string_values} => Array&lt;String&gt;
+    #   * {Types::DescribeDimensionResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeDimensionResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dimension({
+    #     name: "DimensionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.type #=> String, one of "TOPIC_FILTER"
+    #   resp.string_values #=> Array
+    #   resp.string_values[0] #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_dimension(params = {})
+    # @param [Hash] params ({})
+    def describe_dimension(params = {}, options = {})
+      req = build_request(:describe_dimension, params)
       req.send_request(options)
     end
 
@@ -3895,6 +4131,7 @@ module Aws::IoT
     #   * {Types::DescribeProvisioningTemplateResponse#template_body #template_body} => String
     #   * {Types::DescribeProvisioningTemplateResponse#enabled #enabled} => Boolean
     #   * {Types::DescribeProvisioningTemplateResponse#provisioning_role_arn #provisioning_role_arn} => String
+    #   * {Types::DescribeProvisioningTemplateResponse#pre_provisioning_hook #pre_provisioning_hook} => Types::ProvisioningHook
     #
     # @example Request syntax with placeholder values
     #
@@ -3913,6 +4150,8 @@ module Aws::IoT
     #   resp.template_body #=> String
     #   resp.enabled #=> Boolean
     #   resp.provisioning_role_arn #=> String
+    #   resp.pre_provisioning_hook.payload_version #=> String
+    #   resp.pre_provisioning_hook.target_arn #=> String
     #
     # @overload describe_provisioning_template(params = {})
     # @param [Hash] params ({})
@@ -4039,6 +4278,7 @@ module Aws::IoT
     #   * {Types::DescribeSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
     #   * {Types::DescribeSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
     #   * {Types::DescribeSecurityProfileResponse#additional_metrics_to_retain #additional_metrics_to_retain} => Array&lt;String&gt;
+    #   * {Types::DescribeSecurityProfileResponse#additional_metrics_to_retain_v2 #additional_metrics_to_retain_v2} => Array&lt;Types::MetricToRetain&gt;
     #   * {Types::DescribeSecurityProfileResponse#version #version} => Integer
     #   * {Types::DescribeSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::DescribeSecurityProfileResponse#last_modified_date #last_modified_date} => Time
@@ -4057,6 +4297,8 @@ module Aws::IoT
     #   resp.behaviors #=> Array
     #   resp.behaviors[0].name #=> String
     #   resp.behaviors[0].metric #=> String
+    #   resp.behaviors[0].metric_dimension.dimension_name #=> String
+    #   resp.behaviors[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.behaviors[0].criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.behaviors[0].criteria.value.count #=> Integer
     #   resp.behaviors[0].criteria.value.cidrs #=> Array
@@ -4072,6 +4314,10 @@ module Aws::IoT
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
     #   resp.additional_metrics_to_retain #=> Array
     #   resp.additional_metrics_to_retain[0] #=> String
+    #   resp.additional_metrics_to_retain_v2 #=> Array
+    #   resp.additional_metrics_to_retain_v2[0].metric #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
@@ -5163,6 +5409,8 @@ module Aws::IoT
     #   resp.active_violations[0].security_profile_name #=> String
     #   resp.active_violations[0].behavior.name #=> String
     #   resp.active_violations[0].behavior.metric #=> String
+    #   resp.active_violations[0].behavior.metric_dimension.dimension_name #=> String
+    #   resp.active_violations[0].behavior.metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.active_violations[0].behavior.criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.active_violations[0].behavior.criteria.value.count #=> Integer
     #   resp.active_violations[0].behavior.criteria.value.cidrs #=> Array
@@ -5670,6 +5918,7 @@ module Aws::IoT
     #   resp.certificates[0].certificate_arn #=> String
     #   resp.certificates[0].certificate_id #=> String
     #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
+    #   resp.certificates[0].certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.certificates[0].creation_date #=> Time
     #   resp.next_marker #=> String
     #
@@ -5716,6 +5965,7 @@ module Aws::IoT
     #   resp.certificates[0].certificate_arn #=> String
     #   resp.certificates[0].certificate_id #=> String
     #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
+    #   resp.certificates[0].certificate_mode #=> String, one of "DEFAULT", "SNI_ONLY"
     #   resp.certificates[0].creation_date #=> Time
     #   resp.next_marker #=> String
     #
@@ -5723,6 +5973,39 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_certificates_by_ca(params = {}, options = {})
       req = build_request(:list_certificates_by_ca, params)
+      req.send_request(options)
+    end
+
+    # List the set of dimensions that are defined for your AWS account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve at one time.
+    #
+    # @return [Types::ListDimensionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDimensionsResponse#dimension_names #dimension_names} => Array&lt;String&gt;
+    #   * {Types::ListDimensionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dimensions({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dimension_names #=> Array
+    #   resp.dimension_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_dimensions(params = {})
+    # @param [Hash] params ({})
+    def list_dimensions(params = {}, options = {})
+      req = build_request(:list_dimensions, params)
       req.send_request(options)
     end
 
@@ -6453,6 +6736,10 @@ module Aws::IoT
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
     #
+    # @option params [String] :dimension_name
+    #   A filter to limit results to the security profiles that use the
+    #   defined dimension.
+    #
     # @return [Types::ListSecurityProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSecurityProfilesResponse#security_profile_identifiers #security_profile_identifiers} => Array&lt;Types::SecurityProfileIdentifier&gt;
@@ -6463,6 +6750,7 @@ module Aws::IoT
     #   resp = client.list_security_profiles({
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     dimension_name: "DimensionName",
     #   })
     #
     # @example Response structure
@@ -7216,6 +7504,8 @@ module Aws::IoT
     #   resp.violation_events[0].security_profile_name #=> String
     #   resp.violation_events[0].behavior.name #=> String
     #   resp.violation_events[0].behavior.metric #=> String
+    #   resp.violation_events[0].behavior.metric_dimension.dimension_name #=> String
+    #   resp.violation_events[0].behavior.metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.violation_events[0].behavior.criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.violation_events[0].behavior.criteria.value.count #=> Integer
     #   resp.violation_events[0].behavior.criteria.value.cidrs #=> Array
@@ -7267,6 +7557,20 @@ module Aws::IoT
     # @option params [Types::RegistrationConfig] :registration_config
     #   Information about the registration configuration.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the CA certificate.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
     # @return [Types::RegisterCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterCACertificateResponse#certificate_arn #certificate_arn} => String
@@ -7283,6 +7587,12 @@ module Aws::IoT
     #       template_body: "TemplateBody",
     #       role_arn: "RoleArn",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7341,6 +7651,39 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Register a certificate that does not have a certificate authority
+    # (CA).
+    #
+    # @option params [required, String] :certificate_pem
+    #   The certificate data, in PEM format.
+    #
+    # @option params [String] :status
+    #   The status of the register certificate request.
+    #
+    # @return [Types::RegisterCertificateWithoutCAResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterCertificateWithoutCAResponse#certificate_arn #certificate_arn} => String
+    #   * {Types::RegisterCertificateWithoutCAResponse#certificate_id #certificate_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_certificate_without_ca({
+    #     certificate_pem: "CertificatePem", # required
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_arn #=> String
+    #   resp.certificate_id #=> String
+    #
+    # @overload register_certificate_without_ca(params = {})
+    # @param [Hash] params ({})
+    def register_certificate_without_ca(params = {}, options = {})
+      req = build_request(:register_certificate_without_ca, params)
+      req.send_request(options)
+    end
+
     # Provisions a thing in the device registry. RegisterThing calls other
     # AWS IoT control plane APIs. These calls might exceed your account
     # level [ AWS IoT Throttling Limits][1] and cause throttle errors.
@@ -7361,12 +7704,12 @@ module Aws::IoT
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html
     #
     # @option params [Hash<String,String>] :parameters
-    #   The parameters for provisioning a thing. See [Programmatic
-    #   Provisioning][1] for more information.
+    #   The parameters for provisioning a thing. See [Provisioning
+    #   Templates][1] for more information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
     #
     # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8174,7 +8517,7 @@ module Aws::IoT
     #     resource_arn: "ResourceArn", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
+    #         key: "TagKey", # required
     #         value: "TagValue",
     #       },
     #     ],
@@ -8225,7 +8568,7 @@ module Aws::IoT
     #     auth_infos: [ # required
     #       {
     #         action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
-    #         resources: ["Resource"],
+    #         resources: ["Resource"], # required
     #       },
     #     ],
     #     client_id: "ClientId",
@@ -8271,7 +8614,7 @@ module Aws::IoT
     #
     # @option params [String] :token_signature
     #   The signature made with the token and your custom authentication
-    #   service's private key.
+    #   service's private key. This value must be Base-64-encoded.
     #
     # @option params [Types::HttpContext] :http_context
     #   Specifies a test HTTP authorization request.
@@ -8622,6 +8965,51 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates the definition for a dimension. You cannot change the type of
+    # a dimension after it is created (you can delete it and re-create it).
+    #
+    # @option params [required, String] :name
+    #   A unique identifier for the dimension. Choose something that describes
+    #   the type and value to make it easy to remember what it does.
+    #
+    # @option params [required, Array<String>] :string_values
+    #   Specifies the value or list of values for the dimension. For
+    #   `TOPIC_FILTER` dimensions, this is a pattern used to match the MQTT
+    #   topic (for example, "admin/#").
+    #
+    # @return [Types::UpdateDimensionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDimensionResponse#name #name} => String
+    #   * {Types::UpdateDimensionResponse#arn #arn} => String
+    #   * {Types::UpdateDimensionResponse#type #type} => String
+    #   * {Types::UpdateDimensionResponse#string_values #string_values} => Array&lt;String&gt;
+    #   * {Types::UpdateDimensionResponse#creation_date #creation_date} => Time
+    #   * {Types::UpdateDimensionResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_dimension({
+    #     name: "DimensionName", # required
+    #     string_values: ["DimensionStringValue"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.type #=> String, one of "TOPIC_FILTER"
+    #   resp.string_values #=> Array
+    #   resp.string_values[0] #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload update_dimension(params = {})
+    # @param [Hash] params ({})
+    def update_dimension(params = {}, options = {})
+      req = build_request(:update_dimension, params)
+      req.send_request(options)
+    end
+
     # Updates values stored in the domain configuration. Domain
     # configurations for default endpoints can't be updated.
     #
@@ -8956,6 +9344,12 @@ module Aws::IoT
     #   The ARN of the role associated with the provisioning template. This
     #   IoT role grants permission to provision a device.
     #
+    # @option params [Types::ProvisioningHook] :pre_provisioning_hook
+    #   Updates the pre-provisioning hook template.
+    #
+    # @option params [Boolean] :remove_pre_provisioning_hook
+    #   Removes pre-provisioning hook template.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -8966,6 +9360,11 @@ module Aws::IoT
     #     enabled: false,
     #     default_version_id: 1,
     #     provisioning_role_arn: "RoleArn",
+    #     pre_provisioning_hook: {
+    #       payload_version: "PayloadVersion",
+    #       target_arn: "TargetArn", # required
+    #     },
+    #     remove_pre_provisioning_hook: false,
     #   })
     #
     # @overload update_provisioning_template(params = {})
@@ -9086,6 +9485,14 @@ module Aws::IoT
     #   retained for any metric used in the profile's `behaviors`, but it is
     #   also retained for any metric specified here.
     #
+    #   **Note:** This API field is deprecated. Please use
+    #   UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+    #
+    # @option params [Array<Types::MetricToRetain>] :additional_metrics_to_retain_v2
+    #   A list of metrics whose data is retained (stored). By default, data is
+    #   retained for any metric used in the profile's behaviors, but it is
+    #   also retained for any metric specified here.
+    #
     # @option params [Boolean] :delete_behaviors
     #   If true, delete all `behaviors` defined for this security profile. If
     #   any `behaviors` are defined in the current invocation, an exception
@@ -9115,6 +9522,7 @@ module Aws::IoT
     #   * {Types::UpdateSecurityProfileResponse#behaviors #behaviors} => Array&lt;Types::Behavior&gt;
     #   * {Types::UpdateSecurityProfileResponse#alert_targets #alert_targets} => Hash&lt;String,Types::AlertTarget&gt;
     #   * {Types::UpdateSecurityProfileResponse#additional_metrics_to_retain #additional_metrics_to_retain} => Array&lt;String&gt;
+    #   * {Types::UpdateSecurityProfileResponse#additional_metrics_to_retain_v2 #additional_metrics_to_retain_v2} => Array&lt;Types::MetricToRetain&gt;
     #   * {Types::UpdateSecurityProfileResponse#version #version} => Integer
     #   * {Types::UpdateSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::UpdateSecurityProfileResponse#last_modified_date #last_modified_date} => Time
@@ -9128,6 +9536,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -9151,6 +9563,15 @@ module Aws::IoT
     #       },
     #     },
     #     additional_metrics_to_retain: ["BehaviorMetric"],
+    #     additional_metrics_to_retain_v2: [
+    #       {
+    #         metric: "BehaviorMetric", # required
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
+    #       },
+    #     ],
     #     delete_behaviors: false,
     #     delete_alert_targets: false,
     #     delete_additional_metrics_to_retain: false,
@@ -9165,6 +9586,8 @@ module Aws::IoT
     #   resp.behaviors #=> Array
     #   resp.behaviors[0].name #=> String
     #   resp.behaviors[0].metric #=> String
+    #   resp.behaviors[0].metric_dimension.dimension_name #=> String
+    #   resp.behaviors[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.behaviors[0].criteria.comparison_operator #=> String, one of "less-than", "less-than-equals", "greater-than", "greater-than-equals", "in-cidr-set", "not-in-cidr-set", "in-port-set", "not-in-port-set"
     #   resp.behaviors[0].criteria.value.count #=> Integer
     #   resp.behaviors[0].criteria.value.cidrs #=> Array
@@ -9180,6 +9603,10 @@ module Aws::IoT
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
     #   resp.additional_metrics_to_retain #=> Array
     #   resp.additional_metrics_to_retain[0] #=> String
+    #   resp.additional_metrics_to_retain_v2 #=> Array
+    #   resp.additional_metrics_to_retain_v2[0].metric #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
+    #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
@@ -9250,6 +9677,10 @@ module Aws::IoT
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to update.
+    #
+    #   You can't change a thing's name. To change a thing's name, you must
+    #   create a new thing, give it the new name, and then delete the old
+    #   thing.
     #
     # @option params [String] :thing_type_name
     #   The name of the thing type.
@@ -9446,6 +9877,10 @@ module Aws::IoT
     #       {
     #         name: "BehaviorName", # required
     #         metric: "BehaviorMetric",
+    #         metric_dimension: {
+    #           dimension_name: "DimensionName", # required
+    #           operator: "IN", # accepts IN, NOT_IN
+    #         },
     #         criteria: {
     #           comparison_operator: "less-than", # accepts less-than, less-than-equals, greater-than, greater-than-equals, in-cidr-set, not-in-cidr-set, in-port-set, not-in-port-set
     #           value: {
@@ -9490,7 +9925,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

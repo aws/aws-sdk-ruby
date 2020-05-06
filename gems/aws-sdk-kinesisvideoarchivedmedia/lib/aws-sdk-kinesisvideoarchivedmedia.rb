@@ -25,7 +25,7 @@ require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'
 # structure.
 #
 #     kinesis_video_archived_media = Aws::KinesisVideoArchivedMedia::Client.new
-#     resp = kinesis_video_archived_media.get_dash_streaming_session_url(params)
+#     resp = kinesis_video_archived_media.get_clip(params)
 #
 # See {Client} for more information.
 #
@@ -45,6 +45,6 @@ require_relative 'aws-sdk-kinesisvideoarchivedmedia/customizations'
 # @service
 module Aws::KinesisVideoArchivedMedia
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.22.0'
 
 end

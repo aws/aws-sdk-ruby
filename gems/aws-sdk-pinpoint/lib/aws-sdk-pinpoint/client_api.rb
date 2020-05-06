@@ -42,6 +42,7 @@ module Aws::Pinpoint
     BaiduChannelResponse = Shapes::StructureShape.new(name: 'BaiduChannelResponse')
     BaiduMessage = Shapes::StructureShape.new(name: 'BaiduMessage')
     BaseKpiResult = Shapes::StructureShape.new(name: 'BaseKpiResult')
+    CampaignCustomMessage = Shapes::StructureShape.new(name: 'CampaignCustomMessage')
     CampaignDateRangeKpiResponse = Shapes::StructureShape.new(name: 'CampaignDateRangeKpiResponse')
     CampaignEmailMessage = Shapes::StructureShape.new(name: 'CampaignEmailMessage')
     CampaignEventFilter = Shapes::StructureShape.new(name: 'CampaignEventFilter')
@@ -82,6 +83,7 @@ module Aws::Pinpoint
     CreateTemplateMessageBody = Shapes::StructureShape.new(name: 'CreateTemplateMessageBody')
     CreateVoiceTemplateRequest = Shapes::StructureShape.new(name: 'CreateVoiceTemplateRequest')
     CreateVoiceTemplateResponse = Shapes::StructureShape.new(name: 'CreateVoiceTemplateResponse')
+    CustomDeliveryConfiguration = Shapes::StructureShape.new(name: 'CustomDeliveryConfiguration')
     DefaultMessage = Shapes::StructureShape.new(name: 'DefaultMessage')
     DefaultPushNotificationMessage = Shapes::StructureShape.new(name: 'DefaultPushNotificationMessage')
     DefaultPushNotificationTemplate = Shapes::StructureShape.new(name: 'DefaultPushNotificationTemplate')
@@ -301,6 +303,7 @@ module Aws::Pinpoint
     ListOfTemplateVersionResponse = Shapes::ListShape.new(name: 'ListOfTemplateVersionResponse')
     ListOfTreatmentResource = Shapes::ListShape.new(name: 'ListOfTreatmentResource')
     ListOfWriteTreatmentResource = Shapes::ListShape.new(name: 'ListOfWriteTreatmentResource')
+    ListOf__EndpointTypesElement = Shapes::ListShape.new(name: 'ListOf__EndpointTypesElement')
     ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListRecommenderConfigurationsResponse = Shapes::StructureShape.new(name: 'ListRecommenderConfigurationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -470,6 +473,7 @@ module Aws::Pinpoint
     WriteJourneyRequest = Shapes::StructureShape.new(name: 'WriteJourneyRequest')
     WriteSegmentRequest = Shapes::StructureShape.new(name: 'WriteSegmentRequest')
     WriteTreatmentResource = Shapes::StructureShape.new(name: 'WriteTreatmentResource')
+    __EndpointTypesElement = Shapes::StringShape.new(name: '__EndpointTypesElement')
     __blob = Shapes::BlobShape.new(name: '__blob')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -761,6 +765,9 @@ module Aws::Pinpoint
     BaseKpiResult.add_member(:rows, Shapes::ShapeRef.new(shape: ListOfResultRow, required: true, location_name: "Rows"))
     BaseKpiResult.struct_class = Types::BaseKpiResult
 
+    CampaignCustomMessage.add_member(:data, Shapes::ShapeRef.new(shape: __string, location_name: "Data"))
+    CampaignCustomMessage.struct_class = Types::CampaignCustomMessage
+
     CampaignDateRangeKpiResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
     CampaignDateRangeKpiResponse.add_member(:campaign_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CampaignId"))
     CampaignDateRangeKpiResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "EndTime"))
@@ -795,6 +802,7 @@ module Aws::Pinpoint
     CampaignResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
     CampaignResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Arn"))
     CampaignResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "CreationDate"))
+    CampaignResponse.add_member(:custom_delivery_configuration, Shapes::ShapeRef.new(shape: CustomDeliveryConfiguration, location_name: "CustomDeliveryConfiguration"))
     CampaignResponse.add_member(:default_state, Shapes::ShapeRef.new(shape: CampaignState, location_name: "DefaultState"))
     CampaignResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
     CampaignResponse.add_member(:holdout_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "HoldoutPercent"))
@@ -990,6 +998,10 @@ module Aws::Pinpoint
     CreateVoiceTemplateResponse.struct_class = Types::CreateVoiceTemplateResponse
     CreateVoiceTemplateResponse[:payload] = :create_template_message_body
     CreateVoiceTemplateResponse[:payload_member] = CreateVoiceTemplateResponse.member(:create_template_message_body)
+
+    CustomDeliveryConfiguration.add_member(:delivery_uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DeliveryUri"))
+    CustomDeliveryConfiguration.add_member(:endpoint_types, Shapes::ShapeRef.new(shape: ListOf__EndpointTypesElement, location_name: "EndpointTypes"))
+    CustomDeliveryConfiguration.struct_class = Types::CustomDeliveryConfiguration
 
     DefaultMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     DefaultMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
@@ -2064,6 +2076,8 @@ module Aws::Pinpoint
 
     ListOfWriteTreatmentResource.member = Shapes::ShapeRef.new(shape: WriteTreatmentResource)
 
+    ListOf__EndpointTypesElement.member = Shapes::ShapeRef.new(shape: __EndpointTypesElement)
+
     ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
     ListRecommenderConfigurationsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfRecommenderConfigurationResponse, required: true, location_name: "Item"))
@@ -2172,6 +2186,7 @@ module Aws::Pinpoint
     MessageConfiguration.add_member(:adm_message, Shapes::ShapeRef.new(shape: Message, location_name: "ADMMessage"))
     MessageConfiguration.add_member(:apns_message, Shapes::ShapeRef.new(shape: Message, location_name: "APNSMessage"))
     MessageConfiguration.add_member(:baidu_message, Shapes::ShapeRef.new(shape: Message, location_name: "BaiduMessage"))
+    MessageConfiguration.add_member(:custom_message, Shapes::ShapeRef.new(shape: CampaignCustomMessage, location_name: "CustomMessage"))
     MessageConfiguration.add_member(:default_message, Shapes::ShapeRef.new(shape: Message, location_name: "DefaultMessage"))
     MessageConfiguration.add_member(:email_message, Shapes::ShapeRef.new(shape: CampaignEmailMessage, location_name: "EmailMessage"))
     MessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: Message, location_name: "GCMMessage"))
@@ -2393,6 +2408,7 @@ module Aws::Pinpoint
 
     SMSMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     SMSMessage.add_member(:keyword, Shapes::ShapeRef.new(shape: __string, location_name: "Keyword"))
+    SMSMessage.add_member(:media_url, Shapes::ShapeRef.new(shape: __string, location_name: "MediaUrl"))
     SMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
     SMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
@@ -2612,6 +2628,7 @@ module Aws::Pinpoint
     TooManyRequestsException.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestID"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
+    TreatmentResource.add_member(:custom_delivery_configuration, Shapes::ShapeRef.new(shape: CustomDeliveryConfiguration, location_name: "CustomDeliveryConfiguration"))
     TreatmentResource.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Id"))
     TreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
     TreatmentResource.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
@@ -2966,6 +2983,7 @@ module Aws::Pinpoint
     WriteApplicationSettingsRequest.struct_class = Types::WriteApplicationSettingsRequest
 
     WriteCampaignRequest.add_member(:additional_treatments, Shapes::ShapeRef.new(shape: ListOfWriteTreatmentResource, location_name: "AdditionalTreatments"))
+    WriteCampaignRequest.add_member(:custom_delivery_configuration, Shapes::ShapeRef.new(shape: CustomDeliveryConfiguration, location_name: "CustomDeliveryConfiguration"))
     WriteCampaignRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
     WriteCampaignRequest.add_member(:holdout_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "HoldoutPercent"))
     WriteCampaignRequest.add_member(:hook, Shapes::ShapeRef.new(shape: CampaignHook, location_name: "Hook"))
@@ -3006,6 +3024,7 @@ module Aws::Pinpoint
     WriteSegmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     WriteSegmentRequest.struct_class = Types::WriteSegmentRequest
 
+    WriteTreatmentResource.add_member(:custom_delivery_configuration, Shapes::ShapeRef.new(shape: CustomDeliveryConfiguration, location_name: "CustomDeliveryConfiguration"))
     WriteTreatmentResource.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
     WriteTreatmentResource.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "Schedule"))
     WriteTreatmentResource.add_member(:size_percent, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "SizePercent"))

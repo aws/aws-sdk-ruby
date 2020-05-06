@@ -269,8 +269,7 @@ module Aws::CodeGuruProfiler
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::CodeGuruProfiler
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -449,6 +448,36 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
+    # Gets the profiling group policy.
+    #
+    # @option params [required, String] :profiling_group_name
+    #   The name of the profiling group.
+    #
+    # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyResponse#policy #policy} => String
+    #   * {Types::GetPolicyResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_policy({
+    #     profiling_group_name: "ProfilingGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetPolicy AWS API Documentation
+    #
+    # @overload get_policy(params = {})
+    # @param [Hash] params ({})
+    def get_policy(params = {}, options = {})
+      req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
     # Gets the aggregated profile of a profiling group for the specified
     # time range. If the requested time range does not align with the
     # available aggregated profiles, it is expanded to attain alignment. If
@@ -567,6 +596,8 @@ module Aws::CodeGuruProfiler
     #   * {Types::ListProfileTimesResponse#next_token #next_token} => String
     #   * {Types::ListProfileTimesResponse#profile_times #profile_times} => Array&lt;Types::ProfileTime&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_profile_times({
@@ -625,6 +656,8 @@ module Aws::CodeGuruProfiler
     #   * {Types::ListProfilingGroupsResponse#next_token #next_token} => String
     #   * {Types::ListProfilingGroupsResponse#profiling_group_names #profiling_group_names} => Array&lt;String&gt;
     #   * {Types::ListProfilingGroupsResponse#profiling_groups #profiling_groups} => Array&lt;Types::ProfilingGroupDescription&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -689,6 +722,92 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
+    # Provides permission to the principals. This overwrites the existing
+    # permissions, and is not additive.
+    #
+    # @option params [required, String] :action_group
+    #   The list of actions that the users and roles can perform on the
+    #   profiling group.
+    #
+    # @option params [required, Array<String>] :principals
+    #   The list of role and user ARNs or the accountId that needs access
+    #   (wildcards are not allowed).
+    #
+    # @option params [required, String] :profiling_group_name
+    #   The name of the profiling group.
+    #
+    # @option params [String] :revision_id
+    #   A unique identifier for the current revision of the policy. This is
+    #   required, if a policy exists for the profiling group. This is not
+    #   required when creating the policy for the first time.
+    #
+    # @return [Types::PutPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutPermissionResponse#policy #policy} => String
+    #   * {Types::PutPermissionResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_permission({
+    #     action_group: "agentPermissions", # required, accepts agentPermissions
+    #     principals: ["Principal"], # required
+    #     profiling_group_name: "ProfilingGroupName", # required
+    #     revision_id: "RevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PutPermission AWS API Documentation
+    #
+    # @overload put_permission(params = {})
+    # @param [Hash] params ({})
+    def put_permission(params = {}, options = {})
+      req = build_request(:put_permission, params)
+      req.send_request(options)
+    end
+
+    # Removes statement for the provided action group from the policy.
+    #
+    # @option params [required, String] :action_group
+    #   The list of actions that the users and roles can perform on the
+    #   profiling group.
+    #
+    # @option params [required, String] :profiling_group_name
+    #   The name of the profiling group.
+    #
+    # @option params [required, String] :revision_id
+    #   A unique identifier for the current revision of the policy.
+    #
+    # @return [Types::RemovePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemovePermissionResponse#policy #policy} => String
+    #   * {Types::RemovePermissionResponse#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_permission({
+    #     action_group: "agentPermissions", # required, accepts agentPermissions
+    #     profiling_group_name: "ProfilingGroupName", # required
+    #     revision_id: "RevisionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/RemovePermission AWS API Documentation
+    #
+    # @overload remove_permission(params = {})
+    # @param [Hash] params ({})
+    def remove_permission(params = {}, options = {})
+      req = build_request(:remove_permission, params)
+      req.send_request(options)
+    end
+
     # Updates a profiling group.
     #
     # @option params [required, Types::AgentOrchestrationConfig] :agent_orchestration_config
@@ -743,7 +862,7 @@ module Aws::CodeGuruProfiler
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeguruprofiler'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

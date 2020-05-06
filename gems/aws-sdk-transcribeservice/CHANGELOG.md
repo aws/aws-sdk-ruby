@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-04-29)
+------------------
+
+* Feature - With this release, you can now use Amazon Transcribe to create medical custom vocabularies and use them in both medical real-time streaming and medical batch transcription jobs.
+
+1.39.0 (2020-04-06)
+------------------
+
+* Feature - This release adds support for batch transcription jobs within Amazon Transcribe Medical.
+
 1.38.0 (2020-03-10)
 ------------------
 

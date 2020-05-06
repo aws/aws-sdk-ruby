@@ -279,8 +279,7 @@ module Aws::ServiceCatalog
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ServiceCatalog
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -744,9 +743,28 @@ module Aws::ServiceCatalog
     #
     #   LAUNCH
     #
-    #   : Specify the `RoleArn` property as follows:
+    #   : You are required to specify either the `RoleArn` or the
+    #     `LocalRoleName` but can't use both.
+    #
+    #     Specify the `RoleArn` property as follows:
     #
     #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     Specify the `LocalRoleName` property as follows:
+    #
+    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #
+    #     If you specify the `LocalRoleName` property, when an account uses
+    #     the launch constraint, the IAM role with that name in the account
+    #     will be used. This allows launch-role constraints to be
+    #     account-agnostic so the administrator can create fewer resources per
+    #     shared account.
+    #
+    #     <note markdown="1"> The given role name must exist in the account used to create the
+    #     launch constraint and the account of the user who launches a product
+    #     with this launch constraint.
+    #
+    #      </note>
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #
@@ -842,6 +860,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.type #=> String
     #   resp.constraint_detail.description #=> String
     #   resp.constraint_detail.owner #=> String
+    #   resp.constraint_detail.product_id #=> String
+    #   resp.constraint_detail.portfolio_id #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
@@ -1747,6 +1767,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.type #=> String
     #   resp.constraint_detail.description #=> String
     #   resp.constraint_detail.owner #=> String
+    #   resp.constraint_detail.product_id #=> String
+    #   resp.constraint_detail.portfolio_id #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
@@ -2970,6 +2992,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListAcceptedPortfolioSharesOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
     #   * {Types::ListAcceptedPortfolioSharesOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_accepted_portfolio_shares({
@@ -3025,6 +3049,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListBudgetsForResourceOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
     #   * {Types::ListBudgetsForResourceOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_budgets_for_resource({
@@ -3078,6 +3104,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListConstraintsForPortfolioOutput#constraint_details #constraint_details} => Array&lt;Types::ConstraintDetail&gt;
     #   * {Types::ListConstraintsForPortfolioOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_constraints_for_portfolio({
@@ -3095,6 +3123,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_details[0].type #=> String
     #   resp.constraint_details[0].description #=> String
     #   resp.constraint_details[0].owner #=> String
+    #   resp.constraint_details[0].product_id #=> String
+    #   resp.constraint_details[0].portfolio_id #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolio AWS API Documentation
@@ -3133,6 +3163,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListLaunchPathsOutput#launch_path_summaries #launch_path_summaries} => Array&lt;Types::LaunchPathSummary&gt;
     #   * {Types::ListLaunchPathsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3204,6 +3236,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListOrganizationPortfolioAccessOutput#organization_nodes #organization_nodes} => Array&lt;Types::OrganizationNode&gt;
     #   * {Types::ListOrganizationPortfolioAccessOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_organization_portfolio_access({
@@ -3261,6 +3295,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListPortfolioAccessOutput#account_ids #account_ids} => Array&lt;String&gt;
     #   * {Types::ListPortfolioAccessOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_portfolio_access({
@@ -3308,6 +3344,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListPortfoliosOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
     #   * {Types::ListPortfoliosOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3363,6 +3401,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListPortfoliosForProductOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
     #   * {Types::ListPortfoliosForProductOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_portfolios_for_product({
@@ -3417,6 +3457,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListPrincipalsForPortfolioOutput#principals #principals} => Array&lt;Types::Principal&gt;
     #   * {Types::ListPrincipalsForPortfolioOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3581,6 +3623,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListProvisioningArtifactsForServiceActionOutput#provisioning_artifact_views #provisioning_artifact_views} => Array&lt;Types::ProvisioningArtifactView&gt;
     #   * {Types::ListProvisioningArtifactsForServiceActionOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_provisioning_artifacts_for_service_action({
@@ -3720,6 +3764,8 @@ module Aws::ServiceCatalog
     #   * {Types::ListResourcesForTagOptionOutput#resource_details #resource_details} => Array&lt;Types::ResourceDetail&gt;
     #   * {Types::ListResourcesForTagOptionOutput#page_token #page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resources_for_tag_option({
@@ -3770,6 +3816,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListServiceActionsOutput#service_action_summaries #service_action_summaries} => Array&lt;Types::ServiceActionSummary&gt;
     #   * {Types::ListServiceActionsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3827,6 +3875,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListServiceActionsForProvisioningArtifactOutput#service_action_summaries #service_action_summaries} => Array&lt;Types::ServiceActionSummary&gt;
     #   * {Types::ListServiceActionsForProvisioningArtifactOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3928,6 +3978,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::ListTagOptionsOutput#tag_option_details #tag_option_details} => Array&lt;Types::TagOptionDetail&gt;
     #   * {Types::ListTagOptionsOutput#page_token #page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4230,6 +4282,8 @@ module Aws::ServiceCatalog
     #   * {Types::SearchProductsOutput#product_view_aggregations #product_view_aggregations} => Hash&lt;String,Array&lt;Types::ProductViewAggregationValue&gt;&gt;
     #   * {Types::SearchProductsOutput#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_products({
@@ -4311,6 +4365,8 @@ module Aws::ServiceCatalog
     #
     #   * {Types::SearchProductsAsAdminOutput#product_view_details #product_view_details} => Array&lt;Types::ProductViewDetail&gt;
     #   * {Types::SearchProductsAsAdminOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4399,6 +4455,8 @@ module Aws::ServiceCatalog
     #   * {Types::SearchProvisionedProductsOutput#provisioned_products #provisioned_products} => Array&lt;Types::ProvisionedProductAttribute&gt;
     #   * {Types::SearchProvisionedProductsOutput#total_results_count #total_results_count} => Integer
     #   * {Types::SearchProvisionedProductsOutput#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4552,9 +4610,28 @@ module Aws::ServiceCatalog
     #
     #   LAUNCH
     #
-    #   : Specify the `RoleArn` property as follows:
+    #   : You are required to specify either the `RoleArn` or the
+    #     `LocalRoleName` but can't use both.
+    #
+    #     Specify the `RoleArn` property as follows:
     #
     #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     Specify the `LocalRoleName` property as follows:
+    #
+    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #
+    #     If you specify the `LocalRoleName` property, when an account uses
+    #     the launch constraint, the IAM role with that name in the account
+    #     will be used. This allows launch-role constraints to be
+    #     account-agnostic so the administrator can create fewer resources per
+    #     shared account.
+    #
+    #     <note markdown="1"> The given role name must exist in the account used to create the
+    #     launch constraint and the account of the user who launches a product
+    #     with this launch constraint.
+    #
+    #      </note>
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #
@@ -4623,6 +4700,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.type #=> String
     #   resp.constraint_detail.description #=> String
     #   resp.constraint_detail.owner #=> String
+    #   resp.constraint_detail.product_id #=> String
+    #   resp.constraint_detail.portfolio_id #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
@@ -5203,7 +5282,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

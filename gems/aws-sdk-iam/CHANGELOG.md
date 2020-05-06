@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-04-06)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
 1.34.0 (2020-03-09)
 ------------------
 

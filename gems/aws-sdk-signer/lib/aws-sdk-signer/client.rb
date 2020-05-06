@@ -269,8 +269,7 @@ module Aws::Signer
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::Signer
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -384,6 +383,11 @@ module Aws::Signer
     #   resp.status_reason #=> String
     #   resp.signed_object.s3.bucket_name #=> String
     #   resp.signed_object.s3.key #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * successful_signing_job
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/DescribeSigningJob AWS API Documentation
     #
@@ -526,6 +530,8 @@ module Aws::Signer
     #   * {Types::ListSigningJobsResponse#jobs #jobs} => Array&lt;Types::SigningJob&gt;
     #   * {Types::ListSigningJobsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_signing_jobs({
@@ -589,6 +595,8 @@ module Aws::Signer
     #
     #   * {Types::ListSigningPlatformsResponse#platforms #platforms} => Array&lt;Types::SigningPlatform&gt;
     #   * {Types::ListSigningPlatformsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -654,6 +662,8 @@ module Aws::Signer
     #
     #   * {Types::ListSigningProfilesResponse#profiles #profiles} => Array&lt;Types::SigningProfile&gt;
     #   * {Types::ListSigningProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1008,9 +1018,9 @@ module Aws::Signer
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name            | params                  | :delay   | :max_attempts |
-    # | ---------------------- | ----------------------- | -------- | ------------- |
-    # | successful_signing_job | {#describe_signing_job} | 20       | 25            |
+    # | waiter_name            | params                        | :delay   | :max_attempts |
+    # | ---------------------- | ----------------------------- | -------- | ------------- |
+    # | successful_signing_job | {Client#describe_signing_job} | 20       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

@@ -279,8 +279,7 @@ module Aws::WorkMail
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::WorkMail
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1122,6 +1121,8 @@ module Aws::WorkMail
     #   * {Types::ListAliasesResponse#aliases #aliases} => Array&lt;String&gt;
     #   * {Types::ListAliasesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_aliases({
@@ -1168,6 +1169,8 @@ module Aws::WorkMail
     #   * {Types::ListGroupMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::ListGroupMembersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_members({
@@ -1213,6 +1216,8 @@ module Aws::WorkMail
     #
     #   * {Types::ListGroupsResponse#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1265,6 +1270,8 @@ module Aws::WorkMail
     #   * {Types::ListMailboxPermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
     #   * {Types::ListMailboxPermissionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_mailbox_permissions({
@@ -1305,6 +1312,8 @@ module Aws::WorkMail
     #
     #   * {Types::ListOrganizationsResponse#organization_summaries #organization_summaries} => Array&lt;Types::OrganizationSummary&gt;
     #   * {Types::ListOrganizationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1353,6 +1362,8 @@ module Aws::WorkMail
     #   * {Types::ListResourceDelegatesResponse#delegates #delegates} => Array&lt;Types::Delegate&gt;
     #   * {Types::ListResourceDelegatesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_resource_delegates({
@@ -1394,6 +1405,8 @@ module Aws::WorkMail
     #
     #   * {Types::ListResourcesResponse#resources #resources} => Array&lt;Types::Resource&gt;
     #   * {Types::ListResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1470,6 +1483,8 @@ module Aws::WorkMail
     #
     #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::User&gt;
     #   * {Types::ListUsersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

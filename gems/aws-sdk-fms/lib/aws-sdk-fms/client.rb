@@ -279,8 +279,7 @@ module Aws::FMS
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::FMS
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -559,7 +558,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -645,7 +644,7 @@ module Aws::FMS
     # @example Response structure
     #
     #   resp.admin_account_id #=> String
-    #   resp.service_type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.data #=> String
     #   resp.next_token #=> String
     #
@@ -687,6 +686,8 @@ module Aws::FMS
     #
     #   * {Types::ListComplianceStatusResponse#policy_compliance_status_list #policy_compliance_status_list} => Array&lt;Types::PolicyComplianceStatus&gt;
     #   * {Types::ListComplianceStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -748,6 +749,8 @@ module Aws::FMS
     #   * {Types::ListMemberAccountsResponse#member_accounts #member_accounts} => Array&lt;String&gt;
     #   * {Types::ListMemberAccountsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_member_accounts({
@@ -793,6 +796,8 @@ module Aws::FMS
     #   * {Types::ListPoliciesResponse#policy_list #policy_list} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
@@ -807,7 +812,7 @@ module Aws::FMS
     #   resp.policy_list[0].policy_id #=> String
     #   resp.policy_list[0].policy_name #=> String
     #   resp.policy_list[0].resource_type #=> String
-    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy_list[0].security_service_type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy_list[0].remediation_enabled #=> Boolean
     #   resp.next_token #=> String
     #
@@ -888,15 +893,18 @@ module Aws::FMS
     # * A Shield Advanced policy, which applies Shield Advanced protection
     #   to specified accounts and resources
     #
-    # * An AWS WAF policy, which contains a rule group and defines which
-    #   resources are to be protected by that rule group
+    # * An AWS WAF policy (type WAFV2), which defines rule groups to run
+    #   first in the corresponding AWS WAF web ACL and rule groups to run
+    #   last in the web ACL.
+    #
+    # * An AWS WAF Classic policy (type WAF), which defines a rule group.
     #
     # * A security group policy, which manages VPC security groups across
     #   your AWS organization.
     #
-    # Each policy is specific to one of the three types. If you want to
-    # enforce more than one policy type across accounts, you can create
-    # multiple policies. You can create multiple policies for each type.
+    # Each policy is specific to one of the types. If you want to enforce
+    # more than one policy type across accounts, create multiple policies.
+    # You can create multiple policies for each type.
     #
     # You must be subscribed to Shield Advanced to create a Shield Advanced
     # policy. For more information about subscribing to Shield Advanced, see
@@ -925,7 +933,7 @@ module Aws::FMS
     #       policy_name: "ResourceName", # required
     #       policy_update_token: "PolicyUpdateToken",
     #       security_service_policy_data: { # required
-    #         type: "WAF", # required, accepts WAF, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
+    #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT
     #         managed_service_data: "ManagedServiceData",
     #       },
     #       resource_type: "ResourceType", # required
@@ -958,7 +966,7 @@ module Aws::FMS
     #   resp.policy.policy_id #=> String
     #   resp.policy.policy_name #=> String
     #   resp.policy.policy_update_token #=> String
-    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
+    #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
@@ -1059,7 +1067,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

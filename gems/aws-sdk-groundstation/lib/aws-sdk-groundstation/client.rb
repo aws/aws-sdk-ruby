@@ -269,8 +269,7 @@ module Aws::GroundStation
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::GroundStation
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -954,6 +953,8 @@ module Aws::GroundStation
     #   * {Types::ListConfigsResponse#config_list #config_list} => Array&lt;Types::ConfigListItem&gt;
     #   * {Types::ListConfigsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configs({
@@ -1014,6 +1015,8 @@ module Aws::GroundStation
     #   * {Types::ListContactsResponse#contact_list #contact_list} => Array&lt;Types::ContactData&gt;
     #   * {Types::ListContactsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contacts({
@@ -1071,6 +1074,8 @@ module Aws::GroundStation
     #   * {Types::ListDataflowEndpointGroupsResponse#dataflow_endpoint_group_list #dataflow_endpoint_group_list} => Array&lt;Types::DataflowEndpointListItem&gt;
     #   * {Types::ListDataflowEndpointGroupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dataflow_endpoint_groups({
@@ -1111,6 +1116,8 @@ module Aws::GroundStation
     #   * {Types::ListGroundStationsResponse#ground_station_list #ground_station_list} => Array&lt;Types::GroundStationData&gt;
     #   * {Types::ListGroundStationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ground_stations({
@@ -1150,6 +1157,8 @@ module Aws::GroundStation
     #   * {Types::ListMissionProfilesResponse#mission_profile_list #mission_profile_list} => Array&lt;Types::MissionProfileListItem&gt;
     #   * {Types::ListMissionProfilesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_mission_profiles({
@@ -1188,6 +1197,8 @@ module Aws::GroundStation
     #
     #   * {Types::ListSatellitesResponse#next_token #next_token} => String
     #   * {Types::ListSatellitesResponse#satellites #satellites} => Array&lt;Types::SatelliteListItem&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

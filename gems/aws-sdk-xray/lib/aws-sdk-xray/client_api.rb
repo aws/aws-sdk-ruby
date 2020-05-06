@@ -271,6 +271,7 @@ module Aws::XRay
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
     ErrorRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ErrorRootCauseServices, location_name: "Services"))
+    ErrorRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
     ErrorRootCause.struct_class = Types::ErrorRootCause
 
     ErrorRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -298,6 +299,7 @@ module Aws::XRay
     ErrorStatistics.struct_class = Types::ErrorStatistics
 
     FaultRootCause.add_member(:services, Shapes::ShapeRef.new(shape: FaultRootCauseServices, location_name: "Services"))
+    FaultRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
     FaultRootCause.struct_class = Types::FaultRootCause
 
     FaultRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -471,6 +473,7 @@ module Aws::XRay
     ResourceARNDetail.struct_class = Types::ResourceARNDetail
 
     ResponseTimeRootCause.add_member(:services, Shapes::ShapeRef.new(shape: ResponseTimeRootCauseServices, location_name: "Services"))
+    ResponseTimeRootCause.add_member(:client_impacting, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "ClientImpacting"))
     ResponseTimeRootCause.struct_class = Types::ResponseTimeRootCause
 
     ResponseTimeRootCauseEntity.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))

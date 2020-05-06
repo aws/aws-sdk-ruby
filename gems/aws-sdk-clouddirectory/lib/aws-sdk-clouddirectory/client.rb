@@ -269,8 +269,7 @@ module Aws::CloudDirectory
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::CloudDirectory
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -2409,6 +2408,8 @@ module Aws::CloudDirectory
     #   * {Types::ListAppliedSchemaArnsResponse#schema_arns #schema_arns} => Array&lt;String&gt;
     #   * {Types::ListAppliedSchemaArnsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applied_schema_arns({
@@ -2454,6 +2455,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListAttachedIndicesResponse#index_attachments #index_attachments} => Array&lt;Types::IndexAttachment&gt;
     #   * {Types::ListAttachedIndicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2505,6 +2508,8 @@ module Aws::CloudDirectory
     #   * {Types::ListDevelopmentSchemaArnsResponse#schema_arns #schema_arns} => Array&lt;String&gt;
     #   * {Types::ListDevelopmentSchemaArnsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_development_schema_arns({
@@ -2543,6 +2548,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListDirectoriesResponse#directories #directories} => Array&lt;Types::Directory&gt;
     #   * {Types::ListDirectoriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2588,6 +2595,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListFacetAttributesResponse#attributes #attributes} => Array&lt;Types::FacetAttribute&gt;
     #   * {Types::ListFacetAttributesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2642,6 +2651,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListFacetNamesResponse#facet_names #facet_names} => Array&lt;String&gt;
     #   * {Types::ListFacetNamesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2801,6 +2812,8 @@ module Aws::CloudDirectory
     #   * {Types::ListIndexResponse#index_attachments #index_attachments} => Array&lt;Types::IndexAttachment&gt;
     #   * {Types::ListIndexResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_index({
@@ -2883,6 +2896,8 @@ module Aws::CloudDirectory
     #   * {Types::ListManagedSchemaArnsResponse#schema_arns #schema_arns} => Array&lt;String&gt;
     #   * {Types::ListManagedSchemaArnsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_managed_schema_arns({
@@ -2936,6 +2951,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListObjectAttributesResponse#attributes #attributes} => Array&lt;Types::AttributeKeyAndValue&gt;
     #   * {Types::ListObjectAttributesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3003,6 +3020,8 @@ module Aws::CloudDirectory
     #   * {Types::ListObjectChildrenResponse#children #children} => Hash&lt;String,String&gt;
     #   * {Types::ListObjectChildrenResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_object_children({
@@ -3065,6 +3084,8 @@ module Aws::CloudDirectory
     #   * {Types::ListObjectParentPathsResponse#path_to_object_identifiers_list #path_to_object_identifiers_list} => Array&lt;Types::PathToObjectIdentifiers&gt;
     #   * {Types::ListObjectParentPathsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_object_parent_paths({
@@ -3126,6 +3147,8 @@ module Aws::CloudDirectory
     #   * {Types::ListObjectParentsResponse#next_token #next_token} => String
     #   * {Types::ListObjectParentsResponse#parent_links #parent_links} => Array&lt;Types::ObjectIdentifierAndLinkNameTuple&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_object_parents({
@@ -3183,6 +3206,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListObjectPoliciesResponse#attached_policy_ids #attached_policy_ids} => Array&lt;String&gt;
     #   * {Types::ListObjectPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3343,6 +3368,8 @@ module Aws::CloudDirectory
     #   * {Types::ListPolicyAttachmentsResponse#object_identifiers #object_identifiers} => Array&lt;String&gt;
     #   * {Types::ListPolicyAttachmentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policy_attachments({
@@ -3389,6 +3416,8 @@ module Aws::CloudDirectory
     #   * {Types::ListPublishedSchemaArnsResponse#schema_arns #schema_arns} => Array&lt;String&gt;
     #   * {Types::ListPublishedSchemaArnsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_published_schema_arns({
@@ -3433,6 +3462,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3482,6 +3513,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::ListTypedLinkFacetAttributesResponse#attributes #attributes} => Array&lt;Types::TypedLinkAttributeDefinition&gt;
     #   * {Types::ListTypedLinkFacetAttributesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3541,6 +3574,8 @@ module Aws::CloudDirectory
     #   * {Types::ListTypedLinkFacetNamesResponse#facet_names #facet_names} => Array&lt;String&gt;
     #   * {Types::ListTypedLinkFacetNamesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_typed_link_facet_names({
@@ -3594,6 +3629,8 @@ module Aws::CloudDirectory
     #
     #   * {Types::LookupPolicyResponse#policy_to_path_list #policy_to_path_list} => Array&lt;Types::PolicyToPath&gt;
     #   * {Types::LookupPolicyResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

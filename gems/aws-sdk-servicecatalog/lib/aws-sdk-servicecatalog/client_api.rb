@@ -526,6 +526,8 @@ module Aws::ServiceCatalog
     ConstraintDetail.add_member(:type, Shapes::ShapeRef.new(shape: ConstraintType, location_name: "Type"))
     ConstraintDetail.add_member(:description, Shapes::ShapeRef.new(shape: ConstraintDescription, location_name: "Description"))
     ConstraintDetail.add_member(:owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "Owner"))
+    ConstraintDetail.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
+    ConstraintDetail.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, location_name: "PortfolioId"))
     ConstraintDetail.struct_class = Types::ConstraintDetail
 
     ConstraintDetails.member = Shapes::ShapeRef.new(shape: ConstraintDetail)

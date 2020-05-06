@@ -751,6 +751,58 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that you want to
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteProjectRequest < Struct.new(
+      :project_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the delete project operation.
+    #   @return [String]
+    #
+    class DeleteProjectResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteProjectVersionRequest < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the deletion operation.
+    #   @return [String]
+    #
+    class DeleteProjectVersionResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteStreamProcessorRequest
     #   data as a hash:
     #

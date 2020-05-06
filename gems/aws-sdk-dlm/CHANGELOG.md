@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-04-24)
+------------------
+
+* Feature - Enable 1hour frequency in the schedule creation for Data LifeCycle Manager.
+
 1.25.0 (2020-03-09)
 ------------------
 

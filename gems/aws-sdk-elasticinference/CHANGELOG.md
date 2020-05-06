@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-04-24)
+------------------
+
+* Feature - This feature allows customers to describe the accelerator types and offerings on any region where Elastic Inference is available.
+
+1.2.0 (2020-03-31)
+------------------
+
+* Feature - This release includes improvements for the Amazon Elastic Inference service.
+
 1.1.0 (2020-03-09)
 ------------------
 

@@ -441,13 +441,27 @@ module Aws::ServiceCatalog
     #   The owner of the constraint.
     #   @return [String]
     #
+    # @!attribute [rw] product_id
+    #   The identifier of the product the constraint applies to. Note that a
+    #   constraint applies to a specific instance of a product within a
+    #   certain portfolio.
+    #   @return [String]
+    #
+    # @!attribute [rw] portfolio_id
+    #   The identifier of the portfolio the product resides in. The
+    #   constraint applies only to the instance of the product that lives
+    #   within this portfolio.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail AWS API Documentation
     #
     class ConstraintDetail < Struct.new(
       :constraint_id,
       :type,
       :description,
-      :owner)
+      :owner,
+      :product_id,
+      :portfolio_id)
       include Aws::Structure
     end
 
@@ -599,9 +613,28 @@ module Aws::ServiceCatalog
     #
     #   LAUNCH
     #
-    #   : Specify the `RoleArn` property as follows:
+    #   : You are required to specify either the `RoleArn` or the
+    #     `LocalRoleName` but can't use both.
+    #
+    #     Specify the `RoleArn` property as follows:
     #
     #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     Specify the `LocalRoleName` property as follows:
+    #
+    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #
+    #     If you specify the `LocalRoleName` property, when an account uses
+    #     the launch constraint, the IAM role with that name in the account
+    #     will be used. This allows launch-role constraints to be
+    #     account-agnostic so the administrator can create fewer resources
+    #     per shared account.
+    #
+    #     <note markdown="1"> The given role name must exist in the account used to create the
+    #     launch constraint and the account of the user who launches a
+    #     product with this launch constraint.
+    #
+    #      </note>
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #
@@ -6222,9 +6255,28 @@ module Aws::ServiceCatalog
     #
     #   LAUNCH
     #
-    #   : Specify the `RoleArn` property as follows:
+    #   : You are required to specify either the `RoleArn` or the
+    #     `LocalRoleName` but can't use both.
+    #
+    #     Specify the `RoleArn` property as follows:
     #
     #     `\{"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"\}`
+    #
+    #     Specify the `LocalRoleName` property as follows:
+    #
+    #     `\{"LocalRoleName": "SCBasicLaunchRole"\}`
+    #
+    #     If you specify the `LocalRoleName` property, when an account uses
+    #     the launch constraint, the IAM role with that name in the account
+    #     will be used. This allows launch-role constraints to be
+    #     account-agnostic so the administrator can create fewer resources
+    #     per shared account.
+    #
+    #     <note markdown="1"> The given role name must exist in the account used to create the
+    #     launch constraint and the account of the user who launches a
+    #     product with this launch constraint.
+    #
+    #      </note>
     #
     #     You cannot have both a `LAUNCH` and a `STACKSET` constraint.
     #

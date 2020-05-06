@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-04-21)
+------------------
+
+* Feature - You can now programmatically transfer domains between AWS accounts without having to contact AWS Support
+
 1.19.0 (2020-03-09)
 ------------------
 

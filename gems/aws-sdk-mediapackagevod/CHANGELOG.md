@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-04-23)
+------------------
+
+* Feature - Adds tagging support for PackagingGroups, PackagingConfigurations, and Assets
+
 1.10.0 (2020-03-09)
 ------------------
 

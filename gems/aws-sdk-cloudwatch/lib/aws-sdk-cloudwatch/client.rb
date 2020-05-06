@@ -269,8 +269,7 @@ module Aws::CloudWatch
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::CloudWatch
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -383,7 +382,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     stat: "Stat", # required
+    #     stat: "AnomalyDetectorMetricStat", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAnomalyDetector AWS API Documentation
@@ -503,6 +502,8 @@ module Aws::CloudWatch
     #   * {Types::DescribeAlarmHistoryOutput#alarm_history_items #alarm_history_items} => Array&lt;Types::AlarmHistoryItem&gt;
     #   * {Types::DescribeAlarmHistoryOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_alarm_history({
@@ -618,6 +619,8 @@ module Aws::CloudWatch
     #   * {Types::DescribeAlarmsOutput#metric_alarms #metric_alarms} => Array&lt;Types::MetricAlarm&gt;
     #   * {Types::DescribeAlarmsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_alarms({
@@ -698,6 +701,12 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].metrics[0].period #=> Integer
     #   resp.metric_alarms[0].threshold_metric_id #=> String
     #   resp.next_token #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * alarm_exists
+    #   * composite_alarm_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
     #
@@ -913,6 +922,8 @@ module Aws::CloudWatch
     #
     #   * {Types::DescribeInsightRulesOutput#next_token #next_token} => String
     #   * {Types::DescribeInsightRulesOutput#insight_rules #insight_rules} => Array&lt;Types::InsightRule&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1366,6 +1377,8 @@ module Aws::CloudWatch
     #   * {Types::GetMetricDataOutput#next_token #next_token} => String
     #   * {Types::GetMetricDataOutput#messages #messages} => Array&lt;Types::MessageData&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_metric_data({
@@ -1757,6 +1770,8 @@ module Aws::CloudWatch
     #   * {Types::ListDashboardsOutput#dashboard_entries #dashboard_entries} => Array&lt;Types::DashboardEntry&gt;
     #   * {Types::ListDashboardsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dashboards({
@@ -1816,6 +1831,8 @@ module Aws::CloudWatch
     #   * {Types::ListMetricsOutput#metrics #metrics} => Array&lt;Types::Metric&gt;
     #   * {Types::ListMetricsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_metrics({
@@ -1849,17 +1866,24 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Displays the tags associated with a CloudWatch resource. Alarms
-    # support tagging.
+    # Displays the tags associated with a CloudWatch resource. Currently,
+    # alarms and Contributor Insights rules support tagging.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the CloudWatch resource that you want to view tags for. For
-    #   more information on ARN format, see [Example ARNs][1] in the *Amazon
-    #   Web Services General Reference*.
+    #   The ARN of the CloudWatch resource that you want to view tags for.
+    #
+    #   The ARN format of an alarm is
+    #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
+    #
+    #   The ARN format of a Contributor Insights rule is
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name `
+    #
+    #   For more information on ARN format, see [ Resource Types Defined by
+    #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1931,7 +1955,7 @@ module Aws::CloudWatch
     #         value: "DimensionValue", # required
     #       },
     #     ],
-    #     stat: "Stat", # required
+    #     stat: "AnomalyDetectorMetricStat", # required
     #     configuration: {
     #       excluded_time_ranges: [
     #         {
@@ -2218,6 +2242,26 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the Contributor Insights
+    #   rule. You can associate as many as 50 tags with a rule.
+    #
+    #   Tags can help you organize and categorize your resources. You can also
+    #   use them to scope user permissions, by granting a user permission to
+    #   access or change only the resources that have certain tag values.
+    #
+    #   To be able to associate tags with a rule, you must have the
+    #   `cloudwatch:TagResource` permission in addition to the
+    #   `cloudwatch:PutInsightRule` permission.
+    #
+    #   If you are using this operation to update an existing Contributor
+    #   Insights rule, any tags you specify in this parameter are ignored. To
+    #   change the tags of an existing rule, use [TagResource][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2226,6 +2270,12 @@ module Aws::CloudWatch
     #     rule_name: "InsightRuleName", # required
     #     rule_state: "InsightRuleState",
     #     rule_definition: "InsightRuleDefinition", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutInsightRule AWS API Documentation
@@ -2784,7 +2834,7 @@ module Aws::CloudWatch
 
     # Assigns one or more tags (key-value pairs) to the specified CloudWatch
     # resource. Currently, the only CloudWatch resources that can be tagged
-    # are alarms.
+    # are alarms and Contributor Insights rules.
     #
     # Tags can help you organize and categorize your resources. You can also
     # use them to scope user permissions, by granting a user permission to
@@ -2799,11 +2849,23 @@ module Aws::CloudWatch
     # key that is already associated with the alarm, the new tag value that
     # you specify replaces the previous value for that tag.
     #
-    # You can associate as many as 50 tags with a resource.
+    # You can associate as many as 50 tags with a CloudWatch resource.
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the CloudWatch alarm that you're adding tags to. The ARN
-    #   format is `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
+    #   The ARN of the CloudWatch resource that you're adding tags to.
+    #
+    #   The ARN format of an alarm is
+    #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
+    #
+    #   The ARN format of a Contributor Insights rule is
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name `
+    #
+    #   For more information on ARN format, see [ Resource Types Defined by
+    #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The list of key-value pairs to associate with the alarm.
@@ -2835,12 +2897,19 @@ module Aws::CloudWatch
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the CloudWatch resource that you're removing tags from.
-    #   For more information on ARN format, see [Example ARNs][1] in the
-    #   *Amazon Web Services General Reference*.
+    #
+    #   The ARN format of an alarm is
+    #   `arn:aws:cloudwatch:Region:account-id:alarm:alarm-name `
+    #
+    #   The ARN format of a Contributor Insights rule is
+    #   `arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name `
+    #
+    #   For more information on ARN format, see [ Resource Types Defined by
+    #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-cloudwatch
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies
     #
     # @option params [required, Array<String>] :tag_keys
     #   The list of tag keys to remove from the resource.
@@ -2876,7 +2945,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2942,10 +3011,10 @@ module Aws::CloudWatch
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name            | params             | :delay   | :max_attempts |
-    # | ---------------------- | ------------------ | -------- | ------------- |
-    # | alarm_exists           | {#describe_alarms} | 5        | 40            |
-    # | composite_alarm_exists | {#describe_alarms} | 5        | 40            |
+    # | waiter_name            | params                   | :delay   | :max_attempts |
+    # | ---------------------- | ------------------------ | -------- | ------------- |
+    # | alarm_exists           | {Client#describe_alarms} | 5        | 40            |
+    # | composite_alarm_exists | {Client#describe_alarms} | 5        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

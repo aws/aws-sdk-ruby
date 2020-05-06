@@ -85,6 +85,8 @@ module Aws::SecurityHub
     AwsS3ObjectDetails = Shapes::StructureShape.new(name: 'AwsS3ObjectDetails')
     AwsSecurityFinding = Shapes::StructureShape.new(name: 'AwsSecurityFinding')
     AwsSecurityFindingFilters = Shapes::StructureShape.new(name: 'AwsSecurityFindingFilters')
+    AwsSecurityFindingIdentifier = Shapes::StructureShape.new(name: 'AwsSecurityFindingIdentifier')
+    AwsSecurityFindingIdentifierList = Shapes::ListShape.new(name: 'AwsSecurityFindingIdentifierList')
     AwsSecurityFindingList = Shapes::ListShape.new(name: 'AwsSecurityFindingList')
     AwsSnsTopicDetails = Shapes::StructureShape.new(name: 'AwsSnsTopicDetails')
     AwsSnsTopicSubscription = Shapes::StructureShape.new(name: 'AwsSnsTopicSubscription')
@@ -99,6 +101,10 @@ module Aws::SecurityHub
     BatchEnableStandardsResponse = Shapes::StructureShape.new(name: 'BatchEnableStandardsResponse')
     BatchImportFindingsRequest = Shapes::StructureShape.new(name: 'BatchImportFindingsRequest')
     BatchImportFindingsResponse = Shapes::StructureShape.new(name: 'BatchImportFindingsResponse')
+    BatchUpdateFindingsRequest = Shapes::StructureShape.new(name: 'BatchUpdateFindingsRequest')
+    BatchUpdateFindingsResponse = Shapes::StructureShape.new(name: 'BatchUpdateFindingsResponse')
+    BatchUpdateFindingsUnprocessedFinding = Shapes::StructureShape.new(name: 'BatchUpdateFindingsUnprocessedFinding')
+    BatchUpdateFindingsUnprocessedFindingsList = Shapes::ListShape.new(name: 'BatchUpdateFindingsUnprocessedFindingsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
@@ -218,6 +224,7 @@ module Aws::SecurityHub
     Product = Shapes::StructureShape.new(name: 'Product')
     ProductSubscriptionArnList = Shapes::ListShape.new(name: 'ProductSubscriptionArnList')
     ProductsList = Shapes::ListShape.new(name: 'ProductsList')
+    RatioScale = Shapes::IntegerShape.new(name: 'RatioScale')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     RelatedFinding = Shapes::StructureShape.new(name: 'RelatedFinding')
@@ -236,6 +243,7 @@ module Aws::SecurityHub
     Severity = Shapes::StructureShape.new(name: 'Severity')
     SeverityLabel = Shapes::StringShape.new(name: 'SeverityLabel')
     SeverityRating = Shapes::StringShape.new(name: 'SeverityRating')
+    SeverityUpdate = Shapes::StructureShape.new(name: 'SeverityUpdate')
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -284,6 +292,7 @@ module Aws::SecurityHub
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
     WorkflowState = Shapes::StringShape.new(name: 'WorkflowState')
     WorkflowStatus = Shapes::StringShape.new(name: 'WorkflowStatus')
+    WorkflowUpdate = Shapes::StructureShape.new(name: 'WorkflowUpdate')
 
     AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "MasterId"))
     AcceptInvitationRequest.add_member(:invitation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "InvitationId"))
@@ -753,6 +762,12 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:keyword, Shapes::ShapeRef.new(shape: KeywordFilterList, location_name: "Keyword"))
     AwsSecurityFindingFilters.struct_class = Types::AwsSecurityFindingFilters
 
+    AwsSecurityFindingIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
+    AwsSecurityFindingIdentifier.add_member(:product_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ProductArn"))
+    AwsSecurityFindingIdentifier.struct_class = Types::AwsSecurityFindingIdentifier
+
+    AwsSecurityFindingIdentifierList.member = Shapes::ShapeRef.new(shape: AwsSecurityFindingIdentifier)
+
     AwsSecurityFindingList.member = Shapes::ShapeRef.new(shape: AwsSecurityFinding)
 
     AwsSnsTopicDetails.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "KmsMasterKeyId"))
@@ -808,6 +823,29 @@ module Aws::SecurityHub
     BatchImportFindingsResponse.add_member(:success_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SuccessCount"))
     BatchImportFindingsResponse.add_member(:failed_findings, Shapes::ShapeRef.new(shape: ImportFindingsErrorList, location_name: "FailedFindings"))
     BatchImportFindingsResponse.struct_class = Types::BatchImportFindingsResponse
+
+    BatchUpdateFindingsRequest.add_member(:finding_identifiers, Shapes::ShapeRef.new(shape: AwsSecurityFindingIdentifierList, required: true, location_name: "FindingIdentifiers"))
+    BatchUpdateFindingsRequest.add_member(:note, Shapes::ShapeRef.new(shape: NoteUpdate, location_name: "Note"))
+    BatchUpdateFindingsRequest.add_member(:severity, Shapes::ShapeRef.new(shape: SeverityUpdate, location_name: "Severity"))
+    BatchUpdateFindingsRequest.add_member(:verification_state, Shapes::ShapeRef.new(shape: VerificationState, location_name: "VerificationState"))
+    BatchUpdateFindingsRequest.add_member(:confidence, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Confidence"))
+    BatchUpdateFindingsRequest.add_member(:criticality, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Criticality"))
+    BatchUpdateFindingsRequest.add_member(:types, Shapes::ShapeRef.new(shape: TypeList, location_name: "Types"))
+    BatchUpdateFindingsRequest.add_member(:user_defined_fields, Shapes::ShapeRef.new(shape: FieldMap, location_name: "UserDefinedFields"))
+    BatchUpdateFindingsRequest.add_member(:workflow, Shapes::ShapeRef.new(shape: WorkflowUpdate, location_name: "Workflow"))
+    BatchUpdateFindingsRequest.add_member(:related_findings, Shapes::ShapeRef.new(shape: RelatedFindingList, location_name: "RelatedFindings"))
+    BatchUpdateFindingsRequest.struct_class = Types::BatchUpdateFindingsRequest
+
+    BatchUpdateFindingsResponse.add_member(:processed_findings, Shapes::ShapeRef.new(shape: AwsSecurityFindingIdentifierList, required: true, location_name: "ProcessedFindings"))
+    BatchUpdateFindingsResponse.add_member(:unprocessed_findings, Shapes::ShapeRef.new(shape: BatchUpdateFindingsUnprocessedFindingsList, required: true, location_name: "UnprocessedFindings"))
+    BatchUpdateFindingsResponse.struct_class = Types::BatchUpdateFindingsResponse
+
+    BatchUpdateFindingsUnprocessedFinding.add_member(:finding_identifier, Shapes::ShapeRef.new(shape: AwsSecurityFindingIdentifier, required: true, location_name: "FindingIdentifier"))
+    BatchUpdateFindingsUnprocessedFinding.add_member(:error_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ErrorCode"))
+    BatchUpdateFindingsUnprocessedFinding.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ErrorMessage"))
+    BatchUpdateFindingsUnprocessedFinding.struct_class = Types::BatchUpdateFindingsUnprocessedFinding
+
+    BatchUpdateFindingsUnprocessedFindingsList.member = Shapes::ShapeRef.new(shape: BatchUpdateFindingsUnprocessedFinding)
 
     CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -950,6 +988,7 @@ module Aws::SecurityHub
     EnableImportFindingsForProductResponse.struct_class = Types::EnableImportFindingsForProductResponse
 
     EnableSecurityHubRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    EnableSecurityHubRequest.add_member(:enable_default_standards, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDefaultStandards"))
     EnableSecurityHubRequest.struct_class = Types::EnableSecurityHubRequest
 
     EnableSecurityHubResponse.struct_class = Types::EnableSecurityHubResponse
@@ -1258,6 +1297,11 @@ module Aws::SecurityHub
     Severity.add_member(:normalized, Shapes::ShapeRef.new(shape: Integer, location_name: "Normalized"))
     Severity.struct_class = Types::Severity
 
+    SeverityUpdate.add_member(:normalized, Shapes::ShapeRef.new(shape: RatioScale, location_name: "Normalized"))
+    SeverityUpdate.add_member(:product, Shapes::ShapeRef.new(shape: Double, location_name: "Product"))
+    SeverityUpdate.add_member(:label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "Label"))
+    SeverityUpdate.struct_class = Types::SeverityUpdate
+
     SortCriteria.member = Shapes::ShapeRef.new(shape: SortCriterion)
 
     SortCriterion.add_member(:field, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Field"))
@@ -1267,6 +1311,7 @@ module Aws::SecurityHub
     Standard.add_member(:standards_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsArn"))
     Standard.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     Standard.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    Standard.add_member(:enabled_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnabledByDefault"))
     Standard.struct_class = Types::Standard
 
     Standards.member = Shapes::ShapeRef.new(shape: Standard)
@@ -1384,6 +1429,9 @@ module Aws::SecurityHub
     Workflow.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "Status"))
     Workflow.struct_class = Types::Workflow
 
+    WorkflowUpdate.add_member(:status, Shapes::ShapeRef.new(shape: WorkflowStatus, location_name: "Status"))
+    WorkflowUpdate.struct_class = Types::WorkflowUpdate
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1445,6 +1493,18 @@ module Aws::SecurityHub
         o.http_request_uri = "/findings/import"
         o.input = Shapes::ShapeRef.new(shape: BatchImportFindingsRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchImportFindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+      end)
+
+      api.add_operation(:batch_update_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateFindings"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/findings/batchupdate"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateFindingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

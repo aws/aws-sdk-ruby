@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-04-08)
+------------------
+
+* Feature - The OrganizationalUnitIds parameter on StackSet and the OrganizationalUnitId parameter on StackInstance, StackInstanceSummary, and StackSetOperationResultSummary are now reserved for internal use. No data is returned for this parameter.
+
 1.31.0 (2020-03-09)
 ------------------
 

@@ -269,8 +269,7 @@ module Aws::QuickSight
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::QuickSight
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -2555,6 +2554,8 @@ module Aws::QuickSight
     #   * {Types::ListDashboardVersionsResponse#status #status} => Integer
     #   * {Types::ListDashboardVersionsResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_dashboard_versions({
@@ -2605,6 +2606,8 @@ module Aws::QuickSight
     #   * {Types::ListDashboardsResponse#next_token #next_token} => String
     #   * {Types::ListDashboardsResponse#status #status} => Integer
     #   * {Types::ListDashboardsResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2660,6 +2663,8 @@ module Aws::QuickSight
     #   * {Types::ListDataSetsResponse#request_id #request_id} => String
     #   * {Types::ListDataSetsResponse#status #status} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_data_sets({
@@ -2711,6 +2716,8 @@ module Aws::QuickSight
     #   * {Types::ListDataSourcesResponse#next_token #next_token} => String
     #   * {Types::ListDataSourcesResponse#request_id #request_id} => String
     #   * {Types::ListDataSourcesResponse#status #status} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3027,6 +3034,8 @@ module Aws::QuickSight
     #   * {Types::ListIngestionsResponse#request_id #request_id} => String
     #   * {Types::ListIngestionsResponse#status #status} => Integer
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ingestions({
@@ -3124,6 +3133,8 @@ module Aws::QuickSight
     #   * {Types::ListTemplateAliasesResponse#request_id #request_id} => String
     #   * {Types::ListTemplateAliasesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_template_aliases({
@@ -3176,6 +3187,8 @@ module Aws::QuickSight
     #   * {Types::ListTemplateVersionsResponse#status #status} => Integer
     #   * {Types::ListTemplateVersionsResponse#request_id #request_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_template_versions({
@@ -3225,6 +3238,8 @@ module Aws::QuickSight
     #   * {Types::ListTemplatesResponse#next_token #next_token} => String
     #   * {Types::ListTemplatesResponse#status #status} => Integer
     #   * {Types::ListTemplatesResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3495,6 +3510,8 @@ module Aws::QuickSight
     #   * {Types::SearchDashboardsResponse#next_token #next_token} => String
     #   * {Types::SearchDashboardsResponse#status #status} => Integer
     #   * {Types::SearchDashboardsResponse#request_id #request_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

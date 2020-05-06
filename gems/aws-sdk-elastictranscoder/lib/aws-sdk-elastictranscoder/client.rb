@@ -269,8 +269,7 @@ module Aws::ElasticTranscoder
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::ElasticTranscoder
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1464,6 +1463,8 @@ module Aws::ElasticTranscoder
     #   * {Types::ListJobsByPipelineResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsByPipelineResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs_by_pipeline({
@@ -1717,6 +1718,8 @@ module Aws::ElasticTranscoder
     #   * {Types::ListJobsByStatusResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsByStatusResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs_by_status({
@@ -1964,6 +1967,8 @@ module Aws::ElasticTranscoder
     #   * {Types::ListPipelinesResponse#pipelines #pipelines} => Array&lt;Types::Pipeline&gt;
     #   * {Types::ListPipelinesResponse#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipelines({
@@ -2027,6 +2032,8 @@ module Aws::ElasticTranscoder
     #
     #   * {Types::ListPresetsResponse#presets #presets} => Array&lt;Types::Preset&gt;
     #   * {Types::ListPresetsResponse#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2323,6 +2330,11 @@ module Aws::ElasticTranscoder
     #   resp.job.timing.submit_time_millis #=> Integer
     #   resp.job.timing.start_time_millis #=> Integer
     #   resp.job.timing.finish_time_millis #=> Integer
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * job_complete
     #
     # @overload read_job(params = {})
     # @param [Hash] params ({})
@@ -3026,9 +3038,9 @@ module Aws::ElasticTranscoder
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name  | params      | :delay   | :max_attempts |
-    # | ------------ | ----------- | -------- | ------------- |
-    # | job_complete | {#read_job} | 30       | 120           |
+    # | waiter_name  | params            | :delay   | :max_attempts |
+    # | ------------ | ----------------- | -------- | ------------- |
+    # | job_complete | {Client#read_job} | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

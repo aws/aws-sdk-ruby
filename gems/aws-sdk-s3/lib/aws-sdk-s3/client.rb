@@ -347,8 +347,7 @@ module Aws::S3
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -360,7 +359,7 @@ module Aws::S3
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -5322,6 +5321,12 @@ module Aws::S3
     #     bucket: "BucketName", # required
     #   })
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bucket_exists
+    #   * bucket_not_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucket AWS API Documentation
     #
     # @overload head_bucket(params = {})
@@ -5581,6 +5586,12 @@ module Aws::S3
     #   resp.object_lock_mode #=> String, one of "GOVERNANCE", "COMPLIANCE"
     #   resp.object_lock_retain_until_date #=> Time
     #   resp.object_lock_legal_hold_status #=> String, one of "ON", "OFF"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * object_exists
+    #   * object_not_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject AWS API Documentation
     #
@@ -6037,6 +6048,8 @@ module Aws::S3
     #   * {Types::ListMultipartUploadsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListMultipartUploadsOutput#encoding_type #encoding_type} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: List next set of multipart uploads when previous result is truncated
     #
@@ -6269,6 +6282,8 @@ module Aws::S3
     #   * {Types::ListObjectVersionsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListObjectVersionsOutput#encoding_type #encoding_type} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list object versions
     #
@@ -6429,6 +6444,8 @@ module Aws::S3
     #   * {Types::ListObjectsOutput#max_keys #max_keys} => Integer
     #   * {Types::ListObjectsOutput#common_prefixes #common_prefixes} => Array&lt;Types::CommonPrefix&gt;
     #   * {Types::ListObjectsOutput#encoding_type #encoding_type} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list objects in a bucket
@@ -6609,6 +6626,8 @@ module Aws::S3
     #   * {Types::ListObjectsV2Output#next_continuation_token #next_continuation_token} => String
     #   * {Types::ListObjectsV2Output#start_after #start_after} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To get object list
     #
@@ -6784,6 +6803,8 @@ module Aws::S3
     #   * {Types::ListPartsOutput#owner #owner} => Types::Owner
     #   * {Types::ListPartsOutput#storage_class #storage_class} => String
     #   * {Types::ListPartsOutput#request_charged #request_charged} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list parts of a multipart upload.
@@ -11218,8 +11239,8 @@ module Aws::S3
         when nil then EventStreams::SelectObjectContentEventStream.new
         else
           msg = "expected :event_stream_handler to be a block or "\
-            "instance of Aws::S3::EventStreams::SelectObjectContentEventStream"\
-            ", got `#{handler.inspect}` instead"
+                "instance of Aws::S3::EventStreams::SelectObjectContentEventStream"\
+                ", got `#{handler.inspect}` instead"
           raise ArgumentError, msg
         end
 
@@ -11768,7 +11789,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.61.1'
+      context[:gem_version] = '1.63.1'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -11834,12 +11855,12 @@ module Aws::S3
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params         | :delay   | :max_attempts |
-    # | ----------------- | -------------- | -------- | ------------- |
-    # | bucket_exists     | {#head_bucket} | 5        | 20            |
-    # | bucket_not_exists | {#head_bucket} | 5        | 20            |
-    # | object_exists     | {#head_object} | 5        | 20            |
-    # | object_not_exists | {#head_object} | 5        | 20            |
+    # | waiter_name       | params               | :delay   | :max_attempts |
+    # | ----------------- | -------------------- | -------- | ------------- |
+    # | bucket_exists     | {Client#head_bucket} | 5        | 20            |
+    # | bucket_not_exists | {Client#head_bucket} | 5        | 20            |
+    # | object_exists     | {Client#head_object} | 5        | 20            |
+    # | object_not_exists | {Client#head_object} | 5        | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

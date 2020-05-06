@@ -269,8 +269,7 @@ module Aws::AccessAnalyzer
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::AccessAnalyzer
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -357,7 +356,7 @@ module Aws::AccessAnalyzer
     #     tags: {
     #       "String" => "String",
     #     },
-    #     type: "ACCOUNT", # required, accepts ACCOUNT
+    #     type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION
     #   })
     #
     # @example Response structure
@@ -513,6 +512,7 @@ module Aws::AccessAnalyzer
     #   resp.resource.error #=> String
     #   resp.resource.is_public #=> Boolean
     #   resp.resource.resource_arn #=> String
+    #   resp.resource.resource_owner_account #=> String
     #   resp.resource.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
     #   resp.resource.shared_via #=> Array
     #   resp.resource.shared_via[0] #=> String
@@ -550,9 +550,11 @@ module Aws::AccessAnalyzer
     #   resp.analyzer.last_resource_analyzed #=> String
     #   resp.analyzer.last_resource_analyzed_at #=> Time
     #   resp.analyzer.name #=> String
+    #   resp.analyzer.status #=> String, one of "ACTIVE", "CREATING", "DISABLED", "FAILED"
+    #   resp.analyzer.status_reason.code #=> String, one of "AWS_SERVICE_ACCESS_DISABLED", "DELEGATED_ADMINISTRATOR_DEREGISTERED", "ORGANIZATION_DELETED", "SERVICE_LINKED_ROLE_CREATION_FAILED"
     #   resp.analyzer.tags #=> Hash
     #   resp.analyzer.tags["String"] #=> String
-    #   resp.analyzer.type #=> String, one of "ACCOUNT"
+    #   resp.analyzer.type #=> String, one of "ACCOUNT", "ORGANIZATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetAnalyzer AWS API Documentation
     #
@@ -638,7 +640,11 @@ module Aws::AccessAnalyzer
     #   resp.finding.principal #=> Hash
     #   resp.finding.principal["String"] #=> String
     #   resp.finding.resource #=> String
+    #   resp.finding.resource_owner_account #=> String
     #   resp.finding.resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.finding.sources #=> Array
+    #   resp.finding.sources[0].detail.access_point_arn #=> String
+    #   resp.finding.sources[0].type #=> String, one of "BUCKET_ACL", "POLICY", "S3_ACCESS_POINT"
     #   resp.finding.status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.finding.updated_at #=> Time
     #
@@ -671,6 +677,8 @@ module Aws::AccessAnalyzer
     #   * {Types::ListAnalyzedResourcesResponse#analyzed_resources #analyzed_resources} => Array&lt;Types::AnalyzedResourceSummary&gt;
     #   * {Types::ListAnalyzedResourcesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_analyzed_resources({
@@ -684,6 +692,7 @@ module Aws::AccessAnalyzer
     #
     #   resp.analyzed_resources #=> Array
     #   resp.analyzed_resources[0].resource_arn #=> String
+    #   resp.analyzed_resources[0].resource_owner_account #=> String
     #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
     #   resp.next_token #=> String
     #
@@ -712,12 +721,14 @@ module Aws::AccessAnalyzer
     #   * {Types::ListAnalyzersResponse#analyzers #analyzers} => Array&lt;Types::AnalyzerSummary&gt;
     #   * {Types::ListAnalyzersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_analyzers({
     #     max_results: 1,
     #     next_token: "Token",
-    #     type: "ACCOUNT", # accepts ACCOUNT
+    #     type: "ACCOUNT", # accepts ACCOUNT, ORGANIZATION
     #   })
     #
     # @example Response structure
@@ -728,9 +739,11 @@ module Aws::AccessAnalyzer
     #   resp.analyzers[0].last_resource_analyzed #=> String
     #   resp.analyzers[0].last_resource_analyzed_at #=> Time
     #   resp.analyzers[0].name #=> String
+    #   resp.analyzers[0].status #=> String, one of "ACTIVE", "CREATING", "DISABLED", "FAILED"
+    #   resp.analyzers[0].status_reason.code #=> String, one of "AWS_SERVICE_ACCESS_DISABLED", "DELEGATED_ADMINISTRATOR_DEREGISTERED", "ORGANIZATION_DELETED", "SERVICE_LINKED_ROLE_CREATION_FAILED"
     #   resp.analyzers[0].tags #=> Hash
     #   resp.analyzers[0].tags["String"] #=> String
-    #   resp.analyzers[0].type #=> String, one of "ACCOUNT"
+    #   resp.analyzers[0].type #=> String, one of "ACCOUNT", "ORGANIZATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzers AWS API Documentation
@@ -757,6 +770,8 @@ module Aws::AccessAnalyzer
     #
     #   * {Types::ListArchiveRulesResponse#archive_rules #archive_rules} => Array&lt;Types::ArchiveRuleSummary&gt;
     #   * {Types::ListArchiveRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -813,6 +828,8 @@ module Aws::AccessAnalyzer
     #   * {Types::ListFindingsResponse#findings #findings} => Array&lt;Types::FindingSummary&gt;
     #   * {Types::ListFindingsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_findings({
@@ -848,7 +865,11 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].principal #=> Hash
     #   resp.findings[0].principal["String"] #=> String
     #   resp.findings[0].resource #=> String
+    #   resp.findings[0].resource_owner_account #=> String
     #   resp.findings[0].resource_type #=> String, one of "AWS::IAM::Role", "AWS::KMS::Key", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::S3::Bucket", "AWS::SQS::Queue"
+    #   resp.findings[0].sources #=> Array
+    #   resp.findings[0].sources[0].detail.access_point_arn #=> String
+    #   resp.findings[0].sources[0].type #=> String, one of "BUCKET_ACL", "POLICY", "S3_ACCESS_POINT"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.findings[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -1074,7 +1095,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-05-01)
+------------------
+
+* Feature - Change the TagKeys argument for UntagResource to a URL parameter to address an issue with the Java and .NET SDKs.
+
 1.26.0 (2020-03-11)
 ------------------
 

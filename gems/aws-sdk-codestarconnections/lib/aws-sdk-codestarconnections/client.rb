@@ -279,8 +279,7 @@ module Aws::CodeStarconnections
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::CodeStarconnections
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -333,20 +332,33 @@ module Aws::CodeStarconnections
     #   The name of the connection to be created. The name must be unique in
     #   the calling AWS account.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key-value pair to use when tagging the resource.
+    #
     # @return [Types::CreateConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateConnectionOutput#connection_arn #connection_arn} => String
+    #   * {Types::CreateConnectionOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
     #     provider_type: "Bitbucket", # required, accepts Bitbucket
     #     connection_name: "ConnectionName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
     #
     #   resp.connection_arn #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateConnection AWS API Documentation
     #
@@ -436,6 +448,8 @@ module Aws::CodeStarconnections
     #   * {Types::ListConnectionsOutput#connections #connections} => Array&lt;Types::Connection&gt;
     #   * {Types::ListConnectionsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
@@ -463,6 +477,97 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
+    # Gets the set of key-value pairs (metadata) that are used to manage the
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   get information about tags, if any.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # that can be used to manage a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   add or update tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of keys for the tags to be removed from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -476,7 +581,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-04-22)
+------------------
+
+* Feature - This change adds a new field 'OptionalDeployment' to ServiceSoftwareOptions to indicate whether a service software update is optional or mandatory. If True, it indicates that the update is optional, and the service software is not automatically updated. If False, the service software is automatically updated after AutomatedUpdateDate.
+
+1.32.0 (2020-03-25)
+------------------
+
+* Feature - Adding support for customer packages (dictionary files) to Amazon Elasticsearch Service
+
 1.31.0 (2020-03-09)
 ------------------
 

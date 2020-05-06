@@ -290,8 +290,7 @@ module Aws::Kinesis
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -303,7 +302,7 @@ module Aws::Kinesis
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -644,6 +643,8 @@ module Aws::Kinesis
     #
     #   * {Types::DescribeStreamOutput#stream_description #stream_description} => Types::StreamDescription
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_stream({
@@ -673,6 +674,12 @@ module Aws::Kinesis
     #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
     #   resp.stream_description.encryption_type #=> String, one of "NONE", "KMS"
     #   resp.stream_description.key_id #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * stream_exists
+    #   * stream_not_exists
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream AWS API Documentation
     #
@@ -1353,6 +1360,8 @@ module Aws::Kinesis
     #   * {Types::ListStreamConsumersOutput#consumers #consumers} => Array&lt;Types::Consumer&gt;
     #   * {Types::ListStreamConsumersOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stream_consumers({
@@ -1409,6 +1418,8 @@ module Aws::Kinesis
     #
     #   * {Types::ListStreamsOutput#stream_names #stream_names} => Array&lt;String&gt;
     #   * {Types::ListStreamsOutput#has_more_streams #has_more_streams} => Boolean
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2254,10 +2265,10 @@ module Aws::Kinesis
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params             | :delay   | :max_attempts |
-    # | ----------------- | ------------------ | -------- | ------------- |
-    # | stream_exists     | {#describe_stream} | 10       | 18            |
-    # | stream_not_exists | {#describe_stream} | 10       | 18            |
+    # | waiter_name       | params                   | :delay   | :max_attempts |
+    # | ----------------- | ------------------------ | -------- | ------------- |
+    # | stream_exists     | {Client#describe_stream} | 10       | 18            |
+    # | stream_not_exists | {Client#describe_stream} | 10       | 18            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

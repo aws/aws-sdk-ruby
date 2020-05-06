@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-03-31)
+------------------
+
+* Feature - This release adds DeleteProject and DeleteProjectVersion APIs to Amazon Rekognition Custom Labels.
+
 1.35.0 (2020-03-09)
 ------------------
 

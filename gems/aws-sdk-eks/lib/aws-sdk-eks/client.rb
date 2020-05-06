@@ -269,8 +269,7 @@ module Aws::EKS
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::EKS
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -722,14 +721,14 @@ module Aws::EKS
     #   The remote access (SSH) configuration to use with your node group.
     #
     # @option params [required, String] :node_role
-    #   The IAM role associated with your node group. The Amazon EKS worker
-    #   node `kubelet` daemon makes calls to AWS APIs on your behalf. Worker
-    #   nodes receive permissions for these API calls through an IAM instance
-    #   profile and associated policies. Before you can launch worker nodes
-    #   and register them into a cluster, you must create an IAM role for
-    #   those worker nodes to use when they are launched. For more
-    #   information, see [Amazon EKS Worker Node IAM Role][1] in the <i>
-    #   <i>Amazon EKS User Guide</i> </i>.
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with your
+    #   node group. The Amazon EKS worker node `kubelet` daemon makes calls to
+    #   AWS APIs on your behalf. Worker nodes receive permissions for these
+    #   API calls through an IAM instance profile and associated policies.
+    #   Before you can launch worker nodes and register them into a cluster,
+    #   you must create an IAM role for those worker nodes to use when they
+    #   are launched. For more information, see [Amazon EKS Worker Node IAM
+    #   Role][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
@@ -832,7 +831,7 @@ module Aws::EKS
     #   resp.nodegroup.resources.remote_access_security_group #=> String
     #   resp.nodegroup.disk_size #=> Integer
     #   resp.nodegroup.health.issues #=> Array
-    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "IamInstanceProfileNotFound", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "Ec2SubnetInvalidConfiguration", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "NodeCreationFailure", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
@@ -859,7 +858,7 @@ module Aws::EKS
     #
     # If you have managed node groups or Fargate profiles attached to the
     # cluster, you must delete them first. For more information, see
-    # DeleteNodegroup andDeleteFargateProfile.
+    # DeleteNodegroup and DeleteFargateProfile.
     #
     #
     #
@@ -1039,7 +1038,7 @@ module Aws::EKS
     #   resp.nodegroup.resources.remote_access_security_group #=> String
     #   resp.nodegroup.disk_size #=> Integer
     #   resp.nodegroup.health.issues #=> Array
-    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "IamInstanceProfileNotFound", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "Ec2SubnetInvalidConfiguration", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "NodeCreationFailure", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
@@ -1153,6 +1152,12 @@ module Aws::EKS
     #   resp.cluster.encryption_config[0].resources[0] #=> String
     #   resp.cluster.encryption_config[0].provider.key_arn #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * cluster_active
+    #   * cluster_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeCluster AWS API Documentation
     #
     # @overload describe_cluster(params = {})
@@ -1256,12 +1261,18 @@ module Aws::EKS
     #   resp.nodegroup.resources.remote_access_security_group #=> String
     #   resp.nodegroup.disk_size #=> Integer
     #   resp.nodegroup.health.issues #=> Array
-    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "IamInstanceProfileNotFound", "IamNodeRoleNotFound", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
+    #   resp.nodegroup.health.issues[0].code #=> String, one of "AutoScalingGroupNotFound", "AutoScalingGroupInvalidConfiguration", "Ec2SecurityGroupNotFound", "Ec2SecurityGroupDeletionFailure", "Ec2LaunchTemplateNotFound", "Ec2LaunchTemplateVersionMismatch", "Ec2SubnetNotFound", "Ec2SubnetInvalidConfiguration", "IamInstanceProfileNotFound", "IamLimitExceeded", "IamNodeRoleNotFound", "NodeCreationFailure", "AsgInstanceLaunchFailures", "InstanceLimitExceeded", "InsufficientFreeAddresses", "AccessDenied", "InternalFailure"
     #   resp.nodegroup.health.issues[0].message #=> String
     #   resp.nodegroup.health.issues[0].resource_ids #=> Array
     #   resp.nodegroup.health.issues[0].resource_ids[0] #=> String
     #   resp.nodegroup.tags #=> Hash
     #   resp.nodegroup.tags["TagKey"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * nodegroup_active
+    #   * nodegroup_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeNodegroup AWS API Documentation
     #
@@ -1354,6 +1365,8 @@ module Aws::EKS
     #   * {Types::ListClustersResponse#clusters #clusters} => Array&lt;String&gt;
     #   * {Types::ListClustersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list your available clusters
     #
@@ -1422,6 +1435,8 @@ module Aws::EKS
     #   * {Types::ListFargateProfilesResponse#fargate_profile_names #fargate_profile_names} => Array&lt;String&gt;
     #   * {Types::ListFargateProfilesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fargate_profiles({
@@ -1445,8 +1460,9 @@ module Aws::EKS
       req.send_request(options)
     end
 
-    # Lists the Amazon EKS node groups associated with the specified cluster
-    # in your AWS account in the specified Region.
+    # Lists the Amazon EKS managed node groups associated with the specified
+    # cluster in your AWS account in the specified Region. Self-managed node
+    # groups are not listed.
     #
     # @option params [required, String] :cluster_name
     #   The name of the Amazon EKS cluster that you would like to list node
@@ -1472,6 +1488,8 @@ module Aws::EKS
     #
     #   * {Types::ListNodegroupsResponse#nodegroups #nodegroups} => Array&lt;String&gt;
     #   * {Types::ListNodegroupsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1572,6 +1590,8 @@ module Aws::EKS
     #
     #   * {Types::ListUpdatesResponse#update_ids #update_ids} => Array&lt;String&gt;
     #   * {Types::ListUpdatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2034,7 +2054,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2100,12 +2120,12 @@ module Aws::EKS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params                | :delay   | :max_attempts |
-    # | ----------------- | --------------------- | -------- | ------------- |
-    # | cluster_active    | {#describe_cluster}   | 30       | 40            |
-    # | cluster_deleted   | {#describe_cluster}   | 30       | 40            |
-    # | nodegroup_active  | {#describe_nodegroup} | 30       | 80            |
-    # | nodegroup_deleted | {#describe_nodegroup} | 30       | 40            |
+    # | waiter_name       | params                      | :delay   | :max_attempts |
+    # | ----------------- | --------------------------- | -------- | ------------- |
+    # | cluster_active    | {Client#describe_cluster}   | 30       | 40            |
+    # | cluster_deleted   | {Client#describe_cluster}   | 30       | 40            |
+    # | nodegroup_active  | {Client#describe_nodegroup} | 30       | 80            |
+    # | nodegroup_deleted | {Client#describe_nodegroup} | 30       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

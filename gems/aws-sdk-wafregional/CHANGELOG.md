@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-04-29)
+------------------
+
+* Feature - This release add migration API for AWS WAF Classic ("waf" and "waf-regional"). The migration API will parse through your web ACL and generate a CloudFormation template into your S3 bucket. Deploying this template will create equivalent web ACL under new AWS WAF ("wafv2").
+
 1.28.0 (2020-03-09)
 ------------------
 

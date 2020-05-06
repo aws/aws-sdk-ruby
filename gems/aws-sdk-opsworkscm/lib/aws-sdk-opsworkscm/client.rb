@@ -279,8 +279,7 @@ module Aws::OpsWorksCM
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::OpsWorksCM
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -539,22 +538,21 @@ module Aws::OpsWorksCM
     #   Valid values are `true` or `false`. The default value is `true`.
     #
     # @option params [String] :custom_domain
-    #   Supported on servers running Chef Automate 2. An optional public
-    #   endpoint of a server, such as `https://aws.my-company.com`. To access
-    #   the server, create a CNAME DNS record in your preferred DNS service
-    #   that points the custom domain to the endpoint that is generated when
-    #   the server is created (the value of the CreateServer Endpoint
-    #   attribute). You cannot access the server by using the generated
-    #   `Endpoint` value if the server is using a custom domain. If you
-    #   specify a custom domain, you must also specify values for
-    #   `CustomCertificate` and `CustomPrivateKey`.
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. To access the server, create a CNAME DNS
+    #   record in your preferred DNS service that points the custom domain to
+    #   the endpoint that is generated when the server is created (the value
+    #   of the CreateServer Endpoint attribute). You cannot access the server
+    #   by using the generated `Endpoint` value if the server is using a
+    #   custom domain. If you specify a custom domain, you must also specify
+    #   values for `CustomCertificate` and `CustomPrivateKey`.
     #
     # @option params [String] :custom_certificate
-    #   Supported on servers running Chef Automate 2. A PEM-formatted HTTPS
-    #   certificate. The value can be be a single, self-signed certificate, or
-    #   a certificate chain. If you specify a custom certificate, you must
-    #   also specify values for `CustomDomain` and `CustomPrivateKey`. The
-    #   following are requirements for the `CustomCertificate` value:
+    #   A PEM-formatted HTTPS certificate. The value can be be a single,
+    #   self-signed certificate, or a certificate chain. If you specify a
+    #   custom certificate, you must also specify values for `CustomDomain`
+    #   and `CustomPrivateKey`. The following are requirements for the
+    #   `CustomCertificate` value:
     #
     #   * You can provide either a self-signed, custom certificate, or the
     #     full certificate chain.
@@ -573,11 +571,10 @@ module Aws::OpsWorksCM
     #   * The certificate must match the value of `CustomPrivateKey`.
     #
     # @option params [String] :custom_private_key
-    #   Supported on servers running Chef Automate 2. A private key in PEM
-    #   format for connecting to the server by using HTTPS. The private key
-    #   must not be encrypted; it cannot be protected by a password or
-    #   passphrase. If you specify a custom private key, you must also specify
-    #   values for `CustomDomain` and `CustomCertificate`.
+    #   A private key in PEM format for connecting to the server by using
+    #   HTTPS. The private key must not be encrypted; it cannot be protected
+    #   by a password or passphrase. If you specify a custom private key, you
+    #   must also specify values for `CustomDomain` and `CustomCertificate`.
     #
     # @option params [Boolean] :disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -733,11 +730,11 @@ module Aws::OpsWorksCM
     #
     #   * The key can be a maximum of 127 characters, and can contain only
     #     Unicode letters, numbers, or separators, or the following special
-    #     characters: `+ - = . _ : /`
+    #     characters: `+ - = . _ : / @`
     #
     #   * The value can be a maximum 255 characters, and contain only Unicode
     #     letters, numbers, or separators, or the following special
-    #     characters: `+ - = . _ : /`
+    #     characters: `+ - = . _ : / @`
     #
     #   * Leading and trailing white spaces are trimmed from both the key and
     #     value.
@@ -943,6 +940,8 @@ module Aws::OpsWorksCM
     #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
     #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_backups({
@@ -1026,6 +1025,8 @@ module Aws::OpsWorksCM
     #   * {Types::DescribeEventsResponse#server_events #server_events} => Array&lt;Types::ServerEvent&gt;
     #   * {Types::DescribeEventsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -1086,6 +1087,11 @@ module Aws::OpsWorksCM
     #   resp.engine_attributes[0].name #=> String
     #   resp.engine_attributes[0].value #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * node_associated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus AWS API Documentation
     #
     # @overload describe_node_association_status(params = {})
@@ -1118,6 +1124,8 @@ module Aws::OpsWorksCM
     #
     #   * {Types::DescribeServersResponse#servers #servers} => Array&lt;Types::Server&gt;
     #   * {Types::DescribeServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1336,6 +1344,8 @@ module Aws::OpsWorksCM
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1755,7 +1765,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1821,9 +1831,9 @@ module Aws::OpsWorksCM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params                              | :delay   | :max_attempts |
-    # | --------------- | ----------------------------------- | -------- | ------------- |
-    # | node_associated | {#describe_node_association_status} | 15       | 15            |
+    # | waiter_name     | params                                    | :delay   | :max_attempts |
+    # | --------------- | ----------------------------------------- | -------- | ------------- |
+    # | node_associated | {Client#describe_node_association_status} | 15       | 15            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

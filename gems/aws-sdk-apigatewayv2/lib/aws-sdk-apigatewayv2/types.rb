@@ -222,16 +222,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). ForREQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -804,16 +798,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -1280,7 +1268,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -1314,16 +1302,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -1340,9 +1321,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
-    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+    #   Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs
+    #   and between 50 and 30,000 milliseconds for HTTP APIs. The default
+    #   timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP
+    #   APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -1474,7 +1456,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -1592,7 +1574,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -3161,6 +3143,57 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportApiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         export_version: "__string",
+    #         include_extensions: false,
+    #         output_type: "__string", # required
+    #         specification: "__string", # required
+    #         stage_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] export_version
+    #   @return [String]
+    #
+    # @!attribute [rw] include_extensions
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_type
+    #   @return [String]
+    #
+    # @!attribute [rw] specification
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   @return [String]
+    #
+    class ExportApiRequest < Struct.new(
+      :api_id,
+      :export_version,
+      :include_extensions,
+      :output_type,
+      :specification,
+      :stage_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] body
+    #   Represents an exported definition of an API in a particular output
+    #   format, for example, YAML. The API is serialized to the requested
+    #   specification, for example, OpenAPI 3.0.
+    #   @return [String]
+    #
+    class ExportApiResponse < Struct.new(
+      :body)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetApiMappingRequest
     #   data as a hash:
     #
@@ -3787,7 +3820,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -4846,7 +4879,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -4880,16 +4913,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -4907,9 +4933,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
-    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+    #   Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs
+    #   and between 50 and 30,000 milliseconds for HTTP APIs. The default
+    #   timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP
+    #   APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -5061,11 +5088,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] issuer
     #   The base domain of the identity provider that issues JSON Web
     #   Tokens. For example, an Amazon Cognito user pool has the following
-    #   format: https://cognito-idp.<replaceable>\{region\}</replaceable>
-    #
-    #   .amazonaws.com/<replaceable>\{userPoolId\}</replaceable>
-    #
-    #    . Required for the JWT authorizer type. Supported only for HTTP
+    #   format:
+    #   https://cognito-idp.*\\\{region\\}*.amazonaws.com/*\\\{userPoolId\\}*
+    #   . Required for the JWT authorizer type. Supported only for HTTP
     #   APIs.
     #   @return [String]
     #
@@ -6132,16 +6157,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -6587,7 +6606,7 @@ module Aws::ApiGatewayV2
     #
     #
     #
-    #   [1]: https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -6621,16 +6640,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -6647,9 +6659,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
-    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+    #   Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs
+    #   and between 50 and 30,000 milliseconds for HTTP APIs. The default
+    #   timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP
+    #   APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -6785,7 +6798,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -6904,7 +6917,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
     #
     # @!attribute [rw] tls_config
@@ -6966,21 +6979,13 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.<replaceable>\{name\}</replaceable>
-    #
-    #    , where name is a valid and unique header name. The mapped
-    #   non-static value must match the pattern of
-    #   integration.response.header.<replaceable>\{name\}</replaceable>
-    #
-    #    or
-    #   integration.response.body.<replaceable>\{JSON-expression\}</replaceable>
-    #
-    #    , where <replaceable>\{name\}</replaceable>
-    #
-    #    is a valid and unique response header name and
-    #   <replaceable>\{JSON-expression\}</replaceable>
-    #
-    #    is a valid JSON expression without the $ prefix.
+    #   method.response.header.*\\\{name\\}* , where name is a valid and
+    #   unique header name. The mapped non-static value must match the
+    #   pattern of integration.response.header.*\\\{name\\}* or
+    #   integration.response.body.*\\\{JSON-expression\\}* , where
+    #   *\\\{name\\}* is a valid and unique response header name and
+    #   *\\\{JSON-expression\\}* is a valid JSON expression without the $
+    #   prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-03-27)
+------------------
+
+* Feature - This update adds an event history to the ListByoipCidr API call. This enables you to see the changes that you've made for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+
 1.15.0 (2020-03-09)
 ------------------
 

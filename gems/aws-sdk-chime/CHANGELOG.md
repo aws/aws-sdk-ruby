@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-04-08)
+------------------
+
+* Feature - feature: Chime: This release introduces the ability to tag Amazon Chime SDK meeting resources.  You can use tags to organize and identify your resources for cost allocation.
+
+1.22.0 (2020-04-06)
+------------------
+
+* Feature - Amazon Chime proxy phone sessions let you provide two users with a shared phone number to communicate via voice or text for up to 12 hours without revealing personal phone numbers. When users call or message the provided phone number, they are connected to the other party and their private phone numbers are replaced with the shared number in Caller ID.
+
 1.21.0 (2020-03-09)
 ------------------
 

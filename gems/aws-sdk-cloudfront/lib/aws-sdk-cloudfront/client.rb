@@ -269,8 +269,7 @@ module Aws::CloudFront
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::CloudFront
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -2023,6 +2022,11 @@ module Aws::CloudFront
     #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.etag #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * distribution_deployed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistribution2019_03_26 AWS API Documentation
     #
     # @overload get_distribution(params = {})
@@ -2391,6 +2395,11 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * invalidation_completed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidation2019_03_26 AWS API Documentation
     #
     # @overload get_invalidation(params = {})
@@ -2517,6 +2526,11 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * streaming_distribution_deployed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistribution2019_03_26 AWS API Documentation
     #
     # @overload get_streaming_distribution(params = {})
@@ -2589,6 +2603,8 @@ module Aws::CloudFront
     #
     #   * {Types::ListCloudFrontOriginAccessIdentitiesResult#cloud_front_origin_access_identity_list #cloud_front_origin_access_identity_list} => Types::CloudFrontOriginAccessIdentityList
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_cloud_front_origin_access_identities({
@@ -2632,6 +2648,8 @@ module Aws::CloudFront
     # @return [Types::ListDistributionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDistributionsResult#distribution_list #distribution_list} => Types::DistributionList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3103,6 +3121,8 @@ module Aws::CloudFront
     #
     #   * {Types::ListInvalidationsResult#invalidation_list #invalidation_list} => Types::InvalidationList
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_invalidations({
@@ -3188,6 +3208,8 @@ module Aws::CloudFront
     # @return [Types::ListStreamingDistributionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListStreamingDistributionsResult#streaming_distribution_list #streaming_distribution_list} => Types::StreamingDistributionList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4202,11 +4224,11 @@ module Aws::CloudFront
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                     | params                        | :delay   | :max_attempts |
-    # | ------------------------------- | ----------------------------- | -------- | ------------- |
-    # | distribution_deployed           | {#get_distribution}           | 60       | 35            |
-    # | invalidation_completed          | {#get_invalidation}           | 20       | 30            |
-    # | streaming_distribution_deployed | {#get_streaming_distribution} | 60       | 25            |
+    # | waiter_name                     | params                              | :delay   | :max_attempts |
+    # | ------------------------------- | ----------------------------------- | -------- | ------------- |
+    # | distribution_deployed           | {Client#get_distribution}           | 60       | 35            |
+    # | invalidation_completed          | {Client#get_invalidation}           | 20       | 30            |
+    # | streaming_distribution_deployed | {Client#get_streaming_distribution} | 60       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

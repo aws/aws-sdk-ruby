@@ -269,8 +269,7 @@ module Aws::AppConfig
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::AppConfig
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -901,6 +900,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -929,6 +929,11 @@ module Aws::AppConfig
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1055,6 +1060,8 @@ module Aws::AppConfig
     #   * {Types::Applications#items #items} => Array&lt;Types::Application&gt;
     #   * {Types::Applications#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
@@ -1097,6 +1104,8 @@ module Aws::AppConfig
     #
     #   * {Types::ConfigurationProfiles#items #items} => Array&lt;Types::ConfigurationProfileSummary&gt;
     #   * {Types::ConfigurationProfiles#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1141,6 +1150,8 @@ module Aws::AppConfig
     #
     #   * {Types::DeploymentStrategies#items #items} => Array&lt;Types::DeploymentStrategy&gt;
     #   * {Types::DeploymentStrategies#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1192,6 +1203,8 @@ module Aws::AppConfig
     #
     #   * {Types::Deployments#items #items} => Array&lt;Types::DeploymentSummary&gt;
     #   * {Types::Deployments#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1245,6 +1258,8 @@ module Aws::AppConfig
     #
     #   * {Types::Environments#items #items} => Array&lt;Types::Environment&gt;
     #   * {Types::Environments#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1346,6 +1361,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -1380,6 +1396,11 @@ module Aws::AppConfig
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1422,6 +1443,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -1450,6 +1472,11 @@ module Aws::AppConfig
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1826,7 +1853,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

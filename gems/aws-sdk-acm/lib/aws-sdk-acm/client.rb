@@ -279,8 +279,7 @@ module Aws::ACM
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ACM
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -504,6 +503,11 @@ module Aws::ACM
     #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * certificate_validated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate AWS API Documentation
     #
     # @overload describe_certificate(params = {})
@@ -569,12 +573,15 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Retrieves a certificate specified by an ARN and its certificate chain
-    # . The chain is an ordered list of certificates that contains the end
-    # entity certificate, intermediate certificates of subordinate CAs, and
-    # the root certificate in that order. The certificate and certificate
-    # chain are base64 encoded. If you want to decode the certificate to see
-    # the individual fields, you can use OpenSSL.
+    # Retrieves an Amazon-issued certificate and its certificate chain. The
+    # chain consists of the certificate of the issuing CA and the
+    # intermediate certificates of any other subordinate CAs. All of the
+    # certificates are base64 encoded. You can use [OpenSSL][1] to decode
+    # the certificates and inspect individual fields.
+    #
+    #
+    #
+    # [1]: https://wiki.openssl.org/index.php/Command_Line_Utilities
     #
     # @option params [required, String] :certificate_arn
     #   String that contains a certificate ARN in the following format:
@@ -764,6 +771,8 @@ module Aws::ACM
     #
     #   * {Types::ListCertificatesResponse#next_token #next_token} => String
     #   * {Types::ListCertificatesResponse#certificate_summary_list #certificate_summary_list} => Array&lt;Types::CertificateSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -972,9 +981,9 @@ module Aws::ACM
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name. The
     #   maximum number of domain names that you can add to an ACM certificate
-    #   is 100. However, the initial limit is 10 domain names. If you need
-    #   more than 10 names, you must request a limit increase. For more
-    #   information, see [Limits][1].
+    #   is 100. However, the initial quota is 10 domain names. If you need
+    #   more than 10 names, you must request a quota increase. For more
+    #   information, see [Quotas][1].
     #
     #   The maximum length of a SAN DNS name is 253 octets. The name is made
     #   up of multiple labels separated by periods. No label can be longer
@@ -1205,7 +1214,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1271,9 +1280,9 @@ module Aws::ACM
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params                  | :delay   | :max_attempts |
-    # | --------------------- | ----------------------- | -------- | ------------- |
-    # | certificate_validated | {#describe_certificate} | 60       | 40            |
+    # | waiter_name           | params                        | :delay   | :max_attempts |
+    # | --------------------- | ----------------------------- | -------- | ------------- |
+    # | certificate_validated | {Client#describe_certificate} | 60       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

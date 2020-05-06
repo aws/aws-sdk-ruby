@@ -221,6 +221,44 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
+    # The structure representing the getPolicyRequest.
+    #
+    # @note When making an API call, you may pass GetPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         profiling_group_name: "ProfilingGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] profiling_group_name
+    #   The name of the profiling group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetPolicyRequest AWS API Documentation
+    #
+    class GetPolicyRequest < Struct.new(
+      :profiling_group_name)
+      include Aws::Structure
+    end
+
+    # The structure representing the getPolicyResponse.
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy attached to the `ProfilingGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetPolicyResponse AWS API Documentation
+    #
+    class GetPolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
     # The structure representing the getProfileRequest.
     #
     # @note When making an API call, you may pass GetProfileRequest
@@ -602,6 +640,117 @@ module Aws::CodeGuruProfiler
       :latest_agent_orchestrated_at,
       :latest_agent_profile_reported_at,
       :latest_aggregated_profile)
+      include Aws::Structure
+    end
+
+    # The structure representing the putPermissionRequest.
+    #
+    # @note When making an API call, you may pass PutPermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_group: "agentPermissions", # required, accepts agentPermissions
+    #         principals: ["Principal"], # required
+    #         profiling_group_name: "ProfilingGroupName", # required
+    #         revision_id: "RevisionId",
+    #       }
+    #
+    # @!attribute [rw] action_group
+    #   The list of actions that the users and roles can perform on the
+    #   profiling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] principals
+    #   The list of role and user ARNs or the accountId that needs access
+    #   (wildcards are not allowed).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] profiling_group_name
+    #   The name of the profiling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy. This is
+    #   required, if a policy exists for the profiling group. This is not
+    #   required when creating the policy for the first time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PutPermissionRequest AWS API Documentation
+    #
+    class PutPermissionRequest < Struct.new(
+      :action_group,
+      :principals,
+      :profiling_group_name,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # The structure representing the putPermissionResponse.
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PutPermissionResponse AWS API Documentation
+    #
+    class PutPermissionResponse < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # The structure representing the removePermissionRequest.
+    #
+    # @note When making an API call, you may pass RemovePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action_group: "agentPermissions", # required, accepts agentPermissions
+    #         profiling_group_name: "ProfilingGroupName", # required
+    #         revision_id: "RevisionId", # required
+    #       }
+    #
+    # @!attribute [rw] action_group
+    #   The list of actions that the users and roles can perform on the
+    #   profiling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] profiling_group_name
+    #   The name of the profiling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/RemovePermissionRequest AWS API Documentation
+    #
+    class RemovePermissionRequest < Struct.new(
+      :action_group,
+      :profiling_group_name,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # The structure representing the removePermissionResponse.
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   A unique identifier for the current revision of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/RemovePermissionResponse AWS API Documentation
+    #
+    class RemovePermissionResponse < Struct.new(
+      :policy,
+      :revision_id)
       include Aws::Structure
     end
 

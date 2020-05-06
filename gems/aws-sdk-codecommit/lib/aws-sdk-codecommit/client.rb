@@ -279,8 +279,7 @@ module Aws::CodeCommit
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::CodeCommit
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1569,6 +1568,8 @@ module Aws::CodeCommit
     #   * {Types::DescribeMergeConflictsOutput#source_commit_id #source_commit_id} => String
     #   * {Types::DescribeMergeConflictsOutput#base_commit_id #base_commit_id} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_merge_conflicts({
@@ -1657,6 +1658,8 @@ module Aws::CodeCommit
     #
     #   * {Types::DescribePullRequestEventsOutput#pull_request_events #pull_request_events} => Array&lt;Types::PullRequestEvent&gt;
     #   * {Types::DescribePullRequestEventsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1946,6 +1949,8 @@ module Aws::CodeCommit
     #   * {Types::GetCommentsForComparedCommitOutput#comments_for_compared_commit_data #comments_for_compared_commit_data} => Array&lt;Types::CommentsForComparedCommit&gt;
     #   * {Types::GetCommentsForComparedCommitOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_comments_for_compared_commit({
@@ -2017,6 +2022,8 @@ module Aws::CodeCommit
     #
     #   * {Types::GetCommentsForPullRequestOutput#comments_for_pull_request_data #comments_for_pull_request_data} => Array&lt;Types::CommentsForPullRequest&gt;
     #   * {Types::GetCommentsForPullRequestOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2147,6 +2154,8 @@ module Aws::CodeCommit
     #
     #   * {Types::GetDifferencesOutput#differences #differences} => Array&lt;Types::Difference&gt;
     #   * {Types::GetDifferencesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2407,6 +2416,8 @@ module Aws::CodeCommit
     #   * {Types::GetMergeConflictsOutput#base_commit_id #base_commit_id} => String
     #   * {Types::GetMergeConflictsOutput#conflict_metadata_list #conflict_metadata_list} => Array&lt;Types::ConflictMetadata&gt;
     #   * {Types::GetMergeConflictsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2754,6 +2765,8 @@ module Aws::CodeCommit
     #   * {Types::ListApprovalRuleTemplatesOutput#approval_rule_template_names #approval_rule_template_names} => Array&lt;String&gt;
     #   * {Types::ListApprovalRuleTemplatesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_approval_rule_templates({
@@ -2796,6 +2809,8 @@ module Aws::CodeCommit
     #   * {Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput#approval_rule_template_names #approval_rule_template_names} => Array&lt;String&gt;
     #   * {Types::ListAssociatedApprovalRuleTemplatesForRepositoryOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_associated_approval_rule_templates_for_repository({
@@ -2831,6 +2846,8 @@ module Aws::CodeCommit
     #
     #   * {Types::ListBranchesOutput#branches #branches} => Array&lt;String&gt;
     #   * {Types::ListBranchesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2882,6 +2899,8 @@ module Aws::CodeCommit
     #   * {Types::ListPullRequestsOutput#pull_request_ids #pull_request_ids} => Array&lt;String&gt;
     #   * {Types::ListPullRequestsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pull_requests({
@@ -2928,6 +2947,8 @@ module Aws::CodeCommit
     #   * {Types::ListRepositoriesOutput#repositories #repositories} => Array&lt;Types::RepositoryNameIdPair&gt;
     #   * {Types::ListRepositoriesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_repositories({
@@ -2971,6 +2992,8 @@ module Aws::CodeCommit
     #
     #   * {Types::ListRepositoriesForApprovalRuleTemplateOutput#repository_names #repository_names} => Array&lt;String&gt;
     #   * {Types::ListRepositoriesForApprovalRuleTemplateOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

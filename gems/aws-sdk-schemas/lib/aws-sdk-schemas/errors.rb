@@ -31,6 +31,7 @@ module Aws::Schemas
   # * {GoneException}
   # * {InternalServerErrorException}
   # * {NotFoundException}
+  # * {PreconditionFailedException}
   # * {ServiceUnavailableException}
   # * {TooManyRequestsException}
   # * {UnauthorizedException}
@@ -146,6 +147,26 @@ module Aws::Schemas
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Schemas::Types::NotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PreconditionFailedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Schemas::Types::PreconditionFailedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

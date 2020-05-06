@@ -194,6 +194,7 @@ module Aws::Personalize
     TrainingMode = Shapes::StringShape.new(name: 'TrainingMode')
     TransactionsPerSecond = Shapes::IntegerShape.new(name: 'TransactionsPerSecond')
     Tunable = Shapes::BooleanShape.new(name: 'Tunable')
+    TunedHPOParams = Shapes::StructureShape.new(name: 'TunedHPOParams')
     UpdateCampaignRequest = Shapes::StructureShape.new(name: 'UpdateCampaignRequest')
     UpdateCampaignResponse = Shapes::StructureShape.new(name: 'UpdateCampaignResponse')
 
@@ -247,6 +248,7 @@ module Aws::Personalize
     BatchInferenceJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     BatchInferenceJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     BatchInferenceJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    BatchInferenceJobSummary.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     BatchInferenceJobSummary.struct_class = Types::BatchInferenceJobSummary
 
     BatchInferenceJobs.member = Shapes::ShapeRef.new(shape: BatchInferenceJobSummary)
@@ -815,6 +817,7 @@ module Aws::Personalize
     SolutionVersion.add_member(:solution_config, Shapes::ShapeRef.new(shape: SolutionConfig, location_name: "solutionConfig"))
     SolutionVersion.add_member(:training_hours, Shapes::ShapeRef.new(shape: TrainingHours, location_name: "trainingHours"))
     SolutionVersion.add_member(:training_mode, Shapes::ShapeRef.new(shape: TrainingMode, location_name: "trainingMode"))
+    SolutionVersion.add_member(:tuned_hpo_params, Shapes::ShapeRef.new(shape: TunedHPOParams, location_name: "tunedHPOParams"))
     SolutionVersion.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     SolutionVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     SolutionVersion.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
@@ -831,6 +834,9 @@ module Aws::Personalize
     SolutionVersions.member = Shapes::ShapeRef.new(shape: SolutionVersionSummary)
 
     Solutions.member = Shapes::ShapeRef.new(shape: SolutionSummary)
+
+    TunedHPOParams.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
+    TunedHPOParams.struct_class = Types::TunedHPOParams
 
     UpdateCampaignRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     UpdateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-03-31)
+------------------
+
+* Feature - Added support for AWS Firewall Manager for WAFv2 and PermissionPolicy APIs for WAFv2.
+
 1.2.0 (2020-03-09)
 ------------------
 

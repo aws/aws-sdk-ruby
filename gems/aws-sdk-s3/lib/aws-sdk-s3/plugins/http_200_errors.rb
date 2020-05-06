@@ -27,9 +27,15 @@ module Aws
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
+            elsif !xml.match(/<[\w_]/) # Must have the start of an XML Tag
+              # Other incomplete xml bodies will result in XML ParsingError
+              Seahorse::Client::NetworkingError.new(
+                S3::Errors
+                  .error_class('InternalError')
+                  .new(context, 'Empty or incomplete response body')
+              )
             end
           end
-
         end
 
         handler(Handler,
@@ -40,7 +46,6 @@ module Aws
             :upload_part_copy,
           ]
         )
-
       end
     end
   end

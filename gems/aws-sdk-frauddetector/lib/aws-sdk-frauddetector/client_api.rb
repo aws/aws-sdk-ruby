@@ -19,6 +19,7 @@ module Aws::FraudDetector
     BatchGetVariableErrorList = Shapes::ListShape.new(name: 'BatchGetVariableErrorList')
     BatchGetVariableRequest = Shapes::StructureShape.new(name: 'BatchGetVariableRequest')
     BatchGetVariableResult = Shapes::StructureShape.new(name: 'BatchGetVariableResult')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateDetectorVersionRequest = Shapes::StructureShape.new(name: 'CreateDetectorVersionRequest')
     CreateDetectorVersionResult = Shapes::StructureShape.new(name: 'CreateDetectorVersionResult')
     CreateModelVersionRequest = Shapes::StructureShape.new(name: 'CreateModelVersionRequest')
@@ -30,10 +31,14 @@ module Aws::FraudDetector
     CsvIndexToVariableMap = Shapes::MapShape.new(name: 'CsvIndexToVariableMap')
     DataSource = Shapes::StringShape.new(name: 'DataSource')
     DataType = Shapes::StringShape.new(name: 'DataType')
+    DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
+    DeleteDetectorResult = Shapes::StructureShape.new(name: 'DeleteDetectorResult')
     DeleteDetectorVersionRequest = Shapes::StructureShape.new(name: 'DeleteDetectorVersionRequest')
     DeleteDetectorVersionResult = Shapes::StructureShape.new(name: 'DeleteDetectorVersionResult')
     DeleteEventRequest = Shapes::StructureShape.new(name: 'DeleteEventRequest')
     DeleteEventResult = Shapes::StructureShape.new(name: 'DeleteEventResult')
+    DeleteRuleVersionRequest = Shapes::StructureShape.new(name: 'DeleteRuleVersionRequest')
+    DeleteRuleVersionResult = Shapes::StructureShape.new(name: 'DeleteRuleVersionResult')
     DescribeDetectorRequest = Shapes::StructureShape.new(name: 'DescribeDetectorRequest')
     DescribeDetectorResult = Shapes::StructureShape.new(name: 'DescribeDetectorResult')
     DescribeModelVersionsRequest = Shapes::StructureShape.new(name: 'DescribeModelVersionsRequest')
@@ -76,6 +81,7 @@ module Aws::FraudDetector
     Language = Shapes::StringShape.new(name: 'Language')
     ListOfModelScores = Shapes::ListShape.new(name: 'ListOfModelScores')
     ListOfModelVersions = Shapes::ListShape.new(name: 'ListOfModelVersions')
+    ListOfRuleResults = Shapes::ListShape.new(name: 'ListOfRuleResults')
     ListOfStrings = Shapes::ListShape.new(name: 'ListOfStrings')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricsMap = Shapes::MapShape.new(name: 'MetricsMap')
@@ -116,7 +122,9 @@ module Aws::FraudDetector
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleDetail = Shapes::StructureShape.new(name: 'RuleDetail')
     RuleDetailList = Shapes::ListShape.new(name: 'RuleDetailList')
+    RuleExecutionMode = Shapes::StringShape.new(name: 'RuleExecutionMode')
     RuleList = Shapes::ListShape.new(name: 'RuleList')
+    RuleResult = Shapes::StructureShape.new(name: 'RuleResult')
     RulesMaxResults = Shapes::IntegerShape.new(name: 'RulesMaxResults')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TrainingDataSource = Shapes::StructureShape.new(name: 'TrainingDataSource')
@@ -182,11 +190,15 @@ module Aws::FraudDetector
     BatchGetVariableResult.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetVariableErrorList, location_name: "errors"))
     BatchGetVariableResult.struct_class = Types::BatchGetVariableResult
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     CreateDetectorVersionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     CreateDetectorVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     CreateDetectorVersionRequest.add_member(:external_model_endpoints, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "externalModelEndpoints"))
     CreateDetectorVersionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "rules"))
     CreateDetectorVersionRequest.add_member(:model_versions, Shapes::ShapeRef.new(shape: ListOfModelVersions, location_name: "modelVersions"))
+    CreateDetectorVersionRequest.add_member(:rule_execution_mode, Shapes::ShapeRef.new(shape: RuleExecutionMode, location_name: "ruleExecutionMode"))
     CreateDetectorVersionRequest.struct_class = Types::CreateDetectorVersionRequest
 
     CreateDetectorVersionResult.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, location_name: "detectorId"))
@@ -229,6 +241,11 @@ module Aws::FraudDetector
     CsvIndexToVariableMap.key = Shapes::ShapeRef.new(shape: string)
     CsvIndexToVariableMap.value = Shapes::ShapeRef.new(shape: string)
 
+    DeleteDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
+    DeleteDetectorRequest.struct_class = Types::DeleteDetectorRequest
+
+    DeleteDetectorResult.struct_class = Types::DeleteDetectorResult
+
     DeleteDetectorVersionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     DeleteDetectorVersionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: nonEmptyString, required: true, location_name: "detectorVersionId"))
     DeleteDetectorVersionRequest.struct_class = Types::DeleteDetectorVersionRequest
@@ -239,6 +256,13 @@ module Aws::FraudDetector
     DeleteEventRequest.struct_class = Types::DeleteEventRequest
 
     DeleteEventResult.struct_class = Types::DeleteEventResult
+
+    DeleteRuleVersionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
+    DeleteRuleVersionRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "ruleId"))
+    DeleteRuleVersionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: nonEmptyString, required: true, location_name: "ruleVersion"))
+    DeleteRuleVersionRequest.struct_class = Types::DeleteRuleVersionRequest
+
+    DeleteRuleVersionResult.struct_class = Types::DeleteRuleVersionResult
 
     DescribeDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     DescribeDetectorRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
@@ -308,6 +332,7 @@ module Aws::FraudDetector
     GetDetectorVersionResult.add_member(:status, Shapes::ShapeRef.new(shape: DetectorVersionStatus, location_name: "status"))
     GetDetectorVersionResult.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: time, location_name: "lastUpdatedTime"))
     GetDetectorVersionResult.add_member(:created_time, Shapes::ShapeRef.new(shape: time, location_name: "createdTime"))
+    GetDetectorVersionResult.add_member(:rule_execution_mode, Shapes::ShapeRef.new(shape: RuleExecutionMode, location_name: "ruleExecutionMode"))
     GetDetectorVersionResult.struct_class = Types::GetDetectorVersionResult
 
     GetDetectorsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, location_name: "detectorId"))
@@ -368,6 +393,7 @@ module Aws::FraudDetector
 
     GetPredictionResult.add_member(:outcomes, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "outcomes"))
     GetPredictionResult.add_member(:model_scores, Shapes::ShapeRef.new(shape: ListOfModelScores, location_name: "modelScores"))
+    GetPredictionResult.add_member(:rule_results, Shapes::ShapeRef.new(shape: ListOfRuleResults, location_name: "ruleResults"))
     GetPredictionResult.struct_class = Types::GetPredictionResult
 
     GetRulesRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: identifier, location_name: "ruleId"))
@@ -406,6 +432,8 @@ module Aws::FraudDetector
     ListOfModelScores.member = Shapes::ShapeRef.new(shape: ModelScores)
 
     ListOfModelVersions.member = Shapes::ShapeRef.new(shape: ModelVersion)
+
+    ListOfRuleResults.member = Shapes::ShapeRef.new(shape: RuleResult)
 
     ListOfStrings.member = Shapes::ShapeRef.new(shape: string)
 
@@ -544,6 +572,10 @@ module Aws::FraudDetector
 
     RuleList.member = Shapes::ShapeRef.new(shape: Rule)
 
+    RuleResult.add_member(:rule_id, Shapes::ShapeRef.new(shape: string, location_name: "ruleId"))
+    RuleResult.add_member(:outcomes, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "outcomes"))
+    RuleResult.struct_class = Types::RuleResult
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: string, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -564,6 +596,7 @@ module Aws::FraudDetector
     UpdateDetectorVersionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: RuleList, required: true, location_name: "rules"))
     UpdateDetectorVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
     UpdateDetectorVersionRequest.add_member(:model_versions, Shapes::ShapeRef.new(shape: ListOfModelVersions, location_name: "modelVersions"))
+    UpdateDetectorVersionRequest.add_member(:rule_execution_mode, Shapes::ShapeRef.new(shape: RuleExecutionMode, location_name: "ruleExecutionMode"))
     UpdateDetectorVersionRequest.struct_class = Types::UpdateDetectorVersionRequest
 
     UpdateDetectorVersionResult.struct_class = Types::UpdateDetectorVersionResult
@@ -692,6 +725,7 @@ module Aws::FraudDetector
         o.input = Shapes::ShapeRef.new(shape: CreateModelVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateModelVersionResult)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
@@ -718,6 +752,18 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDetector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDetectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteDetectorResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_detector_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDetectorVersion"
         o.http_method = "POST"
@@ -728,6 +774,7 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_event, Seahorse::Model::Operation.new.tap do |o|
@@ -736,6 +783,18 @@ module Aws::FraudDetector
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteEventRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEventResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_rule_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRuleVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRuleVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRuleVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)

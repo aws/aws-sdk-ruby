@@ -412,10 +412,15 @@ module Aws::XRay
     #   segment and it contains a name, account ID, type, and inferred flag.
     #   @return [Array<Types::ErrorRootCauseService>]
     #
+    # @!attribute [rw] client_impacting
+    #   A flag that denotes that the root cause impacts the trace client.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCause AWS API Documentation
     #
     class ErrorRootCause < Struct.new(
-      :services)
+      :services,
+      :client_impacting)
       include Aws::Structure
     end
 
@@ -517,10 +522,15 @@ module Aws::XRay
     #   it contains a name, account ID, type, and inferred flag.
     #   @return [Array<Types::FaultRootCauseService>]
     #
+    # @!attribute [rw] client_impacting
+    #   A flag that denotes that the root cause impacts the trace client.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCause AWS API Documentation
     #
     class FaultRootCause < Struct.new(
-      :services)
+      :services,
+      :client_impacting)
       include Aws::Structure
     end
 
@@ -1384,10 +1394,15 @@ module Aws::XRay
     #   contains a name, account ID, type, and inferred flag.
     #   @return [Array<Types::ResponseTimeRootCauseService>]
     #
+    # @!attribute [rw] client_impacting
+    #   A flag that denotes that the root cause impacts the trace client.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCause AWS API Documentation
     #
     class ResponseTimeRootCause < Struct.new(
-      :services)
+      :services,
+      :client_impacting)
       include Aws::Structure
     end
 

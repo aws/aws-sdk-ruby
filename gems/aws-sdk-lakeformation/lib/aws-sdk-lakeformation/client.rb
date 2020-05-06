@@ -279,8 +279,7 @@ module Aws::LakeFormation
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::LakeFormation
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -611,6 +610,8 @@ module Aws::LakeFormation
     #   * {Types::GetEffectivePermissionsForPathResponse#permissions #permissions} => Array&lt;Types::PrincipalResourcePermissions&gt;
     #   * {Types::GetEffectivePermissionsForPathResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_effective_permissions_for_path({
@@ -781,6 +782,8 @@ module Aws::LakeFormation
     #   * {Types::ListPermissionsResponse#principal_resource_permissions #principal_resource_permissions} => Array&lt;Types::PrincipalResourcePermissions&gt;
     #   * {Types::ListPermissionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_permissions({
@@ -861,6 +864,8 @@ module Aws::LakeFormation
     #
     #   * {Types::ListResourcesResponse#resource_info_list #resource_info_list} => Array&lt;Types::ResourceInfo&gt;
     #   * {Types::ListResourcesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

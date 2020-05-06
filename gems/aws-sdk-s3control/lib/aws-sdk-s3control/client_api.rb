@@ -31,6 +31,7 @@ module Aws::S3Control
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    FunctionArnString = Shapes::StringShape.new(name: 'FunctionArnString')
     GetAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'GetAccessPointPolicyRequest')
     GetAccessPointPolicyResult = Shapes::StructureShape.new(name: 'GetAccessPointPolicyResult')
     GetAccessPointPolicyStatusRequest = Shapes::StructureShape.new(name: 'GetAccessPointPolicyStatusRequest')
@@ -118,22 +119,30 @@ module Aws::S3Control
     S3InitiateRestoreObjectOperation = Shapes::StructureShape.new(name: 'S3InitiateRestoreObjectOperation')
     S3KeyArnString = Shapes::StringShape.new(name: 'S3KeyArnString')
     S3MetadataDirective = Shapes::StringShape.new(name: 'S3MetadataDirective')
+    S3ObjectLockLegalHold = Shapes::StructureShape.new(name: 'S3ObjectLockLegalHold')
     S3ObjectLockLegalHoldStatus = Shapes::StringShape.new(name: 'S3ObjectLockLegalHoldStatus')
     S3ObjectLockMode = Shapes::StringShape.new(name: 'S3ObjectLockMode')
+    S3ObjectLockRetentionMode = Shapes::StringShape.new(name: 'S3ObjectLockRetentionMode')
     S3ObjectMetadata = Shapes::StructureShape.new(name: 'S3ObjectMetadata')
     S3ObjectOwner = Shapes::StructureShape.new(name: 'S3ObjectOwner')
     S3ObjectVersionId = Shapes::StringShape.new(name: 'S3ObjectVersionId')
     S3Permission = Shapes::StringShape.new(name: 'S3Permission')
+    S3Retention = Shapes::StructureShape.new(name: 'S3Retention')
     S3SSEAlgorithm = Shapes::StringShape.new(name: 'S3SSEAlgorithm')
     S3SetObjectAclOperation = Shapes::StructureShape.new(name: 'S3SetObjectAclOperation')
+    S3SetObjectLegalHoldOperation = Shapes::StructureShape.new(name: 'S3SetObjectLegalHoldOperation')
+    S3SetObjectRetentionOperation = Shapes::StructureShape.new(name: 'S3SetObjectRetentionOperation')
     S3SetObjectTaggingOperation = Shapes::StructureShape.new(name: 'S3SetObjectTaggingOperation')
     S3StorageClass = Shapes::StringShape.new(name: 'S3StorageClass')
     S3Tag = Shapes::StructureShape.new(name: 'S3Tag')
     S3TagSet = Shapes::ListShape.new(name: 'S3TagSet')
     S3UserMetadata = Shapes::MapShape.new(name: 'S3UserMetadata')
     Setting = Shapes::BooleanShape.new(name: 'Setting')
+    StringForNextToken = Shapes::StringShape.new(name: 'StringForNextToken')
     SuspendedCause = Shapes::StringShape.new(name: 'SuspendedCause')
     SuspendedDate = Shapes::TimestampShape.new(name: 'SuspendedDate')
+    TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
+    TagValueString = Shapes::StringShape.new(name: 'TagValueString')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
@@ -311,6 +320,8 @@ module Aws::S3Control
     JobOperation.add_member(:s3_put_object_acl, Shapes::ShapeRef.new(shape: S3SetObjectAclOperation, location_name: "S3PutObjectAcl", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_tagging, Shapes::ShapeRef.new(shape: S3SetObjectTaggingOperation, location_name: "S3PutObjectTagging", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_initiate_restore_object, Shapes::ShapeRef.new(shape: S3InitiateRestoreObjectOperation, location_name: "S3InitiateRestoreObject", metadata: {"box"=>true}))
+    JobOperation.add_member(:s3_put_object_legal_hold, Shapes::ShapeRef.new(shape: S3SetObjectLegalHoldOperation, location_name: "S3PutObjectLegalHold", metadata: {"box"=>true}))
+    JobOperation.add_member(:s3_put_object_retention, Shapes::ShapeRef.new(shape: S3SetObjectRetentionOperation, location_name: "S3PutObjectRetention", metadata: {"box"=>true}))
     JobOperation.struct_class = Types::JobOperation
 
     JobProgressSummary.add_member(:total_number_of_tasks, Shapes::ShapeRef.new(shape: JobTotalNumberOfTasks, location_name: "TotalNumberOfTasks", metadata: {"box"=>true}))
@@ -330,7 +341,7 @@ module Aws::S3Control
 
     JobStatusList.member = Shapes::ShapeRef.new(shape: JobStatus)
 
-    LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "FunctionArn"))
+    LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArnString, location_name: "FunctionArn"))
     LambdaInvokeOperation.struct_class = Types::LambdaInvokeOperation
 
     ListAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
@@ -345,11 +356,11 @@ module Aws::S3Control
 
     ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     ListJobsRequest.add_member(:job_statuses, Shapes::ShapeRef.new(shape: JobStatusList, location: "querystring", location_name: "jobStatuses"))
-    ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
+    ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: StringForNextToken, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListJobsRequest.struct_class = Types::ListJobsRequest
 
-    ListJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
+    ListJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: StringForNextToken, location_name: "NextToken"))
     ListJobsResult.add_member(:jobs, Shapes::ShapeRef.new(shape: JobListDescriptorList, location_name: "Jobs"))
     ListJobsResult.struct_class = Types::ListJobsResult
 
@@ -427,6 +438,9 @@ module Aws::S3Control
     S3InitiateRestoreObjectOperation.add_member(:glacier_job_tier, Shapes::ShapeRef.new(shape: S3GlacierJobTier, location_name: "GlacierJobTier"))
     S3InitiateRestoreObjectOperation.struct_class = Types::S3InitiateRestoreObjectOperation
 
+    S3ObjectLockLegalHold.add_member(:status, Shapes::ShapeRef.new(shape: S3ObjectLockLegalHoldStatus, required: true, location_name: "Status"))
+    S3ObjectLockLegalHold.struct_class = Types::S3ObjectLockLegalHold
+
     S3ObjectMetadata.add_member(:cache_control, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "CacheControl"))
     S3ObjectMetadata.add_member(:content_disposition, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "ContentDisposition"))
     S3ObjectMetadata.add_member(:content_encoding, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "ContentEncoding"))
@@ -444,14 +458,25 @@ module Aws::S3Control
     S3ObjectOwner.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "DisplayName"))
     S3ObjectOwner.struct_class = Types::S3ObjectOwner
 
+    S3Retention.add_member(:retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "RetainUntilDate"))
+    S3Retention.add_member(:mode, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionMode, location_name: "Mode"))
+    S3Retention.struct_class = Types::S3Retention
+
     S3SetObjectAclOperation.add_member(:access_control_policy, Shapes::ShapeRef.new(shape: S3AccessControlPolicy, location_name: "AccessControlPolicy"))
     S3SetObjectAclOperation.struct_class = Types::S3SetObjectAclOperation
+
+    S3SetObjectLegalHoldOperation.add_member(:legal_hold, Shapes::ShapeRef.new(shape: S3ObjectLockLegalHold, required: true, location_name: "LegalHold"))
+    S3SetObjectLegalHoldOperation.struct_class = Types::S3SetObjectLegalHoldOperation
+
+    S3SetObjectRetentionOperation.add_member(:bypass_governance_retention, Shapes::ShapeRef.new(shape: Boolean, location_name: "BypassGovernanceRetention", metadata: {"box"=>true}))
+    S3SetObjectRetentionOperation.add_member(:retention, Shapes::ShapeRef.new(shape: S3Retention, required: true, location_name: "Retention"))
+    S3SetObjectRetentionOperation.struct_class = Types::S3SetObjectRetentionOperation
 
     S3SetObjectTaggingOperation.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "TagSet"))
     S3SetObjectTaggingOperation.struct_class = Types::S3SetObjectTaggingOperation
 
-    S3Tag.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, required: true, location_name: "Key"))
-    S3Tag.add_member(:value, Shapes::ShapeRef.new(shape: MaxLength1024String, required: true, location_name: "Value"))
+    S3Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
+    S3Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
     S3Tag.struct_class = Types::S3Tag
 
     S3TagSet.member = Shapes::ShapeRef.new(shape: S3Tag)

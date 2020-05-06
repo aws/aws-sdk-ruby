@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2020-04-27)
+------------------
+
+* Feature - Change to the input, ResourceSpec, changing EnvironmentArn to SageMakerImageArn. This affects the following preview APIs: CreateDomain, DescribeDomain, UpdateDomain, CreateUserProfile, DescribeUserProfile, UpdateUserProfile, CreateApp and DescribeApp.
+
+1.54.0 (2020-04-16)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on ml.g4dn and ml.c5n instance types. Amazon SageMaker supports in "IN" operation for Search now.
+
+1.53.0 (2020-03-26)
+------------------
+
+* Feature - This release updates Amazon Augmented AI CreateFlowDefinition API and DescribeFlowDefinition response.
+
 1.52.0 (2020-03-09)
 ------------------
 

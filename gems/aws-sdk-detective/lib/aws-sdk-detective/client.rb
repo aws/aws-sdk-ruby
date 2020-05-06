@@ -269,8 +269,7 @@ module Aws::Detective
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::Detective
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -309,8 +308,6 @@ module Aws::Detective
 
     # @!group API Operations
 
-    # Amazon Detective is currently in preview.
-    #
     # Accepts an invitation for the member account to contribute data to a
     # behavior graph. This operation can only be called by an invited member
     # account.
@@ -342,11 +339,16 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Creates a new behavior graph for the calling account, and sets that
     # account as the master account. This operation is called by the account
     # that is enabling Detective.
+    #
+    # Before you try to enable Detective, make sure that your account has
+    # been enrolled in Amazon GuardDuty for at least 48 hours. If you do not
+    # meet this requirement, you cannot enable Detective. If you do meet the
+    # GuardDuty prerequisite, then when you make the request to enable
+    # Detective, it checks whether your data volume is within the Detective
+    # quota. If it exceeds the quota, then you cannot enable Detective.
     #
     # The operation also enables Detective for the calling account in the
     # currently selected Region. It returns the ARN of the new behavior
@@ -377,8 +379,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Sends a request to invite the specified AWS accounts to be member
     # accounts in the behavior graph. This operation can only be called by
     # the master account for a behavior graph.
@@ -438,9 +438,12 @@ module Aws::Detective
     #   resp.members[0].email_address #=> String
     #   resp.members[0].graph_arn #=> String
     #   resp.members[0].master_id #=> String
-    #   resp.members[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.members[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.members[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.members[0].invited_time #=> Time
     #   resp.members[0].updated_time #=> Time
+    #   resp.members[0].percent_of_graph_utilization #=> Float
+    #   resp.members[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -454,8 +457,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Disables the specified behavior graph and queues it to be deleted.
     # This operation removes the graph from each member account's list of
     # behavior graphs.
@@ -483,8 +484,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Deletes one or more member accounts from the master account behavior
     # graph. This operation can only be called by a Detective master
     # account. That account cannot use `DeleteMembers` to delete their own
@@ -527,8 +526,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Removes the member account from the specified behavior graph. This
     # operation can only be called by a member account that has the
     # `ENABLED` status.
@@ -556,8 +553,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Returns the membership details for specified member accounts for a
     # behavior graph.
     #
@@ -590,9 +585,12 @@ module Aws::Detective
     #   resp.member_details[0].email_address #=> String
     #   resp.member_details[0].graph_arn #=> String
     #   resp.member_details[0].master_id #=> String
-    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
     #   resp.member_details[0].updated_time #=> Time
+    #   resp.member_details[0].percent_of_graph_utilization #=> Float
+    #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -606,8 +604,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Returns the list of behavior graphs that the calling account is a
     # master of. This operation can only be called by a master account.
     #
@@ -628,6 +624,8 @@ module Aws::Detective
     #
     #   * {Types::ListGraphsResponse#graph_list #graph_list} => Array&lt;Types::Graph&gt;
     #   * {Types::ListGraphsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -652,8 +650,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Retrieves the list of open and accepted behavior graph invitations for
     # the member account. This operation can only be called by a member
     # account.
@@ -681,6 +677,8 @@ module Aws::Detective
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::MemberDetail&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_invitations({
@@ -695,9 +693,12 @@ module Aws::Detective
     #   resp.invitations[0].email_address #=> String
     #   resp.invitations[0].graph_arn #=> String
     #   resp.invitations[0].master_id #=> String
-    #   resp.invitations[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.invitations[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.invitations[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.invitations[0].invited_time #=> Time
     #   resp.invitations[0].updated_time #=> Time
+    #   resp.invitations[0].percent_of_graph_utilization #=> Float
+    #   resp.invitations[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvitations AWS API Documentation
@@ -709,8 +710,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Retrieves the list of member accounts for a behavior graph. Does not
     # return member accounts that were removed from the behavior graph.
     #
@@ -733,6 +732,8 @@ module Aws::Detective
     #   * {Types::ListMembersResponse#member_details #member_details} => Array&lt;Types::MemberDetail&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_members({
@@ -748,9 +749,12 @@ module Aws::Detective
     #   resp.member_details[0].email_address #=> String
     #   resp.member_details[0].graph_arn #=> String
     #   resp.member_details[0].master_id #=> String
-    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED"
+    #   resp.member_details[0].status #=> String, one of "INVITED", "VERIFICATION_IN_PROGRESS", "VERIFICATION_FAILED", "ENABLED", "ACCEPTED_BUT_DISABLED"
+    #   resp.member_details[0].disabled_reason #=> String, one of "VOLUME_TOO_HIGH", "VOLUME_UNKNOWN"
     #   resp.member_details[0].invited_time #=> Time
     #   resp.member_details[0].updated_time #=> Time
+    #   resp.member_details[0].percent_of_graph_utilization #=> Float
+    #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListMembers AWS API Documentation
@@ -762,8 +766,6 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Rejects an invitation to contribute the account data to a behavior
     # graph. This operation must be called by a member account that has the
     # `INVITED` status.
@@ -791,6 +793,44 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Sends a request to enable data ingest for a member account that has a
+    # status of `ACCEPTED_BUT_DISABLED`.
+    #
+    # For valid member accounts, the status is updated as follows.
+    #
+    # * If Detective enabled the member account, then the new status is
+    #   `ENABLED`.
+    #
+    # * If Detective cannot enable the member account, the status remains
+    #   `ACCEPTED_BUT_DISABLED`.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the behavior graph.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the member account to try to enable.
+    #
+    #   The account must be an invited member account with a status of
+    #   `ACCEPTED_BUT_DISABLED`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_monitoring_member({
+    #     graph_arn: "GraphArn", # required
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StartMonitoringMember AWS API Documentation
+    #
+    # @overload start_monitoring_member(params = {})
+    # @param [Hash] params ({})
+    def start_monitoring_member(params = {}, options = {})
+      req = build_request(:start_monitoring_member, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -804,7 +844,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

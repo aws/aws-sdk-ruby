@@ -269,8 +269,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::ElasticLoadBalancingV2
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1802,6 +1801,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeListenersOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
     #   * {Types::DescribeListenersOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a listener
     #
@@ -2002,6 +2003,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeLoadBalancersOutput#load_balancers #load_balancers} => Array&lt;Types::LoadBalancer&gt;
     #   * {Types::DescribeLoadBalancersOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a load balancer
     #
@@ -2078,6 +2081,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.next_marker #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * load_balancer_available
+    #   * load_balancer_exists
+    #   * load_balancers_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers AWS API Documentation
     #
@@ -2551,6 +2561,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeTargetGroupsOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
     #   * {Types::DescribeTargetGroupsOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a target group
     #
@@ -2731,6 +2743,12 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining", "unavailable"
     #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Target.HealthCheckDisabled", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * target_deregistered
+    #   * target_in_service
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth AWS API Documentation
     #
@@ -4263,13 +4281,13 @@ module Aws::ElasticLoadBalancingV2
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name             | params                     | :delay   | :max_attempts |
-    # | ----------------------- | -------------------------- | -------- | ------------- |
-    # | load_balancer_available | {#describe_load_balancers} | 15       | 40            |
-    # | load_balancer_exists    | {#describe_load_balancers} | 15       | 40            |
-    # | load_balancers_deleted  | {#describe_load_balancers} | 15       | 40            |
-    # | target_deregistered     | {#describe_target_health}  | 15       | 40            |
-    # | target_in_service       | {#describe_target_health}  | 15       | 40            |
+    # | waiter_name             | params                           | :delay   | :max_attempts |
+    # | ----------------------- | -------------------------------- | -------- | ------------- |
+    # | load_balancer_available | {Client#describe_load_balancers} | 15       | 40            |
+    # | load_balancer_exists    | {Client#describe_load_balancers} | 15       | 40            |
+    # | load_balancers_deleted  | {Client#describe_load_balancers} | 15       | 40            |
+    # | target_deregistered     | {Client#describe_target_health}  | 15       | 40            |
+    # | target_in_service       | {Client#describe_target_health}  | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

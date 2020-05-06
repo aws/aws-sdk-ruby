@@ -1,6 +1,27 @@
 Unreleased Changes
 ------------------
 
+1.63.1 (2020-05-04)
+------------------
+
+* Issue - Handle copy_object, complete_multipart_upload, and upload_part_copy http responses with 200 OK and incomplete bodies as errors.
+
+1.63.0 (2020-04-22)
+------------------
+
+* Feature - Add `presigned_request` method to the `Presigner` class. This method returns a URL and headers necessary rather than hoisting them onto the query string.
+* Feature - Force HTTPS when using `virtual_host: true` on the `Presigner` class.
+
+1.62.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.2 (2020-04-03)
+------------------
+
+* Issue - Add `put_bucket_lifecycle_configuration` and `put_bucket_replication` as required operations used in the MD5 plugin.
+
 1.61.1 (2020-03-10)
 ------------------
 

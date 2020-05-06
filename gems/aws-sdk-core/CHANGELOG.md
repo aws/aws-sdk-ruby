@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+3.94.1 (2020-05-04)
+------------------
+
+* Issue - When handling errors in XML responses, don't set a new error on the response if one is already set.
+
+3.94.0 (2020-04-08)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Update dependency on aws-eventstream
+
+3.93.0 (2020-04-06)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.92.0 (2020-03-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Change the default of `sts_regional_endpoints` from 'legacy' to 'regional'.
+
 3.91.1 (2020-03-10)
 ------------------
 

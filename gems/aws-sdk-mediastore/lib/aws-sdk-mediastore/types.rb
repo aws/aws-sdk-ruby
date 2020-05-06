@@ -331,6 +331,29 @@ module Aws::MediaStore
     #
     class DeleteLifecyclePolicyOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteMetricPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that is associated with the metric policy
+    #   that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteMetricPolicyInput AWS API Documentation
+    #
+    class DeleteMetricPolicyInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteMetricPolicyOutput AWS API Documentation
+    #
+    class DeleteMetricPolicyOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeContainerInput
     #   data as a hash:
     #
@@ -448,6 +471,35 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMetricPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that is associated with the metric policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetMetricPolicyInput AWS API Documentation
+    #
+    class GetMetricPolicyInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_policy
+    #   The metric policy that is associated with the specific container.
+    #   @return [Types::MetricPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetMetricPolicyOutput AWS API Documentation
+    #
+    class GetMetricPolicyOutput < Struct.new(
+      :metric_policy)
+      include Aws::Structure
+    end
+
     # The service is temporarily unavailable.
     #
     # @!attribute [rw] message
@@ -545,6 +597,92 @@ module Aws::MediaStore
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # The metric policy that is associated with the container. A metric
+    # policy allows AWS Elemental MediaStore to send metrics to Amazon
+    # CloudWatch. In the policy, you must indicate whether you want
+    # MediaStore to send container-level metrics. You can also include rules
+    # to define groups of objects that you want MediaStore to send
+    # object-level metrics for.
+    #
+    # To view examples of how to construct a metric policy for your use
+    # case, see [Example Metric Policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html
+    #
+    # @note When making an API call, you may pass MetricPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         container_level_metrics: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         metric_policy_rules: [
+    #           {
+    #             object_group: "ObjectGroup", # required
+    #             object_group_name: "ObjectGroupName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] container_level_metrics
+    #   A setting to enable or disable metrics at the container level.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_policy_rules
+    #   A parameter that holds an array of rules that enable metrics at the
+    #   object level. This parameter is optional, but if you choose to
+    #   include it, you must also include at least one rule. By default, you
+    #   can include up to five rules. You can also [request a quota
+    #   increase][1] to allow up to 300 rules per policy.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas
+    #   @return [Array<Types::MetricPolicyRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/MetricPolicy AWS API Documentation
+    #
+    class MetricPolicy < Struct.new(
+      :container_level_metrics,
+      :metric_policy_rules)
+      include Aws::Structure
+    end
+
+    # A setting that enables metrics at the object level. Each rule contains
+    # an object group and an object group name. If the policy includes the
+    # MetricPolicyRules parameter, you must include at least one rule. Each
+    # metric policy can include up to five rules by default. You can also
+    # [request a quota increase][1] to allow up to 300 rules per policy.
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas
+    #
+    # @note When making an API call, you may pass MetricPolicyRule
+    #   data as a hash:
+    #
+    #       {
+    #         object_group: "ObjectGroup", # required
+    #         object_group_name: "ObjectGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] object_group
+    #   A path or file name that defines which objects to include in the
+    #   group. Wildcards (*) are acceptable.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_group_name
+    #   A name that allows you to refer to the object group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/MetricPolicyRule AWS API Documentation
+    #
+    class MetricPolicyRule < Struct.new(
+      :object_group,
+      :object_group_name)
       include Aws::Structure
     end
 
@@ -658,6 +796,58 @@ module Aws::MediaStore
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicyOutput AWS API Documentation
     #
     class PutLifecyclePolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutMetricPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #         metric_policy: { # required
+    #           container_level_metrics: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           metric_policy_rules: [
+    #             {
+    #               object_group: "ObjectGroup", # required
+    #               object_group_name: "ObjectGroupName", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that you want to add the metric policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_policy
+    #   The metric policy that you want to associate with the container. In
+    #   the policy, you must indicate whether you want MediaStore to send
+    #   container-level metrics. You can also include up to five rules to
+    #   define groups of objects that you want MediaStore to send
+    #   object-level metrics for. If you include rules in the policy,
+    #   construct each rule with both of the following:
+    #
+    #   * An object group that defines which objects to include in the
+    #     group. The definition can be a path or a file name, but it can't
+    #     have more than 900 characters. Valid characters are: a-z, A-Z,
+    #     0-9, \_ (underscore), = (equal), : (colon), . (period), -
+    #     (hyphen), ~ (tilde), / (forward slash), and * (asterisk).
+    #     Wildcards (*) are acceptable.
+    #
+    #   * An object group name that allows you to refer to the object group.
+    #     The name can't have more than 30 characters. Valid characters
+    #     are: a-z, A-Z, 0-9, and \_ (underscore).
+    #   @return [Types::MetricPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutMetricPolicyInput AWS API Documentation
+    #
+    class PutMetricPolicyInput < Struct.new(
+      :container_name,
+      :metric_policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutMetricPolicyOutput AWS API Documentation
+    #
+    class PutMetricPolicyOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StartAccessLoggingInput
     #   data as a hash:

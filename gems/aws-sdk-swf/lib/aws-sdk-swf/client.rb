@@ -281,8 +281,7 @@ module Aws::SWF
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -294,7 +293,7 @@ module Aws::SWF
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1265,6 +1264,8 @@ module Aws::SWF
     #   * {Types::History#events #events} => Array&lt;Types::HistoryEvent&gt;
     #   * {Types::History#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_workflow_execution_history({
@@ -1602,6 +1603,8 @@ module Aws::SWF
     #   * {Types::ActivityTypeInfos#type_infos #type_infos} => Array&lt;Types::ActivityTypeInfo&gt;
     #   * {Types::ActivityTypeInfos#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_activity_types({
@@ -1766,6 +1769,8 @@ module Aws::SWF
     #   * {Types::WorkflowExecutionInfos#execution_infos #execution_infos} => Array&lt;Types::WorkflowExecutionInfo&gt;
     #   * {Types::WorkflowExecutionInfos#next_page_token #next_page_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_closed_workflow_executions({
@@ -1884,6 +1889,8 @@ module Aws::SWF
     #
     #   * {Types::DomainInfos#domain_infos #domain_infos} => Array&lt;Types::DomainInfo&gt;
     #   * {Types::DomainInfos#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2013,6 +2020,8 @@ module Aws::SWF
     #
     #   * {Types::WorkflowExecutionInfos#execution_infos #execution_infos} => Array&lt;Types::WorkflowExecutionInfo&gt;
     #   * {Types::WorkflowExecutionInfos#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2153,6 +2162,8 @@ module Aws::SWF
     #
     #   * {Types::WorkflowTypeInfos#type_infos #type_infos} => Array&lt;Types::WorkflowTypeInfo&gt;
     #   * {Types::WorkflowTypeInfos#next_page_token #next_page_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2386,6 +2397,8 @@ module Aws::SWF
     #   * {Types::DecisionTask#events #events} => Array&lt;Types::HistoryEvent&gt;
     #   * {Types::DecisionTask#next_page_token #next_page_token} => String
     #   * {Types::DecisionTask#previous_started_event_id #previous_started_event_id} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #

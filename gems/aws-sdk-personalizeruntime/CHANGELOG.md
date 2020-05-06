@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-04-03)
+------------------
+
+* Feature - Amazon Personalize: Add new response field "score" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)
+
 1.7.0 (2020-03-09)
 ------------------
 

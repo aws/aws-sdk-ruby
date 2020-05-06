@@ -298,8 +298,7 @@ module Aws::DynamoDB
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -311,7 +310,7 @@ module Aws::DynamoDB
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -510,6 +509,8 @@ module Aws::DynamoDB
     #   * {Types::BatchGetItemOutput#responses #responses} => Hash&lt;String,Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;&gt;
     #   * {Types::BatchGetItemOutput#unprocessed_keys #unprocessed_keys} => Hash&lt;String,Types::KeysAndAttributes&gt;
     #   * {Types::BatchGetItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve multiple items from a table
@@ -2556,6 +2557,12 @@ module Aws::DynamoDB
     #   resp.table.archival_summary.archival_reason #=> String
     #   resp.table.archival_summary.archival_backup_arn #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * table_exists
+    #   * table_not_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
     # @overload describe_table(params = {})
@@ -2975,6 +2982,8 @@ module Aws::DynamoDB
     #   * {Types::ListContributorInsightsOutput#contributor_insights_summaries #contributor_insights_summaries} => Array&lt;Types::ContributorInsightsSummary&gt;
     #   * {Types::ListContributorInsightsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contributor_insights({
@@ -3073,6 +3082,8 @@ module Aws::DynamoDB
     #
     #   * {Types::ListTablesOutput#table_names #table_names} => Array&lt;String&gt;
     #   * {Types::ListTablesOutput#last_evaluated_table_name #last_evaluated_table_name} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list tables
@@ -3930,6 +3941,8 @@ module Aws::DynamoDB
     #   * {Types::QueryOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::QueryOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To query an item
     #
@@ -4776,6 +4789,8 @@ module Aws::DynamoDB
     #   * {Types::ScanOutput#scanned_count #scanned_count} => Integer
     #   * {Types::ScanOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::ScanOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To scan a table
@@ -6681,10 +6696,10 @@ module Aws::DynamoDB
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params            | :delay   | :max_attempts |
-    # | ---------------- | ----------------- | -------- | ------------- |
-    # | table_exists     | {#describe_table} | 20       | 25            |
-    # | table_not_exists | {#describe_table} | 20       | 25            |
+    # | waiter_name      | params                  | :delay   | :max_attempts |
+    # | ---------------- | ----------------------- | -------- | ------------- |
+    # | table_exists     | {Client#describe_table} | 20       | 25            |
+    # | table_not_exists | {Client#describe_table} | 20       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

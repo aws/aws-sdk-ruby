@@ -269,8 +269,7 @@ module Aws::KinesisVideoArchivedMedia
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -282,7 +281,7 @@ module Aws::KinesisVideoArchivedMedia
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -308,6 +307,83 @@ module Aws::KinesisVideoArchivedMedia
     end
 
     # @!group API Operations
+
+    # Downloads an MP4 file (clip) containing the archived, on-demand media
+    # from the specified video stream over the specified time range.
+    #
+    # Both the StreamName and the StreamARN parameters are optional, but you
+    # must specify either the StreamName or the StreamARN when invoking this
+    # API operation.
+    #
+    # As a prerequsite to using GetCLip API, you must obtain an endpoint
+    # using `GetDataEndpoint`, specifying GET\_CLIP for` the APIName
+    # parameter. </p> An Amazon Kinesis video stream has the following
+    # requirements for providing data through MP4:   The media must contain
+    # h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded
+    # audio. Specifically, the codec ID of track 1 should be V_MPEG/ISO/AVC
+    # (for h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID
+    # of track 2 should be A_AAC (for AAC) or A_MS/ACM (for G.711).   Data
+    # retention must be greater than 0.   The video track of each fragment
+    # must contain codec private data in the Advanced Video Coding (AVC) for
+    # H.264 format and HEVC for H.265 format. For more information, see
+    # MPEG-4 specification ISO/IEC 14496-15. For information about adapting
+    # stream data to a given format, see NAL Adaptation Flags.   The audio
+    # track (if present) of each fragment must contain codec private data in
+    # the AAC format (AAC specification ISO/IEC 13818-7) or the MS Wave
+    # format.   You can monitor the amount of outgoing data by monitoring
+    # the GetClip.OutgoingBytes Amazon CloudWatch metric. For information
+    # about using CloudWatch to monitor Kinesis Video Streams, see
+    # Monitoring Kinesis Video Streams. For pricing information, see Amazon
+    # Kinesis Video Streams Pricing and AWS Pricing. Charges for outgoing
+    # AWS data apply.
+    # `
+    #
+    # @option params [String] :stream_name
+    #   The name of the stream for which to retrieve the media clip.
+    #
+    #   You must specify either the StreamName or the StreamARN.
+    #
+    # @option params [String] :stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which to retrieve the
+    #   media clip.
+    #
+    #   You must specify either the StreamName or the StreamARN.
+    #
+    # @option params [required, Types::ClipFragmentSelector] :clip_fragment_selector
+    #   The time range of the requested clip and the source of the timestamps.
+    #
+    # @return [Types::GetClipOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetClipOutput#content_type #content_type} => String
+    #   * {Types::GetClipOutput#payload #payload} => IO
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_clip({
+    #     stream_name: "StreamName",
+    #     stream_arn: "ResourceARN",
+    #     clip_fragment_selector: { # required
+    #       fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #       timestamp_range: { # required
+    #         start_timestamp: Time.now, # required
+    #         end_timestamp: Time.now, # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content_type #=> String
+    #   resp.payload #=> IO
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetClip AWS API Documentation
+    #
+    # @overload get_clip(params = {})
+    # @param [Hash] params ({})
+    def get_clip(params = {}, options = {}, &block)
+      req = build_request(:get_clip, params)
+      req.send_request(options, &block)
+    end
 
     # Retrieves an MPEG Dynamic Adaptive Streaming over HTTP (DASH) URL for
     # the stream. You can then open the URL in a media player to view the
@@ -1212,12 +1288,14 @@ module Aws::KinesisVideoArchivedMedia
     #   * {Types::ListFragmentsOutput#fragments #fragments} => Array&lt;Types::Fragment&gt;
     #   * {Types::ListFragmentsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_fragments({
     #     stream_name: "StreamName", # required
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #     fragment_selector: {
     #       fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
     #       timestamp_range: { # required
@@ -1259,7 +1337,7 @@ module Aws::KinesisVideoArchivedMedia
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

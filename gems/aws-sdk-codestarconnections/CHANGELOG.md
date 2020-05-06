@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-05-06)
+------------------
+
+* Feature - Added support for tagging resources in AWS CodeStar Connections
+
 1.1.0 (2020-03-09)
 ------------------
 

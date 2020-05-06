@@ -279,8 +279,7 @@ module Aws::ECS
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yielded by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
     #     seconds a connection is allowed to sit idle before it is
@@ -292,7 +291,7 @@ module Aws::ECS
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yielded by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -478,8 +477,8 @@ module Aws::ECS
     #   PutAccountSetting or PutAccountSettingDefault.
     #
     # @option params [Array<String>] :capacity_providers
-    #   The short name or full Amazon Resource Name (ARN) of one or more
-    #   capacity providers to associate with the cluster.
+    #   The short name of one or more capacity providers to associate with the
+    #   cluster.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created and not already associated
@@ -646,11 +645,14 @@ module Aws::ECS
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
     #   on each active container instance that meets all of the task
-    #   placement constraints that you specify in your cluster. When using
-    #   this strategy, you don't need to specify a desired number of tasks,
-    #   a task placement strategy, or use Service Auto Scaling policies. For
-    #   more information, see [Service Scheduler Concepts][2] in the *Amazon
-    #   Elastic Container Service Developer Guide*.
+    #   placement constraints that you specify in your cluster. The service
+    #   scheduler also evaluates the task placement constraints for running
+    #   tasks and will stop tasks that do not meet the placement
+    #   constraints. When using this strategy, you don't need to specify a
+    #   desired number of tasks, a task placement strategy, or use Service
+    #   Auto Scaling policies. For more information, see [Service Scheduler
+    #   Concepts][2] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
     # service. The deployment is triggered by changing properties, such as
@@ -976,9 +978,12 @@ module Aws::ECS
     #
     #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
     #     each active container instance that meets all of the task placement
-    #     constraints that you specify in your cluster. When you're using
-    #     this strategy, you don't need to specify a desired number of tasks,
-    #     a task placement strategy, or use Service Auto Scaling policies.
+    #     constraints that you specify in your cluster. The service scheduler
+    #     also evaluates the task placement constraints for running tasks and
+    #     will stop tasks that do not meet the placement constraints. When
+    #     you're using this strategy, you don't need to specify a desired
+    #     number of tasks, a task placement strategy, or use Service Auto
+    #     Scaling policies.
     #
     #     <note markdown="1"> Tasks using the Fargate launch type or the `CODE_DEPLOY` or
     #     `EXTERNAL` deployment controller types don't support the `DAEMON`
@@ -2385,6 +2390,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.file_system_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3016,6 +3025,12 @@ module Aws::ECS
     #   resp.failures[0].reason #=> String
     #   resp.failures[0].detail #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * services_inactive
+    #   * services_stable
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices AWS API Documentation
     #
     # @overload describe_services(params = {})
@@ -3238,6 +3253,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.file_system_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3551,6 +3570,12 @@ module Aws::ECS
     #   resp.failures[0].reason #=> String
     #   resp.failures[0].detail #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * tasks_running
+    #   * tasks_stopped
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks AWS API Documentation
     #
     # @overload describe_tasks(params = {})
@@ -3653,6 +3678,8 @@ module Aws::ECS
     #
     #   * {Types::ListAccountSettingsResponse#settings #settings} => Array&lt;Types::Setting&gt;
     #   * {Types::ListAccountSettingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To view your effective account settings
@@ -3793,6 +3820,8 @@ module Aws::ECS
     #   * {Types::ListAttributesResponse#attributes #attributes} => Array&lt;Types::Attribute&gt;
     #   * {Types::ListAttributesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_attributes({
@@ -3850,6 +3879,8 @@ module Aws::ECS
     #
     #   * {Types::ListClustersResponse#cluster_arns #cluster_arns} => Array&lt;String&gt;
     #   * {Types::ListClustersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list your available clusters
@@ -3949,6 +3980,8 @@ module Aws::ECS
     #   * {Types::ListContainerInstancesResponse#container_instance_arns #container_instance_arns} => Array&lt;String&gt;
     #   * {Types::ListContainerInstancesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list your available container instances in a cluster
     #
@@ -4030,6 +4063,8 @@ module Aws::ECS
     #
     #   * {Types::ListServicesResponse#service_arns #service_arns} => Array&lt;String&gt;
     #   * {Types::ListServicesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the services in a cluster
@@ -4177,6 +4212,8 @@ module Aws::ECS
     #   * {Types::ListTaskDefinitionFamiliesResponse#families #families} => Array&lt;String&gt;
     #   * {Types::ListTaskDefinitionFamiliesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list your registered task definition families
     #
@@ -4289,6 +4326,8 @@ module Aws::ECS
     #
     #   * {Types::ListTaskDefinitionsResponse#task_definition_arns #task_definition_arns} => Array&lt;String&gt;
     #   * {Types::ListTaskDefinitionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list your registered task definitions
@@ -4432,6 +4471,8 @@ module Aws::ECS
     #
     #   * {Types::ListTasksResponse#task_arns #task_arns} => Array&lt;String&gt;
     #   * {Types::ListTasksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the tasks in a cluster
@@ -5588,6 +5629,12 @@ module Aws::ECS
     #         efs_volume_configuration: {
     #           file_system_id: "String", # required
     #           root_directory: "String",
+    #           transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #           transit_encryption_port: 1,
+    #           authorization_config: {
+    #             access_point_id: "String",
+    #             iam: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #       },
     #     ],
@@ -5744,6 +5791,10 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.file_system_id #=> String
     #   resp.task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.task_definition.volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -7285,25 +7336,33 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Updating the task placement strategies and constraints on an Amazon
+    # ECS service remains in preview and is a Beta Service as defined by and
+    # subject to the Beta Service Participation Service Terms located at
+    # [https://aws.amazon.com/service-terms][1] ("Beta Terms"). These Beta
+    # Terms apply to your participation in this preview.
+    #
     # Modifies the parameters of a service.
     #
     # For services using the rolling update (`ECS`) deployment controller,
-    # the desired count, deployment configuration, network configuration, or
-    # task definition used can be updated.
+    # the desired count, deployment configuration, network configuration,
+    # task placement constraints and strategies, or task definition used can
+    # be updated.
     #
     # For services using the blue/green (`CODE_DEPLOY`) deployment
-    # controller, only the desired count, deployment configuration, and
-    # health check grace period can be updated using this API. If the
-    # network configuration, platform version, or task definition need to be
-    # updated, a new AWS CodeDeploy deployment should be created. For more
-    # information, see [CreateDeployment][1] in the *AWS CodeDeploy API
-    # Reference*.
+    # controller, only the desired count, deployment configuration, task
+    # placement constraints and strategies, and health check grace period
+    # can be updated using this API. If the network configuration, platform
+    # version, or task definition need to be updated, a new AWS CodeDeploy
+    # deployment should be created. For more information, see
+    # [CreateDeployment][2] in the *AWS CodeDeploy API Reference*.
     #
     # For services using an external deployment controller, you can update
-    # only the desired count and health check grace period using this API.
-    # If the launch type, load balancer, network configuration, platform
-    # version, or task definition need to be updated, you should create a
-    # new task set. For more information, see CreateTaskSet.
+    # only the desired count, task placement constraints and strategies, and
+    # health check grace period using this API. If the launch type, load
+    # balancer, network configuration, platform version, or task definition
+    # need to be updated, you should create a new task set. For more
+    # information, see CreateTaskSet.
     #
     # You can add to or subtract from the number of instantiations of a task
     # definition in a service by specifying the cluster that the service is
@@ -7393,7 +7452,8 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
+    # [1]: https://aws.amazon.com/service-terms
+    # [2]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -7420,9 +7480,30 @@ module Aws::ECS
     #
     #   If the service is using the default capacity provider strategy for the
     #   cluster, the service can be updated to use one or more capacity
-    #   providers. However, when a service is using a non-default capacity
-    #   provider strategy, the service cannot be updated to use the cluster's
-    #   default capacity provider strategy.
+    #   providers as opposed to the default capacity provider strategy.
+    #   However, when a service is using a capacity provider strategy that is
+    #   not the default capacity provider strategy, the service cannot be
+    #   updated to use the cluster's default capacity provider strategy.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in a
+    #   capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
     #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
@@ -7878,7 +7959,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -7944,12 +8025,12 @@ module Aws::ECS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name       | params               | :delay   | :max_attempts |
-    # | ----------------- | -------------------- | -------- | ------------- |
-    # | services_inactive | {#describe_services} | 15       | 40            |
-    # | services_stable   | {#describe_services} | 15       | 40            |
-    # | tasks_running     | {#describe_tasks}    | 6        | 100           |
-    # | tasks_stopped     | {#describe_tasks}    | 6        | 100           |
+    # | waiter_name       | params                     | :delay   | :max_attempts |
+    # | ----------------- | -------------------------- | -------- | ------------- |
+    # | services_inactive | {Client#describe_services} | 15       | 40            |
+    # | services_stable   | {Client#describe_services} | 15       | 40            |
+    # | tasks_running     | {Client#describe_tasks}    | 6        | 100           |
+    # | tasks_stopped     | {Client#describe_tasks}    | 6        | 100           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

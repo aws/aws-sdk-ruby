@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-04-28)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports several new features: enhanced VQ for H.264 (AVC) output encodes; passthrough of timed metadata and of Nielsen ID3 metadata in fMP4 containers in HLS outputs; the ability to generate a SCTE-35 sparse track without additional segmentation, in Microsoft Smooth outputs;  the ability to select the audio from a TS input by specifying the audio track; and conversion of HDR colorspace in the input to an SDR colorspace in the output.
+
+1.42.0 (2020-04-08)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports Automatic Input Failover. This feature provides resiliency upstream of the channel, before ingest starts.
+
 1.41.0 (2020-03-09)
 ------------------
 
@@ -215,4 +225,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-medialive`.
-

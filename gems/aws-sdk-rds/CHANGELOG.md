@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2020-04-23)
+------------------
+
+* Feature - Adds support for AWS Local Zones, including a new optional parameter AvailabilityZoneGroup for the DescribeOrderableDBInstanceOptions operation.
+
+1.82.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+
+1.81.0 (2020-04-08)
+------------------
+
+* Feature - Documentation updates for RDS: creating read replicas is now supported for SQL Server DB instances
+
+1.80.0 (2020-03-18)
+------------------
+
+* Feature - Updated the MaxRecords type in DescribeExportTasks to Integer.
+
 1.79.0 (2020-03-09)
 ------------------
 
@@ -497,4 +517,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-rds` gem.
-

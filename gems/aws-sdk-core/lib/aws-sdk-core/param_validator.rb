@@ -152,7 +152,7 @@ module Aws
     def correct_type?(ref, value, errors, context)
       if ref.eventstream && @input
         errors << "instead of providing value directly for eventstreams at input,"\
-          " expected to use #signal events per stream"
+                  " expected to use #signal events per stream"
         return false
       end
       case value
