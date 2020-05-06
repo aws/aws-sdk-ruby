@@ -207,6 +207,13 @@ Known AWS regions include (not specific to this service):
 
       end
 
+      it 'allows request level config overrides' do
+        client.stub_responses(:example_operation, string:'value')
+        resp = client.example_operation({}, request_config: {user_agent_suffix: 'TEST-SUFFIX'})
+
+        expect(resp.context.http_request.headers['user-agent']).to include('TEST-SUFFIX')
+      end
+
     end
   end
 end

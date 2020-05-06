@@ -67,6 +67,13 @@ module Seahorse
       #
       def send_request(options = {}, &block)
         @context[:response_target] = options[:target] || block
+        if options[:request_config]
+          options[:request_config].each do |k, v|
+            if @context.config.respond_to? k
+              @context.config[k] = v
+            end  #elsif raise an error for trying to set an invalid config value?
+          end
+        end
         @handlers.to_stack.call(@context)
       end
 
