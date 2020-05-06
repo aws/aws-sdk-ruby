@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeStarconnections - Updated the API, and documentation for AWS CodeStar connections.
+
+* Feature - Aws::ComprehendMedical - Updated the API, and documentation for AWS Comprehend Medical.
+
 2.11.501 (2020-05-05)
 ------------------
 
