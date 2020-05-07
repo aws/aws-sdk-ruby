@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.503 (2020-05-07)
+------------------
+
 * Feature - Aws::AppConfig - Updated the documentation for Amazon AppConfig.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
