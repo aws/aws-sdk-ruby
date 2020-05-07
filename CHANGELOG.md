@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppConfig - Updated the documentation for Amazon AppConfig.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::Route53 - Updated the API for Amazon Route 53.
+
+* Feature - Aws::SSM - Updated the API for Amazon Simple Systems Manager (SSM).
+
 2.11.502 (2020-05-06)
 ------------------
 
