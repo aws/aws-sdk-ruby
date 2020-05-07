@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-05-07)
+------------------
+
+* Feature - The description of the AWS AppConfig GetConfiguration API action was amended to include important information about calling ClientConfigurationVersion when you configure clients to call GetConfiguration.
+
 1.4.0 (2020-03-31)
 ------------------
 

@@ -105,7 +105,7 @@ module Aws::CodeBuild
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::CodeBuild
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -842,7 +842,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.branch_filter #=> String
     #   resp.projects[0].webhook.filter_groups #=> Array
     #   resp.projects[0].webhook.filter_groups[0] #=> Array
-    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.projects[0].webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
     #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.projects[0].webhook.last_modified_secret #=> Time
@@ -1302,7 +1302,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.branch_filter #=> String
     #   resp.project.webhook.filter_groups #=> Array
     #   resp.project.webhook.filter_groups[0] #=> Array
-    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
@@ -1445,7 +1445,7 @@ module Aws::CodeBuild
     #     filter_groups: [
     #       [
     #         {
-    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #           pattern: "String", # required
     #           exclude_matched_pattern: false,
     #         },
@@ -1461,7 +1461,7 @@ module Aws::CodeBuild
     #   resp.webhook.branch_filter #=> String
     #   resp.webhook.filter_groups #=> Array
     #   resp.webhook.filter_groups[0] #=> Array
-    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
@@ -1655,6 +1655,8 @@ module Aws::CodeBuild
     #   * {Types::DescribeTestCasesOutput#next_token #next_token} => String
     #   * {Types::DescribeTestCasesOutput#test_cases #test_cases} => Array&lt;Types::TestCase&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_test_cases({
@@ -1817,6 +1819,8 @@ module Aws::CodeBuild
     #   * {Types::ListBuildsOutput#ids #ids} => Array&lt;String&gt;
     #   * {Types::ListBuildsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_builds({
@@ -1865,6 +1869,8 @@ module Aws::CodeBuild
     #
     #   * {Types::ListBuildsForProjectOutput#ids #ids} => Array&lt;String&gt;
     #   * {Types::ListBuildsForProjectOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1958,6 +1964,8 @@ module Aws::CodeBuild
     #   * {Types::ListProjectsOutput#next_token #next_token} => String
     #   * {Types::ListProjectsOutput#projects #projects} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_projects({
@@ -2017,6 +2025,8 @@ module Aws::CodeBuild
     #   * {Types::ListReportGroupsOutput#next_token #next_token} => String
     #   * {Types::ListReportGroupsOutput#report_groups #report_groups} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_report_groups({
@@ -2075,6 +2085,8 @@ module Aws::CodeBuild
     #   * {Types::ListReportsOutput#next_token #next_token} => String
     #   * {Types::ListReportsOutput#reports #reports} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_reports({
@@ -2131,6 +2143,8 @@ module Aws::CodeBuild
     #
     #   * {Types::ListReportsForReportGroupOutput#next_token #next_token} => String
     #   * {Types::ListReportsForReportGroupOutput#reports #reports} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2198,6 +2212,8 @@ module Aws::CodeBuild
     #   * {Types::ListSharedProjectsOutput#next_token #next_token} => String
     #   * {Types::ListSharedProjectsOutput#projects #projects} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_shared_projects({
@@ -2259,6 +2275,8 @@ module Aws::CodeBuild
     #
     #   * {Types::ListSharedReportGroupsOutput#next_token #next_token} => String
     #   * {Types::ListSharedReportGroupsOutput#report_groups #report_groups} => Array&lt;String&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2512,7 +2530,7 @@ module Aws::CodeBuild
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
-    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request and is valid for 5 minutes. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #
@@ -3241,7 +3259,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.branch_filter #=> String
     #   resp.project.webhook.filter_groups #=> Array
     #   resp.project.webhook.filter_groups[0] #=> Array
-    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.project.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
@@ -3372,7 +3390,7 @@ module Aws::CodeBuild
     #     filter_groups: [
     #       [
     #         {
-    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #           type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #           pattern: "String", # required
     #           exclude_matched_pattern: false,
     #         },
@@ -3388,7 +3406,7 @@ module Aws::CodeBuild
     #   resp.webhook.branch_filter #=> String
     #   resp.webhook.filter_groups #=> Array
     #   resp.webhook.filter_groups[0] #=> Array
-    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH"
+    #   resp.webhook.filter_groups[0][0].type #=> String, one of "EVENT", "BASE_REF", "HEAD_REF", "ACTOR_ACCOUNT_ID", "FILE_PATH", "COMMIT_MESSAGE"
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
@@ -3415,7 +3433,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1026,6 +1026,12 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: DescribeTestCasesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1066,6 +1072,11 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListBuildsInput)
         o.output = Shapes::ShapeRef.new(shape: ListBuildsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_builds_for_project, Seahorse::Model::Operation.new.tap do |o|
@@ -1076,6 +1087,11 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: ListBuildsForProjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_curated_environment_images, Seahorse::Model::Operation.new.tap do |o|
@@ -1093,6 +1109,11 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListProjectsInput)
         o.output = Shapes::ShapeRef.new(shape: ListProjectsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_report_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1102,6 +1123,12 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListReportGroupsInput)
         o.output = Shapes::ShapeRef.new(shape: ListReportGroupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_reports, Seahorse::Model::Operation.new.tap do |o|
@@ -1111,6 +1138,12 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListReportsInput)
         o.output = Shapes::ShapeRef.new(shape: ListReportsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_reports_for_report_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1121,6 +1154,12 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: ListReportsForReportGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_shared_projects, Seahorse::Model::Operation.new.tap do |o|
@@ -1130,6 +1169,12 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListSharedProjectsInput)
         o.output = Shapes::ShapeRef.new(shape: ListSharedProjectsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_shared_report_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1139,6 +1184,12 @@ module Aws::CodeBuild
         o.input = Shapes::ShapeRef.new(shape: ListSharedReportGroupsInput)
         o.output = Shapes::ShapeRef.new(shape: ListSharedReportGroupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_source_credentials, Seahorse::Model::Operation.new.tap do |o|

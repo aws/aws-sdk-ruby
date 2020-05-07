@@ -845,6 +845,7 @@ module Aws::EC2
     EnableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkResult')
     EndDateType = Shapes::StringShape.new(name: 'EndDateType')
     EndpointSet = Shapes::ListShape.new(name: 'EndpointSet')
+    ErrorSet = Shapes::ListShape.new(name: 'ErrorSet')
     EventCode = Shapes::StringShape.new(name: 'EventCode')
     EventInformation = Shapes::StructureShape.new(name: 'EventInformation')
     EventType = Shapes::StringShape.new(name: 'EventType')
@@ -1915,6 +1916,8 @@ module Aws::EC2
     UserIdStringList = Shapes::ListShape.new(name: 'UserIdStringList')
     VCpuCount = Shapes::IntegerShape.new(name: 'VCpuCount')
     VCpuInfo = Shapes::StructureShape.new(name: 'VCpuInfo')
+    ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
+    ValidationWarning = Shapes::StructureShape.new(name: 'ValidationWarning')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VersionDescription = Shapes::StringShape.new(name: 'VersionDescription')
     VersionStringList = Shapes::ListShape.new(name: 'VersionStringList')
@@ -2984,6 +2987,7 @@ module Aws::EC2
     CreateLaunchTemplateRequest.struct_class = Types::CreateLaunchTemplateRequest
 
     CreateLaunchTemplateResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "launchTemplate"))
+    CreateLaunchTemplateResult.add_member(:warning, Shapes::ShapeRef.new(shape: ValidationWarning, location_name: "warning"))
     CreateLaunchTemplateResult.struct_class = Types::CreateLaunchTemplateResult
 
     CreateLaunchTemplateVersionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -2996,6 +3000,7 @@ module Aws::EC2
     CreateLaunchTemplateVersionRequest.struct_class = Types::CreateLaunchTemplateVersionRequest
 
     CreateLaunchTemplateVersionResult.add_member(:launch_template_version, Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "launchTemplateVersion"))
+    CreateLaunchTemplateVersionResult.add_member(:warning, Shapes::ShapeRef.new(shape: ValidationWarning, location_name: "warning"))
     CreateLaunchTemplateVersionResult.struct_class = Types::CreateLaunchTemplateVersionResult
 
     CreateLocalGatewayRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DestinationCidrBlock"))
@@ -5371,6 +5376,8 @@ module Aws::EC2
     EnableVpcClassicLinkResult.struct_class = Types::EnableVpcClassicLinkResult
 
     EndpointSet.member = Shapes::ShapeRef.new(shape: ClientVpnEndpoint, location_name: "item")
+
+    ErrorSet.member = Shapes::ShapeRef.new(shape: ValidationError, location_name: "item")
 
     EventInformation.add_member(:event_description, Shapes::ShapeRef.new(shape: String, location_name: "eventDescription"))
     EventInformation.add_member(:event_sub_type, Shapes::ShapeRef.new(shape: String, location_name: "eventSubType"))
@@ -9467,6 +9474,13 @@ module Aws::EC2
     VCpuInfo.add_member(:valid_cores, Shapes::ShapeRef.new(shape: CoreCountList, location_name: "validCores"))
     VCpuInfo.add_member(:valid_threads_per_core, Shapes::ShapeRef.new(shape: ThreadsPerCoreList, location_name: "validThreadsPerCore"))
     VCpuInfo.struct_class = Types::VCpuInfo
+
+    ValidationError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ValidationError.struct_class = Types::ValidationError
+
+    ValidationWarning.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorSet, location_name: "errorSet"))
+    ValidationWarning.struct_class = Types::ValidationWarning
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 

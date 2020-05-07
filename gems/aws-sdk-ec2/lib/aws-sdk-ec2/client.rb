@@ -109,7 +109,7 @@ module Aws::EC2
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -165,7 +165,7 @@ module Aws::EC2
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -5213,7 +5213,13 @@ module Aws::EC2
     # Creates a launch template. A launch template contains the parameters
     # to launch an instance. When you launch an instance using RunInstances,
     # you can specify a launch template instead of providing the launch
-    # parameters in the request.
+    # parameters in the request. For more information, see [Launching an
+    # instance from a launch template][1]in the *Amazon Elastic Compute
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5247,6 +5253,7 @@ module Aws::EC2
     # @return [Types::CreateLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLaunchTemplateResult#launch_template #launch_template} => Types::LaunchTemplate
+    #   * {Types::CreateLaunchTemplateResult#warning #warning} => Types::ValidationWarning
     #
     #
     # @example Example: To create a launch template
@@ -5455,6 +5462,9 @@ module Aws::EC2
     #   resp.launch_template.tags #=> Array
     #   resp.launch_template.tags[0].key #=> String
     #   resp.launch_template.tags[0].value #=> String
+    #   resp.warning.errors #=> Array
+    #   resp.warning.errors[0].code #=> String
+    #   resp.warning.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplate AWS API Documentation
     #
@@ -5472,6 +5482,13 @@ module Aws::EC2
     # Launch template versions are numbered in the order in which they are
     # created. You cannot specify, change, or replace the numbering of
     # launch template versions.
+    #
+    # For more information, see [Managing launch template versions][1]in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5515,6 +5532,7 @@ module Aws::EC2
     # @return [Types::CreateLaunchTemplateVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLaunchTemplateVersionResult#launch_template_version #launch_template_version} => Types::LaunchTemplateVersion
+    #   * {Types::CreateLaunchTemplateVersionResult#warning #warning} => Types::ValidationWarning
     #
     #
     # @example Example: To create a launch template version
@@ -5791,6 +5809,9 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
     #   resp.launch_template_version.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.launch_template_version.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.warning.errors #=> Array
+    #   resp.warning.errors[0].code #=> String
+    #   resp.warning.errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -36854,7 +36875,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.157.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

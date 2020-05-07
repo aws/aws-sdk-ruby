@@ -6123,10 +6123,17 @@ module Aws::EC2
     #   Information about the launch template.
     #   @return [Types::LaunchTemplate]
     #
+    # @!attribute [rw] warning
+    #   If the launch template contains parameters or parameter combinations
+    #   that are not valid, an error code and an error message are returned
+    #   for each issue that's found.
+    #   @return [Types::ValidationWarning]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateResult AWS API Documentation
     #
     class CreateLaunchTemplateResult < Struct.new(
-      :launch_template)
+      :launch_template,
+      :warning)
       include Aws::Structure
     end
 
@@ -6335,10 +6342,17 @@ module Aws::EC2
     #   Information about the launch template version.
     #   @return [Types::LaunchTemplateVersion]
     #
+    # @!attribute [rw] warning
+    #   If the new version of the launch template contains parameters or
+    #   parameter combinations that are not valid, an error code and an
+    #   error message are returned for each issue that's found.
+    #   @return [Types::ValidationWarning]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersionResult AWS API Documentation
     #
     class CreateLaunchTemplateVersionResult < Struct.new(
-      :launch_template_version)
+      :launch_template_version,
+      :warning)
       include Aws::Structure
     end
 
@@ -46842,6 +46856,53 @@ module Aws::EC2
       :default_threads_per_core,
       :valid_cores,
       :valid_threads_per_core)
+      include Aws::Structure
+    end
+
+    # The error code and error message that is returned for a parameter or
+    # parameter combination that is not valid when a new launch template or
+    # new version of a launch template is created.
+    #
+    # @!attribute [rw] code
+    #   The error code that indicates why the parameter or parameter
+    #   combination is not valid. For more information about error codes,
+    #   see [Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message that describes why the parameter or parameter
+    #   combination is not valid. For more information about error messages,
+    #   see [Error Codes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidationError AWS API Documentation
+    #
+    class ValidationError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The error codes and error messages that are returned for the
+    # parameters or parameter combinations that are not valid when a new
+    # launch template or new version of a launch template is created.
+    #
+    # @!attribute [rw] errors
+    #   The error codes and error messages.
+    #   @return [Array<Types::ValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidationWarning AWS API Documentation
+    #
+    class ValidationWarning < Struct.new(
+      :errors)
       include Aws::Structure
     end
 

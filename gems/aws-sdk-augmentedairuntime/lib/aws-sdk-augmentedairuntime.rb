@@ -45,6 +45,6 @@ require_relative 'aws-sdk-augmentedairuntime/customizations'
 # @service
 module Aws::AugmentedAIRuntime
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

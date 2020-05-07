@@ -45,6 +45,6 @@ require_relative 'aws-sdk-managedblockchain/customizations'
 # @service
 module Aws::ManagedBlockchain
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

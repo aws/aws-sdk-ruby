@@ -105,7 +105,7 @@ module Aws::CloudWatchLogs
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::CloudWatchLogs
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -408,9 +408,9 @@ module Aws::CloudWatchLogs
     # This is an asynchronous call. If all the required information is
     # provided, this operation initiates an export task and responds with
     # the ID of the task. After the task has started, you can use
-    # DescribeExportTasks to get the status of the export task. Each account
-    # can only have one active (`RUNNING` or `PENDING`) export task at a
-    # time. To cancel an export task, use CancelExportTask.
+    # [DescribeExportTasks][1] to get the status of the export task. Each
+    # account can only have one active (`RUNNING` or `PENDING`) export task
+    # at a time. To cancel an export task, use [CancelExportTask][2].
     #
     # You can export logs from multiple log groups or multiple time ranges
     # to the same S3 bucket. To separate out log data for each export task,
@@ -419,6 +419,11 @@ module Aws::CloudWatchLogs
     #
     # Exporting to S3 buckets that are encrypted with AES-256 is supported.
     # Exporting to S3 buckets encrypted with SSE-KMS is not supported.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html
     #
     # @option params [String] :task_name
     #   The name of the export task.
@@ -682,6 +687,31 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def delete_metric_filter(params = {}, options = {})
       req = build_request(:delete_metric_filter, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :query_definition_id
+    #
+    # @return [Types::DeleteQueryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteQueryDefinitionResponse#success #success} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_query_definition({
+    #     query_definition_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.success #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinition AWS API Documentation
+    #
+    # @overload delete_query_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_query_definition(params = {}, options = {})
+      req = build_request(:delete_query_definition, params)
       req.send_request(options)
     end
 
@@ -1123,6 +1153,47 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # @option params [String] :query_definition_name_prefix
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::DescribeQueryDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueryDefinitionsResponse#query_definitions #query_definitions} => Array&lt;Types::QueryDefinition&gt;
+    #   * {Types::DescribeQueryDefinitionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_query_definitions({
+    #     query_definition_name_prefix: "QueryDefinitionName",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_definitions #=> Array
+    #   resp.query_definitions[0].query_definition_id #=> String
+    #   resp.query_definitions[0].name #=> String
+    #   resp.query_definitions[0].query_string #=> String
+    #   resp.query_definitions[0].last_modified #=> Integer
+    #   resp.query_definitions[0].log_group_names #=> Array
+    #   resp.query_definitions[0].log_group_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueryDefinitions AWS API Documentation
+    #
+    # @overload describe_query_definitions(params = {})
+    # @param [Hash] params ({})
+    def describe_query_definitions(params = {}, options = {})
+      req = build_request(:describe_query_definitions, params)
+      req.send_request(options)
+    end
+
     # Lists the resource policies in this account.
     #
     # @option params [String] :next_token
@@ -1451,10 +1522,15 @@ module Aws::CloudWatchLogs
     #
     # In the results, fields that start with @ are fields generated by
     # CloudWatch Logs. For example, `@timestamp` is the timestamp of each
-    # log event.
+    # log event. For more information about the fields that are generated by
+    # CloudWatch logs, see [Supported Logs and Discovered Fields][1].
     #
     # The response results are sorted by the frequency percentage, starting
     # with the highest percentage.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group to search.
@@ -1536,15 +1612,21 @@ module Aws::CloudWatchLogs
     #
     # Only the fields requested in the query are returned, along with a
     # `@ptr` field which is the identifier for the log record. You can use
-    # the value of `@ptr` in a operation to get the full log record.
+    # the value of `@ptr` in a [GetLogRecord][1] operation to get the full
+    # log record.
     #
     # `GetQueryResults` does not start a query execution. To run a query,
-    # use .
+    # use [StartQuery][2].
     #
     # If the value of the `Status` field in the output is `Running`, this
     # operation returns only partial results. If you see a value of
     # `Scheduled` or `Running` for the status, you can retry the operation
     # later to see the final results.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
     #
     # @option params [required, String] :query_id
     #   The ID number of the query.
@@ -1615,14 +1697,20 @@ module Aws::CloudWatchLogs
     #
     # A destination encapsulates a physical resource (such as an Amazon
     # Kinesis stream) and enables you to subscribe to a real-time stream of
-    # log events for a different account, ingested using PutLogEvents.
+    # log events for a different account, ingested using [PutLogEvents][1].
     #
     # Through an access policy, a destination controls what is written to
     # it. By default, `PutDestination` does not set any access policy with
     # the destination, which means a cross-account user cannot call
-    # PutSubscriptionFilter against this destination. To enable this, the
-    # destination owner must call PutDestinationPolicy after
+    # [PutSubscriptionFilter][2] against this destination. To enable this,
+    # the destination owner must call [PutDestinationPolicy][3] after
     # `PutDestination`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html
     #
     # @option params [required, String] :destination_name
     #   A name for the destination.
@@ -1752,9 +1840,13 @@ module Aws::CloudWatchLogs
     #   The sequence token obtained from the response of the previous
     #   `PutLogEvents` call. An upload in a newly created log stream does not
     #   require a sequence token. You can also get the sequence token using
-    #   DescribeLogStreams. If you call `PutLogEvents` twice within a narrow
-    #   time period using the same value for `sequenceToken`, both calls may
-    #   be successful, or one may be rejected.
+    #   [DescribeLogStreams][1]. If you call `PutLogEvents` twice within a
+    #   narrow time period using the same value for `sequenceToken`, both
+    #   calls may be successful, or one may be rejected.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html
     #
     # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1793,10 +1885,15 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a metric filter and associates it with the
     # specified log group. Metric filters allow you to configure rules to
-    # extract metric data from log events ingested through PutLogEvents.
+    # extract metric data from log events ingested through
+    # [PutLogEvents][1].
     #
     # The maximum number of metric filters that can be associated with a log
     # group is 100.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1835,6 +1932,40 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def put_metric_filter(params = {}, options = {})
       req = build_request(:put_metric_filter, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [String] :query_definition_id
+    #
+    # @option params [Array<String>] :log_group_names
+    #
+    # @option params [required, String] :query_string
+    #
+    # @return [Types::PutQueryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutQueryDefinitionResponse#query_definition_id #query_definition_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_query_definition({
+    #     name: "QueryDefinitionName", # required
+    #     query_definition_id: "QueryId",
+    #     log_group_names: ["LogGroupName"],
+    #     query_string: "QueryDefinitionString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_definition_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinition AWS API Documentation
+    #
+    # @overload put_query_definition(params = {})
+    # @param [Hash] params ({})
+    def put_query_definition(params = {}, options = {})
+      req = build_request(:put_query_definition, params)
       req.send_request(options)
     end
 
@@ -1918,9 +2049,9 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a subscription filter and associates it with the
     # specified log group. Subscription filters allow you to subscribe to a
-    # real-time stream of log events ingested through PutLogEvents and have
-    # them delivered to a specific destination. Currently, the supported
-    # destinations are:
+    # real-time stream of log events ingested through [PutLogEvents][1] and
+    # have them delivered to a specific destination. Currently, the
+    # supported destinations are:
     #
     # * An Amazon Kinesis stream belonging to the same account as the
     #   subscription filter, for same-account delivery.
@@ -1939,6 +2070,10 @@ module Aws::CloudWatchLogs
     # name in `filterName`. Otherwise, the call fails because you cannot
     # associate a second filter with a log group.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html
+    #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
@@ -1947,7 +2082,11 @@ module Aws::CloudWatchLogs
     #   filter, you must specify the correct name in `filterName`. Otherwise,
     #   the call fails because you cannot associate a second filter with a log
     #   group. To find the name of the filter currently associated with a log
-    #   group, use DescribeSubscriptionFilters.
+    #   group, use [DescribeSubscriptionFilters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html
     #
     # @option params [required, String] :filter_pattern
     #   A filter pattern for subscribing to a filtered stream of log events.
@@ -2113,15 +2252,17 @@ module Aws::CloudWatchLogs
 
     # Adds or updates the specified tags for the specified log group.
     #
-    # To list the tags for a log group, use ListTagsLogGroup. To remove
-    # tags, use UntagLogGroup.
+    # To list the tags for a log group, use [ListTagsLogGroup][1]. To remove
+    # tags, use [UntagLogGroup][2].
     #
     # For more information about tags, see [Tag Log Groups in Amazon
-    # CloudWatch Logs][1] in the *Amazon CloudWatch Logs User Guide*.
+    # CloudWatch Logs][3] in the *Amazon CloudWatch Logs User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -2192,8 +2333,13 @@ module Aws::CloudWatchLogs
 
     # Removes the specified tags from the specified log group.
     #
-    # To list the tags for a log group, use ListTagsLogGroup. To add tags,
-    # use UntagLogGroup.
+    # To list the tags for a log group, use [ListTagsLogGroup][1]. To add
+    # tags, use [TagLogGroup][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -2232,7 +2378,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
