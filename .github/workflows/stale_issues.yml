@@ -14,7 +14,7 @@ jobs:
       with:
         # Setting messages to an empty string will cause the automation to skip
         # that category
-        ancient-issue-message: Greetings!! We noticed that this issue is very old and has not been updated in a very long time. We will close this issue for now. Please feel free to reach out and open a new issue if you think this is still a relevant issue or if it is an error.
+        ancient-issue-message: Greetings! We noticed that this has not been updated in a very long time. We'd close this issue now. Please feel free to reach out and open a new issue if you think this is still a relevant issue or if it is an error.
         stale-issue-message: This issue has not recieved a response in 1 week. If you still think it is a persisting issue, please leave a comment to avoid the auto-close.
 
         # These labels are required
