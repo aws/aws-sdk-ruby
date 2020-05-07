@@ -25,7 +25,8 @@ module Aws
       #
       # @option options [Integer] :content_length Only used when
       #   `:multipart_copy` is `true`. Passing this options avoids a HEAD
-      #   request to query the source object size.
+      #   request to query the source object size. Raises an `ArgumentError` if
+      #   this option is provided when `:multipart_copy` is `false` or not set.
       #
       # @option options [S3::Client] :copy_source_client Only used when
       #   `:multipart_copy` is `true` and the source object is in a
