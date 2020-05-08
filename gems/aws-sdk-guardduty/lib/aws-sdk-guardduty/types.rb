@@ -554,6 +554,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.protocol
     #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -656,8 +658,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet. For example: .
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -858,8 +859,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet. For example: .
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1295,7 +1295,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS Account ID for the Organizations account to be disabled as a
+    #   The AWS Account ID for the organizations account to be disabled as a
     #   GuardDuty delegated administrator.
     #   @return [String]
     #
@@ -1405,7 +1405,7 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS Account ID for the Organizations account to be enabled as a
+    #   The AWS Account ID for the organization account to be enabled as a
     #   GuardDuty delegated administrator.
     #   @return [String]
     #
@@ -1841,8 +1841,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet. For example: .
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1989,8 +1988,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet. For example: .
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2369,6 +2367,8 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
+    #   * resource.instanceDetails.outpostArn
+    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2418,6 +2418,8 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -3746,8 +3748,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the IPSet. For example: .
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -3866,7 +3867,7 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] location
     #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   example: .
     #   @return [String]
     #
     # @!attribute [rw] activate

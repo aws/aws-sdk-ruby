@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-05-08)
+------------------
+
+* Feature - Documentation updates for resourcegroupstaggingapi
+
 1.24.0 (2020-05-07)
 ------------------
 

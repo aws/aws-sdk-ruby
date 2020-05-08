@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-05-08)
+------------------
+
+* Feature - This release adds a new parameter (EnableInterContainerTrafficEncryption) to CreateProcessingJob API to allow for enabling inter-container traffic encryption on processing jobs.
+
 1.56.0 (2020-05-07)
 ------------------
 

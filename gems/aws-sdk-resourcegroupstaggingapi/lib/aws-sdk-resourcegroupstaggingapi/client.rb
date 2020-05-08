@@ -780,10 +780,8 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @option params [required, Array<String>] :resource_arn_list
     #   A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a
-    #   resource. You can specify a minimum of 1 and a maximum of 20 ARNs
-    #   (resources) to tag. An ARN can be set to a maximum of 1600 characters.
-    #   For more information, see [Amazon Resource Names (ARNs) and AWS
-    #   Service Namespaces][1] in the *AWS General Reference*.
+    #   resource. For more information, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1] in the *AWS General Reference*.
     #
     #
     #
@@ -840,10 +838,8 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @option params [required, Array<String>] :resource_arn_list
     #   A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a
-    #   resource. You can specify a minimum of 1 and a maximum of 20 ARNs
-    #   (resources) to untag. An ARN can be set to a maximum of 1600
-    #   characters. For more information, see [Amazon Resource Names (ARNs)
-    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #   resource. For more information, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1] in the *AWS General Reference*.
     #
     #
     #
@@ -893,7 +889,7 @@ module Aws::ResourceGroupsTaggingAPI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroupstaggingapi'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
