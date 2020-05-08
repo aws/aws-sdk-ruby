@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow simple attributes plugin to send empty sets, rejected by the server.
+
 1.45.0 (2020-03-09)
 ------------------
 
@@ -309,4 +311,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-dynamodb` gem.
-
