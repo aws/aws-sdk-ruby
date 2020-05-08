@@ -105,7 +105,7 @@ module Aws::GuardDuty
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::GuardDuty
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -523,6 +523,8 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.protocol
     #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
+    #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
@@ -635,8 +637,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the IPSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet. For example: .
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -821,8 +822,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the ThreatIntelSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet. For example: .
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -1174,11 +1174,11 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disables GuardDuty administrator permissions for an AWS account within
-    # the Organization.
+    # Disables an AWS account within the Organization as the GuardDuty
+    # delegated administrator.
     #
     # @option params [required, String] :admin_account_id
-    #   The AWS Account ID for the Organizations account to be disabled as a
+    #   The AWS Account ID for the organizations account to be disabled as a
     #   GuardDuty delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1258,11 +1258,11 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Enables GuardDuty administrator permissions for an AWS account within
-    # the organization.
+    # Enables an AWS account within the organization as the GuardDuty
+    # delegated administrator.
     #
     # @option params [required, String] :admin_account_id
-    #   The AWS Account ID for the Organizations account to be enabled as a
+    #   The AWS Account ID for the organization account to be enabled as a
     #   GuardDuty delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1946,6 +1946,8 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
+    #   * resource.instanceDetails.outpostArn
+    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -1995,6 +1997,8 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
+    #
+    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2252,8 +2256,7 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Lists the accounts configured as AWS Organization delegated
-    # administrators.
+    # Lists the accounts configured as GuardDuty delegated administrators.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -2730,8 +2733,7 @@ module Aws::GuardDuty
     #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the IPSet. For example: .
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the IPSet is active
@@ -2837,7 +2839,7 @@ module Aws::GuardDuty
     #
     # @option params [String] :location
     #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   example: .
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the ThreateIntelSet
@@ -2877,7 +2879,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

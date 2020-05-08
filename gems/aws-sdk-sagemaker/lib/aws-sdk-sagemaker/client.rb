@@ -105,7 +105,7 @@ module Aws::SageMaker
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::SageMaker
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -648,8 +648,8 @@ module Aws::SageMaker
     end
 
     # Creates a running App for the specified UserProfile. Supported Apps
-    # are JupyterServer and KernelGateway. This operation is automatically
-    # invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon
+    # are `JupyterServer`, `KernelGateway`, and `TensorBoard`. This
+    # operation is automatically invoked by Amazon SageMaker Studio upon
     # access to the associated Studio Domain, and when new kernel
     # configurations are selected by the user. A user may have multiple Apps
     # active simultaneously. Apps will automatically terminate and be
@@ -674,7 +674,8 @@ module Aws::SageMaker
     #   unique per resource.
     #
     # @option params [Types::ResourceSpec] :resource_spec
-    #   The instance type and quantity.
+    #   The instance type and the Amazon Resource Name (ARN) of the SageMaker
+    #   image created on the instance.
     #
     # @return [Types::CreateAppResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -990,16 +991,16 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a Domain for Amazon SageMaker Amazon SageMaker Studio
-    # (Studio), which can be accessed by end-users in a web browser. A
-    # Domain has an associated directory, list of authorized users, and a
-    # variety of security, application, policies, and Amazon Virtual Private
-    # Cloud configurations. An AWS account is limited to one Domain, per
-    # region. Users within a domain can share notebook files and other
-    # artifacts with each other. When a Domain is created, an Amazon Elastic
-    # File System (EFS) is also created for use by all of the users within
-    # the Domain. Each user receives a private home directory within the EFS
-    # for notebooks, Git repositories, and data files.
+    # Creates a Domain for Amazon SageMaker Studio, which can be accessed by
+    # end-users in a web browser. A Domain has an associated directory, list
+    # of authorized users, and a variety of security, application, policies,
+    # and Amazon Virtual Private Cloud configurations. An AWS account is
+    # limited to one Domain, per region. Users within a domain can share
+    # notebook files and other artifacts with each other. When a Domain is
+    # created, an Amazon Elastic File System (EFS) is also created for use
+    # by all of the users within the Domain. Each user receives a private
+    # home directory within the EFS for notebooks, Git repositories, and
+    # data files.
     #
     # @option params [required, String] :domain_name
     #   A name for the domain.
@@ -1022,7 +1023,8 @@ module Aws::SageMaker
     #   unique per resource.
     #
     # @option params [String] :home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service encryption key ID.
+    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
+    #   with a customer master key (CMK) is not supported.
     #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2040,7 +2042,7 @@ module Aws::SageMaker
     #     human_task_config: { # required
     #       workteam_arn: "WorkteamArn", # required
     #       ui_config: { # required
-    #         ui_template_s3_uri: "S3Uri", # required
+    #         ui_template_s3_uri: "S3Uri",
     #       },
     #       pre_human_task_lambda_arn: "LambdaFunctionArn", # required
     #       task_keywords: ["TaskKeyword"],
@@ -2438,6 +2440,7 @@ module Aws::SageMaker
     #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #         },
     #         network_config: {
+    #           enable_inter_container_traffic_encryption: false,
     #           enable_network_isolation: false,
     #           vpc_config: {
     #             security_group_ids: ["SecurityGroupId"], # required
@@ -2751,9 +2754,9 @@ module Aws::SageMaker
 
     # Creates a URL for a specified UserProfile in a Domain. When accessed
     # in a web browser, the user will be automatically signed in to Amazon
-    # SageMaker Amazon SageMaker Studio (Studio), and granted access to all
-    # of the Apps and files associated with that Amazon Elastic File System
-    # (EFS). This operation can only be called when AuthMode equals IAM.
+    # SageMaker Studio, and granted access to all of the Apps and files
+    # associated with that Amazon Elastic File System (EFS). This operation
+    # can only be called when AuthMode equals IAM.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
@@ -2947,6 +2950,7 @@ module Aws::SageMaker
     #       "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #     },
     #     network_config: {
+    #       enable_inter_container_traffic_encryption: false,
     #       enable_network_isolation: false,
     #       vpc_config: {
     #         security_group_ids: ["SecurityGroupId"], # required
@@ -3706,14 +3710,16 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a new user profile. A user profile represents a single user
-    # within a Domain, and is the main way to reference a "person" for the
+    # Creates a user profile. A user profile represents a single user within
+    # a Domain, and is the main way to reference a "person" for the
     # purposes of sharing, reporting and other user-oriented features. This
-    # entity is created during on-boarding. If an administrator invites a
-    # person by email or imports them from SSO, a new UserProfile is
-    # automatically created. This entity is the primary holder of settings
-    # for an individual user and has a reference to the user's private
-    # Amazon Elastic File System (EFS) home directory.
+    # entity is created during on-boarding to Amazon SageMaker Studio. If an
+    # administrator invites a person by email or imports them from SSO, a
+    # UserProfile is automatically created.
+    #
+    # This entity is the primary holder of settings for an individual user
+    # and, through the domain, has a reference to the user's private Amazon
+    # Elastic File System (EFS) home directory.
     #
     # @option params [required, String] :domain_id
     #   The ID of the associated Domain.
@@ -3958,18 +3964,17 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Used to delete a domain. If you on-boarded with IAM mode, you will
-    # need to delete your domain to on-board again using SSO. Use with
-    # caution. All of the members of the domain will lose access to their
-    # EFS volume, including data, notebooks, and other artifacts.
+    # Used to delete a domain. Use with caution. If `RetentionPolicy` is set
+    # to `Delete`, all of the members of the domain will lose access to
+    # their EFS volume, including data, notebooks, and other artifacts.
     #
     # @option params [required, String] :domain_id
     #   The domain ID.
     #
     # @option params [Types::RetentionPolicy] :retention_policy
-    #   The retention policy for this domain, which specifies which resources
-    #   will be retained after the Domain is deleted. By default, all
-    #   resources are retained (not automatically deleted).
+    #   The retention policy for this domain, which specifies whether
+    #   resources will be retained after the Domain is deleted. By default,
+    #   all resources are retained (not automatically deleted).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5631,6 +5636,7 @@ module Aws::SageMaker
     #   resp.monitoring_schedule_config.monitoring_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.monitoring_schedule_config.monitoring_job_definition.environment #=> Hash
     #   resp.monitoring_schedule_config.monitoring_job_definition.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.monitoring_schedule_config.monitoring_job_definition.network_config.enable_inter_container_traffic_encryption #=> Boolean
     #   resp.monitoring_schedule_config.monitoring_job_definition.network_config.enable_network_isolation #=> Boolean
     #   resp.monitoring_schedule_config.monitoring_job_definition.network_config.vpc_config.security_group_ids #=> Array
     #   resp.monitoring_schedule_config.monitoring_job_definition.network_config.vpc_config.security_group_ids[0] #=> String
@@ -5844,6 +5850,7 @@ module Aws::SageMaker
     #   resp.app_specification.container_arguments[0] #=> String
     #   resp.environment #=> Hash
     #   resp.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.network_config.enable_inter_container_traffic_encryption #=> Boolean
     #   resp.network_config.enable_network_isolation #=> Boolean
     #   resp.network_config.vpc_config.security_group_ids #=> Array
     #   resp.network_config.vpc_config.security_group_ids[0] #=> String
@@ -8824,7 +8831,7 @@ module Aws::SageMaker
     # Renders the UI template so that you can preview the worker's
     # experience.
     #
-    # @option params [required, Types::UiTemplate] :ui_template
+    # @option params [Types::UiTemplate] :ui_template
     #   A `Template` object containing the worker UI template to render.
     #
     # @option params [required, Types::RenderableTask] :task
@@ -8842,7 +8849,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.render_ui_template({
-    #     ui_template: { # required
+    #     ui_template: {
     #       content: "TemplateContent", # required
     #     },
     #     task: { # required
@@ -9252,6 +9259,7 @@ module Aws::SageMaker
     #   resp.results[0].trial_component.source_detail.processing_job.app_specification.container_arguments[0] #=> String
     #   resp.results[0].trial_component.source_detail.processing_job.environment #=> Hash
     #   resp.results[0].trial_component.source_detail.processing_job.environment["ProcessingEnvironmentKey"] #=> String
+    #   resp.results[0].trial_component.source_detail.processing_job.network_config.enable_inter_container_traffic_encryption #=> Boolean
     #   resp.results[0].trial_component.source_detail.processing_job.network_config.enable_network_isolation #=> Boolean
     #   resp.results[0].trial_component.source_detail.processing_job.network_config.vpc_config.security_group_ids #=> Array
     #   resp.results[0].trial_component.source_detail.processing_job.network_config.vpc_config.security_group_ids[0] #=> String
@@ -9907,6 +9915,7 @@ module Aws::SageMaker
     #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #         },
     #         network_config: {
+    #           enable_inter_container_traffic_encryption: false,
     #           enable_network_isolation: false,
     #           vpc_config: {
     #             security_group_ids: ["SecurityGroupId"], # required
@@ -10444,7 +10453,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -105,7 +105,7 @@ module Aws::Lightsail
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::Lightsail
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -592,11 +592,11 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Closes the public ports on a specific Amazon Lightsail instance.
+    # Closes ports for a specific Amazon Lightsail instance.
     #
-    # The `close instance public ports` operation supports tag-based access
+    # The `CloseInstancePublicPorts` action supports tag-based access
     # control via resource tags applied to the resource identified by
-    # `instance name`. For more information, see the [Lightsail Dev
+    # `instanceName`. For more information, see the [Lightsail Dev
     # Guide][1].
     #
     #
@@ -604,11 +604,10 @@ module Aws::Lightsail
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, Types::PortInfo] :port_info
-    #   Information about the public port you are trying to close.
+    #   An object to describe the ports to close for the specified instance.
     #
     # @option params [required, String] :instance_name
-    #   The name of the instance on which you're attempting to close the
-    #   public ports.
+    #   The name of the instance for which to close ports.
     #
     # @return [Types::CloseInstancePublicPortsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -620,7 +619,9 @@ module Aws::Lightsail
     #     port_info: { # required
     #       from_port: 1,
     #       to_port: 1,
-    #       protocol: "tcp", # accepts tcp, all, udp
+    #       protocol: "tcp", # accepts tcp, all, udp, icmp
+    #       cidrs: ["string"],
+    #       cidr_list_aliases: ["string"],
     #     },
     #     instance_name: "ResourceName", # required
     #   })
@@ -892,7 +893,7 @@ module Aws::Lightsail
     #   maximum of 15 digits, and they are prefixed with the plus character
     #   (+) and the country code. For example, a U.S. phone number in E.164
     #   format would be specified as +1XXX5550100. For more information, see
-    #   [E.164][1] in Wikipedia.
+    #   [E.164][1] on *Wikipedia*.
     #
     #
     #
@@ -4505,11 +4506,15 @@ module Aws::Lightsail
     #   resp.instance.networking.ports #=> Array
     #   resp.instance.networking.ports[0].from_port #=> Integer
     #   resp.instance.networking.ports[0].to_port #=> Integer
-    #   resp.instance.networking.ports[0].protocol #=> String, one of "tcp", "all", "udp"
+    #   resp.instance.networking.ports[0].protocol #=> String, one of "tcp", "all", "udp", "icmp"
     #   resp.instance.networking.ports[0].access_from #=> String
     #   resp.instance.networking.ports[0].access_type #=> String, one of "Public", "Private"
     #   resp.instance.networking.ports[0].common_name #=> String
     #   resp.instance.networking.ports[0].access_direction #=> String, one of "inbound", "outbound"
+    #   resp.instance.networking.ports[0].cidrs #=> Array
+    #   resp.instance.networking.ports[0].cidrs[0] #=> String
+    #   resp.instance.networking.ports[0].cidr_list_aliases #=> Array
+    #   resp.instance.networking.ports[0].cidr_list_aliases[0] #=> String
     #   resp.instance.state.code #=> Integer
     #   resp.instance.state.name #=> String
     #   resp.instance.username #=> String
@@ -4596,7 +4601,7 @@ module Aws::Lightsail
     #   useful `statistics` to include in your request, and the published
     #   `unit` value.
     #
-    #   * <b> <code>CPUUtilization</code> </b> — The percentage of allocated
+    #   * <b> <code>CPUUtilization</code> </b> - The percentage of allocated
     #     compute units that are currently in use on the instance. This metric
     #     identifies the processing power to run the applications on the
     #     instance. Tools in your operating system can show a lower percentage
@@ -4608,7 +4613,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Percent`.
     #
-    #   * <b> <code>NetworkIn</code> </b> — The number of bytes received on
+    #   * <b> <code>NetworkIn</code> </b> - The number of bytes received on
     #     all network interfaces by the instance. This metric identifies the
     #     volume of incoming network traffic to the instance. The number
     #     reported is the number of bytes received during the period. Because
@@ -4619,7 +4624,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Bytes`.
     #
-    #   * <b> <code>NetworkOut</code> </b> — The number of bytes sent out on
+    #   * <b> <code>NetworkOut</code> </b> - The number of bytes sent out on
     #     all network interfaces by the instance. This metric identifies the
     #     volume of outgoing network traffic from the instance. The number
     #     reported is the number of bytes sent during the period. Because this
@@ -4630,7 +4635,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Bytes`.
     #
-    #   * <b> <code>StatusCheckFailed</code> </b> — Reports whether the
+    #   * <b> <code>StatusCheckFailed</code> </b> - Reports whether the
     #     instance passed or failed both the instance status check and the
     #     system status check. This metric can be either 0 (passed) or 1
     #     (failed). This metric data is available in 1-minute (60 seconds)
@@ -4640,7 +4645,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>StatusCheckFailed_Instance</code> </b> — Reports whether
+    #   * <b> <code>StatusCheckFailed_Instance</code> </b> - Reports whether
     #     the instance passed or failed the instance status check. This metric
     #     can be either 0 (passed) or 1 (failed). This metric data is
     #     available in 1-minute (60 seconds) granularity.
@@ -4649,7 +4654,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>StatusCheckFailed_System</code> </b> — Reports whether the
+    #   * <b> <code>StatusCheckFailed_System</code> </b> - Reports whether the
     #     instance passed or failed the system status check. This metric can
     #     be either 0 (passed) or 1 (failed). This metric data is available in
     #     1-minute (60 seconds) granularity.
@@ -4674,34 +4679,34 @@ module Aws::Lightsail
     #
     # @option params [required, String] :unit
     #   The unit for the metric data request. Valid units depend on the metric
-    #   data being required. For the valid units with each available metric,
-    #   see the `metricName` parameter.
+    #   data being requested. For the valid units to specify with each
+    #   available metric, see the `metricName` parameter.
     #
     # @option params [required, Array<String>] :statistics
     #   The statistic for the metric.
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified period.
+    #   * `Maximum` - The highest value observed during the specified period.
     #     Use this value to determine high volumes of activity for your
     #     application.
     #
-    #   * `Sum` — All values submitted for the matching metric added together.
+    #   * `Sum` - All values submitted for the matching metric added together.
     #     You can use this statistic to determine the total volume of a
     #     metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #
     # @return [Types::GetInstanceMetricDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4742,11 +4747,12 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns the port states for a specific virtual private server, or
-    # *instance*.
+    # Returns the firewall port states for a specific Amazon Lightsail
+    # instance, the IP addresses allowed to connect to the instance through
+    # the ports, and the protocol.
     #
     # @option params [required, String] :instance_name
-    #   The name of the instance.
+    #   The name of the instance for which to return firewall port states.
     #
     # @return [Types::GetInstancePortStatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4763,8 +4769,12 @@ module Aws::Lightsail
     #   resp.port_states #=> Array
     #   resp.port_states[0].from_port #=> Integer
     #   resp.port_states[0].to_port #=> Integer
-    #   resp.port_states[0].protocol #=> String, one of "tcp", "all", "udp"
+    #   resp.port_states[0].protocol #=> String, one of "tcp", "all", "udp", "icmp"
     #   resp.port_states[0].state #=> String, one of "open", "closed"
+    #   resp.port_states[0].cidrs #=> Array
+    #   resp.port_states[0].cidrs[0] #=> String
+    #   resp.port_states[0].cidr_list_aliases #=> Array
+    #   resp.port_states[0].cidr_list_aliases[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStates AWS API Documentation
     #
@@ -5030,11 +5040,15 @@ module Aws::Lightsail
     #   resp.instances[0].networking.ports #=> Array
     #   resp.instances[0].networking.ports[0].from_port #=> Integer
     #   resp.instances[0].networking.ports[0].to_port #=> Integer
-    #   resp.instances[0].networking.ports[0].protocol #=> String, one of "tcp", "all", "udp"
+    #   resp.instances[0].networking.ports[0].protocol #=> String, one of "tcp", "all", "udp", "icmp"
     #   resp.instances[0].networking.ports[0].access_from #=> String
     #   resp.instances[0].networking.ports[0].access_type #=> String, one of "Public", "Private"
     #   resp.instances[0].networking.ports[0].common_name #=> String
     #   resp.instances[0].networking.ports[0].access_direction #=> String, one of "inbound", "outbound"
+    #   resp.instances[0].networking.ports[0].cidrs #=> Array
+    #   resp.instances[0].networking.ports[0].cidrs[0] #=> String
+    #   resp.instances[0].networking.ports[0].cidr_list_aliases #=> Array
+    #   resp.instances[0].networking.ports[0].cidr_list_aliases[0] #=> String
     #   resp.instances[0].state.code #=> Integer
     #   resp.instances[0].state.name #=> String
     #   resp.instances[0].username #=> String
@@ -5199,7 +5213,7 @@ module Aws::Lightsail
     #   useful `statistics` to include in your request, and the published
     #   `unit` value.
     #
-    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> — The number of
+    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of
     #     TLS connections initiated by the client that did not establish a
     #     session with the load balancer due to a TLS error generated by the
     #     load balancer. Possible causes include a mismatch of ciphers or
@@ -5209,7 +5223,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HealthyHostCount</code> </b> — The number of target
+    #   * <b> <code>HealthyHostCount</code> </b> - The number of target
     #     instances that are considered healthy.
     #
     #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
@@ -5217,7 +5231,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
     #     HTTP 2XX response codes generated by the target instances. This does
     #     not include any response codes generated by the load balancer.
     #
@@ -5226,7 +5240,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
     #     HTTP 3XX response codes generated by the target instances. This does
     #     not include any response codes generated by the load balancer.
     #
@@ -5235,7 +5249,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
     #     HTTP 4XX response codes generated by the target instances. This does
     #     not include any response codes generated by the load balancer.
     #
@@ -5244,7 +5258,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
     #     HTTP 5XX response codes generated by the target instances. This does
     #     not include any response codes generated by the load balancer.
     #
@@ -5253,7 +5267,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> — The number of HTTP 4XX
+    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX
     #     client error codes that originated from the load balancer. Client
     #     errors are generated when requests are malformed or incomplete.
     #     These requests were not received by the target instance. This count
@@ -5264,7 +5278,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> — The number of HTTP 5XX
+    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX
     #     server error codes that originated from the load balancer. This does
     #     not include any response codes generated by the target instance.
     #     This metric is reported if there are no healthy instances attached
@@ -5276,7 +5290,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>InstanceResponseTime</code> </b> — The time elapsed, in
+    #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
     #     seconds, after the request leaves the load balancer until a response
     #     from the target instance is received.
     #
@@ -5284,7 +5298,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Seconds`.
     #
-    #   * <b> <code>RejectedConnectionCount</code> </b> — The number of
+    #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
     #     connections that were rejected because the load balancer had reached
     #     its maximum number of connections.
     #
@@ -5292,7 +5306,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>RequestCount</code> </b> — The number of requests
+    #   * <b> <code>RequestCount</code> </b> - The number of requests
     #     processed over IPv4. This count includes only the requests with a
     #     response generated by a target instance of the load balancer.
     #
@@ -5301,7 +5315,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>UnhealthyHostCount</code> </b> — The number of target
+    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
     #     instances that are considered unhealthy.
     #
     #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
@@ -5328,26 +5342,26 @@ module Aws::Lightsail
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified period.
+    #   * `Maximum` - The highest value observed during the specified period.
     #     Use this value to determine high volumes of activity for your
     #     application.
     #
-    #   * `Sum` — All values submitted for the matching metric added together.
+    #   * `Sum` - All values submitted for the matching metric added together.
     #     You can use this statistic to determine the total volume of a
     #     metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #
     # @return [Types::GetLoadBalancerMetricDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6108,7 +6122,7 @@ module Aws::Lightsail
     #   published `unit` value. All relational database metric data is
     #   available in 1-minute (60 seconds) granularity.
     #
-    #   * <b> <code>CPUUtilization</code> </b> — The percentage of CPU
+    #   * <b> <code>CPUUtilization</code> </b> - The percentage of CPU
     #     utilization currently in use on the database.
     #
     #     `Statistics`\: The most useful statistics are `Maximum` and
@@ -6116,28 +6130,28 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Percent`.
     #
-    #   * <b> <code>DatabaseConnections</code> </b> — The number of database
+    #   * <b> <code>DatabaseConnections</code> </b> - The number of database
     #     connections in use.
     #
     #     `Statistics`\: The most useful statistics are `Maximum` and `Sum`.
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>DiskQueueDepth</code> </b> — The number of outstanding IOs
+    #   * <b> <code>DiskQueueDepth</code> </b> - The number of outstanding IOs
     #     (read/write requests) that are waiting to access the disk.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>FreeStorageSpace</code> </b> — The amount of available
+    #   * <b> <code>FreeStorageSpace</code> </b> - The amount of available
     #     storage space.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
     #
     #     `Unit`\: The published unit is `Bytes`.
     #
-    #   * <b> <code>NetworkReceiveThroughput</code> </b> — The incoming
+    #   * <b> <code>NetworkReceiveThroughput</code> </b> - The incoming
     #     (Receive) network traffic on the database, including both customer
     #     database traffic and AWS traffic used for monitoring and
     #     replication.
@@ -6146,7 +6160,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Bytes/Second`.
     #
-    #   * <b> <code>NetworkTransmitThroughput</code> </b> — The outgoing
+    #   * <b> <code>NetworkTransmitThroughput</code> </b> - The outgoing
     #     (Transmit) network traffic on the database, including both customer
     #     database traffic and AWS traffic used for monitoring and
     #     replication.
@@ -6195,26 +6209,26 @@ module Aws::Lightsail
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified period.
+    #   * `Maximum` - The highest value observed during the specified period.
     #     Use this value to determine high volumes of activity for your
     #     application.
     #
-    #   * `Sum` — All values submitted for the matching metric added together.
+    #   * `Sum` - All values submitted for the matching metric added together.
     #     You can use this statistic to determine the total volume of a
     #     metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #
     # @return [Types::GetRelationalDatabaseMetricDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6626,11 +6640,13 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Adds public ports to an Amazon Lightsail instance.
+    # Opens ports for a specific Amazon Lightsail instance, and specifies
+    # the IP addresses allowed to connect to the instance through the ports,
+    # and the protocol.
     #
-    # The `open instance public ports` operation supports tag-based access
-    # control via resource tags applied to the resource identified by
-    # `instance name`. For more information, see the [Lightsail Dev
+    # The `OpenInstancePublicPorts` action supports tag-based access control
+    # via resource tags applied to the resource identified by
+    # `instanceName`. For more information, see the [Lightsail Dev
     # Guide][1].
     #
     #
@@ -6638,11 +6654,10 @@ module Aws::Lightsail
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, Types::PortInfo] :port_info
-    #   An array of key-value pairs containing information about the port
-    #   mappings.
+    #   An object to describe the ports to open for the specified instance.
     #
     # @option params [required, String] :instance_name
-    #   The name of the instance for which you want to open the public ports.
+    #   The name of the instance for which to open ports.
     #
     # @return [Types::OpenInstancePublicPortsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6654,7 +6669,9 @@ module Aws::Lightsail
     #     port_info: { # required
     #       from_port: 1,
     #       to_port: 1,
-    #       protocol: "tcp", # accepts tcp, all, udp
+    #       protocol: "tcp", # accepts tcp, all, udp, icmp
+    #       cidrs: ["string"],
+    #       cidr_list_aliases: ["string"],
     #     },
     #     instance_name: "ResourceName", # required
     #   })
@@ -6802,18 +6819,18 @@ module Aws::Lightsail
     #
     #   An alarm can treat missing data in the following ways:
     #
-    #   * `breaching` — Assume the missing data is not within the threshold.
+    #   * `breaching` - Assume the missing data is not within the threshold.
     #     Missing data counts towards the number of times the metric is not
     #     within the threshold.
     #
-    #   * `notBreaching` — Assume the missing data is within the threshold.
+    #   * `notBreaching` - Assume the missing data is within the threshold.
     #     Missing data does not count towards the number of times the metric
     #     is not within the threshold.
     #
-    #   * `ignore` — Ignore the missing data. Maintains the current alarm
+    #   * `ignore` - Ignore the missing data. Maintains the current alarm
     #     state.
     #
-    #   * `missing` — Missing data is treated as missing.
+    #   * `missing` - Missing data is treated as missing.
     #
     #   If `treatMissingData` is not specified, the default behavior of
     #   `missing` is used.
@@ -6839,13 +6856,13 @@ module Aws::Lightsail
     #
     #   An alarm has the following possible states:
     #
-    #   * `ALARM` — The metric is outside of the defined threshold.
+    #   * `ALARM` - The metric is outside of the defined threshold.
     #
-    #   * `INSUFFICIENT_DATA` — The alarm has just started, the metric is not
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is not
     #     available, or not enough data is available for the metric to
     #     determine the alarm state.
     #
-    #   * `OK` — The metric is within the defined threshold.
+    #   * `OK` - The metric is within the defined threshold.
     #
     #   When you specify a notification trigger, the `ALARM` state must be
     #   specified. The `INSUFFICIENT_DATA` and `OK` states can be specified in
@@ -6915,13 +6932,17 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Sets the specified open ports for an Amazon Lightsail instance, and
-    # closes all ports for every protocol not included in the current
-    # request.
+    # Opens ports for a specific Amazon Lightsail instance, and specifies
+    # the IP addresses allowed to connect to the instance through the ports,
+    # and the protocol. This action also closes all currently open ports
+    # that are not included in the request. Include all of the ports and the
+    # protocols you want to open in your `PutInstancePublicPorts`request. Or
+    # use the `OpenInstancePublicPorts` action to open ports without closing
+    # currently open ports.
     #
-    # The `put instance public ports` operation supports tag-based access
-    # control via resource tags applied to the resource identified by
-    # `instance name`. For more information, see the [Lightsail Dev
+    # The `PutInstancePublicPorts` action supports tag-based access control
+    # via resource tags applied to the resource identified by
+    # `instanceName`. For more information, see the [Lightsail Dev
     # Guide][1].
     #
     #
@@ -6929,10 +6950,11 @@ module Aws::Lightsail
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, Array<Types::PortInfo>] :port_infos
-    #   Specifies information about the public port(s).
+    #   An array of objects to describe the ports to open for the specified
+    #   instance.
     #
     # @option params [required, String] :instance_name
-    #   The Lightsail instance name of the public port(s) you are setting.
+    #   The name of the instance for which to open ports.
     #
     # @return [Types::PutInstancePublicPortsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6945,7 +6967,9 @@ module Aws::Lightsail
     #       {
     #         from_port: 1,
     #         to_port: 1,
-    #         protocol: "tcp", # accepts tcp, all, udp
+    #         protocol: "tcp", # accepts tcp, all, udp, icmp
+    #         cidrs: ["string"],
+    #         cidr_list_aliases: ["string"],
     #       },
     #     ],
     #     instance_name: "ResourceName", # required
@@ -7116,8 +7140,9 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Sends a verification request to an email contact method to ensure it’s
-    # owned by the requester. SMS contact methods don’t need to be verified.
+    # Sends a verification request to an email contact method to ensure
+    # it's owned by the requester. SMS contact methods don't need to be
+    # verified.
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
@@ -7498,13 +7523,13 @@ module Aws::Lightsail
     #
     #   An alarm has the following possible states that can be tested:
     #
-    #   * `ALARM` — The metric is outside of the defined threshold.
+    #   * `ALARM` - The metric is outside of the defined threshold.
     #
-    #   * `INSUFFICIENT_DATA` — The alarm has just started, the metric is not
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is not
     #     available, or not enough data is available for the metric to
     #     determine the alarm state.
     #
-    #   * `OK` — The metric is within the defined threshold.
+    #   * `OK` - The metric is within the defined threshold.
     #
     # @return [Types::TestAlarmResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7991,7 +8016,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

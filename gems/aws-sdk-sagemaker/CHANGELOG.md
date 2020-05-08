@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-05-08)
+------------------
+
+* Feature - This release adds a new parameter (EnableInterContainerTrafficEncryption) to CreateProcessingJob API to allow for enabling inter-container traffic encryption on processing jobs.
+
+1.56.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.55.0 (2020-04-27)
 ------------------
 

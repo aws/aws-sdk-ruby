@@ -1007,7 +1007,7 @@ module Aws::CodeBuild
     #         filter_groups: [
     #           [
     #             {
-    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #               pattern: "String", # required
     #               exclude_matched_pattern: false,
     #             },
@@ -1363,13 +1363,22 @@ module Aws::CodeBuild
     #   The type of environment variable. Valid values include:
     #
     #   * `PARAMETER_STORE`\: An environment variable stored in Amazon EC2
-    #     Systems Manager Parameter Store.
+    #     Systems Manager Parameter Store. To learn how to specify a
+    #     parameter store environment variable, see [ parameter store
+    #     reference-key in the buildspec file][1].
     #
     #   * `PLAINTEXT`\: An environment variable in plain text format. This
     #     is the default value.
     #
     #   * `SECRETS_MANAGER`\: An environment variable stored in AWS Secrets
-    #     Manager.
+    #     Manager. To learn how to specify a secrets manager environment
+    #     variable, see [ secrets manager reference-key in the buildspec
+    #     file][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#parameter-store-build-spec
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#secrets-manager-build-spec
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
@@ -2796,17 +2805,16 @@ module Aws::CodeBuild
     #
     #   * The environment type `LINUX_CONTAINER` with compute type
     #     `build.general1.2xlarge` is available only in regions US East (N.
-    #     Virginia), US East (N. Virginia), US West (Oregon), Canada
-    #     (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific
-    #     (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia
-    #     Pacific (Sydney), China (Beijing), and China (Ningxia).
+    #     Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
+    #     (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
+    #     Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney),
+    #     China (Beijing), and China (Ningxia).
     #
     #   * The environment type `LINUX_GPU_CONTAINER` is available only in
-    #     regions US East (N. Virginia), US East (N. Virginia), US West
-    #     (Oregon), Canada (Central), EU (Ireland), EU (London), EU
-    #     (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
-    #     Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
-    #     China (Ningxia).
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia
+    #     Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+    #     Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -3956,7 +3964,7 @@ module Aws::CodeBuild
     # @!attribute [rw] idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
-    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request and is valid for 5 minutes. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #   @return [String]
@@ -4563,7 +4571,7 @@ module Aws::CodeBuild
     #         filter_groups: [
     #           [
     #             {
-    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #               pattern: "String", # required
     #               exclude_matched_pattern: false,
     #             },
@@ -4717,24 +4725,25 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #         pattern: "String", # required
     #         exclude_matched_pattern: false,
     #       }
     #
     # @!attribute [rw] type
-    #   The type of webhook filter. There are five webhook filter types:
-    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, and
-    #   `FILE_PATH`.
+    #   The type of webhook filter. There are six webhook filter types:
+    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
+    #   and `COMMIT_MESSAGE`.
     #
     #   EVENT
     #
     #   : A webhook event triggers a build when the provided `pattern`
-    #     matches one of four event types: `PUSH`, `PULL_REQUEST_CREATED`,
-    #     `PULL_REQUEST_UPDATED`, and `PULL_REQUEST_REOPENED`. The `EVENT`
-    #     patterns are specified as a comma-separated string. For example,
-    #     `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all
-    #     push, pull request created, and pull request updated events.
+    #     matches one of five event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #     `PULL_REQUEST_UPDATED`, `PULL_REQUEST_REOPENED`, and
+    #     `PULL_REQUEST_MERGED`. The `EVENT` patterns are specified as a
+    #     comma-separated string. For example, `PUSH, PULL_REQUEST_CREATED,
+    #     PULL_REQUEST_UPDATED` filters all push, pull request created, and
+    #     pull request updated events.
     #
     #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
     #     Enterprise only.
@@ -4771,7 +4780,20 @@ module Aws::CodeBuild
     #   : A webhook triggers a build when the path of a changed file matches
     #     the regular expression `pattern`.
     #
-    #     <note markdown="1"> Works with GitHub and GitHub Enterprise push events only.
+    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #     events. Also works with GitHub Enterprise push events, but does
+    #     not work with GitHub Enterprise pull request events.
+    #
+    #      </note>
+    #
+    #   COMMIT\_MESSAGE
+    #
+    #   : A webhook triggers a build when the head commit message matches
+    #     the regular expression `pattern`.
+    #
+    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #     events. Also works with GitHub Enterprise push events, but does
+    #     not work with GitHub Enterprise pull request events.
     #
     #      </note>
     #   @return [String]

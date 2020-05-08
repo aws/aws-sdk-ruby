@@ -45,6 +45,6 @@ require_relative 'aws-sdk-ssm/customizations'
 # @service
 module Aws::SSM
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.77.0'
 
 end

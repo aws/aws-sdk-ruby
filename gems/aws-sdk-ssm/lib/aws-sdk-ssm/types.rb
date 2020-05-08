@@ -3197,7 +3197,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -5880,7 +5880,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
     #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #         patch_set: "OS", # accepts OS, APPLICATION
     #         max_results: 1,
@@ -6980,7 +6980,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
     #       }
     #
     # @!attribute [rw] operating_system
@@ -8192,7 +8192,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN
     #       }
     #
     # @!attribute [rw] patch_group

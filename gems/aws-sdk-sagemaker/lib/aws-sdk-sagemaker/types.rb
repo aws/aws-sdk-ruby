@@ -2271,7 +2271,8 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] resource_spec
-    #   The instance type and quantity.
+    #   The instance type and the Amazon Resource Name (ARN) of the
+    #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAppRequest AWS API Documentation
@@ -2628,7 +2629,8 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] home_efs_file_system_kms_key_id
-    #   The AWS Key Management Service encryption key ID.
+    #   The AWS Key Management Service (KMS) encryption key ID. Encryption
+    #   with a customer master key (CMK) is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateDomainRequest AWS API Documentation
@@ -3438,7 +3440,7 @@ module Aws::SageMaker
     #         human_task_config: { # required
     #           workteam_arn: "WorkteamArn", # required
     #           ui_config: { # required
-    #             ui_template_s3_uri: "S3Uri", # required
+    #             ui_template_s3_uri: "S3Uri",
     #           },
     #           pre_human_task_lambda_arn: "LambdaFunctionArn", # required
     #           task_keywords: ["TaskKeyword"],
@@ -3909,6 +3911,7 @@ module Aws::SageMaker
     #               "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #             },
     #             network_config: {
+    #               enable_inter_container_traffic_encryption: false,
     #               enable_network_isolation: false,
     #               vpc_config: {
     #                 security_group_ids: ["SecurityGroupId"], # required
@@ -4336,6 +4339,7 @@ module Aws::SageMaker
     #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #         },
     #         network_config: {
+    #           enable_inter_container_traffic_encryption: false,
     #           enable_network_isolation: false,
     #           vpc_config: {
     #             security_group_ids: ["SecurityGroupId"], # required
@@ -5745,7 +5749,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] retention_policy
-    #   The retention policy for this domain, which specifies which
+    #   The retention policy for this domain, which specifies whether
     #   resources will be retained after the Domain is deleted. By default,
     #   all resources are retained (not automatically deleted).
     #   @return [Types::RetentionPolicy]
@@ -6273,7 +6277,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] resource_spec
-    #   The instance type and quantity.
+    #   The instance type and the Amazon Resource Name (ARN) of the
+    #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAppResponse AWS API Documentation
@@ -8628,7 +8633,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_uid
-    #   The homa Amazon Elastic File System (EFS) Uid.
+    #   The home Amazon Elastic File System (EFS) Uid.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9909,7 +9914,7 @@ module Aws::SageMaker
     #       {
     #         workteam_arn: "WorkteamArn", # required
     #         ui_config: { # required
-    #           ui_template_s3_uri: "S3Uri", # required
+    #           ui_template_s3_uri: "S3Uri",
     #         },
     #         pre_human_task_lambda_arn: "LambdaFunctionArn", # required
     #         task_keywords: ["TaskKeyword"],
@@ -11380,7 +11385,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] default_resource_spec
-    #   The instance type and quantity.
+    #   The default instance type and the Amazon Resource Name (ARN) of the
+    #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
@@ -11403,7 +11409,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] default_resource_spec
-    #   The instance type and quantity.
+    #   The default instance type and the Amazon Resource Name (ARN) of the
+    #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
@@ -15129,6 +15136,7 @@ module Aws::SageMaker
     #           "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #         },
     #         network_config: {
+    #           enable_inter_container_traffic_encryption: false,
     #           enable_network_isolation: false,
     #           vpc_config: {
     #             security_group_ids: ["SecurityGroupId"], # required
@@ -15384,6 +15392,7 @@ module Aws::SageMaker
     #             "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #           },
     #           network_config: {
+    #             enable_inter_container_traffic_encryption: false,
     #             enable_network_isolation: false,
     #             vpc_config: {
     #               security_group_ids: ["SecurityGroupId"], # required
@@ -15547,12 +15556,20 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
+    #         enable_inter_container_traffic_encryption: false,
     #         enable_network_isolation: false,
     #         vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
     #       }
+    #
+    # @!attribute [rw] enable_inter_container_traffic_encryption
+    #   Whether to encrypt all communications between distributed processing
+    #   jobs. Choose `True` to encrypt communications. Encryption provides
+    #   greater security for distributed processing jobs, but the processing
+    #   might take longer.
+    #   @return [Boolean]
     #
     # @!attribute [rw] enable_network_isolation
     #   Whether to allow inbound and outbound network calls to and from the
@@ -15575,6 +15592,7 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NetworkConfig AWS API Documentation
     #
     class NetworkConfig < Struct.new(
+      :enable_inter_container_traffic_encryption,
       :enable_network_isolation,
       :vpc_config)
       include Aws::Structure
@@ -16917,7 +16935,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         ui_template: { # required
+    #         ui_template: {
     #           content: "TemplateContent", # required
     #         },
     #         task: { # required
@@ -17199,8 +17217,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The instance type and the Amazon Resource Name (ARN) of the image
-    # created on the instance. The ARN is stored as metadata in Amazon
+    # The instance type and the Amazon Resource Name (ARN) of the SageMaker
+    # image created on the instance. The ARN is stored as metadata in Amazon
     # SageMaker Studio notebooks.
     #
     # @note When making an API call, you may pass ResourceSpec
@@ -17212,7 +17230,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] sage_maker_image_arn
-    #   The Amazon Resource Name (ARN) of the image created on the instance.
+    #   The Amazon Resource Name (ARN) of the SageMaker image created on the
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -17227,7 +17246,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The retention policy.
+    # The retention policy for data stored on an Amazon Elastic File System
+    # (EFS) volume.
     #
     # @note When making an API call, you may pass RetentionPolicy
     #   data as a hash:
@@ -17237,7 +17257,10 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] home_efs_file_system
-    #   The home Amazon Elastic File System (EFS).
+    #   The default is `Retain`, which specifies to keep the data stored on
+    #   the EFS volume.
+    #
+    #   Specify `Delete` to delete the data stored on the EFS volume.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetentionPolicy AWS API Documentation
@@ -18285,7 +18308,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] default_resource_spec
-    #   The instance type and quantity.
+    #   The default instance type and the Amazon Resource Name (ARN) of the
+    #   SageMaker image created on the instance.
     #   @return [Types::ResourceSpec]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TensorBoardAppSettings AWS API Documentation
@@ -19979,7 +20003,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         ui_template_s3_uri: "S3Uri", # required
+    #         ui_template_s3_uri: "S3Uri",
     #       }
     #
     # @!attribute [rw] ui_template_s3_uri
@@ -20349,6 +20373,7 @@ module Aws::SageMaker
     #               "ProcessingEnvironmentKey" => "ProcessingEnvironmentValue",
     #             },
     #             network_config: {
+    #               enable_inter_container_traffic_encryption: false,
     #               enable_network_isolation: false,
     #               vpc_config: {
     #                 security_group_ids: ["SecurityGroupId"], # required

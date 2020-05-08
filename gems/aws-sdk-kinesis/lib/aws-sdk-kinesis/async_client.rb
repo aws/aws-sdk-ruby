@@ -88,7 +88,7 @@ module Aws::Kinesis
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -116,7 +116,7 @@ module Aws::Kinesis
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -516,7 +516,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

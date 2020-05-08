@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Allow simple attributes plugin to send empty sets, rejected by the server.
 
+1.46.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.45.0 (2020-03-09)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-05-08)
+------------------
+
+* Feature - Documentation updates for GuardDuty
+
+1.30.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2020-04-21)
 ------------------
 
