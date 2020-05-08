@@ -86,6 +86,19 @@ module Aws
                          'cTVsiWVeKyCGT~8i81-4_&Key-Pair-Id=CF_KEYPAIR_ID'
           expect(url).to eq(expected_url)
         end
+
+        it 'can handle urls with url-like paths' do
+          url = signer.signed_url(
+            'https://abc.cloudfront.net/images/from/s3://bucket/file.jpg',
+            :expires => expires
+          )
+          expected_url = 'https://abc.cloudfront.net/images/from/s3://bucket/file.jpg?'\
+                         'Expires=1357034400&Signature=Xk0prcC1fjhyROJOIr~x0KUuc-wEOQ~'\
+                         'v0zHwQ1GjPZH2rJPDIbjwNcvK8NIwyuQSk4PxmpaI1oVV8t62tuMPiQ8NuP2'\
+                         'LM6y-XWFPUkegRVVRC~~HKxvPUghef4iWS~zwIbn4bDpXjqjtA9nnyIlasau'\
+                         'Qypl7Zqm94g48YKTL2U0_&Key-Pair-Id=CF_KEYPAIR_ID'
+          expect(url).to eq(expected_url)
+        end
       end
     end
   end
