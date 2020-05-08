@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.504 (2020-05-08)
+------------------
+
 * Feature - Aws::GuardDuty - Updated the documentation for Amazon GuardDuty.
 
 * Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
