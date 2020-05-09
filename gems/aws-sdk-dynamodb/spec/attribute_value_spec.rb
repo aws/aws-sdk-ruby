@@ -42,9 +42,9 @@ module Aws
           expect(formatted).to eq(ss: %w(abc mno))
         end
 
-        it 'converts empty sets to :es (empty set)' do
+        it 'converts empty sets to :ss (string set)' do
           formatted = value.marshal(Set.new)
-          expect(formatted).to eq(es: [])
+          expect(formatted).to eq(ss: [])
         end
 
         it 'converts objects sets responding to #to_str to :ss (string set)' do
@@ -218,10 +218,6 @@ module Aws
           expect(simple.count).to eq(1)
           expect(simple.first).to be_kind_of(StringIO)
           expect(simple.first.string).to eq('data')
-        end
-
-        it 'converts :es to an empty set' do
-          expect(value.unmarshal(es: [])).to eq(Set.new)
         end
 
         it 'converts :n to big decimals' do
