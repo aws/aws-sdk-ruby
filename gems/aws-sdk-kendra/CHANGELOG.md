@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-05-11)
+------------------
+
+* Feature - Amazon Kendra is now generally available. As part of general availability, we are launching * Developer edition * Ability to scale your Amazon Kendra index with capacity units * Support for new connectors * Support for new tagging API's * Support for Deleting data source * Metrics for data source sync operations * Metrics for query & storage utilization
+
 1.4.0 (2020-05-07)
 ------------------
 

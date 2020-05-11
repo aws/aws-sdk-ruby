@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2020-05-11)
+------------------
+
+* Feature - M6g instances are our next-generation general purpose instances powered by AWS Graviton2 processors
+
 1.157.0 (2020-05-07)
 ------------------
 

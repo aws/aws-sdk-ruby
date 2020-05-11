@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.46.1 (2020-05-11)
+------------------
+
 * Issue - Allow simple attributes plugin to send empty sets, rejected by the server.
 
 1.46.0 (2020-05-07)

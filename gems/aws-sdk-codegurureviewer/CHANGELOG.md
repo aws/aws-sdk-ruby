@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-05-11)
+------------------
+
+* Feature - Add Bitbucket integration APIs
+
 1.4.0 (2020-05-07)
 ------------------
 

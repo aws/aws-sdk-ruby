@@ -24,6 +24,7 @@ module Aws::CodeGuruReviewer
     CommitDiffSourceCodeType = Shapes::StructureShape.new(name: 'CommitDiffSourceCodeType')
     CommitId = Shapes::StringShape.new(name: 'CommitId')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     DescribeCodeReviewRequest = Shapes::StructureShape.new(name: 'DescribeCodeReviewRequest')
     DescribeCodeReviewResponse = Shapes::StructureShape.new(name: 'DescribeCodeReviewResponse')
     DescribeRecommendationFeedbackRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationFeedbackRequest')
@@ -83,6 +84,7 @@ module Aws::CodeGuruReviewer
     SourceCodeType = Shapes::StructureShape.new(name: 'SourceCodeType')
     StateReason = Shapes::StringShape.new(name: 'StateReason')
     Text = Shapes::StringShape.new(name: 'Text')
+    ThirdPartySourceRepository = Shapes::StructureShape.new(name: 'ThirdPartySourceRepository')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     Type = Shapes::StringShape.new(name: 'Type')
@@ -268,10 +270,12 @@ module Aws::CodeGuruReviewer
     RecommendationSummary.struct_class = Types::RecommendationSummary
 
     Repository.add_member(:code_commit, Shapes::ShapeRef.new(shape: CodeCommitRepository, location_name: "CodeCommit"))
+    Repository.add_member(:bitbucket, Shapes::ShapeRef.new(shape: ThirdPartySourceRepository, location_name: "Bitbucket"))
     Repository.struct_class = Types::Repository
 
     RepositoryAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     RepositoryAssociation.add_member(:association_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AssociationArn"))
+    RepositoryAssociation.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
     RepositoryAssociation.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     RepositoryAssociation.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     RepositoryAssociation.add_member(:provider_type, Shapes::ShapeRef.new(shape: ProviderType, location_name: "ProviderType"))
@@ -286,6 +290,7 @@ module Aws::CodeGuruReviewer
     RepositoryAssociationSummaries.member = Shapes::ShapeRef.new(shape: RepositoryAssociationSummary)
 
     RepositoryAssociationSummary.add_member(:association_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AssociationArn"))
+    RepositoryAssociationSummary.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "ConnectionArn"))
     RepositoryAssociationSummary.add_member(:last_updated_time_stamp, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdatedTimeStamp"))
     RepositoryAssociationSummary.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     RepositoryAssociationSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
@@ -301,6 +306,11 @@ module Aws::CodeGuruReviewer
 
     SourceCodeType.add_member(:commit_diff, Shapes::ShapeRef.new(shape: CommitDiffSourceCodeType, location_name: "CommitDiff"))
     SourceCodeType.struct_class = Types::SourceCodeType
+
+    ThirdPartySourceRepository.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    ThirdPartySourceRepository.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, required: true, location_name: "ConnectionArn"))
+    ThirdPartySourceRepository.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, required: true, location_name: "Owner"))
+    ThirdPartySourceRepository.struct_class = Types::ThirdPartySourceRepository
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
