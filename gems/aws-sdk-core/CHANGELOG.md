@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add loaded libraries from ENV to user agent.
+
 3.95.0 (2020-05-07)
 ------------------
 
