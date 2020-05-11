@@ -30,6 +30,10 @@ module Aws
             ua += " exec-env/#{execution_env}"
           end
 
+          if (env_libs = ENV['AWS_SDK_1P_LIBRARIES'])
+            ua += env_libs.split(' ').map { |lib| " ENV-LIB/#{lib}" }.join
+          end
+
           if context.config.user_agent_suffix
             ua += " #{context.config.user_agent_suffix}"
           end
