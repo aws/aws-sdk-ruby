@@ -38,6 +38,8 @@ module Aws
             ua += " #{context.config.user_agent_suffix}"
           end
 
+          puts "User Agent: #{ua}"
+
           context.http_request.headers['User-Agent'] = ua.strip
         end
       end
