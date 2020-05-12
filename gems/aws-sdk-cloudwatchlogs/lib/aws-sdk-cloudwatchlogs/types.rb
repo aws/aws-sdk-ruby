@@ -288,6 +288,33 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteQueryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_definition_id: "QueryId", # required
+    #       }
+    #
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinitionRequest AWS API Documentation
+    #
+    class DeleteQueryDefinitionRequest < Struct.new(
+      :query_definition_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] success
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteQueryDefinitionResponse AWS API Documentation
+    #
+    class DeleteQueryDefinitionResponse < Struct.new(
+      :success)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteResourcePolicyRequest
     #   data as a hash:
     #
@@ -711,6 +738,51 @@ module Aws::CloudWatchLogs
     #
     class DescribeQueriesResponse < Struct.new(
       :queries,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQueryDefinitionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_definition_name_prefix: "QueryDefinitionName",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] query_definition_name_prefix
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueryDefinitionsRequest AWS API Documentation
+    #
+    class DescribeQueryDefinitionsRequest < Struct.new(
+      :query_definition_name_prefix,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_definitions
+    #   @return [Array<Types::QueryDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueryDefinitionsResponse AWS API Documentation
+    #
+    class DescribeQueryDefinitionsResponse < Struct.new(
+      :query_definitions,
       :next_token)
       include Aws::Structure
     end
@@ -1570,14 +1642,16 @@ module Aws::CloudWatchLogs
     end
 
     # The query string is not valid. Details about this error are displayed
-    # in a `QueryCompileError` object. For more information, see .
+    # in a `QueryCompileError` object. For more information, see
+    # [QueryCompileError][1]"/&gt;.
     #
     # For more information about valid query syntax, see [CloudWatch Logs
-    # Insights Query Syntax][1].
+    # Insights Query Syntax][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
     #
     # @!attribute [rw] query_compile_error
     #   Reserved.
@@ -1670,7 +1744,13 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   A custom namespace to contain your metric in CloudWatch. Use
+    #   namespaces to group together metrics that are similar. For more
+    #   information, see [Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace
     #   @return [String]
     #
     # @!attribute [rw] metric_value
@@ -1824,9 +1904,14 @@ module Aws::CloudWatchLogs
     #   The sequence token obtained from the response of the previous
     #   `PutLogEvents` call. An upload in a newly created log stream does
     #   not require a sequence token. You can also get the sequence token
-    #   using DescribeLogStreams. If you call `PutLogEvents` twice within a
-    #   narrow time period using the same value for `sequenceToken`, both
-    #   calls may be successful, or one may be rejected.
+    #   using [DescribeLogStreams][1]. If you call `PutLogEvents` twice
+    #   within a narrow time period using the same value for
+    #   `sequenceToken`, both calls may be successful, or one may be
+    #   rejected.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
@@ -1897,6 +1982,48 @@ module Aws::CloudWatchLogs
       :filter_name,
       :filter_pattern,
       :metric_transformations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutQueryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "QueryDefinitionName", # required
+    #         query_definition_id: "QueryId",
+    #         log_group_names: ["LogGroupName"],
+    #         query_string: "QueryDefinitionString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] query_string
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionRequest AWS API Documentation
+    #
+    class PutQueryDefinitionRequest < Struct.new(
+      :name,
+      :query_definition_id,
+      :log_group_names,
+      :query_string)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutQueryDefinitionResponse AWS API Documentation
+    #
+    class PutQueryDefinitionResponse < Struct.new(
+      :query_definition_id)
       include Aws::Structure
     end
 
@@ -1994,7 +2121,11 @@ module Aws::CloudWatchLogs
     #   filter, you must specify the correct name in `filterName`.
     #   Otherwise, the call fails because you cannot associate a second
     #   filter with a log group. To find the name of the filter currently
-    #   associated with a log group, use DescribeSubscriptionFilters.
+    #   associated with a log group, use [DescribeSubscriptionFilters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html
     #   @return [String]
     #
     # @!attribute [rw] filter_pattern
@@ -2077,6 +2208,32 @@ module Aws::CloudWatchLogs
     class QueryCompileErrorLocation < Struct.new(
       :start_char_offset,
       :end_char_offset)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_definition_id
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_group_names
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryDefinition AWS API Documentation
+    #
+    class QueryDefinition < Struct.new(
+      :query_definition_id,
+      :name,
+      :query_string,
+      :last_modified,
+      :log_group_names)
       include Aws::Structure
     end
 
@@ -2203,6 +2360,13 @@ module Aws::CloudWatchLogs
 
     # Contains one field from one log event returned by a CloudWatch Logs
     # Insights query, along with the value of that field.
+    #
+    # For more information about the fields that are generated by CloudWatch
+    # logs, see [Supported Logs and Discovered Fields][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html
     #
     # @!attribute [rw] field
     #   The log event field.

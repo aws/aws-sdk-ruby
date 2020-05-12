@@ -105,7 +105,7 @@ module Aws::CodeGuruReviewer
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::CodeGuruReviewer
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -358,6 +358,11 @@ module Aws::CodeGuruReviewer
     #       code_commit: {
     #         name: "Name", # required
     #       },
+    #       bitbucket: {
+    #         name: "Name", # required
+    #         connection_arn: "ConnectionArn", # required
+    #         owner: "Owner", # required
+    #       },
     #     },
     #     client_request_token: "ClientRequestToken",
     #   })
@@ -366,9 +371,10 @@ module Aws::CodeGuruReviewer
     #
     #   resp.repository_association.association_id #=> String
     #   resp.repository_association.association_arn #=> String
+    #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
     #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
@@ -405,7 +411,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.code_review_arn #=> String
     #   resp.code_review.repository_name #=> String
     #   resp.code_review.owner #=> String
-    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub"
+    #   resp.code_review.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
     #   resp.code_review.state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review.state_reason #=> String
     #   resp.code_review.created_time_stamp #=> Time
@@ -491,9 +497,10 @@ module Aws::CodeGuruReviewer
     #
     #   resp.repository_association.association_id #=> String
     #   resp.repository_association.association_arn #=> String
+    #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
     #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
@@ -528,9 +535,10 @@ module Aws::CodeGuruReviewer
     #
     #   resp.repository_association.association_id #=> String
     #   resp.repository_association.association_arn #=> String
+    #   resp.repository_association.connection_arn #=> String
     #   resp.repository_association.name #=> String
     #   resp.repository_association.owner #=> String
-    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub"
+    #   resp.repository_association.provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
     #   resp.repository_association.state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.repository_association.state_reason #=> String
     #   resp.repository_association.last_updated_time_stamp #=> Time
@@ -585,7 +593,7 @@ module Aws::CodeGuruReviewer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_code_reviews({
-    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub
+    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
     #     states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #     repository_names: ["Name"],
     #     type: "PullRequest", # required, accepts PullRequest
@@ -600,7 +608,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review_summaries[0].code_review_arn #=> String
     #   resp.code_review_summaries[0].repository_name #=> String
     #   resp.code_review_summaries[0].owner #=> String
-    #   resp.code_review_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub"
+    #   resp.code_review_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
     #   resp.code_review_summaries[0].state #=> String, one of "Completed", "Pending", "Failed", "Deleting"
     #   resp.code_review_summaries[0].created_time_stamp #=> Time
     #   resp.code_review_summaries[0].last_updated_time_stamp #=> Time
@@ -780,7 +788,7 @@ module Aws::CodeGuruReviewer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_repository_associations({
-    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub
+    #     provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
     #     states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating
     #     names: ["Name"],
     #     owners: ["Owner"],
@@ -792,11 +800,12 @@ module Aws::CodeGuruReviewer
     #
     #   resp.repository_association_summaries #=> Array
     #   resp.repository_association_summaries[0].association_arn #=> String
+    #   resp.repository_association_summaries[0].connection_arn #=> String
     #   resp.repository_association_summaries[0].last_updated_time_stamp #=> Time
     #   resp.repository_association_summaries[0].association_id #=> String
     #   resp.repository_association_summaries[0].name #=> String
     #   resp.repository_association_summaries[0].owner #=> String
-    #   resp.repository_association_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub"
+    #   resp.repository_association_summaries[0].provider_type #=> String, one of "CodeCommit", "GitHub", "Bitbucket"
     #   resp.repository_association_summaries[0].state #=> String, one of "Associated", "Associating", "Failed", "Disassociating"
     #   resp.next_token #=> String
     #
@@ -856,7 +865,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

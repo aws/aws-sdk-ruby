@@ -705,9 +705,9 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # The metadata that you apply to AWS resources to help you categorize
-    # and organize them. Each tag consists of a key and an optional value,
-    # both of which you define. For more information, see [Tagging AWS
-    # Resources][1] in the *AWS General Reference*.
+    # and organize them. Each tag consists of a key and a value, both of
+    # which you define. For more information, see [Tagging AWS Resources][1]
+    # in the *AWS General Reference*.
     #
     #
     #
@@ -719,8 +719,9 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The optional part of a key-value pair that make up a tag. A value
-    #   acts as a descriptor within a tag category (key).
+    #   One part of a key-value pair that make up a tag. A value acts as a
+    #   descriptor within a tag category (key). The value can be empty or
+    #   null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/Tag AWS API Documentation
@@ -748,8 +749,9 @@ module Aws::ResourceGroupsTaggingAPI
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The optional part of a key-value pair that make up a tag. A value
-    #   acts as a descriptor within a tag category (key).
+    #   One part of a key-value pair that make up a tag. A value acts as a
+    #   descriptor within a tag category (key). The value can be empty or
+    #   null.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagFilter AWS API Documentation
@@ -772,9 +774,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] resource_arn_list
     #   A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a
-    #   resource. You can specify a minimum of 1 and a maximum of 20 ARNs
-    #   (resources) to tag. An ARN can be set to a maximum of 1600
-    #   characters. For more information, see [Amazon Resource Names (ARNs)
+    #   resource. For more information, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1] in the *AWS General Reference*.
     #
     #
@@ -832,9 +832,7 @@ module Aws::ResourceGroupsTaggingAPI
     #
     # @!attribute [rw] resource_arn_list
     #   A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a
-    #   resource. You can specify a minimum of 1 and a maximum of 20 ARNs
-    #   (resources) to untag. An ARN can be set to a maximum of 1600
-    #   characters. For more information, see [Amazon Resource Names (ARNs)
+    #   resource. For more information, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1] in the *AWS General Reference*.
     #
     #

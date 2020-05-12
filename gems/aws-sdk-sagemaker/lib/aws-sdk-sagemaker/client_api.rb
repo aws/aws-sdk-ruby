@@ -3049,6 +3049,7 @@ module Aws::SageMaker
 
     NestedFiltersList.member = Shapes::ShapeRef.new(shape: NestedFilters)
 
+    NetworkConfig.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     NetworkConfig.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     NetworkConfig.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     NetworkConfig.struct_class = Types::NetworkConfig
@@ -3236,7 +3237,7 @@ module Aws::SageMaker
 
     RealtimeInferenceInstanceTypes.member = Shapes::ShapeRef.new(shape: ProductionVariantInstanceType)
 
-    RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, required: true, location_name: "UiTemplate"))
+    RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, location_name: "UiTemplate"))
     RenderUiTemplateRequest.add_member(:task, Shapes::ShapeRef.new(shape: RenderableTask, required: true, location_name: "Task"))
     RenderUiTemplateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     RenderUiTemplateRequest.struct_class = Types::RenderUiTemplateRequest
@@ -3667,7 +3668,7 @@ module Aws::SageMaker
     USD.add_member(:tenth_fractions_of_a_cent, Shapes::ShapeRef.new(shape: TenthFractionsOfACent, location_name: "TenthFractionsOfACent"))
     USD.struct_class = Types::USD
 
-    UiConfig.add_member(:ui_template_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "UiTemplateS3Uri"))
+    UiConfig.add_member(:ui_template_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "UiTemplateS3Uri"))
     UiConfig.struct_class = Types::UiConfig
 
     UiTemplate.add_member(:content, Shapes::ShapeRef.new(shape: TemplateContent, required: true, location_name: "Content"))

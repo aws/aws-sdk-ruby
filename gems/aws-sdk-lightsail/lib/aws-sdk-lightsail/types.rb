@@ -205,18 +205,18 @@ module Aws::Lightsail
     #
     #   An alarm can treat missing data in the following ways:
     #
-    #   * `breaching` — Assume the missing data is not within the threshold.
+    #   * `breaching` - Assume the missing data is not within the threshold.
     #     Missing data counts towards the number of times the metric is not
     #     within the threshold.
     #
-    #   * `notBreaching` — Assume the missing data is within the threshold.
+    #   * `notBreaching` - Assume the missing data is within the threshold.
     #     Missing data does not count towards the number of times the metric
     #     is not within the threshold.
     #
-    #   * `ignore` — Ignore the missing data. Maintains the current alarm
+    #   * `ignore` - Ignore the missing data. Maintains the current alarm
     #     state.
     #
-    #   * `missing` — Missing data is treated as missing.
+    #   * `missing` - Missing data is treated as missing.
     #   @return [String]
     #
     # @!attribute [rw] statistic
@@ -224,26 +224,26 @@ module Aws::Lightsail
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified
+    #   * `Maximum` - The highest value observed during the specified
     #     period. Use this value to determine high volumes of activity for
     #     your application.
     #
-    #   * `Sum` — All values submitted for the matching metric added
+    #   * `Sum` - All values submitted for the matching metric added
     #     together. You can use this statistic to determine the total volume
     #     of a metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #   @return [String]
     #
@@ -256,13 +256,13 @@ module Aws::Lightsail
     #
     #   An alarm has the following possible states:
     #
-    #   * `ALARM` — The metric is outside of the defined threshold.
+    #   * `ALARM` - The metric is outside of the defined threshold.
     #
-    #   * `INSUFFICIENT_DATA` — The alarm has just started, the metric is
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is
     #     not available, or not enough data is available for the metric to
     #     determine the alarm state.
     #
-    #   * `OK` — The metric is within the defined threshold.
+    #   * `OK` - The metric is within the defined threshold.
     #   @return [String]
     #
     # @!attribute [rw] unit
@@ -328,7 +328,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -372,7 +372,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -417,7 +417,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -455,7 +455,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #
     #   These SSL/TLS certificates are only usable by Lightsail load
@@ -496,7 +496,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -793,18 +793,19 @@ module Aws::Lightsail
     #         port_info: { # required
     #           from_port: 1,
     #           to_port: 1,
-    #           protocol: "tcp", # accepts tcp, all, udp
+    #           protocol: "tcp", # accepts tcp, all, udp, icmp
+    #           cidrs: ["string"],
+    #           cidr_list_aliases: ["string"],
     #         },
     #         instance_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] port_info
-    #   Information about the public port you are trying to close.
+    #   An object to describe the ports to close for the specified instance.
     #   @return [Types::PortInfo]
     #
     # @!attribute [rw] instance_name
-    #   The name of the instance on which you're attempting to close the
-    #   public ports.
+    #   The name of the instance for which to close ports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPortsRequest AWS API Documentation
@@ -816,8 +817,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -929,12 +930,12 @@ module Aws::Lightsail
     #
     #   A contact method has the following possible status:
     #
-    #   * `PendingVerification` — The contact method has not yet been
+    #   * `PendingVerification` - The contact method has not yet been
     #     verified, and the verification has not yet expired.
     #
-    #   * `Valid` — The contact method has been verified.
+    #   * `Valid` - The contact method has been verified.
     #
-    #   * `InValid` — An attempt was made to verify the contact method, but
+    #   * `InValid` - An attempt was made to verify the contact method, but
     #     the verification has expired.
     #   @return [String]
     #
@@ -1090,7 +1091,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1132,7 +1133,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1193,7 +1194,7 @@ module Aws::Lightsail
     #   maximum of 15 digits, and they are prefixed with the plus character
     #   (+) and the country code. For example, a U.S. phone number in E.164
     #   format would be specified as +1XXX5550100. For more information, see
-    #   [E.164][1] in Wikipedia.
+    #   [E.164][1] on *Wikipedia*.
     #
     #
     #
@@ -1210,7 +1211,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1369,7 +1370,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1446,7 +1447,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1519,7 +1520,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1567,7 +1568,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -1621,7 +1622,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -1673,7 +1674,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -1875,7 +1876,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2011,7 +2012,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2070,7 +2071,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -2164,7 +2165,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2243,7 +2244,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2374,7 +2375,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2567,7 +2568,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2625,7 +2626,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2656,7 +2657,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2696,7 +2697,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2734,7 +2735,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2772,7 +2773,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2804,7 +2805,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2851,7 +2852,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -2882,7 +2883,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -2920,7 +2921,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2951,7 +2952,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -2982,7 +2983,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -3014,7 +3015,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3045,7 +3046,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3093,7 +3094,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3156,7 +3157,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3187,7 +3188,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3237,7 +3238,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3275,7 +3276,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3306,7 +3307,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3343,7 +3344,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3833,7 +3834,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -3967,7 +3968,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -4646,7 +4647,7 @@ module Aws::Lightsail
     #   useful `statistics` to include in your request, and the published
     #   `unit` value.
     #
-    #   * <b> <code>CPUUtilization</code> </b> — The percentage of allocated
+    #   * <b> <code>CPUUtilization</code> </b> - The percentage of allocated
     #     compute units that are currently in use on the instance. This
     #     metric identifies the processing power to run the applications on
     #     the instance. Tools in your operating system can show a lower
@@ -4658,7 +4659,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Percent`.
     #
-    #   * <b> <code>NetworkIn</code> </b> — The number of bytes received on
+    #   * <b> <code>NetworkIn</code> </b> - The number of bytes received on
     #     all network interfaces by the instance. This metric identifies the
     #     volume of incoming network traffic to the instance. The number
     #     reported is the number of bytes received during the period.
@@ -4669,7 +4670,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Bytes`.
     #
-    #   * <b> <code>NetworkOut</code> </b> — The number of bytes sent out on
+    #   * <b> <code>NetworkOut</code> </b> - The number of bytes sent out on
     #     all network interfaces by the instance. This metric identifies the
     #     volume of outgoing network traffic from the instance. The number
     #     reported is the number of bytes sent during the period. Because
@@ -4680,7 +4681,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Bytes`.
     #
-    #   * <b> <code>StatusCheckFailed</code> </b> — Reports whether the
+    #   * <b> <code>StatusCheckFailed</code> </b> - Reports whether the
     #     instance passed or failed both the instance status check and the
     #     system status check. This metric can be either 0 (passed) or 1
     #     (failed). This metric data is available in 1-minute (60 seconds)
@@ -4690,7 +4691,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>StatusCheckFailed_Instance</code> </b> — Reports whether
+    #   * <b> <code>StatusCheckFailed_Instance</code> </b> - Reports whether
     #     the instance passed or failed the instance status check. This
     #     metric can be either 0 (passed) or 1 (failed). This metric data is
     #     available in 1-minute (60 seconds) granularity.
@@ -4699,7 +4700,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>StatusCheckFailed_System</code> </b> — Reports whether
+    #   * <b> <code>StatusCheckFailed_System</code> </b> - Reports whether
     #     the instance passed or failed the system status check. This metric
     #     can be either 0 (passed) or 1 (failed). This metric data is
     #     available in 1-minute (60 seconds) granularity.
@@ -4728,8 +4729,8 @@ module Aws::Lightsail
     #
     # @!attribute [rw] unit
     #   The unit for the metric data request. Valid units depend on the
-    #   metric data being required. For the valid units with each available
-    #   metric, see the `metricName` parameter.
+    #   metric data being requested. For the valid units to specify with
+    #   each available metric, see the `metricName` parameter.
     #   @return [String]
     #
     # @!attribute [rw] statistics
@@ -4737,26 +4738,26 @@ module Aws::Lightsail
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified
+    #   * `Maximum` - The highest value observed during the specified
     #     period. Use this value to determine high volumes of activity for
     #     your application.
     #
-    #   * `Sum` — All values submitted for the matching metric added
+    #   * `Sum` - All values submitted for the matching metric added
     #     together. You can use this statistic to determine the total volume
     #     of a metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #   @return [Array<String>]
     #
@@ -4798,7 +4799,7 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] instance_name
-    #   The name of the instance.
+    #   The name of the instance for which to return firewall port states.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesRequest AWS API Documentation
@@ -4809,7 +4810,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] port_states
-    #   Information about the port states resulting from your request.
+    #   An array of objects that describe the firewall port states for the
+    #   specified instance.
     #   @return [Array<Types::InstancePortState>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesResult AWS API Documentation
@@ -5103,7 +5105,7 @@ module Aws::Lightsail
     #   most useful `statistics` to include in your request, and the
     #   published `unit` value.
     #
-    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> — The number
+    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number
     #     of TLS connections initiated by the client that did not establish
     #     a session with the load balancer due to a TLS error generated by
     #     the load balancer. Possible causes include a mismatch of ciphers
@@ -5113,7 +5115,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HealthyHostCount</code> </b> — The number of target
+    #   * <b> <code>HealthyHostCount</code> </b> - The number of target
     #     instances that are considered healthy.
     #
     #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
@@ -5121,7 +5123,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
     #     HTTP 2XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
@@ -5131,7 +5133,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
     #     HTTP 3XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
@@ -5141,7 +5143,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
     #     HTTP 4XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
@@ -5151,7 +5153,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> — The number of
+    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
     #     HTTP 5XX response codes generated by the target instances. This
     #     does not include any response codes generated by the load
     #     balancer.
@@ -5161,7 +5163,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> — The number of HTTP
+    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
     #     4XX client error codes that originated from the load balancer.
     #     Client errors are generated when requests are malformed or
     #     incomplete. These requests were not received by the target
@@ -5173,7 +5175,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> — The number of HTTP
+    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
     #     5XX server error codes that originated from the load balancer.
     #     This does not include any response codes generated by the target
     #     instance. This metric is reported if there are no healthy
@@ -5186,7 +5188,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>InstanceResponseTime</code> </b> — The time elapsed, in
+    #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
     #     seconds, after the request leaves the load balancer until a
     #     response from the target instance is received.
     #
@@ -5194,7 +5196,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Seconds`.
     #
-    #   * <b> <code>RejectedConnectionCount</code> </b> — The number of
+    #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
     #     connections that were rejected because the load balancer had
     #     reached its maximum number of connections.
     #
@@ -5202,7 +5204,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>RequestCount</code> </b> — The number of requests
+    #   * <b> <code>RequestCount</code> </b> - The number of requests
     #     processed over IPv4. This count includes only the requests with a
     #     response generated by a target instance of the load balancer.
     #
@@ -5211,7 +5213,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>UnhealthyHostCount</code> </b> — The number of target
+    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
     #     instances that are considered unhealthy.
     #
     #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
@@ -5243,26 +5245,26 @@ module Aws::Lightsail
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified
+    #   * `Maximum` - The highest value observed during the specified
     #     period. Use this value to determine high volumes of activity for
     #     your application.
     #
-    #   * `Sum` — All values submitted for the matching metric added
+    #   * `Sum` - All values submitted for the matching metric added
     #     together. You can use this statistic to determine the total volume
     #     of a metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #   @return [Array<String>]
     #
@@ -5508,7 +5510,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -5550,7 +5552,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -5609,7 +5611,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -6042,7 +6044,7 @@ module Aws::Lightsail
     #   published `unit` value. All relational database metric data is
     #   available in 1-minute (60 seconds) granularity.
     #
-    #   * <b> <code>CPUUtilization</code> </b> — The percentage of CPU
+    #   * <b> <code>CPUUtilization</code> </b> - The percentage of CPU
     #     utilization currently in use on the database.
     #
     #     `Statistics`\: The most useful statistics are `Maximum` and
@@ -6050,28 +6052,28 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Percent`.
     #
-    #   * <b> <code>DatabaseConnections</code> </b> — The number of database
+    #   * <b> <code>DatabaseConnections</code> </b> - The number of database
     #     connections in use.
     #
     #     `Statistics`\: The most useful statistics are `Maximum` and `Sum`.
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>DiskQueueDepth</code> </b> — The number of outstanding
+    #   * <b> <code>DiskQueueDepth</code> </b> - The number of outstanding
     #     IOs (read/write requests) that are waiting to access the disk.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
     #
     #     `Unit`\: The published unit is `Count`.
     #
-    #   * <b> <code>FreeStorageSpace</code> </b> — The amount of available
+    #   * <b> <code>FreeStorageSpace</code> </b> - The amount of available
     #     storage space.
     #
     #     `Statistics`\: The most useful statistic is `Sum`.
     #
     #     `Unit`\: The published unit is `Bytes`.
     #
-    #   * <b> <code>NetworkReceiveThroughput</code> </b> — The incoming
+    #   * <b> <code>NetworkReceiveThroughput</code> </b> - The incoming
     #     (Receive) network traffic on the database, including both customer
     #     database traffic and AWS traffic used for monitoring and
     #     replication.
@@ -6080,7 +6082,7 @@ module Aws::Lightsail
     #
     #     `Unit`\: The published unit is `Bytes/Second`.
     #
-    #   * <b> <code>NetworkTransmitThroughput</code> </b> — The outgoing
+    #   * <b> <code>NetworkTransmitThroughput</code> </b> - The outgoing
     #     (Transmit) network traffic on the database, including both
     #     customer database traffic and AWS traffic used for monitoring and
     #     replication.
@@ -6134,26 +6136,26 @@ module Aws::Lightsail
     #
     #   The following statistics are available:
     #
-    #   * `Minimum` — The lowest value observed during the specified period.
+    #   * `Minimum` - The lowest value observed during the specified period.
     #     Use this value to determine low volumes of activity for your
     #     application.
     #
-    #   * `Maximum` — The highest value observed during the specified
+    #   * `Maximum` - The highest value observed during the specified
     #     period. Use this value to determine high volumes of activity for
     #     your application.
     #
-    #   * `Sum` — All values submitted for the matching metric added
+    #   * `Sum` - All values submitted for the matching metric added
     #     together. You can use this statistic to determine the total volume
     #     of a metric.
     #
-    #   * `Average` — The value of Sum / SampleCount during the specified
+    #   * `Average` - The value of Sum / SampleCount during the specified
     #     period. By comparing this statistic with the Minimum and Maximum
     #     values, you can determine the full scope of a metric and how close
     #     the average use is to the Minimum and Maximum values. This
     #     comparison helps you to know when to increase or decrease your
     #     resources.
     #
-    #   * `SampleCount` — The count, or number, of data points used for the
+    #   * `SampleCount` - The count, or number, of data points used for the
     #     statistical calculation.
     #   @return [Array<String>]
     #
@@ -6566,7 +6568,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -6816,14 +6818,22 @@ module Aws::Lightsail
     #
     #   The following configuration options are available:
     #
-    #   * DEFAULT — Use the default firewall settings from the image.
+    #   * `DEFAULT` - Use the default firewall settings from the Lightsail
+    #     instance blueprint.
     #
-    #   * INSTANCE — Use the firewall settings from the source Lightsail
-    #     instance.
+    #   * `INSTANCE` - Use the configured firewall settings from the source
+    #     Lightsail instance.
     #
-    #   * NONE — Default to Amazon EC2.
+    #   * `NONE` - Use the default Amazon EC2 security group.
     #
-    #   * CLOSED — All ports closed.
+    #   * `CLOSED` - All ports closed.
+    #
+    #   <note markdown="1"> If you configured `lightsail-connect` as a `cidrListAliases` on your
+    #   instance, or if you chose to allow the Lightsail browser-based SSH
+    #   or RDP clients to connect to your instance, that configuration is
+    #   not carried over to your new Amazon EC2 instance.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -6978,18 +6988,44 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes information about the instance ports.
+    # Describes information about ports for an Amazon Lightsail instance.
     #
     # @!attribute [rw] from_port
-    #   The first port in the range.
+    #   The first port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - `8` (to configure Ping)
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The last port in the range.
+    #   The last port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - `-1` (to configure Ping)
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol being used. Can be one of the following.
+    #   The IP protocol name.
+    #
+    #   The name can be one of the following:
     #
     #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
     #     ordered, and error-checked delivery of streamed data between
@@ -6998,7 +7034,7 @@ module Aws::Lightsail
     #     service, use UDP instead.
     #
     #   * `all` - All transport layer protocol types. For more general
-    #     information, see [Transport layer][1] on Wikipedia.
+    #     information, see [Transport layer][1] on *Wikipedia*.
     #
     #   * `udp` - With User Datagram Protocol (UDP), computer applications
     #     can send messages (or datagrams) to other hosts on an Internet
@@ -7009,14 +7045,26 @@ module Aws::Lightsail
     #     latency over reliability. If you do require reliable data stream
     #     service, use TCP instead.
     #
+    #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
+    #     error messages and operational information indicating success or
+    #     failure when communicating with an instance. For example, an error
+    #     is indicated when an instance could not be reached.
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Transport_layer
     #   @return [String]
     #
     # @!attribute [rw] access_from
-    #   The location from which access is allowed (e.g., `Anywhere
-    #   (0.0.0.0/0)`).
+    #   The location from which access is allowed. For example, `Anywhere
+    #   (0.0.0.0/0)`, or `Custom` if a specific IP address or range of IP
+    #   addresses is allowed.
     #   @return [String]
     #
     # @!attribute [rw] access_type
@@ -7024,12 +7072,38 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] common_name
-    #   The common name.
+    #   The common name of the port information.
     #   @return [String]
     #
     # @!attribute [rw] access_direction
     #   The access direction (`inbound` or `outbound`).
+    #
+    #   <note markdown="1"> Lightsail currently supports only `inbound` access direction.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The IP address, or range of IP addresses in CIDR notation, that are
+    #   allowed to connect to an instance through the ports, and the
+    #   protocol. Lightsail supports IPv4 addresses.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_list_aliases
+    #   An alias that defines access for a preconfigured range of IP
+    #   addresses.
+    #
+    #   The only alias currently supported is `lightsail-connect`, which
+    #   allows IP addresses of the browser-based RDP/SSH client in the
+    #   Lightsail console to connect to your instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortInfo AWS API Documentation
     #
@@ -7040,22 +7114,51 @@ module Aws::Lightsail
       :access_from,
       :access_type,
       :common_name,
-      :access_direction)
+      :access_direction,
+      :cidrs,
+      :cidr_list_aliases)
       include Aws::Structure
     end
 
-    # Describes the port state.
+    # Describes open ports on an instance, the IP addresses allowed to
+    # connect to the instance through the ports, and the protocol.
     #
     # @!attribute [rw] from_port
-    #   The first port in the range.
+    #   The first port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - `8` (to configure Ping)
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The last port in the range.
+    #   The last port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - `-1` (to configure Ping)
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol being used. Can be one of the following.
+    #   The IP protocol name.
+    #
+    #   The name can be one of the following:
     #
     #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
     #     ordered, and error-checked delivery of streamed data between
@@ -7064,7 +7167,7 @@ module Aws::Lightsail
     #     service, use UDP instead.
     #
     #   * `all` - All transport layer protocol types. For more general
-    #     information, see [Transport layer][1] on Wikipedia.
+    #     information, see [Transport layer][1] on *Wikipedia*.
     #
     #   * `udp` - With User Datagram Protocol (UDP), computer applications
     #     can send messages (or datagrams) to other hosts on an Internet
@@ -7075,6 +7178,17 @@ module Aws::Lightsail
     #     latency over reliability. If you do require reliable data stream
     #     service, use TCP instead.
     #
+    #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
+    #     error messages and operational information indicating success or
+    #     failure when communicating with an instance. For example, an error
+    #     is indicated when an instance could not be reached.
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
+    #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Transport_layer
@@ -7082,7 +7196,33 @@ module Aws::Lightsail
     #
     # @!attribute [rw] state
     #   Specifies whether the instance port is `open` or `closed`.
+    #
+    #   <note markdown="1"> The port state for Lightsail instances is always `open`.
+    #
+    #    </note>
     #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The IP address, or range of IP addresses in CIDR notation, that are
+    #   allowed to connect to an instance through the ports, and the
+    #   protocol. Lightsail supports IPv4 addresses.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_list_aliases
+    #   An alias that defines access for a preconfigured range of IP
+    #   addresses.
+    #
+    #   The only alias currently supported is `lightsail-connect`, which
+    #   allows IP addresses of the browser-based RDP/SSH client in the
+    #   Lightsail console to connect to your instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortState AWS API Documentation
     #
@@ -7090,7 +7230,9 @@ module Aws::Lightsail
       :from_port,
       :to_port,
       :protocol,
-      :state)
+      :state,
+      :cidrs,
+      :cidr_list_aliases)
       include Aws::Structure
     end
 
@@ -7881,19 +8023,19 @@ module Aws::Lightsail
     #         port_info: { # required
     #           from_port: 1,
     #           to_port: 1,
-    #           protocol: "tcp", # accepts tcp, all, udp
+    #           protocol: "tcp", # accepts tcp, all, udp, icmp
+    #           cidrs: ["string"],
+    #           cidr_list_aliases: ["string"],
     #         },
     #         instance_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] port_info
-    #   An array of key-value pairs containing information about the port
-    #   mappings.
+    #   An object to describe the ports to open for the specified instance.
     #   @return [Types::PortInfo]
     #
     # @!attribute [rw] instance_name
-    #   The name of the instance for which you want to open the public
-    #   ports.
+    #   The name of the instance for which to open ports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPortsRequest AWS API Documentation
@@ -7906,7 +8048,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -8059,7 +8201,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -8117,8 +8259,8 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes information about the ports on your virtual private server
-    # (or *instance*).
+    # Describes ports to open on an instance, the IP addresses allowed to
+    # connect to the instance through the ports, and the protocol.
     #
     # @note When making an API call, you may pass PortInfo
     #   data as a hash:
@@ -8126,27 +8268,120 @@ module Aws::Lightsail
     #       {
     #         from_port: 1,
     #         to_port: 1,
-    #         protocol: "tcp", # accepts tcp, all, udp
+    #         protocol: "tcp", # accepts tcp, all, udp, icmp
+    #         cidrs: ["string"],
+    #         cidr_list_aliases: ["string"],
     #       }
     #
     # @!attribute [rw] from_port
-    #   The first port in the range.
+    #   The first port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - `8` (to configure Ping)
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
-    #   The last port in the range.
+    #   The last port in a range of open ports on an instance.
+    #
+    #   Allowed ports:
+    #
+    #   * TCP and UDP - `0` to `65535`
+    #
+    #   * ICMP - `-1` (to configure Ping)
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol.
+    #   The IP protocol name.
+    #
+    #   The name can be one of the following:
+    #
+    #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
+    #     ordered, and error-checked delivery of streamed data between
+    #     applications running on hosts communicating by an IP network. If
+    #     you have an application that doesn't require reliable data stream
+    #     service, use UDP instead.
+    #
+    #   * `all` - All transport layer protocol types. For more general
+    #     information, see [Transport layer][1] on *Wikipedia*.
+    #
+    #   * `udp` - With User Datagram Protocol (UDP), computer applications
+    #     can send messages (or datagrams) to other hosts on an Internet
+    #     Protocol (IP) network. Prior communications are not required to
+    #     set up transmission channels or data paths. Applications that
+    #     don't require reliable data stream service can use UDP, which
+    #     provides a connectionless datagram service that emphasizes reduced
+    #     latency over reliability. If you do require reliable data stream
+    #     service, use TCP instead.
+    #
+    #   * `icmp` - Internet Control Message Protocol (ICMP) is used to send
+    #     error messages and operational information indicating success or
+    #     failure when communicating with an instance. For example, an error
+    #     is indicated when an instance could not be reached.
+    #
+    #     <note markdown="1"> Ping is the only communication supported through the ICMP protocol
+    #     in Lightsail. To configure ping, specify the `fromPort` parameter
+    #     as `8`, and the `toPort` parameter as `-1`.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Transport_layer
     #   @return [String]
+    #
+    # @!attribute [rw] cidrs
+    #   The IP address, or range of IP addresses in CIDR notation, that are
+    #   allowed to connect to an instance through the ports, and the
+    #   protocol. Lightsail supports IPv4 addresses.
+    #
+    #   Examples:
+    #
+    #   * To allow the IP address `192.0.2.44`, specify `192.0.2.44` or
+    #     `192.0.2.44/32`.
+    #
+    #   * To allow the IP addresses `192.0.2.0` to `192.0.2.255`, specify
+    #     `192.0.2.0/24`.
+    #
+    #   For more information about CIDR block notation, see [Classless
+    #   Inter-Domain Routing][1] on *Wikipedia*.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cidr_list_aliases
+    #   An alias that defines access for a preconfigured range of IP
+    #   addresses.
+    #
+    #   The only alias currently supported is `lightsail-connect`, which
+    #   allows IP addresses of the browser-based RDP/SSH client in the
+    #   Lightsail console to connect to your instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PortInfo AWS API Documentation
     #
     class PortInfo < Struct.new(
       :from_port,
       :to_port,
-      :protocol)
+      :protocol,
+      :cidrs,
+      :cidr_list_aliases)
       include Aws::Structure
     end
 
@@ -8241,18 +8476,18 @@ module Aws::Lightsail
     #
     #   An alarm can treat missing data in the following ways:
     #
-    #   * `breaching` — Assume the missing data is not within the threshold.
+    #   * `breaching` - Assume the missing data is not within the threshold.
     #     Missing data counts towards the number of times the metric is not
     #     within the threshold.
     #
-    #   * `notBreaching` — Assume the missing data is within the threshold.
+    #   * `notBreaching` - Assume the missing data is within the threshold.
     #     Missing data does not count towards the number of times the metric
     #     is not within the threshold.
     #
-    #   * `ignore` — Ignore the missing data. Maintains the current alarm
+    #   * `ignore` - Ignore the missing data. Maintains the current alarm
     #     state.
     #
-    #   * `missing` — Missing data is treated as missing.
+    #   * `missing` - Missing data is treated as missing.
     #
     #   If `treatMissingData` is not specified, the default behavior of
     #   `missing` is used.
@@ -8280,13 +8515,13 @@ module Aws::Lightsail
     #
     #   An alarm has the following possible states:
     #
-    #   * `ALARM` — The metric is outside of the defined threshold.
+    #   * `ALARM` - The metric is outside of the defined threshold.
     #
-    #   * `INSUFFICIENT_DATA` — The alarm has just started, the metric is
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is
     #     not available, or not enough data is available for the metric to
     #     determine the alarm state.
     #
-    #   * `OK` — The metric is within the defined threshold.
+    #   * `OK` - The metric is within the defined threshold.
     #
     #   When you specify a notification trigger, the `ALARM` state must be
     #   specified. The `INSUFFICIENT_DATA` and `OK` states can be specified
@@ -8331,7 +8566,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -8350,18 +8585,21 @@ module Aws::Lightsail
     #           {
     #             from_port: 1,
     #             to_port: 1,
-    #             protocol: "tcp", # accepts tcp, all, udp
+    #             protocol: "tcp", # accepts tcp, all, udp, icmp
+    #             cidrs: ["string"],
+    #             cidr_list_aliases: ["string"],
     #           },
     #         ],
     #         instance_name: "ResourceName", # required
     #       }
     #
     # @!attribute [rw] port_infos
-    #   Specifies information about the public port(s).
+    #   An array of objects to describe the ports to open for the specified
+    #   instance.
     #   @return [Array<Types::PortInfo>]
     #
     # @!attribute [rw] instance_name
-    #   The Lightsail instance name of the public port(s) you are setting.
+    #   The name of the instance for which to open ports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPortsRequest AWS API Documentation
@@ -8374,7 +8612,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -8405,7 +8643,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -8436,7 +8674,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9002,7 +9240,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9052,7 +9290,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9107,7 +9345,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9138,7 +9376,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9239,7 +9477,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9277,7 +9515,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9366,7 +9604,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9394,13 +9632,13 @@ module Aws::Lightsail
     #
     #   An alarm has the following possible states that can be tested:
     #
-    #   * `ALARM` — The metric is outside of the defined threshold.
+    #   * `ALARM` - The metric is outside of the defined threshold.
     #
-    #   * `INSUFFICIENT_DATA` — The alarm has just started, the metric is
+    #   * `INSUFFICIENT_DATA` - The alarm has just started, the metric is
     #     not available, or not enough data is available for the metric to
     #     determine the alarm state.
     #
-    #   * `OK` — The metric is within the defined threshold.
+    #   * `OK` - The metric is within the defined threshold.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TestAlarmRequest AWS API Documentation
@@ -9413,7 +9651,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9457,7 +9695,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operation
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Types::Operation]
     #
@@ -9501,7 +9739,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9548,7 +9786,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9593,7 +9831,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9641,7 +9879,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #
@@ -9783,7 +10021,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of objects that describe the result of the action, such as
-    #   the status of the request, the time stamp of the request, and the
+    #   the status of the request, the timestamp of the request, and the
     #   resources affected by the request.
     #   @return [Array<Types::Operation>]
     #

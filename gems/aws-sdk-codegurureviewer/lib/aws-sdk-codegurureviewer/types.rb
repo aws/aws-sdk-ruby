@@ -28,6 +28,11 @@ module Aws::CodeGuruReviewer
     #           code_commit: {
     #             name: "Name", # required
     #           },
+    #           bitbucket: {
+    #             name: "Name", # required
+    #             connection_arn: "ConnectionArn", # required
+    #             owner: "Owner", # required
+    #           },
     #         },
     #         client_request_token: "ClientRequestToken",
     #       }
@@ -425,7 +430,7 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub
+    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
     #         states: ["Completed"], # accepts Completed, Pending, Failed, Deleting
     #         repository_names: ["Name"],
     #         type: "PullRequest", # required, accepts PullRequest
@@ -615,7 +620,7 @@ module Aws::CodeGuruReviewer
     #   data as a hash:
     #
     #       {
-    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub
+    #         provider_types: ["CodeCommit"], # accepts CodeCommit, GitHub, Bitbucket
     #         states: ["Associated"], # accepts Associated, Associating, Failed, Disassociating
     #         names: ["Name"],
     #         owners: ["Owner"],
@@ -897,16 +902,26 @@ module Aws::CodeGuruReviewer
     #         code_commit: {
     #           name: "Name", # required
     #         },
+    #         bitbucket: {
+    #           name: "Name", # required
+    #           connection_arn: "ConnectionArn", # required
+    #           owner: "Owner", # required
+    #         },
     #       }
     #
     # @!attribute [rw] code_commit
     #   Information about an AWS CodeCommit repository.
     #   @return [Types::CodeCommitRepository]
     #
+    # @!attribute [rw] bitbucket
+    #   Information about a Bitbucket Cloud repository.
+    #   @return [Types::ThirdPartySourceRepository]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/Repository AWS API Documentation
     #
     class Repository < Struct.new(
-      :code_commit)
+      :code_commit,
+      :bitbucket)
       include Aws::Structure
     end
 
@@ -919,6 +934,11 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) identifying the repository
     #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) identifying the repository
+    #   connection.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -957,6 +977,7 @@ module Aws::CodeGuruReviewer
     class RepositoryAssociation < Struct.new(
       :association_id,
       :association_arn,
+      :connection_arn,
       :name,
       :owner,
       :provider_type,
@@ -972,6 +993,11 @@ module Aws::CodeGuruReviewer
     # @!attribute [rw] association_arn
     #   The Amazon Resource Name (ARN) identifying the repository
     #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) identifying the repository
+    #   connection.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time_stamp
@@ -1020,6 +1046,7 @@ module Aws::CodeGuruReviewer
     #
     class RepositoryAssociationSummary < Struct.new(
       :association_arn,
+      :connection_arn,
       :last_updated_time_stamp,
       :association_id,
       :name,
@@ -1051,6 +1078,40 @@ module Aws::CodeGuruReviewer
     #
     class SourceCodeType < Struct.new(
       :commit_diff)
+      include Aws::Structure
+    end
+
+    # Information about a third party source repository connected through
+    # CodeStar Connections.
+    #
+    # @note When making an API call, you may pass ThirdPartySourceRepository
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         connection_arn: "ConnectionArn", # required
+    #         owner: "Owner", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the third party source repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_arn
+    #   The Amazon Resource Name (ARN) identifying the repository
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The username of the owner of the repository.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/ThirdPartySourceRepository AWS API Documentation
+    #
+    class ThirdPartySourceRepository < Struct.new(
+      :name,
+      :connection_arn,
+      :owner)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2020-05-07)
+------------------
+
+* Feature - This Patch Manager release supports creating patch baselines for Oracle Linux and Debian
+
 1.76.0 (2020-05-05)
 ------------------
 

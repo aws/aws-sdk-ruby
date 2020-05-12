@@ -1477,6 +1477,8 @@ module Aws::Lightsail
     InstancePortInfo.add_member(:access_type, Shapes::ShapeRef.new(shape: PortAccessType, location_name: "accessType"))
     InstancePortInfo.add_member(:common_name, Shapes::ShapeRef.new(shape: string, location_name: "commonName"))
     InstancePortInfo.add_member(:access_direction, Shapes::ShapeRef.new(shape: AccessDirection, location_name: "accessDirection"))
+    InstancePortInfo.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    InstancePortInfo.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     InstancePortInfo.struct_class = Types::InstancePortInfo
 
     InstancePortInfoList.member = Shapes::ShapeRef.new(shape: InstancePortInfo)
@@ -1485,6 +1487,8 @@ module Aws::Lightsail
     InstancePortState.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
     InstancePortState.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
     InstancePortState.add_member(:state, Shapes::ShapeRef.new(shape: PortState, location_name: "state"))
+    InstancePortState.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    InstancePortState.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     InstancePortState.struct_class = Types::InstancePortState
 
     InstancePortStateList.member = Shapes::ShapeRef.new(shape: InstancePortState)
@@ -1706,6 +1710,8 @@ module Aws::Lightsail
     PortInfo.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "fromPort"))
     PortInfo.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
     PortInfo.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
+    PortInfo.add_member(:cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrs"))
+    PortInfo.add_member(:cidr_list_aliases, Shapes::ShapeRef.new(shape: StringList, location_name: "cidrListAliases"))
     PortInfo.struct_class = Types::PortInfo
 
     PortInfoList.member = Shapes::ShapeRef.new(shape: PortInfo)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-05-07)
+------------------
+
+* Feature - Add COMMIT_MESSAGE enum for webhook filter types
+
 1.49.0 (2020-03-09)
 ------------------
 

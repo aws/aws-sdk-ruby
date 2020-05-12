@@ -105,7 +105,7 @@ module Aws::Kendra
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -161,7 +161,7 @@ module Aws::Kendra
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -331,6 +331,9 @@ module Aws::Kendra
     # @option params [required, Array<String>] :document_id_list
     #   One or more identifiers for documents to delete from the index.
     #
+    # @option params [Types::DataSourceSyncJobMetricTarget] :data_source_sync_job_metric_target
+    #   Maps a particular data source sync job to a particular data source.
+    #
     # @return [Types::BatchDeleteDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchDeleteDocumentResponse#failed_documents #failed_documents} => Array&lt;Types::BatchDeleteDocumentResponseFailedDocument&gt;
@@ -340,6 +343,10 @@ module Aws::Kendra
     #   resp = client.batch_delete_document({
     #     index_id: "IndexId", # required
     #     document_id_list: ["DocumentId"], # required
+    #     data_source_sync_job_metric_target: {
+    #       data_source_id: "DataSourceId", # required
+    #       data_source_sync_job_id: "DataSourceSyncJobId", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -386,8 +393,20 @@ module Aws::Kendra
     # @option params [required, Array<Types::Document>] :documents
     #   One or more documents to add to the index.
     #
-    #   Each document is limited to 5 Mb, the total size of the list is
-    #   limited to 50 Mb.
+    #   Documents have the following file size limits.
+    #
+    #   * 5 MB total size for inline documents
+    #
+    #   * 50 MB total size for files from an S3 bucket
+    #
+    #   * 5 MB extracted text for any file
+    #
+    #   For more information about file size and transaction per second
+    #   quotas, see [Quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #
     # @return [Types::BatchPutDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -492,6 +511,11 @@ module Aws::Kendra
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify the data source. You can use
+    #   the tags to identify and organize your resources and to control access
+    #   to resources.
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#id #id} => String
@@ -501,7 +525,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW
     #     configuration: { # required
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -565,10 +589,140 @@ module Aws::Kendra
     #           allowed_groups_column_name: "ColumnName", # required
     #         },
     #       },
+    #       salesforce_configuration: {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         standard_object_configurations: [
+    #           {
+    #             name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
+    #             document_data_field_name: "DataSourceFieldName", # required
+    #             document_title_field_name: "DataSourceFieldName",
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         knowledge_article_configuration: {
+    #           included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
+    #           standard_knowledge_article_type_configuration: {
+    #             document_data_field_name: "DataSourceFieldName", # required
+    #             document_title_field_name: "DataSourceFieldName",
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           custom_knowledge_article_type_configurations: [
+    #             {
+    #               name: "SalesforceCustomKnowledgeArticleTypeName", # required
+    #               document_data_field_name: "DataSourceFieldName", # required
+    #               document_title_field_name: "DataSourceFieldName",
+    #               field_mappings: [
+    #                 {
+    #                   data_source_field_name: "DataSourceFieldName", # required
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         chatter_feed_configuration: {
+    #           document_data_field_name: "DataSourceFieldName", # required
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
+    #         },
+    #         crawl_attachments: false,
+    #         standard_object_attachment_configuration: {
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       },
+    #       one_drive_configuration: {
+    #         tenant_domain: "TenantDomain", # required
+    #         secret_arn: "SecretArn", # required
+    #         one_drive_users: { # required
+    #           one_drive_user_list: ["OneDriveUser"],
+    #           one_drive_user_s3_path: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       service_now_configuration: {
+    #         host_url: "ServiceNowHostUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         service_now_build_version: "LONDON", # required, accepts LONDON, OTHERS
+    #         knowledge_article_configuration: {
+    #           crawl_attachments: false,
+    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           document_data_field_name: "DataSourceFieldName", # required
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         service_catalog_configuration: {
+    #           crawl_attachments: false,
+    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           document_data_field_name: "DataSourceFieldName", # required
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
     #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -608,6 +762,11 @@ module Aws::Kendra
     #
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify the FAQ. You can use the tags
+    #   to identify and organize your resources and to control access to
+    #   resources.
+    #
     # @return [Types::CreateFaqResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFaqResponse#id #id} => String
@@ -623,6 +782,12 @@ module Aws::Kendra
     #       key: "S3ObjectKey", # required
     #     },
     #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -649,6 +814,13 @@ module Aws::Kendra
     # @option params [required, String] :name
     #   The name for the new index.
     #
+    # @option params [String] :edition
+    #   The Amazon Kendra edition to use for the index. Choose
+    #   `DEVELOPER_EDITION` for indexes intended for development, testing, or
+    #   proof of concept. Use `ENTERPRISE_EDITION` for your production
+    #   databases. Once you set the edition for an index, it can't be
+    #   changed.
+    #
     # @option params [required, String] :role_arn
     #   An IAM role that gives Amazon Kendra permissions to access your Amazon
     #   CloudWatch logs and metrics. This is also the role used when you use
@@ -671,6 +843,11 @@ module Aws::Kendra
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs that identify the index. You can use the
+    #   tags to identify and organize your resources and to control access to
+    #   resources.
+    #
     # @return [Types::CreateIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIndexResponse#id #id} => String
@@ -679,12 +856,19 @@ module Aws::Kendra
     #
     #   resp = client.create_index({
     #     name: "IndexName", # required
+    #     edition: "DEVELOPER_EDITION", # accepts DEVELOPER_EDITION, ENTERPRISE_EDITION
     #     role_arn: "RoleArn", # required
     #     server_side_encryption_configuration: {
     #       kms_key_id: "KmsKeyId",
     #     },
     #     description: "Description",
     #     client_token: "ClientTokenName",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -697,6 +881,40 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def create_index(params = {}, options = {})
       req = build_request(:create_index, params)
+      req.send_request(options)
+    end
+
+    # Deletes an Amazon Kendra data source. An exception is not thrown if
+    # the data source is already being deleted. While the data source is
+    # being deleted, the `Status` field returned by a call to the operation
+    # is set to `DELETING`. For more information, see [Deleting Data
+    # Sources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the data source to delete.
+    #
+    # @option params [required, String] :index_id
+    #   The unique identifier of the index associated with the data source.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_source({
+    #     id: "DataSourceId", # required
+    #     index_id: "IndexId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteDataSource AWS API Documentation
+    #
+    # @overload delete_data_source(params = {})
+    # @param [Hash] params ({})
+    def delete_data_source(params = {}, options = {})
+      req = build_request(:delete_data_source, params)
       req.send_request(options)
     end
 
@@ -786,7 +1004,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -833,6 +1051,89 @@ module Aws::Kendra
     #   resp.configuration.database_configuration.column_configuration.change_detecting_columns #=> Array
     #   resp.configuration.database_configuration.column_configuration.change_detecting_columns[0] #=> String
     #   resp.configuration.database_configuration.acl_configuration.allowed_groups_column_name #=> String
+    #   resp.configuration.salesforce_configuration.server_url #=> String
+    #   resp.configuration.salesforce_configuration.secret_arn #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_configurations #=> Array
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].name #=> String, one of "ACCOUNT", "CAMPAIGN", "CASE", "CONTACT", "CONTRACT", "DOCUMENT", "GROUP", "IDEA", "LEAD", "OPPORTUNITY", "PARTNER", "PRICEBOOK", "PRODUCT", "PROFILE", "SOLUTION", "TASK", "USER"
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].document_data_field_name #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].document_title_field_name #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].field_mappings #=> Array
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].field_mappings[0].date_field_format #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_configurations[0].field_mappings[0].index_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.included_states #=> Array
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.included_states[0] #=> String, one of "DRAFT", "PUBLISHED", "ARCHIVED"
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.document_data_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.document_title_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings #=> Array
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations #=> Array
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].document_data_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].document_title_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].field_mappings #=> Array
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].field_mappings[0].date_field_format #=> String
+    #   resp.configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations[0].field_mappings[0].index_field_name #=> String
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.document_data_field_name #=> String
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.document_title_field_name #=> String
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.field_mappings #=> Array
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.include_filter_types #=> Array
+    #   resp.configuration.salesforce_configuration.chatter_feed_configuration.include_filter_types[0] #=> String, one of "ACTIVE_USER", "STANDARD_USER"
+    #   resp.configuration.salesforce_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.salesforce_configuration.standard_object_attachment_configuration.document_title_field_name #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_attachment_configuration.field_mappings #=> Array
+    #   resp.configuration.salesforce_configuration.standard_object_attachment_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_attachment_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.salesforce_configuration.standard_object_attachment_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.salesforce_configuration.include_attachment_file_patterns #=> Array
+    #   resp.configuration.salesforce_configuration.include_attachment_file_patterns[0] #=> String
+    #   resp.configuration.salesforce_configuration.exclude_attachment_file_patterns #=> Array
+    #   resp.configuration.salesforce_configuration.exclude_attachment_file_patterns[0] #=> String
+    #   resp.configuration.one_drive_configuration.tenant_domain #=> String
+    #   resp.configuration.one_drive_configuration.secret_arn #=> String
+    #   resp.configuration.one_drive_configuration.one_drive_users.one_drive_user_list #=> Array
+    #   resp.configuration.one_drive_configuration.one_drive_users.one_drive_user_list[0] #=> String
+    #   resp.configuration.one_drive_configuration.one_drive_users.one_drive_user_s3_path.bucket #=> String
+    #   resp.configuration.one_drive_configuration.one_drive_users.one_drive_user_s3_path.key #=> String
+    #   resp.configuration.one_drive_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.one_drive_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.one_drive_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.one_drive_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.one_drive_configuration.field_mappings #=> Array
+    #   resp.configuration.one_drive_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.one_drive_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.one_drive_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.service_now_configuration.host_url #=> String
+    #   resp.configuration.service_now_configuration.secret_arn #=> String
+    #   resp.configuration.service_now_configuration.service_now_build_version #=> String, one of "LONDON", "OTHERS"
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.include_attachment_file_patterns #=> Array
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.include_attachment_file_patterns[0] #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.exclude_attachment_file_patterns #=> Array
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.exclude_attachment_file_patterns[0] #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.document_data_field_name #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.document_title_field_name #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings #=> Array
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.service_now_configuration.knowledge_article_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.include_attachment_file_patterns #=> Array
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.include_attachment_file_patterns[0] #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.exclude_attachment_file_patterns #=> Array
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.exclude_attachment_file_patterns[0] #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.document_data_field_name #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.document_title_field_name #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings #=> Array
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.service_now_configuration.service_catalog_configuration.field_mappings[0].index_field_name #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -910,6 +1211,7 @@ module Aws::Kendra
     #
     #   * {Types::DescribeIndexResponse#name #name} => String
     #   * {Types::DescribeIndexResponse#id #id} => String
+    #   * {Types::DescribeIndexResponse#edition #edition} => String
     #   * {Types::DescribeIndexResponse#role_arn #role_arn} => String
     #   * {Types::DescribeIndexResponse#server_side_encryption_configuration #server_side_encryption_configuration} => Types::ServerSideEncryptionConfiguration
     #   * {Types::DescribeIndexResponse#status #status} => String
@@ -919,6 +1221,7 @@ module Aws::Kendra
     #   * {Types::DescribeIndexResponse#document_metadata_configurations #document_metadata_configurations} => Array&lt;Types::DocumentMetadataConfiguration&gt;
     #   * {Types::DescribeIndexResponse#index_statistics #index_statistics} => Types::IndexStatistics
     #   * {Types::DescribeIndexResponse#error_message #error_message} => String
+    #   * {Types::DescribeIndexResponse#capacity_units #capacity_units} => Types::CapacityUnitsConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -930,9 +1233,10 @@ module Aws::Kendra
     #
     #   resp.name #=> String
     #   resp.id #=> String
+    #   resp.edition #=> String, one of "DEVELOPER_EDITION", "ENTERPRISE_EDITION"
     #   resp.role_arn #=> String
     #   resp.server_side_encryption_configuration.kms_key_id #=> String
-    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "SYSTEM_UPDATING"
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "SYSTEM_UPDATING"
     #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
@@ -950,7 +1254,10 @@ module Aws::Kendra
     #   resp.document_metadata_configurations[0].search.displayable #=> Boolean
     #   resp.index_statistics.faq_statistics.indexed_question_answers_count #=> Integer
     #   resp.index_statistics.text_document_statistics.indexed_text_documents_count #=> Integer
+    #   resp.index_statistics.text_document_statistics.indexed_text_bytes #=> Integer
     #   resp.error_message #=> String
+    #   resp.capacity_units.storage_capacity_units #=> Integer
+    #   resp.capacity_units.query_capacity_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndex AWS API Documentation
     #
@@ -1004,7 +1311,7 @@ module Aws::Kendra
     #       start_time: Time.now,
     #       end_time: Time.now,
     #     },
-    #     status_filter: "FAILED", # accepts FAILED, SUCCEEDED, SYNCING, INCOMPLETE, STOPPING, ABORTED
+    #     status_filter: "FAILED", # accepts FAILED, SUCCEEDED, SYNCING, INCOMPLETE, STOPPING, ABORTED, SYNCING_INDEXING
     #   })
     #
     # @example Response structure
@@ -1013,10 +1320,15 @@ module Aws::Kendra
     #   resp.history[0].execution_id #=> String
     #   resp.history[0].start_time #=> Time
     #   resp.history[0].end_time #=> Time
-    #   resp.history[0].status #=> String, one of "FAILED", "SUCCEEDED", "SYNCING", "INCOMPLETE", "STOPPING", "ABORTED"
+    #   resp.history[0].status #=> String, one of "FAILED", "SUCCEEDED", "SYNCING", "INCOMPLETE", "STOPPING", "ABORTED", "SYNCING_INDEXING"
     #   resp.history[0].error_message #=> String
     #   resp.history[0].error_code #=> String, one of "InternalError", "InvalidRequest"
     #   resp.history[0].data_source_error_code #=> String
+    #   resp.history[0].metrics.documents_added #=> String
+    #   resp.history[0].metrics.documents_modified #=> String
+    #   resp.history[0].metrics.documents_deleted #=> String
+    #   resp.history[0].metrics.documents_failed #=> String
+    #   resp.history[0].metrics.documents_scanned #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourceSyncJobs AWS API Documentation
@@ -1062,7 +1374,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -1153,9 +1465,10 @@ module Aws::Kendra
     #   resp.index_configuration_summary_items #=> Array
     #   resp.index_configuration_summary_items[0].name #=> String
     #   resp.index_configuration_summary_items[0].id #=> String
+    #   resp.index_configuration_summary_items[0].edition #=> String, one of "DEVELOPER_EDITION", "ENTERPRISE_EDITION"
     #   resp.index_configuration_summary_items[0].created_at #=> Time
     #   resp.index_configuration_summary_items[0].updated_at #=> Time
-    #   resp.index_configuration_summary_items[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "SYSTEM_UPDATING"
+    #   resp.index_configuration_summary_items[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "FAILED", "UPDATING", "SYSTEM_UPDATING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListIndices AWS API Documentation
@@ -1164,6 +1477,38 @@ module Aws::Kendra
     # @param [Hash] params ({})
     def list_indices(params = {}, options = {})
       req = build_request(:list_indices, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of tags associated with a specified resource. Indexes,
+    # FAQs, and data sources can have tags associated with them.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the index, FAQ, or data source to
+    #   get a list of tags for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1225,7 +1570,8 @@ module Aws::Kendra
     #
     # @option params [Integer] :page_size
     #   Sets the number of results that are returned in each page of results.
-    #   The default page size is 100.
+    #   The default page size is 10. The maximum number of results returned is
+    #   100. If you ask for more than 100 results, only 100 are returned.
     #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1491,6 +1837,69 @@ module Aws::Kendra
       req.send_request(options)
     end
 
+    # Adds the specified tag to the specified index, FAQ, or data source
+    # resource. If the tag already exists, the existing value is replaced
+    # with the new value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the index, FAQ, or data source to
+    #   tag.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tag keys to add to the index, FAQ, or data source. If a tag
+    #   already exists, the existing value is replaced with the new value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes a tag from an index, FAQ, or a data source.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the index, FAQ, or data source to
+    #   remove the tag from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys to remove from the index, FAQ, or data source. If a
+    #   tag key does not exist on the resource, it is ignored.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing Amazon Kendra data source.
     #
     # @option params [required, String] :id
@@ -1588,6 +1997,130 @@ module Aws::Kendra
     #           allowed_groups_column_name: "ColumnName", # required
     #         },
     #       },
+    #       salesforce_configuration: {
+    #         server_url: "Url", # required
+    #         secret_arn: "SecretArn", # required
+    #         standard_object_configurations: [
+    #           {
+    #             name: "ACCOUNT", # required, accepts ACCOUNT, CAMPAIGN, CASE, CONTACT, CONTRACT, DOCUMENT, GROUP, IDEA, LEAD, OPPORTUNITY, PARTNER, PRICEBOOK, PRODUCT, PROFILE, SOLUTION, TASK, USER
+    #             document_data_field_name: "DataSourceFieldName", # required
+    #             document_title_field_name: "DataSourceFieldName",
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         knowledge_article_configuration: {
+    #           included_states: ["DRAFT"], # required, accepts DRAFT, PUBLISHED, ARCHIVED
+    #           standard_knowledge_article_type_configuration: {
+    #             document_data_field_name: "DataSourceFieldName", # required
+    #             document_title_field_name: "DataSourceFieldName",
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           custom_knowledge_article_type_configurations: [
+    #             {
+    #               name: "SalesforceCustomKnowledgeArticleTypeName", # required
+    #               document_data_field_name: "DataSourceFieldName", # required
+    #               document_title_field_name: "DataSourceFieldName",
+    #               field_mappings: [
+    #                 {
+    #                   data_source_field_name: "DataSourceFieldName", # required
+    #                   date_field_format: "DataSourceDateFieldFormat",
+    #                   index_field_name: "IndexFieldName", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         chatter_feed_configuration: {
+    #           document_data_field_name: "DataSourceFieldName", # required
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           include_filter_types: ["ACTIVE_USER"], # accepts ACTIVE_USER, STANDARD_USER
+    #         },
+    #         crawl_attachments: false,
+    #         standard_object_attachment_configuration: {
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #       },
+    #       one_drive_configuration: {
+    #         tenant_domain: "TenantDomain", # required
+    #         secret_arn: "SecretArn", # required
+    #         one_drive_users: { # required
+    #           one_drive_user_list: ["OneDriveUser"],
+    #           one_drive_user_s3_path: {
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       service_now_configuration: {
+    #         host_url: "ServiceNowHostUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         service_now_build_version: "LONDON", # required, accepts LONDON, OTHERS
+    #         knowledge_article_configuration: {
+    #           crawl_attachments: false,
+    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           document_data_field_name: "DataSourceFieldName", # required
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #         service_catalog_configuration: {
+    #           crawl_attachments: false,
+    #           include_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclude_attachment_file_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           document_data_field_name: "DataSourceFieldName", # required
+    #           document_title_field_name: "DataSourceFieldName",
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -1621,6 +2154,14 @@ module Aws::Kendra
     # @option params [Array<Types::DocumentMetadataConfiguration>] :document_metadata_configuration_updates
     #   The document metadata to update.
     #
+    # @option params [Types::CapacityUnitsConfiguration] :capacity_units
+    #   Sets the number of addtional storage and query capacity units that
+    #   should be used by the index. You can change the capacity of the index
+    #   up to 5 times per day.
+    #
+    #   If you are using extra storage units, you can't reduce the storage
+    #   capacity below that required to meet the storage needs for your index.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1650,6 +2191,10 @@ module Aws::Kendra
     #         },
     #       },
     #     ],
+    #     capacity_units: {
+    #       storage_capacity_units: 1, # required
+    #       query_capacity_units: 1, # required
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndex AWS API Documentation
@@ -1674,7 +2219,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
