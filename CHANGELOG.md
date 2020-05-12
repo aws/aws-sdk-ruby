@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.506 (2020-05-12)
+------------------
+
 * Feature - Aws::IoTSiteWise - Updated the documentation for AWS IoT SiteWise.
 
 * Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
