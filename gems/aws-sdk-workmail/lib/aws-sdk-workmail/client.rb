@@ -525,7 +525,7 @@ module Aws::WorkMail
     # Deletes an access control rule for the specified WorkMail
     # organization.
     #
-    # @option params [String] :organization_id
+    # @option params [required, String] :organization_id
     #   The identifier for the organization.
     #
     # @option params [required, String] :name
@@ -536,7 +536,7 @@ module Aws::WorkMail
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_access_control_rule({
-    #     organization_id: "OrganizationId",
+    #     organization_id: "OrganizationId", # required
     #     name: "AccessControlRuleName", # required
     #   })
     #
@@ -1299,7 +1299,7 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
-    # Returns summaries of the customer's non-deleted organizations.
+    # Returns summaries of the customer's organizations.
     #
     # @option params [String] :next_token
     #   The token to use to retrieve the next page of results. The first call
@@ -1880,7 +1880,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

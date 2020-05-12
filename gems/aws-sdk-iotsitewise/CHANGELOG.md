@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-05-12)
+------------------
+
+* Feature - Documentation updates for iot-bifrost
+
 1.1.0 (2020-05-07)
 ------------------
 

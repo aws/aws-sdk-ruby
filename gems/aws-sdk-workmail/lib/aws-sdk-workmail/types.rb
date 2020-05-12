@@ -363,7 +363,7 @@ module Aws::WorkMail
     #   data as a hash:
     #
     #       {
-    #         organization_id: "OrganizationId",
+    #         organization_id: "OrganizationId", # required
     #         name: "AccessControlRuleName", # required
     #       }
     #

@@ -475,12 +475,7 @@ module Aws::IoTSiteWise
     #
     # @option params [required, Array<Types::PutAssetPropertyValueEntry>] :entries
     #   The list of asset property value entries for the batch put request.
-    #   You can specify up to 10 entries per request. For more information,
-    #   see [Quotas][1] in the *AWS IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #   You can specify up to 10 entries per request.
     #
     # @return [Types::BatchPutAssetPropertyValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2216,6 +2211,21 @@ module Aws::IoTSiteWise
 
     # Retrieves a paginated list of asset summaries.
     #
+    # You can use this operation to do the following:
+    #
+    # * List assets based on a specific asset model.
+    #
+    # * List top-level assets.
+    #
+    # You can't use this operation to list all assets. To retrieve
+    # summaries for all of your assets, use [ListAssetModels][1] to get all
+    # of your asset model IDs. Then, use ListAssets to get all assets for
+    # each asset model.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ListAssetModels.html
+    #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
@@ -2223,11 +2233,18 @@ module Aws::IoTSiteWise
     #   The maximum number of results to be returned per paginated request.
     #
     # @option params [String] :asset_model_id
-    #   The ID of the asset model by which to filter the list of assets. Omit
-    #   the `assetModelId` to list all assets (of all models).
+    #   The ID of the asset model by which to filter the list of assets. This
+    #   parameter is required if you choose `ALL` for `filter`.
     #
     # @option params [String] :filter
-    #   The hierarchy level by which to filter the requested list of assets.
+    #   The filter for the requested list of assets. Choose one of the
+    #   following options. Defaults to `ALL`.
+    #
+    #   * `ALL` – The list includes all assets for a given asset model ID. The
+    #     `assetModelId` parameter is required if you filter by `ALL`.
+    #
+    #   * `TOP_LEVEL` – The list includes only top-level assets in the asset
+    #     hierarchy tree.
     #
     # @return [Types::ListAssetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2777,8 +2794,8 @@ module Aws::IoTSiteWise
     #
     # This action overwrites the existing model with the provided model. To
     # avoid deleting your asset model's properties or hierarchies, you must
-    # include their definitions in the updated asset model payload. For more
-    # information, see [DescribeAssetModel][2].
+    # include their IDs and definitions in the updated asset model payload.
+    # For more information, see [DescribeAssetModel][2].
     #
     #  If you remove a property from an asset model or update a property's
     # formula expression, AWS IoT SiteWise deletes all previous data for
@@ -2915,6 +2932,16 @@ module Aws::IoTSiteWise
 
     # Updates an asset property's alias and notification state.
     #
+    # This operation overwrites the property's existing alias and
+    # notification state. To keep your existing property's alias or
+    # notification state, you must include the existing values in the
+    # UpdateAssetProperty request. For more information, see
+    # [DescribeAssetProperty][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetProperty.html
+    #
     # @option params [required, String] :asset_id
     #   The ID of the asset to be updated.
     #
@@ -2928,16 +2955,21 @@ module Aws::IoTSiteWise
     #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
+    #   If you omit this parameter, the alias is removed from the property.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
     #
     # @option params [String] :property_notification_state
-    #   The updated MQTT notification state (enabled or disabled) for this
-    #   asset property. When the notification state is enabled, AWS IoT
-    #   SiteWise publishes property value updates to a unique MQTT topic. For
-    #   more information, see [Interacting with Other Services][1] in the *AWS
-    #   IoT SiteWise User Guide*.
+    #   The MQTT notification state (enabled or disabled) for this asset
+    #   property. When the notification state is enabled, AWS IoT SiteWise
+    #   publishes property value updates to a unique MQTT topic. For more
+    #   information, see [Interacting with Other Services][1] in the *AWS IoT
+    #   SiteWise User Guide*.
+    #
+    #   If you omit this parameter, the notification state is set to
+    #   `DISABLED`.
     #
     #
     #
@@ -3216,7 +3248,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

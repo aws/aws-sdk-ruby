@@ -887,12 +887,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] entries
     #   The list of asset property value entries for the batch put request.
-    #   You can specify up to 10 entries per request. For more information,
-    #   see [Quotas][1] in the *AWS IoT SiteWise User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
+    #   You can specify up to 10 entries per request.
     #   @return [Array<Types::PutAssetPropertyValueEntry>]
     #
     class BatchPutAssetPropertyValueRequest < Struct.new(
@@ -3167,11 +3162,18 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_id
     #   The ID of the asset model by which to filter the list of assets.
-    #   Omit the `assetModelId` to list all assets (of all models).
+    #   This parameter is required if you choose `ALL` for `filter`.
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   The hierarchy level by which to filter the requested list of assets.
+    #   The filter for the requested list of assets. Choose one of the
+    #   following options. Defaults to `ALL`.
+    #
+    #   * `ALL` – The list includes all assets for a given asset model ID.
+    #     The `assetModelId` parameter is required if you filter by `ALL`.
+    #
+    #   * `TOP_LEVEL` – The list includes only top-level assets in the asset
+    #     hierarchy tree.
     #   @return [String]
     #
     class ListAssetsRequest < Struct.new(
@@ -3986,13 +3988,6 @@ module Aws::IoTSiteWise
     # @!attribute [rw] property_values
     #   The list of property values to upload. You can specify up to 10
     #   `propertyValues` array elements.
-    #
-    #   For more information, see [Quotas][1] in the *AWS IoT SiteWise User
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
     #   @return [Array<Types::AssetPropertyValue>]
     #
     class PutAssetPropertyValueEntry < Struct.new(
@@ -4527,17 +4522,22 @@ module Aws::IoTSiteWise
     #   see [Mapping Industrial Data Streams to Asset Properties][1] in the
     #   *AWS IoT SiteWise User Guide*.
     #
+    #   If you omit this parameter, the alias is removed from the property.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
     #   @return [String]
     #
     # @!attribute [rw] property_notification_state
-    #   The updated MQTT notification state (enabled or disabled) for this
-    #   asset property. When the notification state is enabled, AWS IoT
-    #   SiteWise publishes property value updates to a unique MQTT topic.
-    #   For more information, see [Interacting with Other Services][1] in
-    #   the *AWS IoT SiteWise User Guide*.
+    #   The MQTT notification state (enabled or disabled) for this asset
+    #   property. When the notification state is enabled, AWS IoT SiteWise
+    #   publishes property value updates to a unique MQTT topic. For more
+    #   information, see [Interacting with Other Services][1] in the *AWS
+    #   IoT SiteWise User Guide*.
+    #
+    #   If you omit this parameter, the notification state is set to
+    #   `DISABLED`.
     #
     #
     #

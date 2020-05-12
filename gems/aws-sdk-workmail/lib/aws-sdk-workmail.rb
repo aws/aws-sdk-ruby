@@ -45,6 +45,6 @@ require_relative 'aws-sdk-workmail/customizations'
 # @service
 module Aws::WorkMail
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.24.0'
 
 end

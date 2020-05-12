@@ -242,7 +242,7 @@ module Aws::WorkMail
     Delegate.add_member(:type, Shapes::ShapeRef.new(shape: MemberType, required: true, location_name: "Type"))
     Delegate.struct_class = Types::Delegate
 
-    DeleteAccessControlRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    DeleteAccessControlRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteAccessControlRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, required: true, location_name: "Name"))
     DeleteAccessControlRuleRequest.struct_class = Types::DeleteAccessControlRuleRequest
 

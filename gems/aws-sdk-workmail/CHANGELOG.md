@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-05-12)
+------------------
+
+* Feature - Minor API fixes and updates to the documentation.
+
 1.23.0 (2020-05-07)
 ------------------
 
