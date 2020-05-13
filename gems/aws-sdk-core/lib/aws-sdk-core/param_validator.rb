@@ -61,7 +61,7 @@ module Aws
         if @validate_required
           shape.required.each do |member_name|
             input_eventstream = ref.shape.member(member_name).eventstream && @input
-            empty_param = values[member_name].blank? if values[member_name].nil?
+            empty_param = values[member_name].to_s.empty? if values[member_name].nil?
             if empty_param && !input_eventstream
               param = "#{context}[#{member_name.inspect}]"
               errors << "missing required parameter #{param}"
