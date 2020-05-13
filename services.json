@@ -436,6 +436,9 @@
   "Macie": {
     "models": "macie/2017-12-19"
   },
+  "Macie2": {
+    "models": "macie2/2020-01-01"
+  },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
   },

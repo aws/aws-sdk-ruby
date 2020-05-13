@@ -506,7 +506,7 @@ module Aws::ElastiCache
     #   resp.processed_update_actions[0].replication_group_id #=> String
     #   resp.processed_update_actions[0].cache_cluster_id #=> String
     #   resp.processed_update_actions[0].service_update_name #=> String
-    #   resp.processed_update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete"
+    #   resp.processed_update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete", "scheduling", "scheduled", "not-applicable"
     #   resp.unprocessed_update_actions #=> Array
     #   resp.unprocessed_update_actions[0].replication_group_id #=> String
     #   resp.unprocessed_update_actions[0].cache_cluster_id #=> String
@@ -558,7 +558,7 @@ module Aws::ElastiCache
     #   resp.processed_update_actions[0].replication_group_id #=> String
     #   resp.processed_update_actions[0].cache_cluster_id #=> String
     #   resp.processed_update_actions[0].service_update_name #=> String
-    #   resp.processed_update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete"
+    #   resp.processed_update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete", "scheduling", "scheduled", "not-applicable"
     #   resp.unprocessed_update_actions #=> Array
     #   resp.unprocessed_update_actions[0].replication_group_id #=> String
     #   resp.unprocessed_update_actions[0].cache_cluster_id #=> String
@@ -1621,7 +1621,7 @@ module Aws::ElastiCache
     # Global
     # Datastore](/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html).
     #
-    # * The **GlobalReplicationGroupId** is the name of the Global
+    # * The **GlobalReplicationGroupIdSuffix** is the name of the Global
     #   Datastore.
     #
     # * The **PrimaryReplicationGroupId** represents the name of the primary
@@ -1629,7 +1629,7 @@ module Aws::ElastiCache
     #   secondary cluster.
     #
     # @option params [required, String] :global_replication_group_id_suffix
-    #   The suffix for name of a Global Datastore. The suffix guarantees
+    #   The suffix name of a Global Datastore. The suffix guarantees
     #   uniqueness of the Global Datastore name across multiple regions.
     #
     # @option params [String] :global_replication_group_description
@@ -1819,10 +1819,10 @@ module Aws::ElastiCache
     #   If you're creating a Redis (cluster mode disabled) or a Redis
     #   (cluster mode enabled) replication group, you can use this parameter
     #   to individually configure each node group (shard), or you can omit
-    #   this parameter. However, when seeding a Redis (cluster mode enabled)
-    #   cluster from a S3 rdb file, you must configure each node group (shard)
-    #   using this parameter because you must specify the slots for each node
-    #   group.
+    #   this parameter. However, it is required when seeding a Redis (cluster
+    #   mode enabled) cluster from a S3 rdb file. You must configure each node
+    #   group (shard) using this parameter because you must specify the slots
+    #   for each node group.
     #
     # @option params [String] :cache_node_type
     #   The compute and memory capacity of the nodes in the node group
@@ -2974,16 +2974,12 @@ module Aws::ElastiCache
     # ElastiCache immediately begins deleting the selected resources; you
     # cannot cancel or revert this operation.
     #
-    # <note markdown="1"> This operation is valid for Redis only.
-    #
-    #  </note>
-    #
     # @option params [required, String] :global_replication_group_id
     #   The name of the Global Datastore
     #
     # @option params [required, Boolean] :retain_primary_replication_group
-    #   If set to `true`, the primary replication is retained as a standalone
-    #   replication group.
+    #   The primary replication group is retained as a standalone replication
+    #   group.
     #
     # @return [Types::DeleteGlobalReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6534,7 +6530,7 @@ module Aws::ElastiCache
     #       start_time: Time.now,
     #       end_time: Time.now,
     #     },
-    #     update_action_status: ["not-applied"], # accepts not-applied, waiting-to-start, in-progress, stopping, stopped, complete
+    #     update_action_status: ["not-applied"], # accepts not-applied, waiting-to-start, in-progress, stopping, stopped, complete, scheduling, scheduled, not-applicable
     #     show_node_level_update_status: false,
     #     max_records: 1,
     #     marker: "String",
@@ -6553,7 +6549,7 @@ module Aws::ElastiCache
     #   resp.update_actions[0].service_update_recommended_apply_by_date #=> Time
     #   resp.update_actions[0].service_update_type #=> String, one of "security-update"
     #   resp.update_actions[0].update_action_available_date #=> Time
-    #   resp.update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete"
+    #   resp.update_actions[0].update_action_status #=> String, one of "not-applied", "waiting-to-start", "in-progress", "stopping", "stopped", "complete", "scheduling", "scheduled", "not-applicable"
     #   resp.update_actions[0].nodes_updated #=> String
     #   resp.update_actions[0].update_action_status_modified_date #=> Time
     #   resp.update_actions[0].sla_met #=> String, one of "yes", "no", "n/a"
@@ -6650,6 +6646,8 @@ module Aws::ElastiCache
     end
 
     # Used to failover the primary region to a selected secondary region.
+    # The selected secondary region will be come primary, and all other
+    # clusters will become secondary.
     #
     # @option params [required, String] :global_replication_group_id
     #   The name of the Global Datastore
@@ -7644,12 +7642,10 @@ module Aws::ElastiCache
     #   The name of the Global Datastore
     #
     # @option params [required, Boolean] :apply_immediately
-    #   If true, this parameter causes the modifications in this request and
-    #   any pending modifications to be applied, asynchronously and as soon as
-    #   possible, regardless of the PreferredMaintenanceWindow setting for the
-    #   replication group. If false, changes to the nodes in the replication
-    #   group are applied on the next maintenance reboot, or the next failure
-    #   reboot, whichever occurs first.
+    #   This parameter causes the modifications in this request and any
+    #   pending modifications to be applied, asynchronously and as soon as
+    #   possible. Modifications to Global Replication Groups cannot be
+    #   requested to be applied in PreferredMaintenceWindow.
     #
     # @option params [String] :cache_node_type
     #   A valid cache node type that you want to scale this Global Datastore
@@ -7713,10 +7709,6 @@ module Aws::ElastiCache
     end
 
     # Modifies the settings for a replication group.
-    #
-    # For Redis (cluster mode enabled) clusters, this operation cannot be
-    # used to change a cluster's node type or engine version. For more
-    # information, see:
     #
     # * [Scaling for Amazon ElastiCache for Redis (cluster mode enabled)][1]
     #   in the ElastiCache User Guide
@@ -8259,7 +8251,7 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Redistribute slots to ensure unifirom distribution across existing
+    # Redistribute slots to ensure uniform distribution across existing
     # shards in the cluster.
     #
     # @option params [required, String] :global_replication_group_id
@@ -8884,7 +8876,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1932,7 +1932,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] global_replication_group_id_suffix
-    #   The suffix for name of a Global Datastore. The suffix guarantees
+    #   The suffix name of a Global Datastore. The suffix guarantees
     #   uniqueness of the Global Datastore name across multiple regions.
     #   @return [String]
     #
@@ -1960,8 +1960,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -2137,10 +2138,10 @@ module Aws::ElastiCache
     #   If you're creating a Redis (cluster mode disabled) or a Redis
     #   (cluster mode enabled) replication group, you can use this parameter
     #   to individually configure each node group (shard), or you can omit
-    #   this parameter. However, when seeding a Redis (cluster mode enabled)
-    #   cluster from a S3 rdb file, you must configure each node group
-    #   (shard) using this parameter because you must specify the slots for
-    #   each node group.
+    #   this parameter. However, it is required when seeding a Redis
+    #   (cluster mode enabled) cluster from a S3 rdb file. You must
+    #   configure each node group (shard) using this parameter because you
+    #   must specify the slots for each node group.
     #   @return [Array<Types::NodeGroupConfiguration>]
     #
     # @!attribute [rw] cache_node_type
@@ -2641,8 +2642,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -2860,8 +2862,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] retain_primary_replication_group
-    #   If set to `true`, the primary replication is retained as a
-    #   standalone replication group.
+    #   The primary replication group is retained as a standalone
+    #   replication group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteGlobalReplicationGroupMessage AWS API Documentation
@@ -2878,8 +2880,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -3981,7 +3984,7 @@ module Aws::ElastiCache
     #           start_time: Time.now,
     #           end_time: Time.now,
     #         },
-    #         update_action_status: ["not-applied"], # accepts not-applied, waiting-to-start, in-progress, stopping, stopped, complete
+    #         update_action_status: ["not-applied"], # accepts not-applied, waiting-to-start, in-progress, stopping, stopped, complete, scheduling, scheduled, not-applicable
     #         show_node_level_update_status: false,
     #         max_records: 1,
     #         marker: "String",
@@ -4086,8 +4089,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -4265,8 +4269,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -4302,8 +4307,9 @@ module Aws::ElastiCache
     # secondary cluster accepts only reads. The primary cluster
     # automatically replicates updates to the secondary cluster.
     #
-    # * The **GlobalReplicationGroupId** represents the name of the Global
-    #   Datastore, which is what you use to associate a secondary cluster.
+    # * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #   Global Datastore, which is what you use to associate a secondary
+    #   cluster.
     #
     # ^
     #
@@ -4324,7 +4330,7 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The Elasticache engine. For preview, it is Redis only.
+    #   The Elasticache engine. For Redis only.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -4514,8 +4520,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -4628,7 +4635,7 @@ module Aws::ElastiCache
     #
     class InvalidCacheSecurityGroupStateFault < Aws::EmptyStructure; end
 
-    # The Global Datastore is not available
+    # The Global Datastore is not available or in primary-only state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidGlobalReplicationGroupStateFault AWS API Documentation
     #
@@ -5252,12 +5259,10 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] apply_immediately
-    #   If true, this parameter causes the modifications in this request and
-    #   any pending modifications to be applied, asynchronously and as soon
-    #   as possible, regardless of the PreferredMaintenanceWindow setting
-    #   for the replication group. If false, changes to the nodes in the
-    #   replication group are applied on the next maintenance reboot, or the
-    #   next failure reboot, whichever occurs first.
+    #   This parameter causes the modifications in this request and any
+    #   pending modifications to be applied, asynchronously and as soon as
+    #   possible. Modifications to Global Replication Groups cannot be
+    #   requested to be applied in PreferredMaintenceWindow.
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_node_type
@@ -5297,8 +5302,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]
@@ -6236,8 +6242,9 @@ module Aws::ElastiCache
     #   secondary cluster accepts only reads. The primary cluster
     #   automatically replicates updates to the secondary cluster.
     #
-    #   * The **GlobalReplicationGroupId** represents the name of the Global
-    #     Datastore, which is what you use to associate a secondary cluster.
+    #   * The **GlobalReplicationGroupIdSuffix** represents the name of the
+    #     Global Datastore, which is what you use to associate a secondary
+    #     cluster.
     #
     #   ^
     #   @return [Types::GlobalReplicationGroup]

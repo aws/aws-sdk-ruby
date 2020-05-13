@@ -137,6 +137,7 @@ module Aws
   autoload :MTurk, 'aws-sdk-mturk'
   autoload :MachineLearning, 'aws-sdk-machinelearning'
   autoload :Macie, 'aws-sdk-macie'
+  autoload :Macie2, 'aws-sdk-macie2'
   autoload :ManagedBlockchain, 'aws-sdk-managedblockchain'
   autoload :MarketplaceCatalog, 'aws-sdk-marketplacecatalog'
   autoload :MarketplaceCommerceAnalytics, 'aws-sdk-marketplacecommerceanalytics'

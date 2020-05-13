@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.314.0 (2020-05-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Macie2`.
+
 1.313.0 (2020-05-11)
 ------------------
 

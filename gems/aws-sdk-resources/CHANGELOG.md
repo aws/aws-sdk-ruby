@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.73.0 (2020-05-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-macie2` gem.
+
 3.72.0 (2020-04-29)
 ------------------
 

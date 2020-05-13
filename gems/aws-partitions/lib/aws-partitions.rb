@@ -353,6 +353,7 @@ module Aws
             'MTurk' => 'mturk-requester',
             'MachineLearning' => 'machinelearning',
             'Macie' => 'macie',
+            'Macie2' => 'macie2',
             'ManagedBlockchain' => 'managedblockchain',
             'MarketplaceCatalog' => 'catalog.marketplace',
             'MarketplaceCommerceAnalytics' => 'marketplacecommerceanalytics',
