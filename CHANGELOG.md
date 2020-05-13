@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Macie2 - Added support for a new service, Amazon Macie 2.
+
 2.11.506 (2020-05-12)
 ------------------
 

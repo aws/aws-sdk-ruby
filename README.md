@@ -416,8 +416,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Signaling Channels               | KinesisVideoSignalingChannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
@@ -428,6 +428,7 @@ to be backwards compatible.
 | Amazon Lightsail                                      | Lightsail                       | 2016-11-28  |
 | Amazon Machine Learning                               | MachineLearning                 | 2014-12-12  |
 | Amazon Macie                                          | Macie                           | 2017-12-19  |
+| Amazon Macie 2                                        | Macie2                          | 2020-01-01  |
 | Amazon Managed Blockchain                             | ManagedBlockchain               | 2018-09-24  |
 | Amazon Mechanical Turk                                | MTurk                           | 2017-01-17  |
 | Amazon Neptune                                        | Neptune                         | 2014-10-31  |

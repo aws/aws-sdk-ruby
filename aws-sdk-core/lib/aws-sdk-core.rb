@@ -157,6 +157,7 @@ module Aws
     MTurk
     MachineLearning
     Macie
+    Macie2
     ManagedBlockchain
     MarketplaceCatalog
     MarketplaceCommerceAnalytics

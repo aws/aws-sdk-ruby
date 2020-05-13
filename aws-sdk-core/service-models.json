@@ -534,6 +534,10 @@
     "models": "macie/2017-12-19",
     "endpoint": "macie"
   },
+  "Macie2": {
+    "models": "macie2/2020-01-01",
+    "endpoint": "macie2"
+  },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24",
     "endpoint": "managedblockchain"
