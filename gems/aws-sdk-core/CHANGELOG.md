@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Raise `ArgumentError` for XML services when required URI elements are not included.
+
 3.95.0 (2020-05-07)
 ------------------
 
