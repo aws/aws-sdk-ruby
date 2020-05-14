@@ -6413,6 +6413,17 @@ module Aws::EC2
     #       {
     #         local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #         vpc_id: "VpcId", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         dry_run: false,
     #       }
     #
@@ -6423,6 +6434,10 @@ module Aws::EC2
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the local gateway route table VPC association.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6436,6 +6451,7 @@ module Aws::EC2
     class CreateLocalGatewayRouteTableVpcAssociationRequest < Struct.new(
       :local_gateway_route_table_id,
       :vpc_id,
+      :tag_specifications,
       :dry_run)
       include Aws::Structure
     end
@@ -7423,7 +7439,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
+    #   Outpost ARN, you must also specify the Availability Zone of the
+    #   Outpost subnet.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -15795,6 +15813,19 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of the local gateway route
+    #     table.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-association-id`
+    #     - The ID of the association.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
+    #     the virtual interface group.
+    #
+    #   * `state` - The state of the association.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -15864,6 +15895,18 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of the local gateway route
+    #     table.
+    #
+    #   * `local-gateway-route-table-vpc-association-id` - The ID of the
+    #     association.
+    #
+    #   * `state` - The state of the association.
+    #
+    #   * `vpc-id` - The ID of the VPC.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -15933,6 +15976,15 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of a local gateway route
+    #     table.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `state` - The state of the local gateway route table.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16002,6 +16054,14 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-virtual-interface-id` - The ID of the virtual
+    #     interface.
+    #
+    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
+    #     interface group.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -16135,7 +16195,22 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] local_gateway_ids
-    #   The IDs of the local gateways.
+    #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of the local gateway route
+    #     table.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-association-id`
+    #     - The ID of the association.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
+    #     the virtual interface group.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `state` - The state of the association.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters

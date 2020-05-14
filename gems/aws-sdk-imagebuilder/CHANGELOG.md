@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2020-05-14)
+------------------
+
+* Feature - This release adds a new parameter (SupportedOsVersions) to the Components API. This parameter lists the OS versions supported by a component.
+
 1.5.0 (2020-05-07)
 ------------------
 

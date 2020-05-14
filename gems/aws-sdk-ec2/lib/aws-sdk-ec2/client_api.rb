@@ -3014,6 +3014,7 @@ module Aws::EC2
 
     CreateLocalGatewayRouteTableVpcAssociationRequest.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, required: true, location_name: "LocalGatewayRouteTableId"))
     CreateLocalGatewayRouteTableVpcAssociationRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    CreateLocalGatewayRouteTableVpcAssociationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateLocalGatewayRouteTableVpcAssociationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateLocalGatewayRouteTableVpcAssociationRequest.struct_class = Types::CreateLocalGatewayRouteTableVpcAssociationRequest
 

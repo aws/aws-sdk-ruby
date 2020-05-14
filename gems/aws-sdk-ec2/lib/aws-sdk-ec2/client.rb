@@ -5879,6 +5879,9 @@ module Aws::EC2
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the local gateway route table VPC association.
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -5894,6 +5897,17 @@ module Aws::EC2
     #   resp = client.create_local_gateway_route_table_vpc_association({
     #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #     vpc_id: "VpcId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
@@ -7414,7 +7428,9 @@ module Aws::EC2
     #   size must use a /64 prefix length.
     #
     # @option params [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
+    #   Outpost ARN, you must also specify the Availability Zone of the
+    #   Outpost subnet.
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
@@ -17579,6 +17595,19 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of the local gateway route
+    #     table.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-association-id` -
+    #     The ID of the association.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
+    #     the virtual interface group.
+    #
+    #   * `state` - The state of the association.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -17645,6 +17674,18 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of the local gateway route
+    #     table.
+    #
+    #   * `local-gateway-route-table-vpc-association-id` - The ID of the
+    #     association.
+    #
+    #   * `state` - The state of the association.
+    #
+    #   * `vpc-id` - The ID of the VPC.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -17714,6 +17755,15 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of a local gateway route
+    #     table.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `state` - The state of the local gateway route table.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -17778,6 +17828,14 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-virtual-interface-id` - The ID of the virtual
+    #     interface.
+    #
+    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
+    #     interface group.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -17908,7 +17966,22 @@ module Aws::EC2
     # are described. Alternatively, you can filter the results.
     #
     # @option params [Array<String>] :local_gateway_ids
-    #   The IDs of the local gateways.
+    #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `local-gateway-route-table-id` - The ID of the local gateway route
+    #     table.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-association-id` -
+    #     The ID of the association.
+    #
+    #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
+    #     the virtual interface group.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `state` - The state of the association.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
@@ -36875,7 +36948,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.159.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

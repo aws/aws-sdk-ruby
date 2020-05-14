@@ -160,6 +160,7 @@ module Aws::Imagebuilder
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OsVersion = Shapes::StringShape.new(name: 'OsVersion')
+    OsVersionList = Shapes::ListShape.new(name: 'OsVersionList')
     OutputResources = Shapes::StructureShape.new(name: 'OutputResources')
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PipelineExecutionStartCondition = Shapes::StringShape.new(name: 'PipelineExecutionStartCondition')
@@ -245,6 +246,7 @@ module Aws::Imagebuilder
     Component.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
     Component.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     Component.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    Component.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     Component.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     Component.add_member(:data, Shapes::ShapeRef.new(shape: ComponentData, location_name: "data"))
     Component.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
@@ -262,6 +264,7 @@ module Aws::Imagebuilder
     ComponentSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ComponentSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ComponentSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ComponentSummary.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     ComponentSummary.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     ComponentSummary.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ComponentSummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
@@ -277,6 +280,7 @@ module Aws::Imagebuilder
     ComponentVersion.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ComponentVersion.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ComponentVersion.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ComponentVersion.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     ComponentVersion.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     ComponentVersion.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ComponentVersion.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
@@ -289,6 +293,7 @@ module Aws::Imagebuilder
     CreateComponentRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     CreateComponentRequest.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
     CreateComponentRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "platform"))
+    CreateComponentRequest.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     CreateComponentRequest.add_member(:data, Shapes::ShapeRef.new(shape: InlineComponentData, location_name: "data"))
     CreateComponentRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, location_name: "uri"))
     CreateComponentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
@@ -809,6 +814,8 @@ module Aws::Imagebuilder
 
     Logging.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3Logs, location_name: "s3Logs"))
     Logging.struct_class = Types::Logging
+
+    OsVersionList.member = Shapes::ShapeRef.new(shape: OsVersion)
 
     OutputResources.add_member(:amis, Shapes::ShapeRef.new(shape: AmiList, location_name: "amis"))
     OutputResources.struct_class = Types::OutputResources
