@@ -28,6 +28,17 @@ RSpec.configure do |config|
     stub_request(:put, "http://169.254.169.254#{token_path}").to_raise(SocketError)
 
     Aws.shared_config.fresh
-
   end
+end
+
+def without_thread_report_on_exception
+  if Thread.respond_to?(:report_on_exception)
+    current_value = Thread.report_on_exception
+    Thread.report_on_exception = false
+  end
+
+  yield
+
+ensure
+  Thread.report_on_exception = current_value if current_value
 end
