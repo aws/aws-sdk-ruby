@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.508 (2020-05-14)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
