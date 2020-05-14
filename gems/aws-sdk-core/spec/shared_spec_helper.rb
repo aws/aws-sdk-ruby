@@ -29,16 +29,18 @@ RSpec.configure do |config|
 
     Aws.shared_config.fresh
   end
-end
 
-def without_thread_report_on_exception
-  if Thread.respond_to?(:report_on_exception)
-    current_value = Thread.report_on_exception
-    Thread.report_on_exception = false
+  # Thread.report_on_exception was set to default true in Ruby 2.5
+  # When testing code that intentionally has threads that raise exceptions
+  # disable printing of those exceptions.
+  config.around(:each, thread_report_on_exception: false) do |example|
+    if Thread.respond_to?(:report_on_exception)
+      current_value = Thread.report_on_exception
+      Thread.report_on_exception = false
+    end
+
+    example.call
+
+    Thread.report_on_exception = current_value if current_value
   end
-
-  yield
-
-ensure
-  Thread.report_on_exception = current_value if current_value
 end

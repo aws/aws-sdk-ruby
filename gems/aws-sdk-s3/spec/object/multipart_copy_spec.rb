@@ -361,27 +361,25 @@ module Aws
             )
           end
 
-          it 'aborts the upload on errors' do
-            without_thread_report_on_exception do
-              client.stub_responses(:upload_part_copy, 'NoSuchKey')
-              allow(client).to receive(:create_multipart_upload)
-                .with(bucket: 'bucket', key: 'unescaped/key path')
-                .and_return(
-                  client.stub_data(:create_multipart_upload, upload_id: 'id')
-                )
-              expect(client).to receive(:abort_multipart_upload)
-                .with(
-                  bucket: 'bucket',
-                  key: 'unescaped/key path',
-                  upload_id: 'id'
-                )
-              expect do
-                object.copy_from(
-                  'source-bucket/source%20key',
-                  multipart_copy: true
-                )
-              end.to raise_error(Aws::S3::Errors::NoSuchKey)
-            end
+          it 'aborts the upload on errors', thread_report_on_exception: false do
+            client.stub_responses(:upload_part_copy, 'NoSuchKey')
+            allow(client).to receive(:create_multipart_upload)
+              .with(bucket: 'bucket', key: 'unescaped/key path')
+              .and_return(
+                client.stub_data(:create_multipart_upload, upload_id: 'id')
+              )
+            expect(client).to receive(:abort_multipart_upload)
+              .with(
+                bucket: 'bucket',
+                key: 'unescaped/key path',
+                upload_id: 'id'
+              )
+            expect do
+              object.copy_from(
+                'source-bucket/source%20key',
+                multipart_copy: true
+              )
+            end.to raise_error(Aws::S3::Errors::NoSuchKey)
           end
 
           it 'rejects files smaller than 5MB' do
