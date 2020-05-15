@@ -2584,6 +2584,10 @@ module Aws::CloudFormation
     #   To set the default version of a type, use ` SetTypeDefaultVersion `.
     #   @return [String]
     #
+    # @!attribute [rw] is_default_version
+    #   Whether the specified type version is set as the default version.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   The description of the registered type.
     #   @return [String]
@@ -2688,6 +2692,7 @@ module Aws::CloudFormation
       :type,
       :type_name,
       :default_version_id,
+      :is_default_version,
       :description,
       :schema,
       :provisioning_type,
@@ -7047,6 +7052,10 @@ module Aws::CloudFormation
     #   type version when it is registered.
     #   @return [String]
     #
+    # @!attribute [rw] is_default_version
+    #   Whether the specified type version is set as the default version.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the type version.
     #   @return [String]
@@ -7065,6 +7074,7 @@ module Aws::CloudFormation
       :type,
       :type_name,
       :version_id,
+      :is_default_version,
       :arn,
       :time_created,
       :description)

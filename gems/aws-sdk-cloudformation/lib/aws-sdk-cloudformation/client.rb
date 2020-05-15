@@ -1742,6 +1742,8 @@ module Aws::CloudFormation
     #   * {Types::DescribeAccountLimitsOutput#account_limits #account_limits} => Array&lt;Types::AccountLimit&gt;
     #   * {Types::DescribeAccountLimitsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_limits({
@@ -2509,6 +2511,7 @@ module Aws::CloudFormation
     #   * stack_delete_complete
     #   * stack_exists
     #   * stack_import_complete
+    #   * stack_rollback_complete
     #   * stack_update_complete
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks AWS API Documentation
@@ -2558,6 +2561,7 @@ module Aws::CloudFormation
     #   * {Types::DescribeTypeOutput#type #type} => String
     #   * {Types::DescribeTypeOutput#type_name #type_name} => String
     #   * {Types::DescribeTypeOutput#default_version_id #default_version_id} => String
+    #   * {Types::DescribeTypeOutput#is_default_version #is_default_version} => Boolean
     #   * {Types::DescribeTypeOutput#description #description} => String
     #   * {Types::DescribeTypeOutput#schema #schema} => String
     #   * {Types::DescribeTypeOutput#provisioning_type #provisioning_type} => String
@@ -2585,6 +2589,7 @@ module Aws::CloudFormation
     #   resp.type #=> String, one of "RESOURCE"
     #   resp.type_name #=> String
     #   resp.default_version_id #=> String
+    #   resp.is_default_version #=> Boolean
     #   resp.description #=> String
     #   resp.schema #=> String
     #   resp.provisioning_type #=> String, one of "NON_PROVISIONABLE", "IMMUTABLE", "FULLY_MUTABLE"
@@ -3218,6 +3223,8 @@ module Aws::CloudFormation
     #   * {Types::ListChangeSetsOutput#summaries #summaries} => Array&lt;Types::ChangeSetSummary&gt;
     #   * {Types::ListChangeSetsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_change_sets({
@@ -3378,6 +3385,8 @@ module Aws::CloudFormation
     #   * {Types::ListStackInstancesOutput#summaries #summaries} => Array&lt;Types::StackInstanceSummary&gt;
     #   * {Types::ListStackInstancesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stack_instances({
@@ -3497,6 +3506,8 @@ module Aws::CloudFormation
     #   * {Types::ListStackSetOperationResultsOutput#summaries #summaries} => Array&lt;Types::StackSetOperationResultSummary&gt;
     #   * {Types::ListStackSetOperationResultsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stack_set_operation_results({
@@ -3553,6 +3564,8 @@ module Aws::CloudFormation
     #   * {Types::ListStackSetOperationsOutput#summaries #summaries} => Array&lt;Types::StackSetOperationSummary&gt;
     #   * {Types::ListStackSetOperationsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stack_set_operations({
@@ -3605,6 +3618,8 @@ module Aws::CloudFormation
     #
     #   * {Types::ListStackSetsOutput#summaries #summaries} => Array&lt;Types::StackSetSummary&gt;
     #   * {Types::ListStackSetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3838,6 +3853,7 @@ module Aws::CloudFormation
     #   resp.type_version_summaries[0].type #=> String, one of "RESOURCE"
     #   resp.type_version_summaries[0].type_name #=> String
     #   resp.type_version_summaries[0].version_id #=> String
+    #   resp.type_version_summaries[0].is_default_version #=> Boolean
     #   resp.type_version_summaries[0].arn #=> String
     #   resp.type_version_summaries[0].time_created #=> Time
     #   resp.type_version_summaries[0].description #=> String
@@ -5282,7 +5298,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -5355,6 +5371,7 @@ module Aws::CloudFormation
     # | stack_delete_complete      | {Client#describe_stacks}            | 30       | 120           |
     # | stack_exists               | {Client#describe_stacks}            | 5        | 20            |
     # | stack_import_complete      | {Client#describe_stacks}            | 30       | 120           |
+    # | stack_rollback_complete    | {Client#describe_stacks}            | 30       | 120           |
     # | stack_update_complete      | {Client#describe_stacks}            | 30       | 120           |
     # | type_registration_complete | {Client#describe_type_registration} | 30       | 120           |
     #
@@ -5412,6 +5429,7 @@ module Aws::CloudFormation
         stack_delete_complete: Waiters::StackDeleteComplete,
         stack_exists: Waiters::StackExists,
         stack_import_complete: Waiters::StackImportComplete,
+        stack_rollback_complete: Waiters::StackRollbackComplete,
         stack_update_complete: Waiters::StackUpdateComplete,
         type_registration_complete: Waiters::TypeRegistrationComplete
       }

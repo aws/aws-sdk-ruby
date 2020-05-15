@@ -36,6 +36,7 @@ module Aws::Glue
   # * {EntityNotFoundException}
   # * {GlueEncryptionException}
   # * {IdempotentParameterMismatchException}
+  # * {IllegalWorkflowStateException}
   # * {InternalServiceException}
   # * {InvalidInputException}
   # * {MLTransformNotReadyException}
@@ -209,6 +210,21 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::IdempotentParameterMismatchException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class IllegalWorkflowStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::IllegalWorkflowStateException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

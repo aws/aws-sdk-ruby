@@ -139,6 +139,7 @@ module Aws::CloudFormation
     InvalidChangeSetStatusException = Shapes::StructureShape.new(name: 'InvalidChangeSetStatusException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidStateTransitionException = Shapes::StructureShape.new(name: 'InvalidStateTransitionException')
+    IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
     Key = Shapes::StringShape.new(name: 'Key')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -663,6 +664,7 @@ module Aws::CloudFormation
     DescribeTypeOutput.add_member(:type, Shapes::ShapeRef.new(shape: RegistryType, location_name: "Type"))
     DescribeTypeOutput.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
     DescribeTypeOutput.add_member(:default_version_id, Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "DefaultVersionId"))
+    DescribeTypeOutput.add_member(:is_default_version, Shapes::ShapeRef.new(shape: IsDefaultVersion, location_name: "IsDefaultVersion"))
     DescribeTypeOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     DescribeTypeOutput.add_member(:schema, Shapes::ShapeRef.new(shape: TypeSchema, location_name: "Schema"))
     DescribeTypeOutput.add_member(:provisioning_type, Shapes::ShapeRef.new(shape: ProvisioningType, location_name: "ProvisioningType"))
@@ -1336,6 +1338,7 @@ module Aws::CloudFormation
     TypeVersionSummary.add_member(:type, Shapes::ShapeRef.new(shape: RegistryType, location_name: "Type"))
     TypeVersionSummary.add_member(:type_name, Shapes::ShapeRef.new(shape: TypeName, location_name: "TypeName"))
     TypeVersionSummary.add_member(:version_id, Shapes::ShapeRef.new(shape: TypeVersionId, location_name: "VersionId"))
+    TypeVersionSummary.add_member(:is_default_version, Shapes::ShapeRef.new(shape: IsDefaultVersion, location_name: "IsDefaultVersion"))
     TypeVersionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TypeArn, location_name: "Arn"))
     TypeVersionSummary.add_member(:time_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TimeCreated"))
     TypeVersionSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -1554,6 +1557,11 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccountLimitsInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccountLimitsOutput)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_change_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1756,6 +1764,11 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListChangeSetsInput)
         o.output = Shapes::ShapeRef.new(shape: ListChangeSetsOutput)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_exports, Seahorse::Model::Operation.new.tap do |o|
@@ -1791,6 +1804,12 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: ListStackInstancesInput)
         o.output = Shapes::ShapeRef.new(shape: ListStackInstancesOutput)
         o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_stack_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -1814,6 +1833,12 @@ module Aws::CloudFormation
         o.output = Shapes::ShapeRef.new(shape: ListStackSetOperationResultsOutput)
         o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_stack_set_operations, Seahorse::Model::Operation.new.tap do |o|
@@ -1823,6 +1848,12 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: ListStackSetOperationsInput)
         o.output = Shapes::ShapeRef.new(shape: ListStackSetOperationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_stack_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -1831,6 +1862,12 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListStackSetsInput)
         o.output = Shapes::ShapeRef.new(shape: ListStackSetsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_stacks, Seahorse::Model::Operation.new.tap do |o|

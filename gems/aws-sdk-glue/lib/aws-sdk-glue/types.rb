@@ -1102,7 +1102,7 @@ module Aws::Glue
     #         job_name: "NameString",
     #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #         crawler_name: "NameString",
-    #         crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #         crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #       }
     #
     # @!attribute [rw] logical_operator
@@ -1115,8 +1115,10 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition state. Currently, the values supported are
-    #   `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`.
+    #   The condition state. Currently, the only job states that a trigger
+    #   can listen for are `SUCCEEDED`, `STOPPED`, `FAILED`, and `TIMEOUT`.
+    #   The only crawler states that a trigger can listen for are
+    #   `SUCCEEDED`, `FAILED`, and `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] crawler_name
@@ -3263,7 +3265,7 @@ module Aws::Glue
     #               job_name: "NameString",
     #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #               crawler_name: "NameString",
-    #               crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #             },
     #           ],
     #         },
@@ -7148,6 +7150,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The workflow is in an invalid state to perform a requested operation.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IllegalWorkflowStateException AWS API Documentation
+    #
+    class IllegalWorkflowStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportCatalogToGlueRequest
     #   data as a hash:
     #
@@ -7601,7 +7616,13 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] job_run_state
-    #   The current state of the job run.
+    #   The current state of the job run. For more information about the
+    #   statuses of jobs that have terminated abnormally, see [AWS Glue Job
+    #   Run Statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html
     #   @return [String]
     #
     # @!attribute [rw] arguments
@@ -9071,7 +9092,7 @@ module Aws::Glue
     #             job_name: "NameString",
     #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #             crawler_name: "NameString",
-    #             crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #           },
     #         ],
     #       }
@@ -10233,6 +10254,34 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopWorkflowRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopWorkflowRunRequest AWS API Documentation
+    #
+    class StopWorkflowRunRequest < Struct.new(
+      :name,
+      :run_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopWorkflowRunResponse AWS API Documentation
+    #
+    class StopWorkflowRunResponse < Aws::EmptyStructure; end
+
     # Describes the physical storage of table data.
     #
     # @note When making an API call, you may pass StorageDescriptor
@@ -11133,7 +11182,7 @@ module Aws::Glue
     #               job_name: "NameString",
     #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #               crawler_name: "NameString",
-    #               crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #             },
     #           ],
     #         },
@@ -12187,7 +12236,7 @@ module Aws::Glue
     #                 job_name: "NameString",
     #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #                 crawler_name: "NameString",
-    #                 crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #                 crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #               },
     #             ],
     #           },

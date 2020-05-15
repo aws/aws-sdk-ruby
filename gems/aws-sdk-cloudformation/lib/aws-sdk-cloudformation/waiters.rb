@@ -72,6 +72,7 @@ module Aws::CloudFormation
   # | stack_delete_complete      | {Client#describe_stacks}            | 30       | 120           |
   # | stack_exists               | {Client#describe_stacks}            | 5        | 20            |
   # | stack_import_complete      | {Client#describe_stacks}            | 30       | 120           |
+  # | stack_rollback_complete    | {Client#describe_stacks}            | 30       | 120           |
   # | stack_update_complete      | {Client#describe_stacks}            | 30       | 120           |
   # | type_registration_complete | {Client#describe_type_registration} | 30       | 120           |
   #
@@ -375,6 +376,68 @@ module Aws::CloudFormation
                 "matcher" => "pathAny",
                 "state" => "failure",
                 "argument" => "stacks[].stack_status"
+              },
+              {
+                "expected" => "ValidationError",
+                "matcher" => "error",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_stacks)
+      # @return (see Client#describe_stacks)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until stack status is UPDATE_ROLLBACK_COMPLETE.
+    class StackRollbackComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (120)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 120,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_stacks,
+            acceptors: [
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_COMPLETE",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "DELETE_FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
               },
               {
                 "expected" => "ValidationError",

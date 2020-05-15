@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.96.0 (2020-05-15)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.95.0 (2020-05-07)
 ------------------
 

@@ -325,6 +325,7 @@ module Aws::Glue
     HashString = Shapes::StringShape.new(name: 'HashString')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    IllegalWorkflowStateException = Shapes::StructureShape.new(name: 'IllegalWorkflowStateException')
     ImportCatalogToGlueRequest = Shapes::StructureShape.new(name: 'ImportCatalogToGlueRequest')
     ImportCatalogToGlueResponse = Shapes::StructureShape.new(name: 'ImportCatalogToGlueResponse')
     ImportLabelsTaskRunProperties = Shapes::StructureShape.new(name: 'ImportLabelsTaskRunProperties')
@@ -504,6 +505,8 @@ module Aws::Glue
     StopCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'StopCrawlerScheduleResponse')
     StopTriggerRequest = Shapes::StructureShape.new(name: 'StopTriggerRequest')
     StopTriggerResponse = Shapes::StructureShape.new(name: 'StopTriggerResponse')
+    StopWorkflowRunRequest = Shapes::StructureShape.new(name: 'StopWorkflowRunRequest')
+    StopWorkflowRunResponse = Shapes::StructureShape.new(name: 'StopWorkflowRunResponse')
     StorageDescriptor = Shapes::StructureShape.new(name: 'StorageDescriptor')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Table = Shapes::StructureShape.new(name: 'Table')
@@ -1775,6 +1778,9 @@ module Aws::Glue
     IdempotentParameterMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
 
+    IllegalWorkflowStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    IllegalWorkflowStateException.struct_class = Types::IllegalWorkflowStateException
+
     ImportCatalogToGlueRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     ImportCatalogToGlueRequest.struct_class = Types::ImportCatalogToGlueRequest
 
@@ -2296,6 +2302,12 @@ module Aws::Glue
 
     StopTriggerResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     StopTriggerResponse.struct_class = Types::StopTriggerResponse
+
+    StopWorkflowRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    StopWorkflowRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, required: true, location_name: "RunId"))
+    StopWorkflowRunRequest.struct_class = Types::StopWorkflowRunRequest
+
+    StopWorkflowRunResponse.struct_class = Types::StopWorkflowRunResponse
 
     StorageDescriptor.add_member(:columns, Shapes::ShapeRef.new(shape: ColumnList, location_name: "Columns"))
     StorageDescriptor.add_member(:location, Shapes::ShapeRef.new(shape: LocationString, location_name: "Location"))
@@ -4164,6 +4176,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:stop_workflow_run, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopWorkflowRun"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopWorkflowRunRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopWorkflowRunResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalWorkflowStateException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
