@@ -138,7 +138,7 @@ module Aws
         stub_request(:post, 'https://route53.amazonaws.com/2013-04-01/hostedzone/ResourceId/rrset/').
           to_return(:status => 400, :body => route53_error)
         expect {
-          route53.change_resource_record_sets(hosted_zone_id: "ResourceId")
+          route53.change_resource_record_sets(hosted_zone_id: 'ResourceId')
         }.to raise_error { |error|
           expected_msg =
             'Tried to create resource record set '\
