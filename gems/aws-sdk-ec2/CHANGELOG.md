@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.159.0 (2020-05-14)
+------------------
+
+* Feature - Amazon EC2 now supports adding AWS resource tags for associations between VPCs and local gateways, at creation time.
+
 1.158.0 (2020-05-11)
 ------------------
 

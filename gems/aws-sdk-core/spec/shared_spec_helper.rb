@@ -28,6 +28,19 @@ RSpec.configure do |config|
     stub_request(:put, "http://169.254.169.254#{token_path}").to_raise(SocketError)
 
     Aws.shared_config.fresh
+  end
 
+  # Thread.report_on_exception was set to default true in Ruby 2.5
+  # When testing code that intentionally has threads that raise exceptions
+  # disable printing of those exceptions.
+  config.around(:each, thread_report_on_exception: false) do |example|
+    if Thread.respond_to?(:report_on_exception)
+      current_value = Thread.report_on_exception
+      Thread.report_on_exception = false
+    end
+
+    example.call
+
+    Thread.report_on_exception = current_value if current_value
   end
 end

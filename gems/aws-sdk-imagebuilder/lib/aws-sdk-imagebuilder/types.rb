@@ -194,6 +194,12 @@ module Aws::Imagebuilder
     #   The platform of the component.
     #   @return [String]
     #
+    # @!attribute [rw] supported_os_versions
+    #   The operating system (OS) version supported by the component. If the
+    #   OS information is available, a prefix match is performed against the
+    #   parent image OS version during image recipe creation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] owner
     #   The owner of the component.
     #   @return [String]
@@ -228,6 +234,7 @@ module Aws::Imagebuilder
       :change_description,
       :type,
       :platform,
+      :supported_os_versions,
       :owner,
       :data,
       :kms_key_id,
@@ -275,6 +282,12 @@ module Aws::Imagebuilder
     #   The platform of the component.
     #   @return [String]
     #
+    # @!attribute [rw] supported_os_versions
+    #   The operating system (OS) version supported by the component. If the
+    #   OS information is available, a prefix match is performed against the
+    #   parent image OS version during image recipe creation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] type
     #   The type of the component denotes whether the component is used to
     #   build the image or only to test it.
@@ -307,6 +320,7 @@ module Aws::Imagebuilder
       :name,
       :version,
       :platform,
+      :supported_os_versions,
       :type,
       :owner,
       :description,
@@ -338,6 +352,12 @@ module Aws::Imagebuilder
     #   The platform of the component.
     #   @return [String]
     #
+    # @!attribute [rw] supported_os_versions
+    #   The operating system (OS) version supported by the component. If the
+    #   OS information is available, a prefix match is performed against the
+    #   parent image OS version during image recipe creation.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] type
     #   The type of the component denotes whether the component is used to
     #   build the image or only to test it.
@@ -359,6 +379,7 @@ module Aws::Imagebuilder
       :version,
       :description,
       :platform,
+      :supported_os_versions,
       :type,
       :owner,
       :date_created)
@@ -374,6 +395,7 @@ module Aws::Imagebuilder
     #         description: "NonEmptyString",
     #         change_description: "NonEmptyString",
     #         platform: "Windows", # required, accepts Windows, Linux
+    #         supported_os_versions: ["OsVersion"],
     #         data: "InlineComponentData",
     #         uri: "Uri",
     #         kms_key_id: "NonEmptyString",
@@ -407,6 +429,12 @@ module Aws::Imagebuilder
     # @!attribute [rw] platform
     #   The platform of the component.
     #   @return [String]
+    #
+    # @!attribute [rw] supported_os_versions
+    #   The operating system (OS) version supported by the component. If the
+    #   OS information is available, a prefix match is performed against the
+    #   parent image OS version during image recipe creation.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] data
     #   The data of the component. Used to specify the data inline. Either
@@ -444,6 +472,7 @@ module Aws::Imagebuilder
       :description,
       :change_description,
       :platform,
+      :supported_os_versions,
       :data,
       :uri,
       :kms_key_id,

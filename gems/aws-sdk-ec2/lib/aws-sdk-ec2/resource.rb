@@ -921,7 +921,9 @@ module Aws::EC2
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
     # @option options [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
+    #   Outpost ARN, you must also specify the Availability Zone of the
+    #   Outpost subnet.
     # @option options [required, String] :vpc_id
     #   The ID of the VPC.
     # @option options [Boolean] :dry_run

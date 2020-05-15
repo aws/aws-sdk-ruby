@@ -372,6 +372,11 @@ module Aws::Imagebuilder
     # @option params [required, String] :platform
     #   The platform of the component.
     #
+    # @option params [Array<String>] :supported_os_versions
+    #   The operating system (OS) version supported by the component. If the
+    #   OS information is available, a prefix match is performed against the
+    #   parent image OS version during image recipe creation.
+    #
     # @option params [String] :data
     #   The data of the component. Used to specify the data inline. Either
     #   `data` or `uri` can be used to specify the data within the component.
@@ -408,6 +413,7 @@ module Aws::Imagebuilder
     #     description: "NonEmptyString",
     #     change_description: "NonEmptyString",
     #     platform: "Windows", # required, accepts Windows, Linux
+    #     supported_os_versions: ["OsVersion"],
     #     data: "InlineComponentData",
     #     uri: "Uri",
     #     kms_key_id: "NonEmptyString",
@@ -1067,6 +1073,8 @@ module Aws::Imagebuilder
     #   resp.component.change_description #=> String
     #   resp.component.type #=> String, one of "BUILD", "TEST"
     #   resp.component.platform #=> String, one of "Windows", "Linux"
+    #   resp.component.supported_os_versions #=> Array
+    #   resp.component.supported_os_versions[0] #=> String
     #   resp.component.owner #=> String
     #   resp.component.data #=> String
     #   resp.component.kms_key_id #=> String
@@ -1618,6 +1626,8 @@ module Aws::Imagebuilder
     #   resp.component_summary_list[0].name #=> String
     #   resp.component_summary_list[0].version #=> String
     #   resp.component_summary_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.component_summary_list[0].supported_os_versions #=> Array
+    #   resp.component_summary_list[0].supported_os_versions[0] #=> String
     #   resp.component_summary_list[0].type #=> String, one of "BUILD", "TEST"
     #   resp.component_summary_list[0].owner #=> String
     #   resp.component_summary_list[0].description #=> String
@@ -1687,6 +1697,8 @@ module Aws::Imagebuilder
     #   resp.component_version_list[0].version #=> String
     #   resp.component_version_list[0].description #=> String
     #   resp.component_version_list[0].platform #=> String, one of "Windows", "Linux"
+    #   resp.component_version_list[0].supported_os_versions #=> Array
+    #   resp.component_version_list[0].supported_os_versions[0] #=> String
     #   resp.component_version_list[0].type #=> String, one of "BUILD", "TEST"
     #   resp.component_version_list[0].owner #=> String
     #   resp.component_version_list[0].date_created #=> String
@@ -2660,7 +2672,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
