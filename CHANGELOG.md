@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::STS - Updated the API for AWS Security Token Service.
+
 2.11.508 (2020-05-14)
 ------------------
 
