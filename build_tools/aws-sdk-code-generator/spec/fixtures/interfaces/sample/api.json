@@ -8,7 +8,7 @@
     "BookConcerts": {
       "http": {
         "method": "POST",
-        "requestUri": "/concerts/{bandname}"
+        "requestUri": "/concerts/{BandName}"
       },
       "input": { "shape": "BookConcertsRequest" },
       "output": { "shape": "BookConcertsResponse" }
@@ -149,7 +149,9 @@
     },
     "BookConcertsRequest": {
       "type": "structure",
-      "members": {}
+      "members": {
+        "BandName": { "shape": "BandName" }
+      }
     },
     "Boolean": { "type": "boolean" },
     "BookConcertsResponse": {

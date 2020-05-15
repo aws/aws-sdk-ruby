@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow S3 presigner to presign non-object operations such as `list_objects`.
+
 1.64.0 (2020-05-07)
 ------------------
 

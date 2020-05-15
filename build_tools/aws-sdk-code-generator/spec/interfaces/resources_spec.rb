@@ -70,7 +70,7 @@ describe 'Interfaces' do
             { concert_id: 'id-2' }
           ])
           band = Sample::Resource.new(client: client)
-          concerts = band.book_concerts
+          concerts = band.book_concerts(band_name: 'foo fighters')
           expect(concerts).to be_kind_of(Sample::Concert::Collection)
           expect(concerts.map(&:id)).to eq(['id-1', 'id-2'])
           expect(concerts.size).to eq(2)
@@ -477,7 +477,7 @@ describe 'Interfaces' do
           { concert_id: 'id-2' }
         ])
         band = Sample::Band.new(name:'name', client: client)
-        concerts = band.book_concerts
+        concerts = band.book_concerts(band_name: 'foo fighters')
         expect(concerts).to be_kind_of(Sample::Concert::Collection)
         expect(concerts.map(&:id)).to eq(['id-1', 'id-2'])
         expect(concerts.size).to eq(2)
