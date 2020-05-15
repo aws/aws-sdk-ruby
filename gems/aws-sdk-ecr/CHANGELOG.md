@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-05-15)
+------------------
+
+* Feature - This release adds support for specifying an image manifest media type when pushing a manifest to Amazon ECR.
+
 1.28.0 (2020-05-07)
 ------------------
 

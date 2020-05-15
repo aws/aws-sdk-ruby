@@ -549,6 +549,7 @@ module Aws::ECR
     #   resp.images[0].image_id.image_digest #=> String
     #   resp.images[0].image_id.image_tag #=> String
     #   resp.images[0].image_manifest #=> String
+    #   resp.images[0].image_manifest_media_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
@@ -1678,6 +1679,11 @@ module Aws::ECR
     # @option params [required, String] :image_manifest
     #   The image manifest corresponding to the image to be uploaded.
     #
+    # @option params [String] :image_manifest_media_type
+    #   The media type of the image manifest. If you push an image manifest
+    #   that does not contain the `mediaType` field, you must specify the
+    #   `imageManifestMediaType` in the request.
+    #
     # @option params [String] :image_tag
     #   The tag to associate with the image. This parameter is required for
     #   images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
@@ -1692,6 +1698,7 @@ module Aws::ECR
     #     registry_id: "RegistryId",
     #     repository_name: "RepositoryName", # required
     #     image_manifest: "ImageManifest", # required
+    #     image_manifest_media_type: "MediaType",
     #     image_tag: "ImageTag",
     #   })
     #
@@ -1702,6 +1709,7 @@ module Aws::ECR
     #   resp.image.image_id.image_digest #=> String
     #   resp.image.image_id.image_tag #=> String
     #   resp.image.image_manifest #=> String
+    #   resp.image.image_manifest_media_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImage AWS API Documentation
     #
@@ -1865,7 +1873,7 @@ module Aws::ECR
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1877,12 +1885,12 @@ module Aws::ECR
     #
     # @option params [required, String] :policy_text
     #   The JSON repository policy text to apply to the repository. For more
-    #   information, see [Amazon ECR Repository Policy Examples][1] in the
-    #   *Amazon Elastic Container Registry User Guide*.
+    #   information, see [Amazon ECR Repository Policies][1] in the *Amazon
+    #   Elastic Container Registry User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html
     #
     # @option params [Boolean] :force
     #   If the policy you are attempting to set on a repository policy would
@@ -2114,10 +2122,12 @@ module Aws::ECR
     #   associate with the layer part upload.
     #
     # @option params [required, Integer] :part_first_byte
-    #   The integer value of the first byte of the layer part.
+    #   The position of the first byte of the layer part witin the overall
+    #   image layer.
     #
     # @option params [required, Integer] :part_last_byte
-    #   The integer value of the last byte of the layer part.
+    #   The position of the last byte of the layer part within the overall
+    #   image layer.
     #
     # @option params [required, String, IO] :layer_part_blob
     #   The base64-encoded layer part payload.
@@ -2169,7 +2179,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
