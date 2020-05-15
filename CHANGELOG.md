@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.509 (2020-05-15)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
 
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
