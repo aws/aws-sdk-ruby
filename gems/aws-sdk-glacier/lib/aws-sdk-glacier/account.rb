@@ -170,7 +170,7 @@ module Aws::Glacier
     # @return [Vault]
     def create_vault(options = {})
       options = options.merge(account_id: @id)
-      resp = @client.create_vault(options)
+      @client.create_vault(options)
       Vault.new(
         account_id: @id,
         name: options[:vault_name],

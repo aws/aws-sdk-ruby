@@ -658,7 +658,7 @@ module Aws::AutoScaling
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = @client.put_scaling_policy(options)
+      @client.put_scaling_policy(options)
       ScalingPolicy.new(
         name: options[:policy_name],
         client: @client
@@ -719,7 +719,7 @@ module Aws::AutoScaling
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = @client.put_scheduled_update_group_action(options)
+      @client.put_scheduled_update_group_action(options)
       ScheduledAction.new(
         name: options[:scheduled_action_name],
         client: @client
@@ -998,7 +998,7 @@ module Aws::AutoScaling
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = @client.update_auto_scaling_group(options)
+      @client.update_auto_scaling_group(options)
       AutoScalingGroup.new(
         name: options[:auto_scaling_group_name],
         client: @client

@@ -327,7 +327,7 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     # @return [AutoScalingGroup]
     def create_group(options = {})
-      resp = @client.create_auto_scaling_group(options)
+      @client.create_auto_scaling_group(options)
       AutoScalingGroup.new(
         name: options[:auto_scaling_group_name],
         client: @client
@@ -589,7 +589,7 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-vpc-tenancy
     # @return [LaunchConfiguration]
     def create_launch_configuration(options = {})
-      resp = @client.create_launch_configuration(options)
+      @client.create_launch_configuration(options)
       LaunchConfiguration.new(
         name: options[:launch_configuration_name],
         client: @client
