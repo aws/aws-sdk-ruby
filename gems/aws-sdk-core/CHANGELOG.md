@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Validate `:region` against the host partition suffix.
+
 3.97.1 (2020-06-01)
 ------------------
 
