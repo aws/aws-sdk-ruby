@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Split on first instance of `://` in `Signer` to handle 3rd party s3:// urls.
+* Issue - Split on first instance of `://` in `Aws::CloudFront::Signer` to handle 3rd party s3:// urls.
 
 1.27.0 (2020-05-07)
 ------------------
