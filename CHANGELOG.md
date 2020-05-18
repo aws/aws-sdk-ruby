@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::DynamoDB - Updated the documentation for Amazon DynamoDB.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::Macie2 - Updated the API for Amazon Macie 2.
+
+* Feature - Aws::QLDB - Updated the API, and documentation for Amazon QLDB.
+
 2.11.509 (2020-05-15)
 ------------------
 
