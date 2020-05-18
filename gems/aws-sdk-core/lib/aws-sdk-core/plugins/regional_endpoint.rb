@@ -2,10 +2,6 @@ module Aws
   module Plugins
     # @api private
     class RegionalEndpoint < Seahorse::Client::Plugin
-
-      # raised when region is not configured
-      MISSING_REGION = 'missing required configuration option :region'
-
       option(:profile)
 
       option(:region,
@@ -47,21 +43,27 @@ to test endpoints. This should be a valid HTTP(S) URI.
       end
 
       def after_initialize(client)
-        if client.config.region.nil? or client.config.region == ''
+        if client.config.region.nil? || client.config.region == ''
           raise Errors::MissingRegionError
+        end
+
+        # check region format follows pattern <continent>-<direction>-<number>
+        unless client.config.region =~ /^[a-zA-Z]([a-zA-Z0-9\-]*[a-zA-Z0-9])?$/
+          raise Errors::InvalidRegionError
         end
       end
 
-      private
+      class << self
+        private
 
-      def self.resolve_region(cfg)
-        keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
-        env_region = ENV.values_at(*keys).compact.first
-        env_region = nil if env_region == ''
-        cfg_region = Aws.shared_config.region(profile: cfg.profile)
-        env_region || cfg_region
+        def resolve_region(cfg)
+          keys = %w[AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION]
+          env_region = ENV.values_at(*keys).compact.first
+          env_region = nil if env_region == ''
+          cfg_region = Aws.shared_config.region(profile: cfg.profile)
+          env_region || cfg_region
+        end
       end
-
     end
   end
 end
