@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.510 (2020-05-18)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::DynamoDB - Updated the documentation for Amazon DynamoDB.
