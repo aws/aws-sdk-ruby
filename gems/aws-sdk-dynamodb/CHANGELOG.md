@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-05-18)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
 1.46.1 (2020-05-11)
 ------------------
 

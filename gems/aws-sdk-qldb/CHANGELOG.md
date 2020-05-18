@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-05-18)
+------------------
+
+* Feature - Amazon QLDB now supports Amazon Kinesis data streams. You can now emit QLDB journal data, via the new QLDB Streams feature, directly to Amazon Kinesis supporting event processing and analytics among related use cases.
+
 1.3.0 (2020-05-07)
 ------------------
 

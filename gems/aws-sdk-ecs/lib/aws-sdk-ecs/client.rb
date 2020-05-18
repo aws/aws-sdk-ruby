@@ -2296,6 +2296,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].environment #=> Array
     #   resp.task_definition.container_definitions[0].environment[0].name #=> String
     #   resp.task_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.task_definition.container_definitions[0].environment_files #=> Array
+    #   resp.task_definition.container_definitions[0].environment_files[0].value #=> String
+    #   resp.task_definition.container_definitions[0].environment_files[0].type #=> String, one of "s3"
     #   resp.task_definition.container_definitions[0].mount_points #=> Array
     #   resp.task_definition.container_definitions[0].mount_points[0].source_volume #=> String
     #   resp.task_definition.container_definitions[0].mount_points[0].container_path #=> String
@@ -3159,6 +3162,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].environment #=> Array
     #   resp.task_definition.container_definitions[0].environment[0].name #=> String
     #   resp.task_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.task_definition.container_definitions[0].environment_files #=> Array
+    #   resp.task_definition.container_definitions[0].environment_files[0].value #=> String
+    #   resp.task_definition.container_definitions[0].environment_files[0].type #=> String, one of "s3"
     #   resp.task_definition.container_definitions[0].mount_points #=> Array
     #   resp.task_definition.container_definitions[0].mount_points[0].source_volume #=> String
     #   resp.task_definition.container_definitions[0].mount_points[0].container_path #=> String
@@ -3537,6 +3543,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files[0].type #=> String, one of "s3"
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
@@ -5492,6 +5501,12 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         environment_files: [
+    #           {
+    #             value: "String", # required
+    #             type: "s3", # required, accepts s3
+    #           },
+    #         ],
     #         mount_points: [
     #           {
     #             source_volume: "String",
@@ -5697,6 +5712,9 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].environment #=> Array
     #   resp.task_definition.container_definitions[0].environment[0].name #=> String
     #   resp.task_definition.container_definitions[0].environment[0].value #=> String
+    #   resp.task_definition.container_definitions[0].environment_files #=> Array
+    #   resp.task_definition.container_definitions[0].environment_files[0].value #=> String
+    #   resp.task_definition.container_definitions[0].environment_files[0].type #=> String, one of "s3"
     #   resp.task_definition.container_definitions[0].mount_points #=> Array
     #   resp.task_definition.container_definitions[0].mount_points[0].source_volume #=> String
     #   resp.task_definition.container_definitions[0].mount_points[0].container_path #=> String
@@ -6115,6 +6133,12 @@ module Aws::ECS
     #               value: "String",
     #             },
     #           ],
+    #           environment_files: [
+    #             {
+    #               value: "String", # required
+    #               type: "s3", # required, accepts s3
+    #             },
+    #           ],
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
@@ -6227,6 +6251,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files[0].type #=> String, one of "s3"
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
@@ -6409,6 +6436,12 @@ module Aws::ECS
     #               value: "String",
     #             },
     #           ],
+    #           environment_files: [
+    #             {
+    #               value: "String", # required
+    #               type: "s3", # required, accepts s3
+    #             },
+    #           ],
     #           cpu: 1,
     #           memory: 1,
     #           memory_reservation: 1,
@@ -6508,6 +6541,9 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
     #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files #=> Array
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files[0].value #=> String
+    #   resp.tasks[0].overrides.container_overrides[0].environment_files[0].type #=> String, one of "s3"
     #   resp.tasks[0].overrides.container_overrides[0].cpu #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory #=> Integer
     #   resp.tasks[0].overrides.container_overrides[0].memory_reservation #=> Integer
@@ -6662,6 +6698,9 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].environment #=> Array
     #   resp.task.overrides.container_overrides[0].environment[0].name #=> String
     #   resp.task.overrides.container_overrides[0].environment[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].environment_files #=> Array
+    #   resp.task.overrides.container_overrides[0].environment_files[0].value #=> String
+    #   resp.task.overrides.container_overrides[0].environment_files[0].type #=> String, one of "s3"
     #   resp.task.overrides.container_overrides[0].cpu #=> Integer
     #   resp.task.overrides.container_overrides[0].memory #=> Integer
     #   resp.task.overrides.container_overrides[0].memory_reservation #=> Integer
@@ -7959,7 +7998,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

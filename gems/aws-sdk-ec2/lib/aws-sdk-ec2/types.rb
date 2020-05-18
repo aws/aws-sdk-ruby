@@ -40882,6 +40882,9 @@ module Aws::EC2
     #
     #   Constraints: Maximum 64 ASCII characters
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html

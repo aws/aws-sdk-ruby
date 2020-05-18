@@ -1272,7 +1272,7 @@ module Aws::Macie2
         "serviceId" => "Macie2",
         "signatureVersion" => "v4",
         "signingName" => "macie2",
-        "uid" => "macie2-2020-01-01T00:00:00Z",
+        "uid" => "macie2-2020-01-01",
       }
 
       api.add_operation(:accept_invitation, Seahorse::Model::Operation.new.tap do |o|

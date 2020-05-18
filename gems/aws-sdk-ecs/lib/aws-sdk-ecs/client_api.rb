@@ -123,6 +123,9 @@ module Aws::ECS
     EFSAuthorizationConfigIAM = Shapes::StringShape.new(name: 'EFSAuthorizationConfigIAM')
     EFSTransitEncryption = Shapes::StringShape.new(name: 'EFSTransitEncryption')
     EFSVolumeConfiguration = Shapes::StructureShape.new(name: 'EFSVolumeConfiguration')
+    EnvironmentFile = Shapes::StructureShape.new(name: 'EnvironmentFile')
+    EnvironmentFileType = Shapes::StringShape.new(name: 'EnvironmentFileType')
+    EnvironmentFiles = Shapes::ListShape.new(name: 'EnvironmentFiles')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
@@ -449,6 +452,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:entry_point, Shapes::ShapeRef.new(shape: StringList, location_name: "entryPoint"))
     ContainerDefinition.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerDefinition.add_member(:environment_files, Shapes::ShapeRef.new(shape: EnvironmentFiles, location_name: "environmentFiles"))
     ContainerDefinition.add_member(:mount_points, Shapes::ShapeRef.new(shape: MountPointList, location_name: "mountPoints"))
     ContainerDefinition.add_member(:volumes_from, Shapes::ShapeRef.new(shape: VolumeFromList, location_name: "volumesFrom"))
     ContainerDefinition.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
@@ -511,6 +515,7 @@ module Aws::ECS
     ContainerOverride.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerOverride.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerOverride.add_member(:environment_files, Shapes::ShapeRef.new(shape: EnvironmentFiles, location_name: "environmentFiles"))
     ContainerOverride.add_member(:cpu, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "cpu"))
     ContainerOverride.add_member(:memory, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memory"))
     ContainerOverride.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memoryReservation"))
@@ -769,6 +774,12 @@ module Aws::ECS
     EFSVolumeConfiguration.add_member(:transit_encryption_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "transitEncryptionPort"))
     EFSVolumeConfiguration.add_member(:authorization_config, Shapes::ShapeRef.new(shape: EFSAuthorizationConfig, location_name: "authorizationConfig"))
     EFSVolumeConfiguration.struct_class = Types::EFSVolumeConfiguration
+
+    EnvironmentFile.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    EnvironmentFile.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentFileType, required: true, location_name: "type"))
+    EnvironmentFile.struct_class = Types::EnvironmentFile
+
+    EnvironmentFiles.member = Shapes::ShapeRef.new(shape: EnvironmentFile)
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 

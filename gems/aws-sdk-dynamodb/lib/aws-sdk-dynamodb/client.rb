@@ -944,7 +944,8 @@ module Aws::DynamoDB
     # a replication relationship between two or more DynamoDB tables with
     # the same table name in the provided Regions.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -968,6 +969,14 @@ module Aws::DynamoDB
     #
     # * The global secondary indexes must have the same hash key and sort
     #   key (if present).
+    #
+    # If local secondary indexes are specified, then the following
+    # conditions must also be met:
+    #
+    # * The local secondary indexes must have the same name.
+    #
+    # * The local secondary indexes must have the same hash key and sort key
+    #   (if present).
     #
     # Write capacity settings should be set consistently across your replica
     # tables and secondary indexes. DynamoDB strongly recommends enabling
@@ -2163,13 +2172,17 @@ module Aws::DynamoDB
 
     # Returns information about the specified global table.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables. If you are using global tables [Version 2019.11.21][2] you can
+    # use [DescribeTable][3] instead.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table.
@@ -2212,7 +2225,8 @@ module Aws::DynamoDB
 
     # Describes Region-specific settings for a global table.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -2575,7 +2589,8 @@ module Aws::DynamoDB
     # Describes auto scaling settings across replicas of the global table at
     # once.
     #
-    # <note markdown="1"> This method only applies to [Version 2019.11.21][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2019.11.21][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -3011,7 +3026,8 @@ module Aws::DynamoDB
 
     # Lists all global tables that have a replica in the specified Region.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -3205,9 +3221,14 @@ module Aws::DynamoDB
     # * [ PutItem in the AWS SDK for Ruby V2][9]
     #
     # When you add an item, the primary key attributes are the only required
-    # attributes. Attribute values cannot be null. String and Binary type
-    # attributes must have lengths greater than zero. Set type attributes
-    # cannot be empty. Requests with empty values will be rejected with a
+    # attributes. Attribute values cannot be null.
+    #
+    # Empty String and Binary attribute values are allowed. Attribute values
+    # of type String and Binary must have a length greater than zero if the
+    # attribute is used as a key attribute for a table or index. Set type
+    # attributes cannot be empty.
+    #
+    # Invalid Requests with empty values will be rejected with a
     # `ValidationException` exception.
     #
     # <note markdown="1"> To prevent a new item from replacing an existing item, use a
@@ -3251,6 +3272,10 @@ module Aws::DynamoDB
     #   If you specify any attributes that are part of an index key, then the
     #   data types for those attributes must match those of the schema in the
     #   table's attribute definition.
+    #
+    #   Empty String and Binary attribute values are allowed. Attribute values
+    #   of type String and Binary must have a length greater than zero if the
+    #   attribute is used as a key attribute for a table or index.
     #
     #   For more information about primary keys, see [Primary Key][1] in the
     #   *Amazon DynamoDB Developer Guide*.
@@ -6377,7 +6402,8 @@ module Aws::DynamoDB
 
     # Updates auto scaling settings on your global tables at once.
     #
-    # <note markdown="1"> This method only applies to [Version 2019.11.21][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2019.11.21][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -6630,7 +6656,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.46.1'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

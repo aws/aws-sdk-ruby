@@ -282,6 +282,10 @@ module Aws::Chime
     PutVoiceConnectorTerminationCredentialsRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationCredentialsRequest')
     PutVoiceConnectorTerminationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationRequest')
     PutVoiceConnectorTerminationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorTerminationResponse')
+    RedactConversationMessageRequest = Shapes::StructureShape.new(name: 'RedactConversationMessageRequest')
+    RedactConversationMessageResponse = Shapes::StructureShape.new(name: 'RedactConversationMessageResponse')
+    RedactRoomMessageRequest = Shapes::StructureShape.new(name: 'RedactRoomMessageRequest')
+    RedactRoomMessageResponse = Shapes::StructureShape.new(name: 'RedactRoomMessageResponse')
     RegenerateSecurityTokenRequest = Shapes::StructureShape.new(name: 'RegenerateSecurityTokenRequest')
     RegenerateSecurityTokenResponse = Shapes::StructureShape.new(name: 'RegenerateSecurityTokenResponse')
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
@@ -1224,6 +1228,20 @@ module Aws::Chime
 
     PutVoiceConnectorTerminationResponse.add_member(:termination, Shapes::ShapeRef.new(shape: Termination, location_name: "Termination"))
     PutVoiceConnectorTerminationResponse.struct_class = Types::PutVoiceConnectorTerminationResponse
+
+    RedactConversationMessageRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    RedactConversationMessageRequest.add_member(:conversation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "conversationId"))
+    RedactConversationMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "messageId"))
+    RedactConversationMessageRequest.struct_class = Types::RedactConversationMessageRequest
+
+    RedactConversationMessageResponse.struct_class = Types::RedactConversationMessageResponse
+
+    RedactRoomMessageRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    RedactRoomMessageRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
+    RedactRoomMessageRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "messageId"))
+    RedactRoomMessageRequest.struct_class = Types::RedactRoomMessageRequest
+
+    RedactRoomMessageResponse.struct_class = Types::RedactRoomMessageResponse
 
     RegenerateSecurityTokenRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     RegenerateSecurityTokenRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "botId"))
@@ -2944,6 +2962,36 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:redact_conversation_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RedactConversationMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/conversations/{conversationId}/messages/{messageId}?operation=redact"
+        o.input = Shapes::ShapeRef.new(shape: RedactConversationMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: RedactConversationMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:redact_room_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RedactRoomMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/rooms/{roomId}/messages/{messageId}?operation=redact"
+        o.input = Shapes::ShapeRef.new(shape: RedactRoomMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: RedactRoomMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

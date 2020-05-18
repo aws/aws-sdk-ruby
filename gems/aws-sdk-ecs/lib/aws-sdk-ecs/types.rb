@@ -743,6 +743,12 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         environment_files: [
+    #           {
+    #             value: "String", # required
+    #             type: "s3", # required, accepts s3
+    #           },
+    #         ],
     #         mount_points: [
     #           {
     #             source_volume: "String",
@@ -1186,6 +1192,37 @@ module Aws::ECS
     #   [2]: https://docs.docker.com/engine/api/v1.35/
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [Array<Types::KeyValuePair>]
+    #
+    # @!attribute [rw] environment_files
+    #   A list of files containing the environment variables to pass to a
+    #   container. This parameter maps to the `--env-file` option to [docker
+    #   run][1].
+    #
+    #   You can specify up to ten environment files. The file must have a
+    #   `.env` file extension. Each line in an environment file should
+    #   contain an environment variable in `VARIABLE=VALUE` format. Lines
+    #   beginning with `#` are treated as comments and are ignored. For more
+    #   information on the environment variable file syntax, see [Declare
+    #   default environment variables in file][2].
+    #
+    #   If there are environment variables specified using the `environment`
+    #   parameter in a container definition, they take precedence over the
+    #   variables contained within an environment file. If multiple
+    #   environment files are specified that contain the same variable, they
+    #   are processed from the top down. It is recommended to use unique
+    #   variable names. For more information, see [Specifying Environment
+    #   Variables][3] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #   This field is not valid for containers in tasks using the Fargate
+    #   launch type.
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   [2]: https://docs.docker.com/compose/env-file/
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html
+    #   @return [Array<Types::EnvironmentFile>]
     #
     # @!attribute [rw] mount_points
     #   The mount points for data volumes in your container.
@@ -1719,6 +1756,7 @@ module Aws::ECS
       :entry_point,
       :command,
       :environment,
+      :environment_files,
       :mount_points,
       :volumes_from,
       :linux_parameters,
@@ -2017,6 +2055,12 @@ module Aws::ECS
     #             value: "String",
     #           },
     #         ],
+    #         environment_files: [
+    #           {
+    #             value: "String", # required
+    #             type: "s3", # required, accepts s3
+    #           },
+    #         ],
     #         cpu: 1,
     #         memory: 1,
     #         memory_reservation: 1,
@@ -2046,6 +2090,11 @@ module Aws::ECS
     #   Docker image or the task definition. You must also specify a
     #   container name.
     #   @return [Array<Types::KeyValuePair>]
+    #
+    # @!attribute [rw] environment_files
+    #   A list of files containing the environment variables to pass to a
+    #   container, instead of the value from the container definition.
+    #   @return [Array<Types::EnvironmentFile>]
     #
     # @!attribute [rw] cpu
     #   The number of `cpu` units reserved for the container, instead of the
@@ -2078,6 +2127,7 @@ module Aws::ECS
       :name,
       :command,
       :environment,
+      :environment_files,
       :cpu,
       :memory,
       :memory_reservation,
@@ -4329,6 +4379,56 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # A list of files containing the environment variables to pass to a
+    # container. You can specify up to ten environment files. The file must
+    # have a `.env` file extension. Each line in an environment file should
+    # contain an environment variable in `VARIABLE=VALUE` format. Lines
+    # beginning with `#` are treated as comments and are ignored. For more
+    # information on the environment variable file syntax, see [Declare
+    # default environment variables in file][1].
+    #
+    # If there are environment variables specified using the `environment`
+    # parameter in a container definition, they take precedence over the
+    # variables contained within an environment file. If multiple
+    # environment files are specified that contain the same variable, they
+    # are processed from the top down. It is recommended to use unique
+    # variable names. For more information, see [Specifying Environment
+    # Variables][2] in the *Amazon Elastic Container Service Developer
+    # Guide*.
+    #
+    # This field is not valid for containers in tasks using the Fargate
+    # launch type.
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/compose/env-file/
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html
+    #
+    # @note When making an API call, you may pass EnvironmentFile
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String", # required
+    #         type: "s3", # required, accepts s3
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The Amazon Resource Name (ARN) of the Amazon S3 object containing
+    #   the environment variable file.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The file type to use. The only supported value is `s3`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EnvironmentFile AWS API Documentation
+    #
+    class EnvironmentFile < Struct.new(
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
     # A failed resource.
     #
     # @!attribute [rw] arn
@@ -4689,8 +4789,9 @@ module Aws::ECS
     #   `CapAdd` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-add` option to [docker run][3].
     #
-    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the `add`
-    #   parameter is not supported.
+    #   <note markdown="1"> The `SYS_PTRACE` capability is supported for tasks that use the
+    #   Fargate launch type if they are also using platform version 1.4.0.
+    #   The other capabilities are not supported for any platform versions.
     #
     #    </note>
     #
@@ -4811,9 +4912,9 @@ module Aws::ECS
     #   The Linux capabilities for the container that are added to or
     #   dropped from the default configuration provided by Docker.
     #
-    #   <note markdown="1"> If you are using tasks that use the Fargate launch type,
-    #   `capabilities` is supported but the `add` parameter is not
-    #   supported.
+    #   <note markdown="1"> For tasks that use the Fargate launch type, `capabilities` is
+    #   supported for all platform versions but the `add` parameter is only
+    #   supported if using platform version 1.4.0 or later.
     #
     #    </note>
     #   @return [Types::KernelCapabilities]
@@ -6828,6 +6929,12 @@ module Aws::ECS
     #                 value: "String",
     #               },
     #             ],
+    #             environment_files: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "s3", # required, accepts s3
+    #               },
+    #             ],
     #             mount_points: [
     #               {
     #                 source_volume: "String",
@@ -7513,6 +7620,12 @@ module Aws::ECS
     #                 {
     #                   name: "String",
     #                   value: "String",
+    #                 },
+    #               ],
+    #               environment_files: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "s3", # required, accepts s3
     #                 },
     #               ],
     #               cpu: 1,
@@ -8294,6 +8407,12 @@ module Aws::ECS
     #                 {
     #                   name: "String",
     #                   value: "String",
+    #                 },
+    #               ],
+    #               environment_files: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "s3", # required, accepts s3
     #                 },
     #               ],
     #               cpu: 1,
@@ -9612,6 +9731,12 @@ module Aws::ECS
     #               {
     #                 name: "String",
     #                 value: "String",
+    #               },
+    #             ],
+    #             environment_files: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "s3", # required, accepts s3
     #               },
     #             ],
     #             cpu: 1,

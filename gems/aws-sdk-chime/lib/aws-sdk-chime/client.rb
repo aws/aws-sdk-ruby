@@ -3849,6 +3849,68 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Redacts the specified message from the specified Amazon Chime
+    # conversation.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :conversation_id
+    #   The conversation ID.
+    #
+    # @option params [required, String] :message_id
+    #   The message ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redact_conversation_message({
+    #     account_id: "NonEmptyString", # required
+    #     conversation_id: "NonEmptyString", # required
+    #     message_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactConversationMessage AWS API Documentation
+    #
+    # @overload redact_conversation_message(params = {})
+    # @param [Hash] params ({})
+    def redact_conversation_message(params = {}, options = {})
+      req = build_request(:redact_conversation_message, params)
+      req.send_request(options)
+    end
+
+    # Redacts the specified message from the specified Amazon Chime chat
+    # room.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, String] :room_id
+    #   The room ID.
+    #
+    # @option params [required, String] :message_id
+    #   The message ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redact_room_message({
+    #     account_id: "NonEmptyString", # required
+    #     room_id: "NonEmptyString", # required
+    #     message_id: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactRoomMessage AWS API Documentation
+    #
+    # @overload redact_room_message(params = {})
+    # @param [Hash] params ({})
+    def redact_room_message(params = {}, options = {})
+      req = build_request(:redact_room_message, params)
+      req.send_request(options)
+    end
+
     # Regenerates the security token for a bot.
     #
     # @option params [required, String] :account_id
@@ -4817,7 +4879,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

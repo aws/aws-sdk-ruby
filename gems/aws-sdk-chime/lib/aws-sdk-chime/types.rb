@@ -4277,6 +4277,74 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RedactConversationMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         conversation_id: "NonEmptyString", # required
+    #         message_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] conversation_id
+    #   The conversation ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The message ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactConversationMessageRequest AWS API Documentation
+    #
+    class RedactConversationMessageRequest < Struct.new(
+      :account_id,
+      :conversation_id,
+      :message_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactConversationMessageResponse AWS API Documentation
+    #
+    class RedactConversationMessageResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RedactRoomMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         room_id: "NonEmptyString", # required
+    #         message_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] room_id
+    #   The room ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   The message ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactRoomMessageRequest AWS API Documentation
+    #
+    class RedactRoomMessageRequest < Struct.new(
+      :account_id,
+      :room_id,
+      :message_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RedactRoomMessageResponse AWS API Documentation
+    #
+    class RedactRoomMessageResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RegenerateSecurityTokenRequest
     #   data as a hash:
     #

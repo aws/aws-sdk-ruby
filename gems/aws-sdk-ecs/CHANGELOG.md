@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2020-05-18)
+------------------
+
+* Feature - This release adds support for specifying environment files to add environment variables to your containers.
+
 1.61.0 (2020-05-07)
 ------------------
 

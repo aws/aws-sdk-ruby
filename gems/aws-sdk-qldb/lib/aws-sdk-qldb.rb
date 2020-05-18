@@ -25,7 +25,7 @@ require_relative 'aws-sdk-qldb/customizations'
 # structure.
 #
 #     qldb = Aws::QLDB::Client.new
-#     resp = qldb.create_ledger(params)
+#     resp = qldb.cancel_journal_kinesis_stream(params)
 #
 # See {Client} for more information.
 #
@@ -45,6 +45,6 @@ require_relative 'aws-sdk-qldb/customizations'
 # @service
 module Aws::QLDB
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end

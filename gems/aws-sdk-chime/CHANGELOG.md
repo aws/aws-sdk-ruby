@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-05-18)
+------------------
+
+* Feature - Amazon Chime now supports redacting chat messages.
+
 1.24.0 (2020-05-07)
 ------------------
 
