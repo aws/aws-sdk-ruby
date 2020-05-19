@@ -48,7 +48,8 @@ module Aws
           if plain_text.empty?
             StringIO.new(cipher.final)
           else
-            StringIO.new(cipher.update(plain_text) + cipher.final)
+            puts "(io_encrypter) cipher.authenticated? #{cipher.authenticated?}"
+            io = StringIO.new(cipher.update(plain_text) + cipher.final + cipher.auth_tag)
           end
         end
 
@@ -59,6 +60,7 @@ module Aws
             encrypted.write(cipher.update(chunk))
           end
           encrypted.write(cipher.final)
+          encrypted.write(cipher.auth_tag)
           encrypted.rewind
           encrypted
         end
