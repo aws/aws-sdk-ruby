@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.161.0 (2020-05-19)
+------------------
+
+* Feature - This release adds support for Federated Authentication via SAML-2.0 in AWS ClientVPN.
+
 1.160.0 (2020-05-18)
 ------------------
 

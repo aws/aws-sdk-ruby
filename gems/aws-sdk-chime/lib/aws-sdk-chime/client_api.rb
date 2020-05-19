@@ -232,6 +232,7 @@ module Aws::Chime
     NonEmptyString128 = Shapes::StringShape.new(name: 'NonEmptyString128')
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NotificationTarget = Shapes::StringShape.new(name: 'NotificationTarget')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NumberSelectionBehavior = Shapes::StringShape.new(name: 'NumberSelectionBehavior')
     OrderedPhoneNumber = Shapes::StructureShape.new(name: 'OrderedPhoneNumber')
@@ -309,6 +310,8 @@ module Aws::Chime
     SigninDelegateGroup = Shapes::StructureShape.new(name: 'SigninDelegateGroup')
     SigninDelegateGroupList = Shapes::ListShape.new(name: 'SigninDelegateGroupList')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
+    StreamingNotificationTarget = Shapes::StructureShape.new(name: 'StreamingNotificationTarget')
+    StreamingNotificationTargetList = Shapes::ListShape.new(name: 'StreamingNotificationTargetList')
     String = Shapes::StringShape.new(name: 'String')
     String128 = Shapes::StringShape.new(name: 'String128')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -1315,7 +1318,13 @@ module Aws::Chime
 
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
+    StreamingConfiguration.add_member(:streaming_notification_targets, Shapes::ShapeRef.new(shape: StreamingNotificationTargetList, location_name: "StreamingNotificationTargets"))
     StreamingConfiguration.struct_class = Types::StreamingConfiguration
+
+    StreamingNotificationTarget.add_member(:notification_target, Shapes::ShapeRef.new(shape: NotificationTarget, required: true, location_name: "NotificationTarget"))
+    StreamingNotificationTarget.struct_class = Types::StreamingNotificationTarget
+
+    StreamingNotificationTargetList.member = Shapes::ShapeRef.new(shape: StreamingNotificationTarget)
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 

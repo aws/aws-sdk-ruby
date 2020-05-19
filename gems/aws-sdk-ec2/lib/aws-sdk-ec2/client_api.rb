@@ -877,6 +877,8 @@ module Aws::EC2
     FailedQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'FailedQueuedPurchaseDeletion')
     FailedQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'FailedQueuedPurchaseDeletionSet')
     FastSnapshotRestoreStateCode = Shapes::StringShape.new(name: 'FastSnapshotRestoreStateCode')
+    FederatedAuthentication = Shapes::StructureShape.new(name: 'FederatedAuthentication')
+    FederatedAuthenticationRequest = Shapes::StructureShape.new(name: 'FederatedAuthenticationRequest')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
@@ -2599,6 +2601,7 @@ module Aws::EC2
     ClientVpnAuthentication.add_member(:type, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationType, location_name: "type"))
     ClientVpnAuthentication.add_member(:active_directory, Shapes::ShapeRef.new(shape: DirectoryServiceAuthentication, location_name: "activeDirectory"))
     ClientVpnAuthentication.add_member(:mutual_authentication, Shapes::ShapeRef.new(shape: CertificateAuthentication, location_name: "mutualAuthentication"))
+    ClientVpnAuthentication.add_member(:federated_authentication, Shapes::ShapeRef.new(shape: FederatedAuthentication, location_name: "federatedAuthentication"))
     ClientVpnAuthentication.struct_class = Types::ClientVpnAuthentication
 
     ClientVpnAuthenticationList.member = Shapes::ShapeRef.new(shape: ClientVpnAuthentication, location_name: "item")
@@ -2606,6 +2609,7 @@ module Aws::EC2
     ClientVpnAuthenticationRequest.add_member(:type, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationType, location_name: "Type"))
     ClientVpnAuthenticationRequest.add_member(:active_directory, Shapes::ShapeRef.new(shape: DirectoryServiceAuthenticationRequest, location_name: "ActiveDirectory"))
     ClientVpnAuthenticationRequest.add_member(:mutual_authentication, Shapes::ShapeRef.new(shape: CertificateAuthenticationRequest, location_name: "MutualAuthentication"))
+    ClientVpnAuthenticationRequest.add_member(:federated_authentication, Shapes::ShapeRef.new(shape: FederatedAuthenticationRequest, location_name: "FederatedAuthentication"))
     ClientVpnAuthenticationRequest.struct_class = Types::ClientVpnAuthenticationRequest
 
     ClientVpnAuthenticationRequestList.member = Shapes::ShapeRef.new(shape: ClientVpnAuthenticationRequest)
@@ -5482,6 +5486,12 @@ module Aws::EC2
     FailedQueuedPurchaseDeletion.struct_class = Types::FailedQueuedPurchaseDeletion
 
     FailedQueuedPurchaseDeletionSet.member = Shapes::ShapeRef.new(shape: FailedQueuedPurchaseDeletion, location_name: "item")
+
+    FederatedAuthentication.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "samlProviderArn"))
+    FederatedAuthentication.struct_class = Types::FederatedAuthentication
+
+    FederatedAuthenticationRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "SAMLProviderArn"))
+    FederatedAuthenticationRequest.struct_class = Types::FederatedAuthenticationRequest
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Value"))

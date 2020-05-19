@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-05-19)
+------------------
+
+* Feature - Documentation updates for Amazon Transcribe.
+
 1.41.0 (2020-05-07)
 ------------------
 

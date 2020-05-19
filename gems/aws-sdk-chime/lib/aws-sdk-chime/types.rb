@@ -4177,6 +4177,11 @@ module Aws::Chime
     #         streaming_configuration: { # required
     #           data_retention_in_hours: 1, # required
     #           disabled: false,
+    #           streaming_notification_targets: [
+    #             {
+    #               notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -4662,6 +4667,11 @@ module Aws::Chime
     #       {
     #         data_retention_in_hours: 1, # required
     #         disabled: false,
+    #         streaming_notification_targets: [
+    #           {
+    #             notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] data_retention_in_hours
@@ -4672,11 +4682,36 @@ module Aws::Chime
     #   When true, media streaming to Amazon Kinesis is turned off.
     #   @return [Boolean]
     #
+    # @!attribute [rw] streaming_notification_targets
+    #   The streaming notification targets.
+    #   @return [Array<Types::StreamingNotificationTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StreamingConfiguration AWS API Documentation
     #
     class StreamingConfiguration < Struct.new(
       :data_retention_in_hours,
-      :disabled)
+      :disabled,
+      :streaming_notification_targets)
+      include Aws::Structure
+    end
+
+    # The targeted recipient for a streaming configuration notification.
+    #
+    # @note When making an API call, you may pass StreamingNotificationTarget
+    #   data as a hash:
+    #
+    #       {
+    #         notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #       }
+    #
+    # @!attribute [rw] notification_target
+    #   The streaming notification target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/StreamingNotificationTarget AWS API Documentation
+    #
+    class StreamingNotificationTarget < Struct.new(
+      :notification_target)
       include Aws::Structure
     end
 

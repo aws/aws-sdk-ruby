@@ -2633,6 +2633,8 @@ module Aws::Chime
     #
     #   resp.streaming_configuration.data_retention_in_hours #=> Integer
     #   resp.streaming_configuration.disabled #=> Boolean
+    #   resp.streaming_configuration.streaming_notification_targets #=> Array
+    #   resp.streaming_configuration.streaming_notification_targets[0].notification_target #=> String, one of "EventBridge", "SNS", "SQS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetVoiceConnectorStreamingConfiguration AWS API Documentation
     #
@@ -3755,6 +3757,11 @@ module Aws::Chime
     #     streaming_configuration: { # required
     #       data_retention_in_hours: 1, # required
     #       disabled: false,
+    #       streaming_notification_targets: [
+    #         {
+    #           notification_target: "EventBridge", # required, accepts EventBridge, SNS, SQS
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -3762,6 +3769,8 @@ module Aws::Chime
     #
     #   resp.streaming_configuration.data_retention_in_hours #=> Integer
     #   resp.streaming_configuration.disabled #=> Boolean
+    #   resp.streaming_configuration.streaming_notification_targets #=> Array
+    #   resp.streaming_configuration.streaming_notification_targets[0].notification_target #=> String, one of "EventBridge", "SNS", "SQS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutVoiceConnectorStreamingConfiguration AWS API Documentation
     #
@@ -4879,7 +4888,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

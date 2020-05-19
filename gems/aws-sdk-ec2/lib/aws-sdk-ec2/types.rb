@@ -1716,7 +1716,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] access_group_id
-    #   The ID of the Active Directory group to grant access.
+    #   The ID of the group to grant access to, for example, the Active
+    #   Directory group or identity provider (IdP) group.
     #   @return [String]
     #
     # @!attribute [rw] authorize_all_groups
@@ -3358,8 +3359,7 @@ module Aws::EC2
     end
 
     # Describes the authentication methods used by a Client VPN endpoint.
-    # Client VPN supports Active Directory and mutual authentication. For
-    # more information, see [Authentication][1] in the *AWS Client VPN
+    # For more information, see [Authentication][1] in the *AWS Client VPN
     # Administrator Guide*.
     #
     #
@@ -3378,19 +3378,23 @@ module Aws::EC2
     #   Information about the authentication certificates, if applicable.
     #   @return [Types::CertificateAuthentication]
     #
+    # @!attribute [rw] federated_authentication
+    #   Information about the IAM SAML identity provider, if applicable.
+    #   @return [Types::FederatedAuthentication]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthentication AWS API Documentation
     #
     class ClientVpnAuthentication < Struct.new(
       :type,
       :active_directory,
-      :mutual_authentication)
+      :mutual_authentication,
+      :federated_authentication)
       include Aws::Structure
     end
 
     # Describes the authentication method to be used by a Client VPN
-    # endpoint. Client VPN supports Active Directory and mutual
-    # authentication. For more information, see [Authentication][1] in the
-    # *AWS Client VPN Administrator Guide*.
+    # endpoint. For more information, see [Authentication][1] in the *AWS
+    # Client VPN Administrator Guide*.
     #
     #
     #
@@ -3400,20 +3404,20 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication, federated-authentication
     #         active_directory: {
     #           directory_id: "String",
     #         },
     #         mutual_authentication: {
     #           client_root_certificate_chain_arn: "String",
     #         },
+    #         federated_authentication: {
+    #           saml_provider_arn: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] type
-    #   The type of client authentication to be used. Specify
-    #   `certificate-authentication` to use certificate-based
-    #   authentication, or `directory-service-authentication` to use Active
-    #   Directory authentication.
+    #   The type of client authentication to be used.
     #   @return [String]
     #
     # @!attribute [rw] active_directory
@@ -3428,12 +3432,19 @@ module Aws::EC2
     #   `certificate-authentication`.
     #   @return [Types::CertificateAuthenticationRequest]
     #
+    # @!attribute [rw] federated_authentication
+    #   Information about the IAM SAML identity provider to be used, if
+    #   applicable. You must provide this information if **Type** is
+    #   `federated-authentication`.
+    #   @return [Types::FederatedAuthenticationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnAuthenticationRequest AWS API Documentation
     #
     class ClientVpnAuthenticationRequest < Struct.new(
       :type,
       :active_directory,
-      :mutual_authentication)
+      :mutual_authentication,
+      :federated_authentication)
       include Aws::Structure
     end
 
@@ -4606,12 +4617,15 @@ module Aws::EC2
     #         server_certificate_arn: "String", # required
     #         authentication_options: [ # required
     #           {
-    #             type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #             type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication, federated-authentication
     #             active_directory: {
     #               directory_id: "String",
     #             },
     #             mutual_authentication: {
     #               client_root_certificate_chain_arn: "String",
+    #             },
+    #             federated_authentication: {
+    #               saml_provider_arn: "String",
     #             },
     #           },
     #         ],
@@ -24139,6 +24153,40 @@ module Aws::EC2
     class FailedQueuedPurchaseDeletion < Struct.new(
       :error,
       :reserved_instances_id)
+      include Aws::Structure
+    end
+
+    # Describes the IAM SAML identity provider used for federated
+    # authentication.
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FederatedAuthentication AWS API Documentation
+    #
+    class FederatedAuthentication < Struct.new(
+      :saml_provider_arn)
+      include Aws::Structure
+    end
+
+    # The IAM SAML identity provider used for federated authentication.
+    #
+    # @note When making an API call, you may pass FederatedAuthenticationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         saml_provider_arn: "String",
+    #       }
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FederatedAuthenticationRequest AWS API Documentation
+    #
+    class FederatedAuthenticationRequest < Struct.new(
+      :saml_provider_arn)
       include Aws::Structure
     end
 

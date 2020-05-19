@@ -151,6 +151,9 @@ module Aws::Health
     #   A JSON set of elements of the affected accounts.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] event_scope_code
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   If the results of a search are large, only a portion of the results
     #   are returned, and a `nextToken` pagination token is returned in the
@@ -163,6 +166,7 @@ module Aws::Health
     #
     class DescribeAffectedAccountsForOrganizationResponse < Struct.new(
       :affected_accounts,
+      :event_scope_code,
       :next_token)
       include Aws::Structure
     end
@@ -174,7 +178,7 @@ module Aws::Health
     #         organization_entity_filters: [ # required
     #           {
     #             event_arn: "eventArn", # required
-    #             aws_account_id: "accountId", # required
+    #             aws_account_id: "accountId",
     #           },
     #         ],
     #         locale: "locale",
@@ -456,7 +460,7 @@ module Aws::Health
     #         organization_event_detail_filters: [ # required
     #           {
     #             event_arn: "eventArn", # required
-    #             aws_account_id: "accountId", # required
+    #             aws_account_id: "accountId",
     #           },
     #         ],
     #         locale: "locale",
@@ -939,6 +943,9 @@ module Aws::Health
     #   `closed`, and `upcoming`.
     #   @return [String]
     #
+    # @!attribute [rw] event_scope_code
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -951,7 +958,8 @@ module Aws::Health
       :start_time,
       :end_time,
       :last_updated_time,
-      :status_code)
+      :status_code,
+      :event_scope_code)
       include Aws::Structure
     end
 
@@ -964,7 +972,7 @@ module Aws::Health
     #
     #       {
     #         event_arn: "eventArn", # required
-    #         aws_account_id: "accountId", # required
+    #         aws_account_id: "accountId",
     #       }
     #
     # @!attribute [rw] event_arn
@@ -1328,6 +1336,9 @@ module Aws::Health
     #   The category of the event type.
     #   @return [String]
     #
+    # @!attribute [rw] event_scope_code
+    #   @return [String]
+    #
     # @!attribute [rw] region
     #   The AWS Region name of the event.
     #   @return [String]
@@ -1356,6 +1367,7 @@ module Aws::Health
       :service,
       :event_type_code,
       :event_type_category,
+      :event_scope_code,
       :region,
       :start_time,
       :end_time,

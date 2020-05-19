@@ -2076,7 +2076,8 @@ module Aws::EC2
     #   access is being authorized.
     #
     # @option params [String] :access_group_id
-    #   The ID of the Active Directory group to grant access.
+    #   The ID of the group to grant access to, for example, the Active
+    #   Directory group or identity provider (IdP) group.
     #
     # @option params [Boolean] :authorize_all_groups
     #   Indicates whether to grant access to all clients. Use `true` to grant
@@ -3805,12 +3806,15 @@ module Aws::EC2
     #     server_certificate_arn: "String", # required
     #     authentication_options: [ # required
     #       {
-    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication
+    #         type: "certificate-authentication", # accepts certificate-authentication, directory-service-authentication, federated-authentication
     #         active_directory: {
     #           directory_id: "String",
     #         },
     #         mutual_authentication: {
     #           client_root_certificate_chain_arn: "String",
+    #         },
+    #         federated_authentication: {
+    #           saml_provider_arn: "String",
     #         },
     #       },
     #     ],
@@ -11632,8 +11636,12 @@ module Aws::EC2
     # you can delete the VPN connection and create a new one that has new
     # keys, without needing to delete the VPC or virtual private gateway. If
     # you create a new VPN connection, you must reconfigure the customer
-    # gateway using the new configuration information returned with the new
-    # VPN connection ID.
+    # gateway device using the new configuration information returned with
+    # the new VPN connection ID.
+    #
+    # For certificate-based authentication, delete all AWS Certificate
+    # Manager (ACM) private certificates used for the AWS-side tunnel
+    # endpoints for the VPN connection before deleting the VPN connection.
     #
     # @option params [required, String] :vpn_connection_id
     #   The ID of the VPN connection.
@@ -13104,9 +13112,10 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_type #=> String, one of "vpc"
     #   resp.client_vpn_endpoints[0].server_certificate_arn #=> String
     #   resp.client_vpn_endpoints[0].authentication_options #=> Array
-    #   resp.client_vpn_endpoints[0].authentication_options[0].type #=> String, one of "certificate-authentication", "directory-service-authentication"
+    #   resp.client_vpn_endpoints[0].authentication_options[0].type #=> String, one of "certificate-authentication", "directory-service-authentication", "federated-authentication"
     #   resp.client_vpn_endpoints[0].authentication_options[0].active_directory.directory_id #=> String
     #   resp.client_vpn_endpoints[0].authentication_options[0].mutual_authentication.client_root_certificate_chain #=> String
+    #   resp.client_vpn_endpoints[0].authentication_options[0].federated_authentication.saml_provider_arn #=> String
     #   resp.client_vpn_endpoints[0].connection_log_options.enabled #=> Boolean
     #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_group #=> String
     #   resp.client_vpn_endpoints[0].connection_log_options.cloudwatch_log_stream #=> String
@@ -31475,7 +31484,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the target gateway of an AWS Site-to-Site VPN connection. The
+    # Modifies the customer gateway or the target gateway of an AWS
+    # Site-to-Site VPN connection. To modify the target gateway, the
     # following migration options are available:
     #
     # * An existing virtual private gateway to a new virtual private gateway
@@ -36951,7 +36961,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.160.0'
+      context[:gem_version] = '1.161.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

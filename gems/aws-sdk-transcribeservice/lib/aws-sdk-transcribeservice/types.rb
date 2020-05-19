@@ -104,7 +104,7 @@ module Aws::TranscribeService
     #
     #   This is an example of a vocabulary file uri location in Amazon S3:
     #
-    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -277,14 +277,6 @@ module Aws::TranscribeService
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
     #   endpoint that you are calling. The general form is
-    #
-    #   `
-    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-    #   `
-    #
-    #   For example:
-    #
-    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -1079,13 +1071,7 @@ module Aws::TranscribeService
     #   the same region as the API endpoint that you are calling. The
     #   general form is:
     #
-    #   ` s3://<bucket-name>/<keyprefix>/<objectkey> `
-    #
     #   For example:
-    #
-    #   `s3://examplebucket/example.mp4`
-    #
-    #   `s3://examplebucket/mediadocs/example.mp4`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -2085,7 +2071,7 @@ module Aws::TranscribeService
     #
     #   For example:
     #
-    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
+    #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -2242,13 +2228,7 @@ module Aws::TranscribeService
     #   custom vocabulary. The URI must be in the same region as the API
     #   endpoint that you are calling. The general form is
     #
-    #   `
-    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-    #   `
-    #
     #   For example:
-    #
-    #   `https://s3.us-east-1.amazonaws.com/examplebucket/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-05-19)
+------------------
+
+* Feature - You can now receive Voice Connector call events through SNS or SQS.
+
 1.25.0 (2020-05-18)
 ------------------
 
