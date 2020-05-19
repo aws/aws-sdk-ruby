@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Health - Updated the API, and documentation for AWS Health APIs and Notifications.
+
+* Feature - Aws::TranscribeService - Updated the documentation for Amazon Transcribe Service.
+
 2.11.510 (2020-05-18)
 ------------------
 
