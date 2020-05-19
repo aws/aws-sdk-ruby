@@ -1,6 +1,7 @@
 # utility classes
 require 'aws-sdk-s3/bucket_region_cache'
 require 'aws-sdk-s3/encryption'
+require 'aws-sdk-s3/encryption_v2'
 require 'aws-sdk-s3/file_part'
 require 'aws-sdk-s3/file_uploader'
 require 'aws-sdk-s3/file_downloader'
