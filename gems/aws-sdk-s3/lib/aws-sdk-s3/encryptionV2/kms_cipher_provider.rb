@@ -20,12 +20,14 @@ module Aws
             encryption_context: encryption_context,
             key_spec: 'AES_256',
           )
-          cipher = Utils.aes_encryption_cipher(:CBC)
+          cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.key = key_data.plaintext
+          cipher.auth_data = ''
           envelope = {
             'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
-            'x-amz-cek-alg' => 'AES/CBC/PKCS5Padding',
+            'x-amz-cek-alg' => 'AES/GCM/NoPadding',
+            'x-amz-tag-len' => 16 * 8,
             'x-amz-wrap-alg' => 'kms',
             'x-amz-matdesc' => Json.dump(encryption_context)
           }

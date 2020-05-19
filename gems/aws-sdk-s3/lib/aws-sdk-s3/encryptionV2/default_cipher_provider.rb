@@ -14,6 +14,7 @@ module Aws
         #   envelope and encryption cipher.
         def encryption_cipher
           cipher = Utils.aes_encryption_cipher(:GCM)
+          cipher.auth_data = ''
           envelope = {
             'x-amz-key-v2' => encode64(encrypt(envelope_key(cipher))),
             'x-amz-cek-alg' => 'AES/GCM/NoPadding',
@@ -22,7 +23,6 @@ module Aws
             'x-amz-iv' => encode64(envelope_iv(cipher)),
             'x-amz-matdesc' => materials_description,
           }
-          cipher.auth_data = ''
           [envelope, cipher]
         end
 
