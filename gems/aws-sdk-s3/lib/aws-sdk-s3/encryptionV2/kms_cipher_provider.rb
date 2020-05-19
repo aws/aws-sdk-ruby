@@ -11,10 +11,14 @@ module Aws
           @kms_client = options[:kms_client]
         end
 
-        # @return [Array<Hash,Cipher>] Creates an returns a new encryption
+        # @return [Array<Hash,Cipher>] Creates and returns a new encryption
         #   envelope and encryption cipher.
         def encryption_cipher
-          encryption_context = { "kms_cmk_id" => @kms_key_id }
+          cek_alg = 'AES/GCM/NoPadding'
+          encryption_context = {
+            'kms_cmk_id' => @kms_key_id,
+            'aws:x-amz-cek-alg' => cek_alg
+          }
           key_data = @kms_client.generate_data_key(
             key_id: @kms_key_id,
             encryption_context: encryption_context,
@@ -26,9 +30,9 @@ module Aws
           envelope = {
             'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
-            'x-amz-cek-alg' => 'AES/GCM/NoPadding',
+            'x-amz-cek-alg' => cek_alg,
             'x-amz-tag-len' => 16 * 8,
-            'x-amz-wrap-alg' => 'kms',
+            'x-amz-wrap-alg' => 'kms+context',
             'x-amz-matdesc' => Json.dump(encryption_context)
           }
           [envelope, cipher]
@@ -40,11 +44,12 @@ module Aws
           encryption_context = Json.load(envelope['x-amz-matdesc'])
           key = @kms_client.decrypt(
             ciphertext_blob: decode64(envelope['x-amz-key-v2']),
-            encryption_context: encryption_context,
+            encryption_context: encryption_context
           ).plaintext
+          cek_alg = encryption_context['aws:x-amz-cek-alg'] || envelope['x-amz-cek-alg']
           iv = decode64(envelope['x-amz-iv'])
           block_mode =
-            case envelope['x-amz-cek-alg']
+            case cek_alg
             when 'AES/CBC/PKCS5Padding'
               :CBC
             when 'AES/CBC/PKCS7Padding'
