@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.512 (2020-05-20)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
 
 * Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
