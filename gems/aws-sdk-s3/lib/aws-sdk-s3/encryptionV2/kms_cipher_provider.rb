@@ -46,7 +46,8 @@ module Aws
             ciphertext_blob: decode64(envelope['x-amz-key-v2']),
             encryption_context: encryption_context
           ).plaintext
-          cek_alg = encryption_context['aws:x-amz-cek-alg'] || envelope['x-amz-cek-alg']
+          cek_alg = envelope['x-amz-wrap-alg'] == 'kms+context' ?
+            encryption_context['aws:x-amz-cek-alg'] : envelope['x-amz-cek-alg']
           iv = decode64(envelope['x-amz-iv'])
           block_mode =
             case cek_alg

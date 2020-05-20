@@ -15,11 +15,19 @@ module Aws
         def encryption_cipher
           cipher = Utils.aes_encryption_cipher(:GCM)
           cipher.auth_data = ''
+          cek_alg = 'AES/GCM/NoPadding'
+          if @key_provider.encryption_materials.key.is_a? OpenSSL::PKey::RSA
+            wrap_alg = 'RSA-OAEP-SHA1'
+            enc_key = encode64(encrypt_rsa(envelope_key(cipher), cek_alg))
+          else
+            wrap_alg = 'AES/GCM'
+            enc_key = encode64(encrypt_aes_gcm(envelope_key(cipher), cek_alg))
+          end
           envelope = {
-            'x-amz-key-v2' => encode64(encrypt(envelope_key(cipher))),
-            'x-amz-cek-alg' => 'AES/GCM/NoPadding',
+            'x-amz-key-v2' => enc_key,
+            'x-amz-cek-alg' => cek_alg,
             'x-amz-tag-len' => 16 * 8,
-            'x-amz-wrap-alg' => 'AES/GCM', # TODO: Update this after changing encrypt(key) above
+            'x-amz-wrap-alg' => wrap_alg,
             'x-amz-iv' => encode64(envelope_iv(cipher)),
             'x-amz-matdesc' => materials_description,
           }
@@ -42,7 +50,19 @@ module Aws
               raise ArgumentError, 'Unsupported cek-alg: ' \
                 "#{envelope['x-amz-cek-alg']}"
             end
-            key = Utils.decrypt(master_key, decode64(envelope['x-amz-key-v2']))
+            key =
+              case envelope['x-amz-wrap-alg']
+              when 'AES/GCM'
+                Utils.decrypt_aes_gcm(master_key,
+                                    decode64(envelope['x-amz-key-v2']),
+                                    envelope['x-amz-cek-alg'])
+              when 'RSA-OAEP-SHA1'
+                raise 'TODO: Implement me!'
+                # Utils.decrypt_rsa(master_key, decode64(envelope['x-amz-key-v2']))
+              else
+              raise ArgumentError, 'Unsupported wrap-alg: ' \
+                "#{envelope['x-amz-wrap-alg']}"
+            end
             iv = decode64(envelope['x-amz-iv'])
             Utils.aes_decryption_cipher(:GCM, key, iv)
           end
@@ -58,8 +78,12 @@ module Aws
           cipher.iv = cipher.random_iv
         end
 
-        def encrypt(data)
-          Utils.encrypt(@key_provider.encryption_materials.key, data)
+        def encrypt_aes_gcm(data, auth_data)
+          Utils.encrypt_aes_gcm(@key_provider.encryption_materials.key, data, auth_data)
+        end
+
+        def encrypt_rca(data, auth_data)
+          raise 'TODO: Implement me'
         end
 
         def materials_description

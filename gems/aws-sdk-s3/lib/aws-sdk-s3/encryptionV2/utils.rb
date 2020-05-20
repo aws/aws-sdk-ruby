@@ -22,6 +22,15 @@ module Aws
             end
           end
 
+          def encrypt_aes_gcm(key, data, auth_data)
+            warn(UNSAFE_MSG) if cipher_size(key) < cipher_size(data)
+            cipher = aes_encryption_cipher(:GCM, key)
+            cipher.iv = (iv = cipher.random_iv)
+            cipher.auth_data = auth_data
+
+            iv + cipher.update(data) + cipher.final + cipher.auth_tag
+          end
+
           def decrypt(key, data)
             begin
               case key
@@ -35,6 +44,18 @@ module Aws
               msg = 'decryption failed, possible incorrect key'
               raise Errors::DecryptionError, msg
             end
+          end
+
+          def decrypt_aes_gcm(key, data, auth_data)
+            # data is iv (12B) + key + tag (16B)
+            buf = data.unpack('C*')
+            iv = buf[0,12].pack('C*') # iv will always be 12 bytes
+            tag = buf[-16, 16].pack('C*') # tag is 16 bytes
+            enc_key = buf[12, buf.size - (12+16)].pack('C*')
+            cipher = aes_cipher(:decrypt, :GCM, key, iv)
+            cipher.auth_tag = tag
+            cipher.auth_data = auth_data
+            cipher.update(enc_key) + cipher.final
           end
 
           # @param [String] block_mode "CBC" or "ECB"
