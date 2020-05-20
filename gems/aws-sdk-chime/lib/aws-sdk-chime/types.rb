@@ -737,6 +737,27 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The retention settings that determine how long to retain chat
+    # conversation messages for an Amazon Chime Enterprise account.
+    #
+    # @note When making an API call, you may pass ConversationRetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days for which to retain chat conversation messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ConversationRetentionSettings AWS API Documentation
+    #
+    class ConversationRetentionSettings < Struct.new(
+      :retention_days)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAccountRequest
     #   data as a hash:
     #
@@ -2181,6 +2202,41 @@ module Aws::Chime
     #
     class GetProxySessionResponse < Struct.new(
       :proxy_session)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetRetentionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRetentionSettingsRequest AWS API Documentation
+    #
+    class GetRetentionSettingsRequest < Struct.new(
+      :account_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retention_settings
+    #   The retention settings.
+    #   @return [Types::RetentionSettings]
+    #
+    # @!attribute [rw] initiate_deletion_timestamp
+    #   The timestamp representing the time at which the specified items are
+    #   permanently deleted, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRetentionSettingsResponse AWS API Documentation
+    #
+    class GetRetentionSettingsResponse < Struct.new(
+      :retention_settings,
+      :initiate_deletion_timestamp)
       include Aws::Structure
     end
 
@@ -4032,6 +4088,54 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRetentionSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         retention_settings: { # required
+    #           room_retention_settings: {
+    #             retention_days: 1,
+    #           },
+    #           conversation_retention_settings: {
+    #             retention_days: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_settings
+    #   The retention settings.
+    #   @return [Types::RetentionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutRetentionSettingsRequest AWS API Documentation
+    #
+    class PutRetentionSettingsRequest < Struct.new(
+      :account_id,
+      :retention_settings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retention_settings
+    #   The retention settings.
+    #   @return [Types::RetentionSettings]
+    #
+    # @!attribute [rw] initiate_deletion_timestamp
+    #   The timestamp representing the time at which the specified items are
+    #   permanently deleted, in ISO 8601 format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutRetentionSettingsResponse AWS API Documentation
+    #
+    class PutRetentionSettingsResponse < Struct.new(
+      :retention_settings,
+      :initiate_deletion_timestamp)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutVoiceConnectorLoggingConfigurationRequest
     #   data as a hash:
     #
@@ -4466,6 +4570,38 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # The retention settings for an Amazon Chime Enterprise account that
+    # determine how long to retain items such as chat room messages and chat
+    # conversation messages.
+    #
+    # @note When making an API call, you may pass RetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         room_retention_settings: {
+    #           retention_days: 1,
+    #         },
+    #         conversation_retention_settings: {
+    #           retention_days: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] room_retention_settings
+    #   The chat room retention settings.
+    #   @return [Types::RoomRetentionSettings]
+    #
+    # @!attribute [rw] conversation_retention_settings
+    #   The chat conversation retention settings.
+    #   @return [Types::ConversationRetentionSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RetentionSettings AWS API Documentation
+    #
+    class RetentionSettings < Struct.new(
+      :room_retention_settings,
+      :conversation_retention_settings)
+      include Aws::Structure
+    end
+
     # The Amazon Chime chat room details.
     #
     # @!attribute [rw] room_id
@@ -4535,6 +4671,27 @@ module Aws::Chime
       :role,
       :invited_by,
       :updated_timestamp)
+      include Aws::Structure
+    end
+
+    # The retention settings that determine how long to retain chat room
+    # messages for an Amazon Chime Enterprise account.
+    #
+    # @note When making an API call, you may pass RoomRetentionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         retention_days: 1,
+    #       }
+    #
+    # @!attribute [rw] retention_days
+    #   The number of days for which to retain chat room messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/RoomRetentionSettings AWS API Documentation
+    #
+    class RoomRetentionSettings < Struct.new(
+      :retention_days)
       include Aws::Structure
     end
 

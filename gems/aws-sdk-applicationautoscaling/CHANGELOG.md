@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-05-20)
+------------------
+
+* Feature - Documentation updates for Application Auto Scaling
+
 1.38.0 (2020-05-07)
 ------------------
 

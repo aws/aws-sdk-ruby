@@ -71,6 +71,9 @@ module Aws::MediaLive
   # | channel_deleted   | {Client#describe_channel}   | 5        | 84            |
   # | channel_running   | {Client#describe_channel}   | 5        | 120           |
   # | channel_stopped   | {Client#describe_channel}   | 5        | 60            |
+  # | input_attached    | {Client#describe_input}     | 5        | 20            |
+  # | input_deleted     | {Client#describe_input}     | 5        | 20            |
+  # | input_detached    | {Client#describe_input}     | 5        | 84            |
   # | multiplex_created | {Client#describe_multiplex} | 3        | 5             |
   # | multiplex_deleted | {Client#describe_multiplex} | 5        | 20            |
   # | multiplex_running | {Client#describe_multiplex} | 5        | 120           |
@@ -275,6 +278,162 @@ module Aws::MediaLive
 
       # @option (see Client#describe_channel)
       # @return (see Client#describe_channel)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an input has been attached
+    class InputAttached
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_input,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "ATTACHED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DETACHED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_input)
+      # @return (see Client#describe_input)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an input has been deleted
+    class InputDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_input,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_input)
+      # @return (see Client#describe_input)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until an input has been detached
+    class InputDetached
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (84)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 84,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_input,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DETACHED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "CREATING"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "ATTACHED"
+              },
+              {
+                "state" => "retry",
+                "matcher" => "status",
+                "expected" => 500
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_input)
+      # @return (see Client#describe_input)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

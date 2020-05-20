@@ -603,7 +603,7 @@ module Aws::Backup
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
     #   vaults are identified by names that are unique to the account used to
-    #   create them and theAWS Region where they are created. They consist of
+    #   create them and the AWS Region where they are created. They consist of
     #   lowercase letters, numbers, and hyphens.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -812,7 +812,7 @@ module Aws::Backup
     # Returns metadata associated with creating a copy of a resource.
     #
     # @option params [required, String] :copy_job_id
-    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   Uniquely identifies a copy job.
     #
     # @return [Types::DescribeCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,7 +854,7 @@ module Aws::Backup
     end
 
     # Returns information about a saved resource, including the last time it
-    # was backed-up, its Amazon Resource Name (ARN), and the AWS service
+    # was backed up, its Amazon Resource Name (ARN), and the AWS service
     # type of the saved resource.
     #
     # @option params [required, String] :resource_arn
@@ -960,6 +960,31 @@ module Aws::Backup
     # @param [Hash] params ({})
     def describe_recovery_point(params = {}, options = {})
       req = build_request(:describe_recovery_point, params)
+      req.send_request(options)
+    end
+
+    # Returns the current service opt-in settings for the region. If the
+    # service has a value set to true, AWS Backup will attempt to protect
+    # that service's resources in this region, when included in an
+    # on-demand backup or scheduled backup plan. If the value is set to
+    # false for a service, AWS Backup will not attempt to protect that
+    # service's resources in this region.
+    #
+    # @return [Types::DescribeRegionSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegionSettingsOutput#resource_type_opt_in_preference #resource_type_opt_in_preference} => Hash&lt;String,Boolean&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.resource_type_opt_in_preference #=> Hash
+    #   resp.resource_type_opt_in_preference["ResourceType"] #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeRegionSettings AWS API Documentation
+    #
+    # @overload describe_region_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_region_settings(params = {}, options = {})
+      req = build_request(:describe_region_settings, params)
       req.send_request(options)
     end
 
@@ -1745,8 +1770,6 @@ module Aws::Backup
     # @option params [String] :by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
-    #   * `DynamoDB` for Amazon DynamoDB
-    #
     #   * `EBS` for Amazon Elastic Block Store
     #
     #   * `EFS` for Amazon Elastic File System
@@ -1758,7 +1781,7 @@ module Aws::Backup
     # @option params [String] :by_destination_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a source backup
     #   vault to copy from; for example,
-    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
     #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2051,6 +2074,10 @@ module Aws::Backup
     # Returns a list of key-value pairs assigned to a target recovery point,
     # backup plan, or backup vault.
     #
+    # <note markdown="1"> `ListTags` are currently only supported with Amazon EFS backups.
+    #
+    #  </note>
+    #
     # @option params [required, String] :resource_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a resource. The
     #   format of the ARN depends on the type of resource. Valid targets for
@@ -2184,11 +2211,13 @@ module Aws::Backup
     #   to `StartBackupJob`.
     #
     # @option params [Integer] :start_window_minutes
-    #   The amount of time in minutes before beginning a backup.
+    #   A value in minutes after a backup is scheduled before a job will be
+    #   canceled if it doesn't start successfully. This value is optional.
     #
     # @option params [Integer] :complete_window_minutes
-    #   The amount of time AWS Backup attempts a backup before canceling the
-    #   job and returning an error.
+    #   A value in minutes after a backup job is successfully started before
+    #   it must be completed or it will be canceled by AWS Backup. This value
+    #   is optional.
     #
     # @option params [Types::Lifecycle] :lifecycle
     #   The lifecycle defines when a protected resource is transitioned to
@@ -2256,7 +2285,7 @@ module Aws::Backup
     #   The name of a logical source container where backups are stored.
     #   Backup vaults are identified by names that are unique to the account
     #   used to create them and the AWS Region where they are created. They
-    #   consist of lowercase letters, numbers, and hyphens. &gt;
+    #   consist of lowercase letters, numbers, and hyphens.
     #
     # @option params [required, String] :destination_backup_vault_arn
     #   An Amazon Resource Name (ARN) that uniquely identifies a destination
@@ -2265,7 +2294,7 @@ module Aws::Backup
     #
     # @option params [required, String] :iam_role_arn
     #   Specifies the IAM role ARN used to copy the target recovery point; for
-    #   example, arn:aws:iam::123456789012:role/S3Access.
+    #   example, `arn:aws:iam::123456789012:role/S3Access`.
     #
     # @option params [String] :idempotency_token
     #   A customer chosen string that can be used to distinguish between calls
@@ -2330,7 +2359,7 @@ module Aws::Backup
     #   resource name, required to restore a recovery point.
     #
     #   You can get configuration metadata about a resource at the time it was
-    #   backed-up by calling `GetRecoveryPointRestoreMetadata`. However,
+    #   backed up by calling `GetRecoveryPointRestoreMetadata`. However,
     #   values in addition to those provided by
     #   `GetRecoveryPointRestoreMetadata` might be required to restore a
     #   resource. For example, you might need to provide a new resource name
@@ -2630,6 +2659,36 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Updates the current service opt-in settings for the region. If the
+    # service has a value set to true, AWS Backup will attempt to protect
+    # that service's resources in this region, when included in an
+    # on-demand backup or scheduled backup plan. If the value is set to
+    # false for a service, AWS Backup will not attempt to protect that
+    # service's resources in this region.
+    #
+    # @option params [Hash<String,Boolean>] :resource_type_opt_in_preference
+    #   Updates the list of services along with the opt-in preferences for the
+    #   region.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_region_settings({
+    #     resource_type_opt_in_preference: {
+    #       "ResourceType" => false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/UpdateRegionSettings AWS API Documentation
+    #
+    # @overload update_region_settings(params = {})
+    # @param [Hash] params ({})
+    def update_region_settings(params = {}, options = {})
+      req = build_request(:update_region_settings, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2643,7 +2702,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

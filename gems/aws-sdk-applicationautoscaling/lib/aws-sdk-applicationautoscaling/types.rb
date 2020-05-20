@@ -1582,7 +1582,7 @@ module Aws::ApplicationAutoScaling
     #   `TargetTrackingScaling`—Not supported for Amazon EMR
     #
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
-    #   or Amazon Keyspaces for Apache Cassandra.
+    #   or Amazon Keyspaces (for Apache Cassandra).
     #
     #   For more information, see [Target Tracking Scaling Policies][1] and
     #   [Step Scaling Policies][2] in the *Application Auto Scaling User
@@ -2175,11 +2175,11 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
-    #   The minimum value to scale to in response to a scale-in event.
+    #   The minimum value to scale to in response to a scale-in activity.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
-    #   The maximum value to scale to in response to a scale-out event.
+    #   The maximum value to scale to in response to a scale-out activity.
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
@@ -2889,29 +2889,29 @@ module Aws::ApplicationAutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   where previous trigger-related scaling activities can influence
-    #   future scaling events.
+    #   The amount of time, in seconds, to wait for a previous scaling
+    #   activity to take effect.
     #
-    #   For scale-out policies, while the cooldown period is in effect, the
-    #   capacity that has been added by the previous scale-out action that
-    #   initiated the cooldown is calculated as part of the desired capacity
-    #   for the next scale out. The intention is to continuously (but not
-    #   excessively) scale out. For example, an alarm triggers a step
-    #   scaling policy to scale out an Amazon ECS service by 2 tasks, the
-    #   scaling activity completes successfully, and a cooldown period of 5
-    #   minutes starts. During the cooldown period, if the alarm triggers
-    #   the same policy again but at a more aggressive step adjustment to
-    #   scale out the service by 3 tasks, the 2 tasks that were added in the
-    #   previous scale-out action are considered part of that capacity and
-    #   only 1 additional task is added to the desired count.
+    #   With scale-out policies, the intention is to continuously (but not
+    #   excessively) scale out. After Application Auto Scaling successfully
+    #   scales out using a step scaling policy, it starts to calculate the
+    #   cooldown time. While the cooldown period is in effect, capacity
+    #   added by the initiating scale-out activity is calculated as part of
+    #   the desired capacity for the next scale-out activity. For example,
+    #   when an alarm triggers a step scaling policy to increase the
+    #   capacity by 2, the scaling activity completes successfully, and a
+    #   cooldown period starts. If the alarm triggers again during the
+    #   cooldown period but at a more aggressive step adjustment of 3, the
+    #   previous increase of 2 is considered part of the current capacity.
+    #   Therefore, only 1 is added to the capacity.
     #
-    #   For scale-in policies, the cooldown period is used to block
-    #   subsequent scale-in requests until it has expired. The intention is
-    #   to scale in conservatively to protect your application's
-    #   availability. However, if another alarm triggers a scale-out policy
-    #   during the cooldown period after a scale-in, Application Auto
-    #   Scaling scales out your scalable target immediately.
+    #   With scale-in policies, the intention is to scale in conservatively
+    #   to protect your application’s availability, so scale-in activities
+    #   are blocked until the cooldown period has expired. However, if
+    #   another alarm triggers a scale-out activity during the cooldown
+    #   period after a scale-in activity, Application Auto Scaling scales
+    #   out the target immediately. In this case, the cooldown period for
+    #   the scale-in activity stops and doesn't complete.
     #
     #   Application Auto Scaling provides a default value of 300 for the
     #   following scalable targets:
@@ -3046,14 +3046,16 @@ module Aws::ApplicationAutoScaling
     #   @return [Types::CustomizedMetricSpecification]
     #
     # @!attribute [rw] scale_out_cooldown
-    #   The amount of time, in seconds, after a scale-out activity completes
-    #   before another scale-out activity can start.
+    #   The amount of time, in seconds, to wait for a previous scale-out
+    #   activity to take effect.
     #
-    #   While the cooldown period is in effect, the capacity that has been
-    #   added by the previous scale-out action that initiated the cooldown
-    #   is calculated as part of the desired capacity for the next scale
-    #   out. The intention is to continuously (but not excessively) scale
-    #   out.
+    #   With the *scale-out cooldown period*, the intention is to
+    #   continuously (but not excessively) scale out. After Application Auto
+    #   Scaling successfully scales out using a target tracking scaling
+    #   policy, it starts to calculate the cooldown time. While the
+    #   scale-out cooldown period is in effect, the capacity added by the
+    #   initiating scale-out activity is calculated as part of the desired
+    #   capacity for the next scale-out activity.
     #
     #   Application Auto Scaling provides a default value of 300 for the
     #   following scalable targets:
@@ -3087,14 +3089,15 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] scale_in_cooldown
     #   The amount of time, in seconds, after a scale-in activity completes
-    #   before another scale in activity can start.
+    #   before another scale-in activity can start.
     #
-    #   The cooldown period is used to block subsequent scale-in requests
-    #   until it has expired. The intention is to scale in conservatively to
-    #   protect your application's availability. However, if another alarm
-    #   triggers a scale-out policy during the cooldown period after a
-    #   scale-in, Application Auto Scaling scales out your scalable target
-    #   immediately.
+    #   With the *scale-in cooldown period*, the intention is to scale in
+    #   conservatively to protect your application’s availability, so
+    #   scale-in activities are blocked until the cooldown period has
+    #   expired. However, if another alarm triggers a scale-out activity
+    #   during the scale-in cooldown period, Application Auto Scaling scales
+    #   out the target immediately. In this case, the scale-in cooldown
+    #   period stops and doesn't complete.
     #
     #   Application Auto Scaling provides a default value of 300 for the
     #   following scalable targets:

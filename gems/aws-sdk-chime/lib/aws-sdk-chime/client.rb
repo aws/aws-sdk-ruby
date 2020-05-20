@@ -2321,6 +2321,44 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Gets the retention settings for the specified Amazon Chime Enterprise
+    # account. For more information about retention settings, see [Managing
+    # Chat Retention Policies][1] in the *Amazon Chime Administration
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @return [Types::GetRetentionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRetentionSettingsResponse#retention_settings #retention_settings} => Types::RetentionSettings
+    #   * {Types::GetRetentionSettingsResponse#initiate_deletion_timestamp #initiate_deletion_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_retention_settings({
+    #     account_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_settings.room_retention_settings.retention_days #=> Integer
+    #   resp.retention_settings.conversation_retention_settings.retention_days #=> Integer
+    #   resp.initiate_deletion_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetRetentionSettings AWS API Documentation
+    #
+    # @overload get_retention_settings(params = {})
+    # @param [Hash] params ({})
+    def get_retention_settings(params = {}, options = {})
+      req = build_request(:get_retention_settings, params)
+      req.send_request(options)
+    end
+
     # Retrieves room details, such as the room name, for a room in an Amazon
     # Chime Enterprise account.
     #
@@ -3596,6 +3634,63 @@ module Aws::Chime
     # @param [Hash] params ({})
     def put_events_configuration(params = {}, options = {})
       req = build_request(:put_events_configuration, params)
+      req.send_request(options)
+    end
+
+    # Puts retention settings for the specified Amazon Chime Enterprise
+    # account. We recommend using AWS CloudTrail to monitor usage of this
+    # API for your account. For more information, see [Logging Amazon Chime
+    # API Calls with AWS CloudTrail][1] in the *Amazon Chime Administration
+    # Guide*.
+    #
+    # To turn off existing retention settings, remove the number of days
+    # from the corresponding **RetentionDays** field in the
+    # **RetentionSettings** object. For more information about retention
+    # settings, see [Managing Chat Retention Policies][2] in the *Amazon
+    # Chime Administration Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html
+    # [2]: https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, Types::RetentionSettings] :retention_settings
+    #   The retention settings.
+    #
+    # @return [Types::PutRetentionSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRetentionSettingsResponse#retention_settings #retention_settings} => Types::RetentionSettings
+    #   * {Types::PutRetentionSettingsResponse#initiate_deletion_timestamp #initiate_deletion_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_retention_settings({
+    #     account_id: "NonEmptyString", # required
+    #     retention_settings: { # required
+    #       room_retention_settings: {
+    #         retention_days: 1,
+    #       },
+    #       conversation_retention_settings: {
+    #         retention_days: 1,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_settings.room_retention_settings.retention_days #=> Integer
+    #   resp.retention_settings.conversation_retention_settings.retention_days #=> Integer
+    #   resp.initiate_deletion_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/PutRetentionSettings AWS API Documentation
+    #
+    # @overload put_retention_settings(params = {})
+    # @param [Hash] params ({})
+    def put_retention_settings(params = {}, options = {})
+      req = build_request(:put_retention_settings, params)
       req.send_request(options)
     end
 
@@ -4888,7 +4983,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-05-20)
+------------------
+
+* Feature - List APIs for all resources now contain additional information: when a resource was created, last updated, and its current version number.
+
 1.22.0 (2020-05-07)
 ------------------
 

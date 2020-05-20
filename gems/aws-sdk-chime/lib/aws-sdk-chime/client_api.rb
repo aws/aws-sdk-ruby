@@ -61,6 +61,7 @@ module Aws::Chime
     CapabilityList = Shapes::ListShape.new(name: 'CapabilityList')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConversationRetentionSettings = Shapes::StructureShape.new(name: 'ConversationRetentionSettings')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryList = Shapes::ListShape.new(name: 'CountryList')
     CpsLimit = Shapes::IntegerShape.new(name: 'CpsLimit')
@@ -147,6 +148,8 @@ module Aws::Chime
     GetPhoneNumberSettingsResponse = Shapes::StructureShape.new(name: 'GetPhoneNumberSettingsResponse')
     GetProxySessionRequest = Shapes::StructureShape.new(name: 'GetProxySessionRequest')
     GetProxySessionResponse = Shapes::StructureShape.new(name: 'GetProxySessionResponse')
+    GetRetentionSettingsRequest = Shapes::StructureShape.new(name: 'GetRetentionSettingsRequest')
+    GetRetentionSettingsResponse = Shapes::StructureShape.new(name: 'GetRetentionSettingsResponse')
     GetRoomRequest = Shapes::StructureShape.new(name: 'GetRoomRequest')
     GetRoomResponse = Shapes::StructureShape.new(name: 'GetRoomResponse')
     GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
@@ -272,6 +275,8 @@ module Aws::Chime
     ProxySessions = Shapes::ListShape.new(name: 'ProxySessions')
     PutEventsConfigurationRequest = Shapes::StructureShape.new(name: 'PutEventsConfigurationRequest')
     PutEventsConfigurationResponse = Shapes::StructureShape.new(name: 'PutEventsConfigurationResponse')
+    PutRetentionSettingsRequest = Shapes::StructureShape.new(name: 'PutRetentionSettingsRequest')
+    PutRetentionSettingsResponse = Shapes::StructureShape.new(name: 'PutRetentionSettingsResponse')
     PutVoiceConnectorLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorLoggingConfigurationRequest')
     PutVoiceConnectorLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutVoiceConnectorLoggingConfigurationResponse')
     PutVoiceConnectorOriginationRequest = Shapes::StructureShape.new(name: 'PutVoiceConnectorOriginationRequest')
@@ -296,11 +301,14 @@ module Aws::Chime
     RestorePhoneNumberRequest = Shapes::StructureShape.new(name: 'RestorePhoneNumberRequest')
     RestorePhoneNumberResponse = Shapes::StructureShape.new(name: 'RestorePhoneNumberResponse')
     ResultMax = Shapes::IntegerShape.new(name: 'ResultMax')
+    RetentionDays = Shapes::IntegerShape.new(name: 'RetentionDays')
+    RetentionSettings = Shapes::StructureShape.new(name: 'RetentionSettings')
     Room = Shapes::StructureShape.new(name: 'Room')
     RoomList = Shapes::ListShape.new(name: 'RoomList')
     RoomMembership = Shapes::StructureShape.new(name: 'RoomMembership')
     RoomMembershipList = Shapes::ListShape.new(name: 'RoomMembershipList')
     RoomMembershipRole = Shapes::StringShape.new(name: 'RoomMembershipRole')
+    RoomRetentionSettings = Shapes::StructureShape.new(name: 'RoomRetentionSettings')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
@@ -523,6 +531,9 @@ module Aws::Chime
     ConflictException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "Code"))
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
+
+    ConversationRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    ConversationRetentionSettings.struct_class = Types::ConversationRetentionSettings
 
     CountryList.member = Shapes::ShapeRef.new(shape: Country)
 
@@ -797,6 +808,13 @@ module Aws::Chime
 
     GetProxySessionResponse.add_member(:proxy_session, Shapes::ShapeRef.new(shape: ProxySession, location_name: "ProxySession"))
     GetProxySessionResponse.struct_class = Types::GetProxySessionResponse
+
+    GetRetentionSettingsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    GetRetentionSettingsRequest.struct_class = Types::GetRetentionSettingsRequest
+
+    GetRetentionSettingsResponse.add_member(:retention_settings, Shapes::ShapeRef.new(shape: RetentionSettings, location_name: "RetentionSettings"))
+    GetRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "InitiateDeletionTimestamp"))
+    GetRetentionSettingsResponse.struct_class = Types::GetRetentionSettingsResponse
 
     GetRoomRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     GetRoomRequest.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "roomId"))
@@ -1190,6 +1208,14 @@ module Aws::Chime
     PutEventsConfigurationResponse.add_member(:events_configuration, Shapes::ShapeRef.new(shape: EventsConfiguration, location_name: "EventsConfiguration"))
     PutEventsConfigurationResponse.struct_class = Types::PutEventsConfigurationResponse
 
+    PutRetentionSettingsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    PutRetentionSettingsRequest.add_member(:retention_settings, Shapes::ShapeRef.new(shape: RetentionSettings, required: true, location_name: "RetentionSettings"))
+    PutRetentionSettingsRequest.struct_class = Types::PutRetentionSettingsRequest
+
+    PutRetentionSettingsResponse.add_member(:retention_settings, Shapes::ShapeRef.new(shape: RetentionSettings, location_name: "RetentionSettings"))
+    PutRetentionSettingsResponse.add_member(:initiate_deletion_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "InitiateDeletionTimestamp"))
+    PutRetentionSettingsResponse.struct_class = Types::PutRetentionSettingsResponse
+
     PutVoiceConnectorLoggingConfigurationRequest.add_member(:voice_connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "voiceConnectorId"))
     PutVoiceConnectorLoggingConfigurationRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, required: true, location_name: "LoggingConfiguration"))
     PutVoiceConnectorLoggingConfigurationRequest.struct_class = Types::PutVoiceConnectorLoggingConfigurationRequest
@@ -1270,6 +1296,10 @@ module Aws::Chime
     RestorePhoneNumberResponse.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     RestorePhoneNumberResponse.struct_class = Types::RestorePhoneNumberResponse
 
+    RetentionSettings.add_member(:room_retention_settings, Shapes::ShapeRef.new(shape: RoomRetentionSettings, location_name: "RoomRetentionSettings"))
+    RetentionSettings.add_member(:conversation_retention_settings, Shapes::ShapeRef.new(shape: ConversationRetentionSettings, location_name: "ConversationRetentionSettings"))
+    RetentionSettings.struct_class = Types::RetentionSettings
+
     Room.add_member(:room_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoomId"))
     Room.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Name"))
     Room.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AccountId"))
@@ -1288,6 +1318,9 @@ module Aws::Chime
     RoomMembership.struct_class = Types::RoomMembership
 
     RoomMembershipList.member = Shapes::ShapeRef.new(shape: RoomMembership)
+
+    RoomRetentionSettings.add_member(:retention_days, Shapes::ShapeRef.new(shape: RetentionDays, location_name: "RetentionDays"))
+    RoomRetentionSettings.struct_class = Types::RoomRetentionSettings
 
     SearchAvailablePhoneNumbersRequest.add_member(:area_code, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "area-code"))
     SearchAvailablePhoneNumbersRequest.add_member(:city, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "city"))
@@ -2367,6 +2400,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:get_retention_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRetentionSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{accountId}/retention-settings"
+        o.input = Shapes::ShapeRef.new(shape: GetRetentionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRetentionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_room, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetRoom"
         o.http_method = "GET"
@@ -2881,6 +2929,22 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:put_retention_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRetentionSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{accountId}/retention-settings"
+        o.input = Shapes::ShapeRef.new(shape: PutRetentionSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRetentionSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
       api.add_operation(:put_voice_connector_logging_configuration, Seahorse::Model::Operation.new.tap do |o|

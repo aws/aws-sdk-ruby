@@ -59,6 +59,8 @@ module Aws::CodeDeploy
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketNameFilterRequiredException = Shapes::StructureShape.new(name: 'BucketNameFilterRequiredException')
     BundleType = Shapes::StringShape.new(name: 'BundleType')
+    CloudFormationResourceType = Shapes::StringShape.new(name: 'CloudFormationResourceType')
+    CloudFormationTarget = Shapes::StructureShape.new(name: 'CloudFormationTarget')
     CommitId = Shapes::StringShape.new(name: 'CommitId')
     ComputePlatform = Shapes::StringShape.new(name: 'ComputePlatform')
     ContinueDeploymentInput = Shapes::StructureShape.new(name: 'ContinueDeploymentInput')
@@ -76,6 +78,8 @@ module Aws::CodeDeploy
     DeleteDeploymentGroupOutput = Shapes::StructureShape.new(name: 'DeleteDeploymentGroupOutput')
     DeleteGitHubAccountTokenInput = Shapes::StructureShape.new(name: 'DeleteGitHubAccountTokenInput')
     DeleteGitHubAccountTokenOutput = Shapes::StructureShape.new(name: 'DeleteGitHubAccountTokenOutput')
+    DeleteResourcesByExternalIdInput = Shapes::StructureShape.new(name: 'DeleteResourcesByExternalIdInput')
+    DeleteResourcesByExternalIdOutput = Shapes::StructureShape.new(name: 'DeleteResourcesByExternalIdOutput')
     DeploymentAlreadyCompletedException = Shapes::StructureShape.new(name: 'DeploymentAlreadyCompletedException')
     DeploymentAlreadyStartedException = Shapes::StructureShape.new(name: 'DeploymentAlreadyStartedException')
     DeploymentConfigAlreadyExistsException = Shapes::StructureShape.new(name: 'DeploymentConfigAlreadyExistsException')
@@ -150,6 +154,7 @@ module Aws::CodeDeploy
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorInformation = Shapes::StructureShape.new(name: 'ErrorInformation')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExternalId = Shapes::StringShape.new(name: 'ExternalId')
     FileExistsBehavior = Shapes::StringShape.new(name: 'FileExistsBehavior')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
@@ -226,6 +231,7 @@ module Aws::CodeDeploy
     InvalidEC2TagCombinationException = Shapes::StructureShape.new(name: 'InvalidEC2TagCombinationException')
     InvalidEC2TagException = Shapes::StructureShape.new(name: 'InvalidEC2TagException')
     InvalidECSServiceException = Shapes::StructureShape.new(name: 'InvalidECSServiceException')
+    InvalidExternalIdException = Shapes::StructureShape.new(name: 'InvalidExternalIdException')
     InvalidFileExistsBehaviorException = Shapes::StructureShape.new(name: 'InvalidFileExistsBehaviorException')
     InvalidGitHubAccountTokenException = Shapes::StructureShape.new(name: 'InvalidGitHubAccountTokenException')
     InvalidGitHubAccountTokenNameException = Shapes::StructureShape.new(name: 'InvalidGitHubAccountTokenNameException')
@@ -514,6 +520,15 @@ module Aws::CodeDeploy
 
     BucketNameFilterRequiredException.struct_class = Types::BucketNameFilterRequiredException
 
+    CloudFormationTarget.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
+    CloudFormationTarget.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
+    CloudFormationTarget.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Time, location_name: "lastUpdatedAt"))
+    CloudFormationTarget.add_member(:lifecycle_events, Shapes::ShapeRef.new(shape: LifecycleEventList, location_name: "lifecycleEvents"))
+    CloudFormationTarget.add_member(:status, Shapes::ShapeRef.new(shape: TargetStatus, location_name: "status"))
+    CloudFormationTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: CloudFormationResourceType, location_name: "resourceType"))
+    CloudFormationTarget.add_member(:target_version_weight, Shapes::ShapeRef.new(shape: TrafficWeight, location_name: "targetVersionWeight"))
+    CloudFormationTarget.struct_class = Types::CloudFormationTarget
+
     ContinueDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
     ContinueDeploymentInput.add_member(:deployment_wait_type, Shapes::ShapeRef.new(shape: DeploymentWaitType, location_name: "deploymentWaitType"))
     ContinueDeploymentInput.struct_class = Types::ContinueDeploymentInput
@@ -590,6 +605,11 @@ module Aws::CodeDeploy
 
     DeleteGitHubAccountTokenOutput.add_member(:token_name, Shapes::ShapeRef.new(shape: GitHubAccountTokenName, location_name: "tokenName"))
     DeleteGitHubAccountTokenOutput.struct_class = Types::DeleteGitHubAccountTokenOutput
+
+    DeleteResourcesByExternalIdInput.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
+    DeleteResourcesByExternalIdInput.struct_class = Types::DeleteResourcesByExternalIdInput
+
+    DeleteResourcesByExternalIdOutput.struct_class = Types::DeleteResourcesByExternalIdOutput
 
     DeploymentAlreadyCompletedException.struct_class = Types::DeploymentAlreadyCompletedException
 
@@ -681,6 +701,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
     DeploymentInfo.add_member(:deployment_status_messages, Shapes::ShapeRef.new(shape: DeploymentStatusMessageList, location_name: "deploymentStatusMessages"))
     DeploymentInfo.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
+    DeploymentInfo.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     DeploymentInfo.struct_class = Types::DeploymentInfo
 
     DeploymentIsNotInReadyStateException.struct_class = Types::DeploymentIsNotInReadyStateException
@@ -713,6 +734,7 @@ module Aws::CodeDeploy
     DeploymentTarget.add_member(:instance_target, Shapes::ShapeRef.new(shape: InstanceTarget, location_name: "instanceTarget"))
     DeploymentTarget.add_member(:lambda_target, Shapes::ShapeRef.new(shape: LambdaTarget, location_name: "lambdaTarget"))
     DeploymentTarget.add_member(:ecs_target, Shapes::ShapeRef.new(shape: ECSTarget, location_name: "ecsTarget"))
+    DeploymentTarget.add_member(:cloud_formation_target, Shapes::ShapeRef.new(shape: CloudFormationTarget, location_name: "cloudFormationTarget"))
     DeploymentTarget.struct_class = Types::DeploymentTarget
 
     DeploymentTargetDoesNotExistException.struct_class = Types::DeploymentTargetDoesNotExistException
@@ -964,6 +986,8 @@ module Aws::CodeDeploy
 
     InvalidECSServiceException.struct_class = Types::InvalidECSServiceException
 
+    InvalidExternalIdException.struct_class = Types::InvalidExternalIdException
+
     InvalidFileExistsBehaviorException.struct_class = Types::InvalidFileExistsBehaviorException
 
     InvalidGitHubAccountTokenException.struct_class = Types::InvalidGitHubAccountTokenException
@@ -1126,6 +1150,7 @@ module Aws::CodeDeploy
 
     ListDeploymentsInput.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
     ListDeploymentsInput.add_member(:deployment_group_name, Shapes::ShapeRef.new(shape: DeploymentGroupName, location_name: "deploymentGroupName"))
+    ListDeploymentsInput.add_member(:external_id, Shapes::ShapeRef.new(shape: ExternalId, location_name: "externalId"))
     ListDeploymentsInput.add_member(:include_only_statuses, Shapes::ShapeRef.new(shape: DeploymentStatusList, location_name: "includeOnlyStatuses"))
     ListDeploymentsInput.add_member(:create_time_range, Shapes::ShapeRef.new(shape: TimeRange, location_name: "createTimeRange"))
     ListDeploymentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1474,6 +1499,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentTargetIdException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentTargetListSizeExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InstanceDoesNotExistException)
       end)
 
       api.add_operation(:batch_get_deployments, Seahorse::Model::Operation.new.tap do |o|
@@ -1557,6 +1583,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidUpdateOutdatedInstancesOnlyValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIgnoreApplicationStopFailuresValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
       end)
 
       api.add_operation(:create_deployment_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1612,6 +1639,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetGroupPairException)
         o.errors << Shapes::ShapeRef.new(shape: ECSServiceMappingLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagsToAddException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1661,6 +1689,14 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenNameException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceValidationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
+      api.add_operation(:delete_resources_by_external_id, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcesByExternalId"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcesByExternalIdInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcesByExternalIdOutput)
       end)
 
       api.add_operation(:deregister_on_premises_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -1902,6 +1938,8 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidTimeRangeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExternalIdException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -2030,6 +2068,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: DeploymentAlreadyCompletedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedActionForDeploymentTypeException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2112,6 +2151,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidECSServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetGroupPairException)
         o.errors << Shapes::ShapeRef.new(shape: ECSServiceMappingLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficRoutingConfigurationException)
       end)
     end
 

@@ -245,8 +245,8 @@ module Aws::SecurityHub
     end
 
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), Amazon MediaStore, or other server from which
-    # CloudFront gets your files.
+    # example, a web server), Amazon Elemental MediaStore, or other server
+    # from which CloudFront gets your files.
     #
     # @note When making an API call, you may pass AwsCloudFrontDistributionOriginItem
     #   data as a hash:
@@ -425,13 +425,13 @@ module Aws::SecurityHub
     # @!attribute [rw] type
     #   The type of build environment to use for related builds.
     #
-    #   The environment type `ARM_CONTAINER` is available only in regions US
+    #   The environment type `ARM_CONTAINER` is available only in Regions US
     #   East (N. Virginia), US East (Ohio), US West (Oregon), Europe
     #   (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific
     #   (Sydney), and Europe (Frankfurt).
     #
     #   The environment type `LINUX_CONTAINER` with compute type
-    #   build.general1.2xlarge is available only in regions US East (N.
+    #   build.general1.2xlarge is available only in Regions US East (N.
     #   Virginia), US East (N. Virginia), US West (Oregon), Canada
     #   (Central), Europe (Ireland), Europe (London), Europe (Frankfurt),
     #   Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific
@@ -439,10 +439,10 @@ module Aws::SecurityHub
     #   (Ningxia).
     #
     #   The environment type `LINUX_GPU_CONTAINER` is available only in
-    #   regions US East (N. Virginia), US East (N. Virginia), US West
+    #   Regions US East (N. Virginia), US East (N. Virginia), US West
     #   (Oregon), Canada (Central), Europe (Ireland), Europe (London),
     #   Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
-    #   Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
+    #   Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and
     #   China (Ningxia).
     #
     #   Valid values: `WINDOWS_CONTAINER` \| `LINUX_CONTAINER` \|
@@ -539,8 +539,8 @@ module Aws::SecurityHub
     #     source action instead of this value.
     #
     #   * For source code in an AWS CodeCommit repository, the HTTPS clone
-    #     URL to the repository that contains the source code and the
-    #     buildspec file (for example,
+    #     URL to the repository that contains the source code and the build
+    #     spec file (for example,
     #     `https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name`
     #     ).
     #
@@ -553,10 +553,10 @@ module Aws::SecurityHub
     #       example, `bucket-name/path/to/source-code/folder/`).
     #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
-    #     repository that contains the source and the buildspec file.
+    #     repository that contains the source and the build spec file.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
-    #     the repository that contains the source and the buildspec file.
+    #     the repository that contains the source and the build spec file.
     #   @return [String]
     #
     # @!attribute [rw] git_clone_depth
@@ -1035,9 +1035,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] cidr_ip
-    #   The IPv4 CIDR range. You can either specify either a CIDR range or a
-    #   source security group, but not both. To specify a single IPv4
-    #   address, use the /32 prefix length.
+    #   The IPv4 CIDR range. You can specify either a CIDR range or a source
+    #   security group, but not both. To specify a single IPv4 address, use
+    #   the /32 prefix length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SecurityGroupIpRange AWS API Documentation
@@ -1057,9 +1057,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] cidr_ipv_6
-    #   The IPv6 CIDR range. You can either specify either a CIDR range or a
-    #   source security group, but not both. To specify a single IPv6
-    #   address, use the /128 prefix length.
+    #   The IPv6 CIDR range. You can specify either a CIDR range or a source
+    #   security group, but not both. To specify a single IPv6 address, use
+    #   the /128 prefix length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SecurityGroupIpv6Range AWS API Documentation
@@ -1990,7 +1990,7 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] compatible_runtimes
-    #   The layer's compatible runtimes. Maximum number of 5 items.
+    #   The layer's compatible runtimes. Maximum number of five items.
     #
     #   Valid values: `nodejs10.x` \| `nodejs12.x` \| `java8` \| `java11` \|
     #   `python2.7` \| `python3.6` \| `python3.7` \| `python3.8` \|
@@ -2038,14 +2038,14 @@ module Aws::SecurityHub
     #   DB instance. The `Status` property returns one of the following
     #   values:
     #
-    #   * `ACTIVE` - the IAM role ARN is associated with the DB instance and
+    #   * `ACTIVE` - The IAM role ARN is associated with the DB instance and
     #     can be used to access other AWS services on your behalf.
     #
-    #   * `PENDING` - the IAM role ARN is being associated with the DB
+    #   * `PENDING` - The IAM role ARN is being associated with the DB
     #     instance.
     #
-    #   * `INVALID` - the IAM role ARN is associated with the DB instance,
-    #     but the DB instance is unable to assume the IAM role in order to
+    #   * `INVALID` - The IAM role ARN is associated with the DB instance.
+    #     But the DB instance is unable to assume the IAM role in order to
     #     access other AWS services on your behalf.
     #   @return [String]
     #
@@ -2419,7 +2419,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] apply_server_side_encryption_by_default
     #   Specifies the default server-side encryption to apply to new objects
-    #   in the bucket. If a `PUT` Object request doesn't specify any
+    #   in the bucket. If a `PUT` object request doesn't specify any
     #   server-side encryption, this default encryption is applied.
     #   @return [Types::AwsS3BucketServerSideEncryptionByDefault]
     #
@@ -2430,7 +2430,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details about an AWS S3 object.
+    # Details about an Amazon S3 object.
     #
     # @note When making an API call, you may pass AwsS3ObjectDetails
     #   data as a hash:
@@ -2514,6 +2514,7 @@ module Aws::SecurityHub
     #           product: 1.0,
     #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #           normalized: 1,
+    #           original: "NonEmptyString",
     #         },
     #         confidence: 1,
     #         criticality: 1,
@@ -2964,6 +2965,12 @@ module Aws::SecurityHub
     #         compliance: {
     #           status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #           related_requirements: ["NonEmptyString"],
+    #           status_reasons: [
+    #             {
+    #               reason_code: "NonEmptyString", # required
+    #               description: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
@@ -3003,7 +3010,7 @@ module Aws::SecurityHub
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security-findings
     #   providers' solutions, this generator can be called a rule, a check,
-    #   a detector, a plug-in, etc.
+    #   a detector, a plugin, etc.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -3772,7 +3779,7 @@ module Aws::SecurityHub
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security-findings
     #   providers' solutions, this generator can be called a rule, a check,
-    #   a detector, a plug-in, etc.
+    #   a detector, a plugin, etc.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] type
@@ -4285,7 +4292,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] kms_master_key_id
-    #   The ID of an AWS-managed customer master key (CMK) for Amazon SNS or
+    #   The ID of an AWS managed customer master key (CMK) for Amazon SNS or
     #   a custom CMK.
     #   @return [String]
     #
@@ -4357,7 +4364,7 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The ID of an AWS-managed customer master key (CMK) for Amazon SQS or
+    #   The ID of an AWS managed customer master key (CMK) for Amazon SQS or
     #   a custom CMK.
     #   @return [String]
     #
@@ -4416,7 +4423,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] default_action
-    #   The action to perform if none of the Rules contained in the WebACL
+    #   The action to perform if none of the rules contained in the WebACL
     #   match.
     #   @return [String]
     #
@@ -4463,7 +4470,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] action
     #   Specifies the action that CloudFront or AWS WAF takes when a web
-    #   request matches the conditions in the Rule.
+    #   request matches the conditions in the rule.
     #   @return [Types::WafAction]
     #
     # @!attribute [rw] excluded_rules
@@ -4491,15 +4498,15 @@ module Aws::SecurityHub
     #   @return [Types::WafOverrideAction]
     #
     # @!attribute [rw] priority
-    #   Specifies the order in which the Rules in a WebACL are evaluated.
-    #   Rules with a lower value for Priority are evaluated before Rules
+    #   Specifies the order in which the rules in a WebACL are evaluated.
+    #   Rules with a lower value for `Priority` are evaluated before rules
     #   with a higher value. The value must be a unique integer. If you add
-    #   multiple Rules to a WebACL, the values do not need to be
+    #   multiple rules to a WebACL, the values do not need to be
     #   consecutive.
     #   @return [Integer]
     #
     # @!attribute [rw] rule_id
-    #   The identifier for a Rule.
+    #   The identifier for a rule.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4607,6 +4614,7 @@ module Aws::SecurityHub
     #               product: 1.0,
     #               label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #               normalized: 1,
+    #               original: "NonEmptyString",
     #             },
     #             confidence: 1,
     #             criticality: 1,
@@ -5057,6 +5065,12 @@ module Aws::SecurityHub
     #             compliance: {
     #               status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #               related_requirements: ["NonEmptyString"],
+    #               status_reasons: [
+    #                 {
+    #                   reason_code: "NonEmptyString", # required
+    #                   description: "NonEmptyString",
+    #                 },
+    #               ],
     #             },
     #             verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #             workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
@@ -5293,27 +5307,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Exclusive to findings that are generated as the result of a check run
-    # against a specific rule in a supported security standard, such as CIS
-    # AWS Foundations. Contains security standard-related finding details.
-    #
-    # Values include the following:
-    #
-    # * Allowed values are the following:
-    #
-    #   * `PASSED` - Standards check passed for all evaluated resources.
-    #
-    #   * `WARNING` - Some information is missing or this check is not
-    #     supported given your configuration.
-    #
-    #   * `FAILED` - Standards check failed for at least one evaluated
-    #     resource.
-    #
-    #   * `NOT_AVAILABLE` - Check could not be performed due to a service
-    #     outage, API error, or because the result of the AWS Config
-    #     evaluation was `NOT_APPLICABLE`. If the AWS Config evaluation
-    #     result was ` NOT_APPLICABLE`, then after 3 days, Security Hub
-    #     automatically archives the finding.
+    # Contains finding details that are specific to control-based findings.
+    # Only returned for findings generated from controls.
     #
     # @note When making an API call, you may pass Compliance
     #   data as a hash:
@@ -5321,21 +5316,57 @@ module Aws::SecurityHub
     #       {
     #         status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #         related_requirements: ["NonEmptyString"],
+    #         status_reasons: [
+    #           {
+    #             reason_code: "NonEmptyString", # required
+    #             description: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] status
     #   The result of a standards check.
+    #
+    #   The valid values for `Status` are as follows.
+    #
+    #   * * `PASSED` - Standards check passed for all evaluated resources.
+    #
+    #     * `WARNING` - Some information is missing or this check is not
+    #       supported for your configuration.
+    #
+    #     * `FAILED` - Standards check failed for at least one evaluated
+    #       resource.
+    #
+    #     * `NOT_AVAILABLE` - Check could not be performed due to a service
+    #       outage, API error, or because the result of the AWS Config
+    #       evaluation was `NOT_APPLICABLE`. If the AWS Config evaluation
+    #       result was `NOT_APPLICABLE`, then after 3 days, Security Hub
+    #       automatically archives the finding.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
-    #   List of requirements that are related to a standards control.
+    #   For a control, the industry or regulatory framework requirements
+    #   that are related to the control. The check for that control is
+    #   aligned with these requirements.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] status_reasons
+    #   For findings generated from controls, a list of reasons behind the
+    #   value of `Status`. For the list of status reason codes and their
+    #   meanings, see [Standards-related information in the ASFF][1] in the
+    #   *AWS Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+    #   @return [Array<Types::StatusReason>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance AWS API Documentation
     #
     class Compliance < Struct.new(
       :status,
-      :related_requirements)
+      :related_requirements,
+      :status_reasons)
       include Aws::Structure
     end
 
@@ -6607,7 +6638,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] tags
-    #   The tags to add to the Hub resource when you enable Security Hub.
+    #   The tags to add to the hub resource when you enable Security Hub.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enable_default_standards
@@ -9291,7 +9322,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsEc2InstanceDetails]
     #
     # @!attribute [rw] aws_ec2_network_interface
-    #   Details for an AWS EC2 network interface.
+    #   Details for an Amazon EC2 network interface.
     #   @return [Types::AwsEc2NetworkInterfaceDetails]
     #
     # @!attribute [rw] aws_ec2_security_group
@@ -9307,7 +9338,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsElasticsearchDomainDetails]
     #
     # @!attribute [rw] aws_s3_bucket
-    #   Details about an Amazon S3 Bucket related to a finding.
+    #   Details about an Amazon S3 bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
     #
     # @!attribute [rw] aws_s3_object
@@ -9335,7 +9366,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsLambdaLayerVersionDetails]
     #
     # @!attribute [rw] aws_rds_db_instance
-    #   Details for an RDS database instance.
+    #   Details for an Amazon RDS database instance.
     #   @return [Types::AwsRdsDbInstanceDetails]
     #
     # @!attribute [rw] aws_sns_topic
@@ -9438,9 +9469,13 @@ module Aws::SecurityHub
     #         product: 1.0,
     #         label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
     #         normalized: 1,
+    #         original: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] product
+    #   Deprecated. This attribute is being deprecated. Instead of providing
+    #   `Product`, provide `Original`.
+    #
     #   The native severity as defined by the AWS service or integrated
     #   partner product that generated the finding.
     #   @return [Float]
@@ -9479,12 +9514,18 @@ module Aws::SecurityHub
     #   * 90–100 - `CRITICAL`
     #   @return [Integer]
     #
+    # @!attribute [rw] original
+    #   The native severity from the finding product that generated the
+    #   finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity AWS API Documentation
     #
     class Severity < Struct.new(
       :product,
       :label,
-      :normalized)
+      :normalized,
+      :original)
       include Aws::Structure
     end
 
@@ -9731,6 +9772,38 @@ module Aws::SecurityHub
     class StandardsSubscriptionRequest < Struct.new(
       :standards_arn,
       :standards_input)
+      include Aws::Structure
+    end
+
+    # Provides additional context for the value of `Compliance.Status`.
+    #
+    # @note When making an API call, you may pass StatusReason
+    #   data as a hash:
+    #
+    #       {
+    #         reason_code: "NonEmptyString", # required
+    #         description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] reason_code
+    #   A code that represents a reason for the control status. For the list
+    #   of status reason codes and their meanings, see [Standards-related
+    #   information in the ASFF][1] in the *AWS Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The corresponding description for the status reason code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StatusReason AWS API Documentation
+    #
+    class StatusReason < Struct.new(
+      :reason_code,
+      :description)
       include Aws::Structure
     end
 
@@ -11127,7 +11200,7 @@ module Aws::SecurityHub
     class UpdateStandardsControlResponse < Aws::EmptyStructure; end
 
     # Details about the action that CloudFront or AWS WAF takes when a web
-    # request matches the conditions in the Rule.
+    # request matches the conditions in the rule.
     #
     # @note When making an API call, you may pass WafAction
     #   data as a hash:
@@ -11138,7 +11211,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   Specifies how you want AWS WAF to respond to requests that match the
-    #   settings in a Rule.
+    #   settings in a rule.
     #
     #   Valid settings include the following:
     #
@@ -11191,7 +11264,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   `COUNT` overrides the action specified by the individual rule within
-    #   a RuleGroup .
+    #   a `RuleGroup` .
     #
     #   If set to `NONE`, the rule's action takes place.
     #   @return [String]

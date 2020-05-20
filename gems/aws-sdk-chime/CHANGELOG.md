@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-05-20)
+------------------
+
+* Feature - Amazon Chime enterprise account administrators can now set custom retention policies on chat data in the Amazon Chime application.
+
 1.26.0 (2020-05-19)
 ------------------
 

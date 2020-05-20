@@ -308,12 +308,19 @@ module Aws::AppMesh
 
     # @!group API Operations
 
-    # Creates a service mesh. A service mesh is a logical boundary for
-    # network traffic between the services that reside within it.
+    # Creates a service mesh.
     #
-    # After you create your service mesh, you can create virtual services,
-    # virtual nodes, virtual routers, and routes to distribute traffic
-    # between the applications in your mesh.
+    # A service mesh is a logical boundary for network traffic between
+    # services that are represented by resources within the mesh. After you
+    # create your service mesh, you can create virtual services, virtual
+    # nodes, virtual routers, and routes to distribute traffic between the
+    # applications in your mesh.
+    #
+    # For more information about service meshes, see [Service meshes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -382,13 +389,8 @@ module Aws::AppMesh
 
     # Creates a route that is associated with a virtual router.
     #
-    # You can use the `prefix` parameter in your route specification for
-    # path-based routing of requests. For example, if your virtual service
-    # name is `my-service.local` and you want the route to match requests to
-    # `my-service.local/metrics`, your prefix should be `/metrics`.
-    #
-    # If your route matches a request, you can distribute traffic to one or
-    # more target virtual nodes with relative weighting.
+    # You can route several different protocols and define a retry policy
+    # for a route. Traffic can be routed to one or more virtual nodes.
     #
     # For more information about routes, see [Routes][1].
     #
@@ -688,11 +690,13 @@ module Aws::AppMesh
     # A virtual node acts as a logical pointer to a particular task group,
     # such as an Amazon ECS service or a Kubernetes deployment. When you
     # create a virtual node, you can specify the service discovery
-    # information for your task group.
+    # information for your task group, and whether the proxy running in a
+    # task group will communicate with other proxies using Transport Layer
+    # Security (TLS).
     #
-    # Any inbound traffic that your virtual node expects should be specified
-    # as a `listener`. Any outbound traffic that your virtual node expects
-    # to reach should be specified as a `backend`.
+    # You define a `listener` for any inbound traffic that your virtual node
+    # expects. Any virtual service that your virtual node expects to
+    # communicate to is specified as a `backend`.
     #
     # The response metadata for your new virtual node contains the `arn`
     # that is associated with the virtual node. Set this value (either the
@@ -710,7 +714,7 @@ module Aws::AppMesh
     #
     #  </note>
     #
-    # For more information about virtual nodes, see [Virtual Nodes][1].
+    # For more information about virtual nodes, see [Virtual nodes][1].
     #
     #
     #
@@ -923,15 +927,14 @@ module Aws::AppMesh
 
     # Creates a virtual router within a service mesh.
     #
-    # Any inbound traffic that your virtual router expects should be
-    # specified as a `listener`.
+    # Specify a `listener` for any inbound traffic that your virtual router
+    # receives. Create a virtual router for each protocol and port that you
+    # need to route. Virtual routers handle traffic for one or more virtual
+    # services within your mesh. After you create your virtual router,
+    # create and associate routes for your virtual router that direct
+    # incoming requests to different virtual nodes.
     #
-    # Virtual routers handle traffic for one or more virtual services within
-    # your mesh. After you create your virtual router, create and associate
-    # routes for your virtual router that direct incoming requests to
-    # different virtual nodes.
-    #
-    # For more information about virtual routers, see [Virtual Routers][1].
+    # For more information about virtual routers, see [Virtual routers][1].
     #
     #
     #
@@ -1036,7 +1039,7 @@ module Aws::AppMesh
     # virtual service.
     #
     # For more information about virtual services, see [Virtual
-    # Services][1].
+    # services][1].
     #
     #
     #
@@ -1915,9 +1918,12 @@ module Aws::AppMesh
     #
     #   resp.meshes #=> Array
     #   resp.meshes[0].arn #=> String
+    #   resp.meshes[0].created_at #=> Time
+    #   resp.meshes[0].last_updated_at #=> Time
     #   resp.meshes[0].mesh_name #=> String
     #   resp.meshes[0].mesh_owner #=> String
     #   resp.meshes[0].resource_owner #=> String
+    #   resp.meshes[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshes AWS API Documentation
@@ -1985,10 +1991,13 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.routes #=> Array
     #   resp.routes[0].arn #=> String
+    #   resp.routes[0].created_at #=> Time
+    #   resp.routes[0].last_updated_at #=> Time
     #   resp.routes[0].mesh_name #=> String
     #   resp.routes[0].mesh_owner #=> String
     #   resp.routes[0].resource_owner #=> String
     #   resp.routes[0].route_name #=> String
+    #   resp.routes[0].version #=> Integer
     #   resp.routes[0].virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutes AWS API Documentation
@@ -2105,9 +2114,12 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.virtual_nodes #=> Array
     #   resp.virtual_nodes[0].arn #=> String
+    #   resp.virtual_nodes[0].created_at #=> Time
+    #   resp.virtual_nodes[0].last_updated_at #=> Time
     #   resp.virtual_nodes[0].mesh_name #=> String
     #   resp.virtual_nodes[0].mesh_owner #=> String
     #   resp.virtual_nodes[0].resource_owner #=> String
+    #   resp.virtual_nodes[0].version #=> Integer
     #   resp.virtual_nodes[0].virtual_node_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodes AWS API Documentation
@@ -2171,9 +2183,12 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.virtual_routers #=> Array
     #   resp.virtual_routers[0].arn #=> String
+    #   resp.virtual_routers[0].created_at #=> Time
+    #   resp.virtual_routers[0].last_updated_at #=> Time
     #   resp.virtual_routers[0].mesh_name #=> String
     #   resp.virtual_routers[0].mesh_owner #=> String
     #   resp.virtual_routers[0].resource_owner #=> String
+    #   resp.virtual_routers[0].version #=> Integer
     #   resp.virtual_routers[0].virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRouters AWS API Documentation
@@ -2237,9 +2252,12 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.virtual_services #=> Array
     #   resp.virtual_services[0].arn #=> String
+    #   resp.virtual_services[0].created_at #=> Time
+    #   resp.virtual_services[0].last_updated_at #=> Time
     #   resp.virtual_services[0].mesh_name #=> String
     #   resp.virtual_services[0].mesh_owner #=> String
     #   resp.virtual_services[0].resource_owner #=> String
+    #   resp.virtual_services[0].version #=> Integer
     #   resp.virtual_services[0].virtual_service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServices AWS API Documentation
@@ -3004,7 +3022,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
