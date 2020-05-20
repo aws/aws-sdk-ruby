@@ -31,6 +31,12 @@ module Aws
             iv + cipher.update(data) + cipher.final + cipher.auth_tag
           end
 
+          def encrypt_rsa(key, data, auth_data)
+            # Plaintext must be KeyLengthInBytes (1 Byte) + DataKey + AuthData
+            buf = [data.bytesize] + data.unpack('C*') + auth_data.unpack('C*')
+            key.public_encrypt(buf.pack('C*'), OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING)
+          end
+
           def decrypt(key, data)
             begin
               case key
@@ -56,6 +62,16 @@ module Aws
             cipher.auth_tag = tag
             cipher.auth_data = auth_data
             cipher.update(enc_key) + cipher.final
+          end
+
+          # returns the decrypted data + auth_data
+          def decrypt_rsa(key, enc_data)
+            # Plaintext must be KeyLengthInBytes (1 Byte) + DataKey + AuthData
+            buf = key.private_decrypt(enc_data, OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING).unpack('C*')
+            key_length = buf[0]
+            data = buf[1, key_length].pack('C*')
+            auth_data = buf[key_length+1, buf.length - key_length].pack('C*')
+            [data, auth_data]
           end
 
           # @param [String] block_mode "CBC" or "ECB"

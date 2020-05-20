@@ -57,8 +57,9 @@ module Aws
                                     decode64(envelope['x-amz-key-v2']),
                                     envelope['x-amz-cek-alg'])
               when 'RSA-OAEP-SHA1'
-                raise 'TODO: Implement me!'
-                # Utils.decrypt_rsa(master_key, decode64(envelope['x-amz-key-v2']))
+                key, cek_alg = Utils.decrypt_rsa(master_key, decode64(envelope['x-amz-key-v2']))
+                raise Errors::DecryptionError unless cek_alg == envelope['x-amz-cek-alg']
+                key
               else
               raise ArgumentError, 'Unsupported wrap-alg: ' \
                 "#{envelope['x-amz-wrap-alg']}"
@@ -82,8 +83,8 @@ module Aws
           Utils.encrypt_aes_gcm(@key_provider.encryption_materials.key, data, auth_data)
         end
 
-        def encrypt_rca(data, auth_data)
-          raise 'TODO: Implement me'
+        def encrypt_rsa(data, auth_data)
+          Utils.encrypt_rsa(@key_provider.encryption_materials.key, data, auth_data)
         end
 
         def materials_description
