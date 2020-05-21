@@ -41,7 +41,7 @@ module Aws
               'Unrecognized :message-type value for the event')
           end
         else
-          # no :message-type header, regular event by default
+          # no :message-type hear, regular event by default
           parse_event(raw_event)
         end
       end
@@ -78,9 +78,9 @@ module Aws
 
         # locate event from eventstream
         name, ref = @rules.shape.member_by_location_name(event_type)
-        unless ref.event
-          raise Aws::Errors::EventStreamParserError.new(
-            "Failed to locate event shape for the event")
+        unless ref && ref.event
+          return Struct.new(:event_type, :response)
+                       .new(:unknown_event, raw_event.payload.read)
         end
 
         event = ref.shape.struct_class.new
