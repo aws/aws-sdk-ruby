@@ -7519,10 +7519,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Adds or overwrites the specified tags for the specified Amazon EC2
-    # resource or resources. Each resource can have a maximum of 50 tags.
-    # Each tag consists of a key and optional value. Tag keys must be unique
-    # per resource.
+    # Adds or overwrites only the specified tags for the specified Amazon
+    # EC2 resource or resources. When you specify an existing tag key, the
+    # value is overwritten with the new value. Each resource can have a
+    # maximum of 50 tags. Each tag consists of a key and optional value. Tag
+    # keys must be unique per resource.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
     # the *Amazon Elastic Compute Cloud User Guide*. For more information
@@ -19256,6 +19257,7 @@ module Aws::EC2
     #   resp.public_ipv_4_pools[0].pool_address_ranges[0].available_address_count #=> Integer
     #   resp.public_ipv_4_pools[0].total_address_count #=> Integer
     #   resp.public_ipv_4_pools[0].total_available_address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].network_border_group #=> String
     #   resp.public_ipv_4_pools[0].tags #=> Array
     #   resp.public_ipv_4_pools[0].tags[0].key #=> String
     #   resp.public_ipv_4_pools[0].tags[0].value #=> String
@@ -32007,6 +32009,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<Types::TagSpecification>] :pool_tag_specifications
+    #   The tags to apply to the address pool.
+    #
     # @return [Types::ProvisionByoipCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ProvisionByoipCidrResult#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -32022,6 +32027,17 @@ module Aws::EC2
     #     publicly_advertisable: false,
     #     description: "String",
     #     dry_run: false,
+    #     pool_tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -36961,7 +36977,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.161.0'
+      context[:gem_version] = '1.162.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

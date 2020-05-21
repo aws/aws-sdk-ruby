@@ -58,6 +58,7 @@ module Aws::Synthetics
     MaxOneYearInSeconds = Shapes::IntegerShape.new(name: 'MaxOneYearInSeconds')
     MaxSize100 = Shapes::IntegerShape.new(name: 'MaxSize100')
     MaxSize1024 = Shapes::IntegerShape.new(name: 'MaxSize1024')
+    MaxSize3008 = Shapes::IntegerShape.new(name: 'MaxSize3008')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RuntimeVersion = Shapes::StructureShape.new(name: 'RuntimeVersion')
     RuntimeVersionList = Shapes::ListShape.new(name: 'RuntimeVersionList')
@@ -131,9 +132,11 @@ module Aws::Synthetics
     CanaryRun.struct_class = Types::CanaryRun
 
     CanaryRunConfigInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, required: true, location_name: "TimeoutInSeconds"))
+    CanaryRunConfigInput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
     CanaryRunConfigInput.struct_class = Types::CanaryRunConfigInput
 
     CanaryRunConfigOutput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: MaxFifteenMinutesInSeconds, location_name: "TimeoutInSeconds"))
+    CanaryRunConfigOutput.add_member(:memory_in_mb, Shapes::ShapeRef.new(shape: MaxSize3008, location_name: "MemoryInMB"))
     CanaryRunConfigOutput.struct_class = Types::CanaryRunConfigOutput
 
     CanaryRunStatus.add_member(:state, Shapes::ShapeRef.new(shape: CanaryRunState, location_name: "State"))

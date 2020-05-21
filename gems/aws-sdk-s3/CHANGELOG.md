@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2020-05-21)
+------------------
+
+* Feature - Deprecates unusable input members bound to Content-MD5 header. Updates example and documentation.
+
 1.65.0 (2020-05-18)
 ------------------
 

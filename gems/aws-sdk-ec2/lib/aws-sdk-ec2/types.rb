@@ -36557,6 +36557,17 @@ module Aws::EC2
     #         publicly_advertisable: false,
     #         description: "String",
     #         dry_run: false,
+    #         pool_tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cidr
@@ -36590,6 +36601,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] pool_tag_specifications
+    #   The tags to apply to the address pool.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
     #
     class ProvisionByoipCidrRequest < Struct.new(
@@ -36597,7 +36612,8 @@ module Aws::EC2
       :cidr_authorization_context,
       :publicly_advertisable,
       :description,
-      :dry_run)
+      :dry_run,
+      :pool_tag_specifications)
       include Aws::Structure
     end
 
@@ -36703,6 +36719,12 @@ module Aws::EC2
     #   The total number of available addresses.
     #   @return [Integer]
     #
+    # @!attribute [rw] network_border_group
+    #   The name of the location from which the address pool is advertised.
+    #   A network border group is a unique set of Availability Zones or
+    #   Local Zones from where AWS advertises public IP addresses.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags for the address pool.
     #   @return [Array<Types::Tag>]
@@ -36715,6 +36737,7 @@ module Aws::EC2
       :pool_address_ranges,
       :total_address_count,
       :total_available_address_count,
+      :network_border_group,
       :tags)
       include Aws::Structure
     end
@@ -44819,14 +44842,14 @@ module Aws::EC2
     #   The type of resource to tag. Currently, the resource types that
     #   support tagging on creation are: `capacity-reservation` \|
     #   `client-vpn-endpoint` \| `dedicated-host` \| `fleet` \| `fpga-image`
-    #   \| `instance` \| `key-pair` \| `launch-template` \| \| `natgateway`
-    #   \| `spot-fleet-request` \| `placement-group` \| `snapshot` \|
-    #   `traffic-mirror-filter` \| `traffic-mirror-session` \|
-    #   `traffic-mirror-target` \| `transit-gateway` \|
-    #   `transit-gateway-attachment` \| `transit-gateway-route-table` \|
-    #   `vpc-endpoint` (for interface VPC endpoints)\|
-    #   `vpc-endpoint-service` (for gateway VPC endpoints) \| `volume` \|
-    #   `vpc-flow-log`.
+    #   \| `instance` \| `ipv4pool-ec2` \| `ipv6pool-ec2` \| `key-pair` \|
+    #   `launch-template` \| `natgateway` \| `spot-fleet-request` \|
+    #   `placement-group` \| `snapshot` \| `traffic-mirror-filter` \|
+    #   `traffic-mirror-session` \| `traffic-mirror-target` \|
+    #   `transit-gateway` \| `transit-gateway-attachment` \|
+    #   `transit-gateway-route-table` \| `vpc-endpoint` (for interface VPC
+    #   endpoints)\| `vpc-endpoint-service` (for gateway VPC endpoints) \|
+    #   `volume` \| `vpc-flow-log`.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #

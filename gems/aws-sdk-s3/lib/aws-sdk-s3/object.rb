@@ -216,7 +216,8 @@ module Aws::S3
     end
 
     # Provides storage class information of the object. Amazon S3 returns
-    # this header for all objects except for Standard storage class objects.
+    # this header for all objects except for S3 Standard storage class
+    # objects.
     #
     # For more information, see [Storage Classes][1].
     #
@@ -744,7 +745,16 @@ module Aws::S3
     # @option options [String] :range
     #   Downloads the specified range bytes of an object. For more information
     #   about the HTTP Range header, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
+    #   [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #
+    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
+    #   `GET` request.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
     # @option options [String] :response_cache_control
     #   Sets the `Cache-Control` header of the response.
     # @option options [String] :response_content_disposition
@@ -1051,8 +1061,8 @@ module Aws::S3
     #   The server-side encryption algorithm used when storing this object in
     #   Amazon S3 (for example, AES256, aws:kms).
     # @option options [String] :storage_class
-    #   If you don't specify, Standard is the default storage class. Amazon
-    #   S3 supports other storage classes.
+    #   If you don't specify, S3 Standard is the default storage class.
+    #   Amazon S3 supports other storage classes.
     # @option options [String] :website_redirect_location
     #   If the bucket is configured as a website, redirects requests for this
     #   object to another object in the same bucket or to an external URL.

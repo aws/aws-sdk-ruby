@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2020-05-21)
+------------------
+
+* Feature - From this release onwards ProvisionByoipCidr publicly supports IPv6. Updated ProvisionByoipCidr API to support tags for public IPv4 and IPv6 pools. Added NetworkBorderGroup to the DescribePublicIpv4Pools response.
+
 1.161.0 (2020-05-19)
 ------------------
 

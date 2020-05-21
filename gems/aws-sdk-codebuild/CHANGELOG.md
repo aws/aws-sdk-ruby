@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2020-05-21)
+------------------
+
+* Feature - CodeBuild adds support for tagging with report groups
+
 1.50.0 (2020-05-07)
 ------------------
 

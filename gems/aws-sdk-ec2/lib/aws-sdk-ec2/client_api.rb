@@ -7761,6 +7761,7 @@ module Aws::EC2
     ProvisionByoipCidrRequest.add_member(:publicly_advertisable, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAdvertisable"))
     ProvisionByoipCidrRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ProvisionByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ProvisionByoipCidrRequest.add_member(:pool_tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "PoolTagSpecification"))
     ProvisionByoipCidrRequest.struct_class = Types::ProvisionByoipCidrRequest
 
     ProvisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
@@ -7780,6 +7781,7 @@ module Aws::EC2
     PublicIpv4Pool.add_member(:pool_address_ranges, Shapes::ShapeRef.new(shape: PublicIpv4PoolRangeSet, location_name: "poolAddressRangeSet"))
     PublicIpv4Pool.add_member(:total_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAddressCount"))
     PublicIpv4Pool.add_member(:total_available_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAvailableAddressCount"))
+    PublicIpv4Pool.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "networkBorderGroup"))
     PublicIpv4Pool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     PublicIpv4Pool.struct_class = Types::PublicIpv4Pool
 
