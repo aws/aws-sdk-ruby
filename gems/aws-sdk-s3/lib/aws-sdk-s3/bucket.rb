@@ -520,7 +520,7 @@ module Aws::S3
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)
-      resp = @client.put_object(options)
+      @client.put_object(options)
       Object.new(
         bucket_name: @name,
         key: options[:key],

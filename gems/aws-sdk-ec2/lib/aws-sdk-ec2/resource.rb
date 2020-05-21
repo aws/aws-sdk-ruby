@@ -768,7 +768,7 @@ module Aws::EC2
     #   The tags to apply to the new placement group.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
-      resp = @client.create_placement_group(options)
+      @client.create_placement_group(options)
       PlacementGroup.new(
         name: options[:group_name],
         client: @client

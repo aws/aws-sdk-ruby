@@ -3,6 +3,9 @@ module Aws
     class Object
       alias size content_length
 
+      # Make the method redefinable
+      alias_method :copy_from, :copy_from
+
       # Copies another object to this object. Use `multipart_copy: true`
       # for large objects. This is required for objects that exceed 5GB.
       #
