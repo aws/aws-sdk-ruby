@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-05-22)
+------------------
+
+* Feature - This release adds support for the standard deviation auto-computed aggregate and improved support for portal logo images in SiteWise.
+
 1.2.0 (2020-05-12)
 ------------------
 
