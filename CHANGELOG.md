@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.514 (2020-05-22)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::IoTSiteWise - Updated the API, and documentation for AWS IoT SiteWise.
