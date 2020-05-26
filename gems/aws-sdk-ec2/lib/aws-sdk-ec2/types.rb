@@ -14902,6 +14902,30 @@ module Aws::EC2
     #     latest generation instance type of an instance family. (`true` \|
     #     `false`)
     #
+    #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
+    #     baseline bandwidth performance for an EBS-optimized instance type,
+    #     in Mbps.
+    #
+    #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
+    #     baseline throughput performance for an EBS-optimized instance
+    #     type, in MBps.
+    #
+    #   * `ebs-info.ebs-optimized-info.baseline-iops` - The baseline
+    #     input/output storage operations per second for an EBS-optimized
+    #     instance type.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
+    #     maximum bandwidth performance for an EBS-optimized instance type,
+    #     in Mbps.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
+    #     maximum throughput performance for an EBS-optimized instance type,
+    #     in MBps.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-iops` - The maximum
+    #     input/output storage operations per second for an EBS-optimized
+    #     instance type.
+    #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
     #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
     #
@@ -14935,6 +14959,9 @@ module Aws::EC2
     #   * `network-info.ena-support` - Indicates whether Elastic Network
     #     Adapter (ENA) is supported or required. (`required` \| `supported`
     #     \| `unsupported`)
+    #
+    #   * `network-info.efa-supported` - Indicates whether the instance type
+    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number
     #     of private IPv4 addresses per network interface.
@@ -22882,11 +22909,16 @@ module Aws::EC2
     #   Indicates whether Amazon EBS encryption is supported.
     #   @return [String]
     #
+    # @!attribute [rw] ebs_optimized_info
+    #   Describes the optimized EBS performance for the instance type.
+    #   @return [Types::EbsOptimizedInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInfo AWS API Documentation
     #
     class EbsInfo < Struct.new(
       :ebs_optimized_support,
-      :encryption_support)
+      :encryption_support,
+      :ebs_optimized_info)
       include Aws::Structure
     end
 
@@ -22943,6 +22975,50 @@ module Aws::EC2
     class EbsInstanceBlockDeviceSpecification < Struct.new(
       :delete_on_termination,
       :volume_id)
+      include Aws::Structure
+    end
+
+    # Describes the optimized EBS performance for supported instance types.
+    #
+    # @!attribute [rw] baseline_bandwidth_in_mbps
+    #   The baseline bandwidth performance for an EBS-optimized instance
+    #   type, in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] baseline_throughput_in_m_bps
+    #   The baseline throughput performance for an EBS-optimized instance
+    #   type, in MBps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] baseline_iops
+    #   The baseline input/output storage operations per seconds for an
+    #   EBS-optimized instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_bandwidth_in_mbps
+    #   The maximum bandwidth performance for an EBS-optimized instance
+    #   type, in Mbps.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_throughput_in_m_bps
+    #   The maximum throughput performance for an EBS-optimized instance
+    #   type, in MBps.
+    #   @return [Float]
+    #
+    # @!attribute [rw] maximum_iops
+    #   The maximum input/output storage operations per second for an
+    #   EBS-optimized instance type.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsOptimizedInfo AWS API Documentation
+    #
+    class EbsOptimizedInfo < Struct.new(
+      :baseline_bandwidth_in_mbps,
+      :baseline_throughput_in_m_bps,
+      :baseline_iops,
+      :maximum_bandwidth_in_mbps,
+      :maximum_throughput_in_m_bps,
+      :maximum_iops)
       include Aws::Structure
     end
 
@@ -24580,7 +24656,15 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a launch template.
+    # Describes the Amazon EC2 launch template and the launch template
+    # version that can be used by a Spot Fleet request to configure Amazon
+    # EC2 instances. For information about launch templates, see [Launching
+    # an instance from a launch template][1] in the *Amazon EC2 User Guide
+    # for Linux Instances*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
     #
     # @note When making an API call, you may pass FleetLaunchTemplateSpecification
     #   data as a hash:
@@ -24592,18 +24676,24 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either a template ID
-    #   or a template name.
+    #   The ID of the launch template. If you specify the template ID, you
+    #   can't specify the template name.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either a template
-    #   name or a template ID.
+    #   The name of the launch template. If you specify the template name,
+    #   you can't specify the template ID.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the launch template. You must specify a
-    #   version number.
+    #   The launch template version number, `$Latest`, or `$Default`. You
+    #   must specify a value, otherwise the request fails.
+    #
+    #   If the value is `$Latest`, Amazon EC2 uses the latest version of the
+    #   launch template.
+    #
+    #   If the value is `$Default`, Amazon EC2 uses the default version of
+    #   the launch template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecification AWS API Documentation
@@ -24615,8 +24705,15 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The launch template to use. You must specify either the launch
-    # template ID or launch template name in the request.
+    # Describes the Amazon EC2 launch template and the launch template
+    # version that can be used by an EC2 Fleet to configure Amazon EC2
+    # instances. For information about launch templates, see [Launching an
+    # instance from a launch template][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
     #
     # @note When making an API call, you may pass FleetLaunchTemplateSpecificationRequest
     #   data as a hash:
@@ -24628,16 +24725,24 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template.
+    #   The ID of the launch template. If you specify the template ID, you
+    #   can't specify the template name.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template.
+    #   The name of the launch template. If you specify the template name,
+    #   you can't specify the template ID.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number of the launch template. Note: This is a required
-    #   parameter and will be updated soon.
+    #   The launch template version number, `$Latest`, or `$Default`. You
+    #   must specify a value, otherwise the request fails.
+    #
+    #   If the value is `$Latest`, Amazon EC2 uses the latest version of the
+    #   launch template.
+    #
+    #   If the value is `$Default`, Amazon EC2 uses the default version of
+    #   the launch template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest AWS API Documentation
@@ -29362,6 +29467,10 @@ module Aws::EC2
     #   Indicates the supported root device types.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_virtualization_types
+    #   The supported virtualization types.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] bare_metal
     #   Indicates whether the instance is bare metal.
     #   @return [Boolean]
@@ -29440,6 +29549,7 @@ module Aws::EC2
       :free_tier_eligible,
       :supported_usage_classes,
       :supported_root_device_types,
+      :supported_virtualization_types,
       :bare_metal,
       :hypervisor,
       :processor_info,
@@ -35229,6 +35339,10 @@ module Aws::EC2
     #   Indicates whether Elastic Network Adapter (ENA) is supported.
     #   @return [String]
     #
+    # @!attribute [rw] efa_supported
+    #   Indicates whether Elastic Fabric Adapter (EFA) is supported.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInfo AWS API Documentation
     #
     class NetworkInfo < Struct.new(
@@ -35237,7 +35351,8 @@ module Aws::EC2
       :ipv_4_addresses_per_interface,
       :ipv_6_addresses_per_interface,
       :ipv_6_supported,
-      :ena_support)
+      :ena_support,
+      :efa_supported)
       include Aws::Structure
     end
 
@@ -41044,6 +41159,9 @@ module Aws::EC2
     #   Elastic inference accelerators are a resource you can attach to your
     #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
     #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the
+    #   same request.
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications

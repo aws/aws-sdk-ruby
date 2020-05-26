@@ -2820,7 +2820,7 @@ module Aws::SSM
     #   You can't use the following strings as document name prefixes.
     #   These are reserved by AWS for use as document name prefixes:
     #
-    #    * `aws`
+    #    * `aws-`
     #
     #   * `amazon`
     #
@@ -13685,7 +13685,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type for a String parameter. Supported data types include
+    #   The data type for a `String` parameter. Supported data types include
     #   plain text and Amazon Machine Image IDs.
     #
     #   **The following data type values are supported.**
@@ -13694,11 +13694,12 @@ module Aws::SSM
     #
     #   * `aws:ec2:image`
     #
-    #   When you create a String parameter and specify `aws:ec2:image`,
-    #   Systems Manager validates the parameter value you provide against
-    #   that data type. The required format is `ami-12345abcdeEXAMPLE`. For
-    #   more information, see [Native parameter support for Amazon Machine
-    #   Image IDs][1] in the *AWS Systems Manager User Guide*.
+    #   When you create a `String` parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value is in the required
+    #   format, such as `ami-12345abcdeEXAMPLE`, and that the specified AMI
+    #   is available in your AWS account. For more information, see [Native
+    #   parameter support for Amazon Machine Image IDs][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #
     #

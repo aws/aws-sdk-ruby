@@ -461,6 +461,7 @@ module Aws::ElastiCache
     #   resp.cache_security_group.ec2_security_groups[0].status #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+    #   resp.cache_security_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngress AWS API Documentation
     #
@@ -638,6 +639,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigration AWS API Documentation
     #
@@ -849,6 +851,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshot.kms_key_id #=> String
+    #   resp.snapshot.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot AWS API Documentation
     #
@@ -1365,6 +1368,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster AWS API Documentation
     #
@@ -1445,6 +1449,7 @@ module Aws::ElastiCache
     #   resp.cache_parameter_group.cache_parameter_group_family #=> String
     #   resp.cache_parameter_group.description #=> String
     #   resp.cache_parameter_group.is_global #=> Boolean
+    #   resp.cache_parameter_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup AWS API Documentation
     #
@@ -1509,6 +1514,7 @@ module Aws::ElastiCache
     #   resp.cache_security_group.ec2_security_groups[0].status #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+    #   resp.cache_security_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroup AWS API Documentation
     #
@@ -1603,6 +1609,7 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets #=> Array
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cache_subnet_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup AWS API Documentation
     #
@@ -1672,6 +1679,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateGlobalReplicationGroup AWS API Documentation
     #
@@ -1765,7 +1773,7 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #
     # @option params [Integer] :num_cache_clusters
-    #   The number of clusters this replication group initially has.
+    #   The number of nodes in the cluster.
     #
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
@@ -2299,6 +2307,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -2507,6 +2516,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshot.kms_key_id #=> String
+    #   resp.snapshot.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot AWS API Documentation
     #
@@ -2579,6 +2589,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseNodeGroupsInGlobalReplicationGroup AWS API Documentation
     #
@@ -2692,6 +2703,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCount AWS API Documentation
     #
@@ -2831,6 +2843,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster AWS API Documentation
     #
@@ -3013,6 +3026,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteGlobalReplicationGroup AWS API Documentation
     #
@@ -3127,6 +3141,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -3238,6 +3253,7 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshot.kms_key_id #=> String
+    #   resp.snapshot.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot AWS API Documentation
     #
@@ -3482,6 +3498,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].auth_token_last_modified_date #=> Time
     #   resp.cache_clusters[0].transit_encryption_enabled #=> Boolean
     #   resp.cache_clusters[0].at_rest_encryption_enabled #=> Boolean
+    #   resp.cache_clusters[0].arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3818,6 +3835,7 @@ module Aws::ElastiCache
     #   resp.cache_parameter_groups[0].cache_parameter_group_family #=> String
     #   resp.cache_parameter_groups[0].description #=> String
     #   resp.cache_parameter_groups[0].is_global #=> Boolean
+    #   resp.cache_parameter_groups[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups AWS API Documentation
     #
@@ -4368,6 +4386,7 @@ module Aws::ElastiCache
     #   resp.cache_security_groups[0].ec2_security_groups[0].status #=> String
     #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_owner_id #=> String
+    #   resp.cache_security_groups[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroups AWS API Documentation
     #
@@ -4474,6 +4493,7 @@ module Aws::ElastiCache
     #   resp.cache_subnet_groups[0].subnets #=> Array
     #   resp.cache_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cache_subnet_groups[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups AWS API Documentation
     #
@@ -5415,6 +5435,7 @@ module Aws::ElastiCache
     #   resp.global_replication_groups[0].auth_token_enabled #=> Boolean
     #   resp.global_replication_groups[0].transit_encryption_enabled #=> Boolean
     #   resp.global_replication_groups[0].at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_groups[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeGlobalReplicationGroups AWS API Documentation
     #
@@ -5577,6 +5598,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].transit_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].at_rest_encryption_enabled #=> Boolean
     #   resp.replication_groups[0].kms_key_id #=> String
+    #   resp.replication_groups[0].arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6464,6 +6486,7 @@ module Aws::ElastiCache
     #   resp.snapshots[0].node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
     #   resp.snapshots[0].kms_key_id #=> String
+    #   resp.snapshots[0].arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots AWS API Documentation
     #
@@ -6635,6 +6658,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DisassociateGlobalReplicationGroup AWS API Documentation
     #
@@ -6691,6 +6715,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/FailoverGlobalReplicationGroup AWS API Documentation
     #
@@ -6763,6 +6788,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseNodeGroupsInGlobalReplicationGroup AWS API Documentation
     #
@@ -6860,6 +6886,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCount AWS API Documentation
     #
@@ -7460,6 +7487,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster AWS API Documentation
     #
@@ -7626,6 +7654,7 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets #=> Array
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cache_subnet_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup AWS API Documentation
     #
@@ -7698,6 +7727,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyGlobalReplicationGroup AWS API Documentation
     #
@@ -8053,6 +8083,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -8170,6 +8201,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfiguration AWS API Documentation
     #
@@ -8292,6 +8324,7 @@ module Aws::ElastiCache
     #   resp.global_replication_group.auth_token_enabled #=> Boolean
     #   resp.global_replication_group.transit_encryption_enabled #=> Boolean
     #   resp.global_replication_group.at_rest_encryption_enabled #=> Boolean
+    #   resp.global_replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebalanceSlotsInGlobalReplicationGroup AWS API Documentation
     #
@@ -8440,6 +8473,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.auth_token_last_modified_date #=> Time
     #   resp.cache_cluster.transit_encryption_enabled #=> Boolean
     #   resp.cache_cluster.at_rest_encryption_enabled #=> Boolean
+    #   resp.cache_cluster.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster AWS API Documentation
     #
@@ -8651,6 +8685,7 @@ module Aws::ElastiCache
     #   resp.cache_security_group.ec2_security_groups[0].status #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+    #   resp.cache_security_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngress AWS API Documentation
     #
@@ -8727,6 +8762,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigration AWS API Documentation
     #
@@ -8853,6 +8889,7 @@ module Aws::ElastiCache
     #   resp.replication_group.transit_encryption_enabled #=> Boolean
     #   resp.replication_group.at_rest_encryption_enabled #=> Boolean
     #   resp.replication_group.kms_key_id #=> String
+    #   resp.replication_group.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
     #
@@ -8876,7 +8913,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

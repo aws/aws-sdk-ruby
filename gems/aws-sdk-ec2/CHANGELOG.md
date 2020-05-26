@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2020-05-26)
+------------------
+
+* Feature - ebsOptimizedInfo, efaSupported and supportedVirtualizationTypes added to DescribeInstanceTypes API
+
 1.162.0 (2020-05-21)
 ------------------
 

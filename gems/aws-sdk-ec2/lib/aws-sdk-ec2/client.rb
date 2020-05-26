@@ -16204,9 +16204,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Returns a list of all instance types offered in your current AWS
-    # Region. The results can be filtered by the attributes of the instance
-    # types.
+    # Describes the details of the instance types that are offered in a
+    # location. The results can be filtered by the attributes of the
+    # instance types.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16237,6 +16237,30 @@ module Aws::EC2
     #   * `current-generation` - Indicates whether this instance type is the
     #     latest generation instance type of an instance family. (`true` \|
     #     `false`)
+    #
+    #   * `ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps` - The
+    #     baseline bandwidth performance for an EBS-optimized instance type,
+    #     in Mbps.
+    #
+    #   * `ebs-info.ebs-optimized-info.baseline-throughput-in-mbps` - The
+    #     baseline throughput performance for an EBS-optimized instance type,
+    #     in MBps.
+    #
+    #   * `ebs-info.ebs-optimized-info.baseline-iops` - The baseline
+    #     input/output storage operations per second for an EBS-optimized
+    #     instance type.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps` - The
+    #     maximum bandwidth performance for an EBS-optimized instance type, in
+    #     Mbps.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-throughput-in-mbps` - The
+    #     maximum throughput performance for an EBS-optimized instance type,
+    #     in MBps.
+    #
+    #   * `ebs-info.ebs-optimized-info.maximum-iops` - The maximum
+    #     input/output storage operations per second for an EBS-optimized
+    #     instance type.
     #
     #   * `ebs-info.ebs-optimized-support` - Indicates whether the instance
     #     type is EBS-optimized. (`supported` \| `unsupported` \| `default`)
@@ -16271,6 +16295,9 @@ module Aws::EC2
     #   * `network-info.ena-support` - Indicates whether Elastic Network
     #     Adapter (ENA) is supported or required. (`required` \| `supported`
     #     \| `unsupported`)
+    #
+    #   * `network-info.efa-supported` - Indicates whether the instance type
+    #     supports Elastic Fabric Adapter (EFA). (`true` \| `false`)
     #
     #   * `network-info.ipv4-addresses-per-interface` - The maximum number of
     #     private IPv4 addresses per network interface.
@@ -16339,6 +16366,8 @@ module Aws::EC2
     #   resp.instance_types[0].supported_usage_classes[0] #=> String, one of "spot", "on-demand"
     #   resp.instance_types[0].supported_root_device_types #=> Array
     #   resp.instance_types[0].supported_root_device_types[0] #=> String, one of "ebs", "instance-store"
+    #   resp.instance_types[0].supported_virtualization_types #=> Array
+    #   resp.instance_types[0].supported_virtualization_types[0] #=> String, one of "hvm", "paravirtual"
     #   resp.instance_types[0].bare_metal #=> Boolean
     #   resp.instance_types[0].hypervisor #=> String, one of "nitro", "xen"
     #   resp.instance_types[0].processor_info.supported_architectures #=> Array
@@ -16360,12 +16389,19 @@ module Aws::EC2
     #   resp.instance_types[0].instance_storage_info.disks[0].type #=> String, one of "hdd", "ssd"
     #   resp.instance_types[0].ebs_info.ebs_optimized_support #=> String, one of "unsupported", "supported", "default"
     #   resp.instance_types[0].ebs_info.encryption_support #=> String, one of "unsupported", "supported"
+    #   resp.instance_types[0].ebs_info.ebs_optimized_info.baseline_bandwidth_in_mbps #=> Integer
+    #   resp.instance_types[0].ebs_info.ebs_optimized_info.baseline_throughput_in_m_bps #=> Float
+    #   resp.instance_types[0].ebs_info.ebs_optimized_info.baseline_iops #=> Integer
+    #   resp.instance_types[0].ebs_info.ebs_optimized_info.maximum_bandwidth_in_mbps #=> Integer
+    #   resp.instance_types[0].ebs_info.ebs_optimized_info.maximum_throughput_in_m_bps #=> Float
+    #   resp.instance_types[0].ebs_info.ebs_optimized_info.maximum_iops #=> Integer
     #   resp.instance_types[0].network_info.network_performance #=> String
     #   resp.instance_types[0].network_info.maximum_network_interfaces #=> Integer
     #   resp.instance_types[0].network_info.ipv_4_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_addresses_per_interface #=> Integer
     #   resp.instance_types[0].network_info.ipv_6_supported #=> Boolean
     #   resp.instance_types[0].network_info.ena_support #=> String, one of "unsupported", "supported", "required"
+    #   resp.instance_types[0].network_info.efa_supported #=> Boolean
     #   resp.instance_types[0].gpu_info.gpus #=> Array
     #   resp.instance_types[0].gpu_info.gpus[0].name #=> String
     #   resp.instance_types[0].gpu_info.gpus[0].manufacturer #=> String
@@ -16399,14 +16435,19 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified instances or all of AWS account's instances.
+    # Describes the specified instances or all instances.
     #
-    # If you specify one or more instance IDs, Amazon EC2 returns
-    # information for those instances. If you do not specify instance IDs,
-    # Amazon EC2 returns information for all relevant instances. If you
-    # specify an instance ID that is not valid, an error is returned. If you
-    # specify an instance that you do not own, it is not included in the
-    # returned results.
+    # If you specify instance IDs, the output includes information for only
+    # the specified instances. If you specify filters, the output includes
+    # information for only those instances that meet the filter criteria. If
+    # you do not specify instance IDs or filters, the output includes
+    # information for all instances, which can affect performance. We
+    # recommend that you use pagination to ensure that the operation returns
+    # quickly and successfully.
+    #
+    # If you specify an instance ID that is not valid, an error is returned.
+    # If you specify an instance that you do not own, it is not included in
+    # the output.
     #
     # Recently terminated instances might appear in the returned results.
     # This interval is usually less than one hour.
@@ -35221,6 +35262,9 @@ module Aws::EC2
     #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
     #   workloads.
     #
+    #   You cannot specify accelerators from different generations in the same
+    #   request.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
@@ -36977,7 +37021,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

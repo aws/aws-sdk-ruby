@@ -110,6 +110,9 @@ module Aws::EC2
     AvailableCapacity = Shapes::StructureShape.new(name: 'AvailableCapacity')
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
     BareMetalFlag = Shapes::BooleanShape.new(name: 'BareMetalFlag')
+    BaselineBandwidthInMbps = Shapes::IntegerShape.new(name: 'BaselineBandwidthInMbps')
+    BaselineIops = Shapes::IntegerShape.new(name: 'BaselineIops')
+    BaselineThroughputInMBps = Shapes::FloatShape.new(name: 'BaselineThroughputInMBps')
     BatchState = Shapes::StringShape.new(name: 'BatchState')
     BillingProductList = Shapes::ListShape.new(name: 'BillingProductList')
     Blob = Shapes::BlobShape.new(name: 'Blob')
@@ -798,7 +801,9 @@ module Aws::EC2
     EbsInfo = Shapes::StructureShape.new(name: 'EbsInfo')
     EbsInstanceBlockDevice = Shapes::StructureShape.new(name: 'EbsInstanceBlockDevice')
     EbsInstanceBlockDeviceSpecification = Shapes::StructureShape.new(name: 'EbsInstanceBlockDeviceSpecification')
+    EbsOptimizedInfo = Shapes::StructureShape.new(name: 'EbsOptimizedInfo')
     EbsOptimizedSupport = Shapes::StringShape.new(name: 'EbsOptimizedSupport')
+    EfaSupportedFlag = Shapes::BooleanShape.new(name: 'EfaSupportedFlag')
     EgressOnlyInternetGateway = Shapes::StructureShape.new(name: 'EgressOnlyInternetGateway')
     EgressOnlyInternetGatewayId = Shapes::StringShape.new(name: 'EgressOnlyInternetGatewayId')
     EgressOnlyInternetGatewayIdList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayIdList')
@@ -1279,6 +1284,9 @@ module Aws::EC2
     MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
     MaxNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaxNetworkInterfaces')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaximumBandwidthInMbps = Shapes::IntegerShape.new(name: 'MaximumBandwidthInMbps')
+    MaximumIops = Shapes::IntegerShape.new(name: 'MaximumIops')
+    MaximumThroughputInMBps = Shapes::FloatShape.new(name: 'MaximumThroughputInMBps')
     MembershipType = Shapes::StringShape.new(name: 'MembershipType')
     MemoryInfo = Shapes::StructureShape.new(name: 'MemoryInfo')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
@@ -1926,6 +1934,7 @@ module Aws::EC2
     VgwTelemetry = Shapes::StructureShape.new(name: 'VgwTelemetry')
     VgwTelemetryList = Shapes::ListShape.new(name: 'VgwTelemetryList')
     VirtualizationType = Shapes::StringShape.new(name: 'VirtualizationType')
+    VirtualizationTypeList = Shapes::ListShape.new(name: 'VirtualizationTypeList')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     VolumeAttachment = Shapes::StructureShape.new(name: 'VolumeAttachment')
     VolumeAttachmentList = Shapes::ListShape.new(name: 'VolumeAttachmentList')
@@ -5233,6 +5242,7 @@ module Aws::EC2
 
     EbsInfo.add_member(:ebs_optimized_support, Shapes::ShapeRef.new(shape: EbsOptimizedSupport, location_name: "ebsOptimizedSupport"))
     EbsInfo.add_member(:encryption_support, Shapes::ShapeRef.new(shape: EbsEncryptionSupport, location_name: "encryptionSupport"))
+    EbsInfo.add_member(:ebs_optimized_info, Shapes::ShapeRef.new(shape: EbsOptimizedInfo, location_name: "ebsOptimizedInfo"))
     EbsInfo.struct_class = Types::EbsInfo
 
     EbsInstanceBlockDevice.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
@@ -5244,6 +5254,14 @@ module Aws::EC2
     EbsInstanceBlockDeviceSpecification.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     EbsInstanceBlockDeviceSpecification.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "volumeId"))
     EbsInstanceBlockDeviceSpecification.struct_class = Types::EbsInstanceBlockDeviceSpecification
+
+    EbsOptimizedInfo.add_member(:baseline_bandwidth_in_mbps, Shapes::ShapeRef.new(shape: BaselineBandwidthInMbps, location_name: "baselineBandwidthInMbps"))
+    EbsOptimizedInfo.add_member(:baseline_throughput_in_m_bps, Shapes::ShapeRef.new(shape: BaselineThroughputInMBps, location_name: "baselineThroughputInMBps"))
+    EbsOptimizedInfo.add_member(:baseline_iops, Shapes::ShapeRef.new(shape: BaselineIops, location_name: "baselineIops"))
+    EbsOptimizedInfo.add_member(:maximum_bandwidth_in_mbps, Shapes::ShapeRef.new(shape: MaximumBandwidthInMbps, location_name: "maximumBandwidthInMbps"))
+    EbsOptimizedInfo.add_member(:maximum_throughput_in_m_bps, Shapes::ShapeRef.new(shape: MaximumThroughputInMBps, location_name: "maximumThroughputInMBps"))
+    EbsOptimizedInfo.add_member(:maximum_iops, Shapes::ShapeRef.new(shape: MaximumIops, location_name: "maximumIops"))
+    EbsOptimizedInfo.struct_class = Types::EbsOptimizedInfo
 
     EgressOnlyInternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
     EgressOnlyInternetGateway.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "egressOnlyInternetGatewayId"))
@@ -6447,6 +6465,7 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: FreeTierEligibleFlag, location_name: "freeTierEligible"))
     InstanceTypeInfo.add_member(:supported_usage_classes, Shapes::ShapeRef.new(shape: UsageClassTypeList, location_name: "supportedUsageClasses"))
     InstanceTypeInfo.add_member(:supported_root_device_types, Shapes::ShapeRef.new(shape: RootDeviceTypeList, location_name: "supportedRootDeviceTypes"))
+    InstanceTypeInfo.add_member(:supported_virtualization_types, Shapes::ShapeRef.new(shape: VirtualizationTypeList, location_name: "supportedVirtualizationTypes"))
     InstanceTypeInfo.add_member(:bare_metal, Shapes::ShapeRef.new(shape: BareMetalFlag, location_name: "bareMetal"))
     InstanceTypeInfo.add_member(:hypervisor, Shapes::ShapeRef.new(shape: InstanceTypeHypervisor, location_name: "hypervisor"))
     InstanceTypeInfo.add_member(:processor_info, Shapes::ShapeRef.new(shape: ProcessorInfo, location_name: "processorInfo"))
@@ -7445,6 +7464,7 @@ module Aws::EC2
     NetworkInfo.add_member(:ipv_6_addresses_per_interface, Shapes::ShapeRef.new(shape: MaxIpv6AddrPerInterface, location_name: "ipv6AddressesPerInterface"))
     NetworkInfo.add_member(:ipv_6_supported, Shapes::ShapeRef.new(shape: Ipv6Flag, location_name: "ipv6Supported"))
     NetworkInfo.add_member(:ena_support, Shapes::ShapeRef.new(shape: EnaSupport, location_name: "enaSupport"))
+    NetworkInfo.add_member(:efa_supported, Shapes::ShapeRef.new(shape: EfaSupportedFlag, location_name: "efaSupported"))
     NetworkInfo.struct_class = Types::NetworkInfo
 
     NetworkInterface.add_member(:association, Shapes::ShapeRef.new(shape: NetworkInterfaceAssociation, location_name: "association"))
@@ -9508,6 +9528,8 @@ module Aws::EC2
     VgwTelemetry.struct_class = Types::VgwTelemetry
 
     VgwTelemetryList.member = Shapes::ShapeRef.new(shape: VgwTelemetry, location_name: "item")
+
+    VirtualizationTypeList.member = Shapes::ShapeRef.new(shape: VirtualizationType, location_name: "item")
 
     Volume.add_member(:attachments, Shapes::ShapeRef.new(shape: VolumeAttachmentList, location_name: "attachmentSet"))
     Volume.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))

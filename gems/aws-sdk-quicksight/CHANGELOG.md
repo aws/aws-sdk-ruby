@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-05-26)
+------------------
+
+* Feature - Add DataSetArns to QuickSight DescribeDashboard API response.
+
 1.19.0 (2020-05-07)
 ------------------
 

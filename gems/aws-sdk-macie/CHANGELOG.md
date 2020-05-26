@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-05-26)
+------------------
+
+* Feature - This is a documentation-only update to the Amazon Macie Classic API. This update corrects out-of-date references to the service name.
+
 1.18.0 (2020-05-07)
 ------------------
 
