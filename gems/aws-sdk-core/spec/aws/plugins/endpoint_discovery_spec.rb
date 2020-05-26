@@ -96,15 +96,15 @@ module Aws
       end
 
       it 'enables endpoint discovery from ENV' do
-        # env['AWS_ENABLE_ENDPOINT_DISCOVERY'] = true
-        # expect(
-        #   EndpointDiscoveryClient.new(region: 'us-east-1').config.endpoint_discovery
-        # ).to be_truthy
-        #
-        # env['AWS_ENABLE_ENDPOINT_DISCOVERY'] = "true"
-        # expect(
-        #   EndpointDiscoveryClient.new(region: 'us-east-1').config.endpoint_discovery
-        # ).to be_truthy
+        env['AWS_ENABLE_ENDPOINT_DISCOVERY'] = true
+        expect(
+          EndpointDiscoveryClient.new(region: 'us-east-1').config.endpoint_discovery
+        ).to be_truthy
+
+        env['AWS_ENABLE_ENDPOINT_DISCOVERY'] = "true"
+        expect(
+          EndpointDiscoveryClient.new(region: 'us-east-1').config.endpoint_discovery
+        ).to be_truthy
 
         env['AWS_ENABLE_ENDPOINT_DISCOVERY'] = "false"
         expect(
