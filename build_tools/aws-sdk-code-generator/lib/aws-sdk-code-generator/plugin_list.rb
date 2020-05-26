@@ -15,6 +15,17 @@ module AwsSdkCodeGenerator
 
     private
 
+    def compute_plugin_options(class_name, options)
+      plugin_options = const_get(class_name).options
+      if class_name == 'Aws::Plugins::EndpointDiscovery' &&
+         options[:endpoint_discovery_required]
+        plugin_options.each do |opt|
+          opt.doc_default = true if opt.name == :endpoint_discovery
+        end
+      end
+      plugin_options
+    end
+
     def compute_plugins(options)
       plugins = {}
       plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
@@ -27,9 +38,11 @@ module AwsSdkCodeGenerator
       plugins.map do |class_name, path|
         path = "./#{path}" unless path[0] == '/'
         Kernel.require(path)
+        plugin_options = compute_plugin_options(class_name, options)
+
         Plugin.new(
           class_name: class_name,
-          options: const_get(class_name).options,
+          options: plugin_options,
           path: path)
       end
     end

@@ -10,6 +10,7 @@ module AwsSdkCodeGenerator
       # @option options [required, String] :aws_sdk_core_lib_path
       # @option options [required, String] :protocol
       # @option options [required, String] :signature_version
+      # @option options [required, Boolean] :endpoint_discovery_required
       # @option options [required, Hash] :add_plugins
       # @option options [required, Array] :remove_plugins
       # @option options [required, Hash] :api

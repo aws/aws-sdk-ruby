@@ -7,7 +7,7 @@ module Aws
         default: false,
         doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
-When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+When set to `true`, endpoint discovery will be enabled for operations when available.
         DOCS
         resolve_endpoint_discovery(cfg)
       end
@@ -102,6 +102,10 @@ the background every 60 secs (default). Defaults to `false`.
           key = cache.extract_key(ctx)
 
           if required
+            unless ctx.config.endpoint_discovery
+              raise ArgumentError, "Operation #{ctx.operation.name} requires "\
+                'endpoint_discovery to be enabled.'
+            end
             # required for the operation
             unless cache.key?(key)
               cache.update(key, ctx)
@@ -151,8 +155,12 @@ the background every 60 secs (default). Defaults to `false`.
 
       def self.resolve_endpoint_discovery(cfg)
         env = ENV['AWS_ENABLE_ENDPOINT_DISCOVERY']
+        default = cfg.api.operations.any? do |_, o|
+          o.endpoint_discovery && o.endpoint_discovery['required']
+        end
         shared_cfg = Aws.shared_config.endpoint_discovery_enabled(profile: cfg.profile)
-        Aws::Util.str_2_bool(env) || Aws::Util.str_2_bool(shared_cfg)
+        resolved = Aws::Util.str_2_bool(env) || Aws::Util.str_2_bool(shared_cfg)
+        env.nil? && shared_cfg.nil? ? default : !!resolved
       end
 
     end
