@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't use `expect` header to compute Signature.
+
 1.1.3 (2020-04-27)
 ------------------
 
