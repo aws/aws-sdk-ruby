@@ -23,7 +23,7 @@ module AwsSdkCodeGenerator
         @gem_name = options.fetch(:gem_name)
         @gem_version = options.fetch(:gem_version)
         @plugins = PluginList.new(options)
-        @client_constructor = ClientConstructor.new(plugins: @plugins)
+        @client_constructor = ClientConstructor.new(options.merge(plugins: @plugins))
         @operations = ClientOperationList.new(options).to_a
         @waiters = Waiter.build_list(options[:waiters])
         @custom = options.fetch(:custom)

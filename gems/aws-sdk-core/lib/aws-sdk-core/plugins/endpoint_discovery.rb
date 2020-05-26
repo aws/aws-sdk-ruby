@@ -4,7 +4,7 @@ module Aws
     class EndpointDiscovery < Seahorse::Client::Plugin
 
       option(:endpoint_discovery,
-        default: false,
+        doc_default: Proc.new { |options| options[:endpoint_discovery_required] },
         doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
 When set to `true`, endpoint discovery will be enabled for operations when available.
