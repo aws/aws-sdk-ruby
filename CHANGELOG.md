@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::GuardDuty - Updated the documentation for Amazon GuardDuty.
+
 2.11.515 (2020-05-26)
 ------------------
 
