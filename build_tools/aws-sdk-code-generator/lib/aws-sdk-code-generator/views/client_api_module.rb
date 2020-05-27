@@ -243,6 +243,10 @@ module AwsSdkCodeGenerator
         nil
       end
 
+      def require_endpoint_discovery
+        @service.require_endpoint_discovery
+      end
+
       private
 
       def shape_class_name(shape)

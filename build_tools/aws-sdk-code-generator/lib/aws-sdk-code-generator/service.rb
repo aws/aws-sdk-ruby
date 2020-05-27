@@ -46,7 +46,7 @@ module AwsSdkCodeGenerator
       @signature_version = api.fetch('metadata')['signatureVersion']
       @full_name = api.fetch('metadata')['serviceFullName']
       @short_name = api.fetch('metadata')['serviceAbbreviation'] || @full_name
-      @endpoint_discovery_required = api.fetch('operations', []).any? do |_, o|
+      @require_endpoint_discovery = api.fetch('operations', []).any? do |_, o|
         o['endpointdiscovery'] && o['endpointdiscovery']['required']
       end
     end
@@ -120,7 +120,7 @@ module AwsSdkCodeGenerator
     attr_reader :short_name
 
     # @return [Boolean] true if any operation requires endpoint_discovery
-    attr_reader :endpoint_discovery_required
+    attr_reader :require_endpoint_discovery
 
     # @api private
     def inspect

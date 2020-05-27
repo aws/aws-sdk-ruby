@@ -53,7 +53,7 @@ module Seahorse
           # For backwards-compat reasons, the default value can be passed as 2nd
           # positional argument (before the options hash) or as the `:default` option
           # in the options hash.
-          if Hash === default
+          if default.is_a? Hash
             options = default
           else
             options[:default] = default
@@ -127,7 +127,6 @@ module Seahorse
           if @doc_default.nil? && !default.is_a?(Proc)
             default
           else
-            puts "doc_default for: #{name}, @doc_default=#{@doc_default}"
             @doc_default.respond_to?(:call) ? @doc_default.call(options) : @doc_default
           end
         end

@@ -112,7 +112,7 @@ module AwsSdkCodeGenerator
         client_examples: @client_examples,
         protocol: @service.protocol,
         signature_version: @service.signature_version,
-        endpoint_discovery_required: @service.endpoint_discovery_required,
+        require_endpoint_discovery: @service.require_endpoint_discovery,
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,

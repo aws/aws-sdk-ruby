@@ -4,7 +4,7 @@ module Aws
     class EndpointDiscovery < Seahorse::Client::Plugin
 
       option(:endpoint_discovery,
-        doc_default: Proc.new { |options| options[:endpoint_discovery_required] },
+        doc_default: Proc.new { |options| options[:require_endpoint_discovery] },
         doc_type: 'Boolean',
         docstring: <<-DOCS) do |cfg|
 When set to `true`, endpoint discovery will be enabled for operations when available.
@@ -155,9 +155,7 @@ the background every 60 secs (default). Defaults to `false`.
 
       def self.resolve_endpoint_discovery(cfg)
         env = ENV['AWS_ENABLE_ENDPOINT_DISCOVERY']
-        default = cfg.api.operations.any? do |_, o|
-          o.endpoint_discovery && o.endpoint_discovery['required']
-        end
+        default = cfg.api.require_endpoint_discovery
         shared_cfg = Aws.shared_config.endpoint_discovery_enabled(profile: cfg.profile)
         resolved = Aws::Util.str_2_bool(env) || Aws::Util.str_2_bool(shared_cfg)
         env.nil? && shared_cfg.nil? ? default : !!resolved
