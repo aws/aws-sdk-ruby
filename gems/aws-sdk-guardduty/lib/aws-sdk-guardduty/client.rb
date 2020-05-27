@@ -637,7 +637,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the IPSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the IPSet. For example: .
+    #   The URI of the file that contains the IPSet.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -822,7 +822,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the ThreatIntelSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the ThreatIntelSet. For example: .
+    #   The URI of the file that contains the ThreatIntelSet.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -2733,7 +2733,7 @@ module Aws::GuardDuty
     #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the IPSet. For example: .
+    #   The updated URI of the file that contains the IPSet.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the IPSet is active
@@ -2838,8 +2838,7 @@ module Aws::GuardDuty
     #   update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: .
+    #   The updated URI of the file that contains the ThreateIntelSet.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the ThreateIntelSet
@@ -2879,7 +2878,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

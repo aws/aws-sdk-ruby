@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-05-27)
+------------------
+
+* Feature - This release added support for HTTP/2 ALPN preference lists for Network Load Balancers
+
 1.42.0 (2020-05-07)
 ------------------
 

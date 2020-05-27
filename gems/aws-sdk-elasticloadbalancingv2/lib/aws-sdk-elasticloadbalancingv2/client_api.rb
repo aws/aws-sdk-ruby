@@ -11,6 +11,7 @@ module Aws::ElasticLoadBalancingV2
 
     include Seahorse::Model
 
+    ALPNPolicyNotSupportedException = Shapes::StructureShape.new(name: 'ALPNPolicyNotSupportedException')
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionOrder = Shapes::IntegerShape.new(name: 'ActionOrder')
     ActionTypeEnum = Shapes::StringShape.new(name: 'ActionTypeEnum')
@@ -21,6 +22,8 @@ module Aws::ElasticLoadBalancingV2
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     AllocationIdNotFoundException = Shapes::StructureShape.new(name: 'AllocationIdNotFoundException')
+    AlpnPolicyName = Shapes::ListShape.new(name: 'AlpnPolicyName')
+    AlpnPolicyValue = Shapes::StringShape.new(name: 'AlpnPolicyValue')
     AuthenticateCognitoActionAuthenticationRequestExtraParams = Shapes::MapShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestExtraParams')
     AuthenticateCognitoActionAuthenticationRequestParamName = Shapes::StringShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestParamName')
     AuthenticateCognitoActionAuthenticationRequestParamValue = Shapes::StringShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestParamValue')
@@ -284,6 +287,8 @@ module Aws::ElasticLoadBalancingV2
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     ZoneName = Shapes::StringShape.new(name: 'ZoneName')
 
+    ALPNPolicyNotSupportedException.struct_class = Types::ALPNPolicyNotSupportedException
+
     Action.add_member(:type, Shapes::ShapeRef.new(shape: ActionTypeEnum, required: true, location_name: "Type"))
     Action.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, location_name: "TargetGroupArn"))
     Action.add_member(:authenticate_oidc_config, Shapes::ShapeRef.new(shape: AuthenticateOidcActionConfig, location_name: "AuthenticateOidcConfig"))
@@ -310,6 +315,8 @@ module Aws::ElasticLoadBalancingV2
     AddTagsOutput.struct_class = Types::AddTagsOutput
 
     AllocationIdNotFoundException.struct_class = Types::AllocationIdNotFoundException
+
+    AlpnPolicyName.member = Shapes::ShapeRef.new(shape: AlpnPolicyValue)
 
     AuthenticateCognitoActionAuthenticationRequestExtraParams.key = Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestParamName)
     AuthenticateCognitoActionAuthenticationRequestExtraParams.value = Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestParamValue)
@@ -370,6 +377,7 @@ module Aws::ElasticLoadBalancingV2
     CreateListenerInput.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     CreateListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CreateListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "DefaultActions"))
+    CreateListenerInput.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
     CreateListenerInput.struct_class = Types::CreateListenerInput
 
     CreateListenerOutput.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "Listeners"))
@@ -592,6 +600,7 @@ module Aws::ElasticLoadBalancingV2
     Listener.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     Listener.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     Listener.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, location_name: "DefaultActions"))
+    Listener.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
     Listener.struct_class = Types::Listener
 
     ListenerArns.member = Shapes::ShapeRef.new(shape: ListenerArn)
@@ -648,6 +657,7 @@ module Aws::ElasticLoadBalancingV2
     ModifyListenerInput.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     ModifyListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     ModifyListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, location_name: "DefaultActions"))
+    ModifyListenerInput.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
     ModifyListenerInput.struct_class = Types::ModifyListenerInput
 
     ModifyListenerOutput.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "Listeners"))
@@ -986,6 +996,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
+        o.errors << Shapes::ShapeRef.new(shape: ALPNPolicyNotSupportedException)
       end)
 
       api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -1236,6 +1247,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
+        o.errors << Shapes::ShapeRef.new(shape: ALPNPolicyNotSupportedException)
       end)
 
       api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|

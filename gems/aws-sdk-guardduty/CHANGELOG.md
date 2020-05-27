@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-05-27)
+------------------
+
+* Feature - Documentation updates for GuardDuty
+
 1.31.0 (2020-05-08)
 ------------------
 
