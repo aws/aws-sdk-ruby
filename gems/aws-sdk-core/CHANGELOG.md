@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Feature - Default endpoint_discovery to `true` for services with at least one operation that requires it.
 
 3.96.1 (2020-05-18)
 ------------------
