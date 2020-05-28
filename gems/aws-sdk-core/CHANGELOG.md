@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Handle unknown http2 events by dropping them rather than raising an error.
+
 3.96.1 (2020-05-18)
 ------------------
 
