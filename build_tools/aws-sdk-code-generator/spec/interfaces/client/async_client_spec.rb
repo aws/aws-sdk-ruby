@@ -135,11 +135,13 @@ describe 'Client Interface:' do
           credentials: Aws::Credentials.new('akid', 'secret'),
           stub_responses: {baz: {
             stream: [
-              { message_type: 'event', event_type: :unknown_event, result: data }
+              { message_type: 'event', event_type: :test_unknown_event, result: data }
             ].each
           }}
         )
         output.on_unknown_event do |e|
+          expect(e.event_type).to eq :unknown_event
+          expect(e.raw_event_type).to eq 'test_unknown_event'
           expect(JSON.parse(e.response, symbolize_names: true)[:result].to_h).to eq(data)
         end
 
