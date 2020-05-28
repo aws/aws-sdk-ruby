@@ -43,7 +43,7 @@ module Aws
         def build_body(api, operation, data)
           rules = operation.output
           if head_operation(operation)
-            ""
+            ''
           elsif streaming?(rules)
             data[rules[:payload]]
           elsif rules[:payload]
@@ -73,7 +73,7 @@ module Aws
         end
 
         def head_operation(operation)
-          operation.http_method == "HEAD"
+          operation.http_method == 'HEAD'
         end
 
         def eventstream?(rules)
@@ -116,8 +116,21 @@ module Aws
           opts
         end
 
-        def encode_event(opts, rules, event_data, builder)
-          event_ref = rules.shape.member(event_data.delete(:event_type))
+        def encode_unknown_event(opts, event_type, event_data)
+          opts[:payload] = event_data[:result]
+          opts[:headers][':event-type'] = Aws::EventStream::HeaderValue.new(
+            value: event_type,
+            type: 'string'
+          )
+          opts[:headers][':message-type'] = Aws::EventStream::HeaderValue.new(
+            value: 'event',
+            type: 'string'
+          )
+          opts
+        end
+
+        def encode_modeled_event(opts, rules, event_type, event_data, builder)
+          event_ref = rules.shape.member(event_type)
           explicit_payload = false
           implicit_payload_members = {}
           event_ref.shape.members.each do |name, ref|
@@ -164,6 +177,16 @@ module Aws
             type: 'string'
           )
           opts
+        end
+
+        def encode_event(opts, rules, event_data, builder)
+          event_type = event_data.delete(:event_type)
+
+          if rules.shape.member?(event_type)
+            encode_modeled_event(opts, rules, event_type, event_data, builder)
+          else
+            encode_unknown_event(opts, event_type, event_data)
+          end
         end
 
       end
