@@ -41,7 +41,7 @@ module Aws
               'Unrecognized :message-type value for the event')
           end
         else
-          # no :message-type hear, regular event by default
+          # no :message-type header, regular event by default
           parse_event(raw_event)
         end
       end
