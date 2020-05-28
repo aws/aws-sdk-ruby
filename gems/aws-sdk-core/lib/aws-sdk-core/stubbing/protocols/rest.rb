@@ -117,7 +117,7 @@ module Aws
         end
 
         def encode_unknown_event(opts, event_type, event_data)
-          opts[:payload] = StringIO.new(event_data[:result].to_s)
+          opts[:payload] = StringIO.new(JSON.dump(event_data))
           opts[:headers][':event-type'] = Aws::EventStream::HeaderValue.new(
             value: event_type.to_s,
             type: 'string'

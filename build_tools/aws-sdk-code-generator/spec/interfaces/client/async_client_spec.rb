@@ -129,18 +129,23 @@ describe 'Client Interface:' do
       it 'handles unknown events' do
         input = Async::EventStreams::InputBazStream.new
         output = Async::EventStreams::OutputBazStream.new
+        data = { details: [ "unknown" ] }
         same_client = Async::AsyncClient.new(
           region: 'us-west-2',
           credentials: Aws::Credentials.new('akid', 'secret'),
           stub_responses: {baz: {
             stream: [
-              { message_type: 'event', event_type: :unknown_event, result: { details: [ "unknown" ]}}
+              { message_type: 'event', event_type: :unknown_event, result: data }
             ].each
           }}
         )
         output.on_unknown_event do |e|
-          expect(e.result.to_hash).to eq({ details: [ "unknown" ]})
+          expect(JSON.parse(e.response, symbolize_names: true)[:result].to_h).to eq(data)
         end
+
+        same_client.baz(input_event_stream_handler: input,
+          output_event_stream_handler: output)
+        input.signal_end_stream
       end
     else
 
