@@ -517,6 +517,34 @@ module Aws::WorkMail
     #
     class DeleteResourceResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteRetentionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         id: "ShortString", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The retention policy ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteRetentionPolicyRequest AWS API Documentation
+    #
+    class DeleteRetentionPolicyRequest < Struct.new(
+      :organization_id,
+      :id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteRetentionPolicyResponse AWS API Documentation
+    #
+    class DeleteRetentionPolicyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteUserRequest
     #   data as a hash:
     #
@@ -1010,6 +1038,41 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # The configuration applied to an organization's folders by its
+    # retention policy.
+    #
+    # @note When making an API call, you may pass FolderConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         name: "INBOX", # required, accepts INBOX, DELETED_ITEMS, SENT_ITEMS, DRAFTS, JUNK_EMAIL
+    #         action: "NONE", # required, accepts NONE, DELETE, PERMANENTLY_DELETE
+    #         period: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The folder name.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take on the folder contents at the end of the folder
+    #   configuration period.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period of time at which the folder configuration action is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/FolderConfiguration AWS API Documentation
+    #
+    class FolderConfiguration < Struct.new(
+      :name,
+      :action,
+      :period)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAccessControlEffectRequest
     #   data as a hash:
     #
@@ -1061,6 +1124,50 @@ module Aws::WorkMail
     class GetAccessControlEffectResponse < Struct.new(
       :effect,
       :matched_rules)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDefaultRetentionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetDefaultRetentionPolicyRequest AWS API Documentation
+    #
+    class GetDefaultRetentionPolicyRequest < Struct.new(
+      :organization_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The retention policy ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The retention policy name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The retention policy description.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_configurations
+    #   The retention policy folder configurations.
+    #   @return [Array<Types::FolderConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetDefaultRetentionPolicyResponse AWS API Documentation
+    #
+    class GetDefaultRetentionPolicyResponse < Struct.new(
+      :id,
+      :name,
+      :description,
+      :folder_configurations)
       include Aws::Structure
     end
 
@@ -1959,6 +2066,58 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsResponse AWS API Documentation
     #
     class PutMailboxPermissionsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutRetentionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         id: "ShortString",
+    #         name: "ShortString", # required
+    #         description: "PolicyDescription",
+    #         folder_configurations: [ # required
+    #           {
+    #             name: "INBOX", # required, accepts INBOX, DELETED_ITEMS, SENT_ITEMS, DRAFTS, JUNK_EMAIL
+    #             action: "NONE", # required, accepts NONE, DELETE, PERMANENTLY_DELETE
+    #             period: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The organization ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The retention policy ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The retention policy name.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The retention policy description.
+    #   @return [String]
+    #
+    # @!attribute [rw] folder_configurations
+    #   The retention policy folder configurations.
+    #   @return [Array<Types::FolderConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutRetentionPolicyRequest AWS API Documentation
+    #
+    class PutRetentionPolicyRequest < Struct.new(
+      :organization_id,
+      :id,
+      :name,
+      :description,
+      :folder_configurations)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutRetentionPolicyResponse AWS API Documentation
+    #
+    class PutRetentionPolicyResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RegisterToWorkMailRequest
     #   data as a hash:

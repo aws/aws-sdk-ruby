@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-05-28)
+------------------
+
+* Feature - Documentation updates for Amazon QLDB Session
+
 1.3.0 (2020-05-07)
 ------------------
 

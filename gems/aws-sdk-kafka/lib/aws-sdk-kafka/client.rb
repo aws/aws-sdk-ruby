@@ -176,7 +176,7 @@ module Aws::Kafka
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -438,7 +438,7 @@ module Aws::Kafka
     # @option params [String] :description
     #   The description of the configuration.
     #
-    # @option params [required, Array<String>] :kafka_versions
+    # @option params [Array<String>] :kafka_versions
     #   The versions of Apache Kafka with which you can use this MSK
     #   configuration.
     #
@@ -459,7 +459,7 @@ module Aws::Kafka
     #
     #   resp = client.create_configuration({
     #     description: "__string",
-    #     kafka_versions: ["__string"], # required
+    #     kafka_versions: ["__string"],
     #     name: "__string", # required
     #     server_properties: "data", # required
     #   })
@@ -599,6 +599,9 @@ module Aws::Kafka
     #   resp.cluster_operation_info.end_time #=> Time
     #   resp.cluster_operation_info.error_info.error_code #=> String
     #   resp.cluster_operation_info.error_info.error_string #=> String
+    #   resp.cluster_operation_info.operation_steps #=> Array
+    #   resp.cluster_operation_info.operation_steps[0].step_info.step_status #=> String
+    #   resp.cluster_operation_info.operation_steps[0].step_name #=> String
     #   resp.cluster_operation_info.operation_arn #=> String
     #   resp.cluster_operation_info.operation_state #=> String
     #   resp.cluster_operation_info.operation_type #=> String
@@ -611,6 +614,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.source_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
     #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
@@ -627,6 +631,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.target_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
     #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
@@ -751,6 +756,37 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Gets the Apache Kafka versions to which you can update the MSK
+    # cluster.
+    #
+    # @option params [String] :cluster_arn
+    #
+    # @return [Types::GetCompatibleKafkaVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCompatibleKafkaVersionsResponse#compatible_kafka_versions #compatible_kafka_versions} => Array&lt;Types::CompatibleKafkaVersion&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_compatible_kafka_versions({
+    #     cluster_arn: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.compatible_kafka_versions #=> Array
+    #   resp.compatible_kafka_versions[0].source_version #=> String
+    #   resp.compatible_kafka_versions[0].target_versions #=> Array
+    #   resp.compatible_kafka_versions[0].target_versions[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetCompatibleKafkaVersions AWS API Documentation
+    #
+    # @overload get_compatible_kafka_versions(params = {})
+    # @param [Hash] params ({})
+    def get_compatible_kafka_versions(params = {}, options = {})
+      req = build_request(:get_compatible_kafka_versions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all the operations that have been performed on the
     # specified MSK cluster.
     #
@@ -784,6 +820,9 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].end_time #=> Time
     #   resp.cluster_operation_info_list[0].error_info.error_code #=> String
     #   resp.cluster_operation_info_list[0].error_info.error_string #=> String
+    #   resp.cluster_operation_info_list[0].operation_steps #=> Array
+    #   resp.cluster_operation_info_list[0].operation_steps[0].step_info.step_status #=> String
+    #   resp.cluster_operation_info_list[0].operation_steps[0].step_name #=> String
     #   resp.cluster_operation_info_list[0].operation_arn #=> String
     #   resp.cluster_operation_info_list[0].operation_state #=> String
     #   resp.cluster_operation_info_list[0].operation_type #=> String
@@ -796,6 +835,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].source_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
@@ -812,6 +852,7 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].target_cluster_info.kafka_version #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
@@ -1288,6 +1329,50 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates the Apache Kafka version for the cluster.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [Types::ConfigurationInfo] :configuration_info
+    #   Specifies the configuration to use for the brokers.
+    #
+    # @option params [required, String] :current_version
+    #   Current cluster version.
+    #
+    # @option params [required, String] :target_kafka_version
+    #   Target Kafka version.
+    #
+    # @return [Types::UpdateClusterKafkaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateClusterKafkaVersionResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateClusterKafkaVersionResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cluster_kafka_version({
+    #     cluster_arn: "__string", # required
+    #     configuration_info: {
+    #       arn: "__string", # required
+    #       revision: 1, # required
+    #     },
+    #     current_version: "__string", # required
+    #     target_kafka_version: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterKafkaVersion AWS API Documentation
+    #
+    # @overload update_cluster_kafka_version(params = {})
+    # @param [Hash] params ({})
+    def update_cluster_kafka_version(params = {}, options = {})
+      req = build_request(:update_cluster_kafka_version, params)
+      req.send_request(options)
+    end
+
     # Updates the monitoring settings for the cluster. You can use this
     # operation to specify which Apache Kafka metrics you want Amazon MSK to
     # send to Amazon CloudWatch. You can also specify settings for open
@@ -1376,7 +1461,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

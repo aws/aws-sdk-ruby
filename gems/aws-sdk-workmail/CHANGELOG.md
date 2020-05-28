@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-05-28)
+------------------
+
+* Feature - This release adds support for Amazon WorkMail organization-level retention policies.
+
 1.24.0 (2020-05-12)
 ------------------
 

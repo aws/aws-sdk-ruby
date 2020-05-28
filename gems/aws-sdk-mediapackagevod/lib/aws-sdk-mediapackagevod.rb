@@ -45,6 +45,6 @@ require_relative 'aws-sdk-mediapackagevod/customizations'
 # @service
 module Aws::MediaPackageVod
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

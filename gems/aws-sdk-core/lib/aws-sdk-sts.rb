@@ -43,6 +43,6 @@ require_relative 'aws-sdk-sts/customizations'
 # @service
 module Aws::STS
 
-  GEM_VERSION = '3.96.1'
+  GEM_VERSION = '3.97.0'
 
 end
