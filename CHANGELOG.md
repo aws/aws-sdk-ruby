@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.517 (2020-05-28)
+------------------
+
 * Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
 
 * Feature - Aws::MarketplaceCatalog - Updated the API, and documentation for AWS Marketplace Catalog Service.
