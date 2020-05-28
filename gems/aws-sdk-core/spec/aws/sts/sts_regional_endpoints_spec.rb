@@ -3,6 +3,9 @@ require_relative '../../spec_helper'
 module Aws
   module STS
     describe Client do
+      before(:each) do
+        stub_const('ENV', {})
+      end
 
       describe ':sts_regional_endpoints' do
 

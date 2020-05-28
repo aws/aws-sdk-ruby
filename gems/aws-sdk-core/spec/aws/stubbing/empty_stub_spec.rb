@@ -4,6 +4,9 @@ require 'stringio'
 module Aws
   module Stubbing
     describe EmptyStub do
+      before(:each) do
+        stub_const('ENV', {})
+      end
 
       it 'supports complex recursive structures' do
         now = Time.now

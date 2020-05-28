@@ -3,6 +3,9 @@ require_relative '../../spec_helper'
 module Aws
   module Plugins
     describe SignatureV4 do
+      before(:each) do
+        stub_const('ENV', {})
+      end
 
       Sigv4Client = ApiHelper.sample_service(metadata: {
         'signatureVersion' => 'v4',

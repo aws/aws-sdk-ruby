@@ -3,6 +3,9 @@ require_relative '../spec_helper'
 module Aws
   describe 'Client' do
     describe 'response stubbing' do
+      before(:each) do
+        stub_const('ENV', {})
+      end
 
       ResponseStubbingExample = ApiHelper.sample_service
 
