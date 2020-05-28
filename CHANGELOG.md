@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::MarketplaceCatalog - Updated the API, and documentation for AWS Marketplace Catalog Service.
+
+* Feature - Aws::QLDBSession - Updated the documentation for Amazon QLDB Session.
+
+* Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
+
 2.11.516 (2020-05-27)
 ------------------
 
