@@ -176,7 +176,7 @@ module Aws::Synthetics
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -315,24 +315,25 @@ module Aws::Synthetics
     # metrics. You can set up a canary to run continuously or just once.
     #
     # Do not use `CreateCanary` to modify an existing canary. Use
-    # UpdateCanary instead.
+    # [UpdateCanary][1] instead.
     #
     # To create canaries, you must have the `CloudWatchSyntheticsFullAccess`
     # policy. If you are creating a new IAM role for the canary, you also
     # need the the `iam:CreateRole`, `iam:CreatePolicy` and
     # `iam:AttachRolePolicy` permissions. For more information, see
-    # [Necessary Roles and Permissions][1].
+    # [Necessary Roles and Permissions][2].
     #
     # Do not include secrets or proprietary information in your canary
     # names. The canary name makes up part of the Amazon Resource Name (ARN)
     # for the canary, and the ARN is included in outbound calls over the
     # internet. For more information, see [Security Considerations for
-    # Synthetics Canaries][2].
+    # Synthetics Canaries][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles
-    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html
+    # [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html
     #
     # @option params [required, String] :name
     #   The name for this canary. Be sure to give it a descriptive name that
@@ -444,6 +445,7 @@ module Aws::Synthetics
     #     },
     #     run_config: {
     #       timeout_in_seconds: 1, # required
+    #       memory_in_mb: 1,
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -467,6 +469,7 @@ module Aws::Synthetics
     #   resp.canary.schedule.expression #=> String
     #   resp.canary.schedule.duration_in_seconds #=> Integer
     #   resp.canary.run_config.timeout_in_seconds #=> Integer
+    #   resp.canary.run_config.memory_in_mb #=> Integer
     #   resp.canary.success_retention_period_in_days #=> Integer
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -525,7 +528,11 @@ module Aws::Synthetics
     #
     # @option params [required, String] :name
     #   The name of the canary that you want to delete. To find the names of
-    #   your canaries, use DescribeCanaries.
+    #   your canaries, use [DescribeCanaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -587,6 +594,7 @@ module Aws::Synthetics
     #   resp.canaries[0].schedule.expression #=> String
     #   resp.canaries[0].schedule.duration_in_seconds #=> Integer
     #   resp.canaries[0].run_config.timeout_in_seconds #=> Integer
+    #   resp.canaries[0].run_config.memory_in_mb #=> Integer
     #   resp.canaries[0].success_retention_period_in_days #=> Integer
     #   resp.canaries[0].failure_retention_period_in_days #=> Integer
     #   resp.canaries[0].status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -746,6 +754,7 @@ module Aws::Synthetics
     #   resp.canary.schedule.expression #=> String
     #   resp.canary.schedule.duration_in_seconds #=> Integer
     #   resp.canary.run_config.timeout_in_seconds #=> Integer
+    #   resp.canary.run_config.memory_in_mb #=> Integer
     #   resp.canary.success_retention_period_in_days #=> Integer
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
@@ -868,7 +877,11 @@ module Aws::Synthetics
     #
     # @option params [required, String] :name
     #   The name of the canary that you want to run. To find canary names, use
-    #   DescribeCanaries.
+    #   [DescribeCanaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -898,7 +911,11 @@ module Aws::Synthetics
     #
     # @option params [required, String] :name
     #   The name of the canary that you want to stop. To find the names of
-    #   your canaries, use DescribeCanaries.
+    #   your canaries, use [DescribeCanaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1005,9 +1022,13 @@ module Aws::Synthetics
     #
     # @option params [required, String] :name
     #   The name of the canary that you want to update. To find the names of
-    #   your canaries, use DescribeCanaries.
+    #   your canaries, use [DescribeCanaries][1].
     #
     #   You cannot change the name of a canary that has already been created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #
     # @option params [Types::CanaryCodeInput] :code
     #   A structure that includes the entry point from which the canary should
@@ -1088,6 +1109,7 @@ module Aws::Synthetics
     #     },
     #     run_config: {
     #       timeout_in_seconds: 1, # required
+    #       memory_in_mb: 1,
     #     },
     #     success_retention_period_in_days: 1,
     #     failure_retention_period_in_days: 1,
@@ -1119,7 +1141,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

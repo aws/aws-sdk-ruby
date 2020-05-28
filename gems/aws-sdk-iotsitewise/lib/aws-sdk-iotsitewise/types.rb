@@ -71,27 +71,30 @@ module Aws::IoTSiteWise
     # Contains the (pre-calculated) aggregate values for an asset property.
     #
     # @!attribute [rw] average
-    #   The average (mean) value of the time series for the last time
-    #   interval window.
+    #   The average (mean) value of the time series over a time interval
+    #   window.
     #   @return [Float]
     #
     # @!attribute [rw] count
-    #   The count of data points in the time series for the last time
-    #   interval window.
+    #   The count of data points in the time series over a time interval
+    #   window.
     #   @return [Float]
     #
     # @!attribute [rw] maximum
-    #   The maximum value of the time series for the last time interval
-    #   window.
+    #   The maximum value of the time series over a time interval window.
     #   @return [Float]
     #
     # @!attribute [rw] minimum
-    #   The minimum value of the time series for the last time interval
-    #   window.
+    #   The minimum value of the time series over a time interval window.
     #   @return [Float]
     #
     # @!attribute [rw] sum
-    #   The sum of the time series for the last time interval window.
+    #   The sum of the time series over a time interval window.
+    #   @return [Float]
+    #
+    # @!attribute [rw] standard_deviation
+    #   The standard deviation of the time series over a time interval
+    #   window.
     #   @return [Float]
     #
     class Aggregates < Struct.new(
@@ -99,7 +102,8 @@ module Aws::IoTSiteWise
       :count,
       :maximum,
       :minimum,
-      :sum)
+      :sum,
+      :standard_deviation)
       include Aws::Structure
     end
 
@@ -1160,7 +1164,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_model_status
     #   The status of the asset model, which contains a state (`CREATING`
-    #   after successfully calling this action) and any error message.
+    #   after successfully calling this operation) and any error message.
     #   @return [Types::AssetModelStatus]
     #
     class CreateAssetModelResponse < Struct.new(
@@ -1234,7 +1238,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] asset_status
     #   The status of the asset, which contains a state (`CREATING` after
-    #   successfully calling this action) and any error message.
+    #   successfully calling this operation) and any error message.
     #   @return [Types::AssetStatus]
     #
     class CreateAssetResponse < Struct.new(
@@ -1400,8 +1404,8 @@ module Aws::IoTSiteWise
     #         portal_contact_email: "Email", # required
     #         client_token: "ClientToken",
     #         portal_logo_image_file: {
-    #           encoded_string: "data", # required
-    #           file_type: "PNG", # required, accepts PNG
+    #           data: "data", # required
+    #           type: "PNG", # required, accepts PNG
     #         },
     #         role_arn: "ARN", # required
     #         tags: {
@@ -1488,7 +1492,7 @@ module Aws::IoTSiteWise
     #
     # @!attribute [rw] portal_status
     #   The status of the portal, which contains a state (`CREATING` after
-    #   successfully calling this action) and any error message.
+    #   successfully calling this operation) and any error message.
     #   @return [Types::PortalStatus]
     #
     # @!attribute [rw] sso_application_id
@@ -1666,7 +1670,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_model_status
     #   The status of the asset model, which contains a state (`DELETING`
-    #   after successfully calling this action) and any error message.
+    #   after successfully calling this operation) and any error message.
     #   @return [Types::AssetModelStatus]
     #
     class DeleteAssetModelResponse < Struct.new(
@@ -1703,7 +1707,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_status
     #   The status of the asset, which contains a state (`DELETING` after
-    #   successfully calling this action) and any error message.
+    #   successfully calling this operation) and any error message.
     #   @return [Types::AssetStatus]
     #
     class DeleteAssetResponse < Struct.new(
@@ -1785,7 +1789,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] portal_status
     #   The status of the portal, which contains a state (`DELETING` after
-    #   successfully calling this action) and any error message.
+    #   successfully calling this operation) and any error message.
     #   @return [Types::PortalStatus]
     #
     class DeletePortalResponse < Struct.new(
@@ -2362,9 +2366,9 @@ module Aws::IoTSiteWise
     #   The date the portal was last updated, in Unix epoch time.
     #   @return [Time]
     #
-    # @!attribute [rw] portal_logo_image
-    #   The portal's logo image.
-    #   @return [Types::Image]
+    # @!attribute [rw] portal_logo_image_location
+    #   The portal's logo image, which is available at a URL.
+    #   @return [Types::ImageLocation]
     #
     # @!attribute [rw] role_arn
     #   The [ARN][1] of the service role that allows the portal's users to
@@ -2389,7 +2393,7 @@ module Aws::IoTSiteWise
       :portal_status,
       :portal_creation_date,
       :portal_last_update_date,
-      :portal_logo_image,
+      :portal_logo_image_location,
       :role_arn)
       include Aws::Structure
     end
@@ -2640,7 +2644,7 @@ module Aws::IoTSiteWise
     #         asset_id: "ID",
     #         property_id: "ID",
     #         property_alias: "AssetPropertyAlias",
-    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM
+    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
     #         resolution: "Resolution", # required
     #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
     #         start_date: Time.now, # required
@@ -2959,20 +2963,36 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
-    # Contains an image that is available at a URL.
+    # Contains an image that is one of the following:
     #
-    # @!attribute [rw] location_url
-    #   A URL at which the image is available. The URL is valid for 15
-    #   minutes for you to view and download the image.
+    # * An image file. Choose this option to upload a new image.
+    #
+    # * The ID of an existing image. Choose this option to keep an existing
+    #   image.
+    #
+    # @note When making an API call, you may pass Image
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ID",
+    #         file: {
+    #           data: "data", # required
+    #           type: "PNG", # required, accepts PNG
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of an existing image. Specify this parameter to keep an
+    #   existing image.
     #   @return [String]
     #
-    # @!attribute [rw] last_update_date
-    #   The date the image was last updated, in Unix epoch time.
-    #   @return [Time]
+    # @!attribute [rw] file
+    #   Contains an image file.
+    #   @return [Types::ImageFile]
     #
     class Image < Struct.new(
-      :location_url,
-      :last_update_date)
+      :id,
+      :file)
       include Aws::Structure
     end
 
@@ -2982,22 +3002,40 @@ module Aws::IoTSiteWise
     #   data as a hash:
     #
     #       {
-    #         encoded_string: "data", # required
-    #         file_type: "PNG", # required, accepts PNG
+    #         data: "data", # required
+    #         type: "PNG", # required, accepts PNG
     #       }
     #
-    # @!attribute [rw] encoded_string
+    # @!attribute [rw] data
     #   The image file contents, represented as a base64-encoded string. The
     #   file size must be less than 1 MB.
     #   @return [String]
     #
-    # @!attribute [rw] file_type
+    # @!attribute [rw] type
     #   The file type of the image.
     #   @return [String]
     #
     class ImageFile < Struct.new(
-      :encoded_string,
-      :file_type)
+      :data,
+      :type)
+      include Aws::Structure
+    end
+
+    # Contains an image that is uploaded to AWS IoT SiteWise and available
+    # at a URL.
+    #
+    # @!attribute [rw] id
+    #   The ID of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL where the image is available. The URL is valid for 15
+    #   minutes so that you can view and download the image
+    #   @return [String]
+    #
+    class ImageLocation < Struct.new(
+      :id,
+      :url)
       include Aws::Structure
     end
 
@@ -3057,19 +3095,23 @@ module Aws::IoTSiteWise
     #       }
     #
     # @!attribute [rw] identity_type
-    #   The type of identity (user or group).
+    #   The type of identity (user or group). This parameter is required if
+    #   you specify `identityId`.
     #   @return [String]
     #
     # @!attribute [rw] identity_id
-    #   The ID of the identity.
+    #   The ID of the identity. This parameter is required if you specify
+    #   `identityType`.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource (portal or project).
+    #   The type of resource (portal or project). This parameter is required
+    #   if you specify `resourceId`.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource.
+    #   The ID of the resource. This parameter is required if you specify
+    #   `resourceType`.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4488,7 +4530,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_model_status
     #   The status of the asset model, which contains a state (`UPDATING`
-    #   after successfully calling this action) and any error message.
+    #   after successfully calling this operation) and any error message.
     #   @return [Types::AssetModelStatus]
     #
     class UpdateAssetModelResponse < Struct.new(
@@ -4597,7 +4639,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] asset_status
     #   The status of the asset, which contains a state (`UPDATING` after
-    #   successfully calling this action) and any error message.
+    #   successfully calling this operation) and any error message.
     #   @return [Types::AssetStatus]
     #
     class UpdateAssetResponse < Struct.new(
@@ -4752,9 +4794,12 @@ module Aws::IoTSiteWise
     #         portal_name: "Name", # required
     #         portal_description: "Description",
     #         portal_contact_email: "Email", # required
-    #         portal_logo_image_file: {
-    #           encoded_string: "data", # required
-    #           file_type: "PNG", # required, accepts PNG
+    #         portal_logo_image: {
+    #           id: "ID",
+    #           file: {
+    #             data: "data", # required
+    #             type: "PNG", # required, accepts PNG
+    #           },
     #         },
     #         role_arn: "ARN", # required
     #         client_token: "ClientToken",
@@ -4776,10 +4821,14 @@ module Aws::IoTSiteWise
     #   The AWS administrator's contact email address.
     #   @return [String]
     #
-    # @!attribute [rw] portal_logo_image_file
-    #   A logo image to display in the portal. Upload a square,
-    #   high-resolution image. The image is displayed on a dark background.
-    #   @return [Types::ImageFile]
+    # @!attribute [rw] portal_logo_image
+    #   Contains an image that is one of the following:
+    #
+    #   * An image file. Choose this option to upload a new image.
+    #
+    #   * The ID of an existing image. Choose this option to keep an
+    #     existing image.
+    #   @return [Types::Image]
     #
     # @!attribute [rw] role_arn
     #   The [ARN][1] of a service role that allows the portal's users to
@@ -4807,7 +4856,7 @@ module Aws::IoTSiteWise
       :portal_name,
       :portal_description,
       :portal_contact_email,
-      :portal_logo_image_file,
+      :portal_logo_image,
       :role_arn,
       :client_token)
       include Aws::Structure
@@ -4815,7 +4864,7 @@ module Aws::IoTSiteWise
 
     # @!attribute [rw] portal_status
     #   The status of the portal, which contains a state (`UPDATING` after
-    #   successfully calling this action) and any error message.
+    #   successfully calling this operation) and any error message.
     #   @return [Types::PortalStatus]
     #
     class UpdatePortalResponse < Struct.new(

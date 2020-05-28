@@ -176,7 +176,7 @@ module Aws::SSM
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -580,13 +580,11 @@ module Aws::SSM
     # Associates the specified Systems Manager document with the specified
     # instances or targets.
     #
-    # When you associate a document with one or more instances using
-    # instance IDs or tags, SSM Agent running on the instance processes the
-    # document and configures the instance as specified.
-    #
-    # If you associate a document with an instance that already has an
-    # associated document, the system returns the AssociationAlreadyExists
-    # exception.
+    # When you associate a document with one or more instances, SSM Agent
+    # running on the instance processes the document and configures the
+    # instance as specified. If you associate a document with an instance
+    # that already has an associated document, the system returns the
+    # `AssociationAlreadyExists` exception.
     #
     # @option params [required, String] :name
     #   The name of the SSM document that contains the configuration
@@ -963,7 +961,7 @@ module Aws::SSM
     #   You can't use the following strings as document name prefixes. These
     #   are reserved by AWS for use as document name prefixes:
     #
-    #    * `aws`
+    #    * `aws-`
     #
     #   * `amazon`
     #
@@ -7047,7 +7045,7 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html
     #
     # @option params [String] :data_type
-    #   The data type for a String parameter. Supported data types include
+    #   The data type for a `String` parameter. Supported data types include
     #   plain text and Amazon Machine Image IDs.
     #
     #   **The following data type values are supported.**
@@ -7056,11 +7054,12 @@ module Aws::SSM
     #
     #   * `aws:ec2:image`
     #
-    #   When you create a String parameter and specify `aws:ec2:image`,
-    #   Systems Manager validates the parameter value you provide against that
-    #   data type. The required format is `ami-12345abcdeEXAMPLE`. For more
-    #   information, see [Native parameter support for Amazon Machine Image
-    #   IDs][1] in the *AWS Systems Manager User Guide*.
+    #   When you create a `String` parameter and specify `aws:ec2:image`,
+    #   Systems Manager validates the parameter value is in the required
+    #   format, such as `ami-12345abcdeEXAMPLE`, and that the specified AMI is
+    #   available in your AWS account. For more information, see [Native
+    #   parameter support for Amazon Machine Image IDs][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #
     #
@@ -9507,7 +9506,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -176,7 +176,7 @@ module Aws::MarketplaceCatalog
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -388,6 +388,7 @@ module Aws::MarketplaceCatalog
     #   resp.change_set[0].change_type #=> String
     #   resp.change_set[0].entity.type #=> String
     #   resp.change_set[0].entity.identifier #=> String
+    #   resp.change_set[0].details #=> String
     #   resp.change_set[0].error_detail_list #=> Array
     #   resp.change_set[0].error_detail_list[0].error_code #=> String
     #   resp.change_set[0].error_detail_list[0].error_message #=> String
@@ -458,7 +459,7 @@ module Aws::MarketplaceCatalog
     #   An array of filter objects.
     #
     # @option params [Types::Sort] :sort
-    #   An object that contains two attributes, `sortBy` and `sortOrder`.
+    #   An object that contains two attributes, `SortBy` and `SortOrder`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by a single call. This value
@@ -529,7 +530,7 @@ module Aws::MarketplaceCatalog
     #   attributes, `filterName` and `filterValues`.
     #
     # @option params [Types::Sort] :sort
-    #   An object that contains two attributes, `sortBy` and `sortOrder`.
+    #   An object that contains two attributes, `SortBy` and `SortOrder`.
     #
     # @option params [String] :next_token
     #   The value of the next token, if it exists. Null if there are no more
@@ -585,7 +586,21 @@ module Aws::MarketplaceCatalog
       req.send_request(options)
     end
 
-    # This operation allows you to request changes in your entities.
+    # This operation allows you to request changes for your entities. Within
+    # a single ChangeSet, you cannot start the same change type against the
+    # same entity multiple times. Additionally, when a ChangeSet is running,
+    # all the entities targeted by the different changes are locked until
+    # the ChangeSet has completed (either succeeded, cancelled, or failed).
+    # If you try to start a ChangeSet containing a change against an entity
+    # that is already locked, you will receive a `ResourceInUseException`.
+    #
+    # For example, you cannot start the ChangeSet described in the
+    # [example][1] below because it contains two changes to execute the same
+    # change type (`AddRevisions`) against the same entity (`entity-id@1)`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
     #
     # @option params [required, String] :catalog
     #   The catalog related to the request. Fixed value: `AWSMarketplace`
@@ -650,7 +665,7 @@ module Aws::MarketplaceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

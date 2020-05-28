@@ -25,6 +25,7 @@ module Aws::ElasticLoadBalancingV2
   # See {Seahorse::Client::RequestContext} for more information.
   #
   # ## Error Classes
+  # * {ALPNPolicyNotSupportedException}
   # * {AllocationIdNotFoundException}
   # * {AvailabilityZoneNotSupportedException}
   # * {CertificateNotFoundException}
@@ -67,6 +68,16 @@ module Aws::ElasticLoadBalancingV2
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class ALPNPolicyNotSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticLoadBalancingV2::Types::ALPNPolicyNotSupportedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class AllocationIdNotFoundException < ServiceError
 

@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Handle unknown http2 events by dropping them rather than raising an error.
 
+3.97.0 (2020-05-28)
+------------------
+* Feature - Default endpoint_discovery to `true` for services with at least one operation that requires it.
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.96.1 (2020-05-18)
 ------------------
 

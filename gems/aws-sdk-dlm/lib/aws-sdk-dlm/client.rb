@@ -176,7 +176,7 @@ module Aws::DLM
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -364,9 +364,10 @@ module Aws::DLM
     #             },
     #           ],
     #           create_rule: {
-    #             interval: 1, # required
-    #             interval_unit: "HOURS", # required, accepts HOURS
+    #             interval: 1,
+    #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
+    #             cron_expression: "CronExpression",
     #           },
     #           retain_rule: {
     #             count: 1,
@@ -540,6 +541,7 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].create_rule.interval_unit #=> String, one of "HOURS"
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
     #   resp.policy.policy_details.schedules[0].create_rule.times[0] #=> String
+    #   resp.policy.policy_details.schedules[0].create_rule.cron_expression #=> String
     #   resp.policy.policy_details.schedules[0].retain_rule.count #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
@@ -706,9 +708,10 @@ module Aws::DLM
     #             },
     #           ],
     #           create_rule: {
-    #             interval: 1, # required
-    #             interval_unit: "HOURS", # required, accepts HOURS
+    #             interval: 1,
+    #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
+    #             cron_expression: "CronExpression",
     #           },
     #           retain_rule: {
     #             count: 1,
@@ -763,7 +766,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

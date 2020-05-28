@@ -319,8 +319,8 @@ module Aws::AutoScaling
     #   @return [Array<Types::EnabledMetric>]
     #
     # @!attribute [rw] status
-    #   The current state of the group when DeleteAutoScalingGroup is in
-    #   progress.
+    #   The current state of the group when the DeleteAutoScalingGroup
+    #   operation is in progress.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -345,7 +345,7 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service.
     #
-    #   Valid Range: Minimum value of 604800.
+    #   Valid Range: Minimum value of 0.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
@@ -628,6 +628,8 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] virtual_name
     #   The name of the virtual device (for example, `ephemeral0`).
+    #
+    #   You can specify either `VirtualName` or `Ebs`, but not both.
     #   @return [String]
     #
     # @!attribute [rw] device_name
@@ -641,15 +643,21 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] ebs
-    #   The information about the Amazon EBS volume.
+    #   Parameters used to automatically set up EBS volumes when an instance
+    #   is launched.
+    #
+    #   You can specify either `VirtualName` or `Ebs`, but not both.
     #   @return [Types::Ebs]
     #
     # @!attribute [rw] no_device
-    #   Suppresses a device mapping.
+    #   Setting this value to `true` suppresses the specified device
+    #   included in the block device mapping of the AMI.
     #
-    #   If this parameter is true for the root device, the instance might
-    #   fail the EC2 health check. In that case, Amazon EC2 Auto Scaling
-    #   launches a replacement instance.
+    #   If `NoDevice` is `true` for the root device, instances might fail
+    #   the EC2 health check. In that case, Amazon EC2 Auto Scaling launches
+    #   replacement instances.
+    #
+    #   If you specify `NoDevice`, you cannot specify `Ebs`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/BlockDeviceMapping AWS API Documentation
@@ -790,21 +798,29 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
-    #   The name of the launch configuration.
+    #   The name of the launch configuration to use when an instance is
+    #   launched. To get the launch configuration name, use the
+    #   DescribeLaunchConfigurations API operation. New launch
+    #   configurations can be created with the CreateLaunchConfiguration
+    #   API.
     #
-    #   If you do not specify `LaunchConfigurationName`, you must specify
-    #   one of the following parameters: `InstanceId`, `LaunchTemplate`, or
+    #   You must specify one of the following parameters in your request:
+    #   `LaunchConfigurationName`, `LaunchTemplate`, `InstanceId`, or
     #   `MixedInstancesPolicy`.
     #   @return [String]
     #
     # @!attribute [rw] launch_template
-    #   The launch template to use to launch instances.
+    #   Parameters used to specify the launch template and version to use
+    #   when an instance is launched.
     #
     #   For more information, see [LaunchTemplateSpecification][1] in the
     #   *Amazon EC2 Auto Scaling API Reference*.
     #
-    #   If you do not specify `LaunchTemplate`, you must specify one of the
-    #   following parameters: `InstanceId`, `LaunchConfigurationName`, or
+    #   You can alternatively associate a launch template to the Auto
+    #   Scaling group by using the `MixedInstancesPolicy` parameter.
+    #
+    #   You must specify one of the following parameters in your request:
+    #   `LaunchConfigurationName`, `LaunchTemplate`, `InstanceId`, or
     #   `MixedInstancesPolicy`.
     #
     #
@@ -841,15 +857,13 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance used to create a launch configuration for the
-    #   group.
+    #   group. To get the instance ID, use the Amazon EC2
+    #   [DescribeInstances][1] API operation.
     #
     #   When you specify an ID of an instance, Amazon EC2 Auto Scaling
     #   creates a new launch configuration and associates it with the group.
     #   This launch configuration derives its attributes from the specified
     #   instance, except for the block device mapping.
-    #
-    #   For more information, see [Create an Auto Scaling Group Using an EC2
-    #   Instance][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #   You must specify one of the following parameters in your request:
     #   `LaunchConfigurationName`, `LaunchTemplate`, `InstanceId`, or
@@ -857,7 +871,7 @@ module Aws::AutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
     #   @return [String]
     #
     # @!attribute [rw] min_size
@@ -866,14 +880,27 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_size
     #   The maximum size of the group.
+    #
+    #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon
+    #   EC2 Auto Scaling may need to go above `MaxSize` to meet your
+    #   capacity requirements. In this event, Amazon EC2 Auto Scaling will
+    #   never go above `MaxSize` by more than your maximum instance weight
+    #   (weights that define how many capacity units each instance
+    #   contributes to the capacity of the group).
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] desired_capacity
-    #   The number of Amazon EC2 instances that the Auto Scaling group
-    #   attempts to maintain. This number must be greater than or equal to
-    #   the minimum size of the group and less than or equal to the maximum
-    #   size of the group. If you do not specify a desired capacity, the
-    #   default is the minimum size of the group.
+    #   The desired capacity is the initial capacity of the Auto Scaling
+    #   group at the time of its creation and the capacity it attempts to
+    #   maintain. It can scale beyond this capacity if you configure
+    #   automatic scaling.
+    #
+    #   This number must be greater than or equal to the minimum size of the
+    #   group and less than or equal to the maximum size of the group. If
+    #   you do not specify a desired capacity, the default is the minimum
+    #   size of the group.
     #   @return [Integer]
     #
     # @!attribute [rw] default_cooldown
@@ -1012,7 +1039,15 @@ module Aws::AutoScaling
     #   @return [Array<Types::LifecycleHookSpecification>]
     #
     # @!attribute [rw] tags
-    #   One or more tags.
+    #   One or more tags. You can tag your Auto Scaling group and propagate
+    #   the tags to the Amazon EC2 instances it launches.
+    #
+    #   Tags are not propagated to Amazon EBS volumes. To add tags to Amazon
+    #   EBS volumes, specify the tags in a launch template but use caution.
+    #   If the launch template specifies an instance tag with a key that is
+    #   also specified for the Auto Scaling group, Amazon EC2 Auto Scaling
+    #   overrides the value of that instance tag with the value specified by
+    #   the Auto Scaling group.
     #
     #   For more information, see [Tagging Auto Scaling Groups and
     #   Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
@@ -1037,13 +1072,17 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_instance_lifetime
     #   The maximum amount of time, in seconds, that an instance can be in
-    #   service.
+    #   service. The default is null.
+    #
+    #   This parameter is optional, but if you specify a value for it, you
+    #   must specify a value of at least 604,800 seconds (7 days). To clear
+    #   a previously set value, specify a new value of 0.
     #
     #   For more information, see [Replacing Auto Scaling Instances Based on
     #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
     #   Guide*.
     #
-    #   Valid Range: Minimum value of 604800.
+    #   Valid Range: Minimum value of 0.
     #
     #
     #
@@ -2265,8 +2304,7 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] metrics
-    #   One or more of the following metrics. If you omit this parameter,
-    #   all metrics are disabled.
+    #   Specifies one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -2283,6 +2321,18 @@ module Aws::AutoScaling
     #   * `GroupTerminatingInstances`
     #
     #   * `GroupTotalInstances`
+    #
+    #   * `GroupInServiceCapacity`
+    #
+    #   * `GroupPendingCapacity`
+    #
+    #   * `GroupStandbyCapacity`
+    #
+    #   * `GroupTerminatingCapacity`
+    #
+    #   * `GroupTotalCapacity`
+    #
+    #   If you omit this parameter, all metrics are disabled.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollectionQuery AWS API Documentation
@@ -2293,8 +2343,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an Amazon EBS volume. Used in combination with
-    # BlockDeviceMapping.
+    # Describes information used to set up an Amazon EBS volume specified in
+    # a block device mapping.
     #
     # @note When making an API call, you may pass Ebs
     #   data as a hash:
@@ -2428,8 +2478,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] metrics
-    #   One or more of the following metrics. If you omit this parameter,
-    #   all metrics are enabled.
+    #   Specifies which group-level metrics to start collecting. You can
+    #   specify one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -2446,6 +2496,21 @@ module Aws::AutoScaling
     #   * `GroupTerminatingInstances`
     #
     #   * `GroupTotalInstances`
+    #
+    #   The instance weighting feature supports the following additional
+    #   metrics:
+    #
+    #   * `GroupInServiceCapacity`
+    #
+    #   * `GroupPendingCapacity`
+    #
+    #   * `GroupStandbyCapacity`
+    #
+    #   * `GroupTerminatingCapacity`
+    #
+    #   * `GroupTotalCapacity`
+    #
+    #   If you omit this parameter, all metrics are enabled.
     #   @return [Array<String>]
     #
     # @!attribute [rw] granularity
@@ -2482,6 +2547,16 @@ module Aws::AutoScaling
     #   * `GroupTerminatingInstances`
     #
     #   * `GroupTotalInstances`
+    #
+    #   * `GroupInServiceCapacity`
+    #
+    #   * `GroupPendingCapacity`
+    #
+    #   * `GroupStandbyCapacity`
+    #
+    #   * `GroupTerminatingCapacity`
+    #
+    #   * `GroupTotalCapacity`
     #   @return [String]
     #
     # @!attribute [rw] granularity
@@ -2663,7 +2738,15 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a filter.
+    # Describes a filter that is used to return a more specific list of
+    # results when describing tags.
+    #
+    # For more information, see [Tagging Auto Scaling Groups and
+    # Instances][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -2674,13 +2757,12 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the filter. The valid values are:
-    #   `"auto-scaling-group"`, `"key"`, `"value"`, and
-    #   `"propagate-at-launch"`.
+    #   The name of the filter. The valid values are: `auto-scaling-group`,
+    #   `key`, `value`, and `propagate-at-launch`.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The value of the filter.
+    #   One or more filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Filter AWS API Documentation
@@ -3245,10 +3327,12 @@ module Aws::AutoScaling
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] overrides
-    #   An optional setting. Any parameters that you specify override the
-    #   same parameters in the launch template. Currently, the only
-    #   supported override is instance type. You can specify between 1 and
-    #   20 instance types.
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template. Currently, the only supported override is instance
+    #   type. You can specify between 1 and 20 instance types.
+    #
+    #   If not provided, Amazon EC2 Auto Scaling will use the instance type
+    #   specified in the launch template to launch instances.
     #   @return [Array<Types::LaunchTemplateOverrides>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplate AWS API Documentation
@@ -3259,7 +3343,11 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an override for a launch template.
+    # Describes an override for a launch template. Currently, the only
+    # supported override is instance type.
+    #
+    # The maximum number of instance type overrides that can be associated
+    # with an Auto Scaling group is 20.
     #
     # @note When making an API call, you may pass LaunchTemplateOverrides
     #   data as a hash:
@@ -3270,7 +3358,8 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] instance_type
-    #   The instance type.
+    #   The instance type. You must use an instance type that is supported
+    #   in your requested Region and Availability Zones.
     #
     #   For information about available instance types, see [Available
     #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
@@ -3306,7 +3395,9 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a launch template and the launch template version.
+    # Describes the Amazon EC2 launch template and the launch template
+    # version that can be used by an Auto Scaling group to configure Amazon
+    # EC2 instances.
     #
     # The launch template that is specified must be configured for use with
     # an Auto Scaling group. For more information, see [Creating a Launch
@@ -3327,22 +3418,49 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template. You must specify either a template ID
-    #   or a template name.
+    #   The ID of the launch template. To get the template ID, use the
+    #   Amazon EC2 [DescribeLaunchTemplates][1] API operation. New launch
+    #   templates can be created using the Amazon EC2
+    #   [CreateLaunchTemplate][2] API.
+    #
+    #   You must specify either a template ID or a template name.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplates.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template. You must specify either a template
-    #   name or a template ID.
+    #   The name of the launch template. To get the template name, use the
+    #   Amazon EC2 [DescribeLaunchTemplates][1] API operation. New launch
+    #   templates can be created using the Amazon EC2
+    #   [CreateLaunchTemplate][2] API.
+    #
+    #   You must specify either a template ID or a template name.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplates.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number, `$Latest`, or `$Default`. If the value is
-    #   `$Latest`, Amazon EC2 Auto Scaling selects the latest version of the
-    #   launch template when launching instances. If the value is
-    #   `$Default`, Amazon EC2 Auto Scaling selects the default version of
-    #   the launch template when launching instances. The default value is
-    #   `$Default`.
+    #   The version number, `$Latest`, or `$Default`. To get the version
+    #   number, use the Amazon EC2 [DescribeLaunchTemplateVersions][1] API
+    #   operation. New launch template versions can be created using the
+    #   Amazon EC2 [CreateLaunchTemplateVersion][2] API.
+    #
+    #   If the value is `$Latest`, Amazon EC2 Auto Scaling selects the
+    #   latest version of the launch template when launching instances. If
+    #   the value is `$Default`, Amazon EC2 Auto Scaling selects the default
+    #   version of the launch template when launching instances. The default
+    #   value is `$Default`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplateVersion.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateSpecification AWS API Documentation
@@ -3356,7 +3474,7 @@ module Aws::AutoScaling
 
     # Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that
     # you want to perform an action whenever it launches instances or
-    # terminates instances. Used in response to DescribeLifecycleHooks.
+    # terminates instances.
     #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -3427,8 +3545,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a lifecycle hook. Used in combination with
-    # CreateAutoScalingGroup.
+    # Describes information used to specify a lifecycle hook for an Auto
+    # Scaling group.
     #
     # A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on
     # an instance when the instance launches (before it is put into service)
@@ -3450,20 +3568,13 @@ module Aws::AutoScaling
     #     the instances launch or terminate.**
     #
     # 4.  If you need more time, record the lifecycle action heartbeat to
-    #     keep the instance in a pending state using
-    #     RecordLifecycleActionHeartbeat.
+    #     keep the instance in a pending state.
     #
     # 5.  If you finish before the timeout period ends, complete the
-    #     lifecycle action using CompleteLifecycleAction.
+    #     lifecycle action.
     #
     # For more information, see [Amazon EC2 Auto Scaling Lifecycle Hooks][1]
     # in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    # You can view the lifecycle hooks for an Auto Scaling group using
-    # DescribeLifecycleHooks. You can modify an existing lifecycle hook or
-    # create new lifecycle hooks using PutLifecycleHook. If you are no
-    # longer using a lifecycle hook, you can delete it using
-    # DeleteLifecycleHook.
     #
     #
     #
@@ -3545,7 +3656,12 @@ module Aws::AutoScaling
 
     # You have already reached a limit for your Amazon EC2 Auto Scaling
     # resources (for example, Auto Scaling groups, launch configurations, or
-    # lifecycle hooks). For more information, see DescribeAccountLimits.
+    # lifecycle hooks). For more information, see [DescribeAccountLimits][1]
+    # in the *Amazon EC2 Auto Scaling API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAccountLimits.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4029,8 +4145,8 @@ module Aws::AutoScaling
     #
     #   If the lifecycle hook times out, Amazon EC2 Auto Scaling performs
     #   the action that you specified in the `DefaultResult` parameter. You
-    #   can prevent the lifecycle hook from timing out by calling
-    #   RecordLifecycleActionHeartbeat.
+    #   can prevent the lifecycle hook from timing out by calling the
+    #   RecordLifecycleActionHeartbeat API.
     #   @return [Integer]
     #
     # @!attribute [rw] default_result
@@ -4073,9 +4189,9 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] notification_types
-    #   The type of event that causes the notification to be sent. For more
-    #   information about notification types supported by Amazon EC2 Auto
-    #   Scaling, see DescribeAutoScalingNotificationTypes.
+    #   The type of event that causes the notification to be sent. To query
+    #   the notification types supported by Amazon EC2 Auto Scaling, call
+    #   the DescribeAutoScalingNotificationTypes API.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationType AWS API Documentation
@@ -4165,12 +4281,7 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] min_adjustment_magnitude
-    #   The minimum number of instances to scale. If the value of
-    #   `AdjustmentType` is `PercentChangeInCapacity`, the scaling policy
-    #   changes the `DesiredCapacity` of the Auto Scaling group by at least
-    #   this many instances. Otherwise, the error is `ValidationError`.
-    #
-    #   This property replaces the `MinAdjustmentStep` property. For
+    #   The minimum value to scale by when scaling by percentages. For
     #   example, suppose that you create a step scaling policy to scale out
     #   an Auto Scaling group by 25 percent and you specify a
     #   `MinAdjustmentMagnitude` of 2. If the group has 4 instances and the
@@ -4178,7 +4289,14 @@ module Aws::AutoScaling
     #   you specified a `MinAdjustmentMagnitude` of 2, Amazon EC2 Auto
     #   Scaling scales out the group by 2 instances.
     #
-    #   Valid only if the policy type is `SimpleScaling` or `StepScaling`.
+    #   Valid only if the policy type is `StepScaling` or `SimpleScaling`
+    #   and the adjustment type is `PercentChangeInCapacity`. For more
+    #   information, see [Scaling Adjustment Types][1] in the *Amazon EC2
+    #   Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment
     #   @return [Integer]
     #
     # @!attribute [rw] scaling_adjustment
@@ -4341,16 +4459,18 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] min_size
-    #   The minimum number of instances in the Auto Scaling group.
+    #   The minimum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum number of instances in the Auto Scaling group.
+    #   The maximum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] desired_capacity
-    #   The number of EC2 instances that should be running in the Auto
-    #   Scaling group.
+    #   The desired capacity is the initial capacity of the Auto Scaling
+    #   group after the scheduled action runs and the capacity it attempts
+    #   to maintain. It can scale beyond this capacity if you add more
+    #   scaling conditions.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupActionType AWS API Documentation
@@ -4608,8 +4728,7 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a scheduled scaling action. Used in response to
-    # DescribeScheduledActions.
+    # Describes a scheduled scaling action.
     #
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -4645,15 +4764,17 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] min_size
-    #   The minimum number of instances in the Auto Scaling group.
+    #   The minimum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum number of instances in the Auto Scaling group.
+    #   The maximum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] desired_capacity
-    #   The number of instances you prefer to maintain in the group.
+    #   The desired capacity is the initial capacity of the Auto Scaling
+    #   group after the scheduled action runs and the capacity it attempts
+    #   to maintain.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupAction AWS API Documentation
@@ -4672,9 +4793,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes one or more scheduled scaling action updates for a specified
-    # Auto Scaling group. Used in combination with
-    # BatchPutScheduledUpdateGroupAction.
+    # Describes information used for one or more scheduled scaling action
+    # updates in a BatchPutScheduledUpdateGroupAction operation.
     #
     # When updating a scheduled scaling action, all optional parameters are
     # left unchanged if not specified.
@@ -4731,15 +4851,17 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] min_size
-    #   The minimum number of instances in the Auto Scaling group.
+    #   The minimum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] max_size
-    #   The maximum number of instances in the Auto Scaling group.
+    #   The maximum size of the Auto Scaling group.
     #   @return [Integer]
     #
     # @!attribute [rw] desired_capacity
-    #   The number of EC2 instances that should be running in the group.
+    #   The desired capacity is the initial capacity of the Auto Scaling
+    #   group after the scheduled action runs and the capacity it attempts
+    #   to maintain.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupActionRequest AWS API Documentation
@@ -4781,8 +4903,9 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] desired_capacity
-    #   The number of EC2 instances that should be running in the Auto
-    #   Scaling group.
+    #   The desired capacity is the initial capacity of the Auto Scaling
+    #   group after this operation completes and the capacity it attempts to
+    #   maintain.
     #   @return [Integer]
     #
     # @!attribute [rw] honor_cooldown
@@ -4829,7 +4952,12 @@ module Aws::AutoScaling
     #   call not respect the grace period associated with the group.
     #
     #   For more information about the health check grace period, see
-    #   CreateAutoScalingGroup.
+    #   [CreateAutoScalingGroup][1] in the *Amazon EC2 Auto Scaling API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealthQuery AWS API Documentation
@@ -4876,9 +5004,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an adjustment based on the difference between the value of
-    # the aggregated CloudWatch metric and the breach threshold that you've
-    # defined for the alarm. Used in combination with PutScalingPolicy.
+    # Describes information used to create a step adjustment for a step
+    # scaling policy.
     #
     # For the following examples, suppose that you have an alarm with a
     # breach threshold of 50:
@@ -4905,6 +5032,13 @@ module Aws::AutoScaling
     #
     # * The upper and lower bound can't be null in the same step
     #   adjustment.
+    #
+    # For more information, see [Step Adjustments][1] in the *Amazon EC2
+    # Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps
     #
     # @note When making an API call, you may pass StepAdjustment
     #   data as a hash:
@@ -4950,8 +5084,14 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes an automatic scaling process that has been suspended. For
-    # more information, see ProcessType.
+    # Describes an automatic scaling process that has been suspended.
+    #
+    # For more information, see [Scaling Processes][1] in the *Amazon EC2
+    # Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types
     #
     # @!attribute [rw] process_name
     #   The name of the suspended process.
@@ -5250,13 +5390,24 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_size
     #   The maximum size of the Auto Scaling group.
+    #
+    #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon
+    #   EC2 Auto Scaling may need to go above `MaxSize` to meet your
+    #   capacity requirements. In this event, Amazon EC2 Auto Scaling will
+    #   never go above `MaxSize` by more than your maximum instance weight
+    #   (weights that define how many capacity units each instance
+    #   contributes to the capacity of the group).
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] desired_capacity
-    #   The number of EC2 instances that should be running in the Auto
-    #   Scaling group. This number must be greater than or equal to the
-    #   minimum size of the group and less than or equal to the maximum size
-    #   of the group.
+    #   The desired capacity is the initial capacity of the Auto Scaling
+    #   group after this operation completes and the capacity it attempts to
+    #   maintain.
+    #
+    #   This number must be greater than or equal to the minimum size of the
+    #   group and less than or equal to the maximum size of the group.
     #   @return [Integer]
     #
     # @!attribute [rw] default_cooldown
@@ -5363,13 +5514,17 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_instance_lifetime
     #   The maximum amount of time, in seconds, that an instance can be in
-    #   service.
+    #   service. The default is null.
+    #
+    #   This parameter is optional, but if you specify a value for it, you
+    #   must specify a value of at least 604,800 seconds (7 days). To clear
+    #   a previously set value, specify a new value of 0.
     #
     #   For more information, see [Replacing Auto Scaling Instances Based on
     #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
     #   Guide*.
     #
-    #   Valid Range: Minimum value of 604800.
+    #   Valid Range: Minimum value of 0.
     #
     #
     #

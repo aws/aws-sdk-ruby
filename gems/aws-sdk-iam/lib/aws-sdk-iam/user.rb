@@ -502,7 +502,7 @@ module Aws::IAM
     # @return [UserPolicy]
     def create_policy(options = {})
       options = options.merge(user_name: @name)
-      resp = @client.put_user_policy(options)
+      @client.put_user_policy(options)
       UserPolicy.new(
         user_name: @name,
         name: options[:policy_name],
@@ -596,7 +596,7 @@ module Aws::IAM
     # @return [MfaDevice]
     def enable_mfa(options = {})
       options = options.merge(user_name: @name)
-      resp = @client.enable_mfa_device(options)
+      @client.enable_mfa_device(options)
       MfaDevice.new(
         user_name: @name,
         serial_number: options[:serial_number],
@@ -659,7 +659,7 @@ module Aws::IAM
     # @return [User]
     def update(options = {})
       options = options.merge(user_name: @name)
-      resp = @client.update_user(options)
+      @client.update_user(options)
       User.new(
         name: options[:new_user_name],
         client: @client

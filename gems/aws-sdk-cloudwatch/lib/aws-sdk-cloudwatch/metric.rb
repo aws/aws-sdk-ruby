@@ -586,7 +586,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_name: @name
       )
-      resp = @client.put_metric_alarm(options)
+      @client.put_metric_alarm(options)
       Alarm.new(
         name: options[:alarm_name],
         client: @client

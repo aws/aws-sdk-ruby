@@ -341,7 +341,12 @@ module Aws::AutoScaling
     #   not respect the grace period associated with the group.
     #
     #   For more information about the health check grace period, see
-    #   CreateAutoScalingGroup.
+    #   [CreateAutoScalingGroup][1] in the *Amazon EC2 Auto Scaling API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
     # @return [EmptyStructure]
     def set_health(options = {})
       options = options.merge(instance_id: @id)

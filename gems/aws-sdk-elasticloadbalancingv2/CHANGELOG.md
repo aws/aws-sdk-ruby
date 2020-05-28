@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2020-05-27)
+------------------
+
+* Feature - This release added support for HTTP/2 ALPN preference lists for Network Load Balancers
+
 1.42.0 (2020-05-07)
 ------------------
 

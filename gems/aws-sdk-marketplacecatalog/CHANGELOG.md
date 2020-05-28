@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2020-05-28)
+------------------
+
+* Feature - AWS Marketplace Catalog now supports accessing initial change payloads with DescribeChangeSet operation.
+
 1.2.0 (2020-05-07)
 ------------------
 

@@ -8,6 +8,12 @@
 module Aws::ElasticLoadBalancingV2
   module Types
 
+    # The specified ALPN policy is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ALPNPolicyNotSupportedException AWS API Documentation
+    #
+    class ALPNPolicyNotSupportedException < Aws::EmptyStructure; end
+
     # Information about an action.
     #
     # @note When making an API call, you may pass Action
@@ -572,6 +578,7 @@ module Aws::ElasticLoadBalancingV2
     #             },
     #           },
     #         ],
+    #         alpn_policy: ["AlpnPolicyValue"],
     #       }
     #
     # @!attribute [rw] load_balancer_arn
@@ -656,6 +663,29 @@ module Aws::ElasticLoadBalancingV2
     #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
     #
     class CreateListenerInput < Struct.new(
@@ -664,7 +694,8 @@ module Aws::ElasticLoadBalancingV2
       :port,
       :ssl_policy,
       :certificates,
-      :default_actions)
+      :default_actions,
+      :alpn_policy)
       include Aws::Structure
     end
 
@@ -2068,6 +2099,11 @@ module Aws::ElasticLoadBalancingV2
     #   The default actions for the listener.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] alpn_policy
+    #   \[TLS listener\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Listener AWS API Documentation
     #
     class Listener < Struct.new(
@@ -2077,7 +2113,8 @@ module Aws::ElasticLoadBalancingV2
       :protocol,
       :certificates,
       :ssl_policy,
-      :default_actions)
+      :default_actions,
+      :alpn_policy)
       include Aws::Structure
     end
 
@@ -2393,6 +2430,7 @@ module Aws::ElasticLoadBalancingV2
     #             },
     #           },
     #         ],
+    #         alpn_policy: ["AlpnPolicyValue"],
     #       }
     #
     # @!attribute [rw] listener_arn
@@ -2476,6 +2514,29 @@ module Aws::ElasticLoadBalancingV2
     #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
     #
     class ModifyListenerInput < Struct.new(
@@ -2484,7 +2545,8 @@ module Aws::ElasticLoadBalancingV2
       :protocol,
       :ssl_policy,
       :certificates,
-      :default_actions)
+      :default_actions,
+      :alpn_policy)
       include Aws::Structure
     end
 
@@ -3834,8 +3896,9 @@ module Aws::ElasticLoadBalancingV2
     #     values are `lb_cookie` for Application Load Balancers or
     #     `source_ip` for Network Load Balancers.
     #
-    #   The following attributes are supported by Application Load Balancers
-    #   if the target is not a Lambda function:
+    #   The following attributes are supported only if the load balancer is
+    #   an Application Load Balancer and the target is an instance or an IP
+    #   address:
     #
     #   * `load_balancing.algorithm.type` - The load balancing algorithm
     #     determines how the load balancer selects targets when routing
@@ -3843,11 +3906,11 @@ module Aws::ElasticLoadBalancingV2
     #     `least_outstanding_requests`. The default is `round_robin`.
     #
     #   * `slow_start.duration_seconds` - The time period, in seconds,
-    #     during which a newly registered target receives a linearly
-    #     increasing share of the traffic to the target group. After this
-    #     time period ends, the target receives its full share of traffic.
-    #     The range is 30-900 seconds (15 minutes). Slow start mode is
-    #     disabled by default.
+    #     during which a newly registered target receives an increasing
+    #     share of the traffic to the target group. After this time period
+    #     ends, the target receives its full share of traffic. The range is
+    #     30-900 seconds (15 minutes). Slow start mode is disabled by
+    #     default.
     #
     #   * `stickiness.lb_cookie.duration_seconds` - The time period, in
     #     seconds, during which requests from a client should be routed to
@@ -3856,16 +3919,16 @@ module Aws::ElasticLoadBalancingV2
     #     second to 1 week (604800 seconds). The default value is 1 day
     #     (86400 seconds).
     #
-    #   The following attribute is supported only if the target is a Lambda
-    #   function.
+    #   The following attribute is supported only if the load balancer is an
+    #   Application Load Balancer and the target is a Lambda function:
     #
     #   * `lambda.multi_value_headers.enabled` - Indicates whether the
-    #     request and response headers exchanged between the load balancer
-    #     and the Lambda function include arrays of values or strings. The
-    #     value is `true` or `false`. The default is `false`. If the value
-    #     is `false` and the request contains a duplicate header field name
-    #     or query parameter key, the load balancer uses the last value sent
-    #     by the client.
+    #     request and response headers that are exchanged between the load
+    #     balancer and the Lambda function include arrays of values or
+    #     strings. The value is `true` or `false`. The default is `false`.
+    #     If the value is `false` and the request contains a duplicate
+    #     header field name or query parameter key, the load balancer uses
+    #     the last value sent by the client.
     #
     #   ^
     #

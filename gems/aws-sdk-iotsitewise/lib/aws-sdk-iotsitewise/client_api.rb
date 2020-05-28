@@ -155,6 +155,7 @@ module Aws::IoTSiteWise
     ImageFile = Shapes::StructureShape.new(name: 'ImageFile')
     ImageFileData = Shapes::BlobShape.new(name: 'ImageFileData')
     ImageFileType = Shapes::StringShape.new(name: 'ImageFileType')
+    ImageLocation = Shapes::StructureShape.new(name: 'ImageLocation')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     Interval = Shapes::StringShape.new(name: 'Interval')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -293,6 +294,7 @@ module Aws::IoTSiteWise
     Aggregates.add_member(:maximum, Shapes::ShapeRef.new(shape: AggregatedDoubleValue, location_name: "maximum"))
     Aggregates.add_member(:minimum, Shapes::ShapeRef.new(shape: AggregatedDoubleValue, location_name: "minimum"))
     Aggregates.add_member(:sum, Shapes::ShapeRef.new(shape: AggregatedDoubleValue, location_name: "sum"))
+    Aggregates.add_member(:standard_deviation, Shapes::ShapeRef.new(shape: AggregatedDoubleValue, location_name: "standardDeviation"))
     Aggregates.struct_class = Types::Aggregates
 
     AssetErrorDetails.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "assetId"))
@@ -690,7 +692,7 @@ module Aws::IoTSiteWise
     DescribePortalResponse.add_member(:portal_status, Shapes::ShapeRef.new(shape: PortalStatus, required: true, location_name: "portalStatus"))
     DescribePortalResponse.add_member(:portal_creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "portalCreationDate"))
     DescribePortalResponse.add_member(:portal_last_update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "portalLastUpdateDate"))
-    DescribePortalResponse.add_member(:portal_logo_image, Shapes::ShapeRef.new(shape: Image, location_name: "portalLogoImage"))
+    DescribePortalResponse.add_member(:portal_logo_image_location, Shapes::ShapeRef.new(shape: ImageLocation, location_name: "portalLogoImageLocation"))
     DescribePortalResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "roleArn"))
     DescribePortalResponse.struct_class = Types::DescribePortalResponse
 
@@ -792,13 +794,17 @@ module Aws::IoTSiteWise
     Identity.add_member(:group, Shapes::ShapeRef.new(shape: GroupIdentity, location_name: "group"))
     Identity.struct_class = Types::Identity
 
-    Image.add_member(:location_url, Shapes::ShapeRef.new(shape: Url, location_name: "locationUrl"))
-    Image.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateDate"))
+    Image.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "id"))
+    Image.add_member(:file, Shapes::ShapeRef.new(shape: ImageFile, location_name: "file"))
     Image.struct_class = Types::Image
 
-    ImageFile.add_member(:encoded_string, Shapes::ShapeRef.new(shape: ImageFileData, required: true, location_name: "encodedString"))
-    ImageFile.add_member(:file_type, Shapes::ShapeRef.new(shape: ImageFileType, required: true, location_name: "fileType"))
+    ImageFile.add_member(:data, Shapes::ShapeRef.new(shape: ImageFileData, required: true, location_name: "data"))
+    ImageFile.add_member(:type, Shapes::ShapeRef.new(shape: ImageFileType, required: true, location_name: "type"))
     ImageFile.struct_class = Types::ImageFile
+
+    ImageLocation.add_member(:id, Shapes::ShapeRef.new(shape: ID, required: true, location_name: "id"))
+    ImageLocation.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
+    ImageLocation.struct_class = Types::ImageLocation
 
     InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalFailureException.struct_class = Types::InternalFailureException
@@ -1093,7 +1099,7 @@ module Aws::IoTSiteWise
     UpdatePortalRequest.add_member(:portal_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "portalName"))
     UpdatePortalRequest.add_member(:portal_description, Shapes::ShapeRef.new(shape: Description, location_name: "portalDescription"))
     UpdatePortalRequest.add_member(:portal_contact_email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "portalContactEmail"))
-    UpdatePortalRequest.add_member(:portal_logo_image_file, Shapes::ShapeRef.new(shape: ImageFile, location_name: "portalLogoImageFile"))
+    UpdatePortalRequest.add_member(:portal_logo_image, Shapes::ShapeRef.new(shape: Image, location_name: "portalLogoImage"))
     UpdatePortalRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "roleArn"))
     UpdatePortalRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdatePortalRequest.struct_class = Types::UpdatePortalRequest

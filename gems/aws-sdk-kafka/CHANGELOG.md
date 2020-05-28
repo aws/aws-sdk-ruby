@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-05-28)
+------------------
+
+* Feature - New APIs for upgrading the Apache Kafka version of a cluster and to find out compatible upgrade paths
+
 1.20.0 (2020-05-07)
 ------------------
 

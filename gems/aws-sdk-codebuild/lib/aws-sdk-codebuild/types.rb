@@ -882,7 +882,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A set of tags for this build project.
+    #   A list of tag key and value pairs associated with this build
+    #   project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -963,6 +964,12 @@ module Aws::CodeBuild
     #             encryption_disabled: false,
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "KeyInput",
+    #             value: "ValueInput",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -978,12 +985,20 @@ module Aws::CodeBuild
     #   the report group test results are exported.
     #   @return [Types::ReportExportConfig]
     #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroupInput AWS API Documentation
     #
     class CreateReportGroupInput < Struct.new(
       :name,
       :type,
-      :export_config)
+      :export_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -2420,7 +2435,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags for this build project.
+    #   A list of tag key and value pairs associated with this build
+    #   project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -3485,6 +3501,13 @@ module Aws::CodeBuild
     #   The date and time this `ReportGroup` was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroup AWS API Documentation
     #
     class ReportGroup < Struct.new(
@@ -3493,7 +3516,8 @@ module Aws::CodeBuild
       :type,
       :export_config,
       :created,
-      :last_modified)
+      :last_modified,
+      :tags)
       include Aws::Structure
     end
 
@@ -3964,7 +3988,7 @@ module Aws::CodeBuild
     # @!attribute [rw] idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
-    #   StartBuild request and is valid for 5 minutes. If you repeat the
+    #   StartBuild request and is valid for 12 hours. If you repeat the
     #   StartBuild request with the same token, but change a parameter, AWS
     #   CodeBuild returns a parameter mismatch error.
     #   @return [String]
@@ -4449,7 +4473,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The replacement set of tags for this build project.
+    #   An updated list of tag key and value pairs associated with this
+    #   build project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -4528,6 +4553,12 @@ module Aws::CodeBuild
     #             encryption_disabled: false,
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "KeyInput",
+    #             value: "ValueInput",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] arn
@@ -4542,11 +4573,20 @@ module Aws::CodeBuild
     #   * `NO_EXPORT`\: The report results are not exported.
     #   @return [Types::ReportExportConfig]
     #
+    # @!attribute [rw] tags
+    #   An updated list of tag key and value pairs associated with this
+    #   report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroupInput AWS API Documentation
     #
     class UpdateReportGroupInput < Struct.new(
       :arn,
-      :export_config)
+      :export_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -4731,9 +4771,9 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] type
-    #   The type of webhook filter. There are six webhook filter types:
-    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
-    #   and `COMMIT_MESSAGE`.
+    #   The type of webhook filter. There are five webhook filter types:
+    #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, and
+    #   `FILE_PATH`.
     #
     #   EVENT
     #
@@ -4780,20 +4820,7 @@ module Aws::CodeBuild
     #   : A webhook triggers a build when the path of a changed file matches
     #     the regular expression `pattern`.
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
-    #
-    #      </note>
-    #
-    #   COMMIT\_MESSAGE
-    #
-    #   : A webhook triggers a build when the head commit message matches
-    #     the regular expression `pattern`.
-    #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #     <note markdown="1"> Works with GitHub and GitHub Enterprise push events only.
     #
     #      </note>
     #   @return [String]

@@ -658,7 +658,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example: .
+    #   The URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -859,7 +859,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example: .
+    #   The URI of the file that contains the ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1841,7 +1841,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example: .
+    #   The URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1988,7 +1988,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example: .
+    #   The URI of the file that contains the ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3748,7 +3748,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet. For example: .
+    #   The updated URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -3866,8 +3866,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the ThreateIntelSet. For
-    #   example: .
+    #   The updated URI of the file that contains the ThreateIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] activate

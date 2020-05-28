@@ -428,6 +428,9 @@ module Aws::EC2
     #   Elastic inference accelerators are a resource you can attach to your
     #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
     #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the same
+    #   request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
@@ -768,7 +771,7 @@ module Aws::EC2
     #   The tags to apply to the new placement group.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
-      resp = @client.create_placement_group(options)
+      @client.create_placement_group(options)
       PlacementGroup.new(
         name: options[:group_name],
         client: @client

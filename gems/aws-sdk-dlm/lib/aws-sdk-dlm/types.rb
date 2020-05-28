@@ -41,9 +41,10 @@ module Aws::DLM
     #                 },
     #               ],
     #               create_rule: {
-    #                 interval: 1, # required
-    #                 interval_unit: "HOURS", # required, accepts HOURS
+    #                 interval: 1,
+    #                 interval_unit: "HOURS", # accepts HOURS
     #                 times: ["Time"],
+    #                 cron_expression: "CronExpression",
     #               },
     #               retain_rule: {
     #                 count: 1,
@@ -125,13 +126,17 @@ module Aws::DLM
 
     # Specifies when to create snapshots of EBS volumes.
     #
+    # You must specify either a Cron expression or an interval, interval
+    # unit, and start time. You cannot specify both.
+    #
     # @note When making an API call, you may pass CreateRule
     #   data as a hash:
     #
     #       {
-    #         interval: 1, # required
-    #         interval_unit: "HOURS", # required, accepts HOURS
+    #         interval: 1,
+    #         interval_unit: "HOURS", # accepts HOURS
     #         times: ["Time"],
+    #         cron_expression: "CronExpression",
     #       }
     #
     # @!attribute [rw] interval
@@ -148,15 +153,27 @@ module Aws::DLM
     #   hh:mm.
     #
     #   The operation occurs within a one-hour window following the
-    #   specified time.
+    #   specified time. If you do not specify a time, Amazon DLM selects a
+    #   time within the next 24 hours.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] cron_expression
+    #   The schedule, as a Cron expression. The schedule interval must be
+    #   between 1 hour and 1 year. For more information, see [Cron
+    #   expressions][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CreateRule AWS API Documentation
     #
     class CreateRule < Struct.new(
       :interval,
       :interval_unit,
-      :times)
+      :times,
+      :cron_expression)
       include Aws::Structure
     end
 
@@ -631,9 +648,10 @@ module Aws::DLM
     #               },
     #             ],
     #             create_rule: {
-    #               interval: 1, # required
-    #               interval_unit: "HOURS", # required, accepts HOURS
+    #               interval: 1,
+    #               interval_unit: "HOURS", # accepts HOURS
     #               times: ["Time"],
+    #               cron_expression: "CronExpression",
     #             },
     #             retain_rule: {
     #               count: 1,
@@ -671,7 +689,9 @@ module Aws::DLM
     #   @return [String]
     #
     # @!attribute [rw] resource_types
-    #   The resource type.
+    #   The resource type. Use VOLUME to create snapshots of individual
+    #   volumes or use INSTANCE to create multi-volume snapshots from the
+    #   volumes for an instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] target_tags
@@ -779,9 +799,10 @@ module Aws::DLM
     #           },
     #         ],
     #         create_rule: {
-    #           interval: 1, # required
-    #           interval_unit: "HOURS", # required, accepts HOURS
+    #           interval: 1,
+    #           interval_unit: "HOURS", # accepts HOURS
     #           times: ["Time"],
+    #           cron_expression: "CronExpression",
     #         },
     #         retain_rule: {
     #           count: 1,
@@ -978,9 +999,10 @@ module Aws::DLM
     #                 },
     #               ],
     #               create_rule: {
-    #                 interval: 1, # required
-    #                 interval_unit: "HOURS", # required, accepts HOURS
+    #                 interval: 1,
+    #                 interval_unit: "HOURS", # accepts HOURS
     #                 times: ["Time"],
+    #                 cron_expression: "CronExpression",
     #               },
     #               retain_rule: {
     #                 count: 1,
