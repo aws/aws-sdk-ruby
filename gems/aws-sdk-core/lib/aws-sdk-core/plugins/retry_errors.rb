@@ -174,7 +174,7 @@ a clock skew correction and retry requests with skewed client clocks.
       end
 
       def self.resolve_max_attempts(cfg)
-        value = ENV['AWS_MAX_ATTEMPTS'] ||
+        value = ENV['AWS_MAX_ATTEMPTS'] && ENV['AWS_MAX_ATTEMPTS'].to_i ||
                 Aws.shared_config.max_attempts(profile: cfg.profile) ||
                 3
         # Raise if provided value is not a positive integer

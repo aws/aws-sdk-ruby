@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set
 
 3.97.0 (2020-05-28)
 ------------------
