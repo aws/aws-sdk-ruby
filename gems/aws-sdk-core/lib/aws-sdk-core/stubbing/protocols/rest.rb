@@ -186,7 +186,6 @@ module Aws
           if rules.shape.member?(event_type)
             encode_modeled_event(opts, rules, event_type, event_data, builder)
           else
-            puts builder.inspect
             encode_unknown_event(opts, event_type, event_data)
           end
         end
