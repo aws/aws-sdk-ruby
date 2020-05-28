@@ -142,7 +142,7 @@ describe 'Client Interface:' do
         output.on_unknown_event do |e|
           expect(e.event_type).to eq :unknown_event
           expect(e.raw_event_type).to eq 'test_unknown_event'
-          expect(JSON.parse(e.response, symbolize_names: true)[:result].to_h).to eq(data)
+          expect(JSON.parse(e.raw_event.payload.read, symbolize_names: true)[:result].to_h).to eq(data)
         end
 
         same_client.baz(input_event_stream_handler: input,
