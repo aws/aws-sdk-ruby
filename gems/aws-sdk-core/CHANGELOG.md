@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Handle unknown http2 events by dropping them rather than raising an error.
+* Issue - Handle unknown and unmodeled events from event streams by ignoring them and providing a new callback rather than raising an error.
 
 3.97.0 (2020-05-28)
 ------------------
