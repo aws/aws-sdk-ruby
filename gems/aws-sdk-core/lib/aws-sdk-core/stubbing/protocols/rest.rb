@@ -117,6 +117,7 @@ module Aws
         end
 
         def encode_unknown_event(opts, event_type, event_data)
+          # right now h2 events are only rest_json
           opts[:payload] = StringIO.new(JSON.dump(event_data))
           opts[:headers][':event-type'] = Aws::EventStream::HeaderValue.new(
             value: event_type.to_s,
@@ -185,6 +186,7 @@ module Aws
           if rules.shape.member?(event_type)
             encode_modeled_event(opts, rules, event_type, event_data, builder)
           else
+            puts builder.inspect
             encode_unknown_event(opts, event_type, event_data)
           end
         end
