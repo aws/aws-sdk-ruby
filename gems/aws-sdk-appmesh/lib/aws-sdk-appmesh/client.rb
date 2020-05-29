@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:appmesh)
 
 module Aws::AppMesh
+  # An API client for AppMesh.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::AppMesh::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::AppMesh
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::AppMesh
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::AppMesh
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::AppMesh
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::AppMesh
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::AppMesh
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::AppMesh
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::AppMesh
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::AppMesh
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -254,12 +308,19 @@ module Aws::AppMesh
 
     # @!group API Operations
 
-    # Creates a service mesh. A service mesh is a logical boundary for
-    # network traffic between the services that reside within it.
+    # Creates a service mesh.
     #
-    # After you create your service mesh, you can create virtual services,
-    # virtual nodes, virtual routers, and routes to distribute traffic
-    # between the applications in your mesh.
+    # A service mesh is a logical boundary for network traffic between
+    # services that are represented by resources within the mesh. After you
+    # create your service mesh, you can create virtual services, virtual
+    # nodes, virtual routers, and routes to distribute traffic between the
+    # applications in your mesh.
+    #
+    # For more information about service meshes, see [Service meshes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -310,6 +371,8 @@ module Aws::AppMesh
     #   resp.mesh.metadata.arn #=> String
     #   resp.mesh.metadata.created_at #=> Time
     #   resp.mesh.metadata.last_updated_at #=> Time
+    #   resp.mesh.metadata.mesh_owner #=> String
+    #   resp.mesh.metadata.resource_owner #=> String
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
@@ -326,13 +389,14 @@ module Aws::AppMesh
 
     # Creates a route that is associated with a virtual router.
     #
-    # You can use the `prefix` parameter in your route specification for
-    # path-based routing of requests. For example, if your virtual service
-    # name is `my-service.local` and you want the route to match requests to
-    # `my-service.local/metrics`, your prefix should be `/metrics`.
+    # You can route several different protocols and define a retry policy
+    # for a route. Traffic can be routed to one or more virtual nodes.
     #
-    # If your route matches a request, you can distribute traffic to one or
-    # more target virtual nodes with relative weighting.
+    # For more information about routes, see [Routes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -344,6 +408,17 @@ module Aws::AppMesh
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to create the route in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then the account that you specify must share the mesh
+    #   with your account before you can create the resource in the service
+    #   mesh. For more information about mesh sharing, see [Working with
+    #   Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #
     # @option params [required, String] :route_name
     #   The name to use for the route.
@@ -359,7 +434,9 @@ module Aws::AppMesh
     #   length of 256 characters.
     #
     # @option params [required, String] :virtual_router_name
-    #   The name of the virtual router in which to create the route.
+    #   The name of the virtual router in which to create the route. If the
+    #   virtual router is in a shared mesh, then you must be the owner of the
+    #   virtual router resource.
     #
     # @return [Types::CreateRouteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -370,6 +447,7 @@ module Aws::AppMesh
     #   resp = client.create_route({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     route_name: "ResourceName", # required
     #     spec: { # required
     #       grpc_route: {
@@ -519,6 +597,8 @@ module Aws::AppMesh
     #   resp.route.metadata.arn #=> String
     #   resp.route.metadata.created_at #=> Time
     #   resp.route.metadata.last_updated_at #=> Time
+    #   resp.route.metadata.mesh_owner #=> String
+    #   resp.route.metadata.resource_owner #=> String
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
@@ -610,11 +690,13 @@ module Aws::AppMesh
     # A virtual node acts as a logical pointer to a particular task group,
     # such as an Amazon ECS service or a Kubernetes deployment. When you
     # create a virtual node, you can specify the service discovery
-    # information for your task group.
+    # information for your task group, and whether the proxy running in a
+    # task group will communicate with other proxies using Transport Layer
+    # Security (TLS).
     #
-    # Any inbound traffic that your virtual node expects should be specified
-    # as a `listener`. Any outbound traffic that your virtual node expects
-    # to reach should be specified as a `backend`.
+    # You define a `listener` for any inbound traffic that your virtual node
+    # expects. Any virtual service that your virtual node expects to
+    # communicate to is specified as a `backend`.
     #
     # The response metadata for your new virtual node contains the `arn`
     # that is associated with the virtual node. Set this value (either the
@@ -632,6 +714,12 @@ module Aws::AppMesh
     #
     #  </note>
     #
+    # For more information about virtual nodes, see [Virtual nodes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
@@ -642,6 +730,17 @@ module Aws::AppMesh
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to create the virtual node in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then the account that you specify must share the mesh
+    #   with your account before you can create the resource in the service
+    #   mesh. For more information about mesh sharing, see [Working with
+    #   Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #
     # @option params [required, Types::VirtualNodeSpec] :spec
     #   The virtual node specification to apply.
@@ -665,10 +764,45 @@ module Aws::AppMesh
     #   resp = client.create_virtual_node({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     spec: { # required
+    #       backend_defaults: {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
     #       backends: [
     #         {
     #           virtual_service: {
+    #             client_policy: {
+    #               tls: {
+    #                 enforce: false,
+    #                 ports: [1],
+    #                 validation: { # required
+    #                   trust: { # required
+    #                     acm: {
+    #                       certificate_authority_arns: ["Arn"], # required
+    #                     },
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             virtual_service_name: "ServiceName", # required
     #           },
     #         },
@@ -687,6 +821,18 @@ module Aws::AppMesh
     #           port_mapping: { # required
     #             port: 1, # required
     #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #           },
+    #           tls: {
+    #             certificate: { # required
+    #               acm: {
+    #                 certificate_arn: "Arn", # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #             },
+    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
     #           },
     #         },
     #       ],
@@ -728,9 +874,23 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.arn #=> String
     #   resp.virtual_node.metadata.created_at #=> Time
     #   resp.virtual_node.metadata.last_updated_at #=> Time
+    #   resp.virtual_node.metadata.mesh_owner #=> String
+    #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -742,6 +902,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -763,13 +927,18 @@ module Aws::AppMesh
 
     # Creates a virtual router within a service mesh.
     #
-    # Any inbound traffic that your virtual router expects should be
-    # specified as a `listener`.
+    # Specify a `listener` for any inbound traffic that your virtual router
+    # receives. Create a virtual router for each protocol and port that you
+    # need to route. Virtual routers handle traffic for one or more virtual
+    # services within your mesh. After you create your virtual router,
+    # create and associate routes for your virtual router that direct
+    # incoming requests to different virtual nodes.
     #
-    # Virtual routers handle traffic for one or more virtual services within
-    # your mesh. After you create your virtual router, create and associate
-    # routes for your virtual router that direct incoming requests to
-    # different virtual nodes.
+    # For more information about virtual routers, see [Virtual routers][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -781,6 +950,17 @@ module Aws::AppMesh
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to create the virtual router in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then the account that you specify must share the mesh
+    #   with your account before you can create the resource in the service
+    #   mesh. For more information about mesh sharing, see [Working with
+    #   Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #
     # @option params [required, Types::VirtualRouterSpec] :spec
     #   The virtual router specification to apply.
@@ -804,6 +984,7 @@ module Aws::AppMesh
     #   resp = client.create_virtual_router({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     spec: { # required
     #       listeners: [
     #         {
@@ -829,6 +1010,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.arn #=> String
     #   resp.virtual_router.metadata.created_at #=> Time
     #   resp.virtual_router.metadata.last_updated_at #=> Time
+    #   resp.virtual_router.metadata.mesh_owner #=> String
+    #   resp.virtual_router.metadata.resource_owner #=> String
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
@@ -855,6 +1038,13 @@ module Aws::AppMesh
     # node or virtual router that is specified as the provider for the
     # virtual service.
     #
+    # For more information about virtual services, see [Virtual
+    # services][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
@@ -865,6 +1055,17 @@ module Aws::AppMesh
     #
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to create the virtual service in.
+    #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then the account that you specify must share the mesh
+    #   with your account before you can create the resource in the service
+    #   mesh. For more information about mesh sharing, see [Working with
+    #   Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
     #
     # @option params [required, Types::VirtualServiceSpec] :spec
     #   The virtual service specification to apply.
@@ -888,6 +1089,7 @@ module Aws::AppMesh
     #   resp = client.create_virtual_service({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     spec: { # required
     #       provider: {
     #         virtual_node: {
@@ -913,6 +1115,8 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.arn #=> String
     #   resp.virtual_service.metadata.created_at #=> Time
     #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.mesh_owner #=> String
+    #   resp.virtual_service.metadata.resource_owner #=> String
     #   resp.virtual_service.metadata.uid #=> String
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
@@ -954,6 +1158,8 @@ module Aws::AppMesh
     #   resp.mesh.metadata.arn #=> String
     #   resp.mesh.metadata.created_at #=> Time
     #   resp.mesh.metadata.last_updated_at #=> Time
+    #   resp.mesh.metadata.mesh_owner #=> String
+    #   resp.mesh.metadata.resource_owner #=> String
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
@@ -973,6 +1179,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to delete the route in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :route_name
     #   The name of the route to delete.
     #
@@ -987,6 +1203,7 @@ module Aws::AppMesh
     #
     #   resp = client.delete_route({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     route_name: "ResourceName", # required
     #     virtual_router_name: "ResourceName", # required
     #   })
@@ -997,6 +1214,8 @@ module Aws::AppMesh
     #   resp.route.metadata.arn #=> String
     #   resp.route.metadata.created_at #=> Time
     #   resp.route.metadata.last_updated_at #=> Time
+    #   resp.route.metadata.mesh_owner #=> String
+    #   resp.route.metadata.resource_owner #=> String
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
@@ -1091,6 +1310,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to delete the virtual node in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :virtual_node_name
     #   The name of the virtual node to delete.
     #
@@ -1102,6 +1331,7 @@ module Aws::AppMesh
     #
     #   resp = client.delete_virtual_node({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     virtual_node_name: "ResourceName", # required
     #   })
     #
@@ -1111,9 +1341,23 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.arn #=> String
     #   resp.virtual_node.metadata.created_at #=> Time
     #   resp.virtual_node.metadata.last_updated_at #=> Time
+    #   resp.virtual_node.metadata.mesh_owner #=> String
+    #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -1125,6 +1369,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1152,6 +1400,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to delete the virtual router in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :virtual_router_name
     #   The name of the virtual router to delete.
     #
@@ -1163,6 +1421,7 @@ module Aws::AppMesh
     #
     #   resp = client.delete_virtual_router({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     virtual_router_name: "ResourceName", # required
     #   })
     #
@@ -1172,6 +1431,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.arn #=> String
     #   resp.virtual_router.metadata.created_at #=> Time
     #   resp.virtual_router.metadata.last_updated_at #=> Time
+    #   resp.virtual_router.metadata.mesh_owner #=> String
+    #   resp.virtual_router.metadata.resource_owner #=> String
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
@@ -1194,6 +1455,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to delete the virtual service in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :virtual_service_name
     #   The name of the virtual service to delete.
     #
@@ -1205,6 +1476,7 @@ module Aws::AppMesh
     #
     #   resp = client.delete_virtual_service({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     virtual_service_name: "ServiceName", # required
     #   })
     #
@@ -1214,6 +1486,8 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.arn #=> String
     #   resp.virtual_service.metadata.created_at #=> Time
     #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.mesh_owner #=> String
+    #   resp.virtual_service.metadata.resource_owner #=> String
     #   resp.virtual_service.metadata.uid #=> String
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
@@ -1235,6 +1509,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to describe.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @return [Types::DescribeMeshOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeMeshOutput#mesh #mesh} => Types::MeshData
@@ -1243,6 +1527,7 @@ module Aws::AppMesh
     #
     #   resp = client.describe_mesh({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1251,6 +1536,8 @@ module Aws::AppMesh
     #   resp.mesh.metadata.arn #=> String
     #   resp.mesh.metadata.created_at #=> Time
     #   resp.mesh.metadata.last_updated_at #=> Time
+    #   resp.mesh.metadata.mesh_owner #=> String
+    #   resp.mesh.metadata.resource_owner #=> String
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
@@ -1270,6 +1557,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the route resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :route_name
     #   The name of the route to describe.
     #
@@ -1284,6 +1581,7 @@ module Aws::AppMesh
     #
     #   resp = client.describe_route({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     route_name: "ResourceName", # required
     #     virtual_router_name: "ResourceName", # required
     #   })
@@ -1294,6 +1592,8 @@ module Aws::AppMesh
     #   resp.route.metadata.arn #=> String
     #   resp.route.metadata.created_at #=> Time
     #   resp.route.metadata.last_updated_at #=> Time
+    #   resp.route.metadata.mesh_owner #=> String
+    #   resp.route.metadata.resource_owner #=> String
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
@@ -1385,6 +1685,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the virtual node resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :virtual_node_name
     #   The name of the virtual node to describe.
     #
@@ -1396,6 +1706,7 @@ module Aws::AppMesh
     #
     #   resp = client.describe_virtual_node({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     virtual_node_name: "ResourceName", # required
     #   })
     #
@@ -1405,9 +1716,23 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.arn #=> String
     #   resp.virtual_node.metadata.created_at #=> Time
     #   resp.virtual_node.metadata.last_updated_at #=> Time
+    #   resp.virtual_node.metadata.mesh_owner #=> String
+    #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -1419,6 +1744,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1443,6 +1772,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the virtual router resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :virtual_router_name
     #   The name of the virtual router to describe.
     #
@@ -1454,6 +1793,7 @@ module Aws::AppMesh
     #
     #   resp = client.describe_virtual_router({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     virtual_router_name: "ResourceName", # required
     #   })
     #
@@ -1463,6 +1803,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.arn #=> String
     #   resp.virtual_router.metadata.created_at #=> Time
     #   resp.virtual_router.metadata.last_updated_at #=> Time
+    #   resp.virtual_router.metadata.mesh_owner #=> String
+    #   resp.virtual_router.metadata.resource_owner #=> String
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
@@ -1485,6 +1827,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the virtual service resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :virtual_service_name
     #   The name of the virtual service to describe.
     #
@@ -1496,6 +1848,7 @@ module Aws::AppMesh
     #
     #   resp = client.describe_virtual_service({
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     virtual_service_name: "ServiceName", # required
     #   })
     #
@@ -1505,6 +1858,8 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.arn #=> String
     #   resp.virtual_service.metadata.created_at #=> Time
     #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.mesh_owner #=> String
+    #   resp.virtual_service.metadata.resource_owner #=> String
     #   resp.virtual_service.metadata.uid #=> String
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
@@ -1550,6 +1905,8 @@ module Aws::AppMesh
     #   * {Types::ListMeshesOutput#meshes #meshes} => Array&lt;Types::MeshRef&gt;
     #   * {Types::ListMeshesOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_meshes({
@@ -1561,7 +1918,12 @@ module Aws::AppMesh
     #
     #   resp.meshes #=> Array
     #   resp.meshes[0].arn #=> String
+    #   resp.meshes[0].created_at #=> Time
+    #   resp.meshes[0].last_updated_at #=> Time
     #   resp.meshes[0].mesh_name #=> String
+    #   resp.meshes[0].mesh_owner #=> String
+    #   resp.meshes[0].resource_owner #=> String
+    #   resp.meshes[0].version #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListMeshes AWS API Documentation
@@ -1588,6 +1950,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to list routes in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListRoutes`
     #   request where `limit` was used and the results exceeded the value of
@@ -1602,11 +1974,14 @@ module Aws::AppMesh
     #   * {Types::ListRoutesOutput#next_token #next_token} => String
     #   * {Types::ListRoutesOutput#routes #routes} => Array&lt;Types::RouteRef&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_routes({
     #     limit: 1,
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     next_token: "String",
     #     virtual_router_name: "ResourceName", # required
     #   })
@@ -1616,8 +1991,13 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.routes #=> Array
     #   resp.routes[0].arn #=> String
+    #   resp.routes[0].created_at #=> Time
+    #   resp.routes[0].last_updated_at #=> Time
     #   resp.routes[0].mesh_name #=> String
+    #   resp.routes[0].mesh_owner #=> String
+    #   resp.routes[0].resource_owner #=> String
     #   resp.routes[0].route_name #=> String
+    #   resp.routes[0].version #=> Integer
     #   resp.routes[0].virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListRoutes AWS API Documentation
@@ -1655,6 +2035,8 @@ module Aws::AppMesh
     #
     #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
     #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::TagRef&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1695,6 +2077,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to list virtual nodes in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListVirtualNodes` request where `limit` was used and the results
@@ -1706,11 +2098,14 @@ module Aws::AppMesh
     #   * {Types::ListVirtualNodesOutput#next_token #next_token} => String
     #   * {Types::ListVirtualNodesOutput#virtual_nodes #virtual_nodes} => Array&lt;Types::VirtualNodeRef&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_virtual_nodes({
     #     limit: 1,
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     next_token: "String",
     #   })
     #
@@ -1719,7 +2114,12 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.virtual_nodes #=> Array
     #   resp.virtual_nodes[0].arn #=> String
+    #   resp.virtual_nodes[0].created_at #=> Time
+    #   resp.virtual_nodes[0].last_updated_at #=> Time
     #   resp.virtual_nodes[0].mesh_name #=> String
+    #   resp.virtual_nodes[0].mesh_owner #=> String
+    #   resp.virtual_nodes[0].resource_owner #=> String
+    #   resp.virtual_nodes[0].version #=> Integer
     #   resp.virtual_nodes[0].virtual_node_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualNodes AWS API Documentation
@@ -1746,6 +2146,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to list virtual routers in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListVirtualRouters` request where `limit` was used and the results
@@ -1757,11 +2167,14 @@ module Aws::AppMesh
     #   * {Types::ListVirtualRoutersOutput#next_token #next_token} => String
     #   * {Types::ListVirtualRoutersOutput#virtual_routers #virtual_routers} => Array&lt;Types::VirtualRouterRef&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_virtual_routers({
     #     limit: 1,
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     next_token: "String",
     #   })
     #
@@ -1770,7 +2183,12 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.virtual_routers #=> Array
     #   resp.virtual_routers[0].arn #=> String
+    #   resp.virtual_routers[0].created_at #=> Time
+    #   resp.virtual_routers[0].last_updated_at #=> Time
     #   resp.virtual_routers[0].mesh_name #=> String
+    #   resp.virtual_routers[0].mesh_owner #=> String
+    #   resp.virtual_routers[0].resource_owner #=> String
+    #   resp.virtual_routers[0].version #=> Integer
     #   resp.virtual_routers[0].virtual_router_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualRouters AWS API Documentation
@@ -1797,6 +2215,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh to list virtual services in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
     #   `ListVirtualServices` request where `limit` was used and the results
@@ -1808,11 +2236,14 @@ module Aws::AppMesh
     #   * {Types::ListVirtualServicesOutput#next_token #next_token} => String
     #   * {Types::ListVirtualServicesOutput#virtual_services #virtual_services} => Array&lt;Types::VirtualServiceRef&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_virtual_services({
     #     limit: 1,
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     next_token: "String",
     #   })
     #
@@ -1821,7 +2252,12 @@ module Aws::AppMesh
     #   resp.next_token #=> String
     #   resp.virtual_services #=> Array
     #   resp.virtual_services[0].arn #=> String
+    #   resp.virtual_services[0].created_at #=> Time
+    #   resp.virtual_services[0].last_updated_at #=> Time
     #   resp.virtual_services[0].mesh_name #=> String
+    #   resp.virtual_services[0].mesh_owner #=> String
+    #   resp.virtual_services[0].resource_owner #=> String
+    #   resp.virtual_services[0].version #=> Integer
     #   resp.virtual_services[0].virtual_service_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/ListVirtualServices AWS API Documentation
@@ -1933,6 +2369,8 @@ module Aws::AppMesh
     #   resp.mesh.metadata.arn #=> String
     #   resp.mesh.metadata.created_at #=> Time
     #   resp.mesh.metadata.last_updated_at #=> Time
+    #   resp.mesh.metadata.mesh_owner #=> String
+    #   resp.mesh.metadata.resource_owner #=> String
     #   resp.mesh.metadata.uid #=> String
     #   resp.mesh.metadata.version #=> Integer
     #   resp.mesh.spec.egress_filter.type #=> String, one of "ALLOW_ALL", "DROP_ALL"
@@ -1961,6 +2399,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the route resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, String] :route_name
     #   The name of the route to update.
     #
@@ -1980,6 +2428,7 @@ module Aws::AppMesh
     #   resp = client.update_route({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     route_name: "ResourceName", # required
     #     spec: { # required
     #       grpc_route: {
@@ -2123,6 +2572,8 @@ module Aws::AppMesh
     #   resp.route.metadata.arn #=> String
     #   resp.route.metadata.created_at #=> Time
     #   resp.route.metadata.last_updated_at #=> Time
+    #   resp.route.metadata.mesh_owner #=> String
+    #   resp.route.metadata.resource_owner #=> String
     #   resp.route.metadata.uid #=> String
     #   resp.route.metadata.version #=> Integer
     #   resp.route.route_name #=> String
@@ -2222,6 +2673,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the virtual node resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, Types::VirtualNodeSpec] :spec
     #   The new virtual node specification to apply. This overwrites the
     #   existing data.
@@ -2238,10 +2699,45 @@ module Aws::AppMesh
     #   resp = client.update_virtual_node({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     spec: { # required
+    #       backend_defaults: {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
     #       backends: [
     #         {
     #           virtual_service: {
+    #             client_policy: {
+    #               tls: {
+    #                 enforce: false,
+    #                 ports: [1],
+    #                 validation: { # required
+    #                   trust: { # required
+    #                     acm: {
+    #                       certificate_authority_arns: ["Arn"], # required
+    #                     },
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             virtual_service_name: "ServiceName", # required
     #           },
     #         },
@@ -2260,6 +2756,18 @@ module Aws::AppMesh
     #           port_mapping: { # required
     #             port: 1, # required
     #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #           },
+    #           tls: {
+    #             certificate: { # required
+    #               acm: {
+    #                 certificate_arn: "Arn", # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #             },
+    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
     #           },
     #         },
     #       ],
@@ -2295,9 +2803,23 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.arn #=> String
     #   resp.virtual_node.metadata.created_at #=> Time
     #   resp.virtual_node.metadata.last_updated_at #=> Time
+    #   resp.virtual_node.metadata.mesh_owner #=> String
+    #   resp.virtual_node.metadata.resource_owner #=> String
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -2309,6 +2831,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -2341,6 +2867,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the virtual router resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, Types::VirtualRouterSpec] :spec
     #   The new virtual router specification to apply. This overwrites the
     #   existing data.
@@ -2357,6 +2893,7 @@ module Aws::AppMesh
     #   resp = client.update_virtual_router({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     spec: { # required
     #       listeners: [
     #         {
@@ -2376,6 +2913,8 @@ module Aws::AppMesh
     #   resp.virtual_router.metadata.arn #=> String
     #   resp.virtual_router.metadata.created_at #=> Time
     #   resp.virtual_router.metadata.last_updated_at #=> Time
+    #   resp.virtual_router.metadata.mesh_owner #=> String
+    #   resp.virtual_router.metadata.resource_owner #=> String
     #   resp.virtual_router.metadata.uid #=> String
     #   resp.virtual_router.metadata.version #=> Integer
     #   resp.virtual_router.spec.listeners #=> Array
@@ -2406,6 +2945,16 @@ module Aws::AppMesh
     # @option params [required, String] :mesh_name
     #   The name of the service mesh that the virtual service resides in.
     #
+    # @option params [String] :mesh_owner
+    #   The AWS IAM account ID of the service mesh owner. If the account ID is
+    #   not your own, then it's the ID of the account that shared the mesh
+    #   with your account. For more information about mesh sharing, see
+    #   [Working with Shared Meshes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
+    #
     # @option params [required, Types::VirtualServiceSpec] :spec
     #   The new virtual service specification to apply. This overwrites the
     #   existing data.
@@ -2422,6 +2971,7 @@ module Aws::AppMesh
     #   resp = client.update_virtual_service({
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
+    #     mesh_owner: "AccountId",
     #     spec: { # required
     #       provider: {
     #         virtual_node: {
@@ -2441,6 +2991,8 @@ module Aws::AppMesh
     #   resp.virtual_service.metadata.arn #=> String
     #   resp.virtual_service.metadata.created_at #=> Time
     #   resp.virtual_service.metadata.last_updated_at #=> Time
+    #   resp.virtual_service.metadata.mesh_owner #=> String
+    #   resp.virtual_service.metadata.resource_owner #=> String
     #   resp.virtual_service.metadata.uid #=> String
     #   resp.virtual_service.metadata.version #=> Integer
     #   resp.virtual_service.spec.provider.virtual_node.virtual_node_name #=> String
@@ -2470,7 +3022,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::QLDBSession
+
   class Resource
 
     # @param options ({})

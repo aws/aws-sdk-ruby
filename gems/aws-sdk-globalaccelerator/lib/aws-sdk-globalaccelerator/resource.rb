@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::GlobalAccelerator
+
   class Resource
 
     # @param options ({})

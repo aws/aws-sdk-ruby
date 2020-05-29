@@ -73,6 +73,21 @@
         {"shape":"InvalidAccessException"}
       ]
     },
+    "BatchUpdateFindings":{
+      "name":"BatchUpdateFindings",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/findings/batchupdate"
+      },
+      "input":{"shape":"BatchUpdateFindingsRequest"},
+      "output":{"shape":"BatchUpdateFindingsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InvalidAccessException"}
+      ]
+    },
     "CreateActionTarget":{
       "name":"CreateActionTarget",
       "http":{
@@ -243,6 +258,20 @@
         {"shape":"LimitExceededException"},
         {"shape":"InvalidAccessException"},
         {"shape":"InvalidInputException"}
+      ]
+    },
+    "DescribeStandards":{
+      "name":"DescribeStandards",
+      "http":{
+        "method":"GET",
+        "requestUri":"/standards"
+      },
+      "input":{"shape":"DescribeStandardsRequest"},
+      "output":{"shape":"DescribeStandardsResponse"},
+      "errors":[
+        {"shape":"InternalException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InvalidAccessException"}
       ]
     },
     "DescribeStandardsControls":{
@@ -1159,7 +1188,43 @@
       "type":"structure",
       "members":{
         "OwnerId":{"shape":"NonEmptyString"},
-        "OwnerName":{"shape":"NonEmptyString"}
+        "OwnerName":{"shape":"NonEmptyString"},
+        "CreatedAt":{"shape":"NonEmptyString"},
+        "ServerSideEncryptionConfiguration":{"shape":"AwsS3BucketServerSideEncryptionConfiguration"}
+      }
+    },
+    "AwsS3BucketServerSideEncryptionByDefault":{
+      "type":"structure",
+      "members":{
+        "SSEAlgorithm":{"shape":"NonEmptyString"},
+        "KMSMasterKeyID":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsS3BucketServerSideEncryptionConfiguration":{
+      "type":"structure",
+      "members":{
+        "Rules":{"shape":"AwsS3BucketServerSideEncryptionRules"}
+      }
+    },
+    "AwsS3BucketServerSideEncryptionRule":{
+      "type":"structure",
+      "members":{
+        "ApplyServerSideEncryptionByDefault":{"shape":"AwsS3BucketServerSideEncryptionByDefault"}
+      }
+    },
+    "AwsS3BucketServerSideEncryptionRules":{
+      "type":"list",
+      "member":{"shape":"AwsS3BucketServerSideEncryptionRule"}
+    },
+    "AwsS3ObjectDetails":{
+      "type":"structure",
+      "members":{
+        "LastModified":{"shape":"NonEmptyString"},
+        "ETag":{"shape":"NonEmptyString"},
+        "VersionId":{"shape":"NonEmptyString"},
+        "ContentType":{"shape":"NonEmptyString"},
+        "ServerSideEncryption":{"shape":"NonEmptyString"},
+        "SSEKMSKeyId":{"shape":"NonEmptyString"}
       }
     },
     "AwsSecurityFinding":{
@@ -1206,6 +1271,7 @@
         "Compliance":{"shape":"Compliance"},
         "VerificationState":{"shape":"VerificationState"},
         "WorkflowState":{"shape":"WorkflowState"},
+        "Workflow":{"shape":"Workflow"},
         "RecordState":{"shape":"RecordState"},
         "RelatedFindings":{"shape":"RelatedFindingList"},
         "Note":{"shape":"Note"}
@@ -1290,6 +1356,7 @@
         "ComplianceStatus":{"shape":"StringFilterList"},
         "VerificationState":{"shape":"StringFilterList"},
         "WorkflowState":{"shape":"StringFilterList"},
+        "WorkflowStatus":{"shape":"StringFilterList"},
         "RecordState":{"shape":"StringFilterList"},
         "RelatedFindingsProductArn":{"shape":"StringFilterList"},
         "RelatedFindingsId":{"shape":"StringFilterList"},
@@ -1298,6 +1365,21 @@
         "NoteUpdatedBy":{"shape":"StringFilterList"},
         "Keyword":{"shape":"KeywordFilterList"}
       }
+    },
+    "AwsSecurityFindingIdentifier":{
+      "type":"structure",
+      "required":[
+        "Id",
+        "ProductArn"
+      ],
+      "members":{
+        "Id":{"shape":"NonEmptyString"},
+        "ProductArn":{"shape":"NonEmptyString"}
+      }
+    },
+    "AwsSecurityFindingIdentifierList":{
+      "type":"list",
+      "member":{"shape":"AwsSecurityFindingIdentifier"}
     },
     "AwsSecurityFindingList":{
       "type":"list",
@@ -1401,6 +1483,50 @@
         "FailedFindings":{"shape":"ImportFindingsErrorList"}
       }
     },
+    "BatchUpdateFindingsRequest":{
+      "type":"structure",
+      "required":["FindingIdentifiers"],
+      "members":{
+        "FindingIdentifiers":{"shape":"AwsSecurityFindingIdentifierList"},
+        "Note":{"shape":"NoteUpdate"},
+        "Severity":{"shape":"SeverityUpdate"},
+        "VerificationState":{"shape":"VerificationState"},
+        "Confidence":{"shape":"RatioScale"},
+        "Criticality":{"shape":"RatioScale"},
+        "Types":{"shape":"TypeList"},
+        "UserDefinedFields":{"shape":"FieldMap"},
+        "Workflow":{"shape":"WorkflowUpdate"},
+        "RelatedFindings":{"shape":"RelatedFindingList"}
+      }
+    },
+    "BatchUpdateFindingsResponse":{
+      "type":"structure",
+      "required":[
+        "ProcessedFindings",
+        "UnprocessedFindings"
+      ],
+      "members":{
+        "ProcessedFindings":{"shape":"AwsSecurityFindingIdentifierList"},
+        "UnprocessedFindings":{"shape":"BatchUpdateFindingsUnprocessedFindingsList"}
+      }
+    },
+    "BatchUpdateFindingsUnprocessedFinding":{
+      "type":"structure",
+      "required":[
+        "FindingIdentifier",
+        "ErrorCode",
+        "ErrorMessage"
+      ],
+      "members":{
+        "FindingIdentifier":{"shape":"AwsSecurityFindingIdentifier"},
+        "ErrorCode":{"shape":"NonEmptyString"},
+        "ErrorMessage":{"shape":"NonEmptyString"}
+      }
+    },
+    "BatchUpdateFindingsUnprocessedFindingsList":{
+      "type":"list",
+      "member":{"shape":"BatchUpdateFindingsUnprocessedFinding"}
+    },
     "Boolean":{"type":"boolean"},
     "CategoryList":{
       "type":"list",
@@ -1410,7 +1536,8 @@
       "type":"structure",
       "members":{
         "Status":{"shape":"ComplianceStatus"},
-        "RelatedRequirements":{"shape":"RelatedRequirementsList"}
+        "RelatedRequirements":{"shape":"RelatedRequirementsList"},
+        "StatusReasons":{"shape":"StatusReasonsList"}
       }
     },
     "ComplianceStatus":{
@@ -1671,6 +1798,28 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "DescribeStandardsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"NextToken"
+        },
+        "MaxResults":{
+          "shape":"MaxResults",
+          "location":"querystring",
+          "locationName":"MaxResults"
+        }
+      }
+    },
+    "DescribeStandardsResponse":{
+      "type":"structure",
+      "members":{
+        "Standards":{"shape":"Standards"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "DisableImportFindingsForProductRequest":{
       "type":"structure",
       "required":["ProductSubscriptionArn"],
@@ -1735,7 +1884,8 @@
     "EnableSecurityHubRequest":{
       "type":"structure",
       "members":{
-        "Tags":{"shape":"TagMap"}
+        "Tags":{"shape":"TagMap"},
+        "EnableDefaultStandards":{"shape":"Boolean"}
       }
     },
     "EnableSecurityHubResponse":{
@@ -1915,6 +2065,17 @@
       }
     },
     "Integer":{"type":"integer"},
+    "IntegrationType":{
+      "type":"string",
+      "enum":[
+        "SEND_FINDINGS_TO_SECURITY_HUB",
+        "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+      ]
+    },
+    "IntegrationTypeList":{
+      "type":"list",
+      "member":{"shape":"IntegrationType"}
+    },
     "InternalException":{
       "type":"structure",
       "members":{
@@ -2265,6 +2426,7 @@
         "CompanyName":{"shape":"NonEmptyString"},
         "Description":{"shape":"NonEmptyString"},
         "Categories":{"shape":"CategoryList"},
+        "IntegrationTypes":{"shape":"IntegrationTypeList"},
         "MarketplaceUrl":{"shape":"NonEmptyString"},
         "ActivationUrl":{"shape":"NonEmptyString"},
         "ProductSubscriptionResourcePolicy":{"shape":"NonEmptyString"}
@@ -2277,6 +2439,11 @@
     "ProductsList":{
       "type":"list",
       "member":{"shape":"Product"}
+    },
+    "RatioScale":{
+      "type":"integer",
+      "max":100,
+      "min":0
     },
     "Recommendation":{
       "type":"structure",
@@ -2356,6 +2523,7 @@
         "AwsElbv2LoadBalancer":{"shape":"AwsElbv2LoadBalancerDetails"},
         "AwsElasticsearchDomain":{"shape":"AwsElasticsearchDomainDetails"},
         "AwsS3Bucket":{"shape":"AwsS3BucketDetails"},
+        "AwsS3Object":{"shape":"AwsS3ObjectDetails"},
         "AwsIamAccessKey":{"shape":"AwsIamAccessKeyDetails"},
         "AwsIamRole":{"shape":"AwsIamRoleDetails"},
         "AwsKmsKey":{"shape":"AwsKmsKeyDetails"},
@@ -2399,11 +2567,22 @@
     },
     "Severity":{
       "type":"structure",
-      "required":["Normalized"],
       "members":{
         "Product":{"shape":"Double"},
-        "Normalized":{"shape":"Integer"}
+        "Label":{"shape":"SeverityLabel"},
+        "Normalized":{"shape":"Integer"},
+        "Original":{"shape":"NonEmptyString"}
       }
+    },
+    "SeverityLabel":{
+      "type":"string",
+      "enum":[
+        "INFORMATIONAL",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
     },
     "SeverityRating":{
       "type":"string",
@@ -2413,6 +2592,14 @@
         "HIGH",
         "CRITICAL"
       ]
+    },
+    "SeverityUpdate":{
+      "type":"structure",
+      "members":{
+        "Normalized":{"shape":"RatioScale"},
+        "Product":{"shape":"Double"},
+        "Label":{"shape":"SeverityLabel"}
+      }
     },
     "SortCriteria":{
       "type":"list",
@@ -2432,6 +2619,19 @@
         "desc"
       ]
     },
+    "Standard":{
+      "type":"structure",
+      "members":{
+        "StandardsArn":{"shape":"NonEmptyString"},
+        "Name":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"},
+        "EnabledByDefault":{"shape":"Boolean"}
+      }
+    },
+    "Standards":{
+      "type":"list",
+      "member":{"shape":"Standard"}
+    },
     "StandardsControl":{
       "type":"structure",
       "members":{
@@ -2443,7 +2643,8 @@
         "Title":{"shape":"NonEmptyString"},
         "Description":{"shape":"NonEmptyString"},
         "RemediationUrl":{"shape":"NonEmptyString"},
-        "SeverityRating":{"shape":"SeverityRating"}
+        "SeverityRating":{"shape":"SeverityRating"},
+        "RelatedRequirements":{"shape":"RelatedRequirementsList"}
       }
     },
     "StandardsControls":{
@@ -2503,6 +2704,18 @@
     "StandardsSubscriptions":{
       "type":"list",
       "member":{"shape":"StandardsSubscription"}
+    },
+    "StatusReason":{
+      "type":"structure",
+      "required":["ReasonCode"],
+      "members":{
+        "ReasonCode":{"shape":"NonEmptyString"},
+        "Description":{"shape":"NonEmptyString"}
+      }
+    },
+    "StatusReasonsList":{
+      "type":"list",
+      "member":{"shape":"StatusReason"}
     },
     "StringFilter":{
       "type":"structure",
@@ -2743,8 +2956,16 @@
         "Type":{"shape":"NonEmptyString"}
       }
     },
+    "Workflow":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"WorkflowStatus"}
+      }
+    },
     "WorkflowState":{
       "type":"string",
+      "deprecated":true,
+      "deprecatedMessage":"This field is deprecated, use Workflow.Status instead.",
       "enum":[
         "NEW",
         "ASSIGNED",
@@ -2752,6 +2973,21 @@
         "DEFERRED",
         "RESOLVED"
       ]
+    },
+    "WorkflowStatus":{
+      "type":"string",
+      "enum":[
+        "NEW",
+        "NOTIFIED",
+        "RESOLVED",
+        "SUPPRESSED"
+      ]
+    },
+    "WorkflowUpdate":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"WorkflowStatus"}
+      }
     }
   }
 }

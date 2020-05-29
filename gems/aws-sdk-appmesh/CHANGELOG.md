@@ -1,6 +1,42 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2020-05-20)
+------------------
+
+* Feature - List APIs for all resources now contain additional information: when a resource was created, last updated, and its current version number.
+
+1.22.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-03-06)
+------------------
+
+* Feature - App Mesh now supports sharing a Mesh with other AWS accounts. Customers can use AWS Resource Access Manager to share their Mesh with other accounts in their organization to connection applications within a single service mesh. See https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html for details.
+
+1.19.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
+1.19.0 (2020-02-28)
+------------------
+
+* Issue - This version has been yanked. (#2239)
+* Feature - App Mesh now supports Transport Layer Security (TLS) between Virtual Nodes in a Mesh. Customers can use managed certificates from an AWS Certificate Manager Private Certificate Authority or bring their own certificates from the local file system to encrypt traffic between their workloads. See https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html for details.
+
 1.18.0 (2019-10-24)
 ------------------
 
@@ -95,4 +131,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-appmesh`.
-

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     compute_optimizer = Aws::ComputeOptimizer::Client.new
+#     resp = compute_optimizer.get_auto_scaling_group_recommendations(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Compute Optimizer all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Compute Optimizer are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ComputeOptimizer::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Compute Optimizer API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-computeoptimizer/customizations'
 # @service
 module Aws::ComputeOptimizer
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.3.0'
 
 end

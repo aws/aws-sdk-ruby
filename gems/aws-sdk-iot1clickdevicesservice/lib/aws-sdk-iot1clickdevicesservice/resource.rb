@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoT1ClickDevicesService
+
   class Resource
 
     # @param options ({})

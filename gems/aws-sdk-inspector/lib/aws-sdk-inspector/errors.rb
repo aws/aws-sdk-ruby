@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Inspector
+
+  # When Inspector returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Inspector::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Inspector errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Inspector::Errors::ServiceError
+  #       # rescues all Inspector API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {AgentsAlreadyRunningAssessmentException}
+  # * {AssessmentRunInProgressException}
+  # * {InternalException}
+  # * {InvalidCrossAccountRoleException}
+  # * {InvalidInputException}
+  # * {LimitExceededException}
+  # * {NoSuchEntityException}
+  # * {PreviewGenerationInProgressException}
+  # * {ServiceTemporarilyUnavailableException}
+  # * {UnsupportedFeatureException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -33,7 +66,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class AgentsAlreadyRunningAssessmentException < ServiceError
@@ -64,7 +96,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class AssessmentRunInProgressException < ServiceError
@@ -95,7 +126,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class InternalException < ServiceError
@@ -116,7 +146,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class InvalidCrossAccountRoleException < ServiceError
@@ -142,7 +171,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -168,7 +196,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -194,7 +221,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class NoSuchEntityException < ServiceError
@@ -220,7 +246,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class PreviewGenerationInProgressException < ServiceError
@@ -236,7 +261,6 @@ module Aws::Inspector
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceTemporarilyUnavailableException < ServiceError
@@ -257,7 +281,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
     class UnsupportedFeatureException < ServiceError
@@ -278,7 +301,6 @@ module Aws::Inspector
       def can_retry
         @data[:can_retry]
       end
-
     end
 
   end

@@ -50,7 +50,7 @@ module Aws::QLDBSession
     #       }
     #
     # @!attribute [rw] transaction_id
-    #   Specifies the transaction id of the transaction to commit.
+    #   Specifies the transaction ID of the transaction to commit.
     #   @return [String]
     #
     # @!attribute [rw] commit_digest
@@ -71,7 +71,7 @@ module Aws::QLDBSession
     # Contains the details of the committed transaction.
     #
     # @!attribute [rw] transaction_id
-    #   The transaction id of the committed transaction.
+    #   The transaction ID of the committed transaction.
     #   @return [String]
     #
     # @!attribute [rw] commit_digest
@@ -117,7 +117,7 @@ module Aws::QLDBSession
     #       }
     #
     # @!attribute [rw] transaction_id
-    #   Specifies the transaction id of the request.
+    #   Specifies the transaction ID of the request.
     #   @return [String]
     #
     # @!attribute [rw] statement
@@ -162,7 +162,7 @@ module Aws::QLDBSession
     #       }
     #
     # @!attribute [rw] transaction_id
-    #   Specifies the transaction id of the page to be fetched.
+    #   Specifies the transaction ID of the page to be fetched.
     #   @return [String]
     #
     # @!attribute [rw] next_page_token
@@ -190,7 +190,7 @@ module Aws::QLDBSession
       include Aws::Structure
     end
 
-    # Returned if the session doesn't exist anymore because it timed-out or
+    # Returned if the session doesn't exist anymore because it timed out or
     # expired.
     #
     # @!attribute [rw] message
@@ -221,7 +221,8 @@ module Aws::QLDBSession
     end
 
     # Returned when a transaction cannot be written to the journal due to a
-    # failure in the verification phase of Optimistic Concurrency Control.
+    # failure in the verification phase of *optimistic concurrency control*
+    # (OCC).
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -392,7 +393,7 @@ module Aws::QLDBSession
       include Aws::Structure
     end
 
-    # Specifies a request to start a a new session.
+    # Specifies a request to start a new session.
     #
     # @note When making an API call, you may pass StartSessionRequest
     #   data as a hash:
@@ -438,7 +439,7 @@ module Aws::QLDBSession
     # Contains the details of the started transaction.
     #
     # @!attribute [rw] transaction_id
-    #   The transaction id of the started transaction.
+    #   The transaction ID of the started transaction.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/StartTransactionResult AWS API Documentation
@@ -448,7 +449,8 @@ module Aws::QLDBSession
       include Aws::Structure
     end
 
-    # A structure that can contains values in multiple encoding formats.
+    # A structure that can contain an Amazon Ion value in multiple encoding
+    # formats.
     #
     # @note When making an API call, you may pass ValueHolder
     #   data as a hash:

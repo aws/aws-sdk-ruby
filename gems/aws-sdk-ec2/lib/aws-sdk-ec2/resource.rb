@@ -6,6 +6,18 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
+  # This class provides a resource oriented interface for EC2.
+  # To create a resource object:
+  #
+  #     resource = Aws::EC2::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = Aws::EC2::Client.new(region: 'us-west-2')
+  #     resource = Aws::EC2::Resource.new(client: client)
+  #
   class Resource
 
     # @param options ({})
@@ -70,15 +82,15 @@ module Aws::EC2
     #       },
     #     ],
     #     image_id: "ImageId",
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge, m6g.metal, m6g.medium, m6g.large, m6g.xlarge, m6g.2xlarge, m6g.4xlarge, m6g.8xlarge, m6g.12xlarge, m6g.16xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
     #         ipv_6_address: "String",
     #       },
     #     ],
-    #     kernel_id: "String",
-    #     key_name: "String",
+    #     kernel_id: "KernelId",
+    #     key_name: "KeyPairName",
     #     max_count: 1, # required
     #     min_count: 1, # required
     #     monitoring: {
@@ -94,10 +106,10 @@ module Aws::EC2
     #       spread_domain: "String",
     #       host_resource_group_arn: "String",
     #     },
-    #     ramdisk_id: "String",
-    #     security_group_ids: ["String"],
-    #     security_groups: ["String"],
-    #     subnet_id: "String",
+    #     ramdisk_id: "RamdiskId",
+    #     security_group_ids: ["SecurityGroupId"],
+    #     security_groups: ["SecurityGroupName"],
+    #     subnet_id: "SubnetId",
     #     user_data: "String",
     #     additional_info: "String",
     #     client_token: "String",
@@ -115,7 +127,7 @@ module Aws::EC2
     #         delete_on_termination: false,
     #         description: "String",
     #         device_index: 1,
-    #         groups: ["String"],
+    #         groups: ["SecurityGroupId"],
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -149,7 +161,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -159,7 +171,7 @@ module Aws::EC2
     #       },
     #     ],
     #     launch_template: {
-    #       launch_template_id: "String",
+    #       launch_template_id: "LaunchTemplateId",
     #       launch_template_name: "String",
     #       version: "String",
     #     },
@@ -183,7 +195,7 @@ module Aws::EC2
     #     capacity_reservation_specification: {
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
-    #         capacity_reservation_id: "String",
+    #         capacity_reservation_id: "CapacityReservationId",
     #       },
     #     },
     #     hibernation_options: {
@@ -339,8 +351,11 @@ module Aws::EC2
     #   Reserved.
     # @option options [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
     #
     #   Constraints: Maximum 64 ASCII characters
     #
@@ -413,6 +428,9 @@ module Aws::EC2
     #   Elastic inference accelerators are a resource you can attach to your
     #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
     #   workloads.
+    #
+    #   You cannot specify accelerators from different generations in the same
+    #   request.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
@@ -515,8 +533,19 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   keypair = ec2.create_key_pair({
-    #     key_name: "KeyPairName", # required
+    #     key_name: "String", # required
     #     dry_run: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :key_name
@@ -528,6 +557,8 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new key pair.
     # @return [KeyPair]
     def create_key_pair(options = {})
       resp = @client.create_key_pair(options)
@@ -543,7 +574,19 @@ module Aws::EC2
     #   natgateway = ec2.create_nat_gateway({
     #     allocation_id: "AllocationId", # required
     #     client_token: "String",
+    #     dry_run: false,
     #     subnet_id: "SubnetId", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :allocation_id
@@ -560,8 +603,15 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :subnet_id
     #   The subnet in which to create the NAT gateway.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the NAT gateway.
     # @return [NatGateway]
     def create_nat_gateway(options = {})
       resp = @client.create_nat_gateway(options)
@@ -601,7 +651,7 @@ module Aws::EC2
     #   networkinterface = ec2.create_network_interface({
     #     description: "String",
     #     dry_run: false,
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -689,6 +739,17 @@ module Aws::EC2
     #     group_name: "String",
     #     strategy: "cluster", # accepts cluster, spread, partition
     #     partition_count: 1,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -706,9 +767,11 @@ module Aws::EC2
     # @option options [Integer] :partition_count
     #   The number of partitions. Valid only when **Strategy** is set to
     #   `partition`.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new placement group.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
-      resp = @client.create_placement_group(options)
+      @client.create_placement_group(options)
       PlacementGroup.new(
         name: options[:group_name],
         client: @client
@@ -789,7 +852,7 @@ module Aws::EC2
     #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -846,6 +909,9 @@ module Aws::EC2
     #   that support Local Zones, see [Available Regions][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
+    #   To create a subnet in an Outpost, set this value to the Availability
+    #   Zone for the Outpost and specify the Outpost ARN.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
@@ -858,7 +924,9 @@ module Aws::EC2
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
     # @option options [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost.
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
+    #   Outpost ARN, you must also specify the Availability Zone of the
+    #   Outpost subnet.
     # @option options [required, String] :vpc_id
     #   The ID of the VPC.
     # @option options [Boolean] :dry_run
@@ -880,7 +948,7 @@ module Aws::EC2
     #
     #   ec2.create_tags({
     #     dry_run: false,
-    #     resources: ["String"], # required
+    #     resources: ["TaggableResourceId"], # required
     #     tags: [ # required
     #       {
     #         key: "String",
@@ -913,7 +981,7 @@ module Aws::EC2
     #
     #   ec2.delete_tags({
     #     dry_run: false,
-    #     resources: ["String"], # required
+    #     resources: ["TaggableResourceId"], # required
     #     tags: [
     #       {
     #         key: "String",
@@ -962,7 +1030,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
     #         tags: [
     #           {
     #             key: "String",
@@ -971,6 +1039,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     multi_attach_enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :availability_zone
@@ -1055,6 +1124,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
+    # @option options [Boolean] :multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [Nitro-based
+    #   instances][1] in the same Availability Zone. For more information, see
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
     # @return [Volume]
     def create_volume(options = {})
       resp = @client.create_volume(options)
@@ -1070,7 +1150,7 @@ module Aws::EC2
     #   vpc = ec2.create_vpc({
     #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
-    #     ipv_6_pool: "String",
+    #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
@@ -1174,7 +1254,7 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [required, String] :association_id
     #   The association ID representing the current association between the
-    #   route table and subnet.
+    #   route table and subnet or gateway.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1190,8 +1270,19 @@ module Aws::EC2
     #
     #   keypairinfo = ec2.import_key_pair({
     #     dry_run: false,
-    #     key_name: "KeyPairName", # required
+    #     key_name: "String", # required
     #     public_key_material: "data", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -1204,6 +1295,8 @@ module Aws::EC2
     # @option options [required, String, IO] :public_key_material
     #   The public key. For API calls, the text must be base64-encoded. For
     #   command line tools, base64 encoding is performed for you.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the imported key pair.
     # @return [KeyPairInfo]
     def import_key_pair(options = {})
       resp = @client.import_key_pair(options)
@@ -1325,7 +1418,7 @@ module Aws::EC2
     #       },
     #     ],
     #     public_ips: ["String"],
-    #     allocation_ids: ["String"],
+    #     allocation_ids: ["AllocationId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1408,7 +1501,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcp_options_sets = ec2.dhcp_options_sets({
-    #     dhcp_options_ids: ["String"],
+    #     dhcp_options_ids: ["DhcpOptionsId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -1486,7 +1579,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     image_ids: ["String"],
+    #     image_ids: ["ImageId"],
     #     owners: ["String"],
     #     dry_run: false,
     #   })
@@ -1635,7 +1728,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1684,6 +1777,7 @@ module Aws::EC2
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
+    #     The value `xen` is used for both Xen and Nitro hypervisors.
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
     #     the instance. Specified as an ARN.
@@ -1961,7 +2055,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     internet_gateway_ids: ["String"],
+    #     internet_gateway_ids: ["InternetGatewayId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2033,17 +2127,29 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     key_names: ["String"],
-    #     key_pair_ids: ["String"],
+    #     key_names: ["KeyPairName"],
+    #     key_pair_ids: ["KeyPairId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
     #
+    #   * `key-pair-id` - The ID of the key pair.
+    #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     # @option options [Array<String>] :key_names
     #   The key pair names.
     #
@@ -2084,15 +2190,21 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   nat_gateways = ec2.nat_gateways({
+    #     dry_run: false,
     #     filter: [
     #       {
     #         name: "String",
     #         values: ["String"],
     #       },
     #     ],
-    #     nat_gateway_ids: ["String"],
+    #     nat_gateway_ids: ["NatGatewayId"],
     #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::Filter>] :filter
     #   One or more filters.
     #
@@ -2154,7 +2266,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_acl_ids: ["String"],
+    #     network_acl_ids: ["NetworkAclId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2257,7 +2369,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2419,8 +2531,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     group_names: ["String"],
-    #     group_ids: ["String"],
+    #     group_names: ["PlacementGroupName"],
+    #     group_ids: ["PlacementGroupId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2433,6 +2545,16 @@ module Aws::EC2
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
     #     `spread` \| `partition`).
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2490,7 +2612,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     route_table_ids: ["String"],
+    #     route_table_ids: ["RouteTableId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2611,7 +2733,7 @@ module Aws::EC2
     #       },
     #     ],
     #     group_ids: ["String"],
-    #     group_names: ["String"],
+    #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2750,7 +2872,7 @@ module Aws::EC2
     #     ],
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
-    #     snapshot_ids: ["String"],
+    #     snapshot_ids: ["SnapshotId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2843,7 +2965,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     subnet_ids: ["String"],
+    #     subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2942,7 +3064,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2971,6 +3093,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled for
+    #     Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|
@@ -3044,7 +3169,7 @@ module Aws::EC2
     #       },
     #     ],
     #     public_ips: ["String"],
-    #     allocation_ids: ["String"],
+    #     allocation_ids: ["AllocationId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -3134,7 +3259,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     vpc_peering_connection_ids: ["String"],
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -3214,7 +3339,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     vpc_ids: ["String"],
+    #     vpc_ids: ["VpcId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

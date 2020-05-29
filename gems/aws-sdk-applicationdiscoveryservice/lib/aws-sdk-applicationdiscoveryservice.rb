@@ -24,17 +24,20 @@ require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     application_discovery_service = Aws::ApplicationDiscoveryService::Client.new
+#     resp = application_discovery_service.associate_configuration_items_to_application(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Application Discovery Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Application Discovery Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ApplicationDiscoveryService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Application Discovery Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 # @service
 module Aws::ApplicationDiscoveryService
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.27.0'
 
 end

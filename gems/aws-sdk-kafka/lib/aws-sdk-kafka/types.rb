@@ -52,6 +52,49 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # The broker logs configuration for this MSK cluster.
+    #
+    # @note When making an API call, you may pass BrokerLogs
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs: {
+    #           enabled: false, # required
+    #           log_group: "__string",
+    #         },
+    #         firehose: {
+    #           delivery_stream: "__string",
+    #           enabled: false, # required
+    #         },
+    #         s3: {
+    #           bucket: "__string",
+    #           enabled: false, # required
+    #           prefix: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs
+    #   Details of the CloudWatch Logs destination for broker logs.
+    #   @return [Types::CloudWatchLogs]
+    #
+    # @!attribute [rw] firehose
+    #   Details of the Kinesis Data Firehose delivery stream that is the
+    #   destination for broker logs.
+    #   @return [Types::Firehose]
+    #
+    # @!attribute [rw] s3
+    #   Details of the Amazon S3 destination for broker logs.
+    #   @return [Types::S3]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/BrokerLogs AWS API Documentation
+    #
+    class BrokerLogs < Struct.new(
+      :cloud_watch_logs,
+      :firehose,
+      :s3)
+      include Aws::Structure
+    end
+
     # Describes the setup to be used for Kafka broker nodes in the cluster.
     #
     # @note When making an API call, you may pass BrokerNodeGroupInfo
@@ -200,6 +243,33 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Details of the CloudWatch Logs destination for broker logs.
+    #
+    # @note When making an API call, you may pass CloudWatchLogs
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         log_group: "__string",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether broker logs get sent to the specified CloudWatch
+    #   Logs destination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] log_group
+    #   The CloudWatch log group that is the destination for broker logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CloudWatchLogs AWS API Documentation
+    #
+    class CloudWatchLogs < Struct.new(
+      :enabled,
+      :log_group)
+      include Aws::Structure
+    end
+
     # Returns information about a cluster.
     #
     # @!attribute [rw] active_operation_arn
@@ -230,6 +300,12 @@ module Aws::Kafka
     #   Information about the version of software currently deployed on the
     #   Kafka brokers in the cluster.
     #   @return [Types::BrokerSoftwareInfo]
+    #
+    # @!attribute [rw] logging_info
+    #   You can configure your MSK cluster to send broker logs to different
+    #   destination types. This is a container for the configuration details
+    #   related to broker logs.
+    #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] current_version
     #   The current version of the MSK cluster. Cluster versions aren't
@@ -284,6 +360,7 @@ module Aws::Kafka
       :cluster_name,
       :creation_time,
       :current_broker_software_info,
+      :logging_info,
       :current_version,
       :encryption_info,
       :enhanced_monitoring,
@@ -317,6 +394,10 @@ module Aws::Kafka
     #   Describes the error if the operation fails.
     #   @return [Types::ErrorInfo]
     #
+    # @!attribute [rw] operation_steps
+    #   Steps completed during the operation.
+    #   @return [Array<Types::ClusterOperationStep>]
+    #
     # @!attribute [rw] operation_arn
     #   ARN of the cluster operation.
     #   @return [String]
@@ -345,11 +426,59 @@ module Aws::Kafka
       :creation_time,
       :end_time,
       :error_info,
+      :operation_steps,
       :operation_arn,
       :operation_state,
       :operation_type,
       :source_cluster_info,
       :target_cluster_info)
+      include Aws::Structure
+    end
+
+    # Step taken during a cluster operation.
+    #
+    # @!attribute [rw] step_info
+    #   Information about the step and its status.
+    #   @return [Types::ClusterOperationStepInfo]
+    #
+    # @!attribute [rw] step_name
+    #   The name of the step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationStep AWS API Documentation
+    #
+    class ClusterOperationStep < Struct.new(
+      :step_info,
+      :step_name)
+      include Aws::Structure
+    end
+
+    # State information about the operation step.
+    #
+    # @!attribute [rw] step_status
+    #   The steps current status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ClusterOperationStepInfo AWS API Documentation
+    #
+    class ClusterOperationStepInfo < Struct.new(
+      :step_status)
+      include Aws::Structure
+    end
+
+    # Contains source Kafka versions and compatible target Kafka versions.
+    #
+    # @!attribute [rw] source_version
+    #   @return [String]
+    #
+    # @!attribute [rw] target_versions
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CompatibleKafkaVersion AWS API Documentation
+    #
+    class CompatibleKafkaVersion < Struct.new(
+      :source_version,
+      :target_versions)
       include Aws::Structure
     end
 
@@ -497,6 +626,23 @@ module Aws::Kafka
     #         },
     #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
     #         kafka_version: "__stringMin1Max128", # required
+    #         logging_info: {
+    #           broker_logs: { # required
+    #             cloud_watch_logs: {
+    #               enabled: false, # required
+    #               log_group: "__string",
+    #             },
+    #             firehose: {
+    #               delivery_stream: "__string",
+    #               enabled: false, # required
+    #             },
+    #             s3: {
+    #               bucket: "__string",
+    #               enabled: false, # required
+    #               prefix: "__string",
+    #             },
+    #           },
+    #         },
     #         number_of_broker_nodes: 1, # required
     #         open_monitoring: {
     #           prometheus: { # required
@@ -543,6 +689,10 @@ module Aws::Kafka
     #   The version of Apache Kafka.
     #   @return [String]
     #
+    # @!attribute [rw] logging_info
+    #   LoggingInfo details.
+    #   @return [Types::LoggingInfo]
+    #
     # @!attribute [rw] number_of_broker_nodes
     #   The number of Kafka broker nodes in the Amazon MSK cluster.
     #   @return [Integer]
@@ -565,6 +715,7 @@ module Aws::Kafka
       :encryption_info,
       :enhanced_monitoring,
       :kafka_version,
+      :logging_info,
       :number_of_broker_nodes,
       :open_monitoring,
       :tags)
@@ -602,7 +753,7 @@ module Aws::Kafka
     #
     #       {
     #         description: "__string",
-    #         kafka_versions: ["__string"], # required
+    #         kafka_versions: ["__string"],
     #         name: "__string", # required
     #         server_properties: "data", # required
     #       }
@@ -1010,6 +1161,34 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Firehose details for BrokerLogs.
+    #
+    # @note When making an API call, you may pass Firehose
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream: "__string",
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] delivery_stream
+    #   The Kinesis Data Firehose delivery stream that is the destination
+    #   for broker logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether broker logs get sent to the specified Kinesis Data
+    #   Firehose delivery stream.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Firehose AWS API Documentation
+    #
+    class Firehose < Struct.new(
+      :delivery_stream,
+      :enabled)
+      include Aws::Structure
+    end
+
     # Returns information about an error state of the cluster.
     #
     # @!attribute [rw] error_code
@@ -1082,6 +1261,36 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCompatibleKafkaVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetCompatibleKafkaVersionsRequest AWS API Documentation
+    #
+    class GetCompatibleKafkaVersionsRequest < Struct.new(
+      :cluster_arn)
+      include Aws::Structure
+    end
+
+    # Response body for GetCompatibleKafkaVersions.
+    #
+    # @!attribute [rw] compatible_kafka_versions
+    #   A list of CompatibleKafkaVersion objects.
+    #   @return [Array<Types::CompatibleKafkaVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/GetCompatibleKafkaVersionsResponse AWS API Documentation
+    #
+    class GetCompatibleKafkaVersionsResponse < Struct.new(
+      :compatible_kafka_versions)
+      include Aws::Structure
+    end
+
     # Returns information about an error.
     #
     # @!attribute [rw] invalid_parameter
@@ -1105,7 +1314,7 @@ module Aws::Kafka
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a Kafka version.
+    #   The status of the Apache Kafka version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaVersion AWS API Documentation
@@ -1420,6 +1629,44 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # You can configure your MSK cluster to send broker logs to different
+    # destination types. This is a container for the configuration details
+    # related to broker logs.
+    #
+    # @note When making an API call, you may pass LoggingInfo
+    #   data as a hash:
+    #
+    #       {
+    #         broker_logs: { # required
+    #           cloud_watch_logs: {
+    #             enabled: false, # required
+    #             log_group: "__string",
+    #           },
+    #           firehose: {
+    #             delivery_stream: "__string",
+    #             enabled: false, # required
+    #           },
+    #           s3: {
+    #             bucket: "__string",
+    #             enabled: false, # required
+    #             prefix: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] broker_logs
+    #   You can configure your MSK cluster to send broker logs to different
+    #   destination types. This configuration specifies the details of these
+    #   destinations.
+    #   @return [Types::BrokerLogs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/LoggingInfo AWS API Documentation
+    #
+    class LoggingInfo < Struct.new(
+      :broker_logs)
+      include Aws::Structure
+    end
+
     # Information about cluster attributes that can be updated via update
     # APIs.
     #
@@ -1445,6 +1692,13 @@ module Aws::Kafka
     #   Amazon CloudWatch for this cluster.
     #   @return [String]
     #
+    # @!attribute [rw] kafka_version
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_info
+    #   LoggingInfo details.
+    #   @return [Types::LoggingInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
@@ -1452,7 +1706,9 @@ module Aws::Kafka
       :configuration_info,
       :number_of_broker_nodes,
       :open_monitoring,
-      :enhanced_monitoring)
+      :enhanced_monitoring,
+      :kafka_version,
+      :logging_info)
       include Aws::Structure
     end
 
@@ -1835,6 +2091,64 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for UpdateClusterKafkaVersion.
+    #
+    # @note When making an API call, you may pass UpdateClusterKafkaVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         configuration_info: {
+    #           arn: "__string", # required
+    #           revision: 1, # required
+    #         },
+    #         current_version: "__string", # required
+    #         target_kafka_version: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_info
+    #   Specifies the configuration to use for the brokers.
+    #   @return [Types::ConfigurationInfo]
+    #
+    # @!attribute [rw] current_version
+    #   Current cluster version.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_kafka_version
+    #   Target Kafka version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterKafkaVersionRequest AWS API Documentation
+    #
+    class UpdateClusterKafkaVersionRequest < Struct.new(
+      :cluster_arn,
+      :configuration_info,
+      :current_version,
+      :target_kafka_version)
+      include Aws::Structure
+    end
+
+    # Response body for UpdateClusterKafkaVersion.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateClusterKafkaVersionResponse AWS API Documentation
+    #
+    class UpdateClusterKafkaVersionResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      include Aws::Structure
+    end
+
     # Request body for UpdateMonitoring.
     #
     # @note When making an API call, you may pass UpdateMonitoringRequest
@@ -1851,6 +2165,23 @@ module Aws::Kafka
     #             },
     #             node_exporter: {
     #               enabled_in_broker: false, # required
+    #             },
+    #           },
+    #         },
+    #         logging_info: {
+    #           broker_logs: { # required
+    #             cloud_watch_logs: {
+    #               enabled: false, # required
+    #               log_group: "__string",
+    #             },
+    #             firehose: {
+    #               delivery_stream: "__string",
+    #               enabled: false, # required
+    #             },
+    #             s3: {
+    #               bucket: "__string",
+    #               enabled: false, # required
+    #               prefix: "__string",
     #             },
     #           },
     #         },
@@ -1873,13 +2204,18 @@ module Aws::Kafka
     #   The settings for open monitoring.
     #   @return [Types::OpenMonitoringInfo]
     #
+    # @!attribute [rw] logging_info
+    #   LoggingInfo details.
+    #   @return [Types::LoggingInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateMonitoringRequest AWS API Documentation
     #
     class UpdateMonitoringRequest < Struct.new(
       :cluster_arn,
       :current_version,
       :enhanced_monitoring,
-      :open_monitoring)
+      :open_monitoring,
+      :logging_info)
       include Aws::Structure
     end
 
@@ -2022,6 +2358,39 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # The details of the Amazon S3 destination for broker logs.
+    #
+    # @note When making an API call, you may pass S3
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "__string",
+    #         enabled: false, # required
+    #         prefix: "__string",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket that is the destination for broker logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether broker logs get sent to the specified Amazon S3
+    #   destination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix
+    #   The S3 prefix that is the destination for broker logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/S3 AWS API Documentation
+    #
+    class S3 < Struct.new(
+      :bucket,
+      :enabled,
+      :prefix)
+      include Aws::Structure
+    end
+
     # Indicates whether you want to enable or disable the JMX Exporter.
     #
     # @!attribute [rw] enabled_in_broker
@@ -2045,7 +2414,7 @@ module Aws::Kafka
     #       }
     #
     # @!attribute [rw] enabled_in_broker
-    #   Indicates whether you want to enable or disable the JMX Exporter.
+    #   JMX Exporter being enabled in broker.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/JmxExporterInfo AWS API Documentation
@@ -2078,7 +2447,7 @@ module Aws::Kafka
     #       }
     #
     # @!attribute [rw] enabled_in_broker
-    #   Indicates whether you want to enable or disable the Node Exporter.
+    #   Node Exporter being enabled in broker.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/NodeExporterInfo AWS API Documentation

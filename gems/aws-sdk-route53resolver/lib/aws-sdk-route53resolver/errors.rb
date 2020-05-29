@@ -6,6 +6,41 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Route53Resolver
+
+  # When Route53Resolver returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Route53Resolver::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Route53Resolver errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Route53Resolver::Errors::ServiceError
+  #       # rescues all Route53Resolver API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InternalServiceErrorException}
+  # * {InvalidNextTokenException}
+  # * {InvalidParameterException}
+  # * {InvalidPolicyDocument}
+  # * {InvalidRequestException}
+  # * {InvalidTagException}
+  # * {LimitExceededException}
+  # * {ResourceExistsException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ResourceUnavailableException}
+  # * {ThrottlingException}
+  # * {UnknownResourceException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +58,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -39,7 +73,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -60,7 +93,6 @@ module Aws::Route53Resolver
       def field_name
         @data[:field_name]
       end
-
     end
 
     class InvalidPolicyDocument < ServiceError
@@ -76,7 +108,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -92,7 +123,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -108,7 +138,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -129,7 +158,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceExistsException < ServiceError
@@ -150,7 +178,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -171,7 +198,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -192,7 +218,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -213,7 +238,6 @@ module Aws::Route53Resolver
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -229,7 +253,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnknownResourceException < ServiceError
@@ -245,7 +268,6 @@ module Aws::Route53Resolver
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -15,21 +15,28 @@ module Aws::GameLift
     AcceptMatchOutput = Shapes::StructureShape.new(name: 'AcceptMatchOutput')
     AcceptanceType = Shapes::StringShape.new(name: 'AcceptanceType')
     Alias = Shapes::StructureShape.new(name: 'Alias')
+    AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AliasId = Shapes::StringShape.new(name: 'AliasId')
+    AliasIdOrArn = Shapes::StringShape.new(name: 'AliasIdOrArn')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ArnStringModel = Shapes::StringShape.new(name: 'ArnStringModel')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
+    AutoScalingGroupArn = Shapes::StringShape.new(name: 'AutoScalingGroupArn')
     AwsCredentials = Shapes::StructureShape.new(name: 'AwsCredentials')
     BackfillMode = Shapes::StringShape.new(name: 'BackfillMode')
+    BalancingStrategy = Shapes::StringShape.new(name: 'BalancingStrategy')
     BooleanModel = Shapes::BooleanShape.new(name: 'BooleanModel')
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildArn = Shapes::StringShape.new(name: 'BuildArn')
     BuildId = Shapes::StringShape.new(name: 'BuildId')
+    BuildIdOrArn = Shapes::StringShape.new(name: 'BuildIdOrArn')
     BuildList = Shapes::ListShape.new(name: 'BuildList')
     BuildStatus = Shapes::StringShape.new(name: 'BuildStatus')
     CertificateConfiguration = Shapes::StructureShape.new(name: 'CertificateConfiguration')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
+    ClaimGameServerInput = Shapes::StructureShape.new(name: 'ClaimGameServerInput')
+    ClaimGameServerOutput = Shapes::StructureShape.new(name: 'ClaimGameServerOutput')
     ComparisonOperatorType = Shapes::StringShape.new(name: 'ComparisonOperatorType')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateAliasInput = Shapes::StructureShape.new(name: 'CreateAliasInput')
@@ -38,6 +45,8 @@ module Aws::GameLift
     CreateBuildOutput = Shapes::StructureShape.new(name: 'CreateBuildOutput')
     CreateFleetInput = Shapes::StructureShape.new(name: 'CreateFleetInput')
     CreateFleetOutput = Shapes::StructureShape.new(name: 'CreateFleetOutput')
+    CreateGameServerGroupInput = Shapes::StructureShape.new(name: 'CreateGameServerGroupInput')
+    CreateGameServerGroupOutput = Shapes::StructureShape.new(name: 'CreateGameServerGroupOutput')
     CreateGameSessionInput = Shapes::StructureShape.new(name: 'CreateGameSessionInput')
     CreateGameSessionOutput = Shapes::StructureShape.new(name: 'CreateGameSessionOutput')
     CreateGameSessionQueueInput = Shapes::StructureShape.new(name: 'CreateGameSessionQueueInput')
@@ -60,6 +69,8 @@ module Aws::GameLift
     DeleteAliasInput = Shapes::StructureShape.new(name: 'DeleteAliasInput')
     DeleteBuildInput = Shapes::StructureShape.new(name: 'DeleteBuildInput')
     DeleteFleetInput = Shapes::StructureShape.new(name: 'DeleteFleetInput')
+    DeleteGameServerGroupInput = Shapes::StructureShape.new(name: 'DeleteGameServerGroupInput')
+    DeleteGameServerGroupOutput = Shapes::StructureShape.new(name: 'DeleteGameServerGroupOutput')
     DeleteGameSessionQueueInput = Shapes::StructureShape.new(name: 'DeleteGameSessionQueueInput')
     DeleteGameSessionQueueOutput = Shapes::StructureShape.new(name: 'DeleteGameSessionQueueOutput')
     DeleteMatchmakingConfigurationInput = Shapes::StructureShape.new(name: 'DeleteMatchmakingConfigurationInput')
@@ -72,6 +83,7 @@ module Aws::GameLift
     DeleteVpcPeeringAuthorizationOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringAuthorizationOutput')
     DeleteVpcPeeringConnectionInput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionInput')
     DeleteVpcPeeringConnectionOutput = Shapes::StructureShape.new(name: 'DeleteVpcPeeringConnectionOutput')
+    DeregisterGameServerInput = Shapes::StructureShape.new(name: 'DeregisterGameServerInput')
     DescribeAliasInput = Shapes::StructureShape.new(name: 'DescribeAliasInput')
     DescribeAliasOutput = Shapes::StructureShape.new(name: 'DescribeAliasOutput')
     DescribeBuildInput = Shapes::StructureShape.new(name: 'DescribeBuildInput')
@@ -88,6 +100,10 @@ module Aws::GameLift
     DescribeFleetPortSettingsOutput = Shapes::StructureShape.new(name: 'DescribeFleetPortSettingsOutput')
     DescribeFleetUtilizationInput = Shapes::StructureShape.new(name: 'DescribeFleetUtilizationInput')
     DescribeFleetUtilizationOutput = Shapes::StructureShape.new(name: 'DescribeFleetUtilizationOutput')
+    DescribeGameServerGroupInput = Shapes::StructureShape.new(name: 'DescribeGameServerGroupInput')
+    DescribeGameServerGroupOutput = Shapes::StructureShape.new(name: 'DescribeGameServerGroupOutput')
+    DescribeGameServerInput = Shapes::StructureShape.new(name: 'DescribeGameServerInput')
+    DescribeGameServerOutput = Shapes::StructureShape.new(name: 'DescribeGameServerOutput')
     DescribeGameSessionDetailsInput = Shapes::StructureShape.new(name: 'DescribeGameSessionDetailsInput')
     DescribeGameSessionDetailsOutput = Shapes::StructureShape.new(name: 'DescribeGameSessionDetailsOutput')
     DescribeGameSessionPlacementInput = Shapes::StructureShape.new(name: 'DescribeGameSessionPlacementInput')
@@ -130,6 +146,7 @@ module Aws::GameLift
     EventList = Shapes::ListShape.new(name: 'EventList')
     FleetAction = Shapes::StringShape.new(name: 'FleetAction')
     FleetActionList = Shapes::ListShape.new(name: 'FleetActionList')
+    FleetArn = Shapes::StringShape.new(name: 'FleetArn')
     FleetAttributes = Shapes::StructureShape.new(name: 'FleetAttributes')
     FleetAttributesList = Shapes::ListShape.new(name: 'FleetAttributesList')
     FleetCapacity = Shapes::StructureShape.new(name: 'FleetCapacity')
@@ -137,6 +154,8 @@ module Aws::GameLift
     FleetCapacityList = Shapes::ListShape.new(name: 'FleetCapacityList')
     FleetId = Shapes::StringShape.new(name: 'FleetId')
     FleetIdList = Shapes::ListShape.new(name: 'FleetIdList')
+    FleetIdOrArn = Shapes::StringShape.new(name: 'FleetIdOrArn')
+    FleetIdOrArnList = Shapes::ListShape.new(name: 'FleetIdOrArnList')
     FleetStatus = Shapes::StringShape.new(name: 'FleetStatus')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
     FleetUtilization = Shapes::StructureShape.new(name: 'FleetUtilization')
@@ -147,6 +166,28 @@ module Aws::GameLift
     GamePropertyKey = Shapes::StringShape.new(name: 'GamePropertyKey')
     GamePropertyList = Shapes::ListShape.new(name: 'GamePropertyList')
     GamePropertyValue = Shapes::StringShape.new(name: 'GamePropertyValue')
+    GameServer = Shapes::StructureShape.new(name: 'GameServer')
+    GameServerClaimStatus = Shapes::StringShape.new(name: 'GameServerClaimStatus')
+    GameServerConnectionInfo = Shapes::StringShape.new(name: 'GameServerConnectionInfo')
+    GameServerData = Shapes::StringShape.new(name: 'GameServerData')
+    GameServerGroup = Shapes::StructureShape.new(name: 'GameServerGroup')
+    GameServerGroupAction = Shapes::StringShape.new(name: 'GameServerGroupAction')
+    GameServerGroupActions = Shapes::ListShape.new(name: 'GameServerGroupActions')
+    GameServerGroupArn = Shapes::StringShape.new(name: 'GameServerGroupArn')
+    GameServerGroupAutoScalingPolicy = Shapes::StructureShape.new(name: 'GameServerGroupAutoScalingPolicy')
+    GameServerGroupDeleteOption = Shapes::StringShape.new(name: 'GameServerGroupDeleteOption')
+    GameServerGroupInstanceType = Shapes::StringShape.new(name: 'GameServerGroupInstanceType')
+    GameServerGroupName = Shapes::StringShape.new(name: 'GameServerGroupName')
+    GameServerGroupNameOrArn = Shapes::StringShape.new(name: 'GameServerGroupNameOrArn')
+    GameServerGroupStatus = Shapes::StringShape.new(name: 'GameServerGroupStatus')
+    GameServerGroups = Shapes::ListShape.new(name: 'GameServerGroups')
+    GameServerHealthCheck = Shapes::StringShape.new(name: 'GameServerHealthCheck')
+    GameServerId = Shapes::StringShape.new(name: 'GameServerId')
+    GameServerInstanceId = Shapes::StringShape.new(name: 'GameServerInstanceId')
+    GameServerProtectionPolicy = Shapes::StringShape.new(name: 'GameServerProtectionPolicy')
+    GameServerSortKey = Shapes::StringShape.new(name: 'GameServerSortKey')
+    GameServerUtilizationStatus = Shapes::StringShape.new(name: 'GameServerUtilizationStatus')
+    GameServers = Shapes::ListShape.new(name: 'GameServers')
     GameSession = Shapes::StructureShape.new(name: 'GameSession')
     GameSessionActivationTimeoutSeconds = Shapes::IntegerShape.new(name: 'GameSessionActivationTimeoutSeconds')
     GameSessionConnectionInfo = Shapes::StructureShape.new(name: 'GameSessionConnectionInfo')
@@ -158,22 +199,27 @@ module Aws::GameLift
     GameSessionPlacement = Shapes::StructureShape.new(name: 'GameSessionPlacement')
     GameSessionPlacementState = Shapes::StringShape.new(name: 'GameSessionPlacementState')
     GameSessionQueue = Shapes::StructureShape.new(name: 'GameSessionQueue')
+    GameSessionQueueArn = Shapes::StringShape.new(name: 'GameSessionQueueArn')
     GameSessionQueueDestination = Shapes::StructureShape.new(name: 'GameSessionQueueDestination')
     GameSessionQueueDestinationList = Shapes::ListShape.new(name: 'GameSessionQueueDestinationList')
     GameSessionQueueList = Shapes::ListShape.new(name: 'GameSessionQueueList')
     GameSessionQueueName = Shapes::StringShape.new(name: 'GameSessionQueueName')
-    GameSessionQueueNameList = Shapes::ListShape.new(name: 'GameSessionQueueNameList')
+    GameSessionQueueNameOrArn = Shapes::StringShape.new(name: 'GameSessionQueueNameOrArn')
+    GameSessionQueueNameOrArnList = Shapes::ListShape.new(name: 'GameSessionQueueNameOrArnList')
     GameSessionStatus = Shapes::StringShape.new(name: 'GameSessionStatus')
     GameSessionStatusReason = Shapes::StringShape.new(name: 'GameSessionStatusReason')
     GetGameSessionLogUrlInput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlInput')
     GetGameSessionLogUrlOutput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlOutput')
     GetInstanceAccessInput = Shapes::StructureShape.new(name: 'GetInstanceAccessInput')
     GetInstanceAccessOutput = Shapes::StructureShape.new(name: 'GetInstanceAccessOutput')
+    IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdStringModel = Shapes::StringShape.new(name: 'IdStringModel')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceAccess = Shapes::StructureShape.new(name: 'InstanceAccess')
     InstanceCredentials = Shapes::StructureShape.new(name: 'InstanceCredentials')
+    InstanceDefinition = Shapes::StructureShape.new(name: 'InstanceDefinition')
+    InstanceDefinitions = Shapes::ListShape.new(name: 'InstanceDefinitions')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
@@ -187,6 +233,10 @@ module Aws::GameLift
     IpPermissionsList = Shapes::ListShape.new(name: 'IpPermissionsList')
     IpProtocol = Shapes::StringShape.new(name: 'IpProtocol')
     LatencyMap = Shapes::MapShape.new(name: 'LatencyMap')
+    LaunchTemplateId = Shapes::StringShape.new(name: 'LaunchTemplateId')
+    LaunchTemplateName = Shapes::StringShape.new(name: 'LaunchTemplateName')
+    LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
+    LaunchTemplateVersion = Shapes::StringShape.new(name: 'LaunchTemplateVersion')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAliasesInput = Shapes::StructureShape.new(name: 'ListAliasesInput')
     ListAliasesOutput = Shapes::StructureShape.new(name: 'ListAliasesOutput')
@@ -194,6 +244,10 @@ module Aws::GameLift
     ListBuildsOutput = Shapes::StructureShape.new(name: 'ListBuildsOutput')
     ListFleetsInput = Shapes::StructureShape.new(name: 'ListFleetsInput')
     ListFleetsOutput = Shapes::StructureShape.new(name: 'ListFleetsOutput')
+    ListGameServerGroupsInput = Shapes::StructureShape.new(name: 'ListGameServerGroupsInput')
+    ListGameServerGroupsOutput = Shapes::StructureShape.new(name: 'ListGameServerGroupsOutput')
+    ListGameServersInput = Shapes::StructureShape.new(name: 'ListGameServersInput')
+    ListGameServersOutput = Shapes::StructureShape.new(name: 'ListGameServersOutput')
     ListScriptsInput = Shapes::StructureShape.new(name: 'ListScriptsInput')
     ListScriptsOutput = Shapes::StructureShape.new(name: 'ListScriptsOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -225,9 +279,11 @@ module Aws::GameLift
     NonBlankAndLengthConstraintString = Shapes::StringShape.new(name: 'NonBlankAndLengthConstraintString')
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
     NonZeroAndMaxString = Shapes::StringShape.new(name: 'NonZeroAndMaxString')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
+    OutOfCapacityException = Shapes::StructureShape.new(name: 'OutOfCapacityException')
     PlacedPlayerSession = Shapes::StructureShape.new(name: 'PlacedPlayerSession')
     PlacedPlayerSessionList = Shapes::ListShape.new(name: 'PlacedPlayerSessionList')
     Player = Shapes::StructureShape.new(name: 'Player')
@@ -253,11 +309,15 @@ module Aws::GameLift
     PutScalingPolicyInput = Shapes::StructureShape.new(name: 'PutScalingPolicyInput')
     PutScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutScalingPolicyOutput')
     QueueArnsList = Shapes::ListShape.new(name: 'QueueArnsList')
+    RegisterGameServerInput = Shapes::StructureShape.new(name: 'RegisterGameServerInput')
+    RegisterGameServerOutput = Shapes::StructureShape.new(name: 'RegisterGameServerOutput')
     RequestUploadCredentialsInput = Shapes::StructureShape.new(name: 'RequestUploadCredentialsInput')
     RequestUploadCredentialsOutput = Shapes::StructureShape.new(name: 'RequestUploadCredentialsOutput')
     ResolveAliasInput = Shapes::StructureShape.new(name: 'ResolveAliasInput')
     ResolveAliasOutput = Shapes::StructureShape.new(name: 'ResolveAliasOutput')
     ResourceCreationLimitPolicy = Shapes::StructureShape.new(name: 'ResourceCreationLimitPolicy')
+    ResumeGameServerGroupInput = Shapes::StructureShape.new(name: 'ResumeGameServerGroupInput')
+    ResumeGameServerGroupOutput = Shapes::StructureShape.new(name: 'ResumeGameServerGroupOutput')
     RoutingStrategy = Shapes::StructureShape.new(name: 'RoutingStrategy')
     RoutingStrategyType = Shapes::StringShape.new(name: 'RoutingStrategyType')
     RuleSetBody = Shapes::StringShape.new(name: 'RuleSetBody')
@@ -271,12 +331,14 @@ module Aws::GameLift
     Script = Shapes::StructureShape.new(name: 'Script')
     ScriptArn = Shapes::StringShape.new(name: 'ScriptArn')
     ScriptId = Shapes::StringShape.new(name: 'ScriptId')
+    ScriptIdOrArn = Shapes::StringShape.new(name: 'ScriptIdOrArn')
     ScriptList = Shapes::ListShape.new(name: 'ScriptList')
     SearchGameSessionsInput = Shapes::StructureShape.new(name: 'SearchGameSessionsInput')
     SearchGameSessionsOutput = Shapes::StructureShape.new(name: 'SearchGameSessionsOutput')
     ServerProcess = Shapes::StructureShape.new(name: 'ServerProcess')
     ServerProcessList = Shapes::ListShape.new(name: 'ServerProcessList')
     SnsArnStringModel = Shapes::StringShape.new(name: 'SnsArnStringModel')
+    SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartFleetActionsInput = Shapes::StructureShape.new(name: 'StartFleetActionsInput')
     StartFleetActionsOutput = Shapes::StructureShape.new(name: 'StartFleetActionsOutput')
     StartGameSessionPlacementInput = Shapes::StructureShape.new(name: 'StartGameSessionPlacementInput')
@@ -294,6 +356,8 @@ module Aws::GameLift
     StringDoubleMap = Shapes::MapShape.new(name: 'StringDoubleMap')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringModel = Shapes::StringShape.new(name: 'StringModel')
+    SuspendGameServerGroupInput = Shapes::StructureShape.new(name: 'SuspendGameServerGroupInput')
+    SuspendGameServerGroupOutput = Shapes::StructureShape.new(name: 'SuspendGameServerGroupOutput')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -303,6 +367,7 @@ module Aws::GameLift
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaggingFailedException = Shapes::StructureShape.new(name: 'TaggingFailedException')
     TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
+    TargetTrackingConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingConfiguration')
     TerminalRoutingStrategyException = Shapes::StructureShape.new(name: 'TerminalRoutingStrategyException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -319,6 +384,10 @@ module Aws::GameLift
     UpdateFleetCapacityOutput = Shapes::StructureShape.new(name: 'UpdateFleetCapacityOutput')
     UpdateFleetPortSettingsInput = Shapes::StructureShape.new(name: 'UpdateFleetPortSettingsInput')
     UpdateFleetPortSettingsOutput = Shapes::StructureShape.new(name: 'UpdateFleetPortSettingsOutput')
+    UpdateGameServerGroupInput = Shapes::StructureShape.new(name: 'UpdateGameServerGroupInput')
+    UpdateGameServerGroupOutput = Shapes::StructureShape.new(name: 'UpdateGameServerGroupOutput')
+    UpdateGameServerInput = Shapes::StructureShape.new(name: 'UpdateGameServerInput')
+    UpdateGameServerOutput = Shapes::StructureShape.new(name: 'UpdateGameServerOutput')
     UpdateGameSessionInput = Shapes::StructureShape.new(name: 'UpdateGameSessionInput')
     UpdateGameSessionOutput = Shapes::StructureShape.new(name: 'UpdateGameSessionOutput')
     UpdateGameSessionQueueInput = Shapes::StructureShape.new(name: 'UpdateGameSessionQueueInput')
@@ -336,6 +405,9 @@ module Aws::GameLift
     VpcPeeringConnection = Shapes::StructureShape.new(name: 'VpcPeeringConnection')
     VpcPeeringConnectionList = Shapes::ListShape.new(name: 'VpcPeeringConnectionList')
     VpcPeeringConnectionStatus = Shapes::StructureShape.new(name: 'VpcPeeringConnectionStatus')
+    VpcSubnet = Shapes::StringShape.new(name: 'VpcSubnet')
+    VpcSubnets = Shapes::ListShape.new(name: 'VpcSubnets')
+    WeightedCapacity = Shapes::StringShape.new(name: 'WeightedCapacity')
     WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
     ZipBlob = Shapes::BlobShape.new(name: 'ZipBlob')
 
@@ -348,7 +420,7 @@ module Aws::GameLift
 
     Alias.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
     Alias.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))
-    Alias.add_member(:alias_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "AliasArn"))
+    Alias.add_member(:alias_arn, Shapes::ShapeRef.new(shape: AliasArn, location_name: "AliasArn"))
     Alias.add_member(:description, Shapes::ShapeRef.new(shape: FreeText, location_name: "Description"))
     Alias.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, location_name: "RoutingStrategy"))
     Alias.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -383,6 +455,14 @@ module Aws::GameLift
     CertificateConfiguration.add_member(:certificate_type, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "CertificateType"))
     CertificateConfiguration.struct_class = Types::CertificateConfiguration
 
+    ClaimGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    ClaimGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, location_name: "GameServerId"))
+    ClaimGameServerInput.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
+    ClaimGameServerInput.struct_class = Types::ClaimGameServerInput
+
+    ClaimGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
+    ClaimGameServerOutput.struct_class = Types::ClaimGameServerOutput
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -409,8 +489,8 @@ module Aws::GameLift
 
     CreateFleetInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
     CreateFleetInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
-    CreateFleetInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
-    CreateFleetInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
+    CreateFleetInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, location_name: "BuildId"))
+    CreateFleetInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptIdOrArn, location_name: "ScriptId"))
     CreateFleetInput.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
     CreateFleetInput.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
     CreateFleetInput.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
@@ -431,8 +511,24 @@ module Aws::GameLift
     CreateFleetOutput.add_member(:fleet_attributes, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "FleetAttributes"))
     CreateFleetOutput.struct_class = Types::CreateFleetOutput
 
-    CreateGameSessionInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    CreateGameSessionInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
+    CreateGameServerGroupInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupName, required: true, location_name: "GameServerGroupName"))
+    CreateGameServerGroupInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "RoleArn"))
+    CreateGameServerGroupInput.add_member(:min_size, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "MinSize"))
+    CreateGameServerGroupInput.add_member(:max_size, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "MaxSize"))
+    CreateGameServerGroupInput.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, required: true, location_name: "LaunchTemplate"))
+    CreateGameServerGroupInput.add_member(:instance_definitions, Shapes::ShapeRef.new(shape: InstanceDefinitions, required: true, location_name: "InstanceDefinitions"))
+    CreateGameServerGroupInput.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: GameServerGroupAutoScalingPolicy, location_name: "AutoScalingPolicy"))
+    CreateGameServerGroupInput.add_member(:balancing_strategy, Shapes::ShapeRef.new(shape: BalancingStrategy, location_name: "BalancingStrategy"))
+    CreateGameServerGroupInput.add_member(:game_server_protection_policy, Shapes::ShapeRef.new(shape: GameServerProtectionPolicy, location_name: "GameServerProtectionPolicy"))
+    CreateGameServerGroupInput.add_member(:vpc_subnets, Shapes::ShapeRef.new(shape: VpcSubnets, location_name: "VpcSubnets"))
+    CreateGameServerGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateGameServerGroupInput.struct_class = Types::CreateGameServerGroupInput
+
+    CreateGameServerGroupOutput.add_member(:game_server_group, Shapes::ShapeRef.new(shape: GameServerGroup, location_name: "GameServerGroup"))
+    CreateGameServerGroupOutput.struct_class = Types::CreateGameServerGroupOutput
+
+    CreateGameSessionInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, location_name: "FleetId"))
+    CreateGameSessionInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, location_name: "AliasId"))
     CreateGameSessionInput.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "MaximumPlayerSessionCount"))
     CreateGameSessionInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     CreateGameSessionInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
@@ -522,16 +618,23 @@ module Aws::GameLift
 
     CreateVpcPeeringConnectionOutput.struct_class = Types::CreateVpcPeeringConnectionOutput
 
-    DeleteAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
+    DeleteAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, required: true, location_name: "AliasId"))
     DeleteAliasInput.struct_class = Types::DeleteAliasInput
 
-    DeleteBuildInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, required: true, location_name: "BuildId"))
+    DeleteBuildInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, required: true, location_name: "BuildId"))
     DeleteBuildInput.struct_class = Types::DeleteBuildInput
 
-    DeleteFleetInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DeleteFleetInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DeleteFleetInput.struct_class = Types::DeleteFleetInput
 
-    DeleteGameSessionQueueInput.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, required: true, location_name: "Name"))
+    DeleteGameServerGroupInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    DeleteGameServerGroupInput.add_member(:delete_option, Shapes::ShapeRef.new(shape: GameServerGroupDeleteOption, location_name: "DeleteOption"))
+    DeleteGameServerGroupInput.struct_class = Types::DeleteGameServerGroupInput
+
+    DeleteGameServerGroupOutput.add_member(:game_server_group, Shapes::ShapeRef.new(shape: GameServerGroup, location_name: "GameServerGroup"))
+    DeleteGameServerGroupOutput.struct_class = Types::DeleteGameServerGroupOutput
+
+    DeleteGameSessionQueueInput.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueNameOrArn, required: true, location_name: "Name"))
     DeleteGameSessionQueueInput.struct_class = Types::DeleteGameSessionQueueInput
 
     DeleteGameSessionQueueOutput.struct_class = Types::DeleteGameSessionQueueOutput
@@ -547,10 +650,10 @@ module Aws::GameLift
     DeleteMatchmakingRuleSetOutput.struct_class = Types::DeleteMatchmakingRuleSetOutput
 
     DeleteScalingPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
-    DeleteScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DeleteScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DeleteScalingPolicyInput.struct_class = Types::DeleteScalingPolicyInput
 
-    DeleteScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, required: true, location_name: "ScriptId"))
+    DeleteScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptIdOrArn, required: true, location_name: "ScriptId"))
     DeleteScriptInput.struct_class = Types::DeleteScriptInput
 
     DeleteVpcPeeringAuthorizationInput.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "GameLiftAwsAccountId"))
@@ -565,13 +668,17 @@ module Aws::GameLift
 
     DeleteVpcPeeringConnectionOutput.struct_class = Types::DeleteVpcPeeringConnectionOutput
 
-    DescribeAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
+    DeregisterGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    DeregisterGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, required: true, location_name: "GameServerId"))
+    DeregisterGameServerInput.struct_class = Types::DeregisterGameServerInput
+
+    DescribeAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, required: true, location_name: "AliasId"))
     DescribeAliasInput.struct_class = Types::DescribeAliasInput
 
     DescribeAliasOutput.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     DescribeAliasOutput.struct_class = Types::DescribeAliasOutput
 
-    DescribeBuildInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, required: true, location_name: "BuildId"))
+    DescribeBuildInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, required: true, location_name: "BuildId"))
     DescribeBuildInput.struct_class = Types::DescribeBuildInput
 
     DescribeBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "Build"))
@@ -583,7 +690,7 @@ module Aws::GameLift
     DescribeEC2InstanceLimitsOutput.add_member(:ec2_instance_limits, Shapes::ShapeRef.new(shape: EC2InstanceLimitList, location_name: "EC2InstanceLimits"))
     DescribeEC2InstanceLimitsOutput.struct_class = Types::DescribeEC2InstanceLimitsOutput
 
-    DescribeFleetAttributesInput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdList, location_name: "FleetIds"))
+    DescribeFleetAttributesInput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdOrArnList, location_name: "FleetIds"))
     DescribeFleetAttributesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeFleetAttributesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetAttributesInput.struct_class = Types::DescribeFleetAttributesInput
@@ -592,7 +699,7 @@ module Aws::GameLift
     DescribeFleetAttributesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetAttributesOutput.struct_class = Types::DescribeFleetAttributesOutput
 
-    DescribeFleetCapacityInput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdList, location_name: "FleetIds"))
+    DescribeFleetCapacityInput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdOrArnList, location_name: "FleetIds"))
     DescribeFleetCapacityInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeFleetCapacityInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetCapacityInput.struct_class = Types::DescribeFleetCapacityInput
@@ -601,7 +708,7 @@ module Aws::GameLift
     DescribeFleetCapacityOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetCapacityOutput.struct_class = Types::DescribeFleetCapacityOutput
 
-    DescribeFleetEventsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DescribeFleetEventsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DescribeFleetEventsInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     DescribeFleetEventsInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     DescribeFleetEventsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
@@ -612,13 +719,13 @@ module Aws::GameLift
     DescribeFleetEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetEventsOutput.struct_class = Types::DescribeFleetEventsOutput
 
-    DescribeFleetPortSettingsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DescribeFleetPortSettingsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DescribeFleetPortSettingsInput.struct_class = Types::DescribeFleetPortSettingsInput
 
     DescribeFleetPortSettingsOutput.add_member(:inbound_permissions, Shapes::ShapeRef.new(shape: IpPermissionsList, location_name: "InboundPermissions"))
     DescribeFleetPortSettingsOutput.struct_class = Types::DescribeFleetPortSettingsOutput
 
-    DescribeFleetUtilizationInput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdList, location_name: "FleetIds"))
+    DescribeFleetUtilizationInput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdOrArnList, location_name: "FleetIds"))
     DescribeFleetUtilizationInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeFleetUtilizationInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetUtilizationInput.struct_class = Types::DescribeFleetUtilizationInput
@@ -627,9 +734,22 @@ module Aws::GameLift
     DescribeFleetUtilizationOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeFleetUtilizationOutput.struct_class = Types::DescribeFleetUtilizationOutput
 
-    DescribeGameSessionDetailsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    DescribeGameServerGroupInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    DescribeGameServerGroupInput.struct_class = Types::DescribeGameServerGroupInput
+
+    DescribeGameServerGroupOutput.add_member(:game_server_group, Shapes::ShapeRef.new(shape: GameServerGroup, location_name: "GameServerGroup"))
+    DescribeGameServerGroupOutput.struct_class = Types::DescribeGameServerGroupOutput
+
+    DescribeGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    DescribeGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, required: true, location_name: "GameServerId"))
+    DescribeGameServerInput.struct_class = Types::DescribeGameServerInput
+
+    DescribeGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
+    DescribeGameServerOutput.struct_class = Types::DescribeGameServerOutput
+
+    DescribeGameSessionDetailsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, location_name: "FleetId"))
     DescribeGameSessionDetailsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionId"))
-    DescribeGameSessionDetailsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
+    DescribeGameSessionDetailsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, location_name: "AliasId"))
     DescribeGameSessionDetailsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "StatusFilter"))
     DescribeGameSessionDetailsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeGameSessionDetailsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
@@ -645,7 +765,7 @@ module Aws::GameLift
     DescribeGameSessionPlacementOutput.add_member(:game_session_placement, Shapes::ShapeRef.new(shape: GameSessionPlacement, location_name: "GameSessionPlacement"))
     DescribeGameSessionPlacementOutput.struct_class = Types::DescribeGameSessionPlacementOutput
 
-    DescribeGameSessionQueuesInput.add_member(:names, Shapes::ShapeRef.new(shape: GameSessionQueueNameList, location_name: "Names"))
+    DescribeGameSessionQueuesInput.add_member(:names, Shapes::ShapeRef.new(shape: GameSessionQueueNameOrArnList, location_name: "Names"))
     DescribeGameSessionQueuesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeGameSessionQueuesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeGameSessionQueuesInput.struct_class = Types::DescribeGameSessionQueuesInput
@@ -654,9 +774,9 @@ module Aws::GameLift
     DescribeGameSessionQueuesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeGameSessionQueuesOutput.struct_class = Types::DescribeGameSessionQueuesOutput
 
-    DescribeGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    DescribeGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, location_name: "FleetId"))
     DescribeGameSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionId"))
-    DescribeGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
+    DescribeGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, location_name: "AliasId"))
     DescribeGameSessionsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "StatusFilter"))
     DescribeGameSessionsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeGameSessionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
@@ -666,7 +786,7 @@ module Aws::GameLift
     DescribeGameSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeGameSessionsOutput.struct_class = Types::DescribeGameSessionsOutput
 
-    DescribeInstancesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DescribeInstancesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DescribeInstancesInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     DescribeInstancesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
@@ -713,13 +833,13 @@ module Aws::GameLift
     DescribePlayerSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribePlayerSessionsOutput.struct_class = Types::DescribePlayerSessionsOutput
 
-    DescribeRuntimeConfigurationInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DescribeRuntimeConfigurationInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DescribeRuntimeConfigurationInput.struct_class = Types::DescribeRuntimeConfigurationInput
 
     DescribeRuntimeConfigurationOutput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
     DescribeRuntimeConfigurationOutput.struct_class = Types::DescribeRuntimeConfigurationOutput
 
-    DescribeScalingPoliciesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    DescribeScalingPoliciesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     DescribeScalingPoliciesInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: ScalingStatusType, location_name: "StatusFilter"))
     DescribeScalingPoliciesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeScalingPoliciesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
@@ -729,7 +849,7 @@ module Aws::GameLift
     DescribeScalingPoliciesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeScalingPoliciesOutput.struct_class = Types::DescribeScalingPoliciesOutput
 
-    DescribeScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, required: true, location_name: "ScriptId"))
+    DescribeScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptIdOrArn, required: true, location_name: "ScriptId"))
     DescribeScriptInput.struct_class = Types::DescribeScriptInput
 
     DescribeScriptOutput.add_member(:script, Shapes::ShapeRef.new(shape: Script, location_name: "Script"))
@@ -781,7 +901,7 @@ module Aws::GameLift
     FleetActionList.member = Shapes::ShapeRef.new(shape: FleetAction)
 
     FleetAttributes.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    FleetAttributes.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
+    FleetAttributes.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
     FleetAttributes.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
     FleetAttributes.add_member(:instance_type, Shapes::ShapeRef.new(shape: EC2InstanceType, location_name: "InstanceType"))
     FleetAttributes.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
@@ -819,6 +939,8 @@ module Aws::GameLift
 
     FleetIdList.member = Shapes::ShapeRef.new(shape: FleetId)
 
+    FleetIdOrArnList.member = Shapes::ShapeRef.new(shape: FleetIdOrArn)
+
     FleetUtilization.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     FleetUtilization.add_member(:active_server_process_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ActiveServerProcessCount"))
     FleetUtilization.add_member(:active_game_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ActiveGameSessionCount"))
@@ -834,10 +956,48 @@ module Aws::GameLift
 
     GamePropertyList.member = Shapes::ShapeRef.new(shape: GameProperty)
 
+    GameServer.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupName, location_name: "GameServerGroupName"))
+    GameServer.add_member(:game_server_group_arn, Shapes::ShapeRef.new(shape: GameServerGroupArn, location_name: "GameServerGroupArn"))
+    GameServer.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, location_name: "GameServerId"))
+    GameServer.add_member(:instance_id, Shapes::ShapeRef.new(shape: GameServerInstanceId, location_name: "InstanceId"))
+    GameServer.add_member(:connection_info, Shapes::ShapeRef.new(shape: GameServerConnectionInfo, location_name: "ConnectionInfo"))
+    GameServer.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
+    GameServer.add_member(:custom_sort_key, Shapes::ShapeRef.new(shape: GameServerSortKey, location_name: "CustomSortKey"))
+    GameServer.add_member(:claim_status, Shapes::ShapeRef.new(shape: GameServerClaimStatus, location_name: "ClaimStatus"))
+    GameServer.add_member(:utilization_status, Shapes::ShapeRef.new(shape: GameServerUtilizationStatus, location_name: "UtilizationStatus"))
+    GameServer.add_member(:registration_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RegistrationTime"))
+    GameServer.add_member(:last_claim_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastClaimTime"))
+    GameServer.add_member(:last_health_check_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastHealthCheckTime"))
+    GameServer.struct_class = Types::GameServer
+
+    GameServerGroup.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupName, location_name: "GameServerGroupName"))
+    GameServerGroup.add_member(:game_server_group_arn, Shapes::ShapeRef.new(shape: GameServerGroupArn, location_name: "GameServerGroupArn"))
+    GameServerGroup.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    GameServerGroup.add_member(:instance_definitions, Shapes::ShapeRef.new(shape: InstanceDefinitions, location_name: "InstanceDefinitions"))
+    GameServerGroup.add_member(:balancing_strategy, Shapes::ShapeRef.new(shape: BalancingStrategy, location_name: "BalancingStrategy"))
+    GameServerGroup.add_member(:game_server_protection_policy, Shapes::ShapeRef.new(shape: GameServerProtectionPolicy, location_name: "GameServerProtectionPolicy"))
+    GameServerGroup.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: AutoScalingGroupArn, location_name: "AutoScalingGroupArn"))
+    GameServerGroup.add_member(:status, Shapes::ShapeRef.new(shape: GameServerGroupStatus, location_name: "Status"))
+    GameServerGroup.add_member(:status_reason, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "StatusReason"))
+    GameServerGroup.add_member(:suspended_actions, Shapes::ShapeRef.new(shape: GameServerGroupActions, location_name: "SuspendedActions"))
+    GameServerGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    GameServerGroup.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
+    GameServerGroup.struct_class = Types::GameServerGroup
+
+    GameServerGroupActions.member = Shapes::ShapeRef.new(shape: GameServerGroupAction)
+
+    GameServerGroupAutoScalingPolicy.add_member(:estimated_instance_warmup, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "EstimatedInstanceWarmup"))
+    GameServerGroupAutoScalingPolicy.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, required: true, location_name: "TargetTrackingConfiguration"))
+    GameServerGroupAutoScalingPolicy.struct_class = Types::GameServerGroupAutoScalingPolicy
+
+    GameServerGroups.member = Shapes::ShapeRef.new(shape: GameServerGroup)
+
+    GameServers.member = Shapes::ShapeRef.new(shape: GameServer)
+
     GameSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
     GameSession.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     GameSession.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    GameSession.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
+    GameSession.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
     GameSession.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     GameSession.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
     GameSession.add_member(:current_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "CurrentPlayerSessionCount"))
@@ -893,7 +1053,7 @@ module Aws::GameLift
     GameSessionPlacement.struct_class = Types::GameSessionPlacement
 
     GameSessionQueue.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, location_name: "Name"))
-    GameSessionQueue.add_member(:game_session_queue_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionQueueArn"))
+    GameSessionQueue.add_member(:game_session_queue_arn, Shapes::ShapeRef.new(shape: GameSessionQueueArn, location_name: "GameSessionQueueArn"))
     GameSessionQueue.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutInSeconds"))
     GameSessionQueue.add_member(:player_latency_policies, Shapes::ShapeRef.new(shape: PlayerLatencyPolicyList, location_name: "PlayerLatencyPolicies"))
     GameSessionQueue.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
@@ -906,7 +1066,7 @@ module Aws::GameLift
 
     GameSessionQueueList.member = Shapes::ShapeRef.new(shape: GameSessionQueue)
 
-    GameSessionQueueNameList.member = Shapes::ShapeRef.new(shape: GameSessionQueueName)
+    GameSessionQueueNameOrArnList.member = Shapes::ShapeRef.new(shape: GameSessionQueueNameOrArn)
 
     GetGameSessionLogUrlInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionId"))
     GetGameSessionLogUrlInput.struct_class = Types::GetGameSessionLogUrlInput
@@ -914,7 +1074,7 @@ module Aws::GameLift
     GetGameSessionLogUrlOutput.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PreSignedUrl"))
     GetGameSessionLogUrlOutput.struct_class = Types::GetGameSessionLogUrlOutput
 
-    GetInstanceAccessInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    GetInstanceAccessInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     GetInstanceAccessInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     GetInstanceAccessInput.struct_class = Types::GetInstanceAccessInput
 
@@ -945,6 +1105,12 @@ module Aws::GameLift
     InstanceCredentials.add_member(:secret, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Secret"))
     InstanceCredentials.struct_class = Types::InstanceCredentials
 
+    InstanceDefinition.add_member(:instance_type, Shapes::ShapeRef.new(shape: GameServerGroupInstanceType, required: true, location_name: "InstanceType"))
+    InstanceDefinition.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: WeightedCapacity, location_name: "WeightedCapacity"))
+    InstanceDefinition.struct_class = Types::InstanceDefinition
+
+    InstanceDefinitions.member = Shapes::ShapeRef.new(shape: InstanceDefinition)
+
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
 
     InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
@@ -970,6 +1136,11 @@ module Aws::GameLift
     LatencyMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     LatencyMap.value = Shapes::ShapeRef.new(shape: PositiveInteger)
 
+    LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "LaunchTemplateId"))
+    LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, location_name: "LaunchTemplateName"))
+    LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: LaunchTemplateVersion, location_name: "Version"))
+    LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -992,8 +1163,8 @@ module Aws::GameLift
     ListBuildsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     ListBuildsOutput.struct_class = Types::ListBuildsOutput
 
-    ListFleetsInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
-    ListFleetsInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
+    ListFleetsInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, location_name: "BuildId"))
+    ListFleetsInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptIdOrArn, location_name: "ScriptId"))
     ListFleetsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     ListFleetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     ListFleetsInput.struct_class = Types::ListFleetsInput
@@ -1001,6 +1172,24 @@ module Aws::GameLift
     ListFleetsOutput.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdList, location_name: "FleetIds"))
     ListFleetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     ListFleetsOutput.struct_class = Types::ListFleetsOutput
+
+    ListGameServerGroupsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
+    ListGameServerGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+    ListGameServerGroupsInput.struct_class = Types::ListGameServerGroupsInput
+
+    ListGameServerGroupsOutput.add_member(:game_server_groups, Shapes::ShapeRef.new(shape: GameServerGroups, location_name: "GameServerGroups"))
+    ListGameServerGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+    ListGameServerGroupsOutput.struct_class = Types::ListGameServerGroupsOutput
+
+    ListGameServersInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    ListGameServersInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListGameServersInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
+    ListGameServersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+    ListGameServersInput.struct_class = Types::ListGameServersInput
+
+    ListGameServersOutput.add_member(:game_servers, Shapes::ShapeRef.new(shape: GameServers, location_name: "GameServers"))
+    ListGameServersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+    ListGameServersOutput.struct_class = Types::ListGameServersOutput
 
     ListScriptsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     ListScriptsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
@@ -1076,6 +1265,9 @@ module Aws::GameLift
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    OutOfCapacityException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    OutOfCapacityException.struct_class = Types::OutOfCapacityException
+
     PlacedPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     PlacedPlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
     PlacedPlayerSession.struct_class = Types::PlacedPlayerSession
@@ -1115,7 +1307,7 @@ module Aws::GameLift
     PlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     PlayerSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
     PlayerSession.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    PlayerSession.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
+    PlayerSession.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
     PlayerSession.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     PlayerSession.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
     PlayerSession.add_member(:status, Shapes::ShapeRef.new(shape: PlayerSessionStatus, location_name: "Status"))
@@ -1128,7 +1320,7 @@ module Aws::GameLift
     PlayerSessionList.member = Shapes::ShapeRef.new(shape: PlayerSession)
 
     PutScalingPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
-    PutScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    PutScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     PutScalingPolicyInput.add_member(:scaling_adjustment, Shapes::ShapeRef.new(shape: Integer, location_name: "ScalingAdjustment"))
     PutScalingPolicyInput.add_member(:scaling_adjustment_type, Shapes::ShapeRef.new(shape: ScalingAdjustmentType, location_name: "ScalingAdjustmentType"))
     PutScalingPolicyInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Double, location_name: "Threshold"))
@@ -1144,23 +1336,42 @@ module Aws::GameLift
 
     QueueArnsList.member = Shapes::ShapeRef.new(shape: ArnStringModel)
 
-    RequestUploadCredentialsInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, required: true, location_name: "BuildId"))
+    RegisterGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    RegisterGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, required: true, location_name: "GameServerId"))
+    RegisterGameServerInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: GameServerInstanceId, required: true, location_name: "InstanceId"))
+    RegisterGameServerInput.add_member(:connection_info, Shapes::ShapeRef.new(shape: GameServerConnectionInfo, location_name: "ConnectionInfo"))
+    RegisterGameServerInput.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
+    RegisterGameServerInput.add_member(:custom_sort_key, Shapes::ShapeRef.new(shape: GameServerSortKey, location_name: "CustomSortKey"))
+    RegisterGameServerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    RegisterGameServerInput.struct_class = Types::RegisterGameServerInput
+
+    RegisterGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
+    RegisterGameServerOutput.struct_class = Types::RegisterGameServerOutput
+
+    RequestUploadCredentialsInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, required: true, location_name: "BuildId"))
     RequestUploadCredentialsInput.struct_class = Types::RequestUploadCredentialsInput
 
     RequestUploadCredentialsOutput.add_member(:upload_credentials, Shapes::ShapeRef.new(shape: AwsCredentials, location_name: "UploadCredentials"))
     RequestUploadCredentialsOutput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
     RequestUploadCredentialsOutput.struct_class = Types::RequestUploadCredentialsOutput
 
-    ResolveAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
+    ResolveAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, required: true, location_name: "AliasId"))
     ResolveAliasInput.struct_class = Types::ResolveAliasInput
 
     ResolveAliasOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    ResolveAliasOutput.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
+    ResolveAliasOutput.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
     ResolveAliasOutput.struct_class = Types::ResolveAliasOutput
 
     ResourceCreationLimitPolicy.add_member(:new_game_sessions_per_creator, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "NewGameSessionsPerCreator"))
     ResourceCreationLimitPolicy.add_member(:policy_period_in_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "PolicyPeriodInMinutes"))
     ResourceCreationLimitPolicy.struct_class = Types::ResourceCreationLimitPolicy
+
+    ResumeGameServerGroupInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    ResumeGameServerGroupInput.add_member(:resume_actions, Shapes::ShapeRef.new(shape: GameServerGroupActions, required: true, location_name: "ResumeActions"))
+    ResumeGameServerGroupInput.struct_class = Types::ResumeGameServerGroupInput
+
+    ResumeGameServerGroupOutput.add_member(:game_server_group, Shapes::ShapeRef.new(shape: GameServerGroup, location_name: "GameServerGroup"))
+    ResumeGameServerGroupOutput.struct_class = Types::ResumeGameServerGroupOutput
 
     RoutingStrategy.add_member(:type, Shapes::ShapeRef.new(shape: RoutingStrategyType, location_name: "Type"))
     RoutingStrategy.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
@@ -1204,8 +1415,8 @@ module Aws::GameLift
 
     ScriptList.member = Shapes::ShapeRef.new(shape: Script)
 
-    SearchGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    SearchGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
+    SearchGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, location_name: "FleetId"))
+    SearchGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, location_name: "AliasId"))
     SearchGameSessionsInput.add_member(:filter_expression, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "FilterExpression"))
     SearchGameSessionsInput.add_member(:sort_expression, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "SortExpression"))
     SearchGameSessionsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
@@ -1223,14 +1434,14 @@ module Aws::GameLift
 
     ServerProcessList.member = Shapes::ShapeRef.new(shape: ServerProcess)
 
-    StartFleetActionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    StartFleetActionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     StartFleetActionsInput.add_member(:actions, Shapes::ShapeRef.new(shape: FleetActionList, required: true, location_name: "Actions"))
     StartFleetActionsInput.struct_class = Types::StartFleetActionsInput
 
     StartFleetActionsOutput.struct_class = Types::StartFleetActionsOutput
 
     StartGameSessionPlacementInput.add_member(:placement_id, Shapes::ShapeRef.new(shape: IdStringModel, required: true, location_name: "PlacementId"))
-    StartGameSessionPlacementInput.add_member(:game_session_queue_name, Shapes::ShapeRef.new(shape: GameSessionQueueName, required: true, location_name: "GameSessionQueueName"))
+    StartGameSessionPlacementInput.add_member(:game_session_queue_name, Shapes::ShapeRef.new(shape: GameSessionQueueNameOrArn, required: true, location_name: "GameSessionQueueName"))
     StartGameSessionPlacementInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     StartGameSessionPlacementInput.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "MaximumPlayerSessionCount"))
     StartGameSessionPlacementInput.add_member(:game_session_name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionName"))
@@ -1259,7 +1470,7 @@ module Aws::GameLift
     StartMatchmakingOutput.add_member(:matchmaking_ticket, Shapes::ShapeRef.new(shape: MatchmakingTicket, location_name: "MatchmakingTicket"))
     StartMatchmakingOutput.struct_class = Types::StartMatchmakingOutput
 
-    StopFleetActionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    StopFleetActionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     StopFleetActionsInput.add_member(:actions, Shapes::ShapeRef.new(shape: FleetActionList, required: true, location_name: "Actions"))
     StopFleetActionsInput.struct_class = Types::StopFleetActionsInput
 
@@ -1281,6 +1492,13 @@ module Aws::GameLift
 
     StringList.member = Shapes::ShapeRef.new(shape: NonZeroAndMaxString)
 
+    SuspendGameServerGroupInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    SuspendGameServerGroupInput.add_member(:suspend_actions, Shapes::ShapeRef.new(shape: GameServerGroupActions, required: true, location_name: "SuspendActions"))
+    SuspendGameServerGroupInput.struct_class = Types::SuspendGameServerGroupInput
+
+    SuspendGameServerGroupOutput.add_member(:game_server_group, Shapes::ShapeRef.new(shape: GameServerGroup, location_name: "GameServerGroup"))
+    SuspendGameServerGroupOutput.struct_class = Types::SuspendGameServerGroupOutput
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -1301,6 +1519,9 @@ module Aws::GameLift
     TargetConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
     TargetConfiguration.struct_class = Types::TargetConfiguration
 
+    TargetTrackingConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: NonNegativeDouble, required: true, location_name: "TargetValue"))
+    TargetTrackingConfiguration.struct_class = Types::TargetTrackingConfiguration
+
     TerminalRoutingStrategyException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     TerminalRoutingStrategyException.struct_class = Types::TerminalRoutingStrategyException
 
@@ -1316,7 +1537,7 @@ module Aws::GameLift
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
+    UpdateAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasIdOrArn, required: true, location_name: "AliasId"))
     UpdateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))
     UpdateAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     UpdateAliasInput.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, location_name: "RoutingStrategy"))
@@ -1325,7 +1546,7 @@ module Aws::GameLift
     UpdateAliasOutput.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
     UpdateAliasOutput.struct_class = Types::UpdateAliasOutput
 
-    UpdateBuildInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, required: true, location_name: "BuildId"))
+    UpdateBuildInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildIdOrArn, required: true, location_name: "BuildId"))
     UpdateBuildInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     UpdateBuildInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
     UpdateBuildInput.struct_class = Types::UpdateBuildInput
@@ -1333,7 +1554,7 @@ module Aws::GameLift
     UpdateBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "Build"))
     UpdateBuildOutput.struct_class = Types::UpdateBuildOutput
 
-    UpdateFleetAttributesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    UpdateFleetAttributesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     UpdateFleetAttributesInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     UpdateFleetAttributesInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     UpdateFleetAttributesInput.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
@@ -1344,7 +1565,7 @@ module Aws::GameLift
     UpdateFleetAttributesOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     UpdateFleetAttributesOutput.struct_class = Types::UpdateFleetAttributesOutput
 
-    UpdateFleetCapacityInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    UpdateFleetCapacityInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     UpdateFleetCapacityInput.add_member(:desired_instances, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "DesiredInstances"))
     UpdateFleetCapacityInput.add_member(:min_size, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MinSize"))
     UpdateFleetCapacityInput.add_member(:max_size, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaxSize"))
@@ -1353,13 +1574,34 @@ module Aws::GameLift
     UpdateFleetCapacityOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     UpdateFleetCapacityOutput.struct_class = Types::UpdateFleetCapacityOutput
 
-    UpdateFleetPortSettingsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    UpdateFleetPortSettingsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     UpdateFleetPortSettingsInput.add_member(:inbound_permission_authorizations, Shapes::ShapeRef.new(shape: IpPermissionsList, location_name: "InboundPermissionAuthorizations"))
     UpdateFleetPortSettingsInput.add_member(:inbound_permission_revocations, Shapes::ShapeRef.new(shape: IpPermissionsList, location_name: "InboundPermissionRevocations"))
     UpdateFleetPortSettingsInput.struct_class = Types::UpdateFleetPortSettingsInput
 
     UpdateFleetPortSettingsOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     UpdateFleetPortSettingsOutput.struct_class = Types::UpdateFleetPortSettingsOutput
+
+    UpdateGameServerGroupInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    UpdateGameServerGroupInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    UpdateGameServerGroupInput.add_member(:instance_definitions, Shapes::ShapeRef.new(shape: InstanceDefinitions, location_name: "InstanceDefinitions"))
+    UpdateGameServerGroupInput.add_member(:game_server_protection_policy, Shapes::ShapeRef.new(shape: GameServerProtectionPolicy, location_name: "GameServerProtectionPolicy"))
+    UpdateGameServerGroupInput.add_member(:balancing_strategy, Shapes::ShapeRef.new(shape: BalancingStrategy, location_name: "BalancingStrategy"))
+    UpdateGameServerGroupInput.struct_class = Types::UpdateGameServerGroupInput
+
+    UpdateGameServerGroupOutput.add_member(:game_server_group, Shapes::ShapeRef.new(shape: GameServerGroup, location_name: "GameServerGroup"))
+    UpdateGameServerGroupOutput.struct_class = Types::UpdateGameServerGroupOutput
+
+    UpdateGameServerInput.add_member(:game_server_group_name, Shapes::ShapeRef.new(shape: GameServerGroupNameOrArn, required: true, location_name: "GameServerGroupName"))
+    UpdateGameServerInput.add_member(:game_server_id, Shapes::ShapeRef.new(shape: GameServerId, required: true, location_name: "GameServerId"))
+    UpdateGameServerInput.add_member(:game_server_data, Shapes::ShapeRef.new(shape: GameServerData, location_name: "GameServerData"))
+    UpdateGameServerInput.add_member(:custom_sort_key, Shapes::ShapeRef.new(shape: GameServerSortKey, location_name: "CustomSortKey"))
+    UpdateGameServerInput.add_member(:utilization_status, Shapes::ShapeRef.new(shape: GameServerUtilizationStatus, location_name: "UtilizationStatus"))
+    UpdateGameServerInput.add_member(:health_check, Shapes::ShapeRef.new(shape: GameServerHealthCheck, location_name: "HealthCheck"))
+    UpdateGameServerInput.struct_class = Types::UpdateGameServerInput
+
+    UpdateGameServerOutput.add_member(:game_server, Shapes::ShapeRef.new(shape: GameServer, location_name: "GameServer"))
+    UpdateGameServerOutput.struct_class = Types::UpdateGameServerOutput
 
     UpdateGameSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionId"))
     UpdateGameSessionInput.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaximumPlayerSessionCount"))
@@ -1371,7 +1613,7 @@ module Aws::GameLift
     UpdateGameSessionOutput.add_member(:game_session, Shapes::ShapeRef.new(shape: GameSession, location_name: "GameSession"))
     UpdateGameSessionOutput.struct_class = Types::UpdateGameSessionOutput
 
-    UpdateGameSessionQueueInput.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, required: true, location_name: "Name"))
+    UpdateGameSessionQueueInput.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueNameOrArn, required: true, location_name: "Name"))
     UpdateGameSessionQueueInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutInSeconds"))
     UpdateGameSessionQueueInput.add_member(:player_latency_policies, Shapes::ShapeRef.new(shape: PlayerLatencyPolicyList, location_name: "PlayerLatencyPolicies"))
     UpdateGameSessionQueueInput.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
@@ -1398,14 +1640,14 @@ module Aws::GameLift
     UpdateMatchmakingConfigurationOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: MatchmakingConfiguration, location_name: "Configuration"))
     UpdateMatchmakingConfigurationOutput.struct_class = Types::UpdateMatchmakingConfigurationOutput
 
-    UpdateRuntimeConfigurationInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    UpdateRuntimeConfigurationInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdOrArn, required: true, location_name: "FleetId"))
     UpdateRuntimeConfigurationInput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, required: true, location_name: "RuntimeConfiguration"))
     UpdateRuntimeConfigurationInput.struct_class = Types::UpdateRuntimeConfigurationInput
 
     UpdateRuntimeConfigurationOutput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
     UpdateRuntimeConfigurationOutput.struct_class = Types::UpdateRuntimeConfigurationOutput
 
-    UpdateScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, required: true, location_name: "ScriptId"))
+    UpdateScriptInput.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptIdOrArn, required: true, location_name: "ScriptId"))
     UpdateScriptInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     UpdateScriptInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
     UpdateScriptInput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
@@ -1431,7 +1673,7 @@ module Aws::GameLift
     VpcPeeringAuthorizationList.member = Shapes::ShapeRef.new(shape: VpcPeeringAuthorization)
 
     VpcPeeringConnection.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-    VpcPeeringConnection.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
+    VpcPeeringConnection.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: FleetArn, location_name: "FleetArn"))
     VpcPeeringConnection.add_member(:ip_v4_cidr_block, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "IpV4CidrBlock"))
     VpcPeeringConnection.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "VpcPeeringConnectionId"))
     VpcPeeringConnection.add_member(:status, Shapes::ShapeRef.new(shape: VpcPeeringConnectionStatus, location_name: "Status"))
@@ -1444,6 +1686,8 @@ module Aws::GameLift
     VpcPeeringConnectionStatus.add_member(:code, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Code"))
     VpcPeeringConnectionStatus.add_member(:message, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Message"))
     VpcPeeringConnectionStatus.struct_class = Types::VpcPeeringConnectionStatus
+
+    VpcSubnets.member = Shapes::ShapeRef.new(shape: VpcSubnet)
 
 
     # @api private
@@ -1473,6 +1717,20 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+      end)
+
+      api.add_operation(:claim_game_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ClaimGameServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ClaimGameServerInput)
+        o.output = Shapes::ShapeRef.new(shape: ClaimGameServerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: OutOfCapacityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:create_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1515,6 +1773,19 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
+      end)
+
+      api.add_operation(:create_game_server_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateGameServerGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateGameServerGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateGameServerGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_game_session, Seahorse::Model::Operation.new.tap do |o|
@@ -1681,6 +1952,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
+      api.add_operation(:delete_game_server_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGameServerGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGameServerGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGameServerGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:delete_game_session_queue, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteGameSessionQueue"
         o.http_method = "POST"
@@ -1766,6 +2049,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:deregister_game_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterGameServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterGameServerInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -1862,6 +2157,30 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:describe_game_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGameServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGameServerInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGameServerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_game_server_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGameServerGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGameServerGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGameServerGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:describe_game_session_details, Seahorse::Model::Operation.new.tap do |o|
@@ -2089,6 +2408,28 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:list_game_server_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGameServerGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGameServerGroupsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListGameServerGroupsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:list_game_servers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGameServers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListGameServersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListGameServersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:list_scripts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListScripts"
         o.http_method = "POST"
@@ -2124,6 +2465,19 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:register_game_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterGameServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterGameServerInput)
+        o.output = Shapes::ShapeRef.new(shape: RegisterGameServerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:request_upload_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RequestUploadCredentials"
         o.http_method = "POST"
@@ -2146,6 +2500,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:resume_game_server_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeGameServerGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResumeGameServerGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: ResumeGameServerGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -2246,6 +2612,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
+      api.add_operation(:suspend_game_server_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SuspendGameServerGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SuspendGameServerGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: SuspendGameServerGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -2337,6 +2715,30 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_game_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGameServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGameServerInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGameServerOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_game_server_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGameServerGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGameServerGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGameServerGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_game_session, Seahorse::Model::Operation.new.tap do |o|

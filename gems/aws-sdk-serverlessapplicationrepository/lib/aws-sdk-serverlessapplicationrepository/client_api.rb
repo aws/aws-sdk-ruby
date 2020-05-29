@@ -61,6 +61,8 @@ module Aws::ServerlessApplicationRepository
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TemplateDetails = Shapes::StructureShape.new(name: 'TemplateDetails')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UnshareApplicationInput = Shapes::StructureShape.new(name: 'UnshareApplicationInput')
+    UnshareApplicationRequest = Shapes::StructureShape.new(name: 'UnshareApplicationRequest')
     UpdateApplicationInput = Shapes::StructureShape.new(name: 'UpdateApplicationInput')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
@@ -113,6 +115,7 @@ module Aws::ServerlessApplicationRepository
     ApplicationPolicy.struct_class = Types::ApplicationPolicy
 
     ApplicationPolicyStatement.add_member(:actions, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "actions"))
+    ApplicationPolicyStatement.add_member(:principal_org_i_ds, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "principalOrgIDs"))
     ApplicationPolicyStatement.add_member(:principals, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "principals"))
     ApplicationPolicyStatement.add_member(:statement_id, Shapes::ShapeRef.new(shape: __string, location_name: "statementId"))
     ApplicationPolicyStatement.struct_class = Types::ApplicationPolicyStatement
@@ -398,6 +401,13 @@ module Aws::ServerlessApplicationRepository
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
+    UnshareApplicationInput.add_member(:organization_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "organizationId"))
+    UnshareApplicationInput.struct_class = Types::UnshareApplicationInput
+
+    UnshareApplicationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "applicationId"))
+    UnshareApplicationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "organizationId"))
+    UnshareApplicationRequest.struct_class = Types::UnshareApplicationRequest
+
     UpdateApplicationInput.add_member(:author, Shapes::ShapeRef.new(shape: __string, location_name: "author"))
     UpdateApplicationInput.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateApplicationInput.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
@@ -651,6 +661,19 @@ module Aws::ServerlessApplicationRepository
         o.http_request_uri = "/applications/{applicationId}/policy"
         o.input = Shapes::ShapeRef.new(shape: PutApplicationPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutApplicationPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:unshare_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UnshareApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/applications/{applicationId}/unshare"
+        o.input = Shapes::ShapeRef.new(shape: UnshareApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

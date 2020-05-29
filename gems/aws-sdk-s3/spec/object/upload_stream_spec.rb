@@ -212,7 +212,7 @@ module Aws
           )
         end
 
-        it 'automatically deletes failed multipart upload on error' do
+        it 'automatically deletes failed multipart upload on part processing error' do
           client.stub_responses(
             :upload_part, [
               { etag: 'etag-1' },
@@ -233,6 +233,17 @@ module Aws
               end
             end
           end.to raise_error('multipart upload failed: part 3 failed')
+        end
+
+        it 'automatically deletes failed multipart upload on stream read error' do
+          expect(client).to receive(:abort_multipart_upload)
+            .with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
+
+          expect do
+            object.upload_stream do |_write_stream|
+              raise 'something went wrong'
+            end
+          end.to raise_error('multipart upload failed: something went wrong')
         end
 
         it 'reports when it is unable to abort a failed multipart upload' do
@@ -381,7 +392,7 @@ module Aws
             )
           end
 
-          it 'automatically deletes failed multipart upload on error' do
+          it 'automatically deletes failed multipart upload on part processing error' do
             client.stub_responses(
               :upload_part,
               [
@@ -404,6 +415,18 @@ module Aws
                 end
               end
             end.to raise_error('multipart upload failed: part 3 failed')
+          end
+
+          it 'automatically deletes failed multipart upload on stream read error' do
+            expect(client).to receive(:abort_multipart_upload).with(
+              bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId'
+            )
+
+            expect do
+              object.upload_stream(tempfile: true) do |_write_stream|
+                raise 'something went wrong'
+              end
+            end.to raise_error('multipart upload failed: something went wrong')
           end
 
           it 'reports when it is unable to abort a failed multipart upload' do

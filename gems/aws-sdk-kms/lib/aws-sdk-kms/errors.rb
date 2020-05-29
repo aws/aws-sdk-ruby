@@ -6,6 +6,61 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::KMS
+
+  # When KMS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::KMS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all KMS errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::KMS::Errors::ServiceError
+  #       # rescues all KMS API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AlreadyExistsException}
+  # * {CloudHsmClusterInUseException}
+  # * {CloudHsmClusterInvalidConfigurationException}
+  # * {CloudHsmClusterNotActiveException}
+  # * {CloudHsmClusterNotFoundException}
+  # * {CloudHsmClusterNotRelatedException}
+  # * {CustomKeyStoreHasCMKsException}
+  # * {CustomKeyStoreInvalidStateException}
+  # * {CustomKeyStoreNameInUseException}
+  # * {CustomKeyStoreNotFoundException}
+  # * {DependencyTimeoutException}
+  # * {DisabledException}
+  # * {ExpiredImportTokenException}
+  # * {IncorrectKeyException}
+  # * {IncorrectKeyMaterialException}
+  # * {IncorrectTrustAnchorException}
+  # * {InvalidAliasNameException}
+  # * {InvalidArnException}
+  # * {InvalidCiphertextException}
+  # * {InvalidGrantIdException}
+  # * {InvalidGrantTokenException}
+  # * {InvalidImportTokenException}
+  # * {InvalidKeyUsageException}
+  # * {InvalidMarkerException}
+  # * {KMSInternalException}
+  # * {KMSInvalidSignatureException}
+  # * {KMSInvalidStateException}
+  # * {KeyUnavailableException}
+  # * {LimitExceededException}
+  # * {MalformedPolicyDocumentException}
+  # * {NotFoundException}
+  # * {TagException}
+  # * {UnsupportedOperationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +78,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmClusterInUseException < ServiceError
@@ -39,7 +93,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmClusterInvalidConfigurationException < ServiceError
@@ -55,7 +108,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmClusterNotActiveException < ServiceError
@@ -71,7 +123,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmClusterNotFoundException < ServiceError
@@ -87,7 +138,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CloudHsmClusterNotRelatedException < ServiceError
@@ -103,7 +153,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomKeyStoreHasCMKsException < ServiceError
@@ -119,7 +168,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomKeyStoreInvalidStateException < ServiceError
@@ -135,7 +183,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomKeyStoreNameInUseException < ServiceError
@@ -151,7 +198,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomKeyStoreNotFoundException < ServiceError
@@ -167,7 +213,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class DependencyTimeoutException < ServiceError
@@ -183,7 +228,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class DisabledException < ServiceError
@@ -199,7 +243,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExpiredImportTokenException < ServiceError
@@ -215,7 +258,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectKeyException < ServiceError
@@ -231,7 +273,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectKeyMaterialException < ServiceError
@@ -247,7 +288,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectTrustAnchorException < ServiceError
@@ -263,7 +303,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAliasNameException < ServiceError
@@ -279,7 +318,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -295,7 +333,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCiphertextException < ServiceError
@@ -311,7 +348,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidGrantIdException < ServiceError
@@ -327,7 +363,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidGrantTokenException < ServiceError
@@ -343,7 +378,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidImportTokenException < ServiceError
@@ -359,7 +393,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidKeyUsageException < ServiceError
@@ -375,7 +408,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidMarkerException < ServiceError
@@ -391,7 +423,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSInternalException < ServiceError
@@ -407,7 +438,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSInvalidSignatureException < ServiceError
@@ -423,7 +453,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSInvalidStateException < ServiceError
@@ -439,7 +468,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class KeyUnavailableException < ServiceError
@@ -455,7 +483,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -471,7 +498,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -487,7 +513,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -503,7 +528,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagException < ServiceError
@@ -519,7 +543,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -535,7 +558,6 @@ module Aws::KMS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

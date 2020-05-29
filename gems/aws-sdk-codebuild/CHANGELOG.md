@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2020-05-21)
+------------------
+
+* Feature - CodeBuild adds support for tagging with report groups
+
+1.50.0 (2020-05-07)
+------------------
+
+* Feature - Add COMMIT_MESSAGE enum for webhook filter types
+
+1.49.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2020-02-06)
 ------------------
 

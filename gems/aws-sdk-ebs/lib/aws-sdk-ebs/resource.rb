@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EBS
+
   class Resource
 
     # @param options ({})

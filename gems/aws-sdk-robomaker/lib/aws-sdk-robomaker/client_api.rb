@@ -28,6 +28,8 @@ module Aws::RoboMaker
     CancelSimulationJobResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     Command = Shapes::StringShape.new(name: 'Command')
+    Compute = Shapes::StructureShape.new(name: 'Compute')
+    ComputeResponse = Shapes::StructureShape.new(name: 'ComputeResponse')
     ConcurrentDeploymentException = Shapes::StructureShape.new(name: 'ConcurrentDeploymentException')
     CreateDeploymentJobRequest = Shapes::StructureShape.new(name: 'CreateDeploymentJobRequest')
     CreateDeploymentJobResponse = Shapes::StructureShape.new(name: 'CreateDeploymentJobResponse')
@@ -197,6 +199,7 @@ module Aws::RoboMaker
     SimulationSoftwareSuiteType = Shapes::StringShape.new(name: 'SimulationSoftwareSuiteType')
     SimulationSoftwareSuiteVersionType = Shapes::StringShape.new(name: 'SimulationSoftwareSuiteVersionType')
     SimulationTimeMillis = Shapes::IntegerShape.new(name: 'SimulationTimeMillis')
+    SimulationUnit = Shapes::IntegerShape.new(name: 'SimulationUnit')
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceConfig = Shapes::StructureShape.new(name: 'SourceConfig')
     SourceConfigs = Shapes::ListShape.new(name: 'SourceConfigs')
@@ -252,6 +255,12 @@ module Aws::RoboMaker
     CancelSimulationJobRequest.struct_class = Types::CancelSimulationJobRequest
 
     CancelSimulationJobResponse.struct_class = Types::CancelSimulationJobResponse
+
+    Compute.add_member(:simulation_unit_limit, Shapes::ShapeRef.new(shape: SimulationUnit, location_name: "simulationUnitLimit"))
+    Compute.struct_class = Types::Compute
+
+    ComputeResponse.add_member(:simulation_unit_limit, Shapes::ShapeRef.new(shape: SimulationUnit, location_name: "simulationUnitLimit"))
+    ComputeResponse.struct_class = Types::ComputeResponse
 
     ConcurrentDeploymentException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ConcurrentDeploymentException.struct_class = Types::ConcurrentDeploymentException
@@ -373,6 +382,7 @@ module Aws::RoboMaker
     CreateSimulationJobRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigs, location_name: "dataSources"))
     CreateSimulationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSimulationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfig, location_name: "vpcConfig"))
+    CreateSimulationJobRequest.add_member(:compute, Shapes::ShapeRef.new(shape: Compute, location_name: "compute"))
     CreateSimulationJobRequest.struct_class = Types::CreateSimulationJobRequest
 
     CreateSimulationJobRequests.member = Shapes::ShapeRef.new(shape: SimulationJobRequest)
@@ -394,6 +404,7 @@ module Aws::RoboMaker
     CreateSimulationJobResponse.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     CreateSimulationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSimulationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
+    CreateSimulationJobResponse.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeResponse, location_name: "compute"))
     CreateSimulationJobResponse.struct_class = Types::CreateSimulationJobResponse
 
     DataSource.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -587,6 +598,7 @@ module Aws::RoboMaker
     DescribeSimulationJobResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     DescribeSimulationJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
     DescribeSimulationJobResponse.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
+    DescribeSimulationJobResponse.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeResponse, location_name: "compute"))
     DescribeSimulationJobResponse.struct_class = Types::DescribeSimulationJobResponse
 
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
@@ -631,6 +643,7 @@ module Aws::RoboMaker
     LaunchConfig.add_member(:launch_file, Shapes::ShapeRef.new(shape: Command, required: true, location_name: "launchFile"))
     LaunchConfig.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariableMap, location_name: "environmentVariables"))
     LaunchConfig.add_member(:port_forwarding_config, Shapes::ShapeRef.new(shape: PortForwardingConfig, location_name: "portForwardingConfig"))
+    LaunchConfig.add_member(:stream_ui, Shapes::ShapeRef.new(shape: Boolean, location_name: "streamUI"))
     LaunchConfig.struct_class = Types::LaunchConfig
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
@@ -861,6 +874,7 @@ module Aws::RoboMaker
     SimulationJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     SimulationJob.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfigResponse, location_name: "vpcConfig"))
     SimulationJob.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
+    SimulationJob.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeResponse, location_name: "compute"))
     SimulationJob.struct_class = Types::SimulationJob
 
     SimulationJobBatchSummaries.member = Shapes::ShapeRef.new(shape: SimulationJobBatchSummary)
@@ -884,6 +898,7 @@ module Aws::RoboMaker
     SimulationJobRequest.add_member(:simulation_applications, Shapes::ShapeRef.new(shape: SimulationApplicationConfigs, location_name: "simulationApplications"))
     SimulationJobRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigs, location_name: "dataSources"))
     SimulationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfig, location_name: "vpcConfig"))
+    SimulationJobRequest.add_member(:compute, Shapes::ShapeRef.new(shape: Compute, location_name: "compute"))
     SimulationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     SimulationJobRequest.struct_class = Types::SimulationJobRequest
 
@@ -919,7 +934,7 @@ module Aws::RoboMaker
 
     Sources.member = Shapes::ShapeRef.new(shape: Source)
 
-    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     StartSimulationJobBatchRequest.add_member(:batch_policy, Shapes::ShapeRef.new(shape: BatchPolicy, location_name: "batchPolicy"))
     StartSimulationJobBatchRequest.add_member(:create_simulation_job_requests, Shapes::ShapeRef.new(shape: CreateSimulationJobRequests, required: true, location_name: "createSimulationJobRequests"))
     StartSimulationJobBatchRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))

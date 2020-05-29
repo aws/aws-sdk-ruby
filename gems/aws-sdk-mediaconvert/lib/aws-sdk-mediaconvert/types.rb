@@ -184,9 +184,7 @@ module Aws::MediaConvert
     end
 
     # Accelerated transcoding can significantly speed up jobs with long,
-    # visually complex content. Outputs that use this feature incur pro-tier
-    # pricing. For information about feature limitations, see the AWS
-    # Elemental MediaConvert User Guide.
+    # visually complex content.
     #
     # @note When making an API call, you may pass AccelerationSettings
     #   data as a hash:
@@ -908,6 +906,181 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Settings for quality-defined variable bitrate encoding with the AV1
+    # codec. Required when you set Rate control mode to QVBR. Not valid when
+    # you set Rate control mode to a value other than QVBR, or when you
+    # don't define Rate control mode.
+    #
+    # @note When making an API call, you may pass Av1QvbrSettings
+    #   data as a hash:
+    #
+    #       {
+    #         qvbr_quality_level: 1,
+    #         qvbr_quality_level_fine_tune: 1.0,
+    #       }
+    #
+    # @!attribute [rw] qvbr_quality_level
+    #   Required when you use QVBR rate control mode. That is, when you
+    #   specify qvbrSettings within av1Settings. Specify the general target
+    #   quality level for this output, from 1 to 10. Use higher numbers for
+    #   greater quality. Level 10 results in nearly lossless compression.
+    #   The quality level for most broadcast-quality transcodes is between 6
+    #   and 9. Optionally, to specify a value between whole numbers, also
+    #   provide a value for the setting qvbrQualityLevelFineTune. For
+    #   example, if you want your QVBR quality level to be 7.33, set
+    #   qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] qvbr_quality_level_fine_tune
+    #   Optional. Specify a value here to set the QVBR quality to a level
+    #   that is between whole numbers. For example, if you want your QVBR
+    #   quality level to be 7.33, set qvbrQualityLevel to 7 and set
+    #   qvbrQualityLevelFineTune to .33. MediaConvert rounds your QVBR
+    #   quality level to the nearest third of a whole number. For example,
+    #   if you set qvbrQualityLevel to 7 and you set
+    #   qvbrQualityLevelFineTune to .25, your actual QVBR quality level is
+    #   7.33.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Av1QvbrSettings AWS API Documentation
+    #
+    class Av1QvbrSettings < Struct.new(
+      :qvbr_quality_level,
+      :qvbr_quality_level_fine_tune)
+      include Aws::Structure
+    end
+
+    # Required when you set Codec, under VideoDescription>CodecSettings to
+    # the value AV1.
+    #
+    # @note When making an API call, you may pass Av1Settings
+    #   data as a hash:
+    #
+    #       {
+    #         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #         gop_size: 1.0,
+    #         max_bitrate: 1,
+    #         number_b_frames_between_reference_frames: 1,
+    #         qvbr_settings: {
+    #           qvbr_quality_level: 1,
+    #           qvbr_quality_level_fine_tune: 1.0,
+    #         },
+    #         rate_control_mode: "QVBR", # accepts QVBR
+    #         slices: 1,
+    #         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] adaptive_quantization
+    #   Adaptive quantization. Allows intra-frame quantizers to vary to
+    #   improve visual quality.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_control
+    #   If you are using the console, use the Framerate setting to specify
+    #   the frame rate for this output. If you want to keep the same frame
+    #   rate as the input video, choose Follow source. If you want to do
+    #   frame rate conversion, choose a frame rate from the dropdown list or
+    #   choose Custom. The framerates shown in the dropdown list are decimal
+    #   approximations of fractions. If you choose Custom, specify your
+    #   frame rate as a fraction. If you are creating your transcoding job
+    #   specification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the frame rate from the input. Choose
+    #   SPECIFIED if you want the service to use the frame rate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   When set to INTERPOLATE, produces smoother motion during frame rate
+    #   conversion.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gop_size
+    #   Specify the GOP length (keyframe interval) in frames. With AV1,
+    #   MediaConvert doesn't support GOP length in seconds. This value must
+    #   be greater than zero and preferably equal to 1 + ((numberBFrames +
+    #   1) * x), where x is an integer value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_bitrate
+    #   Maximum bitrate in bits/second. For example, enter five megabits per
+    #   second as 5000000. Required when Rate control mode is QVBR.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] number_b_frames_between_reference_frames
+    #   Specify the number of B-frames. With AV1, MediaConvert supports only
+    #   7 or 15.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] qvbr_settings
+    #   Settings for quality-defined variable bitrate encoding with the AV1
+    #   codec. Required when you set Rate control mode to QVBR. Not valid
+    #   when you set Rate control mode to a value other than QVBR, or when
+    #   you don't define Rate control mode.
+    #   @return [Types::Av1QvbrSettings]
+    #
+    # @!attribute [rw] rate_control_mode
+    #   'With AV1 outputs, for rate control mode, MediaConvert supports
+    #   only quality-defined variable bitrate (QVBR). You can''t use CBR
+    #   or VBR.'
+    #   @return [String]
+    #
+    # @!attribute [rw] slices
+    #   Specify the number of slices per picture. This value must be 1, 2,
+    #   4, 8, 16, or 32. For progressive pictures, this value must be less
+    #   than or equal to the number of macroblock rows. For interlaced
+    #   pictures, this value must be less than or equal to half the number
+    #   of macroblock rows.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spatial_adaptive_quantization
+    #   Adjust quantization within each frame based on spatial variation of
+    #   content complexity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Av1Settings AWS API Documentation
+    #
+    class Av1Settings < Struct.new(
+      :adaptive_quantization,
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :gop_size,
+      :max_bitrate,
+      :number_b_frames_between_reference_frames,
+      :qvbr_settings,
+      :rate_control_mode,
+      :slices,
+      :spatial_adaptive_quantization)
+      include Aws::Structure
+    end
+
     # Settings for Avail Blanking
     #
     # @note When making an API call, you may pass AvailBlanking
@@ -1523,6 +1696,10 @@ module Aws::MediaConvert
     #           },
     #           file_source_settings: {
     #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #             framerate: {
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #             },
     #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #             time_delta: 1,
     #           },
@@ -1573,6 +1750,45 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Ignore this setting unless your input captions format is SCC. To have
+    # the service compensate for differing framerates between your input
+    # captions and input video, specify the framerate of the captions file.
+    # Specify this value as a fraction, using the settings Framerate
+    # numerator (framerateNumerator) and Framerate denominator
+    # (framerateDenominator). For example, you might specify 24 / 1 for 24
+    # fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001
+    # for 29.97 fps.
+    #
+    # @note When making an API call, you may pass CaptionSourceFramerate
+    #   data as a hash:
+    #
+    #       {
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #       }
+    #
+    # @!attribute [rw] framerate_denominator
+    #   Specify the denominator of the fraction that represents the
+    #   framerate for the setting Caption source framerate
+    #   (CaptionSourceFramerate). Use this setting along with the setting
+    #   Framerate numerator (framerateNumerator).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   Specify the numerator of the fraction that represents the framerate
+    #   for the setting Caption source framerate (CaptionSourceFramerate).
+    #   Use this setting along with the setting Framerate denominator
+    #   (framerateDenominator).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionSourceFramerate AWS API Documentation
+    #
+    class CaptionSourceFramerate < Struct.new(
+      :framerate_denominator,
+      :framerate_numerator)
+      include Aws::Structure
+    end
+
     # If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml
     # file, specify the URI of the input captions source file. If your input
     # captions are IMSC in an IMF package, use TrackSourceSettings instead
@@ -1598,6 +1814,10 @@ module Aws::MediaConvert
     #         },
     #         file_source_settings: {
     #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #           framerate: {
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #           },
     #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #           time_delta: 1,
     #         },
@@ -2091,11 +2311,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] color_space_conversion
     #   Specify the color space you want for this output. The service
-    #   supports conversion between HDR formats, between SDR formats, and
-    #   from SDR to HDR. The service doesn't support conversion from HDR to
-    #   SDR. SDR to HDR conversion doesn't upgrade the dynamic range. The
-    #   converted video has an HDR format, but visually appears the same as
-    #   an unconverted output.
+    #   supports conversion between HDR formats, between SDR formats, from
+    #   SDR to HDR, and from HDR to SDR. SDR to HDR conversion doesn't
+    #   upgrade the dynamic range. The converted video has an HDR format,
+    #   but visually appears the same as an unconverted output. HDR to SDR
+    #   conversion uses Elemental tone mapping technology to approximate the
+    #   outcome of manually regrading from HDR to SDR.
     #   @return [String]
     #
     # @!attribute [rw] contrast
@@ -2251,6 +2472,9 @@ module Aws::MediaConvert
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
+    #         mxf_settings: {
+    #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #         },
     #       }
     #
     # @!attribute [rw] cmfc_settings
@@ -2298,6 +2522,10 @@ module Aws::MediaConvert
     #   Settings for MP4 segments in DASH
     #   @return [Types::MpdSettings]
     #
+    # @!attribute [rw] mxf_settings
+    #   MXF settings
+    #   @return [Types::MxfSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ContainerSettings AWS API Documentation
     #
     class ContainerSettings < Struct.new(
@@ -2308,7 +2536,8 @@ module Aws::MediaConvert
       :m3u_8_settings,
       :mov_settings,
       :mp_4_settings,
-      :mpd_settings)
+      :mpd_settings,
+      :mxf_settings)
       include Aws::Structure
     end
 
@@ -2324,6 +2553,13 @@ module Aws::MediaConvert
     #         },
     #         billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #         client_request_token: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1,
+    #           },
+    #         ],
     #         job_template: "__string",
     #         priority: 1,
     #         queue: "__string",
@@ -2394,6 +2630,10 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
@@ -2993,6 +3233,9 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     },
     #                   },
     #                   extension: "__string",
     #                   name_modifier: "__stringMin1",
@@ -3011,7 +3254,24 @@ module Aws::MediaConvert
     #                     afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                     anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                     codec_settings: {
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                       av_1_settings: {
+    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         max_bitrate: 1,
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         qvbr_settings: {
+    #                           qvbr_quality_level: 1,
+    #                           qvbr_quality_level_fine_tune: 1.0,
+    #                         },
+    #                         rate_control_mode: "QVBR", # accepts QVBR
+    #                         slices: 1,
+    #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       },
+    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -3281,10 +3541,10 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] acceleration_settings
-    #   Accelerated transcoding can significantly speed up jobs with long,
-    #   visually complex content. Outputs that use this feature incur
-    #   pro-tier pricing. For information about feature limitations, see the
-    #   AWS Elemental MediaConvert User Guide.
+    #   Optional. Accelerated transcoding can significantly speed up jobs
+    #   with long, visually complex content. Outputs that use this feature
+    #   incur pro-tier pricing. For information about feature limitations,
+    #   see the AWS Elemental MediaConvert User Guide.
     #   @return [Types::AccelerationSettings]
     #
     # @!attribute [rw] billing_tags_source
@@ -3297,21 +3557,29 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the
+    #   backlog of the queue that you submit your job to. Specify an
+    #   alternate queue and the maximum time that your job will wait in the
+    #   initial queue before hopping. For more information about this
+    #   feature, see the AWS Elemental MediaConvert User Guide.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] job_template
-    #   When you create a job, you can either specify a job template or
-    #   specify the transcoding settings individually
+    #   Optional. When you create a job, you can either specify a job
+    #   template or specify the transcoding settings individually.
     #   @return [String]
     #
     # @!attribute [rw] priority
-    #   Specify the relative priority for this job. In any given queue, the
-    #   service begins processing the job with the highest value first. When
-    #   more than one job has the same priority, the service begins
-    #   processing the job that you submitted first. If you don't specify a
-    #   priority, the service uses the default value 0.
+    #   Optional. Specify the relative priority for this job. In any given
+    #   queue, the service begins processing the job with the highest value
+    #   first. When more than one job has the same priority, the service
+    #   begins processing the job that you submitted first. If you don't
+    #   specify a priority, the service uses the default value 0.
     #   @return [Integer]
     #
     # @!attribute [rw] queue
@@ -3332,28 +3600,28 @@ module Aws::MediaConvert
     #   @return [Types::JobSettings]
     #
     # @!attribute [rw] simulate_reserved_queue
-    #   Enable this setting when you run a test job to estimate how many
-    #   reserved transcoding slots (RTS) you need. When this is enabled,
-    #   MediaConvert runs your job from an on-demand queue with similar
-    #   performance to what you will see with one RTS in a reserved queue.
-    #   This setting is disabled by default.
+    #   Optional. Enable this setting when you run a test job to estimate
+    #   how many reserved transcoding slots (RTS) you need. When this is
+    #   enabled, MediaConvert runs your job from an on-demand queue with
+    #   similar performance to what you will see with one RTS in a reserved
+    #   queue. This setting is disabled by default.
     #   @return [String]
     #
     # @!attribute [rw] status_update_interval
-    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
-    #   CloudWatch Events. Set the interval, in seconds, between status
-    #   updates. MediaConvert sends an update at this interval from the time
-    #   the service begins processing your job to the time it completes the
-    #   transcode or encounters an error.
+    #   Optional. Specify how often MediaConvert sends STATUS\_UPDATE events
+    #   to Amazon CloudWatch Events. Set the interval, in seconds, between
+    #   status updates. MediaConvert sends an update at this interval from
+    #   the time the service begins processing your job to the time it
+    #   completes the transcode or encounters an error.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags that you want to add to the resource. You can tag resources
-    #   with a key-value pair or with only a key.
+    #   Optional. The tags that you want to add to the resource. You can tag
+    #   resources with a key-value pair or with only a key.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_metadata
-    #   User-defined metadata that you want to associate with an
+    #   Optional. User-defined metadata that you want to associate with an
     #   MediaConvert job. You specify metadata in key/value pairs.
     #   @return [Hash<String,String>]
     #
@@ -3363,6 +3631,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :billing_tags_source,
       :client_request_token,
+      :hop_destinations,
       :job_template,
       :priority,
       :queue,
@@ -3404,6 +3673,13 @@ module Aws::MediaConvert
     #         },
     #         category: "__string",
     #         description: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1,
+    #           },
+    #         ],
     #         name: "__string", # required
     #         priority: 1,
     #         queue: "__string",
@@ -3473,6 +3749,10 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
@@ -4064,6 +4344,9 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     },
     #                   },
     #                   extension: "__string",
     #                   name_modifier: "__stringMin1",
@@ -4082,7 +4365,24 @@ module Aws::MediaConvert
     #                     afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                     anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                     codec_settings: {
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                       av_1_settings: {
+    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         max_bitrate: 1,
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         qvbr_settings: {
+    #                           qvbr_quality_level: 1,
+    #                           qvbr_quality_level_fine_tune: 1.0,
+    #                         },
+    #                         rate_control_mode: "QVBR", # accepts QVBR
+    #                         slices: 1,
+    #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       },
+    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -4362,6 +4662,14 @@ module Aws::MediaConvert
     #   Optional. A description of the job template you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the
+    #   backlog of the queue that you submit your job to. Specify an
+    #   alternate queue and the maximum time that your job will wait in the
+    #   initial queue before hopping. For more information about this
+    #   feature, see the AWS Elemental MediaConvert User Guide.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] name
     #   The name of the job template you are creating.
     #   @return [String]
@@ -4404,6 +4712,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :hop_destinations,
       :name,
       :priority,
       :queue,
@@ -4718,12 +5027,32 @@ module Aws::MediaConvert
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
+    #             mxf_settings: {
+    #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #             },
     #           },
     #           video_description: {
     #             afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #             anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_settings: {
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #               av_1_settings: {
+    #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 gop_size: 1.0,
+    #                 max_bitrate: 1,
+    #                 number_b_frames_between_reference_frames: 1,
+    #                 qvbr_settings: {
+    #                   qvbr_quality_level: 1,
+    #                   qvbr_quality_level_fine_tune: 1.0,
+    #                 },
+    #                 rate_control_mode: "QVBR", # accepts QVBR
+    #                 slices: 1,
+    #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               },
+    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -6575,6 +6904,10 @@ module Aws::MediaConvert
     #
     #       {
     #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #         framerate: {
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #         },
     #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #         time_delta: 1,
     #       }
@@ -6586,6 +6919,17 @@ module Aws::MediaConvert
     #   608 data through using the 608 compatibility bytes fields of the 708
     #   wrapper, and it also translates the 608 data into 708.
     #   @return [String]
+    #
+    # @!attribute [rw] framerate
+    #   Ignore this setting unless your input captions format is SCC. To
+    #   have the service compensate for differing framerates between your
+    #   input captions and input video, specify the framerate of the
+    #   captions file. Specify this value as a fraction, using the settings
+    #   Framerate numerator (framerateNumerator) and Framerate denominator
+    #   (framerateDenominator). For example, you might specify 24 / 1 for 24
+    #   fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001
+    #   for 29.97 fps.
+    #   @return [Types::CaptionSourceFramerate]
     #
     # @!attribute [rw] source_file
     #   External caption file used for loading captions. Accepted file
@@ -6602,6 +6946,7 @@ module Aws::MediaConvert
     #
     class FileSourceSettings < Struct.new(
       :convert_608_to_708,
+      :framerate,
       :source_file,
       :time_delta)
       include Aws::Structure
@@ -8241,6 +8586,49 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Optional. Configuration for a destination queue to which the job can
+    # hop once a customer-defined minimum wait time has passed.
+    #
+    # @note When making an API call, you may pass HopDestination
+    #   data as a hash:
+    #
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] priority
+    #   Optional. When you set up a job to use queue hopping, you can
+    #   specify a different relative priority for the job in the destination
+    #   queue. If you don't specify, the relative priority will remain the
+    #   same as in the previous queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] queue
+    #   Optional unless the job is submitted on the default queue. When you
+    #   set up a job to use queue hopping, you can specify a destination
+    #   queue. This queue cannot be the original queue to which the job is
+    #   submitted. If the original queue isn't the default queue and you
+    #   don't specify the destination queue, the job will move to the
+    #   default queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] wait_minutes
+    #   Required for setting up a job to use queue hopping. Minimum wait
+    #   time in minutes until the job can hop to the destination queue.
+    #   Valid range is 1 to 1440 minutes, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/HopDestination AWS API Documentation
+    #
+    class HopDestination < Struct.new(
+      :priority,
+      :queue,
+      :wait_minutes)
+      include Aws::Structure
+    end
+
     # To insert ID3 tags in your output, specify two values. Use ID3 tag
     # (Id3) to specify the base 64 encoded string and use Timecode
     # (TimeCode) to specify the time when the tag should be inserted. To
@@ -8320,8 +8708,8 @@ module Aws::MediaConvert
     # @!attribute [rw] style_passthrough
     #   Keep this setting enabled to have MediaConvert use the font style
     #   and position information from the captions source in the output.
-    #   This option is available only when your input captions are CFF-TT,
-    #   IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output
+    #   This option is available only when your input captions are IMSC,
+    #   SMPTE-TT, or TTML. Disable this setting for simplified output
     #   captions.
     #   @return [String]
     #
@@ -8388,6 +8776,10 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                 framerate: {
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                 },
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
@@ -8808,6 +9200,10 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                 framerate: {
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                 },
     #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                 time_delta: 1,
     #               },
@@ -9183,12 +9579,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] billing_tags_source
-    #   Optional. Choose a tag type that AWS Billing and Cost Management
-    #   will use to sort your AWS Elemental MediaConvert costs on any
-    #   billing report that you set up. Any transcoding outputs that don't
-    #   have an associated tag will appear in your billing report unsorted.
-    #   If you don't choose a valid value for this field, your job outputs
-    #   will appear on the billing report unsorted.
+    #   The tag type that AWS Billing and Cost Management will use to sort
+    #   your AWS Elemental MediaConvert costs on any billing report that you
+    #   set up.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -9206,6 +9599,10 @@ module Aws::MediaConvert
     # @!attribute [rw] error_message
     #   Error message of Job
     #   @return [String]
+    #
+    # @!attribute [rw] hop_destinations
+    #   Optional list of hop destinations.
+    #   @return [Array<Types::HopDestination>]
     #
     # @!attribute [rw] id
     #   A portion of the job's ARN, unique within your AWS Elemental
@@ -9244,11 +9641,15 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] queue
-    #   Optional. When you create a job, you can specify a queue to send it
-    #   to. If you don't specify, the job will go to the default queue. For
-    #   more about queues, see the User Guide topic at
+    #   When you create a job, you can specify a queue to send it to. If you
+    #   don't specify, the job will go to the default queue. For more about
+    #   queues, see the User Guide topic at
     #   http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #   @return [String]
+    #
+    # @!attribute [rw] queue_transitions
+    #   The job's queue hopping history.
+    #   @return [Array<Types::QueueTransition>]
     #
     # @!attribute [rw] retry_count
     #   The number of times that the service automatically attempted to
@@ -9307,6 +9708,7 @@ module Aws::MediaConvert
       :current_phase,
       :error_code,
       :error_message,
+      :hop_destinations,
       :id,
       :job_percent_complete,
       :job_template,
@@ -9314,6 +9716,7 @@ module Aws::MediaConvert
       :output_group_details,
       :priority,
       :queue,
+      :queue_transitions,
       :retry_count,
       :role,
       :settings,
@@ -9417,6 +9820,10 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                     framerate: {
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                     },
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
@@ -10016,6 +10423,9 @@ module Aws::MediaConvert
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
+    #                   mxf_settings: {
+    #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                   },
     #                 },
     #                 extension: "__string",
     #                 name_modifier: "__stringMin1",
@@ -10034,7 +10444,24 @@ module Aws::MediaConvert
     #                   afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                   anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_settings: {
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                     av_1_settings: {
+    #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       gop_size: 1.0,
+    #                       max_bitrate: 1,
+    #                       number_b_frames_between_reference_frames: 1,
+    #                       qvbr_settings: {
+    #                         qvbr_quality_level: 1,
+    #                         qvbr_quality_level_fine_tune: 1.0,
+    #                       },
+    #                       rate_control_mode: "QVBR", # accepts QVBR
+    #                       slices: 1,
+    #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                     },
+    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -10396,6 +10823,10 @@ module Aws::MediaConvert
     #   An optional description you create for each job template.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional list of hop destinations.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] last_updated
     #   The timestamp in epoch seconds when the Job template was last
     #   updated.
@@ -10442,6 +10873,7 @@ module Aws::MediaConvert
       :category,
       :created_at,
       :description,
+      :hop_destinations,
       :last_updated,
       :name,
       :priority,
@@ -10524,6 +10956,10 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                     framerate: {
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                     },
     #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                     time_delta: 1,
     #                   },
@@ -11115,6 +11551,9 @@ module Aws::MediaConvert
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
+    #                   mxf_settings: {
+    #                     afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                   },
     #                 },
     #                 extension: "__string",
     #                 name_modifier: "__stringMin1",
@@ -11133,7 +11572,24 @@ module Aws::MediaConvert
     #                   afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                   anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_settings: {
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                     av_1_settings: {
+    #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       gop_size: 1.0,
+    #                       max_bitrate: 1,
+    #                       number_b_frames_between_reference_frames: 1,
+    #                       qvbr_settings: {
+    #                         qvbr_quality_level: 1,
+    #                         qvbr_quality_level_fine_tune: 1.0,
+    #                       },
+    #                       rate_control_mode: "QVBR", # accepts QVBR
+    #                       slices: 1,
+    #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                     },
+    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -11510,7 +11966,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
@@ -11568,23 +12024,24 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Use this string, provided with the response to a previous request,
-    #   to request the next batch of jobs.
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
     #
     # @!attribute [rw] queue
-    #   Provide a queue name to get back only jobs from that queue.
+    #   Optional. Provide a queue name to get back only jobs from that
+    #   queue.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED,
-    #   or ERROR.
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobsRequest AWS API Documentation
@@ -11656,7 +12113,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
@@ -11723,7 +12180,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] order
-    #   When you request lists of resources, you can optionally specify
+    #   Optional. When you request lists of resources, you can specify
     #   whether they are sorted in ASCENDING or DESCENDING order. Default
     #   varies by resource.
     #   @return [String]
@@ -13123,6 +13580,35 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # MXF settings
+    #
+    # @note When making an API call, you may pass MxfSettings
+    #   data as a hash:
+    #
+    #       {
+    #         afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #       }
+    #
+    # @!attribute [rw] afd_signaling
+    #   Optional. When you have AFD signaling set up in your output video
+    #   stream, use this setting to choose whether to also include it in the
+    #   MXF wrapper. Choose Don't copy (NO\_COPY) to exclude AFD signaling
+    #   from the MXF wrapper. Choose Copy from video stream
+    #   (COPY\_FROM\_VIDEO) to copy the AFD values from the video stream for
+    #   this output to the MXF wrapper. Regardless of which option you
+    #   choose, the AFD values remain in the video stream. Related settings:
+    #   To set up your output to include or exclude AFD values, see
+    #   AfdSignaling, under VideoDescription. On the console, find AFD
+    #   signaling under the output's video encoding settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MxfSettings AWS API Documentation
+    #
+    class MxfSettings < Struct.new(
+      :afd_signaling)
+      include Aws::Structure
+    end
+
     # Settings for your Nielsen configuration. If you don't do Nielsen
     # measurement and analytics, ignore these settings. When you enable
     # Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM
@@ -13613,6 +14099,9 @@ module Aws::MediaConvert
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
+    #           mxf_settings: {
+    #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #           },
     #         },
     #         extension: "__string",
     #         name_modifier: "__stringMin1",
@@ -13631,7 +14120,24 @@ module Aws::MediaConvert
     #           afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #           anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_settings: {
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #             av_1_settings: {
+    #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               gop_size: 1.0,
+    #               max_bitrate: 1,
+    #               number_b_frames_between_reference_frames: 1,
+    #               qvbr_settings: {
+    #                 qvbr_quality_level: 1,
+    #                 qvbr_quality_level_fine_tune: 1.0,
+    #               },
+    #               rate_control_mode: "QVBR", # accepts QVBR
+    #               slices: 1,
+    #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             },
+    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -14478,6 +14984,9 @@ module Aws::MediaConvert
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
+    #               mxf_settings: {
+    #                 afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #               },
     #             },
     #             extension: "__string",
     #             name_modifier: "__stringMin1",
@@ -14496,7 +15005,24 @@ module Aws::MediaConvert
     #               afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #               anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_settings: {
-    #                 codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                 av_1_settings: {
+    #                   adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                   gop_size: 1.0,
+    #                   max_bitrate: 1,
+    #                   number_b_frames_between_reference_frames: 1,
+    #                   qvbr_settings: {
+    #                     qvbr_quality_level: 1,
+    #                     qvbr_quality_level_fine_tune: 1.0,
+    #                   },
+    #                   rate_control_mode: "QVBR", # accepts QVBR
+    #                   slices: 1,
+    #                   spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                 },
+    #                 codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                 frame_capture_settings: {
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -15406,12 +15932,32 @@ module Aws::MediaConvert
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
+    #           mxf_settings: {
+    #             afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #           },
     #         },
     #         video_description: {
     #           afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #           anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_settings: {
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #             av_1_settings: {
+    #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               gop_size: 1.0,
+    #               max_bitrate: 1,
+    #               number_b_frames_between_reference_frames: 1,
+    #               qvbr_settings: {
+    #                 qvbr_quality_level: 1,
+    #                 qvbr_quality_level_fine_tune: 1.0,
+    #               },
+    #               rate_control_mode: "QVBR", # accepts QVBR
+    #               slices: 1,
+    #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #             },
+    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -15882,6 +16428,31 @@ module Aws::MediaConvert
       :status,
       :submitted_jobs_count,
       :type)
+      include Aws::Structure
+    end
+
+    # Description of the source and destination queues between which the job
+    # has moved, along with the timestamp of the move
+    #
+    # @!attribute [rw] destination_queue
+    #   The queue that the job was on after the transition.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_queue
+    #   The queue that the job was on before the transition.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in Unix epoch format, that the job moved from the source
+    #   queue to the destination queue.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/QueueTransition AWS API Documentation
+    #
+    class QueueTransition < Struct.new(
+      :destination_queue,
+      :source_queue,
+      :timestamp)
       include Aws::Structure
     end
 
@@ -16686,7 +17257,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] style_passthrough
     #   Pass through style and position information from a TTML-like input
-    #   source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+    #   source (TTML, SMPTE-TT) to the TTML output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings AWS API Documentation
@@ -16746,6 +17317,13 @@ module Aws::MediaConvert
     #         },
     #         category: "__string",
     #         description: "__string",
+    #         hop_destinations: [
+    #           {
+    #             priority: 1,
+    #             queue: "__string",
+    #             wait_minutes: 1,
+    #           },
+    #         ],
     #         name: "__string", # required
     #         priority: 1,
     #         queue: "__string",
@@ -16815,6 +17393,10 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                       framerate: {
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                       },
     #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                       time_delta: 1,
     #                     },
@@ -17406,6 +17988,9 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
+    #                     mxf_settings: {
+    #                       afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                     },
     #                   },
     #                   extension: "__string",
     #                   name_modifier: "__stringMin1",
@@ -17424,7 +18009,24 @@ module Aws::MediaConvert
     #                     afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                     anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                     codec_settings: {
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                       av_1_settings: {
+    #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         max_bitrate: 1,
+    #                         number_b_frames_between_reference_frames: 1,
+    #                         qvbr_settings: {
+    #                           qvbr_quality_level: 1,
+    #                           qvbr_quality_level_fine_tune: 1.0,
+    #                         },
+    #                         rate_control_mode: "QVBR", # accepts QVBR
+    #                         slices: 1,
+    #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                       },
+    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -17701,6 +18303,10 @@ module Aws::MediaConvert
     #   The new description for the job template, if you are changing it.
     #   @return [String]
     #
+    # @!attribute [rw] hop_destinations
+    #   Optional list of hop destinations.
+    #   @return [Array<Types::HopDestination>]
+    #
     # @!attribute [rw] name
     #   The name of the job template you are modifying
     #   @return [String]
@@ -17736,6 +18342,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :hop_destinations,
       :name,
       :priority,
       :queue,
@@ -18051,12 +18658,32 @@ module Aws::MediaConvert
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
+    #             mxf_settings: {
+    #               afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #             },
     #           },
     #           video_description: {
     #             afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #             anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_settings: {
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #               av_1_settings: {
+    #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 gop_size: 1.0,
+    #                 max_bitrate: 1,
+    #                 number_b_frames_between_reference_frames: 1,
+    #                 qvbr_settings: {
+    #                   qvbr_quality_level: 1,
+    #                   qvbr_quality_level_fine_tune: 1.0,
+    #                 },
+    #                 rate_control_mode: "QVBR", # accepts QVBR
+    #                 slices: 1,
+    #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #               },
+    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -18414,15 +19041,32 @@ module Aws::MediaConvert
     # in this group vary depending on the value that you choose for Video
     # codec (Codec). For each codec enum that you choose, define the
     # corresponding settings object. The following lists the codec enum,
-    # settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings *
-    # H\_264, H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings
-    # * PRORES, ProresSettings
+    # settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings * AV1,
+    # Av1Settings * H\_264, H264Settings * H\_265, H265Settings * MPEG2,
+    # Mpeg2Settings * PRORES, ProresSettings
     #
     # @note When making an API call, you may pass VideoCodecSettings
     #   data as a hash:
     #
     #       {
-    #         codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #         av_1_settings: {
+    #           adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #           gop_size: 1.0,
+    #           max_bitrate: 1,
+    #           number_b_frames_between_reference_frames: 1,
+    #           qvbr_settings: {
+    #             qvbr_quality_level: 1,
+    #             qvbr_quality_level_fine_tune: 1.0,
+    #           },
+    #           rate_control_mode: "QVBR", # accepts QVBR
+    #           slices: 1,
+    #           spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #         },
+    #         codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #         frame_capture_settings: {
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -18567,6 +19211,11 @@ module Aws::MediaConvert
     #         },
     #       }
     #
+    # @!attribute [rw] av_1_settings
+    #   Required when you set Codec, under VideoDescription>CodecSettings to
+    #   the value AV1.
+    #   @return [Types::Av1Settings]
+    #
     # @!attribute [rw] codec
     #   Specifies the video codec. This must be equal to one of the enum
     #   values defined by the object VideoCodec.
@@ -18599,6 +19248,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
+      :av_1_settings,
       :codec,
       :frame_capture_settings,
       :h264_settings,
@@ -18617,7 +19267,24 @@ module Aws::MediaConvert
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -18881,8 +19548,8 @@ module Aws::MediaConvert
     #   for Video codec (Codec). For each codec enum that you choose, define
     #   the corresponding settings object. The following lists the codec
     #   enum, settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings
-    #   * H\_264, H264Settings * H\_265, H265Settings * MPEG2,
-    #   Mpeg2Settings * PRORES, ProresSettings
+    #   * AV1, Av1Settings * H\_264, H264Settings * H\_265, H265Settings
+    #   * MPEG2, Mpeg2Settings * PRORES, ProresSettings
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] color_metadata

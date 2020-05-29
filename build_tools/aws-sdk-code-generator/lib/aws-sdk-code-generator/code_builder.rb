@@ -112,9 +112,11 @@ module AwsSdkCodeGenerator
         client_examples: @client_examples,
         protocol: @service.protocol,
         signature_version: @service.signature_version,
+        require_endpoint_discovery: @service.require_endpoint_discovery,
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         api: @service.api,
+        paginators: @service.paginators,
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway'
@@ -167,6 +169,7 @@ module AwsSdkCodeGenerator
     def root_resource_class
       Views::RootResourceClass.new(
         module_name: @service.module_name,
+        service_name: @service.name,
         resources: @service.resources,
         paginators: @paginators,
         api: @api,

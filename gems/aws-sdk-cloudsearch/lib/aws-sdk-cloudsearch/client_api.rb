@@ -329,6 +329,8 @@ module Aws::CloudSearch
     DescribeSuggestersResponse.add_member(:suggesters, Shapes::ShapeRef.new(shape: SuggesterStatusList, required: true, location_name: "Suggesters"))
     DescribeSuggestersResponse.struct_class = Types::DescribeSuggestersResponse
 
+    DisabledOperationException.struct_class = Types::DisabledOperationException
+
     DocumentSuggesterOptions.add_member(:source_field, Shapes::ShapeRef.new(shape: FieldName, required: true, location_name: "SourceField"))
     DocumentSuggesterOptions.add_member(:fuzzy_matching, Shapes::ShapeRef.new(shape: SuggesterFuzzyMatching, location_name: "FuzzyMatching"))
     DocumentSuggesterOptions.add_member(:sort_expression, Shapes::ShapeRef.new(shape: String, location_name: "SortExpression"))
@@ -435,6 +437,10 @@ module Aws::CloudSearch
     IntOptions.add_member(:sort_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SortEnabled"))
     IntOptions.struct_class = Types::IntOptions
 
+    InternalException.struct_class = Types::InternalException
+
+    InvalidTypeException.struct_class = Types::InvalidTypeException
+
     LatLonOptions.add_member(:default_value, Shapes::ShapeRef.new(shape: FieldValue, location_name: "DefaultValue"))
     LatLonOptions.add_member(:source_field, Shapes::ShapeRef.new(shape: FieldName, location_name: "SourceField"))
     LatLonOptions.add_member(:facet_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "FacetEnabled"))
@@ -442,6 +448,8 @@ module Aws::CloudSearch
     LatLonOptions.add_member(:return_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReturnEnabled"))
     LatLonOptions.add_member(:sort_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SortEnabled"))
     LatLonOptions.struct_class = Types::LatLonOptions
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     Limits.add_member(:maximum_replication_count, Shapes::ShapeRef.new(shape: MaximumReplicationCount, required: true, location_name: "MaximumReplicationCount"))
     Limits.add_member(:maximum_partition_count, Shapes::ShapeRef.new(shape: MaximumPartitionCount, required: true, location_name: "MaximumPartitionCount"))
@@ -471,6 +479,8 @@ module Aws::CloudSearch
     OptionStatus.add_member(:state, Shapes::ShapeRef.new(shape: OptionState, required: true, location_name: "State"))
     OptionStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     OptionStatus.struct_class = Types::OptionStatus
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ScalingParameters.add_member(:desired_instance_type, Shapes::ShapeRef.new(shape: PartitionInstanceType, location_name: "DesiredInstanceType"))
     ScalingParameters.add_member(:desired_replication_count, Shapes::ShapeRef.new(shape: UIntValue, location_name: "DesiredReplicationCount"))
@@ -538,6 +548,8 @@ module Aws::CloudSearch
 
     UpdateServiceAccessPoliciesResponse.add_member(:access_policies, Shapes::ShapeRef.new(shape: AccessPoliciesStatus, required: true, location_name: "AccessPolicies"))
     UpdateServiceAccessPoliciesResponse.struct_class = Types::UpdateServiceAccessPoliciesResponse
+
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private

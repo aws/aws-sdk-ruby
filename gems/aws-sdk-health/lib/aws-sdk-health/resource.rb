@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Health
+
   class Resource
 
     # @param options ({})

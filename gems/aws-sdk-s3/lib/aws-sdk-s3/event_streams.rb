@@ -41,6 +41,10 @@ module Aws::S3
         @event_emitter.on(:initial_response, block) if block_given?
       end
 
+      def on_unknown_event(&block)
+        @event_emitter.on(:unknown_event, block) if block_given?
+      end
+
       def on_event(&block)
         on_records_event(&block)
         on_stats_event(&block)
@@ -49,6 +53,7 @@ module Aws::S3
         on_end_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
+        on_unknown_event(&block)
       end
 
       # @api private

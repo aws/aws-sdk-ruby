@@ -46,6 +46,9 @@ module AwsSdkCodeGenerator
       @signature_version = api.fetch('metadata')['signatureVersion']
       @full_name = api.fetch('metadata')['serviceFullName']
       @short_name = api.fetch('metadata')['serviceAbbreviation'] || @full_name
+      @require_endpoint_discovery = api.fetch('operations', []).any? do |_, o|
+        o['endpointdiscovery'] && o['endpointdiscovery']['required']
+      end
     end
 
     # @return [String] The service name, e.g. "S3"
@@ -115,6 +118,9 @@ module AwsSdkCodeGenerator
 
     # @return [String] The short product name for the service, e.g. "Amazon S3".
     attr_reader :short_name
+
+    # @return [Boolean] true if any operation requires endpoint_discovery
+    attr_reader :require_endpoint_discovery
 
     # @api private
     def inspect

@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DataExchange
+
+  # When DataExchange returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::DataExchange::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all DataExchange errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::DataExchange::Errors::ServiceError
+  #       # rescues all DataExchange API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConflictException}
+  # * {InternalServerException}
+  # * {ResourceNotFoundException}
+  # * {ServiceLimitExceededException}
+  # * {ThrottlingException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +52,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -49,7 +77,6 @@ module Aws::DataExchange
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -65,7 +92,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -91,7 +117,6 @@ module Aws::DataExchange
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ServiceLimitExceededException < ServiceError
@@ -117,7 +142,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -133,7 +157,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -149,7 +172,6 @@ module Aws::DataExchange
       def message
         @message || @data[:message]
       end
-
     end
 
   end

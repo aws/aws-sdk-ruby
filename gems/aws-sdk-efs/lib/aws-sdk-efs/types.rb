@@ -283,6 +283,9 @@ module Aws::EFS
     #
     #   If `KmsKeyId` is specified, the CreateFileSystemRequest$Encrypted
     #   parameter must be set to true.
+    #
+    #   EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with
+    #   EFS file systems.
     #   @return [String]
     #
     # @!attribute [rw] throughput_mode
@@ -1838,7 +1841,7 @@ module Aws::EFS
     #
     #       {
     #         resource_id: "ResourceId", # required
-    #         tag_keys: ["TagKey"],
+    #         tag_keys: ["TagKey"], # required
     #       }
     #
     # @!attribute [rw] resource_id

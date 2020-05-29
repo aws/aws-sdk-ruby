@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DataExchange
+
   class Resource
 
     # @param options ({})

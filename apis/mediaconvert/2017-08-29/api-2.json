@@ -1398,6 +1398,110 @@
         "USE_CONFIGURED"
       ]
     },
+    "Av1AdaptiveQuantization": {
+      "type": "string",
+      "enum": [
+        "OFF",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "HIGHER",
+        "MAX"
+      ]
+    },
+    "Av1FramerateControl": {
+      "type": "string",
+      "enum": [
+        "INITIALIZE_FROM_SOURCE",
+        "SPECIFIED"
+      ]
+    },
+    "Av1FramerateConversionAlgorithm": {
+      "type": "string",
+      "enum": [
+        "DUPLICATE_DROP",
+        "INTERPOLATE"
+      ]
+    },
+    "Av1QvbrSettings": {
+      "type": "structure",
+      "members": {
+        "QvbrQualityLevel": {
+          "shape": "__integerMin1Max10",
+          "locationName": "qvbrQualityLevel"
+        },
+        "QvbrQualityLevelFineTune": {
+          "shape": "__doubleMin0Max1",
+          "locationName": "qvbrQualityLevelFineTune"
+        }
+      }
+    },
+    "Av1RateControlMode": {
+      "type": "string",
+      "enum": [
+        "QVBR"
+      ]
+    },
+    "Av1Settings": {
+      "type": "structure",
+      "members": {
+        "AdaptiveQuantization": {
+          "shape": "Av1AdaptiveQuantization",
+          "locationName": "adaptiveQuantization"
+        },
+        "FramerateControl": {
+          "shape": "Av1FramerateControl",
+          "locationName": "framerateControl"
+        },
+        "FramerateConversionAlgorithm": {
+          "shape": "Av1FramerateConversionAlgorithm",
+          "locationName": "framerateConversionAlgorithm"
+        },
+        "FramerateDenominator": {
+          "shape": "__integerMin1Max2147483647",
+          "locationName": "framerateDenominator"
+        },
+        "FramerateNumerator": {
+          "shape": "__integerMin1Max2147483647",
+          "locationName": "framerateNumerator"
+        },
+        "GopSize": {
+          "shape": "__doubleMin0",
+          "locationName": "gopSize"
+        },
+        "MaxBitrate": {
+          "shape": "__integerMin1000Max1152000000",
+          "locationName": "maxBitrate"
+        },
+        "NumberBFramesBetweenReferenceFrames": {
+          "shape": "__integerMin7Max15",
+          "locationName": "numberBFramesBetweenReferenceFrames"
+        },
+        "QvbrSettings": {
+          "shape": "Av1QvbrSettings",
+          "locationName": "qvbrSettings"
+        },
+        "RateControlMode": {
+          "shape": "Av1RateControlMode",
+          "locationName": "rateControlMode"
+        },
+        "Slices": {
+          "shape": "__integerMin1Max32",
+          "locationName": "slices"
+        },
+        "SpatialAdaptiveQuantization": {
+          "shape": "Av1SpatialAdaptiveQuantization",
+          "locationName": "spatialAdaptiveQuantization"
+        }
+      }
+    },
+    "Av1SpatialAdaptiveQuantization": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
     "AvailBlanking": {
       "type": "structure",
       "members": {
@@ -1686,6 +1790,19 @@
         "SourceSettings": {
           "shape": "CaptionSourceSettings",
           "locationName": "sourceSettings"
+        }
+      }
+    },
+    "CaptionSourceFramerate": {
+      "type": "structure",
+      "members": {
+        "FramerateDenominator": {
+          "shape": "__integerMin1Max1001",
+          "locationName": "framerateDenominator"
+        },
+        "FramerateNumerator": {
+          "shape": "__integerMin1Max60000",
+          "locationName": "framerateNumerator"
         }
       }
     },
@@ -2105,6 +2222,10 @@
         "MpdSettings": {
           "shape": "MpdSettings",
           "locationName": "mpdSettings"
+        },
+        "MxfSettings": {
+          "shape": "MxfSettings",
+          "locationName": "mxfSettings"
         }
       }
     },
@@ -2138,6 +2259,10 @@
           "shape": "__string",
           "locationName": "clientRequestToken",
           "idempotencyToken": true
+        },
+        "HopDestinations": {
+          "shape": "__listOfHopDestination",
+          "locationName": "hopDestinations"
         },
         "JobTemplate": {
           "shape": "__string",
@@ -2204,6 +2329,10 @@
         "Description": {
           "shape": "__string",
           "locationName": "description"
+        },
+        "HopDestinations": {
+          "shape": "__listOfHopDestination",
+          "locationName": "hopDestinations"
         },
         "Name": {
           "shape": "__string",
@@ -3326,6 +3455,10 @@
         "Convert608To708": {
           "shape": "FileSourceConvert608To708",
           "locationName": "convert608To708"
+        },
+        "Framerate": {
+          "shape": "CaptionSourceFramerate",
+          "locationName": "framerate"
         },
         "SourceFile": {
           "shape": "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
@@ -4603,6 +4736,23 @@
         "TDRL"
       ]
     },
+    "HopDestination": {
+      "type": "structure",
+      "members": {
+        "Priority": {
+          "shape": "__integerMinNegative50Max50",
+          "locationName": "priority"
+        },
+        "Queue": {
+          "shape": "__string",
+          "locationName": "queue"
+        },
+        "WaitMinutes": {
+          "shape": "__integer",
+          "locationName": "waitMinutes"
+        }
+      }
+    },
     "Id3Insertion": {
       "type": "structure",
       "members": {
@@ -4969,6 +5119,10 @@
           "shape": "__string",
           "locationName": "errorMessage"
         },
+        "HopDestinations": {
+          "shape": "__listOfHopDestination",
+          "locationName": "hopDestinations"
+        },
         "Id": {
           "shape": "__string",
           "locationName": "id"
@@ -4996,6 +5150,10 @@
         "Queue": {
           "shape": "__string",
           "locationName": "queue"
+        },
+        "QueueTransitions": {
+          "shape": "__listOfQueueTransition",
+          "locationName": "queueTransitions"
         },
         "RetryCount": {
           "shape": "__integer",
@@ -5129,6 +5287,10 @@
         "Description": {
           "shape": "__string",
           "locationName": "description"
+        },
+        "HopDestinations": {
+          "shape": "__listOfHopDestination",
+          "locationName": "hopDestinations"
         },
         "LastUpdated": {
           "shape": "__timestampUnix",
@@ -6532,6 +6694,22 @@
         "UTF16"
       ]
     },
+    "MxfAfdSignaling": {
+      "type": "string",
+      "enum": [
+        "NO_COPY",
+        "COPY_FROM_VIDEO"
+      ]
+    },
+    "MxfSettings": {
+      "type": "structure",
+      "members": {
+        "AfdSignaling": {
+          "shape": "MxfAfdSignaling",
+          "locationName": "afdSignaling"
+        }
+      }
+    },
     "NielsenConfiguration": {
       "type": "structure",
       "members": {
@@ -7033,6 +7211,23 @@
         "ACTIVE",
         "PAUSED"
       ]
+    },
+    "QueueTransition": {
+      "type": "structure",
+      "members": {
+        "DestinationQueue": {
+          "shape": "__string",
+          "locationName": "destinationQueue"
+        },
+        "SourceQueue": {
+          "shape": "__string",
+          "locationName": "sourceQueue"
+        },
+        "Timestamp": {
+          "shape": "__timestampUnix",
+          "locationName": "timestamp"
+        }
+      }
     },
     "Rectangle": {
       "type": "structure",
@@ -7558,6 +7753,10 @@
           "shape": "__string",
           "locationName": "description"
         },
+        "HopDestinations": {
+          "shape": "__listOfHopDestination",
+          "locationName": "hopDestinations"
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -7665,6 +7864,7 @@
       "type": "string",
       "enum": [
         "FRAME_CAPTURE",
+        "AV1",
         "H_264",
         "H_265",
         "MPEG2",
@@ -7674,6 +7874,10 @@
     "VideoCodecSettings": {
       "type": "structure",
       "members": {
+        "Av1Settings": {
+          "shape": "Av1Settings",
+          "locationName": "av1Settings"
+        },
         "Codec": {
           "shape": "VideoCodec",
           "locationName": "codec"
@@ -8150,6 +8354,11 @@
       "min": 1,
       "max": 6
     },
+    "__integerMin1Max60000": {
+      "type": "integer",
+      "min": 1,
+      "max": 60000
+    },
     "__integerMin1Max64": {
       "type": "integer",
       "min": 1,
@@ -8219,6 +8428,11 @@
       "type": "integer",
       "min": 64000,
       "max": 640000
+    },
+    "__integerMin7Max15": {
+      "type": "integer",
+      "min": 7,
+      "max": 15
     },
     "__integerMin8000Max192000": {
       "type": "integer",
@@ -8334,6 +8548,12 @@
         "shape": "HlsCaptionLanguageMapping"
       }
     },
+    "__listOfHopDestination": {
+      "type": "list",
+      "member": {
+        "shape": "HopDestination"
+      }
+    },
     "__listOfId3Insertion": {
       "type": "list",
       "member": {
@@ -8422,6 +8642,12 @@
       "type": "list",
       "member": {
         "shape": "Queue"
+      }
+    },
+    "__listOfQueueTransition": {
+      "type": "list",
+      "member": {
+        "shape": "QueueTransition"
       }
     },
     "__listOfTeletextPageType": {

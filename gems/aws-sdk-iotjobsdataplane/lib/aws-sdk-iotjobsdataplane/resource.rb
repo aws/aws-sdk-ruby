@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoTJobsDataPlane
+
   class Resource
 
     # @param options ({})

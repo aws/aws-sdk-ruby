@@ -1,6 +1,37 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-05-26)
+------------------
+
+* Feature - Add DataSetArns to QuickSight DescribeDashboard API response.
+
+1.19.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
+1.17.0 (2020-02-28)
+------------------
+
+* Issue - This version has been yanked. (#2239)
+* Feature - Added SearchDashboards API that allows listing of dashboards that a specific user has access to.
+
 1.16.0 (2019-12-09)
 ------------------
 
@@ -85,4 +116,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-quicksight`.
-

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Neptune
+
   class Resource
 
     # @param options ({})

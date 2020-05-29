@@ -25,17 +25,20 @@ require_relative 'aws-sdk-route53/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     route_53 = Aws::Route53::Client.new
+#     resp = route_53.associate_vpc_with_hosted_zone(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Route 53 all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Route 53 are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Route53::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Route 53 API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-route53/customizations'
 # @service
 module Aws::Route53
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.35.0'
 
 end

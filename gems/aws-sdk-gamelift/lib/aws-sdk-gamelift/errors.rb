@@ -6,6 +6,43 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::GameLift
+
+  # When GameLift returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::GameLift::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all GameLift errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::GameLift::Errors::ServiceError
+  #       # rescues all GameLift API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ConflictException}
+  # * {FleetCapacityExceededException}
+  # * {GameSessionFullException}
+  # * {IdempotentParameterMismatchException}
+  # * {InternalServiceException}
+  # * {InvalidFleetStatusException}
+  # * {InvalidGameSessionStatusException}
+  # * {InvalidRequestException}
+  # * {LimitExceededException}
+  # * {NotFoundException}
+  # * {OutOfCapacityException}
+  # * {TaggingFailedException}
+  # * {TerminalRoutingStrategyException}
+  # * {UnauthorizedException}
+  # * {UnsupportedRegionException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +60,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class FleetCapacityExceededException < ServiceError
@@ -39,7 +75,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class GameSessionFullException < ServiceError
@@ -55,7 +90,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -71,7 +105,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -87,7 +120,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFleetStatusException < ServiceError
@@ -103,7 +135,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidGameSessionStatusException < ServiceError
@@ -119,7 +150,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -135,7 +165,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -151,7 +180,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -167,7 +195,21 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
+    end
 
+    class OutOfCapacityException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GameLift::Types::OutOfCapacityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class TaggingFailedException < ServiceError
@@ -183,7 +225,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class TerminalRoutingStrategyException < ServiceError
@@ -199,7 +240,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -215,7 +255,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedRegionException < ServiceError
@@ -231,7 +270,6 @@ module Aws::GameLift
       def message
         @message || @data[:message]
       end
-
     end
 
   end

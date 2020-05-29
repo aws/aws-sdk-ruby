@@ -6,6 +6,37 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Snowball
+
+  # When Snowball returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Snowball::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Snowball errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Snowball::Errors::ServiceError
+  #       # rescues all Snowball API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ClusterLimitExceededException}
+  # * {Ec2RequestFailedException}
+  # * {InvalidAddressException}
+  # * {InvalidInputCombinationException}
+  # * {InvalidJobStateException}
+  # * {InvalidNextTokenException}
+  # * {InvalidResourceException}
+  # * {KMSRequestFailedException}
+  # * {UnsupportedAddressException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +54,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class Ec2RequestFailedException < ServiceError
@@ -39,7 +69,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAddressException < ServiceError
@@ -55,7 +84,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputCombinationException < ServiceError
@@ -71,7 +99,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidJobStateException < ServiceError
@@ -87,7 +114,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -103,7 +129,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceException < ServiceError
@@ -124,7 +149,6 @@ module Aws::Snowball
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class KMSRequestFailedException < ServiceError
@@ -140,7 +164,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAddressException < ServiceError
@@ -156,7 +179,6 @@ module Aws::Snowball
       def message
         @message || @data[:message]
       end
-
     end
 
   end

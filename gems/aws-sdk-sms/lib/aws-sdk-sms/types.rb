@@ -1994,6 +1994,12 @@ module Aws::SMS
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/TemporarilyUnavailableException AWS API Documentation
+    #
+    class TemporarilyUnavailableException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass TerminateAppRequest
     #   data as a hash:
     #

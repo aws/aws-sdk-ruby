@@ -6,6 +6,36 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Backup
+
+  # When Backup returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Backup::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Backup errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Backup::Errors::ServiceError
+  #       # rescues all Backup API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AlreadyExistsException}
+  # * {DependencyFailureException}
+  # * {InvalidParameterValueException}
+  # * {InvalidRequestException}
+  # * {LimitExceededException}
+  # * {MissingParameterValueException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -48,7 +78,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class DependencyFailureException < ServiceError
@@ -79,7 +108,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -110,7 +138,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -141,7 +168,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -172,7 +198,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class MissingParameterValueException < ServiceError
@@ -203,7 +228,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -234,7 +258,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -265,7 +288,6 @@ module Aws::Backup
       def context
         @data[:context]
       end
-
     end
 
   end

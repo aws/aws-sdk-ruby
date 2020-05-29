@@ -718,6 +718,18 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_.\\-]*"
     },
+    "Compute":{
+      "type":"structure",
+      "members":{
+        "simulationUnitLimit":{"shape":"SimulationUnit"}
+      }
+    },
+    "ComputeResponse":{
+      "type":"structure",
+      "members":{
+        "simulationUnitLimit":{"shape":"SimulationUnit"}
+      }
+    },
     "ConcurrentDeploymentException":{
       "type":"structure",
       "members":{
@@ -921,7 +933,8 @@
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
         "dataSources":{"shape":"DataSourceConfigs"},
         "tags":{"shape":"TagMap"},
-        "vpcConfig":{"shape":"VPCConfig"}
+        "vpcConfig":{"shape":"VPCConfig"},
+        "compute":{"shape":"Compute"}
       }
     },
     "CreateSimulationJobRequests":{
@@ -948,7 +961,8 @@
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
         "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
-        "vpcConfig":{"shape":"VPCConfigResponse"}
+        "vpcConfig":{"shape":"VPCConfigResponse"},
+        "compute":{"shape":"ComputeResponse"}
       }
     },
     "CreatedAt":{"type":"timestamp"},
@@ -1089,10 +1103,12 @@
         "RobotDeploymentNoResponse",
         "RobotAgentConnectionTimeout",
         "GreengrassDeploymentFailed",
+        "InvalidGreengrassGroup",
         "MissingRobotArchitecture",
         "MissingRobotApplicationArchitecture",
         "MissingRobotDeploymentResource",
         "GreengrassGroupVersionDoesNotExist",
+        "LambdaDeleted",
         "ExtractingBundleFailure",
         "PreLaunchFileFailure",
         "PostLaunchFileFailure",
@@ -1318,7 +1334,8 @@
         "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"},
-        "networkInterface":{"shape":"NetworkInterface"}
+        "networkInterface":{"shape":"NetworkInterface"},
+        "compute":{"shape":"ComputeResponse"}
       }
     },
     "EnvironmentVariableKey":{
@@ -1398,7 +1415,12 @@
       "min":0
     },
     "GenericInteger":{"type":"integer"},
-    "GenericString":{"type":"string"},
+    "GenericString":{
+      "type":"string",
+      "max":1024,
+      "min":0,
+      "pattern":".*"
+    },
     "IamRole":{
       "type":"string",
       "max":255,
@@ -1449,7 +1471,8 @@
         "packageName":{"shape":"Command"},
         "launchFile":{"shape":"Command"},
         "environmentVariables":{"shape":"EnvironmentVariableMap"},
-        "portForwardingConfig":{"shape":"PortForwardingConfig"}
+        "portForwardingConfig":{"shape":"PortForwardingConfig"},
+        "streamUI":{"shape":"Boolean"}
       }
     },
     "LimitExceededException":{
@@ -1611,7 +1634,8 @@
     "NonEmptyString":{
       "type":"string",
       "max":255,
-      "min":1
+      "min":1,
+      "pattern":".+"
     },
     "NonSystemPort":{
       "type":"integer",
@@ -1716,6 +1740,8 @@
     },
     "RenderingEngineVersionType":{
       "type":"string",
+      "max":4,
+      "min":1,
       "pattern":"1.x"
     },
     "ResourceAlreadyExistsException":{
@@ -1989,7 +2015,8 @@
         "dataSources":{"shape":"DataSources"},
         "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"},
-        "networkInterface":{"shape":"NetworkInterface"}
+        "networkInterface":{"shape":"NetworkInterface"},
+        "compute":{"shape":"ComputeResponse"}
       }
     },
     "SimulationJobBatchErrorCode":{
@@ -2072,6 +2099,7 @@
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
         "dataSources":{"shape":"DataSourceConfigs"},
         "vpcConfig":{"shape":"VPCConfig"},
+        "compute":{"shape":"Compute"},
         "tags":{"shape":"TagMap"}
       }
     },
@@ -2128,9 +2156,16 @@
     },
     "SimulationSoftwareSuiteVersionType":{
       "type":"string",
+      "max":1024,
+      "min":0,
       "pattern":"7|9|Kinetic|Melodic|Dashing"
     },
     "SimulationTimeMillis":{"type":"long"},
+    "SimulationUnit":{
+      "type":"integer",
+      "max":15,
+      "min":1
+    },
     "Source":{
       "type":"structure",
       "members":{
@@ -2160,7 +2195,10 @@
       "type":"structure",
       "required":["createSimulationJobRequests"],
       "members":{
-        "clientRequestToken":{"shape":"ClientRequestToken"},
+        "clientRequestToken":{
+          "shape":"ClientRequestToken",
+          "idempotencyToken":true
+        },
         "batchPolicy":{"shape":"BatchPolicy"},
         "createSimulationJobRequests":{"shape":"CreateSimulationJobRequests"},
         "tags":{"shape":"TagMap"}
@@ -2373,6 +2411,8 @@
     },
     "VersionQualifier":{
       "type":"string",
+      "max":255,
+      "min":1,
       "pattern":"ALL"
     },
     "errorMessage":{"type":"string"}

@@ -6,6 +6,43 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ServiceQuotas
+
+  # When ServiceQuotas returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ServiceQuotas::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ServiceQuotas errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ServiceQuotas::Errors::ServiceError
+  #       # rescues all ServiceQuotas API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AWSServiceAccessNotEnabledException}
+  # * {AccessDeniedException}
+  # * {DependencyAccessDeniedException}
+  # * {IllegalArgumentException}
+  # * {InvalidPaginationTokenException}
+  # * {InvalidResourceStateException}
+  # * {NoAvailableOrganizationException}
+  # * {NoSuchResourceException}
+  # * {OrganizationNotInAllFeaturesModeException}
+  # * {QuotaExceededException}
+  # * {ResourceAlreadyExistsException}
+  # * {ServiceException}
+  # * {ServiceQuotaTemplateNotInUseException}
+  # * {TemplatesNotAvailableInRegionException}
+  # * {TooManyRequestsException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +60,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessDeniedException < ServiceError
@@ -39,7 +75,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class DependencyAccessDeniedException < ServiceError
@@ -55,7 +90,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class IllegalArgumentException < ServiceError
@@ -71,7 +105,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPaginationTokenException < ServiceError
@@ -87,7 +120,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceStateException < ServiceError
@@ -103,7 +135,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoAvailableOrganizationException < ServiceError
@@ -119,7 +150,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchResourceException < ServiceError
@@ -135,7 +165,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationNotInAllFeaturesModeException < ServiceError
@@ -151,7 +180,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class QuotaExceededException < ServiceError
@@ -167,7 +195,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -183,7 +210,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -199,7 +225,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceQuotaTemplateNotInUseException < ServiceError
@@ -215,7 +240,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class TemplatesNotAvailableInRegionException < ServiceError
@@ -231,7 +255,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -247,7 +270,6 @@ module Aws::ServiceQuotas
       def message
         @message || @data[:message]
       end
-
     end
 
   end

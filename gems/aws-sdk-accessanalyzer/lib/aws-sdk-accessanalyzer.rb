@@ -24,17 +24,20 @@ require_relative 'aws-sdk-accessanalyzer/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     access_analyzer = Aws::AccessAnalyzer::Client.new
+#     resp = access_analyzer.create_analyzer(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Access Analyzer all
-# extend {Errors::ServiceError}.
+# Errors returned from Access Analyzer are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AccessAnalyzer::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Access Analyzer API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-accessanalyzer/customizations'
 # @service
 module Aws::AccessAnalyzer
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.7.0'
 
 end

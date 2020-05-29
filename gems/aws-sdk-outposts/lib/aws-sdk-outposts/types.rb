@@ -45,10 +45,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpostInput AWS API Documentation
@@ -72,6 +76,50 @@ module Aws::Outposts
       :outpost)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteOutpostInput
+    #   data as a hash:
+    #
+    #       {
+    #         outpost_id: "OutpostId", # required
+    #       }
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID of the Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpostInput AWS API Documentation
+    #
+    class DeleteOutpostInput < Struct.new(
+      :outpost_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpostOutput AWS API Documentation
+    #
+    class DeleteOutpostOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteSiteInput
+    #   data as a hash:
+    #
+    #       {
+    #         site_id: "SiteId", # required
+    #       }
+    #
+    # @!attribute [rw] site_id
+    #   The ID of the site.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSiteInput AWS API Documentation
+    #
+    class DeleteSiteInput < Struct.new(
+      :site_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSiteOutput AWS API Documentation
+    #
+    class DeleteSiteOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass GetOutpostInput
     #   data as a hash:
@@ -307,10 +355,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
     #   The ID of the Availability Zone.
+    #
+    #   You must specify `AvailabilityZone` or `AvailabilityZoneId`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation

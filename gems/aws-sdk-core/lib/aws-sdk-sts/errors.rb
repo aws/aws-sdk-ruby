@@ -6,6 +6,36 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::STS
+
+  # When STS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::STS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all STS errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::STS::Errors::ServiceError
+  #       # rescues all STS API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ExpiredTokenException}
+  # * {IDPCommunicationErrorException}
+  # * {IDPRejectedClaimException}
+  # * {InvalidAuthorizationMessageException}
+  # * {InvalidIdentityTokenException}
+  # * {MalformedPolicyDocumentException}
+  # * {PackedPolicyTooLargeException}
+  # * {RegionDisabledException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +53,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IDPCommunicationErrorException < ServiceError
@@ -39,7 +68,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IDPRejectedClaimException < ServiceError
@@ -55,7 +83,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAuthorizationMessageException < ServiceError
@@ -71,7 +98,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidIdentityTokenException < ServiceError
@@ -87,7 +113,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -103,7 +128,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class PackedPolicyTooLargeException < ServiceError
@@ -119,7 +143,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
     class RegionDisabledException < ServiceError
@@ -135,7 +158,6 @@ module Aws::STS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

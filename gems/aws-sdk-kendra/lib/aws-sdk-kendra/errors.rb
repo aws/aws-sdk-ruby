@@ -6,6 +6,38 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Kendra
+
+  # When Kendra returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Kendra::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Kendra errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Kendra::Errors::ServiceError
+  #       # rescues all Kendra API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConflictException}
+  # * {InternalServerException}
+  # * {ResourceAlreadyExistException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ResourceUnavailableException}
+  # * {ServiceQuotaExceededException}
+  # * {ThrottlingException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +55,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -39,7 +70,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -55,7 +85,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistException < ServiceError
@@ -71,7 +100,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -87,7 +115,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -103,7 +130,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -119,7 +145,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -135,7 +160,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -151,7 +175,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -167,7 +190,6 @@ module Aws::Kendra
       def message
         @message || @data[:message]
       end
-
     end
 
   end

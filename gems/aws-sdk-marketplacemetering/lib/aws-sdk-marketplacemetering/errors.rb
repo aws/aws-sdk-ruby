@@ -6,6 +6,43 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MarketplaceMetering
+
+  # When MarketplaceMetering returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::MarketplaceMetering::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all MarketplaceMetering errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::MarketplaceMetering::Errors::ServiceError
+  #       # rescues all MarketplaceMetering API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CustomerNotEntitledException}
+  # * {DisabledApiException}
+  # * {DuplicateRequestException}
+  # * {ExpiredTokenException}
+  # * {InternalServiceErrorException}
+  # * {InvalidCustomerIdentifierException}
+  # * {InvalidEndpointRegionException}
+  # * {InvalidProductCodeException}
+  # * {InvalidPublicKeyVersionException}
+  # * {InvalidRegionException}
+  # * {InvalidTokenException}
+  # * {InvalidUsageDimensionException}
+  # * {PlatformNotSupportedException}
+  # * {ThrottlingException}
+  # * {TimestampOutOfBoundsException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +60,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class DisabledApiException < ServiceError
@@ -39,7 +75,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRequestException < ServiceError
@@ -55,7 +90,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExpiredTokenException < ServiceError
@@ -71,7 +105,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceErrorException < ServiceError
@@ -87,7 +120,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCustomerIdentifierException < ServiceError
@@ -103,7 +135,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidEndpointRegionException < ServiceError
@@ -119,7 +150,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidProductCodeException < ServiceError
@@ -135,7 +165,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPublicKeyVersionException < ServiceError
@@ -151,7 +180,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRegionException < ServiceError
@@ -167,7 +195,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTokenException < ServiceError
@@ -183,7 +210,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidUsageDimensionException < ServiceError
@@ -199,7 +225,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class PlatformNotSupportedException < ServiceError
@@ -215,7 +240,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -231,7 +255,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
     class TimestampOutOfBoundsException < ServiceError
@@ -247,7 +270,6 @@ module Aws::MarketplaceMetering
       def message
         @message || @data[:message]
       end
-
     end
 
   end

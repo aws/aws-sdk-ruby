@@ -41,12 +41,15 @@ module Aws::Detective
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
     MemberDetail = Shapes::StructureShape.new(name: 'MemberDetail')
     MemberDetailList = Shapes::ListShape.new(name: 'MemberDetailList')
+    MemberDisabledReason = Shapes::StringShape.new(name: 'MemberDisabledReason')
     MemberResultsLimit = Shapes::IntegerShape.new(name: 'MemberResultsLimit')
     MemberStatus = Shapes::StringShape.new(name: 'MemberStatus')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    Percentage = Shapes::FloatShape.new(name: 'Percentage')
     RejectInvitationRequest = Shapes::StructureShape.new(name: 'RejectInvitationRequest')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StartMonitoringMemberRequest = Shapes::StructureShape.new(name: 'StartMonitoringMemberRequest')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
     UnprocessedAccountList = Shapes::ListShape.new(name: 'UnprocessedAccountList')
@@ -140,8 +143,11 @@ module Aws::Detective
     MemberDetail.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, location_name: "GraphArn"))
     MemberDetail.add_member(:master_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "MasterId"))
     MemberDetail.add_member(:status, Shapes::ShapeRef.new(shape: MemberStatus, location_name: "Status"))
+    MemberDetail.add_member(:disabled_reason, Shapes::ShapeRef.new(shape: MemberDisabledReason, location_name: "DisabledReason"))
     MemberDetail.add_member(:invited_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InvitedTime"))
     MemberDetail.add_member(:updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedTime"))
+    MemberDetail.add_member(:percent_of_graph_utilization, Shapes::ShapeRef.new(shape: Percentage, location_name: "PercentOfGraphUtilization"))
+    MemberDetail.add_member(:percent_of_graph_utilization_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PercentOfGraphUtilizationUpdatedTime"))
     MemberDetail.struct_class = Types::MemberDetail
 
     MemberDetailList.member = Shapes::ShapeRef.new(shape: MemberDetail)
@@ -154,6 +160,10 @@ module Aws::Detective
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StartMonitoringMemberRequest.add_member(:graph_arn, Shapes::ShapeRef.new(shape: GraphArn, required: true, location_name: "GraphArn"))
+    StartMonitoringMemberRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    StartMonitoringMemberRequest.struct_class = Types::StartMonitoringMemberRequest
 
     UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
     UnprocessedAccount.add_member(:reason, Shapes::ShapeRef.new(shape: UnprocessedReason, location_name: "Reason"))
@@ -202,6 +212,7 @@ module Aws::Detective
         o.output = Shapes::ShapeRef.new(shape: CreateGraphResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:create_members, Seahorse::Model::Operation.new.tap do |o|
@@ -320,6 +331,19 @@ module Aws::Detective
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:start_monitoring_member, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMonitoringMember"
+        o.http_method = "POST"
+        o.http_request_uri = "/graph/member/monitoringstate"
+        o.input = Shapes::ShapeRef.new(shape: StartMonitoringMemberRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SESV2
+
   class Resource
 
     # @param options ({})

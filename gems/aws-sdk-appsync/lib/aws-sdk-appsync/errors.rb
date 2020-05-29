@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AppSync
+
+  # When AppSync returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::AppSync::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all AppSync errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::AppSync::Errors::ServiceError
+  #       # rescues all AppSync API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ApiKeyLimitExceededException}
+  # * {ApiKeyValidityOutOfBoundsException}
+  # * {ApiLimitExceededException}
+  # * {BadRequestException}
+  # * {ConcurrentModificationException}
+  # * {GraphQLSchemaException}
+  # * {InternalFailureException}
+  # * {LimitExceededException}
+  # * {NotFoundException}
+  # * {UnauthorizedException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +56,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ApiKeyLimitExceededException < ServiceError
@@ -39,7 +71,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ApiKeyValidityOutOfBoundsException < ServiceError
@@ -55,7 +86,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ApiLimitExceededException < ServiceError
@@ -71,7 +101,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -87,7 +116,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -103,7 +131,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class GraphQLSchemaException < ServiceError
@@ -119,7 +146,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -135,7 +161,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -151,7 +176,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -167,7 +191,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -183,7 +206,6 @@ module Aws::AppSync
       def message
         @message || @data[:message]
       end
-
     end
 
   end

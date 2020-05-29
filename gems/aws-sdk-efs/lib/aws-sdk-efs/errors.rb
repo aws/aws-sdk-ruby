@@ -6,6 +6,54 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EFS
+
+  # When EFS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::EFS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all EFS errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::EFS::Errors::ServiceError
+  #       # rescues all EFS API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessPointAlreadyExists}
+  # * {AccessPointLimitExceeded}
+  # * {AccessPointNotFound}
+  # * {BadRequest}
+  # * {DependencyTimeout}
+  # * {FileSystemAlreadyExists}
+  # * {FileSystemInUse}
+  # * {FileSystemLimitExceeded}
+  # * {FileSystemNotFound}
+  # * {IncorrectFileSystemLifeCycleState}
+  # * {IncorrectMountTargetState}
+  # * {InsufficientThroughputCapacity}
+  # * {InternalServerError}
+  # * {InvalidPolicyException}
+  # * {IpAddressInUse}
+  # * {MountTargetConflict}
+  # * {MountTargetNotFound}
+  # * {NetworkInterfaceLimitExceeded}
+  # * {NoFreeAddressesInSubnet}
+  # * {PolicyNotFound}
+  # * {SecurityGroupLimitExceeded}
+  # * {SecurityGroupNotFound}
+  # * {SubnetNotFound}
+  # * {ThroughputLimitExceeded}
+  # * {TooManyRequests}
+  # * {UnsupportedAvailabilityZone}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -33,7 +81,6 @@ module Aws::EFS
       def access_point_id
         @data[:access_point_id]
       end
-
     end
 
     class AccessPointLimitExceeded < ServiceError
@@ -54,7 +101,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessPointNotFound < ServiceError
@@ -75,7 +121,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequest < ServiceError
@@ -96,7 +141,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class DependencyTimeout < ServiceError
@@ -117,7 +161,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemAlreadyExists < ServiceError
@@ -143,7 +186,6 @@ module Aws::EFS
       def file_system_id
         @data[:file_system_id]
       end
-
     end
 
     class FileSystemInUse < ServiceError
@@ -164,7 +206,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemLimitExceeded < ServiceError
@@ -185,7 +226,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemNotFound < ServiceError
@@ -206,7 +246,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectFileSystemLifeCycleState < ServiceError
@@ -227,7 +266,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncorrectMountTargetState < ServiceError
@@ -248,7 +286,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InsufficientThroughputCapacity < ServiceError
@@ -269,7 +306,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -290,7 +326,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPolicyException < ServiceError
@@ -311,7 +346,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class IpAddressInUse < ServiceError
@@ -332,7 +366,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MountTargetConflict < ServiceError
@@ -353,7 +386,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MountTargetNotFound < ServiceError
@@ -374,7 +406,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NetworkInterfaceLimitExceeded < ServiceError
@@ -395,7 +426,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoFreeAddressesInSubnet < ServiceError
@@ -416,7 +446,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotFound < ServiceError
@@ -437,7 +466,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SecurityGroupLimitExceeded < ServiceError
@@ -458,7 +486,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SecurityGroupNotFound < ServiceError
@@ -479,7 +506,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class SubnetNotFound < ServiceError
@@ -500,7 +526,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThroughputLimitExceeded < ServiceError
@@ -521,7 +546,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequests < ServiceError
@@ -542,7 +566,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAvailabilityZone < ServiceError
@@ -563,7 +586,6 @@ module Aws::EFS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

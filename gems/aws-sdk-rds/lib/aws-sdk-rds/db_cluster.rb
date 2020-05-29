@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
   class DBCluster
 
     extend Aws::Deprecations
@@ -194,13 +195,13 @@ module Aws::RDS
     end
 
     # Contains the identifier of the source DB cluster if this DB cluster is
-    # a Read Replica.
+    # a read replica.
     # @return [String]
     def replication_source_identifier
       data[:replication_source_identifier]
     end
 
-    # Contains one or more identifiers of the Read Replicas associated with
+    # Contains one or more identifiers of the read replicas associated with
     # this DB cluster.
     # @return [Array<String>]
     def read_replica_identifiers
@@ -333,6 +334,15 @@ module Aws::RDS
 
     # The DB engine mode of the DB cluster, either `provisioned`,
     # `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    # <note markdown="1"> `global` engine mode only applies for global database clusters created
+    # with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    # the clusters in a global database use `provisioned` engine mode. To
+    # check if a DB cluster is part of a global database, use
+    # `DescribeGlobalClusters` instead of checking the `EngineMode` return
+    # value from `DescribeDBClusters`.
+    #
+    #  </note>
     # @return [String]
     def engine_mode
       data[:engine_mode]
@@ -421,6 +431,13 @@ module Aws::RDS
       data[:cross_account_clone]
     end
 
+    # The Active Directory Domain membership records associated with the DB
+    # cluster.
+    # @return [Array<Types::DomainMembership>]
+    def domain_memberships
+      data[:domain_memberships]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -461,7 +478,8 @@ module Aws::RDS
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -474,13 +492,15 @@ module Aws::RDS
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -511,17 +531,16 @@ module Aws::RDS
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -596,6 +615,8 @@ module Aws::RDS
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -751,7 +772,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora
     # @option options [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
-    #   if this DB cluster is created as a Read Replica.
+    #   if this DB cluster is created as a read replica.
     # @option options [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
     # @option options [Boolean] :storage_encrypted
@@ -779,9 +800,9 @@ module Aws::RDS
     #   AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another AWS
+    #   If you create a read replica of an encrypted DB cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the Read Replica
+    #   destination AWS Region. This key is used to encrypt the read replica
     #   in that AWS Region.
     # @option options [String] :pre_signed_url
     #   A URL that contains a Signature Version 4 signed request for the
@@ -803,8 +824,8 @@ module Aws::RDS
     #     action that is called in the destination AWS Region, and the action
     #     contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that Aurora Read
-    #     Replica will be created in.
+    #   * `DestinationRegion` - The name of the AWS Region that Aurora read
+    #     replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
@@ -866,6 +887,12 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
+    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    #   the clusters in a global database use `provisioned` engine mode.
+    #
+    #    </note>
+    #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
@@ -913,6 +940,20 @@ module Aws::RDS
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
+    # @option options [String] :domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1058,6 +1099,8 @@ module Aws::RDS
     #     engine_version: "String",
     #     allow_major_version_upgrade: false,
     #     db_instance_parameter_group_name: "String",
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -1255,6 +1298,13 @@ module Aws::RDS
     #
     #   * The `DBInstanceParameterGroupName` parameter is only valid in
     #     combination with the `AllowMajorVersionUpgrade` parameter.
+    # @option options [String] :domain
+    #   The Active Directory directory ID to move the DB cluster to. Specify
+    #   `none` to remove the cluster from its current domain. The domain must
+    #   be created prior to this operation.
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify scaling
     #   properties for DB clusters in `serverless` DB engine mode.
@@ -1316,6 +1366,8 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -1476,6 +1528,21 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the restored DB
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
+    # @option options [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

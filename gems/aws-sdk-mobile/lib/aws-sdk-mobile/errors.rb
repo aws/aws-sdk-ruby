@@ -6,6 +6,36 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Mobile
+
+  # When Mobile returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Mobile::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Mobile errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Mobile::Errors::ServiceError
+  #       # rescues all Mobile API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccountActionRequiredException}
+  # * {BadRequestException}
+  # * {InternalFailureException}
+  # * {LimitExceededException}
+  # * {NotFoundException}
+  # * {ServiceUnavailableException}
+  # * {TooManyRequestsException}
+  # * {UnauthorizedException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +53,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class BadRequestException < ServiceError
@@ -39,7 +68,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -55,7 +83,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -76,7 +103,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -92,7 +118,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -113,7 +138,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -134,7 +158,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -150,7 +173,6 @@ module Aws::Mobile
       def message
         @message || @data[:message]
       end
-
     end
 
   end

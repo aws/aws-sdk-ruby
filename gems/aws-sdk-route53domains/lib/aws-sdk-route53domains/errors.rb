@@ -6,6 +6,34 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Route53Domains
+
+  # When Route53Domains returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Route53Domains::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Route53Domains errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Route53Domains::Errors::ServiceError
+  #       # rescues all Route53Domains API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {DomainLimitExceeded}
+  # * {DuplicateRequest}
+  # * {InvalidInput}
+  # * {OperationLimitExceeded}
+  # * {TLDRulesViolation}
+  # * {UnsupportedTLD}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +51,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRequest < ServiceError
@@ -39,7 +66,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInput < ServiceError
@@ -55,7 +81,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationLimitExceeded < ServiceError
@@ -71,7 +96,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class TLDRulesViolation < ServiceError
@@ -87,7 +111,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedTLD < ServiceError
@@ -103,7 +126,6 @@ module Aws::Route53Domains
       def message
         @message || @data[:message]
       end
-
     end
 
   end

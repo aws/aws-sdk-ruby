@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SSO
+
   class Resource
 
     # @param options ({})

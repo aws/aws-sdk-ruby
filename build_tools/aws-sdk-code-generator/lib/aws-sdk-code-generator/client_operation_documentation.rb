@@ -14,6 +14,8 @@ module AwsSdkCodeGenerator
       @examples = options.fetch(:examples)
       @module_name = options.fetch(:module_name)
       @async_client = options[:async_client] || false
+      @pager = options[:pager]
+      @waiters = options[:waiters]
     end
 
     # @return [String]
@@ -34,6 +36,9 @@ module AwsSdkCodeGenerator
     # @return [Array<Hash>]
     attr_reader :client_examples
 
+    # @return [Hash]
+    attr_reader :pager
+
     # @return [String]
     def to_str
       Docstring.join_docstrings([
@@ -41,6 +46,7 @@ module AwsSdkCodeGenerator
         response_target_tag(operation, api),
         option_tags(operation, api),
         return_tag(operation, api),
+        pagination(pager, operation, api),
         generated_examples(operation, api),
         eventstream_examples(module_name, method_name, operation, api),
         shared_examples(examples, operation, api),
@@ -48,6 +54,7 @@ module AwsSdkCodeGenerator
         @async_client ? async_request_syntax_example(method_name, operation, api)
         : request_syntax_example(method_name, operation, api),
         response_structure_example(operation, api),
+        waiters_tag(@waiters),
         see_also_tag(operation, api),
       ], block_comment: false)
     end
@@ -127,6 +134,23 @@ module AwsSdkCodeGenerator
       else
         "# @return [Struct] Returns an empty {Seahorse::Client::Response response}."
       end
+    end
+
+    def pagination(pager, operation, api)
+      return unless pager
+
+      input = Array(pager['input_token'])
+      output = Array(pager['output_token'])
+      tokens = {}
+      input.each.with_index do |key, n|
+        tokens[Underscore.underscore_jmespath(output[n])] = Underscore.underscore_jmespath(key)
+      end
+
+      return if tokens.empty?
+
+      "# The returned {Seahorse::Client::Response response}" \
+      " is a pageable response and is Enumerable. For details on usage see" \
+      " {Aws::PageableResponse PageableResponse}."
     end
 
     def shared_examples(examples, operation, api)
@@ -220,6 +244,15 @@ module AwsSdkCodeGenerator
           api: api
         ).to_s)
       end
+    end
+
+    def waiters_tag(waiters)
+      return unless waiters && waiters.size > 0
+
+      waiters_doc = waiters.map do |w|
+        "#   * #{w.name}"
+      end
+      "#\n# The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):\n#\n" + waiters_doc.join("\n")
     end
 
     def see_also_tag(operation, api)

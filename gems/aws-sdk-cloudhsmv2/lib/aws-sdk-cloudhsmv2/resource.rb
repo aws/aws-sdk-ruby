@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudHSMV2
+
   class Resource
 
     # @param options ({})

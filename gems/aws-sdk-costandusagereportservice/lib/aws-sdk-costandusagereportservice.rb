@@ -24,17 +24,20 @@ require_relative 'aws-sdk-costandusagereportservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     costand_usage_report_service = Aws::CostandUsageReportService::Client.new
+#     resp = costand_usage_report_service.delete_report_definition(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Cost and Usage Report Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Cost and Usage Report Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CostandUsageReportService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Cost and Usage Report Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-costandusagereportservice/customizations'
 # @service
 module Aws::CostandUsageReportService
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.21.0'
 
 end

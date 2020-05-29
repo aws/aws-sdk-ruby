@@ -21,6 +21,91 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
+    # Describes the timestamp range and timestamp origin of a range of
+    # fragments.
+    #
+    # Fragments that have duplicate producer timestamps are deduplicated.
+    # This means that if producers are producing a stream of fragments with
+    # producer timestamps that are approximately equal to the true clock
+    # time, the clip will contain all of the fragments within the requested
+    # timestamp range. If some fragments are ingested within the same time
+    # range and very different points in time, only the oldest ingested
+    # collection of fragments are returned.
+    #
+    # @note When making an API call, you may pass ClipFragmentSelector
+    #   data as a hash:
+    #
+    #       {
+    #         fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #         timestamp_range: { # required
+    #           start_timestamp: Time.now, # required
+    #           end_timestamp: Time.now, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fragment_selector_type
+    #   The origin of the timestamps to use (Server or Producer).
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_range
+    #   The range of timestamps to return.
+    #   @return [Types::ClipTimestampRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ClipFragmentSelector AWS API Documentation
+    #
+    class ClipFragmentSelector < Struct.new(
+      :fragment_selector_type,
+      :timestamp_range)
+      include Aws::Structure
+    end
+
+    # The range of timestamps for which to return fragments.
+    #
+    # The values in the ClipTimestampRange are `inclusive`. Fragments that
+    # begin before the start time but continue past it, or fragments that
+    # begin before the end time but continue past it, are included in the
+    # session.
+    #
+    # @note When making an API call, you may pass ClipTimestampRange
+    #   data as a hash:
+    #
+    #       {
+    #         start_timestamp: Time.now, # required
+    #         end_timestamp: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] start_timestamp
+    #   The starting timestamp in the range of timestamps for which to
+    #   return fragments.
+    #
+    #   This value is inclusive. Fragments that start before the
+    #   `StartTimestamp` and continue past it are included in the session.
+    #   If `FragmentSelectorType` is `SERVER_TIMESTAMP`, the
+    #   `StartTimestamp` must be later than the stream head.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_timestamp
+    #   The end of the timestamp range for the requested media.
+    #
+    #   This value must be within 3 hours of the specified `StartTimestamp`,
+    #   and it must be later than the `StartTimestamp` value. If
+    #   `FragmentSelectorType` for the request is `SERVER_TIMESTAMP`, this
+    #   value must be in the past.
+    #
+    #   This value is inclusive. The `EndTimestamp` is compared to the
+    #   (starting) timestamp of the fragment. Fragments that start before
+    #   the `EndTimestamp` value and continue past it are included in the
+    #   session.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ClipTimestampRange AWS API Documentation
+    #
+    class ClipTimestampRange < Struct.new(
+      :start_timestamp,
+      :end_timestamp)
+      include Aws::Structure
+    end
+
     # Contains the range of timestamps for the requested media, and the
     # source of the timestamps.
     #
@@ -223,6 +308,68 @@ module Aws::KinesisVideoArchivedMedia
     class FragmentSelector < Struct.new(
       :fragment_selector_type,
       :timestamp_range)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetClipInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #         clip_fragment_selector: { # required
+    #           fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
+    #           timestamp_range: { # required
+    #             start_timestamp: Time.now, # required
+    #             end_timestamp: Time.now, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream for which to retrieve the media clip.
+    #
+    #   You must specify either the StreamName or the StreamARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the stream for which to retrieve
+    #   the media clip.
+    #
+    #   You must specify either the StreamName or the StreamARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] clip_fragment_selector
+    #   The time range of the requested clip and the source of the
+    #   timestamps.
+    #   @return [Types::ClipFragmentSelector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetClipInput AWS API Documentation
+    #
+    class GetClipInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :clip_fragment_selector)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_type
+    #   The content type of the media in the requested clip.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   Traditional MP4 file that contains the media clip from the specified
+    #   video stream. The output will contain the first 100 MB or the first
+    #   200 fragments from the specified start timestamp. For more
+    #   information, see [Kinesis Video Streams Limits](Kinesis Video
+    #   Streams Limits).
+    #   @return [IO]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetClipOutput AWS API Documentation
+    #
+    class GetClipOutput < Struct.new(
+      :content_type,
+      :payload)
       include Aws::Structure
     end
 
@@ -881,13 +1028,26 @@ module Aws::KinesisVideoArchivedMedia
       include Aws::Structure
     end
 
+    # One or more frames in the requested clip could not be parsed based on
+    # the specified codec.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/InvalidMediaFrameException AWS API Documentation
+    #
+    class InvalidMediaFrameException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListFragmentsInput
     #   data as a hash:
     #
     #       {
     #         stream_name: "StreamName", # required
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #         fragment_selector: {
     #           fragment_selector_type: "PRODUCER_TIMESTAMP", # required, accepts PRODUCER_TIMESTAMP, SERVER_TIMESTAMP
     #           timestamp_range: { # required

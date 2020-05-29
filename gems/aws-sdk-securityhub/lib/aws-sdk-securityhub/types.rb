@@ -245,8 +245,8 @@ module Aws::SecurityHub
     end
 
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), Amazon MediaStore, or other server from which
-    # CloudFront gets your files.
+    # example, a web server), Amazon Elemental MediaStore, or other server
+    # from which CloudFront gets your files.
     #
     # @note When making an API call, you may pass AwsCloudFrontDistributionOriginItem
     #   data as a hash:
@@ -425,13 +425,13 @@ module Aws::SecurityHub
     # @!attribute [rw] type
     #   The type of build environment to use for related builds.
     #
-    #   The environment type `ARM_CONTAINER` is available only in regions US
+    #   The environment type `ARM_CONTAINER` is available only in Regions US
     #   East (N. Virginia), US East (Ohio), US West (Oregon), Europe
     #   (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific
     #   (Sydney), and Europe (Frankfurt).
     #
     #   The environment type `LINUX_CONTAINER` with compute type
-    #   build.general1.2xlarge is available only in regions US East (N.
+    #   build.general1.2xlarge is available only in Regions US East (N.
     #   Virginia), US East (N. Virginia), US West (Oregon), Canada
     #   (Central), Europe (Ireland), Europe (London), Europe (Frankfurt),
     #   Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific
@@ -439,10 +439,10 @@ module Aws::SecurityHub
     #   (Ningxia).
     #
     #   The environment type `LINUX_GPU_CONTAINER` is available only in
-    #   regions US East (N. Virginia), US East (N. Virginia), US West
+    #   Regions US East (N. Virginia), US East (N. Virginia), US West
     #   (Oregon), Canada (Central), Europe (Ireland), Europe (London),
     #   Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
-    #   Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
+    #   Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and
     #   China (Ningxia).
     #
     #   Valid values: `WINDOWS_CONTAINER` \| `LINUX_CONTAINER` \|
@@ -539,8 +539,8 @@ module Aws::SecurityHub
     #     source action instead of this value.
     #
     #   * For source code in an AWS CodeCommit repository, the HTTPS clone
-    #     URL to the repository that contains the source code and the
-    #     buildspec file (for example,
+    #     URL to the repository that contains the source code and the build
+    #     spec file (for example,
     #     `https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name`
     #     ).
     #
@@ -553,10 +553,10 @@ module Aws::SecurityHub
     #       example, `bucket-name/path/to/source-code/folder/`).
     #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
-    #     repository that contains the source and the buildspec file.
+    #     repository that contains the source and the build spec file.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
-    #     the repository that contains the source and the buildspec file.
+    #     the repository that contains the source and the build spec file.
     #   @return [String]
     #
     # @!attribute [rw] git_clone_depth
@@ -1035,9 +1035,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] cidr_ip
-    #   The IPv4 CIDR range. You can either specify either a CIDR range or a
-    #   source security group, but not both. To specify a single IPv4
-    #   address, use the /32 prefix length.
+    #   The IPv4 CIDR range. You can specify either a CIDR range or a source
+    #   security group, but not both. To specify a single IPv4 address, use
+    #   the /32 prefix length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SecurityGroupIpRange AWS API Documentation
@@ -1057,9 +1057,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] cidr_ipv_6
-    #   The IPv6 CIDR range. You can either specify either a CIDR range or a
-    #   source security group, but not both. To specify a single IPv6
-    #   address, use the /128 prefix length.
+    #   The IPv6 CIDR range. You can specify either a CIDR range or a source
+    #   security group, but not both. To specify a single IPv6 address, use
+    #   the /128 prefix length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2SecurityGroupIpv6Range AWS API Documentation
@@ -1990,12 +1990,12 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] compatible_runtimes
-    #   The layer's compatible runtimes. Maximum number of 5 items.
+    #   The layer's compatible runtimes. Maximum number of five items.
     #
-    #   Valid values: `nodejs8.10` \| `nodejs10.x` \| `nodejs12.x` \|
-    #   `java8` \| `java11` \| `python2.7` \| `python3.6` \| `python3.7` \|
-    #   `python3.8` \| `dotnetcore1.0` \| `dotnetcore2.1` \| `go1.x` \|
-    #   `ruby2.5` \| `provided`
+    #   Valid values: `nodejs10.x` \| `nodejs12.x` \| `java8` \| `java11` \|
+    #   `python2.7` \| `python3.6` \| `python3.7` \| `python3.8` \|
+    #   `dotnetcore1.0` \| `dotnetcore2.1` \| `go1.x` \| `ruby2.5` \|
+    #   `provided`
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_date
@@ -2038,14 +2038,14 @@ module Aws::SecurityHub
     #   DB instance. The `Status` property returns one of the following
     #   values:
     #
-    #   * `ACTIVE` - the IAM role ARN is associated with the DB instance and
+    #   * `ACTIVE` - The IAM role ARN is associated with the DB instance and
     #     can be used to access other AWS services on your behalf.
     #
-    #   * `PENDING` - the IAM role ARN is being associated with the DB
+    #   * `PENDING` - The IAM role ARN is being associated with the DB
     #     instance.
     #
-    #   * `INVALID` - the IAM role ARN is associated with the DB instance,
-    #     but the DB instance is unable to assume the IAM role in order to
+    #   * `INVALID` - The IAM role ARN is associated with the DB instance.
+    #     But the DB instance is unable to assume the IAM role in order to
     #     access other AWS services on your behalf.
     #   @return [String]
     #
@@ -2311,6 +2311,17 @@ module Aws::SecurityHub
     #       {
     #         owner_id: "NonEmptyString",
     #         owner_name: "NonEmptyString",
+    #         created_at: "NonEmptyString",
+    #         server_side_encryption_configuration: {
+    #           rules: [
+    #             {
+    #               apply_server_side_encryption_by_default: {
+    #                 sse_algorithm: "NonEmptyString",
+    #                 kms_master_key_id: "NonEmptyString",
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] owner_id
@@ -2321,22 +2332,167 @@ module Aws::SecurityHub
     #   The display name of the owner of the S3 bucket.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The date and time when the S3 bucket was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption_configuration
+    #   The encryption rules that are applied to the S3 bucket.
+    #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
     class AwsS3BucketDetails < Struct.new(
       :owner_id,
-      :owner_name)
+      :owner_name,
+      :created_at,
+      :server_side_encryption_configuration)
+      include Aws::Structure
+    end
+
+    # Specifies the default server-side encryption to apply to new objects
+    # in the bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketServerSideEncryptionByDefault
+    #   data as a hash:
+    #
+    #       {
+    #         sse_algorithm: "NonEmptyString",
+    #         kms_master_key_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] sse_algorithm
+    #   Server-side encryption algorithm to use for the default encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   AWS KMS customer master key (CMK) ID to use for the default
+    #   encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionByDefault AWS API Documentation
+    #
+    class AwsS3BucketServerSideEncryptionByDefault < Struct.new(
+      :sse_algorithm,
+      :kms_master_key_id)
+      include Aws::Structure
+    end
+
+    # The encryption configuration for the S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketServerSideEncryptionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [
+    #           {
+    #             apply_server_side_encryption_by_default: {
+    #               sse_algorithm: "NonEmptyString",
+    #               kms_master_key_id: "NonEmptyString",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   The encryption rules that are applied to the S3 bucket.
+    #   @return [Array<Types::AwsS3BucketServerSideEncryptionRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionConfiguration AWS API Documentation
+    #
+    class AwsS3BucketServerSideEncryptionConfiguration < Struct.new(
+      :rules)
+      include Aws::Structure
+    end
+
+    # An encryption rule to apply to the S3 bucket.
+    #
+    # @note When making an API call, you may pass AwsS3BucketServerSideEncryptionRule
+    #   data as a hash:
+    #
+    #       {
+    #         apply_server_side_encryption_by_default: {
+    #           sse_algorithm: "NonEmptyString",
+    #           kms_master_key_id: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] apply_server_side_encryption_by_default
+    #   Specifies the default server-side encryption to apply to new objects
+    #   in the bucket. If a `PUT` object request doesn't specify any
+    #   server-side encryption, this default encryption is applied.
+    #   @return [Types::AwsS3BucketServerSideEncryptionByDefault]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketServerSideEncryptionRule AWS API Documentation
+    #
+    class AwsS3BucketServerSideEncryptionRule < Struct.new(
+      :apply_server_side_encryption_by_default)
+      include Aws::Structure
+    end
+
+    # Details about an Amazon S3 object.
+    #
+    # @note When making an API call, you may pass AwsS3ObjectDetails
+    #   data as a hash:
+    #
+    #       {
+    #         last_modified: "NonEmptyString",
+    #         etag: "NonEmptyString",
+    #         version_id: "NonEmptyString",
+    #         content_type: "NonEmptyString",
+    #         server_side_encryption: "NonEmptyString",
+    #         ssekms_key_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time when the object was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The opaque identifier assigned by a web server to a specific version
+    #   of a resource found at a URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   A standard MIME type describing the format of the object data.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_side_encryption
+    #   If the object is stored using server-side encryption, the value of
+    #   the server-side encryption algorithm used when storing this object
+    #   in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssekms_key_id
+    #   The identifier of the AWS Key Management Service (AWS KMS) symmetric
+    #   customer managed customer master key (CMK) that was used for the
+    #   object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3ObjectDetails AWS API Documentation
+    #
+    class AwsS3ObjectDetails < Struct.new(
+      :last_modified,
+      :etag,
+      :version_id,
+      :content_type,
+      :server_side_encryption,
+      :ssekms_key_id)
       include Aws::Structure
     end
 
     # Provides consistent format for the contents of the Security
     # Hub-aggregated findings. `AwsSecurityFinding` format enables you to
     # share findings between AWS security services and third-party
-    # solutions, and compliance checks.
+    # solutions, and security standards checks.
     #
     # <note markdown="1"> A finding is a potential security issue generated either by AWS
     # services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by
-    # the integrated third-party solutions and compliance checks.
+    # the integrated third-party solutions and standards checks.
     #
     #  </note>
     #
@@ -2356,7 +2512,9 @@ module Aws::SecurityHub
     #         updated_at: "NonEmptyString", # required
     #         severity: { # required
     #           product: 1.0,
-    #           normalized: 1, # required
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           normalized: 1,
+    #           original: "NonEmptyString",
     #         },
     #         confidence: 1,
     #         criticality: 1,
@@ -2621,6 +2779,25 @@ module Aws::SecurityHub
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
+    #                 created_at: "NonEmptyString",
+    #                 server_side_encryption_configuration: {
+    #                   rules: [
+    #                     {
+    #                       apply_server_side_encryption_by_default: {
+    #                         sse_algorithm: "NonEmptyString",
+    #                         kms_master_key_id: "NonEmptyString",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               aws_s3_object: {
+    #                 last_modified: "NonEmptyString",
+    #                 etag: "NonEmptyString",
+    #                 version_id: "NonEmptyString",
+    #                 content_type: "NonEmptyString",
+    #                 server_side_encryption: "NonEmptyString",
+    #                 ssekms_key_id: "NonEmptyString",
     #               },
     #               aws_iam_access_key: {
     #                 user_name: "NonEmptyString",
@@ -2788,9 +2965,18 @@ module Aws::SecurityHub
     #         compliance: {
     #           status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #           related_requirements: ["NonEmptyString"],
+    #           status_reasons: [
+    #             {
+    #               reason_code: "NonEmptyString", # required
+    #               description: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
+    #         workflow: {
+    #           status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #         },
     #         record_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #         related_findings: [
     #           {
@@ -2814,17 +3000,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] product_arn
-    #   The ARN generated by Security Hub that uniquely identifies a
-    #   third-party company (security-findings provider) after this
-    #   provider's product (solution that generates findings) is registered
-    #   with Security Hub.
+    #   The ARN generated by Security Hub that uniquely identifies a product
+    #   that generates findings. This can be the ARN for a third-party
+    #   product that is integrated with Security Hub, or the ARN for a
+    #   custom integration.
     #   @return [String]
     #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security-findings
     #   providers' solutions, this generator can be called a rule, a check,
-    #   a detector, a plug-in, etc.
+    #   a detector, a plugin, etc.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -2945,8 +3131,8 @@ module Aws::SecurityHub
     # @!attribute [rw] compliance
     #   This data type is exclusive to findings that are generated as the
     #   result of a check run against a specific rule in a supported
-    #   standard (for example, CIS AWS Foundations). Contains
-    #   compliance-related finding details.
+    #   security standard, such as CIS AWS Foundations. Contains security
+    #   standard-related finding details.
     #   @return [Types::Compliance]
     #
     # @!attribute [rw] verification_state
@@ -2956,6 +3142,11 @@ module Aws::SecurityHub
     # @!attribute [rw] workflow_state
     #   The workflow state of a finding.
     #   @return [String]
+    #
+    # @!attribute [rw] workflow
+    #   Provides information about the status of the investigation into a
+    #   finding.
+    #   @return [Types::Workflow]
     #
     # @!attribute [rw] record_state
     #   The record state of a finding.
@@ -2999,6 +3190,7 @@ module Aws::SecurityHub
       :compliance,
       :verification_state,
       :workflow_state,
+      :workflow,
       :record_state,
       :related_findings,
       :note)
@@ -3515,6 +3707,12 @@ module Aws::SecurityHub
     #             comparison: "EQUALS", # accepts EQUALS, PREFIX
     #           },
     #         ],
+    #         workflow_status: [
+    #           {
+    #             value: "NonEmptyString",
+    #             comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #           },
+    #         ],
     #         record_state: [
     #           {
     #             value: "NonEmptyString",
@@ -3581,7 +3779,7 @@ module Aws::SecurityHub
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security-findings
     #   providers' solutions, this generator can be called a rule, a check,
-    #   a detector, a plug-in, etc.
+    #   a detector, a plugin, etc.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] type
@@ -3898,8 +4096,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] compliance_status
     #   Exclusive to findings that are generated as the result of a check
-    #   run against a specific rule in a supported standard (for example,
-    #   CIS AWS Foundations). Contains compliance-related finding details.
+    #   run against a specific rule in a supported standard, such as CIS AWS
+    #   Foundations. Contains security standard-related finding details.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] verification_state
@@ -3908,6 +4106,24 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] workflow_state
     #   The workflow state of a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] workflow_status
+    #   The status of the investigation into a finding. Allowed values are
+    #   the following.
+    #
+    #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #   * `NOTIFIED` - Indicates that the resource owner has been notified
+    #     about the security issue. Used when the initial reviewer is not
+    #     the resource owner, and needs intervention from the resource
+    #     owner.
+    #
+    #   * `SUPPRESSED` - The finding will not be reviewed again and will not
+    #     be acted upon.
+    #
+    #   * `RESOLVED` - The finding was reviewed and remediated and is now
+    #     considered resolved.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] record_state
@@ -4017,6 +4233,7 @@ module Aws::SecurityHub
       :compliance_status,
       :verification_state,
       :workflow_state,
+      :workflow_status,
       :record_state,
       :related_findings_product_arn,
       :related_findings_id,
@@ -4024,6 +4241,36 @@ module Aws::SecurityHub
       :note_updated_at,
       :note_updated_by,
       :keyword)
+      include Aws::Structure
+    end
+
+    # Identifies a finding to update using `BatchUpdateFindings`.
+    #
+    # @note When making an API call, you may pass AwsSecurityFindingIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NonEmptyString", # required
+    #         product_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the finding that was specified by the finding
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_arn
+    #   The ARN generated by Security Hub that uniquely identifies a product
+    #   that generates findings. This can be the ARN for a third-party
+    #   product that is integrated with Security Hub, or the ARN for a
+    #   custom integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingIdentifier AWS API Documentation
+    #
+    class AwsSecurityFindingIdentifier < Struct.new(
+      :id,
+      :product_arn)
       include Aws::Structure
     end
 
@@ -4045,7 +4292,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] kms_master_key_id
-    #   The ID of an AWS-managed customer master key (CMK) for Amazon SNS or
+    #   The ID of an AWS managed customer master key (CMK) for Amazon SNS or
     #   a custom CMK.
     #   @return [String]
     #
@@ -4117,7 +4364,7 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] kms_master_key_id
-    #   The ID of an AWS-managed customer master key (CMK) for Amazon SQS or
+    #   The ID of an AWS managed customer master key (CMK) for Amazon SQS or
     #   a custom CMK.
     #   @return [String]
     #
@@ -4176,7 +4423,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] default_action
-    #   The action to perform if none of the Rules contained in the WebACL
+    #   The action to perform if none of the rules contained in the WebACL
     #   match.
     #   @return [String]
     #
@@ -4223,7 +4470,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] action
     #   Specifies the action that CloudFront or AWS WAF takes when a web
-    #   request matches the conditions in the Rule.
+    #   request matches the conditions in the rule.
     #   @return [Types::WafAction]
     #
     # @!attribute [rw] excluded_rules
@@ -4251,15 +4498,15 @@ module Aws::SecurityHub
     #   @return [Types::WafOverrideAction]
     #
     # @!attribute [rw] priority
-    #   Specifies the order in which the Rules in a WebACL are evaluated.
-    #   Rules with a lower value for Priority are evaluated before Rules
+    #   Specifies the order in which the rules in a WebACL are evaluated.
+    #   Rules with a lower value for `Priority` are evaluated before rules
     #   with a higher value. The value must be a unique integer. If you add
-    #   multiple Rules to a WebACL, the values do not need to be
+    #   multiple rules to a WebACL, the values do not need to be
     #   consecutive.
     #   @return [Integer]
     #
     # @!attribute [rw] rule_id
-    #   The identifier for a Rule.
+    #   The identifier for a rule.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4326,13 +4573,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_subscription_requests
-    #   The list of standards compliance checks to enable.
-    #
-    #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard.
-    #
-    #    The ARN for the standard is
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
+    #   The list of standards checks to enable.
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandardsRequest AWS API Documentation
@@ -4371,7 +4612,9 @@ module Aws::SecurityHub
     #             updated_at: "NonEmptyString", # required
     #             severity: { # required
     #               product: 1.0,
-    #               normalized: 1, # required
+    #               label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #               normalized: 1,
+    #               original: "NonEmptyString",
     #             },
     #             confidence: 1,
     #             criticality: 1,
@@ -4636,6 +4879,25 @@ module Aws::SecurityHub
     #                   aws_s3_bucket: {
     #                     owner_id: "NonEmptyString",
     #                     owner_name: "NonEmptyString",
+    #                     created_at: "NonEmptyString",
+    #                     server_side_encryption_configuration: {
+    #                       rules: [
+    #                         {
+    #                           apply_server_side_encryption_by_default: {
+    #                             sse_algorithm: "NonEmptyString",
+    #                             kms_master_key_id: "NonEmptyString",
+    #                           },
+    #                         },
+    #                       ],
+    #                     },
+    #                   },
+    #                   aws_s3_object: {
+    #                     last_modified: "NonEmptyString",
+    #                     etag: "NonEmptyString",
+    #                     version_id: "NonEmptyString",
+    #                     content_type: "NonEmptyString",
+    #                     server_side_encryption: "NonEmptyString",
+    #                     ssekms_key_id: "NonEmptyString",
     #                   },
     #                   aws_iam_access_key: {
     #                     user_name: "NonEmptyString",
@@ -4803,9 +5065,18 @@ module Aws::SecurityHub
     #             compliance: {
     #               status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #               related_requirements: ["NonEmptyString"],
+    #               status_reasons: [
+    #                 {
+    #                   reason_code: "NonEmptyString", # required
+    #                   description: "NonEmptyString",
+    #                 },
+    #               ],
     #             },
     #             verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #             workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
+    #             workflow: {
+    #               status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #             },
     #             record_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #             related_findings: [
     #               {
@@ -4860,27 +5131,184 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Exclusive to findings that are generated as the result of a check run
-    # against a specific rule in a supported standard (for example, CIS AWS
-    # Foundations). Contains compliance-related finding details.
+    # @note When making an API call, you may pass BatchUpdateFindingsRequest
+    #   data as a hash:
     #
-    # Values include the following:
+    #       {
+    #         finding_identifiers: [ # required
+    #           {
+    #             id: "NonEmptyString", # required
+    #             product_arn: "NonEmptyString", # required
+    #           },
+    #         ],
+    #         note: {
+    #           text: "NonEmptyString", # required
+    #           updated_by: "NonEmptyString", # required
+    #         },
+    #         severity: {
+    #           normalized: 1,
+    #           product: 1.0,
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #         },
+    #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
+    #         confidence: 1,
+    #         criticality: 1,
+    #         types: ["NonEmptyString"],
+    #         user_defined_fields: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         workflow: {
+    #           status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #         },
+    #         related_findings: [
+    #           {
+    #             product_arn: "NonEmptyString", # required
+    #             id: "NonEmptyString", # required
+    #           },
+    #         ],
+    #       }
     #
-    # * Allowed values are the following:
+    # @!attribute [rw] finding_identifiers
+    #   The list of findings to update. `BatchUpdateFindings` can be used to
+    #   update up to 100 findings at a time.
     #
-    #   * `PASSED` - Compliance check passed for all evaluated resources.
+    #   For each finding, the list provides the finding identifier and the
+    #   ARN of the finding provider.
+    #   @return [Array<Types::AwsSecurityFindingIdentifier>]
     #
-    #   * `WARNING` - Some information is missing or this check is not
-    #     supported given your configuration.
+    # @!attribute [rw] note
+    #   The updated note.
+    #   @return [Types::NoteUpdate]
     #
-    #   * `FAILED` - Compliance check failed for at least one evaluated
-    #     resource.
+    # @!attribute [rw] severity
+    #   Used to update the finding severity.
+    #   @return [Types::SeverityUpdate]
     #
-    #   * `NOT_AVAILABLE` - Check could not be performed due to a service
-    #     outage, API error, or because the result of the AWS Config
-    #     evaluation was `NOT_APPLICABLE`. If the AWS Config evaluation
-    #     result was ` NOT_APPLICABLE`, then after 3 days, Security Hub
-    #     automatically archives the finding.
+    # @!attribute [rw] verification_state
+    #   Indicates the veracity of a finding.
+    #
+    #   The available values for `VerificationState` are as follows.
+    #
+    #   * `UNKNOWN` – The default disposition of a security finding
+    #
+    #   * `TRUE_POSITIVE` – The security finding is confirmed
+    #
+    #   * `FALSE_POSITIVE` – The security finding was determined to be a
+    #     false alarm
+    #
+    #   * `BENIGN_POSITIVE` – A special case of `TRUE_POSITIVE` where the
+    #     finding doesn't pose any threat, is expected, or both
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The updated value for the finding confidence. Confidence is defined
+    #   as the likelihood that a finding accurately identifies the behavior
+    #   or issue that it was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] criticality
+    #   The updated value for the level of importance assigned to the
+    #   resources associated with the findings.
+    #
+    #   A score of 0 means that the underlying resources have no
+    #   criticality, and a score of 100 is reserved for the most critical
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] types
+    #   One or more finding types in the format of
+    #   namespace/category/classifier that classify a finding.
+    #
+    #   Valid namespace values are as follows.
+    #
+    #   * Software and Configuration Checks
+    #
+    #   * TTPs
+    #
+    #   * Effects
+    #
+    #   * Unusual Behaviors
+    #
+    #   * Sensitive Data Identifications
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_defined_fields
+    #   A list of name/value string pairs associated with the finding. These
+    #   are custom, user-defined fields added to a finding.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] workflow
+    #   Used to update the workflow status of a finding.
+    #
+    #   The workflow status indicates the progress of the investigation into
+    #   the finding.
+    #   @return [Types::WorkflowUpdate]
+    #
+    # @!attribute [rw] related_findings
+    #   A list of findings that are related to the updated findings.
+    #   @return [Array<Types::RelatedFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsRequest AWS API Documentation
+    #
+    class BatchUpdateFindingsRequest < Struct.new(
+      :finding_identifiers,
+      :note,
+      :severity,
+      :verification_state,
+      :confidence,
+      :criticality,
+      :types,
+      :user_defined_fields,
+      :workflow,
+      :related_findings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_findings
+    #   The list of findings that were updated successfully.
+    #   @return [Array<Types::AwsSecurityFindingIdentifier>]
+    #
+    # @!attribute [rw] unprocessed_findings
+    #   The list of findings that were not updated.
+    #   @return [Array<Types::BatchUpdateFindingsUnprocessedFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsResponse AWS API Documentation
+    #
+    class BatchUpdateFindingsResponse < Struct.new(
+      :processed_findings,
+      :unprocessed_findings)
+      include Aws::Structure
+    end
+
+    # A finding from a `BatchUpdateFindings` request that Security Hub was
+    # unable to update.
+    #
+    # @!attribute [rw] finding_identifier
+    #   The identifier of the finding that was not updated.
+    #   @return [Types::AwsSecurityFindingIdentifier]
+    #
+    # @!attribute [rw] error_code
+    #   The code associated with the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The message associated with the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindingsUnprocessedFinding AWS API Documentation
+    #
+    class BatchUpdateFindingsUnprocessedFinding < Struct.new(
+      :finding_identifier,
+      :error_code,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # Contains finding details that are specific to control-based findings.
+    # Only returned for findings generated from controls.
     #
     # @note When making an API call, you may pass Compliance
     #   data as a hash:
@@ -4888,21 +5316,57 @@ module Aws::SecurityHub
     #       {
     #         status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #         related_requirements: ["NonEmptyString"],
+    #         status_reasons: [
+    #           {
+    #             reason_code: "NonEmptyString", # required
+    #             description: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] status
-    #   The result of a compliance check.
+    #   The result of a standards check.
+    #
+    #   The valid values for `Status` are as follows.
+    #
+    #   * * `PASSED` - Standards check passed for all evaluated resources.
+    #
+    #     * `WARNING` - Some information is missing or this check is not
+    #       supported for your configuration.
+    #
+    #     * `FAILED` - Standards check failed for at least one evaluated
+    #       resource.
+    #
+    #     * `NOT_AVAILABLE` - Check could not be performed due to a service
+    #       outage, API error, or because the result of the AWS Config
+    #       evaluation was `NOT_APPLICABLE`. If the AWS Config evaluation
+    #       result was `NOT_APPLICABLE`, then after 3 days, Security Hub
+    #       automatically archives the finding.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
-    #   List of requirements that are related to a standards control.
+    #   For a control, the industry or regulatory framework requirements
+    #   that are related to the control. The check for that control is
+    #   aligned with these requirements.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] status_reasons
+    #   For findings generated from controls, a list of reasons behind the
+    #   value of `Status`. For the list of status reason codes and their
+    #   meanings, see [Standards-related information in the ASFF][1] in the
+    #   *AWS Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+    #   @return [Array<Types::StatusReason>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance AWS API Documentation
     #
     class Compliance < Struct.new(
       :status,
-      :related_requirements)
+      :related_requirements,
+      :status_reasons)
       include Aws::Structure
     end
 
@@ -5493,6 +5957,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -5553,8 +6023,11 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
-    #   The attribute used as the aggregator to group related findings for
-    #   the insight.
+    #   The attribute used to group the findings for the insight. The
+    #   grouping attribute identifies the type of item that the insight
+    #   applies to. For example, if an insight is grouped by resource
+    #   identifier, then the insight produces a list of resource
+    #   identifiers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateInsightRequest AWS API Documentation
@@ -5840,7 +6313,13 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeActionTargets` operation, set the value of this parameter
+    #   to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5863,7 +6342,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::ActionTarget>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargetsResponse AWS API Documentation
@@ -5917,7 +6396,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeProducts` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5937,7 +6422,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Product>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsResponse AWS API Documentation
@@ -5963,13 +6448,17 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   For requests to get the next page of results, the pagination token
-    #   that was returned with the previous set of results. The initial
-    #   request does not include a pagination token.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandardsControls` operation, set the value of this
+    #   parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of compliance standard controls to return.
+    #   The maximum number of security standard controls to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControlsRequest AWS API Documentation
@@ -5982,19 +6471,63 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] controls
-    #   A list of compliance standards controls.
+    #   A list of security standards controls.
     #   @return [Array<Types::StandardsControl>]
     #
     # @!attribute [rw] next_token
-    #   If there are more compliance standards control remaining in the
-    #   results, then this is the pagination token to use to request the
-    #   next page of compliance standard controls.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControlsResponse AWS API Documentation
     #
     class DescribeStandardsControlsResponse < Struct.new(
       :controls,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStandardsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandards` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of standards to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsRequest AWS API Documentation
+    #
+    class DescribeStandardsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards
+    #   A list of available standards.
+    #   @return [Array<Types::Standard>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsResponse AWS API Documentation
+    #
+    class DescribeStandardsResponse < Struct.new(
+      :standards,
       :next_token)
       include Aws::Structure
     end
@@ -6101,16 +6634,26 @@ module Aws::SecurityHub
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         enable_default_standards: false,
     #       }
     #
     # @!attribute [rw] tags
-    #   The tags to add to the Hub resource when you enable Security Hub.
+    #   The tags to add to the hub resource when you enable Security Hub.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] enable_default_standards
+    #   Whether to enable the security standards that Security Hub has
+    #   designated as automatically enabled. If you do not provide a value
+    #   for `EnableDefaultStandards`, it is set to `true`. To not enable the
+    #   automatically enabled standards, set `EnableDefaultStandards` to
+    #   `false`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHubRequest AWS API Documentation
     #
     class EnableSecurityHubRequest < Struct.new(
-      :tags)
+      :tags,
+      :enable_default_standards)
       include Aws::Structure
     end
 
@@ -6133,12 +6676,13 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `GetEnabledStandards`
-    #   operation, set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetEnabledStandards` operation, set the value of this parameter to
+    #   `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6160,7 +6704,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsSubscription>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandardsResponse AWS API Documentation
@@ -6678,6 +7222,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -6744,12 +7294,12 @@ module Aws::SecurityHub
     #   @return [Array<Types::SortCriterion>]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `GetFindings`
-    #   operation, set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetFindings` operation, set the value of this parameter to `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6771,7 +7321,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsSecurityFinding>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsResponse AWS API Documentation
@@ -6821,14 +7371,18 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] insight_arns
-    #   The ARNs of the insights to describe.
+    #   The ARNs of the insights to describe. If you do not provide any
+    #   insight ARNs, then `GetInsights` returns all of your custom
+    #   insights. It does not return any managed insights.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `GetInsights`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetInsights` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6849,7 +7403,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Insight>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetInsightsResponse AWS API Documentation
@@ -6932,19 +7486,20 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Includes details of the list of the findings that cannot be imported.
+    # The list of the findings that cannot be imported. For each finding,
+    # the list provides the error.
     #
     # @!attribute [rw] id
-    #   The ID of the error made during the `BatchImportFindings` operation.
+    #   The identifier of the finding that could not be updated.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The code of the error made during the `BatchImportFindings`
+    #   The code of the error returned by the `BatchImportFindings`
     #   operation.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The message of the error made during the `BatchImportFindings`
+    #   The message of the error returned by the `BatchImportFindings`
     #   operation.
     #   @return [String]
     #
@@ -6974,10 +7529,11 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
-    #   The attribute that the insight's findings are grouped by. This
-    #   attribute is used as a findings aggregator for the purposes of
-    #   viewing and managing multiple related findings under a single
-    #   operand.
+    #   The grouping attribute for the insight's findings. Indicates how to
+    #   group the matching findings, and identifies the type of item that
+    #   the insight applies to. For example, if an insight is grouped by
+    #   resource identifier, then the insight produces a list of resource
+    #   identifiers.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Insight AWS API Documentation
@@ -7215,11 +7771,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the
+    #   The token that is required for pagination. On your first call to the
     #   `ListEnabledProductsForImport` operation, set the value of this
-    #   parameter to `NULL`. For subsequent calls to the operation, to
-    #   continue listing data, set `nextToken` in the request to the value
-    #   of `NextToken` from the previous response.
+    #   parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7240,7 +7798,7 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListEnabledProductsForImportResponse AWS API Documentation
@@ -7264,10 +7822,13 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `ListInvitations`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `NextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListInvitations` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListInvitationsRequest AWS API Documentation
@@ -7283,7 +7844,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Invitation>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListInvitationsResponse AWS API Documentation
@@ -7308,11 +7869,11 @@ module Aws::SecurityHub
     #   their relationship status with the master account. The default value
     #   is `TRUE`.
     #
-    #   If `onlyAssociated` is set to `TRUE`, the response includes member
+    #   If `OnlyAssociated` is set to `TRUE`, the response includes member
     #   accounts whose relationship status with the master is set to
     #   `ENABLED` or `DISABLED`.
     #
-    #   If `onlyAssociated` is set to `FALSE`, the response includes all
+    #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
     #   @return [Boolean]
     #
@@ -7321,10 +7882,12 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `ListMembers`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListMembers` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembersRequest AWS API Documentation
@@ -7341,7 +7904,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembersResponse AWS API Documentation
@@ -7777,6 +8340,17 @@ module Aws::SecurityHub
     #   The categories assigned to the product.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] integration_types
+    #   The types of integration that the product supports. Available values
+    #   are the following.
+    #
+    #   * `SEND_FINDINGS_TO_SECURITY_HUB` - Indicates that the integration
+    #     sends findings to Security Hub.
+    #
+    #   * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - Indicates that the
+    #     integration receives findings from Security Hub.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] marketplace_url
     #   The URL for the page that contains more information about the
     #   product.
@@ -7798,6 +8372,7 @@ module Aws::SecurityHub
       :company_name,
       :description,
       :categories,
+      :integration_types,
       :marketplace_url,
       :activation_url,
       :product_subscription_resource_policy)
@@ -8094,6 +8669,25 @@ module Aws::SecurityHub
     #           aws_s3_bucket: {
     #             owner_id: "NonEmptyString",
     #             owner_name: "NonEmptyString",
+    #             created_at: "NonEmptyString",
+    #             server_side_encryption_configuration: {
+    #               rules: [
+    #                 {
+    #                   apply_server_side_encryption_by_default: {
+    #                     sse_algorithm: "NonEmptyString",
+    #                     kms_master_key_id: "NonEmptyString",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           aws_s3_object: {
+    #             last_modified: "NonEmptyString",
+    #             etag: "NonEmptyString",
+    #             version_id: "NonEmptyString",
+    #             content_type: "NonEmptyString",
+    #             server_side_encryption: "NonEmptyString",
+    #             ssekms_key_id: "NonEmptyString",
     #           },
     #           aws_iam_access_key: {
     #             user_name: "NonEmptyString",
@@ -8533,6 +9127,25 @@ module Aws::SecurityHub
     #         aws_s3_bucket: {
     #           owner_id: "NonEmptyString",
     #           owner_name: "NonEmptyString",
+    #           created_at: "NonEmptyString",
+    #           server_side_encryption_configuration: {
+    #             rules: [
+    #               {
+    #                 apply_server_side_encryption_by_default: {
+    #                   sse_algorithm: "NonEmptyString",
+    #                   kms_master_key_id: "NonEmptyString",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         aws_s3_object: {
+    #           last_modified: "NonEmptyString",
+    #           etag: "NonEmptyString",
+    #           version_id: "NonEmptyString",
+    #           content_type: "NonEmptyString",
+    #           server_side_encryption: "NonEmptyString",
+    #           ssekms_key_id: "NonEmptyString",
     #         },
     #         aws_iam_access_key: {
     #           user_name: "NonEmptyString",
@@ -8709,7 +9322,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsEc2InstanceDetails]
     #
     # @!attribute [rw] aws_ec2_network_interface
-    #   Details for an AWS EC2 network interface.
+    #   Details for an Amazon EC2 network interface.
     #   @return [Types::AwsEc2NetworkInterfaceDetails]
     #
     # @!attribute [rw] aws_ec2_security_group
@@ -8725,8 +9338,12 @@ module Aws::SecurityHub
     #   @return [Types::AwsElasticsearchDomainDetails]
     #
     # @!attribute [rw] aws_s3_bucket
-    #   Details about an Amazon S3 Bucket related to a finding.
+    #   Details about an Amazon S3 bucket related to a finding.
     #   @return [Types::AwsS3BucketDetails]
+    #
+    # @!attribute [rw] aws_s3_object
+    #   Details about an Amazon S3 object related to a finding.
+    #   @return [Types::AwsS3ObjectDetails]
     #
     # @!attribute [rw] aws_iam_access_key
     #   Details about an IAM access key related to a finding.
@@ -8749,7 +9366,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsLambdaLayerVersionDetails]
     #
     # @!attribute [rw] aws_rds_db_instance
-    #   Details for an RDS database instance.
+    #   Details for an Amazon RDS database instance.
     #   @return [Types::AwsRdsDbInstanceDetails]
     #
     # @!attribute [rw] aws_sns_topic
@@ -8793,6 +9410,7 @@ module Aws::SecurityHub
       :aws_elbv_2_load_balancer,
       :aws_elasticsearch_domain,
       :aws_s3_bucket,
+      :aws_s3_object,
       :aws_iam_access_key,
       :aws_iam_role,
       :aws_kms_key,
@@ -8849,23 +9467,124 @@ module Aws::SecurityHub
     #
     #       {
     #         product: 1.0,
-    #         normalized: 1, # required
+    #         label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #         normalized: 1,
+    #         original: "NonEmptyString",
     #       }
+    #
+    # @!attribute [rw] product
+    #   Deprecated. This attribute is being deprecated. Instead of providing
+    #   `Product`, provide `Original`.
+    #
+    #   The native severity as defined by the AWS service or integrated
+    #   partner product that generated the finding.
+    #   @return [Float]
+    #
+    # @!attribute [rw] label
+    #   The severity value of the finding. The allowed values are the
+    #   following.
+    #
+    #   * `INFORMATIONAL` - No issue was found.
+    #
+    #   * `LOW` - The issue does not require action on its own.
+    #
+    #   * `MEDIUM` - The issue must be addressed but not urgently.
+    #
+    #   * `HIGH` - The issue must be addressed as a priority.
+    #
+    #   * `CRITICAL` - The issue must be remediated immediately to avoid it
+    #     escalating.
+    #   @return [String]
+    #
+    # @!attribute [rw] normalized
+    #   Deprecated. This attribute is being deprecated. Instead of providing
+    #   `Normalized`, provide `Label`.
+    #
+    #   If you provide `Normalized` and do not provide `Label`, `Label` is
+    #   set automatically as follows.
+    #
+    #   * 0 - `INFORMATIONAL`
+    #
+    #   * 1–39 - `LOW`
+    #
+    #   * 40–69 - `MEDIUM`
+    #
+    #   * 70–89 - `HIGH`
+    #
+    #   * 90–100 - `CRITICAL`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] original
+    #   The native severity from the finding product that generated the
+    #   finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity AWS API Documentation
+    #
+    class Severity < Struct.new(
+      :product,
+      :label,
+      :normalized,
+      :original)
+      include Aws::Structure
+    end
+
+    # Updates to the severity information for a finding.
+    #
+    # @note When making an API call, you may pass SeverityUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         normalized: 1,
+    #         product: 1.0,
+    #         label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #       }
+    #
+    # @!attribute [rw] normalized
+    #   The normalized severity for the finding. This attribute is to be
+    #   deprecated in favor of `Label`.
+    #
+    #   If you provide `Normalized` and do not provide `Label`, `Label` is
+    #   set automatically as follows.
+    #
+    #   * 0 - `INFORMATIONAL`
+    #
+    #   * 1–39 - `LOW`
+    #
+    #   * 40–69 - `MEDIUM`
+    #
+    #   * 70–89 - `HIGH`
+    #
+    #   * 90–100 - `CRITICAL`
+    #   @return [Integer]
     #
     # @!attribute [rw] product
     #   The native severity as defined by the AWS service or integrated
     #   partner product that generated the finding.
     #   @return [Float]
     #
-    # @!attribute [rw] normalized
-    #   The normalized severity of a finding.
-    #   @return [Integer]
+    # @!attribute [rw] label
+    #   The severity value of the finding. The allowed values are the
+    #   following.
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity AWS API Documentation
+    #   * `INFORMATIONAL` - No issue was found.
     #
-    class Severity < Struct.new(
+    #   * `LOW` - The issue does not require action on its own.
+    #
+    #   * `MEDIUM` - The issue must be addressed but not urgently.
+    #
+    #   * `HIGH` - The issue must be addressed as a priority.
+    #
+    #   * `CRITICAL` - The issue must be remediated immediately to avoid it
+    #     escalating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SeverityUpdate AWS API Documentation
+    #
+    class SeverityUpdate < Struct.new(
+      :normalized,
       :product,
-      :normalized)
+      :label)
       include Aws::Structure
     end
 
@@ -8895,14 +9614,48 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details for an individual compliance standard control.
+    # Provides information about a specific standard.
+    #
+    # @!attribute [rw] standards_arn
+    #   The ARN of a standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_by_default
+    #   Whether the standard is enabled by default. When Security Hub is
+    #   enabled from the console, if a standard is enabled by default, the
+    #   check box for that standard is selected by default.
+    #
+    #   When Security Hub is enabled using the `EnableSecurityHub` API
+    #   operation, the standard is enabled by default unless
+    #   `EnableDefaultStandards` is set to `false`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Standard AWS API Documentation
+    #
+    class Standard < Struct.new(
+      :standards_arn,
+      :name,
+      :description,
+      :enabled_by_default)
+      include Aws::Structure
+    end
+
+    # Details for an individual security standard control.
     #
     # @!attribute [rw] standards_control_arn
-    #   The ARN of the compliance standard control.
+    #   The ARN of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] control_status
-    #   The current status of the compliance standard control. Indicates
+    #   The current status of the security standard control. Indicates
     #   whether the control is enabled or disabled. Security Hub does not
     #   check against disabled controls.
     #   @return [String]
@@ -8913,35 +9666,39 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] control_status_updated_at
-    #   The date and time that the status of the compliance standard control
+    #   The date and time that the status of the security standard control
     #   was most recently updated.
     #   @return [Time]
     #
     # @!attribute [rw] control_id
-    #   The identifier of the compliance standard control.
+    #   The identifier of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   The title of the compliance standard control.
+    #   The title of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The longer description of the compliance standard control. Provides
+    #   The longer description of the security standard control. Provides
     #   information about what the control is checking for.
     #   @return [String]
     #
     # @!attribute [rw] remediation_url
     #   A link to remediation information for the control in the Security
-    #   Hub user documentation
+    #   Hub user documentation.
     #   @return [String]
     #
     # @!attribute [rw] severity_rating
-    #   The severity of findings generated from this compliance standard
+    #   The severity of findings generated from this security standard
     #   control.
     #
     #   The finding severity is based on an assessment of how easy it would
-    #   be to compromise AWS resources if the compliance issue is detected.
+    #   be to compromise AWS resources if the issue is detected.
     #   @return [String]
+    #
+    # @!attribute [rw] related_requirements
+    #   The list of requirements that are related to this control.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControl AWS API Documentation
     #
@@ -8954,7 +9711,8 @@ module Aws::SecurityHub
       :title,
       :description,
       :remediation_url,
-      :severity_rating)
+      :severity_rating,
+      :related_requirements)
       include Aws::Structure
     end
 
@@ -8967,10 +9725,6 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_arn
     #   The ARN of a standard.
-    #
-    #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard, which uses the following ARN:
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.`
     #   @return [String]
     #
     # @!attribute [rw] standards_input
@@ -9004,13 +9758,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_arn
-    #   The ARN of the standard that you want to enable.
-    #
-    #   In this release, Security Hub only supports the CIS AWS Foundations
-    #   standard.
-    #
-    #    Its ARN is
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
+    #   The ARN of the standard that you want to enable. To view the list of
+    #   available standards and their ARNs, use the ` DescribeStandards `
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] standards_input
@@ -9022,6 +9772,38 @@ module Aws::SecurityHub
     class StandardsSubscriptionRequest < Struct.new(
       :standards_arn,
       :standards_input)
+      include Aws::Structure
+    end
+
+    # Provides additional context for the value of `Compliance.Status`.
+    #
+    # @note When making an API call, you may pass StatusReason
+    #   data as a hash:
+    #
+    #       {
+    #         reason_code: "NonEmptyString", # required
+    #         description: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] reason_code
+    #   A code that represents a reason for the control status. For the list
+    #   of status reason codes and their meanings, see [Standards-related
+    #   information in the ASFF][1] in the *AWS Security Hub User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The corresponding description for the status reason code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StatusReason AWS API Documentation
+    #
+    class StatusReason < Struct.new(
+      :reason_code,
+      :description)
       include Aws::Structure
     end
 
@@ -9703,6 +10485,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -10291,6 +11079,12 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX
     #             },
     #           ],
+    #           workflow_status: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #             },
+    #           ],
     #           record_state: [
     #             {
     #               value: "NonEmptyString",
@@ -10380,15 +11174,15 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_control_arn
-    #   The ARN of the compliance standard control to enable or disable.
+    #   The ARN of the security standard control to enable or disable.
     #   @return [String]
     #
     # @!attribute [rw] control_status
-    #   The updated status of the compliance standard control.
+    #   The updated status of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] disabled_reason
-    #   A description of the reason why you are disabling a compliance
+    #   A description of the reason why you are disabling a security
     #   standard control.
     #   @return [String]
     #
@@ -10406,7 +11200,7 @@ module Aws::SecurityHub
     class UpdateStandardsControlResponse < Aws::EmptyStructure; end
 
     # Details about the action that CloudFront or AWS WAF takes when a web
-    # request matches the conditions in the Rule.
+    # request matches the conditions in the rule.
     #
     # @note When making an API call, you may pass WafAction
     #   data as a hash:
@@ -10417,7 +11211,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   Specifies how you want AWS WAF to respond to requests that match the
-    #   settings in a Rule.
+    #   settings in a rule.
     #
     #   Valid settings include the following:
     #
@@ -10470,7 +11264,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] type
     #   `COUNT` overrides the action specified by the individual rule within
-    #   a RuleGroup .
+    #   a `RuleGroup` .
     #
     #   If set to `NONE`, the rule's action takes place.
     #   @return [String]
@@ -10479,6 +11273,73 @@ module Aws::SecurityHub
     #
     class WafOverrideAction < Struct.new(
       :type)
+      include Aws::Structure
+    end
+
+    # Provides information about the status of the investigation into a
+    # finding.
+    #
+    # @note When making an API call, you may pass Workflow
+    #   data as a hash:
+    #
+    #       {
+    #         status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the investigation into the finding. The allowed values
+    #   are the following.
+    #
+    #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #   * `NOTIFIED` - Indicates that you notified the resource owner about
+    #     the security issue. Used when the initial reviewer is not the
+    #     resource owner, and needs intervention from the resource owner.
+    #
+    #   * `SUPPRESSED` - The finding will not be reviewed again and will not
+    #     be acted upon.
+    #
+    #   * `RESOLVED` - The finding was reviewed and remediated and is now
+    #     considered resolved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Workflow AWS API Documentation
+    #
+    class Workflow < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # Used to update information about the investigation into the finding.
+    #
+    # @note When making an API call, you may pass WorkflowUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the investigation into the finding. The allowed values
+    #   are the following.
+    #
+    #   * `NEW` - The initial state of a finding, before it is reviewed.
+    #
+    #   * `NOTIFIED` - Indicates that you notified the resource owner about
+    #     the security issue. Used when the initial reviewer is not the
+    #     resource owner, and needs intervention from the resource owner.
+    #
+    #   * `RESOLVED` - The finding was reviewed and remediated and is now
+    #     considered resolved.
+    #
+    #   * `SUPPRESSED` - The finding will not be reviewed again and will not
+    #     be acted upon.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/WorkflowUpdate AWS API Documentation
+    #
+    class WorkflowUpdate < Struct.new(
+      :status)
       include Aws::Structure
     end
 

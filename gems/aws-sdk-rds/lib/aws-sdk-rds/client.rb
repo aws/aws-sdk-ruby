@@ -31,6 +31,18 @@ require 'aws-sdk-rds/plugins/cross_region_copying.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:rds)
 
 module Aws::RDS
+  # An API client for RDS.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::RDS::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -95,7 +107,7 @@ module Aws::RDS
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -109,6 +121,12 @@ module Aws::RDS
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -134,6 +152,10 @@ module Aws::RDS
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -141,7 +163,7 @@ module Aws::RDS
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -156,7 +178,7 @@ module Aws::RDS
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -168,15 +190,29 @@ module Aws::RDS
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -184,11 +220,30 @@ module Aws::RDS
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -211,16 +266,15 @@ module Aws::RDS
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -229,7 +283,7 @@ module Aws::RDS
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1085,7 +1139,7 @@ module Aws::RDS
     #   encrypted DB cluster snapshot in the same AWS Region.
     #
     #   The pre-signed URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the source
+    #   `CopyDBClusterSnapshot` API action that can be executed in the source
     #   AWS Region that contains the encrypted DB cluster snapshot to be
     #   copied. The pre-signed URL request must contain the following
     #   parameter values:
@@ -1749,7 +1803,7 @@ module Aws::RDS
     # Creates a new Amazon Aurora DB cluster.
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create the
-    # DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL
+    # DB cluster as a read replica of another DB cluster or Amazon RDS MySQL
     # DB instance. For cross-region replication where the DB cluster
     # identified by `ReplicationSourceIdentifier` is encrypted, you must
     # also specify the `PreSignedUrl` parameter.
@@ -1946,7 +2000,7 @@ module Aws::RDS
     #
     # @option params [String] :replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
-    #   if this DB cluster is created as a Read Replica.
+    #   if this DB cluster is created as a read replica.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to assign to the DB cluster.
@@ -1977,9 +2031,9 @@ module Aws::RDS
     #   AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another AWS
+    #   If you create a read replica of an encrypted DB cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
-    #   destination AWS Region. This key is used to encrypt the Read Replica
+    #   destination AWS Region. This key is used to encrypt the read replica
     #   in that AWS Region.
     #
     # @option params [String] :pre_signed_url
@@ -2002,8 +2056,8 @@ module Aws::RDS
     #     action that is called in the destination AWS Region, and the action
     #     contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that Aurora Read
-    #     Replica will be created in.
+    #   * `DestinationRegion` - The name of the AWS Region that Aurora read
+    #     replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
@@ -2069,6 +2123,12 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters created
+    #   with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions,
+    #   the clusters in a global database use `provisioned` engine mode.
+    #
+    #    </note>
+    #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
@@ -2121,6 +2181,22 @@ module Aws::RDS
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
+    #
+    # @option params [String] :domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2201,6 +2277,8 @@ module Aws::RDS
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     source_region: "String",
     #   })
     #
@@ -2276,6 +2354,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -3018,7 +3101,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -3058,7 +3141,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -3066,7 +3149,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -3074,7 +3157,7 @@ module Aws::RDS
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -3082,20 +3165,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -3288,12 +3371,10 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
-    #
-    #
     #
     #
     #
@@ -3667,19 +3748,20 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a new DB instance that acts as a Read Replica for an existing
-    # source DB instance. You can create a Read Replica for a DB instance
-    # running MySQL, MariaDB, Oracle, or PostgreSQL. For more information,
-    # see [Working with Read Replicas][1] in the *Amazon RDS User Guide*.
+    # Creates a new DB instance that acts as a read replica for an existing
+    # source DB instance. You can create a read replica for a DB instance
+    # running MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server. For more
+    # information, see [Working with Read Replicas][1] in the *Amazon RDS
+    # User Guide*.
     #
-    # Amazon Aurora doesn't support this action. You must call the
+    # Amazon Aurora doesn't support this action. Call the
     # `CreateDBInstance` action to create a DB instance for an Aurora DB
     # cluster.
     #
-    # All Read Replica DB instances are created with backups disabled. All
+    # All read replica DB instances are created with backups disabled. All
     # other DB instance attributes (including DB security groups and DB
     # parameter groups) are inherited from the source DB instance, except as
-    # specified following.
+    # specified.
     #
     # Your source DB instance must have backup retention enabled.
     #
@@ -3688,47 +3770,53 @@ module Aws::RDS
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html
     #
     # @option params [required, String] :db_instance_identifier
-    #   The DB instance identifier of the Read Replica. This identifier is the
+    #   The DB instance identifier of the read replica. This identifier is the
     #   unique key that identifies a DB instance. This parameter is stored as
     #   a lowercase string.
     #
     # @option params [required, String] :source_db_instance_identifier
     #   The identifier of the DB instance that will act as the source for the
-    #   Read Replica. Each DB instance can have up to five Read Replicas.
+    #   read replica. Each DB instance can have up to five read replicas.
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle, or
-    #     PostgreSQL DB instance.
+    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle,
+    #     PostgreSQL, or SQL Server DB instance.
     #
-    #   * Can specify a DB instance that is a MySQL Read Replica only if the
+    #   * Can specify a DB instance that is a MySQL read replica only if the
     #     source is running MySQL 5.6 or later.
     #
-    #   * For the limitations of Oracle Read Replicas, see [Read Replica
+    #   * For the limitations of Oracle read replicas, see [Read Replica
     #     Limitations with Oracle][1] in the *Amazon RDS User Guide*.
     #
-    #   * Can specify a DB instance that is a PostgreSQL DB instance only if
-    #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
-    #     for cross-region replication).
-    #
-    #   * The specified DB instance must have automatic backups enabled, its
-    #     backup retention period must be greater than 0.
-    #
-    #   * If the source DB instance is in the same AWS Region as the Read
-    #     Replica, specify a valid DB instance identifier.
-    #
-    #   * If the source DB instance is in a different AWS Region than the Read
-    #     Replica, specify a valid DB instance ARN. For more information, go
-    #     to [ Constructing an ARN for Amazon RDS][2] in the *Amazon RDS User
+    #   * For the limitations of SQL Server read replicas, see [Read Replica
+    #     Limitations with Microsoft SQL Server][2] in the *Amazon RDS User
     #     Guide*.
+    #
+    #   * Can specify a PostgreSQL DB instance only if the source is running
+    #     PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region
+    #     replication).
+    #
+    #   * The specified DB instance must have automatic backups enabled, that
+    #     is, its backup retention period must be greater than 0.
+    #
+    #   * If the source DB instance is in the same AWS Region as the read
+    #     replica, specify a valid DB instance identifier.
+    #
+    #   * If the source DB instance is in a different AWS Region from the read
+    #     replica, specify a valid DB instance ARN. For more information, see
+    #     [Constructing an ARN for Amazon RDS][3] in the *Amazon RDS User
+    #     Guide*. This doesn't apply to SQL Server, which doesn't support
+    #     cross-region replicas.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #
     # @option params [String] :db_instance_class
-    #   The compute and memory capacity of the Read Replica, for example,
+    #   The compute and memory capacity of the read replica, for example,
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
@@ -3741,7 +3829,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     #
     # @option params [String] :availability_zone
-    #   The Availability Zone (AZ) where the Read Replica will be created.
+    #   The Availability Zone (AZ) where the read replica will be created.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -3756,18 +3844,18 @@ module Aws::RDS
     #   Valid Values: `1150-65535`
     #
     # @option params [Boolean] :multi_az
-    #   A value that indicates whether the Read Replica is in a Multi-AZ
+    #   A value that indicates whether the read replica is in a Multi-AZ
     #   deployment.
     #
-    #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
+    #   You can create a read replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
-    #   support for the replica. Creating your Read Replica as a Multi-AZ DB
+    #   support for the replica. Creating your read replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
-    #   automatically to the Read Replica during the maintenance window.
+    #   automatically to the read replica during the maintenance window.
     #
     #   Default: Inherits from the source DB instance
     #
@@ -3779,13 +3867,18 @@ module Aws::RDS
     #   The option group the DB instance is associated with. If omitted, the
     #   option group associated with the source instance is used.
     #
+    #   <note markdown="1"> For SQL Server, you must use the option group associated with the
+    #   source instance.
+    #
+    #    </note>
+    #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #
     #   If you do not specify a value for `DBParameterGroupName`, then Amazon
     #   RDS uses the `DBParameterGroup` of source DB instance for a same
-    #   region Read Replica, or the default `DBParameterGroup` for the
-    #   specified DB engine for a cross region Read Replica.
+    #   region read replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross region read replica.
     #
     #   <note markdown="1"> Currently, specifying a parameter group for this operation is only
     #   supported for Oracle DB instances.
@@ -3832,25 +3925,25 @@ module Aws::RDS
     #   * The specified DB subnet group must be in the same AWS Region in
     #     which the operation is running.
     #
-    #   * All Read Replicas in one AWS Region that are created from the same
+    #   * All read replicas in one AWS Region that are created from the same
     #     source DB instance must either:&gt;
     #
-    #     * Specify DB subnet groups from the same VPC. All these Read
-    #       Replicas are created in the same VPC.
+    #     * Specify DB subnet groups from the same VPC. All these read
+    #       replicas are created in the same VPC.
     #
-    #     * Not specify a DB subnet group. All these Read Replicas are created
+    #     * Not specify a DB subnet group. All these read replicas are created
     #       outside of any VPC.
     #
     #   Example: `mySubnetgroup`
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with the Read Replica.
+    #   A list of EC2 VPC security groups to associate with the read replica.
     #
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     #
     # @option params [String] :storage_type
-    #   Specifies the storage type to be associated with the Read Replica.
+    #   Specifies the storage type to be associated with the read replica.
     #
     #   Valid values: `standard | gp2 | io1`
     #
@@ -3860,12 +3953,12 @@ module Aws::RDS
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
     # @option params [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the Read Replica
-    #   to snapshots of the Read Replica. By default, tags are not copied.
+    #   A value that indicates whether to copy all tags from the read replica
+    #   to snapshots of the read replica. By default, tags are not copied.
     #
     # @option params [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
-    #   metrics are collected for the Read Replica. To disable collecting
+    #   metrics are collected for the read replica. To disable collecting
     #   Enhanced Monitoring metrics, specify 0. The default is 0.
     #
     #   If `MonitoringRoleArn` is specified, then you must also set
@@ -3888,22 +3981,22 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted Read Replica. The KMS key ID is
+    #   The AWS KMS key ID for an encrypted read replica. The KMS key ID is
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you create an encrypted Read Replica in the same AWS Region as the
+    #   If you create an encrypted read replica in the same AWS Region as the
     #   source DB instance, then you do not have to specify a value for this
-    #   parameter. The Read Replica is encrypted with the same KMS key as the
+    #   parameter. The read replica is encrypted with the same KMS key as the
     #   source DB instance.
     #
-    #   If you create an encrypted Read Replica in a different AWS Region,
+    #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a KMS key for the destination AWS Region. KMS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
     #
-    #   You can't create an encrypted Read Replica from an unencrypted DB
+    #   You can't create an encrypted read replica from an unencrypted DB
     #   instance.
     #
     # @option params [String] :pre_signed_url
@@ -3911,9 +4004,9 @@ module Aws::RDS
     #   `CreateDBInstanceReadReplica` API action in the source AWS Region that
     #   contains the source DB instance.
     #
-    #   You must specify this parameter when you create an encrypted Read
-    #   Replica from another AWS Region by using the Amazon RDS API. Don't
-    #   specify `PreSignedUrl` when you are creating an encrypted Read Replica
+    #   You must specify this parameter when you create an encrypted read
+    #   replica from another AWS Region by using the Amazon RDS API. Don't
+    #   specify `PreSignedUrl` when you are creating an encrypted read replica
     #   in the same AWS Region.
     #
     #   The presigned URL must be a valid request for the
@@ -3921,7 +4014,7 @@ module Aws::RDS
     #   source AWS Region that contains the encrypted source DB instance. The
     #   presigned URL request must contain the following parameter values:
     #
-    #   * `DestinationRegion` - The AWS Region that the encrypted Read Replica
+    #   * `DestinationRegion` - The AWS Region that the encrypted read replica
     #     is created in. This AWS Region is the same one where the
     #     `CreateDBInstanceReadReplica` action is called that contains this
     #     presigned URL.
@@ -3935,7 +4028,7 @@ module Aws::RDS
     #     presigned URL must be set to the us-east-1 AWS Region.
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the Read Replica in the destination AWS Region. This is the
+    #     encrypt the read replica in the destination AWS Region. This is the
     #     same identifier for both the `CreateDBInstanceReadReplica` action
     #     that is called in the destination AWS Region, and the action
     #     contained in the presigned URL.
@@ -3943,7 +4036,7 @@ module Aws::RDS
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
     #     the Amazon Resource Name (ARN) format for the source AWS Region. For
-    #     example, if you are creating an encrypted Read Replica from a DB
+    #     example, if you are creating an encrypted read replica from a DB
     #     instance in the us-west-2 AWS Region, then your
     #     `SourceDBInstanceIdentifier` looks like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115`.
@@ -3955,8 +4048,11 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
     #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
+    #   autogenerates a presigned URL that is a valid request for the
     #   operation that can be executed in the source AWS Region.
+    #
+    #    `SourceRegion` isn't supported for SQL Server, because SQL Server on
+    #   Amazon RDS doesn't support cross-region read replicas.
     #
     #    </note>
     #
@@ -3981,7 +4077,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
-    #   Read Replica.
+    #   read replica.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
@@ -4040,9 +4136,16 @@ module Aws::RDS
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][1] in the *Amazon RDS User Guide*.
     #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][2] in the *Amazon
+    #   RDS User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
     #
     # @option params [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
@@ -4387,9 +4490,8 @@ module Aws::RDS
     # @option params [required, String] :engine_family
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
-    #   it interprets network traffic to and from the database. Currently,
-    #   this value is always `MYSQL`. The engine family applies to both RDS
-    #   MySQL and Aurora MySQL.
+    #   it interprets network traffic to and from the database. The engine
+    #   family applies to MySQL and PostgreSQL for both RDS and Aurora.
     #
     # @option params [required, Array<Types::UserAuthConfig>] :auth
     #   The authorization mechanism that the proxy uses.
@@ -4435,7 +4537,7 @@ module Aws::RDS
     #
     #   resp = client.create_db_proxy({
     #     db_proxy_name: "String", # required
-    #     engine_family: "MYSQL", # required, accepts MYSQL
+    #     engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL
     #     auth: [ # required
     #       {
     #         description: "String",
@@ -4463,7 +4565,7 @@ module Aws::RDS
     #
     #   resp.db_proxy.db_proxy_name #=> String
     #   resp.db_proxy.db_proxy_arn #=> String
-    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
@@ -5329,6 +5431,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5548,14 +5655,14 @@ module Aws::RDS
     # you can't delete the DB instance if both of the following conditions
     # are true:
     #
-    # * The DB cluster is a Read Replica of another Amazon Aurora DB
+    # * The DB cluster is a read replica of another Amazon Aurora DB
     #   cluster.
     #
     # * The DB instance is the only instance in the DB cluster.
     #
     # To delete a DB instance in this case, first call the
     # `PromoteReadReplicaDBCluster` API action to promote the DB cluster so
-    # it's no longer a Read Replica. After the promotion completes, then
+    # it's no longer a read replica. After the promotion completes, then
     # call the `DeleteDBInstance` API action to delete the final instance in
     # the DB cluster.
     #
@@ -5580,7 +5687,7 @@ module Aws::RDS
     #   'failed', 'incompatible-restore', or 'incompatible-network', it
     #   can only be deleted when skip is specified.
     #
-    #   Specify skip when deleting a Read Replica.
+    #   Specify skip when deleting a read replica.
     #
     #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip
     #   isn't specified.
@@ -5604,7 +5711,7 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Can't be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a read replica.
     #
     # @option params [Boolean] :delete_automated_backups
     #   A value that indicates whether to remove automated backups immediately
@@ -5883,7 +5990,7 @@ module Aws::RDS
     #
     #   resp.db_proxy.db_proxy_name #=> String
     #   resp.db_proxy.db_proxy_arn #=> String
-    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
@@ -6475,6 +6582,8 @@ module Aws::RDS
     #
     #   * {Types::CustomAvailabilityZoneMessage#marker #marker} => String
     #   * {Types::CustomAvailabilityZoneMessage#custom_availability_zones #custom_availability_zones} => Array&lt;Types::CustomAvailabilityZone&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7171,6 +7280,12 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
     #   resp.db_cluster_snapshots[0].iam_database_authentication_enabled #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * db_cluster_snapshot_available
+    #   * db_cluster_snapshot_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots AWS API Documentation
     #
     # @overload describe_db_cluster_snapshots(params = {})
@@ -7241,6 +7356,8 @@ module Aws::RDS
     #
     #   * {Types::DBClusterMessage#marker #marker} => String
     #   * {Types::DBClusterMessage#db_clusters #db_clusters} => Array&lt;Types::DBCluster&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB clusters
@@ -7344,6 +7461,11 @@ module Aws::RDS
     #   resp.db_clusters[0].activity_stream_kinesis_stream_name #=> String
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
     #   resp.db_clusters[0].cross_account_clone #=> Boolean
+    #   resp.db_clusters[0].domain_memberships #=> Array
+    #   resp.db_clusters[0].domain_memberships[0].domain #=> String
+    #   resp.db_clusters[0].domain_memberships[0].status #=> String
+    #   resp.db_clusters[0].domain_memberships[0].fqdn #=> String
+    #   resp.db_clusters[0].domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -7421,6 +7543,8 @@ module Aws::RDS
     #
     #   * {Types::DBEngineVersionMessage#marker #marker} => String
     #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB engine version settings
@@ -7562,6 +7686,8 @@ module Aws::RDS
     #   * {Types::DBInstanceAutomatedBackupMessage#marker #marker} => String
     #   * {Types::DBInstanceAutomatedBackupMessage#db_instance_automated_backups #db_instance_automated_backups} => Array&lt;Types::DBInstanceAutomatedBackup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_instance_automated_backups({
@@ -7679,6 +7805,8 @@ module Aws::RDS
     #
     #   * {Types::DBInstanceMessage#marker #marker} => String
     #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB instance settings
@@ -7825,6 +7953,12 @@ module Aws::RDS
     #   resp.db_instances[0].listener_endpoint.hosted_zone_id #=> String
     #   resp.db_instances[0].max_allocated_storage #=> Integer
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * db_instance_available
+    #   * db_instance_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
     # @overload describe_db_instances(params = {})
@@ -7876,6 +8010,8 @@ module Aws::RDS
     #
     #   * {Types::DescribeDBLogFilesResponse#describe_db_log_files #describe_db_log_files} => Array&lt;Types::DescribeDBLogFilesDetails&gt;
     #   * {Types::DescribeDBLogFilesResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB log file names
@@ -7966,6 +8102,8 @@ module Aws::RDS
     #   * {Types::DBParameterGroupsMessage#marker #marker} => String
     #   * {Types::DBParameterGroupsMessage#db_parameter_groups #db_parameter_groups} => Array&lt;Types::DBParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about DB parameter groups
     #
@@ -8053,6 +8191,8 @@ module Aws::RDS
     #
     #   * {Types::DBParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::DBParameterGroupDetails#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB parameters
@@ -8143,6 +8283,8 @@ module Aws::RDS
     #   * {Types::DescribeDBProxiesResponse#db_proxies #db_proxies} => Array&lt;Types::DBProxy&gt;
     #   * {Types::DescribeDBProxiesResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxies({
@@ -8162,7 +8304,7 @@ module Aws::RDS
     #   resp.db_proxies #=> Array
     #   resp.db_proxies[0].db_proxy_name #=> String
     #   resp.db_proxies[0].db_proxy_arn #=> String
-    #   resp.db_proxies[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxies[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxies[0].engine_family #=> String
     #   resp.db_proxies[0].vpc_security_group_ids #=> Array
     #   resp.db_proxies[0].vpc_security_group_ids[0] #=> String
@@ -8228,6 +8370,8 @@ module Aws::RDS
     #
     #   * {Types::DescribeDBProxyTargetGroupsResponse#target_groups #target_groups} => Array&lt;Types::DBProxyTargetGroup&gt;
     #   * {Types::DescribeDBProxyTargetGroupsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8308,6 +8452,8 @@ module Aws::RDS
     #   * {Types::DescribeDBProxyTargetsResponse#targets #targets} => Array&lt;Types::DBProxyTarget&gt;
     #   * {Types::DescribeDBProxyTargetsResponse#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_proxy_targets({
@@ -8332,6 +8478,9 @@ module Aws::RDS
     #   resp.targets[0].rds_resource_id #=> String
     #   resp.targets[0].port #=> Integer
     #   resp.targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
+    #   resp.targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY"
+    #   resp.targets[0].target_health.description #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargets AWS API Documentation
@@ -8373,6 +8522,8 @@ module Aws::RDS
     #
     #   * {Types::DBSecurityGroupMessage#marker #marker} => String
     #   * {Types::DBSecurityGroupMessage#db_security_groups #db_security_groups} => Array&lt;Types::DBSecurityGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list DB security group settings
@@ -8611,6 +8762,8 @@ module Aws::RDS
     #   * {Types::DBSnapshotMessage#marker #marker} => String
     #   * {Types::DBSnapshotMessage#db_snapshots #db_snapshots} => Array&lt;Types::DBSnapshot&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list DB snapshot attributes
     #
@@ -8681,6 +8834,12 @@ module Aws::RDS
     #   resp.db_snapshots[0].processor_features[0].value #=> String
     #   resp.db_snapshots[0].dbi_resource_id #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * db_snapshot_available
+    #   * db_snapshot_deleted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
     #
     # @overload describe_db_snapshots(params = {})
@@ -8726,6 +8885,8 @@ module Aws::RDS
     #
     #   * {Types::DBSubnetGroupMessage#marker #marker} => String
     #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB subnet groups
@@ -8899,6 +9060,8 @@ module Aws::RDS
     #
     #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list default parameters for a DB engine
     #
@@ -9053,6 +9216,8 @@ module Aws::RDS
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about DB event notification subscriptions
     #
@@ -9192,6 +9357,8 @@ module Aws::RDS
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about events
     #
@@ -9283,7 +9450,7 @@ module Aws::RDS
     #   response includes only records beyond the marker, up to the value
     #   specified by the `MaxRecords` parameter.
     #
-    # @option params [String] :max_records
+    # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
     #   records exist than the specified value, a pagination token called a
     #   marker is included in the response. You can use the marker in a later
@@ -9298,6 +9465,8 @@ module Aws::RDS
     #   * {Types::ExportTasksMessage#marker #marker} => String
     #   * {Types::ExportTasksMessage#export_tasks #export_tasks} => Array&lt;Types::ExportTask&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_tasks({
@@ -9310,7 +9479,7 @@ module Aws::RDS
     #       },
     #     ],
     #     marker: "String",
-    #     max_records: "String",
+    #     max_records: 1,
     #   })
     #
     # @example Response structure
@@ -9400,6 +9569,8 @@ module Aws::RDS
     #   * {Types::GlobalClustersMessage#marker #marker} => String
     #   * {Types::GlobalClustersMessage#global_clusters #global_clusters} => Array&lt;Types::GlobalCluster&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_clusters({
@@ -9480,6 +9651,8 @@ module Aws::RDS
     #   * {Types::InstallationMediaMessage#marker #marker} => String
     #   * {Types::InstallationMediaMessage#installation_media #installation_media} => Array&lt;Types::InstallationMedia&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_installation_media({
@@ -9548,6 +9721,8 @@ module Aws::RDS
     #
     #   * {Types::OptionGroupOptionsMessage#option_group_options #option_group_options} => Array&lt;Types::OptionGroupOption&gt;
     #   * {Types::OptionGroupOptionsMessage#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list information about DB option group options
@@ -9661,6 +9836,8 @@ module Aws::RDS
     #   * {Types::OptionGroups#option_groups_list #option_groups_list} => Array&lt;Types::OptionGroup&gt;
     #   * {Types::OptionGroups#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about DB option groups
     #
@@ -9753,6 +9930,14 @@ module Aws::RDS
     #   The license model filter value. Specify this parameter to show only
     #   the available offerings matching the specified license model.
     #
+    # @option params [String] :availability_zone_group
+    #   The Availability Zone group associated with a Local Zone. Specify this
+    #   parameter to retrieve available offerings for the Local Zones in the
+    #   group.
+    #
+    #   Omit this parameter to show the available offerings in the specified
+    #   AWS Region.
+    #
     # @option params [Boolean] :vpc
     #   A value that indicates whether to show only VPC or non-VPC offerings.
     #
@@ -9780,6 +9965,8 @@ module Aws::RDS
     #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
     #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about orderable DB instance options
     #
@@ -9805,6 +9992,7 @@ module Aws::RDS
     #     engine_version: "String",
     #     db_instance_class: "String",
     #     license_model: "String",
+    #     availability_zone_group: "String",
     #     vpc: false,
     #     filters: [
     #       {
@@ -9823,6 +10011,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].engine_version #=> String
     #   resp.orderable_db_instance_options[0].db_instance_class #=> String
     #   resp.orderable_db_instance_options[0].license_model #=> String
+    #   resp.orderable_db_instance_options[0].availability_zone_group #=> String
     #   resp.orderable_db_instance_options[0].availability_zones #=> Array
     #   resp.orderable_db_instance_options[0].availability_zones[0].name #=> String
     #   resp.orderable_db_instance_options[0].multi_az_capable #=> Boolean
@@ -10019,6 +10208,8 @@ module Aws::RDS
     #   * {Types::ReservedDBInstanceMessage#marker #marker} => String
     #   * {Types::ReservedDBInstanceMessage#reserved_db_instances #reserved_db_instances} => Array&lt;Types::ReservedDBInstance&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about reserved DB instances
     #
@@ -10151,6 +10342,8 @@ module Aws::RDS
     #   * {Types::ReservedDBInstancesOfferingMessage#marker #marker} => String
     #   * {Types::ReservedDBInstancesOfferingMessage#reserved_db_instances_offerings #reserved_db_instances_offerings} => Array&lt;Types::ReservedDBInstancesOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about reserved DB instance offerings
     #
@@ -10215,7 +10408,7 @@ module Aws::RDS
     end
 
     # Returns a list of the source AWS Regions where the current AWS Region
-    # can create a Read Replica or copy a DB snapshot from. This API action
+    # can create a read replica or copy a DB snapshot from. This API action
     # supports pagination.
     #
     # @option params [String] :region_name
@@ -10446,6 +10639,8 @@ module Aws::RDS
     #   * {Types::DownloadDBLogFilePortionDetails#marker #marker} => String
     #   * {Types::DownloadDBLogFilePortionDetails#additional_data_pending #additional_data_pending} => Boolean
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list information about DB log files
     #
@@ -10623,6 +10818,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -11202,6 +11402,15 @@ module Aws::RDS
     #   * The `DBInstanceParameterGroupName` parameter is only valid in
     #     combination with the `AllowMajorVersionUpgrade` parameter.
     #
+    # @option params [String] :domain
+    #   The Active Directory directory ID to move the DB cluster to. Specify
+    #   `none` to remove the cluster from its current domain. The domain must
+    #   be created prior to this operation.
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify scaling
     #   properties for DB clusters in `serverless` DB engine mode.
@@ -11279,6 +11488,8 @@ module Aws::RDS
     #     engine_version: "String",
     #     allow_major_version_upgrade: false,
     #     db_instance_parameter_group_name: "String",
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -11363,6 +11574,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -11847,13 +12063,13 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can be specified for a MySQL Read Replica only if the source is
+    #   * Can be specified for a MySQL read replica only if the source is
     #     running MySQL 5.6 or later
     #
-    #   * Can be specified for a PostgreSQL Read Replica only if the source is
+    #   * Can be specified for a PostgreSQL read replica only if the source is
     #     running PostgreSQL 9.3.5
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -11964,7 +12180,7 @@ module Aws::RDS
     #   performance degradation. While the migration takes place, nightly
     #   backups for the instance are suspended. No other Amazon RDS operations
     #   can take place for the instance, including modifying the instance,
-    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL, the value
@@ -12024,7 +12240,7 @@ module Aws::RDS
     #   performance degradation. While the migration takes place, nightly
     #   backups for the instance are suspended. No other Amazon RDS operations
     #   can take place for the instance, including modifying the instance,
-    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
     #   Valid values: `standard | gp2 | io1`
@@ -12100,19 +12316,19 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **MariaDB**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **PostgreSQL**
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -12120,20 +12336,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     # @option params [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
@@ -12669,7 +12885,7 @@ module Aws::RDS
     #
     #   resp.db_proxy.db_proxy_name #=> String
     #   resp.db_proxy.db_proxy_arn #=> String
-    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting", "suspended", "suspending", "reactivating"
     #   resp.db_proxy.engine_family #=> String
     #   resp.db_proxy.vpc_security_group_ids #=> Array
     #   resp.db_proxy.vpc_security_group_ids[0] #=> String
@@ -12765,8 +12981,8 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Updates a manual DB snapshot, which can be encrypted or not encrypted,
-    # with a new engine version.
+    # Updates a manual DB snapshot with a new engine version. The snapshot
+    # can be encrypted or unencrypted, but not shared or public.
     #
     # Amazon RDS supports upgrading DB snapshots for MySQL, Oracle, and
     # PostgreSQL.
@@ -13345,16 +13561,16 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Promotes a Read Replica DB instance to a standalone DB instance.
+    # Promotes a read replica DB instance to a standalone DB instance.
     #
     # <note markdown="1"> * Backup duration is a function of the amount of changes to the
-    #   database since the previous backup. If you plan to promote a Read
-    #   Replica to a standalone instance, we recommend that you enable
+    #   database since the previous backup. If you plan to promote a read
+    #   replica to a standalone instance, we recommend that you enable
     #   backups and complete at least one backup prior to promotion. In
-    #   addition, a Read Replica cannot be promoted to a standalone instance
+    #   addition, a read replica cannot be promoted to a standalone instance
     #   when it is in the `backing-up` status. If you have enabled backups
-    #   on your Read Replica, configure the automated backup window so that
-    #   daily backups do not interfere with Read Replica promotion.
+    #   on your read replica, configure the automated backup window so that
+    #   daily backups do not interfere with read replica promotion.
     #
     # * This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
@@ -13366,7 +13582,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing Read Replica DB instance.
+    #   * Must match the identifier of an existing read replica DB instance.
     #
     #   ^
     #
@@ -13383,7 +13599,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35.
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas.
+    #   * Can't be set to 0 if the DB instance is a source to read replicas.
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -13563,19 +13779,19 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Promotes a Read Replica DB cluster to a standalone DB cluster.
+    # Promotes a read replica DB cluster to a standalone DB cluster.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
     #  </note>
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The identifier of the DB cluster Read Replica to promote. This
+    #   The identifier of the DB cluster read replica to promote. This
     #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing DBCluster Read Replica.
+    #   * Must match the identifier of an existing DB cluster read replica.
     #
     #   ^
     #
@@ -13663,6 +13879,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -13990,6 +14211,9 @@ module Aws::RDS
     #   resp.db_proxy_targets[0].rds_resource_id #=> String
     #   resp.db_proxy_targets[0].port #=> Integer
     #   resp.db_proxy_targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.db_proxy_targets[0].target_health.state #=> String, one of "REGISTERING", "AVAILABLE", "UNAVAILABLE"
+    #   resp.db_proxy_targets[0].target_health.reason #=> String, one of "UNREACHABLE", "CONNECTION_FAILED", "AUTH_FAILURE", "PENDING_PROXY_CAPACITY"
+    #   resp.db_proxy_targets[0].target_health.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargets AWS API Documentation
     #
@@ -14448,6 +14672,18 @@ module Aws::RDS
     # described in [ Migrating Data to an Amazon Aurora MySQL DB Cluster][1]
     # in the *Amazon Aurora User Guide*.
     #
+    # <note markdown="1"> This action only restores the DB cluster, not the DB instances for
+    # that DB cluster. You must invoke the `CreateDBInstance` action to
+    # create DB instances for the restored DB cluster, specifying the
+    # identifier of the restored DB cluster in `DBClusterIdentifier`. You
+    # can create DB instances only after the `RestoreDBClusterFromS3` action
+    # has completed and the DB cluster is available.
+    #
+    #  </note>
+    #
+    # For more information on Amazon Aurora, see [ What Is Amazon
+    # Aurora?][2] in the *Amazon Aurora User Guide.*
+    #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
     #  </note>
@@ -14455,6 +14691,7 @@ module Aws::RDS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
     #
     # @option params [Array<String>] :availability_zones
     #   A list of Availability Zones (AZs) where instances in the restored DB
@@ -14726,6 +14963,23 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
+    # @option params [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -14767,6 +15021,8 @@ module Aws::RDS
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     #
     # @example Response structure
@@ -14841,6 +15097,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -14869,6 +15130,10 @@ module Aws::RDS
     #
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
+    #
+    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    #
+    #  </note>
     #
     #
     #
@@ -15064,6 +15329,14 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
+    # @option params [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -15119,6 +15392,8 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     #
     # @example Response structure
@@ -15193,6 +15468,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -15413,6 +15693,23 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
+    # @option params [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -15459,6 +15756,8 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     #
     # @example Response structure
@@ -15533,6 +15832,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -17494,6 +17798,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -17692,17 +18001,19 @@ module Aws::RDS
     #   provided, all the snapshot data is exported. Valid values are the
     #   following:
     #
-    #   * `database` - Export all the data of the snapshot.
+    #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #   * `database.table` *table-name* - Export a table of the snapshot. This
+    #     format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora
+    #     MySQL.
     #
-    #   * `database.schema [schema-name]` - Export a database schema of the
-    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema` *schema-name* - Export a database schema of the
+    #     snapshot. This format is valid only for RDS for PostgreSQL and
+    #     Aurora PostgreSQL.
     #
-    #   * `database.schema.table [table-name]` - Export a table of the
-    #     database schema. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema.table` *table-name* - Export a table of the
+    #     database schema. This format is valid only for RDS for PostgreSQL
+    #     and Aurora PostgreSQL.
     #
     # @return [Types::ExportTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17913,6 +18224,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -18097,7 +18413,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -18163,14 +18479,14 @@ module Aws::RDS
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                   | params                           | :delay   | :max_attempts |
-    # | ----------------------------- | -------------------------------- | -------- | ------------- |
-    # | db_cluster_snapshot_available | {#describe_db_cluster_snapshots} | 30       | 60            |
-    # | db_cluster_snapshot_deleted   | {#describe_db_cluster_snapshots} | 30       | 60            |
-    # | db_instance_available         | {#describe_db_instances}         | 30       | 60            |
-    # | db_instance_deleted           | {#describe_db_instances}         | 30       | 60            |
-    # | db_snapshot_available         | {#describe_db_snapshots}         | 30       | 60            |
-    # | db_snapshot_deleted           | {#describe_db_snapshots}         | 30       | 60            |
+    # | waiter_name                   | params                                 | :delay   | :max_attempts |
+    # | ----------------------------- | -------------------------------------- | -------- | ------------- |
+    # | db_cluster_snapshot_available | {Client#describe_db_cluster_snapshots} | 30       | 60            |
+    # | db_cluster_snapshot_deleted   | {Client#describe_db_cluster_snapshots} | 30       | 60            |
+    # | db_instance_available         | {Client#describe_db_instances}         | 30       | 60            |
+    # | db_instance_deleted           | {Client#describe_db_instances}         | 30       | 60            |
+    # | db_snapshot_available         | {Client#describe_db_snapshots}         | 30       | 60            |
+    # | db_snapshot_deleted           | {Client#describe_db_snapshots}         | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

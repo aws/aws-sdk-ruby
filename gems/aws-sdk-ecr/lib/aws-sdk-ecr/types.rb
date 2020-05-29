@@ -1131,13 +1131,18 @@ module Aws::ECR
     #   The image manifest associated with the image.
     #   @return [String]
     #
+    # @!attribute [rw] image_manifest_media_type
+    #   The media type associated with the image manifest.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Image AWS API Documentation
     #
     class Image < Struct.new(
       :registry_id,
       :repository_name,
       :image_id,
-      :image_manifest)
+      :image_manifest,
+      :image_manifest_media_type)
       include Aws::Structure
     end
 
@@ -1177,6 +1182,9 @@ module Aws::ECR
     #
     # @!attribute [rw] image_size_in_bytes
     #   The size, in bytes, of the image in the repository.
+    #
+    #   If the image is a manifest list, this will be the max size of all
+    #   manifests in the list.
     #
     #   <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses
     #   image layers before pushing them to a V2 Docker registry. The output
@@ -1763,13 +1771,12 @@ module Aws::ECR
     end
 
     # The operation did not succeed because it would have exceeded a service
-    # limit for your account. For more information, see [Amazon ECR Default
-    # Service Limits][1] in the Amazon Elastic Container Registry User
-    # Guide.
+    # limit for your account. For more information, see [Amazon ECR Service
+    # Quotas][1] in the Amazon Elastic Container Registry User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html
     #
     # @!attribute [rw] message
     #   The error message associated with the exception.
@@ -1924,6 +1931,7 @@ module Aws::ECR
     #         registry_id: "RegistryId",
     #         repository_name: "RepositoryName", # required
     #         image_manifest: "ImageManifest", # required
+    #         image_manifest_media_type: "MediaType",
     #         image_tag: "ImageTag",
     #       }
     #
@@ -1941,6 +1949,12 @@ module Aws::ECR
     #   The image manifest corresponding to the image to be uploaded.
     #   @return [String]
     #
+    # @!attribute [rw] image_manifest_media_type
+    #   The media type of the image manifest. If you push an image manifest
+    #   that does not contain the `mediaType` field, you must specify the
+    #   `imageManifestMediaType` in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] image_tag
     #   The tag to associate with the image. This parameter is required for
     #   images that use the Docker Image Manifest V2 Schema 2 or OCI
@@ -1953,6 +1967,7 @@ module Aws::ECR
       :registry_id,
       :repository_name,
       :image_manifest,
+      :image_manifest_media_type,
       :image_tag)
       include Aws::Structure
     end
@@ -2137,6 +2152,18 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The manifest list is referencing an image that does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReferencedImagesNotFoundException AWS API Documentation
+    #
+    class ReferencedImagesNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An object representing a repository.
     #
     # @!attribute [rw] repository_arn
@@ -2292,12 +2319,12 @@ module Aws::ECR
     #
     # @!attribute [rw] policy_text
     #   The JSON repository policy text to apply to the repository. For more
-    #   information, see [Amazon ECR Repository Policy Examples][1] in the
-    #   *Amazon Elastic Container Registry User Guide*.
+    #   information, see [Amazon ECR Repository Policies][1] in the *Amazon
+    #   Elastic Container Registry User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html
     #   @return [String]
     #
     # @!attribute [rw] force
@@ -2542,6 +2569,18 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # The image is of a type that cannot be scanned.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UnsupportedImageTypeException AWS API Documentation
+    #
+    class UnsupportedImageTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -2600,11 +2639,13 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] part_first_byte
-    #   The integer value of the first byte of the layer part.
+    #   The position of the first byte of the layer part witin the overall
+    #   image layer.
     #   @return [Integer]
     #
     # @!attribute [rw] part_last_byte
-    #   The integer value of the last byte of the layer part.
+    #   The position of the last byte of the layer part within the overall
+    #   image layer.
     #   @return [Integer]
     #
     # @!attribute [rw] layer_part_blob

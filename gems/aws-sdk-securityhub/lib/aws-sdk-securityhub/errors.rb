@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SecurityHub
+
+  # When SecurityHub returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SecurityHub::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SecurityHub errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SecurityHub::Errors::ServiceError
+  #       # rescues all SecurityHub API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {InternalException}
+  # * {InvalidAccessException}
+  # * {InvalidInputException}
+  # * {LimitExceededException}
+  # * {ResourceConflictException}
+  # * {ResourceNotFoundException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +57,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class InternalException < ServiceError
@@ -49,7 +77,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidAccessException < ServiceError
@@ -70,7 +97,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -91,7 +117,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -112,7 +137,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class ResourceConflictException < ServiceError
@@ -133,7 +157,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -154,7 +177,6 @@ module Aws::SecurityHub
       def code
         @code || @data[:code]
       end
-
     end
 
   end

@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/query.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:elasticloadbalancingv2)
 
 module Aws::ElasticLoadBalancingV2
+  # An API client for ElasticLoadBalancingV2.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::ElasticLoadBalancingV2::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::ElasticLoadBalancingV2
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::ElasticLoadBalancingV2
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::ElasticLoadBalancingV2
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::ElasticLoadBalancingV2
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::ElasticLoadBalancingV2
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::ElasticLoadBalancingV2
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::ElasticLoadBalancingV2
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::ElasticLoadBalancingV2
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::ElasticLoadBalancingV2
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -324,7 +378,7 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each resource can have a maximum of 10 tags.
+    #   The tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -406,8 +460,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   ciphers and protocols are supported. The default is the current
-    #   predefined security policy.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default certificate for the listener.
@@ -438,6 +519,28 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
     #   you drop specified client requests and return a custom HTTP response.
+    #
+    # @option params [Array<String>] :alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
     #
     # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -601,6 +704,7 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #       },
     #     ],
+    #     alpn_policy: ["AlpnPolicyValue"],
     #   })
     #
     # @example Response structure
@@ -654,6 +758,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].alpn_policy #=> Array
+    #   resp.listeners[0].alpn_policy[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
@@ -1720,6 +1826,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeListenersOutput#listeners #listeners} => Array&lt;Types::Listener&gt;
     #   * {Types::DescribeListenersOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a listener
     #
@@ -1809,6 +1917,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].alpn_policy #=> Array
+    #   resp.listeners[0].alpn_policy[0] #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
@@ -1920,6 +2030,8 @@ module Aws::ElasticLoadBalancingV2
     #   * {Types::DescribeLoadBalancersOutput#load_balancers #load_balancers} => Array&lt;Types::LoadBalancer&gt;
     #   * {Types::DescribeLoadBalancersOutput#next_marker #next_marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To describe a load balancer
     #
@@ -1996,6 +2108,13 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.next_marker #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * load_balancer_available
+    #   * load_balancer_exists
+    #   * load_balancers_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers AWS API Documentation
     #
@@ -2308,7 +2427,8 @@ module Aws::ElasticLoadBalancingV2
     # Balancers, and target groups.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARN) of the resources. You can specify up
+    #   to 20 resources in a single call.
     #
     # @return [Types::DescribeTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2467,6 +2587,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   * {Types::DescribeTargetGroupsOutput#target_groups #target_groups} => Array&lt;Types::TargetGroup&gt;
     #   * {Types::DescribeTargetGroupsOutput#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To describe a target group
@@ -2649,6 +2771,12 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Target.IpUnusable", "Target.HealthCheckDisabled", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * target_deregistered
+    #   * target_in_service
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth AWS API Documentation
     #
     # @overload describe_target_health(params = {})
@@ -2685,12 +2813,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   protocols and ciphers are supported. For more information, see
-    #   [Security Policies][1] in the *Application Load Balancers Guide*.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network Load
+    #   Balancers Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default certificate for the listener.
@@ -2720,6 +2871,28 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Application Load Balancer\] If the action type is `fixed-response`,
     #   you drop specified client requests and return a custom HTTP response.
+    #
+    # @option params [Array<String>] :alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
     #
     # @return [Types::ModifyListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2868,6 +3041,7 @@ module Aws::ElasticLoadBalancingV2
     #         },
     #       },
     #     ],
+    #     alpn_policy: ["AlpnPolicyValue"],
     #   })
     #
     # @example Response structure
@@ -2921,6 +3095,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].forward_config.target_groups[0].weight #=> Integer
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.enabled #=> Boolean
     #   resp.listeners[0].default_actions[0].forward_config.target_group_stickiness_config.duration_seconds #=> Integer
+    #   resp.listeners[0].alpn_policy #=> Array
+    #   resp.listeners[0].alpn_policy[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
     #
@@ -4091,7 +4267,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4157,13 +4333,13 @@ module Aws::ElasticLoadBalancingV2
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name             | params                     | :delay   | :max_attempts |
-    # | ----------------------- | -------------------------- | -------- | ------------- |
-    # | load_balancer_available | {#describe_load_balancers} | 15       | 40            |
-    # | load_balancer_exists    | {#describe_load_balancers} | 15       | 40            |
-    # | load_balancers_deleted  | {#describe_load_balancers} | 15       | 40            |
-    # | target_deregistered     | {#describe_target_health}  | 15       | 40            |
-    # | target_in_service       | {#describe_target_health}  | 15       | 40            |
+    # | waiter_name             | params                           | :delay   | :max_attempts |
+    # | ----------------------- | -------------------------------- | -------- | ------------- |
+    # | load_balancer_available | {Client#describe_load_balancers} | 15       | 40            |
+    # | load_balancer_exists    | {Client#describe_load_balancers} | 15       | 40            |
+    # | load_balancers_deleted  | {Client#describe_load_balancers} | 15       | 40            |
+    # | target_deregistered     | {Client#describe_target_health}  | 15       | 40            |
+    # | target_in_service       | {Client#describe_target_health}  | 15       | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

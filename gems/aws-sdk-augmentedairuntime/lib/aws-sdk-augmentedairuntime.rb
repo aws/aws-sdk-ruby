@@ -24,17 +24,20 @@ require_relative 'aws-sdk-augmentedairuntime/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     augmented_ai_runtime = Aws::AugmentedAIRuntime::Client.new
+#     resp = augmented_ai_runtime.delete_human_loop(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Augmented AI Runtime all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Augmented AI Runtime are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AugmentedAIRuntime::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Augmented AI Runtime API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-augmentedairuntime/customizations'
 # @service
 module Aws::AugmentedAIRuntime
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.5.0'
 
 end

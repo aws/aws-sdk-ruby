@@ -1,6 +1,116 @@
 Unreleased Changes
 ------------------
 
+1.164.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.163.0 (2020-05-26)
+------------------
+
+* Feature - ebsOptimizedInfo, efaSupported and supportedVirtualizationTypes added to DescribeInstanceTypes API
+
+1.162.0 (2020-05-21)
+------------------
+
+* Feature - From this release onwards ProvisionByoipCidr publicly supports IPv6. Updated ProvisionByoipCidr API to support tags for public IPv4 and IPv6 pools. Added NetworkBorderGroup to the DescribePublicIpv4Pools response.
+
+1.161.0 (2020-05-19)
+------------------
+
+* Feature - This release adds support for Federated Authentication via SAML-2.0 in AWS ClientVPN.
+
+1.160.0 (2020-05-18)
+------------------
+
+* Feature - This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+
+1.159.0 (2020-05-14)
+------------------
+
+* Feature - Amazon EC2 now supports adding AWS resource tags for associations between VPCs and local gateways, at creation time.
+
+1.158.0 (2020-05-11)
+------------------
+
+* Feature - M6g instances are our next-generation general purpose instances powered by AWS Graviton2 processors
+
+1.157.0 (2020-05-07)
+------------------
+
+* Feature - Amazon EC2 now adds warnings to identify issues when creating a launch template or launch template version.
+
+1.156.0 (2020-05-05)
+------------------
+
+* Feature - With this release, you can call ModifySubnetAttribute with two new parameters: MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool, to map a customerOwnedIpv4Pool to a subnet. You will also see these two new fields in the DescribeSubnets response. If your subnet has a customerOwnedIpv4Pool mapped, your network interface will get an auto assigned customerOwnedIpv4 address when placed onto an instance.
+
+1.155.0 (2020-05-04)
+------------------
+
+* Feature - With this release, you can include enriched metadata in Amazon Virtual Private Cloud (Amazon VPC) flow logs published to Amazon CloudWatch Logs or Amazon Simple Storage Service (S3). Prior to this, custom format VPC flow logs enriched with additional metadata could be published only to S3. With this launch, we are also adding additional metadata fields that provide insights about the location such as AWS Region, AWS Availability Zone, AWS Local Zone, AWS Wavelength Zone, or AWS Outpost where the network interface where flow logs are captured exists.
+
+1.154.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.153.0 (2020-04-16)
+------------------
+
+* Feature - Amazon EC2 now supports adding AWS resource tags for placement groups and key pairs, at creation time. The CreatePlacementGroup API will now return placement group information when created successfully. The DeleteKeyPair API now supports deletion by resource ID.
+
+1.152.0 (2020-04-08)
+------------------
+
+* Feature - This release provides the ability to include tags in EC2 event notifications.
+
+1.151.0 (2020-03-12)
+------------------
+
+* Feature - Documentation updates for EC2
+
+1.150.0 (2020-03-10)
+------------------
+
+* Feature - Documentation updates for EC2
+
+1.149.0 (2020-03-09)
+------------------
+
+* Feature - Amazon Virtual Private Cloud (VPC) NAT Gateway adds support for tagging on resource creation.
+
+1.148.0 (2020-03-06)
+------------------
+
+* Feature - This release provides customers with a self-service option to enable Local Zones.
+
+1.147.0 (2020-03-05)
+------------------
+
+* Feature - You can now create AWS Client VPN Endpoints with a specified VPC and Security Group. Additionally, you can modify these attributes when modifying the endpoint.
+
+1.146.0 (2020-03-03)
+------------------
+
+* Feature - Amazon VPC Flow Logs adds support for tags and tagging on resource creation.
+
+1.145.0 (2020-02-26)
+------------------
+
+* Feature - This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+
+1.144.0 (2020-02-17)
+------------------
+
+* Feature - Documentation updates for EC2
+
+1.143.0 (2020-02-14)
+------------------
+
+* Feature - You can now enable Multi-Attach on Provisioned IOPS io1 volumes through the create-volume API.
+
 1.142.0 (2020-02-12)
 ------------------
 

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::PinpointEmail
+
   class Resource
 
     # @param options ({})

@@ -257,12 +257,15 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   A URI to locate the configuration. You can specify either a Systems
-    #   Manager (SSM) document or an SSM Parameter Store parameter. For an
-    #   SSM document, specify either the document name in the format
-    #   `ssm-document://<Document name>` or the Amazon Resource Name (ARN).
-    #   For a parameter, specify either the parameter name in the format
-    #   `ssm-parameter://<Parameter name>` or the ARN.
+    #   A URI to locate the configuration. You can specify a Systems Manager
+    #   (SSM) document, an SSM Parameter Store parameter, or an Amazon S3
+    #   object. For an SSM document, specify either the document name in the
+    #   format `ssm-document://<Document_name>` or the Amazon Resource Name
+    #   (ARN). For a parameter, specify either the parameter name in the
+    #   format `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon
+    #   S3 object, specify the URI in the following format:
+    #   `s3://<bucket>/<objectKey> `. Here is an example:
+    #   s3://my-bucket/my-app/us-east-1/my-config.json
     #   @return [String]
     #
     # @!attribute [rw] retrieval_role_arn
@@ -302,7 +305,7 @@ module Aws::AppConfig
     #         deployment_duration_in_minutes: 1, # required
     #         final_bake_time_in_minutes: 1,
     #         growth_factor: 1.0, # required
-    #         growth_type: "LINEAR", # accepts LINEAR
+    #         growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
     #         replicate_to: "NONE", # required, accepts NONE, SSM_DOCUMENT
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -333,7 +336,33 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] growth_type
-    #   The algorithm used to define how percentage grows over time.
+    #   The algorithm used to define how percentage grows over time. AWS
+    #   AppConfig supports the following growth types:
+    #
+    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   dividing the total number of targets by the value specified for
+    #   `Step percentage`. For example, a linear deployment that uses a
+    #   `Step percentage` of 10 deploys the configuration to 10 percent of
+    #   the hosts. After those deployments are complete, the system deploys
+    #   the configuration to the next 10 percent. This continues until 100%
+    #   of the targets have successfully received the configuration.
+    #
+    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   exponentially using the following formula: `G*(2^N)`. In this
+    #   formula, `G` is the growth factor specified by the user and `N` is
+    #   the number of steps until the configuration is deployed to all
+    #   targets. For example, if you specify a growth factor of 2, then the
+    #   system rolls out the configuration as follows:
+    #
+    #   `2*(2^0)`
+    #
+    #   `2*(2^1)`
+    #
+    #   `2*(2^2)`
+    #
+    #   Expressed numerically, the deployment rolls out as follows: 2% of
+    #   the targets, 4% of the targets, 8% of the targets, and continues
+    #   until the configuration has been deployed to all targets.
     #   @return [String]
     #
     # @!attribute [rw] replicate_to
@@ -555,6 +584,11 @@ module Aws::AppConfig
     #   The state of the deployment.
     #   @return [String]
     #
+    # @!attribute [rw] event_log
+    #   A list containing all events related to a deployment. The most
+    #   recent events are displayed first.
+    #   @return [Array<Types::DeploymentEvent>]
+    #
     # @!attribute [rw] percentage_complete
     #   The percentage of targets for which the deployment is available.
     #   @return [Float]
@@ -584,9 +618,47 @@ module Aws::AppConfig
       :growth_factor,
       :final_bake_time_in_minutes,
       :state,
+      :event_log,
       :percentage_complete,
       :started_at,
       :completed_at)
+      include Aws::Structure
+    end
+
+    # An object that describes a deployment event.
+    #
+    # @!attribute [rw] event_type
+    #   The type of deployment event. Deployment event types include the
+    #   start, stop, or completion of a deployment; a percentage update; the
+    #   start or stop of a bake period; the start or completion of a
+    #   rollback.
+    #   @return [String]
+    #
+    # @!attribute [rw] triggered_by
+    #   The entity that triggered the deployment event. Events can be
+    #   triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or
+    #   an internal error.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the deployment event. Descriptions include, but are
+    #   not limited to, the user account or the CloudWatch alarm ARN that
+    #   initiated a rollback, the percentage of hosts that received the
+    #   deployment, or in the case of an internal error, a recommendation to
+    #   attempt a new deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] occurred_at
+    #   The date and time the event occurred.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeploymentEvent AWS API Documentation
+    #
+    class DeploymentEvent < Struct.new(
+      :event_type,
+      :triggered_by,
+      :description,
+      :occurred_at)
       include Aws::Structure
     end
 
@@ -849,15 +921,18 @@ module Aws::AppConfig
     #       }
     #
     # @!attribute [rw] application
-    #   The application to get.
+    #   The application to get. Specify either the application name or the
+    #   application ID.
     #   @return [String]
     #
     # @!attribute [rw] environment
-    #   The environment to get.
+    #   The environment to get. Specify either the environment name or the
+    #   environment ID.
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The configuration to get.
+    #   The configuration to get. Specify either the configuration name or
+    #   the configuration ID.
     #   @return [String]
     #
     # @!attribute [rw] client_id
@@ -868,7 +943,26 @@ module Aws::AppConfig
     #
     # @!attribute [rw] client_configuration_version
     #   The configuration version returned in the most recent
-    #   GetConfiguration response.
+    #   `GetConfiguration` response.
+    #
+    #   AWS AppConfig uses the value of the `ClientConfigurationVersion`
+    #   parameter to identify the configuration version on your clients. If
+    #   you don’t send `ClientConfigurationVersion` with each call to
+    #   `GetConfiguration`, your clients receive the current configuration.
+    #   You are charged each time your clients receive a configuration.
+    #
+    #    To avoid excess charges, we recommend that you include the
+    #   `ClientConfigurationVersion` value with every call to
+    #   `GetConfiguration`. This value must be saved on your client.
+    #   Subsequent calls to `GetConfiguration` must pass this value by using
+    #   the `ClientConfigurationVersion` parameter.
+    #
+    #   For more information about working with configurations, see
+    #   [Retrieving the Configuration][1] in the *AWS AppConfig User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationRequest AWS API Documentation
@@ -1434,7 +1528,7 @@ module Aws::AppConfig
     #         deployment_duration_in_minutes: 1,
     #         final_bake_time_in_minutes: 1,
     #         growth_factor: 1.0,
-    #         growth_type: "LINEAR", # accepts LINEAR
+    #         growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
     #       }
     #
     # @!attribute [rw] deployment_strategy_id
@@ -1461,7 +1555,34 @@ module Aws::AppConfig
     #   @return [Float]
     #
     # @!attribute [rw] growth_type
-    #   The algorithm used to define how percentage grows over time.
+    #   The algorithm used to define how percentage grows over time. AWS
+    #   AppConfig supports the following growth types:
+    #
+    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   increments of the growth factor evenly distributed over the
+    #   deployment time. For example, a linear deployment that uses a growth
+    #   factor of 20 initially makes the configuration available to 20
+    #   percent of the targets. After 1/5th of the deployment time has
+    #   passed, the system updates the percentage to 40 percent. This
+    #   continues until 100% of the targets are set to receive the deployed
+    #   configuration.
+    #
+    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   exponentially using the following formula: `G*(2^N)`. In this
+    #   formula, `G` is the growth factor specified by the user and `N` is
+    #   the number of steps until the configuration is deployed to all
+    #   targets. For example, if you specify a growth factor of 2, then the
+    #   system rolls out the configuration as follows:
+    #
+    #   `2*(2^0)`
+    #
+    #   `2*(2^1)`
+    #
+    #   `2*(2^2)`
+    #
+    #   Expressed numerically, the deployment rolls out as follows: 2% of
+    #   the targets, 4% of the targets, 8% of the targets, and continues
+    #   until the configuration has been deployed to all targets.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateDeploymentStrategyRequest AWS API Documentation
@@ -1573,7 +1694,8 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] content
-    #   Either the JSON Schema content or an AWS Lambda function name.
+    #   Either the JSON Schema content or the Amazon Resource Name (ARN) of
+    #   an AWS Lambda function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/Validator AWS API Documentation

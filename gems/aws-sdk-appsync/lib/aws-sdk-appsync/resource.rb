@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AppSync
+
   class Resource
 
     # @param options ({})

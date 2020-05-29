@@ -6,6 +6,33 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Outposts
+
+  # When Outposts returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Outposts::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Outposts errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Outposts::Errors::ServiceError
+  #       # rescues all Outposts API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {InternalServerException}
+  # * {NotFoundException}
+  # * {ServiceQuotaExceededException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +50,6 @@ module Aws::Outposts
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -39,7 +65,6 @@ module Aws::Outposts
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -55,7 +80,6 @@ module Aws::Outposts
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -71,7 +95,6 @@ module Aws::Outposts
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -87,7 +110,6 @@ module Aws::Outposts
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -46,6 +46,8 @@ module Aws::WorkMail
     DeleteMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsResponse')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
     DeleteResourceResponse = Shapes::StructureShape.new(name: 'DeleteResourceResponse')
+    DeleteRetentionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyRequest')
+    DeleteRetentionPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRetentionPolicyResponse')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
     DeleteUserResponse = Shapes::StructureShape.new(name: 'DeleteUserResponse')
     DeregisterFromWorkMailRequest = Shapes::StructureShape.new(name: 'DeregisterFromWorkMailRequest')
@@ -70,8 +72,13 @@ module Aws::WorkMail
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     EntityState = Shapes::StringShape.new(name: 'EntityState')
     EntityStateException = Shapes::StructureShape.new(name: 'EntityStateException')
+    FolderConfiguration = Shapes::StructureShape.new(name: 'FolderConfiguration')
+    FolderConfigurations = Shapes::ListShape.new(name: 'FolderConfigurations')
+    FolderName = Shapes::StringShape.new(name: 'FolderName')
     GetAccessControlEffectRequest = Shapes::StructureShape.new(name: 'GetAccessControlEffectRequest')
     GetAccessControlEffectResponse = Shapes::StructureShape.new(name: 'GetAccessControlEffectResponse')
+    GetDefaultRetentionPolicyRequest = Shapes::StructureShape.new(name: 'GetDefaultRetentionPolicyRequest')
+    GetDefaultRetentionPolicyResponse = Shapes::StructureShape.new(name: 'GetDefaultRetentionPolicyResponse')
     GetMailboxDetailsRequest = Shapes::StructureShape.new(name: 'GetMailboxDetailsRequest')
     GetMailboxDetailsResponse = Shapes::StructureShape.new(name: 'GetMailboxDetailsResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
@@ -125,10 +132,13 @@ module Aws::WorkMail
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     PermissionValues = Shapes::ListShape.new(name: 'PermissionValues')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
+    PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PutAccessControlRuleRequest = Shapes::StructureShape.new(name: 'PutAccessControlRuleRequest')
     PutAccessControlRuleResponse = Shapes::StructureShape.new(name: 'PutAccessControlRuleResponse')
     PutMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'PutMailboxPermissionsRequest')
     PutMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'PutMailboxPermissionsResponse')
+    PutRetentionPolicyRequest = Shapes::StructureShape.new(name: 'PutRetentionPolicyRequest')
+    PutRetentionPolicyResponse = Shapes::StructureShape.new(name: 'PutRetentionPolicyResponse')
     RegisterToWorkMailRequest = Shapes::StructureShape.new(name: 'RegisterToWorkMailRequest')
     RegisterToWorkMailResponse = Shapes::StructureShape.new(name: 'RegisterToWorkMailResponse')
     ReservedNameException = Shapes::StructureShape.new(name: 'ReservedNameException')
@@ -141,6 +151,9 @@ module Aws::WorkMail
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Resources = Shapes::ListShape.new(name: 'Resources')
+    RetentionAction = Shapes::StringShape.new(name: 'RetentionAction')
+    RetentionPeriod = Shapes::IntegerShape.new(name: 'RetentionPeriod')
+    ShortString = Shapes::StringShape.new(name: 'ShortString')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -242,7 +255,7 @@ module Aws::WorkMail
     Delegate.add_member(:type, Shapes::ShapeRef.new(shape: MemberType, required: true, location_name: "Type"))
     Delegate.struct_class = Types::Delegate
 
-    DeleteAccessControlRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    DeleteAccessControlRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteAccessControlRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, required: true, location_name: "Name"))
     DeleteAccessControlRuleRequest.struct_class = Types::DeleteAccessControlRuleRequest
 
@@ -273,6 +286,12 @@ module Aws::WorkMail
     DeleteResourceRequest.struct_class = Types::DeleteResourceRequest
 
     DeleteResourceResponse.struct_class = Types::DeleteResourceResponse
+
+    DeleteRetentionPolicyRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteRetentionPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: ShortString, required: true, location_name: "Id"))
+    DeleteRetentionPolicyRequest.struct_class = Types::DeleteRetentionPolicyRequest
+
+    DeleteRetentionPolicyResponse.struct_class = Types::DeleteRetentionPolicyResponse
 
     DeleteUserRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
@@ -372,6 +391,13 @@ module Aws::WorkMail
     EntityStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EntityStateException.struct_class = Types::EntityStateException
 
+    FolderConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: FolderName, required: true, location_name: "Name"))
+    FolderConfiguration.add_member(:action, Shapes::ShapeRef.new(shape: RetentionAction, required: true, location_name: "Action"))
+    FolderConfiguration.add_member(:period, Shapes::ShapeRef.new(shape: RetentionPeriod, location_name: "Period"))
+    FolderConfiguration.struct_class = Types::FolderConfiguration
+
+    FolderConfigurations.member = Shapes::ShapeRef.new(shape: FolderConfiguration)
+
     GetAccessControlEffectRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     GetAccessControlEffectRequest.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, required: true, location_name: "IpAddress"))
     GetAccessControlEffectRequest.add_member(:action, Shapes::ShapeRef.new(shape: AccessControlRuleAction, required: true, location_name: "Action"))
@@ -381,6 +407,15 @@ module Aws::WorkMail
     GetAccessControlEffectResponse.add_member(:effect, Shapes::ShapeRef.new(shape: AccessControlRuleEffect, location_name: "Effect"))
     GetAccessControlEffectResponse.add_member(:matched_rules, Shapes::ShapeRef.new(shape: AccessControlRuleNameList, location_name: "MatchedRules"))
     GetAccessControlEffectResponse.struct_class = Types::GetAccessControlEffectResponse
+
+    GetDefaultRetentionPolicyRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    GetDefaultRetentionPolicyRequest.struct_class = Types::GetDefaultRetentionPolicyRequest
+
+    GetDefaultRetentionPolicyResponse.add_member(:id, Shapes::ShapeRef.new(shape: ShortString, location_name: "Id"))
+    GetDefaultRetentionPolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: ShortString, location_name: "Name"))
+    GetDefaultRetentionPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    GetDefaultRetentionPolicyResponse.add_member(:folder_configurations, Shapes::ShapeRef.new(shape: FolderConfigurations, location_name: "FolderConfigurations"))
+    GetDefaultRetentionPolicyResponse.struct_class = Types::GetDefaultRetentionPolicyResponse
 
     GetMailboxDetailsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     GetMailboxDetailsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
@@ -564,6 +599,15 @@ module Aws::WorkMail
     PutMailboxPermissionsRequest.struct_class = Types::PutMailboxPermissionsRequest
 
     PutMailboxPermissionsResponse.struct_class = Types::PutMailboxPermissionsResponse
+
+    PutRetentionPolicyRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    PutRetentionPolicyRequest.add_member(:id, Shapes::ShapeRef.new(shape: ShortString, location_name: "Id"))
+    PutRetentionPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: ShortString, required: true, location_name: "Name"))
+    PutRetentionPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: PolicyDescription, location_name: "Description"))
+    PutRetentionPolicyRequest.add_member(:folder_configurations, Shapes::ShapeRef.new(shape: FolderConfigurations, required: true, location_name: "FolderConfigurations"))
+    PutRetentionPolicyRequest.struct_class = Types::PutRetentionPolicyRequest
+
+    PutRetentionPolicyResponse.struct_class = Types::PutRetentionPolicyResponse
 
     RegisterToWorkMailRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     RegisterToWorkMailRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -835,6 +879,17 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:delete_retention_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRetentionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRetentionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteRetentionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:delete_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteUser"
         o.http_method = "POST"
@@ -948,6 +1003,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:get_default_retention_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDefaultRetentionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDefaultRetentionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDefaultRetentionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
       end)
 
       api.add_operation(:get_mailbox_details, Seahorse::Model::Operation.new.tap do |o|
@@ -1146,6 +1213,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:put_retention_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRetentionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRetentionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRetentionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:register_to_work_mail, Seahorse::Model::Operation.new.tap do |o|

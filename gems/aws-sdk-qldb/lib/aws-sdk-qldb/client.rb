@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:qldb)
 
 module Aws::QLDB
+  # An API client for QLDB.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::QLDB::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::QLDB
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::QLDB
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::QLDB
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::QLDB
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::QLDB
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::QLDB
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::QLDB
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::QLDB
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::QLDB
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -253,6 +307,43 @@ module Aws::QLDB
     end
 
     # @!group API Operations
+
+    # Ends a given Amazon QLDB journal stream. Before a stream can be
+    # canceled, its current status must be `ACTIVE`.
+    #
+    # You can't restart a stream after you cancel it. Canceled QLDB stream
+    # resources are subject to a 7-day retention period, so they are
+    # automatically deleted after this limit expires.
+    #
+    # @option params [required, String] :ledger_name
+    #   The name of the ledger.
+    #
+    # @option params [required, String] :stream_id
+    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #
+    # @return [Types::CancelJournalKinesisStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelJournalKinesisStreamResponse#stream_id #stream_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_journal_kinesis_stream({
+    #     ledger_name: "LedgerName", # required
+    #     stream_id: "UniqueId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CancelJournalKinesisStream AWS API Documentation
+    #
+    # @overload cancel_journal_kinesis_stream(params = {})
+    # @param [Hash] params ({})
+    def cancel_journal_kinesis_stream(params = {}, options = {})
+      req = build_request(:cancel_journal_kinesis_stream, params)
+      req.send_request(options)
+    end
 
     # Creates a new ledger in your AWS account.
     #
@@ -343,15 +434,69 @@ module Aws::QLDB
       req.send_request(options)
     end
 
+    # Returns detailed information about a given Amazon QLDB journal stream.
+    # The output includes the Amazon Resource Name (ARN), stream name,
+    # current status, creation time, and the parameters of your original
+    # stream creation request.
+    #
+    # @option params [required, String] :ledger_name
+    #   The name of the ledger.
+    #
+    # @option params [required, String] :stream_id
+    #   The unique ID that QLDB assigns to each QLDB journal stream.
+    #
+    # @return [Types::DescribeJournalKinesisStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeJournalKinesisStreamResponse#stream #stream} => Types::JournalKinesisStreamDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_journal_kinesis_stream({
+    #     ledger_name: "LedgerName", # required
+    #     stream_id: "UniqueId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream.ledger_name #=> String
+    #   resp.stream.creation_time #=> Time
+    #   resp.stream.inclusive_start_time #=> Time
+    #   resp.stream.exclusive_end_time #=> Time
+    #   resp.stream.role_arn #=> String
+    #   resp.stream.stream_id #=> String
+    #   resp.stream.arn #=> String
+    #   resp.stream.status #=> String, one of "ACTIVE", "COMPLETED", "CANCELED", "FAILED", "IMPAIRED"
+    #   resp.stream.kinesis_configuration.stream_arn #=> String
+    #   resp.stream.kinesis_configuration.aggregation_enabled #=> Boolean
+    #   resp.stream.error_cause #=> String, one of "KINESIS_STREAM_NOT_FOUND", "IAM_PERMISSION_REVOKED"
+    #   resp.stream.stream_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeJournalKinesisStream AWS API Documentation
+    #
+    # @overload describe_journal_kinesis_stream(params = {})
+    # @param [Hash] params ({})
+    def describe_journal_kinesis_stream(params = {}, options = {})
+      req = build_request(:describe_journal_kinesis_stream, params)
+      req.send_request(options)
+    end
+
     # Returns information about a journal export job, including the ledger
     # name, export ID, when it was created, current status, and its start
     # and end time export parameters.
+    #
+    # This action does not return any expired export jobs. For more
+    # information, see [Export Job Expiration][1] in the *Amazon QLDB
+    # Developer Guide*.
     #
     # If the export job with the given `ExportId` doesn't exist, then
     # throws `ResourceNotFoundException`.
     #
     # If the ledger with the given `Name` doesn't exist, then throws
     # `ResourceNotFoundException`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration
     #
     # @option params [required, String] :name
     #   The name of the ledger.
@@ -668,12 +813,83 @@ module Aws::QLDB
       req.send_request(options)
     end
 
+    # Returns an array of all Amazon QLDB journal stream descriptors for a
+    # given ledger. The output of each stream descriptor includes the same
+    # details that are returned by `DescribeJournalKinesisStream`.
+    #
+    # This action returns a maximum of `MaxResults` items. It is paginated
+    # so that you can retrieve all the items by calling
+    # `ListJournalKinesisStreamsForLedger` multiple times.
+    #
+    # @option params [required, String] :ledger_name
+    #   The name of the ledger.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single
+    #   `ListJournalKinesisStreamsForLedger` request. (The actual number of
+    #   results returned might be fewer.)
+    #
+    # @option params [String] :next_token
+    #   A pagination token, indicating that you want to retrieve the next page
+    #   of results. If you received a value for `NextToken` in the response
+    #   from a previous `ListJournalKinesisStreamsForLedger` call, you should
+    #   use that value as input here.
+    #
+    # @return [Types::ListJournalKinesisStreamsForLedgerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJournalKinesisStreamsForLedgerResponse#streams #streams} => Array&lt;Types::JournalKinesisStreamDescription&gt;
+    #   * {Types::ListJournalKinesisStreamsForLedgerResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_journal_kinesis_streams_for_ledger({
+    #     ledger_name: "LedgerName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streams #=> Array
+    #   resp.streams[0].ledger_name #=> String
+    #   resp.streams[0].creation_time #=> Time
+    #   resp.streams[0].inclusive_start_time #=> Time
+    #   resp.streams[0].exclusive_end_time #=> Time
+    #   resp.streams[0].role_arn #=> String
+    #   resp.streams[0].stream_id #=> String
+    #   resp.streams[0].arn #=> String
+    #   resp.streams[0].status #=> String, one of "ACTIVE", "COMPLETED", "CANCELED", "FAILED", "IMPAIRED"
+    #   resp.streams[0].kinesis_configuration.stream_arn #=> String
+    #   resp.streams[0].kinesis_configuration.aggregation_enabled #=> Boolean
+    #   resp.streams[0].error_cause #=> String, one of "KINESIS_STREAM_NOT_FOUND", "IAM_PERMISSION_REVOKED"
+    #   resp.streams[0].stream_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListJournalKinesisStreamsForLedger AWS API Documentation
+    #
+    # @overload list_journal_kinesis_streams_for_ledger(params = {})
+    # @param [Hash] params ({})
+    def list_journal_kinesis_streams_for_ledger(params = {}, options = {})
+      req = build_request(:list_journal_kinesis_streams_for_ledger, params)
+      req.send_request(options)
+    end
+
     # Returns an array of journal export job descriptions for all ledgers
     # that are associated with the current AWS account and Region.
     #
     # This action returns a maximum of `MaxResults` items, and is paginated
     # so that you can retrieve all the items by calling
     # `ListJournalS3Exports` multiple times.
+    #
+    # This action does not return any expired export jobs. For more
+    # information, see [Export Job Expiration][1] in the *Amazon QLDB
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single
@@ -690,6 +906,8 @@ module Aws::QLDB
     #
     #   * {Types::ListJournalS3ExportsResponse#journal_s3_exports #journal_s3_exports} => Array&lt;Types::JournalS3ExportDescription&gt;
     #   * {Types::ListJournalS3ExportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -730,6 +948,14 @@ module Aws::QLDB
     # so that you can retrieve all the items by calling
     # `ListJournalS3ExportsForLedger` multiple times.
     #
+    # This action does not return any expired export jobs. For more
+    # information, see [Export Job Expiration][1] in the *Amazon QLDB
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration
+    #
     # @option params [required, String] :name
     #   The name of the ledger.
     #
@@ -748,6 +974,8 @@ module Aws::QLDB
     #
     #   * {Types::ListJournalS3ExportsForLedgerResponse#journal_s3_exports #journal_s3_exports} => Array&lt;Types::JournalS3ExportDescription&gt;
     #   * {Types::ListJournalS3ExportsForLedgerResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -804,6 +1032,8 @@ module Aws::QLDB
     #   * {Types::ListLedgersResponse#ledgers #ledgers} => Array&lt;Types::LedgerSummary&gt;
     #   * {Types::ListLedgersResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_ledgers({
@@ -857,6 +1087,100 @@ module Aws::QLDB
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a stream for a given Amazon QLDB ledger that delivers the
+    # journal data to a specified Amazon Kinesis Data Streams resource. The
+    # stream captures every document revision that is committed to your
+    # journal and sends it to the Kinesis data stream.
+    #
+    # @option params [required, String] :ledger_name
+    #   The name of the ledger.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that grants QLDB
+    #   permissions for a journal stream to write data records to a Kinesis
+    #   Data Streams resource.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to add as tags to the stream that you want to
+    #   create. Tag keys are case sensitive. Tag values are case sensitive and
+    #   can be null.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :inclusive_start_time
+    #   The inclusive start date and time from which to start streaming
+    #   journal data. This parameter must be in `ISO 8601` date and time
+    #   format and in Universal Coordinated Time (UTC). For example:
+    #   `2019-06-13T21:36:34Z`
+    #
+    #   The `InclusiveStartTime` cannot be in the future and must be before
+    #   `ExclusiveEndTime`.
+    #
+    #   If you provide an `InclusiveStartTime` that is before the ledger's
+    #   `CreationDateTime`, QLDB effectively defaults it to the ledger's
+    #   `CreationDateTime`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :exclusive_end_time
+    #   The exclusive date and time that specifies when the stream ends. If
+    #   you keep this parameter blank, the stream runs indefinitely until you
+    #   cancel it.
+    #
+    #   The `ExclusiveEndTime` must be in `ISO 8601` date and time format and
+    #   in Universal Coordinated Time (UTC). For example:
+    #   `2019-06-13T21:36:34Z`
+    #
+    # @option params [required, Types::KinesisConfiguration] :kinesis_configuration
+    #   The configuration settings of the Kinesis Data Streams destination for
+    #   your stream request.
+    #
+    # @option params [required, String] :stream_name
+    #   The name that you want to assign to the QLDB journal stream.
+    #   User-defined names can help identify and indicate the purpose of a
+    #   stream.
+    #
+    #   Your stream name must be unique among other *active* streams for a
+    #   given ledger. If you try to create a stream with the same name and
+    #   configuration of an active, existing stream for the same ledger, QLDB
+    #   simply returns the existing stream. Stream names have the same naming
+    #   constraints as ledger names, as defined in [Quotas in Amazon QLDB][1]
+    #   in the *Amazon QLDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming
+    #
+    # @return [Types::StreamJournalToKinesisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StreamJournalToKinesisResponse#stream_id #stream_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stream_journal_to_kinesis({
+    #     ledger_name: "LedgerName", # required
+    #     role_arn: "Arn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     inclusive_start_time: Time.now, # required
+    #     exclusive_end_time: Time.now,
+    #     kinesis_configuration: { # required
+    #       stream_arn: "Arn", # required
+    #       aggregation_enabled: false,
+    #     },
+    #     stream_name: "StreamName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/StreamJournalToKinesis AWS API Documentation
+    #
+    # @overload stream_journal_to_kinesis(params = {})
+    # @param [Hash] params ({})
+    def stream_journal_to_kinesis(params = {}, options = {})
+      req = build_request(:stream_journal_to_kinesis, params)
       req.send_request(options)
     end
 
@@ -988,7 +1312,7 @@ module Aws::QLDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-qldb'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

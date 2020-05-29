@@ -24,17 +24,20 @@ require_relative 'aws-sdk-fsx/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     f_sx = Aws::FSx::Client.new
+#     resp = f_sx.cancel_data_repository_task(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon FSx all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon FSx are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::FSx::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon FSx API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-fsx/customizations'
 # @service
 module Aws::FSx
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.19.0'
 
 end

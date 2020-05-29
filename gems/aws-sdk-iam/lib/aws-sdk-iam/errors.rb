@@ -6,6 +6,55 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
+  # When IAM returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::IAM::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all IAM errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::IAM::Errors::ServiceError
+  #       # rescues all IAM API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ConcurrentModificationException}
+  # * {CredentialReportExpiredException}
+  # * {CredentialReportNotPresentException}
+  # * {CredentialReportNotReadyException}
+  # * {DeleteConflictException}
+  # * {DuplicateCertificateException}
+  # * {DuplicateSSHPublicKeyException}
+  # * {EntityAlreadyExistsException}
+  # * {EntityTemporarilyUnmodifiableException}
+  # * {InvalidAuthenticationCodeException}
+  # * {InvalidCertificateException}
+  # * {InvalidInputException}
+  # * {InvalidPublicKeyException}
+  # * {InvalidUserTypeException}
+  # * {KeyPairMismatchException}
+  # * {LimitExceededException}
+  # * {MalformedCertificateException}
+  # * {MalformedPolicyDocumentException}
+  # * {NoSuchEntityException}
+  # * {PasswordPolicyViolationException}
+  # * {PolicyEvaluationException}
+  # * {PolicyNotAttachableException}
+  # * {ReportGenerationLimitExceededException}
+  # * {ServiceFailureException}
+  # * {ServiceNotSupportedException}
+  # * {UnmodifiableEntityException}
+  # * {UnrecognizedPublicKeyEncodingException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +72,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CredentialReportExpiredException < ServiceError
@@ -39,7 +87,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CredentialReportNotPresentException < ServiceError
@@ -55,7 +102,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CredentialReportNotReadyException < ServiceError
@@ -71,7 +117,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeleteConflictException < ServiceError
@@ -87,7 +132,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateCertificateException < ServiceError
@@ -103,7 +147,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateSSHPublicKeyException < ServiceError
@@ -119,7 +162,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityAlreadyExistsException < ServiceError
@@ -135,7 +177,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityTemporarilyUnmodifiableException < ServiceError
@@ -151,7 +192,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAuthenticationCodeException < ServiceError
@@ -167,7 +207,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCertificateException < ServiceError
@@ -183,7 +222,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -199,7 +237,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPublicKeyException < ServiceError
@@ -215,7 +252,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidUserTypeException < ServiceError
@@ -231,7 +267,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class KeyPairMismatchException < ServiceError
@@ -247,7 +282,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -263,7 +297,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedCertificateException < ServiceError
@@ -279,7 +312,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -295,7 +327,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchEntityException < ServiceError
@@ -311,7 +342,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PasswordPolicyViolationException < ServiceError
@@ -327,7 +357,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyEvaluationException < ServiceError
@@ -343,7 +372,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotAttachableException < ServiceError
@@ -359,7 +387,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReportGenerationLimitExceededException < ServiceError
@@ -375,7 +402,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceFailureException < ServiceError
@@ -391,7 +417,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceNotSupportedException < ServiceError
@@ -407,7 +432,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnmodifiableEntityException < ServiceError
@@ -423,7 +447,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnrecognizedPublicKeyEncodingException < ServiceError
@@ -439,7 +462,6 @@ module Aws::IAM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

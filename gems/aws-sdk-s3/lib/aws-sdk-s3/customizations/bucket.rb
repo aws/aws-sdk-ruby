@@ -5,6 +5,8 @@ module Aws
     class Bucket
       # Save the old initialize method so that we can call 'super'.
       old_initialize = instance_method(:initialize)
+      # Make the method redefinable
+      alias_method :initialize, :initialize
       # Define a new initialize method that extracts out a bucket ARN.
       define_method(:initialize) do |*args|
         old_initialize.bind(self).call(*args)

@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ResourceGroups
+
+  # When ResourceGroups returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ResourceGroups::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ResourceGroups errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ResourceGroups::Errors::ServiceError
+  #       # rescues all ResourceGroups API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BadRequestException}
+  # * {ForbiddenException}
+  # * {InternalServerErrorException}
+  # * {MethodNotAllowedException}
+  # * {NotFoundException}
+  # * {TooManyRequestsException}
+  # * {UnauthorizedException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +52,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -39,7 +67,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -55,7 +82,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
     class MethodNotAllowedException < ServiceError
@@ -71,7 +97,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -87,7 +112,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -103,7 +127,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -119,7 +142,6 @@ module Aws::ResourceGroups
       def message
         @message || @data[:message]
       end
-
     end
 
   end

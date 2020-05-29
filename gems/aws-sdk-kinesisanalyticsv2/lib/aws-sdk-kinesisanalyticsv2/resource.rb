@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::KinesisAnalyticsV2
+
   class Resource
 
     # @param options ({})

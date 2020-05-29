@@ -18,6 +18,7 @@ module Aws::MediaStore
     ContainerARN = Shapes::StringShape.new(name: 'ContainerARN')
     ContainerAccessLoggingEnabled = Shapes::BooleanShape.new(name: 'ContainerAccessLoggingEnabled')
     ContainerInUseException = Shapes::StructureShape.new(name: 'ContainerInUseException')
+    ContainerLevelMetrics = Shapes::StringShape.new(name: 'ContainerLevelMetrics')
     ContainerList = Shapes::ListShape.new(name: 'ContainerList')
     ContainerListLimit = Shapes::IntegerShape.new(name: 'ContainerListLimit')
     ContainerName = Shapes::StringShape.new(name: 'ContainerName')
@@ -37,6 +38,8 @@ module Aws::MediaStore
     DeleteCorsPolicyOutput = Shapes::StructureShape.new(name: 'DeleteCorsPolicyOutput')
     DeleteLifecyclePolicyInput = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyInput')
     DeleteLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyOutput')
+    DeleteMetricPolicyInput = Shapes::StructureShape.new(name: 'DeleteMetricPolicyInput')
+    DeleteMetricPolicyOutput = Shapes::StructureShape.new(name: 'DeleteMetricPolicyOutput')
     DescribeContainerInput = Shapes::StructureShape.new(name: 'DescribeContainerInput')
     DescribeContainerOutput = Shapes::StructureShape.new(name: 'DescribeContainerOutput')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
@@ -48,6 +51,8 @@ module Aws::MediaStore
     GetCorsPolicyOutput = Shapes::StructureShape.new(name: 'GetCorsPolicyOutput')
     GetLifecyclePolicyInput = Shapes::StructureShape.new(name: 'GetLifecyclePolicyInput')
     GetLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'GetLifecyclePolicyOutput')
+    GetMetricPolicyInput = Shapes::StructureShape.new(name: 'GetMetricPolicyInput')
+    GetMetricPolicyOutput = Shapes::StructureShape.new(name: 'GetMetricPolicyOutput')
     Header = Shapes::StringShape.new(name: 'Header')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     LifecyclePolicy = Shapes::StringShape.new(name: 'LifecyclePolicy')
@@ -58,6 +63,11 @@ module Aws::MediaStore
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxAgeSeconds = Shapes::IntegerShape.new(name: 'MaxAgeSeconds')
     MethodName = Shapes::StringShape.new(name: 'MethodName')
+    MetricPolicy = Shapes::StructureShape.new(name: 'MetricPolicy')
+    MetricPolicyRule = Shapes::StructureShape.new(name: 'MetricPolicyRule')
+    MetricPolicyRules = Shapes::ListShape.new(name: 'MetricPolicyRules')
+    ObjectGroup = Shapes::StringShape.new(name: 'ObjectGroup')
+    ObjectGroupName = Shapes::StringShape.new(name: 'ObjectGroupName')
     Origin = Shapes::StringShape.new(name: 'Origin')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PolicyNotFoundException = Shapes::StructureShape.new(name: 'PolicyNotFoundException')
@@ -67,6 +77,8 @@ module Aws::MediaStore
     PutCorsPolicyOutput = Shapes::StructureShape.new(name: 'PutCorsPolicyOutput')
     PutLifecyclePolicyInput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyInput')
     PutLifecyclePolicyOutput = Shapes::StructureShape.new(name: 'PutLifecyclePolicyOutput')
+    PutMetricPolicyInput = Shapes::StructureShape.new(name: 'PutMetricPolicyInput')
+    PutMetricPolicyOutput = Shapes::StructureShape.new(name: 'PutMetricPolicyOutput')
     StartAccessLoggingInput = Shapes::StructureShape.new(name: 'StartAccessLoggingInput')
     StartAccessLoggingOutput = Shapes::StructureShape.new(name: 'StartAccessLoggingOutput')
     StopAccessLoggingInput = Shapes::StructureShape.new(name: 'StopAccessLoggingInput')
@@ -143,6 +155,11 @@ module Aws::MediaStore
 
     DeleteLifecyclePolicyOutput.struct_class = Types::DeleteLifecyclePolicyOutput
 
+    DeleteMetricPolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    DeleteMetricPolicyInput.struct_class = Types::DeleteMetricPolicyInput
+
+    DeleteMetricPolicyOutput.struct_class = Types::DeleteMetricPolicyOutput
+
     DescribeContainerInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, location_name: "ContainerName"))
     DescribeContainerInput.struct_class = Types::DescribeContainerInput
 
@@ -169,6 +186,12 @@ module Aws::MediaStore
     GetLifecyclePolicyOutput.add_member(:lifecycle_policy, Shapes::ShapeRef.new(shape: LifecyclePolicy, required: true, location_name: "LifecyclePolicy"))
     GetLifecyclePolicyOutput.struct_class = Types::GetLifecyclePolicyOutput
 
+    GetMetricPolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    GetMetricPolicyInput.struct_class = Types::GetMetricPolicyInput
+
+    GetMetricPolicyOutput.add_member(:metric_policy, Shapes::ShapeRef.new(shape: MetricPolicy, required: true, location_name: "MetricPolicy"))
+    GetMetricPolicyOutput.struct_class = Types::GetMetricPolicyOutput
+
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerError.struct_class = Types::InternalServerError
 
@@ -188,6 +211,16 @@ module Aws::MediaStore
 
     ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    MetricPolicy.add_member(:container_level_metrics, Shapes::ShapeRef.new(shape: ContainerLevelMetrics, required: true, location_name: "ContainerLevelMetrics"))
+    MetricPolicy.add_member(:metric_policy_rules, Shapes::ShapeRef.new(shape: MetricPolicyRules, location_name: "MetricPolicyRules"))
+    MetricPolicy.struct_class = Types::MetricPolicy
+
+    MetricPolicyRule.add_member(:object_group, Shapes::ShapeRef.new(shape: ObjectGroup, required: true, location_name: "ObjectGroup"))
+    MetricPolicyRule.add_member(:object_group_name, Shapes::ShapeRef.new(shape: ObjectGroupName, required: true, location_name: "ObjectGroupName"))
+    MetricPolicyRule.struct_class = Types::MetricPolicyRule
+
+    MetricPolicyRules.member = Shapes::ShapeRef.new(shape: MetricPolicyRule)
 
     PolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     PolicyNotFoundException.struct_class = Types::PolicyNotFoundException
@@ -209,6 +242,12 @@ module Aws::MediaStore
     PutLifecyclePolicyInput.struct_class = Types::PutLifecyclePolicyInput
 
     PutLifecyclePolicyOutput.struct_class = Types::PutLifecyclePolicyOutput
+
+    PutMetricPolicyInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
+    PutMetricPolicyInput.add_member(:metric_policy, Shapes::ShapeRef.new(shape: MetricPolicy, required: true, location_name: "MetricPolicy"))
+    PutMetricPolicyInput.struct_class = Types::PutMetricPolicyInput
+
+    PutMetricPolicyOutput.struct_class = Types::PutMetricPolicyOutput
 
     StartAccessLoggingInput.add_member(:container_name, Shapes::ShapeRef.new(shape: ContainerName, required: true, location_name: "ContainerName"))
     StartAccessLoggingInput.struct_class = Types::StartAccessLoggingInput
@@ -318,6 +357,18 @@ module Aws::MediaStore
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:delete_metric_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMetricPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMetricPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMetricPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_container, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeContainer"
         o.http_method = "POST"
@@ -361,6 +412,18 @@ module Aws::MediaStore
         o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_metric_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricPolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -418,6 +481,17 @@ module Aws::MediaStore
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PutLifecyclePolicyInput)
         o.output = Shapes::ShapeRef.new(shape: PutLifecyclePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:put_metric_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutMetricPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutMetricPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutMetricPolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: ContainerInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ContainerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)

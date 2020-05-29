@@ -25,17 +25,20 @@ require_relative 'aws-sdk-neptune/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     neptune = Aws::Neptune::Client.new
+#     resp = neptune.add_role_to_db_cluster(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Neptune all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Neptune are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Neptune::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Neptune API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-neptune/customizations'
 # @service
 module Aws::Neptune
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.24.0'
 
 end

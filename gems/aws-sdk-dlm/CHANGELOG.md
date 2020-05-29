@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-05-26)
+------------------
+
+* Feature - Allowing cron expression in the DLM policy creation schedule.
+
+1.27.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2020-04-24)
+------------------
+
+* Feature - Enable 1hour frequency in the schedule creation for Data LifeCycle Manager.
+
+1.25.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2020-02-05)
 ------------------
 

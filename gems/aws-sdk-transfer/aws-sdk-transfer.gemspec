@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-transfer'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - AWS Transfer'
-  spec.description   = 'Official AWS Ruby gem for AWS Transfer for SFTP (AWS Transfer). This gem is part of the AWS SDK for Ruby.'
+  spec.description   = 'Official AWS Ruby gem for AWS Transfer Family (AWS Transfer). This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

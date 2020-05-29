@@ -24,17 +24,20 @@ require_relative 'aws-sdk-simpledb/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     simple_db = Aws::SimpleDB::Client.new
+#     resp = simple_db.batch_delete_attributes(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon SimpleDB all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon SimpleDB are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SimpleDB::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon SimpleDB API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-simpledb/customizations'
 # @service
 module Aws::SimpleDB
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.19.0'
 
 end

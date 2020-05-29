@@ -6,6 +6,31 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MarketplaceEntitlementService
+
+  # When MarketplaceEntitlementService returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::MarketplaceEntitlementService::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all MarketplaceEntitlementService errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::MarketplaceEntitlementService::Errors::ServiceError
+  #       # rescues all MarketplaceEntitlementService API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InternalServiceErrorException}
+  # * {InvalidParameterException}
+  # * {ThrottlingException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +48,6 @@ module Aws::MarketplaceEntitlementService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -39,7 +63,6 @@ module Aws::MarketplaceEntitlementService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -55,7 +78,6 @@ module Aws::MarketplaceEntitlementService
       def message
         @message || @data[:message]
       end
-
     end
 
   end

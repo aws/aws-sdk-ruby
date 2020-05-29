@@ -24,17 +24,20 @@ require_relative 'aws-sdk-serverlessapplicationrepository/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     serverless_application_repository = Aws::ServerlessApplicationRepository::Client.new
+#     resp = serverless_application_repository.create_application(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWSServerlessApplicationRepository all
-# extend {Errors::ServiceError}.
+# Errors returned from AWSServerlessApplicationRepository are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ServerlessApplicationRepository::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWSServerlessApplicationRepository API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-serverlessapplicationrepository/customizations'
 # @service
 module Aws::ServerlessApplicationRepository
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.27.0'
 
 end

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-appsync/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     app_sync = Aws::AppSync::Client.new
+#     resp = app_sync.create_api_cache(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS AppSync all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS AppSync are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AppSync::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS AppSync API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-appsync/customizations'
 # @service
 module Aws::AppSync
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.26.0'
 
 end

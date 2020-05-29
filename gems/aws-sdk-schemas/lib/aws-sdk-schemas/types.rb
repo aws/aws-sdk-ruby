@@ -214,6 +214,7 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] content
+    #   The source of the schema definition.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -225,6 +226,7 @@ module Aws::Schemas
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
+    #   The type of schema.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/CreateSchemaInput AWS API Documentation
@@ -351,6 +353,23 @@ module Aws::Schemas
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteRegistryRequest AWS API Documentation
     #
     class DeleteRegistryRequest < Struct.new(
+      :registry_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] registry_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
       :registry_name)
       include Aws::Structure
     end
@@ -547,6 +566,7 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] content
+    #   The source of the schema definition.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -731,6 +751,7 @@ module Aws::Schemas
     #   @return [String]
     #
     # @!attribute [rw] state
+    #   The state of the discoverer.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -821,7 +842,9 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] events
-    #   An array of strings that
+    #   An array of strings where each string is a JSON event. These are the
+    #   events that were used to generate the schema. The array includes a
+    #   single type of event and has a maximum size of 10 events.
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
@@ -837,6 +860,7 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] content
+    #   The source of the schema definition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetDiscoveredSchemaOutput AWS API Documentation
@@ -875,6 +899,55 @@ module Aws::Schemas
     #
     class GetDiscoveredSchemaResponse < Struct.new(
       :content)
+      include Aws::Structure
+    end
+
+    # Information about the policy.
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetResourcePolicyOutput AWS API Documentation
+    #
+    class GetResourcePolicyOutput < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         registry_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] registry_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :registry_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1164,6 +1237,17 @@ module Aws::Schemas
       include Aws::Structure
     end
 
+    # @!attribute [rw] tags
+    #   Key-value pairs associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -1224,14 +1308,6 @@ module Aws::Schemas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass LockServiceLinkedRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "__stringMin1Max1600", # required
-    #         timeout: 1, # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   @return [String]
     #
@@ -1273,6 +1349,20 @@ module Aws::Schemas
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/NotFoundException AWS API Documentation
     #
     class NotFoundException < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PreconditionFailedException AWS API Documentation
+    #
+    class PreconditionFailedException < Struct.new(
       :code,
       :message)
       include Aws::Structure
@@ -1329,6 +1419,85 @@ module Aws::Schemas
       :last_modified,
       :schema_version,
       :status)
+      include Aws::Structure
+    end
+
+    # Only update the policy if the revision ID matches the ID that's
+    # specified. Use this option to avoid modifying a policy that has
+    # changed since you last read it.
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutResourcePolicyInput AWS API Documentation
+    #
+    class PutResourcePolicyInput < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # The resource-based policy.
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   The revision ID of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutResourcePolicyOutput AWS API Documentation
+    #
+    class PutResourcePolicyOutput < Struct.new(
+      :policy,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy: "__string", # required
+    #         registry_name: "__string",
+    #         revision_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] policy
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_name
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :policy,
+      :registry_name,
+      :revision_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1506,6 +1675,7 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] created_date
+    #   The date the schema version was created.
     #   @return [Time]
     #
     # @!attribute [rw] schema_version
@@ -1661,7 +1831,7 @@ module Aws::Schemas
     end
 
     # @!attribute [rw] tags
-    #   Key-value pairs associated with a resource.
+    #   Tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/TagResourceInput AWS API Documentation
@@ -1734,13 +1904,6 @@ module Aws::Schemas
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass UnlockServiceLinkedRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_arn: "__stringMin1Max1600", # required
-    #       }
-    #
     # @!attribute [rw] role_arn
     #   @return [String]
     #

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::KMS
+
   class Resource
 
     # @param options ({})

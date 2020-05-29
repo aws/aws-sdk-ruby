@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-05-20)
+------------------
+
+* Feature - Amazon Chime enterprise account administrators can now set custom retention policies on chat data in the Amazon Chime application.
+
+1.26.0 (2020-05-19)
+------------------
+
+* Feature - You can now receive Voice Connector call events through SNS or SQS.
+
+1.25.0 (2020-05-18)
+------------------
+
+* Feature - Amazon Chime now supports redacting chat messages.
+
+1.24.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2020-04-08)
+------------------
+
+* Feature - feature: Chime: This release introduces the ability to tag Amazon Chime SDK meeting resources.  You can use tags to organize and identify your resources for cost allocation.
+
+1.22.0 (2020-04-06)
+------------------
+
+* Feature - Amazon Chime proxy phone sessions let you provide two users with a shared phone number to communicate via voice or text for up to 12 hours without revealing personal phone numbers. When users call or message the provided phone number, they are connected to the other party and their private phone numbers are replaced with the shared number in Caller ID.
+
+1.21.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-02-18)
+------------------
+
+* Feature - Added AudioFallbackUrl to support Chime SDK client.
+
 1.19.0 (2020-02-12)
 ------------------
 

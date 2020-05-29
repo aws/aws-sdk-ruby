@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-03-24)
+------------------
+
+* Feature - Adding new error codes: Ec2SubnetInvalidConfiguration and NodeCreationFailure for Nodegroups in EKS
+
+1.34.0 (2020-03-23)
+------------------
+
+* Feature - Adding new error code IamLimitExceeded for Nodegroups in EKS
+
+1.33.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-03-05)
+------------------
+
+* Feature - Amazon EKS now supports adding a KMS key to your cluster for envelope encryption of Kubernetes secrets.
+
 1.31.0 (2020-01-24)
 ------------------
 

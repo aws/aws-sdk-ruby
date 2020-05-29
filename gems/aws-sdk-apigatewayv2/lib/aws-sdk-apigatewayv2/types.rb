@@ -222,16 +222,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). ForREQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -804,16 +798,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -1192,13 +1180,15 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for a CreateIntegration request.
     #
     # @!attribute [rw] connection_id
-    #   The connection ID.
+    #   The ID of the VPC link for a private integration. Supported only for
+    #   HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
     #   The type of the network connection to the integration endpoint.
-    #   Currently the only valid value is INTERNET, for connections through
-    #   the public routable internet.
+    #   Specify INTERNET for connections through the public routable
+    #   internet or VPC\_LINK for private connections between API Gateway
+    #   and resources in a VPC. The default value is INTERNET.
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
@@ -1253,9 +1243,10 @@ module Aws::ApiGatewayV2
     #   endpoint. This integration is also referred to as the HTTP custom
     #   integration. Supported only for WebSocket APIs.
     #
-    #   HTTP\_PROXY: for integrating route or method request with an HTTP
-    #   endpoint, with the client request passed through as-is. This is also
-    #   referred to as HTTP proxy integration.
+    #   HTTP\_PROXY: for integrating the route or method request with an
+    #   HTTP endpoint, with the client request passed through as-is. This is
+    #   also referred to as HTTP proxy integration. For HTTP API private
+    #   integrations, use an HTTP\_PROXY integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
     #   as a "loopback" endpoint without invoking any backend. Supported
@@ -1263,8 +1254,21 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
-    #   For a Lambda proxy integration, this is the URI of the Lambda
-    #   function.
+    #   For a Lambda integration, specify the URI of a Lambda function.
+    #
+    #   For an HTTP integration, specify a fully-qualified URL.
+    #
+    #   For an HTTP API private integration, specify the ARN of an
+    #   Application Load Balancer listener, Network Load Balancer listener,
+    #   or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
+    #   service, API Gateway uses DiscoverInstances to identify resources.
+    #   You can use query parameters to target specific resources. To learn
+    #   more, see [DiscoverInstances][1]. For private integrations, all
+    #   resources must be owned by the same AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -1288,7 +1292,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] payload_format_version
     #   Specifies the format of the payload sent to an integration. Required
-    #   for HTTP APIs. Currently, the only supported value is 1.0.
+    #   for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -1298,16 +1302,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -1324,10 +1321,17 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
-    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+    #   Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs
+    #   and between 50 and 30,000 milliseconds for HTTP APIs. The default
+    #   timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP
+    #   APIs.
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfigInput]
     #
     class CreateIntegrationInput < Struct.new(
       :connection_id,
@@ -1343,7 +1347,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -1370,6 +1375,9 @@ module Aws::ApiGatewayV2
     #         },
     #         template_selection_expression: "SelectionExpression",
     #         timeout_in_millis: 1,
+    #         tls_config: {
+    #           server_name_to_verify: "StringWithLengthBetween1And512",
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -1448,8 +1456,14 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfigInput]
     #
     class CreateIntegrationRequest < Struct.new(
       :api_id,
@@ -1466,7 +1480,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -1559,8 +1574,14 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfig]
     #
     class CreateIntegrationResult < Struct.new(
       :api_gateway_managed,
@@ -1579,7 +1600,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -2327,8 +2349,7 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] stage_variables
     #   A map that defines the stage variables for a Stage. Variable names
     #   can have alphanumeric and underscore characters, and the values must
-    #   match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+. Supported only for WebSocket
-    #   APIs.
+    #   match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -2364,7 +2385,7 @@ module Aws::ApiGatewayV2
     #         default_route_settings: {
     #           data_trace_enabled: false,
     #           detailed_metrics_enabled: false,
-    #           logging_level: "ERROR", # accepts ERROR, INFO, false
+    #           logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #           throttling_burst_limit: 1,
     #           throttling_rate_limit: 1.0,
     #         },
@@ -2374,7 +2395,7 @@ module Aws::ApiGatewayV2
     #           "__string" => {
     #             data_trace_enabled: false,
     #             detailed_metrics_enabled: false,
-    #             logging_level: "ERROR", # accepts ERROR, INFO, false
+    #             logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #             throttling_burst_limit: 1,
     #             throttling_rate_limit: 1.0,
     #           },
@@ -2511,6 +2532,136 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      include Aws::Structure
+    end
+
+    # Represents the input parameters for a CreateVpcLink request.
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags.
+    #   @return [Hash<String,String>]
+    #
+    class CreateVpcLinkInput < Struct.new(
+      :name,
+      :security_group_ids,
+      :subnet_ids,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StringWithLengthBetween1And128", # required
+    #         security_group_ids: ["__string"],
+    #         subnet_ids: ["__string"], # required
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class CreateVpcLinkRequest < Struct.new(
+      :name,
+      :security_group_ids,
+      :subnet_ids,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_link_id
+    #   The identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status
+    #   The status of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status_message
+    #   A string with a length between \[0-1024\].
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_version
+    #   The version of the VPC link.
+    #   @return [String]
+    #
+    class CreateVpcLinkResponse < Struct.new(
+      :created_date,
+      :name,
+      :security_group_ids,
+      :subnet_ids,
+      :tags,
+      :vpc_link_id,
+      :vpc_link_status,
+      :vpc_link_status_message,
+      :vpc_link_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAccessLogSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         stage_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   @return [String]
+    #
+    class DeleteAccessLogSettingsRequest < Struct.new(
+      :api_id,
+      :stage_name)
       include Aws::Structure
     end
 
@@ -2704,6 +2855,31 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRouteRequestParameterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         request_parameter_key: "__string", # required
+    #         route_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] request_parameter_key
+    #   @return [String]
+    #
+    # @!attribute [rw] route_id
+    #   @return [String]
+    #
+    class DeleteRouteRequestParameterRequest < Struct.new(
+      :api_id,
+      :request_parameter_key,
+      :route_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRouteResponseRequest
     #   data as a hash:
     #
@@ -2734,7 +2910,7 @@ module Aws::ApiGatewayV2
     #
     #       {
     #         api_id: "__string", # required
-    #         route_key: "SelectionKey", # required
+    #         route_key: "__string", # required
     #         stage_name: "__string", # required
     #       }
     #
@@ -2742,14 +2918,6 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_key
-    #   After evaluating a selection expression, the result is compared
-    #   against one or more selection keys to find a matching key. See
-    #   [Selection Expressions][1] for a list of expressions and each
-    #   expression's associated selection key type.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -2781,6 +2949,23 @@ module Aws::ApiGatewayV2
       :stage_name)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_link_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_link_id
+    #   @return [String]
+    #
+    class DeleteVpcLinkRequest < Struct.new(
+      :vpc_link_id)
+      include Aws::Structure
+    end
+
+    class DeleteVpcLinkResponse < Aws::EmptyStructure; end
 
     # An immutable representation of an API that can be called by users. A
     # Deployment must be associated with a Stage for it to be callable over
@@ -2955,6 +3140,57 @@ module Aws::ApiGatewayV2
     class DomainNames < Struct.new(
       :items,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportApiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         export_version: "__string",
+    #         include_extensions: false,
+    #         output_type: "__string", # required
+    #         specification: "__string", # required
+    #         stage_name: "__string",
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] export_version
+    #   @return [String]
+    #
+    # @!attribute [rw] include_extensions
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_type
+    #   @return [String]
+    #
+    # @!attribute [rw] specification
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   @return [String]
+    #
+    class ExportApiRequest < Struct.new(
+      :api_id,
+      :export_version,
+      :include_extensions,
+      :output_type,
+      :specification,
+      :stage_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] body
+    #   Represents an exported definition of an API in a particular output
+    #   format, for example, YAML. The API is serialized to the requested
+    #   specification, for example, OpenAPI 3.0.
+    #   @return [String]
+    #
+    class ExportApiResponse < Struct.new(
+      :body)
       include Aws::Structure
     end
 
@@ -3584,8 +3820,14 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfig]
     #
     class GetIntegrationResult < Struct.new(
       :api_gateway_managed,
@@ -3604,7 +3846,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -4308,6 +4551,103 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_link_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_link_id
+    #   @return [String]
+    #
+    class GetVpcLinkRequest < Struct.new(
+      :vpc_link_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_link_id
+    #   The identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status
+    #   The status of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status_message
+    #   A string with a length between \[0-1024\].
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_version
+    #   The version of the VPC link.
+    #   @return [String]
+    #
+    class GetVpcLinkResponse < Struct.new(
+      :created_date,
+      :name,
+      :security_group_ids,
+      :subnet_ids,
+      :tags,
+      :vpc_link_id,
+      :vpc_link_status,
+      :vpc_link_status_message,
+      :vpc_link_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVpcLinksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: "__string",
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    class GetVpcLinksRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   @return [Array<Types::VpcLink>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class GetVpcLinksResponse < Struct.new(
+      :items,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Represents the input to ImportAPI. Supported only for HTTP APIs.
     #
     # @!attribute [rw] body
@@ -4438,13 +4778,15 @@ module Aws::ApiGatewayV2
     #   @return [Boolean]
     #
     # @!attribute [rw] connection_id
-    #   The connection ID.
+    #   The ID of the VPC link for a private integration. Supported only for
+    #   HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
     #   The type of the network connection to the integration endpoint.
-    #   Currently the only valid value is INTERNET, for connections through
-    #   the public routable internet.
+    #   Specify INTERNET for connections through the public routable
+    #   internet or VPC\_LINK for private connections between API Gateway
+    #   and resources in a VPC. The default value is INTERNET.
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
@@ -4513,9 +4855,9 @@ module Aws::ApiGatewayV2
     #   endpoint. This integration is also referred to as the HTTP custom
     #   integration. Supported only for WebSocket APIs.
     #
-    #   HTTP\_PROXY: for integrating route or method request with an HTTP
-    #   endpoint, with the client request passed through as-is. This is also
-    #   referred to as HTTP proxy integration.
+    #   HTTP\_PROXY: for integrating the route or method request with an
+    #   HTTP endpoint, with the client request passed through as-is. This is
+    #   also referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
     #   as a "loopback" endpoint without invoking any backend. Supported
@@ -4523,8 +4865,21 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
-    #   For a Lambda proxy integration, this is the URI of the Lambda
-    #   function.
+    #   For a Lambda integration, specify the URI of a Lambda function.
+    #
+    #   For an HTTP integration, specify a fully-qualified URL.
+    #
+    #   For an HTTP API private integration, specify the ARN of an
+    #   Application Load Balancer listener, Network Load Balancer listener,
+    #   or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
+    #   service, API Gateway uses DiscoverInstances to identify resources.
+    #   You can use query parameters to target specific resources. To learn
+    #   more, see [DiscoverInstances][1]. For private integrations, all
+    #   resources must be owned by the same AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -4548,7 +4903,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] payload_format_version
     #   Specifies the format of the payload sent to an integration. Required
-    #   for HTTP APIs. Currently, the only supported value is 1.0.
+    #   for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -4558,16 +4913,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -4585,10 +4933,17 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
-    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+    #   Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs
+    #   and between 50 and 30,000 milliseconds for HTTP APIs. The default
+    #   timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP
+    #   APIs.
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfig]
     #
     class Integration < Struct.new(
       :api_gateway_managed,
@@ -4607,7 +4962,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -4732,11 +5088,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] issuer
     #   The base domain of the identity provider that issues JSON Web
     #   Tokens. For example, an Amazon Cognito user pool has the following
-    #   format: https://cognito-idp.<replaceable>\{region\}</replaceable>
-    #
-    #   .amazonaws.com/<replaceable>\{userPoolId\}</replaceable>
-    #
-    #    . Required for the JWT authorizer type. Supported only for HTTP
+    #   format:
+    #   https://cognito-idp.*\\\{region\\}*.amazonaws.com/*\\\{userPoolId\\}*
+    #   . Required for the JWT authorizer type. Supported only for HTTP
     #   APIs.
     #   @return [String]
     #
@@ -5133,7 +5487,7 @@ module Aws::ApiGatewayV2
     #       {
     #         data_trace_enabled: false,
     #         detailed_metrics_enabled: false,
-    #         logging_level: "ERROR", # accepts ERROR, INFO, false
+    #         logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #         throttling_burst_limit: 1,
     #         throttling_rate_limit: 1.0,
     #       }
@@ -5155,13 +5509,11 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] throttling_burst_limit
-    #   Specifies the throttling burst limit. Supported only for WebSocket
-    #   APIs.
+    #   Specifies the throttling burst limit.
     #   @return [Integer]
     #
     # @!attribute [rw] throttling_rate_limit
-    #   Specifies the throttling rate limit. Supported only for WebSocket
-    #   APIs.
+    #   Specifies the throttling rate limit.
     #   @return [Float]
     #
     class RouteSettings < Struct.new(
@@ -5249,8 +5601,7 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] stage_variables
     #   A map that defines the stage variables for a stage resource.
     #   Variable names can have alphanumeric and underscore characters, and
-    #   the values must match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+. Supported only
-    #   for WebSocket APIs.
+    #   the values must match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -5339,6 +5690,45 @@ module Aws::ApiGatewayV2
     #
     class Template < Struct.new(
       :value)
+      include Aws::Structure
+    end
+
+    # The TLS configuration for a private integration. If you specify a TLS
+    # configuration, private integration traffic uses the HTTPS protocol.
+    # Supported only for HTTP APIs.
+    #
+    # @!attribute [rw] server_name_to_verify
+    #   If you specify a server name, API Gateway uses it to verify the
+    #   hostname on the integration's certificate. The server name is also
+    #   included in the TLS handshake to support Server Name Indication
+    #   (SNI) or virtual hosting.
+    #   @return [String]
+    #
+    class TlsConfig < Struct.new(
+      :server_name_to_verify)
+      include Aws::Structure
+    end
+
+    # The TLS configuration for a private integration. If you specify a TLS
+    # configuration, private integration traffic uses the HTTPS protocol.
+    # Supported only for HTTP APIs.
+    #
+    # @note When making an API call, you may pass TlsConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         server_name_to_verify: "StringWithLengthBetween1And512",
+    #       }
+    #
+    # @!attribute [rw] server_name_to_verify
+    #   If you specify a server name, API Gateway uses it to verify the
+    #   hostname on the integration's certificate. The server name is also
+    #   included in the TLS handshake to support Server Name Indication
+    #   (SNI) or virtual hosting.
+    #   @return [String]
+    #
+    class TlsConfigInput < Struct.new(
+      :server_name_to_verify)
       include Aws::Structure
     end
 
@@ -5767,16 +6157,10 @@ module Aws::ApiGatewayV2
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
-    #
-    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
-    #
-    #   /invocations. In general, the URI has this form:
-    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
-    #
-    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
-    #
-    #    , where <replaceable />
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:*\\\{account\_id\\}*\:function:*\\\{lambda\_function\_name\\}*/invocations.
+    #   In general, the URI has this form:
+    #   arn:aws:apigateway:*\\\{region\\}*\:lambda:path/*\\\{service\_api\\}*
+    #   , where <replaceable />
     #
     #   \\\{region\\} is the same as the region hosting the Lambda function,
     #   path indicates that the remaining substring in the URI should be
@@ -6134,13 +6518,15 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for an UpdateIntegration request.
     #
     # @!attribute [rw] connection_id
-    #   The connection ID.
+    #   The ID of the VPC link for a private integration. Supported only for
+    #   HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] connection_type
     #   The type of the network connection to the integration endpoint.
-    #   Currently the only valid value is INTERNET, for connections through
-    #   the public routable internet.
+    #   Specify INTERNET for connections through the public routable
+    #   internet or VPC\_LINK for private connections between API Gateway
+    #   and resources in a VPC. The default value is INTERNET.
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
@@ -6195,9 +6581,10 @@ module Aws::ApiGatewayV2
     #   endpoint. This integration is also referred to as the HTTP custom
     #   integration. Supported only for WebSocket APIs.
     #
-    #   HTTP\_PROXY: for integrating route or method request with an HTTP
-    #   endpoint, with the client request passed through as-is. This is also
-    #   referred to as HTTP proxy integration.
+    #   HTTP\_PROXY: for integrating the route or method request with an
+    #   HTTP endpoint, with the client request passed through as-is. This is
+    #   also referred to as HTTP proxy integration. For HTTP API private
+    #   integrations, use an HTTP\_PROXY integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
     #   as a "loopback" endpoint without invoking any backend. Supported
@@ -6205,8 +6592,21 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
-    #   For a Lambda proxy integration, this is the URI of the Lambda
-    #   function.
+    #   For a Lambda integration, specify the URI of a Lambda function.
+    #
+    #   For an HTTP integration, specify a fully-qualified URL.
+    #
+    #   For an HTTP API private integration, specify the ARN of an
+    #   Application Load Balancer listener, Network Load Balancer listener,
+    #   or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
+    #   service, API Gateway uses DiscoverInstances to identify resources.
+    #   You can use query parameters to target specific resources. To learn
+    #   more, see [DiscoverInstances][1]. For private integrations, all
+    #   resources must be owned by the same AWS account.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #   @return [String]
     #
     # @!attribute [rw] passthrough_behavior
@@ -6230,7 +6630,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] payload_format_version
     #   Specifies the format of the payload sent to an integration. Required
-    #   for HTTP APIs. Currently, the only supported value is 1.0.
+    #   for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -6240,16 +6640,9 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.<replaceable>\{location\}</replaceable>
-    #
-    #   .<replaceable>\{name\}</replaceable>
-    #
-    #    , where <replaceable>\{location\}</replaceable>
-    #
-    #    is querystring, path, or header; and
-    #   <replaceable>\{name\}</replaceable>
-    #
-    #    must be a valid and unique method request parameter name. Supported
+    #   method.request.*\\\{location\\}*.*\\\{name\\}* , where
+    #   *\\\{location\\}* is querystring, path, or header; and *\\\{name\\}*
+    #   must be a valid and unique method request parameter name. Supported
     #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
@@ -6266,10 +6659,17 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
-    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+    #   Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs
+    #   and between 50 and 30,000 milliseconds for HTTP APIs. The default
+    #   timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP
+    #   APIs.
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfigInput]
     #
     class UpdateIntegrationInput < Struct.new(
       :connection_id,
@@ -6285,7 +6685,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -6313,6 +6714,9 @@ module Aws::ApiGatewayV2
     #         },
     #         template_selection_expression: "SelectionExpression",
     #         timeout_in_millis: 1,
+    #         tls_config: {
+    #           server_name_to_verify: "StringWithLengthBetween1And512",
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -6394,8 +6798,14 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfigInput]
     #
     class UpdateIntegrationRequest < Struct.new(
       :api_id,
@@ -6413,7 +6823,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -6506,8 +6917,14 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
-    #   An integer with a value between \[50-29000\].
+    #   An integer with a value between \[50-30000\].
     #   @return [Integer]
+    #
+    # @!attribute [rw] tls_config
+    #   The TLS configuration for a private integration. If you specify a
+    #   TLS configuration, private integration traffic uses the HTTPS
+    #   protocol. Supported only for HTTP APIs.
+    #   @return [Types::TlsConfig]
     #
     class UpdateIntegrationResult < Struct.new(
       :api_gateway_managed,
@@ -6526,7 +6943,8 @@ module Aws::ApiGatewayV2
       :request_parameters,
       :request_templates,
       :template_selection_expression,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -6561,21 +6979,13 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.<replaceable>\{name\}</replaceable>
-    #
-    #    , where name is a valid and unique header name. The mapped
-    #   non-static value must match the pattern of
-    #   integration.response.header.<replaceable>\{name\}</replaceable>
-    #
-    #    or
-    #   integration.response.body.<replaceable>\{JSON-expression\}</replaceable>
-    #
-    #    , where <replaceable>\{name\}</replaceable>
-    #
-    #    is a valid and unique response header name and
-    #   <replaceable>\{JSON-expression\}</replaceable>
-    #
-    #    is a valid JSON expression without the $ prefix.
+    #   method.response.header.*\\\{name\\}* , where name is a valid and
+    #   unique header name. The mapped non-static value must match the
+    #   pattern of integration.response.header.*\\\{name\\}* or
+    #   integration.response.body.*\\\{JSON-expression\\}* , where
+    #   *\\\{name\\}* is a valid and unique response header name and
+    #   *\\\{JSON-expression\\}* is a valid JSON expression without the $
+    #   prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates
@@ -7300,8 +7710,7 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] stage_variables
     #   A map that defines the stage variables for a Stage. Variable names
     #   can have alphanumeric and underscore characters, and the values must
-    #   match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+. Supported only for WebSocket
-    #   APIs.
+    #   match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+.
     #   @return [Hash<String,String>]
     #
     class UpdateStageInput < Struct.new(
@@ -7330,7 +7739,7 @@ module Aws::ApiGatewayV2
     #         default_route_settings: {
     #           data_trace_enabled: false,
     #           detailed_metrics_enabled: false,
-    #           logging_level: "ERROR", # accepts ERROR, INFO, false
+    #           logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #           throttling_burst_limit: 1,
     #           throttling_rate_limit: 1.0,
     #         },
@@ -7340,7 +7749,7 @@ module Aws::ApiGatewayV2
     #           "__string" => {
     #             data_trace_enabled: false,
     #             detailed_metrics_enabled: false,
-    #             logging_level: "ERROR", # accepts ERROR, INFO, false
+    #             logging_level: "ERROR", # accepts ERROR, INFO, OFF
     #             throttling_burst_limit: 1,
     #             throttling_rate_limit: 1.0,
     #           },
@@ -7468,6 +7877,154 @@ module Aws::ApiGatewayV2
       :stage_name,
       :stage_variables,
       :tags)
+      include Aws::Structure
+    end
+
+    # Represents the input parameters for an UpdateVpcLink request.
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC link.
+    #   @return [String]
+    #
+    class UpdateVpcLinkInput < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StringWithLengthBetween1And128",
+    #         vpc_link_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_id
+    #   @return [String]
+    #
+    class UpdateVpcLinkRequest < Struct.new(
+      :name,
+      :vpc_link_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_link_id
+    #   The identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status
+    #   The status of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status_message
+    #   A string with a length between \[0-1024\].
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_version
+    #   The version of the VPC link.
+    #   @return [String]
+    #
+    class UpdateVpcLinkResponse < Struct.new(
+      :created_date,
+      :name,
+      :security_group_ids,
+      :subnet_ids,
+      :tags,
+      :vpc_link_id,
+      :vpc_link_status,
+      :vpc_link_status_message,
+      :vpc_link_version)
+      include Aws::Structure
+    end
+
+    # Represents a VPC link.
+    #
+    # @!attribute [rw] created_date
+    #   The timestamp when the VPC link was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs for the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs to include in the VPC link.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   Tags for the VPC link.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc_link_id
+    #   The ID of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status
+    #   The status of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_status_message
+    #   A message summarizing the cause of the status of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_link_version
+    #   The version of the VPC link.
+    #   @return [String]
+    #
+    class VpcLink < Struct.new(
+      :created_date,
+      :name,
+      :security_group_ids,
+      :subnet_ids,
+      :tags,
+      :vpc_link_id,
+      :vpc_link_status,
+      :vpc_link_status_message,
+      :vpc_link_version)
+      include Aws::Structure
+    end
+
+    # Represents a collection of VPCLinks.
+    #
+    # @!attribute [rw] items
+    #   A collection of VPC links.
+    #   @return [Array<Types::VpcLink>]
+    #
+    # @!attribute [rw] next_token
+    #   The next page of elements from this collection. Not valid for the
+    #   last element of the collection.
+    #   @return [String]
+    #
+    class VpcLinks < Struct.new(
+      :items,
+      :next_token)
       include Aws::Structure
     end
 

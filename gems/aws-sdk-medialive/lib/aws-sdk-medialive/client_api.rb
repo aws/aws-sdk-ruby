@@ -48,8 +48,11 @@ module Aws::MediaLive
     AudioPidSelection = Shapes::StructureShape.new(name: 'AudioPidSelection')
     AudioSelector = Shapes::StructureShape.new(name: 'AudioSelector')
     AudioSelectorSettings = Shapes::StructureShape.new(name: 'AudioSelectorSettings')
+    AudioTrack = Shapes::StructureShape.new(name: 'AudioTrack')
+    AudioTrackSelection = Shapes::StructureShape.new(name: 'AudioTrackSelection')
     AudioType = Shapes::StringShape.new(name: 'AudioType')
     AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
+    AutomaticInputFailoverSettings = Shapes::StructureShape.new(name: 'AutomaticInputFailoverSettings')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     AvailBlankingState = Shapes::StringShape.new(name: 'AvailBlankingState')
     AvailConfiguration = Shapes::StructureShape.new(name: 'AvailConfiguration')
@@ -123,6 +126,8 @@ module Aws::MediaLive
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
+    DescribeInputDeviceRequest = Shapes::StructureShape.new(name: 'DescribeInputDeviceRequest')
+    DescribeInputDeviceResponse = Shapes::StructureShape.new(name: 'DescribeInputDeviceResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
     DescribeInputResponse = Shapes::StructureShape.new(name: 'DescribeInputResponse')
     DescribeInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupRequest')
@@ -137,6 +142,7 @@ module Aws::MediaLive
     DescribeReservationResponse = Shapes::StructureShape.new(name: 'DescribeReservationResponse')
     DescribeScheduleRequest = Shapes::StructureShape.new(name: 'DescribeScheduleRequest')
     DescribeScheduleResponse = Shapes::StructureShape.new(name: 'DescribeScheduleResponse')
+    DeviceSettingsSyncState = Shapes::StringShape.new(name: 'DeviceSettingsSyncState')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtOutputSdt = Shapes::StringShape.new(name: 'DvbSdtOutputSdt')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -176,6 +182,8 @@ module Aws::MediaLive
     FixedAfd = Shapes::StringShape.new(name: 'FixedAfd')
     FixedModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FixedModeScheduleActionStartSettings')
     Fmp4HlsSettings = Shapes::StructureShape.new(name: 'Fmp4HlsSettings')
+    Fmp4NielsenId3Behavior = Shapes::StringShape.new(name: 'Fmp4NielsenId3Behavior')
+    Fmp4TimedMetadataBehavior = Shapes::StringShape.new(name: 'Fmp4TimedMetadataBehavior')
     FollowModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FollowModeScheduleActionStartSettings')
     FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
@@ -193,7 +201,9 @@ module Aws::MediaLive
     H264ColorMetadata = Shapes::StringShape.new(name: 'H264ColorMetadata')
     H264ColorSpaceSettings = Shapes::StructureShape.new(name: 'H264ColorSpaceSettings')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
+    H264FilterSettings = Shapes::StructureShape.new(name: 'H264FilterSettings')
     H264FlickerAq = Shapes::StringShape.new(name: 'H264FlickerAq')
+    H264ForceFieldPictures = Shapes::StringShape.new(name: 'H264ForceFieldPictures')
     H264FramerateControl = Shapes::StringShape.new(name: 'H264FramerateControl')
     H264GopBReference = Shapes::StringShape.new(name: 'H264GopBReference')
     H264GopSizeUnits = Shapes::StringShape.new(name: 'H264GopSizeUnits')
@@ -201,6 +211,7 @@ module Aws::MediaLive
     H264LookAheadRateControl = Shapes::StringShape.new(name: 'H264LookAheadRateControl')
     H264ParControl = Shapes::StringShape.new(name: 'H264ParControl')
     H264Profile = Shapes::StringShape.new(name: 'H264Profile')
+    H264QualityLevel = Shapes::StringShape.new(name: 'H264QualityLevel')
     H264RateControlMode = Shapes::StringShape.new(name: 'H264RateControlMode')
     H264ScanType = Shapes::StringShape.new(name: 'H264ScanType')
     H264SceneChangeDetect = Shapes::StringShape.new(name: 'H264SceneChangeDetect')
@@ -273,6 +284,21 @@ module Aws::MediaLive
     InputDestination = Shapes::StructureShape.new(name: 'InputDestination')
     InputDestinationRequest = Shapes::StructureShape.new(name: 'InputDestinationRequest')
     InputDestinationVpc = Shapes::StructureShape.new(name: 'InputDestinationVpc')
+    InputDevice = Shapes::StructureShape.new(name: 'InputDevice')
+    InputDeviceActiveInput = Shapes::StringShape.new(name: 'InputDeviceActiveInput')
+    InputDeviceConfigurableSettings = Shapes::StructureShape.new(name: 'InputDeviceConfigurableSettings')
+    InputDeviceConfigurationValidationError = Shapes::StructureShape.new(name: 'InputDeviceConfigurationValidationError')
+    InputDeviceConfiguredInput = Shapes::StringShape.new(name: 'InputDeviceConfiguredInput')
+    InputDeviceConnectionState = Shapes::StringShape.new(name: 'InputDeviceConnectionState')
+    InputDeviceHdSettings = Shapes::StructureShape.new(name: 'InputDeviceHdSettings')
+    InputDeviceIpScheme = Shapes::StringShape.new(name: 'InputDeviceIpScheme')
+    InputDeviceNetworkSettings = Shapes::StructureShape.new(name: 'InputDeviceNetworkSettings')
+    InputDeviceRequest = Shapes::StructureShape.new(name: 'InputDeviceRequest')
+    InputDeviceScanType = Shapes::StringShape.new(name: 'InputDeviceScanType')
+    InputDeviceSettings = Shapes::StructureShape.new(name: 'InputDeviceSettings')
+    InputDeviceState = Shapes::StringShape.new(name: 'InputDeviceState')
+    InputDeviceSummary = Shapes::StructureShape.new(name: 'InputDeviceSummary')
+    InputDeviceType = Shapes::StringShape.new(name: 'InputDeviceType')
     InputFilter = Shapes::StringShape.new(name: 'InputFilter')
     InputLocation = Shapes::StructureShape.new(name: 'InputLocation')
     InputLossActionForHlsOut = Shapes::StringShape.new(name: 'InputLossActionForHlsOut')
@@ -282,6 +308,7 @@ module Aws::MediaLive
     InputLossBehavior = Shapes::StructureShape.new(name: 'InputLossBehavior')
     InputLossImageType = Shapes::StringShape.new(name: 'InputLossImageType')
     InputMaximumBitrate = Shapes::StringShape.new(name: 'InputMaximumBitrate')
+    InputPreference = Shapes::StringShape.new(name: 'InputPreference')
     InputResolution = Shapes::StringShape.new(name: 'InputResolution')
     InputSecurityGroup = Shapes::StructureShape.new(name: 'InputSecurityGroup')
     InputSecurityGroupState = Shapes::StringShape.new(name: 'InputSecurityGroupState')
@@ -308,6 +335,9 @@ module Aws::MediaLive
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
     ListChannelsResultModel = Shapes::StructureShape.new(name: 'ListChannelsResultModel')
+    ListInputDevicesRequest = Shapes::StructureShape.new(name: 'ListInputDevicesRequest')
+    ListInputDevicesResponse = Shapes::StructureShape.new(name: 'ListInputDevicesResponse')
+    ListInputDevicesResultModel = Shapes::StructureShape.new(name: 'ListInputDevicesResultModel')
     ListInputSecurityGroupsRequest = Shapes::StructureShape.new(name: 'ListInputSecurityGroupsRequest')
     ListInputSecurityGroupsResponse = Shapes::StructureShape.new(name: 'ListInputSecurityGroupsResponse')
     ListInputSecurityGroupsResultModel = Shapes::StructureShape.new(name: 'ListInputSecurityGroupsResultModel')
@@ -382,7 +412,6 @@ module Aws::MediaLive
     MultiplexState = Shapes::StringShape.new(name: 'MultiplexState')
     MultiplexStatmuxVideoSettings = Shapes::StructureShape.new(name: 'MultiplexStatmuxVideoSettings')
     MultiplexSummary = Shapes::StructureShape.new(name: 'MultiplexSummary')
-    MultiplexValidationError = Shapes::StructureShape.new(name: 'MultiplexValidationError')
     MultiplexVideoSettings = Shapes::StructureShape.new(name: 'MultiplexVideoSettings')
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
@@ -404,6 +433,7 @@ module Aws::MediaLive
     PipelineDetail = Shapes::StructureShape.new(name: 'PipelineDetail')
     PipelineId = Shapes::StringShape.new(name: 'PipelineId')
     PipelinePauseStateSettings = Shapes::StructureShape.new(name: 'PipelinePauseStateSettings')
+    PreferredChannelPipeline = Shapes::StringShape.new(name: 'PreferredChannelPipeline')
     PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
     PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
     PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
@@ -465,6 +495,7 @@ module Aws::MediaLive
     SmoothGroupSparseTrackType = Shapes::StringShape.new(name: 'SmoothGroupSparseTrackType')
     SmoothGroupStreamManifestBehavior = Shapes::StringShape.new(name: 'SmoothGroupStreamManifestBehavior')
     SmoothGroupTimestampOffsetMode = Shapes::StringShape.new(name: 'SmoothGroupTimestampOffsetMode')
+    Smpte2038DataPreference = Shapes::StringShape.new(name: 'Smpte2038DataPreference')
     SmpteTtDestinationSettings = Shapes::StructureShape.new(name: 'SmpteTtDestinationSettings')
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
@@ -484,6 +515,9 @@ module Aws::MediaLive
     TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
     TeletextSourceSettings = Shapes::StructureShape.new(name: 'TeletextSourceSettings')
+    TemporalFilterPostFilterSharpening = Shapes::StringShape.new(name: 'TemporalFilterPostFilterSharpening')
+    TemporalFilterSettings = Shapes::StructureShape.new(name: 'TemporalFilterSettings')
+    TemporalFilterStrength = Shapes::StringShape.new(name: 'TemporalFilterStrength')
     TimecodeConfig = Shapes::StructureShape.new(name: 'TimecodeConfig')
     TimecodeConfigSource = Shapes::StringShape.new(name: 'TimecodeConfigSource')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -502,6 +536,9 @@ module Aws::MediaLive
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateChannelResultModel = Shapes::StructureShape.new(name: 'UpdateChannelResultModel')
     UpdateInput = Shapes::StructureShape.new(name: 'UpdateInput')
+    UpdateInputDevice = Shapes::StructureShape.new(name: 'UpdateInputDevice')
+    UpdateInputDeviceRequest = Shapes::StructureShape.new(name: 'UpdateInputDeviceRequest')
+    UpdateInputDeviceResponse = Shapes::StructureShape.new(name: 'UpdateInputDeviceResponse')
     UpdateInputRequest = Shapes::StructureShape.new(name: 'UpdateInputRequest')
     UpdateInputResponse = Shapes::StructureShape.new(name: 'UpdateInputResponse')
     UpdateInputResultModel = Shapes::StructureShape.new(name: 'UpdateInputResultModel')
@@ -589,6 +626,7 @@ module Aws::MediaLive
     __listOfAudioChannelMapping = Shapes::ListShape.new(name: '__listOfAudioChannelMapping')
     __listOfAudioDescription = Shapes::ListShape.new(name: '__listOfAudioDescription')
     __listOfAudioSelector = Shapes::ListShape.new(name: '__listOfAudioSelector')
+    __listOfAudioTrack = Shapes::ListShape.new(name: '__listOfAudioTrack')
     __listOfCaptionDescription = Shapes::ListShape.new(name: '__listOfCaptionDescription')
     __listOfCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfCaptionLanguageMapping')
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
@@ -600,6 +638,9 @@ module Aws::MediaLive
     __listOfInputChannelLevel = Shapes::ListShape.new(name: '__listOfInputChannelLevel')
     __listOfInputDestination = Shapes::ListShape.new(name: '__listOfInputDestination')
     __listOfInputDestinationRequest = Shapes::ListShape.new(name: '__listOfInputDestinationRequest')
+    __listOfInputDeviceRequest = Shapes::ListShape.new(name: '__listOfInputDeviceRequest')
+    __listOfInputDeviceSettings = Shapes::ListShape.new(name: '__listOfInputDeviceSettings')
+    __listOfInputDeviceSummary = Shapes::ListShape.new(name: '__listOfInputDeviceSummary')
     __listOfInputSecurityGroup = Shapes::ListShape.new(name: '__listOfInputSecurityGroup')
     __listOfInputSource = Shapes::ListShape.new(name: '__listOfInputSource')
     __listOfInputSourceRequest = Shapes::ListShape.new(name: '__listOfInputSourceRequest')
@@ -611,7 +652,6 @@ module Aws::MediaLive
     __listOfMultiplexOutputDestination = Shapes::ListShape.new(name: '__listOfMultiplexOutputDestination')
     __listOfMultiplexProgramSummary = Shapes::ListShape.new(name: '__listOfMultiplexProgramSummary')
     __listOfMultiplexSummary = Shapes::ListShape.new(name: '__listOfMultiplexSummary')
-    __listOfMultiplexValidationError = Shapes::ListShape.new(name: '__listOfMultiplexValidationError')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
@@ -729,7 +769,18 @@ module Aws::MediaLive
 
     AudioSelectorSettings.add_member(:audio_language_selection, Shapes::ShapeRef.new(shape: AudioLanguageSelection, location_name: "audioLanguageSelection"))
     AudioSelectorSettings.add_member(:audio_pid_selection, Shapes::ShapeRef.new(shape: AudioPidSelection, location_name: "audioPidSelection"))
+    AudioSelectorSettings.add_member(:audio_track_selection, Shapes::ShapeRef.new(shape: AudioTrackSelection, location_name: "audioTrackSelection"))
     AudioSelectorSettings.struct_class = Types::AudioSelectorSettings
+
+    AudioTrack.add_member(:track, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "track"))
+    AudioTrack.struct_class = Types::AudioTrack
+
+    AudioTrackSelection.add_member(:tracks, Shapes::ShapeRef.new(shape: __listOfAudioTrack, required: true, location_name: "tracks"))
+    AudioTrackSelection.struct_class = Types::AudioTrackSelection
+
+    AutomaticInputFailoverSettings.add_member(:input_preference, Shapes::ShapeRef.new(shape: InputPreference, location_name: "inputPreference"))
+    AutomaticInputFailoverSettings.add_member(:secondary_input_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secondaryInputId"))
+    AutomaticInputFailoverSettings.struct_class = Types::AutomaticInputFailoverSettings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
     AvailBlanking.add_member(:state, Shapes::ShapeRef.new(shape: AvailBlankingState, location_name: "state"))
@@ -915,6 +966,7 @@ module Aws::MediaLive
     CreateChannelResultModel.struct_class = Types::CreateChannelResultModel
 
     CreateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
+    CreateInput.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
     CreateInput.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
     CreateInput.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     CreateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -927,6 +979,7 @@ module Aws::MediaLive
     CreateInput.struct_class = Types::CreateInput
 
     CreateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
+    CreateInputRequest.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
     CreateInputRequest.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
     CreateInputRequest.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     CreateInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -1102,6 +1155,21 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeChannelResponse.struct_class = Types::DescribeChannelResponse
 
+    DescribeInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    DescribeInputDeviceRequest.struct_class = Types::DescribeInputDeviceRequest
+
+    DescribeInputDeviceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeInputDeviceResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: InputDeviceConnectionState, location_name: "connectionState"))
+    DescribeInputDeviceResponse.add_member(:device_settings_sync_state, Shapes::ShapeRef.new(shape: DeviceSettingsSyncState, location_name: "deviceSettingsSyncState"))
+    DescribeInputDeviceResponse.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceHdSettings, location_name: "hdDeviceSettings"))
+    DescribeInputDeviceResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeInputDeviceResponse.add_member(:mac_address, Shapes::ShapeRef.new(shape: __string, location_name: "macAddress"))
+    DescribeInputDeviceResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeInputDeviceResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
+    DescribeInputDeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
+    DescribeInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
+    DescribeInputDeviceResponse.struct_class = Types::DescribeInputDeviceResponse
+
     DescribeInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
     DescribeInputRequest.struct_class = Types::DescribeInputRequest
 
@@ -1110,6 +1178,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     DescribeInputResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribeInputResponse.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
+    DescribeInputResponse.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
     DescribeInputResponse.add_member(:input_source_type, Shapes::ShapeRef.new(shape: InputSourceType, location_name: "inputSourceType"))
     DescribeInputResponse.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     DescribeInputResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -1296,6 +1365,8 @@ module Aws::MediaLive
     FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
     Fmp4HlsSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
+    Fmp4HlsSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: Fmp4NielsenId3Behavior, location_name: "nielsenId3Behavior"))
+    Fmp4HlsSettings.add_member(:timed_metadata_behavior, Shapes::ShapeRef.new(shape: Fmp4TimedMetadataBehavior, location_name: "timedMetadataBehavior"))
     Fmp4HlsSettings.struct_class = Types::Fmp4HlsSettings
 
     FollowModeScheduleActionStartSettings.add_member(:follow_point, Shapes::ShapeRef.new(shape: FollowPoint, required: true, location_name: "followPoint"))
@@ -1331,6 +1402,9 @@ module Aws::MediaLive
     H264ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
     H264ColorSpaceSettings.struct_class = Types::H264ColorSpaceSettings
 
+    H264FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
+    H264FilterSettings.struct_class = Types::H264FilterSettings
+
     H264Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H264AdaptiveQuantization, location_name: "adaptiveQuantization"))
     H264Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
     H264Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin1000, location_name: "bitrate"))
@@ -1339,8 +1413,10 @@ module Aws::MediaLive
     H264Settings.add_member(:color_metadata, Shapes::ShapeRef.new(shape: H264ColorMetadata, location_name: "colorMetadata"))
     H264Settings.add_member(:color_space_settings, Shapes::ShapeRef.new(shape: H264ColorSpaceSettings, location_name: "colorSpaceSettings"))
     H264Settings.add_member(:entropy_encoding, Shapes::ShapeRef.new(shape: H264EntropyEncoding, location_name: "entropyEncoding"))
+    H264Settings.add_member(:filter_settings, Shapes::ShapeRef.new(shape: H264FilterSettings, location_name: "filterSettings"))
     H264Settings.add_member(:fixed_afd, Shapes::ShapeRef.new(shape: FixedAfd, location_name: "fixedAfd"))
     H264Settings.add_member(:flicker_aq, Shapes::ShapeRef.new(shape: H264FlickerAq, location_name: "flickerAq"))
+    H264Settings.add_member(:force_field_pictures, Shapes::ShapeRef.new(shape: H264ForceFieldPictures, location_name: "forceFieldPictures"))
     H264Settings.add_member(:framerate_control, Shapes::ShapeRef.new(shape: H264FramerateControl, location_name: "framerateControl"))
     H264Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "framerateDenominator"))
     H264Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "framerateNumerator"))
@@ -1358,6 +1434,7 @@ module Aws::MediaLive
     H264Settings.add_member(:par_denominator, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "parDenominator"))
     H264Settings.add_member(:par_numerator, Shapes::ShapeRef.new(shape: __integer, location_name: "parNumerator"))
     H264Settings.add_member(:profile, Shapes::ShapeRef.new(shape: H264Profile, location_name: "profile"))
+    H264Settings.add_member(:quality_level, Shapes::ShapeRef.new(shape: H264QualityLevel, location_name: "qualityLevel"))
     H264Settings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
     H264Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: H264RateControlMode, location_name: "rateControlMode"))
     H264Settings.add_member(:scan_type, Shapes::ShapeRef.new(shape: H264ScanType, location_name: "scanType"))
@@ -1518,6 +1595,7 @@ module Aws::MediaLive
     Input.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestination, location_name: "destinations"))
     Input.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     Input.add_member(:input_class, Shapes::ShapeRef.new(shape: InputClass, location_name: "inputClass"))
+    Input.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSettings, location_name: "inputDevices"))
     Input.add_member(:input_source_type, Shapes::ShapeRef.new(shape: InputSourceType, location_name: "inputSourceType"))
     Input.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlow, location_name: "mediaConnectFlows"))
     Input.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -1529,6 +1607,7 @@ module Aws::MediaLive
     Input.add_member(:type, Shapes::ShapeRef.new(shape: InputType, location_name: "type"))
     Input.struct_class = Types::Input
 
+    InputAttachment.add_member(:automatic_input_failover_settings, Shapes::ShapeRef.new(shape: AutomaticInputFailoverSettings, location_name: "automaticInputFailoverSettings"))
     InputAttachment.add_member(:input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "inputAttachmentName"))
     InputAttachment.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, location_name: "inputId"))
     InputAttachment.add_member(:input_settings, Shapes::ShapeRef.new(shape: InputSettings, location_name: "inputSettings"))
@@ -1555,6 +1634,61 @@ module Aws::MediaLive
     InputDestinationVpc.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
     InputDestinationVpc.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: __string, location_name: "networkInterfaceId"))
     InputDestinationVpc.struct_class = Types::InputDestinationVpc
+
+    InputDevice.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    InputDevice.add_member(:connection_state, Shapes::ShapeRef.new(shape: InputDeviceConnectionState, location_name: "connectionState"))
+    InputDevice.add_member(:device_settings_sync_state, Shapes::ShapeRef.new(shape: DeviceSettingsSyncState, location_name: "deviceSettingsSyncState"))
+    InputDevice.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceHdSettings, location_name: "hdDeviceSettings"))
+    InputDevice.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    InputDevice.add_member(:mac_address, Shapes::ShapeRef.new(shape: __string, location_name: "macAddress"))
+    InputDevice.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    InputDevice.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
+    InputDevice.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
+    InputDevice.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
+    InputDevice.struct_class = Types::InputDevice
+
+    InputDeviceConfigurableSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
+    InputDeviceConfigurableSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
+    InputDeviceConfigurableSettings.struct_class = Types::InputDeviceConfigurableSettings
+
+    InputDeviceConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    InputDeviceConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
+    InputDeviceConfigurationValidationError.struct_class = Types::InputDeviceConfigurationValidationError
+
+    InputDeviceHdSettings.add_member(:active_input, Shapes::ShapeRef.new(shape: InputDeviceActiveInput, location_name: "activeInput"))
+    InputDeviceHdSettings.add_member(:configured_input, Shapes::ShapeRef.new(shape: InputDeviceConfiguredInput, location_name: "configuredInput"))
+    InputDeviceHdSettings.add_member(:device_state, Shapes::ShapeRef.new(shape: InputDeviceState, location_name: "deviceState"))
+    InputDeviceHdSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: __double, location_name: "framerate"))
+    InputDeviceHdSettings.add_member(:height, Shapes::ShapeRef.new(shape: __integer, location_name: "height"))
+    InputDeviceHdSettings.add_member(:max_bitrate, Shapes::ShapeRef.new(shape: __integer, location_name: "maxBitrate"))
+    InputDeviceHdSettings.add_member(:scan_type, Shapes::ShapeRef.new(shape: InputDeviceScanType, location_name: "scanType"))
+    InputDeviceHdSettings.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
+    InputDeviceHdSettings.struct_class = Types::InputDeviceHdSettings
+
+    InputDeviceNetworkSettings.add_member(:dns_addresses, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "dnsAddresses"))
+    InputDeviceNetworkSettings.add_member(:gateway, Shapes::ShapeRef.new(shape: __string, location_name: "gateway"))
+    InputDeviceNetworkSettings.add_member(:ip_address, Shapes::ShapeRef.new(shape: __string, location_name: "ipAddress"))
+    InputDeviceNetworkSettings.add_member(:ip_scheme, Shapes::ShapeRef.new(shape: InputDeviceIpScheme, location_name: "ipScheme"))
+    InputDeviceNetworkSettings.add_member(:subnet_mask, Shapes::ShapeRef.new(shape: __string, location_name: "subnetMask"))
+    InputDeviceNetworkSettings.struct_class = Types::InputDeviceNetworkSettings
+
+    InputDeviceRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    InputDeviceRequest.struct_class = Types::InputDeviceRequest
+
+    InputDeviceSettings.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    InputDeviceSettings.struct_class = Types::InputDeviceSettings
+
+    InputDeviceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    InputDeviceSummary.add_member(:connection_state, Shapes::ShapeRef.new(shape: InputDeviceConnectionState, location_name: "connectionState"))
+    InputDeviceSummary.add_member(:device_settings_sync_state, Shapes::ShapeRef.new(shape: DeviceSettingsSyncState, location_name: "deviceSettingsSyncState"))
+    InputDeviceSummary.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceHdSettings, location_name: "hdDeviceSettings"))
+    InputDeviceSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    InputDeviceSummary.add_member(:mac_address, Shapes::ShapeRef.new(shape: __string, location_name: "macAddress"))
+    InputDeviceSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    InputDeviceSummary.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
+    InputDeviceSummary.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
+    InputDeviceSummary.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
+    InputDeviceSummary.struct_class = Types::InputDeviceSummary
 
     InputLocation.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
     InputLocation.add_member(:uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "uri"))
@@ -1587,6 +1721,7 @@ module Aws::MediaLive
     InputSettings.add_member(:filter_strength, Shapes::ShapeRef.new(shape: __integerMin1Max5, location_name: "filterStrength"))
     InputSettings.add_member(:input_filter, Shapes::ShapeRef.new(shape: InputFilter, location_name: "inputFilter"))
     InputSettings.add_member(:network_input_settings, Shapes::ShapeRef.new(shape: NetworkInputSettings, location_name: "networkInputSettings"))
+    InputSettings.add_member(:smpte_2038_data_preference, Shapes::ShapeRef.new(shape: Smpte2038DataPreference, location_name: "smpte2038DataPreference"))
     InputSettings.add_member(:source_end_behavior, Shapes::ShapeRef.new(shape: InputSourceEndBehavior, location_name: "sourceEndBehavior"))
     InputSettings.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputSettings.struct_class = Types::InputSettings
@@ -1647,6 +1782,18 @@ module Aws::MediaLive
     ListChannelsResultModel.add_member(:channels, Shapes::ShapeRef.new(shape: __listOfChannelSummary, location_name: "channels"))
     ListChannelsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListChannelsResultModel.struct_class = Types::ListChannelsResultModel
+
+    ListInputDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListInputDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListInputDevicesRequest.struct_class = Types::ListInputDevicesRequest
+
+    ListInputDevicesResponse.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSummary, location_name: "inputDevices"))
+    ListInputDevicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListInputDevicesResponse.struct_class = Types::ListInputDevicesResponse
+
+    ListInputDevicesResultModel.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceSummary, location_name: "inputDevices"))
+    ListInputDevicesResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListInputDevicesResultModel.struct_class = Types::ListInputDevicesResultModel
 
     ListInputSecurityGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListInputSecurityGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -1870,7 +2017,7 @@ module Aws::MediaLive
     Multiplex.struct_class = Types::Multiplex
 
     MultiplexConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
-    MultiplexConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfMultiplexValidationError, location_name: "validationErrors"))
+    MultiplexConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
     MultiplexConfigurationValidationError.struct_class = Types::MultiplexConfigurationValidationError
 
     MultiplexGroupSettings.struct_class = Types::MultiplexGroupSettings
@@ -1913,6 +2060,7 @@ module Aws::MediaLive
     MultiplexProgramServiceDescriptor.add_member(:service_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "serviceName"))
     MultiplexProgramServiceDescriptor.struct_class = Types::MultiplexProgramServiceDescriptor
 
+    MultiplexProgramSettings.add_member(:preferred_channel_pipeline, Shapes::ShapeRef.new(shape: PreferredChannelPipeline, location_name: "preferredChannelPipeline"))
     MultiplexProgramSettings.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMin0Max65535, required: true, location_name: "programNumber"))
     MultiplexProgramSettings.add_member(:service_descriptor, Shapes::ShapeRef.new(shape: MultiplexProgramServiceDescriptor, location_name: "serviceDescriptor"))
     MultiplexProgramSettings.add_member(:video_settings, Shapes::ShapeRef.new(shape: MultiplexVideoSettings, location_name: "videoSettings"))
@@ -1945,10 +2093,6 @@ module Aws::MediaLive
     MultiplexSummary.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
     MultiplexSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     MultiplexSummary.struct_class = Types::MultiplexSummary
-
-    MultiplexValidationError.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
-    MultiplexValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
-    MultiplexValidationError.struct_class = Types::MultiplexValidationError
 
     MultiplexVideoSettings.add_member(:constant_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "constantBitrate"))
     MultiplexVideoSettings.add_member(:statmux_settings, Shapes::ShapeRef.new(shape: MultiplexStatmuxVideoSettings, location_name: "statmuxSettings"))
@@ -2317,6 +2461,10 @@ module Aws::MediaLive
     TeletextSourceSettings.add_member(:page_number, Shapes::ShapeRef.new(shape: __string, location_name: "pageNumber"))
     TeletextSourceSettings.struct_class = Types::TeletextSourceSettings
 
+    TemporalFilterSettings.add_member(:post_filter_sharpening, Shapes::ShapeRef.new(shape: TemporalFilterPostFilterSharpening, location_name: "postFilterSharpening"))
+    TemporalFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: TemporalFilterStrength, location_name: "strength"))
+    TemporalFilterSettings.struct_class = Types::TemporalFilterSettings
+
     TimecodeConfig.add_member(:source, Shapes::ShapeRef.new(shape: TimecodeConfigSource, required: true, location_name: "source"))
     TimecodeConfig.add_member(:sync_threshold, Shapes::ShapeRef.new(shape: __integerMin1Max1000000, location_name: "syncThreshold"))
     TimecodeConfig.struct_class = Types::TimecodeConfig
@@ -2383,6 +2531,7 @@ module Aws::MediaLive
     UpdateChannelResultModel.struct_class = Types::UpdateChannelResultModel
 
     UpdateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
+    UpdateInput.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceRequest, location_name: "inputDevices"))
     UpdateInput.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
     UpdateInput.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
     UpdateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
@@ -2390,7 +2539,29 @@ module Aws::MediaLive
     UpdateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
     UpdateInput.struct_class = Types::UpdateInput
 
+    UpdateInputDevice.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
+    UpdateInputDevice.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInputDevice.struct_class = Types::UpdateInputDevice
+
+    UpdateInputDeviceRequest.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceConfigurableSettings, location_name: "hdDeviceSettings"))
+    UpdateInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
+    UpdateInputDeviceRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInputDeviceRequest.struct_class = Types::UpdateInputDeviceRequest
+
+    UpdateInputDeviceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateInputDeviceResponse.add_member(:connection_state, Shapes::ShapeRef.new(shape: InputDeviceConnectionState, location_name: "connectionState"))
+    UpdateInputDeviceResponse.add_member(:device_settings_sync_state, Shapes::ShapeRef.new(shape: DeviceSettingsSyncState, location_name: "deviceSettingsSyncState"))
+    UpdateInputDeviceResponse.add_member(:hd_device_settings, Shapes::ShapeRef.new(shape: InputDeviceHdSettings, location_name: "hdDeviceSettings"))
+    UpdateInputDeviceResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdateInputDeviceResponse.add_member(:mac_address, Shapes::ShapeRef.new(shape: __string, location_name: "macAddress"))
+    UpdateInputDeviceResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInputDeviceResponse.add_member(:network_settings, Shapes::ShapeRef.new(shape: InputDeviceNetworkSettings, location_name: "networkSettings"))
+    UpdateInputDeviceResponse.add_member(:serial_number, Shapes::ShapeRef.new(shape: __string, location_name: "serialNumber"))
+    UpdateInputDeviceResponse.add_member(:type, Shapes::ShapeRef.new(shape: InputDeviceType, location_name: "type"))
+    UpdateInputDeviceResponse.struct_class = Types::UpdateInputDeviceResponse
+
     UpdateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
+    UpdateInputRequest.add_member(:input_devices, Shapes::ShapeRef.new(shape: __listOfInputDeviceRequest, location_name: "inputDevices"))
     UpdateInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
     UpdateInputRequest.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
     UpdateInputRequest.add_member(:media_connect_flows, Shapes::ShapeRef.new(shape: __listOfMediaConnectFlowRequest, location_name: "mediaConnectFlows"))
@@ -2499,6 +2670,8 @@ module Aws::MediaLive
 
     __listOfAudioSelector.member = Shapes::ShapeRef.new(shape: AudioSelector)
 
+    __listOfAudioTrack.member = Shapes::ShapeRef.new(shape: AudioTrack)
+
     __listOfCaptionDescription.member = Shapes::ShapeRef.new(shape: CaptionDescription)
 
     __listOfCaptionLanguageMapping.member = Shapes::ShapeRef.new(shape: CaptionLanguageMapping)
@@ -2521,6 +2694,12 @@ module Aws::MediaLive
 
     __listOfInputDestinationRequest.member = Shapes::ShapeRef.new(shape: InputDestinationRequest)
 
+    __listOfInputDeviceRequest.member = Shapes::ShapeRef.new(shape: InputDeviceRequest)
+
+    __listOfInputDeviceSettings.member = Shapes::ShapeRef.new(shape: InputDeviceSettings)
+
+    __listOfInputDeviceSummary.member = Shapes::ShapeRef.new(shape: InputDeviceSummary)
+
     __listOfInputSecurityGroup.member = Shapes::ShapeRef.new(shape: InputSecurityGroup)
 
     __listOfInputSource.member = Shapes::ShapeRef.new(shape: InputSource)
@@ -2542,8 +2721,6 @@ module Aws::MediaLive
     __listOfMultiplexProgramSummary.member = Shapes::ShapeRef.new(shape: MultiplexProgramSummary)
 
     __listOfMultiplexSummary.member = Shapes::ShapeRef.new(shape: MultiplexSummary)
-
-    __listOfMultiplexValidationError.member = Shapes::ShapeRef.new(shape: MultiplexValidationError)
 
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 
@@ -2848,6 +3025,21 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:describe_input_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInputDevice"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInputDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInputDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:describe_input_security_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInputSecurityGroup"
         o.http_method = "GET"
@@ -2950,6 +3142,26 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/channels"
         o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_input_devices, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInputDevices"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/inputDevices"
+        o.input = Shapes::ShapeRef.new(shape: ListInputDevicesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInputDevicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -3222,6 +3434,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_input_device, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInputDevice"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/inputDevices/{inputDeviceId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInputDeviceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInputDeviceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_input_security_group, Seahorse::Model::Operation.new.tap do |o|

@@ -25,17 +25,20 @@ require_relative 'aws-sdk-redshift/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     redshift = Aws::Redshift::Client.new
+#     resp = redshift.accept_reserved_node_exchange(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Redshift all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Redshift are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Redshift::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Redshift API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-redshift/customizations'
 # @service
 module Aws::Redshift
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.43.0'
 
 end

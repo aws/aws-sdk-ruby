@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iotanalytics/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t_analytics = Aws::IoTAnalytics::Client.new
+#     resp = io_t_analytics.batch_put_message(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT Analytics all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT Analytics are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoTAnalytics::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT Analytics API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-iotanalytics/customizations'
 # @service
 module Aws::IoTAnalytics
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.29.0'
 
 end

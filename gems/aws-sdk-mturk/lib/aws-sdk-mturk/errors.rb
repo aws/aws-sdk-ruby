@@ -6,6 +6,30 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MTurk
+
+  # When MTurk returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::MTurk::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all MTurk errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::MTurk::Errors::ServiceError
+  #       # rescues all MTurk API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {RequestError}
+  # * {ServiceFault}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +52,6 @@ module Aws::MTurk
       def turk_error_code
         @data[:turk_error_code]
       end
-
     end
 
     class ServiceFault < ServiceError
@@ -49,7 +72,6 @@ module Aws::MTurk
       def turk_error_code
         @data[:turk_error_code]
       end
-
     end
 
   end

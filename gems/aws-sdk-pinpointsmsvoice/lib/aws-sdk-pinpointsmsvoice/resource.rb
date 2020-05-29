@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::PinpointSMSVoice
+
   class Resource
 
     # @param options ({})

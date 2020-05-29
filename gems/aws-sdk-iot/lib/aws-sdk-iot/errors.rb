@@ -6,6 +6,57 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoT
+
+  # When IoT returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::IoT::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all IoT errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::IoT::Errors::ServiceError
+  #       # rescues all IoT API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CertificateConflictException}
+  # * {CertificateStateException}
+  # * {CertificateValidationException}
+  # * {ConflictingResourceUpdateException}
+  # * {DeleteConflictException}
+  # * {IndexNotReadyException}
+  # * {InternalException}
+  # * {InternalFailureException}
+  # * {InvalidAggregationException}
+  # * {InvalidQueryException}
+  # * {InvalidRequestException}
+  # * {InvalidResponseException}
+  # * {InvalidStateTransitionException}
+  # * {LimitExceededException}
+  # * {MalformedPolicyException}
+  # * {NotConfiguredException}
+  # * {RegistrationCodeValidationException}
+  # * {ResourceAlreadyExistsException}
+  # * {ResourceNotFoundException}
+  # * {ResourceRegistrationFailureException}
+  # * {ServiceUnavailableException}
+  # * {SqlParseException}
+  # * {TaskAlreadyExistsException}
+  # * {ThrottlingException}
+  # * {TransferAlreadyCompletedException}
+  # * {TransferConflictException}
+  # * {UnauthorizedException}
+  # * {VersionConflictException}
+  # * {VersionsLimitExceededException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +74,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class CertificateStateException < ServiceError
@@ -39,7 +89,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class CertificateValidationException < ServiceError
@@ -55,7 +104,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictingResourceUpdateException < ServiceError
@@ -71,7 +119,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class DeleteConflictException < ServiceError
@@ -87,7 +134,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class IndexNotReadyException < ServiceError
@@ -103,7 +149,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalException < ServiceError
@@ -119,7 +164,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -135,7 +179,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAggregationException < ServiceError
@@ -151,7 +194,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidQueryException < ServiceError
@@ -167,7 +209,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -183,7 +224,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResponseException < ServiceError
@@ -199,7 +239,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateTransitionException < ServiceError
@@ -215,7 +254,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -231,7 +269,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedPolicyException < ServiceError
@@ -247,7 +284,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotConfiguredException < ServiceError
@@ -263,7 +299,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class RegistrationCodeValidationException < ServiceError
@@ -279,7 +314,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -305,7 +339,6 @@ module Aws::IoT
       def resource_arn
         @data[:resource_arn]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -321,7 +354,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceRegistrationFailureException < ServiceError
@@ -337,7 +369,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -353,7 +384,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class SqlParseException < ServiceError
@@ -369,7 +399,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class TaskAlreadyExistsException < ServiceError
@@ -385,7 +414,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -401,7 +429,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class TransferAlreadyCompletedException < ServiceError
@@ -417,7 +444,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class TransferConflictException < ServiceError
@@ -433,7 +459,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnauthorizedException < ServiceError
@@ -449,7 +474,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class VersionConflictException < ServiceError
@@ -465,7 +489,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
     class VersionsLimitExceededException < ServiceError
@@ -481,7 +504,6 @@ module Aws::IoT
       def message
         @message || @data[:message]
       end
-
     end
 
   end

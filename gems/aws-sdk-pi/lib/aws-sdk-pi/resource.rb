@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::PI
+
   class Resource
 
     # @param options ({})

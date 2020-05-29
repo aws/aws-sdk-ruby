@@ -11,7 +11,7 @@ module AwsSdkCodeGenerator
     end
 
     def to_str
-      "@example Response structure\n\n  #{entry(@shape_ref, "resp", Set.new).join("\n  ")}"
+      "@example Response structure\n\n  #{entry(@shape_ref, 'resp', Set.new).join("\n  ")}"
     end
     alias to_s to_str
 
@@ -27,9 +27,9 @@ module AwsSdkCodeGenerator
           event_type = Underscore.underscore(member_name).to_sym
           event_types << event_type
           ctx << "For #{event_type.inspect} event available at #on_#{event_type}_event callback"\
-            " and response eventstream enumerator:"
-          event_entry = entry(member_ref, "event", Set.new).join("\n  ")
-          ctx << (event_entry.empty? ? " #=> EmptyStruct" : event_entry + "\n")
+                 ' and response eventstream enumerator:'
+          event_entry = entry(member_ref, 'event', Set.new).join("\n  ")
+          ctx << (event_entry.empty? ? ' #=> EmptyStruct' : event_entry + "\n")
         end
         # Add eventstream entry
         event_ctx.unshift("#{context}.event_types #=> #{event_types.inspect}\n")

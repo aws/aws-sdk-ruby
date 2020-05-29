@@ -3,7 +3,6 @@ require 'delegate'
 module Seahorse
   module Client
     class Response < Delegator
-
       # @option options [RequestContext] :context (nil)
       # @option options [Integer] :status_code (nil)
       # @option options [Http::Headers] :headers (Http::Headers.new)
@@ -39,10 +38,10 @@ module Seahorse
       #     witin the given range.
       #
       # @return [self]
-      def on(range, &block)
+      def on(range, &_block)
         response = self
         @context.http_response.on_success(range) do
-          block.call(response)
+          yield response
         end
         self
       end
@@ -56,7 +55,7 @@ module Seahorse
       # @return [Boolean] Returns `true` if the response is complete with
       #   a ~ 200 level http status code.
       def successful?
-        (200..299).include?(@context.http_response.status_code) && @error.nil?
+        (200..299).cover?(@context.http_response.status_code) && @error.nil?
       end
 
       # @api private
@@ -76,7 +75,6 @@ module Seahorse
       def __setobj__(obj)
         @data = obj
       end
-
     end
   end
 end

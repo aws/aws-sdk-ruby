@@ -6,6 +6,54 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ECR
+
+  # When ECR returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ECR::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ECR errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ECR::Errors::ServiceError
+  #       # rescues all ECR API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {EmptyUploadException}
+  # * {ImageAlreadyExistsException}
+  # * {ImageNotFoundException}
+  # * {ImageTagAlreadyExistsException}
+  # * {InvalidLayerException}
+  # * {InvalidLayerPartException}
+  # * {InvalidParameterException}
+  # * {InvalidTagParameterException}
+  # * {LayerAlreadyExistsException}
+  # * {LayerInaccessibleException}
+  # * {LayerPartTooSmallException}
+  # * {LayersNotFoundException}
+  # * {LifecyclePolicyNotFoundException}
+  # * {LifecyclePolicyPreviewInProgressException}
+  # * {LifecyclePolicyPreviewNotFoundException}
+  # * {LimitExceededException}
+  # * {ReferencedImagesNotFoundException}
+  # * {RepositoryAlreadyExistsException}
+  # * {RepositoryNotEmptyException}
+  # * {RepositoryNotFoundException}
+  # * {RepositoryPolicyNotFoundException}
+  # * {ScanNotFoundException}
+  # * {ServerException}
+  # * {TooManyTagsException}
+  # * {UnsupportedImageTypeException}
+  # * {UploadNotFoundException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +71,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class ImageAlreadyExistsException < ServiceError
@@ -39,7 +86,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class ImageNotFoundException < ServiceError
@@ -55,7 +101,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class ImageTagAlreadyExistsException < ServiceError
@@ -71,7 +116,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLayerException < ServiceError
@@ -87,7 +131,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLayerPartException < ServiceError
@@ -123,7 +166,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -139,7 +181,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagParameterException < ServiceError
@@ -155,7 +196,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LayerAlreadyExistsException < ServiceError
@@ -171,7 +211,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LayerInaccessibleException < ServiceError
@@ -187,7 +226,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LayerPartTooSmallException < ServiceError
@@ -203,7 +241,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LayersNotFoundException < ServiceError
@@ -219,7 +256,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LifecyclePolicyNotFoundException < ServiceError
@@ -235,7 +271,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LifecyclePolicyPreviewInProgressException < ServiceError
@@ -251,7 +286,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LifecyclePolicyPreviewNotFoundException < ServiceError
@@ -267,7 +301,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -283,7 +316,21 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
+    end
 
+    class ReferencedImagesNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ReferencedImagesNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class RepositoryAlreadyExistsException < ServiceError
@@ -299,7 +346,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class RepositoryNotEmptyException < ServiceError
@@ -315,7 +361,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class RepositoryNotFoundException < ServiceError
@@ -331,7 +376,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class RepositoryPolicyNotFoundException < ServiceError
@@ -347,7 +391,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class ScanNotFoundException < ServiceError
@@ -363,7 +406,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerException < ServiceError
@@ -379,7 +421,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -395,7 +436,21 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
+    end
 
+    class UnsupportedImageTypeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::UnsupportedImageTypeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class UploadNotFoundException < ServiceError
@@ -411,7 +466,6 @@ module Aws::ECR
       def message
         @message || @data[:message]
       end
-
     end
 
   end

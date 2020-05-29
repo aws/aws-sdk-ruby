@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2020-05-04)
+------------------
+
+* Feature - Amazon S3 Batch Operations now supports Object Lock.
+
+1.16.0 (2020-03-16)
+------------------
+
+* Feature - Amazon S3 now supports Batch Operations job tagging.
+
+1.15.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.14.0 (2019-12-03)
 ------------------
 

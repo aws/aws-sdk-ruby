@@ -252,6 +252,12 @@ module Aws::SESV2
     VolumeStatistics = Shapes::StructureShape.new(name: 'VolumeStatistics')
     WarmupStatus = Shapes::StringShape.new(name: 'WarmupStatus')
 
+    AccountSuspendedException.struct_class = Types::AccountSuspendedException
+
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    BadRequestException.struct_class = Types::BadRequestException
+
     BlacklistEntries.member = Shapes::ShapeRef.new(shape: BlacklistEntry)
 
     BlacklistEntry.add_member(:rbl_name, Shapes::ShapeRef.new(shape: RblName, location_name: "RblName"))
@@ -277,6 +283,8 @@ module Aws::SESV2
     CloudWatchDimensionConfiguration.struct_class = Types::CloudWatchDimensionConfiguration
 
     CloudWatchDimensionConfigurations.member = Shapes::ShapeRef.new(shape: CloudWatchDimensionConfiguration)
+
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     ConfigurationSetNameList.member = Shapes::ShapeRef.new(shape: ConfigurationSetName)
 
@@ -575,6 +583,8 @@ module Aws::SESV2
     InboxPlacementTrackingOption.add_member(:tracked_isps, Shapes::ShapeRef.new(shape: IspNameList, location_name: "TrackedIsps"))
     InboxPlacementTrackingOption.struct_class = Types::InboxPlacementTrackingOption
 
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
     IpList.member = Shapes::ShapeRef.new(shape: Ip)
 
     IspNameList.member = Shapes::ShapeRef.new(shape: IspName)
@@ -588,6 +598,8 @@ module Aws::SESV2
     KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "IamRoleArn"))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "DeliveryStreamArn"))
     KinesisFirehoseDestination.struct_class = Types::KinesisFirehoseDestination
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListConfigurationSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListConfigurationSetsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
@@ -656,15 +668,21 @@ module Aws::SESV2
     MailFromAttributes.add_member(:behavior_on_mx_failure, Shapes::ShapeRef.new(shape: BehaviorOnMxFailure, required: true, location_name: "BehaviorOnMxFailure"))
     MailFromAttributes.struct_class = Types::MailFromAttributes
 
+    MailFromDomainNotVerifiedException.struct_class = Types::MailFromDomainNotVerifiedException
+
     Message.add_member(:subject, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Subject"))
     Message.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "Body"))
     Message.struct_class = Types::Message
+
+    MessageRejected.struct_class = Types::MessageRejected
 
     MessageTag.add_member(:name, Shapes::ShapeRef.new(shape: MessageTagName, required: true, location_name: "Name"))
     MessageTag.add_member(:value, Shapes::ShapeRef.new(shape: MessageTagValue, required: true, location_name: "Value"))
     MessageTag.struct_class = Types::MessageTag
 
     MessageTagList.member = Shapes::ShapeRef.new(shape: MessageTag)
+
+    NotFoundException.struct_class = Types::NotFoundException
 
     OverallVolume.add_member(:volume_statistics, Shapes::ShapeRef.new(shape: VolumeStatistics, location_name: "VolumeStatistics"))
     OverallVolume.add_member(:read_rate_percent, Shapes::ShapeRef.new(shape: Percentage, location_name: "ReadRatePercent"))
@@ -806,6 +824,8 @@ module Aws::SESV2
     SendingOptions.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
     SendingOptions.struct_class = Types::SendingOptions
 
+    SendingPausedException.struct_class = Types::SendingPausedException
+
     SnsDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "TopicArn"))
     SnsDestination.struct_class = Types::SnsDestination
 
@@ -851,6 +871,8 @@ module Aws::SESV2
     Template.add_member(:template_arn, Shapes::ShapeRef.new(shape: TemplateArn, location_name: "TemplateArn"))
     Template.add_member(:template_data, Shapes::ShapeRef.new(shape: TemplateData, location_name: "TemplateData"))
     Template.struct_class = Types::Template
+
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     TrackingOptions.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, required: true, location_name: "CustomRedirectDomain"))
     TrackingOptions.struct_class = Types::TrackingOptions

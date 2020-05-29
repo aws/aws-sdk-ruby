@@ -6,6 +6,49 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::FSx
+
+  # When FSx returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::FSx::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all FSx errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::FSx::Errors::ServiceError
+  #       # rescues all FSx API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ActiveDirectoryError}
+  # * {BackupInProgress}
+  # * {BackupNotFound}
+  # * {BackupRestoring}
+  # * {BadRequest}
+  # * {DataRepositoryTaskEnded}
+  # * {DataRepositoryTaskExecuting}
+  # * {DataRepositoryTaskNotFound}
+  # * {FileSystemNotFound}
+  # * {IncompatibleParameterError}
+  # * {InternalServerError}
+  # * {InvalidExportPath}
+  # * {InvalidImportPath}
+  # * {InvalidNetworkSettings}
+  # * {InvalidPerUnitStorageThroughput}
+  # * {MissingFileSystemConfiguration}
+  # * {NotServiceResourceError}
+  # * {ResourceDoesNotSupportTagging}
+  # * {ResourceNotFound}
+  # * {ServiceLimitExceeded}
+  # * {UnsupportedOperation}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -33,7 +76,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupInProgress < ServiceError
@@ -49,7 +91,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupNotFound < ServiceError
@@ -65,7 +106,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class BackupRestoring < ServiceError
@@ -86,7 +126,6 @@ module Aws::FSx
       def file_system_id
         @data[:file_system_id]
       end
-
     end
 
     class BadRequest < ServiceError
@@ -102,7 +141,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class DataRepositoryTaskEnded < ServiceError
@@ -118,7 +156,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class DataRepositoryTaskExecuting < ServiceError
@@ -134,7 +171,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class DataRepositoryTaskNotFound < ServiceError
@@ -150,7 +186,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class FileSystemNotFound < ServiceError
@@ -166,7 +201,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatibleParameterError < ServiceError
@@ -187,7 +221,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -203,7 +236,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidExportPath < ServiceError
@@ -219,7 +251,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidImportPath < ServiceError
@@ -235,7 +266,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNetworkSettings < ServiceError
@@ -261,7 +291,21 @@ module Aws::FSx
       def invalid_security_group_id
         @data[:invalid_security_group_id]
       end
+    end
 
+    class InvalidPerUnitStorageThroughput < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::InvalidPerUnitStorageThroughput] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class MissingFileSystemConfiguration < ServiceError
@@ -277,7 +321,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotServiceResourceError < ServiceError
@@ -298,7 +341,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDoesNotSupportTagging < ServiceError
@@ -319,7 +361,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFound < ServiceError
@@ -340,7 +381,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceLimitExceeded < ServiceError
@@ -361,7 +401,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedOperation < ServiceError
@@ -377,7 +416,6 @@ module Aws::FSx
       def message
         @message || @data[:message]
       end
-
     end
 
   end

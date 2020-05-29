@@ -4483,7 +4483,14 @@ module Aws::DynamoDB
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of table names to return.
+    #   The maximum number of table names to return, if the parameter is not
+    #   specified DynamoDB defaults to 100.
+    #
+    #   If the number of global tables DynamoDB finds reaches this limit, it
+    #   stops the operation and returns the table names collected up to that
+    #   point, with a table name in the `LastEvaluatedGlobalTableName` to
+    #   apply in a subsequent operation to the
+    #   `ExclusiveStartGlobalTableName` parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] region_name
@@ -5155,6 +5162,11 @@ module Aws::DynamoDB
     #   If you specify any attributes that are part of an index key, then
     #   the data types for those attributes must match those of the schema
     #   in the table's attribute definition.
+    #
+    #   Empty String and Binary attribute values are allowed. Attribute
+    #   values of type String and Binary must have a length greater than
+    #   zero if the attribute is used as a key attribute for a table or
+    #   index.
     #
     #   For more information about primary keys, see [Primary Key][1] in the
     #   *Amazon DynamoDB Developer Guide*.
@@ -6785,6 +6797,11 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         sse_specification_override: {
+    #           enabled: false,
+    #           sse_type: "AES256", # accepts AES256, KMS
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #         },
     #       }
     #
     # @!attribute [rw] target_table_name
@@ -6815,6 +6832,10 @@ module Aws::DynamoDB
     #   Provisioned throughput settings for the restored table.
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] sse_specification_override
+    #   The new server-side encryption settings for the restored table.
+    #   @return [Types::SSESpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupInput AWS API Documentation
     #
     class RestoreTableFromBackupInput < Struct.new(
@@ -6823,7 +6844,8 @@ module Aws::DynamoDB
       :billing_mode_override,
       :global_secondary_index_override,
       :local_secondary_index_override,
-      :provisioned_throughput_override)
+      :provisioned_throughput_override,
+      :sse_specification_override)
       include Aws::Structure
     end
 
@@ -6842,7 +6864,8 @@ module Aws::DynamoDB
     #   data as a hash:
     #
     #       {
-    #         source_table_name: "TableName", # required
+    #         source_table_arn: "TableArn",
+    #         source_table_name: "TableName",
     #         target_table_name: "TableName", # required
     #         use_latest_restorable_time: false,
     #         restore_date_time: Time.now,
@@ -6885,7 +6908,17 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         sse_specification_override: {
+    #           enabled: false,
+    #           sse_type: "AES256", # accepts AES256, KMS
+    #           kms_master_key_id: "KMSMasterKeyId",
+    #         },
     #       }
+    #
+    # @!attribute [rw] source_table_arn
+    #   The DynamoDB table that will be restored. This value is an Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
     #
     # @!attribute [rw] source_table_name
     #   Name of the source table that is being restored.
@@ -6925,9 +6958,14 @@ module Aws::DynamoDB
     #   Provisioned throughput settings for the restored table.
     #   @return [Types::ProvisionedThroughput]
     #
+    # @!attribute [rw] sse_specification_override
+    #   The new server-side encryption settings for the restored table.
+    #   @return [Types::SSESpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeInput AWS API Documentation
     #
     class RestoreTableToPointInTimeInput < Struct.new(
+      :source_table_arn,
       :source_table_name,
       :target_table_name,
       :use_latest_restorable_time,
@@ -6935,7 +6973,8 @@ module Aws::DynamoDB
       :billing_mode_override,
       :global_secondary_index_override,
       :local_secondary_index_override,
-      :provisioned_throughput_override)
+      :provisioned_throughput_override,
+      :sse_specification_override)
       include Aws::Structure
     end
 

@@ -88,7 +88,7 @@ module Aws::TranscribeStreamingService
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -99,14 +99,24 @@ module Aws::TranscribeStreamingService
     #
     #   @option options [String] :access_key_id
     #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -124,6 +134,12 @@ module Aws::TranscribeStreamingService
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [Proc] :output_event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
@@ -131,11 +147,19 @@ module Aws::TranscribeStreamingService
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -143,11 +167,30 @@ module Aws::TranscribeStreamingService
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,6 +252,19 @@ module Aws::TranscribeStreamingService
     #   Amazon Transcribe will generate one for you and return it in the
     #   response.
     #
+    # @option params [String] :vocabulary_filter_name
+    #   The name of the vocabulary filter you've created that is unique to
+    #   your AWS accountf. Provide the name in this field to successfully use
+    #   it in a stream.
+    #
+    # @option params [String] :vocabulary_filter_method
+    #   The manner in which you use your vocabulary filter to filter words in
+    #   your transcript. `Remove` removes filtered words from your
+    #   transcription results. `Mask` masks those words with a `***` in your
+    #   transcription results. `Tag` keeps the filtered words in your
+    #   transcription results and tags them. The tag appears as
+    #   `VocabularyFilterMatch` equal to `True`
+    #
     # @return [Types::StartStreamTranscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartStreamTranscriptionResponse#request_id #request_id} => String
@@ -218,6 +274,8 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_name #vocabulary_name} => String
     #   * {Types::StartStreamTranscriptionResponse#session_id #session_id} => String
     #   * {Types::StartStreamTranscriptionResponse#transcript_result_stream #transcript_result_stream} => Types::TranscriptResultStream
+    #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_name #vocabulary_filter_name} => String
+    #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_method #vocabulary_filter_method} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
@@ -248,6 +306,9 @@ module Aws::TranscribeStreamingService
     #       end
     #       out_stream.on_conflict_exception_event do |event|
     #         event # => Aws::TranscribeStreamingService::Types::ConflictException
+    #       end
+    #       out_stream.on_service_unavailable_exception_event do |event|
+    #         event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
     #       end
     #
     #     end
@@ -284,6 +345,9 @@ module Aws::TranscribeStreamingService
     #     output_stream.on_conflict_exception_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::ConflictException
     #     end
+    #     output_stream.on_service_unavailable_exception_event do |event|
+    #       event # => Aws::TranscribeStreamingService::Types::ServiceUnavailableException
+    #     end
     #     output_stream.on_error_event do |event|
     #       # catch unmodeled error event in the stream
     #       raise event
@@ -314,6 +378,8 @@ module Aws::TranscribeStreamingService
     #     vocabulary_name: "VocabularyName",
     #     session_id: "SessionId",
     #     input_event_stream_hander: EventStreams::AudioStream.new,
+    #     vocabulary_filter_name: "VocabularyFilterName",
+    #     vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -330,7 +396,7 @@ module Aws::TranscribeStreamingService
     #   resp.session_id #=> String
     #   All events are available at resp.transcript_result_stream:
     #   resp.transcript_result_stream #=> Enumerator
-    #   resp.transcript_result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception]
+    #   resp.transcript_result_stream.event_types #=> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
     #
     #   For :transcript_event event available at #on_transcript_event_event callback and response eventstream enumerator:
     #   event.transcript.results #=> Array
@@ -345,6 +411,7 @@ module Aws::TranscribeStreamingService
     #   event.transcript.results[0].alternatives[0].items[0].end_time #=> Float
     #   event.transcript.results[0].alternatives[0].items[0].type #=> String, one of "pronunciation", "punctuation"
     #   event.transcript.results[0].alternatives[0].items[0].content #=> String
+    #   event.transcript.results[0].alternatives[0].items[0].vocabulary_filter_match #=> Boolean
     #
     #   For :bad_request_exception event available at #on_bad_request_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
@@ -357,6 +424,12 @@ module Aws::TranscribeStreamingService
     #
     #   For :conflict_exception event available at #on_conflict_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
+    #
+    #   For :service_unavailable_exception event available at #on_service_unavailable_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   resp.vocabulary_filter_name #=> String
+    #   resp.vocabulary_filter_method #=> String, one of "remove", "mask", "tag"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-streaming-2017-10-26/StartStreamTranscription AWS API Documentation
     #
@@ -401,7 +474,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -414,8 +487,8 @@ module Aws::TranscribeStreamingService
       when nil then event_stream_class.new
       else
         msg = "expected #{type}_event_stream_handler to be a block or "\
-          "instance of Aws::TranscribeStreamingService::#{event_stream_class}"\
-          ", got `#{handler.inspect}` instead"
+              "instance of Aws::TranscribeStreamingService::#{event_stream_class}"\
+              ", got `#{handler.inspect}` instead"
         raise ArgumentError, msg
       end
     end

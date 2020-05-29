@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElasticTranscoder
+
   class Resource
 
     # @param options ({})

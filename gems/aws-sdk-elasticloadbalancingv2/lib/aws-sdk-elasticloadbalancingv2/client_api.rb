@@ -11,6 +11,7 @@ module Aws::ElasticLoadBalancingV2
 
     include Seahorse::Model
 
+    ALPNPolicyNotSupportedException = Shapes::StructureShape.new(name: 'ALPNPolicyNotSupportedException')
     Action = Shapes::StructureShape.new(name: 'Action')
     ActionOrder = Shapes::IntegerShape.new(name: 'ActionOrder')
     ActionTypeEnum = Shapes::StringShape.new(name: 'ActionTypeEnum')
@@ -21,6 +22,8 @@ module Aws::ElasticLoadBalancingV2
     AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
     AllocationId = Shapes::StringShape.new(name: 'AllocationId')
     AllocationIdNotFoundException = Shapes::StructureShape.new(name: 'AllocationIdNotFoundException')
+    AlpnPolicyName = Shapes::ListShape.new(name: 'AlpnPolicyName')
+    AlpnPolicyValue = Shapes::StringShape.new(name: 'AlpnPolicyValue')
     AuthenticateCognitoActionAuthenticationRequestExtraParams = Shapes::MapShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestExtraParams')
     AuthenticateCognitoActionAuthenticationRequestParamName = Shapes::StringShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestParamName')
     AuthenticateCognitoActionAuthenticationRequestParamValue = Shapes::StringShape.new(name: 'AuthenticateCognitoActionAuthenticationRequestParamValue')
@@ -284,6 +287,8 @@ module Aws::ElasticLoadBalancingV2
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     ZoneName = Shapes::StringShape.new(name: 'ZoneName')
 
+    ALPNPolicyNotSupportedException.struct_class = Types::ALPNPolicyNotSupportedException
+
     Action.add_member(:type, Shapes::ShapeRef.new(shape: ActionTypeEnum, required: true, location_name: "Type"))
     Action.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: TargetGroupArn, location_name: "TargetGroupArn"))
     Action.add_member(:authenticate_oidc_config, Shapes::ShapeRef.new(shape: AuthenticateOidcActionConfig, location_name: "AuthenticateOidcConfig"))
@@ -308,6 +313,10 @@ module Aws::ElasticLoadBalancingV2
     AddTagsInput.struct_class = Types::AddTagsInput
 
     AddTagsOutput.struct_class = Types::AddTagsOutput
+
+    AllocationIdNotFoundException.struct_class = Types::AllocationIdNotFoundException
+
+    AlpnPolicyName.member = Shapes::ShapeRef.new(shape: AlpnPolicyValue)
 
     AuthenticateCognitoActionAuthenticationRequestExtraParams.key = Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestParamName)
     AuthenticateCognitoActionAuthenticationRequestExtraParams.value = Shapes::ShapeRef.new(shape: AuthenticateCognitoActionAuthenticationRequestParamValue)
@@ -344,6 +353,8 @@ module Aws::ElasticLoadBalancingV2
     AvailabilityZone.add_member(:load_balancer_addresses, Shapes::ShapeRef.new(shape: LoadBalancerAddresses, location_name: "LoadBalancerAddresses"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
+    AvailabilityZoneNotSupportedException.struct_class = Types::AvailabilityZoneNotSupportedException
+
     AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
 
     Certificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "CertificateArn"))
@@ -351,6 +362,8 @@ module Aws::ElasticLoadBalancingV2
     Certificate.struct_class = Types::Certificate
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate)
+
+    CertificateNotFoundException.struct_class = Types::CertificateNotFoundException
 
     Cipher.add_member(:name, Shapes::ShapeRef.new(shape: CipherName, location_name: "Name"))
     Cipher.add_member(:priority, Shapes::ShapeRef.new(shape: CipherPriority, location_name: "Priority"))
@@ -364,6 +377,7 @@ module Aws::ElasticLoadBalancingV2
     CreateListenerInput.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     CreateListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CreateListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, required: true, location_name: "DefaultActions"))
+    CreateListenerInput.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
     CreateListenerInput.struct_class = Types::CreateListenerInput
 
     CreateListenerOutput.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "Listeners"))
@@ -528,6 +542,14 @@ module Aws::ElasticLoadBalancingV2
     DescribeTargetHealthOutput.add_member(:target_health_descriptions, Shapes::ShapeRef.new(shape: TargetHealthDescriptions, location_name: "TargetHealthDescriptions"))
     DescribeTargetHealthOutput.struct_class = Types::DescribeTargetHealthOutput
 
+    DuplicateListenerException.struct_class = Types::DuplicateListenerException
+
+    DuplicateLoadBalancerNameException.struct_class = Types::DuplicateLoadBalancerNameException
+
+    DuplicateTagKeysException.struct_class = Types::DuplicateTagKeysException
+
+    DuplicateTargetGroupNameException.struct_class = Types::DuplicateTargetGroupNameException
+
     FixedResponseActionConfig.add_member(:message_body, Shapes::ShapeRef.new(shape: FixedResponseActionMessage, location_name: "MessageBody"))
     FixedResponseActionConfig.add_member(:status_code, Shapes::ShapeRef.new(shape: FixedResponseActionStatusCode, required: true, location_name: "StatusCode"))
     FixedResponseActionConfig.add_member(:content_type, Shapes::ShapeRef.new(shape: FixedResponseActionContentType, location_name: "ContentType"))
@@ -536,6 +558,8 @@ module Aws::ElasticLoadBalancingV2
     ForwardActionConfig.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroupList, location_name: "TargetGroups"))
     ForwardActionConfig.add_member(:target_group_stickiness_config, Shapes::ShapeRef.new(shape: TargetGroupStickinessConfig, location_name: "TargetGroupStickinessConfig"))
     ForwardActionConfig.struct_class = Types::ForwardActionConfig
+
+    HealthUnavailableException.struct_class = Types::HealthUnavailableException
 
     HostHeaderConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     HostHeaderConditionConfig.struct_class = Types::HostHeaderConditionConfig
@@ -546,6 +570,20 @@ module Aws::ElasticLoadBalancingV2
 
     HttpRequestMethodConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     HttpRequestMethodConditionConfig.struct_class = Types::HttpRequestMethodConditionConfig
+
+    IncompatibleProtocolsException.struct_class = Types::IncompatibleProtocolsException
+
+    InvalidConfigurationRequestException.struct_class = Types::InvalidConfigurationRequestException
+
+    InvalidLoadBalancerActionException.struct_class = Types::InvalidLoadBalancerActionException
+
+    InvalidSchemeException.struct_class = Types::InvalidSchemeException
+
+    InvalidSecurityGroupException.struct_class = Types::InvalidSecurityGroupException
+
+    InvalidSubnetException.struct_class = Types::InvalidSubnetException
+
+    InvalidTargetException.struct_class = Types::InvalidTargetException
 
     Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
@@ -562,9 +600,12 @@ module Aws::ElasticLoadBalancingV2
     Listener.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     Listener.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     Listener.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, location_name: "DefaultActions"))
+    Listener.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
     Listener.struct_class = Types::Listener
 
     ListenerArns.member = Shapes::ShapeRef.new(shape: ListenerArn)
+
+    ListenerNotFoundException.struct_class = Types::ListenerNotFoundException
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
 
@@ -599,6 +640,8 @@ module Aws::ElasticLoadBalancingV2
 
     LoadBalancerNames.member = Shapes::ShapeRef.new(shape: LoadBalancerName)
 
+    LoadBalancerNotFoundException.struct_class = Types::LoadBalancerNotFoundException
+
     LoadBalancerState.add_member(:code, Shapes::ShapeRef.new(shape: LoadBalancerStateEnum, location_name: "Code"))
     LoadBalancerState.add_member(:reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "Reason"))
     LoadBalancerState.struct_class = Types::LoadBalancerState
@@ -614,6 +657,7 @@ module Aws::ElasticLoadBalancingV2
     ModifyListenerInput.add_member(:ssl_policy, Shapes::ShapeRef.new(shape: SslPolicyName, location_name: "SslPolicy"))
     ModifyListenerInput.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     ModifyListenerInput.add_member(:default_actions, Shapes::ShapeRef.new(shape: Actions, location_name: "DefaultActions"))
+    ModifyListenerInput.add_member(:alpn_policy, Shapes::ShapeRef.new(shape: AlpnPolicyName, location_name: "AlpnPolicy"))
     ModifyListenerInput.struct_class = Types::ModifyListenerInput
 
     ModifyListenerOutput.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "Listeners"))
@@ -656,8 +700,12 @@ module Aws::ElasticLoadBalancingV2
     ModifyTargetGroupOutput.add_member(:target_groups, Shapes::ShapeRef.new(shape: TargetGroups, location_name: "TargetGroups"))
     ModifyTargetGroupOutput.struct_class = Types::ModifyTargetGroupOutput
 
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
+
     PathPatternConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: ListOfString, location_name: "Values"))
     PathPatternConditionConfig.struct_class = Types::PathPatternConditionConfig
+
+    PriorityInUseException.struct_class = Types::PriorityInUseException
 
     QueryStringConditionConfig.add_member(:values, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairList, location_name: "Values"))
     QueryStringConditionConfig.struct_class = Types::QueryStringConditionConfig
@@ -696,6 +744,8 @@ module Aws::ElasticLoadBalancingV2
 
     ResourceArns.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
     Rule.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
     Rule.add_member(:priority, Shapes::ShapeRef.new(shape: String, location_name: "Priority"))
     Rule.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleConditionList, location_name: "Conditions"))
@@ -717,6 +767,8 @@ module Aws::ElasticLoadBalancingV2
 
     RuleConditionList.member = Shapes::ShapeRef.new(shape: RuleCondition)
 
+    RuleNotFoundException.struct_class = Types::RuleNotFoundException
+
     RulePriorityList.member = Shapes::ShapeRef.new(shape: RulePriorityPair)
 
     RulePriorityPair.add_member(:rule_arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "RuleArn"))
@@ -724,6 +776,8 @@ module Aws::ElasticLoadBalancingV2
     RulePriorityPair.struct_class = Types::RulePriorityPair
 
     Rules.member = Shapes::ShapeRef.new(shape: Rule)
+
+    SSLPolicyNotFoundException.struct_class = Types::SSLPolicyNotFoundException
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -776,6 +830,8 @@ module Aws::ElasticLoadBalancingV2
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)
 
+    SubnetNotFoundException.struct_class = Types::SubnetNotFoundException
+
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
@@ -819,6 +875,8 @@ module Aws::ElasticLoadBalancingV2
 
     TargetGroupArns.member = Shapes::ShapeRef.new(shape: TargetGroupArn)
 
+    TargetGroupAssociationLimitException.struct_class = Types::TargetGroupAssociationLimitException
+
     TargetGroupAttribute.add_member(:key, Shapes::ShapeRef.new(shape: TargetGroupAttributeKey, location_name: "Key"))
     TargetGroupAttribute.add_member(:value, Shapes::ShapeRef.new(shape: TargetGroupAttributeValue, location_name: "Value"))
     TargetGroupAttribute.struct_class = Types::TargetGroupAttribute
@@ -828,6 +886,8 @@ module Aws::ElasticLoadBalancingV2
     TargetGroupList.member = Shapes::ShapeRef.new(shape: TargetGroupTuple)
 
     TargetGroupNames.member = Shapes::ShapeRef.new(shape: TargetGroupName)
+
+    TargetGroupNotFoundException.struct_class = Types::TargetGroupNotFoundException
 
     TargetGroupStickinessConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: TargetGroupStickinessEnabled, location_name: "Enabled"))
     TargetGroupStickinessConfig.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: TargetGroupStickinessDurationSeconds, location_name: "DurationSeconds"))
@@ -850,6 +910,28 @@ module Aws::ElasticLoadBalancingV2
     TargetHealthDescription.struct_class = Types::TargetHealthDescription
 
     TargetHealthDescriptions.member = Shapes::ShapeRef.new(shape: TargetHealthDescription)
+
+    TooManyActionsException.struct_class = Types::TooManyActionsException
+
+    TooManyCertificatesException.struct_class = Types::TooManyCertificatesException
+
+    TooManyListenersException.struct_class = Types::TooManyListenersException
+
+    TooManyLoadBalancersException.struct_class = Types::TooManyLoadBalancersException
+
+    TooManyRegistrationsForTargetIdException.struct_class = Types::TooManyRegistrationsForTargetIdException
+
+    TooManyRulesException.struct_class = Types::TooManyRulesException
+
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    TooManyTargetGroupsException.struct_class = Types::TooManyTargetGroupsException
+
+    TooManyTargetsException.struct_class = Types::TooManyTargetsException
+
+    TooManyUniqueTargetGroupsPerLoadBalancerException.struct_class = Types::TooManyUniqueTargetGroupsPerLoadBalancerException
+
+    UnsupportedProtocolException.struct_class = Types::UnsupportedProtocolException
 
 
     # @api private
@@ -914,6 +996,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
+        o.errors << Shapes::ShapeRef.new(shape: ALPNPolicyNotSupportedException)
       end)
 
       api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -1164,6 +1247,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: TooManyActionsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerActionException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUniqueTargetGroupsPerLoadBalancerException)
+        o.errors << Shapes::ShapeRef.new(shape: ALPNPolicyNotSupportedException)
       end)
 
       api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|

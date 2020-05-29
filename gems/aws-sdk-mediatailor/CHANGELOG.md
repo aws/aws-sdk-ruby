@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2020-04-16)
+------------------
+
+* Feature - AWS Elemental MediaTailor SDK now allows configuration of Avail Suppression.
+
+1.24.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2020-02-14)
+------------------
+
+* Feature - AWS Elemental MediaTailor SDK now allows configuration of Personalization Threshold for HLS and DASH streams.
+
 1.22.0 (2019-11-26)
 ------------------
 

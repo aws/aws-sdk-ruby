@@ -24,17 +24,20 @@ require_relative 'aws-sdk-swf/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     swf = Aws::SWF::Client.new
+#     resp = swf.count_closed_workflow_executions(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Simple Workflow Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Simple Workflow Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SWF::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Simple Workflow Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-swf/customizations'
 # @service
 module Aws::SWF
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.20.0'
 
 end

@@ -252,6 +252,13 @@ module Aws::Snowball
     # @!attribute [rw] snowball_type
     #   The type of AWS Snowball device to use for this cluster. Currently,
     #   the only supported device type for cluster jobs is `EDGE`.
+    #
+    #   For more information, see [Snowball Edge Device Options][1] in the
+    #   Snowball Edge Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -299,6 +306,10 @@ module Aws::Snowball
     #   in most regions.
     #   @return [String]
     #
+    # @!attribute [rw] tax_documents
+    #   The tax documents required in your AWS Region.
+    #   @return [Types::TaxDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterMetadata AWS API Documentation
     #
     class ClusterMetadata < Struct.new(
@@ -314,7 +325,8 @@ module Aws::Snowball
       :address_id,
       :shipping_option,
       :notification,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents)
       include Aws::Structure
     end
 
@@ -421,7 +433,7 @@ module Aws::Snowball
     #         address_id: "AddressId", # required
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN", # required
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
     #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -429,6 +441,11 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         forwarding_address_id: "AddressId",
+    #         tax_documents: {
+    #           ind: {
+    #             gstin: "GSTIN",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] job_type
@@ -474,6 +491,13 @@ module Aws::Snowball
     # @!attribute [rw] snowball_type
     #   The type of AWS Snowball device to use for this cluster. Currently,
     #   the only supported device type for cluster jobs is `EDGE`.
+    #
+    #   For more information, see [Snowball Edge Device Options][1] in the
+    #   Snowball Edge Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
     #   @return [String]
     #
     # @!attribute [rw] shipping_option
@@ -507,6 +531,10 @@ module Aws::Snowball
     #   in most regions.
     #   @return [String]
     #
+    # @!attribute [rw] tax_documents
+    #   The tax documents required in your AWS Region.
+    #   @return [Types::TaxDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -519,7 +547,8 @@ module Aws::Snowball
       :snowball_type,
       :shipping_option,
       :notification,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents)
       include Aws::Structure
     end
 
@@ -570,7 +599,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         kms_key_arn: "KmsKeyARN",
     #         role_arn: "RoleARN",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         notification: {
     #           sns_topic_arn: "SnsTopicARN",
@@ -578,8 +607,13 @@ module Aws::Snowball
     #           notify_all: false,
     #         },
     #         cluster_id: "ClusterId",
-    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
+    #         snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG, EDGE_S
     #         forwarding_address_id: "AddressId",
+    #         tax_documents: {
+    #           ind: {
+    #             gstin: "GSTIN",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] job_type
@@ -669,12 +703,23 @@ module Aws::Snowball
     # @!attribute [rw] snowball_type
     #   The type of AWS Snowball device to use for this job. Currently, the
     #   only supported device type for cluster jobs is `EDGE`.
+    #
+    #   For more information, see [Snowball Edge Device Options][1] in the
+    #   Snowball Edge Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
     #   @return [String]
     #
     # @!attribute [rw] forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
     #   most regions.
     #   @return [String]
+    #
+    # @!attribute [rw] tax_documents
+    #   The tax documents required in your AWS Region.
+    #   @return [Types::TaxDocuments]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest AWS API Documentation
     #
@@ -690,7 +735,8 @@ module Aws::Snowball
       :notification,
       :cluster_id,
       :snowball_type,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents)
       include Aws::Structure
     end
 
@@ -1065,6 +1111,27 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # The tax documents required in AWS Regions in India.
+    #
+    # @note When making an API call, you may pass INDTaxDocuments
+    #   data as a hash:
+    #
+    #       {
+    #         gstin: "GSTIN",
+    #       }
+    #
+    # @!attribute [rw] gstin
+    #   The Goods and Services Tax (GST) documents required in AWS Regions
+    #   in India.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/INDTaxDocuments AWS API Documentation
+    #
+    class INDTaxDocuments < Struct.new(
+      :gstin)
+      include Aws::Structure
+    end
+
     # The address provided was invalid. Check the address with your
     # region's carrier, and try again.
     #
@@ -1341,6 +1408,11 @@ module Aws::Snowball
     #   most regions.
     #   @return [String]
     #
+    # @!attribute [rw] tax_documents
+    #   The metadata associated with the tax documents required in your AWS
+    #   Region.
+    #   @return [Types::TaxDocuments]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
     #
     class JobMetadata < Struct.new(
@@ -1360,7 +1432,8 @@ module Aws::Snowball
       :data_transfer_progress,
       :job_log_info,
       :cluster_id,
-      :forwarding_address_id)
+      :forwarding_address_id,
+      :tax_documents)
       include Aws::Structure
     end
 
@@ -1842,6 +1915,28 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # The tax documents required in your AWS Region.
+    #
+    # @note When making an API call, you may pass TaxDocuments
+    #   data as a hash:
+    #
+    #       {
+    #         ind: {
+    #           gstin: "GSTIN",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ind
+    #   The tax documents required in AWS Regions in India.
+    #   @return [Types::INDTaxDocuments]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/TaxDocuments AWS API Documentation
+    #
+    class TaxDocuments < Struct.new(
+      :ind)
+      include Aws::Structure
+    end
+
     # The address is either outside the serviceable area for your region, or
     # an error occurred. Check the address with your region's carrier and
     # try again. If the issue persists, contact AWS Support.
@@ -2001,7 +2096,7 @@ module Aws::Snowball
     #         address_id: "AddressId",
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
-    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, NoPreference
+    #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, T42, T98, NoPreference
     #         forwarding_address_id: "AddressId",
     #       }
     #

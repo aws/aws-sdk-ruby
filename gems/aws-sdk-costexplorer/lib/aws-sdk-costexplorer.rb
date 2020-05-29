@@ -24,17 +24,20 @@ require_relative 'aws-sdk-costexplorer/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cost_explorer = Aws::CostExplorer::Client.new
+#     resp = cost_explorer.create_cost_category_definition(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Cost Explorer Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Cost Explorer Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CostExplorer::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Cost Explorer Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-costexplorer/customizations'
 # @service
 module Aws::CostExplorer
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.42.0'
 
 end

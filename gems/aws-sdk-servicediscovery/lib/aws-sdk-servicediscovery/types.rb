@@ -46,7 +46,12 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. To get the status of the operation, see GetOperation.
+    #   successfully. To get the status of the operation, see
+    #   [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespaceResponse AWS API Documentation
@@ -104,7 +109,12 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. To get the status of the operation, see GetOperation.
+    #   successfully. To get the status of the operation, see
+    #   [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespaceResponse AWS API Documentation
@@ -152,7 +162,12 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. To get the status of the operation, see GetOperation.
+    #   successfully. To get the status of the operation, see
+    #   [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespaceResponse AWS API Documentation
@@ -192,6 +207,24 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] name
     #   The name that you want to assign to the service.
+    #
+    #   If you want AWS Cloud Map to create an SRV record when you register
+    #   an instance, and if you're using a system that requires a specific
+    #   SRV format, such as [HAProxy][1], specify the following for `Name`\:
+    #
+    #   * Start the name with an underscore (\_), such as `_exampleservice`
+    #
+    #   * End the name with *.\_protocol*, such as `._tcp`
+    #
+    #   When you register an instance, AWS Cloud Map creates an SRV record
+    #   and assigns a name to the record by concatenating the service name
+    #   and the namespace name, for example:
+    #
+    #   `_exampleservice._tcp.example.com`
+    #
+    #
+    #
+    #   [1]: http://www.haproxy.org/
     #   @return [String]
     #
     # @!attribute [rw] namespace_id
@@ -219,10 +252,11 @@ module Aws::ServiceDiscovery
     #   @return [Types::DnsConfig]
     #
     # @!attribute [rw] health_check_config
-    #   *Public DNS namespaces only.* A complex type that contains settings
-    #   for an optional Route 53 health check. If you specify settings for a
-    #   health check, AWS Cloud Map associates the health check with all the
-    #   Route 53 DNS records that you specify in `DnsConfig`.
+    #   *Public DNS and HTTP namespaces only.* A complex type that contains
+    #   settings for an optional Route 53 health check. If you specify
+    #   settings for a health check, AWS Cloud Map associates the health
+    #   check with all the Route 53 DNS records that you specify in
+    #   `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -241,6 +275,9 @@ module Aws::ServiceDiscovery
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
+    #
+    #   You can't add, update, or delete a `HealthCheckCustomConfig`
+    #   configuration from an existing service.
     #   @return [Types::HealthCheckCustomConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateServiceRequest AWS API Documentation
@@ -300,7 +337,12 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. To get the status of the operation, see GetOperation.
+    #   successfully. To get the status of the operation, see
+    #   [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeleteNamespaceResponse AWS API Documentation
@@ -345,8 +387,12 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The value that you specified for `Id` in the RegisterInstance
+    #   The value that you specified for `Id` in the [RegisterInstance][1]
     #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstanceRequest AWS API Documentation
@@ -359,7 +405,11 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. For more information, see GetOperation.
+    #   successfully. For more information, see [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DeregisterInstanceResponse AWS API Documentation
@@ -393,9 +443,10 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of instances that you want Cloud Map to return in
-    #   the response to a `DiscoverInstances` request. If you don't specify
-    #   a value for `MaxResults`, Cloud Map returns up to 100 instances.
+    #   The maximum number of instances that you want AWS Cloud Map to
+    #   return in the response to a `DiscoverInstances` request. If you
+    #   don't specify a value for `MaxResults`, AWS Cloud Map returns up to
+    #   100 instances.
     #   @return [Integer]
     #
     # @!attribute [rw] query_parameters
@@ -509,8 +560,8 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted
     #   @return [String]
     #
     # @!attribute [rw] dns_records
@@ -585,25 +636,25 @@ module Aws::ServiceDiscovery
     #
     # @!attribute [rw] type
     #   The type of the resource, which indicates the type of value that
-    #   Route 53 returns in response to DNS queries.
+    #   Route 53 returns in response to DNS queries. You can specify values
+    #   for `Type` in the following combinations:
     #
-    #   Note the following:
+    #   * A
     #
-    #   * **A, AAAA, and SRV records:** You can specify settings for a
-    #     maximum of one A, one AAAA, and one SRV record. You can specify
-    #     them in any combination.
+    #   * AAAA
     #
-    #   * **CNAME records:** If you specify `CNAME` for `Type`, you can't
-    #     define any other records. This is a limitation of DNS: you can't
-    #     create a CNAME record and any other type of record that has the
-    #     same name as a CNAME record.
+    #   * A and AAAA
     #
-    #   * **Alias records:** If you want AWS Cloud Map to create a Route 53
-    #     alias record when you register an instance, specify `A` or `AAAA`
-    #     for `Type`.
+    #   * SRV
     #
-    #   * **All records:** You specify settings other than `TTL` and `Type`
-    #     when you register an instance.
+    #   * CNAME
+    #
+    #   If you want AWS Cloud Map to create a Route 53 alias record when you
+    #   register an instance, specify `A` or `AAAA` for `Type`.
+    #
+    #   You specify other settings, such as the IP address for A and AAAA
+    #   records, when you register an instance. For more information, see
+    #   [RegisterInstance][1].
     #
     #   The following values are supported:
     #
@@ -624,7 +675,7 @@ module Aws::ServiceDiscovery
     #
     #   * You specify the domain name that you want to route traffic to when
     #     you register an instance. For more information, see
-    #     RegisterInstanceRequest$Attributes.
+    #     [Attributes][2] in the topic [RegisterInstance][1].
     #
     #   * You must specify `WEIGHTED` for the value of `RoutingPolicy`.
     #
@@ -645,8 +696,8 @@ module Aws::ServiceDiscovery
     #     can't be changed.
     #
     #   * The value of `port` comes from the value that you specify for the
-    #     `AWS_INSTANCE_PORT` attribute when you submit a RegisterInstance
-    #     request.
+    #     `AWS_INSTANCE_PORT` attribute when you submit a
+    #     [RegisterInstance][1] request.
     #
     #   * The value of `service-hostname` is a concatenation of the
     #     following values:
@@ -664,11 +715,24 @@ module Aws::ServiceDiscovery
     #
     #     `test.backend.example.com`
     #
-    #   If you specify settings for an SRV record and if you specify values
-    #   for `AWS_INSTANCE_IPV4`, `AWS_INSTANCE_IPV6`, or both in the
-    #   `RegisterInstance` request, AWS Cloud Map automatically creates `A`
-    #   and/or `AAAA` records that have the same name as the value of
-    #   `service-hostname` in the SRV record. You can ignore these records.
+    #   If you specify settings for an SRV record, note the following:
+    #
+    #   * If you specify values for `AWS_INSTANCE_IPV4`,
+    #     `AWS_INSTANCE_IPV6`, or both in the `RegisterInstance` request,
+    #     AWS Cloud Map automatically creates `A` and/or `AAAA` records that
+    #     have the same name as the value of `service-hostname` in the SRV
+    #     record. You can ignore these records.
+    #
+    #   * If you're using a system that requires a specific SRV format,
+    #     such as HAProxy, see the [Name][3] element in the documentation
+    #     about `CreateService` for information about how to specify the
+    #     correct name format.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html
+    #   [2]: https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html#cloudmap-RegisterInstance-request-Attributes
+    #   [3]: https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html#cloudmap-CreateService-request-Name
     #   @return [String]
     #
     # @!attribute [rw] ttl
@@ -678,11 +742,15 @@ module Aws::ServiceDiscovery
     #   <note markdown="1"> Alias records don't include a TTL because Route 53 uses the TTL for
     #   the AWS resource that an alias record routes traffic to. If you
     #   include the `AWS_ALIAS_DNS_NAME` attribute when you submit a
-    #   RegisterInstance request, the `TTL` value is ignored. Always specify
-    #   a TTL for the service; you can use a service to register instances
-    #   that create either alias or non-alias records.
+    #   [RegisterInstance][1] request, the `TTL` value is ignored. Always
+    #   specify a TTL for the service; you can use a service to register
+    #   instances that create either alias or non-alias records.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsRecord AWS API Documentation
@@ -767,9 +835,13 @@ module Aws::ServiceDiscovery
     #   all the instances that are associated with the specified service.
     #
     #   <note markdown="1"> To get the IDs for the instances that you've registered by using a
-    #   specified service, submit a ListInstances request.
+    #   specified service, submit a [ListInstances][1] request.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -907,10 +979,10 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # *Public DNS namespaces only.* A complex type that contains settings
-    # for an optional health check. If you specify settings for a health
-    # check, AWS Cloud Map associates the health check with the records that
-    # you specify in `DnsConfig`.
+    # *Public DNS and HTTP namespaces only.* A complex type that contains
+    # settings for an optional health check. If you specify settings for a
+    # health check, AWS Cloud Map associates the health check with the
+    # records that you specify in `DnsConfig`.
     #
     # If you specify a health check configuration, you can specify either
     # `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -973,8 +1045,8 @@ module Aws::ServiceDiscovery
     #
     #
     # [1]: http://aws.amazon.com/route53/pricing/
-    # [2]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
-    # [3]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
     #
     # @note When making an API call, you may pass HealthCheckConfig
     #   data as a hash:
@@ -1015,7 +1087,7 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #   @return [String]
     #
     # @!attribute [rw] resource_path
@@ -1039,7 +1111,7 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckConfig AWS API Documentation
@@ -1069,9 +1141,9 @@ module Aws::ServiceDiscovery
     # `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
     #
     # To change the status of a custom health check, submit an
-    # `UpdateInstanceCustomHealthStatus` request. Cloud Map doesn't monitor
-    # the status of the resource, it just keeps a record of the status
-    # specified in the most recent `UpdateInstanceCustomHealthStatus`
+    # `UpdateInstanceCustomHealthStatus` request. AWS Cloud Map doesn't
+    # monitor the status of the resource, it just keeps a record of the
+    # status specified in the most recent `UpdateInstanceCustomHealthStatus`
     # request.
     #
     # Here's how custom health checks work:
@@ -1080,9 +1152,9 @@ module Aws::ServiceDiscovery
     #
     #     The failure threshold indicates the number of 30-second intervals
     #     you want AWS Cloud Map to wait between the time that your
-    #     application sends an UpdateInstanceCustomHealthStatus request and
-    #     the time that AWS Cloud Map stops routing internet traffic to the
-    #     corresponding resource.
+    #     application sends an [UpdateInstanceCustomHealthStatus][1] request
+    #     and the time that AWS Cloud Map stops routing internet traffic to
+    #     the corresponding resource.
     #
     # 2.  You register an instance.
     #
@@ -1105,7 +1177,9 @@ module Aws::ServiceDiscovery
     #     arrive during that time to change the status back to healthy, AWS
     #     Cloud Map stops routing traffic to the resource.
     #
-    # Note the following about configuring custom health checks.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_UpdateInstanceCustomHealthStatus.html
     #
     # @note When making an API call, you may pass HealthCheckCustomConfig
     #   data as a hash:
@@ -1115,18 +1189,18 @@ module Aws::ServiceDiscovery
     #       }
     #
     # @!attribute [rw] failure_threshold
-    #   The number of 30-second intervals that you want Cloud Map to wait
-    #   after receiving an `UpdateInstanceCustomHealthStatus` request before
-    #   it changes the health status of a service instance. For example,
-    #   suppose you specify a value of `2` for `FailureTheshold`, and then
-    #   your application sends an `UpdateInstanceCustomHealthStatus`
-    #   request. Cloud Map waits for approximately 60 seconds (2 x 30)
-    #   before changing the status of the service instance based on that
-    #   request.
+    #   The number of 30-second intervals that you want AWS Cloud Map to
+    #   wait after receiving an `UpdateInstanceCustomHealthStatus` request
+    #   before it changes the health status of a service instance. For
+    #   example, suppose you specify a value of `2` for `FailureTheshold`,
+    #   and then your application sends an
+    #   `UpdateInstanceCustomHealthStatus` request. AWS Cloud Map waits for
+    #   approximately 60 seconds (2 x 30) before changing the status of the
+    #   service instance based on that request.
     #
     #   Sending a second or subsequent `UpdateInstanceCustomHealthStatus`
     #   request with the same value before `FailureThreshold x 30` seconds
-    #   has passed doesn't accelerate the change. Cloud Map still waits
+    #   has passed doesn't accelerate the change. AWS Cloud Map still waits
     #   `FailureThreshold x 30` seconds after the first request to make the
     #   change.
     #   @return [Integer]
@@ -1138,9 +1212,13 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
-    # In a response to a DiscoverInstance request, `HttpInstanceSummary`
-    # contains information about one instance that matches the values that
-    # you specified in the request.
+    # In a response to a [DiscoverInstances][1] request,
+    # `HttpInstanceSummary` contains information about one instance that
+    # matches the values that you specified in the request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
     #
     # @!attribute [rw] instance_id
     #   The ID of an instance that matches the values that you specified in
@@ -1201,7 +1279,7 @@ module Aws::ServiceDiscovery
     #   * If the service that is specified by `ServiceId` includes settings
     #     for an SRV record, the value of `InstanceId` is automatically
     #     included as part of the value for the SRV record. For more
-    #     information, see DnsRecord$Type.
+    #     information, see [DnsRecord &gt; Type][1].
     #
     #   * You can use this value to update an existing instance.
     #
@@ -1219,6 +1297,10 @@ module Aws::ServiceDiscovery
     #     example.
     #
     #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -1311,11 +1393,11 @@ module Aws::ServiceDiscovery
     #   endpoint that you want Route 53 to send requests to.
     #
     #   This value is required if you specified settings for an SRV record
-    #   when you created the service.
+    #   or a Route 53 health check when you created the service.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Instance AWS API Documentation
@@ -1723,8 +1805,17 @@ module Aws::ServiceDiscovery
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the namespace. Valid values are `DNS_PUBLIC` and
-    #   `DNS_PRIVATE`.
+    #   The type of the namespace. The methods for discovering instances
+    #   depends on the value that you specify:
+    #
+    #   * `HTTP`\: Instances can be discovered only programmatically, using
+    #     the AWS Cloud Map `DiscoverInstances` API.
+    #
+    #   * `DNS_PUBLIC`\: Instances can be discovered using public DNS
+    #     queries and using the `DiscoverInstances` API.
+    #
+    #   * `DNS_PRIVATE`\: Instances can be discovered using DNS queries in
+    #     VPCs and using the `DiscoverInstances` API.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2104,7 +2195,12 @@ module Aws::ServiceDiscovery
     end
 
     # A complex type that contains information about an operation that
-    # matches the criteria that you specified in a ListOperations request.
+    # matches the criteria that you specified in a [ListOperations][1]
+    # request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html
     #
     # @!attribute [rw] id
     #   The ID for an operation.
@@ -2156,7 +2252,7 @@ module Aws::ServiceDiscovery
     #   * If the service that is specified by `ServiceId` includes settings
     #     for an SRV record, the value of `InstanceId` is automatically
     #     included as part of the value for the SRV record. For more
-    #     information, see DnsRecord$Type.
+    #     information, see [DnsRecord &gt; Type][1].
     #
     #   * You can use this value to update an existing instance.
     #
@@ -2174,6 +2270,10 @@ module Aws::ServiceDiscovery
     #     example.
     #
     #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type
     #   @return [String]
     #
     # @!attribute [rw] creator_request_id
@@ -2277,7 +2377,7 @@ module Aws::ServiceDiscovery
     #   endpoint that you want Route 53 to send requests to.
     #
     #   This value is required if you specified settings for an SRV record
-    #   when you created the service.
+    #   or a Route 53 health check when you created the service.
     #
     #   **Custom attributes**
     #
@@ -2287,7 +2387,7 @@ module Aws::ServiceDiscovery
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RegisterInstanceRequest AWS API Documentation
@@ -2302,7 +2402,12 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. To get the status of the operation, see GetOperation.
+    #   successfully. To get the status of the operation, see
+    #   [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RegisterInstanceResponse AWS API Documentation
@@ -2366,7 +2471,8 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] instance_count
     #   The number of instances that are currently associated with the
     #   service. Instances that were previously associated with the service
-    #   but that have been deleted are not included in the count.
+    #   but that have been deleted are not included in the count. The count
+    #   might not reflect pending registrations and deregistrations.
     #   @return [Integer]
     #
     # @!attribute [rw] dns_config
@@ -2376,10 +2482,10 @@ module Aws::ServiceDiscovery
     #   @return [Types::DnsConfig]
     #
     # @!attribute [rw] health_check_config
-    #   *Public DNS namespaces only.* A complex type that contains settings
-    #   for an optional health check. If you specify settings for a health
-    #   check, AWS Cloud Map associates the health check with the records
-    #   that you specify in `DnsConfig`.
+    #   *Public DNS and HTTP namespaces only.* A complex type that contains
+    #   settings for an optional health check. If you specify settings for a
+    #   health check, AWS Cloud Map associates the health check with the
+    #   records that you specify in `DnsConfig`.
     #
     #   For information about the charges for health checks, see [Amazon
     #   Route 53 Pricing][1].
@@ -2484,10 +2590,10 @@ module Aws::ServiceDiscovery
     #   @return [Types::DnsConfigChange]
     #
     # @!attribute [rw] health_check_config
-    #   *Public DNS namespaces only.* A complex type that contains settings
-    #   for an optional health check. If you specify settings for a health
-    #   check, AWS Cloud Map associates the health check with the records
-    #   that you specify in `DnsConfig`.
+    #   *Public DNS and HTTP namespaces only.* A complex type that contains
+    #   settings for an optional health check. If you specify settings for a
+    #   health check, AWS Cloud Map associates the health check with the
+    #   records that you specify in `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -2551,8 +2657,8 @@ module Aws::ServiceDiscovery
     #
     #
     #   [1]: http://aws.amazon.com/route53/pricing/
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
-    #   [3]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
     #   @return [Types::HealthCheckConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ServiceChange AWS API Documentation
@@ -2644,7 +2750,8 @@ module Aws::ServiceDiscovery
     # @!attribute [rw] instance_count
     #   The number of instances that are currently associated with the
     #   service. Instances that were previously associated with the service
-    #   but that have been deleted are not included in the count.
+    #   but that have been deleted are not included in the count. The count
+    #   might not reflect pending registrations and deregistrations.
     #   @return [Integer]
     #
     # @!attribute [rw] dns_config
@@ -2654,10 +2761,10 @@ module Aws::ServiceDiscovery
     #   @return [Types::DnsConfig]
     #
     # @!attribute [rw] health_check_config
-    #   *Public DNS namespaces only.* A complex type that contains settings
-    #   for an optional health check. If you specify settings for a health
-    #   check, AWS Cloud Map associates the health check with the records
-    #   that you specify in `DnsConfig`.
+    #   *Public DNS and HTTP namespaces only.* A complex type that contains
+    #   settings for an optional health check. If you specify settings for a
+    #   health check, AWS Cloud Map associates the health check with the
+    #   records that you specify in `DnsConfig`.
     #
     #   If you specify a health check configuration, you can specify either
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
@@ -2721,8 +2828,8 @@ module Aws::ServiceDiscovery
     #
     #
     #   [1]: http://aws.amazon.com/route53/pricing/
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
-    #   [3]: http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions
+    #   [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth
     #   @return [Types::HealthCheckConfig]
     #
     # @!attribute [rw] health_check_custom_config
@@ -2744,7 +2851,7 @@ module Aws::ServiceDiscovery
     #   `HealthCheckCustomConfig` or `HealthCheckConfig` but not both.
     #
     #   To change the status of a custom health check, submit an
-    #   `UpdateInstanceCustomHealthStatus` request. Cloud Map doesn't
+    #   `UpdateInstanceCustomHealthStatus` request. AWS Cloud Map doesn't
     #   monitor the status of the resource, it just keeps a record of the
     #   status specified in the most recent
     #   `UpdateInstanceCustomHealthStatus` request.
@@ -2755,7 +2862,7 @@ module Aws::ServiceDiscovery
     #
     #       The failure threshold indicates the number of 30-second
     #       intervals you want AWS Cloud Map to wait between the time that
-    #       your application sends an UpdateInstanceCustomHealthStatus
+    #       your application sends an [UpdateInstanceCustomHealthStatus][1]
     #       request and the time that AWS Cloud Map stops routing internet
     #       traffic to the corresponding resource.
     #
@@ -2781,7 +2888,9 @@ module Aws::ServiceDiscovery
     #       arrive during that time to change the status back to healthy,
     #       AWS Cloud Map stops routing traffic to the resource.
     #
-    #   Note the following about configuring custom health checks.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_UpdateInstanceCustomHealthStatus.html
     #   @return [Types::HealthCheckCustomConfig]
     #
     # @!attribute [rw] create_date
@@ -2876,7 +2985,12 @@ module Aws::ServiceDiscovery
 
     # @!attribute [rw] operation_id
     #   A value that you can use to determine whether the request completed
-    #   successfully. To get the status of the operation, see GetOperation.
+    #   successfully. To get the status of the operation, see
+    #   [GetOperation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateServiceResponse AWS API Documentation

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-frauddetector/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     fraud_detector = Aws::FraudDetector::Client.new
+#     resp = fraud_detector.batch_create_variable(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Fraud Detector all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Fraud Detector are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::FraudDetector::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Fraud Detector API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-frauddetector/customizations'
 # @service
 module Aws::FraudDetector
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.4.0'
 
 end

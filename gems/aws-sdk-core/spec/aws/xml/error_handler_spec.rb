@@ -103,7 +103,7 @@ module Aws
       XML
 
       it 'extracts code and message for empty struct errors' do
-        stub_request(:post, "https://cloudfront.amazonaws.com/2018-11-05/distribution").
+        stub_request(:post, 'https://cloudfront.amazonaws.com/2018-11-05/distribution').
           to_return(:status => 400, :body => empty_struct_error)
         expect {
           cloudfront.create_distribution(
@@ -116,11 +116,11 @@ module Aws
       end
 
       it 'extracts code and message for unmodeled errors' do
-        stub_request(:post, "https://cloudfront.amazonaws.com/2018-11-05/origin-access-identity/cloudfront").
+        stub_request(:post, 'https://cloudfront.amazonaws.com/2018-11-05/origin-access-identity/cloudfront').
           to_return(:status => 400, :body => unmodeled_error)
-        msg = "1 validation error detected: Value null at"\
-          " 'cloudFrontOriginAccessIdentityConfig' failed to satisfy"\
-          " constraint: Member must not be null"
+        msg = '1 validation error detected: Value null at'\
+              ' \'cloudFrontOriginAccessIdentityConfig\' failed to satisfy'\
+              ' constraint: Member must not be null'
         expect {
           cloudfront.create_cloud_front_origin_access_identity(
             cloud_front_origin_access_identity_config: {
@@ -135,36 +135,37 @@ module Aws
       end
 
       it 'handles route53 error format with message' do
-        stub_request(:post, "https://route53.amazonaws.com/2013-04-01/hostedzone//rrset/").
+        stub_request(:post, 'https://route53.amazonaws.com/2013-04-01/hostedzone/ResourceId/rrset/').
           to_return(:status => 400, :body => route53_error)
         expect {
-          route53.change_resource_record_sets
+          route53.change_resource_record_sets(hosted_zone_id: 'ResourceId')
         }.to raise_error { |error|
-          expected_msg = "Tried to create resource record set "\
-            "duplicate.example.com. type A, but it already exists"
+          expected_msg =
+            'Tried to create resource record set '\
+            'duplicate.example.com. type A, but it already exists'
           expect(error.message).to eq(expected_msg)
         }
       end
 
       it 'supports unmodeled `ec2-query` error' do
-        stub_request(:post, "https://ec2.us-west-2.amazonaws.com/").
+        stub_request(:post, 'https://ec2.us-west-2.amazonaws.com/').
           to_return(:status => 400, :body => ec2_error)
         expect {
           ec2.create_subnet
         }.to raise_error { |error|
-          expect(error.code).to eq("InvalidRequest")
-          expect(error.message).to eq("Required parameter 'AvailabilityZone' is not provided.")
+          expect(error.code).to eq('InvalidRequest')
+          expect(error.message).to eq('Required parameter \'AvailabilityZone\' is not provided.')
         }
       end
 
       it 'supports modeled query error' do
-        stub_request(:post, "https://sns.us-west-2.amazonaws.com/").
+        stub_request(:post, 'https://sns.us-west-2.amazonaws.com/').
           to_return(:status => 400, :body => query_error)
         expect {
           sns.create_topic
         }.to raise_error { |error|
-          expect(error.code).to eq("InvalidParameter")
-          expect(error.message).to eq("Invalid parameter: TopicArn Reason: no value for required parameter")
+          expect(error.code).to eq('InvalidParameter')
+          expect(error.message).to eq('Invalid parameter: TopicArn Reason: no value for required parameter')
         }
       end
     end

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-elasticinference/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elastic_inference = Aws::ElasticInference::Client.new
+#     resp = elastic_inference.describe_accelerator_offerings(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Elastic  Inference all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Elastic  Inference are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElasticInference::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Elastic  Inference API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-elasticinference/customizations'
 # @service
 module Aws::ElasticInference
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.5.0'
 
 end

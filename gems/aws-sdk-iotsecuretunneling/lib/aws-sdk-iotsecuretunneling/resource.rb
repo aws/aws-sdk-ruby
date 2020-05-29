@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoTSecureTunneling
+
   class Resource
 
     # @param options ({})

@@ -25,17 +25,20 @@ require_relative 'aws-sdk-ecr/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ecr = Aws::ECR::Client.new
+#     resp = ecr.batch_check_layer_availability(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon EC2 Container Registry all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon EC2 Container Registry are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ECR::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon EC2 Container Registry API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-ecr/customizations'
 # @service
 module Aws::ECR
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.30.0'
 
 end

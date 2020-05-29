@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/query.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:elasticbeanstalk)
 
 module Aws::ElasticBeanstalk
+  # An API client for ElasticBeanstalk.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::ElasticBeanstalk::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::ElasticBeanstalk
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::ElasticBeanstalk
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::ElasticBeanstalk
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::ElasticBeanstalk
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::ElasticBeanstalk
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::ElasticBeanstalk
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::ElasticBeanstalk
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::ElasticBeanstalk
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::ElasticBeanstalk
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -472,17 +526,13 @@ module Aws::ElasticBeanstalk
     # `default` and no application versions.
     #
     # @option params [required, String] :application_name
-    #   The name of the application.
-    #
-    #   Constraint: This name must be unique within your account. If the
-    #   specified name already exists, the action returns an
-    #   `InvalidParameterValue` error.
+    #   The name of the application. Must be unique within your account.
     #
     # @option params [String] :description
-    #   Describes the application.
+    #   Your description of the application.
     #
     # @option params [Types::ApplicationResourceLifecycleConfig] :resource_lifecycle_config
-    #   Specify an application resource lifecycle configuration to prevent
+    #   Specifies an application resource lifecycle configuration to prevent
     #   your application from accumulating too many versions.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -590,8 +640,8 @@ module Aws::ElasticBeanstalk
     # Omit both `SourceBuildInformation` and `SourceBundle` to use the
     # default sample application.
     #
-    # <note markdown="1"> Once you create an application version with a specified Amazon S3
-    # bucket and key location, you cannot change that Amazon S3 location. If
+    # <note markdown="1"> After you create an application version with a specified Amazon S3
+    # bucket and key location, you can't change that Amazon S3 location. If
     # you change the Amazon S3 location, you receive an exception when you
     # attempt to launch an environment from the application version.
     #
@@ -610,7 +660,7 @@ module Aws::ElasticBeanstalk
     #   Elastic Beanstalk returns an `InvalidParameterValue` error.
     #
     # @option params [String] :description
-    #   Describes this version.
+    #   A description of this application version.
     #
     # @option params [Types::SourceBuildInformation] :source_build_information
     #   Specify a commit in an AWS CodeCommit Git repository to use as the
@@ -751,8 +801,10 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Creates a configuration template. Templates are associated with a
-    # specific application and are used to deploy different versions of the
+    # Creates an AWS Elastic Beanstalk configuration template, associated
+    # with a specific Elastic Beanstalk application. You define application
+    # configuration settings in a configuration template. You can then use
+    # the configuration template to deploy different versions of the
     # application with the same configuration settings.
     #
     # Templates aren't associated with any environment. The
@@ -767,64 +819,80 @@ module Aws::ElasticBeanstalk
     # * ListAvailableSolutionStacks
     #
     # @option params [required, String] :application_name
-    #   The name of the application to associate with this configuration
-    #   template. If no application is found with this name, AWS Elastic
-    #   Beanstalk returns an `InvalidParameterValue` error.
+    #   The name of the Elastic Beanstalk application to associate with this
+    #   configuration template.
     #
     # @option params [required, String] :template_name
     #   The name of the configuration template.
     #
     #   Constraint: This name must be unique per application.
     #
-    #   Default: If a configuration template already exists with this name,
-    #   AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
-    #
     # @option params [String] :solution_stack_name
-    #   The name of the solution stack used by this configuration. The
-    #   solution stack specifies the operating system, architecture, and
-    #   application server for a configuration template. It determines the set
-    #   of configuration options as well as the possible and default values.
+    #   The name of an Elastic Beanstalk solution stack (platform version)
+    #   that this configuration uses. For example, `64bit Amazon Linux 2013.09
+    #   running Tomcat 7 Java 7`. A solution stack specifies the operating
+    #   system, runtime, and application server for a configuration template.
+    #   It also determines the set of configuration options as well as the
+    #   possible and default values. For more information, see [Supported
+    #   Platforms][1] in the *AWS Elastic Beanstalk Developer Guide*.
     #
-    #   Use ListAvailableSolutionStacks to obtain a list of available solution
-    #   stacks.
+    #   You must specify `SolutionStackName` if you don't specify
+    #   `PlatformArn`, `EnvironmentId`, or `SourceConfiguration`.
     #
-    #   A solution stack name or a source configuration parameter must be
-    #   specified, otherwise AWS Elastic Beanstalk returns an
-    #   `InvalidParameterValue` error.
+    #   Use the [ `ListAvailableSolutionStacks` ][2] API to obtain a list of
+    #   available solution stacks.
     #
-    #   If a solution stack name is not specified and the source configuration
-    #   parameter is specified, AWS Elastic Beanstalk uses the same solution
-    #   stack as the source configuration template.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #   [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_ListAvailableSolutionStacks.html
     #
     # @option params [String] :platform_arn
-    #   The ARN of the custom platform.
+    #   The Amazon Resource Name (ARN) of the custom platform. For more
+    #   information, see [ Custom Platforms][1] in the *AWS Elastic Beanstalk
+    #   Developer Guide*.
+    #
+    #   <note markdown="1"> If you specify `PlatformArn`, then don't specify `SolutionStackName`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html
     #
     # @option params [Types::SourceConfiguration] :source_configuration
-    #   If specified, AWS Elastic Beanstalk uses the configuration values from
-    #   the specified configuration template to create a new configuration.
+    #   An Elastic Beanstalk configuration template to base this one on. If
+    #   specified, Elastic Beanstalk uses the configuration values from the
+    #   specified configuration template to create a new configuration.
     #
-    #   Values specified in the `OptionSettings` parameter of this call
-    #   overrides any values obtained from the `SourceConfiguration`.
+    #   Values specified in `OptionSettings` override any values obtained from
+    #   the `SourceConfiguration`.
     #
-    #   If no configuration template is found, returns an
-    #   `InvalidParameterValue` error.
+    #   You must specify `SourceConfiguration` if you don't specify
+    #   `PlatformArn`, `EnvironmentId`, or `SolutionStackName`.
     #
-    #   Constraint: If both the solution stack name parameter and the source
-    #   configuration parameters are specified, the solution stack of the
-    #   source configuration template must match the specified solution stack
-    #   name or else AWS Elastic Beanstalk returns an
-    #   `InvalidParameterCombination` error.
+    #   Constraint: If both solution stack name and source configuration are
+    #   specified, the solution stack of the source configuration template
+    #   must match the specified solution stack name.
     #
     # @option params [String] :environment_id
-    #   The ID of the environment used with this configuration template.
+    #   The ID of an environment whose settings you want to use to create the
+    #   configuration template. You must specify `EnvironmentId` if you don't
+    #   specify `PlatformArn`, `SolutionStackName`, or `SourceConfiguration`.
     #
     # @option params [String] :description
-    #   Describes this configuration.
+    #   An optional description for this configuration.
     #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
-    #   If specified, AWS Elastic Beanstalk sets the specified configuration
-    #   option to the requested value. The new value overrides the value
-    #   obtained from the solution stack or the source configuration template.
+    #   Option values for the Elastic Beanstalk configuration, such as the
+    #   instance type. If specified, these values override the values obtained
+    #   from the solution stack or the source configuration template. For a
+    #   complete list of Elastic Beanstalk configuration options, see [Option
+    #   Values][1] in the *AWS Elastic Beanstalk Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Specifies the tags applied to the configuration template.
@@ -918,28 +986,24 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Launches an environment for the specified application using the
-    # specified configuration.
+    # Launches an AWS Elastic Beanstalk environment for the specified
+    # application using the specified configuration.
     #
     # @option params [required, String] :application_name
-    #   The name of the application that contains the version to be deployed.
-    #
-    #   If no application is found with this name, `CreateEnvironment` returns
-    #   an `InvalidParameterValue` error.
+    #   The name of the application that is associated with this environment.
     #
     # @option params [String] :environment_name
-    #   A unique name for the deployment environment. Used in the application
-    #   URL.
+    #   A unique name for the environment.
     #
     #   Constraint: Must be from 4 to 40 characters in length. The name can
-    #   contain only letters, numbers, and hyphens. It cannot start or end
+    #   contain only letters, numbers, and hyphens. It can't start or end
     #   with a hyphen. This name must be unique within a region in your
-    #   account. If the specified name already exists in the region, AWS
-    #   Elastic Beanstalk returns an `InvalidParameterValue` error.
+    #   account. If the specified name already exists in the region, Elastic
+    #   Beanstalk returns an `InvalidParameterValue` error.
     #
-    #   Default: If the CNAME parameter is not specified, the environment name
-    #   becomes part of the CNAME, and therefore part of the visible URL for
-    #   your application.
+    #   If you don't specify the `CNAMEPrefix` parameter, the environment
+    #   name becomes part of the CNAME, and therefore part of the visible URL
+    #   for your application.
     #
     # @option params [String] :group_name
     #   The name of the group to which the target environment belongs. Specify
@@ -952,15 +1016,20 @@ module Aws::ElasticBeanstalk
     #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [String] :description
-    #   Describes this environment.
+    #   Your description for this environment.
     #
     # @option params [String] :cname_prefix
     #   If specified, the environment attempts to use this value as the prefix
-    #   for the CNAME. If not specified, the CNAME is generated automatically
-    #   by appending a random alphanumeric string to the environment name.
+    #   for the CNAME in your Elastic Beanstalk environment URL. If not
+    #   specified, the CNAME is generated automatically by appending a random
+    #   alphanumeric string to the environment name.
     #
     # @option params [Types::EnvironmentTier] :tier
-    #   This specifies the tier to use for creating this environment.
+    #   Specifies the tier to use in creating this environment. The
+    #   environment tier that you choose determines whether Elastic Beanstalk
+    #   provisions resources to support a web application that handles HTTP(S)
+    #   requests or a web application that handles background-processing
+    #   tasks.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Specifies the tags applied to resources in the environment.
@@ -968,32 +1037,47 @@ module Aws::ElasticBeanstalk
     # @option params [String] :version_label
     #   The name of the application version to deploy.
     #
-    #   If the specified application has no associated application versions,
-    #   AWS Elastic Beanstalk `UpdateEnvironment` returns an
-    #   `InvalidParameterValue` error.
-    #
-    #   Default: If not specified, AWS Elastic Beanstalk attempts to launch
-    #   the sample application in the container.
+    #   Default: If not specified, Elastic Beanstalk attempts to deploy the
+    #   sample application.
     #
     # @option params [String] :template_name
-    #   The name of the configuration template to use in deployment. If no
-    #   configuration template is found with this name, AWS Elastic Beanstalk
-    #   returns an `InvalidParameterValue` error.
+    #   The name of the Elastic Beanstalk configuration template to use with
+    #   the environment.
+    #
+    #   <note markdown="1"> If you specify `TemplateName`, then don't specify
+    #   `SolutionStackName`.
+    #
+    #    </note>
     #
     # @option params [String] :solution_stack_name
-    #   This is an alternative to specifying a template name. If specified,
-    #   AWS Elastic Beanstalk sets the configuration values to the default
-    #   values associated with the specified solution stack.
+    #   The name of an Elastic Beanstalk solution stack (platform version) to
+    #   use with the environment. If specified, Elastic Beanstalk sets the
+    #   configuration values to the default values associated with the
+    #   specified solution stack. For a list of current solution stacks, see
+    #   [Elastic Beanstalk Supported Platforms][1] in the *AWS Elastic
+    #   Beanstalk Platforms* guide.
     #
-    #   For a list of current solution stacks, see [Elastic Beanstalk
-    #   Supported Platforms][1].
+    #   <note markdown="1"> If you specify `SolutionStackName`, don't specify `PlatformArn` or
+    #   `TemplateName`.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html
     #
     # @option params [String] :platform_arn
-    #   The ARN of the platform.
+    #   The Amazon Resource Name (ARN) of the custom platform to use with the
+    #   environment. For more information, see [ Custom Platforms][1] in the
+    #   *AWS Elastic Beanstalk Developer Guide*.
+    #
+    #   <note markdown="1"> If you specify `PlatformArn`, don't specify `SolutionStackName`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html
     #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
     #   If specified, AWS Elastic Beanstalk sets the specified configuration
@@ -1207,6 +1291,10 @@ module Aws::ElasticBeanstalk
     #   resp.platform_summary.supported_tier_list[0] #=> String
     #   resp.platform_summary.supported_addon_list #=> Array
     #   resp.platform_summary.supported_addon_list[0] #=> String
+    #   resp.platform_summary.platform_lifecycle_state #=> String
+    #   resp.platform_summary.platform_version #=> String
+    #   resp.platform_summary.platform_branch_name #=> String
+    #   resp.platform_summary.platform_branch_lifecycle_state #=> String
     #   resp.builder.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersion AWS API Documentation
@@ -1460,6 +1548,10 @@ module Aws::ElasticBeanstalk
     #   resp.platform_summary.supported_tier_list[0] #=> String
     #   resp.platform_summary.supported_addon_list #=> Array
     #   resp.platform_summary.supported_addon_list[0] #=> String
+    #   resp.platform_summary.platform_lifecycle_state #=> String
+    #   resp.platform_summary.platform_version #=> String
+    #   resp.platform_summary.platform_branch_name #=> String
+    #   resp.platform_summary.platform_branch_lifecycle_state #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersion AWS API Documentation
     #
@@ -2423,7 +2515,9 @@ module Aws::ElasticBeanstalk
     #   descriptions to those associated with this environment.
     #
     # @option params [String] :platform_arn
-    #   The ARN of the version of the custom platform.
+    #   The ARN of a custom platform version. If specified, AWS Elastic
+    #   Beanstalk restricts the returned descriptions to those associated with
+    #   this custom platform version.
     #
     # @option params [String] :request_id
     #   If specified, AWS Elastic Beanstalk restricts the described events to
@@ -2454,6 +2548,8 @@ module Aws::ElasticBeanstalk
     #
     #   * {Types::EventDescriptionsMessage#events #events} => Array&lt;Types::EventDescription&gt;
     #   * {Types::EventDescriptionsMessage#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To view events for an environment
@@ -2692,10 +2788,19 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Describes the version of the platform.
+    # Describes a platform version. Provides full details. Compare to
+    # ListPlatformVersions, which provides summary information about a list
+    # of platform versions.
+    #
+    # For definitions of platform version and other platform-related terms,
+    # see [AWS Elastic Beanstalk Platforms Glossary][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
     #
     # @option params [String] :platform_arn
-    #   The ARN of the version of the platform.
+    #   The ARN of the platform version.
     #
     # @return [Types::DescribePlatformVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2735,6 +2840,9 @@ module Aws::ElasticBeanstalk
     #   resp.platform_description.supported_tier_list[0] #=> String
     #   resp.platform_description.supported_addon_list #=> Array
     #   resp.platform_description.supported_addon_list[0] #=> String
+    #   resp.platform_description.platform_lifecycle_state #=> String
+    #   resp.platform_description.platform_branch_name #=> String
+    #   resp.platform_description.platform_branch_lifecycle_state #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersion AWS API Documentation
     #
@@ -2822,18 +2930,133 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Lists the available platforms.
+    # Lists the platform branches available for your account in an AWS
+    # Region. Provides summary information about each platform branch.
     #
-    # @option params [Array<Types::PlatformFilter>] :filters
-    #   List only the platforms where the platform member value relates to one
-    #   of the supplied values.
+    # For definitions of platform branch and other platform-related terms,
+    # see [AWS Elastic Beanstalk Platforms Glossary][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+    #
+    # @option params [Array<Types::SearchFilter>] :filters
+    #   Criteria for restricting the resulting list of platform branches. The
+    #   filter is evaluated as a logical conjunction (AND) of the separate
+    #   `SearchFilter` terms.
+    #
+    #   The following list shows valid attribute values for each of the
+    #   `SearchFilter` terms. Most operators take a single value. The `in` and
+    #   `not_in` operators can take multiple values.
+    #
+    #   * `Attribute = BranchName`\:
+    #
+    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #       `contains` \| `in` \| `not_in`
+    #
+    #     ^
+    #
+    #   * `Attribute = LifecycleState`\:
+    #
+    #     * `Operator`\: `=` \| `!=` \| `in` \| `not_in`
+    #
+    #     * `Values`\: `beta` \| `supported` \| `deprecated` \| `retired`
+    #
+    #   * `Attribute = PlatformName`\:
+    #
+    #     * `Operator`\: `=` \| `!=` \| `begins_with` \| `ends_with` \|
+    #       `contains` \| `in` \| `not_in`
+    #
+    #     ^
+    #
+    #   * `Attribute = TierType`\:
+    #
+    #     * `Operator`\: `=` \| `!=`
+    #
+    #     * `Values`\: `WebServer/Standard` \| `Worker/SQS/HTTP`
+    #
+    #   Array size: limited to 10 `SearchFilter` objects.
+    #
+    #   Within each `SearchFilter` item, the `Values` array is limited to 10
+    #   items.
     #
     # @option params [Integer] :max_records
-    #   The maximum number of platform values returned in one call.
+    #   The maximum number of platform branch values returned in one call.
     #
     # @option params [String] :next_token
-    #   The starting index into the remaining list of platforms. Use the
-    #   `NextToken` value from a previous `ListPlatformVersion` call.
+    #   For a paginated request. Specify a token from a previous response page
+    #   to retrieve the next response page. All other parameter values must be
+    #   identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
+    #
+    # @return [Types::ListPlatformBranchesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPlatformBranchesResult#platform_branch_summary_list #platform_branch_summary_list} => Array&lt;Types::PlatformBranchSummary&gt;
+    #   * {Types::ListPlatformBranchesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_platform_branches({
+    #     filters: [
+    #       {
+    #         attribute: "SearchFilterAttribute",
+    #         operator: "SearchFilterOperator",
+    #         values: ["SearchFilterValue"],
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.platform_branch_summary_list #=> Array
+    #   resp.platform_branch_summary_list[0].platform_name #=> String
+    #   resp.platform_branch_summary_list[0].branch_name #=> String
+    #   resp.platform_branch_summary_list[0].lifecycle_state #=> String
+    #   resp.platform_branch_summary_list[0].branch_order #=> Integer
+    #   resp.platform_branch_summary_list[0].supported_tier_list #=> Array
+    #   resp.platform_branch_summary_list[0].supported_tier_list[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformBranches AWS API Documentation
+    #
+    # @overload list_platform_branches(params = {})
+    # @param [Hash] params ({})
+    def list_platform_branches(params = {}, options = {})
+      req = build_request(:list_platform_branches, params)
+      req.send_request(options)
+    end
+
+    # Lists the platform versions available for your account in an AWS
+    # Region. Provides summary information about each platform version.
+    # Compare to DescribePlatformVersion, which provides full details about
+    # a single platform version.
+    #
+    # For definitions of platform version and other platform-related terms,
+    # see [AWS Elastic Beanstalk Platforms Glossary][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+    #
+    # @option params [Array<Types::PlatformFilter>] :filters
+    #   Criteria for restricting the resulting list of platform versions. The
+    #   filter is interpreted as a logical conjunction (AND) of the separate
+    #   `PlatformFilter` terms.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of platform version values returned in one call.
+    #
+    # @option params [String] :next_token
+    #   For a paginated request. Specify a token from a previous response page
+    #   to retrieve the next response page. All other parameter values must be
+    #   identical to the ones specified in the initial request.
+    #
+    #   If no `NextToken` is specified, the first page is retrieved.
     #
     # @return [Types::ListPlatformVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2867,6 +3090,10 @@ module Aws::ElasticBeanstalk
     #   resp.platform_summary_list[0].supported_tier_list[0] #=> String
     #   resp.platform_summary_list[0].supported_addon_list #=> Array
     #   resp.platform_summary_list[0].supported_addon_list[0] #=> String
+    #   resp.platform_summary_list[0].platform_lifecycle_state #=> String
+    #   resp.platform_summary_list[0].platform_version #=> String
+    #   resp.platform_summary_list[0].platform_branch_name #=> String
+    #   resp.platform_summary_list[0].platform_branch_lifecycle_state #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersions AWS API Documentation
@@ -2878,22 +3105,22 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Returns the tags applied to an AWS Elastic Beanstalk resource. The
+    # Return the tags applied to an AWS Elastic Beanstalk resource. The
     # response contains a list of tag key-value pairs.
     #
-    # Currently, Elastic Beanstalk only supports tagging of Elastic
-    # Beanstalk environments. For details about environment tagging, see
-    # [Tagging Resources in Your Elastic Beanstalk Environment][1].
+    # Elastic Beanstalk supports tagging of all of its resources. For
+    # details about resource tagging, see [Tagging Application
+    # Resources][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce for which a tag list is
     #   requested.
     #
-    #   Must be the ARN of an Elastic Beanstalk environment.
+    #   Must be the ARN of an Elastic Beanstalk resource.
     #
     # @return [Types::ResourceTagsDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3990,9 +4217,9 @@ module Aws::ElasticBeanstalk
     # Two lists can be passed: `TagsToAdd` for tags to add or update, and
     # `TagsToRemove`.
     #
-    # Currently, Elastic Beanstalk only supports tagging of Elastic
-    # Beanstalk environments. For details about environment tagging, see
-    # [Tagging Resources in Your Elastic Beanstalk Environment][1].
+    # Elastic Beanstalk supports tagging of all of its resources. For
+    # details about resource tagging, see [Tagging Application
+    # Resources][1].
     #
     # If you create a custom IAM user policy to control permission to this
     # operation, specify one of the following two virtual actions (or both)
@@ -4013,13 +4240,13 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html
     # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce to be updated.
     #
-    #   Must be the ARN of an Elastic Beanstalk environment.
+    #   Must be the ARN of an Elastic Beanstalk resource.
     #
     # @option params [Array<Types::Tag>] :tags_to_add
     #   A list of tags to add or update.
@@ -4154,7 +4381,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

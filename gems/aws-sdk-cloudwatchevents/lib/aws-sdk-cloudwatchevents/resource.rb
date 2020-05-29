@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudWatchEvents
+
   class Resource
 
     # @param options ({})

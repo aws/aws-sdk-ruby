@@ -24,17 +24,20 @@ require_relative 'aws-sdk-lexmodelbuildingservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     lex_model_building_service = Aws::LexModelBuildingService::Client.new
+#     resp = lex_model_building_service.create_bot_version(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Lex Model Building Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Lex Model Building Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::LexModelBuildingService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Lex Model Building Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-lexmodelbuildingservice/customizations'
 # @service
 module Aws::LexModelBuildingService
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.30.0'
 
 end

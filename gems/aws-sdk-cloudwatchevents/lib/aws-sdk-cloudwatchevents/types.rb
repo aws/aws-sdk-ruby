@@ -27,7 +27,7 @@ module Aws::CloudWatchEvents
     end
 
     # This structure specifies the VPC subnets and security groups for the
-    # task and whether a public IP address is to be used. This structure is
+    # task, and whether a public IP address is to be used. This structure is
     # relevant only for ECS tasks that use the `awsvpc` network mode.
     #
     # @note When making an API call, you may pass AwsVpcConfiguration
@@ -47,7 +47,7 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] security_groups
     #   Specifies the security groups associated with the task. These
     #   security groups must all be in the same VPC. You can specify as many
-    #   as five security groups. If you don't specify a security group, the
+    #   as five security groups. If you do not specify a security group, the
     #   default security group for the VPC is used.
     #   @return [Array<String>]
     #
@@ -124,7 +124,7 @@ module Aws::CloudWatchEvents
     #   @return [Types::BatchArrayProperties]
     #
     # @!attribute [rw] retry_strategy
-    #   The retry strategy to use for failed jobs if the target is an AWS
+    #   The retry strategy to use for failed jobs, if the target is an AWS
     #   Batch job. The retry strategy is the number of times to retry the
     #   failed job execution. Valid values are 1–10. When you specify a
     #   retry strategy here, it overrides the retry strategy defined in the
@@ -141,7 +141,7 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The retry strategy to use for failed jobs if the target is an AWS
+    # The retry strategy to use for failed jobs, if the target is an AWS
     # Batch job. If you specify a retry strategy here, it overrides the
     # retry strategy defined in the job definition.
     #
@@ -164,12 +164,18 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # A JSON string that you can use to limit the event bus permissions that
-    # you're granting to only accounts that fulfill the condition.
-    # Currently, the only supported condition is membership in a certain AWS
+    # There is concurrent modification on a rule or target.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
+
+    # A JSON string which you can use to limit the event bus permissions you
+    # are granting to only accounts that fulfill the condition. Currently,
+    # the only supported condition is membership in a certain AWS
     # organization. The string must contain `Type`, `Key`, and `Value`
     # fields. The `Value` field specifies the ID of the AWS organization.
-    # The following is an example value for `Condition`\:
+    # Following is an example value for `Condition`\:
     #
     # `'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
     # "o-1234567890"\}'`
@@ -184,18 +190,18 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] type
-    #   The type of condition. Currently, the only supported value is
-    #   `StringEquals`.
+    #   Specifies the type of condition. Currently the only supported value
+    #   is `StringEquals`.
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The key for the condition. Currently, the only supported key is
-    #   `aws:PrincipalOrgID`.
+    #   Specifies the key for the condition. Currently the only supported
+    #   key is `aws:PrincipalOrgID`.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value for the key. Currently, this must be the ID of the
-    #   organization.
+    #   Specifies the value for the key. Currently, this must be the ID of
+    #   the organization.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Condition AWS API Documentation
@@ -213,30 +219,40 @@ module Aws::CloudWatchEvents
     #       {
     #         name: "EventBusName", # required
     #         event_source_name: "EventSourceName",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
     #   The name of the new event bus.
     #
-    #   The names of custom event buses can't contain the `/` character.
-    #   You can't use the name `default` for a custom event bus because
-    #   this name is already used for your account's default event bus.
+    #   Event bus names cannot contain the / character. You can't use the
+    #   name `default` for a custom event bus, as this name is already used
+    #   for your account's default event bus.
     #
     #   If this is a partner event bus, the name must exactly match the name
-    #   of the partner event source that this event bus is matched to. This
-    #   name will include the `/` character.
+    #   of the partner event source that this event bus is matched to.
     #   @return [String]
     #
     # @!attribute [rw] event_source_name
-    #   If you're creating a partner event bus, this specifies the partner
+    #   If you are creating a partner event bus, this specifies the partner
     #   event source that the new event bus will be matched with.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to associate with the event bus.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreateEventBusRequest AWS API Documentation
     #
     class CreateEventBusRequest < Struct.new(
       :name,
-      :event_source_name)
+      :event_source_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -268,8 +284,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The AWS account ID of the customer who is permitted to create a
-    #   matching partner event bus for this partner event source.
+    #   The AWS account ID that is permitted to create a matching partner
+    #   event bus for this partner event source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/CreatePartnerEventSourceRequest AWS API Documentation
@@ -460,7 +476,7 @@ module Aws::CloudWatchEvents
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
-    #   The date and time that the event source will expire if you don't
+    #   The date and time that the event source will expire if you do not
     #   create a matching event bus.
     #   @return [Time]
     #
@@ -469,12 +485,12 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the event source. If it's `ACTIVE`, you have already
+    #   The state of the event source. If it is ACTIVE, you have already
     #   created a matching event bus for this event source, and that event
-    #   bus is active. If it's `PENDING`, either you haven't yet created a
-    #   matching event bus, or that event bus is deactivated. If it's
-    #   `DELETED`, you have created a matching event bus, but the event
-    #   source has since been deleted.
+    #   bus is active. If it is PENDING, either you haven't yet created a
+    #   matching event bus, or that event bus is deactivated. If it is
+    #   DELETED, you have created a matching event bus, but the event source
+    #   has since been deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventSourceResponse AWS API Documentation
@@ -557,8 +573,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern. For more information, see [Event Patterns][1] in
-    #   the *Amazon EventBridge User Guide*.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -566,8 +582,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression: for example, `"cron(0 20 * * ? *)"` or
-    #   `"rate(5 minutes)"`.
+    #   The scheduling expression. For example, "cron(0 20 * * ? *)",
+    #   "rate(5 minutes)".
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -680,12 +696,12 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] network_configuration
     #   Use this structure if the ECS task uses the `awsvpc` network mode.
     #   This structure specifies the VPC subnets and security groups
-    #   associated with the task and whether a public IP address is to be
+    #   associated with the task, and whether a public IP address is to be
     #   used. This structure is required if `LaunchType` is `FARGATE`
     #   because the `awsvpc` mode is required for Fargate tasks.
     #
-    #   If you specify `NetworkConfiguration` when the target ECS task
-    #   doesn't use the `awsvpc` network mode, the task fails.
+    #   If you specify `NetworkConfiguration` when the target ECS task does
+    #   not use the `awsvpc` network mode, the task fails.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] platform_version
@@ -788,11 +804,11 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date and time when the event source was created.
+    #   The date and time the event source was created.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
-    #   The date and time when the event source will expire if the AWS
+    #   The date and time that the event source will expire, if the AWS
     #   account doesn't create a matching event bus for it.
     #   @return [Time]
     #
@@ -801,12 +817,12 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the event source. If it's `ACTIVE`, you have already
+    #   The state of the event source. If it is ACTIVE, you have already
     #   created a matching event bus for this event source, and that event
-    #   bus is active. If it's `PENDING`, either you haven't yet created a
-    #   matching event bus, or that event bus is deactivated. If it's
-    #   `DELETED`, you have created a matching event bus, but the event
-    #   source has since been deleted.
+    #   bus is active. If it is PENDING, either you haven't yet created a
+    #   matching event bus, or that event bus is deactivated. If it is
+    #   DELETED, you have created a matching event bus, but the event source
+    #   has since been deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EventSource AWS API Documentation
@@ -837,27 +853,27 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] input_paths_map
     #   Map of JSON paths to be extracted from the event. You can then
     #   insert these in the template in `InputTemplate` to produce the
-    #   output to be sent to the target.
+    #   output you want to be sent to the target.
     #
     #   `InputPathsMap` is an array key-value pairs, where each value is a
     #   valid JSON path. You can have as many as 10 key-value pairs. You
     #   must use JSON dot notation, not bracket notation.
     #
-    #   The keys can't start with `"AWS"`.
+    #   The keys cannot start with "AWS."
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] input_template
     #   Input template where you specify placeholders that will be filled
     #   with the values of the keys from `InputPathsMap` to customize the
     #   data sent to the target. Enclose each `InputPathsMaps` value in
-    #   brackets: &lt;*value*&gt;. The InputTemplate must be valid JSON.
+    #   brackets: &lt;*value*&gt; The InputTemplate must be valid JSON.
     #
     #   If `InputTemplate` is a JSON object (surrounded by curly braces),
     #   the following restrictions apply:
     #
-    #   * The placeholder can't be used as an object key
+    #   * The placeholder cannot be used as an object key.
     #
-    #   * Object values can't include quote marks
+    #   * Object values cannot include quote marks.
     #
     #   The following example shows the syntax for using `InputPathsMap` and
     #   `InputTemplate`.
@@ -897,11 +913,29 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # This exception occurs due to unexpected causes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InternalException AWS API Documentation
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # The event pattern is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InvalidEventPatternException AWS API Documentation
+    #
+    class InvalidEventPatternException < Aws::EmptyStructure; end
+
+    # The specified state is not a valid state for an event source.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Aws::EmptyStructure; end
+
     # This object enables you to specify a JSON path to extract from the
-    # event and use as the partition key for the Amazon Kinesis data stream
-    # so that you can control the shard that the event goes to. If you
-    # don't include this parameter, the default is to use the `eventId` as
-    # the partition key.
+    # event and use as the partition key for the Amazon Kinesis data stream,
+    # so that you can control the shard to which the event goes. If you do
+    # not include this parameter, the default is to use the `eventId` as the
+    # partition key.
     #
     # @note When making an API call, you may pass KinesisParameters
     #   data as a hash:
@@ -927,6 +961,13 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # You tried to create more rules or add more targets to a rule than is
+    # allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ListEventBusesRequest
     #   data as a hash:
     #
@@ -948,7 +989,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] limit
     #   Specifying this limits the number of results returned by this
-    #   operation. The operation also returns a `NextToken` that you can use
+    #   operation. The operation also returns a NextToken which you can use
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
@@ -999,7 +1040,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] limit
     #   Specifying this limits the number of results returned by this
-    #   operation. The operation also returns a `NextToken` that you can use
+    #   operation. The operation also returns a NextToken which you can use
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
@@ -1050,7 +1091,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] limit
     #   Specifying this limits the number of results returned by this
-    #   operation. The operation also returns a `NextToken` that you can use
+    #   operation. The operation also returns a NextToken which you can use
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
@@ -1101,7 +1142,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] limit
     #   pecifying this limits the number of results returned by this
-    #   operation. The operation also returns a `NextToken` that you can use
+    #   operation. The operation also returns a NextToken which you can use
     #   in a subsequent operation to retrieve the next set of results.
     #   @return [Integer]
     #
@@ -1249,7 +1290,7 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the rule for which you want to view tags.
+    #   The ARN of the EventBridge resource for which you want to view tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceRequest AWS API Documentation
@@ -1260,8 +1301,8 @@ module Aws::CloudWatchEvents
     end
 
     # @!attribute [rw] tags
-    #   The list of tag keys and values associated with the rule that you
-    #   specified.
+    #   The list of tag keys and values associated with the resource you
+    #   specified
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTagsForResourceResponse AWS API Documentation
@@ -1326,6 +1367,18 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # This rule was created by an AWS service on behalf of your account. It
+    # is managed by that service. If you see this error in response to
+    # `DeleteRule` or `RemoveTargets`, you can use the `Force` parameter in
+    # those calls to delete the rule or remove targets from the rule. You
+    # cannot modify these managed rules by using `DisableRule`,
+    # `EnableRule`, `PutTargets`, `PutRule`, `TagResource`, or
+    # `UntagResource`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ManagedRuleException AWS API Documentation
+    #
+    class ManagedRuleException < Aws::EmptyStructure; end
+
     # This structure specifies the network configuration for an ECS task.
     #
     # @note When making an API call, you may pass NetworkConfiguration
@@ -1341,7 +1394,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] awsvpc_configuration
     #   Use this structure to specify the VPC subnets and security groups
-    #   for the task and whether a public IP address is to be used. This
+    #   for the task, and whether a public IP address is to be used. This
     #   structure is relevant only for ECS tasks that use the `awsvpc`
     #   network mode.
     #   @return [Types::AwsVpcConfiguration]
@@ -1381,21 +1434,21 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The date and time when the event source was created.
+    #   The date and time the event source was created.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_time
-    #   The date and time when the event source will expire if the AWS
+    #   The date and time that the event source will expire, if the AWS
     #   account doesn't create a matching event bus for it.
     #   @return [Time]
     #
     # @!attribute [rw] state
-    #   The state of the event source. If it's `ACTIVE`, you have already
+    #   The state of the event source. If it is ACTIVE, you have already
     #   created a matching event bus for this event source, and that event
-    #   bus is active. If it's `PENDING`, either you haven't yet created a
-    #   matching event bus, or that event bus is deactivated. If it's
-    #   `DELETED`, you have created a matching event bus, but the event
-    #   source has since been deleted.
+    #   bus is active. If it is PENDING, either you haven't yet created a
+    #   matching event bus, or that event bus is deactivated. If it is
+    #   DELETED, you have created a matching event bus, but the event source
+    #   has since been deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PartnerEventSourceAccount AWS API Documentation
@@ -1407,6 +1460,13 @@ module Aws::CloudWatchEvents
       :state)
       include Aws::Structure
     end
+
+    # The event bus policy is too long. For more information, see the
+    # limits.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PolicyLengthExceededException AWS API Documentation
+    #
+    class PolicyLengthExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
@@ -1452,8 +1512,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] time
-    #   The timestamp of the event, per [RFC3339][1]. If no timestamp is
-    #   provided, the timestamp of the PutEvents call is used.
+    #   The time stamp of the event, per [RFC3339][1]. If no time stamp is
+    #   provided, the time stamp of the PutEvents call is used.
     #
     #
     #
@@ -1461,28 +1521,28 @@ module Aws::CloudWatchEvents
     #   @return [Time]
     #
     # @!attribute [rw] source
-    #   The source of the event. This field is required.
+    #   The source of the event.
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   AWS resources, identified by Amazon Resource Name (ARN), that the
-    #   event primarily concerns. Any number, including zero, can be
+    #   AWS resources, identified by Amazon Resource Name (ARN), which the
+    #   event primarily concerns. Any number, including zero, may be
     #   present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] detail_type
-    #   Free-form string used to decide which fields to expect in the event
+    #   Free-form string used to decide what fields to expect in the event
     #   detail.
     #   @return [String]
     #
     # @!attribute [rw] detail
     #   A valid JSON string. There is no other schema imposed. The JSON
-    #   string can contain fields and nested subobjects.
+    #   string may contain fields and nested subobjects.
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
     #   The event bus that will receive the event. Only the rules that are
-    #   associated with this event bus can match the event.
+    #   associated with this event bus will be able to match the event.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
@@ -1546,7 +1606,7 @@ module Aws::CloudWatchEvents
     #         entries: [ # required
     #           {
     #             time: Time.now,
-    #             source: "String",
+    #             source: "EventSourceName",
     #             resources: ["EventResource"],
     #             detail_type: "String",
     #             detail: "String",
@@ -1572,7 +1632,7 @@ module Aws::CloudWatchEvents
     #
     #       {
     #         time: Time.now,
-    #         source: "String",
+    #         source: "EventSourceName",
     #         resources: ["EventResource"],
     #         detail_type: "String",
     #         detail: "String",
@@ -1587,19 +1647,19 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   AWS resources, identified by Amazon Resource Name (ARN), that the
-    #   event primarily concerns. Any number, including zero, can be
+    #   AWS resources, identified by Amazon Resource Name (ARN), which the
+    #   event primarily concerns. Any number, including zero, may be
     #   present.
     #   @return [Array<String>]
     #
     # @!attribute [rw] detail_type
-    #   A free-form string used to decide which fields to expect in the
-    #   event detail.
+    #   A free-form string used to decide what fields to expect in the event
+    #   detail.
     #   @return [String]
     #
     # @!attribute [rw] detail
     #   A valid JSON string. There is no other schema imposed. The JSON
-    #   string can contain fields and nested subobjects.
+    #   string may contain fields and nested subobjects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPartnerEventsRequestEntry AWS API Documentation
@@ -1614,7 +1674,7 @@ module Aws::CloudWatchEvents
     end
 
     # @!attribute [rw] failed_entry_count
-    #   The number of events from this operation that couldn't be written
+    #   The number of events from this operation that could not be written
     #   to the partner event bus.
     #   @return [Integer]
     #
@@ -1631,7 +1691,7 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Represents an event that a partner tried to generate but failed.
+    # Represents an event that a partner tried to generate, but failed.
     #
     # @!attribute [rw] event_id
     #   The ID of the event.
@@ -1675,7 +1735,7 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The action that you're enabling the other account to perform.
+    #   The action that you are enabling the other account to perform.
     #   Currently, this must be `events:PutEvents`.
     #   @return [String]
     #
@@ -1685,15 +1745,15 @@ module Aws::CloudWatchEvents
     #   events to your default event bus.
     #
     #   If you specify "*" without specifying `Condition`, avoid creating
-    #   rules that might match undesirable events. To create more secure
+    #   rules that may match undesirable events. To create more secure
     #   rules, make sure that the event pattern for each rule contains an
-    #   `account` field with a specific account ID to receive events from.
-    #   Rules with an account field don't match any events sent from other
-    #   accounts.
+    #   `account` field with a specific account ID from which to receive
+    #   events. Rules with an account field do not match any events sent
+    #   from other accounts.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
-    #   An identifier string for the external account that you're granting
+    #   An identifier string for the external account that you are granting
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
     #   RemovePermission.
@@ -1703,14 +1763,14 @@ module Aws::CloudWatchEvents
     #   This parameter enables you to limit the permission to accounts that
     #   fulfill a certain condition, such as being a member of a certain AWS
     #   organization. For more information about AWS Organizations, see
-    #   [What Is AWS Organizations?][1] in the *AWS Organizations User
+    #   [What Is AWS Organizations][1] in the *AWS Organizations User
     #   Guide*.
     #
-    #   If you specify `Condition` with an AWS organization ID and specify
+    #   If you specify `Condition` with an AWS organization ID, and specify
     #   "*" as the value for `Principal`, you grant permission to all the
     #   accounts in the named organization.
     #
-    #   The `Condition` is a JSON string that must contain `Type`, `Key`,
+    #   The `Condition` is a JSON string which must contain `Type`, `Key`,
     #   and `Value` fields.
     #
     #
@@ -1749,17 +1809,17 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the rule that you're creating or updating.
+    #   The name of the rule that you are creating or updating.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression: for example, `"cron(0 20 * * ? *)"` or
-    #   `"rate(5 minutes)"`.
+    #   The scheduling expression. For example, "cron(0 20 * * ? *)" or
+    #   "rate(5 minutes)".
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern. For more information, see [Event Patterns][1] in
-    #   the *Amazon EventBridge User Guide*.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -1986,9 +2046,9 @@ module Aws::CloudWatchEvents
     #   @return [Array<String>]
     #
     # @!attribute [rw] force
-    #   If this is a managed rule created by an AWS service on your behalf,
+    #   If this is a managed rule, created by an AWS service on your behalf,
     #   you must specify `Force` as `True` to remove targets. This parameter
-    #   is ignored for rules that aren't managed rules. You can check
+    #   is ignored for rules that are not managed rules. You can check
     #   whether a rule is a managed rule by using `DescribeRule` or
     #   `ListRules` and checking the `ManagedBy` field of the response.
     #   @return [Boolean]
@@ -2044,6 +2104,18 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # The resource you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An entity that you specified does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # Contains information about a rule in Amazon EventBridge.
     #
     # @!attribute [rw] name
@@ -2055,8 +2127,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern of the rule. For more information, see [Event
-    #   Patterns][1] in the *Amazon EventBridge User Guide*.
+    #   The event pattern of the rule. For more information, see [Events and
+    #   Event Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -2072,8 +2144,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
-    #   The scheduling expression: for example, `"cron(0 20 * * ? *)"` or
-    #   `"rate(5 minutes)"`.
+    #   The scheduling expression. For example, "cron(0 20 * * ? *)",
+    #   "rate(5 minutes)".
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2082,9 +2154,9 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] managed_by
-    #   If an AWS service created the rule on behalf of your account, this
-    #   field displays the principal name of the service that created the
-    #   rule.
+    #   If the rule was created on behalf of your account by an AWS service,
+    #   this field displays the principal name of the service that created
+    #   the rule.
     #   @return [String]
     #
     # @!attribute [rw] event_bus_name
@@ -2106,7 +2178,7 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # This parameter contains the criteria (either `InstanceIds` or a tag)
+    # This parameter contains the criteria (either InstanceIds or a tag)
     # used to specify which EC2 instances are to be sent the command.
     #
     # @note When making an API call, you may pass RunCommandParameters
@@ -2122,8 +2194,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] run_command_targets
-    #   Currently, we support including only one `RunCommandTarget` block,
-    #   which specifies either an array of `InstanceIds` or a tag.
+    #   Currently, we support including only one RunCommandTarget block,
+    #   which specifies either an array of InstanceIds or a tag.
     #   @return [Array<Types::RunCommandTarget>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RunCommandParameters AWS API Documentation
@@ -2135,7 +2207,7 @@ module Aws::CloudWatchEvents
 
     # Information about the EC2 instances that are to be sent the command,
     # specified as key-value pairs. Each `RunCommandTarget` block can
-    # include only one key, but this key can specify multiple values.
+    # include only one key, but this key may specify multiple values.
     #
     # @note When making an API call, you may pass RunCommandTarget
     #   data as a hash:
@@ -2185,7 +2257,7 @@ module Aws::CloudWatchEvents
     end
 
     # A key-value pair associated with an AWS resource. In EventBridge,
-    # rules support tagging.
+    # rules and event buses support tagging.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -2196,8 +2268,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] key
-    #   A string that you can use to assign a value. The combination of tag
-    #   keys and values can help you organize and categorize your resources.
+    #   A string you can use to assign a value. The combination of tag keys
+    #   and values can help you organize and categorize your resources.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2226,11 +2298,11 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the rule that you're adding tags to.
+    #   The ARN of the EventBridge resource that you're adding tags to.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The list of key-value pairs to associate with the rule.
+    #   The list of key-value pairs to associate with the resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TagResourceRequest AWS API Documentation
@@ -2249,11 +2321,11 @@ module Aws::CloudWatchEvents
     # a complete list of services and resources that can be set as a target,
     # see PutTargets.
     #
-    # If you're setting the event bus of another account as the target and
+    # If you are setting the event bus of another account as the target, and
     # that account granted permission to your account through an
-    # organization instead of directly by the account ID, you must specify a
-    # `RoleArn` with proper permissions in the `Target` structure. For more
-    # information, see [Sending and Receiving Events Between AWS
+    # organization instead of directly by the account ID, then you must
+    # specify a `RoleArn` with proper permissions in the `Target` structure.
+    # For more information, see [Sending and Receiving Events Between AWS
     # Accounts][1] in the *Amazon EventBridge User Guide*.
     #
     #
@@ -2358,10 +2430,9 @@ module Aws::CloudWatchEvents
     #   @return [Types::InputTransformer]
     #
     # @!attribute [rw] kinesis_parameters
-    #   The custom parameter that you can use to control the shard
-    #   assignment when the target is a Kinesis data stream. If you don't
-    #   include this parameter, the default is to use the `eventId` as the
-    #   partition key.
+    #   The custom parameter you can use to control the shard assignment,
+    #   when the target is a Kinesis data stream. If you do not include this
+    #   parameter, the default is to use the `eventId` as the partition key.
     #   @return [Types::KinesisParameters]
     #
     # @!attribute [rw] run_command_parameters
@@ -2370,10 +2441,10 @@ module Aws::CloudWatchEvents
     #   @return [Types::RunCommandParameters]
     #
     # @!attribute [rw] ecs_parameters
-    #   Contains the Amazon ECS task definition and task count to be used if
-    #   the event target is an Amazon ECS task. For more information about
-    #   Amazon ECS tasks, see [Task Definitions ][1] in the *Amazon EC2
-    #   Container Service Developer Guide*.
+    #   Contains the Amazon ECS task definition and task count to be used,
+    #   if the event target is an Amazon ECS task. For more information
+    #   about Amazon ECS tasks, see [Task Definitions ][1] in the *Amazon
+    #   EC2 Container Service Developer Guide*.
     #
     #
     #
@@ -2424,8 +2495,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern. For more information, see [Event Patterns][1] in
-    #   the *Amazon EventBridge User Guide*.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -2464,7 +2535,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the rule that you're removing tags from.
+    #   The ARN of the EventBridge resource from which you are removing
+    #   tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys

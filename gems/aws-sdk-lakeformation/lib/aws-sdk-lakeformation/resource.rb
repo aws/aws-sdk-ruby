@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::LakeFormation
+
   class Resource
 
     # @param options ({})

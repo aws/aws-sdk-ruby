@@ -6,6 +6,40 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DeviceFarm
+
+  # When DeviceFarm returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::DeviceFarm::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all DeviceFarm errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::DeviceFarm::Errors::ServiceError
+  #       # rescues all DeviceFarm API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ArgumentException}
+  # * {CannotDeleteException}
+  # * {IdempotencyException}
+  # * {InternalServiceException}
+  # * {InvalidOperationException}
+  # * {LimitExceededException}
+  # * {NotEligibleException}
+  # * {NotFoundException}
+  # * {ServiceAccountException}
+  # * {TagOperationException}
+  # * {TagPolicyException}
+  # * {TooManyTagsException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +57,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class CannotDeleteException < ServiceError
@@ -39,7 +72,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotencyException < ServiceError
@@ -55,7 +87,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -71,7 +102,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -87,7 +117,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -103,7 +132,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotEligibleException < ServiceError
@@ -119,7 +147,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -135,7 +162,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceAccountException < ServiceError
@@ -151,7 +177,6 @@ module Aws::DeviceFarm
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagOperationException < ServiceError
@@ -172,7 +197,6 @@ module Aws::DeviceFarm
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class TagPolicyException < ServiceError
@@ -193,7 +217,6 @@ module Aws::DeviceFarm
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -214,7 +237,6 @@ module Aws::DeviceFarm
       def resource_name
         @data[:resource_name]
       end
-
     end
 
   end

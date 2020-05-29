@@ -391,7 +391,11 @@ module Aws::FSx
     # @!attribute [rw] paths
     #   (Optional) The path or paths on the Amazon FSx file system to use
     #   when the data repository task is processed. The default path is the
-    #   file system root directory.
+    #   file system root directory. The paths you provide need to be
+    #   relative to the mount point of the file system. If the mount point
+    #   is `/mnt/fsx` and `/mnt/fsx/path1` is a directory or file on the
+    #   file system you want to export, then the path to provide is `path1`.
+    #   If a path that you provide isn't valid, the task fails.
     #   @return [Array<String>]
     #
     # @!attribute [rw] file_system_id
@@ -402,7 +406,12 @@ module Aws::FSx
     #   Defines whether or not Amazon FSx provides a CompletionReport once
     #   the task has completed. A CompletionReport provides a detailed
     #   report on the files that Amazon FSx processed that meet the criteria
-    #   specified by the `Scope` parameter.
+    #   specified by the `Scope` parameter. For more information, see
+    #   [Working with Task Completion Reports][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/task-completion-report.html
     #   @return [Types::CompletionReport]
     #
     # @!attribute [rw] client_request_token
@@ -468,7 +477,7 @@ module Aws::FSx
     #             password: "DirectoryPassword", # required
     #             dns_ips: ["IpAddress"], # required
     #           },
-    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
     #           preferred_subnet_id: "SubnetId",
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -476,6 +485,7 @@ module Aws::FSx
     #           automatic_backup_retention_days: 1,
     #           copy_tags_to_backups: false,
     #         },
+    #         storage_type: "SSD", # accepts SSD, HDD
     #       }
     #
     # @!attribute [rw] backup_id
@@ -494,16 +504,23 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of IDs for the subnets that the file system will be
-    #   accessible from. Currently, you can specify only one subnet. The
-    #   file server is also launched in that subnet's Availability Zone.
+    #   Specifies the IDs of the subnets that the file system will be
+    #   accessible from. For Windows `MULTI_AZ_1` file system deployment
+    #   types, provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` property.
+    #
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types and
+    #   Lustre file systems, provide exactly one subnet ID. The file server
+    #   is launched in that subnet's Availability Zone.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   A list of IDs for the security groups that apply to the specified
     #   network interfaces created for file system access. These security
     #   groups apply to all network interfaces. This value isn't returned
-    #   in later describe requests.
+    #   in later DescribeFileSystem requests.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -516,6 +533,29 @@ module Aws::FSx
     #   The configuration for this Microsoft Windows file system.
     #   @return [Types::CreateFileSystemWindowsConfiguration]
     #
+    # @!attribute [rw] storage_type
+    #   Sets the storage type for the Windows file system you're creating
+    #   from a backup. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. Supported on all
+    #     Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. Supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
+    #     types.
+    #
+    #   Default value is `SSD`.
+    #
+    #   <note markdown="1"> HDD and SSD storage types have different minimum storage capacity
+    #   requirements. A restored file system's storage capacity is tied to
+    #   the file system that was backed up. You can create a file system
+    #   that uses HDD storage from a backup of a file system that used SSD
+    #   storage only if the original SSD file system had a storage capacity
+    #   of at least 2000 GiB.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
     #
     class CreateFileSystemFromBackupRequest < Struct.new(
@@ -524,7 +564,8 @@ module Aws::FSx
       :subnet_ids,
       :security_group_ids,
       :tags,
-      :windows_configuration)
+      :windows_configuration,
+      :storage_type)
       include Aws::Structure
     end
 
@@ -541,8 +582,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The Lustre configuration for the file system being created. This value
-    # is required if `FileSystemType` is set to `LUSTRE`.
+    # The Lustre configuration for the file system being created.
     #
     # @note When making an API call, you may pass CreateFileSystemLustreConfiguration
     #   data as a hash:
@@ -552,6 +592,8 @@ module Aws::FSx
     #         import_path: "ArchivePath",
     #         export_path: "ArchivePath",
     #         imported_file_chunk_size: 1,
+    #         deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #         per_unit_storage_throughput: 1,
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -598,9 +640,48 @@ module Aws::FSx
     #   that a single file can be striped across is limited by the total
     #   number of disks that make up the file system.
     #
-    #   The chunk size default is 1,024 MiB (1 GiB) and can go as high as
+    #   The default chunk size is 1,024 MiB (1 GiB) and can go as high as
     #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5
     #   TB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_type
+    #   (Optional) Choose `SCRATCH_1` and `SCRATCH_2` deployment types when
+    #   you need temporary storage and shorter-term processing of data. The
+    #   `SCRATCH_2` deployment type provides in-transit encryption of data
+    #   and higher burst throughput capacity than `SCRATCH_1`.
+    #
+    #   Choose `PERSISTENT_1` deployment type for longer-term storage and
+    #   workloads and encryption of data in transit. To learn more about
+    #   deployment types, see [ FSx for Lustre Deployment Options][1].
+    #
+    #   Encryption of data in-transit is automatically enabled when you
+    #   access a `SCRATCH_2` or `PERSISTENT_1` file system from Amazon EC2
+    #   instances that [support this feature][2]. (Default = `SCRATCH_1`)
+    #
+    #   Encryption of data in-transit for `SCRATCH_2` and `PERSISTENT_1`
+    #   deployment types is supported when accessed from supported instance
+    #   types in supported AWS Regions. To learn more, [Encrypting Data in
+    #   Transit][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
+    #   @return [String]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Required for the `PERSISTENT_1` deployment type, describes the
+    #   amount of read and write throughput for each 1 tebibyte of storage,
+    #   in MB/s/TiB. File system throughput capacity is calculated by
+    #   multiplying ﬁle system storage capacity (TiB) by the
+    #   PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
+    #   provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s
+    #   of ﬁle system throughput. You pay for the amount of throughput that
+    #   you provision.
+    #
+    #   Valid values are 50, 100, 200.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
@@ -609,7 +690,9 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :import_path,
       :export_path,
-      :imported_file_chunk_size)
+      :imported_file_chunk_size,
+      :deployment_type,
+      :per_unit_storage_throughput)
       include Aws::Structure
     end
 
@@ -622,6 +705,7 @@ module Aws::FSx
     #         client_request_token: "ClientRequestToken",
     #         file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE
     #         storage_capacity: 1, # required
+    #         storage_type: "SSD", # accepts SSD, HDD
     #         subnet_ids: ["SubnetId"], # required
     #         security_group_ids: ["SecurityGroupId"],
     #         tags: [
@@ -641,7 +725,7 @@ module Aws::FSx
     #             password: "DirectoryPassword", # required
     #             dns_ips: ["IpAddress"], # required
     #           },
-    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #           deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
     #           preferred_subnet_id: "SubnetId",
     #           throughput_capacity: 1, # required
     #           weekly_maintenance_start_time: "WeeklyTime",
@@ -654,6 +738,8 @@ module Aws::FSx
     #           import_path: "ArchivePath",
     #           export_path: "ArchivePath",
     #           imported_file_chunk_size: 1,
+    #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #           per_unit_storage_throughput: 1,
     #         },
     #       }
     #
@@ -668,29 +754,60 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   The type of Amazon FSx file system to create.
+    #   The type of Amazon FSx file system to create, either `WINDOWS` or
+    #   `LUSTRE`.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
-    #   The storage capacity of the file system being created.
+    #   Sets the storage capacity of the file system that you're creating.
     #
-    #   For Windows file systems, valid values are 32 GiB - 65,536 GiB.
+    #   For Lustre file systems:
     #
-    #   For Lustre file systems, valid values are 1,200, 2,400, 3,600, then
-    #   continuing in increments of 3600 GiB.
+    #   * For `SCRATCH_2` and `PERSISTENT_1` deployment types, valid values
+    #     are 1.2, 2.4, and increments of 2.4 TiB.
+    #
+    #   * For `SCRATCH_1` deployment type, valid values are 1.2, 2.4, and
+    #     increments of 3.6 TiB.
+    #
+    #   For Windows file systems:
+    #
+    #   * If `StorageType=SSD`, valid values are 32 GiB - 65,536 GiB (64
+    #     TiB).
+    #
+    #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
+    #     TiB).
     #   @return [Integer]
+    #
+    # @!attribute [rw] storage_type
+    #   Sets the storage type for the Amazon FSx for Windows file system
+    #   you're creating. Valid values are `SSD` and `HDD`.
+    #
+    #   * Set to `SSD` to use solid state drive storage. SSD is supported on
+    #     all Windows deployment types.
+    #
+    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
+    #     types.
+    #
+    #   Default value is `SSD`. For more information, see [ Storage Type
+    #   Options][1] in the *Amazon FSx for Windows User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
     #   accessible from. For Windows `MULTI_AZ_1` file system deployment
     #   types, provide exactly two subnet IDs, one for the preferred file
-    #   server and one for the standy file server. You specify one of these
+    #   server and one for the standby file server. You specify one of these
     #   subnets as the preferred subnet using the `WindowsConfiguration >
     #   PreferredSubnetID` property.
     #
-    #   For Windows `SINGLE_AZ_1` file system deployment types and Lustre
-    #   file systems, provide exactly one subnet ID. The file server is
-    #   launched in that subnet's Availability Zone.
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
+    #   types and Lustre file systems, provide exactly one subnet ID. The
+    #   file server is launched in that subnet's Availability Zone.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
@@ -706,9 +823,12 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for an Amazon FSx for Windows File
-    #   Server file system at rest. Amazon FSx for Lustre does not support
-    #   KMS encryption. For more information, see [Encrypt][1] in the *AWS
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
     #   Key Management Service API Reference*.
     #
     #
@@ -718,13 +838,11 @@ module Aws::FSx
     #
     # @!attribute [rw] windows_configuration
     #   The Microsoft Windows configuration for the file system being
-    #   created. This value is required if `FileSystemType` is set to
-    #   `WINDOWS`.
+    #   created.
     #   @return [Types::CreateFileSystemWindowsConfiguration]
     #
     # @!attribute [rw] lustre_configuration
-    #   The Lustre configuration for the file system being created. This
-    #   value is required if `FileSystemType` is set to `LUSTRE`.
+    #   The Lustre configuration for the file system being created.
     #   @return [Types::CreateFileSystemLustreConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemRequest AWS API Documentation
@@ -733,6 +851,7 @@ module Aws::FSx
       :client_request_token,
       :file_system_type,
       :storage_capacity,
+      :storage_type,
       :subnet_ids,
       :security_group_ids,
       :tags,
@@ -771,7 +890,7 @@ module Aws::FSx
     #           password: "DirectoryPassword", # required
     #           dns_ips: ["IpAddress"], # required
     #         },
-    #         deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1
+    #         deployment_type: "MULTI_AZ_1", # accepts MULTI_AZ_1, SINGLE_AZ_1, SINGLE_AZ_2
     #         preferred_subnet_id: "SubnetId",
     #         throughput_capacity: 1, # required
     #         weekly_maintenance_start_time: "WeeklyTime",
@@ -795,17 +914,21 @@ module Aws::FSx
     #   Specifies the file system deployment type, valid values are the
     #   following:
     #
-    #   * MULTI\_AZ\_1 - Deploys a high availability file system that is
+    #   * `MULTI_AZ_1` - Deploys a high availability file system that is
     #     configured for Multi-AZ redundancy to tolerate temporary
     #     Availability Zone (AZ) unavailability. You can only deploy a
     #     Multi-AZ file system in AWS Regions that have a minimum of three
-    #     Availability Zones.
+    #     Availability Zones. Also supports HDD storage type
     #
-    #   * SINGLE\_AZ\_1 - (Default) Choose to deploy a file system that is
+    #   * `SINGLE_AZ_1` - (Default) Choose to deploy a file system that is
     #     configured for single AZ redundancy.
     #
-    #   To learn more about high availability Multi-AZ file systems, see [
-    #   High Availability for Amazon FSx for Windows File Server][1].
+    #   * `SINGLE_AZ_2` - The latest generation Single AZ file system.
+    #     Specifies a file system that is configured for single AZ
+    #     redundancy and supports HDD storage type.
+    #
+    #   For more information, see [ Availability and Durability: Single-AZ
+    #   and Multi-AZ File Systems][1].
     #
     #
     #
@@ -850,7 +973,9 @@ module Aws::FSx
     #   true, all tags for the file system are copied to all automatic and
     #   user-initiated backups where the user doesn't specify tags. If this
     #   value is true, and you specify one or more tags, only the specified
-    #   tags are copied to backups.
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the file
+    #   system, regardless of this value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
@@ -1585,14 +1710,29 @@ module Aws::FSx
     #   The storage capacity of the file system in gigabytes (GB).
     #   @return [Integer]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type of the file system. Valid values are `SSD` and
+    #   `HDD`. If set to `SSD`, the file system uses solid state drive
+    #   storage. If set to `HDD`, the file system uses hard disk drive
+    #   storage.
+    #   @return [String]
+    #
     # @!attribute [rw] vpc_id
     #   The ID of the primary VPC for the file system.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   The ID of the subnet to contain the endpoint for the file system.
-    #   One and only one is supported. The file system is launched in the
-    #   Availability Zone associated with this subnet.
+    #   Specifies the IDs of the subnets that the file system is accessible
+    #   from. For Windows `MULTI_AZ_1` file system deployment type, there
+    #   are two subnet IDs, one for the preferred file server and one for
+    #   the standby file server. The preferred file server subnet identified
+    #   in the `PreferredSubnetID` property. All other file systems have
+    #   only one subnet ID.
+    #
+    #   For Lustre file systems, and Single-AZ Windows file systems, this is
+    #   the ID of the subnet that contains the endpoint for the file system.
+    #   For `MULTI_AZ_1` Windows file systems, the endpoint for the file
+    #   system is available in the `PreferredSubnetID`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] network_interface_ids
@@ -1617,9 +1757,17 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for an Amazon FSx for Windows File
-    #   Server file system. Amazon FSx for Lustre does not support KMS
-    #   encryption.
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and persistent Amazon FSx for Lustre file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The scratch Amazon FSx for Lustre file systems
+    #   are always encrypted at rest using Amazon FSx managed keys. For more
+    #   information, see [Encrypt][1] in the *AWS Key Management Service API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1654,6 +1802,7 @@ module Aws::FSx
       :lifecycle,
       :failure_details,
       :storage_capacity,
+      :storage_type,
       :vpc_id,
       :subnet_ids,
       :network_interface_ids,
@@ -1824,6 +1973,20 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # An invalid value for `PerUnitStorageThroughput` was provided. Please
+    # create your file system again, using a valid value.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidPerUnitStorageThroughput AWS API Documentation
+    #
+    class InvalidPerUnitStorageThroughput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The request object for `ListTagsForResource` operation.
     #
     # @note When making an API call, you may pass ListTagsForResourceRequest
@@ -1893,15 +2056,38 @@ module Aws::FSx
     #   returned in the response of the `CreateFileSystem` operation.
     #   @return [Types::DataRepositoryConfiguration]
     #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the FSX for Lustre file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Per unit storage throughput represents the megabytes per second of
+    #   read or write throughput per 1 tebibyte of storage provisioned. File
+    #   system throughput capacity is equal to Storage capacity (TiB) *
+    #   PerUnitStorageThroughput (MB/s/TiB). This option is only valid for
+    #   `PERSISTENT_1` deployment types. Valid values are 50, 100, 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_name
+    #   You use the `MountName` value when mounting the file system.
+    #
+    #   For the `SCRATCH_1` deployment type, this value is always "`fsx`".
+    #   For `SCRATCH_2` and `PERSISTENT_1` deployment types, this value is a
+    #   string that is unique within an AWS Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
       :weekly_maintenance_start_time,
-      :data_repository_configuration)
+      :data_repository_configuration,
+      :deployment_type,
+      :per_unit_storage_throughput,
+      :mount_name)
       include Aws::Structure
     end
 
-    # File system configuration is required for this operation.
+    # A file system configuration is required for this operation.
     #
     # @!attribute [rw] message
     #   A detailed error message.
@@ -2439,10 +2625,21 @@ module Aws::FSx
     #
     #   * `MULTI_AZ_1` - Specifies a high availability file system that is
     #     configured for Multi-AZ redundancy to tolerate temporary
-    #     Availability Zone (AZ) unavailability.
+    #     Availability Zone (AZ) unavailability, and supports SSD and HDD
+    #     storage.
     #
     #   * `SINGLE_AZ_1` - (Default) Specifies a file system that is
-    #     configured for single AZ redundancy.
+    #     configured for single AZ redundancy, only supports SSD storage.
+    #
+    #   * `SINGLE_AZ_2` - Latest generation Single AZ file system. Specifies
+    #     a file system that is configured for single AZ redundancy and
+    #     supports SSD and HDD storage.
+    #
+    #   For more information, see [Single-AZ and Multi-AZ File Systems][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
     #   @return [String]
     #
     # @!attribute [rw] remote_administration_endpoint
@@ -2450,8 +2647,8 @@ module Aws::FSx
     #   administrative tasks on the file system using Amazon FSx Remote
     #   PowerShell.
     #
-    #   For `SINGLE_AZ_1` deployment types, this is the DNS name of the file
-    #   system.
+    #   For `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types, this is the
+    #   DNS name of the file system.
     #
     #   This endpoint is temporarily unavailable when the file system is
     #   undergoing maintenance.
@@ -2464,8 +2661,14 @@ module Aws::FSx
     #   traffic from this subnet except in the event of a failover to the
     #   secondary file server.
     #
-    #   For `SINGLE_AZ_1` deployment types, this value is the same as that
-    #   for `SubnetIDs`.
+    #   For `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types, this value is
+    #   the same as that for `SubnetIDs`. For more information, see
+    #   [Availability and Durability: Single-AZ and Multi-AZ File
+    #   Systems][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources
     #   @return [String]
     #
     # @!attribute [rw] preferred_file_server_ip
@@ -2474,13 +2677,12 @@ module Aws::FSx
     #
     #   Use this IP address when mounting the file system on Linux SMB
     #   clients or Windows SMB clients that are not joined to a Microsoft
-    #   Active Directory. Applicable for both `SINGLE_AZ_1` and `MULTI_AZ_1`
-    #   deployment types. This IP address is temporarily unavailable when
-    #   the file system is undergoing maintenance. For Linux and Windows SMB
-    #   clients that are joined to an Active Directory, use the file
-    #   system's DNSName instead. For more information and instruction on
-    #   mapping and mounting file shares, see
-    #   [https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html][1].
+    #   Active Directory. Applicable for all Windows file system deployment
+    #   types. This IP address is temporarily unavailable when the file
+    #   system is undergoing maintenance. For Linux and Windows SMB clients
+    #   that are joined to an Active Directory, use the file system's
+    #   DNSName instead. For more information on mapping and mounting file
+    #   shares, see [Accessing File Shares][1].
     #
     #
     #
@@ -2518,7 +2720,9 @@ module Aws::FSx
     #   true, all tags on the file system are copied to all automatic
     #   backups and any user-initiated backups where the user doesn't
     #   specify any tags. If this value is true, and you specify one or more
-    #   tags, only the specified tags are copied to backups.
+    #   tags, only the specified tags are copied to backups. If you specify
+    #   one or more tags when creating a user-initiated backup, no tags are
+    #   copied from the file system, regardless of this value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation

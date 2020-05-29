@@ -25,17 +25,20 @@ require_relative 'aws-sdk-elastictranscoder/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     elastic_transcoder = Aws::ElasticTranscoder::Client.new
+#     resp = elastic_transcoder.cancel_job(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Elastic Transcoder all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Elastic Transcoder are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ElasticTranscoder::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Elastic Transcoder API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-elastictranscoder/customizations'
 # @service
 module Aws::ElasticTranscoder
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.21.0'
 
 end

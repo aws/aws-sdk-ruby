@@ -124,7 +124,18 @@ module Aws::RDSDataService
     # @!attribute [rw] parameter_sets
     #   The parameter set for the batch operation.
     #
-    #   The maximum number of parameters in a parameter set is 1,000.
+    #   The SQL statement is executed as many times as the number of
+    #   parameter sets provided. To execute a SQL statement with no
+    #   parameters, use one of the following options:
+    #
+    #   * Specify one or more empty parameter sets.
+    #
+    #   * Use the `ExecuteStatement` operation instead of the
+    #     `BatchExecuteStatement` operation.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
     #   @return [Array<Array<Types::SqlParameter>>]
     #
     # @!attribute [rw] resource_arn
@@ -487,6 +498,10 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] parameters
     #   The parameters for the SQL statement.
+    #
+    #   <note markdown="1"> Array parameters are not supported.
+    #
+    #    </note>
     #   @return [Array<Types::SqlParameter>]
     #
     # @!attribute [rw] resource_arn
@@ -644,6 +659,12 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # An internal error occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Aws::EmptyStructure; end
+
     # The `resourceArn`, `secretArn`, or `transactionId` value can't be
     # found.
     #
@@ -781,6 +802,12 @@ module Aws::RDSDataService
       :transaction_status)
       include Aws::Structure
     end
+
+    # The service specified by the `resourceArn` parameter is not available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ServiceUnavailableError AWS API Documentation
+    #
+    class ServiceUnavailableError < Aws::EmptyStructure; end
 
     # A parameter used in a SQL statement.
     #

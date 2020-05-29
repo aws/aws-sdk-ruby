@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Greengrass
+
   class Resource
 
     # @param options ({})

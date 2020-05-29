@@ -6,6 +6,40 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SSOOIDC
+
+  # When SSOOIDC returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SSOOIDC::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SSOOIDC errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SSOOIDC::Errors::ServiceError
+  #       # rescues all SSOOIDC API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {AuthorizationPendingException}
+  # * {ExpiredTokenException}
+  # * {InternalServerException}
+  # * {InvalidClientException}
+  # * {InvalidClientMetadataException}
+  # * {InvalidGrantException}
+  # * {InvalidRequestException}
+  # * {InvalidScopeException}
+  # * {SlowDownException}
+  # * {UnauthorizedClientException}
+  # * {UnsupportedGrantTypeException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +62,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class AuthorizationPendingException < ServiceError
@@ -49,7 +82,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class ExpiredTokenException < ServiceError
@@ -70,7 +102,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -91,7 +122,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidClientException < ServiceError
@@ -112,7 +142,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidClientMetadataException < ServiceError
@@ -133,7 +162,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidGrantException < ServiceError
@@ -154,7 +182,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -175,7 +202,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class InvalidScopeException < ServiceError
@@ -196,7 +222,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class SlowDownException < ServiceError
@@ -217,7 +242,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class UnauthorizedClientException < ServiceError
@@ -238,7 +262,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
     class UnsupportedGrantTypeException < ServiceError
@@ -259,7 +282,6 @@ module Aws::SSOOIDC
       def error_description
         @data[:error_description]
       end
-
     end
 
   end

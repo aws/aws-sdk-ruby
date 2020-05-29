@@ -27,17 +27,20 @@ require_relative 'aws-sdk-kinesis/event_streams'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kinesis = Aws::Kinesis::Client.new
+#     resp = kinesis.add_tags_to_stream(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Kinesis all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Kinesis are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Kinesis::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Kinesis API errors
 #     end
 #
 # See {Errors} for more information.
@@ -45,6 +48,6 @@ require_relative 'aws-sdk-kinesis/event_streams'
 # @service
 module Aws::Kinesis
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.23.0'
 
 end

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2020-05-26)
+------------------
+
+* Feature - The AWS Systems Manager GetOpsSummary API action now supports multiple OpsResultAttributes in the request. Currently, this feature only supports OpsResultAttributes with the following TypeNames: [AWS:EC2InstanceComputeOptimizer] or [AWS:EC2InstanceInformation, AWS:EC2InstanceComputeOptimizer]. These TypeNames can be used along with either or both of the following: [AWS:EC2InstanceRecommendation, AWS:RecommendationSource]
+
+1.77.0 (2020-05-07)
+------------------
+
+* Feature - This Patch Manager release supports creating patch baselines for Oracle Linux and Debian
+
+1.76.0 (2020-05-05)
+------------------
+
+* Feature - AWS Systems Manager Parameter Store launches new data type to support aliases in EC2 APIs
+
+1.75.0 (2020-05-01)
+------------------
+
+* Feature - Added TimeoutSeconds as part of ListCommands API response.
+
+1.74.0 (2020-04-28)
+------------------
+
+* Feature - SSM State Manager support for adding list association filter for Resource Group and manual mode of managing compliance for an association.
+
+1.73.0 (2020-03-16)
+------------------
+
+* Feature - Resource data sync for AWS Systems Manager Inventory now includes destination data sharing. This feature enables you to synchronize inventory data from multiple AWS accounts into a central Amazon S3 bucket. To use this feature, all AWS accounts must be listed in AWS Organizations.
+
+1.72.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.71.0 (2020-02-04)
 ------------------
 

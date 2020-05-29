@@ -6,6 +6,55 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Lambda
+
+  # When Lambda returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Lambda::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Lambda errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Lambda::Errors::ServiceError
+  #       # rescues all Lambda API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CodeStorageExceededException}
+  # * {EC2AccessDeniedException}
+  # * {EC2ThrottledException}
+  # * {EC2UnexpectedException}
+  # * {ENILimitReachedException}
+  # * {InvalidParameterValueException}
+  # * {InvalidRequestContentException}
+  # * {InvalidRuntimeException}
+  # * {InvalidSecurityGroupIDException}
+  # * {InvalidSubnetIDException}
+  # * {InvalidZipFileException}
+  # * {KMSAccessDeniedException}
+  # * {KMSDisabledException}
+  # * {KMSInvalidStateException}
+  # * {KMSNotFoundException}
+  # * {PolicyLengthExceededException}
+  # * {PreconditionFailedException}
+  # * {ProvisionedConcurrencyConfigNotFoundException}
+  # * {RequestTooLargeException}
+  # * {ResourceConflictException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ResourceNotReadyException}
+  # * {ServiceException}
+  # * {SubnetIPAddressLimitReachedException}
+  # * {TooManyRequestsException}
+  # * {UnsupportedMediaTypeException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +77,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class EC2AccessDeniedException < ServiceError
@@ -49,7 +97,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class EC2ThrottledException < ServiceError
@@ -70,7 +117,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class EC2UnexpectedException < ServiceError
@@ -96,7 +142,6 @@ module Aws::Lambda
       def ec2_error_code
         @data[:ec2_error_code]
       end
-
     end
 
     class ENILimitReachedException < ServiceError
@@ -117,7 +162,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -138,7 +182,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestContentException < ServiceError
@@ -159,7 +202,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRuntimeException < ServiceError
@@ -180,7 +222,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSecurityGroupIDException < ServiceError
@@ -201,7 +242,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSubnetIDException < ServiceError
@@ -222,7 +262,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidZipFileException < ServiceError
@@ -243,7 +282,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSAccessDeniedException < ServiceError
@@ -264,7 +302,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSDisabledException < ServiceError
@@ -285,7 +322,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSInvalidStateException < ServiceError
@@ -306,7 +342,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class KMSNotFoundException < ServiceError
@@ -327,7 +362,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyLengthExceededException < ServiceError
@@ -348,7 +382,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class PreconditionFailedException < ServiceError
@@ -369,7 +402,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class ProvisionedConcurrencyConfigNotFoundException < ServiceError
@@ -390,7 +422,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestTooLargeException < ServiceError
@@ -411,7 +442,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceConflictException < ServiceError
@@ -432,7 +462,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -453,7 +482,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -474,7 +502,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotReadyException < ServiceError
@@ -495,7 +522,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -516,7 +542,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class SubnetIPAddressLimitReachedException < ServiceError
@@ -537,7 +562,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -568,7 +592,6 @@ module Aws::Lambda
       def reason
         @data[:reason]
       end
-
     end
 
     class UnsupportedMediaTypeException < ServiceError
@@ -589,7 +612,6 @@ module Aws::Lambda
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -1753,6 +1753,12 @@ module Aws::Route53
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_resource_record_sets, Seahorse::Model::Operation.new.tap do |o|

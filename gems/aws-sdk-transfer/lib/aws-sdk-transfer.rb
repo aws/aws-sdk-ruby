@@ -15,7 +15,7 @@ require_relative 'aws-sdk-transfer/errors'
 require_relative 'aws-sdk-transfer/resource'
 require_relative 'aws-sdk-transfer/customizations'
 
-# This module provides support for AWS Transfer for SFTP. This module is available in the
+# This module provides support for AWS Transfer Family. This module is available in the
 # `aws-sdk-transfer` gem.
 #
 # # Client
@@ -24,17 +24,20 @@ require_relative 'aws-sdk-transfer/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     transfer = Aws::Transfer::Client.new
+#     resp = transfer.create_server(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Transfer for SFTP all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Transfer Family are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Transfer::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Transfer Family API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-transfer/customizations'
 # @service
 module Aws::Transfer
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.20.0'
 
 end

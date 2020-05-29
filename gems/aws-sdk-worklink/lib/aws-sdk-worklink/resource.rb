@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WorkLink
+
   class Resource
 
     # @param options ({})

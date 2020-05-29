@@ -9,8 +9,13 @@ module AwsSdkCodeGenerator
       module_name = options.fetch(:module_name)
       protocol_settings = options.fetch(:protocol_settings, {})
       client_examples = options.fetch(:client_examples, {})
+      paginators = options.fetch(:paginators, {})
+      operation_waiters = Waiter.build_operations_map(options[:waiters])
+
       @operations = api['operations'].inject([]) do |ops, (name, operation)|
         method_name = Underscore.underscore(name)
+        waiters = operation_waiters[method_name]
+
         async_client = options[:async_client] || false
         es_output = AwsSdkCodeGenerator::Helper.eventstream_output?(operation, api)
         es_input = AwsSdkCodeGenerator::Helper.eventstream_input?(operation, api)
@@ -75,7 +80,9 @@ module AwsSdkCodeGenerator
               api: api,
               examples: examples,
               client_examples: client_examples[method_name] || [],
-              async_client: false
+              async_client: false,
+              pager: paginators && paginators['pagination'][name],
+              waiters: waiters
             ).to_s,
             streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
             eventstream_output: false,

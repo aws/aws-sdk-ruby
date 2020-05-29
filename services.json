@@ -364,6 +364,9 @@
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
   },
+  "IoTSiteWise": {
+    "models": "iotsitewise/2019-12-02"
+  },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
   },
@@ -432,6 +435,9 @@
   },
   "Macie": {
     "models": "macie/2017-12-19"
+  },
+  "Macie2": {
+    "models": "macie2/2020-01-01"
   },
   "ManagedBlockchain": {
     "models": "managedblockchain/2018-09-24"
@@ -714,6 +720,9 @@
   },
   "Support": {
     "models": "support/2013-04-15"
+  },
+  "Synthetics": {
+    "models": "synthetics/2017-10-11"
   },
   "Textract": {
     "models": "textract/2018-06-27"

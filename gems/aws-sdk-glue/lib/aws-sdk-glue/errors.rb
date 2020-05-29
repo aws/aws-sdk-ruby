@@ -6,6 +6,51 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Glue
+
+  # When Glue returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Glue::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Glue errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Glue::Errors::ServiceError
+  #       # rescues all Glue API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {AlreadyExistsException}
+  # * {ConcurrentModificationException}
+  # * {ConcurrentRunsExceededException}
+  # * {ConditionCheckFailureException}
+  # * {CrawlerNotRunningException}
+  # * {CrawlerRunningException}
+  # * {CrawlerStoppingException}
+  # * {EntityNotFoundException}
+  # * {GlueEncryptionException}
+  # * {IdempotentParameterMismatchException}
+  # * {IllegalWorkflowStateException}
+  # * {InternalServiceException}
+  # * {InvalidInputException}
+  # * {MLTransformNotReadyException}
+  # * {NoScheduleException}
+  # * {OperationTimeoutException}
+  # * {ResourceNumberLimitExceededException}
+  # * {SchedulerNotRunningException}
+  # * {SchedulerRunningException}
+  # * {SchedulerTransitioningException}
+  # * {ValidationException}
+  # * {VersionMismatchException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +68,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class AlreadyExistsException < ServiceError
@@ -39,7 +83,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -55,7 +98,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentRunsExceededException < ServiceError
@@ -71,7 +113,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConditionCheckFailureException < ServiceError
@@ -87,7 +128,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class CrawlerNotRunningException < ServiceError
@@ -103,7 +143,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class CrawlerRunningException < ServiceError
@@ -119,7 +158,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class CrawlerStoppingException < ServiceError
@@ -135,7 +173,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotFoundException < ServiceError
@@ -151,7 +188,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class GlueEncryptionException < ServiceError
@@ -167,7 +203,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -183,7 +218,21 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
+    end
 
+    class IllegalWorkflowStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::IllegalWorkflowStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class InternalServiceException < ServiceError
@@ -199,7 +248,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -215,7 +263,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class MLTransformNotReadyException < ServiceError
@@ -231,7 +278,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoScheduleException < ServiceError
@@ -247,7 +293,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationTimeoutException < ServiceError
@@ -263,7 +308,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNumberLimitExceededException < ServiceError
@@ -279,7 +323,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchedulerNotRunningException < ServiceError
@@ -295,7 +338,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchedulerRunningException < ServiceError
@@ -311,7 +353,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchedulerTransitioningException < ServiceError
@@ -327,7 +368,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -343,7 +383,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
     class VersionMismatchException < ServiceError
@@ -359,7 +398,6 @@ module Aws::Glue
       def message
         @message || @data[:message]
       end
-
     end
 
   end

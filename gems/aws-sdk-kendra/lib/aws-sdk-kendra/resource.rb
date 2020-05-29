@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Kendra
+
   class Resource
 
     # @param options ({})

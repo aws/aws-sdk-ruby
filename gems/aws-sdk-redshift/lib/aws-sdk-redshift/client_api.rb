@@ -119,6 +119,7 @@ module Aws::Redshift
     CreateSnapshotCopyGrantResult = Shapes::StructureShape.new(name: 'CreateSnapshotCopyGrantResult')
     CreateSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'CreateSnapshotScheduleMessage')
     CreateTagsMessage = Shapes::StructureShape.new(name: 'CreateTagsMessage')
+    CreateUsageLimitMessage = Shapes::StructureShape.new(name: 'CreateUsageLimitMessage')
     CustomerStorageMessage = Shapes::StructureShape.new(name: 'CustomerStorageMessage')
     DataTransferProgress = Shapes::StructureShape.new(name: 'DataTransferProgress')
     DbGroupList = Shapes::ListShape.new(name: 'DbGroupList')
@@ -140,6 +141,7 @@ module Aws::Redshift
     DeleteSnapshotCopyGrantMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotCopyGrantMessage')
     DeleteSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotScheduleMessage')
     DeleteTagsMessage = Shapes::StructureShape.new(name: 'DeleteTagsMessage')
+    DeleteUsageLimitMessage = Shapes::StructureShape.new(name: 'DeleteUsageLimitMessage')
     DependentServiceRequestThrottlingFault = Shapes::StructureShape.new(name: 'DependentServiceRequestThrottlingFault')
     DependentServiceUnavailableFault = Shapes::StructureShape.new(name: 'DependentServiceUnavailableFault')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
@@ -171,6 +173,7 @@ module Aws::Redshift
     DescribeSnapshotSchedulesOutputMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotSchedulesOutputMessage')
     DescribeTableRestoreStatusMessage = Shapes::StructureShape.new(name: 'DescribeTableRestoreStatusMessage')
     DescribeTagsMessage = Shapes::StructureShape.new(name: 'DescribeTagsMessage')
+    DescribeUsageLimitsMessage = Shapes::StructureShape.new(name: 'DescribeUsageLimitsMessage')
     DisableLoggingMessage = Shapes::StructureShape.new(name: 'DisableLoggingMessage')
     DisableSnapshotCopyMessage = Shapes::StructureShape.new(name: 'DisableSnapshotCopyMessage')
     DisableSnapshotCopyResult = Shapes::StructureShape.new(name: 'DisableSnapshotCopyResult')
@@ -248,6 +251,7 @@ module Aws::Redshift
     InvalidSubscriptionStateFault = Shapes::StructureShape.new(name: 'InvalidSubscriptionStateFault')
     InvalidTableRestoreArgumentFault = Shapes::StructureShape.new(name: 'InvalidTableRestoreArgumentFault')
     InvalidTagFault = Shapes::StructureShape.new(name: 'InvalidTagFault')
+    InvalidUsageLimitFault = Shapes::StructureShape.new(name: 'InvalidUsageLimitFault')
     InvalidVPCNetworkStateFault = Shapes::StructureShape.new(name: 'InvalidVPCNetworkStateFault')
     LimitExceededFault = Shapes::StructureShape.new(name: 'LimitExceededFault')
     LoggingStatus = Shapes::StructureShape.new(name: 'LoggingStatus')
@@ -275,6 +279,7 @@ module Aws::Redshift
     ModifySnapshotCopyRetentionPeriodMessage = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodMessage')
     ModifySnapshotCopyRetentionPeriodResult = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodResult')
     ModifySnapshotScheduleMessage = Shapes::StructureShape.new(name: 'ModifySnapshotScheduleMessage')
+    ModifyUsageLimitMessage = Shapes::StructureShape.new(name: 'ModifyUsageLimitMessage')
     NodeConfigurationOption = Shapes::StructureShape.new(name: 'NodeConfigurationOption')
     NodeConfigurationOptionList = Shapes::ListShape.new(name: 'NodeConfigurationOptionList')
     NodeConfigurationOptionsFilter = Shapes::StructureShape.new(name: 'NodeConfigurationOptionsFilter')
@@ -291,6 +296,8 @@ module Aws::Redshift
     ParameterApplyType = Shapes::StringShape.new(name: 'ParameterApplyType')
     ParameterGroupList = Shapes::ListShape.new(name: 'ParameterGroupList')
     ParametersList = Shapes::ListShape.new(name: 'ParametersList')
+    PauseClusterMessage = Shapes::StructureShape.new(name: 'PauseClusterMessage')
+    PauseClusterResult = Shapes::StructureShape.new(name: 'PauseClusterResult')
     PendingActionsList = Shapes::ListShape.new(name: 'PendingActionsList')
     PendingModifiedValues = Shapes::StructureShape.new(name: 'PendingModifiedValues')
     PurchaseReservedNodeOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedNodeOfferingMessage')
@@ -324,6 +331,8 @@ module Aws::Redshift
     RestoreStatus = Shapes::StructureShape.new(name: 'RestoreStatus')
     RestoreTableFromClusterSnapshotMessage = Shapes::StructureShape.new(name: 'RestoreTableFromClusterSnapshotMessage')
     RestoreTableFromClusterSnapshotResult = Shapes::StructureShape.new(name: 'RestoreTableFromClusterSnapshotResult')
+    ResumeClusterMessage = Shapes::StructureShape.new(name: 'ResumeClusterMessage')
+    ResumeClusterResult = Shapes::StructureShape.new(name: 'ResumeClusterResult')
     RevisionTarget = Shapes::StructureShape.new(name: 'RevisionTarget')
     RevisionTargetsList = Shapes::ListShape.new(name: 'RevisionTargetsList')
     RevokeClusterSecurityGroupIngressMessage = Shapes::StructureShape.new(name: 'RevokeClusterSecurityGroupIngressMessage')
@@ -417,6 +426,15 @@ module Aws::Redshift
     UnsupportedOperationFault = Shapes::StructureShape.new(name: 'UnsupportedOperationFault')
     UnsupportedOptionFault = Shapes::StructureShape.new(name: 'UnsupportedOptionFault')
     UpdateTarget = Shapes::StructureShape.new(name: 'UpdateTarget')
+    UsageLimit = Shapes::StructureShape.new(name: 'UsageLimit')
+    UsageLimitAlreadyExistsFault = Shapes::StructureShape.new(name: 'UsageLimitAlreadyExistsFault')
+    UsageLimitBreachAction = Shapes::StringShape.new(name: 'UsageLimitBreachAction')
+    UsageLimitFeatureType = Shapes::StringShape.new(name: 'UsageLimitFeatureType')
+    UsageLimitLimitType = Shapes::StringShape.new(name: 'UsageLimitLimitType')
+    UsageLimitList = Shapes::StructureShape.new(name: 'UsageLimitList')
+    UsageLimitNotFoundFault = Shapes::StructureShape.new(name: 'UsageLimitNotFoundFault')
+    UsageLimitPeriod = Shapes::StringShape.new(name: 'UsageLimitPeriod')
+    UsageLimits = Shapes::ListShape.new(name: 'UsageLimits')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
@@ -428,6 +446,8 @@ module Aws::Redshift
 
     AcceptReservedNodeExchangeOutputMessage.add_member(:exchanged_reserved_node, Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ExchangedReservedNode"))
     AcceptReservedNodeExchangeOutputMessage.struct_class = Types::AcceptReservedNodeExchangeOutputMessage
+
+    AccessToSnapshotDeniedFault.struct_class = Types::AccessToSnapshotDeniedFault
 
     AccountAttribute.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "AttributeName"))
     AccountAttribute.add_member(:attribute_values, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
@@ -452,6 +472,12 @@ module Aws::Redshift
 
     AttributeValueTarget.add_member(:attribute_value, Shapes::ShapeRef.new(shape: String, location_name: "AttributeValue"))
     AttributeValueTarget.struct_class = Types::AttributeValueTarget
+
+    AuthorizationAlreadyExistsFault.struct_class = Types::AuthorizationAlreadyExistsFault
+
+    AuthorizationNotFoundFault.struct_class = Types::AuthorizationNotFoundFault
+
+    AuthorizationQuotaExceededFault.struct_class = Types::AuthorizationQuotaExceededFault
 
     AuthorizeClusterSecurityGroupIngressMessage.add_member(:cluster_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterSecurityGroupName"))
     AuthorizeClusterSecurityGroupIngressMessage.add_member(:cidrip, Shapes::ShapeRef.new(shape: String, location_name: "CIDRIP"))
@@ -483,6 +509,10 @@ module Aws::Redshift
     BatchDeleteClusterSnapshotsResult.add_member(:errors, Shapes::ShapeRef.new(shape: BatchSnapshotOperationErrorList, location_name: "Errors"))
     BatchDeleteClusterSnapshotsResult.struct_class = Types::BatchDeleteClusterSnapshotsResult
 
+    BatchDeleteRequestSizeExceededFault.struct_class = Types::BatchDeleteRequestSizeExceededFault
+
+    BatchModifyClusterSnapshotsLimitExceededFault.struct_class = Types::BatchModifyClusterSnapshotsLimitExceededFault
+
     BatchModifyClusterSnapshotsMessage.add_member(:snapshot_identifier_list, Shapes::ShapeRef.new(shape: SnapshotIdentifierList, required: true, location_name: "SnapshotIdentifierList"))
     BatchModifyClusterSnapshotsMessage.add_member(:manual_snapshot_retention_period, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ManualSnapshotRetentionPeriod"))
     BatchModifyClusterSnapshotsMessage.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
@@ -495,6 +525,8 @@ module Aws::Redshift
     BatchSnapshotOperationErrorList.member = Shapes::ShapeRef.new(shape: SnapshotErrorMessage, location_name: "SnapshotErrorMessage")
 
     BatchSnapshotOperationErrors.member = Shapes::ShapeRef.new(shape: SnapshotErrorMessage, location_name: "SnapshotErrorMessage")
+
+    BucketNotFoundFault.struct_class = Types::BucketNotFoundFault
 
     CancelResizeMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     CancelResizeMessage.struct_class = Types::CancelResizeMessage
@@ -547,6 +579,8 @@ module Aws::Redshift
     Cluster.add_member(:resize_info, Shapes::ShapeRef.new(shape: ResizeInfo, location_name: "ResizeInfo"))
     Cluster.struct_class = Types::Cluster
 
+    ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
+
     ClusterAssociatedToSchedule.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     ClusterAssociatedToSchedule.add_member(:schedule_association_state, Shapes::ShapeRef.new(shape: ScheduleState, location_name: "ScheduleAssociationState"))
     ClusterAssociatedToSchedule.struct_class = Types::ClusterAssociatedToSchedule
@@ -583,11 +617,17 @@ module Aws::Redshift
 
     ClusterNodesList.member = Shapes::ShapeRef.new(shape: ClusterNode)
 
+    ClusterNotFoundFault.struct_class = Types::ClusterNotFoundFault
+
+    ClusterOnLatestRevisionFault.struct_class = Types::ClusterOnLatestRevisionFault
+
     ClusterParameterGroup.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     ClusterParameterGroup.add_member(:parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupFamily"))
     ClusterParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ClusterParameterGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ClusterParameterGroup.struct_class = Types::ClusterParameterGroup
+
+    ClusterParameterGroupAlreadyExistsFault.struct_class = Types::ClusterParameterGroupAlreadyExistsFault
 
     ClusterParameterGroupDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
     ClusterParameterGroupDetails.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -596,6 +636,10 @@ module Aws::Redshift
     ClusterParameterGroupNameMessage.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     ClusterParameterGroupNameMessage.add_member(:parameter_group_status, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupStatus"))
     ClusterParameterGroupNameMessage.struct_class = Types::ClusterParameterGroupNameMessage
+
+    ClusterParameterGroupNotFoundFault.struct_class = Types::ClusterParameterGroupNotFoundFault
+
+    ClusterParameterGroupQuotaExceededFault.struct_class = Types::ClusterParameterGroupQuotaExceededFault
 
     ClusterParameterGroupStatus.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     ClusterParameterGroupStatus.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: String, location_name: "ParameterApplyStatus"))
@@ -615,12 +659,16 @@ module Aws::Redshift
 
     ClusterParameterStatusList.member = Shapes::ShapeRef.new(shape: ClusterParameterStatus)
 
+    ClusterQuotaExceededFault.struct_class = Types::ClusterQuotaExceededFault
+
     ClusterSecurityGroup.add_member(:cluster_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ClusterSecurityGroupName"))
     ClusterSecurityGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ClusterSecurityGroup.add_member(:ec2_security_groups, Shapes::ShapeRef.new(shape: EC2SecurityGroupList, location_name: "EC2SecurityGroups"))
     ClusterSecurityGroup.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: IPRangeList, location_name: "IPRanges"))
     ClusterSecurityGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ClusterSecurityGroup.struct_class = Types::ClusterSecurityGroup
+
+    ClusterSecurityGroupAlreadyExistsFault.struct_class = Types::ClusterSecurityGroupAlreadyExistsFault
 
     ClusterSecurityGroupMembership.add_member(:cluster_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ClusterSecurityGroupName"))
     ClusterSecurityGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
@@ -634,13 +682,23 @@ module Aws::Redshift
 
     ClusterSecurityGroupNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "ClusterSecurityGroupName")
 
+    ClusterSecurityGroupNotFoundFault.struct_class = Types::ClusterSecurityGroupNotFoundFault
+
+    ClusterSecurityGroupQuotaExceededFault.struct_class = Types::ClusterSecurityGroupQuotaExceededFault
+
     ClusterSecurityGroups.member = Shapes::ShapeRef.new(shape: ClusterSecurityGroup, location_name: "ClusterSecurityGroup")
+
+    ClusterSnapshotAlreadyExistsFault.struct_class = Types::ClusterSnapshotAlreadyExistsFault
 
     ClusterSnapshotCopyStatus.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "DestinationRegion"))
     ClusterSnapshotCopyStatus.add_member(:retention_period, Shapes::ShapeRef.new(shape: Long, location_name: "RetentionPeriod"))
     ClusterSnapshotCopyStatus.add_member(:manual_snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "ManualSnapshotRetentionPeriod"))
     ClusterSnapshotCopyStatus.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotCopyGrantName"))
     ClusterSnapshotCopyStatus.struct_class = Types::ClusterSnapshotCopyStatus
+
+    ClusterSnapshotNotFoundFault.struct_class = Types::ClusterSnapshotNotFoundFault
+
+    ClusterSnapshotQuotaExceededFault.struct_class = Types::ClusterSnapshotQuotaExceededFault
 
     ClusterSubnetGroup.add_member(:cluster_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ClusterSubnetGroupName"))
     ClusterSubnetGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -650,11 +708,19 @@ module Aws::Redshift
     ClusterSubnetGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ClusterSubnetGroup.struct_class = Types::ClusterSubnetGroup
 
+    ClusterSubnetGroupAlreadyExistsFault.struct_class = Types::ClusterSubnetGroupAlreadyExistsFault
+
     ClusterSubnetGroupMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ClusterSubnetGroupMessage.add_member(:cluster_subnet_groups, Shapes::ShapeRef.new(shape: ClusterSubnetGroups, location_name: "ClusterSubnetGroups"))
     ClusterSubnetGroupMessage.struct_class = Types::ClusterSubnetGroupMessage
 
+    ClusterSubnetGroupNotFoundFault.struct_class = Types::ClusterSubnetGroupNotFoundFault
+
+    ClusterSubnetGroupQuotaExceededFault.struct_class = Types::ClusterSubnetGroupQuotaExceededFault
+
     ClusterSubnetGroups.member = Shapes::ShapeRef.new(shape: ClusterSubnetGroup, location_name: "ClusterSubnetGroup")
+
+    ClusterSubnetQuotaExceededFault.struct_class = Types::ClusterSubnetQuotaExceededFault
 
     ClusterVersion.add_member(:cluster_version, Shapes::ShapeRef.new(shape: String, location_name: "ClusterVersion"))
     ClusterVersion.add_member(:cluster_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "ClusterParameterGroupFamily"))
@@ -679,6 +745,8 @@ module Aws::Redshift
 
     CopyClusterSnapshotResult.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot"))
     CopyClusterSnapshotResult.struct_class = Types::CopyClusterSnapshotResult
+
+    CopyToRegionDisabledFault.struct_class = Types::CopyToRegionDisabledFault
 
     CreateClusterMessage.add_member(:db_name, Shapes::ShapeRef.new(shape: String, location_name: "DBName"))
     CreateClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
@@ -812,6 +880,15 @@ module Aws::Redshift
     CreateTagsMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     CreateTagsMessage.struct_class = Types::CreateTagsMessage
 
+    CreateUsageLimitMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    CreateUsageLimitMessage.add_member(:feature_type, Shapes::ShapeRef.new(shape: UsageLimitFeatureType, required: true, location_name: "FeatureType"))
+    CreateUsageLimitMessage.add_member(:limit_type, Shapes::ShapeRef.new(shape: UsageLimitLimitType, required: true, location_name: "LimitType"))
+    CreateUsageLimitMessage.add_member(:amount, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "Amount"))
+    CreateUsageLimitMessage.add_member(:period, Shapes::ShapeRef.new(shape: UsageLimitPeriod, location_name: "Period"))
+    CreateUsageLimitMessage.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
+    CreateUsageLimitMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateUsageLimitMessage.struct_class = Types::CreateUsageLimitMessage
+
     CustomerStorageMessage.add_member(:total_backup_size_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "TotalBackupSizeInMegaBytes"))
     CustomerStorageMessage.add_member(:total_provisioned_storage_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "TotalProvisionedStorageInMegaBytes"))
     CustomerStorageMessage.struct_class = Types::CustomerStorageMessage
@@ -886,6 +963,13 @@ module Aws::Redshift
     DeleteTagsMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     DeleteTagsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     DeleteTagsMessage.struct_class = Types::DeleteTagsMessage
+
+    DeleteUsageLimitMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UsageLimitId"))
+    DeleteUsageLimitMessage.struct_class = Types::DeleteUsageLimitMessage
+
+    DependentServiceRequestThrottlingFault.struct_class = Types::DependentServiceRequestThrottlingFault
+
+    DependentServiceUnavailableFault.struct_class = Types::DependentServiceUnavailableFault
 
     DescribeAccountAttributesMessage.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     DescribeAccountAttributesMessage.struct_class = Types::DescribeAccountAttributesMessage
@@ -1069,6 +1153,15 @@ module Aws::Redshift
     DescribeTagsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
     DescribeTagsMessage.struct_class = Types::DescribeTagsMessage
 
+    DescribeUsageLimitsMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, location_name: "UsageLimitId"))
+    DescribeUsageLimitsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    DescribeUsageLimitsMessage.add_member(:feature_type, Shapes::ShapeRef.new(shape: UsageLimitFeatureType, location_name: "FeatureType"))
+    DescribeUsageLimitsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeUsageLimitsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeUsageLimitsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
+    DescribeUsageLimitsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
+    DescribeUsageLimitsMessage.struct_class = Types::DescribeUsageLimitsMessage
+
     DisableLoggingMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     DisableLoggingMessage.struct_class = Types::DisableLoggingMessage
 
@@ -1154,6 +1247,8 @@ module Aws::Redshift
     EventSubscription.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     EventSubscription.struct_class = Types::EventSubscription
 
+    EventSubscriptionQuotaExceededFault.struct_class = Types::EventSubscriptionQuotaExceededFault
+
     EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription")
 
     EventSubscriptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1186,11 +1281,17 @@ module Aws::Redshift
     HsmClientCertificate.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     HsmClientCertificate.struct_class = Types::HsmClientCertificate
 
+    HsmClientCertificateAlreadyExistsFault.struct_class = Types::HsmClientCertificateAlreadyExistsFault
+
     HsmClientCertificateList.member = Shapes::ShapeRef.new(shape: HsmClientCertificate, location_name: "HsmClientCertificate")
 
     HsmClientCertificateMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     HsmClientCertificateMessage.add_member(:hsm_client_certificates, Shapes::ShapeRef.new(shape: HsmClientCertificateList, location_name: "HsmClientCertificates"))
     HsmClientCertificateMessage.struct_class = Types::HsmClientCertificateMessage
+
+    HsmClientCertificateNotFoundFault.struct_class = Types::HsmClientCertificateNotFoundFault
+
+    HsmClientCertificateQuotaExceededFault.struct_class = Types::HsmClientCertificateQuotaExceededFault
 
     HsmConfiguration.add_member(:hsm_configuration_identifier, Shapes::ShapeRef.new(shape: String, location_name: "HsmConfigurationIdentifier"))
     HsmConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -1199,11 +1300,17 @@ module Aws::Redshift
     HsmConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     HsmConfiguration.struct_class = Types::HsmConfiguration
 
+    HsmConfigurationAlreadyExistsFault.struct_class = Types::HsmConfigurationAlreadyExistsFault
+
     HsmConfigurationList.member = Shapes::ShapeRef.new(shape: HsmConfiguration, location_name: "HsmConfiguration")
 
     HsmConfigurationMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     HsmConfigurationMessage.add_member(:hsm_configurations, Shapes::ShapeRef.new(shape: HsmConfigurationList, location_name: "HsmConfigurations"))
     HsmConfigurationMessage.struct_class = Types::HsmConfigurationMessage
+
+    HsmConfigurationNotFoundFault.struct_class = Types::HsmConfigurationNotFoundFault
+
+    HsmConfigurationQuotaExceededFault.struct_class = Types::HsmConfigurationQuotaExceededFault
 
     HsmStatus.add_member(:hsm_client_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "HsmClientCertificateIdentifier"))
     HsmStatus.add_member(:hsm_configuration_identifier, Shapes::ShapeRef.new(shape: String, location_name: "HsmConfigurationIdentifier"))
@@ -1224,6 +1331,66 @@ module Aws::Redshift
     ImportTablesInProgress.member = Shapes::ShapeRef.new(shape: String)
 
     ImportTablesNotStarted.member = Shapes::ShapeRef.new(shape: String)
+
+    InProgressTableRestoreQuotaExceededFault.struct_class = Types::InProgressTableRestoreQuotaExceededFault
+
+    IncompatibleOrderableOptions.struct_class = Types::IncompatibleOrderableOptions
+
+    InsufficientClusterCapacityFault.struct_class = Types::InsufficientClusterCapacityFault
+
+    InsufficientS3BucketPolicyFault.struct_class = Types::InsufficientS3BucketPolicyFault
+
+    InvalidClusterParameterGroupStateFault.struct_class = Types::InvalidClusterParameterGroupStateFault
+
+    InvalidClusterSecurityGroupStateFault.struct_class = Types::InvalidClusterSecurityGroupStateFault
+
+    InvalidClusterSnapshotScheduleStateFault.struct_class = Types::InvalidClusterSnapshotScheduleStateFault
+
+    InvalidClusterSnapshotStateFault.struct_class = Types::InvalidClusterSnapshotStateFault
+
+    InvalidClusterStateFault.struct_class = Types::InvalidClusterStateFault
+
+    InvalidClusterSubnetGroupStateFault.struct_class = Types::InvalidClusterSubnetGroupStateFault
+
+    InvalidClusterSubnetStateFault.struct_class = Types::InvalidClusterSubnetStateFault
+
+    InvalidClusterTrackFault.struct_class = Types::InvalidClusterTrackFault
+
+    InvalidElasticIpFault.struct_class = Types::InvalidElasticIpFault
+
+    InvalidHsmClientCertificateStateFault.struct_class = Types::InvalidHsmClientCertificateStateFault
+
+    InvalidHsmConfigurationStateFault.struct_class = Types::InvalidHsmConfigurationStateFault
+
+    InvalidReservedNodeStateFault.struct_class = Types::InvalidReservedNodeStateFault
+
+    InvalidRestoreFault.struct_class = Types::InvalidRestoreFault
+
+    InvalidRetentionPeriodFault.struct_class = Types::InvalidRetentionPeriodFault
+
+    InvalidS3BucketNameFault.struct_class = Types::InvalidS3BucketNameFault
+
+    InvalidS3KeyPrefixFault.struct_class = Types::InvalidS3KeyPrefixFault
+
+    InvalidScheduleFault.struct_class = Types::InvalidScheduleFault
+
+    InvalidScheduledActionFault.struct_class = Types::InvalidScheduledActionFault
+
+    InvalidSnapshotCopyGrantStateFault.struct_class = Types::InvalidSnapshotCopyGrantStateFault
+
+    InvalidSubnet.struct_class = Types::InvalidSubnet
+
+    InvalidSubscriptionStateFault.struct_class = Types::InvalidSubscriptionStateFault
+
+    InvalidTableRestoreArgumentFault.struct_class = Types::InvalidTableRestoreArgumentFault
+
+    InvalidTagFault.struct_class = Types::InvalidTagFault
+
+    InvalidUsageLimitFault.struct_class = Types::InvalidUsageLimitFault
+
+    InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
+
+    LimitExceededFault.struct_class = Types::LimitExceededFault
 
     LoggingStatus.add_member(:logging_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LoggingEnabled"))
     LoggingStatus.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
@@ -1350,6 +1517,11 @@ module Aws::Redshift
     ModifySnapshotScheduleMessage.add_member(:schedule_definitions, Shapes::ShapeRef.new(shape: ScheduleDefinitionList, required: true, location_name: "ScheduleDefinitions"))
     ModifySnapshotScheduleMessage.struct_class = Types::ModifySnapshotScheduleMessage
 
+    ModifyUsageLimitMessage.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UsageLimitId"))
+    ModifyUsageLimitMessage.add_member(:amount, Shapes::ShapeRef.new(shape: LongOptional, location_name: "Amount"))
+    ModifyUsageLimitMessage.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
+    ModifyUsageLimitMessage.struct_class = Types::ModifyUsageLimitMessage
+
     NodeConfigurationOption.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     NodeConfigurationOption.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
     NodeConfigurationOption.add_member(:estimated_disk_utilization_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "EstimatedDiskUtilizationPercent"))
@@ -1368,6 +1540,10 @@ module Aws::Redshift
     NodeConfigurationOptionsMessage.add_member(:node_configuration_option_list, Shapes::ShapeRef.new(shape: NodeConfigurationOptionList, location_name: "NodeConfigurationOptionList"))
     NodeConfigurationOptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     NodeConfigurationOptionsMessage.struct_class = Types::NodeConfigurationOptionsMessage
+
+    NumberOfNodesPerClusterLimitExceededFault.struct_class = Types::NumberOfNodesPerClusterLimitExceededFault
+
+    NumberOfNodesQuotaExceededFault.struct_class = Types::NumberOfNodesQuotaExceededFault
 
     OrderableClusterOption.add_member(:cluster_version, Shapes::ShapeRef.new(shape: String, location_name: "ClusterVersion"))
     OrderableClusterOption.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
@@ -1395,6 +1571,12 @@ module Aws::Redshift
     ParameterGroupList.member = Shapes::ShapeRef.new(shape: ClusterParameterGroup, location_name: "ClusterParameterGroup")
 
     ParametersList.member = Shapes::ShapeRef.new(shape: Parameter, location_name: "Parameter")
+
+    PauseClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    PauseClusterMessage.struct_class = Types::PauseClusterMessage
+
+    PauseClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    PauseClusterResult.struct_class = Types::PauseClusterResult
 
     PendingActionsList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1445,7 +1627,13 @@ module Aws::Redshift
     ReservedNode.add_member(:reserved_node_offering_type, Shapes::ShapeRef.new(shape: ReservedNodeOfferingType, location_name: "ReservedNodeOfferingType"))
     ReservedNode.struct_class = Types::ReservedNode
 
+    ReservedNodeAlreadyExistsFault.struct_class = Types::ReservedNodeAlreadyExistsFault
+
+    ReservedNodeAlreadyMigratedFault.struct_class = Types::ReservedNodeAlreadyMigratedFault
+
     ReservedNodeList.member = Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ReservedNode")
+
+    ReservedNodeNotFoundFault.struct_class = Types::ReservedNodeNotFoundFault
 
     ReservedNodeOffering.add_member(:reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeOfferingId"))
     ReservedNodeOffering.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
@@ -1460,9 +1648,13 @@ module Aws::Redshift
 
     ReservedNodeOfferingList.member = Shapes::ShapeRef.new(shape: ReservedNodeOffering, location_name: "ReservedNodeOffering")
 
+    ReservedNodeOfferingNotFoundFault.struct_class = Types::ReservedNodeOfferingNotFoundFault
+
     ReservedNodeOfferingsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ReservedNodeOfferingsMessage.add_member(:reserved_node_offerings, Shapes::ShapeRef.new(shape: ReservedNodeOfferingList, location_name: "ReservedNodeOfferings"))
     ReservedNodeOfferingsMessage.struct_class = Types::ReservedNodeOfferingsMessage
+
+    ReservedNodeQuotaExceededFault.struct_class = Types::ReservedNodeQuotaExceededFault
 
     ReservedNodesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ReservedNodesMessage.add_member(:reserved_nodes, Shapes::ShapeRef.new(shape: ReservedNodeList, location_name: "ReservedNodes"))
@@ -1476,7 +1668,7 @@ module Aws::Redshift
     ResizeClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ResizeClusterMessage.add_member(:cluster_type, Shapes::ShapeRef.new(shape: String, location_name: "ClusterType"))
     ResizeClusterMessage.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
-    ResizeClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "NumberOfNodes"))
+    ResizeClusterMessage.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
     ResizeClusterMessage.add_member(:classic, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Classic"))
     ResizeClusterMessage.struct_class = Types::ResizeClusterMessage
 
@@ -1486,6 +1678,8 @@ module Aws::Redshift
     ResizeInfo.add_member(:resize_type, Shapes::ShapeRef.new(shape: String, location_name: "ResizeType"))
     ResizeInfo.add_member(:allow_cancel_resize, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowCancelResize"))
     ResizeInfo.struct_class = Types::ResizeInfo
+
+    ResizeNotFoundFault.struct_class = Types::ResizeNotFoundFault
 
     ResizeProgressMessage.add_member(:target_node_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetNodeType"))
     ResizeProgressMessage.add_member(:target_number_of_nodes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "TargetNumberOfNodes"))
@@ -1504,6 +1698,8 @@ module Aws::Redshift
     ResizeProgressMessage.add_member(:target_encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "TargetEncryptionType"))
     ResizeProgressMessage.add_member(:data_transfer_progress_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "DataTransferProgressPercent"))
     ResizeProgressMessage.struct_class = Types::ResizeProgressMessage
+
+    ResourceNotFoundFault.struct_class = Types::ResourceNotFoundFault
 
     RestorableNodeTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "NodeType")
 
@@ -1559,6 +1755,12 @@ module Aws::Redshift
     RestoreTableFromClusterSnapshotResult.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "TableRestoreStatus"))
     RestoreTableFromClusterSnapshotResult.struct_class = Types::RestoreTableFromClusterSnapshotResult
 
+    ResumeClusterMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
+    ResumeClusterMessage.struct_class = Types::ResumeClusterMessage
+
+    ResumeClusterResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
+    ResumeClusterResult.struct_class = Types::ResumeClusterResult
+
     RevisionTarget.add_member(:database_revision, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseRevision"))
     RevisionTarget.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     RevisionTarget.add_member(:database_revision_release_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "DatabaseRevisionReleaseDate"))
@@ -1589,7 +1791,15 @@ module Aws::Redshift
     RotateEncryptionKeyResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     RotateEncryptionKeyResult.struct_class = Types::RotateEncryptionKeyResult
 
+    SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
+
+    SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
+
+    SNSTopicArnNotFoundFault.struct_class = Types::SNSTopicArnNotFoundFault
+
     ScheduleDefinitionList.member = Shapes::ShapeRef.new(shape: String, location_name: "ScheduleDefinition")
+
+    ScheduleDefinitionTypeUnsupportedFault.struct_class = Types::ScheduleDefinitionTypeUnsupportedFault
 
     ScheduledAction.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, location_name: "ScheduledActionName"))
     ScheduledAction.add_member(:target_action, Shapes::ShapeRef.new(shape: ScheduledActionType, location_name: "TargetAction"))
@@ -1602,6 +1812,8 @@ module Aws::Redshift
     ScheduledAction.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
     ScheduledAction.struct_class = Types::ScheduledAction
 
+    ScheduledActionAlreadyExistsFault.struct_class = Types::ScheduledActionAlreadyExistsFault
+
     ScheduledActionFilter.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledActionFilterName, required: true, location_name: "Name"))
     ScheduledActionFilter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "Values"))
     ScheduledActionFilter.struct_class = Types::ScheduledActionFilter
@@ -1610,10 +1822,18 @@ module Aws::Redshift
 
     ScheduledActionList.member = Shapes::ShapeRef.new(shape: ScheduledAction, location_name: "ScheduledAction")
 
+    ScheduledActionNotFoundFault.struct_class = Types::ScheduledActionNotFoundFault
+
+    ScheduledActionQuotaExceededFault.struct_class = Types::ScheduledActionQuotaExceededFault
+
     ScheduledActionTimeList.member = Shapes::ShapeRef.new(shape: TStamp, location_name: "ScheduledActionTime")
 
     ScheduledActionType.add_member(:resize_cluster, Shapes::ShapeRef.new(shape: ResizeClusterMessage, location_name: "ResizeCluster"))
+    ScheduledActionType.add_member(:pause_cluster, Shapes::ShapeRef.new(shape: PauseClusterMessage, location_name: "PauseCluster"))
+    ScheduledActionType.add_member(:resume_cluster, Shapes::ShapeRef.new(shape: ResumeClusterMessage, location_name: "ResumeCluster"))
     ScheduledActionType.struct_class = Types::ScheduledActionType
+
+    ScheduledActionTypeUnsupportedFault.struct_class = Types::ScheduledActionTypeUnsupportedFault
 
     ScheduledActionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ScheduledActionsMessage.add_member(:scheduled_actions, Shapes::ShapeRef.new(shape: ScheduledActionList, location_name: "ScheduledActions"))
@@ -1656,16 +1876,28 @@ module Aws::Redshift
     Snapshot.add_member(:snapshot_retention_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotRetentionStartTime"))
     Snapshot.struct_class = Types::Snapshot
 
+    SnapshotCopyAlreadyDisabledFault.struct_class = Types::SnapshotCopyAlreadyDisabledFault
+
+    SnapshotCopyAlreadyEnabledFault.struct_class = Types::SnapshotCopyAlreadyEnabledFault
+
+    SnapshotCopyDisabledFault.struct_class = Types::SnapshotCopyDisabledFault
+
     SnapshotCopyGrant.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotCopyGrantName"))
     SnapshotCopyGrant.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     SnapshotCopyGrant.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     SnapshotCopyGrant.struct_class = Types::SnapshotCopyGrant
+
+    SnapshotCopyGrantAlreadyExistsFault.struct_class = Types::SnapshotCopyGrantAlreadyExistsFault
 
     SnapshotCopyGrantList.member = Shapes::ShapeRef.new(shape: SnapshotCopyGrant, location_name: "SnapshotCopyGrant")
 
     SnapshotCopyGrantMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     SnapshotCopyGrantMessage.add_member(:snapshot_copy_grants, Shapes::ShapeRef.new(shape: SnapshotCopyGrantList, location_name: "SnapshotCopyGrants"))
     SnapshotCopyGrantMessage.struct_class = Types::SnapshotCopyGrantMessage
+
+    SnapshotCopyGrantNotFoundFault.struct_class = Types::SnapshotCopyGrantNotFoundFault
+
+    SnapshotCopyGrantQuotaExceededFault.struct_class = Types::SnapshotCopyGrantQuotaExceededFault
 
     SnapshotErrorMessage.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotIdentifier"))
     SnapshotErrorMessage.add_member(:snapshot_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotClusterIdentifier"))
@@ -1690,7 +1922,15 @@ module Aws::Redshift
     SnapshotSchedule.add_member(:associated_clusters, Shapes::ShapeRef.new(shape: AssociatedClusterList, location_name: "AssociatedClusters"))
     SnapshotSchedule.struct_class = Types::SnapshotSchedule
 
+    SnapshotScheduleAlreadyExistsFault.struct_class = Types::SnapshotScheduleAlreadyExistsFault
+
     SnapshotScheduleList.member = Shapes::ShapeRef.new(shape: SnapshotSchedule, location_name: "SnapshotSchedule")
+
+    SnapshotScheduleNotFoundFault.struct_class = Types::SnapshotScheduleNotFoundFault
+
+    SnapshotScheduleQuotaExceededFault.struct_class = Types::SnapshotScheduleQuotaExceededFault
+
+    SnapshotScheduleUpdateInProgressFault.struct_class = Types::SnapshotScheduleUpdateInProgressFault
 
     SnapshotSortingEntity.add_member(:attribute, Shapes::ShapeRef.new(shape: SnapshotAttributeToSortBy, required: true, location_name: "Attribute"))
     SnapshotSortingEntity.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortByOrder, location_name: "SortOrder"))
@@ -1700,14 +1940,28 @@ module Aws::Redshift
 
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
 
+    SourceNotFoundFault.struct_class = Types::SourceNotFoundFault
+
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetStatus"))
     Subnet.struct_class = Types::Subnet
 
+    SubnetAlreadyInUse.struct_class = Types::SubnetAlreadyInUse
+
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
+
+    SubscriptionAlreadyExistFault.struct_class = Types::SubscriptionAlreadyExistFault
+
+    SubscriptionCategoryNotFoundFault.struct_class = Types::SubscriptionCategoryNotFoundFault
+
+    SubscriptionEventIdNotFoundFault.struct_class = Types::SubscriptionEventIdNotFoundFault
+
+    SubscriptionNotFoundFault.struct_class = Types::SubscriptionNotFoundFault
+
+    SubscriptionSeverityNotFoundFault.struct_class = Types::SubscriptionSeverityNotFoundFault
 
     SupportedOperation.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, location_name: "OperationName"))
     SupportedOperation.struct_class = Types::SupportedOperation
@@ -1718,6 +1972,10 @@ module Aws::Redshift
     SupportedPlatform.struct_class = Types::SupportedPlatform
 
     SupportedPlatformsList.member = Shapes::ShapeRef.new(shape: SupportedPlatform, location_name: "SupportedPlatform")
+
+    TableLimitExceededFault.struct_class = Types::TableLimitExceededFault
+
+    TableRestoreNotFoundFault.struct_class = Types::TableRestoreNotFoundFault
 
     TableRestoreStatus.add_member(:table_restore_request_id, Shapes::ShapeRef.new(shape: String, location_name: "TableRestoreRequestId"))
     TableRestoreStatus.add_member(:status, Shapes::ShapeRef.new(shape: TableRestoreStatusType, location_name: "Status"))
@@ -1747,6 +2005,8 @@ module Aws::Redshift
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: String, location_name: "TagKey")
 
+    TagLimitExceededFault.struct_class = Types::TagLimitExceededFault
+
     TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
 
     TagValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "TagValue")
@@ -1768,10 +2028,38 @@ module Aws::Redshift
     TrackListMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     TrackListMessage.struct_class = Types::TrackListMessage
 
+    UnauthorizedOperation.struct_class = Types::UnauthorizedOperation
+
+    UnknownSnapshotCopyRegionFault.struct_class = Types::UnknownSnapshotCopyRegionFault
+
+    UnsupportedOperationFault.struct_class = Types::UnsupportedOperationFault
+
+    UnsupportedOptionFault.struct_class = Types::UnsupportedOptionFault
+
     UpdateTarget.add_member(:maintenance_track_name, Shapes::ShapeRef.new(shape: String, location_name: "MaintenanceTrackName"))
     UpdateTarget.add_member(:database_version, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseVersion"))
     UpdateTarget.add_member(:supported_operations, Shapes::ShapeRef.new(shape: SupportedOperationList, location_name: "SupportedOperations"))
     UpdateTarget.struct_class = Types::UpdateTarget
+
+    UsageLimit.add_member(:usage_limit_id, Shapes::ShapeRef.new(shape: String, location_name: "UsageLimitId"))
+    UsageLimit.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
+    UsageLimit.add_member(:feature_type, Shapes::ShapeRef.new(shape: UsageLimitFeatureType, location_name: "FeatureType"))
+    UsageLimit.add_member(:limit_type, Shapes::ShapeRef.new(shape: UsageLimitLimitType, location_name: "LimitType"))
+    UsageLimit.add_member(:amount, Shapes::ShapeRef.new(shape: Long, location_name: "Amount"))
+    UsageLimit.add_member(:period, Shapes::ShapeRef.new(shape: UsageLimitPeriod, location_name: "Period"))
+    UsageLimit.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "BreachAction"))
+    UsageLimit.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    UsageLimit.struct_class = Types::UsageLimit
+
+    UsageLimitAlreadyExistsFault.struct_class = Types::UsageLimitAlreadyExistsFault
+
+    UsageLimitList.add_member(:usage_limits, Shapes::ShapeRef.new(shape: UsageLimits, location_name: "UsageLimits"))
+    UsageLimitList.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    UsageLimitList.struct_class = Types::UsageLimitList
+
+    UsageLimitNotFoundFault.struct_class = Types::UsageLimitNotFoundFault
+
+    UsageLimits.member = Shapes::ShapeRef.new(shape: UsageLimit)
 
     ValueStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -2065,6 +2353,21 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:create_usage_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUsageLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUsageLimitMessage)
+        o.output = Shapes::ShapeRef.new(shape: UsageLimit)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: UsageLimitAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUsageLimitFault)
+        o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "POST"
@@ -2187,6 +2490,16 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
+      end)
+
+      api.add_operation(:delete_usage_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUsageLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUsageLimitMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UsageLimitNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
       end)
 
       api.add_operation(:describe_account_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -2557,6 +2870,22 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:describe_usage_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeUsageLimits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeUsageLimitsMessage)
+        o.output = Shapes::ShapeRef.new(shape: UsageLimitList)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:disable_logging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableLogging"
         o.http_method = "POST"
@@ -2589,6 +2918,7 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InsufficientS3BucketPolicyFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3KeyPrefixFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketNameFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:enable_snapshot_copy, Seahorse::Model::Operation.new.tap do |o|
@@ -2689,6 +3019,7 @@ module Aws::Redshift
         o.input = Shapes::ShapeRef.new(shape: ModifyClusterMaintenanceMessage)
         o.output = Shapes::ShapeRef.new(shape: ModifyClusterMaintenanceResult)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:modify_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2791,6 +3122,27 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: SnapshotScheduleUpdateInProgressFault)
       end)
 
+      api.add_operation(:modify_usage_limit, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyUsageLimit"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyUsageLimitMessage)
+        o.output = Shapes::ShapeRef.new(shape: UsageLimit)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidUsageLimitFault)
+        o.errors << Shapes::ShapeRef.new(shape: UsageLimitNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:pause_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PauseCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PauseClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: PauseClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+      end)
+
       api.add_operation(:purchase_reserved_node_offering, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PurchaseReservedNodeOffering"
         o.http_method = "POST"
@@ -2886,6 +3238,16 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
+      end)
+
+      api.add_operation(:resume_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResumeClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: ResumeClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
       end)
 
       api.add_operation(:revoke_cluster_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-workmailmessageflow/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     work_mail_message_flow = Aws::WorkMailMessageFlow::Client.new
+#     resp = work_mail_message_flow.get_raw_message_content(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon WorkMail Message Flow all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon WorkMail Message Flow are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::WorkMailMessageFlow::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon WorkMail Message Flow API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-workmailmessageflow/customizations'
 # @service
 module Aws::WorkMailMessageFlow
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.4.0'
 
 end

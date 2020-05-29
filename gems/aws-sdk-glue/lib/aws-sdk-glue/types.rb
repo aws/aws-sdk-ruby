@@ -1102,7 +1102,7 @@ module Aws::Glue
     #         job_name: "NameString",
     #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #         crawler_name: "NameString",
-    #         crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #         crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #       }
     #
     # @!attribute [rw] logical_operator
@@ -1115,8 +1115,10 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition state. Currently, the values supported are
-    #   `SUCCEEDED`, `STOPPED`, `TIMEOUT`, and `FAILED`.
+    #   The condition state. Currently, the only job states that a trigger
+    #   can listen for are `SUCCEEDED`, `STOPPED`, `FAILED`, and `TIMEOUT`.
+    #   The only crawler states that a trigger can listen for are
+    #   `SUCCEEDED`, `FAILED`, and `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] crawler_name
@@ -1242,7 +1244,8 @@ module Aws::Glue
     #
     #   * `INSTANCE_ID` - The instance ID to use.
     #
-    #   * `JDBC_CONNECTION_URL` - The URL for the JDBC connection.
+    #   * `JDBC_CONNECTION_URL` - The URL for connecting to a JDBC data
+    #     source.
     #
     #   * `JDBC_ENFORCE_SSL` - A Boolean string (true, false) specifying
     #     whether Secure Sockets Layer (SSL) with hostname matching is
@@ -1270,6 +1273,14 @@ module Aws::Glue
     #     man-in-the-middle attack. In Oracle database, this is used as the
     #     `SSL_SERVER_CERT_DN`; in Microsoft SQL Server, this is used as the
     #     `hostNameInCertificate`.
+    #
+    #   * `CONNECTION_URL` - The URL for connecting to a general (non-JDBC)
+    #     data source.
+    #
+    #   * `KAFKA_BOOTSTRAP_SERVERS` - A comma-separated list of host and
+    #     port pairs that are the addresses of the Apache Kafka brokers in a
+    #     Kafka cluster to which a Kafka client will connect to and
+    #     bootstrap itself.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
@@ -1314,7 +1325,7 @@ module Aws::Glue
     #       {
     #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #         match_criteria: ["NameString"],
     #         connection_properties: { # required
     #           "HOST" => "ValueString",
@@ -1335,8 +1346,18 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] connection_type
-    #   The type of the connection. Currently, only JDBC is supported; SFTP
-    #   is not supported.
+    #   The type of the connection. Currently, these types are supported:
+    #
+    #   * `JDBC` - Designates a connection to a database through Java
+    #     Database Connectivity (JDBC).
+    #
+    #   * `KAFKA` - Designates a connection to an Apache Kafka streaming
+    #     platform.
+    #
+    #   * `MONGODB` - Designates a connection to a MongoDB document
+    #     database.
+    #
+    #   SFTP is not supported.
     #   @return [String]
     #
     # @!attribute [rw] match_criteria
@@ -1811,7 +1832,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -2739,6 +2760,9 @@ module Aws::Glue
     #         number_of_workers: 1,
     #         timeout: 1,
     #         max_retries: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2871,6 +2895,17 @@ module Aws::Glue
     #   a task run fails.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   The tags to use with this machine learning transform. You may use
+    #   tags to limit access to the machine learning transform. For more
+    #   information about tags in AWS Glue, see [AWS Tags in AWS Glue][1] in
+    #   the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateMLTransformRequest AWS API Documentation
     #
     class CreateMLTransformRequest < Struct.new(
@@ -2884,7 +2919,8 @@ module Aws::Glue
       :worker_type,
       :number_of_workers,
       :timeout,
-      :max_retries)
+      :max_retries,
+      :tags)
       include Aws::Structure
     end
 
@@ -3229,7 +3265,7 @@ module Aws::Glue
     #               job_name: "NameString",
     #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #               crawler_name: "NameString",
-    #               crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #             },
     #           ],
     #         },
@@ -4918,7 +4954,7 @@ module Aws::Glue
     #
     #       {
     #         match_criteria: ["NameString"],
-    #         connection_type: "JDBC", # accepts JDBC, SFTP
+    #         connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #       }
     #
     # @!attribute [rw] match_criteria
@@ -4946,7 +4982,7 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         filter: {
     #           match_criteria: ["NameString"],
-    #           connection_type: "JDBC", # accepts JDBC, SFTP
+    #           connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA
     #         },
     #         hide_password: false,
     #         next_token: "Token",
@@ -6773,7 +6809,7 @@ module Aws::Glue
     #
     #       {
     #         catalog_id: "CatalogIdString",
-    #         database_name: "NameString", # required
+    #         database_name: "NameString",
     #         pattern: "NameString", # required
     #         next_token: "Token",
     #         max_results: 1,
@@ -7110,6 +7146,19 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IdempotentParameterMismatchException AWS API Documentation
     #
     class IdempotentParameterMismatchException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The workflow is in an invalid state to perform a requested operation.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IllegalWorkflowStateException AWS API Documentation
+    #
+    class IllegalWorkflowStateException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -7567,7 +7616,13 @@ module Aws::Glue
     #   @return [Time]
     #
     # @!attribute [rw] job_run_state
-    #   The current state of the job run.
+    #   The current state of the job run. For more information about the
+    #   statuses of jobs that have terminated abnormally, see [AWS Glue Job
+    #   Run Statuses][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html
     #   @return [String]
     #
     # @!attribute [rw] arguments
@@ -8187,6 +8242,88 @@ module Aws::Glue
     #
     class ListJobsResponse < Struct.new(
       :job_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMLTransformsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         filter: {
+    #           name: "NameString",
+    #           transform_type: "FIND_MATCHES", # accepts FIND_MATCHES
+    #           status: "NOT_READY", # accepts NOT_READY, READY, DELETING
+    #           glue_version: "GlueVersionString",
+    #           created_before: Time.now,
+    #           created_after: Time.now,
+    #           last_modified_before: Time.now,
+    #           last_modified_after: Time.now,
+    #           schema: [
+    #             {
+    #               name: "ColumnNameString",
+    #               data_type: "ColumnTypeString",
+    #             },
+    #           ],
+    #         },
+    #         sort: {
+    #           column: "NAME", # required, accepts NAME, TRANSFORM_TYPE, STATUS, CREATED, LAST_MODIFIED
+    #           sort_direction: "DESCENDING", # required, accepts DESCENDING, ASCENDING
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   A `TransformFilterCriteria` used to filter the machine learning
+    #   transforms.
+    #   @return [Types::TransformFilterCriteria]
+    #
+    # @!attribute [rw] sort
+    #   A `TransformSortCriteria` used to sort the machine learning
+    #   transforms.
+    #   @return [Types::TransformSortCriteria]
+    #
+    # @!attribute [rw] tags
+    #   Specifies to return only these tagged resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMLTransformsRequest AWS API Documentation
+    #
+    class ListMLTransformsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filter,
+      :sort,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transform_ids
+    #   The identifiers of all the machine learning transforms in the
+    #   account, or the machine learning transforms with the specified tags.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   metric available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMLTransformsResponse AWS API Documentation
+    #
+    class ListMLTransformsResponse < Struct.new(
+      :transform_ids,
       :next_token)
       include Aws::Structure
     end
@@ -8955,7 +9092,7 @@ module Aws::Glue
     #             job_name: "NameString",
     #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #             crawler_name: "NameString",
-    #             crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #           },
     #         ],
     #       }
@@ -10117,6 +10254,34 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopWorkflowRunRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         run_id: "IdString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the workflow run to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopWorkflowRunRequest AWS API Documentation
+    #
+    class StopWorkflowRunRequest < Struct.new(
+      :name,
+      :run_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopWorkflowRunResponse AWS API Documentation
+    #
+    class StopWorkflowRunResponse < Aws::EmptyStructure; end
+
     # Describes the physical storage of table data.
     #
     # @note When making an API call, you may pass StorageDescriptor
@@ -11017,7 +11182,7 @@ module Aws::Glue
     #               job_name: "NameString",
     #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #               crawler_name: "NameString",
-    #               crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #               crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #             },
     #           ],
     #         },
@@ -11158,7 +11323,7 @@ module Aws::Glue
     #         connection_input: { # required
     #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA
     #           match_criteria: ["NameString"],
     #           connection_properties: { # required
     #             "HOST" => "ValueString",
@@ -12071,7 +12236,7 @@ module Aws::Glue
     #                 job_name: "NameString",
     #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #                 crawler_name: "NameString",
-    #                 crawl_state: "RUNNING", # accepts RUNNING, SUCCEEDED, CANCELLED, FAILED
+    #                 crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED
     #               },
     #             ],
     #           },

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Lambda
+
   class Resource
 
     # @param options ({})

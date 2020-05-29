@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DLM
+
   class Resource
 
     # @param options ({})

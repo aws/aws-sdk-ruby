@@ -17,6 +17,9 @@ module Aws::WAFV2
     #
     # All query arguments of a web request.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -35,6 +38,9 @@ module Aws::WAFV2
     #  </note>
     #
     # Specifies that AWS WAF should allow requests.
+    #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
     #
     #
     #
@@ -282,15 +288,12 @@ module Aws::WAFV2
     #
     #   The ARN must be in one of the following formats:
     #
-    #   * For a CloudFront distribution:
-    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
     #
-    #   * For an Application Load Balancer: `arn:aws:elasticloadbalancing:
-    #     region:account-id:loadbalancer/app/load-balancer-name
-    #     /load-balancer-id `
-    #
-    #   * For an Amazon API Gateway stage: `arn:aws:apigateway:region
-    #     ::/restapis/api-id/stages/stage-name `
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -314,6 +317,9 @@ module Aws::WAFV2
     #
     # Specifies that AWS WAF should block requests.
     #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -333,6 +339,9 @@ module Aws::WAFV2
     #
     # The body of a web request. This immediately follows the request
     # headers.
+    #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
     #
     #
     #
@@ -399,8 +408,8 @@ module Aws::WAFV2
     #   only in the part of web requests that you designate for inspection
     #   in FieldToMatch. The maximum length of the value is 50 bytes.
     #
-    #   Valid values depend on the areas that you specify for inspection in
-    #   `FieldToMatch`\:
+    #   Valid values depend on the component that you specify for inspection
+    #   in `FieldToMatch`\:
     #
     #   * `Method`\: The HTTP method that you want AWS WAF to search for.
     #     This indicates the type of operation specified in the request.
@@ -437,9 +446,9 @@ module Aws::WAFV2
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
     #   you specify one or more transformations in a rule statement, AWS WAF
-    #   performs all transformations on the content identified by
-    #   `FieldToMatch`, starting from the lowest priority setting, before
-    #   inspecting the content for a match.
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
     # @!attribute [rw] positional_constraint
@@ -721,7 +730,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -760,6 +769,9 @@ module Aws::WAFV2
     #
     # Specifies that AWS WAF should count requests.
     #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -788,8 +800,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet`
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -800,15 +812,15 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the IP set. You cannot change the
-    #   description of an IP set after you create it.
+    #   A description of the IP set that helps with identification. You
+    #   cannot change the description of an IP set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_version
@@ -901,8 +913,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -913,15 +925,15 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the set. You cannot change the description
-    #   of a set after you create it.
+    #   A description of the set that helps with identification. You cannot
+    #   change the description of a set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] regular_expression_list
@@ -1191,8 +1203,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1203,7 +1215,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1228,8 +1240,8 @@ module Aws::WAFV2
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   A friendly description of the rule group. You cannot change the
-    #   description of a rule group after you create it.
+    #   A description of the rule group that helps with identification. You
+    #   cannot change the description of a rule group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -1514,8 +1526,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1526,7 +1538,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1538,8 +1550,8 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A friendly description of the Web ACL. You cannot change the
-    #   description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification. You
+    #   cannot change the description of a Web ACL after you create it.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -1592,10 +1604,9 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # In a `WebACL`, this is the action that you want AWS WAF to perform
-    # when a web request doesn't match any of the rules in the `WebACL`.
-    # The default action must be a terminating action, so count is not
-    # allowed.
+    # In a WebACL, this is the action that you want AWS WAF to perform when
+    # a web request doesn't match any of the rules in the `WebACL`. The
+    # default action must be a terminating action, so count is not allowed.
     #
     #
     #
@@ -1627,6 +1638,57 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFirewallManagerRuleGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         web_acl_arn: "ResourceArn", # required
+    #         web_acl_lock_token: "LockToken", # required
+    #       }
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The Amazon Resource Name (ARN) of the web ACL.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_lock_token
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time
+    #   of the request. To make changes to the entity associated with the
+    #   token, you provide the token to operations like update and delete.
+    #   AWS WAF uses the token to ensure that no changes have been made to
+    #   the entity since you last retrieved it. If a change has been made,
+    #   the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another get, and use the new token returned by that
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteFirewallManagerRuleGroupsRequest AWS API Documentation
+    #
+    class DeleteFirewallManagerRuleGroupsRequest < Struct.new(
+      :web_acl_arn,
+      :web_acl_lock_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_web_acl_lock_token
+    #   A token used for optimistic locking. AWS WAF returns a token to your
+    #   get and list requests, to mark the state of the entity at the time
+    #   of the request. To make changes to the entity associated with the
+    #   token, you provide the token to operations like update and delete.
+    #   AWS WAF uses the token to ensure that no changes have been made to
+    #   the entity since you last retrieved it. If a change has been made,
+    #   the update fails with a `WAFOptimisticLockException`. If this
+    #   happens, perform another get, and use the new token returned by that
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteFirewallManagerRuleGroupsResponse AWS API Documentation
+    #
+    class DeleteFirewallManagerRuleGroupsResponse < Struct.new(
+      :next_web_acl_lock_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteIPSetRequest
     #   data as a hash:
     #
@@ -1638,8 +1700,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet`
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1650,7 +1712,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1711,6 +1773,31 @@ module Aws::WAFV2
     #
     class DeleteLoggingConfigurationResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeletePermissionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the rule group from which you want
+    #   to delete the policy.
+    #
+    #   You must be the owner of the rule group to perform this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeletePermissionPolicyRequest AWS API Documentation
+    #
+    class DeletePermissionPolicyRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeletePermissionPolicyResponse AWS API Documentation
+    #
+    class DeletePermissionPolicyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteRegexPatternSetRequest
     #   data as a hash:
     #
@@ -1722,8 +1809,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1734,7 +1821,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1783,8 +1870,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1795,7 +1882,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1844,8 +1931,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -1856,7 +1943,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1921,7 +2008,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -1970,15 +2057,12 @@ module Aws::WAFV2
     #
     #   The ARN must be in one of the following formats:
     #
-    #   * For a CloudFront distribution:
-    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
     #
-    #   * For an Application Load Balancer: `arn:aws:elasticloadbalancing:
-    #     region:account-id:loadbalancer/app/load-balancer-name
-    #     /load-balancer-id `
-    #
-    #   * For an Amazon API Gateway stage: `arn:aws:apigateway:region
-    #     ::/restapis/api-id/stages/stage-name `
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -2034,8 +2118,11 @@ module Aws::WAFV2
     #  </note>
     #
     # The part of a web request that you want AWS WAF to inspect. Include
-    # the `FieldToMatch` types that you want to inspect, with additional
-    # specifications as needed, according to the type.
+    # the single `FieldToMatch` type that you want to inspect, with
+    # additional specifications as needed, according to the type. You
+    # specify a single request component in `FieldToMatch` for each rule
+    # statement that requires it. To inspect more than one component of a
+    # web request, create a separate rule statement for each component.
     #
     #
     #
@@ -2073,6 +2160,9 @@ module Aws::WAFV2
     #   Inspect a single query argument. Provide the name of the query
     #   argument to inspect, such as *UserName* or *SalesRegion*. The name
     #   can be up to 30 characters long and isn't case sensitive.
+    #
+    #   This is used only to indicate the web request component for AWS WAF
+    #   to inspect, in the FieldToMatch specification.
     #   @return [Types::SingleQueryArgument]
     #
     # @!attribute [rw] all_query_arguments
@@ -2096,10 +2186,10 @@ module Aws::WAFV2
     #   body, such as data from a form.
     #
     #   Note that only the first 8 KB (8192 bytes) of the request body are
-    #   forwarded to AWS WAF for inspection. If you don't need to inspect
-    #   more than 8 KB, you can guarantee that you don't allow additional
-    #   bytes in by combining a statement that inspects the body of the web
-    #   request, such as ByteMatchStatement or
+    #   forwarded to AWS WAF for inspection by the underlying host service.
+    #   If you don't need to inspect more than 8 KB, you can guarantee that
+    #   you don't allow additional bytes in by combining a statement that
+    #   inspects the body of the web request, such as ByteMatchStatement or
     #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
     #   that enforces an 8 KB size limit on the body of the request. AWS WAF
     #   doesn't support inspecting the entire contents of web requests
@@ -2121,6 +2211,128 @@ module Aws::WAFV2
       :query_string,
       :body,
       :method)
+      include Aws::Structure
+    end
+
+    # A rule group that's defined for an AWS Firewall Manager WAF policy.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   If you define more than one rule group in the first or last Firewall
+    #   Manager rule groups, AWS WAF evaluates each request against the rule
+    #   groups in order, starting from the lowest priority setting. The
+    #   priorities don't need to be consecutive, but they must all be
+    #   different.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] firewall_manager_statement
+    #   The processing guidance for an AWS Firewall Manager rule. This is
+    #   like a regular rule Statement, but it can only contain a rule group
+    #   reference.
+    #   @return [Types::FirewallManagerStatement]
+    #
+    # @!attribute [rw] override_action
+    #   The override action to apply to the rules in a rule group. Used only
+    #   for rule statements that reference a rule group, like
+    #   `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
+    #
+    #   Set the override action to none to leave the rule actions in effect.
+    #   Set it to count to only count matches, regardless of the rule action
+    #   settings.
+    #
+    #   In a Rule, you must specify either this `OverrideAction` setting or
+    #   the rule `Action` setting, but not both:
+    #
+    #   * If the rule statement references a rule group, use this override
+    #     action setting and not the action setting.
+    #
+    #   * If the rule statement does not reference a rule group, use the
+    #     rule action setting and not this rule override action setting.
+    #   @return [Types::OverrideAction]
+    #
+    # @!attribute [rw] visibility_config
+    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
+    #   in November, 2019. For information, including how to migrate your
+    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #   Defines and enables Amazon CloudWatch metrics and web request sample
+    #   collection.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::VisibilityConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FirewallManagerRuleGroup AWS API Documentation
+    #
+    class FirewallManagerRuleGroup < Struct.new(
+      :name,
+      :priority,
+      :firewall_manager_statement,
+      :override_action,
+      :visibility_config)
+      include Aws::Structure
+    end
+
+    # The processing guidance for an AWS Firewall Manager rule. This is like
+    # a regular rule Statement, but it can only contain a rule group
+    # reference.
+    #
+    # @!attribute [rw] managed_rule_group_statement
+    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
+    #   in November, 2019. For information, including how to migrate your
+    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #   A rule statement used to run the rules that are defined in a managed
+    #   rule group. To use this, provide the vendor name and the name of the
+    #   rule group in this statement. You can retrieve the required names by
+    #   calling ListAvailableManagedRuleGroups.
+    #
+    #   You can't nest a `ManagedRuleGroupStatement`, for example for use
+    #   inside a `NotStatement` or `OrStatement`. It can only be referenced
+    #   as a top-level statement within a rule.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::ManagedRuleGroupStatement]
+    #
+    # @!attribute [rw] rule_group_reference_statement
+    #   <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
+    #   in November, 2019. For information, including how to migrate your
+    #   AWS WAF resources from the prior release, see the [AWS WAF Developer
+    #   Guide][1].
+    #
+    #    </note>
+    #
+    #   A rule statement used to run the rules that are defined in a
+    #   RuleGroup. To use this, create a rule group with your rules, then
+    #   provide the ARN of the rule group in this statement.
+    #
+    #   You cannot nest a `RuleGroupReferenceStatement`, for example for use
+    #   inside a `NotStatement` or `OrStatement`. It can only be referenced
+    #   as a top-level statement within a rule.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    #   @return [Types::RuleGroupReferenceStatement]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/FirewallManagerStatement AWS API Documentation
+    #
+    class FirewallManagerStatement < Struct.new(
+      :managed_rule_group_statement,
+      :rule_group_reference_statement)
       include Aws::Structure
     end
 
@@ -2168,8 +2380,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet`
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -2180,7 +2392,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2254,6 +2466,36 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPermissionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the rule group for which you want
+    #   to get the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetPermissionPolicyRequest AWS API Documentation
+    #
+    class GetPermissionPolicyRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The IAM policy that is attached to the specified rule group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetPermissionPolicyResponse AWS API Documentation
+    #
+    class GetPermissionPolicyResponse < Struct.new(
+      :policy)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetRateBasedStatementManagedKeysRequest
     #   data as a hash:
     #
@@ -2272,15 +2514,15 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
     #   @return [String]
     #
     # @!attribute [rw] web_acl_name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] web_acl_id
@@ -2329,8 +2571,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -2341,7 +2583,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2395,8 +2637,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -2407,7 +2649,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2483,7 +2725,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2585,8 +2827,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -2597,7 +2839,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -2765,8 +3007,8 @@ module Aws::WAFV2
     # [2]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
     #
     # @!attribute [rw] name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet`
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2780,8 +3022,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the IP set. You cannot change the
-    #   description of an IP set after you create it.
+    #   A description of the IP set that helps with identification. You
+    #   cannot change the description of an IP set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_version
@@ -2892,8 +3134,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet`
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -2903,8 +3145,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the IP set. You cannot change the
-    #   description of an IP set after you create it.
+    #   A description of the IP set that helps with identification. You
+    #   cannot change the description of an IP set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -2951,7 +3193,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3017,7 +3259,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3085,7 +3327,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3151,7 +3393,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3255,7 +3497,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3378,7 +3620,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -3565,7 +3807,7 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroups. This provides information like the
     # name and vendor name, that you provide when you add a
     # ManagedRuleGroupStatement to a web ACL. Managed rule groups include
-    # AWS managed rule groups, which are free of charge to AWS WAF
+    # AWS Managed Rules rule groups, which are free of charge to AWS WAF
     # customers, and AWS Marketplace managed rule groups, which you can
     # subscribe to through AWS Marketplace.
     #
@@ -3584,8 +3826,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the managed rule group, provided by AWS or the
-    #   AWS Marketplace seller who manages it.
+    #   The description of the managed rule group, provided by AWS Managed
+    #   Rules or the AWS Marketplace seller who manages it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupSummary AWS API Documentation
@@ -3607,6 +3849,9 @@ module Aws::WAFV2
     # The HTTP method of a web request. The method indicates the type of
     # operation that the request is asking the origin to perform.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -3626,8 +3871,10 @@ module Aws::WAFV2
     #
     # Specifies that AWS WAF should do nothing. This is generally used to
     # try out a rule without performing any actions. You set the
-    # `OverrideAction` on the Rule, and override the actions that are set at
-    # the statement level.
+    # `OverrideAction` on the Rule.
+    #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
     #
     #
     #
@@ -4073,21 +4320,22 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
-    # in November, 2019. For information, including how to migrate your AWS
-    # WAF resources from the prior release, see the [AWS WAF Developer
-    # Guide][1].
+    # The override action to apply to the rules in a rule group. Used only
+    # for rule statements that reference a rule group, like
+    # `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
     #
-    #  </note>
+    # Set the override action to none to leave the rule actions in effect.
+    # Set it to count to only count matches, regardless of the rule action
+    # settings.
     #
-    # The action to use to override the rule's `Action` setting. You can
-    # use no override action, in which case the rule action is in effect, or
-    # count, in which case, if the rule matches a web request, it only
-    # counts the match.
+    # In a Rule, you must specify either this `OverrideAction` setting or
+    # the rule `Action` setting, but not both:
     #
+    # * If the rule statement references a rule group, use this override
+    #   action setting and not the action setting.
     #
-    #
-    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # * If the rule statement does not reference a rule group, use the rule
+    #   action setting and not this rule override action setting.
     #
     # @note When making an API call, you may pass OverrideAction
     #   data as a hash:
@@ -4165,6 +4413,57 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutPermissionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         policy: "PolicyString", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
+    #   attach the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy to attach to the specified rule group.
+    #
+    #   The policy specifications must conform to the following:
+    #
+    #   * The policy must be composed using IAM Policy version 2012-10-17 or
+    #     version 2015-01-01.
+    #
+    #   * The policy must include specifications for `Effect`, `Action`, and
+    #     `Principal`.
+    #
+    #   * `Effect` must specify `Allow`.
+    #
+    #   * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
+    #     and `wafv2:PutFirewallManagerRuleGroups`. AWS WAF rejects any
+    #     extra actions or wildcard actions in the policy.
+    #
+    #   * The policy must not include a `Resource` parameter.
+    #
+    #   For more information, see [IAM Policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutPermissionPolicyRequest AWS API Documentation
+    #
+    class PutPermissionPolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutPermissionPolicyResponse AWS API Documentation
+    #
+    class PutPermissionPolicyResponse < Aws::EmptyStructure; end
+
     # <note markdown="1"> This is the latest version of **AWS WAF**, named AWS WAFV2, released
     # in November, 2019. For information, including how to migrate your AWS
     # WAF resources from the prior release, see the [AWS WAF Developer
@@ -4174,6 +4473,9 @@ module Aws::WAFV2
     #
     # The query string of a web request. This is the part of a URL that
     # appears after a `?` character, if any.
+    #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
     #
     #
     #
@@ -4529,8 +4831,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4544,8 +4846,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the set. You cannot change the description
-    #   of a set after you create it.
+    #   A description of the set that helps with identification. You cannot
+    #   change the description of a set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] regular_expression_list
@@ -4632,9 +4934,9 @@ module Aws::WAFV2
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
     #   you specify one or more transformations in a rule statement, AWS WAF
-    #   performs all transformations on the content identified by
-    #   `FieldToMatch`, starting from the lowest priority setting, before
-    #   inspecting the content for a match.
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/RegexPatternSetReferenceStatement AWS API Documentation
@@ -4664,8 +4966,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the data type instance. You cannot change the
-    #   name after you create the instance.
+    #   The name of the data type instance. You cannot change the name after
+    #   you create the instance.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4675,8 +4977,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the set. You cannot change the description
-    #   of a set after you create it.
+    #   A description of the set that helps with identification. You cannot
+    #   change the description of a set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -4937,8 +5239,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the rule. You can't change the name of a `Rule`
-    #   after you create it.
+    #   The name of the rule. You can't change the name of a `Rule` after
+    #   you create it.
     #   @return [String]
     #
     # @!attribute [rw] priority
@@ -4956,15 +5258,40 @@ module Aws::WAFV2
     #
     # @!attribute [rw] action
     #   The action that AWS WAF should take on a web request when it matches
-    #   the rule's statement. Settings at the web ACL level can override
-    #   the rule action setting.
+    #   the rule statement. Settings at the web ACL level can override the
+    #   rule action setting.
+    #
+    #   This is used only for rules whose statements do not reference a rule
+    #   group. Rule statements that reference a rule group include
+    #   `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
+    #
+    #   You must specify either this `Action` setting or the rule
+    #   `OverrideAction` setting, but not both:
+    #
+    #   * If the rule statement does not reference a rule group, use this
+    #     rule action setting and not the rule override action setting.
+    #
+    #   * If the rule statement references a rule group, use the override
+    #     action setting and not this action setting.
     #   @return [Types::RuleAction]
     #
     # @!attribute [rw] override_action
-    #   The action to use to override the rule's `Action` setting. You can
-    #   use no override action, in which case the rule action is in effect,
-    #   or count action, in which case, if the rule matches a web request,
-    #   it only counts the match.
+    #   The override action to apply to the rules in a rule group. Used only
+    #   for rule statements that reference a rule group, like
+    #   `RuleGroupReferenceStatement` and `ManagedRuleGroupStatement`.
+    #
+    #   Set the override action to none to leave the rule actions in effect.
+    #   Set it to count to only count matches, regardless of the rule action
+    #   settings.
+    #
+    #   In a Rule, you must specify either this `OverrideAction` setting or
+    #   the rule `Action` setting, but not both:
+    #
+    #   * If the rule statement references a rule group, use this override
+    #     action setting and not the action setting.
+    #
+    #   * If the rule statement does not reference a rule group, use the
+    #     rule action setting and not this rule override action setting.
     #   @return [Types::OverrideAction]
     #
     # @!attribute [rw] visibility_config
@@ -5050,8 +5377,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -5083,8 +5410,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the rule group. You cannot change the
-    #   description of a rule group after you create it.
+    #   A description of the rule group that helps with identification. You
+    #   cannot change the description of a rule group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -5178,8 +5505,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the data type instance. You cannot change the
-    #   name after you create the instance.
+    #   The name of the data type instance. You cannot change the name after
+    #   you create the instance.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -5189,8 +5516,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the rule group. You cannot change the
-    #   description of a rule group after you create it.
+    #   A description of the rule group that helps with identification. You
+    #   cannot change the description of a rule group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -5333,6 +5660,9 @@ module Aws::WAFV2
     # One of the headers in a web request, identified by name, for example,
     # `User-Agent` or `Referer`. This setting isn't case sensitive.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -5464,9 +5794,9 @@ module Aws::WAFV2
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
     #   you specify one or more transformations in a rule statement, AWS WAF
-    #   performs all transformations on the content identified by
-    #   `FieldToMatch`, starting from the lowest priority setting, before
-    #   inspecting the content for a match.
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SizeConstraintStatement AWS API Documentation
@@ -5538,9 +5868,9 @@ module Aws::WAFV2
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
     #   you specify one or more transformations in a rule statement, AWS WAF
-    #   performs all transformations on the content identified by
-    #   `FieldToMatch`, starting from the lowest priority setting, before
-    #   inspecting the content for a match.
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/SqliMatchStatement AWS API Documentation
@@ -6960,8 +7290,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the IP set. You cannot change the name of an
-    #   `IPSet` after you create it.
+    #   The name of the IP set. You cannot change the name of an `IPSet`
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -6972,7 +7302,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -6985,8 +7315,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the IP set. You cannot change the
-    #   description of an IP set after you create it.
+    #   A description of the IP set that helps with identification. You
+    #   cannot change the description of an IP set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] addresses
@@ -7078,8 +7408,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the set. You cannot change the name after you
-    #   create the set.
+    #   The name of the set. You cannot change the name after you create the
+    #   set.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -7090,7 +7420,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -7103,8 +7433,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the set. You cannot change the description
-    #   of a set after you create it.
+    #   A description of the set that helps with identification. You cannot
+    #   change the description of a set after you create it.
     #   @return [String]
     #
     # @!attribute [rw] regular_expression_list
@@ -7375,8 +7705,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the rule group. You cannot change the name of a
-    #   rule group after you create it.
+    #   The name of the rule group. You cannot change the name of a rule
+    #   group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -7387,7 +7717,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -7400,8 +7730,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the rule group. You cannot change the
-    #   description of a rule group after you create it.
+    #   A description of the rule group that helps with identification. You
+    #   cannot change the description of a rule group after you create it.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -7688,8 +8018,8 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -7700,7 +8030,7 @@ module Aws::WAFV2
     #   To work with CloudFront, you must also specify the Region US East
     #   (N. Virginia) as follows:
     #
-    #   * CLI - Specify the region when you use the CloudFront scope:
+    #   * CLI - Specify the Region when you use the CloudFront scope:
     #     `--scope=CLOUDFRONT --region=us-east-1`.
     #
     #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
@@ -7718,8 +8048,8 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A friendly description of the Web ACL. You cannot change the
-    #   description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification. You
+    #   cannot change the description of a Web ACL after you create it.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -7784,6 +8114,9 @@ module Aws::WAFV2
     # web request that identifies a resource, for example,
     # `/images/daily-ad.jpg`.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -7834,7 +8167,7 @@ module Aws::WAFV2
     #   @return [Boolean]
     #
     # @!attribute [rw] metric_name
-    #   A friendly name of the CloudWatch metric. The name can contain only
+    #   A name of the CloudWatch metric. The name can contain only
     #   alphanumeric characters (A-Z, a-z, 0-9), with length from one to 128
     #   characters. It can't contain whitespace or metric names reserved
     #   for AWS WAF, for example "All" and "Default\_Action." You can't
@@ -7889,6 +8222,18 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # The operation isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFInvalidOperationException AWS API Documentation
+    #
+    class WAFInvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The operation failed because AWS WAF didn't recognize a parameter in
     # the request. For example:
     #
@@ -7922,6 +8267,41 @@ module Aws::WAFV2
       :field,
       :parameter,
       :reason)
+      include Aws::Structure
+    end
+
+    # The operation failed because the specified policy isn't in the proper
+    # format.
+    #
+    # The policy specifications must conform to the following:
+    #
+    # * The policy must be composed using IAM Policy version 2012-10-17 or
+    #   version 2015-01-01.
+    #
+    # * The policy must include specifications for `Effect`, `Action`, and
+    #   `Principal`.
+    #
+    # * `Effect` must specify `Allow`.
+    #
+    # * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
+    #   and `wafv2:PutFirewallManagerRuleGroups`. AWS WAF rejects any extra
+    #   actions or wildcard actions in the policy.
+    #
+    # * The policy must not include a `Resource` parameter.
+    #
+    # For more information, see [IAM Policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFInvalidPermissionPolicyException AWS API Documentation
+    #
+    class WAFInvalidPermissionPolicyException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -8005,6 +8385,16 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFSubscriptionNotFoundException AWS API Documentation
+    #
+    class WAFSubscriptionNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # An error occurred during the tagging operation. Retry your request.
     #
     # @!attribute [rw] message
@@ -8065,8 +8455,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -8086,8 +8476,8 @@ module Aws::WAFV2
     #   @return [Types::DefaultAction]
     #
     # @!attribute [rw] description
-    #   A friendly description of the Web ACL. You cannot change the
-    #   description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification. You
+    #   cannot change the description of a Web ACL after you create it.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -8116,6 +8506,38 @@ module Aws::WAFV2
     #   for web ACLs is 1,500.
     #   @return [Integer]
     #
+    # @!attribute [rw] pre_process_firewall_manager_rule_groups
+    #   The first set of rules for AWS WAF to process in the web ACL. This
+    #   is defined in an AWS Firewall Manager WAF policy and contains only
+    #   rule group references. You can't alter these. Any rules and rule
+    #   groups that you define for the web ACL are prioritized after these.
+    #
+    #   In the Firewall Manager WAF policy, the Firewall Manager
+    #   administrator can define a set of rule groups to run first in the
+    #   web ACL and a set of rule groups to run last. Within each set, the
+    #   administrator prioritizes the rule groups, to determine their
+    #   relative processing order.
+    #   @return [Array<Types::FirewallManagerRuleGroup>]
+    #
+    # @!attribute [rw] post_process_firewall_manager_rule_groups
+    #   The last set of rules for AWS WAF to process in the web ACL. This is
+    #   defined in an AWS Firewall Manager WAF policy and contains only rule
+    #   group references. You can't alter these. Any rules and rule groups
+    #   that you define for the web ACL are prioritized before these.
+    #
+    #   In the Firewall Manager WAF policy, the Firewall Manager
+    #   administrator can define a set of rule groups to run first in the
+    #   web ACL and a set of rule groups to run last. Within each set, the
+    #   administrator prioritizes the rule groups, to determine their
+    #   relative processing order.
+    #   @return [Array<Types::FirewallManagerRuleGroup>]
+    #
+    # @!attribute [rw] managed_by_firewall_manager
+    #   Indicates whether this web ACL is managed by AWS Firewall Manager.
+    #   If true, then only AWS Firewall Manager can delete the web ACL or
+    #   any Firewall Manager rule groups in the web ACL.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WebACL AWS API Documentation
     #
     class WebACL < Struct.new(
@@ -8126,7 +8548,10 @@ module Aws::WAFV2
       :description,
       :rules,
       :visibility_config,
-      :capacity)
+      :capacity,
+      :pre_process_firewall_manager_rule_groups,
+      :post_process_firewall_manager_rule_groups,
+      :managed_by_firewall_manager)
       include Aws::Structure
     end
 
@@ -8147,8 +8572,8 @@ module Aws::WAFV2
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
     #
     # @!attribute [rw] name
-    #   A friendly name of the Web ACL. You cannot change the name of a Web
-    #   ACL after you create it.
+    #   The name of the Web ACL. You cannot change the name of a Web ACL
+    #   after you create it.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -8158,8 +8583,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A friendly description of the Web ACL. You cannot change the
-    #   description of a Web ACL after you create it.
+    #   A description of the Web ACL that helps with identification. You
+    #   cannot change the description of a Web ACL after you create it.
     #   @return [String]
     #
     # @!attribute [rw] lock_token
@@ -8248,9 +8673,9 @@ module Aws::WAFV2
     #   Text transformations eliminate some of the unusual formatting that
     #   attackers use in web requests in an effort to bypass detection. If
     #   you specify one or more transformations in a rule statement, AWS WAF
-    #   performs all transformations on the content identified by
-    #   `FieldToMatch`, starting from the lowest priority setting, before
-    #   inspecting the content for a match.
+    #   performs all transformations on the content of the request component
+    #   identified by `FieldToMatch`, starting from the lowest priority
+    #   setting, before inspecting the content for a match.
     #   @return [Array<Types::TextTransformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/XssMatchStatement AWS API Documentation

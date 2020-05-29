@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoTEventsData
+
   class Resource
 
     # @param options ({})

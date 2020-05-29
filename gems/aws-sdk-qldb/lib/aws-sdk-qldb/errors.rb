@@ -6,6 +6,34 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::QLDB
+
+  # When QLDB returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::QLDB::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all QLDB errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::QLDB::Errors::ServiceError
+  #       # rescues all QLDB API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InvalidParameterException}
+  # * {LimitExceededException}
+  # * {ResourceAlreadyExistsException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ResourcePreconditionNotMetException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +56,6 @@ module Aws::QLDB
       def parameter_name
         @data[:parameter_name]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -49,7 +76,6 @@ module Aws::QLDB
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -75,7 +101,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -101,7 +126,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -127,7 +151,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class ResourcePreconditionNotMetException < ServiceError
@@ -153,7 +176,6 @@ module Aws::QLDB
       def resource_name
         @data[:resource_name]
       end
-
     end
 
   end

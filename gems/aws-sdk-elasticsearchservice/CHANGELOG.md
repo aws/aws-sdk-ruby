@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-04-22)
+------------------
+
+* Feature - This change adds a new field 'OptionalDeployment' to ServiceSoftwareOptions to indicate whether a service software update is optional or mandatory. If True, it indicates that the update is optional, and the service software is not automatically updated. If False, the service software is automatically updated after AutomatedUpdateDate.
+
+1.32.0 (2020-03-25)
+------------------
+
+* Feature - Adding support for customer packages (dictionary files) to Amazon Elasticsearch Service
+
+1.31.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.30.0 (2020-02-12)
 ------------------
 

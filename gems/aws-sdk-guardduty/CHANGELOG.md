@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-05-27)
+------------------
+
+* Feature - Documentation updates for GuardDuty
+
+1.31.0 (2020-05-08)
+------------------
+
+* Feature - Documentation updates for GuardDuty
+
+1.30.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-04-21)
+------------------
+
+* Feature - AWS GuardDuty now supports using AWS Organizations delegated administrators to create and manage GuardDuty master and member accounts.  The feature also allows GuardDuty to be automatically enabled on associated organization accounts.
+
+1.28.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-03-06)
+------------------
+
+* Feature - Amazon GuardDuty findings now include the OutpostArn if the finding is generated for an AWS Outposts EC2 host.
+
+1.26.0 (2020-03-05)
+------------------
+
+* Feature - Add a new finding field for EC2 findings indicating the instance's local IP address involved in the threat.
+
 1.25.0 (2019-11-15)
 ------------------
 

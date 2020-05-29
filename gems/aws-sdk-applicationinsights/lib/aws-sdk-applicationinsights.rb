@@ -24,17 +24,20 @@ require_relative 'aws-sdk-applicationinsights/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     application_insights = Aws::ApplicationInsights::Client.new
+#     resp = application_insights.create_application(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon CloudWatch Application Insights all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon CloudWatch Application Insights are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ApplicationInsights::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon CloudWatch Application Insights API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-applicationinsights/customizations'
 # @service
 module Aws::ApplicationInsights
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.10.0'
 
 end

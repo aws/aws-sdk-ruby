@@ -24,17 +24,20 @@ require_relative 'aws-sdk-mediapackagevod/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     media_package_vod = Aws::MediaPackageVod::Client.new
+#     resp = media_package_vod.create_asset(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Elemental MediaPackage VOD all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Elemental MediaPackage VOD are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MediaPackageVod::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Elemental MediaPackage VOD API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-mediapackagevod/customizations'
 # @service
 module Aws::MediaPackageVod
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.13.0'
 
 end

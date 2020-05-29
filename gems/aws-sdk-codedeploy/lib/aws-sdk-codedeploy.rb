@@ -25,17 +25,20 @@ require_relative 'aws-sdk-codedeploy/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_deploy = Aws::CodeDeploy::Client.new
+#     resp = code_deploy.add_tags_to_on_premises_instances(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CodeDeploy all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CodeDeploy are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeDeploy::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CodeDeploy API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-codedeploy/customizations'
 # @service
 module Aws::CodeDeploy
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.31.0'
 
 end

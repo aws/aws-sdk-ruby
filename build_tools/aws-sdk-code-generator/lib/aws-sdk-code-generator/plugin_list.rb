@@ -27,6 +27,7 @@ module AwsSdkCodeGenerator
       plugins.map do |class_name, path|
         path = "./#{path}" unless path[0] == '/'
         Kernel.require(path)
+
         Plugin.new(
           class_name: class_name,
           options: const_get(class_name).options,

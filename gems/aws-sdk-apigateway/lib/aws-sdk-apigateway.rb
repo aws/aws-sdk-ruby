@@ -24,17 +24,20 @@ require_relative 'aws-sdk-apigateway/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     api_gateway = Aws::APIGateway::Client.new
+#     resp = api_gateway.create_api_key(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon API Gateway all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon API Gateway are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::APIGateway::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon API Gateway API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-apigateway/customizations'
 # @service
 module Aws::APIGateway
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.41.0'
 
 end

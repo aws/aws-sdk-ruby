@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Schemas
+
   class Resource
 
     # @param options ({})

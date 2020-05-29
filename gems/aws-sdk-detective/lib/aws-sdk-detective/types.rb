@@ -29,8 +29,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # An AWS account that is the master of or a member of a behavior graph.
     #
     # @note When making an API call, you may pass Account
@@ -274,8 +272,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # A behavior graph in Detective.
     #
     # @!attribute [rw] arn
@@ -459,8 +455,6 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
-    #
     # Details about a member account that was invited to contribute to a
     # behavior graph.
     #
@@ -502,8 +496,27 @@ module Aws::Detective
     #   * `ENABLED` - Indicates that the member account accepted the
     #     invitation to contribute to the behavior graph.
     #
+    #   * `ACCEPTED_BUT_DISABLED` - Indicates that the member account
+    #     accepted the invitation but is prevented from contributing data to
+    #     the behavior graph. `DisabledReason` provides the reason why the
+    #     member account is not enabled.
+    #
     #   Member accounts that declined an invitation or that were removed
     #   from the behavior graph are not included.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled_reason
+    #   For member accounts with a status of `ACCEPTED_BUT_DISABLED`, the
+    #   reason that the member account is not enabled.
+    #
+    #   The reason can have one of the following values:
+    #
+    #   * `VOLUME_TOO_HIGH` - Indicates that adding the member account would
+    #     cause the data volume for the behavior graph to be too high.
+    #
+    #   * `VOLUME_UNKNOWN` - Indicates that Detective is unable to verify
+    #     the data volume for the member account. This is usually because
+    #     the member account is not enrolled in Amazon GuardDuty.
     #   @return [String]
     #
     # @!attribute [rw] invited_time
@@ -516,6 +529,26 @@ module Aws::Detective
     #   value is in milliseconds since the epoch.
     #   @return [Time]
     #
+    # @!attribute [rw] percent_of_graph_utilization
+    #   The member account data volume as a percentage of the maximum
+    #   allowed data volume. 0 indicates 0 percent, and 100 indicates 100
+    #   percent.
+    #
+    #   Note that this is not the percentage of the behavior graph data
+    #   volume.
+    #
+    #   For example, the data volume for the behavior graph is 80 GB per
+    #   day. The maximum data volume is 160 GB per day. If the data volume
+    #   for the member account is 40 GB per day, then
+    #   `PercentOfGraphUtilization` is 25. It represents 25% of the maximum
+    #   allowed data volume.
+    #   @return [Float]
+    #
+    # @!attribute [rw] percent_of_graph_utilization_updated_time
+    #   The date and time when the graph utilization percentage was last
+    #   updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/MemberDetail AWS API Documentation
     #
     class MemberDetail < Struct.new(
@@ -524,8 +557,11 @@ module Aws::Detective
       :graph_arn,
       :master_id,
       :status,
+      :disabled_reason,
       :invited_time,
-      :updated_time)
+      :updated_time,
+      :percent_of_graph_utilization,
+      :percent_of_graph_utilization_updated_time)
       include Aws::Structure
     end
 
@@ -562,9 +598,18 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # This request would cause the number of member accounts in the behavior
-    # graph to exceed the maximum allowed. A behavior graph cannot have more
-    # than 1000 member accounts.
+    # This request cannot be completed for one of the following reasons.
+    #
+    # * The request would cause the number of member accounts in the
+    #   behavior graph to exceed the maximum allowed. A behavior graph
+    #   cannot have more than 1000 member accounts.
+    #
+    # * The request would cause the data rate for the behavior graph to
+    #   exceed the maximum allowed.
+    #
+    # * Detective is unable to verify the data rate for the member account.
+    #   This is usually because the member account is not enrolled in Amazon
+    #   GuardDuty.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -576,8 +621,33 @@ module Aws::Detective
       include Aws::Structure
     end
 
-    # Amazon Detective is currently in preview.
+    # @note When making an API call, you may pass StartMonitoringMemberRequest
+    #   data as a hash:
     #
+    #       {
+    #         graph_arn: "GraphArn", # required
+    #         account_id: "AccountId", # required
+    #       }
+    #
+    # @!attribute [rw] graph_arn
+    #   The ARN of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the member account to try to enable.
+    #
+    #   The account must be an invited member account with a status of
+    #   `ACCEPTED_BUT_DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StartMonitoringMemberRequest AWS API Documentation
+    #
+    class StartMonitoringMemberRequest < Struct.new(
+      :graph_arn,
+      :account_id)
+      include Aws::Structure
+    end
+
     # A member account that was included in a request but for which the
     # request could not be processed.
     #

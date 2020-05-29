@@ -59,6 +59,12 @@ module Aws::ApplicationInsights
     #   problem detected by Application Insights for an application.
     #   @return [Boolean]
     #
+    # @!attribute [rw] cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch
+    #   events for the application resources, such as `instance terminated`,
+    #   `failed deployment`, and others.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] remarks
     #   The issues on the user side that block Application Insights from
     #   successfully monitoring an application. Example remarks include:
@@ -75,6 +81,7 @@ module Aws::ApplicationInsights
       :life_cycle,
       :ops_item_sns_topic_arn,
       :ops_center_enabled,
+      :cwe_monitor_enabled,
       :remarks)
       include Aws::Structure
     end
@@ -138,6 +145,7 @@ module Aws::ApplicationInsights
     #       {
     #         resource_group_name: "ResourceGroupName", # required
     #         ops_center_enabled: false,
+    #         cwe_monitor_enabled: false,
     #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #         tags: [
     #           {
@@ -154,6 +162,12 @@ module Aws::ApplicationInsights
     # @!attribute [rw] ops_center_enabled
     #   When set to `true`, creates opsItems for any problems detected on an
     #   application.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch
+    #   events for the application resources, such as `instance terminated`,
+    #   `failed deployment`, and others.
     #   @return [Boolean]
     #
     # @!attribute [rw] ops_item_sns_topic_arn
@@ -173,6 +187,7 @@ module Aws::ApplicationInsights
     class CreateApplicationRequest < Struct.new(
       :resource_group_name,
       :ops_center_enabled,
+      :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
       :tags)
       include Aws::Structure
@@ -1146,6 +1161,97 @@ module Aws::ApplicationInsights
     #   The value of the source observation metric.
     #   @return [Float]
     #
+    # @!attribute [rw] cloud_watch_event_id
+    #   The ID of the CloudWatch Event-based observation related to the
+    #   detected problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_event_source
+    #   The source of the CloudWatch Event.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_event_detail_type
+    #   The detail type of the CloudWatch Event-based observation, for
+    #   example, `EC2 Instance State-change Notification`.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_event_arn
+    #   The Amazon Resource Name (ARN) of the AWS Health Event-based
+    #   observation.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_service
+    #   The service to which the AWS Health Event belongs, such as EC2.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_event_type_code
+    #   The type of the AWS Health event, for example,
+    #   `AWS_EC2_POWER_CONNECTIVITY_ISSUE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_event_type_category
+    #   The category of the AWS Health event, such as `issue`.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_event_description
+    #   The description of the AWS Health event provided by the service,
+    #   such as Amazon EC2.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_deploy_deployment_id
+    #   The deployment ID of the CodeDeploy-based observation related to the
+    #   detected problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_deploy_deployment_group
+    #   The deployment group to which the CodeDeploy deployment belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_deploy_state
+    #   The status of the CodeDeploy deployment, for example `SUCCESS` or `
+    #   FAILURE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_deploy_application
+    #   The CodeDeploy application to which the deployment belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_deploy_instance_group_id
+    #   The instance group to which the CodeDeploy instance belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_state
+    #   The state of the instance, such as `STOPPING` or `TERMINATING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] x_ray_fault_percent
+    #   The X-Ray request fault percentage for this node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x_ray_throttle_percent
+    #   The X-Ray request throttle percentage for this node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x_ray_error_percent
+    #   The X-Ray request error percentage for this node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x_ray_request_count
+    #   The X-Ray request count for this node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x_ray_request_average_latency
+    #   The X-Ray node request average latency for this node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] x_ray_node_name
+    #   The name of the X-Ray node.
+    #   @return [String]
+    #
+    # @!attribute [rw] x_ray_node_type
+    #   The type of the X-Ray node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Observation AWS API Documentation
     #
     class Observation < Struct.new(
@@ -1161,7 +1267,28 @@ module Aws::ApplicationInsights
       :metric_namespace,
       :metric_name,
       :unit,
-      :value)
+      :value,
+      :cloud_watch_event_id,
+      :cloud_watch_event_source,
+      :cloud_watch_event_detail_type,
+      :health_event_arn,
+      :health_service,
+      :health_event_type_code,
+      :health_event_type_category,
+      :health_event_description,
+      :code_deploy_deployment_id,
+      :code_deploy_deployment_group,
+      :code_deploy_state,
+      :code_deploy_application,
+      :code_deploy_instance_group_id,
+      :ec2_state,
+      :x_ray_fault_percent,
+      :x_ray_throttle_percent,
+      :x_ray_error_percent,
+      :x_ray_request_count,
+      :x_ray_request_average_latency,
+      :x_ray_node_name,
+      :x_ray_node_type)
       include Aws::Structure
     end
 
@@ -1421,6 +1548,7 @@ module Aws::ApplicationInsights
     #       {
     #         resource_group_name: "ResourceGroupName", # required
     #         ops_center_enabled: false,
+    #         cwe_monitor_enabled: false,
     #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #         remove_sns_topic: false,
     #       }
@@ -1432,6 +1560,12 @@ module Aws::ApplicationInsights
     # @!attribute [rw] ops_center_enabled
     #   When set to `true`, creates opsItems for any problems detected on an
     #   application.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch
+    #   events for the application resources, such as `instance terminated`,
+    #   `failed deployment`, and others.
     #   @return [Boolean]
     #
     # @!attribute [rw] ops_item_sns_topic_arn
@@ -1450,6 +1584,7 @@ module Aws::ApplicationInsights
     class UpdateApplicationRequest < Struct.new(
       :resource_group_name,
       :ops_center_enabled,
+      :cwe_monitor_enabled,
       :ops_item_sns_topic_arn,
       :remove_sns_topic)
       include Aws::Structure

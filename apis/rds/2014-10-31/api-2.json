@@ -65,8 +65,10 @@
       "input":{"shape":"AddTagsToResourceMessage"},
       "errors":[
         {"shape":"DBInstanceNotFoundFault"},
+        {"shape":"DBClusterNotFoundFault"},
         {"shape":"DBSnapshotNotFoundFault"},
-        {"shape":"DBClusterNotFoundFault"}
+        {"shape":"DBProxyNotFoundFault"},
+        {"shape":"DBProxyTargetGroupNotFoundFault"}
       ]
     },
     "ApplyPendingMaintenanceAction":{
@@ -796,7 +798,8 @@
       "errors":[
         {"shape":"DBProxyTargetNotFoundFault"},
         {"shape":"DBProxyTargetGroupNotFoundFault"},
-        {"shape":"DBProxyNotFoundFault"}
+        {"shape":"DBProxyNotFoundFault"},
+        {"shape":"InvalidDBProxyStateFault"}
       ]
     },
     "DescribeAccountAttributes":{
@@ -1061,7 +1064,9 @@
         "resultWrapper":"DescribeDBProxyTargetGroupsResult"
       },
       "errors":[
-        {"shape":"DBProxyTargetGroupNotFoundFault"}
+        {"shape":"DBProxyNotFoundFault"},
+        {"shape":"DBProxyTargetGroupNotFoundFault"},
+        {"shape":"InvalidDBProxyStateFault"}
       ]
     },
     "DescribeDBProxyTargets":{
@@ -1078,7 +1083,8 @@
       "errors":[
         {"shape":"DBProxyNotFoundFault"},
         {"shape":"DBProxyTargetNotFoundFault"},
-        {"shape":"DBProxyTargetGroupNotFoundFault"}
+        {"shape":"DBProxyTargetGroupNotFoundFault"},
+        {"shape":"InvalidDBProxyStateFault"}
       ]
     },
     "DescribeDBSecurityGroups":{
@@ -1424,7 +1430,9 @@
       "errors":[
         {"shape":"DBInstanceNotFoundFault"},
         {"shape":"DBSnapshotNotFoundFault"},
-        {"shape":"DBClusterNotFoundFault"}
+        {"shape":"DBClusterNotFoundFault"},
+        {"shape":"DBProxyNotFoundFault"},
+        {"shape":"DBProxyTargetGroupNotFoundFault"}
       ]
     },
     "ModifyCertificates":{
@@ -1614,7 +1622,8 @@
       },
       "errors":[
         {"shape":"DBProxyNotFoundFault"},
-        {"shape":"DBProxyTargetGroupNotFoundFault"}
+        {"shape":"DBProxyTargetGroupNotFoundFault"},
+        {"shape":"InvalidDBProxyStateFault"}
       ]
     },
     "ModifyDBSnapshot":{
@@ -1803,7 +1812,8 @@
         {"shape":"DBInstanceNotFoundFault"},
         {"shape":"DBProxyTargetAlreadyRegisteredFault"},
         {"shape":"InvalidDBInstanceStateFault"},
-        {"shape":"InvalidDBClusterStateFault"}
+        {"shape":"InvalidDBClusterStateFault"},
+        {"shape":"InvalidDBProxyStateFault"}
       ]
     },
     "RemoveFromGlobalCluster":{
@@ -1875,7 +1885,9 @@
       "errors":[
         {"shape":"DBInstanceNotFoundFault"},
         {"shape":"DBSnapshotNotFoundFault"},
-        {"shape":"DBClusterNotFoundFault"}
+        {"shape":"DBClusterNotFoundFault"},
+        {"shape":"DBProxyNotFoundFault"},
+        {"shape":"DBProxyTargetGroupNotFoundFault"}
       ]
     },
     "ResetDBClusterParameterGroup":{
@@ -2756,7 +2768,9 @@
         "DeletionProtection":{"shape":"BooleanOptional"},
         "GlobalClusterIdentifier":{"shape":"String"},
         "EnableHttpEndpoint":{"shape":"BooleanOptional"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "Domain":{"shape":"String"},
+        "DomainIAMRoleName":{"shape":"String"}
       }
     },
     "CreateDBClusterParameterGroupMessage":{
@@ -3186,7 +3200,8 @@
         "ActivityStreamKmsKeyId":{"shape":"String"},
         "ActivityStreamKinesisStreamName":{"shape":"String"},
         "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
-        "CrossAccountClone":{"shape":"BooleanOptional"}
+        "CrossAccountClone":{"shape":"BooleanOptional"},
+        "DomainMemberships":{"shape":"DomainMembershipList"}
       },
       "wrapper":true
     },
@@ -3938,7 +3953,7 @@
       "members":{
       },
       "error":{
-        "code":"DBProxyAlreadyExistsFault",
+        "code":"DBProxyTargetExistsFault",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -3978,7 +3993,10 @@
         "incompatible-network",
         "insufficient-resource-limits",
         "creating",
-        "deleting"
+        "deleting",
+        "suspended",
+        "suspending",
+        "reactivating"
       ]
     },
     "DBProxyTarget":{
@@ -3989,7 +4007,8 @@
         "TrackedClusterId":{"shape":"String"},
         "RdsResourceId":{"shape":"String"},
         "Port":{"shape":"Integer"},
-        "Type":{"shape":"TargetType"}
+        "Type":{"shape":"TargetType"},
+        "TargetHealth":{"shape":"TargetHealth"}
       }
     },
     "DBProxyTargetAlreadyRegisteredFault":{
@@ -4867,7 +4886,7 @@
         "SourceArn":{"shape":"String"},
         "Filters":{"shape":"FilterList"},
         "Marker":{"shape":"String"},
-        "MaxRecords":{"shape":"String"}
+        "MaxRecords":{"shape":"MaxRecords"}
       }
     },
     "DescribeGlobalClustersMessage":{
@@ -4918,6 +4937,7 @@
         "EngineVersion":{"shape":"String"},
         "DBInstanceClass":{"shape":"String"},
         "LicenseModel":{"shape":"String"},
+        "AvailabilityZoneGroup":{"shape":"String"},
         "Vpc":{"shape":"BooleanOptional"},
         "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
@@ -5084,7 +5104,10 @@
     },
     "EngineFamily":{
       "type":"string",
-      "enum":["MYSQL"]
+      "enum":[
+        "MYSQL",
+        "POSTGRESQL"
+      ]
     },
     "EngineModeList":{
       "type":"list",
@@ -5878,6 +5901,8 @@
         "EngineVersion":{"shape":"String"},
         "AllowMajorVersionUpgrade":{"shape":"Boolean"},
         "DBInstanceParameterGroupName":{"shape":"String"},
+        "Domain":{"shape":"String"},
+        "DomainIAMRoleName":{"shape":"String"},
         "ScalingConfiguration":{"shape":"ScalingConfiguration"},
         "DeletionProtection":{"shape":"BooleanOptional"},
         "EnableHttpEndpoint":{"shape":"BooleanOptional"},
@@ -6360,6 +6385,7 @@
         "EngineVersion":{"shape":"String"},
         "DBInstanceClass":{"shape":"String"},
         "LicenseModel":{"shape":"String"},
+        "AvailabilityZoneGroup":{"shape":"String"},
         "AvailabilityZones":{"shape":"AvailabilityZoneList"},
         "MultiAZCapable":{"shape":"Boolean"},
         "ReadReplicaCapable":{"shape":"Boolean"},
@@ -6898,7 +6924,9 @@
         "BacktrackWindow":{"shape":"LongOptional"},
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "DeletionProtection":{"shape":"BooleanOptional"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "Domain":{"shape":"String"},
+        "DomainIAMRoleName":{"shape":"String"}
       }
     },
     "RestoreDBClusterFromS3Result":{
@@ -6934,7 +6962,9 @@
         "ScalingConfiguration":{"shape":"ScalingConfiguration"},
         "DBClusterParameterGroupName":{"shape":"String"},
         "DeletionProtection":{"shape":"BooleanOptional"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "Domain":{"shape":"String"},
+        "DomainIAMRoleName":{"shape":"String"}
       }
     },
     "RestoreDBClusterFromSnapshotResult":{
@@ -6966,7 +6996,9 @@
         "EnableCloudwatchLogsExports":{"shape":"LogTypeList"},
         "DBClusterParameterGroupName":{"shape":"String"},
         "DeletionProtection":{"shape":"BooleanOptional"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "Domain":{"shape":"String"},
+        "DomainIAMRoleName":{"shape":"String"}
       }
     },
     "RestoreDBClusterToPointInTimeResult":{
@@ -7522,9 +7554,34 @@
       "type":"list",
       "member":{"shape":"DBProxyTargetGroup"}
     },
+    "TargetHealth":{
+      "type":"structure",
+      "members":{
+        "State":{"shape":"TargetState"},
+        "Reason":{"shape":"TargetHealthReason"},
+        "Description":{"shape":"String"}
+      }
+    },
+    "TargetHealthReason":{
+      "type":"string",
+      "enum":[
+        "UNREACHABLE",
+        "CONNECTION_FAILED",
+        "AUTH_FAILURE",
+        "PENDING_PROXY_CAPACITY"
+      ]
+    },
     "TargetList":{
       "type":"list",
       "member":{"shape":"DBProxyTarget"}
+    },
+    "TargetState":{
+      "type":"string",
+      "enum":[
+        "REGISTERING",
+        "AVAILABLE",
+        "UNAVAILABLE"
+      ]
     },
     "TargetType":{
       "type":"string",

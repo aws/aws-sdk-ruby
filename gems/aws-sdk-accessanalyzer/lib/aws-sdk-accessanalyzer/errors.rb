@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AccessAnalyzer
+
+  # When AccessAnalyzer returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::AccessAnalyzer::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all AccessAnalyzer errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::AccessAnalyzer::Errors::ServiceError
+  #       # rescues all AccessAnalyzer API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConflictException}
+  # * {InternalServerException}
+  # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
+  # * {ThrottlingException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +52,6 @@ module Aws::AccessAnalyzer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -49,7 +77,6 @@ module Aws::AccessAnalyzer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -70,7 +97,6 @@ module Aws::AccessAnalyzer
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -96,7 +122,6 @@ module Aws::AccessAnalyzer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ServiceQuotaExceededException < ServiceError
@@ -122,7 +147,6 @@ module Aws::AccessAnalyzer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -143,7 +167,6 @@ module Aws::AccessAnalyzer
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -169,7 +192,6 @@ module Aws::AccessAnalyzer
       def reason
         @data[:reason]
       end
-
     end
 
   end

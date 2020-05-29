@@ -24,17 +24,20 @@ require_relative 'aws-sdk-gamelift/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     game_lift = Aws::GameLift::Client.new
+#     resp = game_lift.accept_match(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon GameLift all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon GameLift are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::GameLift::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon GameLift API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-gamelift/customizations'
 # @service
 module Aws::GameLift
 
-  GEM_VERSION = '1.27.0'
+  GEM_VERSION = '1.31.0'
 
 end

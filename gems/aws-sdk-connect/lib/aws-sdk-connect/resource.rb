@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Connect
+
   class Resource
 
     # @param options ({})

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-cognitoidentity/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     cognito_identity = Aws::CognitoIdentity::Client.new
+#     resp = cognito_identity.create_identity_pool(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Cognito Identity all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Cognito Identity are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CognitoIdentity::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Cognito Identity API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-cognitoidentity/customizations'
 # @service
 module Aws::CognitoIdentity
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.22.0'
 
 end

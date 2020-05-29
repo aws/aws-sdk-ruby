@@ -6,6 +6,40 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ACM
+
+  # When ACM returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ACM::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ACM errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ACM::Errors::ServiceError
+  #       # rescues all ACM API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InvalidArgsException}
+  # * {InvalidArnException}
+  # * {InvalidDomainValidationOptionsException}
+  # * {InvalidParameterException}
+  # * {InvalidStateException}
+  # * {InvalidTagException}
+  # * {LimitExceededException}
+  # * {RequestInProgressException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {TagPolicyException}
+  # * {TooManyTagsException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +57,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -39,7 +72,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDomainValidationOptionsException < ServiceError
@@ -55,7 +87,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -71,7 +102,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateException < ServiceError
@@ -87,7 +117,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTagException < ServiceError
@@ -103,7 +132,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -119,7 +147,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestInProgressException < ServiceError
@@ -135,7 +162,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -151,7 +177,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -167,7 +192,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagPolicyException < ServiceError
@@ -183,7 +207,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -199,7 +222,6 @@ module Aws::ACM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

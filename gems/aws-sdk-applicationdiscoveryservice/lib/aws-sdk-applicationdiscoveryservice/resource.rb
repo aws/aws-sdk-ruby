@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ApplicationDiscoveryService
+
   class Resource
 
     # @param options ({})

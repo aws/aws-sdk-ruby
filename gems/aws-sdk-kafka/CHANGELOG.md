@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-05-28)
+------------------
+
+* Feature - New APIs for upgrading the Apache Kafka version of a cluster and to find out compatible upgrade paths
+
+1.20.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2020-02-25)
+------------------
+
+* Feature - Amazon MSK has added support for Broker Log delivery to CloudWatch, S3, and Firehose.
+
 1.17.0 (2020-02-04)
 ------------------
 

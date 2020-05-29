@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-04-27)
+------------------
+
+* Feature - Adding minimum replication engine version for describe-endpoint-types api.
+
+1.31.0 (2020-03-09)
+------------------
+
+* Feature - Added new settings for Kinesis target to include detailed transaction info; to capture table DDL details; to use single-line unformatted json, which can be directly queried by AWS Athena if data is streamed into S3 through AWS Kinesis Firehose. Added CdcInsertsAndUpdates in S3 target settings to allow capture ongoing insertions and updates only.
+
 1.30.0 (2019-11-01)
 ------------------
 

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-iotsecuretunneling/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t_secure_tunneling = Aws::IoTSecureTunneling::Client.new
+#     resp = io_t_secure_tunneling.close_tunnel(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT Secure Tunneling all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT Secure Tunneling are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoTSecureTunneling::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT Secure Tunneling API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-iotsecuretunneling/customizations'
 # @service
 module Aws::IoTSecureTunneling
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.3.0'
 
 end

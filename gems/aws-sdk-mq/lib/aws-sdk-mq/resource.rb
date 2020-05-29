@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MQ
+
   class Resource
 
     # @param options ({})

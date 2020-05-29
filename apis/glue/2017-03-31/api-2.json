@@ -1353,6 +1353,21 @@
         {"shape":"OperationTimeoutException"}
       ]
     },
+    "ListMLTransforms":{
+      "name":"ListMLTransforms",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListMLTransformsRequest"},
+      "output":{"shape":"ListMLTransformsResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "ListTriggers":{
       "name":"ListTriggers",
       "http":{
@@ -1648,6 +1663,22 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"},
         {"shape":"ConcurrentModificationException"}
+      ]
+    },
+    "StopWorkflowRun":{
+      "name":"StopWorkflowRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopWorkflowRunRequest"},
+      "output":{"shape":"StopWorkflowRunResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"IllegalWorkflowStateException"}
       ]
     },
     "TagResource":{
@@ -2505,14 +2536,18 @@
         "JDBC_ENFORCE_SSL",
         "CUSTOM_JDBC_CERT",
         "SKIP_CUSTOM_JDBC_CERT_VALIDATION",
-        "CUSTOM_JDBC_CERT_STRING"
+        "CUSTOM_JDBC_CERT_STRING",
+        "CONNECTION_URL",
+        "KAFKA_BOOTSTRAP_SERVERS"
       ]
     },
     "ConnectionType":{
       "type":"string",
       "enum":[
         "JDBC",
-        "SFTP"
+        "SFTP",
+        "MONGODB",
+        "KAFKA"
       ]
     },
     "ConnectionsList":{
@@ -2540,8 +2575,9 @@
       "type":"string",
       "enum":[
         "RUNNING",
-        "SUCCEEDED",
+        "CANCELLING",
         "CANCELLED",
+        "SUCCEEDED",
         "FAILED"
       ]
     },
@@ -2855,7 +2891,8 @@
         "WorkerType":{"shape":"WorkerType"},
         "NumberOfWorkers":{"shape":"NullableInteger"},
         "Timeout":{"shape":"Timeout"},
-        "MaxRetries":{"shape":"NullableInteger"}
+        "MaxRetries":{"shape":"NullableInteger"},
+        "Tags":{"shape":"TagsMap"}
       }
     },
     "CreateMLTransformResponse":{
@@ -4157,10 +4194,7 @@
     },
     "GetUserDefinedFunctionsRequest":{
       "type":"structure",
-      "required":[
-        "DatabaseName",
-        "Pattern"
-      ],
+      "required":["Pattern"],
       "members":{
         "CatalogId":{"shape":"CatalogIdString"},
         "DatabaseName":{"shape":"NameString"},
@@ -4316,6 +4350,13 @@
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "IdempotentParameterMismatchException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"MessageString"}
+      },
+      "exception":true
+    },
+    "IllegalWorkflowStateException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"MessageString"}
@@ -4627,6 +4668,24 @@
       "members":{
         "JobNames":{"shape":"JobNameList"},
         "NextToken":{"shape":"GenericString"}
+      }
+    },
+    "ListMLTransformsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"PaginationToken"},
+        "MaxResults":{"shape":"PageSize"},
+        "Filter":{"shape":"TransformFilterCriteria"},
+        "Sort":{"shape":"TransformSortCriteria"},
+        "Tags":{"shape":"TagsMap"}
+      }
+    },
+    "ListMLTransformsResponse":{
+      "type":"structure",
+      "required":["TransformIds"],
+      "members":{
+        "TransformIds":{"shape":"TransformIdList"},
+        "NextToken":{"shape":"PaginationToken"}
       }
     },
     "ListTriggersRequest":{
@@ -5485,6 +5544,22 @@
         "Name":{"shape":"NameString"}
       }
     },
+    "StopWorkflowRunRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "RunId"
+      ],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "RunId":{"shape":"IdString"}
+      }
+    },
+    "StopWorkflowRunResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "StorageDescriptor":{
       "type":"structure",
       "members":{
@@ -5735,6 +5810,10 @@
         "LastModifiedAfter":{"shape":"Timestamp"},
         "Schema":{"shape":"TransformSchema"}
       }
+    },
+    "TransformIdList":{
+      "type":"list",
+      "member":{"shape":"HashString"}
     },
     "TransformList":{
       "type":"list",
@@ -6271,7 +6350,9 @@
       "type":"string",
       "enum":[
         "RUNNING",
-        "COMPLETED"
+        "COMPLETED",
+        "STOPPING",
+        "STOPPED"
       ]
     },
     "WorkflowRuns":{

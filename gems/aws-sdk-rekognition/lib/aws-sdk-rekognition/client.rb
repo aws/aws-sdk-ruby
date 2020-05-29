@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:rekognition)
 
 module Aws::Rekognition
+  # An API client for Rekognition.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Rekognition::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::Rekognition
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::Rekognition
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::Rekognition
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::Rekognition
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::Rekognition
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::Rekognition
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::Rekognition
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -219,16 +274,15 @@ module Aws::Rekognition
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -237,7 +291,7 @@ module Aws::Rekognition
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -854,6 +908,73 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Deletes an Amazon Rekognition Custom Labels project. To delete a
+    # project you must first delete all versions of the model associated
+    # with the project. To delete a version of a model, see
+    # DeleteProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProject` action.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that you want to delete.
+    #
+    # @return [Types::DeleteProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project({
+    #     project_arn: "ProjectArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATING", "CREATED", "DELETING"
+    #
+    # @overload delete_project(params = {})
+    # @param [Hash] params ({})
+    def delete_project(params = {}, options = {})
+      req = build_request(:delete_project, params)
+      req.send_request(options)
+    end
+
+    # Deletes a version of a model.
+    #
+    # You must first stop the model before you can delete it. To check if a
+    # model is running, use the `Status` field returned from
+    # DescribeProjectVersions. To stop a running model call
+    # StopProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DeleteProjectVersion` action.
+    #
+    # @option params [required, String] :project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #
+    # @return [Types::DeleteProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteProjectVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_project_version({
+    #     project_version_arn: "ProjectVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #
+    # @overload delete_project_version(params = {})
+    # @param [Hash] params ({})
+    def delete_project_version(params = {}, options = {})
+      req = build_request(:delete_project_version, params)
+      req.send_request(options)
+    end
+
     # Deletes the stream processor identified by `Name`. You assign the
     # value for `Name` when you create the stream processor with
     # CreateStreamProcessor. You might not be able to use the same name for
@@ -950,6 +1071,8 @@ module Aws::Rekognition
     #   * {Types::DescribeProjectVersionsResponse#project_version_descriptions #project_version_descriptions} => Array&lt;Types::ProjectVersionDescription&gt;
     #   * {Types::DescribeProjectVersionsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_project_versions({
@@ -995,6 +1118,12 @@ module Aws::Rekognition
     #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.version #=> String
     #   resp.next_token #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * project_version_running
+    #   * project_version_training_completed
+    #
     # @overload describe_project_versions(params = {})
     # @param [Hash] params ({})
     def describe_project_versions(params = {}, options = {})
@@ -1024,6 +1153,8 @@ module Aws::Rekognition
     #
     #   * {Types::DescribeProjectsResponse#project_descriptions #project_descriptions} => Array&lt;Types::ProjectDescription&gt;
     #   * {Types::DescribeProjectsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1230,9 +1361,9 @@ module Aws::Rekognition
     # faces or might detect faces with lower confidence.
     #
     # You pass the input image either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the to call
-    # Amazon Rekognition operations, passing image bytes is not supported.
-    # The image must be either a PNG or JPEG formatted file.
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
     #
     # <note markdown="1"> This is a stateless API operation. That is, the operation does not
     # persist any data.
@@ -1704,9 +1835,14 @@ module Aws::Rekognition
     #   more information, see Images in the Amazon Rekognition developer
     #   guide.
     #
+    # @option params [Types::DetectTextFilters] :filters
+    #   Optional parameters that let you set the criteria that the text must
+    #   meet to be included in your response.
+    #
     # @return [Types::DetectTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectTextResponse#text_detections #text_detections} => Array&lt;Types::TextDetection&gt;
+    #   * {Types::DetectTextResponse#text_model_version #text_model_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1718,6 +1854,23 @@ module Aws::Rekognition
     #         name: "S3ObjectName",
     #         version: "S3ObjectVersion",
     #       },
+    #     },
+    #     filters: {
+    #       word_filter: {
+    #         min_confidence: 1.0,
+    #         min_bounding_box_height: 1.0,
+    #         min_bounding_box_width: 1.0,
+    #       },
+    #       regions_of_interest: [
+    #         {
+    #           bounding_box: {
+    #             width: 1.0,
+    #             height: 1.0,
+    #             left: 1.0,
+    #             top: 1.0,
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1736,6 +1889,7 @@ module Aws::Rekognition
     #   resp.text_detections[0].geometry.polygon #=> Array
     #   resp.text_detections[0].geometry.polygon[0].x #=> Float
     #   resp.text_detections[0].geometry.polygon[0].y #=> Float
+    #   resp.text_model_version #=> String
     #
     # @overload detect_text(params = {})
     # @param [Hash] params ({})
@@ -1862,6 +2016,8 @@ module Aws::Rekognition
     #   * {Types::GetCelebrityRecognitionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetCelebrityRecognitionResponse#next_token #next_token} => String
     #   * {Types::GetCelebrityRecognitionResponse#celebrities #celebrities} => Array&lt;Types::CelebrityRecognition&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2006,6 +2162,8 @@ module Aws::Rekognition
     #   * {Types::GetContentModerationResponse#next_token #next_token} => String
     #   * {Types::GetContentModerationResponse#moderation_model_version #moderation_model_version} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_content_moderation({
@@ -2087,6 +2245,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceDetectionResponse#next_token #next_token} => String
     #   * {Types::GetFaceDetectionResponse#faces #faces} => Array&lt;Types::FaceDetection&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2216,6 +2376,8 @@ module Aws::Rekognition
     #   * {Types::GetFaceSearchResponse#next_token #next_token} => String
     #   * {Types::GetFaceSearchResponse#video_metadata #video_metadata} => Types::VideoMetadata
     #   * {Types::GetFaceSearchResponse#persons #persons} => Array&lt;Types::PersonMatch&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2363,6 +2525,8 @@ module Aws::Rekognition
     #   * {Types::GetLabelDetectionResponse#labels #labels} => Array&lt;Types::LabelDetection&gt;
     #   * {Types::GetLabelDetectionResponse#label_model_version #label_model_version} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_label_detection({
@@ -2474,6 +2638,8 @@ module Aws::Rekognition
     #   * {Types::GetPersonTrackingResponse#next_token #next_token} => String
     #   * {Types::GetPersonTrackingResponse#persons #persons} => Array&lt;Types::PersonDetection&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_person_tracking({
@@ -2541,6 +2707,105 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def get_person_tracking(params = {}, options = {})
       req = build_request(:get_person_tracking, params)
+      req.send_request(options)
+    end
+
+    # Gets the text detection results of a Amazon Rekognition Video analysis
+    # started by StartTextDetection.
+    #
+    # Text detection with Amazon Rekognition Video is an asynchronous
+    # operation. You start text detection by calling StartTextDetection
+    # which returns a job identifier (`JobId`) When the text detection
+    # operation finishes, Amazon Rekognition publishes a completion status
+    # to the Amazon Simple Notification Service topic registered in the
+    # initial call to `StartTextDetection`. To get the results of the text
+    # detection operation, first check that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. if so, call `GetTextDetection`
+    # and pass the job identifier (`JobId`) from the initial call of
+    # `StartLabelDetection`.
+    #
+    # `GetTextDetection` returns an array of detected text
+    # (`TextDetections`) sorted by the time the text was detected, up to 50
+    # words per frame of video.
+    #
+    # Each element of the array includes the detected text, the precentage
+    # confidence in the acuracy of the detected text, the time the text was
+    # detected, bounding box information for where the text was located, and
+    # unique identifiers for words and their lines.
+    #
+    # Use MaxResults parameter to limit the number of text detections
+    # returned. If there are more results than specified in `MaxResults`,
+    # the value of `NextToken` in the operation response contains a
+    # pagination token for getting the next set of results. To get the next
+    # page of results, call `GetTextDetection` and populate the `NextToken`
+    # request parameter with the token value returned from the previous call
+    # to `GetTextDetection`.
+    #
+    # @option params [required, String] :job_id
+    #   Job identifier for the label detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartTextDetection`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more labels
+    #   to retrieve), Amazon Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of text.
+    #
+    # @return [Types::GetTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTextDetectionResponse#job_status #job_status} => String
+    #   * {Types::GetTextDetectionResponse#status_message #status_message} => String
+    #   * {Types::GetTextDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetTextDetectionResponse#text_detections #text_detections} => Array&lt;Types::TextDetectionResult&gt;
+    #   * {Types::GetTextDetectionResponse#next_token #next_token} => String
+    #   * {Types::GetTextDetectionResponse#text_model_version #text_model_version} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_text_detection({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.text_detections #=> Array
+    #   resp.text_detections[0].timestamp #=> Integer
+    #   resp.text_detections[0].text_detection.detected_text #=> String
+    #   resp.text_detections[0].text_detection.type #=> String, one of "LINE", "WORD"
+    #   resp.text_detections[0].text_detection.id #=> Integer
+    #   resp.text_detections[0].text_detection.parent_id #=> Integer
+    #   resp.text_detections[0].text_detection.confidence #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.width #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.height #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.left #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.top #=> Float
+    #   resp.text_detections[0].text_detection.geometry.polygon #=> Array
+    #   resp.text_detections[0].text_detection.geometry.polygon[0].x #=> Float
+    #   resp.text_detections[0].text_detection.geometry.polygon[0].y #=> Float
+    #   resp.next_token #=> String
+    #   resp.text_model_version #=> String
+    #
+    # @overload get_text_detection(params = {})
+    # @param [Hash] params ({})
+    def get_text_detection(params = {}, options = {})
+      req = build_request(:get_text_detection, params)
       req.send_request(options)
     end
 
@@ -2996,6 +3261,8 @@ module Aws::Rekognition
     #   * {Types::ListCollectionsResponse#next_token #next_token} => String
     #   * {Types::ListCollectionsResponse#face_model_versions #face_model_versions} => Array&lt;String&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To list the collections
     #
@@ -3059,6 +3326,8 @@ module Aws::Rekognition
     #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
     #   * {Types::ListFacesResponse#next_token #next_token} => String
     #   * {Types::ListFacesResponse#face_model_version #face_model_version} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list the faces in a collection
@@ -3243,6 +3512,8 @@ module Aws::Rekognition
     #
     #   * {Types::ListStreamProcessorsResponse#next_token #next_token} => String
     #   * {Types::ListStreamProcessorsResponse#stream_processors #stream_processors} => Array&lt;Types::StreamProcessor&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4228,6 +4499,98 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Starts asynchronous detection of text in a stored video.
+    #
+    # Amazon Rekognition Video can detect text in a video stored in an
+    # Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartTextDetection` returns a job identifier
+    # (`JobId`) which you use to get the results of the operation. When text
+    # detection is finished, Amazon Rekognition Video publishes a completion
+    # status to the Amazon Simple Notification Service topic that you
+    # specify in `NotificationChannel`.
+    #
+    # To get the results of the text detection operation, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. if
+    # so, call GetTextDetection and pass the job identifier (`JobId`) from
+    # the initial call to `StartTextDetection`.
+    #
+    # @option params [required, Types::Video] :video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify a
+    #   video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartTextDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidentaly started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the completion status of a video analysis
+    #   operation. For more information, see api-video.
+    #
+    # @option params [String] :job_tag
+    #   An identifier returned in the completion status published by your
+    #   Amazon Simple Notification Service topic. For example, you can use
+    #   `JobTag` to group related jobs and identify them in the completion
+    #   notification.
+    #
+    # @option params [Types::StartTextDetectionFilters] :filters
+    #   Optional parameters that let you set criteria the text must meet to be
+    #   included in your response.
+    #
+    # @return [Types::StartTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTextDetectionResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_text_detection({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #     filters: {
+    #       word_filter: {
+    #         min_confidence: 1.0,
+    #         min_bounding_box_height: 1.0,
+    #         min_bounding_box_width: 1.0,
+    #       },
+    #       regions_of_interest: [
+    #         {
+    #           bounding_box: {
+    #             width: 1.0,
+    #             height: 1.0,
+    #             left: 1.0,
+    #             top: 1.0,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_text_detection(params = {})
+    # @param [Hash] params ({})
+    def start_text_detection(params = {}, options = {})
+      req = build_request(:start_text_detection, params)
+      req.send_request(options)
+    end
+
     # Stops a running model. The operation might take a while to complete.
     # To check the current status, call DescribeProjectVersions.
     #
@@ -4293,7 +4656,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -4359,10 +4722,10 @@ module Aws::Rekognition
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                        | params                       | :delay   | :max_attempts |
-    # | ---------------------------------- | ---------------------------- | -------- | ------------- |
-    # | project_version_running            | {#describe_project_versions} | 30       | 40            |
-    # | project_version_training_completed | {#describe_project_versions} | 120      | 360           |
+    # | waiter_name                        | params                             | :delay   | :max_attempts |
+    # | ---------------------------------- | ---------------------------------- | -------- | ------------- |
+    # | project_version_running            | {Client#describe_project_versions} | 30       | 40            |
+    # | project_version_training_completed | {Client#describe_project_versions} | 120      | 360           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

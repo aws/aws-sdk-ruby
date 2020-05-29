@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MTurk
+
   class Resource
 
     # @param options ({})

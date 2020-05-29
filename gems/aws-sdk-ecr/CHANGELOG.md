@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-05-15)
+------------------
+
+* Feature - This release adds support for specifying an image manifest media type when pushing a manifest to Amazon ECR.
+
+1.28.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-04-28)
+------------------
+
+* Feature - This release adds support for multi-architecture images also known as a manifest list
+
+1.26.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.25.0 (2020-02-06)
 ------------------
 

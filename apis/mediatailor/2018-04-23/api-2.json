@@ -125,6 +125,17 @@
         }
     }, 
     "shapes": {
+        "AvailSuppression" : {
+            "type" : "structure",
+            "members" : {
+              "Mode" : {
+                "shape" : "Mode"
+              },
+              "Value" : {
+                "shape" : "__string"
+              }
+            }
+          },
         "BadRequestException": {
             "error": {
                 "httpStatusCode": 400
@@ -207,10 +218,16 @@
             "members": {
                 "AdDecisionServerUrl": {
                     "shape": "__string"
-                }, 
+                },
+                "AvailSuppression" : {
+                  "shape" : "AvailSuppression"
+                },
                 "CdnConfiguration": {
                     "shape": "CdnConfiguration"
-                }, 
+                },
+                "PersonalizationThresholdSeconds" : {
+                    "shape" : "__integerMin1"
+                },
                 "DashConfiguration": {
                     "shape": "DashConfiguration"
                 }, 
@@ -311,6 +328,13 @@
             ], 
             "type": "string"
         }, 
+        "Mode": {
+            "enum": [
+                "OFF",
+                "BEHIND_LIVE_EDGE"
+            ],
+            "type": "string"
+        },
         "PlaybackConfiguration": {
             "members": {
                 "AdDecisionServerUrl": {
@@ -318,7 +342,10 @@
                 }, 
                 "CdnConfiguration": {
                     "shape": "CdnConfiguration"
-                }, 
+                },
+                "PersonalizationThresholdSeconds" : {
+                    "shape" : "__integerMin1"
+                },
                 "DashConfiguration": {
                     "shape": "DashConfiguration"
                 }, 
@@ -368,10 +395,16 @@
             "members": {
                 "AdDecisionServerUrl": {
                     "shape": "__string"
-                }, 
+                },
+                "AvailSuppression" : {
+                  "shape" : "AvailSuppression"
+                },
                 "CdnConfiguration": {
                     "shape": "CdnConfiguration"
-                }, 
+                },
+                "PersonalizationThresholdSeconds" : {
+                    "shape" : "__integerMin1"
+                },
                 "DashConfiguration": {
                     "shape": "DashConfigurationForPut"
                 },
@@ -401,7 +434,10 @@
             "members": {
                 "AdDecisionServerUrl": {
                     "shape": "__string"
-                }, 
+                },
+                "AvailSuppression" : {
+                  "shape" : "AvailSuppression"
+                },
                 "CdnConfiguration": {
                     "shape": "CdnConfiguration"
                 }, 
@@ -499,6 +535,10 @@
         }, 
         "__integer": {
             "type": "integer"
+        },
+        "__integerMin1": {
+            "type": "integer",
+            "min": 1
         }, 
         "__integerMin1Max100": {
             "max": 100, 

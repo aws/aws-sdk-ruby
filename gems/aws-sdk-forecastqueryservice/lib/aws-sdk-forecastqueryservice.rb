@@ -24,17 +24,20 @@ require_relative 'aws-sdk-forecastqueryservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     forecast_query_service = Aws::ForecastQueryService::Client.new
+#     resp = forecast_query_service.query_forecast(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Forecast Query Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Forecast Query Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ForecastQueryService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Forecast Query Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-forecastqueryservice/customizations'
 # @service
 module Aws::ForecastQueryService
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.5.0'
 
 end

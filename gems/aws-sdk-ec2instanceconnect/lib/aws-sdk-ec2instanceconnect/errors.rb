@@ -6,6 +6,33 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2InstanceConnect
+
+  # When EC2InstanceConnect returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::EC2InstanceConnect::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all EC2InstanceConnect errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::EC2InstanceConnect::Errors::ServiceError
+  #       # rescues all EC2InstanceConnect API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AuthException}
+  # * {EC2InstanceNotFoundException}
+  # * {InvalidArgsException}
+  # * {ServiceException}
+  # * {ThrottlingException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +50,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class EC2InstanceNotFoundException < ServiceError
@@ -39,7 +65,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgsException < ServiceError
@@ -55,7 +80,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -71,7 +95,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -87,7 +110,6 @@ module Aws::EC2InstanceConnect
       def message
         @message || @data[:message]
       end
-
     end
 
   end

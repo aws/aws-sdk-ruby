@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-04-03)
+------------------
+
+* Feature - Added support for limiting simulation unit usage, giving more predictable control over simulation cost
+
+1.21.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-03-06)
+------------------
+
+* Feature - Added support for streaming a GUI from robot and simulation applications
+
 1.19.0 (2020-02-07)
 ------------------
 

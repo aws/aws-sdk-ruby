@@ -24,17 +24,20 @@ require_relative 'aws-sdk-kendra/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     kendra = Aws::Kendra::Client.new
+#     resp = kendra.batch_delete_document(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWSKendraFrontendService all
-# extend {Errors::ServiceError}.
+# Errors returned from AWSKendraFrontendService are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Kendra::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWSKendraFrontendService API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-kendra/customizations'
 # @service
 module Aws::Kendra
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.6.0'
 
 end

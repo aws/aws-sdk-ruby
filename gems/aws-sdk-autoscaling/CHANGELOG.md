@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-05-22)
+------------------
+
+* Feature - Documentation updates for Amazon EC2 Auto Scaling
+
+1.35.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-02-19)
+------------------
+
+* Feature - Doc update for EC2 Auto Scaling: Add Enabled parameter for PutScalingPolicy
+
+1.31.0 (2020-02-18)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports the ability to enable/disable target tracking, step scaling, and simple scaling policies.
+
 1.30.0 (2019-11-19)
 ------------------
 

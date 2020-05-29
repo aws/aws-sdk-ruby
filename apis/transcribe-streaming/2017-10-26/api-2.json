@@ -24,7 +24,8 @@
         {"shape":"BadRequestException"},
         {"shape":"LimitExceededException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ConflictException"}
+        {"shape":"ConflictException"},
+        {"shape":"ServiceUnavailableException"}
       ]
     }
   },
@@ -91,7 +92,8 @@
         "StartTime":{"shape":"Double"},
         "EndTime":{"shape":"Double"},
         "Type":{"shape":"ItemType"},
-        "Content":{"shape":"String"}
+        "Content":{"shape":"String"},
+        "VocabularyFilterMatch":{"shape":"Boolean"}
       }
     },
     "ItemList":{
@@ -148,6 +150,14 @@
       "type":"list",
       "member":{"shape":"Result"}
     },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":503},
+      "exception":true
+    },
     "SessionId":{
       "type":"string",
       "pattern":"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
@@ -186,7 +196,17 @@
           "location":"header",
           "locationName":"x-amzn-transcribe-session-id"
         },
-        "AudioStream":{"shape":"AudioStream"}
+        "AudioStream":{"shape":"AudioStream"},
+        "VocabularyFilterName":{
+          "shape":"VocabularyFilterName",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-filter-name"
+        },
+        "VocabularyFilterMethod":{
+          "shape":"VocabularyFilterMethod",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-filter-method"
+        }
       },
       "payload":"AudioStream"
     },
@@ -223,7 +243,17 @@
           "location":"header",
           "locationName":"x-amzn-transcribe-session-id"
         },
-        "TranscriptResultStream":{"shape":"TranscriptResultStream"}
+        "TranscriptResultStream":{"shape":"TranscriptResultStream"},
+        "VocabularyFilterName":{
+          "shape":"VocabularyFilterName",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-filter-name"
+        },
+        "VocabularyFilterMethod":{
+          "shape":"VocabularyFilterMethod",
+          "location":"header",
+          "locationName":"x-amzn-transcribe-vocabulary-filter-method"
+        }
       },
       "payload":"TranscriptResultStream"
     },
@@ -248,9 +278,24 @@
         "BadRequestException":{"shape":"BadRequestException"},
         "LimitExceededException":{"shape":"LimitExceededException"},
         "InternalFailureException":{"shape":"InternalFailureException"},
-        "ConflictException":{"shape":"ConflictException"}
+        "ConflictException":{"shape":"ConflictException"},
+        "ServiceUnavailableException":{"shape":"ServiceUnavailableException"}
       },
       "eventstream":true
+    },
+    "VocabularyFilterMethod":{
+      "type":"string",
+      "enum":[
+        "remove",
+        "mask",
+        "tag"
+      ]
+    },
+    "VocabularyFilterName":{
+      "type":"string",
+      "max":200,
+      "min":1,
+      "pattern":"^[0-9a-zA-Z._-]+"
     },
     "VocabularyName":{
       "type":"string",

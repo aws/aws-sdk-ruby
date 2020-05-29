@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Translate
+
+  # When Translate returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Translate::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Translate errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Translate::Errors::ServiceError
+  #       # rescues all Translate API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {DetectedLanguageLowConfidenceException}
+  # * {InternalServerException}
+  # * {InvalidFilterException}
+  # * {InvalidParameterValueException}
+  # * {InvalidRequestException}
+  # * {LimitExceededException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {TextSizeLimitExceededException}
+  # * {TooManyRequestsException}
+  # * {UnsupportedLanguagePairException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +61,6 @@ module Aws::Translate
       def detected_language_code
         @data[:detected_language_code]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -44,7 +76,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFilterException < ServiceError
@@ -60,7 +91,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -76,7 +106,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -92,7 +121,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -108,7 +136,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -124,7 +151,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -140,7 +166,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextSizeLimitExceededException < ServiceError
@@ -156,7 +181,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -172,7 +196,6 @@ module Aws::Translate
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedLanguagePairException < ServiceError
@@ -198,7 +221,6 @@ module Aws::Translate
       def target_language_code
         @data[:target_language_code]
       end
-
     end
 
   end

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-eventbridge/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     event_bridge = Aws::EventBridge::Client.new
+#     resp = event_bridge.activate_event_source(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon EventBridge all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon EventBridge are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::EventBridge::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon EventBridge API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-eventbridge/customizations'
 # @service
 module Aws::EventBridge
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.7.0'
 
 end

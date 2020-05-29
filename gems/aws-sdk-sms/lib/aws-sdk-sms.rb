@@ -24,17 +24,20 @@ require_relative 'aws-sdk-sms/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     sms = Aws::SMS::Client.new
+#     resp = sms.create_app(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Server Migration Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Server Migration Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SMS::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Server Migration Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-sms/customizations'
 # @service
 module Aws::SMS
 
-  GEM_VERSION = '1.17.0'
+  GEM_VERSION = '1.20.0'
 
 end

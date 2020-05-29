@@ -6,6 +6,36 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ComprehendMedical
+
+  # When ComprehendMedical returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ComprehendMedical::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ComprehendMedical errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ComprehendMedical::Errors::ServiceError
+  #       # rescues all ComprehendMedical API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InternalServerException}
+  # * {InvalidEncodingException}
+  # * {InvalidRequestException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {TextSizeLimitExceededException}
+  # * {TooManyRequestsException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +53,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidEncodingException < ServiceError
@@ -39,7 +68,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -55,7 +83,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -71,7 +98,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -87,7 +113,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextSizeLimitExceededException < ServiceError
@@ -103,7 +128,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -119,7 +143,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -135,7 +158,6 @@ module Aws::ComprehendMedical
       def message
         @message || @data[:message]
       end
-
     end
 
   end

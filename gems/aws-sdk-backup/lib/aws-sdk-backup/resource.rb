@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Backup
+
   class Resource
 
     # @param options ({})

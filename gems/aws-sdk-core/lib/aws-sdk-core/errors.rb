@@ -36,13 +36,23 @@ module Aws
         attr_accessor :code
 
       end
+
+      # @api private undocumented
+      def retryable?
+        false
+      end
+
+      # @api private undocumented
+      def throttling?
+        false
+      end
     end
 
     # Raised when InstanceProfileCredentialsProvider or
     # EcsCredentialsProvider fails to parse the metadata response after retries
     class MetadataParserError < RuntimeError
       def initialize(*args)
-        msg = "Failed to parse metadata service response."
+        msg = 'Failed to parse metadata service response.'
         super(msg)
       end
     end
@@ -61,7 +71,7 @@ module Aws
     class EndpointDiscoveryError < RuntimeError
       def initialize(*args)
         msg = 'Endpoint discovery failed for the operation or discovered endpoint is not working, '\
-          'request will keep failing until endpoint discovery succeeds or :endpoint option is provided.'
+              'request will keep failing until endpoint discovery succeeds or :endpoint option is provided.'
         super(msg)
       end
     end
@@ -73,8 +83,8 @@ module Aws
 
       def initialize(name)
         msg = "Missing required parameter #{name} to construct"\
-          " endpoint host prefix. You can disable host prefix by"\
-          " setting :disable_host_prefix_injection to `true`."
+              ' endpoint host prefix. You can disable host prefix by'\
+              ' setting :disable_host_prefix_injection to `true`.'
         super(msg)
       end
 
@@ -185,8 +195,8 @@ module Aws
     class MissingWebIdentityTokenFile < RuntimeError
       def initialize(*args)
         msg = 'Missing :web_identity_token_file parameter or'\
-          ' invalid file path provided for'\
-          ' Aws::AssumeRoleWebIdentityCredentials provider'
+              ' invalid file path provided for'\
+              ' Aws::AssumeRoleWebIdentityCredentials provider'
         super(msg)
       end
     end
@@ -198,8 +208,8 @@ module Aws
     # Raised when a client is constructed and region is not specified.
     class MissingRegionError < ArgumentError
       def initialize(*args)
-        msg = "missing region; use :region option or "
-        msg << "export region name to ENV['AWS_REGION']"
+        msg = 'missing region; use :region option or '\
+              "export region name to ENV['AWS_REGION']"
         super(msg)
       end
     end
@@ -255,6 +265,15 @@ Known AWS regions include (not specific to this service):
 
     end
 
+    # Raised when attempting to retry a request
+    # and no capacity is available to retry (See adaptive retry_mode)
+    class RetryCapacityNotAvailableError < RuntimeError
+      def initialize(*args)
+        msg = 'Insufficient client side capacity available to retry request.'
+        super(msg)
+      end
+    end
+
     # This module is mixed into another module, providing dynamic
     # error classes.  Error classes all inherit from {ServiceError}.
     #
@@ -270,7 +289,7 @@ Known AWS regions include (not specific to this service):
     module DynamicErrors
 
       def self.extended(submodule)
-        submodule.instance_variable_set("@const_set_mutex", Mutex.new)
+        submodule.instance_variable_set('@const_set_mutex', Mutex.new)
         submodule.const_set(:ServiceError, Class.new(ServiceError))
       end
 

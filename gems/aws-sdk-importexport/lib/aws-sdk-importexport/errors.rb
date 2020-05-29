@@ -6,6 +6,48 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ImportExport
+
+  # When ImportExport returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ImportExport::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ImportExport errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ImportExport::Errors::ServiceError
+  #       # rescues all ImportExport API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BucketPermissionException}
+  # * {CanceledJobIdException}
+  # * {CreateJobQuotaExceededException}
+  # * {ExpiredJobIdException}
+  # * {InvalidAccessKeyIdException}
+  # * {InvalidAddressException}
+  # * {InvalidCustomsException}
+  # * {InvalidFileSystemException}
+  # * {InvalidJobIdException}
+  # * {InvalidManifestFieldException}
+  # * {InvalidParameterException}
+  # * {InvalidVersionException}
+  # * {MalformedManifestException}
+  # * {MissingCustomsException}
+  # * {MissingManifestFieldException}
+  # * {MissingParameterException}
+  # * {MultipleRegionsException}
+  # * {NoSuchBucketException}
+  # * {UnableToCancelJobIdException}
+  # * {UnableToUpdateJobIdException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +65,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class CanceledJobIdException < ServiceError
@@ -39,7 +80,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class CreateJobQuotaExceededException < ServiceError
@@ -55,7 +95,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExpiredJobIdException < ServiceError
@@ -71,7 +110,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAccessKeyIdException < ServiceError
@@ -87,7 +125,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAddressException < ServiceError
@@ -103,7 +140,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCustomsException < ServiceError
@@ -119,7 +155,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFileSystemException < ServiceError
@@ -135,7 +170,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidJobIdException < ServiceError
@@ -151,7 +185,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidManifestFieldException < ServiceError
@@ -167,7 +200,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -183,7 +215,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidVersionException < ServiceError
@@ -199,7 +230,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedManifestException < ServiceError
@@ -215,7 +245,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingCustomsException < ServiceError
@@ -231,7 +260,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingManifestFieldException < ServiceError
@@ -247,7 +275,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingParameterException < ServiceError
@@ -263,7 +290,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class MultipleRegionsException < ServiceError
@@ -279,7 +305,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoSuchBucketException < ServiceError
@@ -295,7 +320,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnableToCancelJobIdException < ServiceError
@@ -311,7 +335,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnableToUpdateJobIdException < ServiceError
@@ -327,7 +350,6 @@ module Aws::ImportExport
       def message
         @message || @data[:message]
       end
-
     end
 
   end

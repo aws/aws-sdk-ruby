@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2020-05-18)
+------------------
+
+* Feature - Documentation updates for dynamodb
+
+1.46.1 (2020-05-11)
+------------------
+
+* Issue - Allow simple attributes plugin to send empty sets, rejected by the server.
+
+1.46.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2020-03-02)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2020-02-17)
+------------------
+
+* Feature - Amazon DynamoDB enables you to restore your DynamoDB backup or table data across AWS Regions such that the restored table is created in a different AWS Region from where the source table or backup resides. You can do cross-region restores between AWS commercial Regions, AWS China Regions, and AWS GovCloud (US) Regions.
+
 1.42.0 (2020-02-12)
 ------------------
 
@@ -294,4 +329,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-dynamodb` gem.
-

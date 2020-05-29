@@ -104,8 +104,8 @@ module {{module_name}}
       when nil then event_stream_class.new
       else
         msg = "expected #{type}_event_stream_handler to be a block or "\
-          "instance of {{module_name}}::#{event_stream_class}"\
-          ", got `#{handler.inspect}` instead"
+              "instance of {{module_name}}::#{event_stream_class}"\
+              ", got `#{handler.inspect}` instead"
         raise ArgumentError, msg
       end
     end

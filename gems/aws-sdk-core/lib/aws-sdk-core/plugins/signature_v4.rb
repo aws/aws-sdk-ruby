@@ -42,7 +42,7 @@ module Aws
       option(:unsigned_operations) do |cfg|
         cfg.api.operation_names.inject([]) do |unsigned, operation_name|
           if cfg.api.operation(operation_name)['authtype'] == 'none' ||
-            cfg.api.operation(operation_name)['authtype'] == 'custom'
+             cfg.api.operation(operation_name)['authtype'] == 'custom'
             # Unsign requests that has custom apigateway authorizer as well
             unsigned << operation_name
           else
@@ -107,6 +107,17 @@ module Aws
           req.headers.delete('X-Amz-Security-Token')
           req.headers.delete('X-Amz-Date')
 
+          if context.config.respond_to?(:clock_skew) &&
+             context.config.clock_skew &&
+             context.config.correct_clock_skew
+
+            endpoint = context.http_request.endpoint
+            skew = context.config.clock_skew.clock_correction(endpoint)
+            if skew.abs > 0
+              req.headers['X-Amz-Date'] = (Time.now.utc + skew).strftime("%Y%m%dT%H%M%SZ")
+            end
+          end
+
           # compute the signature
           begin
             signature = signer.sign_request(
@@ -130,7 +141,7 @@ module Aws
         # @api private
         def apply_authtype(context)
           if context.operation['authtype'].eql?('v4-unsigned-body') &&
-            context.http_request.endpoint.scheme.eql?('https')
+             context.http_request.endpoint.scheme.eql?('https')
             context.http_request.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD'
           end
           context

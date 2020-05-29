@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2020-05-18)
+------------------
+
+* Feature - This release adds support for specifying environment files to add environment variables to your containers.
+
+1.61.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2020-04-08)
+------------------
+
+* Feature - This release provides native support for specifying Amazon EFS file systems as volumes in your Amazon ECS task definitions.
+
+1.59.0 (2020-03-16)
+------------------
+
+* Feature - This release adds the ability to update the task placement strategy and constraints for Amazon ECS services.
+
+1.58.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.57.0 (2020-01-24)
 ------------------
 

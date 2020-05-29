@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2020-03-31)
+------------------
+
+* Feature - This release adds DeleteProject and DeleteProjectVersion APIs to Amazon Rekognition Custom Labels.
+
+1.35.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-02-17)
+------------------
+
+* Feature - This update adds the ability to detect text in videos and adds filters to image and video text detection.
+
 1.33.0 (2019-12-04)
 ------------------
 

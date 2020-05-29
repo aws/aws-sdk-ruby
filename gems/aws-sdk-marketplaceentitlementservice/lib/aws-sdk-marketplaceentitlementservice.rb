@@ -24,17 +24,20 @@ require_relative 'aws-sdk-marketplaceentitlementservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     marketplace_entitlement_service = Aws::MarketplaceEntitlementService::Client.new
+#     resp = marketplace_entitlement_service.get_entitlements(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Marketplace Entitlement Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Marketplace Entitlement Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::MarketplaceEntitlementService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Marketplace Entitlement Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-marketplaceentitlementservice/customizations'
 # @service
 module Aws::MarketplaceEntitlementService
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.19.0'
 
 end

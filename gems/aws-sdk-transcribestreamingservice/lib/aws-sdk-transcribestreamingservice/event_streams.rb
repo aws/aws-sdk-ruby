@@ -57,6 +57,10 @@ module Aws::TranscribeStreamingService
         @event_emitter.on(:conflict_exception, block) if block_given?
       end
 
+      def on_service_unavailable_exception_event(&block)
+        @event_emitter.on(:service_unavailable_exception, block) if block_given?
+      end
+
       def on_error_event(&block)
         @event_emitter.on(:error, block) if block_given?
       end
@@ -65,14 +69,20 @@ module Aws::TranscribeStreamingService
         @event_emitter.on(:initial_response, block) if block_given?
       end
 
+      def on_unknown_event(&block)
+        @event_emitter.on(:unknown_event, block) if block_given?
+      end
+
       def on_event(&block)
         on_transcript_event_event(&block)
         on_bad_request_exception_event(&block)
         on_limit_exceeded_exception_event(&block)
         on_internal_failure_exception_event(&block)
         on_conflict_exception_event(&block)
+        on_service_unavailable_exception_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
+        on_unknown_event(&block)
       end
 
       # @api private

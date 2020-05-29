@@ -52,6 +52,8 @@ module Aws::MediaPackageVod
     ListPackagingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPackagingConfigurationsResponse')
     ListPackagingGroupsRequest = Shapes::StructureShape.new(name: 'ListPackagingGroupsRequest')
     ListPackagingGroupsResponse = Shapes::StructureShape.new(name: 'ListPackagingGroupsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManifestLayout = Shapes::StringShape.new(name: 'ManifestLayout')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MssEncryption = Shapes::StructureShape.new(name: 'MssEncryption')
@@ -70,8 +72,12 @@ module Aws::MediaPackageVod
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     StreamOrder = Shapes::StringShape.new(name: 'StreamOrder')
     StreamSelection = Shapes::StructureShape.new(name: 'StreamSelection')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    Tags = Shapes::MapShape.new(name: 'Tags')
+    TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -86,6 +92,7 @@ module Aws::MediaPackageVod
     __listOf__PeriodTriggersElement = Shapes::ListShape.new(name: '__listOf__PeriodTriggersElement')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
 
     Asset.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -96,6 +103,7 @@ module Aws::MediaPackageVod
     Asset.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     Asset.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceArn"))
     Asset.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceRoleArn"))
+    Asset.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Asset.struct_class = Types::Asset
 
     AssetCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
@@ -103,6 +111,7 @@ module Aws::MediaPackageVod
     AssetCreateParameters.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     AssetCreateParameters.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceArn"))
     AssetCreateParameters.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceRoleArn"))
+    AssetCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AssetCreateParameters.struct_class = Types::AssetCreateParameters
 
     AssetList.add_member(:assets, Shapes::ShapeRef.new(shape: __listOfAssetShallow, location_name: "assets"))
@@ -116,6 +125,7 @@ module Aws::MediaPackageVod
     AssetShallow.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     AssetShallow.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceArn"))
     AssetShallow.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceRoleArn"))
+    AssetShallow.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AssetShallow.struct_class = Types::AssetShallow
 
     CmafEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
@@ -131,6 +141,7 @@ module Aws::MediaPackageVod
     CreateAssetRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     CreateAssetRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceArn"))
     CreateAssetRequest.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceRoleArn"))
+    CreateAssetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAssetRequest.struct_class = Types::CreateAssetRequest
 
     CreateAssetResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -141,6 +152,7 @@ module Aws::MediaPackageVod
     CreateAssetResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     CreateAssetResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceArn"))
     CreateAssetResponse.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceRoleArn"))
+    CreateAssetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateAssetResponse.struct_class = Types::CreateAssetResponse
 
     CreatePackagingConfigurationRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
@@ -149,6 +161,7 @@ module Aws::MediaPackageVod
     CreatePackagingConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     CreatePackagingConfigurationRequest.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     CreatePackagingConfigurationRequest.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "packagingGroupId"))
+    CreatePackagingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePackagingConfigurationRequest.struct_class = Types::CreatePackagingConfigurationRequest
 
     CreatePackagingConfigurationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -158,14 +171,17 @@ module Aws::MediaPackageVod
     CreatePackagingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreatePackagingConfigurationResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     CreatePackagingConfigurationResponse.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))
+    CreatePackagingConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePackagingConfigurationResponse.struct_class = Types::CreatePackagingConfigurationResponse
 
     CreatePackagingGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    CreatePackagingGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePackagingGroupRequest.struct_class = Types::CreatePackagingGroupRequest
 
     CreatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CreatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     CreatePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    CreatePackagingGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePackagingGroupResponse.struct_class = Types::CreatePackagingGroupResponse
 
     DashEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
@@ -211,6 +227,7 @@ module Aws::MediaPackageVod
     DescribeAssetResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, location_name: "resourceId"))
     DescribeAssetResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceArn"))
     DescribeAssetResponse.add_member(:source_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "sourceRoleArn"))
+    DescribeAssetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeAssetResponse.struct_class = Types::DescribeAssetResponse
 
     DescribePackagingConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
@@ -223,6 +240,7 @@ module Aws::MediaPackageVod
     DescribePackagingConfigurationResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribePackagingConfigurationResponse.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     DescribePackagingConfigurationResponse.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))
+    DescribePackagingConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribePackagingConfigurationResponse.struct_class = Types::DescribePackagingConfigurationResponse
 
     DescribePackagingGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
@@ -231,6 +249,7 @@ module Aws::MediaPackageVod
     DescribePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     DescribePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribePackagingGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribePackagingGroupResponse.struct_class = Types::DescribePackagingGroupResponse
 
     EgressEndpoint.add_member(:packaging_configuration_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingConfigurationId"))
@@ -288,6 +307,12 @@ module Aws::MediaPackageVod
     ListPackagingGroupsResponse.add_member(:packaging_groups, Shapes::ShapeRef.new(shape: __listOfPackagingGroup, location_name: "packagingGroups"))
     ListPackagingGroupsResponse.struct_class = Types::ListPackagingGroupsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MssEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     MssEncryption.struct_class = Types::MssEncryption
 
@@ -310,6 +335,7 @@ module Aws::MediaPackageVod
     PackagingConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     PackagingConfiguration.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     PackagingConfiguration.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "packagingGroupId"))
+    PackagingConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PackagingConfiguration.struct_class = Types::PackagingConfiguration
 
     PackagingConfigurationCreateParameters.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
@@ -318,6 +344,7 @@ module Aws::MediaPackageVod
     PackagingConfigurationCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     PackagingConfigurationCreateParameters.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     PackagingConfigurationCreateParameters.add_member(:packaging_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "packagingGroupId"))
+    PackagingConfigurationCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PackagingConfigurationCreateParameters.struct_class = Types::PackagingConfigurationCreateParameters
 
     PackagingConfigurationList.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
@@ -327,9 +354,11 @@ module Aws::MediaPackageVod
     PackagingGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     PackagingGroup.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     PackagingGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    PackagingGroup.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PackagingGroup.struct_class = Types::PackagingGroup
 
     PackagingGroupCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    PackagingGroupCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PackagingGroupCreateParameters.struct_class = Types::PackagingGroupCreateParameters
 
     PackagingGroupList.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
@@ -349,11 +378,25 @@ module Aws::MediaPackageVod
     StreamSelection.add_member(:stream_order, Shapes::ShapeRef.new(shape: StreamOrder, location_name: "streamOrder"))
     StreamSelection.struct_class = Types::StreamSelection
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    Tags.key = Shapes::ShapeRef.new(shape: __string)
+    Tags.value = Shapes::ShapeRef.new(shape: __string)
+
+    TagsModel.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagsModel.struct_class = Types::TagsModel
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     __listOfAssetShallow.member = Shapes::ShapeRef.new(shape: AssetShallow)
 
@@ -372,6 +415,9 @@ module Aws::MediaPackageVod
     __listOf__PeriodTriggersElement.member = Shapes::ShapeRef.new(shape: __PeriodTriggersElement)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private
@@ -576,6 +622,30 @@ module Aws::MediaPackageVod
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resource-arn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
     end
 

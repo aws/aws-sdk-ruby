@@ -6,6 +6,31 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::StorageGateway
+
+  # When StorageGateway returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::StorageGateway::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all StorageGateway errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::StorageGateway::Errors::ServiceError
+  #       # rescues all StorageGateway API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InternalServerError}
+  # * {InvalidGatewayRequestException}
+  # * {ServiceUnavailableError}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +53,6 @@ module Aws::StorageGateway
       def error
         @data[:error]
       end
-
     end
 
     class InvalidGatewayRequestException < ServiceError
@@ -49,7 +73,6 @@ module Aws::StorageGateway
       def error
         @data[:error]
       end
-
     end
 
     class ServiceUnavailableError < ServiceError
@@ -70,7 +93,6 @@ module Aws::StorageGateway
       def error
         @data[:error]
       end
-
     end
 
   end

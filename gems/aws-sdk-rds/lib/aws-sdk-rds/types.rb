@@ -90,10 +90,10 @@ module Aws::RDS
     #   excluding default option groups. The used value is the count of
     #   nondefault DB option groups in the account.
     #
-    # * `ReadReplicasPerMaster` - The number of Read Replicas per DB
-    #   instance. The used value is the highest number of Read Replicas for
+    # * `ReadReplicasPerMaster` - The number of read replicas per DB
+    #   instance. The used value is the highest number of read replicas for
     #   a DB instance in the account. Other DB instances in the account
-    #   might have a lower number of Read Replicas.
+    #   might have a lower number of read replicas.
     #
     # * `ReservedDBInstances` - The number of reserved DB instances per
     #   account. The used value is the count of the active reserved DB
@@ -350,6 +350,29 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified CIDR IP range or Amazon EC2 security group is already
+    # authorized for the specified DB security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizationAlreadyExistsFault AWS API Documentation
+    #
+    class AuthorizationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified CIDR IP range or Amazon EC2 security group might not be
+    # authorized for the specified DB security group.
+    #
+    # Or, RDS might not be authorized to perform necessary actions using IAM
+    # on your behalf.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizationNotFoundFault AWS API Documentation
+    #
+    class AuthorizationNotFoundFault < Aws::EmptyStructure; end
+
+    # The DB security group authorization quota has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizationQuotaExceededFault AWS API Documentation
+    #
+    class AuthorizationQuotaExceededFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AuthorizeDBSecurityGroupIngressMessage
     #   data as a hash:
     #
@@ -540,6 +563,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BackupPolicyNotFoundFault AWS API Documentation
+    #
+    class BackupPolicyNotFoundFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CancelExportTaskMessage
     #   data as a hash:
     #
@@ -627,6 +654,12 @@ module Aws::RDS
       :marker)
       include Aws::Structure
     end
+
+    # `CertificateIdentifier` doesn't refer to an existing certificate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CertificateNotFoundFault AWS API Documentation
+    #
+    class CertificateNotFoundFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
@@ -757,6 +790,8 @@ module Aws::RDS
     #   the separator. You can also include multiple variables in a single
     #   `SET` statement, such as `SET x=1, y=2`.
     #
+    #   `InitQuery` is not currently supported for PostgreSQL.
+    #
     #   Default: no initialization query
     #   @return [String]
     #
@@ -820,6 +855,8 @@ module Aws::RDS
     #   multiple statements, use semicolons as the separator. You can also
     #   include multiple variables in a single `SET` statement, such as `SET
     #   x=1, y=2`.
+    #
+    #   `InitQuery` is not currently supported for PostgreSQL.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
@@ -1018,7 +1055,7 @@ module Aws::RDS
     #   copying an encrypted DB cluster snapshot in the same AWS Region.
     #
     #   The pre-signed URL must be a valid request for the
-    #   `CopyDBSClusterSnapshot` API action that can be executed in the
+    #   `CopyDBClusterSnapshot` API action that can be executed in the
     #   source AWS Region that contains the encrypted DB cluster snapshot to
     #   be copied. The pre-signed URL request must contain the following
     #   parameter values:
@@ -1663,6 +1700,8 @@ module Aws::RDS
     #         global_cluster_identifier: "String",
     #         enable_http_endpoint: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #         source_region: "String",
     #       }
     #
@@ -1864,7 +1903,7 @@ module Aws::RDS
     #
     # @!attribute [rw] replication_source_identifier
     #   The Amazon Resource Name (ARN) of the source DB instance or DB
-    #   cluster if this DB cluster is created as a Read Replica.
+    #   cluster if this DB cluster is created as a read replica.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1899,10 +1938,10 @@ module Aws::RDS
     #   Your AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a Read Replica of an encrypted DB cluster in another
+    #   If you create a read replica of an encrypted DB cluster in another
     #   AWS Region, you must set `KmsKeyId` to a KMS key ID that is valid in
-    #   the destination AWS Region. This key is used to encrypt the Read
-    #   Replica in that AWS Region.
+    #   the destination AWS Region. This key is used to encrypt the read
+    #   replica in that AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url
@@ -1925,8 +1964,8 @@ module Aws::RDS
     #     `CreateDBCluster` action that is called in the destination AWS
     #     Region, and the action contained in the pre-signed URL.
     #
-    #   * `DestinationRegion` - The name of the AWS Region that Aurora Read
-    #     Replica will be created in.
+    #   * `DestinationRegion` - The name of the AWS Region that Aurora read
+    #     replica will be created in.
     #
     #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
     #     encrypted DB cluster to be copied. This identifier must be in the
@@ -1996,6 +2035,13 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters
+    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
+    #   versions, the clusters in a global database use `provisioned` engine
+    #   mode.
+    #
+    #    </note>
+    #
     #   Limitations and requirements apply to some DB engine modes. For more
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
@@ -2055,6 +2101,24 @@ module Aws::RDS
     #   to snapshots of the DB cluster. The default is not to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -2096,6 +2160,8 @@ module Aws::RDS
       :global_cluster_identifier,
       :enable_http_endpoint,
       :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -2752,7 +2818,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -2794,7 +2860,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -2802,7 +2868,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -2810,7 +2876,7 @@ module Aws::RDS
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -2818,20 +2884,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #   @return [Integer]
@@ -3041,12 +3107,10 @@ module Aws::RDS
     #   with an Amazon RDS DB Instance Running Microsoft SQL Server][1] in
     #   the *Amazon RDS User Guide*.
     #
-    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication
     #   to authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
-    #
-    #
     #
     #
     #
@@ -3325,50 +3389,56 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier of the Read Replica. This identifier is
+    #   The DB instance identifier of the read replica. This identifier is
     #   the unique key that identifies a DB instance. This parameter is
     #   stored as a lowercase string.
     #   @return [String]
     #
     # @!attribute [rw] source_db_instance_identifier
     #   The identifier of the DB instance that will act as the source for
-    #   the Read Replica. Each DB instance can have up to five Read
-    #   Replicas.
+    #   the read replica. Each DB instance can have up to five read
+    #   replicas.
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle, or
-    #     PostgreSQL DB instance.
+    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle,
+    #     PostgreSQL, or SQL Server DB instance.
     #
-    #   * Can specify a DB instance that is a MySQL Read Replica only if the
+    #   * Can specify a DB instance that is a MySQL read replica only if the
     #     source is running MySQL 5.6 or later.
     #
-    #   * For the limitations of Oracle Read Replicas, see [Read Replica
+    #   * For the limitations of Oracle read replicas, see [Read Replica
     #     Limitations with Oracle][1] in the *Amazon RDS User Guide*.
     #
-    #   * Can specify a DB instance that is a PostgreSQL DB instance only if
-    #     the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher
-    #     for cross-region replication).
+    #   * For the limitations of SQL Server read replicas, see [Read Replica
+    #     Limitations with Microsoft SQL Server][2] in the *Amazon RDS User
+    #     Guide*.
     #
-    #   * The specified DB instance must have automatic backups enabled, its
-    #     backup retention period must be greater than 0.
+    #   * Can specify a PostgreSQL DB instance only if the source is running
+    #     PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region
+    #     replication).
     #
-    #   * If the source DB instance is in the same AWS Region as the Read
-    #     Replica, specify a valid DB instance identifier.
+    #   * The specified DB instance must have automatic backups enabled,
+    #     that is, its backup retention period must be greater than 0.
     #
-    #   * If the source DB instance is in a different AWS Region than the
-    #     Read Replica, specify a valid DB instance ARN. For more
-    #     information, go to [ Constructing an ARN for Amazon RDS][2] in the
-    #     *Amazon RDS User Guide*.
+    #   * If the source DB instance is in the same AWS Region as the read
+    #     replica, specify a valid DB instance identifier.
+    #
+    #   * If the source DB instance is in a different AWS Region from the
+    #     read replica, specify a valid DB instance ARN. For more
+    #     information, see [Constructing an ARN for Amazon RDS][3] in the
+    #     *Amazon RDS User Guide*. This doesn't apply to SQL Server, which
+    #     doesn't support cross-region replicas.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The compute and memory capacity of the Read Replica, for example,
+    #   The compute and memory capacity of the read replica, for example,
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB
     #   instance classes, and availability for your engine, see [DB Instance
@@ -3382,7 +3452,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone (AZ) where the Read Replica will be created.
+    #   The Availability Zone (AZ) where the read replica will be created.
     #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's AWS Region.
@@ -3399,19 +3469,19 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   A value that indicates whether the Read Replica is in a Multi-AZ
+    #   A value that indicates whether the read replica is in a Multi-AZ
     #   deployment.
     #
-    #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates
+    #   You can create a read replica as a Multi-AZ DB instance. RDS creates
     #   a standby of your replica in another Availability Zone for failover
-    #   support for the replica. Creating your Read Replica as a Multi-AZ DB
+    #   support for the replica. Creating your read replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
-    #   automatically to the Read Replica during the maintenance window.
+    #   automatically to the read replica during the maintenance window.
     #
     #   Default: Inherits from the source DB instance
     #   @return [Boolean]
@@ -3424,6 +3494,11 @@ module Aws::RDS
     # @!attribute [rw] option_group_name
     #   The option group the DB instance is associated with. If omitted, the
     #   option group associated with the source instance is used.
+    #
+    #   <note markdown="1"> For SQL Server, you must use the option group associated with the
+    #   source instance.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_name
@@ -3432,8 +3507,8 @@ module Aws::RDS
     #
     #   If you do not specify a value for `DBParameterGroupName`, then
     #   Amazon RDS uses the `DBParameterGroup` of source DB instance for a
-    #   same region Read Replica, or the default `DBParameterGroup` for the
-    #   specified DB engine for a cross region Read Replica.
+    #   same region read replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross region read replica.
     #
     #   <note markdown="1"> Currently, specifying a parameter group for this operation is only
     #   supported for Oracle DB instances.
@@ -3484,28 +3559,28 @@ module Aws::RDS
     #   * The specified DB subnet group must be in the same AWS Region in
     #     which the operation is running.
     #
-    #   * All Read Replicas in one AWS Region that are created from the same
+    #   * All read replicas in one AWS Region that are created from the same
     #     source DB instance must either:&gt;
     #
-    #     * Specify DB subnet groups from the same VPC. All these Read
-    #       Replicas are created in the same VPC.
+    #     * Specify DB subnet groups from the same VPC. All these read
+    #       replicas are created in the same VPC.
     #
-    #     * Not specify a DB subnet group. All these Read Replicas are
+    #     * Not specify a DB subnet group. All these read replicas are
     #       created outside of any VPC.
     #
     #   Example: `mySubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with the Read
-    #   Replica.
+    #   A list of EC2 VPC security groups to associate with the read
+    #   replica.
     #
     #   Default: The default EC2 VPC security group for the DB subnet
     #   group's VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the Read Replica.
+    #   Specifies the storage type to be associated with the read replica.
     #
     #   Valid values: `standard | gp2 | io1`
     #
@@ -3516,14 +3591,14 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the Read
-    #   Replica to snapshots of the Read Replica. By default, tags are not
+    #   A value that indicates whether to copy all tags from the read
+    #   replica to snapshots of the read replica. By default, tags are not
     #   copied.
     #   @return [Boolean]
     #
     # @!attribute [rw] monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
-    #   metrics are collected for the Read Replica. To disable collecting
+    #   metrics are collected for the read replica. To disable collecting
     #   Enhanced Monitoring metrics, specify 0. The default is 0.
     #
     #   If `MonitoringRoleArn` is specified, then you must also set
@@ -3548,22 +3623,22 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key ID for an encrypted Read Replica. The KMS key ID is
+    #   The AWS KMS key ID for an encrypted read replica. The KMS key ID is
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you create an encrypted Read Replica in the same AWS Region as
+    #   If you create an encrypted read replica in the same AWS Region as
     #   the source DB instance, then you do not have to specify a value for
-    #   this parameter. The Read Replica is encrypted with the same KMS key
+    #   this parameter. The read replica is encrypted with the same KMS key
     #   as the source DB instance.
     #
-    #   If you create an encrypted Read Replica in a different AWS Region,
+    #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a KMS key for the destination AWS Region. KMS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in
     #   another AWS Region.
     #
-    #   You can't create an encrypted Read Replica from an unencrypted DB
+    #   You can't create an encrypted read replica from an unencrypted DB
     #   instance.
     #   @return [String]
     #
@@ -3572,10 +3647,10 @@ module Aws::RDS
     #   `CreateDBInstanceReadReplica` API action in the source AWS Region
     #   that contains the source DB instance.
     #
-    #   You must specify this parameter when you create an encrypted Read
-    #   Replica from another AWS Region by using the Amazon RDS API. Don't
-    #   specify `PreSignedUrl` when you are creating an encrypted Read
-    #   Replica in the same AWS Region.
+    #   You must specify this parameter when you create an encrypted read
+    #   replica from another AWS Region by using the Amazon RDS API. Don't
+    #   specify `PreSignedUrl` when you are creating an encrypted read
+    #   replica in the same AWS Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CreateDBInstanceReadReplica` API action that can be executed in the
@@ -3583,8 +3658,8 @@ module Aws::RDS
     #   The presigned URL request must contain the following parameter
     #   values:
     #
-    #   * `DestinationRegion` - The AWS Region that the encrypted Read
-    #     Replica is created in. This AWS Region is the same one where the
+    #   * `DestinationRegion` - The AWS Region that the encrypted read
+    #     replica is created in. This AWS Region is the same one where the
     #     `CreateDBInstanceReadReplica` action is called that contains this
     #     presigned URL.
     #
@@ -3597,7 +3672,7 @@ module Aws::RDS
     #     the presigned URL must be set to the us-east-1 AWS Region.
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the Read Replica in the destination AWS Region. This is
+    #     encrypt the read replica in the destination AWS Region. This is
     #     the same identifier for both the `CreateDBInstanceReadReplica`
     #     action that is called in the destination AWS Region, and the
     #     action contained in the presigned URL.
@@ -3605,7 +3680,7 @@ module Aws::RDS
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
     #     the Amazon Resource Name (ARN) format for the source AWS Region.
-    #     For example, if you are creating an encrypted Read Replica from a
+    #     For example, if you are creating an encrypted read replica from a
     #     DB instance in the us-west-2 AWS Region, then your
     #     `SourceDBInstanceIdentifier` looks like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115`.
@@ -3617,8 +3692,11 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
     #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
+    #   autogenerates a presigned URL that is a valid request for the
     #   operation that can be executed in the source AWS Region.
+    #
+    #    `SourceRegion` isn't supported for SQL Server, because SQL Server
+    #   on Amazon RDS doesn't support cross-region read replicas.
     #
     #    </note>
     #
@@ -3645,7 +3723,7 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for
-    #   the Read Replica.
+    #   the read replica.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
@@ -3711,9 +3789,16 @@ module Aws::RDS
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][1] in the *Amazon RDS User Guide*.
     #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB
+    #   instance. For more information, see [ Using Windows Authentication
+    #   with an Amazon RDS DB Instance Running Microsoft SQL Server][2] in
+    #   the *Amazon RDS User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
     #   @return [String]
     #
     # @!attribute [rw] domain_iam_role_name
@@ -3880,7 +3965,7 @@ module Aws::RDS
     #
     #       {
     #         db_proxy_name: "String", # required
-    #         engine_family: "MYSQL", # required, accepts MYSQL
+    #         engine_family: "MYSQL", # required, accepts MYSQL, POSTGRESQL
     #         auth: [ # required
     #           {
     #             description: "String",
@@ -3915,9 +4000,8 @@ module Aws::RDS
     # @!attribute [rw] engine_family
     #   The kinds of databases that the proxy can connect to. This value
     #   determines which database network protocol the proxy recognizes when
-    #   it interprets network traffic to and from the database. Currently,
-    #   this value is always `MYSQL`. The engine family applies to both RDS
-    #   MySQL and Aurora MySQL.
+    #   it interprets network traffic to and from the database. The engine
+    #   family applies to MySQL and PostgreSQL for both RDS and Aurora.
     #   @return [String]
     #
     # @!attribute [rw] auth
@@ -4484,6 +4568,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `CustomAvailabilityZoneName` is already used by an existing custom
+    # Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneAlreadyExistsFault AWS API Documentation
+    #
+    class CustomAvailabilityZoneAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeCustomAvailabilityZones` request. If this parameter is
@@ -4502,6 +4593,19 @@ module Aws::RDS
       :custom_availability_zones)
       include Aws::Structure
     end
+
+    # `CustomAvailabilityZoneId` doesn't refer to an existing custom
+    # Availability Zone identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneNotFoundFault AWS API Documentation
+    #
+    class CustomAvailabilityZoneNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of custom Availability Zones.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneQuotaExceededFault AWS API Documentation
+    #
+    class CustomAvailabilityZoneQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon Aurora DB cluster.
     #
@@ -4636,11 +4740,11 @@ module Aws::RDS
     #
     # @!attribute [rw] replication_source_identifier
     #   Contains the identifier of the source DB cluster if this DB cluster
-    #   is a Read Replica.
+    #   is a read replica.
     #   @return [String]
     #
     # @!attribute [rw] read_replica_identifiers
-    #   Contains one or more identifiers of the Read Replicas associated
+    #   Contains one or more identifiers of the read replicas associated
     #   with this DB cluster.
     #   @return [Array<String>]
     #
@@ -4740,6 +4844,15 @@ module Aws::RDS
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters
+    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
+    #   versions, the clusters in a global database use `provisioned` engine
+    #   mode. To check if a DB cluster is part of a global database, use
+    #   `DescribeGlobalClusters` instead of checking the `EngineMode` return
+    #   value from `DescribeDBClusters`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration_info
@@ -4807,6 +4920,11 @@ module Aws::RDS
     #   a different AWS account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain_memberships
+    #   The Active Directory Domain membership records associated with the
+    #   DB cluster.
+    #   @return [Array<Types::DomainMembership>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -4860,9 +4978,16 @@ module Aws::RDS
       :activity_stream_kms_key_id,
       :activity_stream_kinesis_stream_name,
       :copy_tags_to_snapshot,
-      :cross_account_clone)
+      :cross_account_clone,
+      :domain_memberships)
       include Aws::Structure
     end
+
+    # The user already has a DB cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterAlreadyExistsFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the
     # `DescribeDBClusterBacktracks` action.
@@ -4936,6 +5061,12 @@ module Aws::RDS
       :db_cluster_backtracks)
       include Aws::Structure
     end
+
+    # `BacktrackIdentifier` doesn't refer to an existing backtrack.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrackNotFoundFault AWS API Documentation
+    #
+    class DBClusterBacktrackNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] db_cluster_identifier
     #   A user-supplied DB cluster identifier. This identifier is the unique
@@ -5052,6 +5183,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified custom endpoint can't be created because it already
+    # exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterEndpointAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeDBClusterEndpoints` request. If this parameter is
@@ -5071,6 +5209,18 @@ module Aws::RDS
       :db_cluster_endpoints)
       include Aws::Structure
     end
+
+    # The specified custom endpoint doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointNotFoundFault AWS API Documentation
+    #
+    class DBClusterEndpointNotFoundFault < Aws::EmptyStructure; end
+
+    # The cluster already has the maximum number of custom endpoints.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterEndpointQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains information about an instance that is part of a DB cluster.
     #
@@ -5128,6 +5278,12 @@ module Aws::RDS
       :db_clusters)
       include Aws::Structure
     end
+
+    # `DBClusterIdentifier` doesn't refer to an existing DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterNotFoundFault AWS API Documentation
+    #
+    class DBClusterNotFoundFault < Aws::EmptyStructure; end
 
     # Contains status information for a DB cluster option group.
     #
@@ -5225,6 +5381,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBClusterParameterGroupName` doesn't refer to an existing DB cluster
+    # parameter group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBClusterParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeDBClusterParameterGroups` request. If this parameter is
@@ -5243,6 +5406,13 @@ module Aws::RDS
       :db_cluster_parameter_groups)
       include Aws::Structure
     end
+
+    # The user attempted to create a new DB cluster and the user has already
+    # reached the maximum allowed DB cluster quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a DB cluster.
@@ -5281,6 +5451,27 @@ module Aws::RDS
       :feature_name)
       include Aws::Structure
     end
+
+    # The specified IAM role Amazon Resource Name (ARN) is already
+    # associated with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRoleAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterRoleAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified IAM role Amazon Resource Name (ARN) isn't associated
+    # with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRoleNotFoundFault AWS API Documentation
+    #
+    class DBClusterRoleNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of IAM roles that can be
+    # associated with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRoleQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterRoleQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details for an Amazon RDS DB cluster snapshot
     #
@@ -5404,6 +5595,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The user already has a DB cluster snapshot with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the name and values of a manual DB cluster snapshot
     # attribute.
     #
@@ -5485,6 +5682,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBClusterSnapshotIdentifier` doesn't refer to an existing DB cluster
+    # snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
+
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
     #
@@ -5540,12 +5744,19 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_read_replica
-    #   Indicates whether the database engine version supports Read
-    #   Replicas.
+    #   Indicates whether the database engine version supports read
+    #   replicas.
     #   @return [Boolean]
     #
     # @!attribute [rw] supported_engine_modes
     #   A list of the supported DB engine modes.
+    #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters
+    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
+    #   versions, the clusters in a global database use `provisioned` engine
+    #   mode.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_feature_names
@@ -5626,6 +5837,13 @@ module Aws::RDS
     #
     # @!attribute [rw] db_instance_status
     #   Specifies the current state of this database.
+    #
+    #   For information about DB instance statuses, see [DB Instance
+    #   Status][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Status.html
     #   @return [String]
     #
     # @!attribute [rw] master_username
@@ -5731,24 +5949,24 @@ module Aws::RDS
     #
     # @!attribute [rw] read_replica_source_db_instance_identifier
     #   Contains the identifier of the source DB instance if this DB
-    #   instance is a Read Replica.
+    #   instance is a read replica.
     #   @return [String]
     #
     # @!attribute [rw] read_replica_db_instance_identifiers
-    #   Contains one or more identifiers of the Read Replicas associated
+    #   Contains one or more identifiers of the read replicas associated
     #   with this DB instance.
     #   @return [Array<String>]
     #
     # @!attribute [rw] read_replica_db_cluster_identifiers
     #   Contains one or more identifiers of Aurora DB clusters to which the
-    #   RDS DB instance is replicated as a Read Replica. For example, when
-    #   you create an Aurora Read Replica of an RDS MySQL DB instance, the
-    #   Aurora MySQL DB cluster for the Aurora Read Replica is shown. This
-    #   output does not contain information about cross region Aurora Read
-    #   Replicas.
+    #   RDS DB instance is replicated as a read replica. For example, when
+    #   you create an Aurora read replica of an RDS MySQL DB instance, the
+    #   Aurora MySQL DB cluster for the Aurora read replica is shown. This
+    #   output does not contain information about cross region Aurora read
+    #   replicas.
     #
-    #   <note markdown="1"> Currently, each RDS DB instance can have only one Aurora Read
-    #   Replica.
+    #   <note markdown="1"> Currently, each RDS DB instance can have only one Aurora read
+    #   replica.
     #
     #    </note>
     #   @return [Array<String>]
@@ -5784,7 +6002,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] status_infos
-    #   The status of a Read Replica. If the instance isn't a Read Replica,
+    #   The status of a read replica. If the instance isn't a read replica,
     #   this is blank.
     #   @return [Array<Types::DBInstanceStatusInfo>]
     #
@@ -6017,6 +6235,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The user already has a DB instance with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAlreadyExistsFault AWS API Documentation
+    #
+    class DBInstanceAlreadyExistsFault < Aws::EmptyStructure; end
+
     # An automated backup of a DB instance. It it consists of system
     # backups, transaction logs, and the database instance properties that
     # existed at the time you deleted the source instance.
@@ -6189,6 +6413,20 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # No automated backup for this DB instance was found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupNotFoundFault AWS API Documentation
+    #
+    class DBInstanceAutomatedBackupNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota for retained automated backups was exceeded. This prevents
+    # you from retaining any additional automated backups. The retained
+    # automated backups quota is the same as your DB Instance quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupQuotaExceededFault AWS API Documentation
+    #
+    class DBInstanceAutomatedBackupQuotaExceededFault < Aws::EmptyStructure; end
+
     # Contains the result of a successful invocation of the
     # `DescribeDBInstances` action.
     #
@@ -6209,6 +6447,12 @@ module Aws::RDS
       :db_instances)
       include Aws::Structure
     end
+
+    # `DBInstanceIdentifier` doesn't refer to an existing DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceNotFoundFault AWS API Documentation
+    #
+    class DBInstanceNotFoundFault < Aws::EmptyStructure; end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a DB instance.
@@ -6248,6 +6492,27 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified `RoleArn` or `FeatureName` value is already associated
+    # with the DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRoleAlreadyExistsFault AWS API Documentation
+    #
+    class DBInstanceRoleAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified `RoleArn` value doesn't match the specified feature for
+    # the DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRoleNotFoundFault AWS API Documentation
+    #
+    class DBInstanceRoleNotFoundFault < Aws::EmptyStructure; end
+
+    # You can't associate any more AWS Identity and Access Management (IAM)
+    # roles with the DB instance because the quota has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRoleQuotaExceededFault AWS API Documentation
+    #
+    class DBInstanceRoleQuotaExceededFault < Aws::EmptyStructure; end
+
     # Provides a list of status information for a DB instance.
     #
     # @!attribute [rw] status_type
@@ -6260,7 +6525,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   Status of the DB instance. For a StatusType of Read Replica, the
+    #   Status of the DB instance. For a StatusType of read replica, the
     #   values can be replicating, replication stop point set, replication
     #   stop point reached, error, stopped, or terminated.
     #   @return [String]
@@ -6279,6 +6544,12 @@ module Aws::RDS
       :message)
       include Aws::Structure
     end
+
+    # `LogFileName` doesn't refer to an existing DB log file.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBLogFileNotFoundFault AWS API Documentation
+    #
+    class DBLogFileNotFoundFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon RDS DB parameter group.
     #
@@ -6312,6 +6583,12 @@ module Aws::RDS
       :db_parameter_group_arn)
       include Aws::Structure
     end
+
+    # A DB parameter group with the same name exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
     # Contains the result of a successful invocation of the
     # `DescribeDBParameters` action.
@@ -6347,6 +6624,20 @@ module Aws::RDS
       :db_parameter_group_name)
       include Aws::Structure
     end
+
+    # `DBParameterGroupName` doesn't refer to an existing DB parameter
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB parameter groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # The status of the DB parameter group.
     #
@@ -6428,8 +6719,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_family
-    #   Currently, this value is always `MYSQL`. The engine family applies
-    #   to both RDS MySQL and Aurora MySQL.
+    #   The engine family applies to MySQL and PostgreSQL for both RDS and
+    #   Aurora.
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -6511,6 +6802,27 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified proxy name must be unique for all proxies owned by your
+    # AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyAlreadyExistsFault AWS API Documentation
+    #
+    class DBProxyAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified proxy name doesn't correspond to a proxy owned by your
+    # AWS accoutn in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyNotFoundFault AWS API Documentation
+    #
+    class DBProxyNotFoundFault < Aws::EmptyStructure; end
+
+    # Your AWS account already has the maximum number of proxies in the
+    # specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyQuotaExceededFault AWS API Documentation
+    #
+    class DBProxyQuotaExceededFault < Aws::EmptyStructure; end
+
     # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
     # preview release. It is subject to change.
     #
@@ -6554,6 +6866,10 @@ module Aws::RDS
     #   Aurora DB cluster, that the target represents.
     #   @return [String]
     #
+    # @!attribute [rw] target_health
+    #   Information about the connection health of the RDS Proxy target.
+    #   @return [Types::TargetHealth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTarget AWS API Documentation
     #
     class DBProxyTarget < Struct.new(
@@ -6562,9 +6878,17 @@ module Aws::RDS
       :tracked_cluster_id,
       :rds_resource_id,
       :port,
-      :type)
+      :type,
+      :target_health)
       include Aws::Structure
     end
+
+    # The proxy is already associated with the specified RDS DB instance or
+    # Aurora DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetAlreadyRegisteredFault AWS API Documentation
+    #
+    class DBProxyTargetAlreadyRegisteredFault < Aws::EmptyStructure; end
 
     # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
     # preview release. It is subject to change.
@@ -6633,6 +6957,20 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified target group isn't available for a proxy owned by your
+    # AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetGroupNotFoundFault AWS API Documentation
+    #
+    class DBProxyTargetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The specified RDS DB instance or Aurora DB cluster isn't available
+    # for a proxy owned by your AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetNotFoundFault AWS API Documentation
+    #
+    class DBProxyTargetNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the details for an Amazon RDS DB security group.
     #
     # This data type is used as a response element in the
@@ -6678,6 +7016,13 @@ module Aws::RDS
       :db_security_group_arn)
       include Aws::Structure
     end
+
+    # A DB security group with the name specified in `DBSecurityGroupName`
+    # already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBSecurityGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the following actions:
     #
@@ -6725,6 +7070,25 @@ module Aws::RDS
       :db_security_groups)
       include Aws::Structure
     end
+
+    # `DBSecurityGroupName` doesn't refer to an existing DB security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupNotFoundFault AWS API Documentation
+    #
+    class DBSecurityGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # A DB security group isn't allowed for this action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupNotSupportedFault AWS API Documentation
+    #
+    class DBSecurityGroupNotSupportedFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB security groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon RDS DB snapshot.
     #
@@ -6894,6 +7258,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBSnapshotIdentifier` is already used by an existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the name and values of a manual DB snapshot attribute
     #
     # Manual DB snapshot attributes are used to authorize other AWS accounts
@@ -6972,6 +7342,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBSnapshotIdentifier` doesn't refer to an existing DB snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBSnapshotNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the details of an Amazon RDS DB subnet group.
     #
     # This data type is used as a response element in the
@@ -7013,6 +7389,19 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBSubnetGroupName` is already used by an existing DB subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBSubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # Subnets in the DB subnet group should cover at least two Availability
+    # Zones unless there is only one Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupDoesNotCoverEnoughAZs AWS API Documentation
+    #
+    class DBSubnetGroupDoesNotCoverEnoughAZs < Aws::EmptyStructure; end
+
     # Contains the result of a successful invocation of the
     # `DescribeDBSubnetGroups` action.
     #
@@ -7033,6 +7422,40 @@ module Aws::RDS
       :db_subnet_groups)
       include Aws::Structure
     end
+
+    # The DBSubnetGroup shouldn't be specified while creating read replicas
+    # that lie in the same region as the source instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupNotAllowedFault AWS API Documentation
+    #
+    class DBSubnetGroupNotAllowedFault < Aws::EmptyStructure; end
+
+    # `DBSubnetGroupName` doesn't refer to an existing DB subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupNotFoundFault AWS API Documentation
+    #
+    class DBSubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB subnet groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # subnets in a DB subnet groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The DB upgrade failed because a resource the DB depends on can't be
+    # modified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBUpgradeDependencyFailureFault AWS API Documentation
+    #
+    class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteCustomAvailabilityZoneMessage
     #   data as a hash:
@@ -7293,7 +7716,7 @@ module Aws::RDS
     #   'failed', 'incompatible-restore', or 'incompatible-network',
     #   it can only be deleted when skip is specified.
     #
-    #   Specify skip when deleting a Read Replica.
+    #   Specify skip when deleting a read replica.
     #
     #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip
     #   isn't specified.
@@ -7318,7 +7741,7 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Can't be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a read replica.
     #   @return [String]
     #
     # @!attribute [rw] delete_automated_backups
@@ -9689,7 +10112,7 @@ module Aws::RDS
     #           },
     #         ],
     #         marker: "String",
-    #         max_records: "String",
+    #         max_records: 1,
     #       }
     #
     # @!attribute [rw] export_task_identifier
@@ -9736,7 +10159,7 @@ module Aws::RDS
     #   Default: 100
     #
     #   Constraints: Minimum 20, maximum 100.
-    #   @return [String]
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasksMessage AWS API Documentation
     #
@@ -10007,6 +10430,7 @@ module Aws::RDS
     #         engine_version: "String",
     #         db_instance_class: "String",
     #         license_model: "String",
+    #         availability_zone_group: "String",
     #         vpc: false,
     #         filters: [
     #           {
@@ -10036,6 +10460,15 @@ module Aws::RDS
     # @!attribute [rw] license_model
     #   The license model filter value. Specify this parameter to show only
     #   the available offerings matching the specified license model.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_group
+    #   The Availability Zone group associated with a Local Zone. Specify
+    #   this parameter to retrieve available offerings for the Local Zones
+    #   in the group.
+    #
+    #   Omit this parameter to show the available offerings in the specified
+    #   AWS Region.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -10072,6 +10505,7 @@ module Aws::RDS
       :engine_version,
       :db_instance_class,
       :license_model,
+      :availability_zone_group,
       :vpc,
       :filters,
       :max_records,
@@ -10442,15 +10876,16 @@ module Aws::RDS
     end
 
     # An Active Directory Domain membership record associated with the DB
-    # instance.
+    # instance or cluster.
     #
     # @!attribute [rw] domain
     #   The identifier of the Active Directory Domain.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the DB instance's Active Directory Domain membership,
-    #   such as joined, pending-join, failed etc).
+    #   The status of the Active Directory Domain membership for the DB
+    #   instance or cluster. Values include joined, pending-join, failed,
+    #   and so on.
     #   @return [String]
     #
     # @!attribute [rw] fqdn
@@ -10471,6 +10906,12 @@ module Aws::RDS
       :iam_role_name)
       include Aws::Structure
     end
+
+    # `Domain` doesn't refer to an existing Active Directory domain.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DomainNotFoundFault AWS API Documentation
+    #
+    class DomainNotFoundFault < Aws::EmptyStructure; end
 
     # A range of double values.
     #
@@ -10826,6 +11267,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # You have reached the maximum number of event subscriptions.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventSubscriptionQuotaExceededFault AWS API Documentation
+    #
+    class EventSubscriptionQuotaExceededFault < Aws::EmptyStructure; end
+
     # Data returned by the **DescribeEventSubscriptions** action.
     #
     # @!attribute [rw] marker
@@ -10887,17 +11334,19 @@ module Aws::RDS
     # @!attribute [rw] export_only
     #   The data exported from the snapshot. Valid values are the following:
     #
-    #   * `database` - Export all the data of the snapshot.
+    #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #   * `database.table` *table-name* - Export a table of the snapshot.
+    #     This format is valid only for RDS for MySQL, RDS for MariaDB, and
+    #     Aurora MySQL.
     #
-    #   * `database.schema [schema-name]` - Export a database schema of the
-    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema` *schema-name* - Export a database schema of the
+    #     snapshot. This format is valid only for RDS for PostgreSQL and
+    #     Aurora PostgreSQL.
     #
-    #   * `database.schema.table [table-name]` - Export a table of the
-    #     database schema. This value isn't valid for RDS for MySQL, RDS
-    #     for MariaDB, or Aurora MySQL.
+    #   * `database.schema.table` *table-name* - Export a table of the
+    #     database schema. This format is valid only for RDS for PostgreSQL
+    #     and Aurora PostgreSQL.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_time
@@ -10974,6 +11423,18 @@ module Aws::RDS
       :warning_message)
       include Aws::Structure
     end
+
+    # You can't start an export task that's already running.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTaskAlreadyExistsFault AWS API Documentation
+    #
+    class ExportTaskAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The export task doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTaskNotFoundFault AWS API Documentation
+    #
+    class ExportTaskNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   A pagination token that can be used in a later `DescribeExportTasks`
@@ -11150,6 +11611,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
+    #
+    class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # A data structure with information about any primary and secondary
     # clusters associated with an Aurora global database.
     #
@@ -11176,6 +11641,14 @@ module Aws::RDS
       :is_writer)
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterNotFoundFault AWS API Documentation
+    #
+    class GlobalClusterNotFoundFault < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterQuotaExceededFault AWS API Documentation
+    #
+    class GlobalClusterQuotaExceededFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
@@ -11215,6 +11688,19 @@ module Aws::RDS
       :cidrip)
       include Aws::Structure
     end
+
+    # The IAM role requires additional permissions to export to an Amazon S3
+    # bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IamRoleMissingPermissionsFault AWS API Documentation
+    #
+    class IamRoleMissingPermissionsFault < Aws::EmptyStructure; end
+
+    # The IAM role is missing for exporting to an Amazon S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IamRoleNotFoundFault AWS API Documentation
+    #
+    class IamRoleNotFoundFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ImportInstallationMediaMessage
     #   data as a hash:
@@ -11344,6 +11830,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified installation medium has already been imported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaAlreadyExistsFault AWS API Documentation
+    #
+    class InstallationMediaAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the cause of an installation media failure. Installation
     # media is used for a DB engine that requires an on-premises customer
     # provided license, such as Microsoft SQL Server.
@@ -11377,6 +11869,199 @@ module Aws::RDS
       :installation_media)
       include Aws::Structure
     end
+
+    # `InstallationMediaID` doesn't refer to an existing installation
+    # medium.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaNotFoundFault AWS API Documentation
+    #
+    class InstallationMediaNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstanceQuotaExceededFault AWS API Documentation
+    #
+    class InstanceQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The DB cluster doesn't have enough capacity for the current
+    # operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientDBClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientDBClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The specified DB instance class isn't available in the specified
+    # Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientDBInstanceCapacityFault AWS API Documentation
+    #
+    class InsufficientDBInstanceCapacityFault < Aws::EmptyStructure; end
+
+    # There is insufficient storage available for the current action. You
+    # might be able to resolve this error by updating your subnet group to
+    # use different Availability Zones that have more storage available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientStorageClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
+
+    # `Capacity` isn't a valid Aurora Serverless DB cluster capacity. Valid
+    # capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterCapacityFault AWS API Documentation
+    #
+    class InvalidDBClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed on the endpoint while the
+    # endpoint is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterEndpointStateFault AWS API Documentation
+    #
+    class InvalidDBClusterEndpointStateFault < Aws::EmptyStructure; end
+
+    # The supplied value isn't a valid DB cluster snapshot state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBClusterSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed while the cluster is in
+    # this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterStateFault AWS API Documentation
+    #
+    class InvalidDBClusterStateFault < Aws::EmptyStructure; end
+
+    # The automated backup is in an invalid state. For example, this
+    # automated backup is associated with an active instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBInstanceAutomatedBackupStateFault AWS API Documentation
+    #
+    class InvalidDBInstanceAutomatedBackupStateFault < Aws::EmptyStructure; end
+
+    # The DB instance isn't in a valid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBInstanceStateFault AWS API Documentation
+    #
+    class InvalidDBInstanceStateFault < Aws::EmptyStructure; end
+
+    # The DB parameter group is in use or is in an invalid state. If you are
+    # attempting to delete the parameter group, you can't delete it when
+    # the parameter group is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidDBParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed while the proxy is in this
+    # state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBProxyStateFault AWS API Documentation
+    #
+    class InvalidDBProxyStateFault < Aws::EmptyStructure; end
+
+    # The state of the DB security group doesn't allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSecurityGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the DB snapshot doesn't allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The DBSubnetGroup doesn't belong to the same VPC as that of an
+    # existing cross-region read replica of the same source instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSubnetGroupFault AWS API Documentation
+    #
+    class InvalidDBSubnetGroupFault < Aws::EmptyStructure; end
+
+    # The DB subnet group cannot be deleted because it's in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSubnetGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetGroupStateFault < Aws::EmptyStructure; end
+
+    # The DB subnet isn't in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSubnetStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetStateFault < Aws::EmptyStructure; end
+
+    # This error can occur if someone else is modifying a subscription. You
+    # should retry the action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidEventSubscriptionStateFault AWS API Documentation
+    #
+    class InvalidEventSubscriptionStateFault < Aws::EmptyStructure; end
+
+    # The export is invalid for exporting to an Amazon S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidExportOnlyFault AWS API Documentation
+    #
+    class InvalidExportOnlyFault < Aws::EmptyStructure; end
+
+    # The state of the export snapshot is invalid for exporting to an Amazon
+    # S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidExportSourceStateFault AWS API Documentation
+    #
+    class InvalidExportSourceStateFault < Aws::EmptyStructure; end
+
+    # You can't cancel an export task that has completed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidExportTaskStateFault AWS API Documentation
+    #
+    class InvalidExportTaskStateFault < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
+    #
+    class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
+
+    # The option group isn't in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidOptionGroupStateFault AWS API Documentation
+    #
+    class InvalidOptionGroupStateFault < Aws::EmptyStructure; end
+
+    # Cannot restore from VPC backup to non-VPC DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidRestoreFault AWS API Documentation
+    #
+    class InvalidRestoreFault < Aws::EmptyStructure; end
+
+    # The specified Amazon S3 bucket name can't be found or Amazon RDS
+    # isn't authorized to access the specified Amazon S3 bucket. Verify the
+    # **SourceS3BucketName** and **S3IngestionRoleArn** values and try
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidS3BucketFault AWS API Documentation
+    #
+    class InvalidS3BucketFault < Aws::EmptyStructure; end
+
+    # The requested subnet is invalid, or multiple subnets were requested
+    # that are not all in a common VPC.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # The DB subnet group doesn't cover all Availability Zones after it's
+    # created because of users' change.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
+    # An error occurred accessing an AWS KMS key.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/KMSKeyNotAccessibleFault AWS API Documentation
+    #
+    class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListTagsForResourceMessage
     #   data as a hash:
@@ -11606,6 +12291,8 @@ module Aws::RDS
     #         engine_version: "String",
     #         allow_major_version_upgrade: false,
     #         db_instance_parameter_group_name: "String",
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #         scaling_configuration: {
     #           min_capacity: 1,
     #           max_capacity: 1,
@@ -11847,6 +12534,17 @@ module Aws::RDS
     #     combination with the `AllowMajorVersionUpgrade` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] domain
+    #   The Active Directory directory ID to move the DB cluster to. Specify
+    #   `none` to remove the cluster from its current domain. The domain
+    #   must be created prior to this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @!attribute [rw] scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify
     #   scaling properties for DB clusters in `serverless` DB engine mode.
@@ -11901,6 +12599,8 @@ module Aws::RDS
       :engine_version,
       :allow_major_version_upgrade,
       :db_instance_parameter_group_name,
+      :domain,
+      :domain_iam_role_name,
       :scaling_configuration,
       :deletion_protection,
       :enable_http_endpoint,
@@ -12286,13 +12986,13 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can be specified for a MySQL Read Replica only if the source is
+    #   * Can be specified for a MySQL read replica only if the source is
     #     running MySQL 5.6 or later
     #
-    #   * Can be specified for a PostgreSQL Read Replica only if the source
+    #   * Can be specified for a PostgreSQL read replica only if the source
     #     is running PostgreSQL 9.3.5
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -12413,7 +13113,7 @@ module Aws::RDS
     #   nightly backups for the instance are suspended. No other Amazon RDS
     #   operations can take place for the instance, including modifying the
     #   instance, rebooting the instance, deleting the instance, creating a
-    #   Read Replica for the instance, and creating a DB snapshot of the
+    #   read replica for the instance, and creating a DB snapshot of the
     #   instance.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL, the value
@@ -12477,7 +13177,7 @@ module Aws::RDS
     #   nightly backups for the instance are suspended. No other Amazon RDS
     #   operations can take place for the instance, including modifying the
     #   instance, rebooting the instance, deleting the instance, creating a
-    #   Read Replica for the instance, and creating a DB snapshot of the
+    #   read replica for the instance, and creating a DB snapshot of the
     #   instance.
     #
     #   Valid values: `standard | gp2 | io1`
@@ -12561,19 +13261,19 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **MariaDB**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **PostgreSQL**
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -12581,20 +13281,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #   @return [Integer]
     #
     # @!attribute [rw] publicly_accessible
@@ -13609,6 +14309,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The option group you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupAlreadyExistsFault AWS API Documentation
+    #
+    class OptionGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Provides information on the option groups the DB instance is a member
     # of.
     #
@@ -13630,6 +14336,12 @@ module Aws::RDS
       :status)
       include Aws::Structure
     end
+
+    # The specified option group could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupNotFoundFault AWS API Documentation
+    #
+    class OptionGroupNotFoundFault < Aws::EmptyStructure; end
 
     # Available option.
     #
@@ -13803,6 +14515,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The quota of 20 option groups was exceeded for this AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupQuotaExceededFault AWS API Documentation
+    #
+    class OptionGroupQuotaExceededFault < Aws::EmptyStructure; end
+
     # List of option groups.
     #
     # @!attribute [rw] option_groups_list
@@ -13937,6 +14655,10 @@ module Aws::RDS
     #   The license model for a DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] availability_zone_group
+    #   The Availability Zone group for a DB instance.
+    #   @return [String]
+    #
     # @!attribute [rw] availability_zones
     #   A list of Availability Zones for a DB instance.
     #   @return [Array<Types::AvailabilityZone>]
@@ -13946,7 +14668,7 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] read_replica_capable
-    #   Indicates whether a DB instance can have a Read Replica.
+    #   Indicates whether a DB instance can have a read replica.
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc
@@ -14011,11 +14733,18 @@ module Aws::RDS
     #
     # @!attribute [rw] supported_engine_modes
     #   A list of the supported DB engine modes.
+    #
+    #   <note markdown="1"> `global` engine mode only applies for global database clusters
+    #   created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL
+    #   versions, the clusters in a global database use `provisioned` engine
+    #   mode.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] supports_storage_autoscaling
-    #   Whether or not Amazon RDS can automatically scale storage for DB
-    #   instances that use the specified instance class.
+    #   Whether Amazon RDS can automatically scale storage for DB instances
+    #   that use the specified DB instance class.
     #   @return [Boolean]
     #
     # @!attribute [rw] supports_kerberos_authentication
@@ -14029,6 +14758,7 @@ module Aws::RDS
       :engine_version,
       :db_instance_class,
       :license_model,
+      :availability_zone_group,
       :availability_zones,
       :multi_az_capable,
       :read_replica_capable,
@@ -14353,6 +15083,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `SourceDBInstanceIdentifier` refers to a DB instance with
+    # `BackupRetentionPeriod` equal to 0.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PointInTimeRestoreNotEnabledFault AWS API Documentation
+    #
+    class PointInTimeRestoreNotEnabledFault < Aws::EmptyStructure; end
+
     # Contains the processor features of a DB instance class.
     #
     # To specify the number of CPU cores, use the `coreCount` feature name
@@ -14425,12 +15162,12 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The identifier of the DB cluster Read Replica to promote. This
+    #   The identifier of the DB cluster read replica to promote. This
     #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing DBCluster Read Replica.
+    #   * Must match the identifier of an existing DB cluster read replica.
     #
     #   ^
     #
@@ -14473,7 +15210,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing Read Replica DB instance.
+    #   * Must match the identifier of an existing read replica DB instance.
     #
     #   ^
     #
@@ -14491,8 +15228,8 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35.
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read
-    #     Replicas.
+    #   * Can't be set to 0 if the DB instance is a source to read
+    #     replicas.
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -14542,6 +15279,12 @@ module Aws::RDS
       :db_instance)
       include Aws::Structure
     end
+
+    # Provisioned IOPS not available in the specified Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ProvisionedIopsNotAvailableInAZFault AWS API Documentation
+    #
+    class ProvisionedIopsNotAvailableInAZFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PurchaseReservedDBInstancesOfferingMessage
     #   data as a hash:
@@ -15024,6 +15767,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # User already has a reservation with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceAlreadyExistsFault AWS API Documentation
+    #
+    class ReservedDBInstanceAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the result of a successful invocation of the
     # `DescribeReservedDBInstances` action.
     #
@@ -15044,6 +15793,18 @@ module Aws::RDS
       :reserved_db_instances)
       include Aws::Structure
     end
+
+    # The specified reserved DB Instance not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceNotFoundFault AWS API Documentation
+    #
+    class ReservedDBInstanceNotFoundFault < Aws::EmptyStructure; end
+
+    # Request would exceed the user's DB Instance quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceQuotaExceededFault AWS API Documentation
+    #
+    class ReservedDBInstanceQuotaExceededFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the
     # `DescribeReservedDBInstancesOfferings` action.
@@ -15124,6 +15885,12 @@ module Aws::RDS
       :reserved_db_instances_offerings)
       include Aws::Structure
     end
+
+    # Specified offering does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOfferingNotFoundFault AWS API Documentation
+    #
+    class ReservedDBInstancesOfferingNotFoundFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ResetDBClusterParameterGroupMessage
     #   data as a hash:
@@ -15250,6 +16017,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified resource ID was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResourceNotFoundFault AWS API Documentation
+    #
+    class ResourceNotFoundFault < Aws::EmptyStructure; end
+
     # Describes the pending maintenance actions for a resource.
     #
     # @!attribute [rw] resource_identifier
@@ -15307,6 +16080,8 @@ module Aws::RDS
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -15608,6 +16383,25 @@ module Aws::RDS
     #   to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -15639,7 +16433,9 @@ module Aws::RDS
       :backtrack_window,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name)
       include Aws::Structure
     end
 
@@ -15692,6 +16488,8 @@ module Aws::RDS
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -15906,6 +16704,16 @@ module Aws::RDS
     #   to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -15928,7 +16736,9 @@ module Aws::RDS
       :scaling_configuration,
       :db_cluster_parameter_group_name,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name)
       include Aws::Structure
     end
 
@@ -15972,6 +16782,8 @@ module Aws::RDS
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -16174,6 +16986,25 @@ module Aws::RDS
     #   to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Kerberos Authentication][1] in the
+    #   *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -16193,7 +17024,9 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name)
       include Aws::Structure
     end
 
@@ -17642,6 +18475,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # SNS has responded that there is a problem with the SND topic
+    # specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSInvalidTopicFault AWS API Documentation
+    #
+    class SNSInvalidTopicFault < Aws::EmptyStructure; end
+
+    # You do not have permission to publish to the SNS topic ARN.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSNoAuthorizationFault AWS API Documentation
+    #
+    class SNSNoAuthorizationFault < Aws::EmptyStructure; end
+
+    # The SNS topic ARN does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
+    #
+    class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the scaling configuration of an Aurora Serverless DB cluster.
     #
     # For more information, see [Using Amazon Aurora Serverless][1] in the
@@ -17789,6 +18641,26 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # You have exceeded the maximum number of accounts that you can share a
+    # manual DB snapshot with.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SharedSnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SharedSnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB snapshots.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The requested source could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceNotFoundFault AWS API Documentation
+    #
+    class SourceNotFoundFault < Aws::EmptyStructure; end
+
     # Contains an AWS Region name as the result of a successful call to the
     # `DescribeSourceRegions` action.
     #
@@ -17824,7 +18696,7 @@ module Aws::RDS
     #
     # @!attribute [rw] source_regions
     #   A list of SourceRegion instances that contains each source AWS
-    #   Region that the current AWS Region can get a Read Replica or a DB
+    #   Region that the current AWS Region can get a read replica or a DB
     #   snapshot from.
     #   @return [Array<Types::SourceRegion>]
     #
@@ -18031,17 +18903,19 @@ module Aws::RDS
     #   provided, all the snapshot data is exported. Valid values are the
     #   following:
     #
-    #   * `database` - Export all the data of the snapshot.
+    #   * `database` - Export all the data from a specified database.
     #
-    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #   * `database.table` *table-name* - Export a table of the snapshot.
+    #     This format is valid only for RDS for MySQL, RDS for MariaDB, and
+    #     Aurora MySQL.
     #
-    #   * `database.schema [schema-name]` - Export a database schema of the
-    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
-    #     MariaDB, or Aurora MySQL.
+    #   * `database.schema` *schema-name* - Export a database schema of the
+    #     snapshot. This format is valid only for RDS for PostgreSQL and
+    #     Aurora PostgreSQL.
     #
-    #   * `database.schema.table [table-name]` - Export a table of the
-    #     database schema. This value isn't valid for RDS for MySQL, RDS
-    #     for MariaDB, or Aurora MySQL.
+    #   * `database.schema.table` *table-name* - Export a table of the
+    #     database schema. This format is valid only for RDS for PostgreSQL
+    #     and Aurora PostgreSQL.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartExportTaskMessage AWS API Documentation
@@ -18180,6 +19054,20 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The request would result in the user exceeding the allowed amount of
+    # storage available across all DB instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StorageQuotaExceededFault AWS API Documentation
+    #
+    class StorageQuotaExceededFault < Aws::EmptyStructure; end
+
+    # Storage of the `StorageType` specified can't be associated with the
+    # DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StorageTypeNotSupportedFault AWS API Documentation
+    #
+    class StorageTypeNotSupportedFault < Aws::EmptyStructure; end
+
     # This data type is used as a response element in the
     # `DescribeDBSubnetGroups` action.
     #
@@ -18206,6 +19094,30 @@ module Aws::RDS
       :subnet_status)
       include Aws::Structure
     end
+
+    # The DB subnet is already in use in the Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubnetAlreadyInUse AWS API Documentation
+    #
+    class SubnetAlreadyInUse < Aws::EmptyStructure; end
+
+    # The supplied subscription name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionAlreadyExistFault AWS API Documentation
+    #
+    class SubscriptionAlreadyExistFault < Aws::EmptyStructure; end
+
+    # The supplied category does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionCategoryNotFoundFault AWS API Documentation
+    #
+    class SubscriptionCategoryNotFoundFault < Aws::EmptyStructure; end
+
+    # The subscription name does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionNotFoundFault AWS API Documentation
+    #
+    class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
     # Metadata assigned to an Amazon RDS resource consisting of a key-value
     # pair.
@@ -18252,6 +19164,40 @@ module Aws::RDS
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Information about the connection health of an RDS Proxy target.
+    #
+    # @!attribute [rw] state
+    #   The current state of the connection health lifecycle for the RDS
+    #   Proxy target. The following is a typical lifecycle example for the
+    #   states of an RDS Proxy target:
+    #
+    #   `registering` &gt; `unavailable` &gt; `available` &gt; `unavailable`
+    #   &gt; `available`
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the current health `State` of the RDS Proxy target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the health of the RDS Proxy target. If the `State`
+    #   is `AVAILABLE`, a description is not included.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TargetHealth AWS API Documentation
+    #
+    class TargetHealth < Struct.new(
+      :state,
+      :reason,
+      :description)
       include Aws::Structure
     end
 

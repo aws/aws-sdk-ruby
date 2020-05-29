@@ -6,6 +6,49 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Polly
+
+  # When Polly returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Polly::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Polly errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Polly::Errors::ServiceError
+  #       # rescues all Polly API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {EngineNotSupportedException}
+  # * {InvalidLexiconException}
+  # * {InvalidNextTokenException}
+  # * {InvalidS3BucketException}
+  # * {InvalidS3KeyException}
+  # * {InvalidSampleRateException}
+  # * {InvalidSnsTopicArnException}
+  # * {InvalidSsmlException}
+  # * {InvalidTaskIdException}
+  # * {LanguageNotSupportedException}
+  # * {LexiconNotFoundException}
+  # * {LexiconSizeExceededException}
+  # * {MarksNotSupportedForFormatException}
+  # * {MaxLexemeLengthExceededException}
+  # * {MaxLexiconsNumberExceededException}
+  # * {ServiceFailureException}
+  # * {SsmlMarksNotSupportedForTextTypeException}
+  # * {SynthesisTaskNotFoundException}
+  # * {TextLengthExceededException}
+  # * {UnsupportedPlsAlphabetException}
+  # * {UnsupportedPlsLanguageException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +66,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLexiconException < ServiceError
@@ -39,7 +81,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -55,7 +96,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidS3BucketException < ServiceError
@@ -71,7 +111,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidS3KeyException < ServiceError
@@ -87,7 +126,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSampleRateException < ServiceError
@@ -103,7 +141,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSnsTopicArnException < ServiceError
@@ -119,7 +156,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSsmlException < ServiceError
@@ -135,7 +171,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTaskIdException < ServiceError
@@ -151,7 +186,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class LanguageNotSupportedException < ServiceError
@@ -167,7 +201,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class LexiconNotFoundException < ServiceError
@@ -183,7 +216,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class LexiconSizeExceededException < ServiceError
@@ -199,7 +231,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class MarksNotSupportedForFormatException < ServiceError
@@ -215,7 +246,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class MaxLexemeLengthExceededException < ServiceError
@@ -231,7 +261,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class MaxLexiconsNumberExceededException < ServiceError
@@ -247,7 +276,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceFailureException < ServiceError
@@ -263,7 +291,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class SsmlMarksNotSupportedForTextTypeException < ServiceError
@@ -279,7 +306,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class SynthesisTaskNotFoundException < ServiceError
@@ -295,7 +321,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextLengthExceededException < ServiceError
@@ -311,7 +336,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedPlsAlphabetException < ServiceError
@@ -327,7 +351,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedPlsLanguageException < ServiceError
@@ -343,7 +366,6 @@ module Aws::Polly
       def message
         @message || @data[:message]
       end
-
     end
 
   end

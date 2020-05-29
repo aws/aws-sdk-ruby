@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/query.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:redshift)
 
 module Aws::Redshift
+  # An API client for Redshift.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Redshift::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::Redshift
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::Redshift
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::Redshift
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::Redshift
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::Redshift
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::Redshift
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::Redshift
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::Redshift
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::Redshift
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -836,7 +890,8 @@ module Aws::Redshift
     #   Cluster Management Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
+    #   `ra3.16xlarge`
     #
     #
     #
@@ -1925,8 +1980,14 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         cluster_type: "String",
     #         node_type: "String",
-    #         number_of_nodes: 1, # required
+    #         number_of_nodes: 1,
     #         classic: false,
+    #       },
+    #       pause_cluster: {
+    #         cluster_identifier: "String", # required
+    #       },
+    #       resume_cluster: {
+    #         cluster_identifier: "String", # required
     #       },
     #     },
     #     schedule: "String", # required
@@ -1945,6 +2006,8 @@ module Aws::Redshift
     #   resp.target_action.resize_cluster.node_type #=> String
     #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.target_action.pause_cluster.cluster_identifier #=> String
+    #   resp.target_action.resume_cluster.cluster_identifier #=> String
     #   resp.schedule #=> String
     #   resp.iam_role #=> String
     #   resp.scheduled_action_description #=> String
@@ -2033,7 +2096,8 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Creates a snapshot schedule with the rate of every 12 hours.
+    # Create a snapshot schedule that can be associated to a cluster and
+    # which overrides the default system backup schedule.
     #
     # @option params [Array<String>] :schedule_definitions
     #   The definition of the snapshot schedule. The definition is made up of
@@ -2146,6 +2210,89 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def create_tags(params = {}, options = {})
       req = build_request(:create_tags, params)
+      req.send_request(options)
+    end
+
+    # Creates a usage limit for a specified Amazon Redshift feature on a
+    # cluster. The usage limit is identified by the returned usage limit
+    # identifier.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster that you want to limit usage.
+    #
+    # @option params [required, String] :feature_type
+    #   The Amazon Redshift feature that you want to limit.
+    #
+    # @option params [required, String] :limit_type
+    #   The type of limit. Depending on the feature type, this can be based on
+    #   a time duration or data size. If `FeatureType` is `spectrum`, then
+    #   `LimitType` must be `data-scanned`. If `FeatureType` is
+    #   `concurrency-scaling`, then `LimitType` must be `time`.
+    #
+    # @option params [required, Integer] :amount
+    #   The limit amount. If time-based, this amount is in minutes. If
+    #   data-based, this amount is in terabytes (TB). The value must be a
+    #   positive number.
+    #
+    # @option params [String] :period
+    #   The time period that the amount applies to. A `weekly` period begins
+    #   on Sunday. The default is `monthly`.
+    #
+    # @option params [String] :breach_action
+    #   The action that Amazon Redshift takes when the limit is reached. The
+    #   default is log. For more information about this parameter, see
+    #   UsageLimit.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of tag instances.
+    #
+    # @return [Types::UsageLimit] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UsageLimit#usage_limit_id #usage_limit_id} => String
+    #   * {Types::UsageLimit#cluster_identifier #cluster_identifier} => String
+    #   * {Types::UsageLimit#feature_type #feature_type} => String
+    #   * {Types::UsageLimit#limit_type #limit_type} => String
+    #   * {Types::UsageLimit#amount #amount} => Integer
+    #   * {Types::UsageLimit#period #period} => String
+    #   * {Types::UsageLimit#breach_action #breach_action} => String
+    #   * {Types::UsageLimit#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_usage_limit({
+    #     cluster_identifier: "String", # required
+    #     feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling
+    #     limit_type: "time", # required, accepts time, data-scanned
+    #     amount: 1, # required
+    #     period: "daily", # accepts daily, weekly, monthly
+    #     breach_action: "log", # accepts log, emit-metric, disable
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_limit_id #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.limit_type #=> String, one of "time", "data-scanned"
+    #   resp.amount #=> Integer
+    #   resp.period #=> String, one of "daily", "weekly", "monthly"
+    #   resp.breach_action #=> String, one of "log", "emit-metric", "disable"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateUsageLimit AWS API Documentation
+    #
+    # @overload create_usage_limit(params = {})
+    # @param [Hash] params ({})
+    def create_usage_limit(params = {}, options = {})
+      req = build_request(:create_usage_limit, params)
       req.send_request(options)
     end
 
@@ -2677,6 +2824,28 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Deletes a usage limit from a cluster.
+    #
+    # @option params [required, String] :usage_limit_id
+    #   The identifier of the usage limit to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_usage_limit({
+    #     usage_limit_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteUsageLimit AWS API Documentation
+    #
+    # @overload delete_usage_limit(params = {})
+    # @param [Hash] params ({})
+    def delete_usage_limit(params = {}, options = {})
+      req = build_request(:delete_usage_limit, params)
+      req.send_request(options)
+    end
+
     # Returns a list of attributes attached to an account
     #
     # @option params [Array<String>] :attribute_names
@@ -2847,6 +3016,8 @@ module Aws::Redshift
     #   * {Types::ClusterParameterGroupsMessage#marker #marker} => String
     #   * {Types::ClusterParameterGroupsMessage#parameter_groups #parameter_groups} => Array&lt;Types::ClusterParameterGroup&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_parameter_groups({
@@ -2931,6 +3102,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
     #   * {Types::ClusterParameterGroupDetails#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3039,6 +3212,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterSecurityGroupMessage#marker #marker} => String
     #   * {Types::ClusterSecurityGroupMessage#cluster_security_groups #cluster_security_groups} => Array&lt;Types::ClusterSecurityGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3207,6 +3382,8 @@ module Aws::Redshift
     #   * {Types::SnapshotMessage#marker #marker} => String
     #   * {Types::SnapshotMessage#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_snapshots({
@@ -3271,6 +3448,11 @@ module Aws::Redshift
     #   resp.snapshots[0].manual_snapshot_retention_period #=> Integer
     #   resp.snapshots[0].manual_snapshot_remaining_days #=> Integer
     #   resp.snapshots[0].snapshot_retention_start_time #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * snapshot_available
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots AWS API Documentation
     #
@@ -3342,6 +3524,8 @@ module Aws::Redshift
     #
     #   * {Types::ClusterSubnetGroupMessage#marker #marker} => String
     #   * {Types::ClusterSubnetGroupMessage#cluster_subnet_groups #cluster_subnet_groups} => Array&lt;Types::ClusterSubnetGroup&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3482,6 +3666,8 @@ module Aws::Redshift
     #   * {Types::ClusterVersionsMessage#marker #marker} => String
     #   * {Types::ClusterVersionsMessage#cluster_versions #cluster_versions} => Array&lt;Types::ClusterVersion&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_cluster_versions({
@@ -3578,6 +3764,8 @@ module Aws::Redshift
     #
     #   * {Types::ClustersMessage#marker #marker} => String
     #   * {Types::ClustersMessage#clusters #clusters} => Array&lt;Types::Cluster&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3689,6 +3877,13 @@ module Aws::Redshift
     #   resp.clusters[0].resize_info.resize_type #=> String
     #   resp.clusters[0].resize_info.allow_cancel_resize #=> Boolean
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * cluster_available
+    #   * cluster_deleted
+    #   * cluster_restored
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
     #
     # @overload describe_clusters(params = {})
@@ -3735,6 +3930,8 @@ module Aws::Redshift
     # @return [Types::DescribeDefaultClusterParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDefaultClusterParametersResult#default_cluster_parameters #default_cluster_parameters} => Types::DefaultClusterParameters
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3875,6 +4072,8 @@ module Aws::Redshift
     #   * {Types::EventSubscriptionsMessage#marker #marker} => String
     #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_event_subscriptions({
@@ -4013,6 +4212,8 @@ module Aws::Redshift
     #   * {Types::EventsMessage#marker #marker} => String
     #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_events({
@@ -4110,6 +4311,8 @@ module Aws::Redshift
     #   * {Types::HsmClientCertificateMessage#marker #marker} => String
     #   * {Types::HsmClientCertificateMessage#hsm_client_certificates #hsm_client_certificates} => Array&lt;Types::HsmClientCertificate&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hsm_client_certificates({
@@ -4203,6 +4406,8 @@ module Aws::Redshift
     #   * {Types::HsmConfigurationMessage#marker #marker} => String
     #   * {Types::HsmConfigurationMessage#hsm_configurations #hsm_configurations} => Array&lt;Types::HsmConfiguration&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hsm_configurations({
@@ -4283,7 +4488,8 @@ module Aws::Redshift
     #   "restore-cluster" to get configuration combinations based on an
     #   existing snapshot. Specify "recommend-node-config" to get
     #   configuration recommendations based on an existing cluster or
-    #   snapshot.
+    #   snapshot. Specify "resize-cluster" to get configuration combinations
+    #   for elastic resize based on an existing cluster.
     #
     # @option params [String] :cluster_identifier
     #   The identifier of the cluster to evaluate for possible node
@@ -4326,10 +4532,12 @@ module Aws::Redshift
     #   * {Types::NodeConfigurationOptionsMessage#node_configuration_option_list #node_configuration_option_list} => Array&lt;Types::NodeConfigurationOption&gt;
     #   * {Types::NodeConfigurationOptionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_node_configuration_options({
-    #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config
+    #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
     #     owner_account: "String",
@@ -4414,6 +4622,8 @@ module Aws::Redshift
     #   * {Types::OrderableClusterOptionsMessage#orderable_cluster_options #orderable_cluster_options} => Array&lt;Types::OrderableClusterOption&gt;
     #   * {Types::OrderableClusterOptionsMessage#marker #marker} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_orderable_cluster_options({
@@ -4487,6 +4697,8 @@ module Aws::Redshift
     #   * {Types::ReservedNodeOfferingsMessage#marker #marker} => String
     #   * {Types::ReservedNodeOfferingsMessage#reserved_node_offerings #reserved_node_offerings} => Array&lt;Types::ReservedNodeOffering&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_reserved_node_offerings({
@@ -4548,6 +4760,8 @@ module Aws::Redshift
     #
     #   * {Types::ReservedNodesMessage#marker #marker} => String
     #   * {Types::ReservedNodesMessage#reserved_nodes #reserved_nodes} => Array&lt;Types::ReservedNode&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4708,11 +4922,13 @@ module Aws::Redshift
     #   * {Types::ScheduledActionsMessage#marker #marker} => String
     #   * {Types::ScheduledActionsMessage#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scheduled_actions({
     #     scheduled_action_name: "String",
-    #     target_action_type: "ResizeCluster", # accepts ResizeCluster
+    #     target_action_type: "ResizeCluster", # accepts ResizeCluster, PauseCluster, ResumeCluster
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     active: false,
@@ -4736,6 +4952,8 @@ module Aws::Redshift
     #   resp.scheduled_actions[0].target_action.resize_cluster.node_type #=> String
     #   resp.scheduled_actions[0].target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.scheduled_actions[0].target_action.resize_cluster.classic #=> Boolean
+    #   resp.scheduled_actions[0].target_action.pause_cluster.cluster_identifier #=> String
+    #   resp.scheduled_actions[0].target_action.resume_cluster.cluster_identifier #=> String
     #   resp.scheduled_actions[0].schedule #=> String
     #   resp.scheduled_actions[0].iam_role #=> String
     #   resp.scheduled_actions[0].scheduled_action_description #=> String
@@ -5131,6 +5349,114 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
       req = build_request(:describe_tags, params)
+      req.send_request(options)
+    end
+
+    # Shows usage limits on a cluster. Results are filtered based on the
+    # combination of input usage limit identifier, cluster identifier, and
+    # feature type parameters:
+    #
+    # * If usage limit identifier, cluster identifier, and feature type are
+    #   not provided, then all usage limit objects for the current account
+    #   in the current region are returned.
+    #
+    # * If usage limit identifier is provided, then the corresponding usage
+    #   limit object is returned.
+    #
+    # * If cluster identifier is provided, then all usage limit objects for
+    #   the specified cluster are returned.
+    #
+    # * If cluster identifier and feature type are provided, then all usage
+    #   limit objects for the combination of cluster and feature are
+    #   returned.
+    #
+    # @option params [String] :usage_limit_id
+    #   The identifier of the usage limit to describe.
+    #
+    # @option params [String] :cluster_identifier
+    #   The identifier of the cluster for which you want to describe usage
+    #   limits.
+    #
+    # @option params [String] :feature_type
+    #   The feature type for which you want to describe usage limits.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a DescribeUsageLimits
+    #   request exceed the value specified in `MaxRecords`, AWS returns a
+    #   value in the `Marker` field of the response. You can retrieve the next
+    #   set of response records by providing the returned marker value in the
+    #   `Marker` parameter and retrying the request.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   A tag key or keys for which you want to return all matching usage
+    #   limit objects that are associated with the specified key or keys. For
+    #   example, suppose that you have parameter groups that are tagged with
+    #   keys called `owner` and `environment`. If you specify both of these
+    #   tag keys in the request, Amazon Redshift returns a response with the
+    #   usage limit objects have either or both of these tag keys associated
+    #   with them.
+    #
+    # @option params [Array<String>] :tag_values
+    #   A tag value or values for which you want to return all matching usage
+    #   limit objects that are associated with the specified tag value or
+    #   values. For example, suppose that you have parameter groups that are
+    #   tagged with values called `admin` and `test`. If you specify both of
+    #   these tag values in the request, Amazon Redshift returns a response
+    #   with the usage limit objects that have either or both of these tag
+    #   values associated with them.
+    #
+    # @return [Types::UsageLimitList] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UsageLimitList#usage_limits #usage_limits} => Array&lt;Types::UsageLimit&gt;
+    #   * {Types::UsageLimitList#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_usage_limits({
+    #     usage_limit_id: "String",
+    #     cluster_identifier: "String",
+    #     feature_type: "spectrum", # accepts spectrum, concurrency-scaling
+    #     max_records: 1,
+    #     marker: "String",
+    #     tag_keys: ["String"],
+    #     tag_values: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_limits #=> Array
+    #   resp.usage_limits[0].usage_limit_id #=> String
+    #   resp.usage_limits[0].cluster_identifier #=> String
+    #   resp.usage_limits[0].feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.usage_limits[0].limit_type #=> String, one of "time", "data-scanned"
+    #   resp.usage_limits[0].amount #=> Integer
+    #   resp.usage_limits[0].period #=> String, one of "daily", "weekly", "monthly"
+    #   resp.usage_limits[0].breach_action #=> String, one of "log", "emit-metric", "disable"
+    #   resp.usage_limits[0].tags #=> Array
+    #   resp.usage_limits[0].tags[0].key #=> String
+    #   resp.usage_limits[0].tags[0].value #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeUsageLimits AWS API Documentation
+    #
+    # @overload describe_usage_limits(params = {})
+    # @param [Hash] params ({})
+    def describe_usage_limits(params = {}, options = {})
+      req = build_request(:describe_usage_limits, params)
       req.send_request(options)
     end
 
@@ -5799,7 +6125,8 @@ module Aws::Redshift
     #   Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.4xlarge` \|
+    #   `ra3.16xlarge`
     #
     #
     #
@@ -6948,8 +7275,14 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         cluster_type: "String",
     #         node_type: "String",
-    #         number_of_nodes: 1, # required
+    #         number_of_nodes: 1,
     #         classic: false,
+    #       },
+    #       pause_cluster: {
+    #         cluster_identifier: "String", # required
+    #       },
+    #       resume_cluster: {
+    #         cluster_identifier: "String", # required
     #       },
     #     },
     #     schedule: "String",
@@ -6968,6 +7301,8 @@ module Aws::Redshift
     #   resp.target_action.resize_cluster.node_type #=> String
     #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
     #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.target_action.pause_cluster.cluster_identifier #=> String
+    #   resp.target_action.resume_cluster.cluster_identifier #=> String
     #   resp.schedule #=> String
     #   resp.iam_role #=> String
     #   resp.scheduled_action_description #=> String
@@ -7200,6 +7535,183 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def modify_snapshot_schedule(params = {}, options = {})
       req = build_request(:modify_snapshot_schedule, params)
+      req.send_request(options)
+    end
+
+    # Modifies a usage limit in a cluster. You can't modify the feature
+    # type or period of a usage limit.
+    #
+    # @option params [required, String] :usage_limit_id
+    #   The identifier of the usage limit to modify.
+    #
+    # @option params [Integer] :amount
+    #   The new limit amount. For more information about this parameter, see
+    #   UsageLimit.
+    #
+    # @option params [String] :breach_action
+    #   The new action that Amazon Redshift takes when the limit is reached.
+    #   For more information about this parameter, see UsageLimit.
+    #
+    # @return [Types::UsageLimit] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UsageLimit#usage_limit_id #usage_limit_id} => String
+    #   * {Types::UsageLimit#cluster_identifier #cluster_identifier} => String
+    #   * {Types::UsageLimit#feature_type #feature_type} => String
+    #   * {Types::UsageLimit#limit_type #limit_type} => String
+    #   * {Types::UsageLimit#amount #amount} => Integer
+    #   * {Types::UsageLimit#period #period} => String
+    #   * {Types::UsageLimit#breach_action #breach_action} => String
+    #   * {Types::UsageLimit#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_usage_limit({
+    #     usage_limit_id: "String", # required
+    #     amount: 1,
+    #     breach_action: "log", # accepts log, emit-metric, disable
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.usage_limit_id #=> String
+    #   resp.cluster_identifier #=> String
+    #   resp.feature_type #=> String, one of "spectrum", "concurrency-scaling"
+    #   resp.limit_type #=> String, one of "time", "data-scanned"
+    #   resp.amount #=> Integer
+    #   resp.period #=> String, one of "daily", "weekly", "monthly"
+    #   resp.breach_action #=> String, one of "log", "emit-metric", "disable"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyUsageLimit AWS API Documentation
+    #
+    # @overload modify_usage_limit(params = {})
+    # @param [Hash] params ({})
+    def modify_usage_limit(params = {}, options = {})
+      req = build_request(:modify_usage_limit, params)
+      req.send_request(options)
+    end
+
+    # Pauses a cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to be paused.
+    #
+    # @return [Types::PauseClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PauseClusterResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_cluster({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PauseCluster AWS API Documentation
+    #
+    # @overload pause_cluster(params = {})
+    # @param [Hash] params ({})
+    def pause_cluster(params = {}, options = {})
+      req = build_request(:pause_cluster, params)
       req.send_request(options)
     end
 
@@ -7475,6 +7987,8 @@ module Aws::Redshift
     #
     #   * ds2.8xlarge
     #
+    #   * ra3.4xlarge
+    #
     #   * ra3.16xlarge
     #
     # * The type of nodes that you add must match the node type for the
@@ -7490,7 +8004,7 @@ module Aws::Redshift
     #   The new node type for the nodes you are adding. If not specified, the
     #   cluster's current node type is used.
     #
-    # @option params [required, Integer] :number_of_nodes
+    # @option params [Integer] :number_of_nodes
     #   The new number of nodes for the cluster.
     #
     # @option params [Boolean] :classic
@@ -7508,7 +8022,7 @@ module Aws::Redshift
     #     cluster_identifier: "String", # required
     #     cluster_type: "String",
     #     node_type: "String",
-    #     number_of_nodes: 1, # required
+    #     number_of_nodes: 1,
     #     classic: false,
     #   })
     #
@@ -7804,7 +8318,7 @@ module Aws::Redshift
     #   restore into that same instance type and size. In other words, you can
     #   only restore a dc1.large instance type into another dc1.large instance
     #   type or dc2.large instance type. You can't restore dc1.8xlarge to
-    #   dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a
+    #   dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a
     #   dc2.8large cluster. For more information about node types, see [ About
     #   Clusters and Nodes][1] in the *Amazon Redshift Cluster Management
     #   Guide*.
@@ -8080,6 +8594,128 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def restore_table_from_cluster_snapshot(params = {}, options = {})
       req = build_request(:restore_table_from_cluster_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Resumes a paused cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The identifier of the cluster to be resumed.
+    #
+    # @return [Types::ResumeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResumeClusterResult#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_cluster({
+    #     cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_identifier #=> String
+    #   resp.cluster.node_type #=> String
+    #   resp.cluster.cluster_status #=> String
+    #   resp.cluster.cluster_availability_status #=> String
+    #   resp.cluster.modify_status #=> String
+    #   resp.cluster.master_username #=> String
+    #   resp.cluster.db_name #=> String
+    #   resp.cluster.endpoint.address #=> String
+    #   resp.cluster.endpoint.port #=> Integer
+    #   resp.cluster.cluster_create_time #=> Time
+    #   resp.cluster.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_security_groups #=> Array
+    #   resp.cluster.cluster_security_groups[0].cluster_security_group_name #=> String
+    #   resp.cluster.cluster_security_groups[0].status #=> String
+    #   resp.cluster.vpc_security_groups #=> Array
+    #   resp.cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.cluster.vpc_security_groups[0].status #=> String
+    #   resp.cluster.cluster_parameter_groups #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].parameter_group_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list #=> Array
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_name #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_status #=> String
+    #   resp.cluster.cluster_parameter_groups[0].cluster_parameter_status_list[0].parameter_apply_error_description #=> String
+    #   resp.cluster.cluster_subnet_group_name #=> String
+    #   resp.cluster.vpc_id #=> String
+    #   resp.cluster.availability_zone #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.pending_modified_values.master_user_password #=> String
+    #   resp.cluster.pending_modified_values.node_type #=> String
+    #   resp.cluster.pending_modified_values.number_of_nodes #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_type #=> String
+    #   resp.cluster.pending_modified_values.cluster_version #=> String
+    #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
+    #   resp.cluster.pending_modified_values.cluster_identifier #=> String
+    #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+    #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.pending_modified_values.maintenance_track_name #=> String
+    #   resp.cluster.pending_modified_values.encryption_type #=> String
+    #   resp.cluster.cluster_version #=> String
+    #   resp.cluster.allow_version_upgrade #=> Boolean
+    #   resp.cluster.number_of_nodes #=> Integer
+    #   resp.cluster.publicly_accessible #=> Boolean
+    #   resp.cluster.encrypted #=> Boolean
+    #   resp.cluster.restore_status.status #=> String
+    #   resp.cluster.restore_status.current_restore_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.restore_status.snapshot_size_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.progress_in_mega_bytes #=> Integer
+    #   resp.cluster.restore_status.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.restore_status.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.status #=> String
+    #   resp.cluster.data_transfer_progress.current_rate_in_mega_bytes_per_second #=> Float
+    #   resp.cluster.data_transfer_progress.total_data_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.data_transferred_in_mega_bytes #=> Integer
+    #   resp.cluster.data_transfer_progress.estimated_time_to_completion_in_seconds #=> Integer
+    #   resp.cluster.data_transfer_progress.elapsed_time_in_seconds #=> Integer
+    #   resp.cluster.hsm_status.hsm_client_certificate_identifier #=> String
+    #   resp.cluster.hsm_status.hsm_configuration_identifier #=> String
+    #   resp.cluster.hsm_status.status #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.destination_region #=> String
+    #   resp.cluster.cluster_snapshot_copy_status.retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.manual_snapshot_retention_period #=> Integer
+    #   resp.cluster.cluster_snapshot_copy_status.snapshot_copy_grant_name #=> String
+    #   resp.cluster.cluster_public_key #=> String
+    #   resp.cluster.cluster_nodes #=> Array
+    #   resp.cluster.cluster_nodes[0].node_role #=> String
+    #   resp.cluster.cluster_nodes[0].private_ip_address #=> String
+    #   resp.cluster.cluster_nodes[0].public_ip_address #=> String
+    #   resp.cluster.elastic_ip_status.elastic_ip #=> String
+    #   resp.cluster.elastic_ip_status.status #=> String
+    #   resp.cluster.cluster_revision_number #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.enhanced_vpc_routing #=> Boolean
+    #   resp.cluster.iam_roles #=> Array
+    #   resp.cluster.iam_roles[0].iam_role_arn #=> String
+    #   resp.cluster.iam_roles[0].apply_status #=> String
+    #   resp.cluster.pending_actions #=> Array
+    #   resp.cluster.pending_actions[0] #=> String
+    #   resp.cluster.maintenance_track_name #=> String
+    #   resp.cluster.elastic_resize_number_of_node_options #=> String
+    #   resp.cluster.deferred_maintenance_windows #=> Array
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_identifier #=> String
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_start_time #=> Time
+    #   resp.cluster.deferred_maintenance_windows[0].defer_maintenance_end_time #=> Time
+    #   resp.cluster.snapshot_schedule_identifier #=> String
+    #   resp.cluster.snapshot_schedule_state #=> String, one of "MODIFYING", "ACTIVE", "FAILED"
+    #   resp.cluster.expected_next_snapshot_schedule_time #=> Time
+    #   resp.cluster.expected_next_snapshot_schedule_time_status #=> String
+    #   resp.cluster.next_maintenance_window_start_time #=> Time
+    #   resp.cluster.resize_info.resize_type #=> String
+    #   resp.cluster.resize_info.allow_cancel_resize #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResumeCluster AWS API Documentation
+    #
+    # @overload resume_cluster(params = {})
+    # @param [Hash] params ({})
+    def resume_cluster(params = {}, options = {})
+      req = build_request(:resume_cluster, params)
       req.send_request(options)
     end
 
@@ -8386,7 +9022,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -8452,12 +9088,12 @@ module Aws::Redshift
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name        | params                        | :delay   | :max_attempts |
-    # | ------------------ | ----------------------------- | -------- | ------------- |
-    # | cluster_available  | {#describe_clusters}          | 60       | 30            |
-    # | cluster_deleted    | {#describe_clusters}          | 60       | 30            |
-    # | cluster_restored   | {#describe_clusters}          | 60       | 30            |
-    # | snapshot_available | {#describe_cluster_snapshots} | 15       | 20            |
+    # | waiter_name        | params                              | :delay   | :max_attempts |
+    # | ------------------ | ----------------------------------- | -------- | ------------- |
+    # | cluster_available  | {Client#describe_clusters}          | 60       | 30            |
+    # | cluster_deleted    | {Client#describe_clusters}          | 60       | 30            |
+    # | cluster_restored   | {Client#describe_clusters}          | 60       | 30            |
+    # | snapshot_available | {Client#describe_cluster_snapshots} | 15       | 20            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

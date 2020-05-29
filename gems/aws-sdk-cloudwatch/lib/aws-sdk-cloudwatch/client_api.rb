@@ -20,16 +20,22 @@ module Aws::CloudWatch
     AlarmName = Shapes::StringShape.new(name: 'AlarmName')
     AlarmNamePrefix = Shapes::StringShape.new(name: 'AlarmNamePrefix')
     AlarmNames = Shapes::ListShape.new(name: 'AlarmNames')
+    AlarmRule = Shapes::StringShape.new(name: 'AlarmRule')
+    AlarmType = Shapes::StringShape.new(name: 'AlarmType')
+    AlarmTypes = Shapes::ListShape.new(name: 'AlarmTypes')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AnomalyDetector = Shapes::StructureShape.new(name: 'AnomalyDetector')
     AnomalyDetectorConfiguration = Shapes::StructureShape.new(name: 'AnomalyDetectorConfiguration')
     AnomalyDetectorExcludedTimeRanges = Shapes::ListShape.new(name: 'AnomalyDetectorExcludedTimeRanges')
+    AnomalyDetectorMetricStat = Shapes::StringShape.new(name: 'AnomalyDetectorMetricStat')
     AnomalyDetectorMetricTimezone = Shapes::StringShape.new(name: 'AnomalyDetectorMetricTimezone')
     AnomalyDetectorStateValue = Shapes::StringShape.new(name: 'AnomalyDetectorStateValue')
     AnomalyDetectors = Shapes::ListShape.new(name: 'AnomalyDetectors')
     AwsQueryErrorMessage = Shapes::StringShape.new(name: 'AwsQueryErrorMessage')
     BatchFailures = Shapes::ListShape.new(name: 'BatchFailures')
     ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    CompositeAlarm = Shapes::StructureShape.new(name: 'CompositeAlarm')
+    CompositeAlarms = Shapes::ListShape.new(name: 'CompositeAlarms')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     Counts = Shapes::ListShape.new(name: 'Counts')
     DashboardArn = Shapes::StringShape.new(name: 'DashboardArn')
@@ -175,6 +181,7 @@ module Aws::CloudWatch
     Period = Shapes::IntegerShape.new(name: 'Period')
     PutAnomalyDetectorInput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorInput')
     PutAnomalyDetectorOutput = Shapes::StructureShape.new(name: 'PutAnomalyDetectorOutput')
+    PutCompositeAlarmInput = Shapes::StructureShape.new(name: 'PutCompositeAlarmInput')
     PutDashboardInput = Shapes::StructureShape.new(name: 'PutDashboardInput')
     PutDashboardOutput = Shapes::StructureShape.new(name: 'PutDashboardOutput')
     PutInsightRuleInput = Shapes::StructureShape.new(name: 'PutInsightRuleInput')
@@ -218,6 +225,7 @@ module Aws::CloudWatch
     Values = Shapes::ListShape.new(name: 'Values')
 
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
+    AlarmHistoryItem.add_member(:alarm_type, Shapes::ShapeRef.new(shape: AlarmType, location_name: "AlarmType"))
     AlarmHistoryItem.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     AlarmHistoryItem.add_member(:history_item_type, Shapes::ShapeRef.new(shape: HistoryItemType, location_name: "HistoryItemType"))
     AlarmHistoryItem.add_member(:history_summary, Shapes::ShapeRef.new(shape: HistorySummary, location_name: "HistorySummary"))
@@ -228,10 +236,12 @@ module Aws::CloudWatch
 
     AlarmNames.member = Shapes::ShapeRef.new(shape: AlarmName)
 
+    AlarmTypes.member = Shapes::ShapeRef.new(shape: AlarmType)
+
     AnomalyDetector.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     AnomalyDetector.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
     AnomalyDetector.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, location_name: "Stat"))
+    AnomalyDetector.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, location_name: "Stat"))
     AnomalyDetector.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     AnomalyDetector.add_member(:state_value, Shapes::ShapeRef.new(shape: AnomalyDetectorStateValue, location_name: "StateValue"))
     AnomalyDetector.struct_class = Types::AnomalyDetector
@@ -245,6 +255,25 @@ module Aws::CloudWatch
     AnomalyDetectors.member = Shapes::ShapeRef.new(shape: AnomalyDetector)
 
     BatchFailures.member = Shapes::ShapeRef.new(shape: PartialFailure)
+
+    CompositeAlarm.add_member(:actions_enabled, Shapes::ShapeRef.new(shape: ActionsEnabled, location_name: "ActionsEnabled"))
+    CompositeAlarm.add_member(:alarm_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "AlarmActions"))
+    CompositeAlarm.add_member(:alarm_arn, Shapes::ShapeRef.new(shape: AlarmArn, location_name: "AlarmArn"))
+    CompositeAlarm.add_member(:alarm_configuration_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AlarmConfigurationUpdatedTimestamp"))
+    CompositeAlarm.add_member(:alarm_description, Shapes::ShapeRef.new(shape: AlarmDescription, location_name: "AlarmDescription"))
+    CompositeAlarm.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
+    CompositeAlarm.add_member(:alarm_rule, Shapes::ShapeRef.new(shape: AlarmRule, location_name: "AlarmRule"))
+    CompositeAlarm.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "InsufficientDataActions"))
+    CompositeAlarm.add_member(:ok_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "OKActions"))
+    CompositeAlarm.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "StateReason"))
+    CompositeAlarm.add_member(:state_reason_data, Shapes::ShapeRef.new(shape: StateReasonData, location_name: "StateReasonData"))
+    CompositeAlarm.add_member(:state_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateUpdatedTimestamp"))
+    CompositeAlarm.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, location_name: "StateValue"))
+    CompositeAlarm.struct_class = Types::CompositeAlarm
+
+    CompositeAlarms.member = Shapes::ShapeRef.new(shape: CompositeAlarm)
+
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
     Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
@@ -294,7 +323,7 @@ module Aws::CloudWatch
     DeleteAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     DeleteAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     DeleteAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    DeleteAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, required: true, location_name: "Stat"))
     DeleteAnomalyDetectorInput.struct_class = Types::DeleteAnomalyDetectorInput
 
     DeleteAnomalyDetectorOutput.struct_class = Types::DeleteAnomalyDetectorOutput
@@ -311,11 +340,13 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput.struct_class = Types::DeleteInsightRulesOutput
 
     DescribeAlarmHistoryInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
+    DescribeAlarmHistoryInput.add_member(:alarm_types, Shapes::ShapeRef.new(shape: AlarmTypes, location_name: "AlarmTypes"))
     DescribeAlarmHistoryInput.add_member(:history_item_type, Shapes::ShapeRef.new(shape: HistoryItemType, location_name: "HistoryItemType"))
     DescribeAlarmHistoryInput.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
     DescribeAlarmHistoryInput.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndDate"))
     DescribeAlarmHistoryInput.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeAlarmHistoryInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAlarmHistoryInput.add_member(:scan_by, Shapes::ShapeRef.new(shape: ScanBy, location_name: "ScanBy"))
     DescribeAlarmHistoryInput.struct_class = Types::DescribeAlarmHistoryInput
 
     DescribeAlarmHistoryOutput.add_member(:alarm_history_items, Shapes::ShapeRef.new(shape: AlarmHistoryItems, location_name: "AlarmHistoryItems"))
@@ -336,12 +367,16 @@ module Aws::CloudWatch
 
     DescribeAlarmsInput.add_member(:alarm_names, Shapes::ShapeRef.new(shape: AlarmNames, location_name: "AlarmNames"))
     DescribeAlarmsInput.add_member(:alarm_name_prefix, Shapes::ShapeRef.new(shape: AlarmNamePrefix, location_name: "AlarmNamePrefix"))
+    DescribeAlarmsInput.add_member(:alarm_types, Shapes::ShapeRef.new(shape: AlarmTypes, location_name: "AlarmTypes"))
+    DescribeAlarmsInput.add_member(:children_of_alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "ChildrenOfAlarmName"))
+    DescribeAlarmsInput.add_member(:parents_of_alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "ParentsOfAlarmName"))
     DescribeAlarmsInput.add_member(:state_value, Shapes::ShapeRef.new(shape: StateValue, location_name: "StateValue"))
     DescribeAlarmsInput.add_member(:action_prefix, Shapes::ShapeRef.new(shape: ActionPrefix, location_name: "ActionPrefix"))
     DescribeAlarmsInput.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeAlarmsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAlarmsInput.struct_class = Types::DescribeAlarmsInput
 
+    DescribeAlarmsOutput.add_member(:composite_alarms, Shapes::ShapeRef.new(shape: CompositeAlarms, location_name: "CompositeAlarms"))
     DescribeAlarmsOutput.add_member(:metric_alarms, Shapes::ShapeRef.new(shape: MetricAlarms, location_name: "MetricAlarms"))
     DescribeAlarmsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAlarmsOutput.struct_class = Types::DescribeAlarmsOutput
@@ -513,6 +548,8 @@ module Aws::CloudWatch
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
 
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededFault.struct_class = Types::LimitExceededFault
 
@@ -635,11 +672,21 @@ module Aws::CloudWatch
     PutAnomalyDetectorInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     PutAnomalyDetectorInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     PutAnomalyDetectorInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
-    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    PutAnomalyDetectorInput.add_member(:stat, Shapes::ShapeRef.new(shape: AnomalyDetectorMetricStat, required: true, location_name: "Stat"))
     PutAnomalyDetectorInput.add_member(:configuration, Shapes::ShapeRef.new(shape: AnomalyDetectorConfiguration, location_name: "Configuration"))
     PutAnomalyDetectorInput.struct_class = Types::PutAnomalyDetectorInput
 
     PutAnomalyDetectorOutput.struct_class = Types::PutAnomalyDetectorOutput
+
+    PutCompositeAlarmInput.add_member(:actions_enabled, Shapes::ShapeRef.new(shape: ActionsEnabled, location_name: "ActionsEnabled"))
+    PutCompositeAlarmInput.add_member(:alarm_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "AlarmActions"))
+    PutCompositeAlarmInput.add_member(:alarm_description, Shapes::ShapeRef.new(shape: AlarmDescription, location_name: "AlarmDescription"))
+    PutCompositeAlarmInput.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, required: true, location_name: "AlarmName"))
+    PutCompositeAlarmInput.add_member(:alarm_rule, Shapes::ShapeRef.new(shape: AlarmRule, required: true, location_name: "AlarmRule"))
+    PutCompositeAlarmInput.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "InsufficientDataActions"))
+    PutCompositeAlarmInput.add_member(:ok_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "OKActions"))
+    PutCompositeAlarmInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutCompositeAlarmInput.struct_class = Types::PutCompositeAlarmInput
 
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
     PutDashboardInput.add_member(:dashboard_body, Shapes::ShapeRef.new(shape: DashboardBody, required: true, location_name: "DashboardBody"))
@@ -651,6 +698,7 @@ module Aws::CloudWatch
     PutInsightRuleInput.add_member(:rule_name, Shapes::ShapeRef.new(shape: InsightRuleName, required: true, location_name: "RuleName"))
     PutInsightRuleInput.add_member(:rule_state, Shapes::ShapeRef.new(shape: InsightRuleState, location_name: "RuleState"))
     PutInsightRuleInput.add_member(:rule_definition, Shapes::ShapeRef.new(shape: InsightRuleDefinition, required: true, location_name: "RuleDefinition"))
+    PutInsightRuleInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutInsightRuleInput.struct_class = Types::PutInsightRuleInput
 
     PutInsightRuleOutput.struct_class = Types::PutInsightRuleOutput
@@ -1003,6 +1051,15 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
+      end)
+
+      api.add_operation(:put_composite_alarm, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutCompositeAlarm"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutCompositeAlarmInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
       end)
 
       api.add_operation(:put_dashboard, Seahorse::Model::Operation.new.tap do |o|

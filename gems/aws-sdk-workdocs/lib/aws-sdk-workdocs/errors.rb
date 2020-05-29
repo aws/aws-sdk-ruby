@@ -6,6 +6,53 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WorkDocs
+
+  # When WorkDocs returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::WorkDocs::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all WorkDocs errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::WorkDocs::Errors::ServiceError
+  #       # rescues all WorkDocs API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ConcurrentModificationException}
+  # * {ConflictingOperationException}
+  # * {CustomMetadataLimitExceededException}
+  # * {DeactivatingLastSystemUserException}
+  # * {DocumentLockedForCommentsException}
+  # * {DraftUploadOutOfSyncException}
+  # * {EntityAlreadyExistsException}
+  # * {EntityNotExistsException}
+  # * {FailedDependencyException}
+  # * {IllegalUserStateException}
+  # * {InvalidArgumentException}
+  # * {InvalidCommentOperationException}
+  # * {InvalidOperationException}
+  # * {InvalidPasswordException}
+  # * {LimitExceededException}
+  # * {ProhibitedStateException}
+  # * {RequestedEntityTooLargeException}
+  # * {ResourceAlreadyCheckedOutException}
+  # * {ServiceUnavailableException}
+  # * {StorageLimitExceededException}
+  # * {StorageLimitWillExceedException}
+  # * {TooManyLabelsException}
+  # * {TooManySubscriptionsException}
+  # * {UnauthorizedOperationException}
+  # * {UnauthorizedResourceAccessException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +70,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictingOperationException < ServiceError
@@ -39,7 +85,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomMetadataLimitExceededException < ServiceError
@@ -55,7 +100,16 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
+    end
 
+    class DeactivatingLastSystemUserException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkDocs::Types::DeactivatingLastSystemUserException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class DocumentLockedForCommentsException < ServiceError
@@ -71,7 +125,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class DraftUploadOutOfSyncException < ServiceError
@@ -87,7 +140,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityAlreadyExistsException < ServiceError
@@ -103,7 +155,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotExistsException < ServiceError
@@ -124,7 +175,6 @@ module Aws::WorkDocs
       def entity_ids
         @data[:entity_ids]
       end
-
     end
 
     class FailedDependencyException < ServiceError
@@ -140,7 +190,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class IllegalUserStateException < ServiceError
@@ -156,7 +205,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -172,7 +220,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidCommentOperationException < ServiceError
@@ -188,7 +235,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOperationException < ServiceError
@@ -204,7 +250,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPasswordException < ServiceError
@@ -220,7 +265,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -236,7 +280,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ProhibitedStateException < ServiceError
@@ -252,7 +295,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class RequestedEntityTooLargeException < ServiceError
@@ -268,7 +310,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyCheckedOutException < ServiceError
@@ -284,7 +325,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -300,7 +340,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class StorageLimitExceededException < ServiceError
@@ -316,7 +355,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class StorageLimitWillExceedException < ServiceError
@@ -332,7 +370,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyLabelsException < ServiceError
@@ -348,7 +385,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManySubscriptionsException < ServiceError
@@ -364,7 +400,16 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
+    end
 
+    class UnauthorizedOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkDocs::Types::UnauthorizedOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class UnauthorizedResourceAccessException < ServiceError
@@ -380,7 +425,6 @@ module Aws::WorkDocs
       def message
         @message || @data[:message]
       end
-
     end
 
   end

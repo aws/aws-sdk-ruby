@@ -1,13 +1,76 @@
 Unreleased Changes
 ------------------
 
-3.90.0 (2020-02-12)
+* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set. (#2319)
+* Issue - Handle unknown and unmodeled events from event streams by ignoring them and providing a new callback rather than raising an error.
+
+3.97.0 (2020-05-28)
+------------------
+* Feature - Default endpoint_discovery to `true` for services with at least one operation that requires it.
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.96.1 (2020-05-18)
+------------------
+
+* Issue - Raise `ArgumentError` for XML services when required URI elements are not included.
+
+3.96.0 (2020-05-15)
 ------------------
 
 * Feature - Updated the list of parameters to filter when logging.
 
-* Issue - Parse all values from shared credentials file when using Aws.shared_config
-* Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present
+3.95.0 (2020-05-07)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.94.1 (2020-05-04)
+------------------
+
+* Issue - When handling errors in XML responses, don't set a new error on the response if one is already set.
+
+3.94.0 (2020-04-08)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+* Issue - Update dependency on aws-eventstream
+
+3.93.0 (2020-04-06)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.92.0 (2020-03-20)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Change the default of `sts_regional_endpoints` from 'legacy' to 'regional'.
+
+3.91.1 (2020-03-10)
+------------------
+
+* Issue - Rescue from `JSON::ParserError` when using `Oj.mimic_JSON`. (#2247)
+
+3.91.0 (2020-03-09)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+* Feature - Add `standard` and `adaptive` retry modes.
+
+3.90.1 (2020-02-14)
+------------------
+
+* Issue - Perform a case-insensitive comparison when filtering sensitive parameters from logs
+* Issue - Add passthrough of region from client to STS when using `assume_role_web_identity_credentials`.
+
+3.90.0 (2020-02-12)
+------------------
+
+* Issue - Updated the list of parameters to filter when logging.
+* Issue - Parse all values from shared credentials file when using `Aws.shared_config`.
+* Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present.
 * Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked` in streaming operations because all body objects (`String`, `StringIO`) would respond to `#size`.
 
 3.89.1 (2020-01-14)

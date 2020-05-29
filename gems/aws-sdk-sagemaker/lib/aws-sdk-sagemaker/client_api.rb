@@ -333,7 +333,6 @@ module Aws::SageMaker
     EndpointSummaryList = Shapes::ListShape.new(name: 'EndpointSummaryList')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
-    EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
     EnvironmentKey = Shapes::StringShape.new(name: 'EnvironmentKey')
     EnvironmentMap = Shapes::MapShape.new(name: 'EnvironmentMap')
     EnvironmentValue = Shapes::StringShape.new(name: 'EnvironmentValue')
@@ -342,7 +341,6 @@ module Aws::SageMaker
     Experiment = Shapes::StructureShape.new(name: 'Experiment')
     ExperimentArn = Shapes::StringShape.new(name: 'ExperimentArn')
     ExperimentConfig = Shapes::StructureShape.new(name: 'ExperimentConfig')
-    ExperimentConfigName = Shapes::StringShape.new(name: 'ExperimentConfigName')
     ExperimentDescription = Shapes::StringShape.new(name: 'ExperimentDescription')
     ExperimentEntityName = Shapes::StringShape.new(name: 'ExperimentEntityName')
     ExperimentSource = Shapes::StructureShape.new(name: 'ExperimentSource')
@@ -658,6 +656,7 @@ module Aws::SageMaker
     ProcessingInputs = Shapes::ListShape.new(name: 'ProcessingInputs')
     ProcessingInstanceCount = Shapes::IntegerShape.new(name: 'ProcessingInstanceCount')
     ProcessingInstanceType = Shapes::StringShape.new(name: 'ProcessingInstanceType')
+    ProcessingJob = Shapes::StructureShape.new(name: 'ProcessingJob')
     ProcessingJobArn = Shapes::StringShape.new(name: 'ProcessingJobArn')
     ProcessingJobName = Shapes::StringShape.new(name: 'ProcessingJobName')
     ProcessingJobStatus = Shapes::StringShape.new(name: 'ProcessingJobStatus')
@@ -722,6 +721,7 @@ module Aws::SageMaker
     S3DataSource = Shapes::StructureShape.new(name: 'S3DataSource')
     S3DataType = Shapes::StringShape.new(name: 'S3DataType')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    SageMakerImageArn = Shapes::StringShape.new(name: 'SageMakerImageArn')
     SamplingPercentage = Shapes::IntegerShape.new(name: 'SamplingPercentage')
     ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
@@ -905,6 +905,9 @@ module Aws::SageMaker
     UserProfileStatus = Shapes::StringShape.new(name: 'UserProfileStatus')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     VariantName = Shapes::StringShape.new(name: 'VariantName')
+    VariantProperty = Shapes::StructureShape.new(name: 'VariantProperty')
+    VariantPropertyList = Shapes::ListShape.new(name: 'VariantPropertyList')
+    VariantPropertyType = Shapes::StringShape.new(name: 'VariantPropertyType')
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
@@ -1279,6 +1282,7 @@ module Aws::SageMaker
     CreateExperimentResponse.struct_class = Types::CreateExperimentResponse
 
     CreateFlowDefinitionRequest.add_member(:flow_definition_name, Shapes::ShapeRef.new(shape: FlowDefinitionName, required: true, location_name: "FlowDefinitionName"))
+    CreateFlowDefinitionRequest.add_member(:human_loop_request_source, Shapes::ShapeRef.new(shape: HumanLoopRequestSource, location_name: "HumanLoopRequestSource"))
     CreateFlowDefinitionRequest.add_member(:human_loop_activation_config, Shapes::ShapeRef.new(shape: HumanLoopActivationConfig, location_name: "HumanLoopActivationConfig"))
     CreateFlowDefinitionRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, required: true, location_name: "HumanLoopConfig"))
     CreateFlowDefinitionRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: FlowDefinitionOutputConfig, required: true, location_name: "OutputConfig"))
@@ -1783,6 +1787,7 @@ module Aws::SageMaker
     DescribeFlowDefinitionResponse.add_member(:flow_definition_name, Shapes::ShapeRef.new(shape: FlowDefinitionName, required: true, location_name: "FlowDefinitionName"))
     DescribeFlowDefinitionResponse.add_member(:flow_definition_status, Shapes::ShapeRef.new(shape: FlowDefinitionStatus, required: true, location_name: "FlowDefinitionStatus"))
     DescribeFlowDefinitionResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    DescribeFlowDefinitionResponse.add_member(:human_loop_request_source, Shapes::ShapeRef.new(shape: HumanLoopRequestSource, location_name: "HumanLoopRequestSource"))
     DescribeFlowDefinitionResponse.add_member(:human_loop_activation_config, Shapes::ShapeRef.new(shape: HumanLoopActivationConfig, location_name: "HumanLoopActivationConfig"))
     DescribeFlowDefinitionResponse.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, required: true, location_name: "HumanLoopConfig"))
     DescribeFlowDefinitionResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: FlowDefinitionOutputConfig, required: true, location_name: "OutputConfig"))
@@ -2141,9 +2146,9 @@ module Aws::SageMaker
     Experiment.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Experiment.struct_class = Types::Experiment
 
-    ExperimentConfig.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentConfigName, location_name: "ExperimentName"))
-    ExperimentConfig.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentConfigName, location_name: "TrialName"))
-    ExperimentConfig.add_member(:trial_component_display_name, Shapes::ShapeRef.new(shape: ExperimentConfigName, location_name: "TrialComponentDisplayName"))
+    ExperimentConfig.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    ExperimentConfig.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialName"))
+    ExperimentConfig.add_member(:trial_component_display_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialComponentDisplayName"))
     ExperimentConfig.struct_class = Types::ExperimentConfig
 
     ExperimentSource.add_member(:source_arn, Shapes::ShapeRef.new(shape: ExperimentSourceArn, required: true, location_name: "SourceArn"))
@@ -2221,7 +2226,6 @@ module Aws::SageMaker
     HumanLoopActivationConditionsConfig.add_member(:human_loop_activation_conditions, Shapes::ShapeRef.new(shape: HumanLoopActivationConditions, required: true, location_name: "HumanLoopActivationConditions", metadata: {"jsonvalue"=>true}))
     HumanLoopActivationConditionsConfig.struct_class = Types::HumanLoopActivationConditionsConfig
 
-    HumanLoopActivationConfig.add_member(:human_loop_request_source, Shapes::ShapeRef.new(shape: HumanLoopRequestSource, required: true, location_name: "HumanLoopRequestSource"))
     HumanLoopActivationConfig.add_member(:human_loop_activation_conditions_config, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsConfig, required: true, location_name: "HumanLoopActivationConditionsConfig"))
     HumanLoopActivationConfig.struct_class = Types::HumanLoopActivationConfig
 
@@ -2848,6 +2852,7 @@ module Aws::SageMaker
     ListTrialComponentsResponse.struct_class = Types::ListTrialComponentsResponse
 
     ListTrialsRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    ListTrialsRequest.add_member(:trial_component_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialComponentName"))
     ListTrialsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
     ListTrialsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
     ListTrialsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortTrialsBy, location_name: "SortBy"))
@@ -3044,6 +3049,7 @@ module Aws::SageMaker
 
     NestedFiltersList.member = Shapes::ShapeRef.new(shape: NestedFilters)
 
+    NetworkConfig.add_member(:enable_inter_container_traffic_encryption, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableInterContainerTrafficEncryption"))
     NetworkConfig.add_member(:enable_network_isolation, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNetworkIsolation"))
     NetworkConfig.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     NetworkConfig.struct_class = Types::NetworkConfig
@@ -3131,6 +3137,30 @@ module Aws::SageMaker
 
     ProcessingInputs.member = Shapes::ShapeRef.new(shape: ProcessingInput)
 
+    ProcessingJob.add_member(:processing_inputs, Shapes::ShapeRef.new(shape: ProcessingInputs, location_name: "ProcessingInputs"))
+    ProcessingJob.add_member(:processing_output_config, Shapes::ShapeRef.new(shape: ProcessingOutputConfig, location_name: "ProcessingOutputConfig"))
+    ProcessingJob.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, location_name: "ProcessingJobName"))
+    ProcessingJob.add_member(:processing_resources, Shapes::ShapeRef.new(shape: ProcessingResources, location_name: "ProcessingResources"))
+    ProcessingJob.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: ProcessingStoppingCondition, location_name: "StoppingCondition"))
+    ProcessingJob.add_member(:app_specification, Shapes::ShapeRef.new(shape: AppSpecification, location_name: "AppSpecification"))
+    ProcessingJob.add_member(:environment, Shapes::ShapeRef.new(shape: ProcessingEnvironmentMap, location_name: "Environment"))
+    ProcessingJob.add_member(:network_config, Shapes::ShapeRef.new(shape: NetworkConfig, location_name: "NetworkConfig"))
+    ProcessingJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    ProcessingJob.add_member(:experiment_config, Shapes::ShapeRef.new(shape: ExperimentConfig, location_name: "ExperimentConfig"))
+    ProcessingJob.add_member(:processing_job_arn, Shapes::ShapeRef.new(shape: ProcessingJobArn, location_name: "ProcessingJobArn"))
+    ProcessingJob.add_member(:processing_job_status, Shapes::ShapeRef.new(shape: ProcessingJobStatus, location_name: "ProcessingJobStatus"))
+    ProcessingJob.add_member(:exit_message, Shapes::ShapeRef.new(shape: ExitMessage, location_name: "ExitMessage"))
+    ProcessingJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    ProcessingJob.add_member(:processing_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProcessingEndTime"))
+    ProcessingJob.add_member(:processing_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ProcessingStartTime"))
+    ProcessingJob.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ProcessingJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    ProcessingJob.add_member(:monitoring_schedule_arn, Shapes::ShapeRef.new(shape: MonitoringScheduleArn, location_name: "MonitoringScheduleArn"))
+    ProcessingJob.add_member(:auto_ml_job_arn, Shapes::ShapeRef.new(shape: AutoMLJobArn, location_name: "AutoMLJobArn"))
+    ProcessingJob.add_member(:training_job_arn, Shapes::ShapeRef.new(shape: TrainingJobArn, location_name: "TrainingJobArn"))
+    ProcessingJob.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ProcessingJob.struct_class = Types::ProcessingJob
+
     ProcessingJobSummaries.member = Shapes::ShapeRef.new(shape: ProcessingJobSummary)
 
     ProcessingJobSummary.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, required: true, location_name: "ProcessingJobName"))
@@ -3207,7 +3237,7 @@ module Aws::SageMaker
 
     RealtimeInferenceInstanceTypes.member = Shapes::ShapeRef.new(shape: ProductionVariantInstanceType)
 
-    RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, required: true, location_name: "UiTemplate"))
+    RenderUiTemplateRequest.add_member(:ui_template, Shapes::ShapeRef.new(shape: UiTemplate, location_name: "UiTemplate"))
     RenderUiTemplateRequest.add_member(:task, Shapes::ShapeRef.new(shape: RenderableTask, required: true, location_name: "Task"))
     RenderUiTemplateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     RenderUiTemplateRequest.struct_class = Types::RenderUiTemplateRequest
@@ -3249,7 +3279,7 @@ module Aws::SageMaker
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
-    ResourceSpec.add_member(:environment_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "EnvironmentArn"))
+    ResourceSpec.add_member(:sage_maker_image_arn, Shapes::ShapeRef.new(shape: SageMakerImageArn, location_name: "SageMakerImageArn"))
     ResourceSpec.add_member(:instance_type, Shapes::ShapeRef.new(shape: AppInstanceType, location_name: "InstanceType"))
     ResourceSpec.struct_class = Types::ResourceSpec
 
@@ -3594,6 +3624,7 @@ module Aws::SageMaker
 
     TrialComponentSourceDetail.add_member(:source_arn, Shapes::ShapeRef.new(shape: TrialComponentSourceArn, location_name: "SourceArn"))
     TrialComponentSourceDetail.add_member(:training_job, Shapes::ShapeRef.new(shape: TrainingJob, location_name: "TrainingJob"))
+    TrialComponentSourceDetail.add_member(:processing_job, Shapes::ShapeRef.new(shape: ProcessingJob, location_name: "ProcessingJob"))
     TrialComponentSourceDetail.struct_class = Types::TrialComponentSourceDetail
 
     TrialComponentStatus.add_member(:primary_status, Shapes::ShapeRef.new(shape: TrialComponentPrimaryStatus, location_name: "PrimaryStatus"))
@@ -3637,7 +3668,7 @@ module Aws::SageMaker
     USD.add_member(:tenth_fractions_of_a_cent, Shapes::ShapeRef.new(shape: TenthFractionsOfACent, location_name: "TenthFractionsOfACent"))
     USD.struct_class = Types::USD
 
-    UiConfig.add_member(:ui_template_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "UiTemplateS3Uri"))
+    UiConfig.add_member(:ui_template_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "UiTemplateS3Uri"))
     UiConfig.struct_class = Types::UiConfig
 
     UiTemplate.add_member(:content, Shapes::ShapeRef.new(shape: TemplateContent, required: true, location_name: "Content"))
@@ -3663,6 +3694,8 @@ module Aws::SageMaker
 
     UpdateEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     UpdateEndpointInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
+    UpdateEndpointInput.add_member(:retain_all_variant_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "RetainAllVariantProperties"))
+    UpdateEndpointInput.add_member(:exclude_retained_variant_properties, Shapes::ShapeRef.new(shape: VariantPropertyList, location_name: "ExcludeRetainedVariantProperties"))
     UpdateEndpointInput.struct_class = Types::UpdateEndpointInput
 
     UpdateEndpointOutput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, required: true, location_name: "EndpointArn"))
@@ -3782,6 +3815,11 @@ module Aws::SageMaker
     UserSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
     UserSettings.add_member(:tensor_board_app_settings, Shapes::ShapeRef.new(shape: TensorBoardAppSettings, location_name: "TensorBoardAppSettings"))
     UserSettings.struct_class = Types::UserSettings
+
+    VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))
+    VariantProperty.struct_class = Types::VariantProperty
+
+    VariantPropertyList.member = Shapes::ShapeRef.new(shape: VariantProperty)
 
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))

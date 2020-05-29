@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElasticLoadBalancingV2
+
   class Resource
 
     # @param options ({})

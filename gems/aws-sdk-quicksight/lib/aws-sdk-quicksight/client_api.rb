@@ -77,8 +77,11 @@ module Aws::QuickSight
     DashboardError = Shapes::StructureShape.new(name: 'DashboardError')
     DashboardErrorList = Shapes::ListShape.new(name: 'DashboardErrorList')
     DashboardErrorType = Shapes::StringShape.new(name: 'DashboardErrorType')
+    DashboardFilterAttribute = Shapes::StringShape.new(name: 'DashboardFilterAttribute')
     DashboardName = Shapes::StringShape.new(name: 'DashboardName')
     DashboardPublishOptions = Shapes::StructureShape.new(name: 'DashboardPublishOptions')
+    DashboardSearchFilter = Shapes::StructureShape.new(name: 'DashboardSearchFilter')
+    DashboardSearchFilterList = Shapes::ListShape.new(name: 'DashboardSearchFilterList')
     DashboardSourceEntity = Shapes::StructureShape.new(name: 'DashboardSourceEntity')
     DashboardSourceTemplate = Shapes::StructureShape.new(name: 'DashboardSourceTemplate')
     DashboardSummary = Shapes::StructureShape.new(name: 'DashboardSummary')
@@ -88,6 +91,7 @@ module Aws::QuickSight
     DashboardVersionSummary = Shapes::StructureShape.new(name: 'DashboardVersionSummary')
     DashboardVersionSummaryList = Shapes::ListShape.new(name: 'DashboardVersionSummaryList')
     DataSet = Shapes::StructureShape.new(name: 'DataSet')
+    DataSetArnsList = Shapes::ListShape.new(name: 'DataSetArnsList')
     DataSetConfiguration = Shapes::StructureShape.new(name: 'DataSetConfiguration')
     DataSetConfigurationList = Shapes::ListShape.new(name: 'DataSetConfigurationList')
     DataSetImportMode = Shapes::StringShape.new(name: 'DataSetImportMode')
@@ -167,6 +171,7 @@ module Aws::QuickSight
     Expression = Shapes::StringShape.new(name: 'Expression')
     FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     FilterOperation = Shapes::StructureShape.new(name: 'FilterOperation')
+    FilterOperator = Shapes::StringShape.new(name: 'FilterOperator')
     GeoSpatialColumnGroup = Shapes::StructureShape.new(name: 'GeoSpatialColumnGroup')
     GeoSpatialCountryCode = Shapes::StringShape.new(name: 'GeoSpatialCountryCode')
     GeoSpatialDataRole = Shapes::StringShape.new(name: 'GeoSpatialDataRole')
@@ -298,6 +303,8 @@ module Aws::QuickSight
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Parameters = Shapes::StructureShape.new(name: 'S3Parameters')
     S3Source = Shapes::StructureShape.new(name: 'S3Source')
+    SearchDashboardsRequest = Shapes::StructureShape.new(name: 'SearchDashboardsRequest')
+    SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
@@ -656,6 +663,13 @@ module Aws::QuickSight
     DashboardPublishOptions.add_member(:sheet_controls_option, Shapes::ShapeRef.new(shape: SheetControlsOption, location_name: "SheetControlsOption"))
     DashboardPublishOptions.struct_class = Types::DashboardPublishOptions
 
+    DashboardSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: FilterOperator, required: true, location_name: "Operator"))
+    DashboardSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: DashboardFilterAttribute, location_name: "Name"))
+    DashboardSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    DashboardSearchFilter.struct_class = Types::DashboardSearchFilter
+
+    DashboardSearchFilterList.member = Shapes::ShapeRef.new(shape: DashboardSearchFilter)
+
     DashboardSourceEntity.add_member(:source_template, Shapes::ShapeRef.new(shape: DashboardSourceTemplate, location_name: "SourceTemplate"))
     DashboardSourceEntity.struct_class = Types::DashboardSourceEntity
 
@@ -680,6 +694,7 @@ module Aws::QuickSight
     DashboardVersion.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "Status"))
     DashboardVersion.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DashboardVersion.add_member(:source_entity_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SourceEntityArn"))
+    DashboardVersion.add_member(:data_set_arns, Shapes::ShapeRef.new(shape: DataSetArnsList, location_name: "DataSetArns"))
     DashboardVersion.add_member(:description, Shapes::ShapeRef.new(shape: VersionDescription, location_name: "Description"))
     DashboardVersion.struct_class = Types::DashboardVersion
 
@@ -706,6 +721,8 @@ module Aws::QuickSight
     DataSet.add_member(:column_groups, Shapes::ShapeRef.new(shape: ColumnGroupList, location_name: "ColumnGroups"))
     DataSet.add_member(:row_level_permission_data_set, Shapes::ShapeRef.new(shape: RowLevelPermissionDataSet, location_name: "RowLevelPermissionDataSet"))
     DataSet.struct_class = Types::DataSet
+
+    DataSetArnsList.member = Shapes::ShapeRef.new(shape: Arn)
 
     DataSetConfiguration.add_member(:placeholder, Shapes::ShapeRef.new(shape: String, location_name: "Placeholder"))
     DataSetConfiguration.add_member(:data_set_schema, Shapes::ShapeRef.new(shape: DataSetSchema, location_name: "DataSetSchema"))
@@ -1471,6 +1488,18 @@ module Aws::QuickSight
     S3Source.add_member(:upload_settings, Shapes::ShapeRef.new(shape: UploadSettings, location_name: "UploadSettings"))
     S3Source.add_member(:input_columns, Shapes::ShapeRef.new(shape: InputColumnList, required: true, location_name: "InputColumns"))
     S3Source.struct_class = Types::S3Source
+
+    SearchDashboardsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchDashboardsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DashboardSearchFilterList, required: true, location_name: "Filters"))
+    SearchDashboardsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchDashboardsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchDashboardsRequest.struct_class = Types::SearchDashboardsRequest
+
+    SearchDashboardsResponse.add_member(:dashboard_summary_list, Shapes::ShapeRef.new(shape: DashboardSummaryList, location_name: "DashboardSummaryList"))
+    SearchDashboardsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchDashboardsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchDashboardsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchDashboardsResponse.struct_class = Types::SearchDashboardsResponse
 
     ServiceNowParameters.add_member(:site_base_url, Shapes::ShapeRef.new(shape: SiteBaseUrl, required: true, location_name: "SiteBaseUrl"))
     ServiceNowParameters.struct_class = Types::ServiceNowParameters
@@ -2607,6 +2636,26 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
+      api.add_operation(:search_dashboards, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchDashboards"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/search/dashboards"
+        o.input = Shapes::ShapeRef.new(shape: SearchDashboardsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchDashboardsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

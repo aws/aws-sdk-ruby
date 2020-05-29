@@ -8,6 +8,12 @@
 module Aws::CodeBuild
   module Types
 
+    # An AWS service limit was exceeded for the calling AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/AccountLimitExceededException AWS API Documentation
+    #
+    class AccountLimitExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass BatchDeleteBuildsInput
     #   data as a hash:
     #
@@ -876,7 +882,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A set of tags for this build project.
+    #   A list of tag key and value pairs associated with this build
+    #   project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -957,6 +964,12 @@ module Aws::CodeBuild
     #             encryption_disabled: false,
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "KeyInput",
+    #             value: "ValueInput",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -972,12 +985,20 @@ module Aws::CodeBuild
     #   the report group test results are exported.
     #   @return [Types::ReportExportConfig]
     #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroupInput AWS API Documentation
     #
     class CreateReportGroupInput < Struct.new(
       :name,
       :type,
-      :export_config)
+      :export_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -1001,7 +1022,7 @@ module Aws::CodeBuild
     #         filter_groups: [
     #           [
     #             {
-    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #               pattern: "String", # required
     #               exclude_matched_pattern: false,
     #             },
@@ -1357,13 +1378,22 @@ module Aws::CodeBuild
     #   The type of environment variable. Valid values include:
     #
     #   * `PARAMETER_STORE`\: An environment variable stored in Amazon EC2
-    #     Systems Manager Parameter Store.
+    #     Systems Manager Parameter Store. To learn how to specify a
+    #     parameter store environment variable, see [ parameter store
+    #     reference-key in the buildspec file][1].
     #
     #   * `PLAINTEXT`\: An environment variable in plain text format. This
     #     is the default value.
     #
     #   * `SECRETS_MANAGER`\: An environment variable stored in AWS Secrets
-    #     Manager.
+    #     Manager. To learn how to specify a secrets manager environment
+    #     variable, see [ secrets manager reference-key in the buildspec
+    #     file][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#parameter-store-build-spec
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#secrets-manager-build-spec
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
@@ -1513,6 +1543,12 @@ module Aws::CodeBuild
       :arn)
       include Aws::Structure
     end
+
+    # The input value that was provided is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass InvalidateProjectCacheInput
     #   data as a hash:
@@ -2261,6 +2297,12 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # There was a problem with the underlying OAuth provider.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/OAuthProviderException AWS API Documentation
+    #
+    class OAuthProviderException < Aws::EmptyStructure; end
+
     # Additional information about a build phase that has an error. You can
     # use this information for troubleshooting.
     #
@@ -2393,7 +2435,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags for this build project.
+    #   A list of tag key and value pairs associated with this build
+    #   project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -2778,17 +2821,16 @@ module Aws::CodeBuild
     #
     #   * The environment type `LINUX_CONTAINER` with compute type
     #     `build.general1.2xlarge` is available only in regions US East (N.
-    #     Virginia), US East (N. Virginia), US West (Oregon), Canada
-    #     (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific
-    #     (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia
-    #     Pacific (Sydney), China (Beijing), and China (Ningxia).
+    #     Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
+    #     (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
+    #     Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney),
+    #     China (Beijing), and China (Ningxia).
     #
     #   * The environment type `LINUX_GPU_CONTAINER` is available only in
-    #     regions US East (N. Virginia), US East (N. Virginia), US West
-    #     (Oregon), Canada (Central), EU (Ireland), EU (London), EU
-    #     (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
-    #     Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
-    #     China (Ningxia).
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia
+    #     Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+    #     Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -3459,6 +3501,13 @@ module Aws::CodeBuild
     #   The date and time this `ReportGroup` was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroup AWS API Documentation
     #
     class ReportGroup < Struct.new(
@@ -3467,9 +3516,23 @@ module Aws::CodeBuild
       :type,
       :export_config,
       :created,
-      :last_modified)
+      :last_modified,
+      :tags)
       include Aws::Structure
     end
+
+    # The specified AWS resource cannot be created, because an AWS resource
+    # with the same settings already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified AWS resource cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # Information about S3 logs for a build project.
     #
@@ -4410,7 +4473,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The replacement set of tags for this build project.
+    #   An updated list of tag key and value pairs associated with this
+    #   build project.
     #
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
@@ -4489,6 +4553,12 @@ module Aws::CodeBuild
     #             encryption_disabled: false,
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "KeyInput",
+    #             value: "ValueInput",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] arn
@@ -4503,11 +4573,20 @@ module Aws::CodeBuild
     #   * `NO_EXPORT`\: The report results are not exported.
     #   @return [Types::ReportExportConfig]
     #
+    # @!attribute [rw] tags
+    #   An updated list of tag key and value pairs associated with this
+    #   report group.
+    #
+    #   These tags are available for use by AWS services that support AWS
+    #   CodeBuild report group tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroupInput AWS API Documentation
     #
     class UpdateReportGroupInput < Struct.new(
       :arn,
-      :export_config)
+      :export_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -4532,7 +4611,7 @@ module Aws::CodeBuild
     #         filter_groups: [
     #           [
     #             {
-    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #               type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #               pattern: "String", # required
     #               exclude_matched_pattern: false,
     #             },
@@ -4686,7 +4765,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH
+    #         type: "EVENT", # required, accepts EVENT, BASE_REF, HEAD_REF, ACTOR_ACCOUNT_ID, FILE_PATH, COMMIT_MESSAGE
     #         pattern: "String", # required
     #         exclude_matched_pattern: false,
     #       }
@@ -4699,11 +4778,12 @@ module Aws::CodeBuild
     #   EVENT
     #
     #   : A webhook event triggers a build when the provided `pattern`
-    #     matches one of four event types: `PUSH`, `PULL_REQUEST_CREATED`,
-    #     `PULL_REQUEST_UPDATED`, and `PULL_REQUEST_REOPENED`. The `EVENT`
-    #     patterns are specified as a comma-separated string. For example,
-    #     `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all
-    #     push, pull request created, and pull request updated events.
+    #     matches one of five event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #     `PULL_REQUEST_UPDATED`, `PULL_REQUEST_REOPENED`, and
+    #     `PULL_REQUEST_MERGED`. The `EVENT` patterns are specified as a
+    #     comma-separated string. For example, `PUSH, PULL_REQUEST_CREATED,
+    #     PULL_REQUEST_UPDATED` filters all push, pull request created, and
+    #     pull request updated events.
     #
     #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
     #     Enterprise only.

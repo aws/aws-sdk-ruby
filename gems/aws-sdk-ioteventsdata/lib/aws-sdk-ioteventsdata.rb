@@ -24,17 +24,20 @@ require_relative 'aws-sdk-ioteventsdata/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     io_t_events_data = Aws::IoTEventsData::Client.new
+#     resp = io_t_events_data.batch_put_message(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS IoT Events Data all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS IoT Events Data are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::IoTEventsData::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS IoT Events Data API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-ioteventsdata/customizations'
 # @service
 module Aws::IoTEventsData
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.8.0'
 
 end

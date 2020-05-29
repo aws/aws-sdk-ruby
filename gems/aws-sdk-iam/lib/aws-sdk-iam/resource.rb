@@ -6,6 +6,18 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IAM
+
+  # This class provides a resource oriented interface for IAM.
+  # To create a resource object:
+  #
+  #     resource = Aws::IAM::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = Aws::IAM::Client.new(region: 'us-west-2')
+  #     resource = Aws::IAM::Resource.new(client: client)
+  #
   class Resource
 
     # @param options ({})
@@ -161,7 +173,7 @@ module Aws::IAM
     #   the user.
     # @return [AccountPasswordPolicy]
     def create_account_password_policy(options = {})
-      resp = @client.update_account_password_policy(options)
+      @client.update_account_password_policy(options)
       AccountPasswordPolicy.new(client: @client)
     end
 
@@ -592,7 +604,7 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     # @return [ServerCertificate]
     def create_server_certificate(options = {})
-      resp = @client.upload_server_certificate(options)
+      @client.upload_server_certificate(options)
       ServerCertificate.new(
         name: options[:server_certificate_name],
         client: @client

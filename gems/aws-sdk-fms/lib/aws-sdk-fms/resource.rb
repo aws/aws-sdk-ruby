@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::FMS
+
   class Resource
 
     # @param options ({})

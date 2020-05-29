@@ -12,6 +12,7 @@ module Aws::AppMesh
     include Seahorse::Model
 
     AccessLog = Shapes::StructureShape.new(name: 'AccessLog')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AwsCloudMapInstanceAttribute = Shapes::StructureShape.new(name: 'AwsCloudMapInstanceAttribute')
     AwsCloudMapInstanceAttributeKey = Shapes::StringShape.new(name: 'AwsCloudMapInstanceAttributeKey')
@@ -20,9 +21,13 @@ module Aws::AppMesh
     AwsCloudMapName = Shapes::StringShape.new(name: 'AwsCloudMapName')
     AwsCloudMapServiceDiscovery = Shapes::StructureShape.new(name: 'AwsCloudMapServiceDiscovery')
     Backend = Shapes::StructureShape.new(name: 'Backend')
+    BackendDefaults = Shapes::StructureShape.new(name: 'BackendDefaults')
     Backends = Shapes::ListShape.new(name: 'Backends')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CertificateAuthorityArns = Shapes::ListShape.new(name: 'CertificateAuthorityArns')
+    ClientPolicy = Shapes::StructureShape.new(name: 'ClientPolicy')
+    ClientPolicyTls = Shapes::StructureShape.new(name: 'ClientPolicyTls')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMeshInput = Shapes::StructureShape.new(name: 'CreateMeshInput')
     CreateMeshOutput = Shapes::StructureShape.new(name: 'CreateMeshOutput')
@@ -110,6 +115,11 @@ module Aws::AppMesh
     ListVirtualServicesLimit = Shapes::IntegerShape.new(name: 'ListVirtualServicesLimit')
     ListVirtualServicesOutput = Shapes::StructureShape.new(name: 'ListVirtualServicesOutput')
     Listener = Shapes::StructureShape.new(name: 'Listener')
+    ListenerTls = Shapes::StructureShape.new(name: 'ListenerTls')
+    ListenerTlsAcmCertificate = Shapes::StructureShape.new(name: 'ListenerTlsAcmCertificate')
+    ListenerTlsCertificate = Shapes::StructureShape.new(name: 'ListenerTlsCertificate')
+    ListenerTlsFileCertificate = Shapes::StructureShape.new(name: 'ListenerTlsFileCertificate')
+    ListenerTlsMode = Shapes::StringShape.new(name: 'ListenerTlsMode')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -127,6 +137,7 @@ module Aws::AppMesh
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PortProtocol = Shapes::StringShape.new(name: 'PortProtocol')
+    PortSet = Shapes::ListShape.new(name: 'PortSet')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceMetadata = Shapes::StructureShape.new(name: 'ResourceMetadata')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -154,6 +165,10 @@ module Aws::AppMesh
     TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
     TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TlsValidationContext = Shapes::StructureShape.new(name: 'TlsValidationContext')
+    TlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'TlsValidationContextAcmTrust')
+    TlsValidationContextFileTrust = Shapes::StructureShape.new(name: 'TlsValidationContextFileTrust')
+    TlsValidationContextTrust = Shapes::StructureShape.new(name: 'TlsValidationContextTrust')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -212,10 +227,23 @@ module Aws::AppMesh
     Backend.add_member(:virtual_service, Shapes::ShapeRef.new(shape: VirtualServiceBackend, location_name: "virtualService"))
     Backend.struct_class = Types::Backend
 
+    BackendDefaults.add_member(:client_policy, Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
+    BackendDefaults.struct_class = Types::BackendDefaults
+
     Backends.member = Shapes::ShapeRef.new(shape: Backend)
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    CertificateAuthorityArns.member = Shapes::ShapeRef.new(shape: Arn)
+
+    ClientPolicy.add_member(:tls, Shapes::ShapeRef.new(shape: ClientPolicyTls, location_name: "tls"))
+    ClientPolicy.struct_class = Types::ClientPolicy
+
+    ClientPolicyTls.add_member(:enforce, Shapes::ShapeRef.new(shape: Boolean, location_name: "enforce", metadata: {"box"=>true}))
+    ClientPolicyTls.add_member(:ports, Shapes::ShapeRef.new(shape: PortSet, location_name: "ports"))
+    ClientPolicyTls.add_member(:validation, Shapes::ShapeRef.new(shape: TlsValidationContext, required: true, location_name: "validation"))
+    ClientPolicyTls.struct_class = Types::ClientPolicyTls
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -223,7 +251,7 @@ module Aws::AppMesh
     CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     CreateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
-    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateMeshInput.struct_class = Types::CreateMeshInput
 
     CreateMeshOutput.add_member(:mesh, Shapes::ShapeRef.new(shape: MeshData, required: true, location_name: "mesh"))
@@ -233,9 +261,10 @@ module Aws::AppMesh
 
     CreateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    CreateRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
     CreateRouteInput.add_member(:spec, Shapes::ShapeRef.new(shape: RouteSpec, required: true, location_name: "spec"))
-    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     CreateRouteInput.struct_class = Types::CreateRouteInput
 
@@ -246,8 +275,9 @@ module Aws::AppMesh
 
     CreateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    CreateVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
-    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     CreateVirtualNodeInput.struct_class = Types::CreateVirtualNodeInput
 
@@ -258,8 +288,9 @@ module Aws::AppMesh
 
     CreateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    CreateVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
-    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     CreateVirtualRouterInput.struct_class = Types::CreateVirtualRouterInput
 
@@ -270,8 +301,9 @@ module Aws::AppMesh
 
     CreateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    CreateVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     CreateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))
-    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     CreateVirtualServiceInput.struct_class = Types::CreateVirtualServiceInput
 
@@ -289,6 +321,7 @@ module Aws::AppMesh
     DeleteMeshOutput[:payload_member] = DeleteMeshOutput.member(:mesh)
 
     DeleteRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DeleteRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DeleteRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "routeName"))
     DeleteRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     DeleteRouteInput.struct_class = Types::DeleteRouteInput
@@ -299,6 +332,7 @@ module Aws::AppMesh
     DeleteRouteOutput[:payload_member] = DeleteRouteOutput.member(:route)
 
     DeleteVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DeleteVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DeleteVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualNodeName"))
     DeleteVirtualNodeInput.struct_class = Types::DeleteVirtualNodeInput
 
@@ -308,6 +342,7 @@ module Aws::AppMesh
     DeleteVirtualNodeOutput[:payload_member] = DeleteVirtualNodeOutput.member(:virtual_node)
 
     DeleteVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DeleteVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DeleteVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     DeleteVirtualRouterInput.struct_class = Types::DeleteVirtualRouterInput
 
@@ -317,6 +352,7 @@ module Aws::AppMesh
     DeleteVirtualRouterOutput[:payload_member] = DeleteVirtualRouterOutput.member(:virtual_router)
 
     DeleteVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DeleteVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DeleteVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location: "uri", location_name: "virtualServiceName"))
     DeleteVirtualServiceInput.struct_class = Types::DeleteVirtualServiceInput
 
@@ -326,6 +362,7 @@ module Aws::AppMesh
     DeleteVirtualServiceOutput[:payload_member] = DeleteVirtualServiceOutput.member(:virtual_service)
 
     DescribeMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DescribeMeshInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DescribeMeshInput.struct_class = Types::DescribeMeshInput
 
     DescribeMeshOutput.add_member(:mesh, Shapes::ShapeRef.new(shape: MeshData, required: true, location_name: "mesh"))
@@ -334,6 +371,7 @@ module Aws::AppMesh
     DescribeMeshOutput[:payload_member] = DescribeMeshOutput.member(:mesh)
 
     DescribeRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DescribeRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DescribeRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "routeName"))
     DescribeRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     DescribeRouteInput.struct_class = Types::DescribeRouteInput
@@ -344,6 +382,7 @@ module Aws::AppMesh
     DescribeRouteOutput[:payload_member] = DescribeRouteOutput.member(:route)
 
     DescribeVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DescribeVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DescribeVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualNodeName"))
     DescribeVirtualNodeInput.struct_class = Types::DescribeVirtualNodeInput
 
@@ -353,6 +392,7 @@ module Aws::AppMesh
     DescribeVirtualNodeOutput[:payload_member] = DescribeVirtualNodeOutput.member(:virtual_node)
 
     DescribeVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DescribeVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DescribeVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     DescribeVirtualRouterInput.struct_class = Types::DescribeVirtualRouterInput
 
@@ -362,6 +402,7 @@ module Aws::AppMesh
     DescribeVirtualRouterOutput[:payload_member] = DescribeVirtualRouterOutput.member(:virtual_router)
 
     DescribeVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    DescribeVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     DescribeVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location: "uri", location_name: "virtualServiceName"))
     DescribeVirtualServiceInput.struct_class = Types::DescribeVirtualServiceInput
 
@@ -483,6 +524,7 @@ module Aws::AppMesh
 
     ListRoutesInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListRoutesLimit, location: "querystring", location_name: "limit"))
     ListRoutesInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    ListRoutesInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     ListRoutesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListRoutesInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     ListRoutesInput.struct_class = Types::ListRoutesInput
@@ -502,6 +544,7 @@ module Aws::AppMesh
 
     ListVirtualNodesInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListVirtualNodesLimit, location: "querystring", location_name: "limit"))
     ListVirtualNodesInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    ListVirtualNodesInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     ListVirtualNodesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListVirtualNodesInput.struct_class = Types::ListVirtualNodesInput
 
@@ -511,6 +554,7 @@ module Aws::AppMesh
 
     ListVirtualRoutersInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListVirtualRoutersLimit, location: "querystring", location_name: "limit"))
     ListVirtualRoutersInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    ListVirtualRoutersInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     ListVirtualRoutersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListVirtualRoutersInput.struct_class = Types::ListVirtualRoutersInput
 
@@ -520,6 +564,7 @@ module Aws::AppMesh
 
     ListVirtualServicesInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListVirtualServicesLimit, location: "querystring", location_name: "limit"))
     ListVirtualServicesInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    ListVirtualServicesInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     ListVirtualServicesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListVirtualServicesInput.struct_class = Types::ListVirtualServicesInput
 
@@ -529,7 +574,23 @@ module Aws::AppMesh
 
     Listener.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheckPolicy, location_name: "healthCheck"))
     Listener.add_member(:port_mapping, Shapes::ShapeRef.new(shape: PortMapping, required: true, location_name: "portMapping"))
+    Listener.add_member(:tls, Shapes::ShapeRef.new(shape: ListenerTls, location_name: "tls"))
     Listener.struct_class = Types::Listener
+
+    ListenerTls.add_member(:certificate, Shapes::ShapeRef.new(shape: ListenerTlsCertificate, required: true, location_name: "certificate"))
+    ListenerTls.add_member(:mode, Shapes::ShapeRef.new(shape: ListenerTlsMode, required: true, location_name: "mode"))
+    ListenerTls.struct_class = Types::ListenerTls
+
+    ListenerTlsAcmCertificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "certificateArn"))
+    ListenerTlsAcmCertificate.struct_class = Types::ListenerTlsAcmCertificate
+
+    ListenerTlsCertificate.add_member(:acm, Shapes::ShapeRef.new(shape: ListenerTlsAcmCertificate, location_name: "acm"))
+    ListenerTlsCertificate.add_member(:file, Shapes::ShapeRef.new(shape: ListenerTlsFileCertificate, location_name: "file"))
+    ListenerTlsCertificate.struct_class = Types::ListenerTlsCertificate
+
+    ListenerTlsFileCertificate.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "certificateChain"))
+    ListenerTlsFileCertificate.add_member(:private_key, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "privateKey"))
+    ListenerTlsFileCertificate.struct_class = Types::ListenerTlsFileCertificate
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
 
@@ -549,7 +610,12 @@ module Aws::AppMesh
     MeshList.member = Shapes::ShapeRef.new(shape: MeshRef)
 
     MeshRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    MeshRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    MeshRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     MeshRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
+    MeshRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
+    MeshRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    MeshRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     MeshRef.struct_class = Types::MeshRef
 
     MeshSpec.add_member(:egress_filter, Shapes::ShapeRef.new(shape: EgressFilter, location_name: "egressFilter"))
@@ -565,12 +631,16 @@ module Aws::AppMesh
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: PortProtocol, required: true, location_name: "protocol"))
     PortMapping.struct_class = Types::PortMapping
 
+    PortSet.member = Shapes::ShapeRef.new(shape: PortNumber)
+
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
 
     ResourceMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     ResourceMetadata.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ResourceMetadata.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
+    ResourceMetadata.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
+    ResourceMetadata.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
     ResourceMetadata.add_member(:uid, Shapes::ShapeRef.new(shape: String, required: true, location_name: "uid"))
     ResourceMetadata.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     ResourceMetadata.struct_class = Types::ResourceMetadata
@@ -586,8 +656,13 @@ module Aws::AppMesh
     RouteList.member = Shapes::ShapeRef.new(shape: RouteRef)
 
     RouteRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    RouteRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    RouteRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     RouteRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
+    RouteRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
+    RouteRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
     RouteRef.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
+    RouteRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     RouteRef.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     RouteRef.struct_class = Types::RouteRef
 
@@ -630,6 +705,19 @@ module Aws::AppMesh
     TcpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     TcpRouteAction.struct_class = Types::TcpRouteAction
 
+    TlsValidationContext.add_member(:trust, Shapes::ShapeRef.new(shape: TlsValidationContextTrust, required: true, location_name: "trust"))
+    TlsValidationContext.struct_class = Types::TlsValidationContext
+
+    TlsValidationContextAcmTrust.add_member(:certificate_authority_arns, Shapes::ShapeRef.new(shape: CertificateAuthorityArns, required: true, location_name: "certificateAuthorityArns"))
+    TlsValidationContextAcmTrust.struct_class = Types::TlsValidationContextAcmTrust
+
+    TlsValidationContextFileTrust.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "certificateChain"))
+    TlsValidationContextFileTrust.struct_class = Types::TlsValidationContextFileTrust
+
+    TlsValidationContextTrust.add_member(:acm, Shapes::ShapeRef.new(shape: TlsValidationContextAcmTrust, location_name: "acm"))
+    TlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: TlsValidationContextFileTrust, location_name: "file"))
+    TlsValidationContextTrust.struct_class = Types::TlsValidationContextTrust
+
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
@@ -654,6 +742,7 @@ module Aws::AppMesh
 
     UpdateRouteInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    UpdateRouteInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "routeName"))
     UpdateRouteInput.add_member(:spec, Shapes::ShapeRef.new(shape: RouteSpec, required: true, location_name: "spec"))
     UpdateRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
@@ -666,6 +755,7 @@ module Aws::AppMesh
 
     UpdateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    UpdateVirtualNodeInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
     UpdateVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualNodeName"))
     UpdateVirtualNodeInput.struct_class = Types::UpdateVirtualNodeInput
@@ -677,6 +767,7 @@ module Aws::AppMesh
 
     UpdateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    UpdateVirtualRouterInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
     UpdateVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     UpdateVirtualRouterInput.struct_class = Types::UpdateVirtualRouterInput
@@ -688,6 +779,7 @@ module Aws::AppMesh
 
     UpdateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
+    UpdateVirtualServiceInput.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "meshOwner"))
     UpdateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))
     UpdateVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location: "uri", location_name: "virtualServiceName"))
     UpdateVirtualServiceInput.struct_class = Types::UpdateVirtualServiceInput
@@ -707,13 +799,19 @@ module Aws::AppMesh
     VirtualNodeList.member = Shapes::ShapeRef.new(shape: VirtualNodeRef)
 
     VirtualNodeRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    VirtualNodeRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    VirtualNodeRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     VirtualNodeRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
+    VirtualNodeRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
+    VirtualNodeRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    VirtualNodeRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     VirtualNodeRef.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     VirtualNodeRef.struct_class = Types::VirtualNodeRef
 
     VirtualNodeServiceProvider.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     VirtualNodeServiceProvider.struct_class = Types::VirtualNodeServiceProvider
 
+    VirtualNodeSpec.add_member(:backend_defaults, Shapes::ShapeRef.new(shape: BackendDefaults, location_name: "backendDefaults"))
     VirtualNodeSpec.add_member(:backends, Shapes::ShapeRef.new(shape: Backends, location_name: "backends"))
     VirtualNodeSpec.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "listeners"))
     VirtualNodeSpec.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
@@ -738,7 +836,12 @@ module Aws::AppMesh
     VirtualRouterListeners.member = Shapes::ShapeRef.new(shape: VirtualRouterListener)
 
     VirtualRouterRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    VirtualRouterRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    VirtualRouterRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     VirtualRouterRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
+    VirtualRouterRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
+    VirtualRouterRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    VirtualRouterRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     VirtualRouterRef.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     VirtualRouterRef.struct_class = Types::VirtualRouterRef
 
@@ -751,6 +854,7 @@ module Aws::AppMesh
     VirtualRouterStatus.add_member(:status, Shapes::ShapeRef.new(shape: VirtualRouterStatusCode, required: true, location_name: "status"))
     VirtualRouterStatus.struct_class = Types::VirtualRouterStatus
 
+    VirtualServiceBackend.add_member(:client_policy, Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
     VirtualServiceBackend.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     VirtualServiceBackend.struct_class = Types::VirtualServiceBackend
 
@@ -768,7 +872,12 @@ module Aws::AppMesh
     VirtualServiceProvider.struct_class = Types::VirtualServiceProvider
 
     VirtualServiceRef.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    VirtualServiceRef.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    VirtualServiceRef.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedAt"))
     VirtualServiceRef.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
+    VirtualServiceRef.add_member(:mesh_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "meshOwner"))
+    VirtualServiceRef.add_member(:resource_owner, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "resourceOwner"))
+    VirtualServiceRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     VirtualServiceRef.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     VirtualServiceRef.struct_class = Types::VirtualServiceRef
 
@@ -952,6 +1061,7 @@ module Aws::AppMesh
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)

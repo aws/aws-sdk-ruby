@@ -25,17 +25,20 @@ require_relative 'aws-sdk-schemas/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     schemas = Aws::Schemas::Client.new
+#     resp = schemas.create_discoverer(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Schemas all
-# extend {Errors::ServiceError}.
+# Errors returned from Schemas are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Schemas::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Schemas API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-schemas/customizations'
 # @service
 module Aws::Schemas
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.4.0'
 
 end

@@ -8,6 +8,12 @@
 module Aws::ElasticLoadBalancingV2
   module Types
 
+    # The specified ALPN policy is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ALPNPolicyNotSupportedException AWS API Documentation
+    #
+    class ALPNPolicyNotSupportedException < Aws::EmptyStructure; end
+
     # Information about an action.
     #
     # @note When making an API call, you may pass Action
@@ -197,7 +203,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags. Each resource can have a maximum of 10 tags.
+    #   The tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsInput AWS API Documentation
@@ -211,6 +217,12 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
+
+    # The specified allocation ID does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AllocationIdNotFoundException AWS API Documentation
+    #
+    class AllocationIdNotFoundException < Aws::EmptyStructure; end
 
     # Request parameters to use when integrating with Amazon Cognito to
     # authenticate users.
@@ -433,6 +445,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified Availability Zone is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZoneNotSupportedException AWS API Documentation
+    #
+    class AvailabilityZoneNotSupportedException < Aws::EmptyStructure; end
+
     # Information about an SSL server certificate.
     #
     # @note When making an API call, you may pass Certificate
@@ -461,6 +479,12 @@ module Aws::ElasticLoadBalancingV2
       :is_default)
       include Aws::Structure
     end
+
+    # The specified certificate does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CertificateNotFoundException AWS API Documentation
+    #
+    class CertificateNotFoundException < Aws::EmptyStructure; end
 
     # Information about a cipher used in a policy.
     #
@@ -554,6 +578,7 @@ module Aws::ElasticLoadBalancingV2
     #             },
     #           },
     #         ],
+    #         alpn_policy: ["AlpnPolicyValue"],
     #       }
     #
     # @!attribute [rw] load_balancer_arn
@@ -573,8 +598,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   ciphers and protocols are supported. The default is the current
-    #   predefined security policy.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network
+    #   Load Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -611,6 +663,29 @@ module Aws::ElasticLoadBalancingV2
     #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
     #
     class CreateListenerInput < Struct.new(
@@ -619,7 +694,8 @@ module Aws::ElasticLoadBalancingV2
       :port,
       :ssl_policy,
       :certificates,
-      :default_actions)
+      :default_actions,
+      :alpn_policy)
       include Aws::Structure
     end
 
@@ -1522,7 +1598,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] ssl_policies
-    #   Information about the policies.
+    #   Information about the security policies.
     #   @return [Array<Types::SslPolicy>]
     #
     # @!attribute [rw] next_marker
@@ -1546,7 +1622,8 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARN) of the resources. You can specify up
+    #   to 20 resources in a single call.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTagsInput AWS API Documentation
@@ -1697,6 +1774,30 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # A listener with the specified port already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateListenerException AWS API Documentation
+    #
+    class DuplicateListenerException < Aws::EmptyStructure; end
+
+    # A load balancer with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateLoadBalancerNameException AWS API Documentation
+    #
+    class DuplicateLoadBalancerNameException < Aws::EmptyStructure; end
+
+    # A tag key was specified more than once.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateTagKeysException AWS API Documentation
+    #
+    class DuplicateTagKeysException < Aws::EmptyStructure; end
+
+    # A target group with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateTargetGroupNameException AWS API Documentation
+    #
+    class DuplicateTargetGroupNameException < Aws::EmptyStructure; end
+
     # Information about an action that returns a custom HTTP response.
     #
     # @note When making an API call, you may pass FixedResponseActionConfig
@@ -1766,6 +1867,13 @@ module Aws::ElasticLoadBalancingV2
       :target_group_stickiness_config)
       include Aws::Structure
     end
+
+    # The health of the specified targets could not be retrieved due to an
+    # internal error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HealthUnavailableException AWS API Documentation
+    #
+    class HealthUnavailableException < Aws::EmptyStructure; end
 
     # Information about a host header condition.
     #
@@ -1874,6 +1982,49 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified configuration is not valid with this protocol.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/IncompatibleProtocolsException AWS API Documentation
+    #
+    class IncompatibleProtocolsException < Aws::EmptyStructure; end
+
+    # The requested configuration is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidConfigurationRequestException AWS API Documentation
+    #
+    class InvalidConfigurationRequestException < Aws::EmptyStructure; end
+
+    # The requested action is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidLoadBalancerActionException AWS API Documentation
+    #
+    class InvalidLoadBalancerActionException < Aws::EmptyStructure; end
+
+    # The requested scheme is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidSchemeException AWS API Documentation
+    #
+    class InvalidSchemeException < Aws::EmptyStructure; end
+
+    # The specified security group does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidSecurityGroupException AWS API Documentation
+    #
+    class InvalidSecurityGroupException < Aws::EmptyStructure; end
+
+    # The specified subnet is out of available addresses.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidSubnetException AWS API Documentation
+    #
+    class InvalidSubnetException < Aws::EmptyStructure; end
+
+    # The specified target does not exist, is not in the same VPC as the
+    # target group, or has an unsupported instance type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidTargetException AWS API Documentation
+    #
+    class InvalidTargetException < Aws::EmptyStructure; end
+
     # Information about an Elastic Load Balancing resource limit for your
     # AWS account.
     #
@@ -1941,13 +2092,17 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ssl_policy
     #   \[HTTPS or TLS listener\] The security policy that defines which
-    #   ciphers and protocols are supported. The default is the current
-    #   predefined security policy.
+    #   protocols and ciphers are supported.
     #   @return [String]
     #
     # @!attribute [rw] default_actions
     #   The default actions for the listener.
     #   @return [Array<Types::Action>]
+    #
+    # @!attribute [rw] alpn_policy
+    #   \[TLS listener\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Listener AWS API Documentation
     #
@@ -1958,9 +2113,16 @@ module Aws::ElasticLoadBalancingV2
       :protocol,
       :certificates,
       :ssl_policy,
-      :default_actions)
+      :default_actions,
+      :alpn_policy)
       include Aws::Structure
     end
+
+    # The specified listener does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Aws::EmptyStructure; end
 
     # Information about a load balancer.
     #
@@ -2113,7 +2275,9 @@ module Aws::ElasticLoadBalancingV2
     #     is `false`.
     #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
-    #     value is `true` or `false`. The default is `true`.
+    #     value is `true` or `false`. The default is `true`. Elastic Load
+    #     Balancing requires that message header names contain only
+    #     alphanumeric characters and hyphens.
     #
     #   The following attributes are supported by only Network Load
     #   Balancers:
@@ -2136,6 +2300,12 @@ module Aws::ElasticLoadBalancingV2
       :value)
       include Aws::Structure
     end
+
+    # The specified load balancer does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerNotFoundException AWS API Documentation
+    #
+    class LoadBalancerNotFoundException < Aws::EmptyStructure; end
 
     # Information about the state of the load balancer.
     #
@@ -2260,6 +2430,7 @@ module Aws::ElasticLoadBalancingV2
     #             },
     #           },
     #         ],
+    #         alpn_policy: ["AlpnPolicyValue"],
     #       }
     #
     # @!attribute [rw] listener_arn
@@ -2279,12 +2450,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   protocols and ciphers are supported. For more information, see
-    #   [Security Policies][1] in the *Application Load Balancers Guide*.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network
+    #   Load Balancers Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -2320,6 +2514,29 @@ module Aws::ElasticLoadBalancingV2
     #   custom HTTP response.
     #   @return [Array<Types::Action>]
     #
+    # @!attribute [rw] alpn_policy
+    #   \[TLS listeners\] The name of the Application-Layer Protocol
+    #   Negotiation (ALPN) policy. You can specify one policy name. The
+    #   following are the possible values:
+    #
+    #   * `HTTP1Only`
+    #
+    #   * `HTTP2Only`
+    #
+    #   * `HTTP2Optional`
+    #
+    #   * `HTTP2Preferred`
+    #
+    #   * `None`
+    #
+    #   For more information, see [ALPN Policies][1] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
     #
     class ModifyListenerInput < Struct.new(
@@ -2328,7 +2545,8 @@ module Aws::ElasticLoadBalancingV2
       :protocol,
       :ssl_policy,
       :certificates,
-      :default_actions)
+      :default_actions,
+      :alpn_policy)
       include Aws::Structure
     end
 
@@ -2683,6 +2901,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # This operation is not allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Aws::EmptyStructure; end
+
     # Information about a path pattern condition.
     #
     # @note When making an API call, you may pass PathPatternConditionConfig
@@ -2710,6 +2934,12 @@ module Aws::ElasticLoadBalancingV2
       :values)
       include Aws::Structure
     end
+
+    # The specified priority is in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PriorityInUseException AWS API Documentation
+    #
+    class PriorityInUseException < Aws::EmptyStructure; end
 
     # Information about a query string condition.
     #
@@ -2958,6 +3188,12 @@ module Aws::ElasticLoadBalancingV2
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
+    # A specified resource is in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Aws::EmptyStructure; end
+
     # Information about a rule.
     #
     # @!attribute [rw] rule_arn
@@ -3126,6 +3362,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified rule does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleNotFoundException AWS API Documentation
+    #
+    class RuleNotFoundException < Aws::EmptyStructure; end
+
     # Information about the priorities for the rules for a listener.
     #
     # @note When making an API call, you may pass RulePriorityPair
@@ -3151,6 +3393,12 @@ module Aws::ElasticLoadBalancingV2
       :priority)
       include Aws::Structure
     end
+
+    # The specified SSL policy does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SSLPolicyNotFoundException AWS API Documentation
+    #
+    class SSLPolicyNotFoundException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SetIpAddressTypeInput
     #   data as a hash:
@@ -3410,6 +3658,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified subnet does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetNotFoundException AWS API Documentation
+    #
+    class SubnetNotFoundException < Aws::EmptyStructure; end
+
     # Information about a tag.
     #
     # @note When making an API call, you may pass Tag
@@ -3606,6 +3860,13 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # You've reached the limit on the number of load balancers per target
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupAssociationLimitException AWS API Documentation
+    #
+    class TargetGroupAssociationLimitException < Aws::EmptyStructure; end
+
     # Information about a target group attribute.
     #
     # @note When making an API call, you may pass TargetGroupAttribute
@@ -3619,7 +3880,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] key
     #   The name of the attribute.
     #
-    #   The following attribute is supported by both Application Load
+    #   The following attributes are supported by both Application Load
     #   Balancers and Network Load Balancers:
     #
     #   * `deregistration_delay.timeout_seconds` - The amount of time, in
@@ -3628,10 +3889,16 @@ module Aws::ElasticLoadBalancingV2
     #     range is 0-3600 seconds. The default value is 300 seconds. If the
     #     target is a Lambda function, this attribute is not supported.
     #
-    #   ^
+    #   * `stickiness.enabled` - Indicates whether sticky sessions are
+    #     enabled. The value is `true` or `false`. The default is `false`.
     #
-    #   The following attributes are supported by Application Load Balancers
-    #   if the target is not a Lambda function:
+    #   * `stickiness.type` - The type of sticky sessions. The possible
+    #     values are `lb_cookie` for Application Load Balancers or
+    #     `source_ip` for Network Load Balancers.
+    #
+    #   The following attributes are supported only if the load balancer is
+    #   an Application Load Balancer and the target is an instance or an IP
+    #   address:
     #
     #   * `load_balancing.algorithm.type` - The load balancing algorithm
     #     determines how the load balancer selects targets when routing
@@ -3639,17 +3906,11 @@ module Aws::ElasticLoadBalancingV2
     #     `least_outstanding_requests`. The default is `round_robin`.
     #
     #   * `slow_start.duration_seconds` - The time period, in seconds,
-    #     during which a newly registered target receives a linearly
-    #     increasing share of the traffic to the target group. After this
-    #     time period ends, the target receives its full share of traffic.
-    #     The range is 30-900 seconds (15 minutes). Slow start mode is
-    #     disabled by default.
-    #
-    #   * `stickiness.enabled` - Indicates whether sticky sessions are
-    #     enabled. The value is `true` or `false`. The default is `false`.
-    #
-    #   * `stickiness.type` - The type of sticky sessions. The possible
-    #     value is `lb_cookie`.
+    #     during which a newly registered target receives an increasing
+    #     share of the traffic to the target group. After this time period
+    #     ends, the target receives its full share of traffic. The range is
+    #     30-900 seconds (15 minutes). Slow start mode is disabled by
+    #     default.
     #
     #   * `stickiness.lb_cookie.duration_seconds` - The time period, in
     #     seconds, during which requests from a client should be routed to
@@ -3658,16 +3919,16 @@ module Aws::ElasticLoadBalancingV2
     #     second to 1 week (604800 seconds). The default value is 1 day
     #     (86400 seconds).
     #
-    #   The following attribute is supported only if the target is a Lambda
-    #   function.
+    #   The following attribute is supported only if the load balancer is an
+    #   Application Load Balancer and the target is a Lambda function:
     #
     #   * `lambda.multi_value_headers.enabled` - Indicates whether the
-    #     request and response headers exchanged between the load balancer
-    #     and the Lambda function include arrays of values or strings. The
-    #     value is `true` or `false`. The default is `false`. If the value
-    #     is `false` and the request contains a duplicate header field name
-    #     or query parameter key, the load balancer uses the last value sent
-    #     by the client.
+    #     request and response headers that are exchanged between the load
+    #     balancer and the Lambda function include arrays of values or
+    #     strings. The value is `true` or `false`. The default is `false`.
+    #     If the value is `false` and the request contains a duplicate
+    #     header field name or query parameter key, the load balancer uses
+    #     the last value sent by the client.
     #
     #   ^
     #
@@ -3691,6 +3952,12 @@ module Aws::ElasticLoadBalancingV2
       :value)
       include Aws::Structure
     end
+
+    # The specified target group does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupNotFoundException AWS API Documentation
+    #
+    class TargetGroupNotFoundException < Aws::EmptyStructure; end
 
     # Information about the target group stickiness for a rule.
     #
@@ -3855,6 +4122,79 @@ module Aws::ElasticLoadBalancingV2
       :target_health)
       include Aws::Structure
     end
+
+    # You've reached the limit on the number of actions per rule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyActionsException AWS API Documentation
+    #
+    class TooManyActionsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of certificates per load
+    # balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyCertificatesException AWS API Documentation
+    #
+    class TooManyCertificatesException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of listeners per load
+    # balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyListenersException AWS API Documentation
+    #
+    class TooManyListenersException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of load balancers for your AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyLoadBalancersException AWS API Documentation
+    #
+    class TooManyLoadBalancersException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of times a target can be
+    # registered with a load balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyRegistrationsForTargetIdException AWS API Documentation
+    #
+    class TooManyRegistrationsForTargetIdException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of rules per load balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyRulesException AWS API Documentation
+    #
+    class TooManyRulesException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of tags per load balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of target groups for your AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTargetGroupsException AWS API Documentation
+    #
+    class TooManyTargetGroupsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of targets.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTargetsException AWS API Documentation
+    #
+    class TooManyTargetsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of unique target groups per
+    # load balancer across all listeners. If a target group is used by
+    # multiple actions for a load balancer, it is counted as only one use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyUniqueTargetGroupsPerLoadBalancerException AWS API Documentation
+    #
+    class TooManyUniqueTargetGroupsPerLoadBalancerException < Aws::EmptyStructure; end
+
+    # The specified protocol is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/UnsupportedProtocolException AWS API Documentation
+    #
+    class UnsupportedProtocolException < Aws::EmptyStructure; end
 
   end
 end

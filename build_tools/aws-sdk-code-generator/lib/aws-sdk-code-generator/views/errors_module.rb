@@ -5,11 +5,15 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
+        @service_name = @service.name
         @errors = ErrorList.new(api: @service.api, module_name: module_name).to_a
       end
 
       # @return [Array<Error>]
       attr_reader :errors
+
+      # @return [String]
+      attr_reader :service_name
 
       # @return [String|nil]
       def generated_src_warning

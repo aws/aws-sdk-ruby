@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2InstanceConnect
+
   class Resource
 
     # @param options ({})

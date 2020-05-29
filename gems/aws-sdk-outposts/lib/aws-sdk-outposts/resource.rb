@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Outposts
+
   class Resource
 
     # @param options ({})

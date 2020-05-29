@@ -34,6 +34,7 @@ requests are made, and retries are disabled.
         if client.config.stub_responses
           client.setup_stubbing
           client.handlers.remove(RetryErrors::Handler)
+          client.handlers.remove(RetryErrors::LegacyHandler)
           client.handlers.remove(ClientMetricsPlugin::Handler)
           client.handlers.remove(ClientMetricsSendPlugin::LatencyHandler)
           client.handlers.remove(ClientMetricsSendPlugin::AttemptHandler)

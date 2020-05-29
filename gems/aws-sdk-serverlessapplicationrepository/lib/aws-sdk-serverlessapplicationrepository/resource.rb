@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ServerlessApplicationRepository
+
   class Resource
 
     # @param options ({})

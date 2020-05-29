@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudSearch
+
   class Resource
 
     # @param options ({})

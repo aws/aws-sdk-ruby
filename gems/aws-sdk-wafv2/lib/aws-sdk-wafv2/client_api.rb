@@ -39,10 +39,14 @@ module Aws::WAFV2
     CreateWebACLRequest = Shapes::StructureShape.new(name: 'CreateWebACLRequest')
     CreateWebACLResponse = Shapes::StructureShape.new(name: 'CreateWebACLResponse')
     DefaultAction = Shapes::StructureShape.new(name: 'DefaultAction')
+    DeleteFirewallManagerRuleGroupsRequest = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsRequest')
+    DeleteFirewallManagerRuleGroupsResponse = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
     DeleteIPSetResponse = Shapes::StructureShape.new(name: 'DeleteIPSetResponse')
     DeleteLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteLoggingConfigurationRequest')
     DeleteLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteLoggingConfigurationResponse')
+    DeletePermissionPolicyRequest = Shapes::StructureShape.new(name: 'DeletePermissionPolicyRequest')
+    DeletePermissionPolicyResponse = Shapes::StructureShape.new(name: 'DeletePermissionPolicyResponse')
     DeleteRegexPatternSetRequest = Shapes::StructureShape.new(name: 'DeleteRegexPatternSetRequest')
     DeleteRegexPatternSetResponse = Shapes::StructureShape.new(name: 'DeleteRegexPatternSetResponse')
     DeleteRuleGroupRequest = Shapes::StructureShape.new(name: 'DeleteRuleGroupRequest')
@@ -62,11 +66,16 @@ module Aws::WAFV2
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FieldToMatch = Shapes::StructureShape.new(name: 'FieldToMatch')
     FieldToMatchData = Shapes::StringShape.new(name: 'FieldToMatchData')
+    FirewallManagerRuleGroup = Shapes::StructureShape.new(name: 'FirewallManagerRuleGroup')
+    FirewallManagerRuleGroups = Shapes::ListShape.new(name: 'FirewallManagerRuleGroups')
+    FirewallManagerStatement = Shapes::StructureShape.new(name: 'FirewallManagerStatement')
     GeoMatchStatement = Shapes::StructureShape.new(name: 'GeoMatchStatement')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'GetLoggingConfigurationRequest')
     GetLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'GetLoggingConfigurationResponse')
+    GetPermissionPolicyRequest = Shapes::StructureShape.new(name: 'GetPermissionPolicyRequest')
+    GetPermissionPolicyResponse = Shapes::StructureShape.new(name: 'GetPermissionPolicyResponse')
     GetRateBasedStatementManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedStatementManagedKeysRequest')
     GetRateBasedStatementManagedKeysResponse = Shapes::StructureShape.new(name: 'GetRateBasedStatementManagedKeysResponse')
     GetRegexPatternSetRequest = Shapes::StructureShape.new(name: 'GetRegexPatternSetRequest')
@@ -128,10 +137,13 @@ module Aws::WAFV2
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
     ParameterExceptionField = Shapes::StringShape.new(name: 'ParameterExceptionField')
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
+    PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
     PutLoggingConfigurationRequest = Shapes::StructureShape.new(name: 'PutLoggingConfigurationRequest')
     PutLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'PutLoggingConfigurationResponse')
+    PutPermissionPolicyRequest = Shapes::StructureShape.new(name: 'PutPermissionPolicyRequest')
+    PutPermissionPolicyResponse = Shapes::StructureShape.new(name: 'PutPermissionPolicyResponse')
     QueryString = Shapes::StructureShape.new(name: 'QueryString')
     RateBasedStatement = Shapes::StructureShape.new(name: 'RateBasedStatement')
     RateBasedStatementAggregateKeyType = Shapes::StringShape.new(name: 'RateBasedStatementAggregateKeyType')
@@ -201,12 +213,15 @@ module Aws::WAFV2
     WAFAssociatedItemException = Shapes::StructureShape.new(name: 'WAFAssociatedItemException')
     WAFDuplicateItemException = Shapes::StructureShape.new(name: 'WAFDuplicateItemException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
+    WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
     WAFInvalidParameterException = Shapes::StructureShape.new(name: 'WAFInvalidParameterException')
+    WAFInvalidPermissionPolicyException = Shapes::StructureShape.new(name: 'WAFInvalidPermissionPolicyException')
     WAFInvalidResourceException = Shapes::StructureShape.new(name: 'WAFInvalidResourceException')
     WAFLimitsExceededException = Shapes::StructureShape.new(name: 'WAFLimitsExceededException')
     WAFNonexistentItemException = Shapes::StructureShape.new(name: 'WAFNonexistentItemException')
     WAFOptimisticLockException = Shapes::StructureShape.new(name: 'WAFOptimisticLockException')
     WAFServiceLinkedRoleErrorException = Shapes::StructureShape.new(name: 'WAFServiceLinkedRoleErrorException')
+    WAFSubscriptionNotFoundException = Shapes::StructureShape.new(name: 'WAFSubscriptionNotFoundException')
     WAFTagOperationException = Shapes::StructureShape.new(name: 'WAFTagOperationException')
     WAFTagOperationInternalErrorException = Shapes::StructureShape.new(name: 'WAFTagOperationInternalErrorException')
     WAFUnavailableEntityException = Shapes::StructureShape.new(name: 'WAFUnavailableEntityException')
@@ -298,6 +313,13 @@ module Aws::WAFV2
     DefaultAction.add_member(:allow, Shapes::ShapeRef.new(shape: AllowAction, location_name: "Allow"))
     DefaultAction.struct_class = Types::DefaultAction
 
+    DeleteFirewallManagerRuleGroupsRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebACLArn"))
+    DeleteFirewallManagerRuleGroupsRequest.add_member(:web_acl_lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "WebACLLockToken"))
+    DeleteFirewallManagerRuleGroupsRequest.struct_class = Types::DeleteFirewallManagerRuleGroupsRequest
+
+    DeleteFirewallManagerRuleGroupsResponse.add_member(:next_web_acl_lock_token, Shapes::ShapeRef.new(shape: LockToken, location_name: "NextWebACLLockToken"))
+    DeleteFirewallManagerRuleGroupsResponse.struct_class = Types::DeleteFirewallManagerRuleGroupsResponse
+
     DeleteIPSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     DeleteIPSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     DeleteIPSetRequest.add_member(:id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "Id"))
@@ -310,6 +332,11 @@ module Aws::WAFV2
     DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
 
     DeleteLoggingConfigurationResponse.struct_class = Types::DeleteLoggingConfigurationResponse
+
+    DeletePermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeletePermissionPolicyRequest.struct_class = Types::DeletePermissionPolicyRequest
+
+    DeletePermissionPolicyResponse.struct_class = Types::DeletePermissionPolicyResponse
 
     DeleteRegexPatternSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
     DeleteRegexPatternSetRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
@@ -363,6 +390,19 @@ module Aws::WAFV2
     FieldToMatch.add_member(:method, Shapes::ShapeRef.new(shape: Method, location_name: "Method"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
+    FirewallManagerRuleGroup.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
+    FirewallManagerRuleGroup.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "Priority"))
+    FirewallManagerRuleGroup.add_member(:firewall_manager_statement, Shapes::ShapeRef.new(shape: FirewallManagerStatement, required: true, location_name: "FirewallManagerStatement"))
+    FirewallManagerRuleGroup.add_member(:override_action, Shapes::ShapeRef.new(shape: OverrideAction, required: true, location_name: "OverrideAction"))
+    FirewallManagerRuleGroup.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
+    FirewallManagerRuleGroup.struct_class = Types::FirewallManagerRuleGroup
+
+    FirewallManagerRuleGroups.member = Shapes::ShapeRef.new(shape: FirewallManagerRuleGroup)
+
+    FirewallManagerStatement.add_member(:managed_rule_group_statement, Shapes::ShapeRef.new(shape: ManagedRuleGroupStatement, location_name: "ManagedRuleGroupStatement"))
+    FirewallManagerStatement.add_member(:rule_group_reference_statement, Shapes::ShapeRef.new(shape: RuleGroupReferenceStatement, location_name: "RuleGroupReferenceStatement"))
+    FirewallManagerStatement.struct_class = Types::FirewallManagerStatement
+
     GeoMatchStatement.add_member(:country_codes, Shapes::ShapeRef.new(shape: CountryCodes, location_name: "CountryCodes"))
     GeoMatchStatement.struct_class = Types::GeoMatchStatement
 
@@ -380,6 +420,12 @@ module Aws::WAFV2
 
     GetLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     GetLoggingConfigurationResponse.struct_class = Types::GetLoggingConfigurationResponse
+
+    GetPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetPermissionPolicyRequest.struct_class = Types::GetPermissionPolicyRequest
+
+    GetPermissionPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, location_name: "Policy"))
+    GetPermissionPolicyResponse.struct_class = Types::GetPermissionPolicyResponse
 
     GetRateBasedStatementManagedKeysRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     GetRateBasedStatementManagedKeysRequest.add_member(:web_acl_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "WebACLName"))
@@ -582,6 +628,12 @@ module Aws::WAFV2
 
     PutLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     PutLoggingConfigurationResponse.struct_class = Types::PutLoggingConfigurationResponse
+
+    PutPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    PutPermissionPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, required: true, location_name: "Policy"))
+    PutPermissionPolicyRequest.struct_class = Types::PutPermissionPolicyRequest
+
+    PutPermissionPolicyResponse.struct_class = Types::PutPermissionPolicyResponse
 
     QueryString.struct_class = Types::QueryString
 
@@ -806,11 +858,17 @@ module Aws::WAFV2
     WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
 
+    WAFInvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFInvalidOperationException.struct_class = Types::WAFInvalidOperationException
+
     WAFInvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     WAFInvalidParameterException.add_member(:field, Shapes::ShapeRef.new(shape: ParameterExceptionField, location_name: "Field"))
     WAFInvalidParameterException.add_member(:parameter, Shapes::ShapeRef.new(shape: ParameterExceptionParameter, location_name: "Parameter"))
     WAFInvalidParameterException.add_member(:reason, Shapes::ShapeRef.new(shape: ErrorReason, location_name: "Reason"))
     WAFInvalidParameterException.struct_class = Types::WAFInvalidParameterException
+
+    WAFInvalidPermissionPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFInvalidPermissionPolicyException.struct_class = Types::WAFInvalidPermissionPolicyException
 
     WAFInvalidResourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFInvalidResourceException.struct_class = Types::WAFInvalidResourceException
@@ -826,6 +884,9 @@ module Aws::WAFV2
 
     WAFServiceLinkedRoleErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     WAFServiceLinkedRoleErrorException.struct_class = Types::WAFServiceLinkedRoleErrorException
+
+    WAFSubscriptionNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFSubscriptionNotFoundException.struct_class = Types::WAFSubscriptionNotFoundException
 
     WAFTagOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFTagOperationException.struct_class = Types::WAFTagOperationException
@@ -844,6 +905,9 @@ module Aws::WAFV2
     WebACL.add_member(:rules, Shapes::ShapeRef.new(shape: Rules, location_name: "Rules"))
     WebACL.add_member(:visibility_config, Shapes::ShapeRef.new(shape: VisibilityConfig, required: true, location_name: "VisibilityConfig"))
     WebACL.add_member(:capacity, Shapes::ShapeRef.new(shape: ConsumedCapacity, location_name: "Capacity"))
+    WebACL.add_member(:pre_process_firewall_manager_rule_groups, Shapes::ShapeRef.new(shape: FirewallManagerRuleGroups, location_name: "PreProcessFirewallManagerRuleGroups"))
+    WebACL.add_member(:post_process_firewall_manager_rule_groups, Shapes::ShapeRef.new(shape: FirewallManagerRuleGroups, location_name: "PostProcessFirewallManagerRuleGroups"))
+    WebACL.add_member(:managed_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedByFirewallManager"))
     WebACL.struct_class = Types::WebACL
 
     WebACLSummaries.member = Shapes::ShapeRef.new(shape: WebACLSummary)
@@ -888,6 +952,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:check_capacity, Seahorse::Model::Operation.new.tap do |o|
@@ -902,6 +967,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
       end)
 
       api.add_operation(:create_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -917,6 +983,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:create_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
@@ -932,6 +999,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:create_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -948,6 +1016,9 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:create_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -966,6 +1037,21 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:delete_firewall_manager_rule_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFirewallManagerRuleGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFirewallManagerRuleGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFirewallManagerRuleGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:delete_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -978,8 +1064,10 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:delete_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -991,6 +1079,19 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:delete_permission_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePermissionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePermissionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePermissionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
       end)
 
       api.add_operation(:delete_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1003,8 +1104,10 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:delete_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1017,8 +1120,10 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:delete_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1034,6 +1139,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:describe_managed_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1046,6 +1152,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:disassociate_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1057,6 +1164,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:get_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1068,6 +1176,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:get_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1078,6 +1187,19 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: GetLoggingConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:get_permission_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPermissionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPermissionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPermissionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
       end)
 
       api.add_operation(:get_rate_based_statement_managed_keys, Seahorse::Model::Operation.new.tap do |o|
@@ -1089,6 +1211,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:get_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1100,6 +1223,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:get_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1111,6 +1235,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:get_sampled_requests, Seahorse::Model::Operation.new.tap do |o|
@@ -1133,6 +1258,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:get_web_acl_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1145,6 +1271,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_available_managed_rule_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1155,6 +1282,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListAvailableManagedRuleGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_ip_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -1165,6 +1293,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListIPSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_logging_configurations, Seahorse::Model::Operation.new.tap do |o|
@@ -1175,6 +1304,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListLoggingConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_regex_pattern_sets, Seahorse::Model::Operation.new.tap do |o|
@@ -1185,6 +1315,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListRegexPatternSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_resources_for_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1196,6 +1327,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_rule_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1206,6 +1338,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListRuleGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1219,6 +1352,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:list_web_acls, Seahorse::Model::Operation.new.tap do |o|
@@ -1229,6 +1363,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListWebACLsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:put_logging_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1242,6 +1377,19 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: WAFServiceLinkedRoleErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
+      api.add_operation(:put_permission_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPermissionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutPermissionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPermissionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidPermissionPolicyException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1256,6 +1404,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1269,6 +1418,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:update_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1283,6 +1433,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFDuplicateItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:update_regex_pattern_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1297,6 +1448,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFDuplicateItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:update_rule_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1312,6 +1464,8 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 
       api.add_operation(:update_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1328,6 +1482,8 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
     end
 

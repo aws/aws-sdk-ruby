@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MediaPackageVod
+
   class Resource
 
     # @param options ({})

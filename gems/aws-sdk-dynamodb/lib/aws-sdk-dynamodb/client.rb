@@ -33,6 +33,18 @@ require 'aws-sdk-dynamodb/plugins/crc32_validation.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:dynamodb)
 
 module Aws::DynamoDB
+  # An API client for DynamoDB.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::DynamoDB::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -99,7 +111,7 @@ module Aws::DynamoDB
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -113,6 +125,12 @@ module Aws::DynamoDB
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -144,6 +162,10 @@ module Aws::DynamoDB
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -151,7 +173,7 @@ module Aws::DynamoDB
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -166,7 +188,7 @@ module Aws::DynamoDB
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -178,19 +200,33 @@ module Aws::DynamoDB
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    #   @option options [Integer] :retry_limit (3)
+    #   @option options [Integer] :retry_limit (10)
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
@@ -198,7 +234,25 @@ module Aws::DynamoDB
     #     errors from expired credentials.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -239,16 +293,15 @@ module Aws::DynamoDB
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -257,7 +310,7 @@ module Aws::DynamoDB
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -456,6 +509,8 @@ module Aws::DynamoDB
     #   * {Types::BatchGetItemOutput#responses #responses} => Hash&lt;String,Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;&gt;
     #   * {Types::BatchGetItemOutput#unprocessed_keys #unprocessed_keys} => Hash&lt;String,Types::KeysAndAttributes&gt;
     #   * {Types::BatchGetItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve multiple items from a table
@@ -889,7 +944,8 @@ module Aws::DynamoDB
     # a replication relationship between two or more DynamoDB tables with
     # the same table name in the provided Regions.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -913,6 +969,14 @@ module Aws::DynamoDB
     #
     # * The global secondary indexes must have the same hash key and sort
     #   key (if present).
+    #
+    # If local secondary indexes are specified, then the following
+    # conditions must also be met:
+    #
+    # * The local secondary indexes must have the same name.
+    #
+    # * The local secondary indexes must have the same hash key and sort key
+    #   (if present).
     #
     # Write capacity settings should be set consistently across your replica
     # tables and secondary indexes. DynamoDB strongly recommends enabling
@@ -2108,13 +2172,17 @@ module Aws::DynamoDB
 
     # Returns information about the specified global table.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables. If you are using global tables [Version 2019.11.21][2] you can
+    # use [DescribeTable][3] instead.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table.
@@ -2157,7 +2225,8 @@ module Aws::DynamoDB
 
     # Describes Region-specific settings for a global table.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -2502,6 +2571,12 @@ module Aws::DynamoDB
     #   resp.table.archival_summary.archival_reason #=> String
     #   resp.table.archival_summary.archival_backup_arn #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * table_exists
+    #   * table_not_exists
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
     # @overload describe_table(params = {})
@@ -2514,7 +2589,8 @@ module Aws::DynamoDB
     # Describes auto scaling settings across replicas of the global table at
     # once.
     #
-    # <note markdown="1"> This method only applies to [Version 2019.11.21][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2019.11.21][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -2921,6 +2997,8 @@ module Aws::DynamoDB
     #   * {Types::ListContributorInsightsOutput#contributor_insights_summaries #contributor_insights_summaries} => Array&lt;Types::ContributorInsightsSummary&gt;
     #   * {Types::ListContributorInsightsOutput#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contributor_insights({
@@ -2948,7 +3026,8 @@ module Aws::DynamoDB
 
     # Lists all global tables that have a replica in the specified Region.
     #
-    # <note markdown="1"> This method only applies to [Version 2017.11.29][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -2960,7 +3039,14 @@ module Aws::DynamoDB
     #   The first global table name that this operation will evaluate.
     #
     # @option params [Integer] :limit
-    #   The maximum number of table names to return.
+    #   The maximum number of table names to return, if the parameter is not
+    #   specified DynamoDB defaults to 100.
+    #
+    #   If the number of global tables DynamoDB finds reaches this limit, it
+    #   stops the operation and returns the table names collected up to that
+    #   point, with a table name in the `LastEvaluatedGlobalTableName` to
+    #   apply in a subsequent operation to the `ExclusiveStartGlobalTableName`
+    #   parameter.
     #
     # @option params [String] :region_name
     #   Lists the global tables in a specific Region.
@@ -3012,6 +3098,8 @@ module Aws::DynamoDB
     #
     #   * {Types::ListTablesOutput#table_names #table_names} => Array&lt;String&gt;
     #   * {Types::ListTablesOutput#last_evaluated_table_name #last_evaluated_table_name} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To list tables
@@ -3133,9 +3221,14 @@ module Aws::DynamoDB
     # * [ PutItem in the AWS SDK for Ruby V2][9]
     #
     # When you add an item, the primary key attributes are the only required
-    # attributes. Attribute values cannot be null. String and Binary type
-    # attributes must have lengths greater than zero. Set type attributes
-    # cannot be empty. Requests with empty values will be rejected with a
+    # attributes. Attribute values cannot be null.
+    #
+    # Empty String and Binary attribute values are allowed. Attribute values
+    # of type String and Binary must have a length greater than zero if the
+    # attribute is used as a key attribute for a table or index. Set type
+    # attributes cannot be empty.
+    #
+    # Invalid Requests with empty values will be rejected with a
     # `ValidationException` exception.
     #
     # <note markdown="1"> To prevent a new item from replacing an existing item, use a
@@ -3179,6 +3272,10 @@ module Aws::DynamoDB
     #   If you specify any attributes that are part of an index key, then the
     #   data types for those attributes must match those of the schema in the
     #   table's attribute definition.
+    #
+    #   Empty String and Binary attribute values are allowed. Attribute values
+    #   of type String and Binary must have a length greater than zero if the
+    #   attribute is used as a key attribute for a table or index.
     #
     #   For more information about primary keys, see [Primary Key][1] in the
     #   *Amazon DynamoDB Developer Guide*.
@@ -3869,6 +3966,8 @@ module Aws::DynamoDB
     #   * {Types::QueryOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::QueryOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     #
     # @example Example: To query an item
     #
@@ -4012,6 +4111,9 @@ module Aws::DynamoDB
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
     #   Provisioned throughput settings for the restored table.
     #
+    # @option params [Types::SSESpecification] :sse_specification_override
+    #   The new server-side encryption settings for the restored table.
+    #
     # @return [Types::RestoreTableFromBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableFromBackupOutput#table_description #table_description} => Types::TableDescription
@@ -4059,6 +4161,11 @@ module Aws::DynamoDB
     #     provisioned_throughput_override: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
+    #     },
+    #     sse_specification_override: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -4189,7 +4296,11 @@ module Aws::DynamoDB
     #
     # * Point in time recovery settings
     #
-    # @option params [required, String] :source_table_name
+    # @option params [String] :source_table_arn
+    #   The DynamoDB table that will be restored. This value is an Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [String] :source_table_name
     #   Name of the source table that is being restored.
     #
     # @option params [required, String] :target_table_name
@@ -4219,6 +4330,9 @@ module Aws::DynamoDB
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
     #   Provisioned throughput settings for the restored table.
     #
+    # @option params [Types::SSESpecification] :sse_specification_override
+    #   The new server-side encryption settings for the restored table.
+    #
     # @return [Types::RestoreTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableToPointInTimeOutput#table_description #table_description} => Types::TableDescription
@@ -4226,7 +4340,8 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_table_to_point_in_time({
-    #     source_table_name: "TableName", # required
+    #     source_table_arn: "TableArn",
+    #     source_table_name: "TableName",
     #     target_table_name: "TableName", # required
     #     use_latest_restorable_time: false,
     #     restore_date_time: Time.now,
@@ -4268,6 +4383,11 @@ module Aws::DynamoDB
     #     provisioned_throughput_override: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
+    #     },
+    #     sse_specification_override: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -4694,6 +4814,8 @@ module Aws::DynamoDB
     #   * {Types::ScanOutput#scanned_count #scanned_count} => Integer
     #   * {Types::ScanOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #   * {Types::ScanOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To scan a table
@@ -6280,7 +6402,8 @@ module Aws::DynamoDB
 
     # Updates auto scaling settings on your global tables at once.
     #
-    # <note markdown="1"> This method only applies to [Version 2019.11.21][1] of global tables.
+    # <note markdown="1"> This operation only applies to [Version 2019.11.21][1] of global
+    # tables.
     #
     #  </note>
     #
@@ -6533,7 +6656,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -6599,10 +6722,10 @@ module Aws::DynamoDB
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name      | params            | :delay   | :max_attempts |
-    # | ---------------- | ----------------- | -------- | ------------- |
-    # | table_exists     | {#describe_table} | 20       | 25            |
-    # | table_not_exists | {#describe_table} | 20       | 25            |
+    # | waiter_name      | params                  | :delay   | :max_attempts |
+    # | ---------------- | ----------------------- | -------- | ------------- |
+    # | table_exists     | {Client#describe_table} | 20       | 25            |
+    # | table_not_exists | {Client#describe_table} | 20       | 25            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

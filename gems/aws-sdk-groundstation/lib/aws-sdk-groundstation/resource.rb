@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::GroundStation
+
   class Resource
 
     # @param options ({})

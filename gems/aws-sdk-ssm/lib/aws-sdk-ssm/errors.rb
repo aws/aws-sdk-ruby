@@ -6,6 +6,141 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SSM
+
+  # When SSM returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SSM::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SSM errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SSM::Errors::ServiceError
+  #       # rescues all SSM API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AlreadyExistsException}
+  # * {AssociatedInstances}
+  # * {AssociationAlreadyExists}
+  # * {AssociationDoesNotExist}
+  # * {AssociationExecutionDoesNotExist}
+  # * {AssociationLimitExceeded}
+  # * {AssociationVersionLimitExceeded}
+  # * {AutomationDefinitionNotFoundException}
+  # * {AutomationDefinitionVersionNotFoundException}
+  # * {AutomationExecutionLimitExceededException}
+  # * {AutomationExecutionNotFoundException}
+  # * {AutomationStepNotFoundException}
+  # * {ComplianceTypeCountLimitExceededException}
+  # * {CustomSchemaCountLimitExceededException}
+  # * {DocumentAlreadyExists}
+  # * {DocumentLimitExceeded}
+  # * {DocumentPermissionLimit}
+  # * {DocumentVersionLimitExceeded}
+  # * {DoesNotExistException}
+  # * {DuplicateDocumentContent}
+  # * {DuplicateDocumentVersionName}
+  # * {DuplicateInstanceId}
+  # * {FeatureNotAvailableException}
+  # * {HierarchyLevelLimitExceededException}
+  # * {HierarchyTypeMismatchException}
+  # * {IdempotentParameterMismatch}
+  # * {IncompatiblePolicyException}
+  # * {InternalServerError}
+  # * {InvalidActivation}
+  # * {InvalidActivationId}
+  # * {InvalidAggregatorException}
+  # * {InvalidAllowedPatternException}
+  # * {InvalidAssociation}
+  # * {InvalidAssociationVersion}
+  # * {InvalidAutomationExecutionParametersException}
+  # * {InvalidAutomationSignalException}
+  # * {InvalidAutomationStatusUpdateException}
+  # * {InvalidCommandId}
+  # * {InvalidDeleteInventoryParametersException}
+  # * {InvalidDeletionIdException}
+  # * {InvalidDocument}
+  # * {InvalidDocumentContent}
+  # * {InvalidDocumentOperation}
+  # * {InvalidDocumentSchemaVersion}
+  # * {InvalidDocumentType}
+  # * {InvalidDocumentVersion}
+  # * {InvalidFilter}
+  # * {InvalidFilterKey}
+  # * {InvalidFilterOption}
+  # * {InvalidFilterValue}
+  # * {InvalidInstanceId}
+  # * {InvalidInstanceInformationFilterValue}
+  # * {InvalidInventoryGroupException}
+  # * {InvalidInventoryItemContextException}
+  # * {InvalidInventoryRequestException}
+  # * {InvalidItemContentException}
+  # * {InvalidKeyId}
+  # * {InvalidNextToken}
+  # * {InvalidNotificationConfig}
+  # * {InvalidOptionException}
+  # * {InvalidOutputFolder}
+  # * {InvalidOutputLocation}
+  # * {InvalidParameters}
+  # * {InvalidPermissionType}
+  # * {InvalidPluginName}
+  # * {InvalidPolicyAttributeException}
+  # * {InvalidPolicyTypeException}
+  # * {InvalidResourceId}
+  # * {InvalidResourceType}
+  # * {InvalidResultAttributeException}
+  # * {InvalidRole}
+  # * {InvalidSchedule}
+  # * {InvalidTarget}
+  # * {InvalidTypeNameException}
+  # * {InvalidUpdate}
+  # * {InvocationDoesNotExist}
+  # * {ItemContentMismatchException}
+  # * {ItemSizeLimitExceededException}
+  # * {MaxDocumentSizeExceeded}
+  # * {OpsItemAlreadyExistsException}
+  # * {OpsItemInvalidParameterException}
+  # * {OpsItemLimitExceededException}
+  # * {OpsItemNotFoundException}
+  # * {ParameterAlreadyExists}
+  # * {ParameterLimitExceeded}
+  # * {ParameterMaxVersionLimitExceeded}
+  # * {ParameterNotFound}
+  # * {ParameterPatternMismatchException}
+  # * {ParameterVersionLabelLimitExceeded}
+  # * {ParameterVersionNotFound}
+  # * {PoliciesLimitExceededException}
+  # * {ResourceDataSyncAlreadyExistsException}
+  # * {ResourceDataSyncConflictException}
+  # * {ResourceDataSyncCountExceededException}
+  # * {ResourceDataSyncInvalidConfigurationException}
+  # * {ResourceDataSyncNotFoundException}
+  # * {ResourceInUseException}
+  # * {ResourceLimitExceededException}
+  # * {ServiceSettingNotFound}
+  # * {StatusUnchanged}
+  # * {SubTypeCountLimitExceededException}
+  # * {TargetInUseException}
+  # * {TargetNotConnected}
+  # * {TooManyTagsError}
+  # * {TooManyUpdates}
+  # * {TotalSizeLimitExceededException}
+  # * {UnsupportedCalendarException}
+  # * {UnsupportedFeatureRequiredException}
+  # * {UnsupportedInventoryItemContextException}
+  # * {UnsupportedInventorySchemaVersionException}
+  # * {UnsupportedOperatingSystem}
+  # * {UnsupportedParameterType}
+  # * {UnsupportedPlatformType}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +158,26 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class AssociatedInstances < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AssociatedInstances] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class AssociationAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AssociationAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class AssociationDoesNotExist < ServiceError
@@ -39,7 +193,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class AssociationExecutionDoesNotExist < ServiceError
@@ -55,7 +208,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class AssociationLimitExceeded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AssociationLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class AssociationVersionLimitExceeded < ServiceError
@@ -71,7 +233,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class AutomationDefinitionNotFoundException < ServiceError
@@ -87,7 +248,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class AutomationDefinitionVersionNotFoundException < ServiceError
@@ -103,7 +263,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class AutomationExecutionLimitExceededException < ServiceError
@@ -119,7 +278,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class AutomationExecutionNotFoundException < ServiceError
@@ -135,7 +293,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class AutomationStepNotFoundException < ServiceError
@@ -151,7 +308,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ComplianceTypeCountLimitExceededException < ServiceError
@@ -167,7 +323,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class CustomSchemaCountLimitExceededException < ServiceError
@@ -183,7 +338,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DocumentAlreadyExists < ServiceError
@@ -199,7 +353,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DocumentLimitExceeded < ServiceError
@@ -215,7 +368,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DocumentPermissionLimit < ServiceError
@@ -231,7 +383,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DocumentVersionLimitExceeded < ServiceError
@@ -247,7 +398,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DoesNotExistException < ServiceError
@@ -263,7 +413,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateDocumentContent < ServiceError
@@ -279,7 +428,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateDocumentVersionName < ServiceError
@@ -295,7 +443,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class DuplicateInstanceId < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::DuplicateInstanceId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class FeatureNotAvailableException < ServiceError
@@ -311,7 +468,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class HierarchyLevelLimitExceededException < ServiceError
@@ -327,7 +483,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class HierarchyTypeMismatchException < ServiceError
@@ -343,7 +498,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatch < ServiceError
@@ -359,7 +513,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatiblePolicyException < ServiceError
@@ -375,7 +528,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -391,7 +543,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidActivation < ServiceError
@@ -407,7 +558,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidActivationId < ServiceError
@@ -423,7 +573,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAggregatorException < ServiceError
@@ -439,7 +588,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAllowedPatternException < ServiceError
@@ -455,7 +603,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAssociation < ServiceError
@@ -471,7 +618,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAssociationVersion < ServiceError
@@ -487,7 +633,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAutomationExecutionParametersException < ServiceError
@@ -503,7 +648,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAutomationSignalException < ServiceError
@@ -519,7 +663,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAutomationStatusUpdateException < ServiceError
@@ -535,7 +678,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class InvalidCommandId < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidCommandId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidDeleteInventoryParametersException < ServiceError
@@ -551,7 +703,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDeletionIdException < ServiceError
@@ -567,7 +718,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDocument < ServiceError
@@ -583,7 +733,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDocumentContent < ServiceError
@@ -599,7 +748,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDocumentOperation < ServiceError
@@ -615,7 +763,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDocumentSchemaVersion < ServiceError
@@ -631,7 +778,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDocumentType < ServiceError
@@ -647,7 +793,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDocumentVersion < ServiceError
@@ -663,7 +808,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFilter < ServiceError
@@ -679,7 +823,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class InvalidFilterKey < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidFilterKey] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidFilterOption < ServiceError
@@ -695,7 +848,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFilterValue < ServiceError
@@ -711,7 +863,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInstanceId < ServiceError
@@ -727,7 +878,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInstanceInformationFilterValue < ServiceError
@@ -743,7 +893,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInventoryGroupException < ServiceError
@@ -759,7 +908,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInventoryItemContextException < ServiceError
@@ -775,7 +923,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInventoryRequestException < ServiceError
@@ -791,7 +938,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidItemContentException < ServiceError
@@ -812,7 +958,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidKeyId < ServiceError
@@ -828,7 +973,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextToken < ServiceError
@@ -844,7 +988,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNotificationConfig < ServiceError
@@ -860,7 +1003,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOptionException < ServiceError
@@ -876,7 +1018,26 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class InvalidOutputFolder < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidOutputFolder] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidOutputLocation < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidOutputLocation] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidParameters < ServiceError
@@ -892,7 +1053,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPermissionType < ServiceError
@@ -908,7 +1068,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class InvalidPluginName < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidPluginName] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidPolicyAttributeException < ServiceError
@@ -924,7 +1093,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPolicyTypeException < ServiceError
@@ -940,7 +1108,26 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class InvalidResourceId < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidResourceId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidResourceType < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidResourceType] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidResultAttributeException < ServiceError
@@ -956,7 +1143,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRole < ServiceError
@@ -972,7 +1158,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSchedule < ServiceError
@@ -988,7 +1173,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTarget < ServiceError
@@ -1004,7 +1188,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTypeNameException < ServiceError
@@ -1020,7 +1203,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidUpdate < ServiceError
@@ -1036,7 +1218,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class InvocationDoesNotExist < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvocationDoesNotExist] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class ItemContentMismatchException < ServiceError
@@ -1057,7 +1248,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ItemSizeLimitExceededException < ServiceError
@@ -1078,7 +1268,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MaxDocumentSizeExceeded < ServiceError
@@ -1094,7 +1283,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class OpsItemAlreadyExistsException < ServiceError
@@ -1115,7 +1303,6 @@ module Aws::SSM
       def ops_item_id
         @data[:ops_item_id]
       end
-
     end
 
     class OpsItemInvalidParameterException < ServiceError
@@ -1136,7 +1323,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class OpsItemLimitExceededException < ServiceError
@@ -1167,7 +1353,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class OpsItemNotFoundException < ServiceError
@@ -1183,7 +1368,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterAlreadyExists < ServiceError
@@ -1199,7 +1383,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterLimitExceeded < ServiceError
@@ -1215,7 +1398,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterMaxVersionLimitExceeded < ServiceError
@@ -1231,7 +1413,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterNotFound < ServiceError
@@ -1247,7 +1428,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterPatternMismatchException < ServiceError
@@ -1263,7 +1443,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterVersionLabelLimitExceeded < ServiceError
@@ -1279,7 +1458,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParameterVersionNotFound < ServiceError
@@ -1295,7 +1473,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class PoliciesLimitExceededException < ServiceError
@@ -1311,7 +1488,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDataSyncAlreadyExistsException < ServiceError
@@ -1327,7 +1503,6 @@ module Aws::SSM
       def sync_name
         @data[:sync_name]
       end
-
     end
 
     class ResourceDataSyncConflictException < ServiceError
@@ -1343,7 +1518,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDataSyncCountExceededException < ServiceError
@@ -1359,7 +1533,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDataSyncInvalidConfigurationException < ServiceError
@@ -1375,7 +1548,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDataSyncNotFoundException < ServiceError
@@ -1401,7 +1573,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -1417,7 +1588,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -1433,7 +1603,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceSettingNotFound < ServiceError
@@ -1449,7 +1618,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class StatusUnchanged < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::StatusUnchanged] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class SubTypeCountLimitExceededException < ServiceError
@@ -1465,7 +1643,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TargetInUseException < ServiceError
@@ -1481,7 +1658,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TargetNotConnected < ServiceError
@@ -1497,7 +1673,16 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
+    end
 
+    class TooManyTagsError < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::TooManyTagsError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class TooManyUpdates < ServiceError
@@ -1513,7 +1698,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TotalSizeLimitExceededException < ServiceError
@@ -1529,7 +1713,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedCalendarException < ServiceError
@@ -1545,7 +1728,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedFeatureRequiredException < ServiceError
@@ -1561,7 +1743,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedInventoryItemContextException < ServiceError
@@ -1582,7 +1763,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedInventorySchemaVersionException < ServiceError
@@ -1598,7 +1778,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedOperatingSystem < ServiceError
@@ -1614,7 +1793,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedParameterType < ServiceError
@@ -1630,7 +1808,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedPlatformType < ServiceError
@@ -1646,7 +1823,6 @@ module Aws::SSM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::LexModelBuildingService
+
+  # When LexModelBuildingService returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::LexModelBuildingService::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all LexModelBuildingService errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::LexModelBuildingService::Errors::ServiceError
+  #       # rescues all LexModelBuildingService API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BadRequestException}
+  # * {ConflictException}
+  # * {InternalFailureException}
+  # * {LimitExceededException}
+  # * {NotFoundException}
+  # * {PreconditionFailedException}
+  # * {ResourceInUseException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +52,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -39,7 +67,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -55,7 +82,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -76,7 +102,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -92,7 +117,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class PreconditionFailedException < ServiceError
@@ -108,7 +132,6 @@ module Aws::LexModelBuildingService
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -129,7 +152,6 @@ module Aws::LexModelBuildingService
       def example_reference
         @data[:example_reference]
       end
-
     end
 
   end

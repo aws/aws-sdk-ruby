@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SQS
+
   class Message
 
     extend Aws::Deprecations

@@ -1680,7 +1680,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   A display name for the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1765,6 +1765,42 @@ module Aws::QuickSight
       :ad_hoc_filtering_option,
       :export_to_csv_option,
       :sheet_controls_option)
+      include Aws::Structure
+    end
+
+    # A filter that you apply when searching for dashboards.
+    #
+    # @note When making an API call, you may pass DashboardSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StringEquals", # required, accepts StringEquals
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter. For
+    #   example, `"Operator": "StringEquals"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter. For example,
+    #   `"Name": "QUICKSIGHT_USER"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item, in this case `QUICKSIGHT_USER`, that
+    #   you want to use as a filter. For example, `"Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardSearchFilter AWS API Documentation
+    #
+    class DashboardSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
       include Aws::Structure
     end
 
@@ -1896,6 +1932,11 @@ module Aws::QuickSight
     #   Source entity ARN.
     #   @return [String]
     #
+    # @!attribute [rw] data_set_arns
+    #   The Amazon Resource Numbers (ARNs) for the datasets that are
+    #   associated with a version of the dashboard.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] description
     #   Description.
     #   @return [String]
@@ -1909,6 +1950,7 @@ module Aws::QuickSight
       :status,
       :arn,
       :source_entity_arn,
+      :data_set_arns,
       :description)
       include Aws::Structure
     end
@@ -4399,9 +4441,8 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] dashboard_summary_list
-    #   A structure that contains all of the dashboards shared with the
-    #   user. This structure provides basic information about the
-    #   dashboards.
+    #   A structure that contains all of the dashboards in your AWS account.
+    #   This structure provides basic information about the dashboards.
     #   @return [Array<Types::DashboardSummary>]
     #
     # @!attribute [rw] next_token
@@ -5867,7 +5908,7 @@ module Aws::QuickSight
     #
     #
     #
-    #   [1]: https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html
+    #   [1]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -6201,6 +6242,81 @@ module Aws::QuickSight
       :data_source_arn,
       :upload_settings,
       :input_columns)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchDashboardsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StringEquals", # required, accepts StringEquals
+    #             name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #             value: "String",
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID of the AWS account that contains the user whose dashboards
+    #   you're searching for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the search. Currently, you can search only
+    #   by user name. For example, `"Filters": [ \{ "Name":
+    #   "QUICKSIGHT_USER", "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
+    #   @return [Array<Types::DashboardSearchFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned per request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDashboardsRequest AWS API Documentation
+    #
+    class SearchDashboardsRequest < Struct.new(
+      :aws_account_id,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dashboard_summary_list
+    #   The list of dashboards owned by the user specified in `Filters` in
+    #   your request.
+    #   @return [Array<Types::DashboardSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDashboardsResponse AWS API Documentation
+    #
+    class SearchDashboardsResponse < Struct.new(
+      :dashboard_summary_list,
+      :next_token,
+      :status,
+      :request_id)
       include Aws::Structure
     end
 
@@ -6775,7 +6891,7 @@ module Aws::QuickSight
     # The template version.
     #
     # @!attribute [rw] arn
-    #   The ARN of the template version.
+    #   The Amazon Resource Name (ARN) of the template version.
     #   @return [String]
     #
     # @!attribute [rw] version_number

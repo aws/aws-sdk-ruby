@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RoboMaker
+
   class Resource
 
     # @param options ({})

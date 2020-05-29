@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-02-14)
+------------------
+
+* Feature - This release adds support for associating Amazon Route 53 health checks to AWS Shield Advanced protected resources.
+
 1.21.0 (2019-10-23)
 ------------------
 

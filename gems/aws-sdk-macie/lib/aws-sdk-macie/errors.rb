@@ -6,6 +6,32 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Macie
+
+  # When Macie returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Macie::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Macie errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Macie::Errors::ServiceError
+  #       # rescues all Macie API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {InternalException}
+  # * {InvalidInputException}
+  # * {LimitExceededException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +54,6 @@ module Aws::Macie
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class InternalException < ServiceError
@@ -49,7 +74,6 @@ module Aws::Macie
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -75,7 +99,6 @@ module Aws::Macie
       def field_name
         @data[:field_name]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -101,7 +124,6 @@ module Aws::Macie
       def resource_type
         @data[:resource_type]
       end
-
     end
 
   end

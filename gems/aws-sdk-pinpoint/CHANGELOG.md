@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.39.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2020-04-23)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API enhances support for sending campaigns through custom channels to locations such as AWS Lambda functions or web applications. Campaigns can now use CustomDeliveryConfiguration and CampaignCustomMessage to configure custom channel settings for a campaign.
+
+1.37.0 (2020-03-31)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces MMS support for SMS messages.
+
+1.36.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2020-03-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2020-03-04)
+------------------
+
+* Feature - This release of the Amazon Pinpoint API introduces support for integrating recommender models with email, push notification, and SMS message templates. You can now use these types of templates to connect to recommender models and add personalized recommendations to messages that you send from campaigns and journeys.
+
+1.33.0 (2020-02-20)
+------------------
+
+* Feature - As of this release of the Amazon Pinpoint API, the Title property is optional for the CampaignEmailMessage object.
+
 1.32.0 (2019-12-20)
 ------------------
 

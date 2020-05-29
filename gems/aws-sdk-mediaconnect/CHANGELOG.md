@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2020-04-07)
+------------------
+
+* Feature - You can now send content from your MediaConnect flow to your virtual private cloud (VPC) without going over the public internet.
+
+1.19.0 (2020-04-01)
+------------------
+
+* Feature - You can now send content from your virtual private cloud (VPC) to your MediaConnect flow without going over the public internet.
+
+1.18.0 (2020-03-18)
+------------------
+
+* Feature - Feature adds the ability for a flow to have multiple redundant sources that provides resiliency to a source failing. The new APIs added to enable the feature are, AddFlowSources, RemoveFlowSource and UpdateFlow.
+
+1.17.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.16.0 (2019-10-23)
 ------------------
 

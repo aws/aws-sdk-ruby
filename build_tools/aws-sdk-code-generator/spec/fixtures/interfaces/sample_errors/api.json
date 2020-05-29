@@ -1,0 +1,489 @@
+{
+  "metadata": {
+    "endpointPrefix": "svcname",
+    "serviceId": "sample_errors_svc",
+    "protocol": "rest-json"
+  },
+  "operations": {
+    "BookConcerts": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/concerts/{bandname}"
+      },
+      "input": { "shape": "BookConcertsRequest" },
+      "output": { "shape": "BookConcertsResponse" }
+    },
+    "BuyTicket": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/concerts/{ConcertId}"
+      },
+      "input": { "shape": "BuyTicketRequest" },
+      "output": { "shape": "BuyTicketResponse" }
+    },
+    "CreateBand": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/{BandName}"
+      },
+      "input": { "shape": "CreateBandRequest" },
+      "output": { "shape": "CreateBandResponse" },
+      "errors": [
+        { "shape": "BandAlreadyExists" }
+      ]
+    },
+    "CreateTags": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags"
+      },
+      "input": { "shape": "CreateTagsRequest" }
+    },
+    "GetBand": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bands/{name}"
+      },
+      "input": { "shape": "GetBandRequest" },
+      "output": { "shape": "GetBandResponse" },
+      "errors": [
+        { "shape": "ResourceNotFound" }
+      ]
+    },
+    "GetTicket": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/tickets/{number}"
+      },
+      "input": { "shape": "GetTicketRequest" },
+      "output": { "shape": "GetTicketResponse" }
+    },
+    "ListBands": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bands"
+      },
+      "input": { "shape": "ListBandsRequest" },
+      "output": { "shape": "ListBandsResponse" }
+    },
+    "ListFans": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/fans"
+      },
+      "input": { "shape": "ListFansRequest" },
+      "output": { "shape": "ListFansResponse" }
+    },
+    "ListTopBands": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/bands"
+      },
+      "input": { "shape": "ListTopBandsRequest" },
+      "output": { "shape": "ListTopBandsResponse" }
+    },
+    "UpdateBand": {
+      "http": {
+        "method": "PUT",
+        "requestUri": "/bands/{name}"
+      },
+      "input": { "shape": "UpdateBandRequest" },
+      "output": { "shape": "UpdateBandResponse" }
+    },
+    "DeleteBands":{
+      "name":"DeleteBands",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input": { "shape": "DeleteBandsRequest" }
+    },
+    "DeleteTags": {
+      "name": "DeleteTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {"shape": "DeleteTagRequest"}
+    },
+    "DescribeTags": {
+      "name": "DescribeTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input":{"shape":"DescribeTagsRequest"},
+      "output":{"shape":"DescribeTagsResult"}
+    }
+  },
+  "shapes": {
+    "Band": {
+      "type": "structure",
+      "members": {
+        "BandName": { "shape": "BandName" },
+        "Bio": { "shape": "Bio" },
+        "YearEstablished": { "shape": "Year" },
+        "CoverBandFor": { "shape": "BandName" },
+        "BiggestFans": { "shape": "FanList" },
+        "Famous": { "shape": "Boolean" },
+        "FanClubPresident": { "shape": "String" },
+        "Tags": { "shape": "TagList" }
+      }
+    },
+    "BandNameList": {
+      "type": "list",
+      "member": { "shape": "BandName" }
+    },
+    "BandList": {
+      "type": "list",
+      "member": { "shape": "Band" }
+    },
+    "BandAlreadyExists": {
+      "type": "structure",
+      "members": {},
+      "exception": true
+    },
+    "BandName": { "type": "string" },
+    "Bio": {
+      "type": "string"
+    },
+    "BookConcertsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "Boolean": { "type": "boolean" },
+    "BookConcertsResponse": {
+      "type": "structure",
+      "members": {
+        "Concerts": { "shape": "ConcertList" }
+      }
+    },
+    "BuyTicketRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "BuyTicketResponse": {
+      "type": "structure",
+      "members": {
+        "Ticket": { "shape": "Ticket" }
+      }
+    },
+    "Concert": {
+      "type": "structure",
+      "members": {
+        "ConcertId": { "shape": "String" }
+      }
+    },
+    "ConcertList": {
+      "type": "list",
+      "member": { "shape": "Concert" }
+    },
+    "CreateBandRequest": {
+      "type": "structure",
+      "required": ["BandName"],
+      "members": {
+        "BandName": { "shape": "BandName" },
+        "Bio": { "shape": "Bio" },
+        "YearEstablished": { "shape": "Year" },
+        "CoverBandFor":  { "shape": "BandName" }
+      }
+    },
+    "CreateBandResponse": {
+      "type": "structure",
+      "members": {
+        "Band" : { "shape": "Band" }
+      }
+    },
+    "CreateTagsRequest":{
+      "type": "structure",
+      "required":[
+        "Resources",
+        "Tags"
+      ],
+      "members":{
+        "Resources":{ "shape":"StringList" },
+        "Tags":{ "shape": "TagList" }
+      }
+    },
+    "Fan": {
+      "type": "structure",
+      "members": {
+        "Name": { "shape": "String" },
+        "FavoriteBandName": { "shape": "BandName" },
+        "Age": { "shape": "Integer" }
+      }
+    },
+    "FanList": {
+      "type": "list",
+      "member": { "shape": "Fan" }
+    },
+    "Filter": {
+      "type": "structure",
+      "members": {
+        "Name": { "shape": "String" },
+        "Values": { "shape": "StringList" }
+      }
+    },
+    "FilterList": {
+      "type": "list",
+      "member": { "shape": "Filter" }
+    },
+    "GetBandRequest": {
+      "type": "structure",
+      "required": ["BandName"],
+      "members": {
+        "BandName": {
+          "shape": "BandName",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetBandResponse": {
+      "type": "structure",
+      "members": {
+        "Band" : { "shape": "Band" }
+      }
+    },
+    "GetTicketRequest": {
+      "type": "structure",
+      "required": ["TicketNumber"],
+      "members": {
+        "TicketNumber": {
+          "shape": "Integer",
+          "location": "uri",
+          "locationName": "number"
+        }
+      }
+    },
+    "GetTicketResponse": {
+      "type": "structure",
+      "members": {
+        "Ticket" : { "shape": "Ticket" }
+      }
+    },
+    "Integer": { "type": "integer" },
+    "ListBandsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": { "shape": "String" }
+      }
+    },
+    "ListBandsResponse": {
+      "type": "structure",
+      "members": {
+        "Bands" : { "shape": "BandList" },
+        "NextToken": { "shape": "String" }
+      }
+    },
+    "ListFansRequest": {
+      "type": "structure",
+      "members": {
+        "FavoriteBandName": { "shape": "BandName" },
+        "LikesBand": { "shape": "BandName" },
+        "Filters": { "shape": "FilterList" },
+        "Limit": { "shape": "Integer" },
+        "NextToken": { "shape": "String" }
+      }
+    },
+    "ListFansResponse": {
+      "type": "structure",
+      "members": {
+        "Fans" : { "shape": "FanList" },
+        "NextToken": { "shape": "String" }
+      }
+    },
+    "ListTopBandsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListTopBandsResponse": {
+      "type": "structure",
+      "members": {
+        "TopFive" : { "shape": "TopBands" },
+        "TopTen" : { "shape": "TopBands" }
+      }
+    },
+    "ResourceNotFound": {
+      "type": "structure",
+      "members": {},
+      "exception": true
+    },
+    "String": { "type": "string" },
+    "StringList": {
+      "type": "list",
+      "member": { "shape": "String" }
+    },
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{ "shape":"String" },
+        "Value":{ "shape":"String" }
+      }
+    },
+    "TagList":{
+      "type":"list",
+      "member": {
+        "shape": "Tag"
+      }
+    },
+    "Ticket": {
+      "type": "structure",
+      "members": {
+        "TicketNumber": { "shape": "Integer" },
+        "PurchasePrice": { "shape": "Integer" }
+      }
+    },
+    "Timestamp": { "type": "timestamp" },
+    "TopBands": {
+      "type": "structure",
+      "members": {
+        "BandNames": { "shape": "BandNameList" },
+        "AsOfDate": { "shape": "Timestamp" }
+      }
+    },
+    "UpdateBandRequest": {
+      "type": "structure",
+      "required": ["BandName"],
+      "members": {
+        "BandName": {
+          "shape": "BandName",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "Bio": { "shape": "Bio" },
+        "YearEstablished": { "shape": "Year" }
+      }
+    },
+    "UpdateBandResponse": {
+      "type": "structure",
+      "members": {
+        "Band": { "shape": "Band" }
+      }
+    },
+    "Year": { "type": "integer" },
+    "Delete":{
+      "type": "structure",
+      "required": [ "Bands "],
+      "members": {
+        "Bands": {
+          "shape": "BandIdentifierList",
+          "locationName": "Band"
+        }
+      }
+    },
+    "BandIdentifierList":{
+      "type": "list",
+      "member": { "shape": "BandIdentifier"},
+      "flattened": true
+    },
+    "BandIdentifier":{
+      "type": "structure",
+      "required": [ "BandName" ],
+      "members": {
+        "BandName": { "shape": "BandName" }
+      }
+    },
+    "DeleteBandsRequest":{
+      "type":"structure",
+      "required":[
+        "Delete"
+      ],
+      "members":{
+        "Delete":{
+          "shape": "Delete",
+          "locationName": "Delete"
+        },
+        "Bands":{
+          "shape": "BandList",
+          "locationName": "Band"
+        }
+      }
+    },
+    "DeleteTagRequest": {
+      "type": "structure",
+      "members": {
+        "Resources": {
+          "shape": "StringList"
+        },
+        "Tags": {
+          "shape": "TagList"
+        }
+      }
+    },
+    "DescribeTagsRequest": {
+      "type":"structure",
+      "members": {
+        "NextToken":{
+          "shape":"String"
+        }
+      }
+    },
+    "DescribeTagsResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String"
+        },
+        "Tags": {
+          "shape": "TagDescriptionList"
+        }
+      }
+    },
+    "TagDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "TagDescription"
+      }
+    },
+    "TagDescription": {
+      "type": "structure",
+      "members": {
+        "Key": { "shape": "String"},
+        "Value": { "shape": "String"},
+        "ResourceId": { "shape": "String"}
+      }
+    },
+    "ServiceErrorWithMessage": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true
+    },
+    "RetryableErrorWithMessage": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true,
+      "retryable": {}
+    },
+    "RetryableErrorWithoutMessage": {
+      "type": "structure",
+      "members": {},
+      "exception": true,
+      "retryable": {}
+    },
+    "ThrottlingError": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true,
+      "retryable": {
+        "throttling": true
+      }
+    },
+    "RetryableNonThrottlingError": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true,
+      "retryable": {
+        "throttling": false
+      }
+    }
+  }
+}

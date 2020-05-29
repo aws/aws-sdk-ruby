@@ -181,7 +181,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -203,7 +203,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -239,7 +239,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -324,7 +324,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -361,7 +361,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -404,7 +404,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -436,6 +436,11 @@ module Aws::Firehose
     #             log_group_name: "LogGroupName",
     #             log_stream_name: "LogStreamName",
     #           },
+    #           vpc_configuration: {
+    #             subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #             role_arn: "RoleARN", # required
+    #             security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           },
     #         },
     #         splunk_destination_configuration: {
     #           hec_endpoint: "HECEndpoint", # required
@@ -455,7 +460,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -658,17 +663,19 @@ module Aws::Firehose
     #
     # @!attribute [rw] schema_configuration
     #   Specifies the AWS Glue Data Catalog table that contains the column
-    #   information.
+    #   information. This parameter is required if `Enabled` is set to true.
     #   @return [Types::SchemaConfiguration]
     #
     # @!attribute [rw] input_format_configuration
     #   Specifies the deserializer that you want Kinesis Data Firehose to
-    #   use to convert the format of your data from JSON.
+    #   use to convert the format of your data from JSON. This parameter is
+    #   required if `Enabled` is set to true.
     #   @return [Types::InputFormatConfiguration]
     #
     # @!attribute [rw] output_format_configuration
     #   Specifies the serializer that you want Kinesis Data Firehose to use
     #   to convert the format of your data to the Parquet or ORC format.
+    #   This parameter is required if `Enabled` is set to true.
     #   @return [Types::OutputFormatConfiguration]
     #
     # @!attribute [rw] enabled
@@ -867,8 +874,8 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Used to specify the type and Amazon Resource Name (ARN) of the CMK
-    # needed for Server-Side Encryption (SSE).
+    # Specifies the type and Amazon Resource Name (ARN) of the CMK to use
+    # for Server-Side Encryption (SSE).
     #
     # @note When making an API call, you may pass DeliveryStreamEncryptionConfigurationInput
     #   data as a hash:
@@ -896,14 +903,25 @@ module Aws::Firehose
     #   Firehose manages that grant.
     #
     #   When you invoke StartDeliveryStreamEncryption to change the CMK for
-    #   a delivery stream that is already encrypted with a customer managed
-    #   CMK, Kinesis Data Firehose schedules the grant it had on the old CMK
-    #   for retirement.
+    #   a delivery stream that is encrypted with a customer managed CMK,
+    #   Kinesis Data Firehose schedules the grant it had on the old CMK for
+    #   retirement.
+    #
+    #   You can use a CMK of type CUSTOMER\_MANAGED\_CMK to encrypt up to
+    #   500 delivery streams. If a CreateDeliveryStream or
+    #   StartDeliveryStreamEncryption operation exceeds this limit, Kinesis
+    #   Data Firehose throws a `LimitExceededException`.
+    #
+    #   To encrypt your delivery stream, use symmetric CMKs. Kinesis Data
+    #   Firehose doesn't support asymmetric CMKs. For information about
+    #   symmetric and asymmetric CMKs, see [About Symmetric and Asymmetric
+    #   CMKs][3] in the AWS Key Management Service developer guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
     #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamEncryptionConfigurationInput AWS API Documentation
@@ -1113,7 +1131,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -1144,6 +1162,11 @@ module Aws::Firehose
     #           enabled: false,
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
+    #         },
+    #         vpc_configuration: {
+    #           subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #           role_arn: "RoleARN", # required
+    #           security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
     #         },
     #       }
     #
@@ -1242,6 +1265,10 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] vpc_configuration
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationConfiguration AWS API Documentation
     #
     class ElasticsearchDestinationConfiguration < Struct.new(
@@ -1256,7 +1283,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_configuration,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :vpc_configuration)
       include Aws::Structure
     end
 
@@ -1328,6 +1356,10 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] vpc_configuration_description
+    #   The details of the VPC of the Amazon ES destination.
+    #   @return [Types::VpcConfigurationDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription AWS API Documentation
     #
     class ElasticsearchDestinationDescription < Struct.new(
@@ -1342,7 +1374,8 @@ module Aws::Firehose
       :s3_backup_mode,
       :s3_destination_description,
       :processing_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :vpc_configuration_description)
       include Aws::Structure
     end
 
@@ -1374,7 +1407,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -1576,7 +1609,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1612,7 +1645,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -1880,7 +1913,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -1916,7 +1949,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -2131,7 +2164,8 @@ module Aws::Firehose
     end
 
     # Specifies the deserializer you want to use to convert the format of
-    # the input data.
+    # the input data. This parameter is required if `Enabled` is set to
+    # true.
     #
     # @note When making an API call, you may pass InputFormatConfiguration
     #   data as a hash:
@@ -2585,7 +2619,8 @@ module Aws::Firehose
     end
 
     # Specifies the serializer that you want Kinesis Data Firehose to use to
-    # convert the format of your data before it writes it to Amazon S3.
+    # convert the format of your data before it writes it to Amazon S3. This
+    # parameter is required if `Enabled` is set to true.
     #
     # @note When making an API call, you may pass OutputFormatConfiguration
     #   data as a hash:
@@ -2961,7 +2996,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -2998,7 +3033,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3187,7 +3222,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3224,7 +3259,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -3384,7 +3419,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -3564,7 +3599,7 @@ module Aws::Firehose
     #           size_in_m_bs: 1,
     #           interval_in_seconds: 1,
     #         },
-    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #         encryption_configuration: {
     #           no_encryption_config: "NoEncryption", # accepts NoEncryption
     #           kms_encryption_config: {
@@ -3656,7 +3691,8 @@ module Aws::Firehose
     end
 
     # Specifies the schema to which you want Kinesis Data Firehose to
-    # configure your data before it writes it to Amazon S3.
+    # configure your data before it writes it to Amazon S3. This parameter
+    # is required if `Enabled` is set to true.
     #
     # @note When making an API call, you may pass SchemaConfiguration
     #   data as a hash:
@@ -3837,7 +3873,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -4022,7 +4058,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -4310,7 +4346,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -4332,7 +4368,7 @@ module Aws::Firehose
     #             size_in_m_bs: 1,
     #             interval_in_seconds: 1,
     #           },
-    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #           encryption_configuration: {
     #             no_encryption_config: "NoEncryption", # accepts NoEncryption
     #             kms_encryption_config: {
@@ -4368,7 +4404,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4453,7 +4489,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4490,7 +4526,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4532,7 +4568,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4583,7 +4619,7 @@ module Aws::Firehose
     #               size_in_m_bs: 1,
     #               interval_in_seconds: 1,
     #             },
-    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy, HADOOP_SNAPPY
     #             encryption_configuration: {
     #               no_encryption_config: "NoEncryption", # accepts NoEncryption
     #               kms_encryption_config: {
@@ -4673,6 +4709,108 @@ module Aws::Firehose
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationOutput AWS API Documentation
     #
     class UpdateDestinationOutput < Aws::EmptyStructure; end
+
+    # The details of the VPC of the Amazon ES destination.
+    #
+    # @note When making an API call, you may pass VpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #         role_arn: "RoleARN", # required
+    #         security_group_ids: ["NonEmptyStringWithoutWhitespace"], # required
+    #       }
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets that you want Kinesis Data Firehose to use to
+    #   create ENIs in the VPC of the Amazon ES destination. Make sure that
+    #   the routing tables and inbound and outbound rules allow traffic to
+    #   flow from the subnets whose IDs are specified here to the subnets
+    #   that have the destination Amazon ES endpoints. Kinesis Data Firehose
+    #   creates at least one ENI in each of the subnets that are specified
+    #   here. Do not delete or modify these ENIs.
+    #
+    #   The number of ENIs that Kinesis Data Firehose creates in the subnets
+    #   specified here scales up and down automatically based on throughput.
+    #   To enable Kinesis Data Firehose to scale up the number of ENIs to
+    #   match throughput, ensure that you have sufficient quota. To help you
+    #   calculate the quota you need, assume that Kinesis Data Firehose can
+    #   create up to three ENIs for this delivery stream for each of the
+    #   subnets specified here. For more information about ENI quota, see
+    #   [Network Interfaces ][1] in the Amazon VPC Quotas topic.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that you want the delivery stream to use to
+    #   create endpoints in the destination VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups that you want Kinesis Data Firehose
+    #   to use when it creates ENIs in the VPC of the Amazon ES destination.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :subnet_ids,
+      :role_arn,
+      :security_group_ids)
+      include Aws::Structure
+    end
+
+    # The details of the VPC of the Amazon ES destination.
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets that Kinesis Data Firehose uses to create
+    #   ENIs in the VPC of the Amazon ES destination. Make sure that the
+    #   routing tables and inbound and outbound rules allow traffic to flow
+    #   from the subnets whose IDs are specified here to the subnets that
+    #   have the destination Amazon ES endpoints. Kinesis Data Firehose
+    #   creates at least one ENI in each of the subnets that are specified
+    #   here. Do not delete or modify these ENIs.
+    #
+    #   The number of ENIs that Kinesis Data Firehose creates in the subnets
+    #   specified here scales up and down automatically based on throughput.
+    #   To enable Kinesis Data Firehose to scale up the number of ENIs to
+    #   match throughput, ensure that you have sufficient quota. To help you
+    #   calculate the quota you need, assume that Kinesis Data Firehose can
+    #   create up to three ENIs for this delivery stream for each of the
+    #   subnets specified here. For more information about ENI quota, see
+    #   [Network Interfaces ][1] in the Amazon VPC Quotas topic.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that you want the delivery stream uses to
+    #   create endpoints in the destination VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups that Kinesis Data Firehose uses when
+    #   it creates ENIs in the VPC of the Amazon ES destination.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon ES destination's VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VpcConfigurationDescription AWS API Documentation
+    #
+    class VpcConfigurationDescription < Struct.new(
+      :subnet_ids,
+      :role_arn,
+      :security_group_ids,
+      :vpc_id)
+      include Aws::Structure
+    end
 
   end
 end

@@ -28,6 +28,12 @@ module Aws::ComprehendMedical
     #   attribute is correctly related to this entity.
     #   @return [Float]
     #
+    # @!attribute [rw] relationship_type
+    #   The type of relationship between the entity and attribute. Type for
+    #   the relationship is `OVERLAP`, indicating that the entity occurred
+    #   at the same time as the `Date_Expression`.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The numeric identifier for this attribute. This is a monotonically
     #   increasing id unique within this response rather than a global
@@ -50,6 +56,10 @@ module Aws::ComprehendMedical
     #   The segment of input text extracted as this attribute.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   The category of attribute.
+    #   @return [String]
+    #
     # @!attribute [rw] traits
     #   Contextual information for this attribute.
     #   @return [Array<Types::Trait>]
@@ -60,10 +70,12 @@ module Aws::ComprehendMedical
       :type,
       :score,
       :relationship_score,
+      :relationship_type,
       :id,
       :begin_offset,
       :end_offset,
       :text,
+      :category,
       :traits)
       include Aws::Structure
     end
@@ -234,6 +246,38 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeICD10CMInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   `The StartICD10CMInferenceJob` operation returns this identifier in
+    #   its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeICD10CMInferenceJobRequest AWS API Documentation
+    #
+    class DescribeICD10CMInferenceJobRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comprehend_medical_async_job_properties
+    #   An object that contains the properties associated with a detection
+    #   job.
+    #   @return [Types::ComprehendMedicalAsyncJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeICD10CMInferenceJobResponse AWS API Documentation
+    #
+    class DescribeICD10CMInferenceJobResponse < Struct.new(
+      :comprehend_medical_async_job_properties)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribePHIDetectionJobRequest
     #   data as a hash:
     #
@@ -262,6 +306,38 @@ module Aws::ComprehendMedical
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribePHIDetectionJobResponse AWS API Documentation
     #
     class DescribePHIDetectionJobResponse < Struct.new(
+      :comprehend_medical_async_job_properties)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRxNormInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend Medical generated for the job.
+    #   The StartRxNormInferenceJob operation returns this identifier in its
+    #   response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeRxNormInferenceJobRequest AWS API Documentation
+    #
+    class DescribeRxNormInferenceJobRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comprehend_medical_async_job_properties
+    #   An object that contains the properties associated with a detection
+    #   job.
+    #   @return [Types::ComprehendMedicalAsyncJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/DescribeRxNormInferenceJobResponse AWS API Documentation
+    #
+    class DescribeRxNormInferenceJobResponse < Struct.new(
       :comprehend_medical_async_job_properties)
       include Aws::Structure
     end
@@ -759,7 +835,9 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
-    # The input properties for an entities detection job
+    # The input properties for an entities detection job. This includes the
+    # name of the S3 bucket and the path to the files to be analyzed. See
+    # batch-manifest for more information.
     #
     # @note When making an API call, you may pass InputDataConfig
     #   data as a hash:
@@ -881,6 +959,60 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListICD10CMInferenceJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs based on
+    #   their names, status, or the date and time that they were submitted.
+    #   You can only set one filter at a time.
+    #   @return [Types::ComprehendMedicalAsyncJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListICD10CMInferenceJobsRequest AWS API Documentation
+    #
+    class ListICD10CMInferenceJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comprehend_medical_async_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::ComprehendMedicalAsyncJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListICD10CMInferenceJobsResponse AWS API Documentation
+    #
+    class ListICD10CMInferenceJobsResponse < Struct.new(
+      :comprehend_medical_async_job_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPHIDetectionJobsRequest
     #   data as a hash:
     #
@@ -930,6 +1062,60 @@ module Aws::ComprehendMedical
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListPHIDetectionJobsResponse AWS API Documentation
     #
     class ListPHIDetectionJobsResponse < Struct.new(
+      :comprehend_medical_async_job_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListRxNormInferenceJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, PARTIAL_SUCCESS, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs based on
+    #   their names, status, or the date and time that they were submitted.
+    #   You can only set one filter at a time.
+    #   @return [Types::ComprehendMedicalAsyncJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Identifies the next page of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListRxNormInferenceJobsRequest AWS API Documentation
+    #
+    class ListRxNormInferenceJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comprehend_medical_async_job_properties_list
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Array<Types::ComprehendMedicalAsyncJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ListRxNormInferenceJobsResponse AWS API Documentation
+    #
+    class ListRxNormInferenceJobsResponse < Struct.new(
       :comprehend_medical_async_job_properties_list,
       :next_token)
       include Aws::Structure
@@ -1263,6 +1449,91 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartICD10CMInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key",
+    #         },
+    #         output_data_config: { # required
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         client_request_token: "ClientRequestTokenString",
+    #         kms_key: "KMSKey",
+    #         language_code: "en", # required, accepts en
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies where to send the output files.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend Medical generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   An AWS Key Management Service key to encrypt your output files. If
+    #   you do not specify a key, the files are written in plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. All documents must be in the
+    #   same language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartICD10CMInferenceJobRequest AWS API Documentation
+    #
+    class StartICD10CMInferenceJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :job_name,
+      :client_request_token,
+      :kms_key,
+      :language_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of a job,
+    #   use this identifier with the `StartICD10CMInferenceJob` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartICD10CMInferenceJobResponse AWS API Documentation
+    #
+    class StartICD10CMInferenceJobResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartPHIDetectionJobRequest
     #   data as a hash:
     #
@@ -1348,6 +1619,90 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartRxNormInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key",
+    #         },
+    #         output_data_config: { # required
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         client_request_token: "ClientRequestTokenString",
+    #         kms_key: "KMSKey",
+    #         language_code: "en", # required, accepts en
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies where to send the output files.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend Medical read
+    #   access to your input data. For more information, see [ Role-Based
+    #   Permissions Required for Asynchronous Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend Medical generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   An AWS Key Management Service key to encrypt your output files. If
+    #   you do not specify a key, the files are written in plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. All documents must be in the
+    #   same language.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartRxNormInferenceJobRequest AWS API Documentation
+    #
+    class StartRxNormInferenceJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :job_name,
+      :client_request_token,
+      :kms_key,
+      :language_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StartRxNormInferenceJobResponse AWS API Documentation
+    #
+    class StartRxNormInferenceJobResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopEntitiesDetectionV2JobRequest
     #   data as a hash:
     #
@@ -1378,6 +1733,36 @@ module Aws::ComprehendMedical
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopICD10CMInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopICD10CMInferenceJobRequest AWS API Documentation
+    #
+    class StopICD10CMInferenceJobRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of job, use
+    #   this identifier with the `DescribeICD10CMInferenceJob` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopICD10CMInferenceJobResponse AWS API Documentation
+    #
+    class StopICD10CMInferenceJobResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopPHIDetectionJobRequest
     #   data as a hash:
     #
@@ -1403,6 +1788,36 @@ module Aws::ComprehendMedical
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopPHIDetectionJobResponse AWS API Documentation
     #
     class StopPHIDetectionJobResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopRxNormInferenceJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopRxNormInferenceJobRequest AWS API Documentation
+    #
+    class StopRxNormInferenceJobRequest < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of job, use
+    #   this identifier with the `DescribeRxNormInferenceJob` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/StopRxNormInferenceJobResponse AWS API Documentation
+    #
+    class StopRxNormInferenceJobResponse < Struct.new(
       :job_id)
       include Aws::Structure
     end

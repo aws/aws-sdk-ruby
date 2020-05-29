@@ -6,6 +6,38 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SWF
+
+  # When SWF returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SWF::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SWF errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SWF::Errors::ServiceError
+  #       # rescues all SWF API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {DefaultUndefinedFault}
+  # * {DomainAlreadyExistsFault}
+  # * {DomainDeprecatedFault}
+  # * {LimitExceededFault}
+  # * {OperationNotPermittedFault}
+  # * {TooManyTagsFault}
+  # * {TypeAlreadyExistsFault}
+  # * {TypeDeprecatedFault}
+  # * {UnknownResourceFault}
+  # * {WorkflowExecutionAlreadyStartedFault}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +55,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class DomainAlreadyExistsFault < ServiceError
@@ -39,7 +70,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class DomainDeprecatedFault < ServiceError
@@ -55,7 +85,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededFault < ServiceError
@@ -71,7 +100,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedFault < ServiceError
@@ -87,7 +115,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsFault < ServiceError
@@ -103,7 +130,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class TypeAlreadyExistsFault < ServiceError
@@ -119,7 +145,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class TypeDeprecatedFault < ServiceError
@@ -135,7 +160,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnknownResourceFault < ServiceError
@@ -151,7 +175,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
     class WorkflowExecutionAlreadyStartedFault < ServiceError
@@ -167,7 +190,6 @@ module Aws::SWF
       def message
         @message || @data[:message]
       end
-
     end
 
   end

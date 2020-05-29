@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2020-05-20)
+------------------
+
+* Feature - This release adds support for vocabulary filtering in streaming with which you can filter unwanted words from the real-time transcription results. Visit https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html  to learn more.
+
+1.13.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2020-04-22)
+------------------
+
+* Feature - Adding ServiceUnavailableException as one of the expected exceptions
+
+1.11.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2019-10-25)
 ------------------
 

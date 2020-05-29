@@ -66,6 +66,7 @@ module Aws::SSM
     AssociationStatus = Shapes::StructureShape.new(name: 'AssociationStatus')
     AssociationStatusAggregatedCount = Shapes::MapShape.new(name: 'AssociationStatusAggregatedCount')
     AssociationStatusName = Shapes::StringShape.new(name: 'AssociationStatusName')
+    AssociationSyncCompliance = Shapes::StringShape.new(name: 'AssociationSyncCompliance')
     AssociationVersion = Shapes::StringShape.new(name: 'AssociationVersion')
     AssociationVersionInfo = Shapes::StructureShape.new(name: 'AssociationVersionInfo')
     AssociationVersionLimitExceeded = Shapes::StructureShape.new(name: 'AssociationVersionLimitExceeded')
@@ -171,6 +172,7 @@ module Aws::SSM
     ComplianceSummaryItemList = Shapes::ListShape.new(name: 'ComplianceSummaryItemList')
     ComplianceTypeCountLimitExceededException = Shapes::StructureShape.new(name: 'ComplianceTypeCountLimitExceededException')
     ComplianceTypeName = Shapes::StringShape.new(name: 'ComplianceTypeName')
+    ComplianceUploadType = Shapes::StringShape.new(name: 'ComplianceUploadType')
     CompliantSummary = Shapes::StructureShape.new(name: 'CompliantSummary')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
@@ -721,6 +723,7 @@ module Aws::SSM
     PSParameterVersion = Shapes::IntegerShape.new(name: 'PSParameterVersion')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParameterAlreadyExists = Shapes::StructureShape.new(name: 'ParameterAlreadyExists')
+    ParameterDataType = Shapes::StringShape.new(name: 'ParameterDataType')
     ParameterDescription = Shapes::StringShape.new(name: 'ParameterDescription')
     ParameterHistory = Shapes::StructureShape.new(name: 'ParameterHistory')
     ParameterHistoryList = Shapes::ListShape.new(name: 'ParameterHistoryList')
@@ -818,7 +821,7 @@ module Aws::SSM
     PatchSourceProduct = Shapes::StringShape.new(name: 'PatchSourceProduct')
     PatchSourceProductList = Shapes::ListShape.new(name: 'PatchSourceProductList')
     PatchStatus = Shapes::StructureShape.new(name: 'PatchStatus')
-    PatchStringDate = Shapes::StringShape.new(name: 'PatchStringDate')
+    PatchStringDateTime = Shapes::StringShape.new(name: 'PatchStringDateTime')
     PatchTitle = Shapes::StringShape.new(name: 'PatchTitle')
     PatchUnreportedNotApplicableCount = Shapes::IntegerShape.new(name: 'PatchUnreportedNotApplicableCount')
     PatchVendor = Shapes::StringShape.new(name: 'PatchVendor')
@@ -866,6 +869,8 @@ module Aws::SSM
     ResourceDataSyncConflictException = Shapes::StructureShape.new(name: 'ResourceDataSyncConflictException')
     ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
     ResourceDataSyncCreatedTime = Shapes::TimestampShape.new(name: 'ResourceDataSyncCreatedTime')
+    ResourceDataSyncDestinationDataSharing = Shapes::StructureShape.new(name: 'ResourceDataSyncDestinationDataSharing')
+    ResourceDataSyncDestinationDataSharingType = Shapes::StringShape.new(name: 'ResourceDataSyncDestinationDataSharingType')
     ResourceDataSyncIncludeFutureRegions = Shapes::BooleanShape.new(name: 'ResourceDataSyncIncludeFutureRegions')
     ResourceDataSyncInvalidConfigurationException = Shapes::StructureShape.new(name: 'ResourceDataSyncInvalidConfigurationException')
     ResourceDataSyncItem = Shapes::StructureShape.new(name: 'ResourceDataSyncItem')
@@ -1068,6 +1073,8 @@ module Aws::SSM
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
+    AssociatedInstances.struct_class = Types::AssociatedInstances
+
     Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     Association.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     Association.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
@@ -1079,6 +1086,8 @@ module Aws::SSM
     Association.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     Association.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     Association.struct_class = Types::Association
+
+    AssociationAlreadyExists.struct_class = Types::AssociationAlreadyExists
 
     AssociationDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     AssociationDescription.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
@@ -1100,6 +1109,7 @@ module Aws::SSM
     AssociationDescription.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AssociationDescription.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AssociationDescription.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
+    AssociationDescription.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     AssociationDescription.struct_class = Types::AssociationDescription
 
     AssociationDescriptionList.member = Shapes::ShapeRef.new(shape: AssociationDescription)
@@ -1156,6 +1166,8 @@ module Aws::SSM
 
     AssociationIdList.member = Shapes::ShapeRef.new(shape: AssociationId)
 
+    AssociationLimitExceeded.struct_class = Types::AssociationLimitExceeded
+
     AssociationList.member = Shapes::ShapeRef.new(shape: Association)
 
     AssociationOverview.add_member(:status, Shapes::ShapeRef.new(shape: StatusName, location_name: "Status"))
@@ -1185,6 +1197,7 @@ module Aws::SSM
     AssociationVersionInfo.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     AssociationVersionInfo.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     AssociationVersionInfo.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
+    AssociationVersionInfo.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     AssociationVersionInfo.struct_class = Types::AssociationVersionInfo
 
     AssociationVersionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -1337,6 +1350,7 @@ module Aws::SSM
     Command.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRole"))
     Command.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
     Command.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
+    Command.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: TimeoutSeconds, location_name: "TimeoutSeconds"))
     Command.struct_class = Types::Command
 
     CommandFilter.add_member(:key, Shapes::ShapeRef.new(shape: CommandFilterKey, required: true, location_name: "key"))
@@ -1469,6 +1483,7 @@ module Aws::SSM
     CreateAssociationBatchRequestEntry.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     CreateAssociationBatchRequestEntry.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     CreateAssociationBatchRequestEntry.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
+    CreateAssociationBatchRequestEntry.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     CreateAssociationBatchRequestEntry.struct_class = Types::CreateAssociationBatchRequestEntry
 
     CreateAssociationBatchResult.add_member(:successful, Shapes::ShapeRef.new(shape: AssociationDescriptionList, location_name: "Successful"))
@@ -1487,6 +1502,7 @@ module Aws::SSM
     CreateAssociationRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     CreateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     CreateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
+    CreateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     CreateAssociationRequest.struct_class = Types::CreateAssociationRequest
 
     CreateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2081,6 +2097,8 @@ module Aws::SSM
     DuplicateDocumentVersionName.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DuplicateDocumentVersionName.struct_class = Types::DuplicateDocumentVersionName
 
+    DuplicateInstanceId.struct_class = Types::DuplicateInstanceId
+
     EffectivePatch.add_member(:patch, Shapes::ShapeRef.new(shape: Patch, location_name: "Patch"))
     EffectivePatch.add_member(:patch_status, Shapes::ShapeRef.new(shape: PatchStatus, location_name: "PatchStatus"))
     EffectivePatch.struct_class = Types::EffectivePatch
@@ -2535,6 +2553,8 @@ module Aws::SSM
     InvalidAutomationStatusUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidAutomationStatusUpdateException.struct_class = Types::InvalidAutomationStatusUpdateException
 
+    InvalidCommandId.struct_class = Types::InvalidCommandId
+
     InvalidDeleteInventoryParametersException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidDeleteInventoryParametersException.struct_class = Types::InvalidDeleteInventoryParametersException
 
@@ -2561,6 +2581,8 @@ module Aws::SSM
 
     InvalidFilter.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidFilter.struct_class = Types::InvalidFilter
+
+    InvalidFilterKey.struct_class = Types::InvalidFilterKey
 
     InvalidFilterOption.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidFilterOption.struct_class = Types::InvalidFilterOption
@@ -2599,17 +2621,27 @@ module Aws::SSM
     InvalidOptionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidOptionException.struct_class = Types::InvalidOptionException
 
+    InvalidOutputFolder.struct_class = Types::InvalidOutputFolder
+
+    InvalidOutputLocation.struct_class = Types::InvalidOutputLocation
+
     InvalidParameters.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidParameters.struct_class = Types::InvalidParameters
 
     InvalidPermissionType.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidPermissionType.struct_class = Types::InvalidPermissionType
 
+    InvalidPluginName.struct_class = Types::InvalidPluginName
+
     InvalidPolicyAttributeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidPolicyAttributeException.struct_class = Types::InvalidPolicyAttributeException
 
     InvalidPolicyTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidPolicyTypeException.struct_class = Types::InvalidPolicyTypeException
+
+    InvalidResourceId.struct_class = Types::InvalidResourceId
+
+    InvalidResourceType.struct_class = Types::InvalidResourceType
 
     InvalidResultAttributeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidResultAttributeException.struct_class = Types::InvalidResultAttributeException
@@ -2721,6 +2753,8 @@ module Aws::SSM
 
     InventoryResultItemMap.key = Shapes::ShapeRef.new(shape: InventoryResultItemKey)
     InventoryResultItemMap.value = Shapes::ShapeRef.new(shape: InventoryResultItem)
+
+    InvocationDoesNotExist.struct_class = Types::InvocationDoesNotExist
 
     ItemContentMismatchException.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
     ItemContentMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -3164,6 +3198,7 @@ module Aws::SSM
     Parameter.add_member(:source_result, Shapes::ShapeRef.new(shape: String, location_name: "SourceResult"))
     Parameter.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
     Parameter.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
+    Parameter.add_member(:data_type, Shapes::ShapeRef.new(shape: ParameterDataType, location_name: "DataType"))
     Parameter.struct_class = Types::Parameter
 
     ParameterAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -3181,6 +3216,7 @@ module Aws::SSM
     ParameterHistory.add_member(:labels, Shapes::ShapeRef.new(shape: ParameterLabelList, location_name: "Labels"))
     ParameterHistory.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
     ParameterHistory.add_member(:policies, Shapes::ShapeRef.new(shape: ParameterPolicyList, location_name: "Policies"))
+    ParameterHistory.add_member(:data_type, Shapes::ShapeRef.new(shape: ParameterDataType, location_name: "DataType"))
     ParameterHistory.struct_class = Types::ParameterHistory
 
     ParameterHistoryList.member = Shapes::ShapeRef.new(shape: ParameterHistory)
@@ -3210,6 +3246,7 @@ module Aws::SSM
     ParameterMetadata.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
     ParameterMetadata.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
     ParameterMetadata.add_member(:policies, Shapes::ShapeRef.new(shape: ParameterPolicyList, location_name: "Policies"))
+    ParameterMetadata.add_member(:data_type, Shapes::ShapeRef.new(shape: ParameterDataType, location_name: "DataType"))
     ParameterMetadata.struct_class = Types::ParameterMetadata
 
     ParameterMetadataList.member = Shapes::ShapeRef.new(shape: ParameterMetadata)
@@ -3325,7 +3362,7 @@ module Aws::SSM
     PatchRule.add_member(:patch_filter_group, Shapes::ShapeRef.new(shape: PatchFilterGroup, required: true, location_name: "PatchFilterGroup"))
     PatchRule.add_member(:compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ComplianceLevel"))
     PatchRule.add_member(:approve_after_days, Shapes::ShapeRef.new(shape: ApproveAfterDays, location_name: "ApproveAfterDays", metadata: {"box"=>true}))
-    PatchRule.add_member(:approve_until_date, Shapes::ShapeRef.new(shape: PatchStringDate, location_name: "ApproveUntilDate", metadata: {"box"=>true}))
+    PatchRule.add_member(:approve_until_date, Shapes::ShapeRef.new(shape: PatchStringDateTime, location_name: "ApproveUntilDate", metadata: {"box"=>true}))
     PatchRule.add_member(:enable_non_security, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNonSecurity", metadata: {"box"=>true}))
     PatchRule.struct_class = Types::PatchRule
 
@@ -3366,6 +3403,7 @@ module Aws::SSM
     PutComplianceItemsRequest.add_member(:execution_summary, Shapes::ShapeRef.new(shape: ComplianceExecutionSummary, required: true, location_name: "ExecutionSummary"))
     PutComplianceItemsRequest.add_member(:items, Shapes::ShapeRef.new(shape: ComplianceItemEntryList, required: true, location_name: "Items"))
     PutComplianceItemsRequest.add_member(:item_content_hash, Shapes::ShapeRef.new(shape: ComplianceItemContentHash, location_name: "ItemContentHash"))
+    PutComplianceItemsRequest.add_member(:upload_type, Shapes::ShapeRef.new(shape: ComplianceUploadType, location_name: "UploadType", metadata: {"box"=>true}))
     PutComplianceItemsRequest.struct_class = Types::PutComplianceItemsRequest
 
     PutComplianceItemsResult.struct_class = Types::PutComplianceItemsResult
@@ -3380,13 +3418,14 @@ module Aws::SSM
     PutParameterRequest.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Name"))
     PutParameterRequest.add_member(:description, Shapes::ShapeRef.new(shape: ParameterDescription, location_name: "Description"))
     PutParameterRequest.add_member(:value, Shapes::ShapeRef.new(shape: PSParameterValue, required: true, location_name: "Value"))
-    PutParameterRequest.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, required: true, location_name: "Type"))
+    PutParameterRequest.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, location_name: "Type"))
     PutParameterRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: ParameterKeyId, location_name: "KeyId"))
     PutParameterRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite", metadata: {"box"=>true}))
     PutParameterRequest.add_member(:allowed_pattern, Shapes::ShapeRef.new(shape: AllowedPattern, location_name: "AllowedPattern"))
     PutParameterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutParameterRequest.add_member(:tier, Shapes::ShapeRef.new(shape: ParameterTier, location_name: "Tier"))
     PutParameterRequest.add_member(:policies, Shapes::ShapeRef.new(shape: ParameterPolicies, location_name: "Policies"))
+    PutParameterRequest.add_member(:data_type, Shapes::ShapeRef.new(shape: ParameterDataType, location_name: "DataType"))
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.add_member(:version, Shapes::ShapeRef.new(shape: PSParameterVersion, location_name: "Version"))
@@ -3487,6 +3526,9 @@ module Aws::SSM
     ResourceDataSyncCountExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceDataSyncCountExceededException.struct_class = Types::ResourceDataSyncCountExceededException
 
+    ResourceDataSyncDestinationDataSharing.add_member(:destination_data_sharing_type, Shapes::ShapeRef.new(shape: ResourceDataSyncDestinationDataSharingType, location_name: "DestinationDataSharingType"))
+    ResourceDataSyncDestinationDataSharing.struct_class = Types::ResourceDataSyncDestinationDataSharing
+
     ResourceDataSyncInvalidConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceDataSyncInvalidConfigurationException.struct_class = Types::ResourceDataSyncInvalidConfigurationException
 
@@ -3519,6 +3561,7 @@ module Aws::SSM
     ResourceDataSyncS3Destination.add_member(:sync_format, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Format, required: true, location_name: "SyncFormat"))
     ResourceDataSyncS3Destination.add_member(:region, Shapes::ShapeRef.new(shape: ResourceDataSyncS3Region, required: true, location_name: "Region"))
     ResourceDataSyncS3Destination.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: ResourceDataSyncAWSKMSKeyARN, location_name: "AWSKMSKeyARN"))
+    ResourceDataSyncS3Destination.add_member(:destination_data_sharing, Shapes::ShapeRef.new(shape: ResourceDataSyncDestinationDataSharing, location_name: "DestinationDataSharing"))
     ResourceDataSyncS3Destination.struct_class = Types::ResourceDataSyncS3Destination
 
     ResourceDataSyncSource.add_member(:source_type, Shapes::ShapeRef.new(shape: ResourceDataSyncSourceType, required: true, location_name: "SourceType"))
@@ -3678,6 +3721,8 @@ module Aws::SSM
     StartSessionResponse.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamUrl, location_name: "StreamUrl"))
     StartSessionResponse.struct_class = Types::StartSessionResponse
 
+    StatusUnchanged.struct_class = Types::StatusUnchanged
+
     StepExecution.add_member(:step_name, Shapes::ShapeRef.new(shape: String, location_name: "StepName"))
     StepExecution.add_member(:action, Shapes::ShapeRef.new(shape: AutomationActionName, location_name: "Action"))
     StepExecution.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "TimeoutSeconds", metadata: {"box"=>true}))
@@ -3767,6 +3812,8 @@ module Aws::SSM
     TerminateSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     TerminateSessionResponse.struct_class = Types::TerminateSessionResponse
 
+    TooManyTagsError.struct_class = Types::TooManyTagsError
+
     TooManyUpdates.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TooManyUpdates.struct_class = Types::TooManyUpdates
 
@@ -3808,6 +3855,7 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     UpdateAssociationRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     UpdateAssociationRequest.add_member(:compliance_severity, Shapes::ShapeRef.new(shape: AssociationComplianceSeverity, location_name: "ComplianceSeverity"))
+    UpdateAssociationRequest.add_member(:sync_compliance, Shapes::ShapeRef.new(shape: AssociationSyncCompliance, location_name: "SyncCompliance"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))

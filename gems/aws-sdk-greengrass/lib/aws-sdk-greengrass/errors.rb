@@ -6,6 +6,30 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Greengrass
+
+  # When Greengrass returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Greengrass::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Greengrass errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Greengrass::Errors::ServiceError
+  #       # rescues all Greengrass API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BadRequestException}
+  # * {InternalServerErrorException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +52,6 @@ module Aws::Greengrass
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerErrorException < ServiceError
@@ -49,7 +72,6 @@ module Aws::Greengrass
       def message
         @message || @data[:message]
       end
-
     end
 
   end

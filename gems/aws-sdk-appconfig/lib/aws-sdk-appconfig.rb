@@ -24,17 +24,20 @@ require_relative 'aws-sdk-appconfig/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     app_config = Aws::AppConfig::Client.new
+#     resp = app_config.create_application(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon AppConfig all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon AppConfig are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::AppConfig::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon AppConfig API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-appconfig/customizations'
 # @service
 module Aws::AppConfig
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.6.0'
 
 end

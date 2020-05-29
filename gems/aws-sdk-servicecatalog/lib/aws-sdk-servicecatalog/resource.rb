@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ServiceCatalog
+
   class Resource
 
     # @param options ({})

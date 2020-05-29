@@ -386,6 +386,27 @@
         {"shape":"InvalidTagFault"}
       ]
     },
+    "CreateUsageLimit":{
+      "name":"CreateUsageLimit",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateUsageLimitMessage"},
+      "output":{
+        "shape":"UsageLimit",
+        "resultWrapper":"CreateUsageLimitResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"InvalidClusterStateFault"},
+        {"shape":"LimitExceededFault"},
+        {"shape":"UsageLimitAlreadyExistsFault"},
+        {"shape":"InvalidUsageLimitFault"},
+        {"shape":"TagLimitExceededFault"},
+        {"shape":"UnsupportedOperationFault"}
+      ]
+    },
     "DeleteCluster":{
       "name":"DeleteCluster",
       "http":{
@@ -540,6 +561,18 @@
       "errors":[
         {"shape":"ResourceNotFoundFault"},
         {"shape":"InvalidTagFault"}
+      ]
+    },
+    "DeleteUsageLimit":{
+      "name":"DeleteUsageLimit",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteUsageLimitMessage"},
+      "errors":[
+        {"shape":"UsageLimitNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"}
       ]
     },
     "DescribeAccountAttributes":{
@@ -959,6 +992,22 @@
         {"shape":"InvalidTagFault"}
       ]
     },
+    "DescribeUsageLimits":{
+      "name":"DescribeUsageLimits",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeUsageLimitsMessage"},
+      "output":{
+        "shape":"UsageLimitList",
+        "resultWrapper":"DescribeUsageLimitsResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"}
+      ]
+    },
     "DisableLogging":{
       "name":"DisableLogging",
       "http":{
@@ -1008,7 +1057,8 @@
         {"shape":"BucketNotFoundFault"},
         {"shape":"InsufficientS3BucketPolicyFault"},
         {"shape":"InvalidS3KeyPrefixFault"},
-        {"shape":"InvalidS3BucketNameFault"}
+        {"shape":"InvalidS3BucketNameFault"},
+        {"shape":"InvalidClusterStateFault"}
       ]
     },
     "EnableSnapshotCopy":{
@@ -1150,7 +1200,8 @@
         "resultWrapper":"ModifyClusterMaintenanceResult"
       },
       "errors":[
-        {"shape":"ClusterNotFoundFault"}
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"InvalidClusterStateFault"}
       ]
     },
     "ModifyClusterParameterGroup":{
@@ -1297,6 +1348,39 @@
         {"shape":"SnapshotScheduleUpdateInProgressFault"}
       ]
     },
+    "ModifyUsageLimit":{
+      "name":"ModifyUsageLimit",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyUsageLimitMessage"},
+      "output":{
+        "shape":"UsageLimit",
+        "resultWrapper":"ModifyUsageLimitResult"
+      },
+      "errors":[
+        {"shape":"InvalidUsageLimitFault"},
+        {"shape":"UsageLimitNotFoundFault"},
+        {"shape":"UnsupportedOperationFault"}
+      ]
+    },
+    "PauseCluster":{
+      "name":"PauseCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PauseClusterMessage"},
+      "output":{
+        "shape":"PauseClusterResult",
+        "resultWrapper":"PauseClusterResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"InvalidClusterStateFault"}
+      ]
+    },
     "PurchaseReservedNodeOffering":{
       "name":"PurchaseReservedNodeOffering",
       "http":{
@@ -1430,6 +1514,22 @@
         {"shape":"UnsupportedOperationFault"}
       ]
     },
+    "ResumeCluster":{
+      "name":"ResumeCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResumeClusterMessage"},
+      "output":{
+        "shape":"ResumeClusterResult",
+        "resultWrapper":"ResumeClusterResult"
+      },
+      "errors":[
+        {"shape":"ClusterNotFoundFault"},
+        {"shape":"InvalidClusterStateFault"}
+      ]
+    },
     "RevokeClusterSecurityGroupIngress":{
       "name":"RevokeClusterSecurityGroupIngress",
       "http":{
@@ -1542,7 +1642,8 @@
       "type":"string",
       "enum":[
         "restore-cluster",
-        "recommend-node-config"
+        "recommend-node-config",
+        "resize-cluster"
       ]
     },
     "AssociatedClusterList":{
@@ -2498,6 +2599,24 @@
         "Tags":{"shape":"TagList"}
       }
     },
+    "CreateUsageLimitMessage":{
+      "type":"structure",
+      "required":[
+        "ClusterIdentifier",
+        "FeatureType",
+        "LimitType",
+        "Amount"
+      ],
+      "members":{
+        "ClusterIdentifier":{"shape":"String"},
+        "FeatureType":{"shape":"UsageLimitFeatureType"},
+        "LimitType":{"shape":"UsageLimitLimitType"},
+        "Amount":{"shape":"Long"},
+        "Period":{"shape":"UsageLimitPeriod"},
+        "BreachAction":{"shape":"UsageLimitBreachAction"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "CustomerStorageMessage":{
       "type":"structure",
       "members":{
@@ -2656,6 +2775,13 @@
       "members":{
         "ResourceName":{"shape":"String"},
         "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "DeleteUsageLimitMessage":{
+      "type":"structure",
+      "required":["UsageLimitId"],
+      "members":{
+        "UsageLimitId":{"shape":"String"}
       }
     },
     "DependentServiceRequestThrottlingFault":{
@@ -2951,6 +3077,18 @@
       "members":{
         "ResourceName":{"shape":"String"},
         "ResourceType":{"shape":"String"},
+        "MaxRecords":{"shape":"IntegerOptional"},
+        "Marker":{"shape":"String"},
+        "TagKeys":{"shape":"TagKeyList"},
+        "TagValues":{"shape":"TagValueList"}
+      }
+    },
+    "DescribeUsageLimitsMessage":{
+      "type":"structure",
+      "members":{
+        "UsageLimitId":{"shape":"String"},
+        "ClusterIdentifier":{"shape":"String"},
+        "FeatureType":{"shape":"UsageLimitFeatureType"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"},
         "TagKeys":{"shape":"TagKeyList"},
@@ -3647,6 +3785,17 @@
       },
       "exception":true
     },
+    "InvalidUsageLimitFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidUsageLimit",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidVPCNetworkStateFault":{
       "type":"structure",
       "members":{
@@ -3896,6 +4045,15 @@
         "ScheduleDefinitions":{"shape":"ScheduleDefinitionList"}
       }
     },
+    "ModifyUsageLimitMessage":{
+      "type":"structure",
+      "required":["UsageLimitId"],
+      "members":{
+        "UsageLimitId":{"shape":"String"},
+        "Amount":{"shape":"LongOptional"},
+        "BreachAction":{"shape":"UsageLimitBreachAction"}
+      }
+    },
     "NodeConfigurationOption":{
       "type":"structure",
       "members":{
@@ -4037,6 +4195,19 @@
       "member":{
         "shape":"Parameter",
         "locationName":"Parameter"
+      }
+    },
+    "PauseClusterMessage":{
+      "type":"structure",
+      "required":["ClusterIdentifier"],
+      "members":{
+        "ClusterIdentifier":{"shape":"String"}
+      }
+    },
+    "PauseClusterResult":{
+      "type":"structure",
+      "members":{
+        "Cluster":{"shape":"Cluster"}
       }
     },
     "PendingActionsList":{
@@ -4236,10 +4407,7 @@
     },
     "ResizeClusterMessage":{
       "type":"structure",
-      "required":[
-        "ClusterIdentifier",
-        "NumberOfNodes"
-      ],
+      "required":["ClusterIdentifier"],
       "members":{
         "ClusterIdentifier":{"shape":"String"},
         "ClusterType":{"shape":"String"},
@@ -4387,6 +4555,19 @@
       "type":"structure",
       "members":{
         "TableRestoreStatus":{"shape":"TableRestoreStatus"}
+      }
+    },
+    "ResumeClusterMessage":{
+      "type":"structure",
+      "required":["ClusterIdentifier"],
+      "members":{
+        "ClusterIdentifier":{"shape":"String"}
+      }
+    },
+    "ResumeClusterResult":{
+      "type":"structure",
+      "members":{
+        "Cluster":{"shape":"Cluster"}
       }
     },
     "RevisionTarget":{
@@ -4606,7 +4787,9 @@
     "ScheduledActionType":{
       "type":"structure",
       "members":{
-        "ResizeCluster":{"shape":"ResizeClusterMessage"}
+        "ResizeCluster":{"shape":"ResizeClusterMessage"},
+        "PauseCluster":{"shape":"PauseClusterMessage"},
+        "ResumeCluster":{"shape":"ResumeClusterMessage"}
       }
     },
     "ScheduledActionTypeUnsupportedFault":{
@@ -4622,7 +4805,11 @@
     },
     "ScheduledActionTypeValues":{
       "type":"string",
-      "enum":["ResizeCluster"]
+      "enum":[
+        "ResizeCluster",
+        "PauseCluster",
+        "ResumeCluster"
+      ]
     },
     "ScheduledActionsMessage":{
       "type":"structure",
@@ -5230,6 +5417,82 @@
         "DatabaseVersion":{"shape":"String"},
         "SupportedOperations":{"shape":"SupportedOperationList"}
       }
+    },
+    "UsageLimit":{
+      "type":"structure",
+      "members":{
+        "UsageLimitId":{"shape":"String"},
+        "ClusterIdentifier":{"shape":"String"},
+        "FeatureType":{"shape":"UsageLimitFeatureType"},
+        "LimitType":{"shape":"UsageLimitLimitType"},
+        "Amount":{"shape":"Long"},
+        "Period":{"shape":"UsageLimitPeriod"},
+        "BreachAction":{"shape":"UsageLimitBreachAction"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "UsageLimitAlreadyExistsFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"UsageLimitAlreadyExists",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "UsageLimitBreachAction":{
+      "type":"string",
+      "enum":[
+        "log",
+        "emit-metric",
+        "disable"
+      ]
+    },
+    "UsageLimitFeatureType":{
+      "type":"string",
+      "enum":[
+        "spectrum",
+        "concurrency-scaling"
+      ]
+    },
+    "UsageLimitLimitType":{
+      "type":"string",
+      "enum":[
+        "time",
+        "data-scanned"
+      ]
+    },
+    "UsageLimitList":{
+      "type":"structure",
+      "members":{
+        "UsageLimits":{"shape":"UsageLimits"},
+        "Marker":{"shape":"String"}
+      }
+    },
+    "UsageLimitNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"UsageLimitNotFound",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "UsageLimitPeriod":{
+      "type":"string",
+      "enum":[
+        "daily",
+        "weekly",
+        "monthly"
+      ]
+    },
+    "UsageLimits":{
+      "type":"list",
+      "member":{"shape":"UsageLimit"}
     },
     "ValueStringList":{
       "type":"list",

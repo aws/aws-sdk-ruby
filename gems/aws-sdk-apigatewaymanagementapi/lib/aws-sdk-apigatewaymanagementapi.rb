@@ -24,17 +24,20 @@ require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     api_gateway_management_api = Aws::ApiGatewayManagementApi::Client.new
+#     resp = api_gateway_management_api.delete_connection(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AmazonApiGatewayManagementApi all
-# extend {Errors::ServiceError}.
+# Errors returned from AmazonApiGatewayManagementApi are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ApiGatewayManagementApi::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AmazonApiGatewayManagementApi API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-apigatewaymanagementapi/customizations'
 # @service
 module Aws::ApiGatewayManagementApi
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.14.0'
 
 end

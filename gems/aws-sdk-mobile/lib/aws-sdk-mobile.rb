@@ -24,17 +24,20 @@ require_relative 'aws-sdk-mobile/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     mobile = Aws::Mobile::Client.new
+#     resp = mobile.create_project(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Mobile all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Mobile are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Mobile::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Mobile API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-mobile/customizations'
 # @service
 module Aws::Mobile
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.19.0'
 
 end

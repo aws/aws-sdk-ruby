@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::IoTJobsDataPlane
+
+  # When IoTJobsDataPlane returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::IoTJobsDataPlane::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all IoTJobsDataPlane errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::IoTJobsDataPlane::Errors::ServiceError
+  #       # rescues all IoTJobsDataPlane API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CertificateValidationException}
+  # * {InvalidRequestException}
+  # * {InvalidStateTransitionException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {TerminalStateException}
+  # * {ThrottlingException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +52,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -39,7 +67,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateTransitionException < ServiceError
@@ -55,7 +82,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -71,7 +97,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -87,7 +112,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class TerminalStateException < ServiceError
@@ -103,7 +127,6 @@ module Aws::IoTJobsDataPlane
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -124,7 +147,6 @@ module Aws::IoTJobsDataPlane
       def payload
         @data[:payload]
       end
-
     end
 
   end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ApiGatewayV2
+
   class Resource
 
     # @param options ({})

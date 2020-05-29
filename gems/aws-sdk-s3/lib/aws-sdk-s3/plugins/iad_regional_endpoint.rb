@@ -44,7 +44,7 @@ region. Defaults to `legacy` mode using global endpoint.
           mode = ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] ||
             Aws.shared_config.s3_us_east_1_regional_endpoint(profile: cfg.profile) ||
             'legacy'
-          mode.downcase!
+          mode = mode.downcase
           unless %w(legacy regional).include?(mode)
             raise ArgumentError, "expected :s3_us_east_1_regional_endpoint or"\
               " ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] to be `legacy` or"\

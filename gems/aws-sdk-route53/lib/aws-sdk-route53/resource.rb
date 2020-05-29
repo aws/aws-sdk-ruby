@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Route53
+
   class Resource
 
     # @param options ({})

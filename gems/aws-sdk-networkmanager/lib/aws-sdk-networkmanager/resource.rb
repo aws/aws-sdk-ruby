@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::NetworkManager
+
   class Resource
 
     # @param options ({})

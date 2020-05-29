@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:organizations)
 
 module Aws::Organizations
+  # An API client for Organizations.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::Organizations::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::Organizations
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::Organizations
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::Organizations
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::Organizations
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::Organizations
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::Organizations
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::Organizations
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -219,16 +274,15 @@ module Aws::Organizations
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -237,7 +291,7 @@ module Aws::Organizations
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -402,23 +456,54 @@ module Aws::Organizations
     end
 
     # Attaches a policy to a root, an organizational unit (OU), or an
-    # individual account.
+    # individual account. How the policy affects accounts depends on the
+    # type of policy:
     #
-    # How the policy affects accounts depends on the type of policy:
+    # * **Service control policy (SCP)** - An SCP specifies what permissions
+    #   can be delegated to users in affected member accounts. The scope of
+    #   influence for a policy depends on what you attach the policy to:
     #
-    # * For more information about attaching SCPs, see [How SCPs Work][1] in
-    #   the *AWS Organizations User Guide.*
+    #   * If you attach an SCP to a root, it affects all accounts in the
+    #     organization.
     #
-    # * For information about attaching tag policies, see [How Policy
-    #   Inheritance Works][2] in the *AWS Organizations User Guide.*
+    #   * If you attach an SCP to an OU, it affects all accounts in that OU
+    #     and in any child OUs.
+    #
+    #   * If you attach the policy directly to an account, it affects only
+    #     that account.
+    #
+    #   SCPs are JSON policies that specify the maximum permissions for an
+    #   organization or organizational unit (OU). You can attach one SCP to
+    #   a higher level root or OU, and a different SCP to a child OU or to
+    #   an account. The child policy can further restrict only the
+    #   permissions that pass through the parent filter and are available to
+    #   the child. An SCP that is attached to a child can't grant a
+    #   permission that the parent hasn't already granted. For example,
+    #   imagine that the parent SCP allows permissions A, B, C, D, and E.
+    #   The child SCP allows C, D, E, F, and G. The result is that the
+    #   accounts affected by the child SCP are allowed to use only C, D, and
+    #   E. They can't use A or B because the child OU filtered them out.
+    #   They also can't use F and G because the parent OU filtered them
+    #   out. They can't be granted back by the child SCP; child SCPs can
+    #   only filter the permissions they receive from the parent SCP.
+    #
+    #   AWS Organizations attaches a default SCP named `"FullAWSAccess` to
+    #   every root, OU, and account. This default SCP allows all services
+    #   and actions, enabling any new child OU or account to inherit the
+    #   permissions of the parent root or OU. If you detach the default
+    #   policy, you must replace it with a policy that specifies the
+    #   permissions that you want to allow in that OU or account.
+    #
+    #   For more information about how AWS Organizations policies
+    #   permissions work, see [Using Service Control Policies][1] in the
+    #   *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html
-    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
@@ -649,14 +734,14 @@ module Aws::Organizations
     # Account in Your Organization][3] in the *AWS Organizations User
     # Guide.*
     #
-    # * When you create an account in an organization, the information
-    #   required for the account to operate as a standalone account is *not*
-    #   automatically collected. For example, information about the payment
-    #   method and signing the end user license agreement (EULA) is not
-    #   collected. If you must remove an account from your organization
-    #   later, you can do so only after you provide the missing information.
-    #   Follow the steps at [ To leave an organization as a member
-    #   account][4] in the *AWS Organizations User Guide*.
+    # * When you create an account in an organization using the AWS
+    #   Organizations console, API, or CLI commands, the information
+    #   required for the account to operate as a standalone account, such as
+    #   a payment method and signing the end user license agreement (EULA)
+    #   is *not* automatically collected. If you must remove an account from
+    #   your organization later, you can do so only after you provide the
+    #   missing information. Follow the steps at [ To leave an organization
+    #   as a member account][4] in the *AWS Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [AWS Support][5].
@@ -716,10 +801,13 @@ module Aws::Organizations
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
-    #   account, see [Accessing and Administering the Member Accounts in Your
-    #   Organization][1] in the *AWS Organizations User Guide*. Also see steps
-    #   2 and 3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
-    #   Roles][2] in the *IAM User Guide.*
+    #   account, see the following links:
+    #
+    #   * [Accessing and Administering the Member Accounts in Your
+    #     Organization][1] in the *AWS Organizations User Guide*
+    #
+    #   * Steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
+    #     Using IAM Roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits with
@@ -739,9 +827,9 @@ module Aws::Organizations
     #   the Billing and Cost Management Console][1] in the *AWS Billing and
     #   Cost Management User Guide*.
     #
-    #   If you don't specify this parameter, the value defaults to `ALLOW`.
-    #   This value allows IAM users and roles with the required permissions to
-    #   access billing information for the new account.
+    #   If you don't specify this parameter, the value defaults to `ALLOW`,
+    #   and IAM users and roles with the required permissions can access
+    #   billing information for the new account.
     #
     #
     #
@@ -865,24 +953,24 @@ module Aws::Organizations
     # allows the master account in the organization in the commercial Region
     # to assume it. An AWS GovCloud (US) account is then created and
     # associated with the commercial account that you just created. A role
-    # is created in the new AWS GovCloud (US) account. This role can be
-    # assumed by the AWS GovCloud (US) account that is associated with the
-    # master account of the commercial organization. For more information
-    # and to view a diagram that explains how account access works, see [AWS
+    # is created in the new AWS GovCloud (US) account that can be assumed by
+    # the AWS GovCloud (US) account that is associated with the master
+    # account of the commercial organization. For more information and to
+    # view a diagram that explains how account access works, see [AWS
     # Organizations][4] in the *AWS GovCloud User Guide.*
     #
     # For more information about creating accounts, see [Creating an AWS
     # Account in Your Organization][6] in the *AWS Organizations User
     # Guide.*
     #
-    # * You can create an account in an organization using the AWS
-    #   Organizations console, API, or CLI commands. When you do, the
-    #   information required for the account to operate as a standalone
-    #   account, such as a payment method, is *not* automatically collected.
-    #   If you must remove an account from your organization later, you can
-    #   do so only after you provide the missing information. Follow the
-    #   steps at [ To leave an organization as a member account][7] in the
-    #   *AWS Organizations User Guide.*
+    # * When you create an account in an organization using the AWS
+    #   Organizations console, API, or CLI commands, the information
+    #   required for the account to operate as a standalone account, such as
+    #   a payment method and signing the end user license agreement (EULA)
+    #   is *not* automatically collected. If you must remove an account from
+    #   your organization later, you can do so only after you provide the
+    #   missing information. Follow the steps at [ To leave an organization
+    #   as a member account][7] in the *AWS Organizations User Guide.*
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [AWS Support][8].
@@ -930,8 +1018,8 @@ module Aws::Organizations
     #   of the account or remove an account that was created with an invalid
     #   email address. Like all request parameters for
     #   `CreateGovCloudAccount`, the request for the email address for the AWS
-    #   GovCloud (US) account originates from the commercial Region. It does
-    #   not come from the AWS GovCloud (US) Region.
+    #   GovCloud (US) account originates from the commercial Region, not from
+    #   the AWS GovCloud (US) Region.
     #
     # @option params [required, String] :account_name
     #   The friendly name of the member account.
@@ -951,8 +1039,8 @@ module Aws::Organizations
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in Your
-    #   Organization][1] in the *AWS Organizations User Guide*. See also steps
-    #   2 and 3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
+    #   Organization][1] in the *AWS Organizations User Guide* and steps 2 and
+    #   3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
     #   Roles][2] in the *IAM User Guide.*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
@@ -1023,11 +1111,12 @@ module Aws::Organizations
     # must also have the relevant IAM permissions.
     #
     # By default (or if you set the `FeatureSet` parameter to `ALL`), the
-    # new organization is created with all features enabled. In addition,
-    # service control policies are automatically enabled in the root. If you
-    # instead create the organization supporting only the consolidated
-    # billing features, no policy types are enabled by default, and you
-    # can't use organization policies.
+    # new organization is created with all features enabled and service
+    # control policies automatically enabled in the root. If you instead
+    # choose to create the organization supporting only the consolidated
+    # billing features by setting the `FeatureSet` parameter to
+    # `CONSOLIDATED_BILLING"`, no policy types are enabled by default, and
+    # you can't use organization policies
     #
     #
     #
@@ -1045,9 +1134,9 @@ module Aws::Organizations
     #     The consolidated billing feature subset isn't available for
     #     organizations in the AWS GovCloud (US) Region.
     #
-    #   * `ALL`\: In addition to all the features that consolidated billing
-    #     feature set supports, the master account can also apply any policy
-    #     type to any member account in the organization. For more
+    #   * `ALL`\: In addition to all the features supported by the
+    #     consolidated billing feature set, the master account can also apply
+    #     any policy type to any member account in the organization. For more
     #     information, see [All features][2] in the *AWS Organizations User
     #     Guide.*
     #
@@ -1236,12 +1325,12 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html
     #
     # @option params [required, String] :content
-    #   The policy content to add to the new policy. For example, you could
-    #   create a [service control policy][1] (SCP) that specifies the
-    #   permissions that administrators in attached accounts can delegate to
-    #   their users, groups, and roles. The string for this SCP must be JSON
-    #   text. For more information about the SCP syntax, see [Service Control
-    #   Policy Syntax][2] in the *AWS Organizations User Guide.*
+    #   The policy content to add to the new policy. For example, if you
+    #   create a [service control policy][1] (SCP), this string must be JSON
+    #   text that specifies the permissions that admins in attached accounts
+    #   can delegate to their users, groups, and roles. For more information
+    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
+    #   *AWS Organizations User Guide.*
     #
     #
     #
@@ -1263,6 +1352,11 @@ module Aws::Organizations
     #
     # @option params [required, String] :type
     #   The type of policy to create.
+    #
+    #   <note markdown="1"> In the current release, the only type of policy that you can create is
+    #   a service control policy (SCP).
+    #
+    #    </note>
     #
     # @return [Types::CreatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1333,8 +1427,7 @@ module Aws::Organizations
     # reinitiate the process with a new handshake request.
     #
     # After you decline a handshake, it continues to appear in the results
-    # of relevant API operations for only 30 days. After that, it's
-    # deleted.
+    # of relevant APIs for only 30 days. After that, it's deleted.
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to decline.
@@ -1548,11 +1641,60 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Retrieves AWS Organizations related information about the specified
-    # account.
+    # Removes the specified member AWS account as a delegated administrator
+    # for the specified AWS service.
+    #
+    # You can run this action only for AWS services that support this
+    # feature. For a current list of services that support it, see the
+    # column *Supports Delegated Administrator* in the table at [AWS
+    # Services that you can use with AWS Organizations][1] in the *AWS
+    # Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID number of the member account in the organization that
+    #   you want to deregister as a delegated administrator.
+    #
+    # @option params [required, String] :service_principal
+    #   The service principal name of an AWS service for which the account is
+    #   a delegated administrator.
+    #
+    #   Delegated administrator privileges are revoked for only the specified
+    #   AWS service from the member account. If the specified service is the
+    #   only service for which the member account is a delegated
+    #   administrator, the operation also revokes Organizations read action
+    #   permissions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_delegated_administrator({
+    #     account_id: "AccountId", # required
+    #     service_principal: "ServicePrincipal", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeregisterDelegatedAdministrator AWS API Documentation
+    #
+    # @overload deregister_delegated_administrator(params = {})
+    # @param [Hash] params ({})
+    def deregister_delegated_administrator(params = {}, options = {})
+      req = build_request(:deregister_delegated_administrator, params)
+      req.send_request(options)
+    end
+
+    # Retrieves AWS Organizations-related information about the specified
+    # account.
+    #
+    # This operation can be called only from the organization's master
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the AWS account that you want
@@ -1618,7 +1760,8 @@ module Aws::Organizations
     # account.
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :create_account_request_id
     #   Specifies the `operationId` that uniquely identifies the request. You
@@ -1692,7 +1835,9 @@ module Aws::Organizations
     # For more information on policy inheritance, see [How Policy
     # Inheritance Works][1] in the *AWS Organizations User Guide*.
     #
-    # This operation can be called from any account in the organization.
+    # This operation can be called only from the organization's master
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     #
     #
@@ -1908,7 +2053,8 @@ module Aws::Organizations
     # Retrieves information about an organizational unit (OU).
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :organizational_unit_id
     #   The unique identifier (ID) of the organizational unit that you want
@@ -1970,7 +2116,8 @@ module Aws::Organizations
     # Retrieves information about a policy.
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want details about.
@@ -2044,15 +2191,15 @@ module Aws::Organizations
     # accounts are immediate.
     #
     # **Note:** Every root, OU, and account must have at least one SCP
-    # attached. You can replace the default `FullAWSAccess` policy with one
-    # that limits the permissions that can be delegated. To do that, you
-    # must attach the replacement policy before you can remove the default
-    # one. This is the authorization strategy of using an [allow list][1].
-    # You could instead attach a second SCP and leave the `FullAWSAccess`
-    # SCP still attached. You could then specify `"Effect": "Deny"` in the
-    # second SCP to override the `"Effect": "Allow"` in the `FullAWSAccess`
-    # policy (or any other attached SCP). If you take these steps, you're
-    # using the authorization strategy of a [deny list][2].
+    # attached. If you want to replace the default `FullAWSAccess` policy
+    # with one that limits the permissions that can be delegated, you must
+    # attach the replacement policy before you can remove the default one.
+    # This is the authorization strategy of an "[allow list][1]". If you
+    # instead attach a second SCP and leave the `FullAWSAccess` SCP still
+    # attached, and specify `"Effect": "Deny"` in the second SCP to override
+    # the `"Effect": "Allow"` in the `FullAWSAccess` policy (or any other
+    # attached SCP), you're using the authorization strategy of a "[deny
+    # list][2]".
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2145,9 +2292,8 @@ module Aws::Organizations
     #
     # After you perform the `DisableAWSServiceAccess` operation, the
     # specified service can no longer perform operations in your
-    # organization's accounts. The only exception is when the operations
-    # are explicitly permitted by IAM policies that are attached to your
-    # roles.
+    # organization's accounts unless the operations are explicitly
+    # permitted by the IAM policies that are attached to your roles.
     #
     # For more information about integrating other services with AWS
     # Organizations, including the list of services that work with
@@ -2184,13 +2330,12 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Disables an organizational control policy type in a root and detaches
-    # all policies of that type from the organization root, OUs, and
-    # accounts. A policy of a certain type can be attached to entities in a
-    # root only if that type is enabled in the root. After you perform this
-    # operation, you no longer can attach policies of the specified type to
-    # that root or to any organizational unit (OU) or account in that root.
-    # You can undo this by using the EnablePolicyType operation.
+    # Disables an organizational control policy type in a root. A policy of
+    # a certain type can be attached to entities in a root only if that type
+    # is enabled in the root. After you perform this operation, you no
+    # longer can attach policies of the specified type to that root or to
+    # any organizational unit (OU) or account in that root. You can undo
+    # this by using the EnablePolicyType operation.
     #
     # This is an asynchronous request that AWS performs in the background.
     # If you disable a policy for a root, it still appears enabled for the
@@ -2326,7 +2471,7 @@ module Aws::Organizations
     # Enables all features in an organization. This enables the use of
     # organization policies that can restrict the services and actions that
     # can be called in each account. Until you enable all features, you have
-    # access only to consolidated billing. You can't use any of the
+    # access only to consolidated billing, and you can't use any of the
     # advanced account administration features that AWS Organizations
     # supports. For more information, see [Enabling All Features in Your
     # Organization][1] in the *AWS Organizations User Guide.*
@@ -2336,8 +2481,7 @@ module Aws::Organizations
     # Calling this operation sends a handshake to every invited account in
     # the organization. The feature set change can be finalized and the
     # additional features enabled only after all administrators in the
-    # invited accounts approve the change. Accepting the handshake approves
-    # the change.
+    # invited accounts approve the change by accepting the handshake.
     #
     # After you enable all features, you can separately enable or disable
     # individual policy types in a root using EnablePolicyType and
@@ -2519,18 +2663,18 @@ module Aws::Organizations
     # response.
     #
     # * You can invite AWS accounts only from the same seller as the master
-    #   account. For example, assume that your organization's master
-    #   account was created by Amazon Internet Services Pvt. Ltd (AISPL), an
-    #   AWS seller in India. You can invite only other AISPL accounts to
-    #   your organization. You can't combine accounts from AISPL and AWS or
-    #   from any other AWS seller. For more information, see [Consolidated
+    #   account. For example, if your organization's master account was
+    #   created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS seller
+    #   in India, you can invite only other AISPL accounts to your
+    #   organization. You can't combine accounts from AISPL and AWS or from
+    #   any other AWS seller. For more information, see [Consolidated
     #   Billing in India][1].
     #
-    # * You might receive an exception that indicates that you exceeded your
+    # * If you receive an exception that indicates that you exceeded your
     #   account limits for the organization or that the operation failed
-    #   because your organization is still initializing. If so, wait one
-    #   hour and then try again. If the error persists after an hour,
-    #   contact [AWS Support][2].
+    #   because your organization is still initializing, wait one hour and
+    #   then try again. If the error persists after an hour, contact [AWS
+    #   Support][2].
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2671,24 +2815,31 @@ module Aws::Organizations
     #
     # * The master account in an organization with all features enabled can
     #   set service control policies (SCPs) that can restrict what
-    #   administrators of member accounts can do. These restrictions can
-    #   include preventing member accounts from successfully calling
-    #   `LeaveOrganization`.
+    #   administrators of member accounts can do. This includes preventing
+    #   them from successfully calling `LeaveOrganization` and leaving the
+    #   organization.
     #
     # * You can leave an organization as a member account only if the
     #   account is configured with the information required to operate as a
     #   standalone account. When you create an account in an organization
-    #   using the AWS Organizations console, API, or CLI, the information
-    #   required of standalone accounts is *not* automatically collected.
-    #   For each account that you want to make standalone, you must accept
-    #   the end user license agreement (EULA). You must also choose a
-    #   support plan, provide and verify the required contact information,
-    #   and provide a current payment method. AWS uses the payment method to
-    #   charge for any billable (not free tier) AWS activity that occurs
-    #   while the account isn't attached to an organization. Follow the
-    #   steps at [ To leave an organization when all required account
-    #   information has not yet been provided][1] in the *AWS Organizations
-    #   User Guide.*
+    #   using the AWS Organizations console, API, or CLI commands, the
+    #   information required of standalone accounts is *not* automatically
+    #   collected. For each account that you want to make standalone, you
+    #   must do the following steps:
+    #
+    #   * Accept the end user license agreement (EULA)
+    #
+    #   * Choose a support plan
+    #
+    #   * Provide and verify the required contact information
+    #
+    #   * Provide a current payment method
+    #
+    #   AWS uses the payment method to charge for any billable (not free
+    #   tier) AWS activity that occurs while the account isn't attached to
+    #   an organization. Follow the steps at [ To leave an organization when
+    #   all required account information has not yet been provided][1] in
+    #   the *AWS Organizations User Guide.*
     #
     # * You can leave an organization only after you enable IAM user access
     #   to billing in your account. For more information, see [Activating
@@ -2730,34 +2881,38 @@ module Aws::Organizations
     # Services][1] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListAWSServiceAccessForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAWSServiceAccessForOrganizationResponse#enabled_service_principals #enabled_service_principals} => Array&lt;Types::EnabledServicePrincipal&gt;
     #   * {Types::ListAWSServiceAccessForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2795,30 +2950,34 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccountsResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of all of the accounts in an organization
@@ -2914,34 +3073,38 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or organization unit
     #   (OU) whose accounts you want to list.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListAccountsForParentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccountsForParentResponse#accounts #accounts} => Array&lt;Types::Account&gt;
     #   * {Types::ListAccountsForParentResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of all of the accounts in a root or OU
@@ -3019,7 +3182,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) for the parent root or OU whose children
@@ -3044,27 +3208,30 @@ module Aws::Organizations
     #   Filters the output to include only the specified child type.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListChildrenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListChildrenResponse#children #children} => Array&lt;Types::Child&gt;
     #   * {Types::ListChildrenResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of all of the child accounts and OUs in a parent root or OU
@@ -3127,7 +3294,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [Array<String>] :states
     #   A list of one or more states that you want included in the response.
@@ -3135,27 +3303,30 @@ module Aws::Organizations
     #   response.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListCreateAccountStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCreateAccountStatusResponse#create_account_statuses #create_account_statuses} => Array&lt;Types::CreateAccountStatus&gt;
     #   * {Types::ListCreateAccountStatusResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To get a list of completed account creation requests made in the organization
@@ -3236,6 +3407,137 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Lists the AWS accounts that are designated as delegated administrators
+    # in this organization.
+    #
+    # This operation can be called only from the organization's master
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
+    #
+    # @option params [String] :service_principal
+    #   Specifies a service principal name. If specified, then the operation
+    #   lists the delegated administrators only for the specified service.
+    #
+    #   If you don't specify a service principal, the operation lists all
+    #   delegated administrators for all services in your organization.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
+    #
+    # @return [Types::ListDelegatedAdministratorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDelegatedAdministratorsResponse#delegated_administrators #delegated_administrators} => Array&lt;Types::DelegatedAdministrator&gt;
+    #   * {Types::ListDelegatedAdministratorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_delegated_administrators({
+    #     service_principal: "ServicePrincipal",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delegated_administrators #=> Array
+    #   resp.delegated_administrators[0].id #=> String
+    #   resp.delegated_administrators[0].arn #=> String
+    #   resp.delegated_administrators[0].email #=> String
+    #   resp.delegated_administrators[0].name #=> String
+    #   resp.delegated_administrators[0].status #=> String, one of "ACTIVE", "SUSPENDED"
+    #   resp.delegated_administrators[0].joined_method #=> String, one of "INVITED", "CREATED"
+    #   resp.delegated_administrators[0].joined_timestamp #=> Time
+    #   resp.delegated_administrators[0].delegation_enabled_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedAdministrators AWS API Documentation
+    #
+    # @overload list_delegated_administrators(params = {})
+    # @param [Hash] params ({})
+    def list_delegated_administrators(params = {}, options = {})
+      req = build_request(:list_delegated_administrators, params)
+      req.send_request(options)
+    end
+
+    # List the AWS services for which the specified account is a delegated
+    # administrator.
+    #
+    # This operation can be called only from the organization's master
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID number of a delegated administrator account in the
+    #   organization.
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #
+    # @option params [Integer] :max_results
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
+    #
+    # @return [Types::ListDelegatedServicesForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDelegatedServicesForAccountResponse#delegated_services #delegated_services} => Array&lt;Types::DelegatedService&gt;
+    #   * {Types::ListDelegatedServicesForAccountResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_delegated_services_for_account({
+    #     account_id: "AccountId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.delegated_services #=> Array
+    #   resp.delegated_services[0].service_principal #=> String
+    #   resp.delegated_services[0].delegation_enabled_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedServicesForAccount AWS API Documentation
+    #
+    # @overload list_delegated_services_for_account(params = {})
+    # @param [Hash] params ({})
+    def list_delegated_services_for_account(params = {}, options = {})
+      req = build_request(:list_delegated_services_for_account, params)
+      req.send_request(options)
+    end
+
     # Lists the current handshakes that are associated with the account of
     # the requesting user.
     #
@@ -3251,40 +3553,44 @@ module Aws::Organizations
     #
     #  </note>
     #
-    # This operation can be called from any account in the organization.
+    # This operation can be called only from the organization's master
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   Filters the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the output
     #   to only a specified type, such as `INVITE`, `ENABLE_ALL_FEATURES`, or
-    #   `APPROVE_ALL_FEATURES`. Alternatively, you can specify the
-    #   `ENABLE_ALL_FEATURES` handshake, which generates a separate child
-    #   handshake for each member account. When you do specify
-    #   `ParentHandshakeId` to see only the handshakes that were generated by
-    #   that parent request.
+    #   `APPROVE_ALL_FEATURES`. Alternatively, for the `ENABLE_ALL_FEATURES`
+    #   handshake that generates a separate child handshake for each member
+    #   account, you can specify `ParentHandshakeId` to see only the
+    #   handshakes that were generated by that parent request.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListHandshakesForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListHandshakesForAccountResponse#handshakes #handshakes} => Array&lt;Types::Handshake&gt;
     #   * {Types::ListHandshakesForAccountResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of the handshakes sent to an account
@@ -3399,40 +3705,43 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [Types::HandshakeFilter] :filter
     #   A filter of the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the output
     #   to only a specified type, such as `INVITE`, `ENABLE-ALL-FEATURES`, or
-    #   `APPROVE-ALL-FEATURES`. Alternatively, you can specify the
-    #   `ENABLE-ALL-FEATURES` handshake, which generates a separate child
-    #   handshake for each member account. When you do, specify the
-    #   `ParentHandshakeId` to see only the handshakes that were generated by
-    #   that parent request.
+    #   `APPROVE-ALL-FEATURES`. Alternatively, for the `ENABLE-ALL-FEATURES`
+    #   handshake that generates a separate child handshake for each member
+    #   account, you can specify the `ParentHandshakeId` to see only the
+    #   handshakes that were generated by that parent request.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListHandshakesForOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListHandshakesForOrganizationResponse#handshakes #handshakes} => Array&lt;Types::Handshake&gt;
     #   * {Types::ListHandshakesForOrganizationResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of the handshakes associated with an organization
@@ -3582,7 +3891,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :parent_id
     #   The unique identifier (ID) of the root or OU whose child OUs you want
@@ -3604,27 +3914,30 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListOrganizationalUnitsForParentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListOrganizationalUnitsForParentResponse#organizational_units #organizational_units} => Array&lt;Types::OrganizationalUnit&gt;
     #   * {Types::ListOrganizationalUnitsForParentResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of all of the child OUs in a parent root or OU
@@ -3690,7 +4003,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # <note markdown="1"> In the current release, a child can have only a single parent.
     #
@@ -3715,27 +4029,30 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListParentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListParentsResponse#parents #parents} => Array&lt;Types::Parent&gt;
     #   * {Types::ListParentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of all of the parents of a child OU or account
@@ -3792,33 +4109,37 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :filter
     #   Specifies the type of policy that you want to include in the response.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPoliciesResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list policies in the organization
@@ -3900,7 +4221,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :target_id
     #   The unique identifier (ID) of the root, organizational unit, or
@@ -3927,27 +4249,30 @@ module Aws::Organizations
     #   The type of policy that you want to include in the returned list.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListPoliciesForTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPoliciesForTargetResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
     #   * {Types::ListPoliciesForTargetResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list policies attached to a root, OU, or account
@@ -4015,7 +4340,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
     # from whether they're available in the organization. When you enable
@@ -4027,27 +4353,30 @@ module Aws::Organizations
     #  </note>
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListRootsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRootsResponse#roots #roots} => Array&lt;Types::Root&gt;
     #   * {Types::ListRootsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of roots in the organization
@@ -4106,21 +4435,25 @@ module Aws::Organizations
     # Currently, you can list tags on an account in AWS Organizations.
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :resource_id
     #   The ID of the resource that you want to retrieve tags for.
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4157,7 +4490,8 @@ module Aws::Organizations
     #  </note>
     #
     # This operation can be called only from the organization's master
-    # account.
+    # account or by a member account that is a delegated administrator for
+    # an AWS service.
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy whose attachments you want to
@@ -4172,27 +4506,30 @@ module Aws::Organizations
     #   [1]: http://wikipedia.org/wiki/regex
     #
     # @option params [String] :next_token
-    #   Use this parameter if you receive a `NextToken` response in a previous
-    #   request that indicates that there is more output available. Set it to
-    #   the value of the previous call's `NextToken` response to indicate
-    #   where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #
     # @option params [Integer] :max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the operation
-    #   to get the next part of the results. Note that Organizations might
-    #   return fewer results than the maximum even when there are more results
-    #   available. You should check `NextToken` after every operation to
-    #   ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of the
+    #   response. If you do not include this parameter, it defaults to a value
+    #   that is specific to the operation. If additional items exist beyond
+    #   the maximum you specify, the `NextToken` response element is present
+    #   and has a value (is not null). Include that value as the `NextToken`
+    #   request parameter in the next call to the operation to get the next
+    #   part of the results. Note that Organizations might return fewer
+    #   results than the maximum even when there are more results available.
+    #   You should check `NextToken` after every operation to ensure that you
+    #   receive all of the results.
     #
     # @return [Types::ListTargetsForPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTargetsForPolicyResponse#targets #targets} => Array&lt;Types::PolicyTargetSummary&gt;
     #   * {Types::ListTargetsForPolicyResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     #
     # @example Example: To retrieve a list of roots, OUs, and accounts to which a policy is attached
@@ -4338,6 +4675,50 @@ module Aws::Organizations
       req.send_request(options)
     end
 
+    # Enables the specified member account to administer the Organizations
+    # features of the specified AWS service. It grants read-only access to
+    # AWS Organizations service data. The account still requires IAM
+    # permissions to access and administer the AWS service.
+    #
+    # You can run this action only for AWS services that support this
+    # feature. For a current list of services that support it, see the
+    # column *Supports Delegated Administrator* in the table at [AWS
+    # Services that you can use with AWS Organizations][1] in the *AWS
+    # Organizations User Guide.*
+    #
+    # This operation can be called only from the organization's master
+    # account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID number of the member account in the organization to
+    #   register as a delegated administrator.
+    #
+    # @option params [required, String] :service_principal
+    #   The service principal of the AWS service for which you want to make
+    #   the member account a delegated administrator.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_delegated_administrator({
+    #     account_id: "AccountId", # required
+    #     service_principal: "ServicePrincipal", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RegisterDelegatedAdministrator AWS API Documentation
+    #
+    # @overload register_delegated_administrator(params = {})
+    # @param [Hash] params ({})
+    def register_delegated_administrator(params = {}, options = {})
+      req = build_request(:register_delegated_administrator, params)
+      req.send_request(options)
+    end
+
     # Removes the specified account from the organization.
     #
     # The removed account becomes a standalone account that isn't a member
@@ -4353,15 +4734,15 @@ module Aws::Organizations
     # You can remove an account from your organization only if the account
     # is configured with the information required to operate as a standalone
     # account. When you create an account in an organization using the AWS
-    # Organizations console, API, or CLI, the information required of
-    # standalone accounts is *not* automatically collected. For an account
-    # that you want to make standalone, you must accept the end user license
-    # agreement (EULA). You must also choose a support plan, provide and
-    # verify the required contact information, and provide a current payment
+    # Organizations console, API, or CLI commands, the information required
+    # of standalone accounts is *not* automatically collected. For an
+    # account that you want to make standalone, you must accept the end user
+    # license agreement (EULA), choose a support plan, provide and verify
+    # the required contact information, and provide a current payment
     # method. AWS uses the payment method to charge for any billable (not
     # free tier) AWS activity that occurs while the account isn't attached
     # to an organization. To remove an account that doesn't yet have this
-    # information, you must sign in as the member account. Then follow the
+    # information, you must sign in as the member account and follow the
     # steps at [ To leave an organization when all required account
     # information has not yet been provided][1] in the *AWS Organizations
     # User Guide.*
@@ -4689,7 +5070,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

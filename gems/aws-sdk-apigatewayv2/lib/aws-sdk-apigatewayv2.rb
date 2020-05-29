@@ -24,17 +24,20 @@ require_relative 'aws-sdk-apigatewayv2/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     api_gateway_v2 = Aws::ApiGatewayV2::Client.new
+#     resp = api_gateway_v2.create_api(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AmazonApiGatewayV2 all
-# extend {Errors::ServiceError}.
+# Errors returned from AmazonApiGatewayV2 are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ApiGatewayV2::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AmazonApiGatewayV2 API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-apigatewayv2/customizations'
 # @service
 module Aws::ApiGatewayV2
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.21.0'
 
 end

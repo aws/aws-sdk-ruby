@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AutoScaling
+
   class AutoScalingGroup
 
     extend Aws::Deprecations
@@ -148,8 +149,8 @@ module Aws::AutoScaling
       data[:enabled_metrics]
     end
 
-    # The current state of the group when DeleteAutoScalingGroup is in
-    # progress.
+    # The current state of the group when the DeleteAutoScalingGroup
+    # operation is in progress.
     # @return [String]
     def status
       data[:status]
@@ -178,7 +179,7 @@ module Aws::AutoScaling
     # The maximum amount of time, in seconds, that an instance can be in
     # service.
     #
-    # Valid Range: Minimum value of 604800.
+    # Valid Range: Minimum value of 0.
     # @return [Integer]
     def max_instance_lifetime
       data[:max_instance_lifetime]
@@ -289,7 +290,8 @@ module Aws::AutoScaling
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -302,13 +304,15 @@ module Aws::AutoScaling
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -339,17 +343,16 @@ module Aws::AutoScaling
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -448,8 +451,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :metrics
-    #   One or more of the following metrics. If you omit this parameter, all
-    #   metrics are disabled.
+    #   Specifies one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -466,6 +468,18 @@ module Aws::AutoScaling
     #   * `GroupTerminatingInstances`
     #
     #   * `GroupTotalInstances`
+    #
+    #   * `GroupInServiceCapacity`
+    #
+    #   * `GroupPendingCapacity`
+    #
+    #   * `GroupStandbyCapacity`
+    #
+    #   * `GroupTerminatingCapacity`
+    #
+    #   * `GroupTotalCapacity`
+    #
+    #   If you omit this parameter, all metrics are disabled.
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -481,8 +495,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :metrics
-    #   One or more of the following metrics. If you omit this parameter, all
-    #   metrics are enabled.
+    #   Specifies which group-level metrics to start collecting. You can
+    #   specify one or more of the following metrics:
     #
     #   * `GroupMinSize`
     #
@@ -499,6 +513,21 @@ module Aws::AutoScaling
     #   * `GroupTerminatingInstances`
     #
     #   * `GroupTotalInstances`
+    #
+    #   The instance weighting feature supports the following additional
+    #   metrics:
+    #
+    #   * `GroupInServiceCapacity`
+    #
+    #   * `GroupPendingCapacity`
+    #
+    #   * `GroupStandbyCapacity`
+    #
+    #   * `GroupTerminatingCapacity`
+    #
+    #   * `GroupTotalCapacity`
+    #
+    #   If you omit this parameter, all metrics are enabled.
     # @option options [required, String] :granularity
     #   The granularity to associate with the metrics to collect. The only
     #   valid value is `1Minute`.
@@ -548,6 +577,7 @@ module Aws::AutoScaling
     #       target_value: 1.0, # required
     #       disable_scale_in: false,
     #     },
+    #     enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :policy_name
@@ -572,20 +602,22 @@ module Aws::AutoScaling
     #   Available for backward compatibility. Use `MinAdjustmentMagnitude`
     #   instead.
     # @option options [Integer] :min_adjustment_magnitude
-    #   The minimum number of instances to scale. If the value of
-    #   `AdjustmentType` is `PercentChangeInCapacity`, the scaling policy
-    #   changes the `DesiredCapacity` of the Auto Scaling group by at least
-    #   this many instances. Otherwise, the error is `ValidationError`.
+    #   The minimum value to scale by when scaling by percentages. For
+    #   example, suppose that you create a step scaling policy to scale out an
+    #   Auto Scaling group by 25 percent and you specify a
+    #   `MinAdjustmentMagnitude` of 2. If the group has 4 instances and the
+    #   scaling policy is performed, 25 percent of 4 is 1. However, because
+    #   you specified a `MinAdjustmentMagnitude` of 2, Amazon EC2 Auto Scaling
+    #   scales out the group by 2 instances.
     #
-    #   This property replaces the `MinAdjustmentStep` property. For example,
-    #   suppose that you create a step scaling policy to scale out an Auto
-    #   Scaling group by 25 percent and you specify a `MinAdjustmentMagnitude`
-    #   of 2. If the group has 4 instances and the scaling policy is
-    #   performed, 25 percent of 4 is 1. However, because you specified a
-    #   `MinAdjustmentMagnitude` of 2, Amazon EC2 Auto Scaling scales out the
-    #   group by 2 instances.
+    #   Valid only if the policy type is `StepScaling` or `SimpleScaling` and
+    #   the adjustment type is `PercentChangeInCapacity`. For more
+    #   information, see [Scaling Adjustment Types][1] in the *Amazon EC2 Auto
+    #   Scaling User Guide*.
     #
-    #   Valid only if the policy type is `SimpleScaling` or `StepScaling`.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-adjustment
     # @option options [Integer] :scaling_adjustment
     #   The amount by which a simple scaling policy scales the Auto Scaling
     #   group in response to an alarm breach. The adjustment is based on the
@@ -642,10 +674,19 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
+    # @option options [Boolean] :enabled
+    #   Indicates whether the scaling policy is enabled or disabled. The
+    #   default is enabled. For more information, see [Disabling a Scaling
+    #   Policy for an Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = @client.put_scaling_policy(options)
+      @client.put_scaling_policy(options)
       ScalingPolicy.new(
         name: options[:policy_name],
         client: @client
@@ -697,16 +738,18 @@ module Aws::AutoScaling
     #
     #   [1]: http://crontab.org
     # @option options [Integer] :min_size
-    #   The minimum number of instances in the Auto Scaling group.
+    #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
-    #   The maximum number of instances in the Auto Scaling group.
+    #   The maximum size of the Auto Scaling group.
     # @option options [Integer] :desired_capacity
-    #   The number of EC2 instances that should be running in the Auto Scaling
-    #   group.
+    #   The desired capacity is the initial capacity of the Auto Scaling group
+    #   after the scheduled action runs and the capacity it attempts to
+    #   maintain. It can scale beyond this capacity if you add more scaling
+    #   conditions.
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = @client.put_scheduled_update_group_action(options)
+      @client.put_scheduled_update_group_action(options)
       ScheduledAction.new(
         name: options[:scheduled_action_name],
         client: @client
@@ -753,8 +796,9 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :desired_capacity
-    #   The number of EC2 instances that should be running in the Auto Scaling
-    #   group.
+    #   The desired capacity is the initial capacity of the Auto Scaling group
+    #   after this operation completes and the capacity it attempts to
+    #   maintain.
     # @option options [Boolean] :honor_cooldown
     #   Indicates whether Amazon EC2 Auto Scaling waits for the cooldown
     #   period to complete before initiating a scaling activity to set your
@@ -882,10 +926,22 @@ module Aws::AutoScaling
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
     #   The maximum size of the Auto Scaling group.
+    #
+    #   <note markdown="1"> With a mixed instances policy that uses instance weighting, Amazon EC2
+    #   Auto Scaling may need to go above `MaxSize` to meet your capacity
+    #   requirements. In this event, Amazon EC2 Auto Scaling will never go
+    #   above `MaxSize` by more than your maximum instance weight (weights
+    #   that define how many capacity units each instance contributes to the
+    #   capacity of the group).
+    #
+    #    </note>
     # @option options [Integer] :desired_capacity
-    #   The number of EC2 instances that should be running in the Auto Scaling
-    #   group. This number must be greater than or equal to the minimum size
-    #   of the group and less than or equal to the maximum size of the group.
+    #   The desired capacity is the initial capacity of the Auto Scaling group
+    #   after this operation completes and the capacity it attempts to
+    #   maintain.
+    #
+    #   This number must be greater than or equal to the minimum size of the
+    #   group and less than or equal to the maximum size of the group.
     # @option options [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
     #   before another scaling activity can start. The default value is `300`.
@@ -971,13 +1027,25 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html
     # @option options [Integer] :max_instance_lifetime
     #   The maximum amount of time, in seconds, that an instance can be in
-    #   service.
+    #   service. The default is null.
     #
-    #   Valid Range: Minimum value of 604800.
+    #   This parameter is optional, but if you specify a value for it, you
+    #   must specify a value of at least 604,800 seconds (7 days). To clear a
+    #   previously set value, specify a new value of 0.
+    #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #   Valid Range: Minimum value of 0.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = @client.update_auto_scaling_group(options)
+      @client.update_auto_scaling_group(options)
       AutoScalingGroup.new(
         name: options[:auto_scaling_group_name],
         client: @client
@@ -1272,8 +1340,8 @@ module Aws::AutoScaling
 
     def yield_waiter_and_warn(waiter, &block)
       if !@waiter_block_warned
-        msg = "pass options to configure the waiter; "
-        msg << "yielding the waiter is deprecated"
+        msg = "pass options to configure the waiter; "\
+              "yielding the waiter is deprecated"
         warn(msg)
         @waiter_block_warned = true
       end
@@ -1281,7 +1349,9 @@ module Aws::AutoScaling
     end
 
     def separate_params_and_options(options)
-      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      opts = Set.new(
+        [:client, :max_attempts, :delay, :before_attempt, :before_wait]
+      )
       waiter_opts = {}
       waiter_params = {}
       options.each_pair do |key, value|

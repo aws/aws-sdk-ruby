@@ -6,6 +6,49 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RAM
+
+  # When RAM returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::RAM::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all RAM errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::RAM::Errors::ServiceError
+  #       # rescues all RAM API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {IdempotentParameterMismatchException}
+  # * {InvalidClientTokenException}
+  # * {InvalidMaxResultsException}
+  # * {InvalidNextTokenException}
+  # * {InvalidParameterException}
+  # * {InvalidResourceTypeException}
+  # * {InvalidStateTransitionException}
+  # * {MalformedArnException}
+  # * {MissingRequiredParameterException}
+  # * {OperationNotPermittedException}
+  # * {ResourceArnNotFoundException}
+  # * {ResourceShareInvitationAlreadyAcceptedException}
+  # * {ResourceShareInvitationAlreadyRejectedException}
+  # * {ResourceShareInvitationArnNotFoundException}
+  # * {ResourceShareInvitationExpiredException}
+  # * {ResourceShareLimitExceededException}
+  # * {ServerInternalException}
+  # * {ServiceUnavailableException}
+  # * {TagLimitExceededException}
+  # * {TagPolicyViolationException}
+  # * {UnknownResourceException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +66,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidClientTokenException < ServiceError
@@ -39,7 +81,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidMaxResultsException < ServiceError
@@ -55,7 +96,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -71,7 +111,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -87,7 +126,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceTypeException < ServiceError
@@ -103,7 +141,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidStateTransitionException < ServiceError
@@ -119,7 +156,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MalformedArnException < ServiceError
@@ -135,7 +171,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingRequiredParameterException < ServiceError
@@ -151,7 +186,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -167,7 +201,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceArnNotFoundException < ServiceError
@@ -183,7 +216,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationAlreadyAcceptedException < ServiceError
@@ -199,7 +231,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationAlreadyRejectedException < ServiceError
@@ -215,7 +246,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationArnNotFoundException < ServiceError
@@ -231,7 +261,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareInvitationExpiredException < ServiceError
@@ -247,7 +276,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceShareLimitExceededException < ServiceError
@@ -263,7 +291,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerInternalException < ServiceError
@@ -279,7 +306,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -295,7 +321,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagLimitExceededException < ServiceError
@@ -311,7 +336,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class TagPolicyViolationException < ServiceError
@@ -327,7 +351,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnknownResourceException < ServiceError
@@ -343,7 +366,6 @@ module Aws::RAM
       def message
         @message || @data[:message]
       end
-
     end
 
   end

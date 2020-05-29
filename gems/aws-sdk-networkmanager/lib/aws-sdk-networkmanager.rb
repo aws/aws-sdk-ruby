@@ -24,17 +24,20 @@ require_relative 'aws-sdk-networkmanager/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     network_manager = Aws::NetworkManager::Client.new
+#     resp = network_manager.associate_customer_gateway(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Network Manager all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Network Manager are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::NetworkManager::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Network Manager API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-networkmanager/customizations'
 # @service
 module Aws::NetworkManager
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.3.0'
 
 end

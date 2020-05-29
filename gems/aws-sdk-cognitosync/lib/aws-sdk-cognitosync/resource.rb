@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CognitoSync
+
   class Resource
 
     # @param options ({})

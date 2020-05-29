@@ -24,17 +24,20 @@ require_relative 'aws-sdk-servicequotas/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     service_quotas = Aws::ServiceQuotas::Client.new
+#     resp = service_quotas.associate_service_quota_template(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Service Quotas all
-# extend {Errors::ServiceError}.
+# Errors returned from Service Quotas are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ServiceQuotas::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Service Quotas API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-servicequotas/customizations'
 # @service
 module Aws::ServiceQuotas
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.6.0'
 
 end

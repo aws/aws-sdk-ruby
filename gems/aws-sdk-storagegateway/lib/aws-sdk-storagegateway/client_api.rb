@@ -27,7 +27,12 @@ module Aws::StorageGateway
     AssignTapePoolOutput = Shapes::StructureShape.new(name: 'AssignTapePoolOutput')
     AttachVolumeInput = Shapes::StructureShape.new(name: 'AttachVolumeInput')
     AttachVolumeOutput = Shapes::StructureShape.new(name: 'AttachVolumeOutput')
+    AuditDestinationARN = Shapes::StringShape.new(name: 'AuditDestinationARN')
     Authentication = Shapes::StringShape.new(name: 'Authentication')
+    AutomaticTapeCreationPolicyInfo = Shapes::StructureShape.new(name: 'AutomaticTapeCreationPolicyInfo')
+    AutomaticTapeCreationPolicyInfos = Shapes::ListShape.new(name: 'AutomaticTapeCreationPolicyInfos')
+    AutomaticTapeCreationRule = Shapes::StructureShape.new(name: 'AutomaticTapeCreationRule')
+    AutomaticTapeCreationRules = Shapes::ListShape.new(name: 'AutomaticTapeCreationRules')
     AvailabilityMonitorTestStatus = Shapes::StringShape.new(name: 'AvailabilityMonitorTestStatus')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
@@ -63,6 +68,8 @@ module Aws::StorageGateway
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
     DayOfWeek = Shapes::IntegerShape.new(name: 'DayOfWeek')
+    DeleteAutomaticTapeCreationPolicyInput = Shapes::StructureShape.new(name: 'DeleteAutomaticTapeCreationPolicyInput')
+    DeleteAutomaticTapeCreationPolicyOutput = Shapes::StructureShape.new(name: 'DeleteAutomaticTapeCreationPolicyOutput')
     DeleteBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitInput')
     DeleteBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitOutput')
     DeleteChapCredentialsInput = Shapes::StructureShape.new(name: 'DeleteChapCredentialsInput')
@@ -172,6 +179,8 @@ module Aws::StorageGateway
     JoinDomainOutput = Shapes::StructureShape.new(name: 'JoinDomainOutput')
     KMSKey = Shapes::StringShape.new(name: 'KMSKey')
     LastSoftwareUpdate = Shapes::StringShape.new(name: 'LastSoftwareUpdate')
+    ListAutomaticTapeCreationPoliciesInput = Shapes::StructureShape.new(name: 'ListAutomaticTapeCreationPoliciesInput')
+    ListAutomaticTapeCreationPoliciesOutput = Shapes::StructureShape.new(name: 'ListAutomaticTapeCreationPoliciesOutput')
     ListFileSharesInput = Shapes::StructureShape.new(name: 'ListFileSharesInput')
     ListFileSharesOutput = Shapes::StructureShape.new(name: 'ListFileSharesOutput')
     ListGatewaysInput = Shapes::StructureShape.new(name: 'ListGatewaysInput')
@@ -192,6 +201,7 @@ module Aws::StorageGateway
     LocationARN = Shapes::StringShape.new(name: 'LocationARN')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MediumChangerType = Shapes::StringShape.new(name: 'MediumChangerType')
+    MinimumNumTapes = Shapes::IntegerShape.new(name: 'MinimumNumTapes')
     MinuteOfHour = Shapes::IntegerShape.new(name: 'MinuteOfHour')
     NFSFileShareDefaults = Shapes::StructureShape.new(name: 'NFSFileShareDefaults')
     NFSFileShareInfo = Shapes::StructureShape.new(name: 'NFSFileShareInfo')
@@ -273,6 +283,8 @@ module Aws::StorageGateway
     TargetName = Shapes::StringShape.new(name: 'TargetName')
     Time = Shapes::TimestampShape.new(name: 'Time')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
+    UpdateAutomaticTapeCreationPolicyInput = Shapes::StructureShape.new(name: 'UpdateAutomaticTapeCreationPolicyInput')
+    UpdateAutomaticTapeCreationPolicyOutput = Shapes::StructureShape.new(name: 'UpdateAutomaticTapeCreationPolicyOutput')
     UpdateBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitInput')
     UpdateBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'UpdateBandwidthRateLimitOutput')
     UpdateChapCredentialsInput = Shapes::StructureShape.new(name: 'UpdateChapCredentialsInput')
@@ -378,6 +390,20 @@ module Aws::StorageGateway
     AttachVolumeOutput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
     AttachVolumeOutput.struct_class = Types::AttachVolumeOutput
 
+    AutomaticTapeCreationPolicyInfo.add_member(:automatic_tape_creation_rules, Shapes::ShapeRef.new(shape: AutomaticTapeCreationRules, location_name: "AutomaticTapeCreationRules"))
+    AutomaticTapeCreationPolicyInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    AutomaticTapeCreationPolicyInfo.struct_class = Types::AutomaticTapeCreationPolicyInfo
+
+    AutomaticTapeCreationPolicyInfos.member = Shapes::ShapeRef.new(shape: AutomaticTapeCreationPolicyInfo)
+
+    AutomaticTapeCreationRule.add_member(:tape_barcode_prefix, Shapes::ShapeRef.new(shape: TapeBarcodePrefix, required: true, location_name: "TapeBarcodePrefix"))
+    AutomaticTapeCreationRule.add_member(:pool_id, Shapes::ShapeRef.new(shape: PoolId, required: true, location_name: "PoolId"))
+    AutomaticTapeCreationRule.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, required: true, location_name: "TapeSizeInBytes"))
+    AutomaticTapeCreationRule.add_member(:minimum_num_tapes, Shapes::ShapeRef.new(shape: MinimumNumTapes, required: true, location_name: "MinimumNumTapes"))
+    AutomaticTapeCreationRule.struct_class = Types::AutomaticTapeCreationRule
+
+    AutomaticTapeCreationRules.member = Shapes::ShapeRef.new(shape: AutomaticTapeCreationRule)
+
     CachediSCSIVolume.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
     CachediSCSIVolume.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
     CachediSCSIVolume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
@@ -468,6 +494,7 @@ module Aws::StorageGateway
     CreateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     CreateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     CreateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    CreateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     CreateSMBFileShareInput.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
     CreateSMBFileShareInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateSMBFileShareInput.struct_class = Types::CreateSMBFileShareInput
@@ -535,6 +562,12 @@ module Aws::StorageGateway
 
     CreateTapesOutput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
     CreateTapesOutput.struct_class = Types::CreateTapesOutput
+
+    DeleteAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    DeleteAutomaticTapeCreationPolicyInput.struct_class = Types::DeleteAutomaticTapeCreationPolicyInput
+
+    DeleteAutomaticTapeCreationPolicyOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    DeleteAutomaticTapeCreationPolicyOutput.struct_class = Types::DeleteAutomaticTapeCreationPolicyOutput
 
     DeleteBandwidthRateLimitInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DeleteBandwidthRateLimitInput.add_member(:bandwidth_type, Shapes::ShapeRef.new(shape: BandwidthType, required: true, location_name: "BandwidthType"))
@@ -847,6 +880,12 @@ module Aws::StorageGateway
     JoinDomainOutput.add_member(:active_directory_status, Shapes::ShapeRef.new(shape: ActiveDirectoryStatus, location_name: "ActiveDirectoryStatus"))
     JoinDomainOutput.struct_class = Types::JoinDomainOutput
 
+    ListAutomaticTapeCreationPoliciesInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ListAutomaticTapeCreationPoliciesInput.struct_class = Types::ListAutomaticTapeCreationPoliciesInput
+
+    ListAutomaticTapeCreationPoliciesOutput.add_member(:automatic_tape_creation_policy_infos, Shapes::ShapeRef.new(shape: AutomaticTapeCreationPolicyInfos, location_name: "AutomaticTapeCreationPolicyInfos"))
+    ListAutomaticTapeCreationPoliciesOutput.struct_class = Types::ListAutomaticTapeCreationPoliciesOutput
+
     ListFileSharesInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     ListFileSharesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
     ListFileSharesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
@@ -1008,6 +1047,7 @@ module Aws::StorageGateway
     SMBFileShareInfo.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     SMBFileShareInfo.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     SMBFileShareInfo.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    SMBFileShareInfo.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     SMBFileShareInfo.add_member(:authentication, Shapes::ShapeRef.new(shape: Authentication, location_name: "Authentication"))
     SMBFileShareInfo.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     SMBFileShareInfo.struct_class = Types::SMBFileShareInfo
@@ -1129,6 +1169,13 @@ module Aws::StorageGateway
 
     Tapes.member = Shapes::ShapeRef.new(shape: Tape)
 
+    UpdateAutomaticTapeCreationPolicyInput.add_member(:automatic_tape_creation_rules, Shapes::ShapeRef.new(shape: AutomaticTapeCreationRules, required: true, location_name: "AutomaticTapeCreationRules"))
+    UpdateAutomaticTapeCreationPolicyInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    UpdateAutomaticTapeCreationPolicyInput.struct_class = Types::UpdateAutomaticTapeCreationPolicyInput
+
+    UpdateAutomaticTapeCreationPolicyOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    UpdateAutomaticTapeCreationPolicyOutput.struct_class = Types::UpdateAutomaticTapeCreationPolicyOutput
+
     UpdateBandwidthRateLimitInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     UpdateBandwidthRateLimitInput.add_member(:average_upload_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthUploadRateLimit, location_name: "AverageUploadRateLimitInBitsPerSec"))
     UpdateBandwidthRateLimitInput.add_member(:average_download_rate_limit_in_bits_per_sec, Shapes::ShapeRef.new(shape: BandwidthDownloadRateLimit, location_name: "AverageDownloadRateLimitInBitsPerSec"))
@@ -1201,6 +1248,7 @@ module Aws::StorageGateway
     UpdateSMBFileShareInput.add_member(:admin_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "AdminUserList"))
     UpdateSMBFileShareInput.add_member(:valid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "ValidUserList"))
     UpdateSMBFileShareInput.add_member(:invalid_user_list, Shapes::ShapeRef.new(shape: FileShareUserList, location_name: "InvalidUserList"))
+    UpdateSMBFileShareInput.add_member(:audit_destination_arn, Shapes::ShapeRef.new(shape: AuditDestinationARN, location_name: "AuditDestinationARN"))
     UpdateSMBFileShareInput.struct_class = Types::UpdateSMBFileShareInput
 
     UpdateSMBFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -1458,6 +1506,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateTapesInput)
         o.output = Shapes::ShapeRef.new(shape: CreateTapesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_automatic_tape_creation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAutomaticTapeCreationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAutomaticTapeCreationPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAutomaticTapeCreationPolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1776,6 +1834,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:list_automatic_tape_creation_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAutomaticTapeCreationPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAutomaticTapeCreationPoliciesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListAutomaticTapeCreationPoliciesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:list_file_shares, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListFileShares"
         o.http_method = "POST"
@@ -1992,6 +2060,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: StartGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_automatic_tape_creation_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAutomaticTapeCreationPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAutomaticTapeCreationPolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAutomaticTapeCreationPolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

@@ -6,6 +6,47 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WorkMail
+
+  # When WorkMail returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::WorkMail::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all WorkMail errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::WorkMail::Errors::ServiceError
+  #       # rescues all WorkMail API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {DirectoryServiceAuthenticationFailedException}
+  # * {DirectoryUnavailableException}
+  # * {EmailAddressInUseException}
+  # * {EntityAlreadyRegisteredException}
+  # * {EntityNotFoundException}
+  # * {EntityStateException}
+  # * {InvalidConfigurationException}
+  # * {InvalidParameterException}
+  # * {InvalidPasswordException}
+  # * {LimitExceededException}
+  # * {MailDomainNotFoundException}
+  # * {MailDomainStateException}
+  # * {NameAvailabilityException}
+  # * {OrganizationNotFoundException}
+  # * {OrganizationStateException}
+  # * {ReservedNameException}
+  # * {ResourceNotFoundException}
+  # * {TooManyTagsException}
+  # * {UnsupportedOperationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +64,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryUnavailableException < ServiceError
@@ -39,7 +79,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EmailAddressInUseException < ServiceError
@@ -55,7 +94,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityAlreadyRegisteredException < ServiceError
@@ -71,7 +109,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotFoundException < ServiceError
@@ -87,7 +124,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityStateException < ServiceError
@@ -103,7 +139,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidConfigurationException < ServiceError
@@ -119,7 +154,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -135,7 +169,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPasswordException < ServiceError
@@ -151,7 +184,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -167,7 +199,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class MailDomainNotFoundException < ServiceError
@@ -183,7 +214,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class MailDomainStateException < ServiceError
@@ -199,7 +229,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class NameAvailabilityException < ServiceError
@@ -215,7 +244,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationNotFoundException < ServiceError
@@ -231,7 +259,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationStateException < ServiceError
@@ -247,7 +274,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReservedNameException < ServiceError
@@ -263,7 +289,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -279,7 +304,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -295,7 +319,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -311,7 +334,6 @@ module Aws::WorkMail
       def message
         @message || @data[:message]
       end
-
     end
 
   end

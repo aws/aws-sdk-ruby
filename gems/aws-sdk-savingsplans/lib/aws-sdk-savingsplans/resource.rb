@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SavingsPlans
+
   class Resource
 
     # @param options ({})

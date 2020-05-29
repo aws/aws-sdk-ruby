@@ -24,17 +24,20 @@ require_relative 'aws-sdk-pricing/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     pricing = Aws::Pricing::Client.new
+#     resp = pricing.describe_services(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Price List Service all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Price List Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Pricing::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Price List Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-pricing/customizations'
 # @service
 module Aws::Pricing
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.19.0'
 
 end

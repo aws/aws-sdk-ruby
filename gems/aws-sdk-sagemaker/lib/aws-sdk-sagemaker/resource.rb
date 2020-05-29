@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SageMaker
+
   class Resource
 
     # @param options ({})

@@ -4,6 +4,9 @@ module Aws
 
       alias content_length size
 
+      # Make the method redefinable
+      alias_method :copy_from, :copy_from
+
       # @param (see Object#copy_from)
       # @options (see Object#copy_from)
       # @return (see Object#copy_from)

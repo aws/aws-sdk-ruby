@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ServiceQuotas
+
   class Resource
 
     # @param options ({})

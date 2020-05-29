@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2020-04-08)
+------------------
+
+* Feature - Remove internal ByteBuffer and replace with String to remove dup and string mutation.
+
 1.0.3 (2019-04-24)
 ------------------
 

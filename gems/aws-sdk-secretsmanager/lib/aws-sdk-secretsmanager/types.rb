@@ -593,6 +593,7 @@ module Aws::SecretsManager
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] owning_service
+    #   Returns the name of the service that created this secret.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretResponse AWS API Documentation
@@ -1695,7 +1696,7 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
-    #   Indicated whether automatic, scheduled rotation is enabled for this
+    #   Indicates whether automatic, scheduled rotation is enabled for this
     #   secret.
     #   @return [Boolean]
     #
@@ -1751,6 +1752,7 @@ module Aws::SecretsManager
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] owning_service
+    #   Returns the name of the service that created the secret.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/SecretListEntry AWS API Documentation

@@ -13,6 +13,7 @@ module Aws::LexModelBuildingService
 
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AliasNameOrListAll = Shapes::StringShape.new(name: 'AliasNameOrListAll')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -120,6 +121,8 @@ module Aws::LexModelBuildingService
     LambdaARN = Shapes::StringShape.new(name: 'LambdaARN')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListOfUtterance = Shapes::ListShape.new(name: 'ListOfUtterance')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListsOfUtterances = Shapes::ListShape.new(name: 'ListsOfUtterances')
     Locale = Shapes::StringShape.new(name: 'Locale')
     LocaleList = Shapes::ListShape.new(name: 'LocaleList')
@@ -180,7 +183,16 @@ module Aws::LexModelBuildingService
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SynonymList = Shapes::ListShape.new(name: 'SynonymList')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UserId = Shapes::StringShape.new(name: 'UserId')
     Utterance = Shapes::StringShape.new(name: 'Utterance')
     UtteranceData = Shapes::StructureShape.new(name: 'UtteranceData')
@@ -625,6 +637,12 @@ module Aws::LexModelBuildingService
 
     ListOfUtterance.member = Shapes::ShapeRef.new(shape: UtteranceData)
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListsOfUtterances.member = Shapes::ShapeRef.new(shape: UtteranceList)
 
     LocaleList.member = Shapes::ShapeRef.new(shape: Locale)
@@ -670,6 +688,7 @@ module Aws::LexModelBuildingService
     PutBotAliasRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     PutBotAliasRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutBotAliasRequest.add_member(:conversation_logs, Shapes::ShapeRef.new(shape: ConversationLogsRequest, location_name: "conversationLogs"))
+    PutBotAliasRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotAliasRequest.struct_class = Types::PutBotAliasRequest
 
     PutBotAliasResponse.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, location_name: "name"))
@@ -680,6 +699,7 @@ module Aws::LexModelBuildingService
     PutBotAliasResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     PutBotAliasResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutBotAliasResponse.add_member(:conversation_logs, Shapes::ShapeRef.new(shape: ConversationLogsResponse, location_name: "conversationLogs"))
+    PutBotAliasResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotAliasResponse.struct_class = Types::PutBotAliasResponse
 
     PutBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
@@ -695,6 +715,7 @@ module Aws::LexModelBuildingService
     PutBotRequest.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "childDirected"))
     PutBotRequest.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
     PutBotRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutBotRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotRequest.struct_class = Types::PutBotRequest
 
     PutBotResponse.add_member(:name, Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
@@ -714,6 +735,7 @@ module Aws::LexModelBuildingService
     PutBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
     PutBotResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutBotResponse.add_member(:detect_sentiment, Shapes::ShapeRef.new(shape: Boolean, location_name: "detectSentiment"))
+    PutBotResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     PutBotResponse.struct_class = Types::PutBotResponse
 
     PutIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -816,6 +838,7 @@ module Aws::LexModelBuildingService
     StartImportRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "payload"))
     StartImportRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     StartImportRequest.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, required: true, location_name: "mergeStrategy"))
+    StartImportRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     StartImportRequest.struct_class = Types::StartImportRequest
 
     StartImportResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -823,6 +846,7 @@ module Aws::LexModelBuildingService
     StartImportResponse.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
     StartImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: String, location_name: "importId"))
     StartImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    StartImportResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     StartImportResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     StartImportResponse.struct_class = Types::StartImportResponse
 
@@ -833,6 +857,26 @@ module Aws::LexModelBuildingService
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SynonymList.member = Shapes::ShapeRef.new(shape: Value)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UtteranceData.add_member(:utterance_string, Shapes::ShapeRef.new(shape: UtteranceString, location_name: "utteranceString"))
     UtteranceData.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "count"))
@@ -1311,6 +1355,18 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:put_bot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutBot"
         o.http_method = "PUT"
@@ -1372,6 +1428,32 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
     end
 

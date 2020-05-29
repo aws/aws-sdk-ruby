@@ -6,6 +6,72 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Organizations
+
+  # When Organizations returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Organizations::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Organizations errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Organizations::Errors::ServiceError
+  #       # rescues all Organizations API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AWSOrganizationsNotInUseException}
+  # * {AccessDeniedException}
+  # * {AccessDeniedForDependencyException}
+  # * {AccountAlreadyRegisteredException}
+  # * {AccountNotFoundException}
+  # * {AccountNotRegisteredException}
+  # * {AccountOwnerNotVerifiedException}
+  # * {AlreadyInOrganizationException}
+  # * {ChildNotFoundException}
+  # * {ConcurrentModificationException}
+  # * {ConstraintViolationException}
+  # * {CreateAccountStatusNotFoundException}
+  # * {DestinationParentNotFoundException}
+  # * {DuplicateAccountException}
+  # * {DuplicateHandshakeException}
+  # * {DuplicateOrganizationalUnitException}
+  # * {DuplicatePolicyAttachmentException}
+  # * {DuplicatePolicyException}
+  # * {EffectivePolicyNotFoundException}
+  # * {FinalizingOrganizationException}
+  # * {HandshakeAlreadyInStateException}
+  # * {HandshakeConstraintViolationException}
+  # * {HandshakeNotFoundException}
+  # * {InvalidHandshakeTransitionException}
+  # * {InvalidInputException}
+  # * {MalformedPolicyDocumentException}
+  # * {MasterCannotLeaveOrganizationException}
+  # * {OrganizationNotEmptyException}
+  # * {OrganizationalUnitNotEmptyException}
+  # * {OrganizationalUnitNotFoundException}
+  # * {ParentNotFoundException}
+  # * {PolicyChangesInProgressException}
+  # * {PolicyInUseException}
+  # * {PolicyNotAttachedException}
+  # * {PolicyNotFoundException}
+  # * {PolicyTypeAlreadyEnabledException}
+  # * {PolicyTypeNotAvailableForOrganizationException}
+  # * {PolicyTypeNotEnabledException}
+  # * {RootNotFoundException}
+  # * {ServiceException}
+  # * {SourceParentNotFoundException}
+  # * {TargetNotFoundException}
+  # * {TooManyRequestsException}
+  # * {UnsupportedAPIEndpointException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +89,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessDeniedException < ServiceError
@@ -39,7 +104,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessDeniedForDependencyException < ServiceError
@@ -60,7 +124,21 @@ module Aws::Organizations
       def reason
         @data[:reason]
       end
+    end
 
+    class AccountAlreadyRegisteredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::AccountAlreadyRegisteredException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class AccountNotFoundException < ServiceError
@@ -76,7 +154,21 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
+    end
 
+    class AccountNotRegisteredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::AccountNotRegisteredException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class AccountOwnerNotVerifiedException < ServiceError
@@ -92,7 +184,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class AlreadyInOrganizationException < ServiceError
@@ -108,7 +199,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class ChildNotFoundException < ServiceError
@@ -124,7 +214,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -140,7 +229,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConstraintViolationException < ServiceError
@@ -161,7 +249,6 @@ module Aws::Organizations
       def reason
         @data[:reason]
       end
-
     end
 
     class CreateAccountStatusNotFoundException < ServiceError
@@ -177,7 +264,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class DestinationParentNotFoundException < ServiceError
@@ -193,7 +279,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateAccountException < ServiceError
@@ -209,7 +294,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateHandshakeException < ServiceError
@@ -225,7 +309,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateOrganizationalUnitException < ServiceError
@@ -241,7 +324,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicatePolicyAttachmentException < ServiceError
@@ -257,7 +339,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicatePolicyException < ServiceError
@@ -273,7 +354,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class EffectivePolicyNotFoundException < ServiceError
@@ -289,7 +369,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class FinalizingOrganizationException < ServiceError
@@ -305,7 +384,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class HandshakeAlreadyInStateException < ServiceError
@@ -321,7 +399,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class HandshakeConstraintViolationException < ServiceError
@@ -342,7 +419,6 @@ module Aws::Organizations
       def reason
         @data[:reason]
       end
-
     end
 
     class HandshakeNotFoundException < ServiceError
@@ -358,7 +434,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidHandshakeTransitionException < ServiceError
@@ -374,7 +449,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -395,7 +469,6 @@ module Aws::Organizations
       def reason
         @data[:reason]
       end
-
     end
 
     class MalformedPolicyDocumentException < ServiceError
@@ -411,7 +484,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class MasterCannotLeaveOrganizationException < ServiceError
@@ -427,7 +499,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationNotEmptyException < ServiceError
@@ -443,7 +514,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationalUnitNotEmptyException < ServiceError
@@ -459,7 +529,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class OrganizationalUnitNotFoundException < ServiceError
@@ -475,7 +544,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class ParentNotFoundException < ServiceError
@@ -491,7 +559,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyChangesInProgressException < ServiceError
@@ -507,7 +574,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyInUseException < ServiceError
@@ -523,7 +589,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotAttachedException < ServiceError
@@ -539,7 +604,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyNotFoundException < ServiceError
@@ -555,7 +619,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyTypeAlreadyEnabledException < ServiceError
@@ -571,7 +634,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyTypeNotAvailableForOrganizationException < ServiceError
@@ -587,7 +649,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyTypeNotEnabledException < ServiceError
@@ -603,7 +664,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class RootNotFoundException < ServiceError
@@ -619,7 +679,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -635,7 +694,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class SourceParentNotFoundException < ServiceError
@@ -651,7 +709,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class TargetNotFoundException < ServiceError
@@ -667,7 +724,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -688,7 +744,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAPIEndpointException < ServiceError
@@ -704,7 +759,6 @@ module Aws::Organizations
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,45 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::QuickSight
+
+  # When QuickSight returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::QuickSight::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all QuickSight errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::QuickSight::Errors::ServiceError
+  #       # rescues all QuickSight API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConcurrentUpdatingException}
+  # * {ConflictException}
+  # * {DomainNotWhitelistedException}
+  # * {IdentityTypeNotSupportedException}
+  # * {InternalFailureException}
+  # * {InvalidNextTokenException}
+  # * {InvalidParameterValueException}
+  # * {LimitExceededException}
+  # * {PreconditionNotMetException}
+  # * {QuickSightUserNotFoundException}
+  # * {ResourceExistsException}
+  # * {ResourceNotFoundException}
+  # * {ResourceUnavailableException}
+  # * {SessionLifetimeInMinutesInvalidException}
+  # * {ThrottlingException}
+  # * {UnsupportedUserEditionException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -28,7 +67,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ConcurrentUpdatingException < ServiceError
@@ -49,7 +87,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -70,7 +107,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class DomainNotWhitelistedException < ServiceError
@@ -91,7 +127,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class IdentityTypeNotSupportedException < ServiceError
@@ -112,7 +147,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InternalFailureException < ServiceError
@@ -133,7 +167,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -154,7 +187,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -175,7 +207,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -201,7 +232,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class PreconditionNotMetException < ServiceError
@@ -222,7 +252,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class QuickSightUserNotFoundException < ServiceError
@@ -243,7 +272,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ResourceExistsException < ServiceError
@@ -269,7 +297,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -295,7 +322,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -321,7 +347,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class SessionLifetimeInMinutesInvalidException < ServiceError
@@ -342,7 +367,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -363,7 +387,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
     class UnsupportedUserEditionException < ServiceError
@@ -384,7 +407,6 @@ module Aws::QuickSight
       def request_id
         @data[:request_id]
       end
-
     end
 
   end

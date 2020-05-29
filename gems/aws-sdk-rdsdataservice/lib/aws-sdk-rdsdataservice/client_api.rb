@@ -182,6 +182,8 @@ module Aws::RDSDataService
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
     LongArray.member = Shapes::ShapeRef.new(shape: BoxedLong)
 
     Metadata.member = Shapes::ShapeRef.new(shape: ColumnMetadata)
@@ -214,6 +216,8 @@ module Aws::RDSDataService
     RollbackTransactionResponse.struct_class = Types::RollbackTransactionResponse
 
     Row.member = Shapes::ShapeRef.new(shape: Value)
+
+    ServiceUnavailableError.struct_class = Types::ServiceUnavailableError
 
     SqlParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "name"))
     SqlParameter.add_member(:type_hint, Shapes::ShapeRef.new(shape: TypeHint, location_name: "typeHint"))

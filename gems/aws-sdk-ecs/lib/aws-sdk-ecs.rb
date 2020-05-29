@@ -25,17 +25,20 @@ require_relative 'aws-sdk-ecs/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ecs = Aws::ECS::Client.new
+#     resp = ecs.create_capacity_provider(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon EC2 Container Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon EC2 Container Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ECS::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon EC2 Container Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-ecs/customizations'
 # @service
 module Aws::ECS
 
-  GEM_VERSION = '1.57.0'
+  GEM_VERSION = '1.63.0'
 
 end

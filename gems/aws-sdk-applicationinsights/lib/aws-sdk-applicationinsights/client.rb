@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:applicationinsights)
 
 module Aws::ApplicationInsights
+  # An API client for ApplicationInsights.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::ApplicationInsights::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::ApplicationInsights
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::ApplicationInsights
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::ApplicationInsights
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::ApplicationInsights
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::ApplicationInsights
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::ApplicationInsights
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::ApplicationInsights
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -219,16 +274,15 @@ module Aws::ApplicationInsights
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -237,7 +291,7 @@ module Aws::ApplicationInsights
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -273,6 +327,11 @@ module Aws::ApplicationInsights
     #   When set to `true`, creates opsItems for any problems detected on an
     #   application.
     #
+    # @option params [Boolean] :cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch events
+    #   for the application resources, such as `instance terminated`, `failed
+    #   deployment`, and others.
+    #
     # @option params [String] :ops_item_sns_topic_arn
     #   The SNS topic provided to Application Insights that is associated to
     #   the created opsItem. Allows you to receive notifications for updates
@@ -292,6 +351,7 @@ module Aws::ApplicationInsights
     #   resp = client.create_application({
     #     resource_group_name: "ResourceGroupName", # required
     #     ops_center_enabled: false,
+    #     cwe_monitor_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #     tags: [
     #       {
@@ -307,6 +367,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplication AWS API Documentation
@@ -500,6 +561,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplication AWS API Documentation
@@ -695,6 +757,27 @@ module Aws::ApplicationInsights
     #   resp.observation.metric_name #=> String
     #   resp.observation.unit #=> String
     #   resp.observation.value #=> Float
+    #   resp.observation.cloud_watch_event_id #=> String
+    #   resp.observation.cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH"
+    #   resp.observation.cloud_watch_event_detail_type #=> String
+    #   resp.observation.health_event_arn #=> String
+    #   resp.observation.health_service #=> String
+    #   resp.observation.health_event_type_code #=> String
+    #   resp.observation.health_event_type_category #=> String
+    #   resp.observation.health_event_description #=> String
+    #   resp.observation.code_deploy_deployment_id #=> String
+    #   resp.observation.code_deploy_deployment_group #=> String
+    #   resp.observation.code_deploy_state #=> String
+    #   resp.observation.code_deploy_application #=> String
+    #   resp.observation.code_deploy_instance_group_id #=> String
+    #   resp.observation.ec2_state #=> String
+    #   resp.observation.x_ray_fault_percent #=> Integer
+    #   resp.observation.x_ray_throttle_percent #=> Integer
+    #   resp.observation.x_ray_error_percent #=> Integer
+    #   resp.observation.x_ray_request_count #=> Integer
+    #   resp.observation.x_ray_request_average_latency #=> Integer
+    #   resp.observation.x_ray_node_name #=> String
+    #   resp.observation.x_ray_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeObservation AWS API Documentation
     #
@@ -774,6 +857,27 @@ module Aws::ApplicationInsights
     #   resp.related_observations.observation_list[0].metric_name #=> String
     #   resp.related_observations.observation_list[0].unit #=> String
     #   resp.related_observations.observation_list[0].value #=> Float
+    #   resp.related_observations.observation_list[0].cloud_watch_event_id #=> String
+    #   resp.related_observations.observation_list[0].cloud_watch_event_source #=> String, one of "EC2", "CODE_DEPLOY", "HEALTH"
+    #   resp.related_observations.observation_list[0].cloud_watch_event_detail_type #=> String
+    #   resp.related_observations.observation_list[0].health_event_arn #=> String
+    #   resp.related_observations.observation_list[0].health_service #=> String
+    #   resp.related_observations.observation_list[0].health_event_type_code #=> String
+    #   resp.related_observations.observation_list[0].health_event_type_category #=> String
+    #   resp.related_observations.observation_list[0].health_event_description #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_deployment_id #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_deployment_group #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_state #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_application #=> String
+    #   resp.related_observations.observation_list[0].code_deploy_instance_group_id #=> String
+    #   resp.related_observations.observation_list[0].ec2_state #=> String
+    #   resp.related_observations.observation_list[0].x_ray_fault_percent #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_throttle_percent #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_error_percent #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_request_count #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_request_average_latency #=> Integer
+    #   resp.related_observations.observation_list[0].x_ray_node_name #=> String
+    #   resp.related_observations.observation_list[0].x_ray_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeProblemObservations AWS API Documentation
     #
@@ -799,6 +903,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListApplicationsResponse#application_info_list #application_info_list} => Array&lt;Types::ApplicationInfo&gt;
     #   * {Types::ListApplicationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
@@ -813,6 +919,7 @@ module Aws::ApplicationInsights
     #   resp.application_info_list[0].life_cycle #=> String
     #   resp.application_info_list[0].ops_item_sns_topic_arn #=> String
     #   resp.application_info_list[0].ops_center_enabled #=> Boolean
+    #   resp.application_info_list[0].cwe_monitor_enabled #=> Boolean
     #   resp.application_info_list[0].remarks #=> String
     #   resp.next_token #=> String
     #
@@ -843,6 +950,8 @@ module Aws::ApplicationInsights
     #
     #   * {Types::ListComponentsResponse#application_component_list #application_component_list} => Array&lt;Types::ApplicationComponent&gt;
     #   * {Types::ListComponentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -917,6 +1026,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListConfigurationHistoryResponse#event_list #event_list} => Array&lt;Types::ConfigurationEvent&gt;
     #   * {Types::ListConfigurationHistoryResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_history({
@@ -967,6 +1078,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListLogPatternSetsResponse#log_pattern_sets #log_pattern_sets} => Array&lt;String&gt;
     #   * {Types::ListLogPatternSetsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_log_pattern_sets({
@@ -1012,6 +1125,8 @@ module Aws::ApplicationInsights
     #   * {Types::ListLogPatternsResponse#resource_group_name #resource_group_name} => String
     #   * {Types::ListLogPatternsResponse#log_patterns #log_patterns} => Array&lt;Types::LogPattern&gt;
     #   * {Types::ListLogPatternsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1067,6 +1182,8 @@ module Aws::ApplicationInsights
     #
     #   * {Types::ListProblemsResponse#problem_list #problem_list} => Array&lt;Types::Problem&gt;
     #   * {Types::ListProblemsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1226,6 +1343,11 @@ module Aws::ApplicationInsights
     #   When set to `true`, creates opsItems for any problems detected on an
     #   application.
     #
+    # @option params [Boolean] :cwe_monitor_enabled
+    #   Indicates whether Application Insights can listen to CloudWatch events
+    #   for the application resources, such as `instance terminated`, `failed
+    #   deployment`, and others.
+    #
     # @option params [String] :ops_item_sns_topic_arn
     #   The SNS topic provided to Application Insights that is associated to
     #   the created opsItem. Allows you to receive notifications for updates
@@ -1244,6 +1366,7 @@ module Aws::ApplicationInsights
     #   resp = client.update_application({
     #     resource_group_name: "ResourceGroupName", # required
     #     ops_center_enabled: false,
+    #     cwe_monitor_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #     remove_sns_topic: false,
     #   })
@@ -1254,6 +1377,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.life_cycle #=> String
     #   resp.application_info.ops_item_sns_topic_arn #=> String
     #   resp.application_info.ops_center_enabled #=> Boolean
+    #   resp.application_info.cwe_monitor_enabled #=> Boolean
     #   resp.application_info.remarks #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplication AWS API Documentation
@@ -1415,7 +1539,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

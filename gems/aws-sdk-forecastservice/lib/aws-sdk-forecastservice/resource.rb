@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ForecastService
+
   class Resource
 
     # @param options ({})

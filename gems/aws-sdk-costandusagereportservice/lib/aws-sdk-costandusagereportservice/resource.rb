@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CostandUsageReportService
+
   class Resource
 
     # @param options ({})

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MarketplaceCatalog
+
   class Resource
 
     # @param options ({})

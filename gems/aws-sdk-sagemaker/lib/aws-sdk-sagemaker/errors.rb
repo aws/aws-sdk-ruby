@@ -6,6 +6,32 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SageMaker
+
+  # When SageMaker returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SageMaker::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SageMaker errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SageMaker::Errors::ServiceError
+  #       # rescues all SageMaker API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ConflictException}
+  # * {ResourceInUse}
+  # * {ResourceLimitExceeded}
+  # * {ResourceNotFound}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +49,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUse < ServiceError
@@ -39,7 +64,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceeded < ServiceError
@@ -55,7 +79,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFound < ServiceError
@@ -71,7 +94,6 @@ module Aws::SageMaker
       def message
         @message || @data[:message]
       end
-
     end
 
   end

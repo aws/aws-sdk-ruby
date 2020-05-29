@@ -6,6 +6,34 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::LakeFormation
+
+  # When LakeFormation returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::LakeFormation::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all LakeFormation errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::LakeFormation::Errors::ServiceError
+  #       # rescues all LakeFormation API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AlreadyExistsException}
+  # * {ConcurrentModificationException}
+  # * {EntityNotFoundException}
+  # * {InternalServiceException}
+  # * {InvalidInputException}
+  # * {OperationTimeoutException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +51,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -39,7 +66,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class EntityNotFoundException < ServiceError
@@ -55,7 +81,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -71,7 +96,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -87,7 +111,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationTimeoutException < ServiceError
@@ -103,7 +126,6 @@ module Aws::LakeFormation
       def message
         @message || @data[:message]
       end
-
     end
 
   end

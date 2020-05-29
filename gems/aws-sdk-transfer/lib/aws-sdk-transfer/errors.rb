@@ -6,9 +6,55 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Transfer
+
+  # When Transfer returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Transfer::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Transfer errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Transfer::Errors::ServiceError
+  #       # rescues all Transfer API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConflictException}
+  # * {InternalServiceError}
+  # * {InvalidNextTokenException}
+  # * {InvalidRequestException}
+  # * {ResourceExistsException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {ThrottlingException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Transfer::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
 
     class ConflictException < ServiceError
 
@@ -23,7 +69,6 @@ module Aws::Transfer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceError < ServiceError
@@ -39,7 +84,6 @@ module Aws::Transfer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -55,7 +99,6 @@ module Aws::Transfer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -71,7 +114,6 @@ module Aws::Transfer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceExistsException < ServiceError
@@ -97,7 +139,6 @@ module Aws::Transfer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -123,7 +164,6 @@ module Aws::Transfer
       def resource_type
         @data[:resource_type]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -139,7 +179,6 @@ module Aws::Transfer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ThrottlingException < ServiceError
@@ -155,7 +194,6 @@ module Aws::Transfer
       def retry_after_seconds
         @data[:retry_after_seconds]
       end
-
     end
 
   end

@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2020-04-23)
+------------------
+
+* Feature - Adds support for AWS Local Zones, including a new optional parameter AvailabilityZoneGroup for the DescribeOrderableDBInstanceOptions operation.
+
+1.82.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+
+1.81.0 (2020-04-08)
+------------------
+
+* Feature - Documentation updates for RDS: creating read replicas is now supported for SQL Server DB instances
+
+1.80.0 (2020-03-18)
+------------------
+
+* Feature - Updated the MaxRecords type in DescribeExportTasks to Integer.
+
+1.79.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2020-02-18)
+------------------
+
+* Feature - This release supports Microsoft Active Directory authentication for Amazon Aurora.
+
 1.77.0 (2020-02-07)
 ------------------
 
@@ -487,4 +527,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-rds` gem.
-

@@ -24,17 +24,20 @@ require_relative 'aws-sdk-fms/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     fms = Aws::FMS::Client.new
+#     resp = fms.associate_admin_account(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Firewall Management Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Firewall Management Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::FMS::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Firewall Management Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-fms/customizations'
 # @service
 module Aws::FMS
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.26.0'
 
 end

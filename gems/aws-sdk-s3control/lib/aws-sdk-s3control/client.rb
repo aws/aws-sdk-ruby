@@ -33,6 +33,18 @@ require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3control)
 
 module Aws::S3Control
+  # An API client for S3Control.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::S3Control::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -99,7 +111,7 @@ module Aws::S3Control
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -113,6 +125,12 @@ module Aws::S3Control
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -138,6 +156,10 @@ module Aws::S3Control
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -145,7 +167,7 @@ module Aws::S3Control
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -160,7 +182,7 @@ module Aws::S3Control
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -172,15 +194,29 @@ module Aws::S3Control
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -188,11 +224,30 @@ module Aws::S3Control
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -219,16 +274,15 @@ module Aws::S3Control
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -237,7 +291,7 @@ module Aws::S3Control
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -279,7 +333,7 @@ module Aws::S3Control
     #
     # @option params [Types::VpcConfiguration] :vpc_configuration
     #   If you include this field, Amazon S3 restricts access to this access
-    #   point to requests from the specified Virtual Private Cloud (VPC).
+    #   point to requests from the specified virtual private cloud (VPC).
     #
     # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
     #   The `PublicAccessBlock` configuration that you want to apply to this
@@ -320,7 +374,25 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Creates an Amazon S3 batch operations job.
+    # You can use Amazon S3 Batch Operations to perform large-scale Batch
+    # Operations on Amazon S3 objects. Amazon S3 Batch Operations can
+    # execute a single operation or action on lists of Amazon S3 objects
+    # that you specify. For more information, see [Amazon S3 Batch
+    # Operations][1] in the Amazon Simple Storage Service Developer Guide.
+    #
+    # Related actions include:
+    #
+    # * DescribeJob
+    #
+    # * ListJobs
+    #
+    # * UpdateJobPriority
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -362,9 +434,13 @@ module Aws::S3Control
     #   priority.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) for the Identity and Access Management
-    #   (IAM) Role that batch operations will use to execute this job's
-    #   operation on each object in the manifest.
+    #   The Amazon Resource Name (ARN) for the AWS Identity and Access
+    #   Management (IAM) role that Batch Operations will use to execute this
+    #   job's operation on each object in the manifest.
+    #
+    # @option params [Array<Types::S3Tag>] :tags
+    #   A set of tags to associate with the Amazon S3 Batch Operations job.
+    #   This is an optional parameter.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -377,7 +453,7 @@ module Aws::S3Control
     #     confirmation_required: false,
     #     operation: { # required
     #       lambda_invoke: {
-    #         function_arn: "NonEmptyMaxLength1024String",
+    #         function_arn: "FunctionArnString",
     #       },
     #       s3_put_object_copy: {
     #         target_resource: "S3BucketArnString",
@@ -411,8 +487,8 @@ module Aws::S3Control
     #         },
     #         new_object_tagging: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #         redirect_location: "NonEmptyMaxLength2048String",
@@ -449,14 +525,26 @@ module Aws::S3Control
     #       s3_put_object_tagging: {
     #         tag_set: [
     #           {
-    #             key: "NonEmptyMaxLength1024String", # required
-    #             value: "MaxLength1024String", # required
+    #             key: "TagKeyString", # required
+    #             value: "TagValueString", # required
     #           },
     #         ],
     #       },
     #       s3_initiate_restore_object: {
     #         expiration_in_days: 1,
     #         glacier_job_tier: "BULK", # accepts BULK, STANDARD
+    #       },
+    #       s3_put_object_legal_hold: {
+    #         legal_hold: { # required
+    #           status: "OFF", # required, accepts OFF, ON
+    #         },
+    #       },
+    #       s3_put_object_retention: {
+    #         bypass_governance_retention: false,
+    #         retention: { # required
+    #           retain_until_date: Time.now,
+    #           mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
+    #         },
     #       },
     #     },
     #     report: { # required
@@ -481,6 +569,12 @@ module Aws::S3Control
     #     description: "NonEmptyMaxLength256String",
     #     priority: 1, # required
     #     role_arn: "IAMRoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -548,6 +642,51 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Removes the entire tag set from the specified Amazon S3 Batch
+    # Operations job. To use this operation, you must have permission to
+    # perform the `s3:DeleteJobTagging` action. For more information, see
+    # [Using Job Tags][1] in the Amazon Simple Storage Service Developer
+    # Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * GetJobTagging
+    #
+    # * PutJobTagging
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_tagging({
+    #     account_id: "AccountId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteJobTagging AWS API Documentation
+    #
+    # @overload delete_job_tagging(params = {})
+    # @param [Hash] params ({})
+    def delete_job_tagging(params = {}, options = {})
+      req = build_request(:delete_job_tagging, params)
+      req.send_request(options)
+    end
+
     # Removes the `PublicAccessBlock` configuration for an Amazon Web
     # Services account.
     #
@@ -572,8 +711,25 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Retrieves the configuration parameters and status for a batch
-    # operations job.
+    # Retrieves the configuration parameters and status for a Batch
+    # Operations job. For more information, see [Amazon S3 Batch
+    # Operations][1] in the Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * ListJobs
+    #
+    # * UpdateJobPriority
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -651,6 +807,10 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_tagging.tag_set[0].value #=> String
     #   resp.job.operation.s3_initiate_restore_object.expiration_in_days #=> Integer
     #   resp.job.operation.s3_initiate_restore_object.glacier_job_tier #=> String, one of "BULK", "STANDARD"
+    #   resp.job.operation.s3_put_object_legal_hold.legal_hold.status #=> String, one of "OFF", "ON"
+    #   resp.job.operation.s3_put_object_retention.bypass_governance_retention #=> Boolean
+    #   resp.job.operation.s3_put_object_retention.retention.retain_until_date #=> Time
+    #   resp.job.operation.s3_put_object_retention.retention.mode #=> String, one of "COMPLIANCE", "GOVERNANCE"
     #   resp.job.priority #=> Integer
     #   resp.job.progress_summary.total_number_of_tasks #=> Integer
     #   resp.job.progress_summary.number_of_tasks_succeeded #=> Integer
@@ -797,6 +957,58 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns the tags on an Amazon S3 Batch Operations job. To use this
+    # operation, you must have permission to perform the `s3:GetJobTagging`
+    # action. For more information, see [Using Job Tags][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * PutJobTagging
+    #
+    # * DeleteJobTagging
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   retrieve.
+    #
+    # @return [Types::GetJobTaggingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobTaggingResult#tags #tags} => Array&lt;Types::S3Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_tagging({
+    #     account_id: "AccountId", # required
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetJobTagging AWS API Documentation
+    #
+    # @overload get_job_tagging(params = {})
+    # @param [Hash] params ({})
+    def get_job_tagging(params = {}, options = {})
+      req = build_request(:get_job_tagging, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
     # Services account.
     #
@@ -832,10 +1044,10 @@ module Aws::S3Control
 
     # Returns a list of the access points currently associated with the
     # specified bucket. You can retrieve up to 1000 access points per call.
-    # If the specified bucket has more than 1000 access points (or the
-    # number specified in `maxResults`, whichever is less), then the
-    # response will include a continuation token that you can use to list
-    # the additional access points.
+    # If the specified bucket has more than 1,000 access points (or the
+    # number specified in `maxResults`, whichever is less), the response
+    # will include a continuation token that you can use to list the
+    # additional access points.
     #
     # @option params [required, String] :account_id
     #   The AWS account ID for owner of the bucket whose access points you
@@ -861,6 +1073,8 @@ module Aws::S3Control
     #
     #   * {Types::ListAccessPointsResult#access_point_list #access_point_list} => Array&lt;Types::AccessPoint&gt;
     #   * {Types::ListAccessPointsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -889,8 +1103,26 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Lists current jobs and jobs that have ended within the last 30 days
-    # for the AWS account making the request.
+    # Lists current Amazon S3 Batch Operations jobs and jobs that have ended
+    # within the last 30 days for the AWS account making the request. For
+    # more information, see [Amazon S3 Batch Operations][1] in the *Amazon
+    # Simple Storage Service Developer Guide*.
+    #
+    # Related actions include:
+    #
+    #
+    #
+    # * CreateJob
+    #
+    # * DescribeJob
+    #
+    # * UpdateJobPriority
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -914,12 +1146,14 @@ module Aws::S3Control
     #   * {Types::ListJobsResult#next_token #next_token} => String
     #   * {Types::ListJobsResult#jobs #jobs} => Array&lt;Types::JobListDescriptor&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
     #     account_id: "AccountId", # required
     #     job_statuses: ["Active"], # accepts Active, Cancelled, Cancelling, Complete, Completing, Failed, Failing, New, Paused, Pausing, Preparing, Ready, Suspended
-    #     next_token: "NonEmptyMaxLength1024String",
+    #     next_token: "StringForNextToken",
     #     max_results: 1,
     #   })
     #
@@ -929,7 +1163,7 @@ module Aws::S3Control
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].description #=> String
-    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3InitiateRestoreObject"
+    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention"
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].status #=> String, one of "Active", "Cancelled", "Cancelling", "Complete", "Completing", "Failed", "Failing", "New", "Paused", "Pausing", "Preparing", "Ready", "Suspended"
     #   resp.jobs[0].creation_time #=> Time
@@ -989,6 +1223,99 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Set the supplied tag-set on an Amazon S3 Batch Operations job.
+    #
+    # A tag is a key-value pair. You can associate Amazon S3 Batch
+    # Operations tags with any job by sending a PUT request against the
+    # tagging subresource that is associated with the job. To modify the
+    # existing tag set, you can either replace the existing tag set
+    # entirely, or make changes within the existing tag set by retrieving
+    # the existing tag set using GetJobTagging, modify that tag set, and use
+    # this API action to replace the tag set with the one you have
+    # modified.. For more information, see [Using Job Tags][1] in the Amazon
+    # Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # <note markdown="1"> * If you send this request with an empty tag set, Amazon S3 deletes
+    #   the existing tag set on the Batch Operations job. If you use this
+    #   method, you will be charged for a Tier 1 Request (PUT). For more
+    #   information, see [Amazon S3 pricing][2].
+    #
+    # * For deleting existing tags for your batch operations job,
+    #   DeleteJobTagging request is preferred because it achieves the same
+    #   result without incurring charges.
+    #
+    # * A few things to consider about using tags:
+    #
+    #   * Amazon S3 limits the maximum number of tags to 50 tags per job.
+    #
+    #   * You can associate up to 50 tags with a job as long as they have
+    #     unique tag keys.
+    #
+    #   * A tag key can be up to 128 Unicode characters in length, and tag
+    #     values can be up to 256 Unicode characters in length.
+    #
+    #   * The key and values are case sensitive.
+    #
+    #   * For tagging-related restrictions related to characters and
+    #     encodings, see [User-Defined Tag Restrictions][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # To use this operation, you must have permission to perform the
+    # `s3:PutJobTagging` action.
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * GetJobTagging
+    #
+    # * DeleteJobTagging
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+    # [2]: http://aws.amazon.com/s3/pricing/
+    # [3]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID associated with the Amazon S3 Batch Operations job.
+    #
+    # @option params [required, String] :job_id
+    #   The ID for the Amazon S3 Batch Operations job whose tags you want to
+    #   replace.
+    #
+    # @option params [required, Array<Types::S3Tag>] :tags
+    #   The set of tags to associate with the Amazon S3 Batch Operations job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_job_tagging({
+    #     account_id: "AccountId", # required
+    #     job_id: "JobId", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutJobTagging AWS API Documentation
+    #
+    # @overload put_job_tagging(params = {})
+    # @param [Hash] params ({})
+    def put_job_tagging(params = {}, options = {})
+      req = build_request(:put_job_tagging, params)
+      req.send_request(options)
+    end
+
     # Creates or modifies the `PublicAccessBlock` configuration for an
     # Amazon Web Services account.
     #
@@ -1023,7 +1350,25 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Updates an existing job's priority.
+    # Updates an existing Amazon S3 Batch Operations job's priority. For
+    # more information, see [Amazon S3 Batch Operations][1] in the Amazon
+    # Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * ListJobs
+    #
+    # * DescribeJob
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -1061,7 +1406,25 @@ module Aws::S3Control
     end
 
     # Updates the status for the specified job. Use this operation to
-    # confirm that you want to run a job or to cancel an existing job.
+    # confirm that you want to run a job or to cancel an existing job. For
+    # more information, see [Amazon S3 Batch Operations][1] in the Amazon
+    # Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # Related actions include:
+    #
+    # * CreateJob
+    #
+    # * ListJobs
+    #
+    # * DescribeJob
+    #
+    # * UpdateJobStatus
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
     #
     # @option params [required, String] :account_id
     #
@@ -1118,7 +1481,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

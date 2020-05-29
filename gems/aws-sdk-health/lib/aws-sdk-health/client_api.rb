@@ -89,6 +89,7 @@ module Aws::Health
     eventArnList = Shapes::ListShape.new(name: 'eventArnList')
     eventDescription = Shapes::StringShape.new(name: 'eventDescription')
     eventMetadata = Shapes::MapShape.new(name: 'eventMetadata')
+    eventScopeCode = Shapes::StringShape.new(name: 'eventScopeCode')
     eventStatusCode = Shapes::StringShape.new(name: 'eventStatusCode')
     eventStatusCodeList = Shapes::ListShape.new(name: 'eventStatusCodeList')
     eventType = Shapes::StringShape.new(name: 'eventType')
@@ -136,6 +137,7 @@ module Aws::Health
     DescribeAffectedAccountsForOrganizationRequest.struct_class = Types::DescribeAffectedAccountsForOrganizationRequest
 
     DescribeAffectedAccountsForOrganizationResponse.add_member(:affected_accounts, Shapes::ShapeRef.new(shape: affectedAccountsList, location_name: "affectedAccounts"))
+    DescribeAffectedAccountsForOrganizationResponse.add_member(:event_scope_code, Shapes::ShapeRef.new(shape: eventScopeCode, location_name: "eventScopeCode"))
     DescribeAffectedAccountsForOrganizationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     DescribeAffectedAccountsForOrganizationResponse.struct_class = Types::DescribeAffectedAccountsForOrganizationResponse
 
@@ -261,10 +263,11 @@ module Aws::Health
     Event.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "endTime"))
     Event.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "lastUpdatedTime"))
     Event.add_member(:status_code, Shapes::ShapeRef.new(shape: eventStatusCode, location_name: "statusCode"))
+    Event.add_member(:event_scope_code, Shapes::ShapeRef.new(shape: eventScopeCode, location_name: "eventScopeCode"))
     Event.struct_class = Types::Event
 
     EventAccountFilter.add_member(:event_arn, Shapes::ShapeRef.new(shape: eventArn, required: true, location_name: "eventArn"))
-    EventAccountFilter.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, required: true, location_name: "awsAccountId"))
+    EventAccountFilter.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: accountId, location_name: "awsAccountId"))
     EventAccountFilter.struct_class = Types::EventAccountFilter
 
     EventAggregate.add_member(:aggregate_value, Shapes::ShapeRef.new(shape: aggregateValue, location_name: "aggregateValue"))
@@ -336,6 +339,7 @@ module Aws::Health
     OrganizationEvent.add_member(:service, Shapes::ShapeRef.new(shape: service, location_name: "service"))
     OrganizationEvent.add_member(:event_type_code, Shapes::ShapeRef.new(shape: eventTypeCode, location_name: "eventTypeCode"))
     OrganizationEvent.add_member(:event_type_category, Shapes::ShapeRef.new(shape: eventTypeCategory, location_name: "eventTypeCategory"))
+    OrganizationEvent.add_member(:event_scope_code, Shapes::ShapeRef.new(shape: eventScopeCode, location_name: "eventScopeCode"))
     OrganizationEvent.add_member(:region, Shapes::ShapeRef.new(shape: region, location_name: "region"))
     OrganizationEvent.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "startTime"))
     OrganizationEvent.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "endTime"))

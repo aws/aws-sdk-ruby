@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::RDS
+
   class DBInstance
 
     extend Aws::Deprecations
@@ -47,6 +48,13 @@ module Aws::RDS
     end
 
     # Specifies the current state of this database.
+    #
+    # For information about DB instance statuses, see [DB Instance
+    # Status][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Status.html
     # @return [String]
     def db_instance_status
       data[:db_instance_status]
@@ -188,13 +196,13 @@ module Aws::RDS
     end
 
     # Contains the identifier of the source DB instance if this DB instance
-    # is a Read Replica.
+    # is a read replica.
     # @return [String]
     def read_replica_source_db_instance_identifier
       data[:read_replica_source_db_instance_identifier]
     end
 
-    # Contains one or more identifiers of the Read Replicas associated with
+    # Contains one or more identifiers of the read replicas associated with
     # this DB instance.
     # @return [Array<String>]
     def read_replica_db_instance_identifiers
@@ -202,12 +210,12 @@ module Aws::RDS
     end
 
     # Contains one or more identifiers of Aurora DB clusters to which the
-    # RDS DB instance is replicated as a Read Replica. For example, when you
-    # create an Aurora Read Replica of an RDS MySQL DB instance, the Aurora
-    # MySQL DB cluster for the Aurora Read Replica is shown. This output
-    # does not contain information about cross region Aurora Read Replicas.
+    # RDS DB instance is replicated as a read replica. For example, when you
+    # create an Aurora read replica of an RDS MySQL DB instance, the Aurora
+    # MySQL DB cluster for the Aurora read replica is shown. This output
+    # does not contain information about cross region Aurora read replicas.
     #
-    # <note markdown="1"> Currently, each RDS DB instance can have only one Aurora Read Replica.
+    # <note markdown="1"> Currently, each RDS DB instance can have only one Aurora read replica.
     #
     #  </note>
     # @return [Array<String>]
@@ -257,7 +265,7 @@ module Aws::RDS
       data[:publicly_accessible]
     end
 
-    # The status of a Read Replica. If the instance isn't a Read Replica,
+    # The status of a read replica. If the instance isn't a read replica,
     # this is blank.
     # @return [Array<Types::DBInstanceStatusInfo>]
     def status_infos
@@ -521,7 +529,8 @@ module Aws::RDS
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -534,13 +543,15 @@ module Aws::RDS
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -571,17 +582,16 @@ module Aws::RDS
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -1062,7 +1072,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -1100,7 +1110,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -1108,7 +1118,7 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -1116,7 +1126,7 @@ module Aws::RDS
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -1124,20 +1134,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     # @option options [Boolean] :multi_az
@@ -1314,12 +1324,10 @@ module Aws::RDS
     #   Amazon RDS DB Instance Running Microsoft SQL Server][1] in the *Amazon
     #   RDS User Guide*.
     #
-    #   For Oracle DB instance, Amazon RDS can use Kerberos Authentication to
+    #   For Oracle DB instances, Amazon RDS can use Kerberos Authentication to
     #   authenticate users that connect to the DB instance. For more
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][2] in the *Amazon RDS User Guide*.
-    #
-    #
     #
     #
     #
@@ -1525,11 +1533,11 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
-    #   The DB instance identifier of the Read Replica. This identifier is the
+    #   The DB instance identifier of the read replica. This identifier is the
     #   unique key that identifies a DB instance. This parameter is stored as
     #   a lowercase string.
     # @option options [String] :db_instance_class
-    #   The compute and memory capacity of the Read Replica, for example,
+    #   The compute and memory capacity of the read replica, for example,
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
@@ -1541,7 +1549,7 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
     # @option options [String] :availability_zone
-    #   The Availability Zone (AZ) where the Read Replica will be created.
+    #   The Availability Zone (AZ) where the read replica will be created.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -1554,17 +1562,17 @@ module Aws::RDS
     #
     #   Valid Values: `1150-65535`
     # @option options [Boolean] :multi_az
-    #   A value that indicates whether the Read Replica is in a Multi-AZ
+    #   A value that indicates whether the read replica is in a Multi-AZ
     #   deployment.
     #
-    #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
+    #   You can create a read replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
-    #   support for the replica. Creating your Read Replica as a Multi-AZ DB
+    #   support for the replica. Creating your read replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   A value that indicates whether minor engine upgrades are applied
-    #   automatically to the Read Replica during the maintenance window.
+    #   automatically to the read replica during the maintenance window.
     #
     #   Default: Inherits from the source DB instance
     # @option options [Integer] :iops
@@ -1573,13 +1581,18 @@ module Aws::RDS
     # @option options [String] :option_group_name
     #   The option group the DB instance is associated with. If omitted, the
     #   option group associated with the source instance is used.
+    #
+    #   <note markdown="1"> For SQL Server, you must use the option group associated with the
+    #   source instance.
+    #
+    #    </note>
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to associate with this DB instance.
     #
     #   If you do not specify a value for `DBParameterGroupName`, then Amazon
     #   RDS uses the `DBParameterGroup` of source DB instance for a same
-    #   region Read Replica, or the default `DBParameterGroup` for the
-    #   specified DB engine for a cross region Read Replica.
+    #   region read replica, or the default `DBParameterGroup` for the
+    #   specified DB engine for a cross region read replica.
     #
     #   <note markdown="1"> Currently, specifying a parameter group for this operation is only
     #   supported for Oracle DB instances.
@@ -1623,23 +1636,23 @@ module Aws::RDS
     #   * The specified DB subnet group must be in the same AWS Region in
     #     which the operation is running.
     #
-    #   * All Read Replicas in one AWS Region that are created from the same
+    #   * All read replicas in one AWS Region that are created from the same
     #     source DB instance must either:&gt;
     #
-    #     * Specify DB subnet groups from the same VPC. All these Read
-    #       Replicas are created in the same VPC.
+    #     * Specify DB subnet groups from the same VPC. All these read
+    #       replicas are created in the same VPC.
     #
-    #     * Not specify a DB subnet group. All these Read Replicas are created
+    #     * Not specify a DB subnet group. All these read replicas are created
     #       outside of any VPC.
     #
     #   Example: `mySubnetgroup`
     # @option options [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with the Read Replica.
+    #   A list of EC2 VPC security groups to associate with the read replica.
     #
     #   Default: The default EC2 VPC security group for the DB subnet group's
     #   VPC.
     # @option options [String] :storage_type
-    #   Specifies the storage type to be associated with the Read Replica.
+    #   Specifies the storage type to be associated with the read replica.
     #
     #   Valid values: `standard | gp2 | io1`
     #
@@ -1648,11 +1661,11 @@ module Aws::RDS
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     # @option options [Boolean] :copy_tags_to_snapshot
-    #   A value that indicates whether to copy all tags from the Read Replica
-    #   to snapshots of the Read Replica. By default, tags are not copied.
+    #   A value that indicates whether to copy all tags from the read replica
+    #   to snapshots of the read replica. By default, tags are not copied.
     # @option options [Integer] :monitoring_interval
     #   The interval, in seconds, between points when Enhanced Monitoring
-    #   metrics are collected for the Read Replica. To disable collecting
+    #   metrics are collected for the read replica. To disable collecting
     #   Enhanced Monitoring metrics, specify 0. The default is 0.
     #
     #   If `MonitoringRoleArn` is specified, then you must also set
@@ -1673,31 +1686,31 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
     # @option options [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted Read Replica. The KMS key ID is
+    #   The AWS KMS key ID for an encrypted read replica. The KMS key ID is
     #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
     #   alias for the KMS encryption key.
     #
-    #   If you create an encrypted Read Replica in the same AWS Region as the
+    #   If you create an encrypted read replica in the same AWS Region as the
     #   source DB instance, then you do not have to specify a value for this
-    #   parameter. The Read Replica is encrypted with the same KMS key as the
+    #   parameter. The read replica is encrypted with the same KMS key as the
     #   source DB instance.
     #
-    #   If you create an encrypted Read Replica in a different AWS Region,
+    #   If you create an encrypted read replica in a different AWS Region,
     #   then you must specify a KMS key for the destination AWS Region. KMS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
     #
-    #   You can't create an encrypted Read Replica from an unencrypted DB
+    #   You can't create an encrypted read replica from an unencrypted DB
     #   instance.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CreateDBInstanceReadReplica` API action in the source AWS Region that
     #   contains the source DB instance.
     #
-    #   You must specify this parameter when you create an encrypted Read
-    #   Replica from another AWS Region by using the Amazon RDS API. Don't
-    #   specify `PreSignedUrl` when you are creating an encrypted Read Replica
+    #   You must specify this parameter when you create an encrypted read
+    #   replica from another AWS Region by using the Amazon RDS API. Don't
+    #   specify `PreSignedUrl` when you are creating an encrypted read replica
     #   in the same AWS Region.
     #
     #   The presigned URL must be a valid request for the
@@ -1705,7 +1718,7 @@ module Aws::RDS
     #   source AWS Region that contains the encrypted source DB instance. The
     #   presigned URL request must contain the following parameter values:
     #
-    #   * `DestinationRegion` - The AWS Region that the encrypted Read Replica
+    #   * `DestinationRegion` - The AWS Region that the encrypted read replica
     #     is created in. This AWS Region is the same one where the
     #     `CreateDBInstanceReadReplica` action is called that contains this
     #     presigned URL.
@@ -1719,7 +1732,7 @@ module Aws::RDS
     #     presigned URL must be set to the us-east-1 AWS Region.
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the Read Replica in the destination AWS Region. This is the
+    #     encrypt the read replica in the destination AWS Region. This is the
     #     same identifier for both the `CreateDBInstanceReadReplica` action
     #     that is called in the destination AWS Region, and the action
     #     contained in the presigned URL.
@@ -1727,7 +1740,7 @@ module Aws::RDS
     #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
     #     encrypted DB instance to be replicated. This identifier must be in
     #     the Amazon Resource Name (ARN) format for the source AWS Region. For
-    #     example, if you are creating an encrypted Read Replica from a DB
+    #     example, if you are creating an encrypted read replica from a DB
     #     instance in the us-west-2 AWS Region, then your
     #     `SourceDBInstanceIdentifier` looks like the following example:
     #     `arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115`.
@@ -1739,8 +1752,11 @@ module Aws::RDS
     #   <note markdown="1"> If you are using an AWS SDK tool or the AWS CLI, you can specify
     #   `SourceRegion` (or `--source-region` for the AWS CLI) instead of
     #   specifying `PreSignedUrl` manually. Specifying `SourceRegion`
-    #   autogenerates a pre-signed URL that is a valid request for the
+    #   autogenerates a presigned URL that is a valid request for the
     #   operation that can be executed in the source AWS Region.
+    #
+    #    `SourceRegion` isn't supported for SQL Server, because SQL Server on
+    #   Amazon RDS doesn't support cross-region read replicas.
     #
     #    </note>
     #
@@ -1763,7 +1779,7 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
-    #   Read Replica.
+    #   read replica.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
     #   the *Amazon RDS User Guide*.
@@ -1815,9 +1831,16 @@ module Aws::RDS
     #   information, see [ Using Kerberos Authentication with Amazon RDS for
     #   Oracle][1] in the *Amazon RDS User Guide*.
     #
+    #   For Microsoft SQL Server DB instances, Amazon RDS can use Windows
+    #   Authentication to authenticate users that connect to the DB instance.
+    #   For more information, see [ Using Windows Authentication with an
+    #   Amazon RDS DB Instance Running Microsoft SQL Server][2] in the *Amazon
+    #   RDS User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
@@ -1900,7 +1923,7 @@ module Aws::RDS
     #   'failed', 'incompatible-restore', or 'incompatible-network', it
     #   can only be deleted when skip is specified.
     #
-    #   Specify skip when deleting a Read Replica.
+    #   Specify skip when deleting a read replica.
     #
     #   <note markdown="1"> The FinalDBSnapshotIdentifier parameter must be specified if skip
     #   isn't specified.
@@ -1923,7 +1946,7 @@ module Aws::RDS
     #
     #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
-    #   * Can't be specified when deleting a Read Replica.
+    #   * Can't be specified when deleting a read replica.
     # @option options [Boolean] :delete_automated_backups
     #   A value that indicates whether to remove automated backups immediately
     #   after the DB instance is deleted. This parameter isn't
@@ -2161,13 +2184,13 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35
     #
-    #   * Can be specified for a MySQL Read Replica only if the source is
+    #   * Can be specified for a MySQL read replica only if the source is
     #     running MySQL 5.6 or later
     #
-    #   * Can be specified for a PostgreSQL Read Replica only if the source is
+    #   * Can be specified for a PostgreSQL read replica only if the source is
     #     running PostgreSQL 9.3.5
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas
+    #   * Can't be set to 0 if the DB instance is a source to read replicas
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
@@ -2270,7 +2293,7 @@ module Aws::RDS
     #   performance degradation. While the migration takes place, nightly
     #   backups for the instance are suspended. No other Amazon RDS operations
     #   can take place for the instance, including modifying the instance,
-    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
     #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL, the value
@@ -2327,7 +2350,7 @@ module Aws::RDS
     #   performance degradation. While the migration takes place, nightly
     #   backups for the instance are suspended. No other Amazon RDS operations
     #   can take place for the instance, including modifying the instance,
-    #   rebooting the instance, deleting the instance, creating a Read Replica
+    #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
     #   Valid values: `standard | gp2 | io1`
@@ -2396,19 +2419,19 @@ module Aws::RDS
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **MariaDB**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **PostgreSQL**
     #
     #   Default: `5432`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   Type: Integer
     #
@@ -2416,20 +2439,20 @@ module Aws::RDS
     #
     #   Default: `1521`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     #
     #   **SQL Server**
     #
     #   Default: `1433`
     #
-    #   Valid Values: `1150-65535` except for `1434`, `3389`, `47001`,
-    #   `49152`, and `49152` through `49156`.
+    #   Valid values: `1150-65535` except `1234`, `1434`, `3260`, `3343`,
+    #   `3389`, `47001`, and `49152-49156`.
     #
     #   **Amazon Aurora**
     #
     #   Default: `3306`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid values: `1150-65535`
     # @option options [Boolean] :publicly_accessible
     #   A value that indicates whether the DB instance is publicly accessible.
     #   When the DB instance is publicly accessible, it is an Internet-facing
@@ -2589,7 +2612,7 @@ module Aws::RDS
     #
     #   * Must be a value from 0 to 35.
     #
-    #   * Can't be set to 0 if the DB instance is a source to Read Replicas.
+    #   * Can't be set to 0 if the DB instance is a source to read replicas.
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, using the `BackupRetentionPeriod`

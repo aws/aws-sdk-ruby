@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SMS
+
+  # When SMS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SMS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SMS errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SMS::Errors::ServiceError
+  #       # rescues all SMS API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InternalError}
+  # * {InvalidParameterException}
+  # * {MissingRequiredParameterException}
+  # * {NoConnectorsAvailableException}
+  # * {OperationNotPermittedException}
+  # * {ReplicationJobAlreadyExistsException}
+  # * {ReplicationJobNotFoundException}
+  # * {ReplicationRunLimitExceededException}
+  # * {ServerCannotBeReplicatedException}
+  # * {TemporarilyUnavailableException}
+  # * {UnauthorizedOperationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +56,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -39,7 +71,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingRequiredParameterException < ServiceError
@@ -55,7 +86,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NoConnectorsAvailableException < ServiceError
@@ -71,7 +101,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotPermittedException < ServiceError
@@ -87,7 +116,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationJobAlreadyExistsException < ServiceError
@@ -103,7 +131,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationJobNotFoundException < ServiceError
@@ -119,7 +146,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ReplicationRunLimitExceededException < ServiceError
@@ -135,7 +161,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerCannotBeReplicatedException < ServiceError
@@ -151,7 +176,16 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
+    end
 
+    class TemporarilyUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SMS::Types::TemporarilyUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class UnauthorizedOperationException < ServiceError
@@ -167,7 +201,6 @@ module Aws::SMS
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -28,17 +28,20 @@ require_relative 'aws-sdk-sns/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     sns = Aws::SNS::Client.new
+#     resp = sns.add_permission(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Simple Notification Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Simple Notification Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SNS::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Simple Notification Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -46,6 +49,6 @@ require_relative 'aws-sdk-sns/customizations'
 # @service
 module Aws::SNS
 
-  GEM_VERSION = '1.21.0'
+  GEM_VERSION = '1.24.0'
 
 end

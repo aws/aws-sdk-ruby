@@ -169,8 +169,21 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # We can't find an AWS account with the `AccountId` that you specified.
-    # Or the account whose credentials you used to make this request isn't
+    # The specified account is already a delegated administrator for this
+    # AWS service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccountAlreadyRegisteredException AWS API Documentation
+    #
+    class AccountAlreadyRegisteredException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # We can't find an AWS account with the `AccountId` that you specified,
+    # or the account whose credentials you used to make this request isn't
     # a member of an organization.
     #
     # @!attribute [rw] message
@@ -179,6 +192,19 @@ module Aws::Organizations
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccountNotFoundException AWS API Documentation
     #
     class AccountNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified account is not a delegated administrator for this AWS
+    # service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AccountNotRegisteredException AWS API Documentation
+    #
+    class AccountNotRegisteredException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -368,10 +394,11 @@ module Aws::Organizations
     end
 
     # Performing this operation violates a minimum or maximum value limit.
-    # Examples include attempting to remove the last service control policy
-    # (SCP) from an OU or root, or attaching too many policies to an
-    # account, OU, or root. This exception includes a reason that contains
-    # additional information about the violated limit.
+    # For example, attempting to remove the last service control policy
+    # (SCP) from an OU or root, inviting or creating too many accounts to
+    # the organization, or attaching too many policies to an account, OU, or
+    # root. This exception includes a reason that contains additional
+    # information about the violated limit.
     #
     # Some of the reasons in the following list might not be applicable to
     # this specific API or operation:
@@ -412,6 +439,17 @@ module Aws::Organizations
     #   after an hour it continues to fail with this error, contact [AWS
     #   Support][2].
     #
+    # * CANNOT\_REGISTER\_MASTER\_AS\_DELEGATED\_ADMINISTRATOR: You can
+    #   designate only a member account as a delegated administrator.
+    #
+    # * CANNOT\_REMOVE\_DELEGATED\_ADMINISTRATOR\_FROM\_ORG: To complete
+    #   this operation, you must first deregister this account as a
+    #   delegated administrator.
+    #
+    # * DELEGATED\_ADMINISTRATOR\_EXISTS\_FOR\_THIS\_SERVICE: To complete
+    #   this operation, you must first deregister all delegated
+    #   administrators for this service.
+    #
     # * HANDSHAKE\_RATE\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of handshakes that you can send in one day.
     #
@@ -439,6 +477,10 @@ module Aws::Organizations
     #   account information has not yet been provided][1] in the *AWS
     #   Organizations User Guide.*
     #
+    # * MAX\_DELEGATED\_ADMINISTRATORS\_FOR\_SERVICE\_LIMIT\_EXCEEDED: You
+    #   attempted to register more delegated administrators than allowed for
+    #   the service principal.
+    #
     # * MAX\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
     #   exceed the number of policies of a certain type that can be attached
     #   to an entity at one time.
@@ -454,8 +496,9 @@ module Aws::Organizations
     #   User Guide.*
     #
     # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
-    #   detach a policy from an entity, which would cause the entity to have
-    #   fewer than the minimum number of policies of the required type.
+    #   detach a policy from an entity that would cause the entity to have
+    #   fewer than the minimum number of policies of a certain type
+    #   required.
     #
     # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
     #   is too many levels deep.
@@ -468,20 +511,14 @@ module Aws::Organizations
     # * OU\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number of
     #   OUs that you can have in an organization.
     #
-    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number
+    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED. You attempted to exceed the number
     #   of policies that you can have in an organization.
-    #
-    # * TAG\_POLICY\_VIOLATION: Tags associated with the resource must be
-    #   compliant with the tag policy that’s in effect for the account. For
-    #   more information, see [Tag Policies][4] in the *AWS Organizations
-    #   User Guide.*
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     # [2]: https://console.aws.amazon.com/support/home#/
     # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
-    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -532,10 +569,13 @@ module Aws::Organizations
     #   `OrganizationAccountAccessRole`.
     #
     #   For more information about how to use this role to access the member
-    #   account, see [Accessing and Administering the Member Accounts in
-    #   Your Organization][1] in the *AWS Organizations User Guide*. Also
-    #   see steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
-    #   Using IAM Roles][2] in the *IAM User Guide.*
+    #   account, see the following links:
+    #
+    #   * [Accessing and Administering the Member Accounts in Your
+    #     Organization][1] in the *AWS Organizations User Guide*
+    #
+    #   * Steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
+    #     Using IAM Roles][2] in the *IAM User Guide*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
     #   pattern can include uppercase letters, lowercase letters, digits
@@ -556,9 +596,9 @@ module Aws::Organizations
     #   Access to the Billing and Cost Management Console][1] in the *AWS
     #   Billing and Cost Management User Guide*.
     #
-    #   If you don't specify this parameter, the value defaults to `ALLOW`.
-    #   This value allows IAM users and roles with the required permissions
-    #   to access billing information for the new account.
+    #   If you don't specify this parameter, the value defaults to `ALLOW`,
+    #   and IAM users and roles with the required permissions can access
+    #   billing information for the new account.
     #
     #
     #
@@ -673,7 +713,7 @@ module Aws::Organizations
     #
     #   * INTERNAL\_FAILURE: The account could not be created because of an
     #     internal failure. Try again later. If the problem persists,
-    #     contact AWS Support.
+    #     contact Customer Support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation
@@ -690,7 +730,7 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # We can't find a create account request with the
+    # We can't find an create account request with the
     # `CreateAccountRequestId` that you specified.
     #
     # @!attribute [rw] message
@@ -721,8 +761,8 @@ module Aws::Organizations
     #   user of the account or remove an account that was created with an
     #   invalid email address. Like all request parameters for
     #   `CreateGovCloudAccount`, the request for the email address for the
-    #   AWS GovCloud (US) account originates from the commercial Region. It
-    #   does not come from the AWS GovCloud (US) Region.
+    #   AWS GovCloud (US) account originates from the commercial Region, not
+    #   from the AWS GovCloud (US) Region.
     #   @return [String]
     #
     # @!attribute [rw] account_name
@@ -744,8 +784,8 @@ module Aws::Organizations
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in
-    #   Your Organization][1] in the *AWS Organizations User Guide*. See
-    #   also steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
+    #   Your Organization][1] in the *AWS Organizations User Guide* and
+    #   steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
     #   Using IAM Roles][2] in the *IAM User Guide.*
     #
     #   The [regex pattern][3] that is used to validate this parameter. The
@@ -819,11 +859,11 @@ module Aws::Organizations
     #     The consolidated billing feature subset isn't available for
     #     organizations in the AWS GovCloud (US) Region.
     #
-    #   * `ALL`\: In addition to all the features that consolidated billing
-    #     feature set supports, the master account can also apply any policy
-    #     type to any member account in the organization. For more
-    #     information, see [All features][2] in the *AWS Organizations User
-    #     Guide.*
+    #   * `ALL`\: In addition to all the features supported by the
+    #     consolidated billing feature set, the master account can also
+    #     apply any policy type to any member account in the organization.
+    #     For more information, see [All features][2] in the *AWS
+    #     Organizations User Guide.*
     #
     #
     #
@@ -913,12 +953,12 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] content
-    #   The policy content to add to the new policy. For example, you could
-    #   create a [service control policy][1] (SCP) that specifies the
-    #   permissions that administrators in attached accounts can delegate to
-    #   their users, groups, and roles. The string for this SCP must be JSON
-    #   text. For more information about the SCP syntax, see [Service
-    #   Control Policy Syntax][2] in the *AWS Organizations User Guide.*
+    #   The policy content to add to the new policy. For example, if you
+    #   create a [service control policy][1] (SCP), this string must be JSON
+    #   text that specifies the permissions that admins in attached accounts
+    #   can delegate to their users, groups, and roles. For more information
+    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
+    #   *AWS Organizations User Guide.*
     #
     #
     #
@@ -943,6 +983,11 @@ module Aws::Organizations
     #
     # @!attribute [rw] type
     #   The type of policy to create.
+    #
+    #   <note markdown="1"> In the current release, the only type of policy that you can create
+    #   is a service control policy (SCP).
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest AWS API Documentation
@@ -1005,6 +1050,82 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # Contains information about the delegated administrator.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier (ID) of the delegated administrator's
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the delegated administrator's
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address that is associated with the delegated
+    #   administrator's AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the delegated administrator's account.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the delegated administrator's account in the
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] joined_method
+    #   The method by which the delegated administrator's account joined
+    #   the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] joined_timestamp
+    #   The date when the delegated administrator's account became a part
+    #   of the organization.
+    #   @return [Time]
+    #
+    # @!attribute [rw] delegation_enabled_date
+    #   The date when the account was made a delegated administrator.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DelegatedAdministrator AWS API Documentation
+    #
+    class DelegatedAdministrator < Struct.new(
+      :id,
+      :arn,
+      :email,
+      :name,
+      :status,
+      :joined_method,
+      :joined_timestamp,
+      :delegation_enabled_date)
+      include Aws::Structure
+    end
+
+    # Contains information about the AWS service for which the account is a
+    # delegated administrator.
+    #
+    # @!attribute [rw] service_principal
+    #   The name of a service that can request an operation for the
+    #   specified service. This is typically in the form of a URL, such as:
+    #   ` servicename.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] delegation_enabled_date
+    #   The date that the account became a delegated administrator for this
+    #   service.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DelegatedService AWS API Documentation
+    #
+    class DelegatedService < Struct.new(
+      :service_principal,
+      :delegation_enabled_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteOrganizationalUnitRequest
     #   data as a hash:
     #
@@ -1060,6 +1181,38 @@ module Aws::Organizations
     #
     class DeletePolicyRequest < Struct.new(
       :policy_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeregisterDelegatedAdministratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         service_principal: "ServicePrincipal", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID number of the member account in the organization that
+    #   you want to deregister as a delegated administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_principal
+    #   The service principal name of an AWS service for which the account
+    #   is a delegated administrator.
+    #
+    #   Delegated administrator privileges are revoked for only the
+    #   specified AWS service from the member account. If the specified
+    #   service is the only service for which the member account is a
+    #   delegated administrator, the operation also revokes Organizations
+    #   read action permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeregisterDelegatedAdministratorRequest AWS API Documentation
+    #
+    class DeregisterDelegatedAdministratorRequest < Struct.new(
+      :account_id,
+      :service_principal)
       include Aws::Structure
     end
 
@@ -1632,8 +1785,9 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # A structure that contains details of a service principal that is
-    # enabled to integrate with AWS Organizations.
+    # A structure that contains details of a service principal that
+    # represents an AWS service that is enabled to integrate with AWS
+    # Organizations.
     #
     # @!attribute [rw] service_principal
     #   The name of the service principal. This is typically in the form of
@@ -1674,13 +1828,12 @@ module Aws::Organizations
 
     # Contains information that must be exchanged to securely establish a
     # relationship between two accounts (an *originator* and a *recipient*).
-    # For example, assume that a master account (the originator) invites
-    # another account (the recipient) to join its organization. In that
-    # case, the two accounts exchange information as a series of handshake
-    # requests and responses.
+    # For example, when a master account (the originator) invites another
+    # account (the recipient) to join its organization, the two accounts
+    # exchange information as a series of handshake requests and responses.
     #
     # **Note:** Handshakes that are CANCELED, ACCEPTED, or DECLINED show up
-    # in lists for only 30 days after entering that state. After that, they
+    # in lists for only 30 days after entering that state After that they
     # are deleted.
     #
     # @!attribute [rw] id
@@ -2027,8 +2180,6 @@ module Aws::Organizations
     #
     # * INVALID\_ENUM: You specified an invalid value.
     #
-    # * INVALID\_ENUM\_POLICY\_TYPE: You specified an invalid policy type.
-    #
     # * INVALID\_FULL\_NAME\_TARGET: You specified a full name that contains
     #   invalid characters.
     #
@@ -2156,23 +2307,24 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationRequest AWS API Documentation
@@ -2191,11 +2343,11 @@ module Aws::Organizations
     #   @return [Array<Types::EnabledServicePrincipal>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganizationResponse AWS API Documentation
@@ -2221,23 +2373,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentRequest AWS API Documentation
@@ -2254,11 +2407,11 @@ module Aws::Organizations
     #   @return [Array<Types::Account>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParentResponse AWS API Documentation
@@ -2278,23 +2431,24 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsRequest AWS API Documentation
@@ -2310,11 +2464,11 @@ module Aws::Organizations
     #   @return [Array<Types::Account>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsResponse AWS API Documentation
@@ -2361,23 +2515,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenRequest AWS API Documentation
@@ -2395,11 +2550,11 @@ module Aws::Organizations
     #   @return [Array<Types::Child>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildrenResponse AWS API Documentation
@@ -2426,23 +2581,24 @@ module Aws::Organizations
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusRequest AWS API Documentation
@@ -2461,17 +2617,148 @@ module Aws::Organizations
     #   @return [Array<Types::CreateAccountStatus>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatusResponse AWS API Documentation
     #
     class ListCreateAccountStatusResponse < Struct.new(
       :create_account_statuses,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDelegatedAdministratorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_principal: "ServicePrincipal",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] service_principal
+    #   Specifies a service principal name. If specified, then the operation
+    #   lists the delegated administrators only for the specified service.
+    #
+    #   If you don't specify a service principal, the operation lists all
+    #   delegated administrators for all services in your organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedAdministratorsRequest AWS API Documentation
+    #
+    class ListDelegatedAdministratorsRequest < Struct.new(
+      :service_principal,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegated_administrators
+    #   The list of delegated administrators in your organization.
+    #   @return [Array<Types::DelegatedAdministrator>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedAdministratorsResponse AWS API Documentation
+    #
+    class ListDelegatedAdministratorsResponse < Struct.new(
+      :delegated_administrators,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDelegatedServicesForAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID number of a delegated administrator account in the
+    #   organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedServicesForAccountRequest AWS API Documentation
+    #
+    class ListDelegatedServicesForAccountRequest < Struct.new(
+      :account_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] delegated_services
+    #   The services for which the account is a delegated administrator.
+    #   @return [Array<Types::DelegatedService>]
+    #
+    # @!attribute [rw] next_token
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedServicesForAccountResponse AWS API Documentation
+    #
+    class ListDelegatedServicesForAccountResponse < Struct.new(
+      :delegated_services,
       :next_token)
       include Aws::Structure
     end
@@ -2492,31 +2779,32 @@ module Aws::Organizations
     #   Filters the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the
     #   output to only a specified type, such as `INVITE`,
-    #   `ENABLE_ALL_FEATURES`, or `APPROVE_ALL_FEATURES`. Alternatively, you
-    #   can specify the `ENABLE_ALL_FEATURES` handshake, which generates a
-    #   separate child handshake for each member account. When you do
-    #   specify `ParentHandshakeId` to see only the handshakes that were
-    #   generated by that parent request.
+    #   `ENABLE_ALL_FEATURES`, or `APPROVE_ALL_FEATURES`. Alternatively, for
+    #   the `ENABLE_ALL_FEATURES` handshake that generates a separate child
+    #   handshake for each member account, you can specify
+    #   `ParentHandshakeId` to see only the handshakes that were generated
+    #   by that parent request.
     #   @return [Types::HandshakeFilter]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountRequest AWS API Documentation
@@ -2534,11 +2822,11 @@ module Aws::Organizations
     #   @return [Array<Types::Handshake>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccountResponse AWS API Documentation
@@ -2565,31 +2853,32 @@ module Aws::Organizations
     #   A filter of the handshakes that you want included in the response.
     #   The default is all types. Use the `ActionType` element to limit the
     #   output to only a specified type, such as `INVITE`,
-    #   `ENABLE-ALL-FEATURES`, or `APPROVE-ALL-FEATURES`. Alternatively, you
-    #   can specify the `ENABLE-ALL-FEATURES` handshake, which generates a
-    #   separate child handshake for each member account. When you do,
-    #   specify the `ParentHandshakeId` to see only the handshakes that were
-    #   generated by that parent request.
+    #   `ENABLE-ALL-FEATURES`, or `APPROVE-ALL-FEATURES`. Alternatively, for
+    #   the `ENABLE-ALL-FEATURES` handshake that generates a separate child
+    #   handshake for each member account, you can specify the
+    #   `ParentHandshakeId` to see only the handshakes that were generated
+    #   by that parent request.
     #   @return [Types::HandshakeFilter]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationRequest AWS API Documentation
@@ -2607,11 +2896,11 @@ module Aws::Organizations
     #   @return [Array<Types::Handshake>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganizationResponse AWS API Documentation
@@ -2653,23 +2942,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentRequest AWS API Documentation
@@ -2686,11 +2976,11 @@ module Aws::Organizations
     #   @return [Array<Types::OrganizationalUnit>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParentResponse AWS API Documentation
@@ -2731,23 +3021,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsRequest AWS API Documentation
@@ -2764,11 +3055,11 @@ module Aws::Organizations
     #   @return [Array<Types::Parent>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParentsResponse AWS API Documentation
@@ -2817,23 +3108,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetRequest AWS API Documentation
@@ -2851,11 +3143,11 @@ module Aws::Organizations
     #   @return [Array<Types::PolicySummary>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTargetResponse AWS API Documentation
@@ -2881,23 +3173,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesRequest AWS API Documentation
@@ -2916,11 +3209,11 @@ module Aws::Organizations
     #   @return [Array<Types::PolicySummary>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesResponse AWS API Documentation
@@ -2940,23 +3233,24 @@ module Aws::Organizations
     #       }
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsRequest AWS API Documentation
@@ -2972,11 +3266,11 @@ module Aws::Organizations
     #   @return [Array<Types::Root>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRootsResponse AWS API Documentation
@@ -3000,10 +3294,11 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResourceRequest AWS API Documentation
@@ -3019,11 +3314,11 @@ module Aws::Organizations
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResourceResponse AWS API Documentation
@@ -3057,23 +3352,24 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Use this parameter if you receive a `NextToken` response in a
-    #   previous request that indicates that there is more output available.
-    #   Set it to the value of the previous call's `NextToken` response to
-    #   indicate where the output should continue from.
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) Use this to limit the number of results you want included
-    #   per page in the response. If you do not include this parameter, it
-    #   defaults to a value that is specific to the operation. If additional
-    #   items exist beyond the maximum you specify, the `NextToken` response
-    #   element is present and has a value (is not null). Include that value
-    #   as the `NextToken` request parameter in the next call to the
-    #   operation to get the next part of the results. Note that
-    #   Organizations might return fewer results than the maximum even when
-    #   there are more results available. You should check `NextToken` after
-    #   every operation to ensure that you receive all of the results.
+    #   The total number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value that is specific to the operation. If additional items exist
+    #   beyond the maximum you specify, the `NextToken` response element is
+    #   present and has a value (is not null). Include that value as the
+    #   `NextToken` request parameter in the next call to the operation to
+    #   get the next part of the results. Note that Organizations might
+    #   return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every
+    #   operation to ensure that you receive all of the results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyRequest AWS API Documentation
@@ -3091,11 +3387,11 @@ module Aws::Organizations
     #   @return [Array<Types::PolicyTargetSummary>]
     #
     # @!attribute [rw] next_token
-    #   If present, this value indicates that there is more output available
-    #   than is included in the current response. Use this value in the
-    #   `NextToken` request parameter in a subsequent call to the operation
-    #   to get the next part of the output. You should repeat this until the
-    #   `NextToken` response element comes back as `null`.
+    #   If present, indicates that more output is available than is included
+    #   in the current response. Use this value in the `NextToken` request
+    #   parameter in a subsequent call to the operation to get the next part
+    #   of the output. You should repeat this until the `NextToken` response
+    #   element comes back as `null`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicyResponse AWS API Documentation
@@ -3213,7 +3509,7 @@ module Aws::Organizations
     # Contains details about an organization. An organization is a
     # collection of accounts that are centrally managed together using
     # consolidated billing, organized hierarchically with organizational
-    # units (OUs), and controlled with policies.
+    # units (OUs), and controlled with policies .
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) of an organization.
@@ -3562,7 +3858,7 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] aws_managed
-    #   A Boolean value that indicates whether the specified policy is an
+    #   A boolean value that indicates whether the specified policy is an
     #   AWS managed policy. If true, then you can attach the policy to
     #   roots, OUs, or accounts, but you cannot edit it.
     #   @return [Boolean]
@@ -3702,9 +3998,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] status
     #   The status of the policy type as it relates to the associated root.
-    #   You can attach a policy of the specified type to a root or to an OU
-    #   or account in that root. To do so, the policy must be available in
-    #   the organization and enabled for that root.
+    #   To attach a policy of the specified type to a root or to an OU or
+    #   account in that root, it must be available in the organization and
+    #   enabled for that root.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeSummary AWS API Documentation
@@ -3712,6 +4008,32 @@ module Aws::Organizations
     class PolicyTypeSummary < Struct.new(
       :type,
       :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterDelegatedAdministratorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         service_principal: "ServicePrincipal", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID number of the member account in the organization to
+    #   register as a delegated administrator.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_principal
+    #   The service principal of the AWS service for which you want to make
+    #   the member account a delegated administrator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RegisterDelegatedAdministratorRequest AWS API Documentation
+    #
+    class RegisterDelegatedAdministratorRequest < Struct.new(
+      :account_id,
+      :service_principal)
       include Aws::Structure
     end
 

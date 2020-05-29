@@ -24,17 +24,20 @@ require_relative 'aws-sdk-connect/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     connect = Aws::Connect::Client.new
+#     resp = connect.create_user(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon Connect Service all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon Connect Service are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::Connect::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon Connect Service API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-connect/customizations'
 # @service
 module Aws::Connect
 
-  GEM_VERSION = '1.22.0'
+  GEM_VERSION = '1.25.0'
 
 end

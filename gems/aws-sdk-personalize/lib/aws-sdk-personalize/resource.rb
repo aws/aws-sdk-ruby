@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Personalize
+
   class Resource
 
     # @param options ({})

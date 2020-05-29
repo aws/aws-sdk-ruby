@@ -11,6 +11,7 @@ module Aws::CodeGuruProfiler
 
     include Seahorse::Model
 
+    ActionGroup = Shapes::StringShape.new(name: 'ActionGroup')
     AgentConfiguration = Shapes::StructureShape.new(name: 'AgentConfiguration')
     AgentOrchestrationConfig = Shapes::StructureShape.new(name: 'AgentOrchestrationConfig')
     AgentProfile = Shapes::BlobShape.new(name: 'AgentProfile')
@@ -29,6 +30,8 @@ module Aws::CodeGuruProfiler
     DescribeProfilingGroupRequest = Shapes::StructureShape.new(name: 'DescribeProfilingGroupRequest')
     DescribeProfilingGroupResponse = Shapes::StructureShape.new(name: 'DescribeProfilingGroupResponse')
     FleetInstanceId = Shapes::StringShape.new(name: 'FleetInstanceId')
+    GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
+    GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
     GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
     GetProfileResponse = Shapes::StructureShape.new(name: 'GetProfileResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -44,6 +47,8 @@ module Aws::CodeGuruProfiler
     Period = Shapes::StringShape.new(name: 'Period')
     PostAgentProfileRequest = Shapes::StructureShape.new(name: 'PostAgentProfileRequest')
     PostAgentProfileResponse = Shapes::StructureShape.new(name: 'PostAgentProfileResponse')
+    Principal = Shapes::StringShape.new(name: 'Principal')
+    Principals = Shapes::ListShape.new(name: 'Principals')
     ProfileTime = Shapes::StructureShape.new(name: 'ProfileTime')
     ProfileTimes = Shapes::ListShape.new(name: 'ProfileTimes')
     ProfilingGroupArn = Shapes::StringShape.new(name: 'ProfilingGroupArn')
@@ -52,7 +57,12 @@ module Aws::CodeGuruProfiler
     ProfilingGroupName = Shapes::StringShape.new(name: 'ProfilingGroupName')
     ProfilingGroupNames = Shapes::ListShape.new(name: 'ProfilingGroupNames')
     ProfilingStatus = Shapes::StructureShape.new(name: 'ProfilingStatus')
+    PutPermissionRequest = Shapes::StructureShape.new(name: 'PutPermissionRequest')
+    PutPermissionResponse = Shapes::StructureShape.new(name: 'PutPermissionResponse')
+    RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
+    RemovePermissionResponse = Shapes::StructureShape.new(name: 'RemovePermissionResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RevisionId = Shapes::StringShape.new(name: 'RevisionId')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -107,6 +117,13 @@ module Aws::CodeGuruProfiler
     DescribeProfilingGroupResponse[:payload] = :profiling_group
     DescribeProfilingGroupResponse[:payload_member] = DescribeProfilingGroupResponse.member(:profiling_group)
 
+    GetPolicyRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location: "uri", location_name: "profilingGroupName"))
+    GetPolicyRequest.struct_class = Types::GetPolicyRequest
+
+    GetPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
+    GetPolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    GetPolicyResponse.struct_class = Types::GetPolicyResponse
+
     GetProfileRequest.add_member(:accept, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Accept"))
     GetProfileRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "endTime"))
     GetProfileRequest.add_member(:max_depth, Shapes::ShapeRef.new(shape: MaxDepth, location: "querystring", location_name: "maxDepth"))
@@ -158,6 +175,8 @@ module Aws::CodeGuruProfiler
 
     PostAgentProfileResponse.struct_class = Types::PostAgentProfileResponse
 
+    Principals.member = Shapes::ShapeRef.new(shape: Principal)
+
     ProfileTime.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "start"))
     ProfileTime.struct_class = Types::ProfileTime
 
@@ -179,6 +198,25 @@ module Aws::CodeGuruProfiler
     ProfilingStatus.add_member(:latest_agent_profile_reported_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "latestAgentProfileReportedAt"))
     ProfilingStatus.add_member(:latest_aggregated_profile, Shapes::ShapeRef.new(shape: AggregatedProfileTime, location_name: "latestAggregatedProfile"))
     ProfilingStatus.struct_class = Types::ProfilingStatus
+
+    PutPermissionRequest.add_member(:action_group, Shapes::ShapeRef.new(shape: ActionGroup, required: true, location: "uri", location_name: "actionGroup"))
+    PutPermissionRequest.add_member(:principals, Shapes::ShapeRef.new(shape: Principals, required: true, location_name: "principals"))
+    PutPermissionRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location: "uri", location_name: "profilingGroupName"))
+    PutPermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
+    PutPermissionRequest.struct_class = Types::PutPermissionRequest
+
+    PutPermissionResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
+    PutPermissionResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    PutPermissionResponse.struct_class = Types::PutPermissionResponse
+
+    RemovePermissionRequest.add_member(:action_group, Shapes::ShapeRef.new(shape: ActionGroup, required: true, location: "uri", location_name: "actionGroup"))
+    RemovePermissionRequest.add_member(:profiling_group_name, Shapes::ShapeRef.new(shape: ProfilingGroupName, required: true, location: "uri", location_name: "profilingGroupName"))
+    RemovePermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location: "querystring", location_name: "revisionId"))
+    RemovePermissionRequest.struct_class = Types::RemovePermissionRequest
+
+    RemovePermissionResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
+    RemovePermissionResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
+    RemovePermissionResponse.struct_class = Types::RemovePermissionResponse
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -268,6 +306,17 @@ module Aws::CodeGuruProfiler
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/profilingGroups/{profilingGroupName}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetProfile"
         o.http_method = "GET"
@@ -321,6 +370,32 @@ module Aws::CodeGuruProfiler
         o.input = Shapes::ShapeRef.new(shape: PostAgentProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: PostAgentProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:put_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPermission"
+        o.http_method = "PUT"
+        o.http_request_uri = "/profilingGroups/{profilingGroupName}/policy/{actionGroup}"
+        o.input = Shapes::ShapeRef.new(shape: PutPermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:remove_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemovePermission"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/profilingGroups/{profilingGroupName}/policy/{actionGroup}"
+        o.input = Shapes::ShapeRef.new(shape: RemovePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemovePermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

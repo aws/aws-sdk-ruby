@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EC2
+
   class RouteTable
 
     extend Aws::Deprecations
@@ -96,7 +97,8 @@ module Aws::EC2
     # Waiter polls an API operation until a resource enters a desired
     # state.
     #
-    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    # @note The waiting operation is performed on a copy. The original resource
+    #   remains unchanged.
     #
     # ## Basic Usage
     #
@@ -109,13 +111,15 @@ module Aws::EC2
     #
     # ## Example
     #
-    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #     instance.wait_until(max_attempts:10, delay:5) do |instance|
+    #       instance.state.name == 'running'
+    #     end
     #
     # ## Configuration
     #
     # You can configure the maximum number of polling attempts, and the
-    # delay (in seconds) between each polling attempt. The waiting condition is set
-    # by passing a block to {#wait_until}:
+    # delay (in seconds) between each polling attempt. The waiting condition is
+    # set by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
@@ -146,17 +150,16 @@ module Aws::EC2
     #       # resource did not enter the desired state in time
     #     end
     #
+    # @yieldparam [Resource] resource to be used in the waiting condition.
     #
-    # @yield param [Resource] resource to be used in the waiting condition
-    #
-    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
-    #   because the waiter has entered a state that it will not transition
-    #   out of, preventing success.
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter
+    #   terminates because the waiter has entered a state that it will not
+    #   transition out of, preventing success.
     #
     #   yet successful.
     #
-    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
-    #   while polling for a resource that is not expected.
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is
+    #   encountered while polling for a resource that is not expected.
     #
     # @raise [NotImplementedError] Raised when the resource does not
     #
@@ -192,8 +195,8 @@ module Aws::EC2
     #
     #   routetableassociation = route_table.associate_with_subnet({
     #     dry_run: false,
-    #     subnet_id: "String",
-    #     gateway_id: "String",
+    #     subnet_id: "SubnetId",
+    #     gateway_id: "RouteGatewayId",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -222,11 +225,11 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
-    #     gateway_id: "RouteTableGatewayId",
+    #     gateway_id: "RouteGatewayId",
     #     instance_id: "InstanceId",
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
-    #     local_gateway_id: "String",
+    #     local_gateway_id: "LocalGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
@@ -264,7 +267,7 @@ module Aws::EC2
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)
-      resp = @client.create_route(options)
+      @client.create_route(options)
       Route.new(
         route_table_id: @id,
         destination_cidr_block: options[:destination_cidr_block],

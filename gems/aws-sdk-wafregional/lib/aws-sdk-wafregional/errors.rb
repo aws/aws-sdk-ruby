@@ -6,6 +6,48 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WAFRegional
+
+  # When WAFRegional returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::WAFRegional::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all WAFRegional errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::WAFRegional::Errors::ServiceError
+  #       # rescues all WAFRegional API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {WAFBadRequestException}
+  # * {WAFDisallowedNameException}
+  # * {WAFEntityMigrationException}
+  # * {WAFInternalErrorException}
+  # * {WAFInvalidAccountException}
+  # * {WAFInvalidOperationException}
+  # * {WAFInvalidParameterException}
+  # * {WAFInvalidPermissionPolicyException}
+  # * {WAFInvalidRegexPatternException}
+  # * {WAFLimitsExceededException}
+  # * {WAFNonEmptyEntityException}
+  # * {WAFNonexistentContainerException}
+  # * {WAFNonexistentItemException}
+  # * {WAFReferencedItemException}
+  # * {WAFServiceLinkedRoleErrorException}
+  # * {WAFStaleDataException}
+  # * {WAFSubscriptionNotFoundException}
+  # * {WAFTagOperationException}
+  # * {WAFTagOperationInternalErrorException}
+  # * {WAFUnavailableEntityException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +65,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFDisallowedNameException < ServiceError
@@ -39,7 +80,31 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
+    end
 
+    class WAFEntityMigrationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFRegional::Types::WAFEntityMigrationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def migration_error_type
+        @data[:migration_error_type]
+      end
+
+      # @return [String]
+      def migration_error_reason
+        @data[:migration_error_reason]
+      end
     end
 
     class WAFInternalErrorException < ServiceError
@@ -55,7 +120,16 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
+    end
 
+    class WAFInvalidAccountException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFRegional::Types::WAFInvalidAccountException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class WAFInvalidOperationException < ServiceError
@@ -71,7 +145,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInvalidParameterException < ServiceError
@@ -97,7 +170,6 @@ module Aws::WAFRegional
       def reason
         @data[:reason]
       end
-
     end
 
     class WAFInvalidPermissionPolicyException < ServiceError
@@ -113,7 +185,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFInvalidRegexPatternException < ServiceError
@@ -129,7 +200,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFLimitsExceededException < ServiceError
@@ -145,7 +215,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonEmptyEntityException < ServiceError
@@ -161,7 +230,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonexistentContainerException < ServiceError
@@ -177,7 +245,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFNonexistentItemException < ServiceError
@@ -193,7 +260,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFReferencedItemException < ServiceError
@@ -209,7 +275,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFServiceLinkedRoleErrorException < ServiceError
@@ -225,7 +290,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFStaleDataException < ServiceError
@@ -241,7 +305,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFSubscriptionNotFoundException < ServiceError
@@ -257,7 +320,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFTagOperationException < ServiceError
@@ -273,7 +335,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFTagOperationInternalErrorException < ServiceError
@@ -289,7 +350,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
     class WAFUnavailableEntityException < ServiceError
@@ -305,7 +365,6 @@ module Aws::WAFRegional
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -1,6 +1,52 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2020-05-15)
+------------------
+
+* Feature - Starting today, you can stop the execution of Glue workflows that are running. AWS Glue workflows are directed acyclic graphs (DAGs) of Glue triggers, crawlers and jobs. Using a workflow, you can design a complex multi-job extract, transform, and load (ETL) activity that AWS Glue can execute and track as single entity.
+
+1.54.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2020-04-20)
+------------------
+
+* Feature - Added a new ConnectionType "KAFKA" and a ConnectionProperty "KAFKA_BOOTSTRAP_SERVERS" to support Kafka connection.
+
+1.52.0 (2020-04-16)
+------------------
+
+* Feature - This release adds support for querying GetUserDefinedFunctions API without databaseName.
+
+1.51.0 (2020-03-31)
+------------------
+
+* Feature - Add two enums for MongoDB connection: Added "CONNECTION_URL" to "ConnectionPropertyKey" and added "MONGODB" to "ConnectionType"
+
+1.50.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
+1.49.0 (2020-02-28)
+------------------
+
+* Issue - This version has been yanked. (#2239)
+* Feature - AWS Glue adds resource tagging support for Machine Learning Transforms and adds a new API, ListMLTransforms to support tag filtering.  With this feature, customers can use tags in AWS Glue to organize and control access to Machine Learning Transforms.
+
 1.48.0 (2020-02-12)
 ------------------
 
@@ -250,4 +296,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-glue`.
-

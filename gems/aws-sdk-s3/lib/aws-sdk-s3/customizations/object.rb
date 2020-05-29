@@ -3,6 +3,9 @@ module Aws
     class Object
       alias size content_length
 
+      # Make the method redefinable
+      alias_method :copy_from, :copy_from
+
       # Copies another object to this object. Use `multipart_copy: true`
       # for large objects. This is required for objects that exceed 5GB.
       #
@@ -25,7 +28,8 @@ module Aws
       #
       # @option options [Integer] :content_length Only used when
       #   `:multipart_copy` is `true`. Passing this options avoids a HEAD
-      #   request to query the source object size.
+      #   request to query the source object size. Raises an `ArgumentError` if
+      #   this option is provided when `:multipart_copy` is `false` or not set.
       #
       # @option options [S3::Client] :copy_source_client Only used when
       #   `:multipart_copy` is `true` and the source object is in a

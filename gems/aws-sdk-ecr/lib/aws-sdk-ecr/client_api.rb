@@ -146,6 +146,7 @@ module Aws::ECR
     PutImageTagMutabilityResponse = Shapes::StructureShape.new(name: 'PutImageTagMutabilityResponse')
     PutLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'PutLifecyclePolicyRequest')
     PutLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'PutLifecyclePolicyResponse')
+    ReferencedImagesNotFoundException = Shapes::StructureShape.new(name: 'ReferencedImagesNotFoundException')
     RegistryId = Shapes::StringShape.new(name: 'RegistryId')
     Repository = Shapes::StructureShape.new(name: 'Repository')
     RepositoryAlreadyExistsException = Shapes::StructureShape.new(name: 'RepositoryAlreadyExistsException')
@@ -178,6 +179,7 @@ module Aws::ECR
     TagStatus = Shapes::StringShape.new(name: 'TagStatus')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UnsupportedImageTypeException = Shapes::StructureShape.new(name: 'UnsupportedImageTypeException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UploadId = Shapes::StringShape.new(name: 'UploadId')
@@ -381,6 +383,7 @@ module Aws::ECR
     Image.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     Image.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
     Image.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, location_name: "imageManifest"))
+    Image.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
     Image.struct_class = Types::Image
 
     ImageAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
@@ -556,6 +559,7 @@ module Aws::ECR
     PutImageRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutImageRequest.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, required: true, location_name: "imageManifest"))
+    PutImageRequest.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
     PutImageRequest.add_member(:image_tag, Shapes::ShapeRef.new(shape: ImageTag, location_name: "imageTag"))
     PutImageRequest.struct_class = Types::PutImageRequest
 
@@ -591,6 +595,9 @@ module Aws::ECR
     PutLifecyclePolicyResponse.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     PutLifecyclePolicyResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
     PutLifecyclePolicyResponse.struct_class = Types::PutLifecyclePolicyResponse
+
+    ReferencedImagesNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReferencedImagesNotFoundException.struct_class = Types::ReferencedImagesNotFoundException
 
     Repository.add_member(:repository_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "repositoryArn"))
     Repository.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
@@ -672,6 +679,9 @@ module Aws::ECR
 
     TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UnsupportedImageTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    UnsupportedImageTypeException.struct_class = Types::UnsupportedImageTypeException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
@@ -984,6 +994,7 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LayersNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ReferencedImagesNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ImageTagAlreadyExistsException)
       end)
@@ -1040,6 +1051,8 @@ module Aws::ECR
         o.output = Shapes::ShapeRef.new(shape: StartImageScanResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedImageTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
       end)

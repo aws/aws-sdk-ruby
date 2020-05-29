@@ -6,6 +6,32 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SageMakerRuntime
+
+  # When SageMakerRuntime returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SageMakerRuntime::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SageMakerRuntime errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SageMakerRuntime::Errors::ServiceError
+  #       # rescues all SageMakerRuntime API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {InternalFailure}
+  # * {ModelError}
+  # * {ServiceUnavailable}
+  # * {ValidationError}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +49,6 @@ module Aws::SageMakerRuntime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ModelError < ServiceError
@@ -54,7 +79,6 @@ module Aws::SageMakerRuntime
       def log_stream_arn
         @data[:log_stream_arn]
       end
-
     end
 
     class ServiceUnavailable < ServiceError
@@ -70,7 +94,6 @@ module Aws::SageMakerRuntime
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationError < ServiceError
@@ -86,7 +109,6 @@ module Aws::SageMakerRuntime
       def message
         @message || @data[:message]
       end
-
     end
 
   end

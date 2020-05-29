@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2020-05-07)
+------------------
+
+* Feature - This release adds support for the following options in instance public ports: Specify source IP addresses, specify ICMP protocol like PING, and enable/disable the Lightsail browser-based SSH and RDP clients' access to your instance.
+
+1.29.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
+1.28.0 (2020-02-27)
+------------------
+
+* Issue - This version has been yanked. (#2239)
+* Feature - Adds support to create notification contacts in Amazon Lightsail, and to create instance, database, and load balancer metric alarms that notify you based on the value of a metric relative to a threshold that you specify.
+
 1.27.0 (2020-01-02)
 ------------------
 
@@ -195,4 +221,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-lightsail`.
-

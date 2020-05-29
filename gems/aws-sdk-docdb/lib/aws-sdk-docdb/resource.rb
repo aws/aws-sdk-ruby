@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DocDB
+
   class Resource
 
     # @param options ({})

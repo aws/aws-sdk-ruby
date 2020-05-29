@@ -565,8 +565,9 @@ module Aws::Athena
     #   @return [Integer]
     #
     # @!attribute [rw] work_group
-    #   The name of the workgroup from which the named queries are being
-    #   returned.
+    #   The name of the workgroup from which the named queries are returned.
+    #   If a workgroup is not specified, the saved queries for the primary
+    #   workgroup are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesInput AWS API Documentation
@@ -613,7 +614,9 @@ module Aws::Athena
     #   @return [Integer]
     #
     # @!attribute [rw] work_group
-    #   The name of the workgroup from which queries are being returned.
+    #   The name of the workgroup from which queries are returned. If a
+    #   workgroup is not specified, a list of available query execution IDs
+    #   for the queries in the primary workgroup is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutionsInput AWS API Documentation
@@ -807,9 +810,9 @@ module Aws::Athena
     #   @return [Types::QueryExecutionStatus]
     #
     # @!attribute [rw] statistics
-    #   The amount of data scanned during the query execution and the amount
-    #   of time that it took to execute, and the type of statement that was
-    #   run.
+    #   Query execution statistics, such as the amount of data scanned, the
+    #   amount of time that the query took to process, and the type of
+    #   statement that was run.
     #   @return [Types::QueryExecutionStatistics]
     #
     # @!attribute [rw] work_group
@@ -917,14 +920,13 @@ module Aws::Athena
     # reason (if applicable) for the query execution.
     #
     # @!attribute [rw] state
-    #   The state of query execution. `QUEUED` state is listed but is not
-    #   used by Athena and is reserved for future use. `RUNNING` indicates
-    #   that the query has been submitted to the service, and Athena will
-    #   execute the query as soon as resources are available. `SUCCEEDED`
-    #   indicates that the query completed without errors. `FAILED`
-    #   indicates that the query experienced an error and did not complete
-    #   processing. `CANCELLED` indicates that a user input interrupted
-    #   query execution.
+    #   The state of query execution. `QUEUED` indicates that the query has
+    #   been submitted to the service, and Athena will execute the query as
+    #   soon as resources are available. `RUNNING` indicates that the query
+    #   is in execution phase. `SUCCEEDED` indicates that the query
+    #   completed without errors. `FAILED` indicates that the query
+    #   experienced an error and did not complete processing. `CANCELLED`
+    #   indicates that a user input interrupted query execution.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason

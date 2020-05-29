@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SSOOIDC
+
   class Resource
 
     # @param options ({})

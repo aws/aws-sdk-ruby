@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-05-28)
+------------------
+
+* Feature - This release adds support for Amazon WorkMail organization-level retention policies.
+
+1.24.0 (2020-05-12)
+------------------
+
+* Feature - Minor API fixes and updates to the documentation.
+
+1.23.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2020-02-12)
 ------------------
 

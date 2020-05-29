@@ -10,7 +10,7 @@ module AwsSdkCodeGenerator
           name: option.name,
           required: option.required,
           ruby_type: option.doc_type,
-          default_value: option.doc_default,
+          default_value: option.doc_default(options),
           docstring: option.docstring,
           indent: "  "
         ).to_s
@@ -24,8 +24,12 @@ module AwsSdkCodeGenerator
     private
 
     def documented_plugin_options(plugins)
+      i = 0
       plugins.map(&:options).flatten.select(&:documented?).sort_by do |opt|
-        [opt.required ? 'a' : 'b', opt.name]
+        # Stable sort, first required options, then sort by name, then if
+        # two plugins of the same name, use an incrementer.
+        # options.fetch(:plugins) will be ordered.
+        [opt.required ? 'a' : 'b', opt.name, i += 1] #, opt.override ? 'b' : 'a']
       end
     end
 

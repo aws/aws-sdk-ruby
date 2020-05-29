@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2020-04-17)
+------------------
+
+* Feature - Documentation updates for opsworkscm
+
+1.31.0 (2020-03-31)
+------------------
+
+* Feature - Documentation updates for OpsWorks-CM CreateServer values.
+
+1.30.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2020-03-05)
+------------------
+
+* Feature - Updated the Tag regex pattern to align with AWS tagging APIs.
+
 1.28.0 (2020-01-24)
 ------------------
 

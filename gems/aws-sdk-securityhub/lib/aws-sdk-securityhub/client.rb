@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:securityhub)
 
 module Aws::SecurityHub
+  # An API client for SecurityHub.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::SecurityHub::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::SecurityHub
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::SecurityHub
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::SecurityHub
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::SecurityHub
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::SecurityHub
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::SecurityHub
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::SecurityHub
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::SecurityHub
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::SecurityHub
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -289,8 +343,8 @@ module Aws::SecurityHub
     # Disables the standards specified by the provided
     # `StandardsSubscriptionArns`.
     #
-    # For more information, see [Standards Supported in AWS Security
-    # Hub][1].
+    # For more information, see [Security Standards][1] section of the *AWS
+    # Security Hub User Guide*.
     #
     #
     #
@@ -327,25 +381,19 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the standards specified by the provided `standardsArn`.
+    # Enables the standards specified by the provided `StandardsArn`. To
+    # obtain the ARN for a standard, use the ` DescribeStandards `
+    # operation.
     #
-    # In this release, only CIS AWS Foundations standards are supported.
-    #
-    # For more information, see [Standards Supported in AWS Security
-    # Hub][1].
+    # For more information, see the [Security Standards][1] section of the
+    # *AWS Security Hub User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
     #
     # @option params [required, Array<Types::StandardsSubscriptionRequest>] :standards_subscription_requests
-    #   The list of standards compliance checks to enable.
-    #
-    #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard.
-    #
-    #    The ARN for the standard is
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
+    #   The list of standards checks to enable.
     #
     # @return [Types::BatchEnableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -389,6 +437,28 @@ module Aws::SecurityHub
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
     #
+    # After a finding is created, `BatchImportFindings` cannot be used to
+    # update the following finding fields and objects, which Security Hub
+    # customers use to manage their investigation workflow.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `Note`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
+    #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
     #   must follow the [AWS Security Finding Format][1]. Maximum of 100
@@ -421,7 +491,9 @@ module Aws::SecurityHub
     #         updated_at: "NonEmptyString", # required
     #         severity: { # required
     #           product: 1.0,
-    #           normalized: 1, # required
+    #           label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #           normalized: 1,
+    #           original: "NonEmptyString",
     #         },
     #         confidence: 1,
     #         criticality: 1,
@@ -686,6 +758,25 @@ module Aws::SecurityHub
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
+    #                 created_at: "NonEmptyString",
+    #                 server_side_encryption_configuration: {
+    #                   rules: [
+    #                     {
+    #                       apply_server_side_encryption_by_default: {
+    #                         sse_algorithm: "NonEmptyString",
+    #                         kms_master_key_id: "NonEmptyString",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #               aws_s3_object: {
+    #                 last_modified: "NonEmptyString",
+    #                 etag: "NonEmptyString",
+    #                 version_id: "NonEmptyString",
+    #                 content_type: "NonEmptyString",
+    #                 server_side_encryption: "NonEmptyString",
+    #                 ssekms_key_id: "NonEmptyString",
     #               },
     #               aws_iam_access_key: {
     #                 user_name: "NonEmptyString",
@@ -853,9 +944,18 @@ module Aws::SecurityHub
     #         compliance: {
     #           status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
     #           related_requirements: ["NonEmptyString"],
+    #           status_reasons: [
+    #             {
+    #               reason_code: "NonEmptyString", # required
+    #               description: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
+    #         workflow: {
+    #           status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #         },
     #         record_state: "ACTIVE", # accepts ACTIVE, ARCHIVED
     #         related_findings: [
     #           {
@@ -887,6 +987,172 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def batch_import_findings(params = {}, options = {})
       req = build_request(:batch_import_findings, params)
+      req.send_request(options)
+    end
+
+    # Used by Security Hub customers to update information about their
+    # investigation into a finding. Requested by master accounts or member
+    # accounts. Master accounts can update findings for their account and
+    # their member accounts. Member accounts can update findings for their
+    # account.
+    #
+    # Updates from `BatchUpdateFindings` do not affect the value of
+    # `UpdatedAt` for a finding.
+    #
+    # Master accounts can use `BatchUpdateFindings` to update the following
+    # finding fields and objects.
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `Note`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # * `UserDefinedFields`
+    #
+    # * `VerificationState`
+    #
+    # * `Workflow`
+    #
+    # Member accounts can only use `BatchUpdateFindings` to update the Note
+    # object.
+    #
+    # @option params [required, Array<Types::AwsSecurityFindingIdentifier>] :finding_identifiers
+    #   The list of findings to update. `BatchUpdateFindings` can be used to
+    #   update up to 100 findings at a time.
+    #
+    #   For each finding, the list provides the finding identifier and the ARN
+    #   of the finding provider.
+    #
+    # @option params [Types::NoteUpdate] :note
+    #   The updated note.
+    #
+    # @option params [Types::SeverityUpdate] :severity
+    #   Used to update the finding severity.
+    #
+    # @option params [String] :verification_state
+    #   Indicates the veracity of a finding.
+    #
+    #   The available values for `VerificationState` are as follows.
+    #
+    #   * `UNKNOWN` – The default disposition of a security finding
+    #
+    #   * `TRUE_POSITIVE` – The security finding is confirmed
+    #
+    #   * `FALSE_POSITIVE` – The security finding was determined to be a false
+    #     alarm
+    #
+    #   * `BENIGN_POSITIVE` – A special case of `TRUE_POSITIVE` where the
+    #     finding doesn't pose any threat, is expected, or both
+    #
+    # @option params [Integer] :confidence
+    #   The updated value for the finding confidence. Confidence is defined as
+    #   the likelihood that a finding accurately identifies the behavior or
+    #   issue that it was intended to identify.
+    #
+    #   Confidence is scored on a 0-100 basis using a ratio scale, where 0
+    #   means zero percent confidence and 100 means 100 percent confidence.
+    #
+    # @option params [Integer] :criticality
+    #   The updated value for the level of importance assigned to the
+    #   resources associated with the findings.
+    #
+    #   A score of 0 means that the underlying resources have no criticality,
+    #   and a score of 100 is reserved for the most critical resources.
+    #
+    # @option params [Array<String>] :types
+    #   One or more finding types in the format of
+    #   namespace/category/classifier that classify a finding.
+    #
+    #   Valid namespace values are as follows.
+    #
+    #   * Software and Configuration Checks
+    #
+    #   * TTPs
+    #
+    #   * Effects
+    #
+    #   * Unusual Behaviors
+    #
+    #   * Sensitive Data Identifications
+    #
+    # @option params [Hash<String,String>] :user_defined_fields
+    #   A list of name/value string pairs associated with the finding. These
+    #   are custom, user-defined fields added to a finding.
+    #
+    # @option params [Types::WorkflowUpdate] :workflow
+    #   Used to update the workflow status of a finding.
+    #
+    #   The workflow status indicates the progress of the investigation into
+    #   the finding.
+    #
+    # @option params [Array<Types::RelatedFinding>] :related_findings
+    #   A list of findings that are related to the updated findings.
+    #
+    # @return [Types::BatchUpdateFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateFindingsResponse#processed_findings #processed_findings} => Array&lt;Types::AwsSecurityFindingIdentifier&gt;
+    #   * {Types::BatchUpdateFindingsResponse#unprocessed_findings #unprocessed_findings} => Array&lt;Types::BatchUpdateFindingsUnprocessedFinding&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_findings({
+    #     finding_identifiers: [ # required
+    #       {
+    #         id: "NonEmptyString", # required
+    #         product_arn: "NonEmptyString", # required
+    #       },
+    #     ],
+    #     note: {
+    #       text: "NonEmptyString", # required
+    #       updated_by: "NonEmptyString", # required
+    #     },
+    #     severity: {
+    #       normalized: 1,
+    #       product: 1.0,
+    #       label: "INFORMATIONAL", # accepts INFORMATIONAL, LOW, MEDIUM, HIGH, CRITICAL
+    #     },
+    #     verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
+    #     confidence: 1,
+    #     criticality: 1,
+    #     types: ["NonEmptyString"],
+    #     user_defined_fields: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
+    #     workflow: {
+    #       status: "NEW", # accepts NEW, NOTIFIED, RESOLVED, SUPPRESSED
+    #     },
+    #     related_findings: [
+    #       {
+    #         product_arn: "NonEmptyString", # required
+    #         id: "NonEmptyString", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.processed_findings #=> Array
+    #   resp.processed_findings[0].id #=> String
+    #   resp.processed_findings[0].product_arn #=> String
+    #   resp.unprocessed_findings #=> Array
+    #   resp.unprocessed_findings[0].finding_identifier.id #=> String
+    #   resp.unprocessed_findings[0].finding_identifier.product_arn #=> String
+    #   resp.unprocessed_findings[0].error_code #=> String
+    #   resp.unprocessed_findings[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchUpdateFindings AWS API Documentation
+    #
+    # @overload batch_update_findings(params = {})
+    # @param [Hash] params ({})
+    def batch_update_findings(params = {}, options = {})
+      req = build_request(:batch_update_findings, params)
       req.send_request(options)
     end
 
@@ -945,8 +1211,10 @@ module Aws::SecurityHub
     #   defined in the filters.
     #
     # @option params [required, String] :group_by_attribute
-    #   The attribute used as the aggregator to group related findings for the
-    #   insight.
+    #   The attribute used to group the findings for the insight. The grouping
+    #   attribute identifies the type of item that the insight applies to. For
+    #   example, if an insight is grouped by resource identifier, then the
+    #   insight produces a list of resource identifiers.
     #
     # @return [Types::CreateInsightResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1459,6 +1727,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
@@ -1525,21 +1799,22 @@ module Aws::SecurityHub
     # accounts and the account used to make the request, which is the master
     # account. To successfully create a member, you must use this action
     # from an account that already has Security Hub enabled. To enable
-    # Security Hub, you can use the EnableSecurityHub operation.
+    # Security Hub, you can use the ` EnableSecurityHub ` operation.
     #
     # After you use `CreateMembers` to create member account associations in
-    # Security Hub, you must use the InviteMembers operation to invite the
-    # accounts to enable Security Hub and become member accounts in Security
-    # Hub.
+    # Security Hub, you must use the ` InviteMembers ` operation to invite
+    # the accounts to enable Security Hub and become member accounts in
+    # Security Hub.
     #
     # If the account owner accepts the invitation, the account becomes a
-    # member account in Security Hub, and a permission policy is added that
+    # member account in Security Hub. A permissions policy is added that
     # permits the master account to view the findings generated in the
     # member account. When Security Hub is enabled in the invited account,
     # findings start to be sent to both the member and master accounts.
     #
     # To remove the association between the master and member accounts, use
-    # the DisassociateFromMasterAccount or DisassociateMembers operation.
+    # the ` DisassociateFromMasterAccount ` or ` DisassociateMembers `
+    # operation.
     #
     # @option params [Array<Types::AccountDetails>] :account_details
     #   The list of accounts to associate with the Security Hub master
@@ -1736,7 +2011,13 @@ module Aws::SecurityHub
     #   retrieve.
     #
     # @option params [String] :next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeActionTargets` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1745,6 +2026,8 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeActionTargetsResponse#action_targets #action_targets} => Array&lt;Types::ActionTarget&gt;
     #   * {Types::DescribeActionTargetsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1807,7 +2090,13 @@ module Aws::SecurityHub
     # findings.
     #
     # @option params [String] :next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeProducts` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1816,6 +2105,8 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeProductsResponse#products #products} => Array&lt;Types::Product&gt;
     #   * {Types::DescribeProductsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1833,6 +2124,8 @@ module Aws::SecurityHub
     #   resp.products[0].description #=> String
     #   resp.products[0].categories #=> Array
     #   resp.products[0].categories[0] #=> String
+    #   resp.products[0].integration_types #=> Array
+    #   resp.products[0].integration_types[0] #=> String, one of "SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
     #   resp.products[0].marketplace_url #=> String
     #   resp.products[0].activation_url #=> String
     #   resp.products[0].product_subscription_resource_policy #=> String
@@ -1847,7 +2140,56 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of compliance standards controls.
+    # Returns a list of the available standards in Security Hub.
+    #
+    # For each standard, the results include the standard ARN, the name, and
+    # a description.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandards` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of standards to return.
+    #
+    # @return [Types::DescribeStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStandardsResponse#standards #standards} => Array&lt;Types::Standard&gt;
+    #   * {Types::DescribeStandardsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_standards({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.standards #=> Array
+    #   resp.standards[0].standards_arn #=> String
+    #   resp.standards[0].name #=> String
+    #   resp.standards[0].description #=> String
+    #   resp.standards[0].enabled_by_default #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandards AWS API Documentation
+    #
+    # @overload describe_standards(params = {})
+    # @param [Hash] params ({})
+    def describe_standards(params = {}, options = {})
+      req = build_request(:describe_standards, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of security standards controls.
     #
     # For each control, the results include information about whether it is
     # currently enabled, the severity, and a link to remediation
@@ -1858,17 +2200,23 @@ module Aws::SecurityHub
     #   standard.
     #
     # @option params [String] :next_token
-    #   For requests to get the next page of results, the pagination token
-    #   that was returned with the previous set of results. The initial
-    #   request does not include a pagination token.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandardsControls` operation, set the value of this parameter
+    #   to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of compliance standard controls to return.
+    #   The maximum number of security standard controls to return.
     #
     # @return [Types::DescribeStandardsControlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeStandardsControlsResponse#controls #controls} => Array&lt;Types::StandardsControl&gt;
     #   * {Types::DescribeStandardsControlsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1890,6 +2238,8 @@ module Aws::SecurityHub
     #   resp.controls[0].description #=> String
     #   resp.controls[0].remediation_url #=> String
     #   resp.controls[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.controls[0].related_requirements #=> Array
+    #   resp.controls[0].related_requirements[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControls AWS API Documentation
@@ -1992,8 +2342,8 @@ module Aws::SecurityHub
     # Enables the integration of a partner product with Security Hub.
     # Integrated products send findings to Security Hub.
     #
-    # When you enable a product integration, a permission policy that grants
-    # permission for the product to send findings to Security Hub is
+    # When you enable a product integration, a permissions policy that
+    # grants permission for the product to send findings to Security Hub is
     # applied.
     #
     # @option params [required, String] :product_arn
@@ -2025,20 +2375,43 @@ module Aws::SecurityHub
     # Enables Security Hub for your account in the current Region or the
     # Region you specify in the request.
     #
-    # Enabling Security Hub also enables the CIS AWS Foundations standard.
-    #
     # When you enable Security Hub, you grant to Security Hub the
-    # permissions necessary to gather findings from AWS Config, Amazon
-    # GuardDuty, Amazon Inspector, and Amazon Macie.
+    # permissions necessary to gather findings from other services that are
+    # integrated with Security Hub.
     #
-    # To learn more, see [Setting Up AWS Security Hub][1].
+    # When you use the `EnableSecurityHub` operation to enable Security Hub,
+    # you also automatically enable the following standards.
+    #
+    # * CIS AWS Foundations
+    #
+    # * AWS Foundational Security Best Practices
+    #
+    # You do not enable the Payment Card Industry Data Security Standard
+    # (PCI DSS) standard.
+    #
+    # To not enable the automatically enabled standards, set
+    # `EnableDefaultStandards` to `false`.
+    #
+    # After you enable Security Hub, to enable a standard, use the `
+    # BatchEnableStandards ` operation. To disable a standard, use the `
+    # BatchDisableStandards ` operation.
+    #
+    # To learn more, see [Setting Up AWS Security Hub][1] in the *AWS
+    # Security Hub User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to add to the Hub resource when you enable Security Hub.
+    #   The tags to add to the hub resource when you enable Security Hub.
+    #
+    # @option params [Boolean] :enable_default_standards
+    #   Whether to enable the security standards that Security Hub has
+    #   designated as automatically enabled. If you do not provide a value for
+    #   `EnableDefaultStandards`, it is set to `true`. To not enable the
+    #   automatically enabled standards, set `EnableDefaultStandards` to
+    #   `false`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2048,6 +2421,7 @@ module Aws::SecurityHub
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     enable_default_standards: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnableSecurityHub AWS API Documentation
@@ -2066,12 +2440,13 @@ module Aws::SecurityHub
     #   retrieve.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `GetEnabledStandards`
-    #   operation, set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetEnabledStandards` operation, set the value of this parameter to
+    #   `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -2080,6 +2455,8 @@ module Aws::SecurityHub
     #
     #   * {Types::GetEnabledStandardsResponse#standards_subscriptions #standards_subscriptions} => Array&lt;Types::StandardsSubscription&gt;
     #   * {Types::GetEnabledStandardsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2118,12 +2495,12 @@ module Aws::SecurityHub
     #   The finding attributes used to sort the list of returned findings.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `GetFindings` operation,
-    #   set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetFindings` operation, set the value of this parameter to `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of findings to return.
@@ -2132,6 +2509,8 @@ module Aws::SecurityHub
     #
     #   * {Types::GetFindingsResponse#findings #findings} => Array&lt;Types::AwsSecurityFinding&gt;
     #   * {Types::GetFindingsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2639,6 +3018,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
@@ -2710,7 +3095,9 @@ module Aws::SecurityHub
     #   resp.findings[0].created_at #=> String
     #   resp.findings[0].updated_at #=> String
     #   resp.findings[0].severity.product #=> Float
+    #   resp.findings[0].severity.label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.findings[0].severity.normalized #=> Integer
+    #   resp.findings[0].severity.original #=> String
     #   resp.findings[0].confidence #=> Integer
     #   resp.findings[0].criticality #=> Integer
     #   resp.findings[0].title #=> String
@@ -2884,6 +3271,16 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_name #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.created_at #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules #=> Array
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.sse_algorithm #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_bucket.server_side_encryption_configuration.rules[0].apply_server_side_encryption_by_default.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.last_modified #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.etag #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.version_id #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.content_type #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.server_side_encryption #=> String
+    #   resp.findings[0].resources[0].details.aws_s3_object.ssekms_key_id #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.user_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.status #=> String, one of "Active", "Inactive"
     #   resp.findings[0].resources[0].details.aws_iam_access_key.created_at #=> String
@@ -2992,8 +3389,12 @@ module Aws::SecurityHub
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
     #   resp.findings[0].compliance.related_requirements #=> Array
     #   resp.findings[0].compliance.related_requirements[0] #=> String
+    #   resp.findings[0].compliance.status_reasons #=> Array
+    #   resp.findings[0].compliance.status_reasons[0].reason_code #=> String
+    #   resp.findings[0].compliance.status_reasons[0].description #=> String
     #   resp.findings[0].verification_state #=> String, one of "UNKNOWN", "TRUE_POSITIVE", "FALSE_POSITIVE", "BENIGN_POSITIVE"
     #   resp.findings[0].workflow_state #=> String, one of "NEW", "ASSIGNED", "IN_PROGRESS", "DEFERRED", "RESOLVED"
+    #   resp.findings[0].workflow.status #=> String, one of "NEW", "NOTIFIED", "RESOLVED", "SUPPRESSED"
     #   resp.findings[0].record_state #=> String, one of "ACTIVE", "ARCHIVED"
     #   resp.findings[0].related_findings #=> Array
     #   resp.findings[0].related_findings[0].product_arn #=> String
@@ -3048,13 +3449,17 @@ module Aws::SecurityHub
     # Lists and describes insights for the specified insight ARNs.
     #
     # @option params [Array<String>] :insight_arns
-    #   The ARNs of the insights to describe.
+    #   The ARNs of the insights to describe. If you do not provide any
+    #   insight ARNs, then `GetInsights` returns all of your custom insights.
+    #   It does not return any managed insights.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `GetInsights` operation,
-    #   set the value of this parameter to `NULL`. For subsequent calls to the
-    #   operation, to continue listing data, set `nextToken` in the request to
-    #   the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetInsights` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -3063,6 +3468,8 @@ module Aws::SecurityHub
     #
     #   * {Types::GetInsightsResponse#insights #insights} => Array&lt;Types::Insight&gt;
     #   * {Types::GetInsightsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3331,6 +3738,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.workflow_state #=> Array
     #   resp.insights[0].filters.workflow_state[0].value #=> String
     #   resp.insights[0].filters.workflow_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
+    #   resp.insights[0].filters.workflow_status #=> Array
+    #   resp.insights[0].filters.workflow_status[0].value #=> String
+    #   resp.insights[0].filters.workflow_status[0].comparison #=> String, one of "EQUALS", "PREFIX"
     #   resp.insights[0].filters.record_state #=> Array
     #   resp.insights[0].filters.record_state[0].value #=> String
     #   resp.insights[0].filters.record_state[0].comparison #=> String, one of "EQUALS", "PREFIX"
@@ -3453,7 +3863,8 @@ module Aws::SecurityHub
     # Hub master account that the invitation is sent from.
     #
     # Before you can use this action to invite a member, you must first use
-    # the CreateMembers action to create the member account in Security Hub.
+    # the ` CreateMembers ` action to create the member account in Security
+    # Hub.
     #
     # When the account owner accepts the invitation to become a member
     # account and enables Security Hub, the master account can view the
@@ -3492,11 +3903,13 @@ module Aws::SecurityHub
     # subscribed to receive findings from in Security Hub.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the
+    #   The token that is required for pagination. On your first call to the
     #   `ListEnabledProductsForImport` operation, set the value of this
-    #   parameter to `NULL`. For subsequent calls to the operation, to
-    #   continue listing data, set `nextToken` in the request to the value of
-    #   `NextToken` from the previous response.
+    #   parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -3505,6 +3918,8 @@ module Aws::SecurityHub
     #
     #   * {Types::ListEnabledProductsForImportResponse#product_subscriptions #product_subscriptions} => Array&lt;String&gt;
     #   * {Types::ListEnabledProductsForImportResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3535,15 +3950,20 @@ module Aws::SecurityHub
     #   The maximum number of items to return in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `ListInvitations`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `NextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListInvitations` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @return [Types::ListInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListInvitationsResponse#invitations #invitations} => Array&lt;Types::Invitation&gt;
     #   * {Types::ListInvitationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3578,26 +3998,30 @@ module Aws::SecurityHub
     #   their relationship status with the master account. The default value
     #   is `TRUE`.
     #
-    #   If `onlyAssociated` is set to `TRUE`, the response includes member
+    #   If `OnlyAssociated` is set to `TRUE`, the response includes member
     #   accounts whose relationship status with the master is set to `ENABLED`
     #   or `DISABLED`.
     #
-    #   If `onlyAssociated` is set to `FALSE`, the response includes all
+    #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `ListMembers` operation,
-    #   set the value of this parameter to `NULL`. For subsequent calls to the
-    #   operation, to continue listing data, set `nextToken` in the request to
-    #   the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListMembers` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListMembersResponse#members #members} => Array&lt;Types::Member&gt;
     #   * {Types::ListMembersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3741,6 +4165,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # `UpdateFindings` is deprecated. Instead of `UpdateFindings`, use
+    # `BatchUpdateFindings`.
+    #
     # Updates the `Note` and `RecordState` of the Security Hub-aggregated
     # findings that the filter attributes specify. Any member account that
     # can view the finding also sees the update to the finding.
@@ -4258,6 +4685,12 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       workflow_state: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
+    #       workflow_status: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
@@ -4850,6 +5283,12 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX
     #         },
     #       ],
+    #       workflow_status: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX
+    #         },
+    #       ],
     #       record_state: [
     #         {
     #           value: "NonEmptyString",
@@ -4908,18 +5347,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Used to control whether an individual compliance standard control is
+    # Used to control whether an individual security standard control is
     # enabled or disabled.
     #
     # @option params [required, String] :standards_control_arn
-    #   The ARN of the compliance standard control to enable or disable.
+    #   The ARN of the security standard control to enable or disable.
     #
     # @option params [String] :control_status
-    #   The updated status of the compliance standard control.
+    #   The updated status of the security standard control.
     #
     # @option params [String] :disabled_reason
-    #   A description of the reason why you are disabling a compliance
-    #   standard control.
+    #   A description of the reason why you are disabling a security standard
+    #   control.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4953,7 +5392,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

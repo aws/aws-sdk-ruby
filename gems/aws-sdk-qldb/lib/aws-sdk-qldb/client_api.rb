@@ -12,15 +12,21 @@ module Aws::QLDB
     include Seahorse::Model
 
     Arn = Shapes::StringShape.new(name: 'Arn')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelJournalKinesisStreamRequest = Shapes::StructureShape.new(name: 'CancelJournalKinesisStreamRequest')
+    CancelJournalKinesisStreamResponse = Shapes::StructureShape.new(name: 'CancelJournalKinesisStreamResponse')
     CreateLedgerRequest = Shapes::StructureShape.new(name: 'CreateLedgerRequest')
     CreateLedgerResponse = Shapes::StructureShape.new(name: 'CreateLedgerResponse')
     DeleteLedgerRequest = Shapes::StructureShape.new(name: 'DeleteLedgerRequest')
     DeletionProtection = Shapes::BooleanShape.new(name: 'DeletionProtection')
+    DescribeJournalKinesisStreamRequest = Shapes::StructureShape.new(name: 'DescribeJournalKinesisStreamRequest')
+    DescribeJournalKinesisStreamResponse = Shapes::StructureShape.new(name: 'DescribeJournalKinesisStreamResponse')
     DescribeJournalS3ExportRequest = Shapes::StructureShape.new(name: 'DescribeJournalS3ExportRequest')
     DescribeJournalS3ExportResponse = Shapes::StructureShape.new(name: 'DescribeJournalS3ExportResponse')
     DescribeLedgerRequest = Shapes::StructureShape.new(name: 'DescribeLedgerRequest')
     DescribeLedgerResponse = Shapes::StructureShape.new(name: 'DescribeLedgerResponse')
     Digest = Shapes::BlobShape.new(name: 'Digest')
+    ErrorCause = Shapes::StringShape.new(name: 'ErrorCause')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportJournalToS3Request = Shapes::StructureShape.new(name: 'ExportJournalToS3Request')
     ExportJournalToS3Response = Shapes::StructureShape.new(name: 'ExportJournalToS3Response')
@@ -33,13 +39,18 @@ module Aws::QLDB
     GetRevisionResponse = Shapes::StructureShape.new(name: 'GetRevisionResponse')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     IonText = Shapes::StringShape.new(name: 'IonText')
+    JournalKinesisStreamDescription = Shapes::StructureShape.new(name: 'JournalKinesisStreamDescription')
+    JournalKinesisStreamDescriptionList = Shapes::ListShape.new(name: 'JournalKinesisStreamDescriptionList')
     JournalS3ExportDescription = Shapes::StructureShape.new(name: 'JournalS3ExportDescription')
     JournalS3ExportList = Shapes::ListShape.new(name: 'JournalS3ExportList')
+    KinesisConfiguration = Shapes::StructureShape.new(name: 'KinesisConfiguration')
     LedgerList = Shapes::ListShape.new(name: 'LedgerList')
     LedgerName = Shapes::StringShape.new(name: 'LedgerName')
     LedgerState = Shapes::StringShape.new(name: 'LedgerState')
     LedgerSummary = Shapes::StructureShape.new(name: 'LedgerSummary')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListJournalKinesisStreamsForLedgerRequest = Shapes::StructureShape.new(name: 'ListJournalKinesisStreamsForLedgerRequest')
+    ListJournalKinesisStreamsForLedgerResponse = Shapes::StructureShape.new(name: 'ListJournalKinesisStreamsForLedgerResponse')
     ListJournalS3ExportsForLedgerRequest = Shapes::StructureShape.new(name: 'ListJournalS3ExportsForLedgerRequest')
     ListJournalS3ExportsForLedgerResponse = Shapes::StructureShape.new(name: 'ListJournalS3ExportsForLedgerResponse')
     ListJournalS3ExportsRequest = Shapes::StructureShape.new(name: 'ListJournalS3ExportsRequest')
@@ -63,6 +74,10 @@ module Aws::QLDB
     S3ExportConfiguration = Shapes::StructureShape.new(name: 'S3ExportConfiguration')
     S3ObjectEncryptionType = Shapes::StringShape.new(name: 'S3ObjectEncryptionType')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
+    StreamJournalToKinesisRequest = Shapes::StructureShape.new(name: 'StreamJournalToKinesisRequest')
+    StreamJournalToKinesisResponse = Shapes::StructureShape.new(name: 'StreamJournalToKinesisResponse')
+    StreamName = Shapes::StringShape.new(name: 'StreamName')
+    StreamStatus = Shapes::StringShape.new(name: 'StreamStatus')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
@@ -76,6 +91,13 @@ module Aws::QLDB
     UpdateLedgerRequest = Shapes::StructureShape.new(name: 'UpdateLedgerRequest')
     UpdateLedgerResponse = Shapes::StructureShape.new(name: 'UpdateLedgerResponse')
     ValueHolder = Shapes::StructureShape.new(name: 'ValueHolder')
+
+    CancelJournalKinesisStreamRequest.add_member(:ledger_name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
+    CancelJournalKinesisStreamRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location: "uri", location_name: "streamId"))
+    CancelJournalKinesisStreamRequest.struct_class = Types::CancelJournalKinesisStreamRequest
+
+    CancelJournalKinesisStreamResponse.add_member(:stream_id, Shapes::ShapeRef.new(shape: UniqueId, location_name: "StreamId"))
+    CancelJournalKinesisStreamResponse.struct_class = Types::CancelJournalKinesisStreamResponse
 
     CreateLedgerRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location_name: "Name"))
     CreateLedgerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -92,6 +114,13 @@ module Aws::QLDB
 
     DeleteLedgerRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
     DeleteLedgerRequest.struct_class = Types::DeleteLedgerRequest
+
+    DescribeJournalKinesisStreamRequest.add_member(:ledger_name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
+    DescribeJournalKinesisStreamRequest.add_member(:stream_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location: "uri", location_name: "streamId"))
+    DescribeJournalKinesisStreamRequest.struct_class = Types::DescribeJournalKinesisStreamRequest
+
+    DescribeJournalKinesisStreamResponse.add_member(:stream, Shapes::ShapeRef.new(shape: JournalKinesisStreamDescription, location_name: "Stream"))
+    DescribeJournalKinesisStreamResponse.struct_class = Types::DescribeJournalKinesisStreamResponse
 
     DescribeJournalS3ExportRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
     DescribeJournalS3ExportRequest.add_member(:export_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location: "uri", location_name: "exportId"))
@@ -150,6 +179,21 @@ module Aws::QLDB
     InvalidParameterException.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "ParameterName"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
+    JournalKinesisStreamDescription.add_member(:ledger_name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location_name: "LedgerName"))
+    JournalKinesisStreamDescription.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    JournalKinesisStreamDescription.add_member(:inclusive_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "InclusiveStartTime"))
+    JournalKinesisStreamDescription.add_member(:exclusive_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExclusiveEndTime"))
+    JournalKinesisStreamDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
+    JournalKinesisStreamDescription.add_member(:stream_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "StreamId"))
+    JournalKinesisStreamDescription.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    JournalKinesisStreamDescription.add_member(:status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "Status"))
+    JournalKinesisStreamDescription.add_member(:kinesis_configuration, Shapes::ShapeRef.new(shape: KinesisConfiguration, required: true, location_name: "KinesisConfiguration"))
+    JournalKinesisStreamDescription.add_member(:error_cause, Shapes::ShapeRef.new(shape: ErrorCause, location_name: "ErrorCause"))
+    JournalKinesisStreamDescription.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    JournalKinesisStreamDescription.struct_class = Types::JournalKinesisStreamDescription
+
+    JournalKinesisStreamDescriptionList.member = Shapes::ShapeRef.new(shape: JournalKinesisStreamDescription)
+
     JournalS3ExportDescription.add_member(:ledger_name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location_name: "LedgerName"))
     JournalS3ExportDescription.add_member(:export_id, Shapes::ShapeRef.new(shape: UniqueId, required: true, location_name: "ExportId"))
     JournalS3ExportDescription.add_member(:export_creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ExportCreationTime"))
@@ -162,6 +206,10 @@ module Aws::QLDB
 
     JournalS3ExportList.member = Shapes::ShapeRef.new(shape: JournalS3ExportDescription)
 
+    KinesisConfiguration.add_member(:stream_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "StreamArn"))
+    KinesisConfiguration.add_member(:aggregation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AggregationEnabled"))
+    KinesisConfiguration.struct_class = Types::KinesisConfiguration
+
     LedgerList.member = Shapes::ShapeRef.new(shape: LedgerSummary)
 
     LedgerSummary.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, location_name: "Name"))
@@ -172,6 +220,15 @@ module Aws::QLDB
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListJournalKinesisStreamsForLedgerRequest.add_member(:ledger_name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
+    ListJournalKinesisStreamsForLedgerRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results"))
+    ListJournalKinesisStreamsForLedgerRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next_token"))
+    ListJournalKinesisStreamsForLedgerRequest.struct_class = Types::ListJournalKinesisStreamsForLedgerRequest
+
+    ListJournalKinesisStreamsForLedgerResponse.add_member(:streams, Shapes::ShapeRef.new(shape: JournalKinesisStreamDescriptionList, location_name: "Streams"))
+    ListJournalKinesisStreamsForLedgerResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListJournalKinesisStreamsForLedgerResponse.struct_class = Types::ListJournalKinesisStreamsForLedgerResponse
 
     ListJournalS3ExportsForLedgerRequest.add_member(:name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
     ListJournalS3ExportsForLedgerRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max_results"))
@@ -233,6 +290,18 @@ module Aws::QLDB
     S3ExportConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: S3EncryptionConfiguration, required: true, location_name: "EncryptionConfiguration"))
     S3ExportConfiguration.struct_class = Types::S3ExportConfiguration
 
+    StreamJournalToKinesisRequest.add_member(:ledger_name, Shapes::ShapeRef.new(shape: LedgerName, required: true, location: "uri", location_name: "name"))
+    StreamJournalToKinesisRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
+    StreamJournalToKinesisRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    StreamJournalToKinesisRequest.add_member(:inclusive_start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "InclusiveStartTime"))
+    StreamJournalToKinesisRequest.add_member(:exclusive_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExclusiveEndTime"))
+    StreamJournalToKinesisRequest.add_member(:kinesis_configuration, Shapes::ShapeRef.new(shape: KinesisConfiguration, required: true, location_name: "KinesisConfiguration"))
+    StreamJournalToKinesisRequest.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+    StreamJournalToKinesisRequest.struct_class = Types::StreamJournalToKinesisRequest
+
+    StreamJournalToKinesisResponse.add_member(:stream_id, Shapes::ShapeRef.new(shape: UniqueId, location_name: "StreamId"))
+    StreamJournalToKinesisResponse.struct_class = Types::StreamJournalToKinesisResponse
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
@@ -283,6 +352,17 @@ module Aws::QLDB
         "uid" => "qldb-2019-01-02",
       }
 
+      api.add_operation(:cancel_journal_kinesis_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelJournalKinesisStream"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/ledgers/{name}/journal-kinesis-streams/{streamId}"
+        o.input = Shapes::ShapeRef.new(shape: CancelJournalKinesisStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelJournalKinesisStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePreconditionNotMetException)
+      end)
+
       api.add_operation(:create_ledger, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLedger"
         o.http_method = "POST"
@@ -304,6 +384,17 @@ module Aws::QLDB
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePreconditionNotMetException)
+      end)
+
+      api.add_operation(:describe_journal_kinesis_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeJournalKinesisStream"
+        o.http_method = "GET"
+        o.http_request_uri = "/ledgers/{name}/journal-kinesis-streams/{streamId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeJournalKinesisStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeJournalKinesisStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePreconditionNotMetException)
       end)
 
@@ -369,6 +460,23 @@ module Aws::QLDB
         o.errors << Shapes::ShapeRef.new(shape: ResourcePreconditionNotMetException)
       end)
 
+      api.add_operation(:list_journal_kinesis_streams_for_ledger, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListJournalKinesisStreamsForLedger"
+        o.http_method = "GET"
+        o.http_request_uri = "/ledgers/{name}/journal-kinesis-streams"
+        o.input = Shapes::ShapeRef.new(shape: ListJournalKinesisStreamsForLedgerRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListJournalKinesisStreamsForLedgerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePreconditionNotMetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_journal_s3_exports, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListJournalS3Exports"
         o.http_method = "GET"
@@ -419,6 +527,17 @@ module Aws::QLDB
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:stream_journal_to_kinesis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StreamJournalToKinesis"
+        o.http_method = "POST"
+        o.http_request_uri = "/ledgers/{name}/journal-kinesis-streams"
+        o.input = Shapes::ShapeRef.new(shape: StreamJournalToKinesisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StreamJournalToKinesisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePreconditionNotMetException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

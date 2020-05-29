@@ -24,17 +24,20 @@ require_relative 'aws-sdk-rdsdataservice/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     rds_data_service = Aws::RDSDataService::Client.new
+#     resp = rds_data_service.batch_execute_statement(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS RDS DataService all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS RDS DataService are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::RDSDataService::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS RDS DataService API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-rdsdataservice/customizations'
 # @service
 module Aws::RDSDataService
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.18.0'
 
 end

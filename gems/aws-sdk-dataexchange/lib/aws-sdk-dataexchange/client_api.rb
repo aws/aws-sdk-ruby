@@ -38,6 +38,7 @@ module Aws::DataExchange
     ExportAssetToSignedUrlResponseDetails = Shapes::StructureShape.new(name: 'ExportAssetToSignedUrlResponseDetails')
     ExportAssetsToS3RequestDetails = Shapes::StructureShape.new(name: 'ExportAssetsToS3RequestDetails')
     ExportAssetsToS3ResponseDetails = Shapes::StructureShape.new(name: 'ExportAssetsToS3ResponseDetails')
+    ExportServerSideEncryption = Shapes::StructureShape.new(name: 'ExportServerSideEncryption')
     GetAssetRequest = Shapes::StructureShape.new(name: 'GetAssetRequest')
     GetAssetResponse = Shapes::StructureShape.new(name: 'GetAssetResponse')
     GetDataSetRequest = Shapes::StructureShape.new(name: 'GetDataSetRequest')
@@ -88,6 +89,7 @@ module Aws::DataExchange
     ResponseDetails = Shapes::StructureShape.new(name: 'ResponseDetails')
     RevisionEntry = Shapes::StructureShape.new(name: 'RevisionEntry')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
+    ServerSideEncryptionTypes = Shapes::StringShape.new(name: 'ServerSideEncryptionTypes')
     ServiceLimitExceededException = Shapes::StructureShape.new(name: 'ServiceLimitExceededException')
     StartJobRequest = Shapes::StructureShape.new(name: 'StartJobRequest')
     StartJobResponse = Shapes::StructureShape.new(name: 'StartJobResponse')
@@ -237,13 +239,19 @@ module Aws::DataExchange
 
     ExportAssetsToS3RequestDetails.add_member(:asset_destinations, Shapes::ShapeRef.new(shape: ListOfAssetDestinationEntry, required: true, location_name: "AssetDestinations"))
     ExportAssetsToS3RequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ExportAssetsToS3RequestDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
     ExportAssetsToS3RequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
     ExportAssetsToS3RequestDetails.struct_class = Types::ExportAssetsToS3RequestDetails
 
     ExportAssetsToS3ResponseDetails.add_member(:asset_destinations, Shapes::ShapeRef.new(shape: ListOfAssetDestinationEntry, required: true, location_name: "AssetDestinations"))
     ExportAssetsToS3ResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ExportAssetsToS3ResponseDetails.add_member(:encryption, Shapes::ShapeRef.new(shape: ExportServerSideEncryption, location_name: "Encryption"))
     ExportAssetsToS3ResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
     ExportAssetsToS3ResponseDetails.struct_class = Types::ExportAssetsToS3ResponseDetails
+
+    ExportServerSideEncryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "KmsKeyArn"))
+    ExportServerSideEncryption.add_member(:type, Shapes::ShapeRef.new(shape: ServerSideEncryptionTypes, required: true, location_name: "Type"))
+    ExportServerSideEncryption.struct_class = Types::ExportServerSideEncryption
 
     GetAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "AssetId"))
     GetAssetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
@@ -835,24 +843,6 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-      end)
-
-      api.add_authorizer(:create_job_authorizer, Seahorse::Model::Authorizer.new.tap do |a|
-        a.name = "create_job_authorizer"
-        a.type = "provided"
-        a.placement = {
-          :location => "header",
-          :name => "Authorization"
-        }
-      end)
-
-      api.add_authorizer(:start_cancel_get_job_authorizer, Seahorse::Model::Authorizer.new.tap do |a|
-        a.name = "start_cancel_get_job_authorizer"
-        a.type = "provided"
-        a.placement = {
-          :location => "header",
-          :name => "Authorization"
-        }
       end)
     end
 

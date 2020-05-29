@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ServiceDiscovery
+
+  # When ServiceDiscovery returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::ServiceDiscovery::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all ServiceDiscovery errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::ServiceDiscovery::Errors::ServiceError
+  #       # rescues all ServiceDiscovery API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CustomHealthNotFound}
+  # * {DuplicateRequest}
+  # * {InstanceNotFound}
+  # * {InvalidInput}
+  # * {NamespaceAlreadyExists}
+  # * {NamespaceNotFound}
+  # * {OperationNotFound}
+  # * {ResourceInUse}
+  # * {ResourceLimitExceeded}
+  # * {ServiceAlreadyExists}
+  # * {ServiceNotFound}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +56,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRequest < ServiceError
@@ -44,7 +76,6 @@ module Aws::ServiceDiscovery
       def duplicate_operation_id
         @data[:duplicate_operation_id]
       end
-
     end
 
     class InstanceNotFound < ServiceError
@@ -60,7 +91,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInput < ServiceError
@@ -76,7 +106,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class NamespaceAlreadyExists < ServiceError
@@ -102,7 +131,6 @@ module Aws::ServiceDiscovery
       def namespace_id
         @data[:namespace_id]
       end
-
     end
 
     class NamespaceNotFound < ServiceError
@@ -118,7 +146,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class OperationNotFound < ServiceError
@@ -134,7 +161,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUse < ServiceError
@@ -150,7 +176,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceeded < ServiceError
@@ -166,7 +191,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceAlreadyExists < ServiceError
@@ -192,7 +216,6 @@ module Aws::ServiceDiscovery
       def service_id
         @data[:service_id]
       end
-
     end
 
     class ServiceNotFound < ServiceError
@@ -208,7 +231,6 @@ module Aws::ServiceDiscovery
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,35 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeGuruReviewer
+
+  # When CodeGuruReviewer returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CodeGuruReviewer::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CodeGuruReviewer errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CodeGuruReviewer::Errors::ServiceError
+  #       # rescues all CodeGuruReviewer API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {ConflictException}
+  # * {InternalServerException}
+  # * {NotFoundException}
+  # * {ResourceNotFoundException}
+  # * {ThrottlingException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +52,6 @@ module Aws::CodeGuruReviewer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConflictException < ServiceError
@@ -39,7 +67,6 @@ module Aws::CodeGuruReviewer
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -55,7 +82,6 @@ module Aws::CodeGuruReviewer
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -71,7 +97,21 @@ module Aws::CodeGuruReviewer
       def message
         @message || @data[:message]
       end
+    end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeGuruReviewer::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class ThrottlingException < ServiceError
@@ -87,7 +127,6 @@ module Aws::CodeGuruReviewer
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -103,7 +142,6 @@ module Aws::CodeGuruReviewer
       def message
         @message || @data[:message]
       end
-
     end
 
   end

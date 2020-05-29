@@ -24,17 +24,20 @@ require_relative 'aws-sdk-codebuild/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     code_build = Aws::CodeBuild::Client.new
+#     resp = code_build.batch_delete_builds(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS CodeBuild all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS CodeBuild are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::CodeBuild::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS CodeBuild API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-codebuild/customizations'
 # @service
 module Aws::CodeBuild
 
-  GEM_VERSION = '1.48.0'
+  GEM_VERSION = '1.52.0'
 
 end

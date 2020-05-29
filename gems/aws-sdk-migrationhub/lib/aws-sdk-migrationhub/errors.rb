@@ -6,6 +6,38 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MigrationHub
+
+  # When MigrationHub returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::MigrationHub::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all MigrationHub errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::MigrationHub::Errors::ServiceError
+  #       # rescues all MigrationHub API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {DryRunOperation}
+  # * {HomeRegionNotSetException}
+  # * {InternalServerError}
+  # * {InvalidInputException}
+  # * {PolicyErrorException}
+  # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
+  # * {ThrottlingException}
+  # * {UnauthorizedOperation}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +55,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class DryRunOperation < ServiceError
@@ -39,7 +70,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class HomeRegionNotSetException < ServiceError
@@ -55,7 +85,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerError < ServiceError
@@ -71,7 +100,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidInputException < ServiceError
@@ -87,7 +115,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class PolicyErrorException < ServiceError
@@ -103,7 +130,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -119,7 +145,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -135,7 +160,26 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
+    end
 
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MigrationHub::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
     end
 
     class UnauthorizedOperation < ServiceError
@@ -151,7 +195,6 @@ module Aws::MigrationHub
       def message
         @message || @data[:message]
       end
-
     end
 
   end

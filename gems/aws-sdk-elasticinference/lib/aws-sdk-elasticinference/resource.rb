@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElasticInference
+
   class Resource
 
     # @param options ({})

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeCommit
+
   class Resource
 
     # @param options ({})

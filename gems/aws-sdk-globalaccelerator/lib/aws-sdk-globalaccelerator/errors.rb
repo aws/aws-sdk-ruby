@@ -6,6 +6,43 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::GlobalAccelerator
+
+  # When GlobalAccelerator returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::GlobalAccelerator::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all GlobalAccelerator errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::GlobalAccelerator::Errors::ServiceError
+  #       # rescues all GlobalAccelerator API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AcceleratorNotDisabledException}
+  # * {AcceleratorNotFoundException}
+  # * {AccessDeniedException}
+  # * {AssociatedEndpointGroupFoundException}
+  # * {AssociatedListenerFoundException}
+  # * {ByoipCidrNotFoundException}
+  # * {EndpointGroupAlreadyExistsException}
+  # * {EndpointGroupNotFoundException}
+  # * {IncorrectCidrStateException}
+  # * {InternalServiceErrorException}
+  # * {InvalidArgumentException}
+  # * {InvalidNextTokenException}
+  # * {InvalidPortRangeException}
+  # * {LimitExceededException}
+  # * {ListenerNotFoundException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +60,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AcceleratorNotFoundException < ServiceError
@@ -39,7 +75,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AccessDeniedException < ServiceError
@@ -55,7 +90,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AssociatedEndpointGroupFoundException < ServiceError
@@ -71,7 +105,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class AssociatedListenerFoundException < ServiceError
@@ -87,7 +120,21 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
+    end
 
+    class ByoipCidrNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::ByoipCidrNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class EndpointGroupAlreadyExistsException < ServiceError
@@ -103,7 +150,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class EndpointGroupNotFoundException < ServiceError
@@ -119,7 +165,21 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
+    end
 
+    class IncorrectCidrStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::IncorrectCidrStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
     end
 
     class InternalServiceErrorException < ServiceError
@@ -135,7 +195,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -151,7 +210,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -167,7 +225,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPortRangeException < ServiceError
@@ -183,7 +240,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -199,7 +255,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
     class ListenerNotFoundException < ServiceError
@@ -215,7 +270,6 @@ module Aws::GlobalAccelerator
       def message
         @message || @data[:message]
       end
-
     end
 
   end

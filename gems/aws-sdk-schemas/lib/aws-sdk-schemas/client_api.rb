@@ -27,6 +27,7 @@ module Aws::Schemas
     CreateSchemaResponse = Shapes::StructureShape.new(name: 'CreateSchemaResponse')
     DeleteDiscovererRequest = Shapes::StructureShape.new(name: 'DeleteDiscovererRequest')
     DeleteRegistryRequest = Shapes::StructureShape.new(name: 'DeleteRegistryRequest')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteSchemaRequest = Shapes::StructureShape.new(name: 'DeleteSchemaRequest')
     DeleteSchemaVersionRequest = Shapes::StructureShape.new(name: 'DeleteSchemaVersionRequest')
     DescribeCodeBindingRequest = Shapes::StructureShape.new(name: 'DescribeCodeBindingRequest')
@@ -52,6 +53,9 @@ module Aws::Schemas
     GetDiscoveredSchemaRequest = Shapes::StructureShape.new(name: 'GetDiscoveredSchemaRequest')
     GetDiscoveredSchemaResponse = Shapes::StructureShape.new(name: 'GetDiscoveredSchemaResponse')
     GetDiscoveredSchemaVersionItemInput = Shapes::StringShape.new(name: 'GetDiscoveredSchemaVersionItemInput')
+    GetResourcePolicyOutput = Shapes::StructureShape.new(name: 'GetResourcePolicyOutput')
+    GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
+    GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
     GoneException = Shapes::StructureShape.new(name: 'GoneException')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
@@ -67,6 +71,7 @@ module Aws::Schemas
     ListSchemasOutput = Shapes::StructureShape.new(name: 'ListSchemasOutput')
     ListSchemasRequest = Shapes::StructureShape.new(name: 'ListSchemasRequest')
     ListSchemasResponse = Shapes::StructureShape.new(name: 'ListSchemasResponse')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LockServiceLinkedRoleInput = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleInput')
@@ -74,8 +79,13 @@ module Aws::Schemas
     LockServiceLinkedRoleRequest = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleRequest')
     LockServiceLinkedRoleResponse = Shapes::StructureShape.new(name: 'LockServiceLinkedRoleResponse')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     PutCodeBindingRequest = Shapes::StructureShape.new(name: 'PutCodeBindingRequest')
     PutCodeBindingResponse = Shapes::StructureShape.new(name: 'PutCodeBindingResponse')
+    PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
+    PutResourcePolicyOutput = Shapes::StructureShape.new(name: 'PutResourcePolicyOutput')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RegistryOutput = Shapes::StructureShape.new(name: 'RegistryOutput')
     RegistrySummary = Shapes::StructureShape.new(name: 'RegistrySummary')
     SchemaOutput = Shapes::StructureShape.new(name: 'SchemaOutput')
@@ -209,6 +219,9 @@ module Aws::Schemas
     DeleteRegistryRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "registryName"))
     DeleteRegistryRequest.struct_class = Types::DeleteRegistryRequest
 
+    DeleteResourcePolicyRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "registryName"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
     DeleteSchemaRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "registryName"))
     DeleteSchemaRequest.add_member(:schema_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "schemaName"))
     DeleteSchemaRequest.struct_class = Types::DeleteSchemaRequest
@@ -329,6 +342,17 @@ module Aws::Schemas
     GetDiscoveredSchemaResponse.add_member(:content, Shapes::ShapeRef.new(shape: __string, location_name: "Content"))
     GetDiscoveredSchemaResponse.struct_class = Types::GetDiscoveredSchemaResponse
 
+    GetResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    GetResourcePolicyOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
+    GetResourcePolicyOutput.struct_class = Types::GetResourcePolicyOutput
+
+    GetResourcePolicyRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "registryName"))
+    GetResourcePolicyRequest.struct_class = Types::GetResourcePolicyRequest
+
+    GetResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    GetResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
+    GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
     GoneException.add_member(:code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Code"))
     GoneException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     GoneException.struct_class = Types::GoneException
@@ -393,10 +417,13 @@ module Aws::Schemas
     ListSchemasResponse.add_member(:schemas, Shapes::ShapeRef.new(shape: __listOfSchemaSummary, location_name: "Schemas"))
     ListSchemasResponse.struct_class = Types::ListSchemasResponse
 
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
-    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     LockServiceLinkedRoleInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: __stringMin1Max1600, required: true, location_name: "RoleArn"))
@@ -421,6 +448,10 @@ module Aws::Schemas
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    PreconditionFailedException.add_member(:code, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Code"))
+    PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
+    PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
     PutCodeBindingRequest.add_member(:language, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "language"))
     PutCodeBindingRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "registryName"))
     PutCodeBindingRequest.add_member(:schema_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "schemaName"))
@@ -432,6 +463,23 @@ module Aws::Schemas
     PutCodeBindingResponse.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "SchemaVersion"))
     PutCodeBindingResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeGenerationStatus, location_name: "Status"))
     PutCodeBindingResponse.struct_class = Types::PutCodeBindingResponse
+
+    PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
+    PutResourcePolicyInput.struct_class = Types::PutResourcePolicyInput
+
+    PutResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyOutput.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
+    PutResourcePolicyOutput.struct_class = Types::PutResourcePolicyOutput
+
+    PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyRequest.add_member(:registry_name, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "registryName"))
+    PutResourcePolicyRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: __string, location_name: "Policy", metadata: {"jsonvalue"=>true}))
+    PutResourcePolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, location_name: "RevisionId"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
     RegistryOutput.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
     RegistryOutput.add_member(:registry_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RegistryArn"))
@@ -692,6 +740,20 @@ module Aws::Schemas
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:delete_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSchema"
         o.http_method = "DELETE"
@@ -803,6 +865,20 @@ module Aws::Schemas
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:list_discoverers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDiscoverers"
         o.http_method = "GET"
@@ -892,19 +968,6 @@ module Aws::Schemas
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)
 
-      api.add_operation(:lock_service_linked_role, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "LockServiceLinkedRole"
-        o.http_method = "POST"
-        o.http_request_uri = "/slr-deletion/lock"
-        o.input = Shapes::ShapeRef.new(shape: LockServiceLinkedRoleRequest)
-        o.output = Shapes::ShapeRef.new(shape: LockServiceLinkedRoleResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-      end)
-
       api.add_operation(:put_code_binding, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutCodeBinding"
         o.http_method = "POST"
@@ -918,6 +981,21 @@ module Aws::Schemas
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:search_schemas, Seahorse::Model::Operation.new.tap do |o|
@@ -975,19 +1053,6 @@ module Aws::Schemas
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-      end)
-
-      api.add_operation(:unlock_service_linked_role, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UnlockServiceLinkedRole"
-        o.http_method = "POST"
-        o.http_request_uri = "/slr-deletion/unlock"
-        o.input = Shapes::ShapeRef.new(shape: UnlockServiceLinkedRoleRequest)
-        o.output = Shapes::ShapeRef.new(shape: UnlockServiceLinkedRoleResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
       end)

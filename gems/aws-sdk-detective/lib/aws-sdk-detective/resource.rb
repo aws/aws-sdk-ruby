@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Detective
+
   class Resource
 
     # @param options ({})

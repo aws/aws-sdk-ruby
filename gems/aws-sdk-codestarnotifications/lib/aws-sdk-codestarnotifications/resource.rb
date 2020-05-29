@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeStarNotifications
+
   class Resource
 
     # @param options ({})

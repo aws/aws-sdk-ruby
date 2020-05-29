@@ -24,17 +24,20 @@ require_relative 'aws-sdk-ec2instanceconnect/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     ec2_instance_connect = Aws::EC2InstanceConnect::Client.new
+#     resp = ec2_instance_connect.send_ssh_public_key(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS EC2 Instance Connect all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS EC2 Instance Connect are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::EC2InstanceConnect::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS EC2 Instance Connect API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-ec2instanceconnect/customizations'
 # @service
 module Aws::EC2InstanceConnect
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.6.0'
 
 end

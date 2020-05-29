@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::AugmentedAIRuntime
+
   class Resource
 
     # @param options ({})

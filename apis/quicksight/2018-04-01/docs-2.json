@@ -9,7 +9,7 @@
     "CreateGroup": "<p>Creates an Amazon QuickSight group.</p> <p>The permissions resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;relevant-aws-account-id&gt;</i>:group/default/<i>&lt;group-name&gt;</i> </code>.</p> <p>The response is a group object.</p>",
     "CreateGroupMembership": "<p>Adds an Amazon QuickSight user to an Amazon QuickSight group. </p>",
     "CreateIAMPolicyAssignment": "<p>Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. </p>",
-    "CreateIngestion": "<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href=\"https://aws.example.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
+    "CreateIngestion": "<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
     "CreateTemplate": "<p>Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard.</p> <p>A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p>",
     "CreateTemplateAlias": "<p>Creates a template alias for a template.</p>",
     "DeleteDashboard": "<p>Deletes a dashboard.</p>",
@@ -52,6 +52,7 @@
     "ListUserGroups": "<p>Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member of.</p>",
     "ListUsers": "<p>Returns a list of all of the Amazon QuickSight users belonging to this account. </p>",
     "RegisterUser": "<p>Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity and Access Management (IAM) identity or role specified in the request. </p>",
+    "SearchDashboards": "<p>Searchs for dashboards that belong to a user. </p>",
     "TagResource": "<p>Assigns one or more tags (key-value pairs) to the specified QuickSight resource. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template. </p> <p>Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:</p> <ul> <li> <p>You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.</p> </li> <li> <p>QuickSight doesn't currently support the Tag Editor for AWS Resource Groups.</p> </li> </ul>",
     "UntagResource": "<p>Removes a tag or tags from a resource.</p>",
     "UpdateDashboard": "<p>Updates a dashboard in an AWS account.</p>",
@@ -141,6 +142,7 @@
         "DashboardVersionSummary$Arn": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
         "DashboardVersionSummary$SourceEntityArn": "<p>Source entity ARN.</p>",
         "DataSet$Arn": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+        "DataSetArnsList$member": null,
         "DataSetReference$DataSetArn": "<p>Dataset Amazon Resource Name (ARN).</p>",
         "DataSetSummary$Arn": "<p>The Amazon Resource Name (ARN) of the dataset.</p>",
         "DataSource$Arn": "<p>The Amazon Resource Name (ARN) of the data source.</p>",
@@ -169,7 +171,7 @@
         "TemplateSourceTemplate$Arn": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
         "TemplateSummary$Arn": "<p>A summary of a template.</p>",
         "TemplateVersion$SourceEntityArn": "<p>The Amazon Resource Name (ARN) of the analysis or template which was used to create this template.</p>",
-        "TemplateVersionSummary$Arn": "<p>The ARN of the template version.</p>",
+        "TemplateVersionSummary$Arn": "<p>The Amazon Resource Name (ARN) of the template version.</p>",
         "UntagResourceRequest$ResourceArn": "<p>The Amazon Resource Name (ARN) of the resource that you want to untag.</p>",
         "UpdateDashboardPermissionsResponse$DashboardArn": "<p>The Amazon Resource Name (ARN) of the dashboard.</p>",
         "UpdateDashboardPublishedVersionResponse$DashboardArn": "<p>The Amazon Resource Name (ARN) of the dashboard.</p>",
@@ -272,6 +274,7 @@
         "ListUserGroupsRequest$AwsAccountId": "<p>The AWS account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.</p>",
         "ListUsersRequest$AwsAccountId": "<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.</p>",
         "RegisterUserRequest$AwsAccountId": "<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.</p>",
+        "SearchDashboardsRequest$AwsAccountId": "<p>The ID of the AWS account that contains the user whose dashboards you're searching for. </p>",
         "UpdateDashboardPermissionsRequest$AwsAccountId": "<p>The ID of the AWS account that contains the dashboard whose permissions you're updating.</p>",
         "UpdateDashboardPublishedVersionRequest$AwsAccountId": "<p>The ID of the AWS account that contains the dashboard that you're updating.</p>",
         "UpdateDashboardRequest$AwsAccountId": "<p>The ID of the AWS account that contains the dashboard that you're updating.</p>",
@@ -596,11 +599,17 @@
         "DashboardError$Type": "<p>Type.</p>"
       }
     },
+    "DashboardFilterAttribute": {
+      "base": null,
+      "refs": {
+        "DashboardSearchFilter$Name": "<p>The name of the value that you want to use as a filter. For example, <code>\"Name\": \"QUICKSIGHT_USER\"</code>. </p>"
+      }
+    },
     "DashboardName": {
       "base": null,
       "refs": {
         "CreateDashboardRequest$Name": "<p>The display name of the dashboard.</p>",
-        "Dashboard$Name": "<p>A display name for the dataset.</p>",
+        "Dashboard$Name": "<p>A display name for the dashboard.</p>",
         "DashboardSummary$Name": "<p>A display name for the dashboard.</p>",
         "UpdateDashboardRequest$Name": "<p>The display name of the dashboard.</p>"
       }
@@ -610,6 +619,18 @@
       "refs": {
         "CreateDashboardRequest$DashboardPublishOptions": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>",
         "UpdateDashboardRequest$DashboardPublishOptions": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. The sheet controls pane is collapsed by default when set to true. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
+      }
+    },
+    "DashboardSearchFilter": {
+      "base": "<p>A filter that you apply when searching for dashboards. </p>",
+      "refs": {
+        "DashboardSearchFilterList$member": null
+      }
+    },
+    "DashboardSearchFilterList": {
+      "base": null,
+      "refs": {
+        "SearchDashboardsRequest$Filters": "<p>The filters to apply to the search. Currently, you can search only by user name. For example, <code>\"Filters\": [ { \"Name\": \"QUICKSIGHT_USER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\" } ]</code> </p>"
       }
     },
     "DashboardSourceEntity": {
@@ -634,7 +655,8 @@
     "DashboardSummaryList": {
       "base": null,
       "refs": {
-        "ListDashboardsResponse$DashboardSummaryList": "<p>A structure that contains all of the dashboards shared with the user. This structure provides basic information about the dashboards.</p>"
+        "ListDashboardsResponse$DashboardSummaryList": "<p>A structure that contains all of the dashboards in your AWS account. This structure provides basic information about the dashboards.</p>",
+        "SearchDashboardsResponse$DashboardSummaryList": "<p>The list of dashboards owned by the user specified in <code>Filters</code> in your request.</p>"
       }
     },
     "DashboardUIState": {
@@ -665,6 +687,12 @@
       "base": "<p>Dataset.</p>",
       "refs": {
         "DescribeDataSetResponse$DataSet": "<p>Information on the dataset.</p>"
+      }
+    },
+    "DataSetArnsList": {
+      "base": null,
+      "refs": {
+        "DashboardVersion$DataSetArns": "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with a version of the dashboard.</p>"
       }
     },
     "DataSetConfiguration": {
@@ -1114,6 +1142,12 @@
       "base": "<p>A transform operation that filters rows based on a condition.</p>",
       "refs": {
         "TransformOperation$FilterOperation": "<p>An operation that filters rows based on some condition.</p>"
+      }
+    },
+    "FilterOperator": {
+      "base": null,
+      "refs": {
+        "DashboardSearchFilter$Operator": "<p>The comparison operator that you want to use as a filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
       }
     },
     "GeoSpatialColumnGroup": {
@@ -1641,7 +1675,8 @@
         "ListTemplateVersionsRequest$MaxResults": "<p>The maximum number of results to be returned per request.</p>",
         "ListTemplatesRequest$MaxResults": "<p>The maximum number of results to be returned per request.</p>",
         "ListUserGroupsRequest$MaxResults": "<p>The maximum number of results to return from this request.</p>",
-        "ListUsersRequest$MaxResults": "<p>The maximum number of results to return from this request.</p>"
+        "ListUsersRequest$MaxResults": "<p>The maximum number of results to return from this request.</p>",
+        "SearchDashboardsRequest$MaxResults": "<p>The maximum number of results to be returned per request.</p>"
       }
     },
     "MySqlParameters": {
@@ -2011,7 +2046,7 @@
     "RoleSessionName": {
       "base": null,
       "refs": {
-        "RegisterUserRequest$SessionName": "<p>You need to use this parameter only when you register one or more users using an assumed IAM role. You don't need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href=\"https://docs.aws.example.com/cli/latest/reference/sts/assume-role.html\"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> </p>"
+        "RegisterUserRequest$SessionName": "<p>You need to use this parameter only when you register one or more users using an assumed IAM role. You don't need to provide the session name for other scenarios, for example when you are registering an IAM user or an Amazon QuickSight user. You can register multiple users using the same IAM role if each user has a different session name. For more information on assuming IAM roles, see <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html\"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> </p>"
       }
     },
     "RowInfo": {
@@ -2057,6 +2092,16 @@
       "base": "<p>A physical table type for as S3 data source.</p>",
       "refs": {
         "PhysicalTable$S3Source": "<p>A physical table type for as S3 data source.</p>"
+      }
+    },
+    "SearchDashboardsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "SearchDashboardsResponse": {
+      "base": null,
+      "refs": {
       }
     },
     "ServiceNowParameters": {
@@ -2174,6 +2219,7 @@
         "ListUserGroupsResponse$Status": "<p>The HTTP status of the request.</p>",
         "ListUsersResponse$Status": "<p>The HTTP status of the request.</p>",
         "RegisterUserResponse$Status": "<p>The HTTP status of the request.</p>",
+        "SearchDashboardsResponse$Status": "<p>The HTTP status of the request.</p>",
         "TagResourceResponse$Status": "<p>The HTTP status of the request.</p>",
         "UntagResourceResponse$Status": "<p>The HTTP status of the request.</p>",
         "UpdateDashboardPermissionsResponse$Status": "<p>The HTTP status of the request.</p>",
@@ -2215,6 +2261,7 @@
         "CreateIAMPolicyAssignmentResponse$RequestId": "<p>The AWS request ID for this operation.</p>",
         "CreateTemplateAliasResponse$RequestId": "<p>The AWS request ID for this operation.</p>",
         "CreateTemplateResponse$RequestId": "<p>The AWS request ID for this operation.</p>",
+        "DashboardSearchFilter$Value": "<p>The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter. For example, <code>\"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>. </p>",
         "DataSetConfiguration$Placeholder": "<p>Placeholder.</p>",
         "DataSourceErrorInfo$Message": "<p>Error message.</p>",
         "DeleteDashboardResponse$RequestId": "<p>The AWS request ID for this operation.</p>",
@@ -2310,6 +2357,9 @@
         "ResourceNotFoundException$RequestId": "<p>The AWS request ID for this request.</p>",
         "ResourceUnavailableException$Message": null,
         "ResourceUnavailableException$RequestId": "<p>The AWS request ID for this request.</p>",
+        "SearchDashboardsRequest$NextToken": "<p>The token for the next set of results, or null if there are no more results.</p>",
+        "SearchDashboardsResponse$NextToken": "<p>The token for the next set of results, or null if there are no more results.</p>",
+        "SearchDashboardsResponse$RequestId": "<p>The AWS request ID for this operation.</p>",
         "SessionLifetimeInMinutesInvalidException$Message": null,
         "SessionLifetimeInMinutesInvalidException$RequestId": "<p>The AWS request ID for this request.</p>",
         "StringList$member": null,

@@ -115,32 +115,97 @@ module Aws
           expect(creds.session_token).to eq('token')
         end
 
+        it 'accepts empty credentials' do
+          signer = Signer.new(options.merge(
+            access_key_id: '',
+            secret_access_key: ''
+          ))
+          creds = signer.credentials_provider.credentials
+          expect(creds.access_key_id).to eq('')
+          expect(creds.secret_access_key).to eq('')
+        end
+
       end
 
       context '#sign_request' do
 
-        it 'populates the Host header' do
-          signature = Signer.new(options).sign_request(
+        let(:request) do
+          {
             http_method: 'GET',
             url: 'http://domain.com'
-          )
+          }
+        end
+
+        it 'populates the Host header' do
+          signature = Signer.new(options).sign_request(request)
+
           expect(signature.headers['host']).to eq('domain.com')
         end
 
-        it 'includes HTTP port in Host when not 80' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'http://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context 'when credentials are not set' do
+          let(:creds) do
+            Credentials.new(access_key_id: '', secret_access_key: '')
+          end
+
+          it 'raises a MissingCredentialsError' do
+            signer = Signer.new(
+              options.merge(
+                credentials_provider: StaticCredentialsProvider.new(
+                  credentials: creds
+                )
+              ))
+            expect { signer.sign_request(request) }
+              .to raise_error(Errors::MissingCredentialsError)
+          end
         end
 
-        it 'includes HTTPS port in Host when not 443' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context 'when URI schema is known' do
+
+          it 'omits port in Host when port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'omits port in Host when default port and uri port are the same' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:443'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'includes port in Host when default port and uri port are different' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
+        end
+
+        context 'when URI schema is unknown' do
+
+          it 'omits port in Host when uri port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+
+          end
+
+          it 'includes port in Host when uri port provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
         end
 
         it 'sets the X-Amz-Date header' do

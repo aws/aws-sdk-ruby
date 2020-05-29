@@ -6,6 +6,41 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::KinesisAnalyticsV2
+
+  # When KinesisAnalyticsV2 returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::KinesisAnalyticsV2::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all KinesisAnalyticsV2 errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::KinesisAnalyticsV2::Errors::ServiceError
+  #       # rescues all KinesisAnalyticsV2 API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CodeValidationException}
+  # * {ConcurrentModificationException}
+  # * {InvalidApplicationConfigurationException}
+  # * {InvalidArgumentException}
+  # * {InvalidRequestException}
+  # * {LimitExceededException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ResourceProvisionedThroughputExceededException}
+  # * {ServiceUnavailableException}
+  # * {TooManyTagsException}
+  # * {UnableToDetectSchemaException}
+  # * {UnsupportedOperationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +58,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -39,7 +73,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidApplicationConfigurationException < ServiceError
@@ -55,7 +88,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArgumentException < ServiceError
@@ -71,7 +103,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -87,7 +118,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -103,7 +133,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -119,7 +148,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -135,7 +163,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceProvisionedThroughputExceededException < ServiceError
@@ -151,7 +178,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -167,7 +193,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -183,7 +208,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnableToDetectSchemaException < ServiceError
@@ -209,7 +233,6 @@ module Aws::KinesisAnalyticsV2
       def processed_input_records
         @data[:processed_input_records]
       end
-
     end
 
     class UnsupportedOperationException < ServiceError
@@ -225,7 +248,6 @@ module Aws::KinesisAnalyticsV2
       def message
         @message || @data[:message]
       end
-
     end
 
   end

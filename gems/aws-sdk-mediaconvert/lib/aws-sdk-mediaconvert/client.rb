@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:mediaconvert)
 
 module Aws::MediaConvert
+  # An API client for MediaConvert.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::MediaConvert::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::MediaConvert
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::MediaConvert
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::MediaConvert
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::MediaConvert
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::MediaConvert
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::MediaConvert
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::MediaConvert
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::MediaConvert
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::MediaConvert
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -306,10 +360,10 @@ module Aws::MediaConvert
     # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
     #
     # @option params [Types::AccelerationSettings] :acceleration_settings
-    #   Accelerated transcoding can significantly speed up jobs with long,
-    #   visually complex content. Outputs that use this feature incur pro-tier
-    #   pricing. For information about feature limitations, see the AWS
-    #   Elemental MediaConvert User Guide.
+    #   Optional. Accelerated transcoding can significantly speed up jobs with
+    #   long, visually complex content. Outputs that use this feature incur
+    #   pro-tier pricing. For information about feature limitations, see the
+    #   AWS Elemental MediaConvert User Guide.
     #
     # @option params [String] :billing_tags_source
     #   Optional. Choose a tag type that AWS Billing and Cost Management will
@@ -320,19 +374,26 @@ module Aws::MediaConvert
     #   appear on the billing report unsorted.
     #
     # @option params [String] :client_request_token
-    #   Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
+    #   Optional. Idempotency token for CreateJob operation.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the backlog
+    #   of the queue that you submit your job to. Specify an alternate queue
+    #   and the maximum time that your job will wait in the initial queue
+    #   before hopping. For more information about this feature, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [String] :job_template
-    #   When you create a job, you can either specify a job template or
-    #   specify the transcoding settings individually
+    #   Optional. When you create a job, you can either specify a job template
+    #   or specify the transcoding settings individually.
     #
     # @option params [Integer] :priority
-    #   Specify the relative priority for this job. In any given queue, the
-    #   service begins processing the job with the highest value first. When
-    #   more than one job has the same priority, the service begins processing
-    #   the job that you submitted first. If you don't specify a priority,
-    #   the service uses the default value 0.
+    #   Optional. Specify the relative priority for this job. In any given
+    #   queue, the service begins processing the job with the highest value
+    #   first. When more than one job has the same priority, the service
+    #   begins processing the job that you submitted first. If you don't
+    #   specify a priority, the service uses the default value 0.
     #
     # @option params [String] :queue
     #   Optional. When you create a job, you can specify a queue to send it
@@ -349,26 +410,26 @@ module Aws::MediaConvert
     #   JobSettings contains all the transcode settings for a job.
     #
     # @option params [String] :simulate_reserved_queue
-    #   Enable this setting when you run a test job to estimate how many
-    #   reserved transcoding slots (RTS) you need. When this is enabled,
+    #   Optional. Enable this setting when you run a test job to estimate how
+    #   many reserved transcoding slots (RTS) you need. When this is enabled,
     #   MediaConvert runs your job from an on-demand queue with similar
     #   performance to what you will see with one RTS in a reserved queue.
     #   This setting is disabled by default.
     #
     # @option params [String] :status_update_interval
-    #   Specify how often MediaConvert sends STATUS\_UPDATE events to Amazon
-    #   CloudWatch Events. Set the interval, in seconds, between status
-    #   updates. MediaConvert sends an update at this interval from the time
-    #   the service begins processing your job to the time it completes the
-    #   transcode or encounters an error.
+    #   Optional. Specify how often MediaConvert sends STATUS\_UPDATE events
+    #   to Amazon CloudWatch Events. Set the interval, in seconds, between
+    #   status updates. MediaConvert sends an update at this interval from the
+    #   time the service begins processing your job to the time it completes
+    #   the transcode or encounters an error.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags that you want to add to the resource. You can tag resources
-    #   with a key-value pair or with only a key.
+    #   Optional. The tags that you want to add to the resource. You can tag
+    #   resources with a key-value pair or with only a key.
     #
     # @option params [Hash<String,String>] :user_metadata
-    #   User-defined metadata that you want to associate with an MediaConvert
-    #   job. You specify metadata in key/value pairs.
+    #   Optional. User-defined metadata that you want to associate with an
+    #   MediaConvert job. You specify metadata in key/value pairs.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -382,6 +443,13 @@ module Aws::MediaConvert
     #     },
     #     billing_tags_source: "QUEUE", # accepts QUEUE, PRESET, JOB_TEMPLATE, JOB
     #     client_request_token: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     job_template: "__string",
     #     priority: 1,
     #     queue: "__string",
@@ -452,6 +520,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -1051,6 +1123,9 @@ module Aws::MediaConvert
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 },
+    #                 mxf_settings: {
+    #                   afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                 },
     #               },
     #               extension: "__string",
     #               name_modifier: "__stringMin1",
@@ -1069,7 +1144,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -1348,6 +1440,10 @@ module Aws::MediaConvert
     #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
+    #   resp.job.hop_destinations #=> Array
+    #   resp.job.hop_destinations[0].priority #=> Integer
+    #   resp.job.hop_destinations[0].queue #=> String
+    #   resp.job.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job.id #=> String
     #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
@@ -1362,6 +1458,10 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.queue_transitions #=> Array
+    #   resp.job.queue_transitions[0].destination_queue #=> String
+    #   resp.job.queue_transitions[0].source_queue #=> String
+    #   resp.job.queue_transitions[0].timestamp #=> Time
     #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
@@ -1402,6 +1502,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -1820,6 +1922,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -1831,7 +1934,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -2065,6 +2181,13 @@ module Aws::MediaConvert
     # @option params [String] :description
     #   Optional. A description of the job template you are creating.
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional. Use queue hopping to avoid overly long waits in the backlog
+    #   of the queue that you submit your job to. Specify an alternate queue
+    #   and the maximum time that your job will wait in the initial queue
+    #   before hopping. For more information about this feature, see the AWS
+    #   Elemental MediaConvert User Guide.
+    #
     # @option params [required, String] :name
     #   The name of the job template you are creating.
     #
@@ -2106,6 +2229,13 @@ module Aws::MediaConvert
     #     },
     #     category: "__string",
     #     description: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     name: "__string", # required
     #     priority: 1,
     #     queue: "__string",
@@ -2175,6 +2305,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -2766,6 +2900,9 @@ module Aws::MediaConvert
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 },
+    #                 mxf_settings: {
+    #                   afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                 },
     #               },
     #               extension: "__string",
     #               name_modifier: "__stringMin1",
@@ -2784,7 +2921,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -3056,6 +3210,10 @@ module Aws::MediaConvert
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
     #   resp.job_template.priority #=> Integer
@@ -3098,6 +3256,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -3509,6 +3669,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -3520,7 +3681,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -4043,12 +4217,32 @@ module Aws::MediaConvert
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
+    #         mxf_settings: {
+    #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #         },
     #       },
     #       video_description: {
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -4515,9 +4709,23 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -4889,6 +5097,8 @@ module Aws::MediaConvert
     #   * {Types::DescribeEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
     #   * {Types::DescribeEndpointsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_endpoints({
@@ -4962,6 +5172,10 @@ module Aws::MediaConvert
     #   resp.job.current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.job.error_code #=> Integer
     #   resp.job.error_message #=> String
+    #   resp.job.hop_destinations #=> Array
+    #   resp.job.hop_destinations[0].priority #=> Integer
+    #   resp.job.hop_destinations[0].queue #=> String
+    #   resp.job.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job.id #=> String
     #   resp.job.job_percent_complete #=> Integer
     #   resp.job.job_template #=> String
@@ -4976,6 +5190,10 @@ module Aws::MediaConvert
     #   resp.job.output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.job.priority #=> Integer
     #   resp.job.queue #=> String
+    #   resp.job.queue_transitions #=> Array
+    #   resp.job.queue_transitions[0].destination_queue #=> String
+    #   resp.job.queue_transitions[0].source_queue #=> String
+    #   resp.job.queue_transitions[0].timestamp #=> Time
     #   resp.job.retry_count #=> Integer
     #   resp.job.role #=> String
     #   resp.job.settings.ad_avail_offset #=> Integer
@@ -5016,6 +5234,8 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -5434,6 +5654,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -5445,7 +5666,20 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -5685,6 +5919,10 @@ module Aws::MediaConvert
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
     #   resp.job_template.priority #=> Integer
@@ -5727,6 +5965,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -6138,6 +6378,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -6149,7 +6390,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -6597,9 +6851,23 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -6869,14 +7137,16 @@ module Aws::MediaConvert
     #   request the next batch of job templates.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListJobTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobTemplatesResponse#job_templates #job_templates} => Array&lt;Types::JobTemplate&gt;
     #   * {Types::ListJobTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -6896,6 +7166,10 @@ module Aws::MediaConvert
     #   resp.job_templates[0].category #=> String
     #   resp.job_templates[0].created_at #=> Time
     #   resp.job_templates[0].description #=> String
+    #   resp.job_templates[0].hop_destinations #=> Array
+    #   resp.job_templates[0].hop_destinations[0].priority #=> Integer
+    #   resp.job_templates[0].hop_destinations[0].queue #=> String
+    #   resp.job_templates[0].hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_templates[0].last_updated #=> Time
     #   resp.job_templates[0].name #=> String
     #   resp.job_templates[0].priority #=> Integer
@@ -6938,6 +7212,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -7349,6 +7625,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -7360,7 +7637,20 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -7584,25 +7874,27 @@ module Aws::MediaConvert
     #   time.
     #
     # @option params [String] :next_token
-    #   Use this string, provided with the response to a previous request, to
-    #   request the next batch of jobs.
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @option params [String] :queue
-    #   Provide a queue name to get back only jobs from that queue.
+    #   Optional. Provide a queue name to get back only jobs from that queue.
     #
     # @option params [String] :status
-    #   A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or
-    #   ERROR.
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::Job&gt;
     #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -7625,6 +7917,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].current_phase #=> String, one of "PROBING", "TRANSCODING", "UPLOADING"
     #   resp.jobs[0].error_code #=> Integer
     #   resp.jobs[0].error_message #=> String
+    #   resp.jobs[0].hop_destinations #=> Array
+    #   resp.jobs[0].hop_destinations[0].priority #=> Integer
+    #   resp.jobs[0].hop_destinations[0].queue #=> String
+    #   resp.jobs[0].hop_destinations[0].wait_minutes #=> Integer
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].job_percent_complete #=> Integer
     #   resp.jobs[0].job_template #=> String
@@ -7639,6 +7935,10 @@ module Aws::MediaConvert
     #   resp.jobs[0].output_group_details[0].output_details[0].video_details.width_in_px #=> Integer
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].queue #=> String
+    #   resp.jobs[0].queue_transitions #=> Array
+    #   resp.jobs[0].queue_transitions[0].destination_queue #=> String
+    #   resp.jobs[0].queue_transitions[0].source_queue #=> String
+    #   resp.jobs[0].queue_transitions[0].timestamp #=> Time
     #   resp.jobs[0].retry_count #=> Integer
     #   resp.jobs[0].role #=> String
     #   resp.jobs[0].settings.ad_avail_offset #=> Integer
@@ -7679,6 +7979,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -8097,6 +8399,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].extension #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -8108,7 +8411,20 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].preset #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -8350,14 +8666,16 @@ module Aws::MediaConvert
     #   request the next batch of presets.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListPresetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPresetsResponse#next_token #next_token} => String
     #   * {Types::ListPresetsResponse#presets #presets} => Array&lt;Types::Preset&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8592,9 +8910,23 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.presets[0].settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.presets[0].settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.presets[0].settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -8816,14 +9148,16 @@ module Aws::MediaConvert
     #   request the next batch of queues.
     #
     # @option params [String] :order
-    #   When you request lists of resources, you can optionally specify
-    #   whether they are sorted in ASCENDING or DESCENDING order. Default
-    #   varies by resource.
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
     #
     # @return [Types::ListQueuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListQueuesResponse#next_token #next_token} => String
     #   * {Types::ListQueuesResponse#queues #queues} => Array&lt;Types::Queue&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -8970,6 +9304,9 @@ module Aws::MediaConvert
     # @option params [String] :description
     #   The new description for the job template, if you are changing it.
     #
+    # @option params [Array<Types::HopDestination>] :hop_destinations
+    #   Optional list of hop destinations.
+    #
     # @option params [required, String] :name
     #   The name of the job template you are modifying
     #
@@ -9006,6 +9343,13 @@ module Aws::MediaConvert
     #     },
     #     category: "__string",
     #     description: "__string",
+    #     hop_destinations: [
+    #       {
+    #         priority: 1,
+    #         queue: "__string",
+    #         wait_minutes: 1,
+    #       },
+    #     ],
     #     name: "__string", # required
     #     priority: 1,
     #     queue: "__string",
@@ -9075,6 +9419,10 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
+    #                   framerate: {
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                   },
     #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
@@ -9666,6 +10014,9 @@ module Aws::MediaConvert
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 },
+    #                 mxf_settings: {
+    #                   afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #                 },
     #               },
     #               extension: "__string",
     #               name_modifier: "__stringMin1",
@@ -9684,7 +10035,24 @@ module Aws::MediaConvert
     #                 afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                 anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_settings: {
-    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   av_1_settings: {
+    #                     adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #                     framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                     framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                     framerate_denominator: 1,
+    #                     framerate_numerator: 1,
+    #                     gop_size: 1.0,
+    #                     max_bitrate: 1,
+    #                     number_b_frames_between_reference_frames: 1,
+    #                     qvbr_settings: {
+    #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
+    #                     },
+    #                     rate_control_mode: "QVBR", # accepts QVBR
+    #                     slices: 1,
+    #                     spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #                   },
+    #                   codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #                   frame_capture_settings: {
     #                     framerate_denominator: 1,
     #                     framerate_numerator: 1,
@@ -9953,6 +10321,10 @@ module Aws::MediaConvert
     #   resp.job_template.category #=> String
     #   resp.job_template.created_at #=> Time
     #   resp.job_template.description #=> String
+    #   resp.job_template.hop_destinations #=> Array
+    #   resp.job_template.hop_destinations[0].priority #=> Integer
+    #   resp.job_template.hop_destinations[0].queue #=> String
+    #   resp.job_template.hop_destinations[0].wait_minutes #=> Integer
     #   resp.job_template.last_updated #=> Time
     #   resp.job_template.name #=> String
     #   resp.job_template.priority #=> Integer
@@ -9995,6 +10367,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.source_608_track_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.embedded_source_settings.terminate_captions #=> String, one of "END_OF_INPUT", "DISABLED"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.convert_608_to_708 #=> String, one of "UPCONVERT", "DISABLED"
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_denominator #=> Integer
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.framerate.framerate_numerator #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.source_file #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.file_source_settings.time_delta #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.source_type #=> String, one of "ANCILLARY", "DVB_SUB", "EMBEDDED", "SCTE20", "SCC", "TTML", "STL", "SRT", "SMI", "TELETEXT", "NULL_SOURCE", "IMSC"
@@ -10406,6 +10780,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.job_template.settings.output_groups[0].outputs[0].extension #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].output_settings.hls_settings.audio_group_id #=> String
@@ -10417,7 +10792,20 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].preset #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -10934,12 +11322,32 @@ module Aws::MediaConvert
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
+    #         mxf_settings: {
+    #           afd_signaling: "NO_COPY", # accepts NO_COPY, COPY_FROM_VIDEO
+    #         },
     #       },
     #       video_description: {
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           av_1_settings: {
+    #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH, HIGHER, MAX
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             max_bitrate: 1,
+    #             number_b_frames_between_reference_frames: 1,
+    #             qvbr_settings: {
+    #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
+    #             },
+    #             rate_control_mode: "QVBR", # accepts QVBR
+    #             slices: 1,
+    #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -11403,9 +11811,23 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mxf_settings.afd_signaling #=> String, one of "NO_COPY", "COPY_FROM_VIDEO"
     #   resp.preset.settings.video_description.afd_signaling #=> String, one of "NONE", "AUTO", "FIXED"
     #   resp.preset.settings.video_description.anti_alias #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "H_264", "H_265", "MPEG2", "PRORES"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.adaptive_quantization #=> String, one of "OFF", "LOW", "MEDIUM", "HIGH", "HIGHER", "MAX"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_control #=> String, one of "INITIALIZE_FROM_SOURCE", "SPECIFIED"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_conversion_algorithm #=> String, one of "DUPLICATE_DROP", "INTERPOLATE"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_denominator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.framerate_numerator #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.gop_size #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.max_bitrate #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.number_b_frames_between_reference_frames #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.rate_control_mode #=> String, one of "QVBR"
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.av_1_settings.spatial_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
+    #   resp.preset.settings.video_description.codec_settings.codec #=> String, one of "FRAME_CAPTURE", "AV1", "H_264", "H_265", "MPEG2", "PRORES"
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_denominator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.framerate_numerator #=> Integer
     #   resp.preset.settings.video_description.codec_settings.frame_capture_settings.max_captures #=> Integer
@@ -11689,7 +12111,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

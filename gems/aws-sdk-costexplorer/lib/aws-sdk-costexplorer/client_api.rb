@@ -21,6 +21,7 @@ module Aws::CostExplorer
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
     CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
+    CostCategoryMaxResults = Shapes::IntegerShape.new(name: 'CostCategoryMaxResults')
     CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
     CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
     CostCategoryReferencesList = Shapes::ListShape.new(name: 'CostCategoryReferencesList')
@@ -108,6 +109,8 @@ module Aws::CostExplorer
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
     ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
+    MatchOption = Shapes::StringShape.new(name: 'MatchOption')
+    MatchOptions = Shapes::ListShape.new(name: 'MatchOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metric = Shapes::StringShape.new(name: 'Metric')
     MetricAmount = Shapes::StringShape.new(name: 'MetricAmount')
@@ -131,6 +134,7 @@ module Aws::CostExplorer
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
     PurchasedUnits = Shapes::StringShape.new(name: 'PurchasedUnits')
     RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
+    RecommendationTarget = Shapes::StringShape.new(name: 'RecommendationTarget')
     RedshiftInstanceDetails = Shapes::StructureShape.new(name: 'RedshiftInstanceDetails')
     RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
     ReservationAggregates = Shapes::StructureShape.new(name: 'ReservationAggregates')
@@ -154,6 +158,7 @@ module Aws::CostExplorer
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
     RightsizingRecommendation = Shapes::StructureShape.new(name: 'RightsizingRecommendation')
+    RightsizingRecommendationConfiguration = Shapes::StructureShape.new(name: 'RightsizingRecommendationConfiguration')
     RightsizingRecommendationList = Shapes::ListShape.new(name: 'RightsizingRecommendationList')
     RightsizingRecommendationMetadata = Shapes::StructureShape.new(name: 'RightsizingRecommendationMetadata')
     RightsizingRecommendationSummary = Shapes::StructureShape.new(name: 'RightsizingRecommendationSummary')
@@ -226,6 +231,7 @@ module Aws::CostExplorer
     CostCategoryReference.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Name"))
     CostCategoryReference.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
     CostCategoryReference.add_member(:effective_end, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveEnd"))
+    CostCategoryReference.add_member(:number_of_rules, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "NumberOfRules"))
     CostCategoryReference.struct_class = Types::CostCategoryReference
 
     CostCategoryReferencesList.member = Shapes::ShapeRef.new(shape: CostCategoryReference)
@@ -311,6 +317,7 @@ module Aws::CostExplorer
 
     DimensionValues.add_member(:key, Shapes::ShapeRef.new(shape: Dimension, location_name: "Key"))
     DimensionValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    DimensionValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
     DimensionValues.struct_class = Types::DimensionValues
 
     DimensionValuesWithAttributes.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "Value"))
@@ -473,6 +480,7 @@ module Aws::CostExplorer
     GetReservationUtilizationResponse.struct_class = Types::GetReservationUtilizationResponse
 
     GetRightsizingRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetRightsizingRecommendationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RightsizingRecommendationConfiguration, location_name: "Configuration"))
     GetRightsizingRecommendationRequest.add_member(:service, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Service"))
     GetRightsizingRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
     GetRightsizingRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
@@ -482,6 +490,7 @@ module Aws::CostExplorer
     GetRightsizingRecommendationResponse.add_member(:summary, Shapes::ShapeRef.new(shape: RightsizingRecommendationSummary, location_name: "Summary"))
     GetRightsizingRecommendationResponse.add_member(:rightsizing_recommendations, Shapes::ShapeRef.new(shape: RightsizingRecommendationList, location_name: "RightsizingRecommendations"))
     GetRightsizingRecommendationResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetRightsizingRecommendationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RightsizingRecommendationConfiguration, location_name: "Configuration"))
     GetRightsizingRecommendationResponse.struct_class = Types::GetRightsizingRecommendationResponse
 
     GetSavingsPlansCoverageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
@@ -500,9 +509,11 @@ module Aws::CostExplorer
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:savings_plans_type, Shapes::ShapeRef.new(shape: SupportedSavingsPlansType, required: true, location_name: "SavingsPlansType"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:term_in_years, Shapes::ShapeRef.new(shape: TermInYears, required: true, location_name: "TermInYears"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, required: true, location_name: "PaymentOption"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "AccountScope"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "PageSize"))
     GetSavingsPlansPurchaseRecommendationRequest.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookbackPeriodInDays, required: true, location_name: "LookbackPeriodInDays"))
+    GetSavingsPlansPurchaseRecommendationRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
     GetSavingsPlansPurchaseRecommendationRequest.struct_class = Types::GetSavingsPlansPurchaseRecommendationRequest
 
     GetSavingsPlansPurchaseRecommendationResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: SavingsPlansPurchaseRecommendationMetadata, location_name: "Metadata"))
@@ -583,11 +594,14 @@ module Aws::CostExplorer
 
     ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
     ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostCategoryDefinitionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostCategoryMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListCostCategoryDefinitionsRequest.struct_class = Types::ListCostCategoryDefinitionsRequest
 
     ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, Shapes::ShapeRef.new(shape: CostCategoryReferencesList, location_name: "CostCategoryReferences"))
     ListCostCategoryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsResponse.struct_class = Types::ListCostCategoryDefinitionsResponse
+
+    MatchOptions.member = Shapes::ShapeRef.new(shape: MatchOption)
 
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
@@ -719,6 +733,10 @@ module Aws::CostExplorer
     RightsizingRecommendation.add_member(:terminate_recommendation_detail, Shapes::ShapeRef.new(shape: TerminateRecommendationDetail, location_name: "TerminateRecommendationDetail"))
     RightsizingRecommendation.struct_class = Types::RightsizingRecommendation
 
+    RightsizingRecommendationConfiguration.add_member(:recommendation_target, Shapes::ShapeRef.new(shape: RecommendationTarget, required: true, location_name: "RecommendationTarget"))
+    RightsizingRecommendationConfiguration.add_member(:benefits_considered, Shapes::ShapeRef.new(shape: GenericBoolean, required: true, location_name: "BenefitsConsidered"))
+    RightsizingRecommendationConfiguration.struct_class = Types::RightsizingRecommendationConfiguration
+
     RightsizingRecommendationList.member = Shapes::ShapeRef.new(shape: RightsizingRecommendation)
 
     RightsizingRecommendationMetadata.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "RecommendationId"))
@@ -755,6 +773,7 @@ module Aws::CostExplorer
     SavingsPlansDetails.add_member(:offering_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "OfferingId"))
     SavingsPlansDetails.struct_class = Types::SavingsPlansDetails
 
+    SavingsPlansPurchaseRecommendation.add_member(:account_scope, Shapes::ShapeRef.new(shape: AccountScope, location_name: "AccountScope"))
     SavingsPlansPurchaseRecommendation.add_member(:savings_plans_type, Shapes::ShapeRef.new(shape: SupportedSavingsPlansType, location_name: "SavingsPlansType"))
     SavingsPlansPurchaseRecommendation.add_member(:term_in_years, Shapes::ShapeRef.new(shape: TermInYears, location_name: "TermInYears"))
     SavingsPlansPurchaseRecommendation.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "PaymentOption"))
@@ -842,6 +861,7 @@ module Aws::CostExplorer
 
     TagValues.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     TagValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    TagValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
     TagValues.struct_class = Types::TagValues
 
     TagValuesList.member = Shapes::ShapeRef.new(shape: TagValues)
@@ -1108,6 +1128,12 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|

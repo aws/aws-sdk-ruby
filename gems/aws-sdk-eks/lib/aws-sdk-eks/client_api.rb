@@ -44,6 +44,8 @@ module Aws::EKS
     DescribeNodegroupResponse = Shapes::StructureShape.new(name: 'DescribeNodegroupResponse')
     DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
     DescribeUpdateResponse = Shapes::StructureShape.new(name: 'DescribeUpdateResponse')
+    EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
+    EncryptionConfigList = Shapes::ListShape.new(name: 'EncryptionConfigList')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetails = Shapes::ListShape.new(name: 'ErrorDetails')
@@ -84,6 +86,7 @@ module Aws::EKS
     NodegroupStatus = Shapes::StringShape.new(name: 'NodegroupStatus')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OIDC = Shapes::StructureShape.new(name: 'OIDC')
+    Provider = Shapes::StructureShape.new(name: 'Provider')
     RemoteAccessConfig = Shapes::StructureShape.new(name: 'RemoteAccessConfig')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
@@ -154,6 +157,7 @@ module Aws::EKS
     Cluster.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken"))
     Cluster.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Cluster.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
     Cluster.struct_class = Types::Cluster
 
     CreateClusterRequest.add_member(:name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "name"))
@@ -163,6 +167,7 @@ module Aws::EKS
     CreateClusterRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     CreateClusterRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateClusterRequest.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfigList, location_name: "encryptionConfig"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -246,6 +251,12 @@ module Aws::EKS
 
     DescribeUpdateResponse.add_member(:update, Shapes::ShapeRef.new(shape: Update, location_name: "update"))
     DescribeUpdateResponse.struct_class = Types::DescribeUpdateResponse
+
+    EncryptionConfig.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, location_name: "resources"))
+    EncryptionConfig.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
+    EncryptionConfig.struct_class = Types::EncryptionConfig
+
+    EncryptionConfigList.member = Shapes::ShapeRef.new(shape: EncryptionConfig)
 
     ErrorDetail.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
     ErrorDetail.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
@@ -386,6 +397,9 @@ module Aws::EKS
 
     OIDC.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "issuer"))
     OIDC.struct_class = Types::OIDC
+
+    Provider.add_member(:key_arn, Shapes::ShapeRef.new(shape: String, location_name: "keyArn"))
+    Provider.struct_class = Types::Provider
 
     RemoteAccessConfig.add_member(:ec2_ssh_key, Shapes::ShapeRef.new(shape: String, location_name: "ec2SshKey"))
     RemoteAccessConfig.add_member(:source_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "sourceSecurityGroups"))

@@ -338,6 +338,10 @@ module Aws::DataExchange
     #               },
     #             ],
     #             data_set_id: "Id", # required
+    #             encryption: {
+    #               kms_key_arn: "__string", # required
+    #               type: "aws:kms", # required, accepts aws:kms, AES256
+    #             },
     #             revision_id: "Id", # required
     #           },
     #           import_asset_from_signed_url: {
@@ -742,6 +746,10 @@ module Aws::DataExchange
     #           },
     #         ],
     #         data_set_id: "Id", # required
+    #         encryption: {
+    #           kms_key_arn: "__string", # required
+    #           type: "aws:kms", # required, accepts aws:kms, AES256
+    #         },
     #         revision_id: "Id", # required
     #       }
     #
@@ -754,6 +762,10 @@ module Aws::DataExchange
     #   job.
     #   @return [String]
     #
+    # @!attribute [rw] encryption
+    #   Encryption configuration for the export job.
+    #   @return [Types::ExportServerSideEncryption]
+    #
     # @!attribute [rw] revision_id
     #   The unique identifier for the revision associated with this export
     #   request.
@@ -764,6 +776,7 @@ module Aws::DataExchange
     class ExportAssetsToS3RequestDetails < Struct.new(
       :asset_destinations,
       :data_set_id,
+      :encryption,
       :revision_id)
       include Aws::Structure
     end
@@ -779,6 +792,10 @@ module Aws::DataExchange
     #   job.
     #   @return [String]
     #
+    # @!attribute [rw] encryption
+    #   Encryption configuration of the export job.
+    #   @return [Types::ExportServerSideEncryption]
+    #
     # @!attribute [rw] revision_id
     #   The unique identifier for the revision associated with this export
     #   response.
@@ -789,7 +806,39 @@ module Aws::DataExchange
     class ExportAssetsToS3ResponseDetails < Struct.new(
       :asset_destinations,
       :data_set_id,
+      :encryption,
       :revision_id)
+      include Aws::Structure
+    end
+
+    # Encryption configuration of the export job. Includes the encryption
+    # type as well as the AWS KMS key. The KMS key is only necessary if you
+    # chose the KMS encryption type.
+    #
+    # @note When making an API call, you may pass ExportServerSideEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_arn: "__string", # required
+    #         type: "aws:kms", # required, accepts aws:kms, AES256
+    #       }
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the the AWS KMS key you want to
+    #   use to encrypt the Amazon S3 objects. This parameter is required if
+    #   you choose aws:kms as an encryption type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of server side encryption used for encrypting the objects
+    #   in Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ExportServerSideEncryption AWS API Documentation
+    #
+    class ExportServerSideEncryption < Struct.new(
+      :kms_key_arn,
+      :type)
       include Aws::Structure
     end
 
@@ -1350,7 +1399,7 @@ module Aws::DataExchange
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The unqiue identifier for the resource related to the error.
+    #   The unique identifier for the resource related to the error.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -1609,6 +1658,10 @@ module Aws::DataExchange
     #             },
     #           ],
     #           data_set_id: "Id", # required
+    #           encryption: {
+    #             kms_key_arn: "__string", # required
+    #             type: "aws:kms", # required, accepts aws:kms, AES256
+    #           },
     #           revision_id: "Id", # required
     #         },
     #         import_asset_from_signed_url: {

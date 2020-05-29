@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2020-05-01)
+------------------
+
+* Feature - Change the TagKeys argument for UntagResource to a URL parameter to address an issue with the Java and .NET SDKs.
+
+1.26.0 (2020-03-11)
+------------------
+
+* Feature - Documentation updates for elasticfilesystem
+
+1.25.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.24.0 (2020-01-13)
 ------------------
 

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ResourceGroupsTaggingAPI
+
   class Resource
 
     # @param options ({})

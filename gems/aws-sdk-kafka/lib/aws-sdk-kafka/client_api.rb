@@ -14,14 +14,19 @@ module Aws::Kafka
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BrokerAZDistribution = Shapes::StringShape.new(name: 'BrokerAZDistribution')
     BrokerEBSVolumeInfo = Shapes::StructureShape.new(name: 'BrokerEBSVolumeInfo')
+    BrokerLogs = Shapes::StructureShape.new(name: 'BrokerLogs')
     BrokerNodeGroupInfo = Shapes::StructureShape.new(name: 'BrokerNodeGroupInfo')
     BrokerNodeInfo = Shapes::StructureShape.new(name: 'BrokerNodeInfo')
     BrokerSoftwareInfo = Shapes::StructureShape.new(name: 'BrokerSoftwareInfo')
     ClientAuthentication = Shapes::StructureShape.new(name: 'ClientAuthentication')
     ClientBroker = Shapes::StringShape.new(name: 'ClientBroker')
+    CloudWatchLogs = Shapes::StructureShape.new(name: 'CloudWatchLogs')
     ClusterInfo = Shapes::StructureShape.new(name: 'ClusterInfo')
     ClusterOperationInfo = Shapes::StructureShape.new(name: 'ClusterOperationInfo')
+    ClusterOperationStep = Shapes::StructureShape.new(name: 'ClusterOperationStep')
+    ClusterOperationStepInfo = Shapes::StructureShape.new(name: 'ClusterOperationStepInfo')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
+    CompatibleKafkaVersion = Shapes::StructureShape.new(name: 'CompatibleKafkaVersion')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
     ConfigurationInfo = Shapes::StructureShape.new(name: 'ConfigurationInfo')
     ConfigurationRevision = Shapes::StructureShape.new(name: 'ConfigurationRevision')
@@ -47,9 +52,12 @@ module Aws::Kafka
     EnhancedMonitoring = Shapes::StringShape.new(name: 'EnhancedMonitoring')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
+    Firehose = Shapes::StructureShape.new(name: 'Firehose')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetBootstrapBrokersRequest = Shapes::StructureShape.new(name: 'GetBootstrapBrokersRequest')
     GetBootstrapBrokersResponse = Shapes::StructureShape.new(name: 'GetBootstrapBrokersResponse')
+    GetCompatibleKafkaVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleKafkaVersionsRequest')
+    GetCompatibleKafkaVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleKafkaVersionsResponse')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JmxExporter = Shapes::StructureShape.new(name: 'JmxExporter')
     JmxExporterInfo = Shapes::StructureShape.new(name: 'JmxExporterInfo')
@@ -69,6 +77,7 @@ module Aws::Kafka
     ListNodesResponse = Shapes::StructureShape.new(name: 'ListNodesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MutableClusterInfo = Shapes::StructureShape.new(name: 'MutableClusterInfo')
     NodeExporter = Shapes::StructureShape.new(name: 'NodeExporter')
@@ -80,6 +89,7 @@ module Aws::Kafka
     OpenMonitoringInfo = Shapes::StructureShape.new(name: 'OpenMonitoringInfo')
     Prometheus = Shapes::StructureShape.new(name: 'Prometheus')
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
+    S3 = Shapes::StructureShape.new(name: 'S3')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
@@ -94,6 +104,8 @@ module Aws::Kafka
     UpdateBrokerStorageResponse = Shapes::StructureShape.new(name: 'UpdateBrokerStorageResponse')
     UpdateClusterConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationRequest')
     UpdateClusterConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateClusterConfigurationResponse')
+    UpdateClusterKafkaVersionRequest = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionRequest')
+    UpdateClusterKafkaVersionResponse = Shapes::StructureShape.new(name: 'UpdateClusterKafkaVersionResponse')
     UpdateMonitoringRequest = Shapes::StructureShape.new(name: 'UpdateMonitoringRequest')
     UpdateMonitoringResponse = Shapes::StructureShape.new(name: 'UpdateMonitoringResponse')
     ZookeeperNodeInfo = Shapes::StructureShape.new(name: 'ZookeeperNodeInfo')
@@ -106,6 +118,8 @@ module Aws::Kafka
     __listOfBrokerEBSVolumeInfo = Shapes::ListShape.new(name: '__listOfBrokerEBSVolumeInfo')
     __listOfClusterInfo = Shapes::ListShape.new(name: '__listOfClusterInfo')
     __listOfClusterOperationInfo = Shapes::ListShape.new(name: '__listOfClusterOperationInfo')
+    __listOfClusterOperationStep = Shapes::ListShape.new(name: '__listOfClusterOperationStep')
+    __listOfCompatibleKafkaVersion = Shapes::ListShape.new(name: '__listOfCompatibleKafkaVersion')
     __listOfConfiguration = Shapes::ListShape.new(name: '__listOfConfiguration')
     __listOfConfigurationRevision = Shapes::ListShape.new(name: '__listOfConfigurationRevision')
     __listOfKafkaVersion = Shapes::ListShape.new(name: '__listOfKafkaVersion')
@@ -126,6 +140,11 @@ module Aws::Kafka
     BrokerEBSVolumeInfo.add_member(:kafka_broker_node_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "kafkaBrokerNodeId"))
     BrokerEBSVolumeInfo.add_member(:volume_size_gb, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "volumeSizeGB"))
     BrokerEBSVolumeInfo.struct_class = Types::BrokerEBSVolumeInfo
+
+    BrokerLogs.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogs, location_name: "cloudWatchLogs"))
+    BrokerLogs.add_member(:firehose, Shapes::ShapeRef.new(shape: Firehose, location_name: "firehose"))
+    BrokerLogs.add_member(:s3, Shapes::ShapeRef.new(shape: S3, location_name: "s3"))
+    BrokerLogs.struct_class = Types::BrokerLogs
 
     BrokerNodeGroupInfo.add_member(:broker_az_distribution, Shapes::ShapeRef.new(shape: BrokerAZDistribution, location_name: "brokerAZDistribution"))
     BrokerNodeGroupInfo.add_member(:client_subnets, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "clientSubnets"))
@@ -150,6 +169,10 @@ module Aws::Kafka
     ClientAuthentication.add_member(:tls, Shapes::ShapeRef.new(shape: Tls, location_name: "tls"))
     ClientAuthentication.struct_class = Types::ClientAuthentication
 
+    CloudWatchLogs.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
+    CloudWatchLogs.add_member(:log_group, Shapes::ShapeRef.new(shape: __string, location_name: "logGroup"))
+    CloudWatchLogs.struct_class = Types::CloudWatchLogs
+
     ClusterInfo.add_member(:active_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "activeOperationArn"))
     ClusterInfo.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, location_name: "brokerNodeGroupInfo"))
     ClusterInfo.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
@@ -157,6 +180,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __string, location_name: "clusterName"))
     ClusterInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     ClusterInfo.add_member(:current_broker_software_info, Shapes::ShapeRef.new(shape: BrokerSoftwareInfo, location_name: "currentBrokerSoftwareInfo"))
+    ClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     ClusterInfo.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, location_name: "currentVersion"))
     ClusterInfo.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     ClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
@@ -172,12 +196,24 @@ module Aws::Kafka
     ClusterOperationInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     ClusterOperationInfo.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "endTime"))
     ClusterOperationInfo.add_member(:error_info, Shapes::ShapeRef.new(shape: ErrorInfo, location_name: "errorInfo"))
+    ClusterOperationInfo.add_member(:operation_steps, Shapes::ShapeRef.new(shape: __listOfClusterOperationStep, location_name: "operationSteps"))
     ClusterOperationInfo.add_member(:operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "operationArn"))
     ClusterOperationInfo.add_member(:operation_state, Shapes::ShapeRef.new(shape: __string, location_name: "operationState"))
     ClusterOperationInfo.add_member(:operation_type, Shapes::ShapeRef.new(shape: __string, location_name: "operationType"))
     ClusterOperationInfo.add_member(:source_cluster_info, Shapes::ShapeRef.new(shape: MutableClusterInfo, location_name: "sourceClusterInfo"))
     ClusterOperationInfo.add_member(:target_cluster_info, Shapes::ShapeRef.new(shape: MutableClusterInfo, location_name: "targetClusterInfo"))
     ClusterOperationInfo.struct_class = Types::ClusterOperationInfo
+
+    ClusterOperationStep.add_member(:step_info, Shapes::ShapeRef.new(shape: ClusterOperationStepInfo, location_name: "stepInfo"))
+    ClusterOperationStep.add_member(:step_name, Shapes::ShapeRef.new(shape: __string, location_name: "stepName"))
+    ClusterOperationStep.struct_class = Types::ClusterOperationStep
+
+    ClusterOperationStepInfo.add_member(:step_status, Shapes::ShapeRef.new(shape: __string, location_name: "stepStatus"))
+    ClusterOperationStepInfo.struct_class = Types::ClusterOperationStepInfo
+
+    CompatibleKafkaVersion.add_member(:source_version, Shapes::ShapeRef.new(shape: __string, location_name: "sourceVersion"))
+    CompatibleKafkaVersion.add_member(:target_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "targetVersions"))
+    CompatibleKafkaVersion.struct_class = Types::CompatibleKafkaVersion
 
     Configuration.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
     Configuration.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "creationTime"))
@@ -207,6 +243,7 @@ module Aws::Kafka
     CreateClusterRequest.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     CreateClusterRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     CreateClusterRequest.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "kafkaVersion"))
+    CreateClusterRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     CreateClusterRequest.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
     CreateClusterRequest.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -218,7 +255,7 @@ module Aws::Kafka
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
     CreateConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    CreateConfigurationRequest.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "kafkaVersions"))
+    CreateConfigurationRequest.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "kafkaVersions"))
     CreateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateConfigurationRequest.add_member(:server_properties, Shapes::ShapeRef.new(shape: __blob, required: true, location_name: "serverProperties"))
     CreateConfigurationRequest.struct_class = Types::CreateConfigurationRequest
@@ -293,6 +330,10 @@ module Aws::Kafka
     ErrorInfo.add_member(:error_string, Shapes::ShapeRef.new(shape: __string, location_name: "errorString"))
     ErrorInfo.struct_class = Types::ErrorInfo
 
+    Firehose.add_member(:delivery_stream, Shapes::ShapeRef.new(shape: __string, location_name: "deliveryStream"))
+    Firehose.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
+    Firehose.struct_class = Types::Firehose
+
     ForbiddenException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -303,6 +344,12 @@ module Aws::Kafka
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerString"))
     GetBootstrapBrokersResponse.add_member(:bootstrap_broker_string_tls, Shapes::ShapeRef.new(shape: __string, location_name: "bootstrapBrokerStringTls"))
     GetBootstrapBrokersResponse.struct_class = Types::GetBootstrapBrokersResponse
+
+    GetCompatibleKafkaVersionsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "clusterArn"))
+    GetCompatibleKafkaVersionsRequest.struct_class = Types::GetCompatibleKafkaVersionsRequest
+
+    GetCompatibleKafkaVersionsResponse.add_member(:compatible_kafka_versions, Shapes::ShapeRef.new(shape: __listOfCompatibleKafkaVersion, location_name: "compatibleKafkaVersions"))
+    GetCompatibleKafkaVersionsResponse.struct_class = Types::GetCompatibleKafkaVersionsResponse
 
     InternalServerErrorException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     InternalServerErrorException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -376,11 +423,16 @@ module Aws::Kafka
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LoggingInfo.add_member(:broker_logs, Shapes::ShapeRef.new(shape: BrokerLogs, required: true, location_name: "brokerLogs"))
+    LoggingInfo.struct_class = Types::LoggingInfo
+
     MutableClusterInfo.add_member(:broker_ebs_volume_info, Shapes::ShapeRef.new(shape: __listOfBrokerEBSVolumeInfo, location_name: "brokerEBSVolumeInfo"))
     MutableClusterInfo.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, location_name: "configurationInfo"))
     MutableClusterInfo.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integer, location_name: "numberOfBrokerNodes"))
     MutableClusterInfo.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoring, location_name: "openMonitoring"))
     MutableClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
+    MutableClusterInfo.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __string, location_name: "kafkaVersion"))
+    MutableClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -414,6 +466,11 @@ module Aws::Kafka
     PrometheusInfo.add_member(:jmx_exporter, Shapes::ShapeRef.new(shape: JmxExporterInfo, location_name: "jmxExporter"))
     PrometheusInfo.add_member(:node_exporter, Shapes::ShapeRef.new(shape: NodeExporterInfo, location_name: "nodeExporter"))
     PrometheusInfo.struct_class = Types::PrometheusInfo
+
+    S3.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, location_name: "bucket"))
+    S3.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
+    S3.add_member(:prefix, Shapes::ShapeRef.new(shape: __string, location_name: "prefix"))
+    S3.struct_class = Types::S3
 
     ServiceUnavailableException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -472,10 +529,21 @@ module Aws::Kafka
     UpdateClusterConfigurationResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
     UpdateClusterConfigurationResponse.struct_class = Types::UpdateClusterConfigurationResponse
 
+    UpdateClusterKafkaVersionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateClusterKafkaVersionRequest.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, location_name: "configurationInfo"))
+    UpdateClusterKafkaVersionRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
+    UpdateClusterKafkaVersionRequest.add_member(:target_kafka_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "targetKafkaVersion"))
+    UpdateClusterKafkaVersionRequest.struct_class = Types::UpdateClusterKafkaVersionRequest
+
+    UpdateClusterKafkaVersionResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
+    UpdateClusterKafkaVersionResponse.add_member(:cluster_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterOperationArn"))
+    UpdateClusterKafkaVersionResponse.struct_class = Types::UpdateClusterKafkaVersionResponse
+
     UpdateMonitoringRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     UpdateMonitoringRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
     UpdateMonitoringRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     UpdateMonitoringRequest.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
+    UpdateMonitoringRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     UpdateMonitoringRequest.struct_class = Types::UpdateMonitoringRequest
 
     UpdateMonitoringResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))
@@ -494,6 +562,10 @@ module Aws::Kafka
     __listOfClusterInfo.member = Shapes::ShapeRef.new(shape: ClusterInfo)
 
     __listOfClusterOperationInfo.member = Shapes::ShapeRef.new(shape: ClusterOperationInfo)
+
+    __listOfClusterOperationStep.member = Shapes::ShapeRef.new(shape: ClusterOperationStep)
+
+    __listOfCompatibleKafkaVersion.member = Shapes::ShapeRef.new(shape: CompatibleKafkaVersion)
 
     __listOfConfiguration.member = Shapes::ShapeRef.new(shape: Configuration)
 
@@ -634,6 +706,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+      end)
+
+      api.add_operation(:get_compatible_kafka_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCompatibleKafkaVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/compatible-kafka-versions"
+        o.input = Shapes::ShapeRef.new(shape: GetCompatibleKafkaVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCompatibleKafkaVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:list_cluster_operations, Seahorse::Model::Operation.new.tap do |o|
@@ -818,6 +905,21 @@ module Aws::Kafka
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_cluster_kafka_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterKafkaVersion"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/clusters/{clusterArn}/version"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterKafkaVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterKafkaVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:update_monitoring, Seahorse::Model::Operation.new.tap do |o|

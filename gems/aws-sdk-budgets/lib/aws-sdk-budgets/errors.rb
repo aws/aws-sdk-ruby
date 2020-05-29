@@ -6,6 +6,36 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Budgets
+
+  # When Budgets returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Budgets::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Budgets errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Budgets::Errors::ServiceError
+  #       # rescues all Budgets API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {CreationLimitExceededException}
+  # * {DuplicateRecordException}
+  # * {ExpiredNextTokenException}
+  # * {InternalErrorException}
+  # * {InvalidNextTokenException}
+  # * {InvalidParameterException}
+  # * {NotFoundException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +53,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class CreationLimitExceededException < ServiceError
@@ -39,7 +68,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class DuplicateRecordException < ServiceError
@@ -55,7 +83,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExpiredNextTokenException < ServiceError
@@ -71,7 +98,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalErrorException < ServiceError
@@ -87,7 +113,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -103,7 +128,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -119,7 +143,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -135,7 +158,6 @@ module Aws::Budgets
       def message
         @message || @data[:message]
       end
-
     end
 
   end

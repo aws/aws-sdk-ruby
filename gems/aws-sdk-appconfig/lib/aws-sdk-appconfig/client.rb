@@ -30,6 +30,18 @@ require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 Aws::Plugins::GlobalConfiguration.add_identifier(:appconfig)
 
 module Aws::AppConfig
+  # An API client for AppConfig.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::AppConfig::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
   class Client < Seahorse::Client::Base
 
     include Aws::ClientStubs
@@ -93,7 +105,7 @@ module Aws::AppConfig
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
     #     used to determine the service `:endpoint`. When not passed,
-    #     a default `:region` is search for in the following locations:
+    #     a default `:region` is searched for in the following locations:
     #
     #     * `Aws.config[:region]`
     #     * `ENV['AWS_REGION']`
@@ -107,6 +119,12 @@ module Aws::AppConfig
     #   @option options [Boolean] :active_endpoint_cache (false)
     #     When set to `true`, a thread polling for endpoints will be running in
     #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
     #
     #   @option options [Boolean] :client_side_monitoring (false)
     #     When `true`, client-side metrics will be collected for all API requests from
@@ -132,6 +150,10 @@ module Aws::AppConfig
     #     When `true`, an attempt is made to coerce request parameters into
     #     the required types.
     #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
     #     to default service endpoint when available.
@@ -139,7 +161,7 @@ module Aws::AppConfig
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
     #     option. You should only configure an `:endpoint` when connecting
-    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #     to test endpoints. This should be a valid HTTP(S) URI.
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -154,7 +176,7 @@ module Aws::AppConfig
     #     requests fetching endpoints information. Defaults to 60 sec.
     #
     #   @option options [Boolean] :endpoint_discovery (false)
-    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
     #
     #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
     #     The log formatter.
@@ -166,15 +188,29 @@ module Aws::AppConfig
     #     The Logger instance to send log messages to.  If this option
     #     is not set, logging will be disabled.
     #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
     #   @option options [Float] :retry_base_delay (0.3)
-    #     The base delay in seconds used by the default backoff function.
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
     #
     #   @option options [Symbol] :retry_jitter (:none)
-    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
@@ -182,11 +218,30 @@ module Aws::AppConfig
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
-    #     checksum errors, networking errors, timeout errors and auth
-    #     errors from expired credentials.
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
     #
     #   @option options [Integer] :retry_max_delay (0)
-    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
     #
     #   @option options [String] :secret_access_key
     #
@@ -209,16 +264,15 @@ module Aws::AppConfig
     #     requests through.  Formatted like 'http://proxy.com:123'.
     #
     #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before rasing a
+    #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
     #   @option options [Integer] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
-    #     safely be set
-    #     per-request on the session yeidled by {#session_for}.
+    #     safely be set per-request on the session.
     #
     #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idble before it is
+    #     seconds a connection is allowed to sit idle before it is
     #     considered stale.  Stale connections are closed and removed
     #     from the pool before making a request.
     #
@@ -227,7 +281,7 @@ module Aws::AppConfig
     #     request body.  This option has no effect unless the request has
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
-    #     request on the session yeidled by {#session_for}.
+    #     request on the session.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -303,9 +357,9 @@ module Aws::AppConfig
     end
 
     # Information that enables AppConfig to access the configuration source.
-    # Valid configuration sources include Systems Manager (SSM) documents
-    # and SSM Parameter Store parameters. A configuration profile includes
-    # the following information.
+    # Valid configuration sources include Systems Manager (SSM) documents,
+    # SSM Parameter Store parameters, and Amazon S3 objects. A configuration
+    # profile includes the following information.
     #
     # * The Uri location of the configuration data.
     #
@@ -314,6 +368,13 @@ module Aws::AppConfig
     #
     # * A validator for the configuration data. Available validators include
     #   either a JSON Schema or an AWS Lambda function.
+    #
+    # For more information, see [Create a Configuration and a Configuration
+    # Profile][1] in the *AWS AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html
     #
     # @option params [required, String] :application_id
     #   The application ID.
@@ -325,12 +386,15 @@ module Aws::AppConfig
     #   A description of the configuration profile.
     #
     # @option params [required, String] :location_uri
-    #   A URI to locate the configuration. You can specify either a Systems
-    #   Manager (SSM) document or an SSM Parameter Store parameter. For an SSM
-    #   document, specify either the document name in the format
-    #   `ssm-document://<Document name>` or the Amazon Resource Name (ARN).
-    #   For a parameter, specify either the parameter name in the format
-    #   `ssm-parameter://<Parameter name>` or the ARN.
+    #   A URI to locate the configuration. You can specify a Systems Manager
+    #   (SSM) document, an SSM Parameter Store parameter, or an Amazon S3
+    #   object. For an SSM document, specify either the document name in the
+    #   format `ssm-document://<Document_name>` or the Amazon Resource Name
+    #   (ARN). For a parameter, specify either the parameter name in the
+    #   format `ssm-parameter://<Parameter_name>` or the ARN. For an Amazon S3
+    #   object, specify the URI in the following format:
+    #   `s3://<bucket>/<objectKey> `. Here is an example:
+    #   s3://my-bucket/my-app/us-east-1/my-config.json
     #
     # @option params [required, String] :retrieval_role_arn
     #   The ARN of an IAM role with permission to access the configuration at
@@ -419,7 +483,33 @@ module Aws::AppConfig
     #   each interval.
     #
     # @option params [String] :growth_type
-    #   The algorithm used to define how percentage grows over time.
+    #   The algorithm used to define how percentage grows over time. AWS
+    #   AppConfig supports the following growth types:
+    #
+    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   dividing the total number of targets by the value specified for `Step
+    #   percentage`. For example, a linear deployment that uses a `Step
+    #   percentage` of 10 deploys the configuration to 10 percent of the
+    #   hosts. After those deployments are complete, the system deploys the
+    #   configuration to the next 10 percent. This continues until 100% of the
+    #   targets have successfully received the configuration.
+    #
+    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   exponentially using the following formula: `G*(2^N)`. In this formula,
+    #   `G` is the growth factor specified by the user and `N` is the number
+    #   of steps until the configuration is deployed to all targets. For
+    #   example, if you specify a growth factor of 2, then the system rolls
+    #   out the configuration as follows:
+    #
+    #   `2*(2^0)`
+    #
+    #   `2*(2^1)`
+    #
+    #   `2*(2^2)`
+    #
+    #   Expressed numerically, the deployment rolls out as follows: 2% of the
+    #   targets, 4% of the targets, 8% of the targets, and continues until the
+    #   configuration has been deployed to all targets.
     #
     # @option params [required, String] :replicate_to
     #   Save the deployment strategy to a Systems Manager (SSM) document.
@@ -448,7 +538,7 @@ module Aws::AppConfig
     #     deployment_duration_in_minutes: 1, # required
     #     final_bake_time_in_minutes: 1,
     #     growth_factor: 1.0, # required
-    #     growth_type: "LINEAR", # accepts LINEAR
+    #     growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
     #     replicate_to: "NONE", # required, accepts NONE, SSM_DOCUMENT
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -461,7 +551,7 @@ module Aws::AppConfig
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -680,16 +770,31 @@ module Aws::AppConfig
       req.send_request(options)
     end
 
-    # Retrieve information about a configuration.
+    # Receive information about a configuration.
+    #
+    # AWS AppConfig uses the value of the `ClientConfigurationVersion`
+    # parameter to identify the configuration version on your clients. If
+    # you don’t send `ClientConfigurationVersion` with each call to
+    # `GetConfiguration`, your clients receive the current configuration.
+    # You are charged each time your clients receive a configuration.
+    #
+    #  To avoid excess charges, we recommend that you include the
+    # `ClientConfigurationVersion` value with every call to
+    # `GetConfiguration`. This value must be saved on your client.
+    # Subsequent calls to `GetConfiguration` must pass this value by using
+    # the `ClientConfigurationVersion` parameter.
     #
     # @option params [required, String] :application
-    #   The application to get.
+    #   The application to get. Specify either the application name or the
+    #   application ID.
     #
     # @option params [required, String] :environment
-    #   The environment to get.
+    #   The environment to get. Specify either the environment name or the
+    #   environment ID.
     #
     # @option params [required, String] :configuration
-    #   The configuration to get.
+    #   The configuration to get. Specify either the configuration name or the
+    #   configuration ID.
     #
     # @option params [required, String] :client_id
     #   A unique ID to identify the client for the configuration. This ID
@@ -697,8 +802,27 @@ module Aws::AppConfig
     #   in the deployment strategy.
     #
     # @option params [String] :client_configuration_version
-    #   The configuration version returned in the most recent GetConfiguration
-    #   response.
+    #   The configuration version returned in the most recent
+    #   `GetConfiguration` response.
+    #
+    #   AWS AppConfig uses the value of the `ClientConfigurationVersion`
+    #   parameter to identify the configuration version on your clients. If
+    #   you don’t send `ClientConfigurationVersion` with each call to
+    #   `GetConfiguration`, your clients receive the current configuration.
+    #   You are charged each time your clients receive a configuration.
+    #
+    #    To avoid excess charges, we recommend that you include the
+    #   `ClientConfigurationVersion` value with every call to
+    #   `GetConfiguration`. This value must be saved on your client.
+    #   Subsequent calls to `GetConfiguration` must pass this value by using
+    #   the `ClientConfigurationVersion` parameter.
+    #
+    #   For more information about working with configurations, see
+    #   [Retrieving the Configuration][1] in the *AWS AppConfig User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html
     #
     # @return [Types::Configuration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -807,6 +931,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -831,10 +956,15 @@ module Aws::AppConfig
     #   resp.configuration_version #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -881,7 +1011,7 @@ module Aws::AppConfig
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -961,6 +1091,8 @@ module Aws::AppConfig
     #   * {Types::Applications#items #items} => Array&lt;Types::Application&gt;
     #   * {Types::Applications#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_applications({
@@ -1003,6 +1135,8 @@ module Aws::AppConfig
     #
     #   * {Types::ConfigurationProfiles#items #items} => Array&lt;Types::ConfigurationProfileSummary&gt;
     #   * {Types::ConfigurationProfiles#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1048,6 +1182,8 @@ module Aws::AppConfig
     #   * {Types::DeploymentStrategies#items #items} => Array&lt;Types::DeploymentStrategy&gt;
     #   * {Types::DeploymentStrategies#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployment_strategies({
@@ -1062,7 +1198,7 @@ module Aws::AppConfig
     #   resp.items[0].name #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].deployment_duration_in_minutes #=> Integer
-    #   resp.items[0].growth_type #=> String, one of "LINEAR"
+    #   resp.items[0].growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.items[0].growth_factor #=> Float
     #   resp.items[0].final_bake_time_in_minutes #=> Integer
     #   resp.items[0].replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -1099,6 +1235,8 @@ module Aws::AppConfig
     #   * {Types::Deployments#items #items} => Array&lt;Types::DeploymentSummary&gt;
     #   * {Types::Deployments#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployments({
@@ -1115,7 +1253,7 @@ module Aws::AppConfig
     #   resp.items[0].configuration_name #=> String
     #   resp.items[0].configuration_version #=> String
     #   resp.items[0].deployment_duration_in_minutes #=> Integer
-    #   resp.items[0].growth_type #=> String, one of "LINEAR"
+    #   resp.items[0].growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.items[0].growth_factor #=> Float
     #   resp.items[0].final_bake_time_in_minutes #=> Integer
     #   resp.items[0].state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
@@ -1151,6 +1289,8 @@ module Aws::AppConfig
     #
     #   * {Types::Environments#items #items} => Array&lt;Types::Environment&gt;
     #   * {Types::Environments#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1252,6 +1392,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -1282,10 +1423,15 @@ module Aws::AppConfig
     #   resp.configuration_version #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1328,6 +1474,7 @@ module Aws::AppConfig
     #   * {Types::Deployment#growth_factor #growth_factor} => Float
     #   * {Types::Deployment#final_bake_time_in_minutes #final_bake_time_in_minutes} => Integer
     #   * {Types::Deployment#state #state} => String
+    #   * {Types::Deployment#event_log #event_log} => Array&lt;Types::DeploymentEvent&gt;
     #   * {Types::Deployment#percentage_complete #percentage_complete} => Float
     #   * {Types::Deployment#started_at #started_at} => Time
     #   * {Types::Deployment#completed_at #completed_at} => Time
@@ -1352,10 +1499,15 @@ module Aws::AppConfig
     #   resp.configuration_version #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
+    #   resp.event_log #=> Array
+    #   resp.event_log[0].event_type #=> String, one of "PERCENTAGE_UPDATED", "ROLLBACK_STARTED", "ROLLBACK_COMPLETED", "BAKE_TIME_STARTED", "DEPLOYMENT_STARTED", "DEPLOYMENT_COMPLETED"
+    #   resp.event_log[0].triggered_by #=> String, one of "USER", "APPCONFIG", "CLOUDWATCH_ALARM", "INTERNAL_ERROR"
+    #   resp.event_log[0].description #=> String
+    #   resp.event_log[0].occurred_at #=> Time
     #   resp.percentage_complete #=> Float
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -1557,7 +1709,33 @@ module Aws::AppConfig
     #   each interval.
     #
     # @option params [String] :growth_type
-    #   The algorithm used to define how percentage grows over time.
+    #   The algorithm used to define how percentage grows over time. AWS
+    #   AppConfig supports the following growth types:
+    #
+    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   increments of the growth factor evenly distributed over the deployment
+    #   time. For example, a linear deployment that uses a growth factor of 20
+    #   initially makes the configuration available to 20 percent of the
+    #   targets. After 1/5th of the deployment time has passed, the system
+    #   updates the percentage to 40 percent. This continues until 100% of the
+    #   targets are set to receive the deployed configuration.
+    #
+    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   exponentially using the following formula: `G*(2^N)`. In this formula,
+    #   `G` is the growth factor specified by the user and `N` is the number
+    #   of steps until the configuration is deployed to all targets. For
+    #   example, if you specify a growth factor of 2, then the system rolls
+    #   out the configuration as follows:
+    #
+    #   `2*(2^0)`
+    #
+    #   `2*(2^1)`
+    #
+    #   `2*(2^2)`
+    #
+    #   Expressed numerically, the deployment rolls out as follows: 2% of the
+    #   targets, 4% of the targets, 8% of the targets, and continues until the
+    #   configuration has been deployed to all targets.
     #
     # @return [Types::DeploymentStrategy] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1578,7 +1756,7 @@ module Aws::AppConfig
     #     deployment_duration_in_minutes: 1,
     #     final_bake_time_in_minutes: 1,
     #     growth_factor: 1.0,
-    #     growth_type: "LINEAR", # accepts LINEAR
+    #     growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
     #   })
     #
     # @example Response structure
@@ -1587,7 +1765,7 @@ module Aws::AppConfig
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -1706,7 +1884,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6,6 +6,63 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudDirectory
+
+  # When CloudDirectory returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::CloudDirectory::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all CloudDirectory errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::CloudDirectory::Errors::ServiceError
+  #       # rescues all CloudDirectory API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {BatchWriteException}
+  # * {CannotListParentOfRootException}
+  # * {DirectoryAlreadyExistsException}
+  # * {DirectoryDeletedException}
+  # * {DirectoryNotDisabledException}
+  # * {DirectoryNotEnabledException}
+  # * {FacetAlreadyExistsException}
+  # * {FacetInUseException}
+  # * {FacetNotFoundException}
+  # * {FacetValidationException}
+  # * {IncompatibleSchemaException}
+  # * {IndexedAttributeMissingException}
+  # * {InternalServiceException}
+  # * {InvalidArnException}
+  # * {InvalidAttachmentException}
+  # * {InvalidFacetUpdateException}
+  # * {InvalidNextTokenException}
+  # * {InvalidRuleException}
+  # * {InvalidSchemaDocException}
+  # * {InvalidTaggingRequestException}
+  # * {LimitExceededException}
+  # * {LinkNameAlreadyInUseException}
+  # * {NotIndexException}
+  # * {NotNodeException}
+  # * {NotPolicyException}
+  # * {ObjectAlreadyDetachedException}
+  # * {ObjectNotDetachedException}
+  # * {ResourceNotFoundException}
+  # * {RetryableConflictException}
+  # * {SchemaAlreadyExistsException}
+  # * {SchemaAlreadyPublishedException}
+  # * {StillContainsLinksException}
+  # * {UnsupportedIndexTypeException}
+  # * {ValidationException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +80,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class BatchWriteException < ServiceError
@@ -49,7 +105,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class CannotListParentOfRootException < ServiceError
@@ -65,7 +120,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryAlreadyExistsException < ServiceError
@@ -81,7 +135,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryDeletedException < ServiceError
@@ -97,7 +150,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryNotDisabledException < ServiceError
@@ -113,7 +165,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class DirectoryNotEnabledException < ServiceError
@@ -129,7 +180,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetAlreadyExistsException < ServiceError
@@ -145,7 +195,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetInUseException < ServiceError
@@ -161,7 +210,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetNotFoundException < ServiceError
@@ -177,7 +225,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class FacetValidationException < ServiceError
@@ -193,7 +240,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class IncompatibleSchemaException < ServiceError
@@ -209,7 +255,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class IndexedAttributeMissingException < ServiceError
@@ -225,7 +270,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServiceException < ServiceError
@@ -241,7 +285,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArnException < ServiceError
@@ -257,7 +300,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidAttachmentException < ServiceError
@@ -273,7 +315,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFacetUpdateException < ServiceError
@@ -289,7 +330,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidNextTokenException < ServiceError
@@ -305,7 +345,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRuleException < ServiceError
@@ -321,7 +360,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidSchemaDocException < ServiceError
@@ -337,7 +375,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidTaggingRequestException < ServiceError
@@ -353,7 +390,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class LimitExceededException < ServiceError
@@ -369,7 +405,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class LinkNameAlreadyInUseException < ServiceError
@@ -385,7 +420,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotIndexException < ServiceError
@@ -401,7 +435,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotNodeException < ServiceError
@@ -417,7 +450,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotPolicyException < ServiceError
@@ -433,7 +465,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectAlreadyDetachedException < ServiceError
@@ -449,7 +480,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ObjectNotDetachedException < ServiceError
@@ -465,7 +495,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -481,7 +510,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class RetryableConflictException < ServiceError
@@ -497,7 +525,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchemaAlreadyExistsException < ServiceError
@@ -513,7 +540,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class SchemaAlreadyPublishedException < ServiceError
@@ -529,7 +555,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class StillContainsLinksException < ServiceError
@@ -545,7 +570,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedIndexTypeException < ServiceError
@@ -561,7 +585,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
     class ValidationException < ServiceError
@@ -577,7 +600,6 @@ module Aws::CloudDirectory
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::FraudDetector
+
   class Resource
 
     # @param options ({})

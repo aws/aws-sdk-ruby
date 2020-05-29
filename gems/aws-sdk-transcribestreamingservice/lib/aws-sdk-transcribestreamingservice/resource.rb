@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::TranscribeStreamingService
+
   class Resource
 
     # @param options ({})

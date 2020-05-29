@@ -24,17 +24,20 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     service_discovery = Aws::ServiceDiscovery::Client.new
+#     resp = service_discovery.create_http_namespace(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Cloud Map all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Cloud Map are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::ServiceDiscovery::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Cloud Map API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-servicediscovery/customizations'
 # @service
 module Aws::ServiceDiscovery
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.23.0'
 
 end

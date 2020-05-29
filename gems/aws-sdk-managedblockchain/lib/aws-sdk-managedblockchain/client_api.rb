@@ -29,6 +29,7 @@ module Aws::ManagedBlockchain
     DeleteNodeOutput = Shapes::StructureShape.new(name: 'DeleteNodeOutput')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
     Edition = Shapes::StringShape.new(name: 'Edition')
+    Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     Framework = Shapes::StringShape.new(name: 'Framework')
     FrameworkVersionString = Shapes::StringShape.new(name: 'FrameworkVersionString')
     GetMemberInput = Shapes::StructureShape.new(name: 'GetMemberInput')
@@ -61,13 +62,17 @@ module Aws::ManagedBlockchain
     ListProposalVotesOutput = Shapes::StructureShape.new(name: 'ListProposalVotesOutput')
     ListProposalsInput = Shapes::StructureShape.new(name: 'ListProposalsInput')
     ListProposalsOutput = Shapes::StructureShape.new(name: 'ListProposalsOutput')
+    LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
+    LogConfigurations = Shapes::StructureShape.new(name: 'LogConfigurations')
     Member = Shapes::StructureShape.new(name: 'Member')
     MemberConfiguration = Shapes::StructureShape.new(name: 'MemberConfiguration')
     MemberFabricAttributes = Shapes::StructureShape.new(name: 'MemberFabricAttributes')
     MemberFabricConfiguration = Shapes::StructureShape.new(name: 'MemberFabricConfiguration')
+    MemberFabricLogPublishingConfiguration = Shapes::StructureShape.new(name: 'MemberFabricLogPublishingConfiguration')
     MemberFrameworkAttributes = Shapes::StructureShape.new(name: 'MemberFrameworkAttributes')
     MemberFrameworkConfiguration = Shapes::StructureShape.new(name: 'MemberFrameworkConfiguration')
     MemberListMaxResults = Shapes::IntegerShape.new(name: 'MemberListMaxResults')
+    MemberLogPublishingConfiguration = Shapes::StructureShape.new(name: 'MemberLogPublishingConfiguration')
     MemberStatus = Shapes::StringShape.new(name: 'MemberStatus')
     MemberSummary = Shapes::StructureShape.new(name: 'MemberSummary')
     MemberSummaryList = Shapes::ListShape.new(name: 'MemberSummaryList')
@@ -85,8 +90,10 @@ module Aws::ManagedBlockchain
     Node = Shapes::StructureShape.new(name: 'Node')
     NodeConfiguration = Shapes::StructureShape.new(name: 'NodeConfiguration')
     NodeFabricAttributes = Shapes::StructureShape.new(name: 'NodeFabricAttributes')
+    NodeFabricLogPublishingConfiguration = Shapes::StructureShape.new(name: 'NodeFabricLogPublishingConfiguration')
     NodeFrameworkAttributes = Shapes::StructureShape.new(name: 'NodeFrameworkAttributes')
     NodeListMaxResults = Shapes::IntegerShape.new(name: 'NodeListMaxResults')
+    NodeLogPublishingConfiguration = Shapes::StructureShape.new(name: 'NodeLogPublishingConfiguration')
     NodeStatus = Shapes::StringShape.new(name: 'NodeStatus')
     NodeSummary = Shapes::StructureShape.new(name: 'NodeSummary')
     NodeSummaryList = Shapes::ListShape.new(name: 'NodeSummaryList')
@@ -115,6 +122,10 @@ module Aws::ManagedBlockchain
     ThresholdPercentageInt = Shapes::IntegerShape.new(name: 'ThresholdPercentageInt')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
+    UpdateMemberInput = Shapes::StructureShape.new(name: 'UpdateMemberInput')
+    UpdateMemberOutput = Shapes::StructureShape.new(name: 'UpdateMemberOutput')
+    UpdateNodeInput = Shapes::StructureShape.new(name: 'UpdateNodeInput')
+    UpdateNodeOutput = Shapes::StructureShape.new(name: 'UpdateNodeOutput')
     UsernameString = Shapes::StringShape.new(name: 'UsernameString')
     VoteCount = Shapes::IntegerShape.new(name: 'VoteCount')
     VoteOnProposalInput = Shapes::StructureShape.new(name: 'VoteOnProposalInput')
@@ -122,6 +133,8 @@ module Aws::ManagedBlockchain
     VoteSummary = Shapes::StructureShape.new(name: 'VoteSummary')
     VoteValue = Shapes::StringShape.new(name: 'VoteValue')
     VotingPolicy = Shapes::StructureShape.new(name: 'VotingPolicy')
+
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     ApprovalThresholdPolicy.add_member(:threshold_percentage, Shapes::ShapeRef.new(shape: ThresholdPercentageInt, location_name: "ThresholdPercentage"))
     ApprovalThresholdPolicy.add_member(:proposal_duration_in_hours, Shapes::ShapeRef.new(shape: ProposalDurationInt, location_name: "ProposalDurationInHours"))
@@ -214,6 +227,8 @@ module Aws::ManagedBlockchain
     IllegalActionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     IllegalActionException.struct_class = Types::IllegalActionException
 
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
@@ -292,11 +307,18 @@ module Aws::ManagedBlockchain
     ListProposalsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListProposalsOutput.struct_class = Types::ListProposalsOutput
 
+    LogConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
+    LogConfiguration.struct_class = Types::LogConfiguration
+
+    LogConfigurations.add_member(:cloudwatch, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "Cloudwatch"))
+    LogConfigurations.struct_class = Types::LogConfigurations
+
     Member.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "NetworkId"))
     Member.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
     Member.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMemberNameString, location_name: "Name"))
     Member.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Member.add_member(:framework_attributes, Shapes::ShapeRef.new(shape: MemberFrameworkAttributes, location_name: "FrameworkAttributes"))
+    Member.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: MemberLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     Member.add_member(:status, Shapes::ShapeRef.new(shape: MemberStatus, location_name: "Status"))
     Member.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Member.struct_class = Types::Member
@@ -304,6 +326,7 @@ module Aws::ManagedBlockchain
     MemberConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMemberNameString, required: true, location_name: "Name"))
     MemberConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     MemberConfiguration.add_member(:framework_configuration, Shapes::ShapeRef.new(shape: MemberFrameworkConfiguration, required: true, location_name: "FrameworkConfiguration"))
+    MemberConfiguration.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: MemberLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     MemberConfiguration.struct_class = Types::MemberConfiguration
 
     MemberFabricAttributes.add_member(:admin_username, Shapes::ShapeRef.new(shape: UsernameString, location_name: "AdminUsername"))
@@ -314,11 +337,17 @@ module Aws::ManagedBlockchain
     MemberFabricConfiguration.add_member(:admin_password, Shapes::ShapeRef.new(shape: PasswordString, required: true, location_name: "AdminPassword"))
     MemberFabricConfiguration.struct_class = Types::MemberFabricConfiguration
 
+    MemberFabricLogPublishingConfiguration.add_member(:ca_logs, Shapes::ShapeRef.new(shape: LogConfigurations, location_name: "CaLogs"))
+    MemberFabricLogPublishingConfiguration.struct_class = Types::MemberFabricLogPublishingConfiguration
+
     MemberFrameworkAttributes.add_member(:fabric, Shapes::ShapeRef.new(shape: MemberFabricAttributes, location_name: "Fabric"))
     MemberFrameworkAttributes.struct_class = Types::MemberFrameworkAttributes
 
     MemberFrameworkConfiguration.add_member(:fabric, Shapes::ShapeRef.new(shape: MemberFabricConfiguration, location_name: "Fabric"))
     MemberFrameworkConfiguration.struct_class = Types::MemberFrameworkConfiguration
+
+    MemberLogPublishingConfiguration.add_member(:fabric, Shapes::ShapeRef.new(shape: MemberFabricLogPublishingConfiguration, location_name: "Fabric"))
+    MemberLogPublishingConfiguration.struct_class = Types::MemberLogPublishingConfiguration
 
     MemberSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
     MemberSummary.add_member(:name, Shapes::ShapeRef.new(shape: NetworkMemberNameString, location_name: "Name"))
@@ -372,20 +401,29 @@ module Aws::ManagedBlockchain
     Node.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, location_name: "InstanceType"))
     Node.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, location_name: "AvailabilityZone"))
     Node.add_member(:framework_attributes, Shapes::ShapeRef.new(shape: NodeFrameworkAttributes, location_name: "FrameworkAttributes"))
+    Node.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     Node.add_member(:status, Shapes::ShapeRef.new(shape: NodeStatus, location_name: "Status"))
     Node.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Node.struct_class = Types::Node
 
     NodeConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeString, required: true, location_name: "InstanceType"))
     NodeConfiguration.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneString, required: true, location_name: "AvailabilityZone"))
+    NodeConfiguration.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
     NodeConfiguration.struct_class = Types::NodeConfiguration
 
     NodeFabricAttributes.add_member(:peer_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "PeerEndpoint"))
     NodeFabricAttributes.add_member(:peer_event_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "PeerEventEndpoint"))
     NodeFabricAttributes.struct_class = Types::NodeFabricAttributes
 
+    NodeFabricLogPublishingConfiguration.add_member(:chaincode_logs, Shapes::ShapeRef.new(shape: LogConfigurations, location_name: "ChaincodeLogs"))
+    NodeFabricLogPublishingConfiguration.add_member(:peer_logs, Shapes::ShapeRef.new(shape: LogConfigurations, location_name: "PeerLogs"))
+    NodeFabricLogPublishingConfiguration.struct_class = Types::NodeFabricLogPublishingConfiguration
+
     NodeFrameworkAttributes.add_member(:fabric, Shapes::ShapeRef.new(shape: NodeFabricAttributes, location_name: "Fabric"))
     NodeFrameworkAttributes.struct_class = Types::NodeFrameworkAttributes
+
+    NodeLogPublishingConfiguration.add_member(:fabric, Shapes::ShapeRef.new(shape: NodeFabricLogPublishingConfiguration, location_name: "Fabric"))
+    NodeLogPublishingConfiguration.struct_class = Types::NodeLogPublishingConfiguration
 
     NodeSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
     NodeSummary.add_member(:status, Shapes::ShapeRef.new(shape: NodeStatus, location_name: "Status"))
@@ -448,6 +486,23 @@ module Aws::ManagedBlockchain
 
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    UpdateMemberInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
+    UpdateMemberInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    UpdateMemberInput.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: MemberLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
+    UpdateMemberInput.struct_class = Types::UpdateMemberInput
+
+    UpdateMemberOutput.struct_class = Types::UpdateMemberOutput
+
+    UpdateNodeInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
+    UpdateNodeInput.add_member(:member_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "memberId"))
+    UpdateNodeInput.add_member(:node_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "nodeId"))
+    UpdateNodeInput.add_member(:log_publishing_configuration, Shapes::ShapeRef.new(shape: NodeLogPublishingConfiguration, location_name: "LogPublishingConfiguration"))
+    UpdateNodeInput.struct_class = Types::UpdateNodeInput
+
+    UpdateNodeOutput.struct_class = Types::UpdateNodeOutput
 
     VoteOnProposalInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     VoteOnProposalInput.add_member(:proposal_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "proposalId"))
@@ -743,6 +798,32 @@ module Aws::ManagedBlockchain
         o.output = Shapes::ShapeRef.new(shape: RejectInvitationOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalActionException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:update_member, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMember"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/networks/{networkId}/members/{memberId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMemberInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMemberOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:update_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNode"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/networks/{networkId}/members/{memberId}/nodes/{nodeId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNodeInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNodeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

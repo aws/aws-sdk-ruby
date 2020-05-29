@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::WAF
+
   class Resource
 
     # @param options ({})

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Glue
+
   class Resource
 
     # @param options ({})

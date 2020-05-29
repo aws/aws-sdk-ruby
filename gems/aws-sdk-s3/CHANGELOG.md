@@ -3,6 +3,60 @@ Unreleased Changes
 
 * Issue - Reduce memory usage of `IOEncryptor` and `IODecryptor`.
 
+1.67.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2020-05-21)
+------------------
+
+* Feature - Deprecates unusable input members bound to Content-MD5 header. Updates example and documentation.
+
+1.65.0 (2020-05-18)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Allow S3 presigner to presign non-object operations such as `list_objects`.
+
+1.64.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.1 (2020-05-04)
+------------------
+
+* Issue - Handle copy_object, complete_multipart_upload, and upload_part_copy http responses with 200 OK and incomplete bodies as errors.
+
+1.63.0 (2020-04-22)
+------------------
+
+* Feature - Add `presigned_request` method to the `Presigner` class. This method returns a URL and headers necessary rather than hoisting them onto the query string.
+* Feature - Force HTTPS when using `virtual_host: true` on the `Presigner` class.
+
+1.62.0 (2020-04-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.61.2 (2020-04-03)
+------------------
+
+* Issue - Add `put_bucket_lifecycle_configuration` and `put_bucket_replication` as required operations used in the MD5 plugin.
+
+1.61.1 (2020-03-10)
+------------------
+
+* Issue - Fix raising in `Object#upload_stream` block not triggering the `Aws::S3::MultipartStreamUploader#abort_upload`.
+
+1.61.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+* Issue - Don't update endpoint on region mismatch errors when using a custom endpoint.
+
 1.60.2 (2020-02-07)
 ------------------
 

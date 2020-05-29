@@ -6,6 +6,39 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EKS
+
+  # When EKS returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::EKS::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all EKS errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::EKS::Errors::ServiceError
+  #       # rescues all EKS API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BadRequestException}
+  # * {ClientException}
+  # * {InvalidParameterException}
+  # * {InvalidRequestException}
+  # * {NotFoundException}
+  # * {ResourceInUseException}
+  # * {ResourceLimitExceededException}
+  # * {ResourceNotFoundException}
+  # * {ServerException}
+  # * {ServiceUnavailableException}
+  # * {UnsupportedAvailabilityZoneException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +56,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ClientException < ServiceError
@@ -49,7 +81,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -80,7 +111,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -106,7 +136,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class NotFoundException < ServiceError
@@ -122,7 +151,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -148,7 +176,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -174,7 +201,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -205,7 +231,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerException < ServiceError
@@ -231,7 +256,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -247,7 +271,6 @@ module Aws::EKS
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedAvailabilityZoneException < ServiceError
@@ -278,7 +301,6 @@ module Aws::EKS
       def valid_zones
         @data[:valid_zones]
       end
-
     end
 
   end

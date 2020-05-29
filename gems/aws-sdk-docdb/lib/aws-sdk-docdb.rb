@@ -25,17 +25,20 @@ require_relative 'aws-sdk-docdb/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     doc_db = Aws::DocDB::Client.new
+#     resp = doc_db.add_tags_to_resource(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from Amazon DocumentDB with MongoDB compatibility all
-# extend {Errors::ServiceError}.
+# Errors returned from Amazon DocumentDB with MongoDB compatibility are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::DocDB::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all Amazon DocumentDB with MongoDB compatibility API errors
 #     end
 #
 # See {Errors} for more information.
@@ -43,6 +46,6 @@ require_relative 'aws-sdk-docdb/customizations'
 # @service
 module Aws::DocDB
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.17.0'
 
 end

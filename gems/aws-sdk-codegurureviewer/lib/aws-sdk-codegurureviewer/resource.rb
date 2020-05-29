@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CodeGuruReviewer
+
   class Resource
 
     # @param options ({})

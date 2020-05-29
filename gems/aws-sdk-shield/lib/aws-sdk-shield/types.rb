@@ -23,8 +23,8 @@ module Aws::Shield
     end
 
     # In order to grant the necessary access to the DDoS Response Team, the
-    # user submitting `AssociateDRTRole` must have the `iam:PassRole`
-    # permission. This error indicates the user did not have the appropriate
+    # user submitting the request must have the `iam:PassRole` permission.
+    # This error indicates the user did not have the appropriate
     # permissions. For more information, see [Granting a User Permissions to
     # Pass a Role to an AWS Service][1].
     #
@@ -95,6 +95,36 @@ module Aws::Shield
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRoleResponse AWS API Documentation
     #
     class AssociateDRTRoleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateHealthCheckRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_id: "ProtectionId", # required
+    #         health_check_arn: "HealthCheckArn", # required
+    #       }
+    #
+    # @!attribute [rw] protection_id
+    #   The unique identifier (ID) for the Protection object to add the
+    #   health check association to.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_arn
+    #   The Amazon Resource Name (ARN) of the health check to associate with
+    #   the protection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheckRequest AWS API Documentation
+    #
+    class AssociateHealthCheckRequest < Struct.new(
+      :protection_id,
+      :health_check_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheckResponse AWS API Documentation
+    #
+    class AssociateHealthCheckResponse < Aws::EmptyStructure; end
 
     # The details of a DDoS attack.
     #
@@ -571,6 +601,36 @@ module Aws::Shield
     #
     class DisassociateDRTRoleResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateHealthCheckRequest
+    #   data as a hash:
+    #
+    #       {
+    #         protection_id: "ProtectionId", # required
+    #         health_check_arn: "HealthCheckArn", # required
+    #       }
+    #
+    # @!attribute [rw] protection_id
+    #   The unique identifier (ID) for the Protection object to remove the
+    #   health check association from.
+    #   @return [String]
+    #
+    # @!attribute [rw] health_check_arn
+    #   The Amazon Resource Name (ARN) of the health check that is
+    #   associated with the protection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheckRequest AWS API Documentation
+    #
+    class DisassociateHealthCheckRequest < Struct.new(
+      :protection_id,
+      :health_check_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheckResponse AWS API Documentation
+    #
+    class DisassociateHealthCheckResponse < Aws::EmptyStructure; end
+
     # Contact information that the DRT can use to contact you during a
     # suspected attack.
     #
@@ -945,12 +1005,18 @@ module Aws::Shield
     #   protected.
     #   @return [String]
     #
+    # @!attribute [rw] health_check_ids
+    #   The unique identifier (ID) for the Route 53 health check that's
+    #   associated with the protection.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Protection AWS API Documentation
     #
     class Protection < Struct.new(
       :id,
       :name,
-      :resource_arn)
+      :resource_arn,
+      :health_check_ids)
       include Aws::Structure
     end
 

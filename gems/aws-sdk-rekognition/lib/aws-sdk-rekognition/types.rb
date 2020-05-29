@@ -8,6 +8,10 @@
 module Aws::Rekognition
   module Types
 
+    # You are not authorized to perform the action.
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # Structure containing the estimated age range, in years, for a face.
     #
     # Amazon Rekognition estimates an age range for faces detected in the
@@ -96,6 +100,16 @@ module Aws::Rekognition
     # `top` values.
     #
     #  </note>
+    #
+    # @note When making an API call, you may pass BoundingBox
+    #   data as a hash:
+    #
+    #       {
+    #         width: 1.0,
+    #         height: 1.0,
+    #         left: 1.0,
+    #         top: 1.0,
+    #       }
     #
     # @!attribute [rw] width
     #   Width of the bounding box as a ratio of the overall image width.
@@ -737,6 +751,58 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that you want to
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteProjectRequest < Struct.new(
+      :project_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the delete project operation.
+    #   @return [String]
+    #
+    class DeleteProjectResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteProjectVersionRequest < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the deletion operation.
+    #   @return [String]
+    #
+    class DeleteProjectVersionResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteStreamProcessorRequest
     #   data as a hash:
     #
@@ -1297,6 +1363,48 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A set of optional parameters that you can use to set the criteria that
+    # the text must meet to be included in your response. `WordFilter` looks
+    # at a word’s height, width, and minimum confidence. `RegionOfInterest`
+    # lets you set a specific region of the image to look for text in.
+    #
+    # @note When making an API call, you may pass DetectTextFilters
+    #   data as a hash:
+    #
+    #       {
+    #         word_filter: {
+    #           min_confidence: 1.0,
+    #           min_bounding_box_height: 1.0,
+    #           min_bounding_box_width: 1.0,
+    #         },
+    #         regions_of_interest: [
+    #           {
+    #             bounding_box: {
+    #               width: 1.0,
+    #               height: 1.0,
+    #               left: 1.0,
+    #               top: 1.0,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] word_filter
+    #   A set of parameters that allow you to filter out certain results
+    #   from your returned results.
+    #   @return [Types::DetectionFilter]
+    #
+    # @!attribute [rw] regions_of_interest
+    #   A Filter focusing on a certain area of the image. Uses a
+    #   `BoundingBox` object to set the region of the image.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    class DetectTextFilters < Struct.new(
+      :word_filter,
+      :regions_of_interest)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetectTextRequest
     #   data as a hash:
     #
@@ -1308,6 +1416,23 @@ module Aws::Rekognition
     #             name: "S3ObjectName",
     #             version: "S3ObjectVersion",
     #           },
+    #         },
+    #         filters: {
+    #           word_filter: {
+    #             min_confidence: 1.0,
+    #             min_bounding_box_height: 1.0,
+    #             min_bounding_box_width: 1.0,
+    #           },
+    #           regions_of_interest: [
+    #             {
+    #               bounding_box: {
+    #                 width: 1.0,
+    #                 height: 1.0,
+    #                 left: 1.0,
+    #                 top: 1.0,
+    #               },
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -1322,8 +1447,14 @@ module Aws::Rekognition
     #   developer guide.
     #   @return [Types::Image]
     #
+    # @!attribute [rw] filters
+    #   Optional parameters that let you set the criteria that the text must
+    #   meet to be included in your response.
+    #   @return [Types::DetectTextFilters]
+    #
     class DetectTextRequest < Struct.new(
-      :image)
+      :image,
+      :filters)
       include Aws::Structure
     end
 
@@ -1331,8 +1462,51 @@ module Aws::Rekognition
     #   An array of text that was detected in the input image.
     #   @return [Array<Types::TextDetection>]
     #
+    # @!attribute [rw] text_model_version
+    #   The model version used to detect text.
+    #   @return [String]
+    #
     class DetectTextResponse < Struct.new(
-      :text_detections)
+      :text_detections,
+      :text_model_version)
+      include Aws::Structure
+    end
+
+    # A set of parameters that allow you to filter out certain results from
+    # your returned results.
+    #
+    # @note When making an API call, you may pass DetectionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         min_confidence: 1.0,
+    #         min_bounding_box_height: 1.0,
+    #         min_bounding_box_width: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min_confidence
+    #   Sets confidence of word detection. Words with detection confidence
+    #   below this will be excluded from the result. Values should be
+    #   between 0.5 and 1 as Text in Video will not return any result below
+    #   0.5.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_bounding_box_height
+    #   Sets the minimum height of the word bounding box. Words with
+    #   bounding box heights lesser than this value will be excluded from
+    #   the result. Value is relative to the video frame height.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min_bounding_box_width
+    #   Sets the minimum width of the word bounding box. Words with bounding
+    #   boxes widths lesser than this value will be excluded from the
+    #   result. Value is relative to the video frame width.
+    #   @return [Float]
+    #
+    class DetectionFilter < Struct.new(
+      :min_confidence,
+      :min_bounding_box_height,
+      :min_bounding_box_width)
       include Aws::Structure
     end
 
@@ -1642,7 +1816,7 @@ module Aws::Rekognition
     #
     # @!attribute [rw] face_match_threshold
     #   Minimum face match confidence score that must be met to return a
-    #   result for a recognized face. Default is 70. 0 is the lowest
+    #   result for a recognized face. Default is 80. 0 is the lowest
     #   confidence. 100 is the highest confidence.
     #   @return [Float]
     #
@@ -2223,6 +2397,82 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTextDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   Job identifier for the label detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartTextDetection`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   labels to retrieve), Amazon Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of text.
+    #   @return [String]
+    #
+    class GetTextDetectionRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   Current status of the text detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Amazon Rekognition analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Amazon Rekognition video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] text_detections
+    #   An array of text detected in the video. Each element contains the
+    #   detected text, the time in milliseconds from the start of the video
+    #   that the text was detected, and where it was detected on the screen.
+    #   @return [Array<Types::TextDetectionResult>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Rekognition Video returns this
+    #   token that you can use in the subsequent request to retrieve the
+    #   next set of text.
+    #   @return [String]
+    #
+    # @!attribute [rw] text_model_version
+    #   Version number of the text detection model that was used to detect
+    #   text.
+    #   @return [String]
+    #
+    class GetTextDetectionResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :text_detections,
+      :next_token,
+      :text_model_version)
+      include Aws::Structure
+    end
+
     # The S3 bucket that contains the Ground Truth manifest file.
     #
     # @note When making an API call, you may pass GroundTruthManifest
@@ -2349,6 +2599,12 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A `ClientRequestToken` input parameter was reused with an operation,
+    # but at least one of the other input parameters is different from the
+    # previous call to the operation.
+    #
+    class IdempotentParameterMismatchException < Aws::EmptyStructure; end
+
     # Provides the input image either as bytes or an S3 object.
     #
     # You pass image bytes to an Amazon Rekognition API operation by using
@@ -2422,6 +2678,12 @@ module Aws::Rekognition
       :sharpness)
       include Aws::Structure
     end
+
+    # The input image size exceeds the allowed limit. For more information,
+    # see Limits in Amazon Rekognition in the Amazon Rekognition Developer
+    # Guide.
+    #
+    class ImageTooLargeException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass IndexFacesRequest
     #   data as a hash:
@@ -2597,6 +2859,28 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Amazon Rekognition experienced a service issue. Try your call again.
+    #
+    class InternalServerError < Aws::EmptyStructure; end
+
+    # The provided image format is not supported.
+    #
+    class InvalidImageFormatException < Aws::EmptyStructure; end
+
+    # Pagination token in the request is not valid.
+    #
+    class InvalidPaginationTokenException < Aws::EmptyStructure; end
+
+    # Input parameter violated a constraint. Validate your parameter before
+    # calling the API operation again.
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
+    # Amazon Rekognition is unable to access the S3 object specified in the
+    # request.
+    #
+    class InvalidS3ObjectException < Aws::EmptyStructure; end
+
     # The Kinesis data stream Amazon Rekognition to which the analysis
     # results of a Amazon Rekognition stream processor are streamed. For
     # more information, see CreateStreamProcessor in the Amazon Rekognition
@@ -2714,6 +2998,15 @@ module Aws::Rekognition
       :y)
       include Aws::Structure
     end
+
+    # An Amazon Rekognition service limit was exceeded. For example, if you
+    # start too many Amazon Rekognition Video jobs concurrently, calls to
+    # start operations (`StartLabelDetection`, for example) will raise a
+    # `LimitExceededException` exception (HTTP status code: 400) until the
+    # number of concurrently running jobs is below the Amazon Rekognition
+    # service limit.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListCollectionsRequest
     #   data as a hash:
@@ -3191,6 +3484,11 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The number of requests exceeded your throughput limit. If you want to
+    # increase this limit, contact Amazon Rekognition.
+    #
+    class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RecognizeCelebritiesRequest
     #   data as a hash:
     #
@@ -3255,6 +3553,51 @@ module Aws::Rekognition
       :orientation_correction)
       include Aws::Structure
     end
+
+    # Specifies a location within the frame that Rekognition checks for
+    # text. Uses a `BoundingBox` object to set a region of the screen.
+    #
+    # A word is included in the region if the word is more than half in that
+    # region. If there is more than one region, the word will be compared
+    # with all regions of the screen. Any word more than half in a region is
+    # kept in the results.
+    #
+    # @note When making an API call, you may pass RegionOfInterest
+    #   data as a hash:
+    #
+    #       {
+    #         bounding_box: {
+    #           width: 1.0,
+    #           height: 1.0,
+    #           left: 1.0,
+    #           top: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bounding_box
+    #   The box representing a region of interest on screen.
+    #   @return [Types::BoundingBox]
+    #
+    class RegionOfInterest < Struct.new(
+      :bounding_box)
+      include Aws::Structure
+    end
+
+    # A collection with the specified ID already exists.
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The collection specified in the request cannot be found.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # The requested resource isn't ready. For example, this exception
+    # occurs when you call `DetectCustomLabels` with a model version that
+    # isn't deployed.
+    #
+    class ResourceNotReadyException < Aws::EmptyStructure; end
 
     # Provides the S3 bucket name and object name.
     #
@@ -3941,6 +4284,135 @@ module Aws::Rekognition
 
     class StartStreamProcessorResponse < Aws::EmptyStructure; end
 
+    # Set of optional parameters that let you set the criteria text must
+    # meet to be included in your response. `WordFilter` looks at a word's
+    # height, width and minimum confidence. `RegionOfInterest` lets you set
+    # a specific region of the screen to look for text in.
+    #
+    # @note When making an API call, you may pass StartTextDetectionFilters
+    #   data as a hash:
+    #
+    #       {
+    #         word_filter: {
+    #           min_confidence: 1.0,
+    #           min_bounding_box_height: 1.0,
+    #           min_bounding_box_width: 1.0,
+    #         },
+    #         regions_of_interest: [
+    #           {
+    #             bounding_box: {
+    #               width: 1.0,
+    #               height: 1.0,
+    #               left: 1.0,
+    #               top: 1.0,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] word_filter
+    #   Filters focusing on qualities of the text, such as confidence or
+    #   size.
+    #   @return [Types::DetectionFilter]
+    #
+    # @!attribute [rw] regions_of_interest
+    #   Filter focusing on a certain area of the frame. Uses a `BoundingBox`
+    #   object to set the region of the screen.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    class StartTextDetectionFilters < Struct.new(
+      :word_filter,
+      :regions_of_interest)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartTextDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #         filters: {
+    #           word_filter: {
+    #             min_confidence: 1.0,
+    #             min_bounding_box_height: 1.0,
+    #             min_bounding_box_width: 1.0,
+    #           },
+    #           regions_of_interest: [
+    #             {
+    #               bounding_box: {
+    #                 width: 1.0,
+    #                 height: 1.0,
+    #                 left: 1.0,
+    #                 top: 1.0,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify
+    #   a video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartTextDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidentaly started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the completion status of a video analysis
+    #   operation. For more information, see api-video.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   An identifier returned in the completion status published by your
+    #   Amazon Simple Notification Service topic. For example, you can use
+    #   `JobTag` to group related jobs and identify them in the completion
+    #   notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Optional parameters that let you set criteria the text must meet to
+    #   be included in your response.
+    #   @return [Types::StartTextDetectionFilters]
+    #
+    class StartTextDetectionRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :notification_channel,
+      :job_tag,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   Identifier for the text detection job. Use `JobId` to identify the
+    #   job in a subsequent call to `GetTextDetection`.
+    #   @return [String]
+    #
+    class StartTextDetectionResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopProjectVersionRequest
     #   data as a hash:
     #
@@ -4227,6 +4699,30 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Information about text detected in a video. Incudes the detected text,
+    # the time in milliseconds from the start of the video that the text was
+    # detected, and where it was detected on the screen.
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in milliseconds from the start of the video, that the text
+    #   was detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text_detection
+    #   Details about text detected in a video.
+    #   @return [Types::TextDetection]
+    #
+    class TextDetectionResult < Struct.new(
+      :timestamp,
+      :text_detection)
+      include Aws::Structure
+    end
+
+    # Amazon Rekognition is temporarily unable to process the request. Try
+    # your call again.
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
     # The dataset used for training.
     #
     # @note When making an API call, you may pass TrainingData
@@ -4370,6 +4866,11 @@ module Aws::Rekognition
       :frame_width)
       include Aws::Structure
     end
+
+    # The file size or duration of the supplied media is too large. The
+    # maximum file size is 10GB. The maximum duration is 6 hours.
+    #
+    class VideoTooLargeException < Aws::EmptyStructure; end
 
   end
 end

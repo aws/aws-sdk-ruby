@@ -18,6 +18,7 @@ module Aws::Kendra
     AdditionalResultAttributeList = Shapes::ListShape.new(name: 'AdditionalResultAttributeList')
     AdditionalResultAttributeValue = Shapes::StructureShape.new(name: 'AdditionalResultAttributeValue')
     AdditionalResultAttributeValueType = Shapes::StringShape.new(name: 'AdditionalResultAttributeValueType')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AttributeFilter = Shapes::StructureShape.new(name: 'AttributeFilter')
     AttributeFilterList = Shapes::ListShape.new(name: 'AttributeFilterList')
     BatchDeleteDocumentRequest = Shapes::StructureShape.new(name: 'BatchDeleteDocumentRequest')
@@ -30,9 +31,11 @@ module Aws::Kendra
     BatchPutDocumentResponseFailedDocuments = Shapes::ListShape.new(name: 'BatchPutDocumentResponseFailedDocuments')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CapacityUnitsConfiguration = Shapes::StructureShape.new(name: 'CapacityUnitsConfiguration')
     ChangeDetectingColumns = Shapes::ListShape.new(name: 'ChangeDetectingColumns')
     ClickFeedback = Shapes::StructureShape.new(name: 'ClickFeedback')
     ClickFeedbackList = Shapes::ListShape.new(name: 'ClickFeedbackList')
+    ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -56,6 +59,9 @@ module Aws::Kendra
     DataSourceSummaryList = Shapes::ListShape.new(name: 'DataSourceSummaryList')
     DataSourceSyncJob = Shapes::StructureShape.new(name: 'DataSourceSyncJob')
     DataSourceSyncJobHistoryList = Shapes::ListShape.new(name: 'DataSourceSyncJobHistoryList')
+    DataSourceSyncJobId = Shapes::StringShape.new(name: 'DataSourceSyncJobId')
+    DataSourceSyncJobMetricTarget = Shapes::StructureShape.new(name: 'DataSourceSyncJobMetricTarget')
+    DataSourceSyncJobMetrics = Shapes::StructureShape.new(name: 'DataSourceSyncJobMetrics')
     DataSourceSyncJobStatus = Shapes::StringShape.new(name: 'DataSourceSyncJobStatus')
     DataSourceToIndexFieldMapping = Shapes::StructureShape.new(name: 'DataSourceToIndexFieldMapping')
     DataSourceToIndexFieldMappingList = Shapes::ListShape.new(name: 'DataSourceToIndexFieldMappingList')
@@ -66,6 +72,7 @@ module Aws::Kendra
     DatabaseHost = Shapes::StringShape.new(name: 'DatabaseHost')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DatabasePort = Shapes::IntegerShape.new(name: 'DatabasePort')
+    DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
     DeleteFaqRequest = Shapes::StructureShape.new(name: 'DeleteFaqRequest')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
@@ -112,12 +119,14 @@ module Aws::Kendra
     Importance = Shapes::IntegerShape.new(name: 'Importance')
     IndexConfigurationSummary = Shapes::StructureShape.new(name: 'IndexConfigurationSummary')
     IndexConfigurationSummaryList = Shapes::ListShape.new(name: 'IndexConfigurationSummaryList')
+    IndexEdition = Shapes::StringShape.new(name: 'IndexEdition')
     IndexFieldName = Shapes::StringShape.new(name: 'IndexFieldName')
     IndexId = Shapes::StringShape.new(name: 'IndexId')
     IndexName = Shapes::StringShape.new(name: 'IndexName')
     IndexStatistics = Shapes::StructureShape.new(name: 'IndexStatistics')
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     IndexedQuestionAnswersCount = Shapes::IntegerShape.new(name: 'IndexedQuestionAnswersCount')
+    IndexedTextBytes = Shapes::IntegerShape.new(name: 'IndexedTextBytes')
     IndexedTextDocumentsCount = Shapes::IntegerShape.new(name: 'IndexedTextDocumentsCount')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -130,17 +139,25 @@ module Aws::Kendra
     ListFaqsResponse = Shapes::StructureShape.new(name: 'ListFaqsResponse')
     ListIndicesRequest = Shapes::StructureShape.new(name: 'ListIndicesRequest')
     ListIndicesResponse = Shapes::StructureShape.new(name: 'ListIndicesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResultsIntegerForListDataSourceSyncJobsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourceSyncJobsRequest')
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
+    MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OneDriveConfiguration = Shapes::StructureShape.new(name: 'OneDriveConfiguration')
+    OneDriveUser = Shapes::StringShape.new(name: 'OneDriveUser')
+    OneDriveUserList = Shapes::ListShape.new(name: 'OneDriveUserList')
+    OneDriveUsers = Shapes::StructureShape.new(name: 'OneDriveUsers')
     Order = Shapes::StringShape.new(name: 'Order')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
     PrincipalName = Shapes::StringShape.new(name: 'PrincipalName')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    QueryCapacityUnit = Shapes::IntegerShape.new(name: 'QueryCapacityUnit')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
     QueryRequest = Shapes::StructureShape.new(name: 'QueryRequest')
     QueryResult = Shapes::StructureShape.new(name: 'QueryResult')
@@ -163,11 +180,31 @@ module Aws::Kendra
     S3DataSourceConfiguration = Shapes::StructureShape.new(name: 'S3DataSourceConfiguration')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     S3Path = Shapes::StructureShape.new(name: 'S3Path')
+    SalesforceChatterFeedConfiguration = Shapes::StructureShape.new(name: 'SalesforceChatterFeedConfiguration')
+    SalesforceChatterFeedIncludeFilterType = Shapes::StringShape.new(name: 'SalesforceChatterFeedIncludeFilterType')
+    SalesforceChatterFeedIncludeFilterTypes = Shapes::ListShape.new(name: 'SalesforceChatterFeedIncludeFilterTypes')
+    SalesforceConfiguration = Shapes::StructureShape.new(name: 'SalesforceConfiguration')
+    SalesforceCustomKnowledgeArticleTypeConfiguration = Shapes::StructureShape.new(name: 'SalesforceCustomKnowledgeArticleTypeConfiguration')
+    SalesforceCustomKnowledgeArticleTypeConfigurationList = Shapes::ListShape.new(name: 'SalesforceCustomKnowledgeArticleTypeConfigurationList')
+    SalesforceCustomKnowledgeArticleTypeName = Shapes::StringShape.new(name: 'SalesforceCustomKnowledgeArticleTypeName')
+    SalesforceKnowledgeArticleConfiguration = Shapes::StructureShape.new(name: 'SalesforceKnowledgeArticleConfiguration')
+    SalesforceKnowledgeArticleState = Shapes::StringShape.new(name: 'SalesforceKnowledgeArticleState')
+    SalesforceKnowledgeArticleStateList = Shapes::ListShape.new(name: 'SalesforceKnowledgeArticleStateList')
+    SalesforceStandardKnowledgeArticleTypeConfiguration = Shapes::StructureShape.new(name: 'SalesforceStandardKnowledgeArticleTypeConfiguration')
+    SalesforceStandardObjectAttachmentConfiguration = Shapes::StructureShape.new(name: 'SalesforceStandardObjectAttachmentConfiguration')
+    SalesforceStandardObjectConfiguration = Shapes::StructureShape.new(name: 'SalesforceStandardObjectConfiguration')
+    SalesforceStandardObjectConfigurationList = Shapes::ListShape.new(name: 'SalesforceStandardObjectConfigurationList')
+    SalesforceStandardObjectName = Shapes::StringShape.new(name: 'SalesforceStandardObjectName')
     ScanSchedule = Shapes::StringShape.new(name: 'ScanSchedule')
     Search = Shapes::StructureShape.new(name: 'Search')
     SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
+    ServiceNowBuildVersionType = Shapes::StringShape.new(name: 'ServiceNowBuildVersionType')
+    ServiceNowConfiguration = Shapes::StructureShape.new(name: 'ServiceNowConfiguration')
+    ServiceNowHostUrl = Shapes::StringShape.new(name: 'ServiceNowHostUrl')
+    ServiceNowKnowledgeArticleConfiguration = Shapes::StructureShape.new(name: 'ServiceNowKnowledgeArticleConfiguration')
+    ServiceNowServiceCatalogConfiguration = Shapes::StructureShape.new(name: 'ServiceNowServiceCatalogConfiguration')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SharePointConfiguration = Shapes::StructureShape.new(name: 'SharePointConfiguration')
     SharePointUrlList = Shapes::ListShape.new(name: 'SharePointUrlList')
@@ -175,17 +212,28 @@ module Aws::Kendra
     StartDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobRequest')
     StartDataSourceSyncJobResponse = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobResponse')
     StopDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StopDataSourceSyncJobRequest')
+    StorageCapacityUnit = Shapes::IntegerShape.new(name: 'StorageCapacityUnit')
     String = Shapes::StringShape.new(name: 'String')
     SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     TableName = Shapes::StringShape.new(name: 'TableName')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TenantDomain = Shapes::StringShape.new(name: 'TenantDomain')
     TextDocumentStatistics = Shapes::StructureShape.new(name: 'TextDocumentStatistics')
     TextWithHighlights = Shapes::StructureShape.new(name: 'TextWithHighlights')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Title = Shapes::StringShape.new(name: 'Title')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -229,6 +277,7 @@ module Aws::Kendra
 
     BatchDeleteDocumentRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     BatchDeleteDocumentRequest.add_member(:document_id_list, Shapes::ShapeRef.new(shape: DocumentIdList, required: true, location_name: "DocumentIdList"))
+    BatchDeleteDocumentRequest.add_member(:data_source_sync_job_metric_target, Shapes::ShapeRef.new(shape: DataSourceSyncJobMetricTarget, location_name: "DataSourceSyncJobMetricTarget"))
     BatchDeleteDocumentRequest.struct_class = Types::BatchDeleteDocumentRequest
 
     BatchDeleteDocumentResponse.add_member(:failed_documents, Shapes::ShapeRef.new(shape: BatchDeleteDocumentResponseFailedDocuments, location_name: "FailedDocuments"))
@@ -255,6 +304,10 @@ module Aws::Kendra
     BatchPutDocumentResponseFailedDocument.struct_class = Types::BatchPutDocumentResponseFailedDocument
 
     BatchPutDocumentResponseFailedDocuments.member = Shapes::ShapeRef.new(shape: BatchPutDocumentResponseFailedDocument)
+
+    CapacityUnitsConfiguration.add_member(:storage_capacity_units, Shapes::ShapeRef.new(shape: StorageCapacityUnit, required: true, location_name: "StorageCapacityUnits"))
+    CapacityUnitsConfiguration.add_member(:query_capacity_units, Shapes::ShapeRef.new(shape: QueryCapacityUnit, required: true, location_name: "QueryCapacityUnits"))
+    CapacityUnitsConfiguration.struct_class = Types::CapacityUnitsConfiguration
 
     ChangeDetectingColumns.member = Shapes::ShapeRef.new(shape: ColumnName)
 
@@ -288,6 +341,7 @@ module Aws::Kendra
     CreateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     CreateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
@@ -298,15 +352,19 @@ module Aws::Kendra
     CreateFaqRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFaqRequest.add_member(:s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "S3Path"))
     CreateFaqRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateFaqRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateFaqRequest.struct_class = Types::CreateFaqRequest
 
     CreateFaqResponse.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, location_name: "Id"))
     CreateFaqResponse.struct_class = Types::CreateFaqResponse
 
     CreateIndexRequest.add_member(:name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "Name"))
+    CreateIndexRequest.add_member(:edition, Shapes::ShapeRef.new(shape: IndexEdition, location_name: "Edition"))
     CreateIndexRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateIndexRequest.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
     CreateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateIndexRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateIndexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateIndexRequest.struct_class = Types::CreateIndexRequest
 
     CreateIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
@@ -315,6 +373,9 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DataSourceConfiguration, location_name: "S3Configuration"))
     DataSourceConfiguration.add_member(:share_point_configuration, Shapes::ShapeRef.new(shape: SharePointConfiguration, location_name: "SharePointConfiguration"))
     DataSourceConfiguration.add_member(:database_configuration, Shapes::ShapeRef.new(shape: DatabaseConfiguration, location_name: "DatabaseConfiguration"))
+    DataSourceConfiguration.add_member(:salesforce_configuration, Shapes::ShapeRef.new(shape: SalesforceConfiguration, location_name: "SalesforceConfiguration"))
+    DataSourceConfiguration.add_member(:one_drive_configuration, Shapes::ShapeRef.new(shape: OneDriveConfiguration, location_name: "OneDriveConfiguration"))
+    DataSourceConfiguration.add_member(:service_now_configuration, Shapes::ShapeRef.new(shape: ServiceNowConfiguration, location_name: "ServiceNowConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)
@@ -336,9 +397,21 @@ module Aws::Kendra
     DataSourceSyncJob.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     DataSourceSyncJob.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     DataSourceSyncJob.add_member(:data_source_error_code, Shapes::ShapeRef.new(shape: String, location_name: "DataSourceErrorCode"))
+    DataSourceSyncJob.add_member(:metrics, Shapes::ShapeRef.new(shape: DataSourceSyncJobMetrics, location_name: "Metrics"))
     DataSourceSyncJob.struct_class = Types::DataSourceSyncJob
 
     DataSourceSyncJobHistoryList.member = Shapes::ShapeRef.new(shape: DataSourceSyncJob)
+
+    DataSourceSyncJobMetricTarget.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "DataSourceId"))
+    DataSourceSyncJobMetricTarget.add_member(:data_source_sync_job_id, Shapes::ShapeRef.new(shape: DataSourceSyncJobId, required: true, location_name: "DataSourceSyncJobId"))
+    DataSourceSyncJobMetricTarget.struct_class = Types::DataSourceSyncJobMetricTarget
+
+    DataSourceSyncJobMetrics.add_member(:documents_added, Shapes::ShapeRef.new(shape: MetricValue, location_name: "DocumentsAdded"))
+    DataSourceSyncJobMetrics.add_member(:documents_modified, Shapes::ShapeRef.new(shape: MetricValue, location_name: "DocumentsModified"))
+    DataSourceSyncJobMetrics.add_member(:documents_deleted, Shapes::ShapeRef.new(shape: MetricValue, location_name: "DocumentsDeleted"))
+    DataSourceSyncJobMetrics.add_member(:documents_failed, Shapes::ShapeRef.new(shape: MetricValue, location_name: "DocumentsFailed"))
+    DataSourceSyncJobMetrics.add_member(:documents_scanned, Shapes::ShapeRef.new(shape: MetricValue, location_name: "DocumentsScanned"))
+    DataSourceSyncJobMetrics.struct_class = Types::DataSourceSyncJobMetrics
 
     DataSourceToIndexFieldMapping.add_member(:data_source_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DataSourceFieldName"))
     DataSourceToIndexFieldMapping.add_member(:date_field_format, Shapes::ShapeRef.new(shape: DataSourceDateFieldFormat, location_name: "DateFieldFormat"))
@@ -357,6 +430,10 @@ module Aws::Kendra
     DatabaseConfiguration.add_member(:column_configuration, Shapes::ShapeRef.new(shape: ColumnConfiguration, required: true, location_name: "ColumnConfiguration"))
     DatabaseConfiguration.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     DatabaseConfiguration.struct_class = Types::DatabaseConfiguration
+
+    DeleteDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
+    DeleteDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DeleteDataSourceRequest.struct_class = Types::DeleteDataSourceRequest
 
     DeleteFaqRequest.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, required: true, location_name: "Id"))
     DeleteFaqRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -404,6 +481,7 @@ module Aws::Kendra
 
     DescribeIndexResponse.add_member(:name, Shapes::ShapeRef.new(shape: IndexName, location_name: "Name"))
     DescribeIndexResponse.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
+    DescribeIndexResponse.add_member(:edition, Shapes::ShapeRef.new(shape: IndexEdition, location_name: "Edition"))
     DescribeIndexResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeIndexResponse.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "ServerSideEncryptionConfiguration"))
     DescribeIndexResponse.add_member(:status, Shapes::ShapeRef.new(shape: IndexStatus, location_name: "Status"))
@@ -413,6 +491,7 @@ module Aws::Kendra
     DescribeIndexResponse.add_member(:document_metadata_configurations, Shapes::ShapeRef.new(shape: DocumentMetadataConfigurationList, location_name: "DocumentMetadataConfigurations"))
     DescribeIndexResponse.add_member(:index_statistics, Shapes::ShapeRef.new(shape: IndexStatistics, location_name: "IndexStatistics"))
     DescribeIndexResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeIndexResponse.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
     DescribeIndexResponse.struct_class = Types::DescribeIndexResponse
 
     Document.add_member(:id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location_name: "Id"))
@@ -493,6 +572,7 @@ module Aws::Kendra
 
     IndexConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: IndexName, location_name: "Name"))
     IndexConfigurationSummary.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
+    IndexConfigurationSummary.add_member(:edition, Shapes::ShapeRef.new(shape: IndexEdition, location_name: "Edition"))
     IndexConfigurationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     IndexConfigurationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
     IndexConfigurationSummary.add_member(:status, Shapes::ShapeRef.new(shape: IndexStatus, required: true, location_name: "Status"))
@@ -544,6 +624,26 @@ module Aws::Kendra
     ListIndicesResponse.add_member(:index_configuration_summary_items, Shapes::ShapeRef.new(shape: IndexConfigurationSummaryList, location_name: "IndexConfigurationSummaryItems"))
     ListIndicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIndicesResponse.struct_class = Types::ListIndicesResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    OneDriveConfiguration.add_member(:tenant_domain, Shapes::ShapeRef.new(shape: TenantDomain, required: true, location_name: "TenantDomain"))
+    OneDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    OneDriveConfiguration.add_member(:one_drive_users, Shapes::ShapeRef.new(shape: OneDriveUsers, required: true, location_name: "OneDriveUsers"))
+    OneDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    OneDriveConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    OneDriveConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    OneDriveConfiguration.struct_class = Types::OneDriveConfiguration
+
+    OneDriveUserList.member = Shapes::ShapeRef.new(shape: OneDriveUser)
+
+    OneDriveUsers.add_member(:one_drive_user_list, Shapes::ShapeRef.new(shape: OneDriveUserList, location_name: "OneDriveUserList"))
+    OneDriveUsers.add_member(:one_drive_user_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "OneDriveUserS3Path"))
+    OneDriveUsers.struct_class = Types::OneDriveUsers
 
     Principal.add_member(:name, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "Name"))
     Principal.add_member(:type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "Type"))
@@ -616,6 +716,57 @@ module Aws::Kendra
     S3Path.add_member(:key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "Key"))
     S3Path.struct_class = Types::S3Path
 
+    SalesforceChatterFeedConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
+    SalesforceChatterFeedConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SalesforceChatterFeedConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    SalesforceChatterFeedConfiguration.add_member(:include_filter_types, Shapes::ShapeRef.new(shape: SalesforceChatterFeedIncludeFilterTypes, location_name: "IncludeFilterTypes"))
+    SalesforceChatterFeedConfiguration.struct_class = Types::SalesforceChatterFeedConfiguration
+
+    SalesforceChatterFeedIncludeFilterTypes.member = Shapes::ShapeRef.new(shape: SalesforceChatterFeedIncludeFilterType)
+
+    SalesforceConfiguration.add_member(:server_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "ServerUrl"))
+    SalesforceConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    SalesforceConfiguration.add_member(:standard_object_configurations, Shapes::ShapeRef.new(shape: SalesforceStandardObjectConfigurationList, location_name: "StandardObjectConfigurations"))
+    SalesforceConfiguration.add_member(:knowledge_article_configuration, Shapes::ShapeRef.new(shape: SalesforceKnowledgeArticleConfiguration, location_name: "KnowledgeArticleConfiguration"))
+    SalesforceConfiguration.add_member(:chatter_feed_configuration, Shapes::ShapeRef.new(shape: SalesforceChatterFeedConfiguration, location_name: "ChatterFeedConfiguration"))
+    SalesforceConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    SalesforceConfiguration.add_member(:standard_object_attachment_configuration, Shapes::ShapeRef.new(shape: SalesforceStandardObjectAttachmentConfiguration, location_name: "StandardObjectAttachmentConfiguration"))
+    SalesforceConfiguration.add_member(:include_attachment_file_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "IncludeAttachmentFilePatterns"))
+    SalesforceConfiguration.add_member(:exclude_attachment_file_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExcludeAttachmentFilePatterns"))
+    SalesforceConfiguration.struct_class = Types::SalesforceConfiguration
+
+    SalesforceCustomKnowledgeArticleTypeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SalesforceCustomKnowledgeArticleTypeName, required: true, location_name: "Name"))
+    SalesforceCustomKnowledgeArticleTypeConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
+    SalesforceCustomKnowledgeArticleTypeConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SalesforceCustomKnowledgeArticleTypeConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    SalesforceCustomKnowledgeArticleTypeConfiguration.struct_class = Types::SalesforceCustomKnowledgeArticleTypeConfiguration
+
+    SalesforceCustomKnowledgeArticleTypeConfigurationList.member = Shapes::ShapeRef.new(shape: SalesforceCustomKnowledgeArticleTypeConfiguration)
+
+    SalesforceKnowledgeArticleConfiguration.add_member(:included_states, Shapes::ShapeRef.new(shape: SalesforceKnowledgeArticleStateList, required: true, location_name: "IncludedStates"))
+    SalesforceKnowledgeArticleConfiguration.add_member(:standard_knowledge_article_type_configuration, Shapes::ShapeRef.new(shape: SalesforceStandardKnowledgeArticleTypeConfiguration, location_name: "StandardKnowledgeArticleTypeConfiguration"))
+    SalesforceKnowledgeArticleConfiguration.add_member(:custom_knowledge_article_type_configurations, Shapes::ShapeRef.new(shape: SalesforceCustomKnowledgeArticleTypeConfigurationList, location_name: "CustomKnowledgeArticleTypeConfigurations"))
+    SalesforceKnowledgeArticleConfiguration.struct_class = Types::SalesforceKnowledgeArticleConfiguration
+
+    SalesforceKnowledgeArticleStateList.member = Shapes::ShapeRef.new(shape: SalesforceKnowledgeArticleState)
+
+    SalesforceStandardKnowledgeArticleTypeConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
+    SalesforceStandardKnowledgeArticleTypeConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SalesforceStandardKnowledgeArticleTypeConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    SalesforceStandardKnowledgeArticleTypeConfiguration.struct_class = Types::SalesforceStandardKnowledgeArticleTypeConfiguration
+
+    SalesforceStandardObjectAttachmentConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SalesforceStandardObjectAttachmentConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    SalesforceStandardObjectAttachmentConfiguration.struct_class = Types::SalesforceStandardObjectAttachmentConfiguration
+
+    SalesforceStandardObjectConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SalesforceStandardObjectName, required: true, location_name: "Name"))
+    SalesforceStandardObjectConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
+    SalesforceStandardObjectConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    SalesforceStandardObjectConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    SalesforceStandardObjectConfiguration.struct_class = Types::SalesforceStandardObjectConfiguration
+
+    SalesforceStandardObjectConfigurationList.member = Shapes::ShapeRef.new(shape: SalesforceStandardObjectConfiguration)
+
     Search.add_member(:facetable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Facetable"))
     Search.add_member(:searchable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Searchable"))
     Search.add_member(:displayable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Displayable"))
@@ -626,6 +777,29 @@ module Aws::Kendra
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
 
+    ServiceNowConfiguration.add_member(:host_url, Shapes::ShapeRef.new(shape: ServiceNowHostUrl, required: true, location_name: "HostUrl"))
+    ServiceNowConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    ServiceNowConfiguration.add_member(:service_now_build_version, Shapes::ShapeRef.new(shape: ServiceNowBuildVersionType, required: true, location_name: "ServiceNowBuildVersion"))
+    ServiceNowConfiguration.add_member(:knowledge_article_configuration, Shapes::ShapeRef.new(shape: ServiceNowKnowledgeArticleConfiguration, location_name: "KnowledgeArticleConfiguration"))
+    ServiceNowConfiguration.add_member(:service_catalog_configuration, Shapes::ShapeRef.new(shape: ServiceNowServiceCatalogConfiguration, location_name: "ServiceCatalogConfiguration"))
+    ServiceNowConfiguration.struct_class = Types::ServiceNowConfiguration
+
+    ServiceNowKnowledgeArticleConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    ServiceNowKnowledgeArticleConfiguration.add_member(:include_attachment_file_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "IncludeAttachmentFilePatterns"))
+    ServiceNowKnowledgeArticleConfiguration.add_member(:exclude_attachment_file_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExcludeAttachmentFilePatterns"))
+    ServiceNowKnowledgeArticleConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
+    ServiceNowKnowledgeArticleConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    ServiceNowKnowledgeArticleConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    ServiceNowKnowledgeArticleConfiguration.struct_class = Types::ServiceNowKnowledgeArticleConfiguration
+
+    ServiceNowServiceCatalogConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    ServiceNowServiceCatalogConfiguration.add_member(:include_attachment_file_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "IncludeAttachmentFilePatterns"))
+    ServiceNowServiceCatalogConfiguration.add_member(:exclude_attachment_file_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExcludeAttachmentFilePatterns"))
+    ServiceNowServiceCatalogConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
+    ServiceNowServiceCatalogConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
+    ServiceNowServiceCatalogConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    ServiceNowServiceCatalogConfiguration.struct_class = Types::ServiceNowServiceCatalogConfiguration
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -633,6 +807,9 @@ module Aws::Kendra
     SharePointConfiguration.add_member(:urls, Shapes::ShapeRef.new(shape: SharePointUrlList, required: true, location_name: "Urls"))
     SharePointConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     SharePointConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    SharePointConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    SharePointConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    SharePointConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
     SharePointConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
     SharePointConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
     SharePointConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
@@ -659,7 +836,22 @@ module Aws::Kendra
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TextDocumentStatistics.add_member(:indexed_text_documents_count, Shapes::ShapeRef.new(shape: IndexedTextDocumentsCount, required: true, location_name: "IndexedTextDocumentsCount"))
+    TextDocumentStatistics.add_member(:indexed_text_bytes, Shapes::ShapeRef.new(shape: IndexedTextBytes, required: true, location_name: "IndexedTextBytes"))
     TextDocumentStatistics.struct_class = Types::TextDocumentStatistics
 
     TextWithHighlights.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
@@ -672,6 +864,12 @@ module Aws::Kendra
     TimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     TimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     TimeRange.struct_class = Types::TimeRange
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDataSourceRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, location_name: "Name"))
@@ -687,6 +885,7 @@ module Aws::Kendra
     UpdateIndexRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     UpdateIndexRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateIndexRequest.add_member(:document_metadata_configuration_updates, Shapes::ShapeRef.new(shape: DocumentMetadataConfigurationList, location_name: "DocumentMetadataConfigurationUpdates"))
+    UpdateIndexRequest.add_member(:capacity_units, Shapes::ShapeRef.new(shape: CapacityUnitsConfiguration, location_name: "CapacityUnits"))
     UpdateIndexRequest.struct_class = Types::UpdateIndexRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -786,6 +985,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_data_source, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDataSource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDataSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -926,6 +1140,19 @@ module Aws::Kendra
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:query, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Query"
         o.http_method = "POST"
@@ -937,6 +1164,7 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -982,6 +1210,32 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:update_data_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateDataSource"
         o.http_method = "POST"
@@ -1007,6 +1261,7 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end

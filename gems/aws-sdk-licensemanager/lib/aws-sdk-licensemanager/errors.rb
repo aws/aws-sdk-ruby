@@ -6,6 +6,38 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::LicenseManager
+
+  # When LicenseManager returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::LicenseManager::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all LicenseManager errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::LicenseManager::Errors::ServiceError
+  #       # rescues all LicenseManager API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccessDeniedException}
+  # * {AuthorizationException}
+  # * {FailedDependencyException}
+  # * {FilterLimitExceededException}
+  # * {InvalidParameterValueException}
+  # * {InvalidResourceStateException}
+  # * {LicenseUsageException}
+  # * {RateLimitExceededException}
+  # * {ResourceLimitExceededException}
+  # * {ServerInternalException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +55,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class AuthorizationException < ServiceError
@@ -39,7 +70,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class FailedDependencyException < ServiceError
@@ -55,7 +85,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class FilterLimitExceededException < ServiceError
@@ -71,7 +100,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -87,7 +115,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidResourceStateException < ServiceError
@@ -103,7 +130,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class LicenseUsageException < ServiceError
@@ -119,7 +145,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class RateLimitExceededException < ServiceError
@@ -135,7 +160,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -151,7 +175,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServerInternalException < ServiceError
@@ -167,7 +190,6 @@ module Aws::LicenseManager
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Rekognition
+
   class Resource
 
     # @param options ({})

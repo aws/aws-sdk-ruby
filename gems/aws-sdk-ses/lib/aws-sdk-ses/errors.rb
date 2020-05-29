@@ -6,9 +6,75 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::SES
+
+  # When SES returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::SES::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all SES errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::SES::Errors::ServiceError
+  #       # rescues all SES API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {AccountSendingPausedException}
+  # * {AlreadyExistsException}
+  # * {CannotDeleteException}
+  # * {ConfigurationSetAlreadyExistsException}
+  # * {ConfigurationSetDoesNotExistException}
+  # * {ConfigurationSetSendingPausedException}
+  # * {CustomVerificationEmailInvalidContentException}
+  # * {CustomVerificationEmailTemplateAlreadyExistsException}
+  # * {CustomVerificationEmailTemplateDoesNotExistException}
+  # * {EventDestinationAlreadyExistsException}
+  # * {EventDestinationDoesNotExistException}
+  # * {FromEmailAddressNotVerifiedException}
+  # * {InvalidCloudWatchDestinationException}
+  # * {InvalidConfigurationSetException}
+  # * {InvalidDeliveryOptionsException}
+  # * {InvalidFirehoseDestinationException}
+  # * {InvalidLambdaFunctionException}
+  # * {InvalidPolicyException}
+  # * {InvalidRenderingParameterException}
+  # * {InvalidS3ConfigurationException}
+  # * {InvalidSNSDestinationException}
+  # * {InvalidSnsTopicException}
+  # * {InvalidTemplateException}
+  # * {InvalidTrackingOptionsException}
+  # * {LimitExceededException}
+  # * {MailFromDomainNotVerifiedException}
+  # * {MessageRejected}
+  # * {MissingRenderingAttributeException}
+  # * {ProductionAccessNotGrantedException}
+  # * {RuleDoesNotExistException}
+  # * {RuleSetDoesNotExistException}
+  # * {TemplateDoesNotExistException}
+  # * {TrackingOptionsAlreadyExistsException}
+  # * {TrackingOptionsDoesNotExistException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
+
+    class AccountSendingPausedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::AccountSendingPausedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
 
     class AlreadyExistsException < ServiceError
 
@@ -23,7 +89,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class CannotDeleteException < ServiceError
@@ -39,7 +104,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class ConfigurationSetAlreadyExistsException < ServiceError
@@ -55,7 +119,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class ConfigurationSetDoesNotExistException < ServiceError
@@ -71,7 +134,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class ConfigurationSetSendingPausedException < ServiceError
@@ -87,7 +149,16 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
+    end
 
+    class CustomVerificationEmailInvalidContentException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::CustomVerificationEmailInvalidContentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class CustomVerificationEmailTemplateAlreadyExistsException < ServiceError
@@ -103,7 +174,6 @@ module Aws::SES
       def custom_verification_email_template_name
         @data[:custom_verification_email_template_name]
       end
-
     end
 
     class CustomVerificationEmailTemplateDoesNotExistException < ServiceError
@@ -119,7 +189,6 @@ module Aws::SES
       def custom_verification_email_template_name
         @data[:custom_verification_email_template_name]
       end
-
     end
 
     class EventDestinationAlreadyExistsException < ServiceError
@@ -140,7 +209,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class EventDestinationDoesNotExistException < ServiceError
@@ -161,7 +229,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class FromEmailAddressNotVerifiedException < ServiceError
@@ -177,7 +244,6 @@ module Aws::SES
       def from_email_address
         @data[:from_email_address]
       end
-
     end
 
     class InvalidCloudWatchDestinationException < ServiceError
@@ -198,7 +264,26 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
+    end
 
+    class InvalidConfigurationSetException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidConfigurationSetException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidDeliveryOptionsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidDeliveryOptionsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidFirehoseDestinationException < ServiceError
@@ -219,7 +304,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class InvalidLambdaFunctionException < ServiceError
@@ -235,7 +319,16 @@ module Aws::SES
       def function_arn
         @data[:function_arn]
       end
+    end
 
+    class InvalidPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidPolicyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class InvalidRenderingParameterException < ServiceError
@@ -251,7 +344,6 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
-
     end
 
     class InvalidS3ConfigurationException < ServiceError
@@ -267,7 +359,6 @@ module Aws::SES
       def bucket
         @data[:bucket]
       end
-
     end
 
     class InvalidSNSDestinationException < ServiceError
@@ -288,7 +379,6 @@ module Aws::SES
       def event_destination_name
         @data[:event_destination_name]
       end
-
     end
 
     class InvalidSnsTopicException < ServiceError
@@ -304,7 +394,6 @@ module Aws::SES
       def topic
         @data[:topic]
       end
-
     end
 
     class InvalidTemplateException < ServiceError
@@ -320,7 +409,46 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
+    end
 
+    class InvalidTrackingOptionsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidTrackingOptionsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class MailFromDomainNotVerifiedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::MailFromDomainNotVerifiedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class MessageRejected < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::MessageRejected] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class MissingRenderingAttributeException < ServiceError
@@ -336,7 +464,16 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
+    end
 
+    class ProductionAccessNotGrantedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::ProductionAccessNotGrantedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
     end
 
     class RuleDoesNotExistException < ServiceError
@@ -352,7 +489,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class RuleSetDoesNotExistException < ServiceError
@@ -368,7 +504,6 @@ module Aws::SES
       def name
         @data[:name]
       end
-
     end
 
     class TemplateDoesNotExistException < ServiceError
@@ -384,7 +519,6 @@ module Aws::SES
       def template_name
         @data[:template_name]
       end
-
     end
 
     class TrackingOptionsAlreadyExistsException < ServiceError
@@ -400,7 +534,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
     class TrackingOptionsDoesNotExistException < ServiceError
@@ -416,7 +549,6 @@ module Aws::SES
       def configuration_set_name
         @data[:configuration_set_name]
       end
-
     end
 
   end

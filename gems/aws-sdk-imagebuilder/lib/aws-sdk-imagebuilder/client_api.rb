@@ -159,6 +159,8 @@ module Aws::Imagebuilder
     Logging = Shapes::StructureShape.new(name: 'Logging')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    OsVersion = Shapes::StringShape.new(name: 'OsVersion')
+    OsVersionList = Shapes::ListShape.new(name: 'OsVersionList')
     OutputResources = Shapes::StructureShape.new(name: 'OutputResources')
     Ownership = Shapes::StringShape.new(name: 'Ownership')
     PipelineExecutionStartCondition = Shapes::StringShape.new(name: 'PipelineExecutionStartCondition')
@@ -175,6 +177,7 @@ module Aws::Imagebuilder
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicyDocument = Shapes::StringShape.new(name: 'ResourcePolicyDocument')
     RestrictedInteger = Shapes::IntegerShape.new(name: 'RestrictedInteger')
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -243,6 +246,7 @@ module Aws::Imagebuilder
     Component.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
     Component.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     Component.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    Component.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     Component.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     Component.add_member(:data, Shapes::ShapeRef.new(shape: ComponentData, location_name: "data"))
     Component.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
@@ -260,6 +264,7 @@ module Aws::Imagebuilder
     ComponentSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ComponentSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ComponentSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ComponentSummary.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     ComponentSummary.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     ComponentSummary.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ComponentSummary.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
@@ -275,6 +280,7 @@ module Aws::Imagebuilder
     ComponentVersion.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ComponentVersion.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ComponentVersion.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ComponentVersion.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     ComponentVersion.add_member(:type, Shapes::ShapeRef.new(shape: ComponentType, location_name: "type"))
     ComponentVersion.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ComponentVersion.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
@@ -287,6 +293,7 @@ module Aws::Imagebuilder
     CreateComponentRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     CreateComponentRequest.add_member(:change_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "changeDescription"))
     CreateComponentRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "platform"))
+    CreateComponentRequest.add_member(:supported_os_versions, Shapes::ShapeRef.new(shape: OsVersionList, location_name: "supportedOsVersions"))
     CreateComponentRequest.add_member(:data, Shapes::ShapeRef.new(shape: InlineComponentData, location_name: "data"))
     CreateComponentRequest.add_member(:uri, Shapes::ShapeRef.new(shape: Uri, location_name: "uri"))
     CreateComponentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
@@ -317,6 +324,7 @@ module Aws::Imagebuilder
     CreateImagePipelineRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     CreateImagePipelineRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     CreateImagePipelineRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
+    CreateImagePipelineRequest.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     CreateImagePipelineRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     CreateImagePipelineRequest.add_member(:status, Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "status"))
     CreateImagePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -347,6 +355,7 @@ module Aws::Imagebuilder
     CreateImageRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     CreateImageRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     CreateImageRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
+    CreateImageRequest.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     CreateImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateImageRequest.struct_class = Types::CreateImageRequest
@@ -468,7 +477,7 @@ module Aws::Imagebuilder
     GetComponentPolicyRequest.struct_class = Types::GetComponentPolicyRequest
 
     GetComponentPolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
-    GetComponentPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetComponentPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetComponentPolicyResponse.struct_class = Types::GetComponentPolicyResponse
 
     GetComponentRequest.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location: "querystring", location_name: "componentBuildVersionArn"))
@@ -496,14 +505,14 @@ module Aws::Imagebuilder
     GetImagePolicyRequest.struct_class = Types::GetImagePolicyRequest
 
     GetImagePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
-    GetImagePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetImagePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetImagePolicyResponse.struct_class = Types::GetImagePolicyResponse
 
     GetImageRecipePolicyRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location: "querystring", location_name: "imageRecipeArn"))
     GetImageRecipePolicyRequest.struct_class = Types::GetImageRecipePolicyRequest
 
     GetImageRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
-    GetImageRecipePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetImageRecipePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetImageRecipePolicyResponse.struct_class = Types::GetImageRecipePolicyResponse
 
     GetImageRecipeRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location: "querystring", location_name: "imageRecipeArn"))
@@ -534,6 +543,8 @@ module Aws::Imagebuilder
     Image.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     Image.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    Image.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
+    Image.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     Image.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "state"))
     Image.add_member(:image_recipe, Shapes::ShapeRef.new(shape: ImageRecipe, location_name: "imageRecipe"))
     Image.add_member(:source_pipeline_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sourcePipelineName"))
@@ -550,6 +561,7 @@ module Aws::Imagebuilder
     ImagePipeline.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ImagePipeline.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ImagePipeline.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ImagePipeline.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     ImagePipeline.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "imageRecipeArn"))
     ImagePipeline.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "infrastructureConfigurationArn"))
     ImagePipeline.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "distributionConfigurationArn"))
@@ -597,6 +609,7 @@ module Aws::Imagebuilder
     ImageSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ImageSummary.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ImageSummary.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ImageSummary.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     ImageSummary.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "state"))
     ImageSummary.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ImageSummary.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
@@ -614,6 +627,7 @@ module Aws::Imagebuilder
     ImageVersion.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     ImageVersion.add_member(:version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "version"))
     ImageVersion.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    ImageVersion.add_member(:os_version, Shapes::ShapeRef.new(shape: OsVersion, location_name: "osVersion"))
     ImageVersion.add_member(:owner, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "owner"))
     ImageVersion.add_member(:date_created, Shapes::ShapeRef.new(shape: DateTime, location_name: "dateCreated"))
     ImageVersion.struct_class = Types::ImageVersion
@@ -801,11 +815,13 @@ module Aws::Imagebuilder
     Logging.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3Logs, location_name: "s3Logs"))
     Logging.struct_class = Types::Logging
 
+    OsVersionList.member = Shapes::ShapeRef.new(shape: OsVersion)
+
     OutputResources.add_member(:amis, Shapes::ShapeRef.new(shape: AmiList, location_name: "amis"))
     OutputResources.struct_class = Types::OutputResources
 
     PutComponentPolicyRequest.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location_name: "componentArn"))
-    PutComponentPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutComponentPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutComponentPolicyRequest.struct_class = Types::PutComponentPolicyRequest
 
     PutComponentPolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -813,7 +829,7 @@ module Aws::Imagebuilder
     PutComponentPolicyResponse.struct_class = Types::PutComponentPolicyResponse
 
     PutImagePolicyRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageArn"))
-    PutImagePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutImagePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutImagePolicyRequest.struct_class = Types::PutImagePolicyRequest
 
     PutImagePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -821,7 +837,7 @@ module Aws::Imagebuilder
     PutImagePolicyResponse.struct_class = Types::PutImagePolicyResponse
 
     PutImageRecipePolicyRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location_name: "imageRecipeArn"))
-    PutImageRecipePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutImageRecipePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutImageRecipePolicyRequest.struct_class = Types::PutImageRecipePolicyRequest
 
     PutImageRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -901,6 +917,7 @@ module Aws::Imagebuilder
     UpdateImagePipelineRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     UpdateImagePipelineRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     UpdateImagePipelineRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
+    UpdateImagePipelineRequest.add_member(:enhanced_image_metadata_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "enhancedImageMetadataEnabled"))
     UpdateImagePipelineRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
     UpdateImagePipelineRequest.add_member(:status, Shapes::ShapeRef.new(shape: PipelineStatus, location_name: "status"))
     UpdateImagePipelineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))

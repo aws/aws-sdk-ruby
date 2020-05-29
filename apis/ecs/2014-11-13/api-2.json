@@ -1070,6 +1070,7 @@
         "entryPoint":{"shape":"StringList"},
         "command":{"shape":"StringList"},
         "environment":{"shape":"EnvironmentVariables"},
+        "environmentFiles":{"shape":"EnvironmentFiles"},
         "mountPoints":{"shape":"MountPointList"},
         "volumesFrom":{"shape":"VolumeFromList"},
         "linuxParameters":{"shape":"LinuxParameters"},
@@ -1167,6 +1168,7 @@
         "name":{"shape":"String"},
         "command":{"shape":"StringList"},
         "environment":{"shape":"EnvironmentVariables"},
+        "environmentFiles":{"shape":"EnvironmentFiles"},
         "cpu":{"shape":"BoxedInteger"},
         "memory":{"shape":"BoxedInteger"},
         "memoryReservation":{"shape":"BoxedInteger"},
@@ -1617,13 +1619,56 @@
       }
     },
     "Double":{"type":"double"},
+    "EFSAuthorizationConfig":{
+      "type":"structure",
+      "members":{
+        "accessPointId":{"shape":"String"},
+        "iam":{"shape":"EFSAuthorizationConfigIAM"}
+      }
+    },
+    "EFSAuthorizationConfigIAM":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EFSTransitEncryption":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "EFSVolumeConfiguration":{
       "type":"structure",
       "required":["fileSystemId"],
       "members":{
         "fileSystemId":{"shape":"String"},
-        "rootDirectory":{"shape":"String"}
+        "rootDirectory":{"shape":"String"},
+        "transitEncryption":{"shape":"EFSTransitEncryption"},
+        "transitEncryptionPort":{"shape":"BoxedInteger"},
+        "authorizationConfig":{"shape":"EFSAuthorizationConfig"}
       }
+    },
+    "EnvironmentFile":{
+      "type":"structure",
+      "required":[
+        "value",
+        "type"
+      ],
+      "members":{
+        "value":{"shape":"String"},
+        "type":{"shape":"EnvironmentFileType"}
+      }
+    },
+    "EnvironmentFileType":{
+      "type":"string",
+      "enum":["s3"]
+    },
+    "EnvironmentFiles":{
+      "type":"list",
+      "member":{"shape":"EnvironmentFile"}
     },
     "EnvironmentVariables":{
       "type":"list",
@@ -3082,6 +3127,8 @@
         "capacityProviderStrategy":{"shape":"CapacityProviderStrategy"},
         "deploymentConfiguration":{"shape":"DeploymentConfiguration"},
         "networkConfiguration":{"shape":"NetworkConfiguration"},
+        "placementConstraints":{"shape":"PlacementConstraints"},
+        "placementStrategy":{"shape":"PlacementStrategies"},
         "platformVersion":{"shape":"String"},
         "forceNewDeployment":{"shape":"Boolean"},
         "healthCheckGracePeriodSeconds":{"shape":"BoxedInteger"}

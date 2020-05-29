@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::ElastiCache
+
   class Resource
 
     # @param options ({})

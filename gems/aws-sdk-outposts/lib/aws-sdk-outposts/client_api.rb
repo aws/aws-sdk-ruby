@@ -17,6 +17,10 @@ module Aws::Outposts
     AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
     CreateOutpostOutput = Shapes::StructureShape.new(name: 'CreateOutpostOutput')
+    DeleteOutpostInput = Shapes::StructureShape.new(name: 'DeleteOutpostInput')
+    DeleteOutpostOutput = Shapes::StructureShape.new(name: 'DeleteOutpostOutput')
+    DeleteSiteInput = Shapes::StructureShape.new(name: 'DeleteSiteInput')
+    DeleteSiteOutput = Shapes::StructureShape.new(name: 'DeleteSiteOutput')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GetOutpostInput = Shapes::StructureShape.new(name: 'GetOutpostInput')
     GetOutpostInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesInput')
@@ -61,6 +65,16 @@ module Aws::Outposts
 
     CreateOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
     CreateOutpostOutput.struct_class = Types::CreateOutpostOutput
+
+    DeleteOutpostInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
+    DeleteOutpostInput.struct_class = Types::DeleteOutpostInput
+
+    DeleteOutpostOutput.struct_class = Types::DeleteOutpostOutput
+
+    DeleteSiteInput.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location: "uri", location_name: "SiteId"))
+    DeleteSiteInput.struct_class = Types::DeleteSiteInput
+
+    DeleteSiteOutput.struct_class = Types::DeleteSiteOutput
 
     GetOutpostInput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "uri", location_name: "OutpostId"))
     GetOutpostInput.struct_class = Types::GetOutpostInput
@@ -163,6 +177,30 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:delete_outpost, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOutpost"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/outposts/{OutpostId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOutpostInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOutpostOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_site, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSite"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/sites/{SiteId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSiteInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSiteOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_outpost, Seahorse::Model::Operation.new.tap do |o|

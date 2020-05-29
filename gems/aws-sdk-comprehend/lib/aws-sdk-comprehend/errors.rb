@@ -6,6 +6,44 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Comprehend
+
+  # When Comprehend returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Comprehend::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Comprehend errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Comprehend::Errors::ServiceError
+  #       # rescues all Comprehend API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {BatchSizeLimitExceededException}
+  # * {ConcurrentModificationException}
+  # * {InternalServerException}
+  # * {InvalidFilterException}
+  # * {InvalidRequestException}
+  # * {JobNotFoundException}
+  # * {KmsKeyValidationException}
+  # * {ResourceInUseException}
+  # * {ResourceLimitExceededException}
+  # * {ResourceNotFoundException}
+  # * {ResourceUnavailableException}
+  # * {TextSizeLimitExceededException}
+  # * {TooManyRequestsException}
+  # * {TooManyTagKeysException}
+  # * {TooManyTagsException}
+  # * {UnsupportedLanguageException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +61,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ConcurrentModificationException < ServiceError
@@ -39,7 +76,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class InternalServerException < ServiceError
@@ -55,7 +91,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidFilterException < ServiceError
@@ -71,7 +106,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -87,7 +121,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class JobNotFoundException < ServiceError
@@ -103,7 +136,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class KmsKeyValidationException < ServiceError
@@ -119,7 +151,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -135,7 +166,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceLimitExceededException < ServiceError
@@ -151,7 +181,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -167,7 +196,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceUnavailableException < ServiceError
@@ -183,7 +211,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TextSizeLimitExceededException < ServiceError
@@ -199,7 +226,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyRequestsException < ServiceError
@@ -215,7 +241,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagKeysException < ServiceError
@@ -231,7 +256,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTagsException < ServiceError
@@ -247,7 +271,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
     class UnsupportedLanguageException < ServiceError
@@ -263,7 +286,6 @@ module Aws::Comprehend
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,51 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::States
+
+  # When States returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::States::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all States errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::States::Errors::ServiceError
+  #       # rescues all States API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {ActivityDoesNotExist}
+  # * {ActivityLimitExceeded}
+  # * {ActivityWorkerLimitExceeded}
+  # * {ExecutionAlreadyExists}
+  # * {ExecutionDoesNotExist}
+  # * {ExecutionLimitExceeded}
+  # * {InvalidArn}
+  # * {InvalidDefinition}
+  # * {InvalidExecutionInput}
+  # * {InvalidLoggingConfiguration}
+  # * {InvalidName}
+  # * {InvalidOutput}
+  # * {InvalidToken}
+  # * {MissingRequiredParameter}
+  # * {ResourceNotFound}
+  # * {StateMachineAlreadyExists}
+  # * {StateMachineDeleting}
+  # * {StateMachineDoesNotExist}
+  # * {StateMachineLimitExceeded}
+  # * {StateMachineTypeNotSupported}
+  # * {TaskDoesNotExist}
+  # * {TaskTimedOut}
+  # * {TooManyTags}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +68,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class ActivityLimitExceeded < ServiceError
@@ -39,7 +83,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class ActivityWorkerLimitExceeded < ServiceError
@@ -55,7 +98,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExecutionAlreadyExists < ServiceError
@@ -71,7 +113,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExecutionDoesNotExist < ServiceError
@@ -87,7 +128,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class ExecutionLimitExceeded < ServiceError
@@ -103,7 +143,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidArn < ServiceError
@@ -119,7 +158,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidDefinition < ServiceError
@@ -135,7 +173,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidExecutionInput < ServiceError
@@ -151,7 +188,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidLoggingConfiguration < ServiceError
@@ -167,7 +203,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidName < ServiceError
@@ -183,7 +218,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidOutput < ServiceError
@@ -199,7 +233,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidToken < ServiceError
@@ -215,7 +248,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class MissingRequiredParameter < ServiceError
@@ -231,7 +263,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFound < ServiceError
@@ -252,7 +283,6 @@ module Aws::States
       def resource_name
         @data[:resource_name]
       end
-
     end
 
     class StateMachineAlreadyExists < ServiceError
@@ -268,7 +298,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class StateMachineDeleting < ServiceError
@@ -284,7 +313,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class StateMachineDoesNotExist < ServiceError
@@ -300,7 +328,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class StateMachineLimitExceeded < ServiceError
@@ -316,7 +343,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class StateMachineTypeNotSupported < ServiceError
@@ -332,7 +358,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class TaskDoesNotExist < ServiceError
@@ -348,7 +373,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class TaskTimedOut < ServiceError
@@ -364,7 +388,6 @@ module Aws::States
       def message
         @message || @data[:message]
       end
-
     end
 
     class TooManyTags < ServiceError
@@ -385,7 +408,6 @@ module Aws::States
       def resource_name
         @data[:resource_name]
       end
-
     end
 
   end

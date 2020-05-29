@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::MarketplaceEntitlementService
+
   class Resource
 
     # @param options ({})

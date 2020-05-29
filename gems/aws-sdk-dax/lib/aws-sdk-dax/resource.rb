@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::DAX
+
   class Resource
 
     # @param options ({})

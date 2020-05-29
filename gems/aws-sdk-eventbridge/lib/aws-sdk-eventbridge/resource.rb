@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::EventBridge
+
   class Resource
 
     # @param options ({})

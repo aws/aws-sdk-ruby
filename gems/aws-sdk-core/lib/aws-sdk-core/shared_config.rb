@@ -117,16 +117,18 @@ module Aws
       credentials
     end
 
-    def assume_role_web_identity_credentials_from_config(profile)
-      p = profile || @profile_name
+    def assume_role_web_identity_credentials_from_config(opts = {})
+      p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config
         entry = @parsed_config.fetch(p, {})
         if entry['web_identity_token_file'] && entry['role_arn']
-          AssumeRoleWebIdentityCredentials.new(
+          cfg = {
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
             role_session_name: entry['role_session_name']
-          )
+          }
+          cfg[:region] = opts[:region] if opts[:region]
+          AssumeRoleWebIdentityCredentials.new(cfg)
         end
       end
     end
@@ -141,16 +143,20 @@ module Aws
     end
 
     config_reader(
+      :region,
       :credential_process,
+      :endpoint_discovery_enabled,
+      :max_attempts,
+      :retry_mode,
+      :adaptive_retry_wait_to_fill,
+      :correct_clock_skew,
       :csm_client_id,
       :csm_enabled,
       :csm_host,
       :csm_port,
-      :endpoint_discovery_enabled,
-      :region,
+      :sts_regional_endpoints,
       :s3_use_arn_region,
-      :s3_us_east_1_regional_endpoint,
-      :sts_regional_endpoints
+      :s3_us_east_1_regional_endpoint
     )
 
     private
@@ -178,11 +184,11 @@ module Aws
         credential_source ||= prof_cfg['credential_source']
         if opts[:source_profile] && credential_source
           raise Errors::CredentialSourceConflictError,
-                "Profile #{profile} has a source_profile, and "\
-                'a credential_source. For assume role credentials, must '\
-                'provide only source_profile or credential_source, not both.'
+            "Profile #{profile} has a source_profile, and "\
+            'a credential_source. For assume role credentials, must '\
+            'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
-          opts[:credentials] = resolve_source_profile(opts[:source_profile])
+          opts[:credentials] = resolve_source_profile(opts[:source_profile], opts)
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -193,8 +199,9 @@ module Aws
             opts[:profile] = opts.delete(:source_profile)
             AssumeRoleCredentials.new(opts)
           else
-            raise Errors::NoSourceProfileError, "Profile #{profile} has a role_arn, and source_profile, but the"\
-                ' source_profile does not have credentials.'
+            raise Errors::NoSourceProfileError,
+              "Profile #{profile} has a role_arn, and source_profile, but the"\
+              ' source_profile does not have credentials.'
           end
         elsif credential_source
           opts[:credentials] = credentials_from_source(
@@ -211,8 +218,9 @@ module Aws
             opts.delete(:source_profile) # Cleanup
             AssumeRoleCredentials.new(opts)
           else
-            raise Errors::NoSourceCredentials, "Profile #{profile} could not get source credentials from"\
-                " provider #{credential_source}"
+            raise Errors::NoSourceCredentials,
+              "Profile #{profile} could not get source credentials from"\
+              " provider #{credential_source}"
           end
         elsif prof_cfg['role_arn']
           raise Errors::NoSourceProfileError, "Profile #{profile} has a role_arn, but no source_profile."
@@ -220,10 +228,10 @@ module Aws
       end
     end
 
-    def resolve_source_profile(profile)
+    def resolve_source_profile(profile, opts = {})
       if (creds = credentials(profile: profile))
         creds # static credentials
-      elsif (provider = assume_role_web_identity_credentials_from_config(profile))
+      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider.credentials if provider.credentials.set?
@@ -300,8 +308,8 @@ module Aws
     def validate_profile_exists(profile)
       unless (@parsed_credentials && @parsed_credentials[profile]) ||
              (@parsed_config && @parsed_config[profile])
-        msg = "Profile `#{profile}' not found in #{@credentials_path}"
-        msg << " or #{@config_path}" if @config_path
+        msg = "Profile `#{profile}' not found in #{@credentials_path}"\
+              "#{" or #{@config_path}" if @config_path}"
         raise Errors::NoSuchProfileError, msg
       end
     end

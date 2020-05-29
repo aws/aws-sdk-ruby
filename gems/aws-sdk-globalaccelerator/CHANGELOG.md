@@ -1,6 +1,37 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-05-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2020-05-07)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2020-03-27)
+------------------
+
+* Feature - This update adds an event history to the ListByoipCidr API call. This enables you to see the changes that you've made for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+
+1.15.0 (2020-03-09)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.1 (2020-03-02)
+------------------
+
+* Issue - Republish the previously yanked version.
+
+1.14.0 (2020-02-27)
+------------------
+
+* Issue - This version has been yanked. (#2239)
+* Feature - This release adds support for adding tags to accelerators and bringing your own IP address to AWS Global Accelerator (BYOIP).
+
 1.13.0 (2019-10-23)
 ------------------
 
@@ -70,4 +101,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-globalaccelerator`.
-

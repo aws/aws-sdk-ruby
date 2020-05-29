@@ -24,17 +24,20 @@ require_relative 'aws-sdk-lambdapreview/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     lambda_preview = Aws::LambdaPreview::Client.new
+#     resp = lambda_preview.add_event_source(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Lambda all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Lambda are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::LambdaPreview::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Lambda API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-lambdapreview/customizations'
 # @service
 module Aws::LambdaPreview
 
-  GEM_VERSION = '1.16.0'
+  GEM_VERSION = '1.19.0'
 
 end

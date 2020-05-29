@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::CloudFront
+
   class Resource
 
     # @param options ({})

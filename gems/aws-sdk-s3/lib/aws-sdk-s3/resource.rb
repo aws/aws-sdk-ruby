@@ -6,6 +6,18 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::S3
+
+  # This class provides a resource oriented interface for S3.
+  # To create a resource object:
+  #
+  #     resource = Aws::S3::Resource.new(region: 'us-west-2')
+  #
+  # You can supply a client object with custom configuration that will be used for all resource operations.
+  # If you do not pass `:client`, a default client will be constructed.
+  #
+  #     client = Aws::S3::Client.new(region: 'us-west-2')
+  #     resource = Aws::S3::Resource.new(client: client)
+  #
   class Resource
 
     # @param options ({})
@@ -60,7 +72,7 @@ module Aws::S3
     #   bucket.
     # @return [Bucket]
     def create_bucket(options = {})
-      resp = @client.create_bucket(options)
+      @client.create_bucket(options)
       Bucket.new(
         name: options[:bucket],
         client: @client

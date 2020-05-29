@@ -12,6 +12,7 @@ module Aws::ElasticsearchService
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPoliciesStatus = Shapes::StructureShape.new(name: 'AccessPoliciesStatus')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
     AdditionalLimit = Shapes::StructureShape.new(name: 'AdditionalLimit')
@@ -21,6 +22,8 @@ module Aws::ElasticsearchService
     AdvancedSecurityOptions = Shapes::StructureShape.new(name: 'AdvancedSecurityOptions')
     AdvancedSecurityOptionsInput = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsInput')
     AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
+    AssociatePackageRequest = Shapes::StructureShape.new(name: 'AssociatePackageRequest')
+    AssociatePackageResponse = Shapes::StructureShape.new(name: 'AssociatePackageResponse')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateRequest')
@@ -30,10 +33,16 @@ module Aws::ElasticsearchService
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
     CompatibleElasticsearchVersionsList = Shapes::ListShape.new(name: 'CompatibleElasticsearchVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainRequest')
     CreateElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainResponse')
+    CreatePackageRequest = Shapes::StructureShape.new(name: 'CreatePackageRequest')
+    CreatePackageResponse = Shapes::StructureShape.new(name: 'CreatePackageResponse')
+    CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     DeleteElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainRequest')
     DeleteElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainResponse')
+    DeletePackageRequest = Shapes::StructureShape.new(name: 'DeletePackageRequest')
+    DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     DescribeElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainConfigRequest')
@@ -44,11 +53,20 @@ module Aws::ElasticsearchService
     DescribeElasticsearchDomainsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainsResponse')
     DescribeElasticsearchInstanceTypeLimitsRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsRequest')
     DescribeElasticsearchInstanceTypeLimitsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsResponse')
+    DescribePackagesFilter = Shapes::StructureShape.new(name: 'DescribePackagesFilter')
+    DescribePackagesFilterList = Shapes::ListShape.new(name: 'DescribePackagesFilterList')
+    DescribePackagesFilterName = Shapes::StringShape.new(name: 'DescribePackagesFilterName')
+    DescribePackagesFilterValue = Shapes::StringShape.new(name: 'DescribePackagesFilterValue')
+    DescribePackagesFilterValues = Shapes::ListShape.new(name: 'DescribePackagesFilterValues')
+    DescribePackagesRequest = Shapes::StructureShape.new(name: 'DescribePackagesRequest')
+    DescribePackagesResponse = Shapes::StructureShape.new(name: 'DescribePackagesResponse')
     DescribeReservedElasticsearchInstanceOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstanceOfferingsRequest')
     DescribeReservedElasticsearchInstanceOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstanceOfferingsResponse')
     DescribeReservedElasticsearchInstancesRequest = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesRequest')
     DescribeReservedElasticsearchInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesResponse')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
+    DissociatePackageRequest = Shapes::StructureShape.new(name: 'DissociatePackageRequest')
+    DissociatePackageResponse = Shapes::StructureShape.new(name: 'DissociatePackageResponse')
     DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
     DomainEndpointOptionsStatus = Shapes::StructureShape.new(name: 'DomainEndpointOptionsStatus')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
@@ -56,6 +74,9 @@ module Aws::ElasticsearchService
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
+    DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
+    DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
+    DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
     Double = Shapes::FloatShape.new(name: 'Double')
     EBSOptions = Shapes::StructureShape.new(name: 'EBSOptions')
     EBSOptionsStatus = Shapes::StructureShape.new(name: 'EBSOptionsStatus')
@@ -73,7 +94,9 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptions = Shapes::StructureShape.new(name: 'EncryptionAtRestOptions')
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
+    ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     GUID = Shapes::StringShape.new(name: 'GUID')
     GetCompatibleElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsRequest')
     GetCompatibleElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsResponse')
@@ -93,6 +116,7 @@ module Aws::ElasticsearchService
     Issue = Shapes::StringShape.new(name: 'Issue')
     Issues = Shapes::ListShape.new(name: 'Issues')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LastUpdated = Shapes::TimestampShape.new(name: 'LastUpdated')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitName = Shapes::StringShape.new(name: 'LimitName')
     LimitValue = Shapes::StringShape.new(name: 'LimitValue')
@@ -100,10 +124,14 @@ module Aws::ElasticsearchService
     Limits = Shapes::StructureShape.new(name: 'Limits')
     LimitsByRole = Shapes::MapShape.new(name: 'LimitsByRole')
     ListDomainNamesResponse = Shapes::StructureShape.new(name: 'ListDomainNamesResponse')
+    ListDomainsForPackageRequest = Shapes::StructureShape.new(name: 'ListDomainsForPackageRequest')
+    ListDomainsForPackageResponse = Shapes::StructureShape.new(name: 'ListDomainsForPackageResponse')
     ListElasticsearchInstanceTypesRequest = Shapes::StructureShape.new(name: 'ListElasticsearchInstanceTypesRequest')
     ListElasticsearchInstanceTypesResponse = Shapes::StructureShape.new(name: 'ListElasticsearchInstanceTypesResponse')
     ListElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'ListElasticsearchVersionsRequest')
     ListElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'ListElasticsearchVersionsResponse')
+    ListPackagesForDomainRequest = Shapes::StructureShape.new(name: 'ListPackagesForDomainRequest')
+    ListPackagesForDomainResponse = Shapes::StructureShape.new(name: 'ListPackagesForDomainResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     LogPublishingOption = Shapes::StructureShape.new(name: 'LogPublishingOption')
@@ -119,12 +147,21 @@ module Aws::ElasticsearchService
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
     OptionState = Shapes::StringShape.new(name: 'OptionState')
     OptionStatus = Shapes::StructureShape.new(name: 'OptionStatus')
+    PackageDescription = Shapes::StringShape.new(name: 'PackageDescription')
+    PackageDetails = Shapes::StructureShape.new(name: 'PackageDetails')
+    PackageDetailsList = Shapes::ListShape.new(name: 'PackageDetailsList')
+    PackageID = Shapes::StringShape.new(name: 'PackageID')
+    PackageName = Shapes::StringShape.new(name: 'PackageName')
+    PackageSource = Shapes::StructureShape.new(name: 'PackageSource')
+    PackageStatus = Shapes::StringShape.new(name: 'PackageStatus')
+    PackageType = Shapes::StringShape.new(name: 'PackageType')
     Password = Shapes::StringShape.new(name: 'Password')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PurchaseReservedElasticsearchInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingRequest')
     PurchaseReservedElasticsearchInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingResponse')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+    ReferencePath = Shapes::StringShape.new(name: 'ReferencePath')
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
     ReservationToken = Shapes::StringShape.new(name: 'ReservationToken')
     ReservedElasticsearchInstance = Shapes::StructureShape.new(name: 'ReservedElasticsearchInstance')
@@ -135,6 +172,8 @@ module Aws::ElasticsearchService
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
+    S3Key = Shapes::StringShape.new(name: 'S3Key')
     ServiceSoftwareOptions = Shapes::StructureShape.new(name: 'ServiceSoftwareOptions')
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
@@ -177,6 +216,8 @@ module Aws::ElasticsearchService
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AccessPoliciesStatus.add_member(:options, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "Options"))
     AccessPoliciesStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AccessPoliciesStatus.struct_class = Types::AccessPoliciesStatus
@@ -211,6 +252,13 @@ module Aws::ElasticsearchService
     AdvancedSecurityOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AdvancedSecurityOptionsStatus.struct_class = Types::AdvancedSecurityOptionsStatus
 
+    AssociatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
+    AssociatePackageRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    AssociatePackageRequest.struct_class = Types::AssociatePackageRequest
+
+    AssociatePackageResponse.add_member(:domain_package_details, Shapes::ShapeRef.new(shape: DomainPackageDetails, location_name: "DomainPackageDetails"))
+    AssociatePackageResponse.struct_class = Types::AssociatePackageResponse
+
     BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BaseException.struct_class = Types::BaseException
 
@@ -236,6 +284,8 @@ module Aws::ElasticsearchService
     CompatibleVersionsMap.add_member(:target_versions, Shapes::ShapeRef.new(shape: ElasticsearchVersionList, location_name: "TargetVersions"))
     CompatibleVersionsMap.struct_class = Types::CompatibleVersionsMap
 
+    ConflictException.struct_class = Types::ConflictException
+
     CreateElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CreateElasticsearchDomainRequest.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "ElasticsearchVersion"))
     CreateElasticsearchDomainRequest.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, location_name: "ElasticsearchClusterConfig"))
@@ -255,11 +305,26 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
     CreateElasticsearchDomainResponse.struct_class = Types::CreateElasticsearchDomainResponse
 
+    CreatePackageRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location_name: "PackageName"))
+    CreatePackageRequest.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, required: true, location_name: "PackageType"))
+    CreatePackageRequest.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
+    CreatePackageRequest.add_member(:package_source, Shapes::ShapeRef.new(shape: PackageSource, required: true, location_name: "PackageSource"))
+    CreatePackageRequest.struct_class = Types::CreatePackageRequest
+
+    CreatePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
+    CreatePackageResponse.struct_class = Types::CreatePackageResponse
+
     DeleteElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DeleteElasticsearchDomainRequest.struct_class = Types::DeleteElasticsearchDomainRequest
 
     DeleteElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
     DeleteElasticsearchDomainResponse.struct_class = Types::DeleteElasticsearchDomainResponse
+
+    DeletePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
+    DeletePackageRequest.struct_class = Types::DeletePackageRequest
+
+    DeletePackageResponse.add_member(:package_details, Shapes::ShapeRef.new(shape: PackageDetails, location_name: "PackageDetails"))
+    DeletePackageResponse.struct_class = Types::DeletePackageResponse
 
     DescribeElasticsearchDomainConfigRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeElasticsearchDomainConfigRequest.struct_class = Types::DescribeElasticsearchDomainConfigRequest
@@ -287,6 +352,23 @@ module Aws::ElasticsearchService
     DescribeElasticsearchInstanceTypeLimitsResponse.add_member(:limits_by_role, Shapes::ShapeRef.new(shape: LimitsByRole, location_name: "LimitsByRole"))
     DescribeElasticsearchInstanceTypeLimitsResponse.struct_class = Types::DescribeElasticsearchInstanceTypeLimitsResponse
 
+    DescribePackagesFilter.add_member(:name, Shapes::ShapeRef.new(shape: DescribePackagesFilterName, location_name: "Name"))
+    DescribePackagesFilter.add_member(:value, Shapes::ShapeRef.new(shape: DescribePackagesFilterValues, location_name: "Value"))
+    DescribePackagesFilter.struct_class = Types::DescribePackagesFilter
+
+    DescribePackagesFilterList.member = Shapes::ShapeRef.new(shape: DescribePackagesFilter)
+
+    DescribePackagesFilterValues.member = Shapes::ShapeRef.new(shape: DescribePackagesFilterValue)
+
+    DescribePackagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribePackagesFilterList, location_name: "Filters"))
+    DescribePackagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribePackagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePackagesRequest.struct_class = Types::DescribePackagesRequest
+
+    DescribePackagesResponse.add_member(:package_details_list, Shapes::ShapeRef.new(shape: PackageDetailsList, location_name: "PackageDetailsList"))
+    DescribePackagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribePackagesResponse.struct_class = Types::DescribePackagesResponse
+
     DescribeReservedElasticsearchInstanceOfferingsRequest.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, location: "querystring", location_name: "offeringId"))
     DescribeReservedElasticsearchInstanceOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     DescribeReservedElasticsearchInstanceOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -305,6 +387,15 @@ module Aws::ElasticsearchService
     DescribeReservedElasticsearchInstancesResponse.add_member(:reserved_elasticsearch_instances, Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceList, location_name: "ReservedElasticsearchInstances"))
     DescribeReservedElasticsearchInstancesResponse.struct_class = Types::DescribeReservedElasticsearchInstancesResponse
 
+    DisabledOperationException.struct_class = Types::DisabledOperationException
+
+    DissociatePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
+    DissociatePackageRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DissociatePackageRequest.struct_class = Types::DissociatePackageRequest
+
+    DissociatePackageResponse.add_member(:domain_package_details, Shapes::ShapeRef.new(shape: DomainPackageDetails, location_name: "DomainPackageDetails"))
+    DissociatePackageResponse.struct_class = Types::DissociatePackageResponse
+
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
     DomainEndpointOptions.add_member(:tls_security_policy, Shapes::ShapeRef.new(shape: TLSSecurityPolicy, location_name: "TLSSecurityPolicy"))
     DomainEndpointOptions.struct_class = Types::DomainEndpointOptions
@@ -319,6 +410,18 @@ module Aws::ElasticsearchService
     DomainInfoList.member = Shapes::ShapeRef.new(shape: DomainInfo)
 
     DomainNameList.member = Shapes::ShapeRef.new(shape: DomainName)
+
+    DomainPackageDetails.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
+    DomainPackageDetails.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "PackageName"))
+    DomainPackageDetails.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
+    DomainPackageDetails.add_member(:last_updated, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdated"))
+    DomainPackageDetails.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
+    DomainPackageDetails.add_member(:domain_package_status, Shapes::ShapeRef.new(shape: DomainPackageStatus, location_name: "DomainPackageStatus"))
+    DomainPackageDetails.add_member(:reference_path, Shapes::ShapeRef.new(shape: ReferencePath, location_name: "ReferencePath"))
+    DomainPackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    DomainPackageDetails.struct_class = Types::DomainPackageDetails
+
+    DomainPackageDetailsList.member = Shapes::ShapeRef.new(shape: DomainPackageDetails)
 
     EBSOptions.add_member(:ebs_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EBSEnabled"))
     EBSOptions.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
@@ -407,6 +510,10 @@ module Aws::ElasticsearchService
     EndpointsMap.key = Shapes::ShapeRef.new(shape: String)
     EndpointsMap.value = Shapes::ShapeRef.new(shape: ServiceUrl)
 
+    ErrorDetails.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
+    ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    ErrorDetails.struct_class = Types::ErrorDetails
+
     GetCompatibleElasticsearchVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
     GetCompatibleElasticsearchVersionsRequest.struct_class = Types::GetCompatibleElasticsearchVersionsRequest
 
@@ -437,7 +544,13 @@ module Aws::ElasticsearchService
     InstanceLimits.add_member(:instance_count_limits, Shapes::ShapeRef.new(shape: InstanceCountLimits, location_name: "InstanceCountLimits"))
     InstanceLimits.struct_class = Types::InstanceLimits
 
+    InternalException.struct_class = Types::InternalException
+
+    InvalidTypeException.struct_class = Types::InvalidTypeException
+
     Issues.member = Shapes::ShapeRef.new(shape: Issue)
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     LimitValueList.member = Shapes::ShapeRef.new(shape: LimitValue)
 
@@ -451,6 +564,15 @@ module Aws::ElasticsearchService
 
     ListDomainNamesResponse.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainInfoList, location_name: "DomainNames"))
     ListDomainNamesResponse.struct_class = Types::ListDomainNamesResponse
+
+    ListDomainsForPackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
+    ListDomainsForPackageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListDomainsForPackageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListDomainsForPackageRequest.struct_class = Types::ListDomainsForPackageRequest
+
+    ListDomainsForPackageResponse.add_member(:domain_package_details_list, Shapes::ShapeRef.new(shape: DomainPackageDetailsList, location_name: "DomainPackageDetailsList"))
+    ListDomainsForPackageResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListDomainsForPackageResponse.struct_class = Types::ListDomainsForPackageResponse
 
     ListElasticsearchInstanceTypesRequest.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location: "uri", location_name: "ElasticsearchVersion"))
     ListElasticsearchInstanceTypesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
@@ -469,6 +591,15 @@ module Aws::ElasticsearchService
     ListElasticsearchVersionsResponse.add_member(:elasticsearch_versions, Shapes::ShapeRef.new(shape: ElasticsearchVersionList, location_name: "ElasticsearchVersions"))
     ListElasticsearchVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListElasticsearchVersionsResponse.struct_class = Types::ListElasticsearchVersionsResponse
+
+    ListPackagesForDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    ListPackagesForDomainRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPackagesForDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPackagesForDomainRequest.struct_class = Types::ListPackagesForDomainRequest
+
+    ListPackagesForDomainResponse.add_member(:domain_package_details_list, Shapes::ShapeRef.new(shape: DomainPackageDetailsList, location_name: "DomainPackageDetailsList"))
+    ListPackagesForDomainResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListPackagesForDomainResponse.struct_class = Types::ListPackagesForDomainResponse
 
     ListTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "arn"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
@@ -505,6 +636,21 @@ module Aws::ElasticsearchService
     OptionStatus.add_member(:state, Shapes::ShapeRef.new(shape: OptionState, required: true, location_name: "State"))
     OptionStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     OptionStatus.struct_class = Types::OptionStatus
+
+    PackageDetails.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
+    PackageDetails.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "PackageName"))
+    PackageDetails.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
+    PackageDetails.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
+    PackageDetails.add_member(:package_status, Shapes::ShapeRef.new(shape: PackageStatus, location_name: "PackageStatus"))
+    PackageDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
+    PackageDetails.add_member(:error_details, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "ErrorDetails"))
+    PackageDetails.struct_class = Types::PackageDetails
+
+    PackageDetailsList.member = Shapes::ShapeRef.new(shape: PackageDetails)
+
+    PackageSource.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "S3BucketName"))
+    PackageSource.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
+    PackageSource.struct_class = Types::PackageSource
 
     PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ReservedElasticsearchInstanceOfferingId"))
     PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, required: true, location_name: "ReservationName"))
@@ -554,6 +700,10 @@ module Aws::ElasticsearchService
 
     ReservedElasticsearchInstanceOfferingList.member = Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceOffering)
 
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))
     ServiceSoftwareOptions.add_member(:update_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpdateAvailable"))
@@ -561,6 +711,7 @@ module Aws::ElasticsearchService
     ServiceSoftwareOptions.add_member(:update_status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "UpdateStatus"))
     ServiceSoftwareOptions.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ServiceSoftwareOptions.add_member(:automated_update_date, Shapes::ShapeRef.new(shape: DeploymentCloseDateTimeStamp, location_name: "AutomatedUpdateDate"))
+    ServiceSoftwareOptions.add_member(:optional_deployment, Shapes::ShapeRef.new(shape: Boolean, location_name: "OptionalDeployment"))
     ServiceSoftwareOptions.struct_class = Types::ServiceSoftwareOptions
 
     SnapshotOptions.add_member(:automated_snapshot_start_hour, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AutomatedSnapshotStartHour"))
@@ -653,6 +804,8 @@ module Aws::ElasticsearchService
     VPCOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
     VPCOptions.struct_class = Types::VPCOptions
 
+    ValidationException.struct_class = Types::ValidationException
+
     ZoneAwarenessConfig.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.struct_class = Types::ZoneAwarenessConfig
 
@@ -684,6 +837,20 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:associate_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociatePackage"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/packages/associate/{PackageID}/{DomainName}"
+        o.input = Shapes::ShapeRef.new(shape: AssociatePackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociatePackageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:cancel_elasticsearch_service_software_update, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelElasticsearchServiceSoftwareUpdate"
         o.http_method = "POST"
@@ -711,6 +878,21 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePackage"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/packages"
+        o.input = Shapes::ShapeRef.new(shape: CreatePackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePackageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:delete_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteElasticsearchDomain"
         o.http_method = "DELETE"
@@ -732,6 +914,20 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePackage"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2015-01-01/packages/{PackageID}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePackageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:describe_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -783,6 +979,25 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:describe_packages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePackages"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/packages/describe"
+        o.input = Shapes::ShapeRef.new(shape: DescribePackagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePackagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_reserved_elasticsearch_instance_offerings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeReservedElasticsearchInstanceOfferings"
         o.http_method = "GET"
@@ -817,6 +1032,20 @@ module Aws::ElasticsearchService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:dissociate_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DissociatePackage"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/packages/dissociate/{PackageID}/{DomainName}"
+        o.input = Shapes::ShapeRef.new(shape: DissociatePackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: DissociatePackageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:get_compatible_elasticsearch_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -874,6 +1103,25 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:list_domains_for_package, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDomainsForPackage"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/packages/{PackageID}/domains"
+        o.input = Shapes::ShapeRef.new(shape: ListDomainsForPackageRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDomainsForPackageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_elasticsearch_instance_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListElasticsearchInstanceTypes"
         o.http_method = "GET"
@@ -901,6 +1149,25 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_packages_for_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPackagesForDomain"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/domain/{DomainName}/packages"
+        o.input = Shapes::ShapeRef.new(shape: ListPackagesForDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPackagesForDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

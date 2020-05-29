@@ -24,17 +24,20 @@ require_relative 'aws-sdk-savingsplans/customizations'
 # methods each accept a hash of request parameters and return a response
 # structure.
 #
+#     savings_plans = Aws::SavingsPlans::Client.new
+#     resp = savings_plans.create_savings_plan(params)
+#
 # See {Client} for more information.
 #
 # # Errors
 #
-# Errors returned from AWS Savings Plans all
-# extend {Errors::ServiceError}.
+# Errors returned from AWS Savings Plans are defined in the
+# {Errors} module and all extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
 #     rescue Aws::SavingsPlans::Errors::ServiceError
-#       # rescues all service API errors
+#       # rescues all AWS Savings Plans API errors
 #     end
 #
 # See {Errors} for more information.
@@ -42,6 +45,6 @@ require_relative 'aws-sdk-savingsplans/customizations'
 # @service
 module Aws::SavingsPlans
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.5.0'
 
 end

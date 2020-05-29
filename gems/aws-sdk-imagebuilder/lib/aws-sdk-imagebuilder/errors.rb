@@ -6,6 +6,44 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Imagebuilder
+
+  # When Imagebuilder returns an error response, the Ruby SDK constructs and raises an error.
+  # These errors all extend Aws::Imagebuilder::Errors::ServiceError < {Aws::Errors::ServiceError}
+  #
+  # You can rescue all Imagebuilder errors using ServiceError:
+  #
+  #     begin
+  #       # do stuff
+  #     rescue Aws::Imagebuilder::Errors::ServiceError
+  #       # rescues all Imagebuilder API errors
+  #     end
+  #
+  #
+  # ## Request Context
+  # ServiceError objects have a {Aws::Errors::ServiceError#context #context} method that returns
+  # information about the request that generated the error.
+  # See {Seahorse::Client::RequestContext} for more information.
+  #
+  # ## Error Classes
+  # * {CallRateLimitExceededException}
+  # * {ClientException}
+  # * {ForbiddenException}
+  # * {IdempotentParameterMismatchException}
+  # * {InvalidPaginationTokenException}
+  # * {InvalidParameterCombinationException}
+  # * {InvalidParameterException}
+  # * {InvalidParameterValueException}
+  # * {InvalidRequestException}
+  # * {InvalidVersionNumberException}
+  # * {ResourceAlreadyExistsException}
+  # * {ResourceDependencyException}
+  # * {ResourceInUseException}
+  # * {ResourceNotFoundException}
+  # * {ServiceException}
+  # * {ServiceUnavailableException}
+  #
+  # Additionally, error classes are dynamically generated for service errors based on the error code
+  # if they are not defined above.
   module Errors
 
     extend Aws::Errors::DynamicErrors
@@ -23,7 +61,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ClientException < ServiceError
@@ -39,7 +76,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ForbiddenException < ServiceError
@@ -55,7 +91,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class IdempotentParameterMismatchException < ServiceError
@@ -71,7 +106,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidPaginationTokenException < ServiceError
@@ -87,7 +121,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterCombinationException < ServiceError
@@ -103,7 +136,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterException < ServiceError
@@ -119,7 +151,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidParameterValueException < ServiceError
@@ -135,7 +166,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidRequestException < ServiceError
@@ -151,7 +181,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class InvalidVersionNumberException < ServiceError
@@ -167,7 +196,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceAlreadyExistsException < ServiceError
@@ -183,7 +211,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceDependencyException < ServiceError
@@ -199,7 +226,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceInUseException < ServiceError
@@ -215,7 +241,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ResourceNotFoundException < ServiceError
@@ -231,7 +256,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceException < ServiceError
@@ -247,7 +271,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
     class ServiceUnavailableException < ServiceError
@@ -263,7 +286,6 @@ module Aws::Imagebuilder
       def message
         @message || @data[:message]
       end
-
     end
 
   end

@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 module Aws::Imagebuilder
+
   class Resource
 
     # @param options ({})
