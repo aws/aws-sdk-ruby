@@ -4,7 +4,7 @@ describe 'Client Interface:' do
   describe 'Support H2 Async' do
 
     before(:all) do
-      SpecHelper.generate_service(['Async'], multiple_files: false)  
+      SpecHelper.generate_service(['Async'], multiple_files: false)
     end
 
     if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
@@ -12,7 +12,7 @@ describe 'Client Interface:' do
       let(:output_stream) {
         [
           { message_type: 'event', event_type: :baz_result, result: { details: [ "foo" ]}}
-        ].each 
+        ].each
       }
 
       let(:client) {
@@ -124,6 +124,30 @@ describe 'Client Interface:' do
           input_stream.signal_bar_event(bar_chunk: "chunk1")
           input_stream.signal_end_stream
         }.to_not raise_error
+      end
+
+      it 'handles unknown events' do
+        input = Async::EventStreams::InputBazStream.new
+        output = Async::EventStreams::OutputBazStream.new
+        data = { details: [ "unknown" ] }
+        same_client = Async::AsyncClient.new(
+          region: 'us-west-2',
+          credentials: Aws::Credentials.new('akid', 'secret'),
+          stub_responses: {baz: {
+            stream: [
+              { message_type: 'event', event_type: :test_unknown_event, result: data }
+            ].each
+          }}
+        )
+        output.on_unknown_event do |e|
+          expect(e.event_type).to eq :unknown_event
+          expect(e.raw_event_type).to eq 'test_unknown_event'
+          expect(JSON.parse(e.raw_event.payload.read, symbolize_names: true)[:result].to_h).to eq(data)
+        end
+
+        same_client.baz(input_event_stream_handler: input,
+          output_event_stream_handler: output)
+        input.signal_end_stream
       end
     else
 

@@ -1,11 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Handle unknown and unmodeled events from event streams by ignoring them and providing a new callback rather than raising an error.
+
 3.97.0 (2020-05-28)
 ------------------
 * Feature - Default endpoint_discovery to `true` for services with at least one operation that requires it.
 * Feature - Updated Aws::STS::Client with the latest API changes.
-
 
 3.96.1 (2020-05-18)
 ------------------
