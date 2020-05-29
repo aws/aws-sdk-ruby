@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
-* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set
+
+* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set. (#2319)
 
 3.97.0 (2020-05-28)
 ------------------

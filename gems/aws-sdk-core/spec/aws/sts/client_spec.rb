@@ -3,10 +3,6 @@ require_relative '../../spec_helper'
 module Aws
   module STS
     describe Client do
-      before(:each) do
-        stub_const('ENV', {})
-      end
-
       it 'constructs the proper endpoint in gov-cloud' do
         client = Client.new(
           region: 'us-gov-west-1',

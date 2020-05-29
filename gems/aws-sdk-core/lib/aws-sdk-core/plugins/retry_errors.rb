@@ -174,7 +174,7 @@ a clock skew correction and retry requests with skewed client clocks.
       end
 
       def self.resolve_max_attempts(cfg)
-        value = ENV['AWS_MAX_ATTEMPTS'] && ENV['AWS_MAX_ATTEMPTS'].to_i ||
+        value = (ENV['AWS_MAX_ATTEMPTS'] && ENV['AWS_MAX_ATTEMPTS'].to_i) ||
                 Aws.shared_config.max_attempts(profile: cfg.profile) ||
                 3
         # Raise if provided value is not a positive integer
@@ -190,7 +190,6 @@ a clock skew correction and retry requests with skewed client clocks.
         value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] ||
           Aws.shared_config.adaptive_retry_wait_to_fill(profile: cfg.profile) ||
           'true'
-
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
           raise ArgumentError,
@@ -198,7 +197,6 @@ a clock skew correction and retry requests with skewed client clocks.
             'adaptive_retry_wait_to_fill profile option or for '\
             'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
         end
-
         value == 'true'
       end
 
@@ -206,7 +204,6 @@ a clock skew correction and retry requests with skewed client clocks.
         value = ENV['AWS_CORRECT_CLOCK_SKEW'] ||
           Aws.shared_config.correct_clock_skew(profile: cfg.profile) ||
           'true'
-
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
           raise ArgumentError,
@@ -214,7 +211,6 @@ a clock skew correction and retry requests with skewed client clocks.
             'correct_clock_skew profile option or for '\
             'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
         end
-
         value == 'true'
       end
 

@@ -6,109 +6,99 @@ module Aws
     describe RetryErrors do
       let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
 
-      context 'ENV is stubbed' do
-        before(:each) do
-          stub_const('ENV', {})
-        end
-
-        it 'can configure retry_mode with shared config' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:retry_mode).and_return('standard')
-          expect(client.config.retry_mode).to eq('standard')
-        end
-
-        it 'can configure retry_mode using ENV with precedence over config' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:retry_mode).and_return('standard')
-          ENV['AWS_RETRY_MODE'] = 'adaptive'
-          expect(client.config.retry_mode).to eq('adaptive')
-        end
-
-        it 'raises when retry_mode is not legacy, standard, or adaptive' do
-          ENV['AWS_RETRY_MODE'] = 'peccy'
-          expect { client }.to raise_error(ArgumentError)
-        end
-
-        it 'uses the handler when retry_mode is standard' do
-          client = RetryErrorsSvc::Client.new(retry_mode: 'standard',
-                                              region: 'us-west-2')
-          expect(client.handlers.entries.map(&:handler_class)).
-            to include(RetryErrors::Handler)
-        end
-
-        it 'uses the handler when retry_mode is adaptive' do
-          client = RetryErrorsSvc::Client.new(retry_mode: 'adaptive',
-                                              region: 'us-west-2')
-          expect(client.handlers.entries.map(&:handler_class))
-            .to include(RetryErrors::Handler)
-        end
-
-        it 'defaults config.max_attempts to 3' do
-          expect(client.config.max_attempts).to eq(3)
-        end
-
-        it 'can configure max_attempts with shared config' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:max_attempts).and_return(5)
-          expect(client.config.max_attempts).to eq(5)
-        end
-
-        it 'defaults config.adaptive_retry_wait_to_fill to true' do
-          expect(client.config.adaptive_retry_wait_to_fill).to eq(true)
-        end
-
-        it 'can configure adaptive_retry_wait_to_fill using ENV with precedence over config' do
-          ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] = 'false'
-          expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
-        end
-
-        it 'can configure adaptive_retry_wait_to_fill with shared config' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:adaptive_retry_wait_to_fill).and_return('false')
-          expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
-        end
-
-        it 'defaults config.correct_clock_skew to true' do
-          expect(client.config.correct_clock_skew).to eq(true)
-        end
-
-        it 'can configure correct_clock_skew using ENV with precedence over config' do
-          ENV['AWS_CORRECT_CLOCK_SKEW'] = 'true'
-          expect(client.config.correct_clock_skew).to eq(true)
-        end
-
-        it 'can configure correct_clock_skew with shared config' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:correct_clock_skew).and_return('true')
-          expect(client.config.correct_clock_skew).to eq(true)
-        end
+      it 'can configure retry_mode with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:retry_mode).and_return('standard')
+        expect(client.config.retry_mode).to eq('standard')
       end
 
-      context 'ENV is not stubbed' do
-        it 'can configure max_attempts using ENV with precedence over config' do
-          allow_any_instance_of(Aws::SharedConfig)
-            .to receive(:max_attempts).and_return(3)
-          ENV['AWS_MAX_ATTEMPTS'] = '1'
-          expect(client.config.max_attempts).to eq(1)
-        end
+      it 'can configure retry_mode using ENV with precedence over config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:retry_mode).and_return('standard')
+        ENV['AWS_RETRY_MODE'] = 'adaptive'
+        expect(client.config.retry_mode).to eq('adaptive')
+      end
 
-        it 'raises when max_attempts is not an integer' do
-          ENV['AWS_MAX_ATTEMPTS'] = 'string'
-          expect { client }.to raise_error(ArgumentError)
-        end
+      it 'raises when retry_mode is not legacy, standard, or adaptive' do
+        ENV['AWS_RETRY_MODE'] = 'peccy'
+        expect { client }.to raise_error(ArgumentError)
+      end
 
-        it 'raises when max_attempts is not >= 0' do
-          ENV['AWS_MAX_ATTEMPTS'] = '-1'
-          expect { client }.to raise_error(ArgumentError)
-        end
+      it 'uses the handler when retry_mode is standard' do
+        client = RetryErrorsSvc::Client.new(
+          retry_mode: 'standard', region: 'us-west-2'
+        )
+        expect(client.handlers.entries.map(&:handler_class)).
+          to include(RetryErrors::Handler)
+      end
+
+      it 'uses the handler when retry_mode is adaptive' do
+        client = RetryErrorsSvc::Client.new(
+          retry_mode: 'adaptive', region: 'us-west-2'
+        )
+        expect(client.handlers.entries.map(&:handler_class))
+          .to include(RetryErrors::Handler)
+      end
+
+      it 'defaults config.max_attempts to 3' do
+        expect(client.config.max_attempts).to eq(3)
+      end
+
+      it 'can configure max_attempts with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:max_attempts).and_return(5)
+        expect(client.config.max_attempts).to eq(5)
+      end
+
+      it 'can configure max_attempts using ENV with precedence over config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:max_attempts).and_return(3)
+        ENV['AWS_MAX_ATTEMPTS'] = '1'
+        expect(client.config.max_attempts).to eq(1)
+      end
+
+      it 'raises when max_attempts is not an integer' do
+        ENV['AWS_MAX_ATTEMPTS'] = 'string'
+        expect { client }.to raise_error(ArgumentError)
+      end
+
+      it 'raises when max_attempts is not >= 0' do
+        ENV['AWS_MAX_ATTEMPTS'] = '-1'
+        expect { client }.to raise_error(ArgumentError)
+      end
+
+      it 'defaults config.adaptive_retry_wait_to_fill to true' do
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(true)
+      end
+
+      it 'can configure adaptive_retry_wait_to_fill using ENV with precedence over config' do
+        ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] = 'false'
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
+      end
+
+      it 'can configure adaptive_retry_wait_to_fill with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:adaptive_retry_wait_to_fill).and_return('false')
+        expect(client.config.adaptive_retry_wait_to_fill).to eq(false)
+      end
+
+      it 'defaults config.correct_clock_skew to true' do
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
+
+      it 'can configure correct_clock_skew using ENV with precedence over config' do
+        ENV['AWS_CORRECT_CLOCK_SKEW'] = 'true'
+        expect(client.config.correct_clock_skew).to eq(true)
+      end
+
+      it 'can configure correct_clock_skew with shared config' do
+        allow_any_instance_of(Aws::SharedConfig)
+          .to receive(:correct_clock_skew).and_return('true')
+        expect(client.config.correct_clock_skew).to eq(true)
       end
     end
 
     describe RetryErrors::Handler do
-      before(:each) do
-        stub_const('ENV', {})
-      end
-
       let(:credentials) { Credentials.new('akid', 'secret') }
 
       let(:cache) { EndpointCache.new }

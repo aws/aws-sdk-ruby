@@ -7,7 +7,6 @@ module Aws
         allow(Time).to receive(:now).and_return(now)
         allow(now).to receive(:utc).and_return(utc)
         allow(utc).to receive(:strftime).and_return(datetime)
-        stub_const('ENV', {})
       end
 
       let(:now) { double('now') }

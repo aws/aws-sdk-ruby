@@ -3,9 +3,6 @@ require_relative '../../spec_helper'
 module Aws
   module Xml
     describe ErrorHandler do
-      before(:each) do
-        stub_const('ENV', {})
-      end
 
       let(:cloudfront) {
         ApiHelper.sample_service(

@@ -3,9 +3,6 @@ require_relative '../spec_helper'
 module Aws
   module Waiters
     describe 'Waiters' do
-      before(:each) do
-        stub_const('ENV', {})
-      end
 
       dir = File.expand_path('../../fixtures/waiters', __FILE__)
       WaiterTest = ApiHelper.sample_service(
