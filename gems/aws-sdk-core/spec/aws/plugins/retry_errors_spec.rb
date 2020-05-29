@@ -25,15 +25,17 @@ module Aws
       end
 
       it 'uses the handler when retry_mode is standard' do
-        client = RetryErrorsSvc::Client.new(retry_mode: 'standard',
-                                            region: 'us-west-2')
+        client = RetryErrorsSvc::Client.new(
+          retry_mode: 'standard', region: 'us-west-2'
+        )
         expect(client.handlers.entries.map(&:handler_class)).
           to include(RetryErrors::Handler)
       end
 
       it 'uses the handler when retry_mode is adaptive' do
-        client = RetryErrorsSvc::Client.new(retry_mode: 'adaptive',
-                                            region: 'us-west-2')
+        client = RetryErrorsSvc::Client.new(
+          retry_mode: 'adaptive', region: 'us-west-2'
+        )
         expect(client.handlers.entries.map(&:handler_class))
           .to include(RetryErrors::Handler)
       end
@@ -51,7 +53,7 @@ module Aws
       it 'can configure max_attempts using ENV with precedence over config' do
         allow_any_instance_of(Aws::SharedConfig)
           .to receive(:max_attempts).and_return(3)
-        ENV['AWS_MAX_ATTEMPTS'] = 1
+        ENV['AWS_MAX_ATTEMPTS'] = '1'
         expect(client.config.max_attempts).to eq(1)
       end
 
@@ -61,7 +63,7 @@ module Aws
       end
 
       it 'raises when max_attempts is not >= 0' do
-        ENV['AWS_MAX_ATTEMPTS'] = -1
+        ENV['AWS_MAX_ATTEMPTS'] = '-1'
         expect { client }.to raise_error(ArgumentError)
       end
 

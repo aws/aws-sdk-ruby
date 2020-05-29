@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Issue - Convert ENV['AWS_MAX_ATTEMPTS'] String value to Integer when set. (#2319)
 * Issue - Handle unknown and unmodeled events from event streams by ignoring them and providing a new callback rather than raising an error.
 
 3.97.0 (2020-05-28)
