@@ -69,6 +69,10 @@ module Aws::TranscribeStreamingService
         @event_emitter.on(:initial_response, block) if block_given?
       end
 
+      def on_unknown_event(&block)
+        @event_emitter.on(:unknown_event, block) if block_given?
+      end
+
       def on_event(&block)
         on_transcript_event_event(&block)
         on_bad_request_exception_event(&block)
@@ -78,6 +82,7 @@ module Aws::TranscribeStreamingService
         on_service_unavailable_exception_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
+        on_unknown_event(&block)
       end
 
       # @api private
