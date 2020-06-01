@@ -1032,6 +1032,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:generate_data_key_pair_without_plaintext, Seahorse::Model::Operation.new.tap do |o|
@@ -1048,6 +1049,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:generate_data_key_without_plaintext, Seahorse::Model::Operation.new.tap do |o|
@@ -1387,6 +1389,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
       end)
 

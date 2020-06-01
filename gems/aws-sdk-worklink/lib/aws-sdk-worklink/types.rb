@@ -139,6 +139,9 @@ module Aws::WorkLink
     #         fleet_name: "FleetName", # required
     #         display_name: "DisplayName",
     #         optimize_for_end_user_location: false,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] fleet_name
@@ -155,17 +158,22 @@ module Aws::WorkLink
     #   your home Region.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is a key-value pair.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
       :fleet_name,
       :display_name,
-      :optimize_for_end_user_location)
+      :optimize_for_end_user_location,
+      :tags)
       include Aws::Structure
     end
 
     # @!attribute [rw] fleet_arn
-    #   The ARN of the fleet.
+    #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/CreateFleetResponse AWS API Documentation
@@ -437,7 +445,7 @@ module Aws::WorkLink
     #       }
     #
     # @!attribute [rw] fleet_arn
-    #   The ARN of the fleet.
+    #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeFleetMetadataRequest AWS API Documentation
@@ -477,6 +485,10 @@ module Aws::WorkLink
     #   The current state of the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags attached to the resource. A tag is a key-value pair.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/DescribeFleetMetadataResponse AWS API Documentation
     #
     class DescribeFleetMetadataResponse < Struct.new(
@@ -486,7 +498,8 @@ module Aws::WorkLink
       :display_name,
       :optimize_for_end_user_location,
       :company_code,
-      :fleet_status)
+      :fleet_status,
+      :tags)
       include Aws::Structure
     end
 
@@ -707,7 +720,7 @@ module Aws::WorkLink
     # The summary of the fleet.
     #
     # @!attribute [rw] fleet_arn
-    #   The ARN of the fleet.
+    #   The Amazon Resource Name (ARN) of the fleet.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -723,7 +736,7 @@ module Aws::WorkLink
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name to display.
+    #   The name of the fleet to display.
     #   @return [String]
     #
     # @!attribute [rw] company_code
@@ -734,6 +747,10 @@ module Aws::WorkLink
     #   The status of the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags attached to the resource. A tag is a key-value pair.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/FleetSummary AWS API Documentation
     #
     class FleetSummary < Struct.new(
@@ -743,7 +760,8 @@ module Aws::WorkLink
       :fleet_name,
       :display_name,
       :company_code,
-      :fleet_status)
+      :fleet_status,
+      :tags)
       include Aws::Structure
     end
 
@@ -906,6 +924,35 @@ module Aws::WorkLink
     class ListFleetsResponse < Struct.new(
       :fleet_summary_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "FleetArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags attached to the resource. A tag is a key-value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -1113,6 +1160,36 @@ module Aws::WorkLink
     #
     class SignOutUserResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "FleetArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource. A tag is a key-value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The number of requests exceeds the limit.
     #
     # @!attribute [rw] message
@@ -1136,6 +1213,34 @@ module Aws::WorkLink
       :message)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "FleetArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/worklink-2018-09-25/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateAuditStreamConfigurationRequest
     #   data as a hash:

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2020-06-01)
+------------------
+
+* Feature - We are releasing HumanTaskUiArn as a new parameter in CreateLabelingJob and RenderUiTemplate which can take an ARN for a system managed UI to render a task.
+
 1.58.0 (2020-05-28)
 ------------------
 

@@ -783,6 +783,7 @@ module Aws::EMR
     #   resp.cluster.ec2_instance_attributes.additional_slave_security_groups[0] #=> String
     #   resp.cluster.instance_collection_type #=> String, one of "INSTANCE_FLEET", "INSTANCE_GROUP"
     #   resp.cluster.log_uri #=> String
+    #   resp.cluster.log_encryption_kms_key_id #=> String
     #   resp.cluster.requested_ami_version #=> String
     #   resp.cluster.running_ami_version #=> String
     #   resp.cluster.release_label #=> String
@@ -890,6 +891,7 @@ module Aws::EMR
     #   resp.job_flows[0].job_flow_id #=> String
     #   resp.job_flows[0].name #=> String
     #   resp.job_flows[0].log_uri #=> String
+    #   resp.job_flows[0].log_encryption_kms_key_id #=> String
     #   resp.job_flows[0].ami_version #=> String
     #   resp.job_flows[0].execution_status_detail.state #=> String, one of "STARTING", "BOOTSTRAPPING", "RUNNING", "WAITING", "SHUTTING_DOWN", "TERMINATED", "COMPLETED", "FAILED"
     #   resp.job_flows[0].execution_status_detail.creation_date_time #=> Time
@@ -2035,6 +2037,12 @@ module Aws::EMR
     #   The location in Amazon S3 to write the log files of the job flow. If a
     #   value is not provided, logs are not created.
     #
+    # @option params [String] :log_encryption_kms_key_id
+    #   The AWS KMS customer master key (CMK) used for encrypting log files.
+    #   If a value is not provided, the logs will remain encrypted by AES-256.
+    #   This attribute is only available with EMR version 5.30.0 and later,
+    #   excluding EMR 6.0.0.
+    #
     # @option params [String] :additional_info
     #   A JSON string for selecting additional features.
     #
@@ -2241,6 +2249,7 @@ module Aws::EMR
     #   resp = client.run_job_flow({
     #     name: "XmlStringMaxLen256", # required
     #     log_uri: "XmlString",
+    #     log_encryption_kms_key_id: "XmlString",
     #     additional_info: "XmlString",
     #     ami_version: "XmlStringMaxLen256",
     #     release_label: "XmlStringMaxLen256",
@@ -2620,7 +2629,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

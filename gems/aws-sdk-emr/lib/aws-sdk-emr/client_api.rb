@@ -359,6 +359,7 @@ module Aws::EMR
     Cluster.add_member(:ec2_instance_attributes, Shapes::ShapeRef.new(shape: Ec2InstanceAttributes, location_name: "Ec2InstanceAttributes"))
     Cluster.add_member(:instance_collection_type, Shapes::ShapeRef.new(shape: InstanceCollectionType, location_name: "InstanceCollectionType"))
     Cluster.add_member(:log_uri, Shapes::ShapeRef.new(shape: String, location_name: "LogUri"))
+    Cluster.add_member(:log_encryption_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "LogEncryptionKmsKeyId"))
     Cluster.add_member(:requested_ami_version, Shapes::ShapeRef.new(shape: String, location_name: "RequestedAmiVersion"))
     Cluster.add_member(:running_ami_version, Shapes::ShapeRef.new(shape: String, location_name: "RunningAmiVersion"))
     Cluster.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
@@ -735,6 +736,7 @@ module Aws::EMR
     JobFlowDetail.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
     JobFlowDetail.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
     JobFlowDetail.add_member(:log_uri, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogUri"))
+    JobFlowDetail.add_member(:log_encryption_kms_key_id, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogEncryptionKmsKeyId"))
     JobFlowDetail.add_member(:ami_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "AmiVersion"))
     JobFlowDetail.add_member(:execution_status_detail, Shapes::ShapeRef.new(shape: JobFlowExecutionStatusDetail, required: true, location_name: "ExecutionStatusDetail"))
     JobFlowDetail.add_member(:instances, Shapes::ShapeRef.new(shape: JobFlowInstancesDetail, required: true, location_name: "Instances"))
@@ -948,6 +950,7 @@ module Aws::EMR
 
     RunJobFlowInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
     RunJobFlowInput.add_member(:log_uri, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogUri"))
+    RunJobFlowInput.add_member(:log_encryption_kms_key_id, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogEncryptionKmsKeyId"))
     RunJobFlowInput.add_member(:additional_info, Shapes::ShapeRef.new(shape: XmlString, location_name: "AdditionalInfo"))
     RunJobFlowInput.add_member(:ami_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "AmiVersion"))
     RunJobFlowInput.add_member(:release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ReleaseLabel"))

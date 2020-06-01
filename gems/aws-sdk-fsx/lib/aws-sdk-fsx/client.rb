@@ -525,6 +525,13 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backup.file_system.lustre_configuration.mount_name #=> String
+    #   resp.backup.file_system.administrative_actions #=> Array
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backup.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #
@@ -731,7 +738,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options
     #
     # @option params [required, Array<String>] :subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
@@ -930,6 +937,13 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -1177,6 +1191,13 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -1509,6 +1530,13 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
+    #   resp.backups[0].file_system.administrative_actions #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
+    #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backups[0].file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.backups[0].file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.next_token #=> String
@@ -1762,6 +1790,13 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_systems[0].lustre_configuration.mount_name #=> String
+    #   resp.file_systems[0].administrative_actions #=> Array
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
+    #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_systems[0].administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_systems[0].administrative_actions[0].failure_details.message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -1947,24 +1982,54 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Updates a file system configuration.
+    # Use this operation to update the configuration of an existing Amazon
+    # FSx file system. For an Amazon FSx for Lustre file system, you can
+    # update only the WeeklyMaintenanceStartTime. For an Amazon for Windows
+    # File Server file system, you can update the following properties:
+    #
+    # * AutomaticBackupRetentionDays
+    #
+    # * DailyAutomaticBackupStartTime
+    #
+    # * SelfManagedActiveDirectoryConfiguration
+    #
+    # * StorageCapacity
+    #
+    # * ThroughputCapacity
+    #
+    # * WeeklyMaintenanceStartTime
+    #
+    # You can update multiple properties in a single request.
     #
     # @option params [required, String] :file_system_id
-    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   Identifies the file system that you are updating.
     #
     # @option params [String] :client_request_token
-    #   (Optional) A string of up to 64 ASCII characters that Amazon FSx uses
-    #   to ensure idempotent updates. This string is automatically filled on
-    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
-    #   an AWS SDK.
+    #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
+    #   idempotent updates. This string is automatically filled on your behalf
+    #   when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Integer] :storage_capacity
+    #   Use this parameter to increase the storage capacity of an Amazon FSx
+    #   for Windows File Server file system. Specifies the storage capacity
+    #   target value, GiB, for the file system you're updating. The storage
+    #   capacity target value must be at least 10 percent (%) greater than the
+    #   current storage capacity value. In order to increase storage capacity,
+    #   the file system needs to have at least 16 MB/s of throughput capacity.
+    #   You cannot make a storage capacity increase request if there is an
+    #   existing storage capacity increase request in progress. For more
+    #   information, see [Managing Storage Capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+    #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
-    #   The configuration update for this Microsoft Windows file system. The
-    #   only supported options are for backup and maintenance and for
-    #   self-managed Active Directory configuration.
+    #   The configuration updates for an Amazon FSx for Windows File Server
+    #   file system.
     #
     # @option params [Types::UpdateFileSystemLustreConfiguration] :lustre_configuration
     #   The configuration object for Amazon FSx for Lustre file systems used
@@ -2023,10 +2088,12 @@ module Aws::FSx
     #   resp = client.update_file_system({
     #     file_system_id: "FileSystemId", # required
     #     client_request_token: "ClientRequestToken",
+    #     storage_capacity: 1,
     #     windows_configuration: {
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
+    #       throughput_capacity: 1,
     #       self_managed_active_directory_configuration: {
     #         user_name: "DirectoryUserName",
     #         password: "DirectoryPassword",
@@ -2084,6 +2151,13 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -2107,7 +2181,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

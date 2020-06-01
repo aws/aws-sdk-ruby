@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2020-06-01)
+------------------
+
+* Feature - Amazon WorkLink now supports resource tagging for fleets.
+
 1.15.0 (2020-05-28)
 ------------------
 

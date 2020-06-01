@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-06-01)
+------------------
+
+* Feature - Amazon EMR now supports encrypting log files with AWS Key Management Service (KMS) customer managed keys.
+
 1.28.0 (2020-05-28)
 ------------------
 

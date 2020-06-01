@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.67.1 (2020-06-01)
+------------------
+
 * Issue - Add support for Object.exists? and Waiters for the encryption client.
 
 1.67.0 (2020-05-28)

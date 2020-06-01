@@ -27,6 +27,7 @@ module Aws::Athena
   # ## Error Classes
   # * {InternalServerException}
   # * {InvalidRequestException}
+  # * {MetadataException}
   # * {ResourceNotFoundException}
   # * {TooManyRequestsException}
   #
@@ -63,6 +64,21 @@ module Aws::Athena
       # @return [String]
       def athena_error_code
         @data[:athena_error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class MetadataException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Athena::Types::MetadataException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
       # @return [String]
