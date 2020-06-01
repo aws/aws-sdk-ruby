@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::WorkLink - Updated the API, and documentation for Amazon WorkLink.
+
 2.11.517 (2020-05-28)
 ------------------
 
