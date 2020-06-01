@@ -34,6 +34,9 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
           if cfg.respond_to?(:sts_regional_endpoints)
             sts_regional = cfg.sts_regional_endpoints
           end
+
+          validate_region(cfg.region)
+
           Aws::Partitions::EndpointProvider.resolve(
             cfg.region,
             endpoint_prefix,
@@ -42,19 +45,19 @@ to test or custom endpoints. This should be a valid HTTP(S) URI.
         end
       end
 
-      def after_initialize(client)
-        if client.config.region.nil? || client.config.region == ''
-          raise Errors::MissingRegionError
-        end
-
-        # check region is a valid RFC host label
-        unless client.config.region =~ /^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$/
-          raise Errors::InvalidRegionError
-        end
-      end
-
       class << self
         private
+
+        def validate_region(region)
+          if region.nil? || region == ''
+            raise Errors::MissingRegionError
+          end
+
+          # check region is a valid RFC host label
+          unless region =~ /^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$/
+            raise Errors::InvalidRegionError
+          end
+        end
 
         def resolve_region(cfg)
           keys = %w[AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION]
