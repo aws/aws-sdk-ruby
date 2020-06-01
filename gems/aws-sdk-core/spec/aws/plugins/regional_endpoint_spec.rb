@@ -52,6 +52,12 @@ module Aws
           expect(client_class.new(region: 'cfg').config.region).to eq('cfg')
         end
 
+        it 'raises when region is not a valid RFC host label' do
+          expect {
+            client_class.new(region: '@peccy.com')
+          }.to raise_error(Errors::InvalidRegionError)
+        end
+
         it 'raises an argument error when not set' do
           client = Seahorse::Client::Base.define
           client.add_plugin(RegionalEndpoint)
@@ -79,15 +85,6 @@ module Aws
             end
           end
         end
-
-        it 'raises when region is not in the proper format' do
-          client = Seahorse::Client::Base.define
-          client.add_plugin(RegionalEndpoint)
-          expect {
-            client.new(region: '@peccy.com')
-          }.to raise_error(Errors::InvalidRegionError)
-        end
-
       end
 
       describe 'endpoint option' do
