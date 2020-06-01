@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.518 (2020-06-01)
+------------------
+
 * Feature - Aws::Athena - Updated the API, and documentation for Amazon Athena.
 
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
