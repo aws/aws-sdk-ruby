@@ -27,7 +27,7 @@ a default `:region` is searched for in the following locations:
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
-to test endpoints. This should be a valid HTTP(S) URI.
+to test or custom endpoints. This should be a valid HTTP(S) URI.
         DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
@@ -47,8 +47,8 @@ to test endpoints. This should be a valid HTTP(S) URI.
           raise Errors::MissingRegionError
         end
 
-        # check region format follows pattern <continent>-<direction>-<number>
-        unless client.config.region =~ /^[a-zA-Z]([a-zA-Z0-9\-]*[a-zA-Z0-9])?$/
+        # check region is a valid RFC host label
+        unless client.config.region =~ /^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{,63}(?<!-)$/
           raise Errors::InvalidRegionError
         end
       end
