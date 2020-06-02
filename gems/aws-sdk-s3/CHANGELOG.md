@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Change `:compute_checksums` option to compute checksums only for optional operations when set to true, and no operations when set to false. Operations that require checksums are now modeled with `httpChecksumRequired` and computed automatically in aws-sdk-core.
+
 1.67.1 (2020-06-01)
 ------------------
 
