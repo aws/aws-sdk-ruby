@@ -6,9 +6,6 @@ module Aws
     module EncryptionV2
 
       # Provides an IO wrapper encrpyting a stream of data.
-      # It is possible to use this same object for decrypting. You must
-      # initialize it with a decryptiion cipher in that case and the
-      # IO object must contain cipher text instead of plain text.
       # @api private
       class IOEncrypter
 
@@ -26,7 +23,7 @@ module Aws
         attr_reader :size
 
         def read(bytes =  nil, output_buffer = nil)
-          if Tempfile === @encrypted && @encrypted.closed?
+          if @encrypted.is_a?(Tempfile) && @encrypted.closed?
             @encrypted.open
             @encrypted.binmode
           end
@@ -39,7 +36,7 @@ module Aws
 
         # @api private
         def close
-          @encrypted.close if Tempfile === @encrypted
+          @encrypted.close if @encrypted.is_a?(Tempfile)
         end
 
         private
@@ -48,7 +45,7 @@ module Aws
           if plain_text.empty?
             StringIO.new(cipher.final)
           else
-            io = StringIO.new(cipher.update(plain_text) + cipher.final + cipher.auth_tag)
+            StringIO.new(cipher.update(plain_text) + cipher.final + cipher.auth_tag)
           end
         end
 

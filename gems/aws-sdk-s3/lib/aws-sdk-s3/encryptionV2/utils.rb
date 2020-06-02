@@ -99,7 +99,6 @@ module Aws
             cipher.send(mode) # encrypt or decrypt
             cipher.key = key if key
             cipher.iv = iv if iv
-            puts "Created an AES cipher: #{cipher.name}"
             cipher
           end
 

@@ -50,10 +50,10 @@ module Aws
           end
 
           it 'sets the body to the IOEncrypter and calls close on_headers' do
-            encryptor = double()
-            expect(IOEncrypter).to receive(:new).with(cipher, kind_of(StringIO)).and_return(encryptor)
+            encrypter = double()
+            expect(IOEncrypter).to receive(:new).with(cipher, kind_of(StringIO)).and_return(encrypter)
             expect(http_response).to receive(:on_headers) { |&block| block.call }
-            expect(encryptor).to receive(:close)
+            expect(encrypter).to receive(:close)
             handler.call(context)
           end
 
