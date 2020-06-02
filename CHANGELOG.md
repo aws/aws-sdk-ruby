@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.519 (2020-06-02)
+------------------
+
 * Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
 
 2.11.518 (2020-06-01)
