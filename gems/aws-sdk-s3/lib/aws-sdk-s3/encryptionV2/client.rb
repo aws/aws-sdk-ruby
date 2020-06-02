@@ -181,7 +181,7 @@ module Aws
 
         extend Deprecations
         extend Forwardable
-        def_delegators :@client, :config, :delete_object, :head_object
+        def_delegators :@client, :config, :delete_object, :head_object, :build_request
 
         # Creates a new encryption client. You must provide one of the following
         # options:
@@ -275,7 +275,7 @@ module Aws
         # @note The `:range` request parameter is not yet supported.
         def get_object(params = {}, &block)
           if params[:range]
-            raise NotImplementedError, '#get_object with :range not supported yet'
+            raise NotImplementedError, '#get_object with :range not supported'
           end
           envelope_location, instruction_file_suffix = envelope_options(params)
           req = @client.build_request(:get_object, params)
@@ -319,7 +319,6 @@ module Aws
               kms_client: kms_client(options),
             )
           else
-            # kept here for backwards compatability, {#key_provider} is deprecated
             @key_provider = extract_key_provider(options)
             DefaultCipherProvider.new(key_provider: @key_provider)
           end
@@ -359,7 +358,7 @@ module Aws
 
         def extract_suffix(options)
           suffix = options[:instruction_file_suffix] || '.instruction'
-          if String === suffix
+          if suffix.is_a? String
             suffix
           else
             msg = ':instruction_file_suffix must be a String'
