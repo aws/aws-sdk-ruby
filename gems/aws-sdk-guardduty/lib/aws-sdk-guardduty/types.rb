@@ -44,6 +44,27 @@ module Aws::GuardDuty
     #
     class AcceptInvitationResponse < Aws::EmptyStructure; end
 
+    # Contains information on the current access control policies for the
+    # bucket.
+    #
+    # @!attribute [rw] allows_public_read_access
+    #   A value that indicates whether public read access for the bucket is
+    #   enabled through an Access Control List (ACL).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allows_public_write_access
+    #   A value that indicates whether public write access for the bucket is
+    #   enabled through an Access Control List (ACL).
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccessControlList AWS API Documentation
+    #
+    class AccessControlList < Struct.new(
+      :allows_public_read_access,
+      :allows_public_write_access)
+      include Aws::Structure
+    end
+
     # Contains information about the access keys.
     #
     # @!attribute [rw] access_key_id
@@ -95,6 +116,21 @@ module Aws::GuardDuty
     class AccountDetail < Struct.new(
       :account_id,
       :email)
+      include Aws::Structure
+    end
+
+    # Contains information about the account level permissions on the S3
+    # bucket.
+    #
+    # @!attribute [rw] block_public_access
+    #   Describes the S3 Block Public Access settings of the bucket's
+    #   parent account.
+    #   @return [Types::BlockPublicAccess]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountLevelPermissions AWS API Documentation
+    #
+    class AccountLevelPermissions < Struct.new(
+      :block_public_access)
       include Aws::Structure
     end
 
@@ -230,6 +266,87 @@ module Aws::GuardDuty
     class BadRequestException < Struct.new(
       :message,
       :type)
+      include Aws::Structure
+    end
+
+    # Contains information on how the bucker owner's S3 Block Public Access
+    # settings are being applied to the S3 bucket. See [S3 Block Public
+    # Access][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
+    #
+    # @!attribute [rw] ignore_public_acls
+    #   Indicates if S3 Block Public Access is set to `IgnorePublicAcls`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restrict_public_buckets
+    #   Indicates if S3 Block Public Access is set to
+    #   `RestrictPublicBuckets`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] block_public_acls
+    #   Indicates if S3 Block Public Access is set to `BlockPublicAcls`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] block_public_policy
+    #   Indicates if S3 Block Public Access is set to `BlockPublicPolicy`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BlockPublicAccess AWS API Documentation
+    #
+    class BlockPublicAccess < Struct.new(
+      :ignore_public_acls,
+      :restrict_public_buckets,
+      :block_public_acls,
+      :block_public_policy)
+      include Aws::Structure
+    end
+
+    # Contains information about the bucket level permissions for the S3
+    # bucket.
+    #
+    # @!attribute [rw] access_control_list
+    #   Contains information on how Access Control Policies are applied to
+    #   the bucket.
+    #   @return [Types::AccessControlList]
+    #
+    # @!attribute [rw] bucket_policy
+    #   Contains information on the bucket policies for the S3 bucket.
+    #   @return [Types::BucketPolicy]
+    #
+    # @!attribute [rw] block_public_access
+    #   Contains information on which account level S3 Block Public Access
+    #   settings are applied to the S3 bucket.
+    #   @return [Types::BlockPublicAccess]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BucketLevelPermissions AWS API Documentation
+    #
+    class BucketLevelPermissions < Struct.new(
+      :access_control_list,
+      :bucket_policy,
+      :block_public_access)
+      include Aws::Structure
+    end
+
+    # Contains information on the current bucket policies for the S3 bucket.
+    #
+    # @!attribute [rw] allows_public_read_access
+    #   A value that indicates whether public read access for the bucket is
+    #   enabled through a bucket policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allows_public_write_access
+    #   A value that indicates whether public write access for the bucket is
+    #   enabled through a bucket policy.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/BucketPolicy AWS API Documentation
+    #
+    class BucketPolicy < Struct.new(
+      :allows_public_read_access,
+      :allows_public_write_access)
       include Aws::Structure
     end
 
@@ -658,7 +775,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet.
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -859,7 +977,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet.
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -931,6 +1050,30 @@ module Aws::GuardDuty
     #
     class DeclineInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      include Aws::Structure
+    end
+
+    # Contains information on the server side encryption method used in the
+    # S3 bucket. See [S3 Server-Side Encryption][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption used for objects within the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS encryption key. Only
+    #   available if the bucket `EncryptionType` is `aws:kms`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DefaultServerSideEncryption AWS API Documentation
+    #
+    class DefaultServerSideEncryption < Struct.new(
+      :encryption_type,
+      :kms_master_key_arn)
       include Aws::Structure
     end
 
@@ -1841,7 +1984,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet.
+    #   The URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1988,7 +2132,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet.
+    #   The URI of the file that contains the ThreatIntelSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2367,8 +2512,6 @@ module Aws::GuardDuty
     #
     #   * resource.instanceDetails.instanceId
     #
-    #   * resource.instanceDetails.outpostArn
-    #
     #   * resource.instanceDetails.networkInterfaces.ipv6Addresses
     #
     #   * resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
@@ -2418,8 +2561,6 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
-    #
-    #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
@@ -2628,11 +2769,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] only_associated
-    #   Specifies what member accounts the response includes based on their
-    #   relationship status with the master account. The default value is
-    #   "true". If set to "false" the response includes all existing
-    #   member accounts (including members who haven't been invited yet or
-    #   have been disassociated).
+    #   Specifies whether to only return associated members or to return all
+    #   members (including members who haven't been invited yet or have
+    #   been disassociated).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest AWS API Documentation
@@ -3083,6 +3222,46 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information on the owner of the bucket.
+    #
+    # @!attribute [rw] id
+    #   The canonical user ID of the bucket owner. For information about
+    #   locating your canonical user ID see [Finding Your Account Canonical
+    #   User ID.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Owner AWS API Documentation
+    #
+    class Owner < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # Contains information about how permissions are configured for the S3
+    # bucket.
+    #
+    # @!attribute [rw] bucket_level_permissions
+    #   Contains information about the bucket level permissions for the S3
+    #   bucket.
+    #   @return [Types::BucketLevelPermissions]
+    #
+    # @!attribute [rw] account_level_permissions
+    #   Contains information about the account level permissions on the S3
+    #   bucket.
+    #   @return [Types::AccountLevelPermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PermissionConfiguration AWS API Documentation
+    #
+    class PermissionConfiguration < Struct.new(
+      :bucket_level_permissions,
+      :account_level_permissions)
+      include Aws::Structure
+    end
+
     # Contains information about the PORT\_PROBE action described in the
     # finding.
     #
@@ -3162,6 +3341,26 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Describes the public access policies that apply to the S3 bucket.
+    #
+    # @!attribute [rw] permission_configuration
+    #   Contains information about how permissions are configured for the S3
+    #   bucket.
+    #   @return [Types::PermissionConfiguration]
+    #
+    # @!attribute [rw] effective_permission
+    #   Describes the effective permission on this bucket after factoring
+    #   all attached policies.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PublicAccess AWS API Documentation
+    #
+    class PublicAccess < Struct.new(
+      :permission_configuration,
+      :effective_permission)
+      include Aws::Structure
+    end
+
     # Contains information about the remote IP address of the connection.
     #
     # @!attribute [rw] city
@@ -3222,6 +3421,10 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::AccessKeyDetails]
     #
+    # @!attribute [rw] s3_bucket_details
+    #   Contains information on the S3 bucket.
+    #   @return [Array<Types::S3BucketDetail>]
+    #
     # @!attribute [rw] instance_details
     #   The information about the EC2 instance associated with the activity
     #   that prompted GuardDuty to generate a finding.
@@ -3235,8 +3438,55 @@ module Aws::GuardDuty
     #
     class Resource < Struct.new(
       :access_key_details,
+      :s3_bucket_details,
       :instance_details,
       :resource_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Describes whether the bucket is a source or destination bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the bucket was created at.
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the S3 bucket.
+    #   @return [Types::Owner]
+    #
+    # @!attribute [rw] tags
+    #   All tags attached to the S3 bucket
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] default_server_side_encryption
+    #   Describes the server side encryption method used in the S3 bucket.
+    #   @return [Types::DefaultServerSideEncryption]
+    #
+    # @!attribute [rw] public_access
+    #   Describes the public access policies that apply to the S3 bucket.
+    #   @return [Types::PublicAccess]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3BucketDetail AWS API Documentation
+    #
+    class S3BucketDetail < Struct.new(
+      :arn,
+      :name,
+      :type,
+      :created_at,
+      :owner,
+      :tags,
+      :default_server_side_encryption,
+      :public_access)
       include Aws::Structure
     end
 
@@ -3748,7 +3998,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet.
+    #   The updated URI of the file that contains the IPSet. For example:
+    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -3866,7 +4117,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the ThreateIntelSet.
+    #   The updated URI of the file that contains the ThreateIntelSet. For
+    #   example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
     #   @return [String]
     #
     # @!attribute [rw] activate

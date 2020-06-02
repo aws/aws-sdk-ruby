@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-06-02)
+------------------
+
+* Feature - Amazon GuardDuty findings now include S3 bucket details under the resource section if an S3 Bucket was one of the affected resources
+
 1.33.0 (2020-05-28)
 ------------------
 
