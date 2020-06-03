@@ -4,14 +4,12 @@ module Aws
   module Plugins
     # @api private
     class HttpChecksum < Seahorse::Client::Plugin
-
       # @api private
       class Handler < Seahorse::Client::Handler
         CHUNK_SIZE = 1 * 1024 * 1024 # one MB
 
         def call(context)
           if context.operation.http_checksum_required
-            puts "------------i am a checksum required operation"
             body = context.http_request.body
             context.http_request.headers['Content-Md5'] ||= md5(body)
           end
@@ -23,7 +21,8 @@ module Aws
         # @param [File, Tempfile, IO#read, String] value
         # @return [String<MD5>]
         def md5(value)
-          if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
+          if (value.is_a?(File) || value.is_a?(Tempfile)) &&
+             !value.path.nil? && File.exist?(value.path)
             OpenSSL::Digest::MD5.file(value).base64digest
           elsif value.respond_to?(:read)
             md5 = OpenSSL::Digest::MD5.new
@@ -45,7 +44,7 @@ module Aws
 
       end
 
-      def add_handlers(handlers, config)
+      def add_handlers(handlers, _config)
         # priority set low to ensure checksum is computed AFTER the request is
         # built but before it is signed
         handlers.add(Handler, priority: 10, step: :build)

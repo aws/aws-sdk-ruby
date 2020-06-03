@@ -4,9 +4,11 @@ module Aws
   module S3
     module Plugins
       # @api private
+      # This plugin is effectively deprecated in favor of modeled
+      # httpChecksumRequired traits.
       class Md5s < Seahorse::Client::Plugin
         # These operations allow Content MD5 but are not required by
-        # httpChecksumRequired
+        # httpChecksumRequired. This list should not grow.
         OPTIONAL_OPERATIONS = [
           :put_object,
           :upload_part
@@ -18,7 +20,6 @@ module Aws
           CHUNK_SIZE = 1 * 1024 * 1024 # one MB
 
           def call(context)
-            puts "------------i am an optional operation"
             body = context.http_request.body
             if body.size > 0
               context.http_request.headers['Content-Md5'] ||= md5(body)
@@ -57,10 +58,11 @@ module Aws
           default: true,
           doc_type: 'Boolean',
           docstring: <<-DOCS)
-When `true` a MD5 checksum will be computed for every request that
-optionally allows for a Content MD5 header.  When `false`, MD5 checksums
-will not be computed for optional operations. Checksum errors returned by
-Amazon S3 are automatically retried up to `:retry_limit` times.
+When `true` a MD5 checksum will be computed and sent in the Content Md5
+header for :put_object and :upload_part. When `false`, MD5 checksums
+will not be computed for these operations. Checksums are still computed
+for operations requiring them. Checksum errors returned by Amazon S3 are
+automatically retried up to `:retry_limit` times.
           DOCS
 
         def add_handlers(handlers, config)
