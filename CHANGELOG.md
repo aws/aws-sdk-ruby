@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.520 (2020-06-03)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
