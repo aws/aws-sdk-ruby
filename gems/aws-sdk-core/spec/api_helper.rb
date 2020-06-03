@@ -56,6 +56,7 @@ module ApiHelper
             'StringMap' => { 'shape' => 'StringMap' },
             # scalar members
             'Blob' => { 'shape' => 'BlobShape' },
+            'StreamingBlob' => { 'shape' => 'BlobShape', 'streaming' => 'true' },
             'Byte' => { 'shape' => 'ByteShape' },
             'Boolean' => { 'shape' => 'BooleanShape' },
             'Character' => { 'shape' => 'CharacterShape' },
