@@ -44,7 +44,6 @@ module Aws
             iv = decode64(envelope['x-amz-iv'])
             Utils.aes_decryption_cipher(:CBC, key, iv)
           else
-            puts "Building Decryption_cipher for: #{envelope}"
             master_key = @key_provider.key_for(envelope['x-amz-matdesc'])
             if envelope['x-amz-cek-alg'] != 'AES/GCM/NoPadding'
               raise ArgumentError, 'Unsupported cek-alg: ' \
