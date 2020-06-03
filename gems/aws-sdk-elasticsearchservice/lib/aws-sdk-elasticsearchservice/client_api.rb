@@ -12,6 +12,8 @@ module Aws::ElasticsearchService
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AcceptInboundCrossClusterSearchConnectionRequest = Shapes::StructureShape.new(name: 'AcceptInboundCrossClusterSearchConnectionRequest')
+    AcceptInboundCrossClusterSearchConnectionResponse = Shapes::StructureShape.new(name: 'AcceptInboundCrossClusterSearchConnectionResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPoliciesStatus = Shapes::StructureShape.new(name: 'AccessPoliciesStatus')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
@@ -34,13 +36,22 @@ module Aws::ElasticsearchService
     CompatibleElasticsearchVersionsList = Shapes::ListShape.new(name: 'CompatibleElasticsearchVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionAlias = Shapes::StringShape.new(name: 'ConnectionAlias')
     CreateElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainRequest')
     CreateElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainResponse')
+    CreateOutboundCrossClusterSearchConnectionRequest = Shapes::StructureShape.new(name: 'CreateOutboundCrossClusterSearchConnectionRequest')
+    CreateOutboundCrossClusterSearchConnectionResponse = Shapes::StructureShape.new(name: 'CreateOutboundCrossClusterSearchConnectionResponse')
     CreatePackageRequest = Shapes::StructureShape.new(name: 'CreatePackageRequest')
     CreatePackageResponse = Shapes::StructureShape.new(name: 'CreatePackageResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
+    CrossClusterSearchConnectionId = Shapes::StringShape.new(name: 'CrossClusterSearchConnectionId')
+    CrossClusterSearchConnectionStatusMessage = Shapes::StringShape.new(name: 'CrossClusterSearchConnectionStatusMessage')
     DeleteElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainRequest')
     DeleteElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'DeleteElasticsearchDomainResponse')
+    DeleteInboundCrossClusterSearchConnectionRequest = Shapes::StructureShape.new(name: 'DeleteInboundCrossClusterSearchConnectionRequest')
+    DeleteInboundCrossClusterSearchConnectionResponse = Shapes::StructureShape.new(name: 'DeleteInboundCrossClusterSearchConnectionResponse')
+    DeleteOutboundCrossClusterSearchConnectionRequest = Shapes::StructureShape.new(name: 'DeleteOutboundCrossClusterSearchConnectionRequest')
+    DeleteOutboundCrossClusterSearchConnectionResponse = Shapes::StructureShape.new(name: 'DeleteOutboundCrossClusterSearchConnectionResponse')
     DeletePackageRequest = Shapes::StructureShape.new(name: 'DeletePackageRequest')
     DeletePackageResponse = Shapes::StructureShape.new(name: 'DeletePackageResponse')
     DeploymentCloseDateTimeStamp = Shapes::TimestampShape.new(name: 'DeploymentCloseDateTimeStamp')
@@ -53,6 +64,10 @@ module Aws::ElasticsearchService
     DescribeElasticsearchDomainsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainsResponse')
     DescribeElasticsearchInstanceTypeLimitsRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsRequest')
     DescribeElasticsearchInstanceTypeLimitsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsResponse')
+    DescribeInboundCrossClusterSearchConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeInboundCrossClusterSearchConnectionsRequest')
+    DescribeInboundCrossClusterSearchConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeInboundCrossClusterSearchConnectionsResponse')
+    DescribeOutboundCrossClusterSearchConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeOutboundCrossClusterSearchConnectionsRequest')
+    DescribeOutboundCrossClusterSearchConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeOutboundCrossClusterSearchConnectionsResponse')
     DescribePackagesFilter = Shapes::StructureShape.new(name: 'DescribePackagesFilter')
     DescribePackagesFilterList = Shapes::ListShape.new(name: 'DescribePackagesFilterList')
     DescribePackagesFilterName = Shapes::StringShape.new(name: 'DescribePackagesFilterName')
@@ -72,6 +87,7 @@ module Aws::ElasticsearchService
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainInfo = Shapes::StructureShape.new(name: 'DomainInfo')
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
+    DomainInformation = Shapes::StructureShape.new(name: 'DomainInformation')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
@@ -97,6 +113,8 @@ module Aws::ElasticsearchService
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterList = Shapes::ListShape.new(name: 'FilterList')
     GUID = Shapes::StringShape.new(name: 'GUID')
     GetCompatibleElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsRequest')
     GetCompatibleElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsResponse')
@@ -105,6 +123,10 @@ module Aws::ElasticsearchService
     GetUpgradeStatusRequest = Shapes::StructureShape.new(name: 'GetUpgradeStatusRequest')
     GetUpgradeStatusResponse = Shapes::StructureShape.new(name: 'GetUpgradeStatusResponse')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
+    InboundCrossClusterSearchConnection = Shapes::StructureShape.new(name: 'InboundCrossClusterSearchConnection')
+    InboundCrossClusterSearchConnectionStatus = Shapes::StructureShape.new(name: 'InboundCrossClusterSearchConnectionStatus')
+    InboundCrossClusterSearchConnectionStatusCode = Shapes::StringShape.new(name: 'InboundCrossClusterSearchConnectionStatusCode')
+    InboundCrossClusterSearchConnections = Shapes::ListShape.new(name: 'InboundCrossClusterSearchConnections')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
     InstanceLimits = Shapes::StructureShape.new(name: 'InstanceLimits')
@@ -112,6 +134,7 @@ module Aws::ElasticsearchService
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerClass = Shapes::IntegerShape.new(name: 'IntegerClass')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
+    InvalidPaginationTokenException = Shapes::StructureShape.new(name: 'InvalidPaginationTokenException')
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
     Issue = Shapes::StringShape.new(name: 'Issue')
     Issues = Shapes::ListShape.new(name: 'Issues')
@@ -145,8 +168,14 @@ module Aws::ElasticsearchService
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     OptionState = Shapes::StringShape.new(name: 'OptionState')
     OptionStatus = Shapes::StructureShape.new(name: 'OptionStatus')
+    OutboundCrossClusterSearchConnection = Shapes::StructureShape.new(name: 'OutboundCrossClusterSearchConnection')
+    OutboundCrossClusterSearchConnectionStatus = Shapes::StructureShape.new(name: 'OutboundCrossClusterSearchConnectionStatus')
+    OutboundCrossClusterSearchConnectionStatusCode = Shapes::StringShape.new(name: 'OutboundCrossClusterSearchConnectionStatusCode')
+    OutboundCrossClusterSearchConnections = Shapes::ListShape.new(name: 'OutboundCrossClusterSearchConnections')
+    OwnerId = Shapes::StringShape.new(name: 'OwnerId')
     PackageDescription = Shapes::StringShape.new(name: 'PackageDescription')
     PackageDetails = Shapes::StructureShape.new(name: 'PackageDetails')
     PackageDetailsList = Shapes::ListShape.new(name: 'PackageDetailsList')
@@ -162,6 +191,9 @@ module Aws::ElasticsearchService
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
     RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
     ReferencePath = Shapes::StringShape.new(name: 'ReferencePath')
+    Region = Shapes::StringShape.new(name: 'Region')
+    RejectInboundCrossClusterSearchConnectionRequest = Shapes::StructureShape.new(name: 'RejectInboundCrossClusterSearchConnectionRequest')
+    RejectInboundCrossClusterSearchConnectionResponse = Shapes::StructureShape.new(name: 'RejectInboundCrossClusterSearchConnectionResponse')
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
     ReservationToken = Shapes::StringShape.new(name: 'ReservationToken')
     ReservedElasticsearchInstance = Shapes::StructureShape.new(name: 'ReservedElasticsearchInstance')
@@ -213,8 +245,15 @@ module Aws::ElasticsearchService
     VPCDerivedInfoStatus = Shapes::StructureShape.new(name: 'VPCDerivedInfoStatus')
     VPCOptions = Shapes::StructureShape.new(name: 'VPCOptions')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
     ZoneAwarenessConfig = Shapes::StructureShape.new(name: 'ZoneAwarenessConfig')
+
+    AcceptInboundCrossClusterSearchConnectionRequest.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, required: true, location: "uri", location_name: "ConnectionId"))
+    AcceptInboundCrossClusterSearchConnectionRequest.struct_class = Types::AcceptInboundCrossClusterSearchConnectionRequest
+
+    AcceptInboundCrossClusterSearchConnectionResponse.add_member(:cross_cluster_search_connection, Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnection, location_name: "CrossClusterSearchConnection"))
+    AcceptInboundCrossClusterSearchConnectionResponse.struct_class = Types::AcceptInboundCrossClusterSearchConnectionResponse
 
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -305,6 +344,18 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
     CreateElasticsearchDomainResponse.struct_class = Types::CreateElasticsearchDomainResponse
 
+    CreateOutboundCrossClusterSearchConnectionRequest.add_member(:source_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, required: true, location_name: "SourceDomainInfo"))
+    CreateOutboundCrossClusterSearchConnectionRequest.add_member(:destination_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, required: true, location_name: "DestinationDomainInfo"))
+    CreateOutboundCrossClusterSearchConnectionRequest.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, required: true, location_name: "ConnectionAlias"))
+    CreateOutboundCrossClusterSearchConnectionRequest.struct_class = Types::CreateOutboundCrossClusterSearchConnectionRequest
+
+    CreateOutboundCrossClusterSearchConnectionResponse.add_member(:source_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, location_name: "SourceDomainInfo"))
+    CreateOutboundCrossClusterSearchConnectionResponse.add_member(:destination_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, location_name: "DestinationDomainInfo"))
+    CreateOutboundCrossClusterSearchConnectionResponse.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, location_name: "ConnectionAlias"))
+    CreateOutboundCrossClusterSearchConnectionResponse.add_member(:connection_status, Shapes::ShapeRef.new(shape: OutboundCrossClusterSearchConnectionStatus, location_name: "ConnectionStatus"))
+    CreateOutboundCrossClusterSearchConnectionResponse.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, location_name: "CrossClusterSearchConnectionId"))
+    CreateOutboundCrossClusterSearchConnectionResponse.struct_class = Types::CreateOutboundCrossClusterSearchConnectionResponse
+
     CreatePackageRequest.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, required: true, location_name: "PackageName"))
     CreatePackageRequest.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, required: true, location_name: "PackageType"))
     CreatePackageRequest.add_member(:package_description, Shapes::ShapeRef.new(shape: PackageDescription, location_name: "PackageDescription"))
@@ -319,6 +370,18 @@ module Aws::ElasticsearchService
 
     DeleteElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
     DeleteElasticsearchDomainResponse.struct_class = Types::DeleteElasticsearchDomainResponse
+
+    DeleteInboundCrossClusterSearchConnectionRequest.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, required: true, location: "uri", location_name: "ConnectionId"))
+    DeleteInboundCrossClusterSearchConnectionRequest.struct_class = Types::DeleteInboundCrossClusterSearchConnectionRequest
+
+    DeleteInboundCrossClusterSearchConnectionResponse.add_member(:cross_cluster_search_connection, Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnection, location_name: "CrossClusterSearchConnection"))
+    DeleteInboundCrossClusterSearchConnectionResponse.struct_class = Types::DeleteInboundCrossClusterSearchConnectionResponse
+
+    DeleteOutboundCrossClusterSearchConnectionRequest.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, required: true, location: "uri", location_name: "ConnectionId"))
+    DeleteOutboundCrossClusterSearchConnectionRequest.struct_class = Types::DeleteOutboundCrossClusterSearchConnectionRequest
+
+    DeleteOutboundCrossClusterSearchConnectionResponse.add_member(:cross_cluster_search_connection, Shapes::ShapeRef.new(shape: OutboundCrossClusterSearchConnection, location_name: "CrossClusterSearchConnection"))
+    DeleteOutboundCrossClusterSearchConnectionResponse.struct_class = Types::DeleteOutboundCrossClusterSearchConnectionResponse
 
     DeletePackageRequest.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, required: true, location: "uri", location_name: "PackageID"))
     DeletePackageRequest.struct_class = Types::DeletePackageRequest
@@ -351,6 +414,24 @@ module Aws::ElasticsearchService
 
     DescribeElasticsearchInstanceTypeLimitsResponse.add_member(:limits_by_role, Shapes::ShapeRef.new(shape: LimitsByRole, location_name: "LimitsByRole"))
     DescribeElasticsearchInstanceTypeLimitsResponse.struct_class = Types::DescribeElasticsearchInstanceTypeLimitsResponse
+
+    DescribeInboundCrossClusterSearchConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeInboundCrossClusterSearchConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeInboundCrossClusterSearchConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInboundCrossClusterSearchConnectionsRequest.struct_class = Types::DescribeInboundCrossClusterSearchConnectionsRequest
+
+    DescribeInboundCrossClusterSearchConnectionsResponse.add_member(:cross_cluster_search_connections, Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnections, location_name: "CrossClusterSearchConnections"))
+    DescribeInboundCrossClusterSearchConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInboundCrossClusterSearchConnectionsResponse.struct_class = Types::DescribeInboundCrossClusterSearchConnectionsResponse
+
+    DescribeOutboundCrossClusterSearchConnectionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeOutboundCrossClusterSearchConnectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeOutboundCrossClusterSearchConnectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeOutboundCrossClusterSearchConnectionsRequest.struct_class = Types::DescribeOutboundCrossClusterSearchConnectionsRequest
+
+    DescribeOutboundCrossClusterSearchConnectionsResponse.add_member(:cross_cluster_search_connections, Shapes::ShapeRef.new(shape: OutboundCrossClusterSearchConnections, location_name: "CrossClusterSearchConnections"))
+    DescribeOutboundCrossClusterSearchConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeOutboundCrossClusterSearchConnectionsResponse.struct_class = Types::DescribeOutboundCrossClusterSearchConnectionsResponse
 
     DescribePackagesFilter.add_member(:name, Shapes::ShapeRef.new(shape: DescribePackagesFilterName, location_name: "Name"))
     DescribePackagesFilter.add_member(:value, Shapes::ShapeRef.new(shape: DescribePackagesFilterValues, location_name: "Value"))
@@ -408,6 +489,11 @@ module Aws::ElasticsearchService
     DomainInfo.struct_class = Types::DomainInfo
 
     DomainInfoList.member = Shapes::ShapeRef.new(shape: DomainInfo)
+
+    DomainInformation.add_member(:owner_id, Shapes::ShapeRef.new(shape: OwnerId, location_name: "OwnerId"))
+    DomainInformation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    DomainInformation.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
+    DomainInformation.struct_class = Types::DomainInformation
 
     DomainNameList.member = Shapes::ShapeRef.new(shape: DomainName)
 
@@ -514,6 +600,12 @@ module Aws::ElasticsearchService
     ErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     ErrorDetails.struct_class = Types::ErrorDetails
 
+    Filter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    Filter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Values"))
+    Filter.struct_class = Types::Filter
+
+    FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
     GetCompatibleElasticsearchVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
     GetCompatibleElasticsearchVersionsRequest.struct_class = Types::GetCompatibleElasticsearchVersionsRequest
 
@@ -537,6 +629,18 @@ module Aws::ElasticsearchService
     GetUpgradeStatusResponse.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
     GetUpgradeStatusResponse.struct_class = Types::GetUpgradeStatusResponse
 
+    InboundCrossClusterSearchConnection.add_member(:source_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, location_name: "SourceDomainInfo"))
+    InboundCrossClusterSearchConnection.add_member(:destination_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, location_name: "DestinationDomainInfo"))
+    InboundCrossClusterSearchConnection.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, location_name: "CrossClusterSearchConnectionId"))
+    InboundCrossClusterSearchConnection.add_member(:connection_status, Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnectionStatus, location_name: "ConnectionStatus"))
+    InboundCrossClusterSearchConnection.struct_class = Types::InboundCrossClusterSearchConnection
+
+    InboundCrossClusterSearchConnectionStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnectionStatusCode, location_name: "StatusCode"))
+    InboundCrossClusterSearchConnectionStatus.add_member(:message, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionStatusMessage, location_name: "Message"))
+    InboundCrossClusterSearchConnectionStatus.struct_class = Types::InboundCrossClusterSearchConnectionStatus
+
+    InboundCrossClusterSearchConnections.member = Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnection)
+
     InstanceCountLimits.add_member(:minimum_instance_count, Shapes::ShapeRef.new(shape: MinimumInstanceCount, location_name: "MinimumInstanceCount"))
     InstanceCountLimits.add_member(:maximum_instance_count, Shapes::ShapeRef.new(shape: MaximumInstanceCount, location_name: "MaximumInstanceCount"))
     InstanceCountLimits.struct_class = Types::InstanceCountLimits
@@ -545,6 +649,8 @@ module Aws::ElasticsearchService
     InstanceLimits.struct_class = Types::InstanceLimits
 
     InternalException.struct_class = Types::InternalException
+
+    InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
 
     InvalidTypeException.struct_class = Types::InvalidTypeException
 
@@ -637,6 +743,19 @@ module Aws::ElasticsearchService
     OptionStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     OptionStatus.struct_class = Types::OptionStatus
 
+    OutboundCrossClusterSearchConnection.add_member(:source_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, location_name: "SourceDomainInfo"))
+    OutboundCrossClusterSearchConnection.add_member(:destination_domain_info, Shapes::ShapeRef.new(shape: DomainInformation, location_name: "DestinationDomainInfo"))
+    OutboundCrossClusterSearchConnection.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, location_name: "CrossClusterSearchConnectionId"))
+    OutboundCrossClusterSearchConnection.add_member(:connection_alias, Shapes::ShapeRef.new(shape: ConnectionAlias, location_name: "ConnectionAlias"))
+    OutboundCrossClusterSearchConnection.add_member(:connection_status, Shapes::ShapeRef.new(shape: OutboundCrossClusterSearchConnectionStatus, location_name: "ConnectionStatus"))
+    OutboundCrossClusterSearchConnection.struct_class = Types::OutboundCrossClusterSearchConnection
+
+    OutboundCrossClusterSearchConnectionStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: OutboundCrossClusterSearchConnectionStatusCode, location_name: "StatusCode"))
+    OutboundCrossClusterSearchConnectionStatus.add_member(:message, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionStatusMessage, location_name: "Message"))
+    OutboundCrossClusterSearchConnectionStatus.struct_class = Types::OutboundCrossClusterSearchConnectionStatus
+
+    OutboundCrossClusterSearchConnections.member = Shapes::ShapeRef.new(shape: OutboundCrossClusterSearchConnection)
+
     PackageDetails.add_member(:package_id, Shapes::ShapeRef.new(shape: PackageID, location_name: "PackageID"))
     PackageDetails.add_member(:package_name, Shapes::ShapeRef.new(shape: PackageName, location_name: "PackageName"))
     PackageDetails.add_member(:package_type, Shapes::ShapeRef.new(shape: PackageType, location_name: "PackageType"))
@@ -666,6 +785,12 @@ module Aws::ElasticsearchService
     RecurringCharge.struct_class = Types::RecurringCharge
 
     RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge)
+
+    RejectInboundCrossClusterSearchConnectionRequest.add_member(:cross_cluster_search_connection_id, Shapes::ShapeRef.new(shape: CrossClusterSearchConnectionId, required: true, location: "uri", location_name: "ConnectionId"))
+    RejectInboundCrossClusterSearchConnectionRequest.struct_class = Types::RejectInboundCrossClusterSearchConnectionRequest
+
+    RejectInboundCrossClusterSearchConnectionResponse.add_member(:cross_cluster_search_connection, Shapes::ShapeRef.new(shape: InboundCrossClusterSearchConnection, location_name: "CrossClusterSearchConnection"))
+    RejectInboundCrossClusterSearchConnectionResponse.struct_class = Types::RejectInboundCrossClusterSearchConnectionResponse
 
     RemoveTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ARN"))
     RemoveTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TagKeys"))
@@ -806,6 +931,8 @@ module Aws::ElasticsearchService
 
     ValidationException.struct_class = Types::ValidationException
 
+    ValueStringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     ZoneAwarenessConfig.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.struct_class = Types::ZoneAwarenessConfig
 
@@ -824,6 +951,17 @@ module Aws::ElasticsearchService
         "signatureVersion" => "v4",
         "uid" => "es-2015-01-01",
       }
+
+      api.add_operation(:accept_inbound_cross_cluster_search_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AcceptInboundCrossClusterSearchConnection"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-01-01/es/ccs/inboundConnection/{ConnectionId}/accept"
+        o.input = Shapes::ShapeRef.new(shape: AcceptInboundCrossClusterSearchConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: AcceptInboundCrossClusterSearchConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
 
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTags"
@@ -878,6 +1016,18 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_outbound_cross_cluster_search_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOutboundCrossClusterSearchConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/ccs/outboundConnection"
+        o.input = Shapes::ShapeRef.new(shape: CreateOutboundCrossClusterSearchConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateOutboundCrossClusterSearchConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:create_package, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePackage"
         o.http_method = "POST"
@@ -914,6 +1064,26 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_inbound_cross_cluster_search_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInboundCrossClusterSearchConnection"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2015-01-01/es/ccs/inboundConnection/{ConnectionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInboundCrossClusterSearchConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInboundCrossClusterSearchConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
+      api.add_operation(:delete_outbound_cross_cluster_search_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteOutboundCrossClusterSearchConnection"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2015-01-01/es/ccs/outboundConnection/{ConnectionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteOutboundCrossClusterSearchConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteOutboundCrossClusterSearchConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:delete_package, Seahorse::Model::Operation.new.tap do |o|
@@ -977,6 +1147,38 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_inbound_cross_cluster_search_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInboundCrossClusterSearchConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/ccs/inboundConnection/search"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInboundCrossClusterSearchConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInboundCrossClusterSearchConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_outbound_cross_cluster_search_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOutboundCrossClusterSearchConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/ccs/outboundConnection/search"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOutboundCrossClusterSearchConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOutboundCrossClusterSearchConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_packages, Seahorse::Model::Operation.new.tap do |o|
@@ -1201,6 +1403,16 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:reject_inbound_cross_cluster_search_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RejectInboundCrossClusterSearchConnection"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-01-01/es/ccs/inboundConnection/{ConnectionId}/reject"
+        o.input = Shapes::ShapeRef.new(shape: RejectInboundCrossClusterSearchConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RejectInboundCrossClusterSearchConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|

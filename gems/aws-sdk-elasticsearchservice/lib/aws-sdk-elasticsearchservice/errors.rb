@@ -30,6 +30,7 @@ module Aws::ElasticsearchService
   # * {ConflictException}
   # * {DisabledOperationException}
   # * {InternalException}
+  # * {InvalidPaginationTokenException}
   # * {InvalidTypeException}
   # * {LimitExceededException}
   # * {ResourceAlreadyExistsException}
@@ -92,6 +93,16 @@ module Aws::ElasticsearchService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElasticsearchService::Types::InternalException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidPaginationTokenException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElasticsearchService::Types::InvalidPaginationTokenException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

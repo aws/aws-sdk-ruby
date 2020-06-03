@@ -6821,7 +6821,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name of the catalog database where the functions are located.
+    #   The name of the catalog database where the functions are located. If
+    #   none is provided, functions from all the databases across the
+    #   catalog will be returned.
     #   @return [String]
     #
     # @!attribute [rw] pattern
@@ -12412,6 +12414,10 @@ module Aws::Glue
     #   The name of the function.
     #   @return [String]
     #
+    # @!attribute [rw] database_name
+    #   The name of the database where the function resides.
+    #   @return [String]
+    #
     # @!attribute [rw] class_name
     #   The Java class that contains the function code.
     #   @return [String]
@@ -12436,6 +12442,7 @@ module Aws::Glue
     #
     class UserDefinedFunction < Struct.new(
       :function_name,
+      :database_name,
       :class_name,
       :owner_name,
       :owner_type,

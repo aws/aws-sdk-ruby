@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-06-03)
+------------------
+
+* Feature - Adding databaseName in the response for GetUserDefinedFunctions() API.
+
 1.56.0 (2020-05-28)
 ------------------
 

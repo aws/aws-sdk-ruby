@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-06-03)
+------------------
+
+* Feature - This release improves the Multi-AZ feature in ElastiCache by adding a separate flag and proper validations.
+
 1.35.0 (2020-05-28)
 ------------------
 

@@ -5489,6 +5489,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.user_defined_function.function_name #=> String
+    #   resp.user_defined_function.database_name #=> String
     #   resp.user_defined_function.class_name #=> String
     #   resp.user_defined_function.owner_name #=> String
     #   resp.user_defined_function.owner_type #=> String, one of "USER", "ROLE", "GROUP"
@@ -5513,7 +5514,9 @@ module Aws::Glue
     #   located. If none is provided, the AWS account ID is used by default.
     #
     # @option params [String] :database_name
-    #   The name of the catalog database where the functions are located.
+    #   The name of the catalog database where the functions are located. If
+    #   none is provided, functions from all the databases across the catalog
+    #   will be returned.
     #
     # @option params [required, String] :pattern
     #   An optional function-name pattern string that filters the function
@@ -5546,6 +5549,7 @@ module Aws::Glue
     #
     #   resp.user_defined_functions #=> Array
     #   resp.user_defined_functions[0].function_name #=> String
+    #   resp.user_defined_functions[0].database_name #=> String
     #   resp.user_defined_functions[0].class_name #=> String
     #   resp.user_defined_functions[0].owner_name #=> String
     #   resp.user_defined_functions[0].owner_type #=> String, one of "USER", "ROLE", "GROUP"
@@ -8153,7 +8157,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
