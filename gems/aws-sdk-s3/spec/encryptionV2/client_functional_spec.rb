@@ -100,6 +100,7 @@ module Aws
         end
       end
 
+      # TODO: Tests of KMS
 
     end
   end
