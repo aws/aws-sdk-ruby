@@ -5,6 +5,7 @@ module Aws
   module Plugins
     describe HttpChecksum do
       HttpChecksumClient = ApiHelper.sample_service(
+        metadata: {'protocol' => 'rest-xml'},
         operations: {
           'Operation' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
@@ -15,6 +16,12 @@ module Aws
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'input' => { 'shape' => 'StructureShape' },
             'output' => { 'shape' => 'StructureShape' },
+            'httpChecksumRequired' => { 'required' => 'true' }
+          },
+          'ChecksumStreamingOperation' => {
+            'http' => { 'method' => 'POST', 'requestUri' => '/' },
+            'input' => { 'shape' => 'PayloadStructureShape' },
+            'output' => { 'shape' => 'PayloadStructureShape' },
             'httpChecksumRequired' => { 'required' => 'true' }
           }
         }
@@ -30,7 +37,7 @@ module Aws
         it 'computes MD5 of the http body and sends as content-md5 header' do
           resp = client.checksum_operation(string: 'md5 me captain')
           expect(resp.context.http_request.headers['content-md5']).to eq(
-            'G61/PKT6UtV1lZgC5mnpog=='
+            '9ZS+xZNSM+p0Dt901z+WHg=='
           )
         end
 
@@ -38,7 +45,7 @@ module Aws
           body = StringIO.new('.' * 5 * 1024 * 1024) # 5MB
           allow(body).to receive(:read)
             .with(1024 * 1024, any_args).and_call_original
-          resp = client.checksum_operation(streaming_blob: body)
+          resp = client.checksum_streaming_operation(streaming_blob: body)
           expect(resp.context.http_request.headers['content-md5']).to eq(
             '+kDD2/74SZx+Rz+/Dw7I1Q=='
           )
