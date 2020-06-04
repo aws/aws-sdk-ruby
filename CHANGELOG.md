@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+* Feature - Aws::MediaPackageVod - Updated the API, and documentation for AWS Elemental MediaPackage VOD.
+
+* Feature - Aws::MarketplaceMetering - Updated the documentation for AWSMarketplace Metering.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.520 (2020-06-03)
 ------------------
 
