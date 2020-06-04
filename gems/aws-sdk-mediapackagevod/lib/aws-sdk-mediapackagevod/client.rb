@@ -586,6 +586,9 @@ module Aws::MediaPackageVod
 
     # Creates a new MediaPackage VOD PackagingGroup resource.
     #
+    # @option params [Types::Authorization] :authorization
+    #   CDN Authorization credentials
+    #
     # @option params [required, String] :id
     #
     # @option params [Hash<String,String>] :tags
@@ -594,6 +597,7 @@ module Aws::MediaPackageVod
     # @return [Types::CreatePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePackagingGroupResponse#arn #arn} => String
+    #   * {Types::CreatePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::CreatePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::CreatePackagingGroupResponse#id #id} => String
     #   * {Types::CreatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -601,6 +605,10 @@ module Aws::MediaPackageVod
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_packaging_group({
+    #     authorization: {
+    #       cdn_identifier_secret: "__string", # required
+    #       secrets_role_arn: "__string", # required
+    #     },
     #     id: "__string", # required
     #     tags: {
     #       "__string" => "__string",
@@ -610,6 +618,8 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
@@ -836,6 +846,7 @@ module Aws::MediaPackageVod
     # @return [Types::DescribePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
+    #   * {Types::DescribePackagingGroupResponse#authorization #authorization} => Types::Authorization
     #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::DescribePackagingGroupResponse#id #id} => String
     #   * {Types::DescribePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -849,6 +860,8 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
     #   resp.domain_name #=> String
     #   resp.id #=> String
     #   resp.tags #=> Hash
@@ -1034,6 +1047,8 @@ module Aws::MediaPackageVod
     #   resp.next_token #=> String
     #   resp.packaging_groups #=> Array
     #   resp.packaging_groups[0].arn #=> String
+    #   resp.packaging_groups[0].authorization.cdn_identifier_secret #=> String
+    #   resp.packaging_groups[0].authorization.secrets_role_arn #=> String
     #   resp.packaging_groups[0].domain_name #=> String
     #   resp.packaging_groups[0].id #=> String
     #   resp.packaging_groups[0].tags #=> Hash
@@ -1048,6 +1063,8 @@ module Aws::MediaPackageVod
       req.send_request(options)
     end
 
+    # Returns a list of the tags assigned to the specified resource.
+    #
     # @option params [required, String] :resource_arn
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1074,6 +1091,9 @@ module Aws::MediaPackageVod
       req.send_request(options)
     end
 
+    # Adds tags to the specified resource. You can specify one or more tags
+    # to add.
+    #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Hash<String,String>] :tags
@@ -1098,6 +1118,9 @@ module Aws::MediaPackageVod
       req.send_request(options)
     end
 
+    # Removes tags from the specified resource. You can specify one or more
+    # tags to remove.
+    #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Array<String>] :tag_keys
@@ -1120,6 +1143,51 @@ module Aws::MediaPackageVod
       req.send_request(options)
     end
 
+    # Updates a specific packaging group. You can't change the id attribute
+    # or any other system-generated attributes.
+    #
+    # @option params [Types::Authorization] :authorization
+    #   CDN Authorization credentials
+    #
+    # @option params [required, String] :id
+    #
+    # @return [Types::UpdatePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePackagingGroupResponse#arn #arn} => String
+    #   * {Types::UpdatePackagingGroupResponse#authorization #authorization} => Types::Authorization
+    #   * {Types::UpdatePackagingGroupResponse#domain_name #domain_name} => String
+    #   * {Types::UpdatePackagingGroupResponse#id #id} => String
+    #   * {Types::UpdatePackagingGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_packaging_group({
+    #     authorization: {
+    #       cdn_identifier_secret: "__string", # required
+    #       secrets_role_arn: "__string", # required
+    #     },
+    #     id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.id #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UpdatePackagingGroup AWS API Documentation
+    #
+    # @overload update_packaging_group(params = {})
+    # @param [Hash] params ({})
+    def update_packaging_group(params = {}, options = {})
+      req = build_request(:update_packaging_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1133,7 +1201,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
