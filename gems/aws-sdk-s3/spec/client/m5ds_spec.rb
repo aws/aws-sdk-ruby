@@ -50,7 +50,7 @@ module Aws
 
           it 'computes the MD5 by reading the body 1MB at a time' do
             body = StringIO.new('.' * 5 * 1024 * 1024) # 5MB
-            expect(body).to receive(:read)
+            allow(body).to receive(:read)
               .with(1024 * 1024, any_args).and_call_original
             client = Client.new(stub_responses: true)
             resp = client.put_object(
