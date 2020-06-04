@@ -16,7 +16,6 @@ module Aws
         def encryption_cipher
           cek_alg = 'AES/GCM/NoPadding'
           encryption_context = {
-            'kms_cmk_id' => @kms_key_id,
             'aws:x-amz-cek-alg' => cek_alg
           }
           key_data = @kms_client.generate_data_key(
@@ -48,6 +47,10 @@ module Aws
           ).plaintext
           cek_alg = envelope['x-amz-wrap-alg'] == 'kms+context' ?
             encryption_context['aws:x-amz-cek-alg'] : envelope['x-amz-cek-alg']
+          if cek_alg != envelope['x-amz-cek-alg']
+            raise Errors::DecryptionError, 'Value of cek-alg from envelope'\
+              ' does not match the value in the encryption context'
+          end
           iv = decode64(envelope['x-amz-iv'])
           block_mode =
             case cek_alg

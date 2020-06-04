@@ -146,6 +146,18 @@ module Aws
             end.to raise_exception(Errors::DecryptionError,
                                    /incomplete v2 encryption envelope/)
           end
+
+          it 'raises an DecryptionError when a bit in the encrypted content modified' do
+            client = Aws::S3::EncryptionV2::Client.new(encryption_key: key, client: s3_client)
+            data = stub_put(s3_client)
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            data[:enc_body][0] = [(~data[:enc_body].unpack('C1')[0] << 1)].pack('C1')
+
+            stub_get(s3_client, data, true)
+            expect do
+              client.get_object(bucket: test_bucket, key: test_object)
+            end.to raise_exception(OpenSSL::Cipher::CipherError)
+          end
         end
 
         context 'when using an asymmetric (RSA) key' do
@@ -248,6 +260,37 @@ module Aws
             )
             decrypted = client_v2.get_object(bucket: test_bucket, key: test_object).body.read
             expect(decrypted).to eq(plaintext)
+          end
+
+          it 'raises a DecryptionError when the cek_alg has been modified' do
+            client = Aws::S3::EncryptionV2::Client.new(
+              kms_key_id: kms_key_id, client: s3_client, kms_client: kms_client)
+
+            data = stub_put(s3_client)
+            kms_client.stub_responses(
+              :generate_data_key,
+              {
+                key_id: kms_key_id,
+                ciphertext_blob: kms_ciphertext_blob,
+                plaintext: kms_plaintext
+              }
+            )
+            client.put_object(bucket: test_bucket, key: test_object, body: plaintext)
+            data[:metadata]['x-amz-cek-alg'] = 'AES/CBC/PKCS5Padding'
+
+            stub_get(s3_client, data, true)
+            kms_client.stub_responses(
+              :decrypt,
+              {
+                key_id: kms_key_id,
+                plaintext: kms_plaintext,
+                encryption_algorithm: "SYMMETRIC_DEFAULT"
+              }
+            )
+            expect do
+              client.get_object(bucket: test_bucket, key: test_object)
+            end.to raise_exception(Errors::DecryptionError, /oes not match the value in the encryption context/)
+
           end
         end
       end
