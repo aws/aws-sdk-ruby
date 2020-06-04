@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.521 (2020-06-04)
+------------------
+
 * Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
