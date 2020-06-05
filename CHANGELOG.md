@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::PersonalizeRuntime - Updated the API, and documentation for Amazon Personalize Runtime.
+
+* Feature - Aws::Personalize - Updated the API, and documentation for Amazon Personalize.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::SageMakerRuntime - Updated the API, and documentation for Amazon SageMaker Runtime.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
 2.11.521 (2020-06-04)
 ------------------
 
