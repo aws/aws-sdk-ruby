@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.522 (2020-06-05)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::CloudFront - Updated the API, and documentation for Amazon CloudFront.
