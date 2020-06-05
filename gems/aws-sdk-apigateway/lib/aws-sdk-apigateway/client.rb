@@ -1064,6 +1064,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.resource_methods["String"].authorization_scopes #=> Array
     #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -3147,6 +3148,7 @@ module Aws::APIGateway
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
+    #   * {Types::Integration#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -3182,6 +3184,7 @@ module Aws::APIGateway
     #   resp.integration_responses["String"].response_templates #=> Hash
     #   resp.integration_responses["String"].response_templates["String"] #=> String
     #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.tls_config.insecure_skip_verification #=> Boolean
     #
     # @overload get_integration(params = {})
     # @param [Hash] params ({})
@@ -3316,6 +3319,7 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.authorization_scopes #=> Array
     #   resp.authorization_scopes[0] #=> String
     #
@@ -3646,6 +3650,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.resource_methods["String"].authorization_scopes #=> Array
     #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -3742,6 +3747,7 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.items[0].resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.items[0].resource_methods["String"].authorization_scopes #=> Array
     #   resp.items[0].resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -4899,6 +4905,8 @@ module Aws::APIGateway
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
     #   is 29,000 milliseconds or 29 seconds.
     #
+    # @option params [Types::TlsConfig] :tls_config
+    #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Integration#type #type} => String
@@ -4915,6 +4923,7 @@ module Aws::APIGateway
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
+    #   * {Types::Integration#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -4939,6 +4948,9 @@ module Aws::APIGateway
     #     cache_key_parameters: ["String"],
     #     content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
     #     timeout_in_millis: 1,
+    #     tls_config: {
+    #       insecure_skip_verification: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4967,6 +4979,7 @@ module Aws::APIGateway
     #   resp.integration_responses["String"].response_templates #=> Hash
     #   resp.integration_responses["String"].response_templates["String"] #=> String
     #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.tls_config.insecure_skip_verification #=> Boolean
     #
     # @overload put_integration(params = {})
     # @param [Hash] params ({})
@@ -5206,6 +5219,7 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.authorization_scopes #=> Array
     #   resp.authorization_scopes[0] #=> String
     #
@@ -6194,6 +6208,7 @@ module Aws::APIGateway
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
+    #   * {Types::Integration#tls_config #tls_config} => Types::TlsConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6237,6 +6252,7 @@ module Aws::APIGateway
     #   resp.integration_responses["String"].response_templates #=> Hash
     #   resp.integration_responses["String"].response_templates["String"] #=> String
     #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.tls_config.insecure_skip_verification #=> Boolean
     #
     # @overload update_integration(params = {})
     # @param [Hash] params ({})
@@ -6395,6 +6411,7 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.authorization_scopes #=> Array
     #   resp.authorization_scopes[0] #=> String
     #
@@ -6641,6 +6658,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.tls_config.insecure_skip_verification #=> Boolean
     #   resp.resource_methods["String"].authorization_scopes #=> Array
     #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
@@ -6991,7 +7009,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

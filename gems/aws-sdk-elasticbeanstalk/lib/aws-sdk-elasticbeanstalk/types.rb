@@ -431,6 +431,33 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # Request to add or change the operations role used by an environment.
+    #
+    # @note When making an API call, you may pass AssociateEnvironmentOperationsRoleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         environment_name: "EnvironmentName", # required
+    #         operations_role: "OperationsRole", # required
+    #       }
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the environment to which to set the operations role.
+    #   @return [String]
+    #
+    # @!attribute [rw] operations_role
+    #   The Amazon Resource Name (ARN) of an existing IAM role to be used as
+    #   the environment's operations role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AssociateEnvironmentOperationsRoleMessage AWS API Documentation
+    #
+    class AssociateEnvironmentOperationsRoleMessage < Struct.new(
+      :environment_name,
+      :operations_role)
+      include Aws::Structure
+    end
+
     # Describes an Auto Scaling launch configuration.
     #
     # @!attribute [rw] name
@@ -1321,6 +1348,7 @@ module Aws::ElasticBeanstalk
     #             option_name: "ConfigurationOptionName",
     #           },
     #         ],
+    #         operations_role: "OperationsRole",
     #       }
     #
     # @!attribute [rw] application_name
@@ -1413,7 +1441,7 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] platform_arn
     #   The Amazon Resource Name (ARN) of the custom platform to use with
-    #   the environment. For more information, see [ Custom Platforms][1] in
+    #   the environment. For more information, see [Custom Platforms][1] in
     #   the *AWS Elastic Beanstalk Developer Guide*.
     #
     #   <note markdown="1"> If you specify `PlatformArn`, don't specify `SolutionStackName`.
@@ -1437,6 +1465,21 @@ module Aws::ElasticBeanstalk
     #   the configuration set for this new environment.
     #   @return [Array<Types::OptionSpecification>]
     #
+    # @!attribute [rw] operations_role
+    #   The Amazon Resource Name (ARN) of an existing IAM role to be used as
+    #   the environment's operations role. If specified, Elastic Beanstalk
+    #   uses the operations role for permissions to downstream services
+    #   during this call and during subsequent calls acting on this
+    #   environment. To specify an operations role, you must have the
+    #   `iam:PassRole` permission for the role. For more information, see
+    #   [Operations roles][1] in the *AWS Elastic Beanstalk Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironmentMessage AWS API Documentation
     #
     class CreateEnvironmentMessage < Struct.new(
@@ -1452,7 +1495,8 @@ module Aws::ElasticBeanstalk
       :solution_stack_name,
       :platform_arn,
       :option_settings,
-      :options_to_remove)
+      :options_to_remove,
+      :operations_role)
       include Aws::Structure
     end
 
@@ -2456,6 +2500,27 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # Request to disassociate the operations role from an environment.
+    #
+    # @note When making an API call, you may pass DisassociateEnvironmentOperationsRoleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         environment_name: "EnvironmentName", # required
+    #       }
+    #
+    # @!attribute [rw] environment_name
+    #   The name of the environment from which to disassociate the
+    #   operations role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DisassociateEnvironmentOperationsRoleMessage AWS API Documentation
+    #
+    class DisassociateEnvironmentOperationsRoleMessage < Struct.new(
+      :environment_name)
+      include Aws::Structure
+    end
+
     # A generic service exception has occurred.
     #
     # @!attribute [rw] message
@@ -2595,6 +2660,16 @@ module Aws::ElasticBeanstalk
     #   other API requests that require an ARN.
     #   @return [String]
     #
+    # @!attribute [rw] operations_role
+    #   The Amazon Resource Name (ARN) of the environment's operations
+    #   role. For more information, see [Operations roles][1] in the *AWS
+    #   Elastic Beanstalk Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription AWS API Documentation
     #
     class EnvironmentDescription < Struct.new(
@@ -2617,7 +2692,8 @@ module Aws::ElasticBeanstalk
       :resources,
       :tier,
       :environment_links,
-      :environment_arn)
+      :environment_arn,
+      :operations_role)
       include Aws::Structure
     end
 
@@ -5017,15 +5093,19 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] tags_to_add
-    #   A list of tags to add or update.
+    #   A list of tags to add or update. If a key of an existing tag is
+    #   added, the tag's value is updated.
     #
-    #   If a key of an existing tag is added, the tag's value is updated.
+    #   Specify at least one of these parameters: `TagsToAdd`,
+    #   `TagsToRemove`.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] tags_to_remove
-    #   A list of tag keys to remove.
+    #   A list of tag keys to remove. If a tag key doesn't exist, it is
+    #   silently ignored.
     #
-    #   If a tag key doesn't exist, it is silently ignored.
+    #   Specify at least one of these parameters: `TagsToAdd`,
+    #   `TagsToRemove`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateTagsForResourceMessage AWS API Documentation

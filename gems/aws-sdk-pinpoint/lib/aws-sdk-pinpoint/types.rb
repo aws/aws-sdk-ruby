@@ -1234,6 +1234,16 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         custom: {
+    #           delivery_uri: "__string",
+    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           message_config: {
+    #             data: "__string",
+    #           },
+    #           next_activity: "__string",
+    #           template_name: "__string",
+    #           template_version: "__string",
+    #         },
     #         conditional_split: {
     #           condition: {
     #             conditions: [
@@ -1454,6 +1464,14 @@ module Aws::Pinpoint
     #             wait_until: "__string",
     #           },
     #         },
+    #         push: {
+    #           message_config: {
+    #             time_to_live: "__string",
+    #           },
+    #           next_activity: "__string",
+    #           template_name: "__string",
+    #           template_version: "__string",
+    #         },
     #         random_split: {
     #           branches: [
     #             {
@@ -1461,6 +1479,15 @@ module Aws::Pinpoint
     #               percentage: 1,
     #             },
     #           ],
+    #         },
+    #         sms: {
+    #           message_config: {
+    #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             sender_id: "__string",
+    #           },
+    #           next_activity: "__string",
+    #           template_name: "__string",
+    #           template_version: "__string",
     #         },
     #         wait: {
     #           next_activity: "__string",
@@ -1470,6 +1497,12 @@ module Aws::Pinpoint
     #           },
     #         },
     #       }
+    #
+    # @!attribute [rw] custom
+    #   The settings for a custom message activity. This type of activity
+    #   calls an AWS Lambda function or web hook that sends messages to
+    #   participants.
+    #   @return [Types::CustomMessageActivity]
     #
     # @!attribute [rw] conditional_split
     #   The settings for a yes/no split activity. This type of activity
@@ -1498,12 +1531,22 @@ module Aws::Pinpoint
     #   that you specify.
     #   @return [Types::MultiConditionalSplitActivity]
     #
+    # @!attribute [rw] push
+    #   The settings for a push notification activity. This type of activity
+    #   sends a push notification to participants.
+    #   @return [Types::PushMessageActivity]
+    #
     # @!attribute [rw] random_split
     #   The settings for a random split activity. This type of activity
     #   randomly sends specified percentages of participants down one of as
     #   many as five paths in a journey, based on conditions that you
     #   specify.
     #   @return [Types::RandomSplitActivity]
+    #
+    # @!attribute [rw] sms
+    #   The settings for an SMS activity. This type of activity sends a text
+    #   message to participants.
+    #   @return [Types::SMSMessageActivity]
     #
     # @!attribute [rw] wait
     #   The settings for a wait activity. This type of activity waits for a
@@ -1514,12 +1557,15 @@ module Aws::Pinpoint
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Activity AWS API Documentation
     #
     class Activity < Struct.new(
+      :custom,
       :conditional_split,
       :description,
       :email,
       :holdout,
       :multi_condition,
+      :push,
       :random_split,
+      :sms,
       :wait)
       include Aws::Structure
     end
@@ -1615,7 +1661,7 @@ module Aws::Pinpoint
     #
     #       {
     #         body_override: "__string",
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         context: {
     #           "__string" => "__string",
     #         },
@@ -2712,10 +2758,10 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] message_type
-    #   The type of SMS message. Valid values are: TRANSACTIONAL, the
-    #   message is critical or time-sensitive, such as a one-time password
-    #   that supports a customer transaction; and, PROMOTIONAL, the message
-    #   isn't critical or time-sensitive, such as a marketing message.
+    #   The SMS message type. Valid values are TRANSACTIONAL (for messages
+    #   that are critical or time-sensitive, such as a one-time passwords)
+    #   and PROMOTIONAL (for messsages that aren't critical or
+    #   time-sensitive, such as marketing messages).
     #   @return [String]
     #
     # @!attribute [rw] sender_id
@@ -3189,7 +3235,7 @@ module Aws::Pinpoint
     #             {
     #               custom_delivery_configuration: {
     #                 delivery_uri: "__string", # required
-    #                 endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               },
     #               message_configuration: {
     #                 adm_message: {
@@ -3334,7 +3380,7 @@ module Aws::Pinpoint
     #           ],
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           },
     #           description: "__string",
     #           holdout_percent: 1,
@@ -3669,6 +3715,16 @@ module Aws::Pinpoint
     #         write_journey_request: { # required
     #           activities: {
     #             "__string" => {
+    #               custom: {
+    #                 delivery_uri: "__string",
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 message_config: {
+    #                   data: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #                 template_version: "__string",
+    #               },
     #               conditional_split: {
     #                 condition: {
     #                   conditions: [
@@ -3889,6 +3945,14 @@ module Aws::Pinpoint
     #                   wait_until: "__string",
     #                 },
     #               },
+    #               push: {
+    #                 message_config: {
+    #                   time_to_live: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #                 template_version: "__string",
+    #               },
     #               random_split: {
     #                 branches: [
     #                   {
@@ -3896,6 +3960,15 @@ module Aws::Pinpoint
     #                     percentage: 1,
     #                   },
     #                 ],
+    #               },
+    #               sms: {
+    #                 message_config: {
+    #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   sender_id: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #                 template_version: "__string",
     #               },
     #               wait: {
     #                 next_activity: "__string",
@@ -4554,7 +4627,7 @@ module Aws::Pinpoint
     #
     #       {
     #         delivery_uri: "__string", # required
-    #         endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #       }
     #
     # @!attribute [rw] delivery_uri
@@ -4580,6 +4653,86 @@ module Aws::Pinpoint
     class CustomDeliveryConfiguration < Struct.new(
       :delivery_uri,
       :endpoint_types)
+      include Aws::Structure
+    end
+
+    # The settings for a custom message activity. This type of activity
+    # calls an AWS Lambda function or web hook that sends messages to
+    # participants.
+    #
+    # @note When making an API call, you may pass CustomMessageActivity
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_uri: "__string",
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         message_config: {
+    #           data: "__string",
+    #         },
+    #         next_activity: "__string",
+    #         template_name: "__string",
+    #         template_version: "__string",
+    #       }
+    #
+    # @!attribute [rw] delivery_uri
+    #   The destination to send the custom message to. This value can be one
+    #   of the following:
+    #
+    #   * The name or Amazon Resource Name (ARN) of an AWS Lambda function
+    #     to invoke to handle delivery of the custom message.
+    #
+    #   * The URL for a web application or service that supports HTTPS and
+    #     can receive the message. The URL has to be a full URL, including
+    #     the HTTPS protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_types
+    #   The types of endpoints to send the custom message to. Each valid
+    #   value maps to a type of channel that you can associate with an
+    #   endpoint by using the ChannelType property of an endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message_config
+    #   Specifies the message data included in a custom channel message
+    #   that's sent to participants in a journey.
+    #   @return [Types::JourneyCustomMessage]
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after Amazon
+    #   Pinpoint calls the AWS Lambda function or web hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom message template to use for the message. If
+    #   specified, this value must match the name of an existing message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version
+    #   The unique identifier for the version of the message template to use
+    #   for the message. If specified, this value must match the identifier
+    #   for an existing template version. To retrieve a list of versions and
+    #   version identifiers for a template, use the <link
+    #   linkend="templates-template-name-template-type-versions" />
+    #
+    #   Template Versions</link> resource.
+    #
+    #   If you don't specify a value for this property, Amazon Pinpoint
+    #   uses the *active version* of the template. The *active version* is
+    #   typically the version of a template that's been most recently
+    #   reviewed and approved for use, depending on your workflow. It isn't
+    #   necessarily the latest version of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CustomMessageActivity AWS API Documentation
+    #
+    class CustomMessageActivity < Struct.new(
+      :delivery_uri,
+      :endpoint_types,
+      :message_config,
+      :next_activity,
+      :template_name,
+      :template_version)
       include Aws::Structure
     end
 
@@ -5928,7 +6081,8 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] message_config
-    #   The "From" address to use for the message.
+    #   Specifies the sender address for an email message that's sent to
+    #   participants in the journey.
     #   @return [Types::JourneyEmailMessage]
     #
     # @!attribute [rw] next_activity
@@ -5937,7 +6091,9 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   The name of the email template to use for the message.
+    #   The name of the email message template to use for the message. If
+    #   specified, this value must match the name of an existing message
+    #   template.
     #   @return [String]
     #
     # @!attribute [rw] template_version
@@ -6145,7 +6301,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -6297,7 +6453,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -6566,7 +6722,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -7213,7 +7369,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -7301,7 +7457,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -9917,6 +10073,28 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Specifies the message content for a custom channel message that's
+    # sent to participants in a journey.
+    #
+    # @note When making an API call, you may pass JourneyCustomMessage
+    #   data as a hash:
+    #
+    #       {
+    #         data: "__string",
+    #       }
+    #
+    # @!attribute [rw] data
+    #   The message content that's passed to an AWS Lambda function or to a
+    #   web hook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyCustomMessage AWS API Documentation
+    #
+    class JourneyCustomMessage < Struct.new(
+      :data)
+      include Aws::Structure
+    end
+
     # Provides the results of a query that retrieved the data for a standard
     # engagement metric that applies to a journey, and provides information
     # about that query.
@@ -10062,7 +10240,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyExecutionActivityMetricsResponse AWS API Documentation
@@ -10102,7 +10280,7 @@ module Aws::Pinpoint
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyExecutionMetricsResponse AWS API Documentation
@@ -10149,6 +10327,35 @@ module Aws::Pinpoint
       :daily_cap,
       :endpoint_reentry_cap,
       :messages_per_second)
+      include Aws::Structure
+    end
+
+    # Specifies the message configuration for a push notification that's
+    # sent to participants in a journey.
+    #
+    # @note When making an API call, you may pass JourneyPushMessage
+    #   data as a hash:
+    #
+    #       {
+    #         time_to_live: "__string",
+    #       }
+    #
+    # @!attribute [rw] time_to_live
+    #   The number of seconds that the push notification service should keep
+    #   the message, if the service is unable to deliver the notification
+    #   the first time. This value is converted to an expiration value when
+    #   it's sent to a push-notification service. If this value is 0, the
+    #   service treats the notification as if it expires immediately and the
+    #   service doesn't store or try to deliver the notification again.
+    #
+    #   This value doesn't apply to messages that are sent through the
+    #   Amazon Device Messaging (ADM) service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneyPushMessage AWS API Documentation
+    #
+    class JourneyPushMessage < Struct.new(
+      :time_to_live)
       include Aws::Structure
     end
 
@@ -10284,6 +10491,43 @@ module Aws::Pinpoint
       :start_condition,
       :state,
       :tags)
+      include Aws::Structure
+    end
+
+    # Specifies the sender ID and message type for an SMS message that's
+    # sent to participants in a journey.
+    #
+    # @note When making an API call, you may pass JourneySMSMessage
+    #   data as a hash:
+    #
+    #       {
+    #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         sender_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] message_type
+    #   The SMS message type. Valid values are TRANSACTIONAL (for messages
+    #   that are critical or time-sensitive, such as a one-time passwords)
+    #   and PROMOTIONAL (for messsages that aren't critical or
+    #   time-sensitive, such as marketing messages).
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   The sender ID to display as the sender of the message on a
+    #   recipient's device. Support for sender IDs varies by country or
+    #   region. For more information, see [Supported Countries and
+    #   Regions][1] in the Amazon Pinpoint User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/JourneySMSMessage AWS API Documentation
+    #
+    class JourneySMSMessage < Struct.new(
+      :message_type,
+      :sender_id)
       include Aws::Structure
     end
 
@@ -10861,7 +11105,7 @@ module Aws::Pinpoint
     #         addresses: {
     #           "__string" => {
     #             body_override: "__string",
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             context: {
     #               "__string" => "__string",
     #             },
@@ -11710,7 +11954,7 @@ module Aws::Pinpoint
     #         attributes: {
     #           "__string" => ["__string"],
     #         },
-    #         channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         demographic: {
     #           app_version: "__string",
     #           locale: "__string",
@@ -11824,6 +12068,63 @@ module Aws::Pinpoint
       :opt_out,
       :request_id,
       :user)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for a push notification activity in a journey.
+    # This type of activity sends a push notification to participants.
+    #
+    # @note When making an API call, you may pass PushMessageActivity
+    #   data as a hash:
+    #
+    #       {
+    #         message_config: {
+    #           time_to_live: "__string",
+    #         },
+    #         next_activity: "__string",
+    #         template_name: "__string",
+    #         template_version: "__string",
+    #       }
+    #
+    # @!attribute [rw] message_config
+    #   Specifies the time to live (TTL) value for push notifications that
+    #   are sent to participants in a journey.
+    #   @return [Types::JourneyPushMessage]
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after the
+    #   message is sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the push notification template to use for the message.
+    #   If specified, this value must match the name of an existing message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version
+    #   The unique identifier for the version of the push notification
+    #   template to use for the message. If specified, this value must match
+    #   the identifier for an existing template version. To retrieve a list
+    #   of versions and version identifiers for a template, use the <link
+    #   linkend="templates-template-name-template-type-versions" />
+    #
+    #   Template Versions</link> resource.
+    #
+    #   If you don't specify a value for this property, Amazon Pinpoint
+    #   uses the *active version* of the template. The *active version* is
+    #   typically the version of a template that's been most recently
+    #   reviewed and approved for use, depending on your workflow. It isn't
+    #   necessarily the latest version of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushMessageActivity AWS API Documentation
+    #
+    class PushMessageActivity < Struct.new(
+      :message_config,
+      :next_activity,
+      :template_name,
+      :template_version)
       include Aws::Structure
     end
 
@@ -12127,7 +12428,7 @@ module Aws::Pinpoint
     #                 attributes: {
     #                   "__string" => ["__string"],
     #                 },
-    #                 channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #                 demographic: {
     #                   app_version: "__string",
     #                   locale: "__string",
@@ -12732,10 +13033,10 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] message_type
-    #   The SMS message type. Valid values are: TRANSACTIONAL, the message
-    #   is critical or time-sensitive, such as a one-time password that
-    #   supports a customer transaction; and, PROMOTIONAL, the message is
-    #   not critical or time-sensitive, such as a marketing message.
+    #   The SMS message type. Valid values are TRANSACTIONAL (for messages
+    #   that are critical or time-sensitive, such as a one-time passwords)
+    #   and PROMOTIONAL (for messsages that aren't critical or
+    #   time-sensitive, such as marketing messages).
     #   @return [String]
     #
     # @!attribute [rw] origination_number
@@ -12767,6 +13068,64 @@ module Aws::Pinpoint
       :origination_number,
       :sender_id,
       :substitutions)
+      include Aws::Structure
+    end
+
+    # Specifies the settings for an SMS activity in a journey. This type of
+    # activity sends a text message to participants.
+    #
+    # @note When making an API call, you may pass SMSMessageActivity
+    #   data as a hash:
+    #
+    #       {
+    #         message_config: {
+    #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           sender_id: "__string",
+    #         },
+    #         next_activity: "__string",
+    #         template_name: "__string",
+    #         template_version: "__string",
+    #       }
+    #
+    # @!attribute [rw] message_config
+    #   Specifies the sender ID and message type for an SMS message that's
+    #   sent to participants in a journey.
+    #   @return [Types::JourneySMSMessage]
+    #
+    # @!attribute [rw] next_activity
+    #   The unique identifier for the next activity to perform, after the
+    #   message is sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the SMS message template to use for the message. If
+    #   specified, this value must match the name of an existing message
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_version
+    #   The unique identifier for the version of the SMS template to use for
+    #   the message. If specified, this value must match the identifier for
+    #   an existing template version. To retrieve a list of versions and
+    #   version identifiers for a template, use the <link
+    #   linkend="templates-template-name-template-type-versions" />
+    #
+    #   Template Versions</link> resource.
+    #
+    #   If you don't specify a value for this property, Amazon Pinpoint
+    #   uses the *active version* of the template. The *active version* is
+    #   typically the version of a template that's been most recently
+    #   reviewed and approved for use, depending on your workflow. It isn't
+    #   necessarily the latest version of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSMessageActivity AWS API Documentation
+    #
+    class SMSMessageActivity < Struct.new(
+      :message_config,
+      :next_activity,
+      :template_name,
+      :template_version)
       include Aws::Structure
     end
 
@@ -13705,7 +14064,7 @@ module Aws::Pinpoint
     #           addresses: {
     #             "__string" => {
     #               body_override: "__string",
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               context: {
     #                 "__string" => "__string",
     #               },
@@ -15536,7 +15895,7 @@ module Aws::Pinpoint
     #             {
     #               custom_delivery_configuration: {
     #                 delivery_uri: "__string", # required
-    #                 endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               },
     #               message_configuration: {
     #                 adm_message: {
@@ -15681,7 +16040,7 @@ module Aws::Pinpoint
     #           ],
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           },
     #           description: "__string",
     #           holdout_percent: 1,
@@ -15983,7 +16342,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -16060,7 +16419,7 @@ module Aws::Pinpoint
     #               attributes: {
     #                 "__string" => ["__string"],
     #               },
-    #               channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #               demographic: {
     #                 app_version: "__string",
     #                 locale: "__string",
@@ -16177,6 +16536,16 @@ module Aws::Pinpoint
     #         write_journey_request: { # required
     #           activities: {
     #             "__string" => {
+    #               custom: {
+    #                 delivery_uri: "__string",
+    #                 endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #                 message_config: {
+    #                   data: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #                 template_version: "__string",
+    #               },
     #               conditional_split: {
     #                 condition: {
     #                   conditions: [
@@ -16397,6 +16766,14 @@ module Aws::Pinpoint
     #                   wait_until: "__string",
     #                 },
     #               },
+    #               push: {
+    #                 message_config: {
+    #                   time_to_live: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #                 template_version: "__string",
+    #               },
     #               random_split: {
     #                 branches: [
     #                   {
@@ -16404,6 +16781,15 @@ module Aws::Pinpoint
     #                     percentage: 1,
     #                   },
     #                 ],
+    #               },
+    #               sms: {
+    #                 message_config: {
+    #                   message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                   sender_id: "__string",
+    #                 },
+    #                 next_activity: "__string",
+    #                 template_name: "__string",
+    #                 template_version: "__string",
     #               },
     #               wait: {
     #                 next_activity: "__string",
@@ -17721,7 +18107,7 @@ module Aws::Pinpoint
     #           {
     #             custom_delivery_configuration: {
     #               delivery_uri: "__string", # required
-    #               endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             },
     #             message_configuration: {
     #               adm_message: {
@@ -17866,7 +18252,7 @@ module Aws::Pinpoint
     #         ],
     #         custom_delivery_configuration: {
     #           delivery_uri: "__string", # required
-    #           endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         },
     #         description: "__string",
     #         holdout_percent: 1,
@@ -18173,6 +18559,16 @@ module Aws::Pinpoint
     #       {
     #         activities: {
     #           "__string" => {
+    #             custom: {
+    #               delivery_uri: "__string",
+    #               endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #               message_config: {
+    #                 data: "__string",
+    #               },
+    #               next_activity: "__string",
+    #               template_name: "__string",
+    #               template_version: "__string",
+    #             },
     #             conditional_split: {
     #               condition: {
     #                 conditions: [
@@ -18393,6 +18789,14 @@ module Aws::Pinpoint
     #                 wait_until: "__string",
     #               },
     #             },
+    #             push: {
+    #               message_config: {
+    #                 time_to_live: "__string",
+    #               },
+    #               next_activity: "__string",
+    #               template_name: "__string",
+    #               template_version: "__string",
+    #             },
     #             random_split: {
     #               branches: [
     #                 {
@@ -18400,6 +18804,15 @@ module Aws::Pinpoint
     #                   percentage: 1,
     #                 },
     #               ],
+    #             },
+    #             sms: {
+    #               message_config: {
+    #                 message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #                 sender_id: "__string",
+    #               },
+    #               next_activity: "__string",
+    #               template_name: "__string",
+    #               template_version: "__string",
     #             },
     #             wait: {
     #               next_activity: "__string",
@@ -18749,7 +19162,7 @@ module Aws::Pinpoint
     #       {
     #         custom_delivery_configuration: {
     #           delivery_uri: "__string", # required
-    #           endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #         },
     #         message_configuration: {
     #           adm_message: {

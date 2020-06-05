@@ -367,7 +367,7 @@ module Aws::Pinpoint
     #         {
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           },
     #           message_configuration: {
     #             adm_message: {
@@ -512,7 +512,7 @@ module Aws::Pinpoint
     #       ],
     #       custom_delivery_configuration: {
     #         delivery_uri: "__string", # required
-    #         endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #       },
     #       description: "__string",
     #       holdout_percent: 1,
@@ -680,7 +680,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -785,7 +785,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -1089,6 +1089,16 @@ module Aws::Pinpoint
     #     write_journey_request: { # required
     #       activities: {
     #         "__string" => {
+    #           custom: {
+    #             delivery_uri: "__string",
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             message_config: {
+    #               data: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #             template_version: "__string",
+    #           },
     #           conditional_split: {
     #             condition: {
     #               conditions: [
@@ -1309,6 +1319,14 @@ module Aws::Pinpoint
     #               wait_until: "__string",
     #             },
     #           },
+    #           push: {
+    #             message_config: {
+    #               time_to_live: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #             template_version: "__string",
+    #           },
     #           random_split: {
     #             branches: [
     #               {
@@ -1316,6 +1334,15 @@ module Aws::Pinpoint
     #                 percentage: 1,
     #               },
     #             ],
+    #           },
+    #           sms: {
+    #             message_config: {
+    #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               sender_id: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #             template_version: "__string",
     #           },
     #           wait: {
     #             next_activity: "__string",
@@ -1359,6 +1386,13 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
+    #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
+    #   resp.journey_response.activities["__string"].custom.next_activity #=> String
+    #   resp.journey_response.activities["__string"].custom.template_name #=> String
+    #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -1475,9 +1509,18 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].push.message_config.time_to_live #=> String
+    #   resp.journey_response.activities["__string"].push.next_activity #=> String
+    #   resp.journey_response.activities["__string"].push.template_name #=> String
+    #   resp.journey_response.activities["__string"].push.template_version #=> String
     #   resp.journey_response.activities["__string"].random_split.branches #=> Array
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.next_activity #=> String
+    #   resp.journey_response.activities["__string"].sms.template_name #=> String
+    #   resp.journey_response.activities["__string"].sms.template_version #=> String
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
@@ -2312,7 +2355,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -2417,7 +2460,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -2642,7 +2685,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -2770,6 +2813,13 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
+    #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
+    #   resp.journey_response.activities["__string"].custom.next_activity #=> String
+    #   resp.journey_response.activities["__string"].custom.template_name #=> String
+    #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -2886,9 +2936,18 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].push.message_config.time_to_live #=> String
+    #   resp.journey_response.activities["__string"].push.next_activity #=> String
+    #   resp.journey_response.activities["__string"].push.template_name #=> String
+    #   resp.journey_response.activities["__string"].push.template_version #=> String
     #   resp.journey_response.activities["__string"].random_split.branches #=> Array
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.next_activity #=> String
+    #   resp.journey_response.activities["__string"].sms.template_name #=> String
+    #   resp.journey_response.activities["__string"].sms.template_version #=> String
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
@@ -3220,7 +3279,7 @@ module Aws::Pinpoint
     #   resp.endpoints_response.item[0].attributes #=> Hash
     #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
     #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
-    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoints_response.item[0].cohort_id #=> String
     #   resp.endpoints_response.item[0].creation_date #=> String
     #   resp.endpoints_response.item[0].demographic.app_version #=> String
@@ -3742,7 +3801,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -3847,7 +3906,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -4110,7 +4169,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4215,7 +4274,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -4372,7 +4431,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4477,7 +4536,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
@@ -4633,7 +4692,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments #=> Array
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaigns_response.item[0].additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -4738,7 +4797,7 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].creation_date #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaigns_response.item[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
@@ -5014,7 +5073,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -5350,6 +5409,13 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
+    #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
+    #   resp.journey_response.activities["__string"].custom.next_activity #=> String
+    #   resp.journey_response.activities["__string"].custom.template_name #=> String
+    #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -5466,9 +5532,18 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].push.message_config.time_to_live #=> String
+    #   resp.journey_response.activities["__string"].push.next_activity #=> String
+    #   resp.journey_response.activities["__string"].push.template_name #=> String
+    #   resp.journey_response.activities["__string"].push.template_version #=> String
     #   resp.journey_response.activities["__string"].random_split.branches #=> Array
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.next_activity #=> String
+    #   resp.journey_response.activities["__string"].sms.template_name #=> String
+    #   resp.journey_response.activities["__string"].sms.template_version #=> String
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
@@ -6573,7 +6648,7 @@ module Aws::Pinpoint
     #   resp.endpoints_response.item[0].attributes #=> Hash
     #   resp.endpoints_response.item[0].attributes["__string"] #=> Array
     #   resp.endpoints_response.item[0].attributes["__string"][0] #=> String
-    #   resp.endpoints_response.item[0].channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoints_response.item[0].channel_type #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoints_response.item[0].cohort_id #=> String
     #   resp.endpoints_response.item[0].creation_date #=> String
     #   resp.endpoints_response.item[0].demographic.app_version #=> String
@@ -6716,6 +6791,13 @@ module Aws::Pinpoint
     #
     #   resp.journeys_response.item #=> Array
     #   resp.journeys_response.item[0].activities #=> Hash
+    #   resp.journeys_response.item[0].activities["__string"].custom.delivery_uri #=> String
+    #   resp.journeys_response.item[0].activities["__string"].custom.endpoint_types #=> Array
+    #   resp.journeys_response.item[0].activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journeys_response.item[0].activities["__string"].custom.message_config.data #=> String
+    #   resp.journeys_response.item[0].activities["__string"].custom.next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].custom.template_name #=> String
+    #   resp.journeys_response.item[0].activities["__string"].custom.template_version #=> String
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
     #   resp.journeys_response.item[0].activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -6832,9 +6914,18 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.default_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journeys_response.item[0].activities["__string"].push.message_config.time_to_live #=> String
+    #   resp.journeys_response.item[0].activities["__string"].push.next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].push.template_name #=> String
+    #   resp.journeys_response.item[0].activities["__string"].push.template_version #=> String
     #   resp.journeys_response.item[0].activities["__string"].random_split.branches #=> Array
     #   resp.journeys_response.item[0].activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journeys_response.item[0].activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journeys_response.item[0].activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journeys_response.item[0].activities["__string"].sms.next_activity #=> String
+    #   resp.journeys_response.item[0].activities["__string"].sms.template_name #=> String
+    #   resp.journeys_response.item[0].activities["__string"].sms.template_version #=> String
     #   resp.journeys_response.item[0].activities["__string"].wait.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journeys_response.item[0].activities["__string"].wait.wait_time.wait_until #=> String
@@ -7104,7 +7195,7 @@ module Aws::Pinpoint
     #             attributes: {
     #               "__string" => ["__string"],
     #             },
-    #             channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #             demographic: {
     #               app_version: "__string",
     #               locale: "__string",
@@ -7243,7 +7334,7 @@ module Aws::Pinpoint
     #       addresses: {
     #         "__string" => {
     #           body_override: "__string",
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           context: {
     #             "__string" => "__string",
     #           },
@@ -8151,7 +8242,7 @@ module Aws::Pinpoint
     #         {
     #           custom_delivery_configuration: {
     #             delivery_uri: "__string", # required
-    #             endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           },
     #           message_configuration: {
     #             adm_message: {
@@ -8296,7 +8387,7 @@ module Aws::Pinpoint
     #       ],
     #       custom_delivery_configuration: {
     #         delivery_uri: "__string", # required
-    #         endpoint_types: ["GCM"], # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #         endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #       },
     #       description: "__string",
     #       holdout_percent: 1,
@@ -8464,7 +8555,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments #=> Array
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.additional_treatments[0].custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.additional_treatments[0].id #=> String
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
     #   resp.campaign_response.additional_treatments[0].message_configuration.adm_message.body #=> String
@@ -8569,7 +8660,7 @@ module Aws::Pinpoint
     #   resp.campaign_response.creation_date #=> String
     #   resp.campaign_response.custom_delivery_configuration.delivery_uri #=> String
     #   resp.campaign_response.custom_delivery_configuration.endpoint_types #=> Array
-    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.campaign_response.custom_delivery_configuration.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
@@ -8827,7 +8918,7 @@ module Aws::Pinpoint
     #       attributes: {
     #         "__string" => ["__string"],
     #       },
-    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #       channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #       demographic: {
     #         app_version: "__string",
     #         locale: "__string",
@@ -8904,7 +8995,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #           channel_type: "PUSH", # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -9025,6 +9116,16 @@ module Aws::Pinpoint
     #     write_journey_request: { # required
     #       activities: {
     #         "__string" => {
+    #           custom: {
+    #             delivery_uri: "__string",
+    #             endpoint_types: ["PUSH"], # accepts PUSH, GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, VOICE, EMAIL, BAIDU, CUSTOM
+    #             message_config: {
+    #               data: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #             template_version: "__string",
+    #           },
     #           conditional_split: {
     #             condition: {
     #               conditions: [
@@ -9245,6 +9346,14 @@ module Aws::Pinpoint
     #               wait_until: "__string",
     #             },
     #           },
+    #           push: {
+    #             message_config: {
+    #               time_to_live: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #             template_version: "__string",
+    #           },
     #           random_split: {
     #             branches: [
     #               {
@@ -9252,6 +9361,15 @@ module Aws::Pinpoint
     #                 percentage: 1,
     #               },
     #             ],
+    #           },
+    #           sms: {
+    #             message_config: {
+    #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               sender_id: "__string",
+    #             },
+    #             next_activity: "__string",
+    #             template_name: "__string",
+    #             template_version: "__string",
     #           },
     #           wait: {
     #             next_activity: "__string",
@@ -9295,6 +9413,13 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
+    #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
+    #   resp.journey_response.activities["__string"].custom.next_activity #=> String
+    #   resp.journey_response.activities["__string"].custom.template_name #=> String
+    #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9411,9 +9536,18 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].push.message_config.time_to_live #=> String
+    #   resp.journey_response.activities["__string"].push.next_activity #=> String
+    #   resp.journey_response.activities["__string"].push.template_name #=> String
+    #   resp.journey_response.activities["__string"].push.template_version #=> String
     #   resp.journey_response.activities["__string"].random_split.branches #=> Array
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.next_activity #=> String
+    #   resp.journey_response.activities["__string"].sms.template_name #=> String
+    #   resp.journey_response.activities["__string"].sms.template_version #=> String
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
@@ -9474,6 +9608,13 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.journey_response.activities #=> Hash
+    #   resp.journey_response.activities["__string"].custom.delivery_uri #=> String
+    #   resp.journey_response.activities["__string"].custom.endpoint_types #=> Array
+    #   resp.journey_response.activities["__string"].custom.endpoint_types[0] #=> String, one of "PUSH", "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "VOICE", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.journey_response.activities["__string"].custom.message_config.data #=> String
+    #   resp.journey_response.activities["__string"].custom.next_activity #=> String
+    #   resp.journey_response.activities["__string"].custom.template_name #=> String
+    #   resp.journey_response.activities["__string"].custom.template_version #=> String
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions #=> Array
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes #=> Hash
     #   resp.journey_response.activities["__string"].conditional_split.condition.conditions[0].event_condition.dimensions.attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
@@ -9590,9 +9731,18 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].multi_condition.default_activity #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].multi_condition.evaluation_wait_time.wait_until #=> String
+    #   resp.journey_response.activities["__string"].push.message_config.time_to_live #=> String
+    #   resp.journey_response.activities["__string"].push.next_activity #=> String
+    #   resp.journey_response.activities["__string"].push.template_name #=> String
+    #   resp.journey_response.activities["__string"].push.template_version #=> String
     #   resp.journey_response.activities["__string"].random_split.branches #=> Array
     #   resp.journey_response.activities["__string"].random_split.branches[0].next_activity #=> String
     #   resp.journey_response.activities["__string"].random_split.branches[0].percentage #=> Integer
+    #   resp.journey_response.activities["__string"].sms.message_config.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.journey_response.activities["__string"].sms.message_config.sender_id #=> String
+    #   resp.journey_response.activities["__string"].sms.next_activity #=> String
+    #   resp.journey_response.activities["__string"].sms.template_name #=> String
+    #   resp.journey_response.activities["__string"].sms.template_version #=> String
     #   resp.journey_response.activities["__string"].wait.next_activity #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_for #=> String
     #   resp.journey_response.activities["__string"].wait.wait_time.wait_until #=> String
@@ -10310,7 +10460,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

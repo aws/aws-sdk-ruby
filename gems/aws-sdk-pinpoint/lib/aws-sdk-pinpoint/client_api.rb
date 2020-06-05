@@ -84,6 +84,7 @@ module Aws::Pinpoint
     CreateVoiceTemplateRequest = Shapes::StructureShape.new(name: 'CreateVoiceTemplateRequest')
     CreateVoiceTemplateResponse = Shapes::StructureShape.new(name: 'CreateVoiceTemplateResponse')
     CustomDeliveryConfiguration = Shapes::StructureShape.new(name: 'CustomDeliveryConfiguration')
+    CustomMessageActivity = Shapes::StructureShape.new(name: 'CustomMessageActivity')
     DefaultMessage = Shapes::StructureShape.new(name: 'DefaultMessage')
     DefaultPushNotificationMessage = Shapes::StructureShape.new(name: 'DefaultPushNotificationMessage')
     DefaultPushNotificationTemplate = Shapes::StructureShape.new(name: 'DefaultPushNotificationTemplate')
@@ -270,12 +271,15 @@ module Aws::Pinpoint
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ItemResponse = Shapes::StructureShape.new(name: 'ItemResponse')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    JourneyCustomMessage = Shapes::StructureShape.new(name: 'JourneyCustomMessage')
     JourneyDateRangeKpiResponse = Shapes::StructureShape.new(name: 'JourneyDateRangeKpiResponse')
     JourneyEmailMessage = Shapes::StructureShape.new(name: 'JourneyEmailMessage')
     JourneyExecutionActivityMetricsResponse = Shapes::StructureShape.new(name: 'JourneyExecutionActivityMetricsResponse')
     JourneyExecutionMetricsResponse = Shapes::StructureShape.new(name: 'JourneyExecutionMetricsResponse')
     JourneyLimits = Shapes::StructureShape.new(name: 'JourneyLimits')
+    JourneyPushMessage = Shapes::StructureShape.new(name: 'JourneyPushMessage')
     JourneyResponse = Shapes::StructureShape.new(name: 'JourneyResponse')
+    JourneySMSMessage = Shapes::StructureShape.new(name: 'JourneySMSMessage')
     JourneySchedule = Shapes::StructureShape.new(name: 'JourneySchedule')
     JourneyStateRequest = Shapes::StructureShape.new(name: 'JourneyStateRequest')
     JourneysResponse = Shapes::StructureShape.new(name: 'JourneysResponse')
@@ -349,6 +353,7 @@ module Aws::Pinpoint
     PhoneNumberValidateRequest = Shapes::StructureShape.new(name: 'PhoneNumberValidateRequest')
     PhoneNumberValidateResponse = Shapes::StructureShape.new(name: 'PhoneNumberValidateResponse')
     PublicEndpoint = Shapes::StructureShape.new(name: 'PublicEndpoint')
+    PushMessageActivity = Shapes::StructureShape.new(name: 'PushMessageActivity')
     PushNotificationTemplateRequest = Shapes::StructureShape.new(name: 'PushNotificationTemplateRequest')
     PushNotificationTemplateResponse = Shapes::StructureShape.new(name: 'PushNotificationTemplateResponse')
     PutEventStreamRequest = Shapes::StructureShape.new(name: 'PutEventStreamRequest')
@@ -369,6 +374,7 @@ module Aws::Pinpoint
     SMSChannelRequest = Shapes::StructureShape.new(name: 'SMSChannelRequest')
     SMSChannelResponse = Shapes::StructureShape.new(name: 'SMSChannelResponse')
     SMSMessage = Shapes::StructureShape.new(name: 'SMSMessage')
+    SMSMessageActivity = Shapes::StructureShape.new(name: 'SMSMessageActivity')
     SMSTemplateRequest = Shapes::StructureShape.new(name: 'SMSTemplateRequest')
     SMSTemplateResponse = Shapes::StructureShape.new(name: 'SMSTemplateResponse')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -647,12 +653,15 @@ module Aws::Pinpoint
     ActivitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ActivitiesResponse.struct_class = Types::ActivitiesResponse
 
+    Activity.add_member(:custom, Shapes::ShapeRef.new(shape: CustomMessageActivity, location_name: "CUSTOM"))
     Activity.add_member(:conditional_split, Shapes::ShapeRef.new(shape: ConditionalSplitActivity, location_name: "ConditionalSplit"))
     Activity.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
     Activity.add_member(:email, Shapes::ShapeRef.new(shape: EmailMessageActivity, location_name: "EMAIL"))
     Activity.add_member(:holdout, Shapes::ShapeRef.new(shape: HoldoutActivity, location_name: "Holdout"))
     Activity.add_member(:multi_condition, Shapes::ShapeRef.new(shape: MultiConditionalSplitActivity, location_name: "MultiCondition"))
+    Activity.add_member(:push, Shapes::ShapeRef.new(shape: PushMessageActivity, location_name: "PUSH"))
     Activity.add_member(:random_split, Shapes::ShapeRef.new(shape: RandomSplitActivity, location_name: "RandomSplit"))
+    Activity.add_member(:sms, Shapes::ShapeRef.new(shape: SMSMessageActivity, location_name: "SMS"))
     Activity.add_member(:wait, Shapes::ShapeRef.new(shape: WaitActivity, location_name: "Wait"))
     Activity.struct_class = Types::Activity
 
@@ -1002,6 +1011,14 @@ module Aws::Pinpoint
     CustomDeliveryConfiguration.add_member(:delivery_uri, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "DeliveryUri"))
     CustomDeliveryConfiguration.add_member(:endpoint_types, Shapes::ShapeRef.new(shape: ListOf__EndpointTypesElement, location_name: "EndpointTypes"))
     CustomDeliveryConfiguration.struct_class = Types::CustomDeliveryConfiguration
+
+    CustomMessageActivity.add_member(:delivery_uri, Shapes::ShapeRef.new(shape: __string, location_name: "DeliveryUri"))
+    CustomMessageActivity.add_member(:endpoint_types, Shapes::ShapeRef.new(shape: ListOf__EndpointTypesElement, location_name: "EndpointTypes"))
+    CustomMessageActivity.add_member(:message_config, Shapes::ShapeRef.new(shape: JourneyCustomMessage, location_name: "MessageConfig"))
+    CustomMessageActivity.add_member(:next_activity, Shapes::ShapeRef.new(shape: __string, location_name: "NextActivity"))
+    CustomMessageActivity.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateName"))
+    CustomMessageActivity.add_member(:template_version, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateVersion"))
+    CustomMessageActivity.struct_class = Types::CustomMessageActivity
 
     DefaultMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     DefaultMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
@@ -1962,6 +1979,9 @@ module Aws::Pinpoint
     ItemResponse.add_member(:events_item_response, Shapes::ShapeRef.new(shape: MapOfEventItemResponse, location_name: "EventsItemResponse"))
     ItemResponse.struct_class = Types::ItemResponse
 
+    JourneyCustomMessage.add_member(:data, Shapes::ShapeRef.new(shape: __string, location_name: "Data"))
+    JourneyCustomMessage.struct_class = Types::JourneyCustomMessage
+
     JourneyDateRangeKpiResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
     JourneyDateRangeKpiResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, required: true, location_name: "EndTime"))
     JourneyDateRangeKpiResponse.add_member(:journey_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "JourneyId"))
@@ -1993,6 +2013,9 @@ module Aws::Pinpoint
     JourneyLimits.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
     JourneyLimits.struct_class = Types::JourneyLimits
 
+    JourneyPushMessage.add_member(:time_to_live, Shapes::ShapeRef.new(shape: __string, location_name: "TimeToLive"))
+    JourneyPushMessage.struct_class = Types::JourneyPushMessage
+
     JourneyResponse.add_member(:activities, Shapes::ShapeRef.new(shape: MapOfActivity, location_name: "Activities"))
     JourneyResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApplicationId"))
     JourneyResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
@@ -2009,6 +2032,10 @@ module Aws::Pinpoint
     JourneyResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "State"))
     JourneyResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     JourneyResponse.struct_class = Types::JourneyResponse
+
+    JourneySMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    JourneySMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
+    JourneySMSMessage.struct_class = Types::JourneySMSMessage
 
     JourneySchedule.add_member(:end_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "EndTime"))
     JourneySchedule.add_member(:start_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "StartTime"))
@@ -2282,6 +2309,12 @@ module Aws::Pinpoint
     PublicEndpoint.add_member(:user, Shapes::ShapeRef.new(shape: EndpointUser, location_name: "User"))
     PublicEndpoint.struct_class = Types::PublicEndpoint
 
+    PushMessageActivity.add_member(:message_config, Shapes::ShapeRef.new(shape: JourneyPushMessage, location_name: "MessageConfig"))
+    PushMessageActivity.add_member(:next_activity, Shapes::ShapeRef.new(shape: __string, location_name: "NextActivity"))
+    PushMessageActivity.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateName"))
+    PushMessageActivity.add_member(:template_version, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateVersion"))
+    PushMessageActivity.struct_class = Types::PushMessageActivity
+
     PushNotificationTemplateRequest.add_member(:adm, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "ADM"))
     PushNotificationTemplateRequest.add_member(:apns, Shapes::ShapeRef.new(shape: APNSPushNotificationTemplate, location_name: "APNS"))
     PushNotificationTemplateRequest.add_member(:baidu, Shapes::ShapeRef.new(shape: AndroidPushNotificationTemplate, location_name: "Baidu"))
@@ -2414,6 +2447,12 @@ module Aws::Pinpoint
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     SMSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     SMSMessage.struct_class = Types::SMSMessage
+
+    SMSMessageActivity.add_member(:message_config, Shapes::ShapeRef.new(shape: JourneySMSMessage, location_name: "MessageConfig"))
+    SMSMessageActivity.add_member(:next_activity, Shapes::ShapeRef.new(shape: __string, location_name: "NextActivity"))
+    SMSMessageActivity.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateName"))
+    SMSMessageActivity.add_member(:template_version, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateVersion"))
+    SMSMessageActivity.struct_class = Types::SMSMessageActivity
 
     SMSTemplateRequest.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     SMSTemplateRequest.add_member(:default_substitutions, Shapes::ShapeRef.new(shape: __string, location_name: "DefaultSubstitutions"))

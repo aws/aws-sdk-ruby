@@ -37,6 +37,7 @@ module Aws::ElasticBeanstalk
     ApplicationVersionStatus = Shapes::StringShape.new(name: 'ApplicationVersionStatus')
     ApplyEnvironmentManagedActionRequest = Shapes::StructureShape.new(name: 'ApplyEnvironmentManagedActionRequest')
     ApplyEnvironmentManagedActionResult = Shapes::StructureShape.new(name: 'ApplyEnvironmentManagedActionResult')
+    AssociateEnvironmentOperationsRoleMessage = Shapes::StructureShape.new(name: 'AssociateEnvironmentOperationsRoleMessage')
     AutoCreateApplication = Shapes::BooleanShape.new(name: 'AutoCreateApplication')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
     AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
@@ -116,6 +117,7 @@ module Aws::ElasticBeanstalk
     DescribePlatformVersionRequest = Shapes::StructureShape.new(name: 'DescribePlatformVersionRequest')
     DescribePlatformVersionResult = Shapes::StructureShape.new(name: 'DescribePlatformVersionResult')
     Description = Shapes::StringShape.new(name: 'Description')
+    DisassociateEnvironmentOperationsRoleMessage = Shapes::StructureShape.new(name: 'DisassociateEnvironmentOperationsRoleMessage')
     Ec2InstanceId = Shapes::StringShape.new(name: 'Ec2InstanceId')
     ElasticBeanstalkServiceException = Shapes::StructureShape.new(name: 'ElasticBeanstalkServiceException')
     EndpointURL = Shapes::StringShape.new(name: 'EndpointURL')
@@ -202,6 +204,7 @@ module Aws::ElasticBeanstalk
     OperatingSystemName = Shapes::StringShape.new(name: 'OperatingSystemName')
     OperatingSystemVersion = Shapes::StringShape.new(name: 'OperatingSystemVersion')
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
+    OperationsRole = Shapes::StringShape.new(name: 'OperationsRole')
     OptionNamespace = Shapes::StringShape.new(name: 'OptionNamespace')
     OptionRestrictionMaxLength = Shapes::IntegerShape.new(name: 'OptionRestrictionMaxLength')
     OptionRestrictionMaxValue = Shapes::IntegerShape.new(name: 'OptionRestrictionMaxValue')
@@ -399,6 +402,10 @@ module Aws::ElasticBeanstalk
     ApplyEnvironmentManagedActionResult.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     ApplyEnvironmentManagedActionResult.struct_class = Types::ApplyEnvironmentManagedActionResult
 
+    AssociateEnvironmentOperationsRoleMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "EnvironmentName"))
+    AssociateEnvironmentOperationsRoleMessage.add_member(:operations_role, Shapes::ShapeRef.new(shape: OperationsRole, required: true, location_name: "OperationsRole"))
+    AssociateEnvironmentOperationsRoleMessage.struct_class = Types::AssociateEnvironmentOperationsRoleMessage
+
     AutoScalingGroup.add_member(:name, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Name"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
@@ -537,6 +544,7 @@ module Aws::ElasticBeanstalk
     CreateEnvironmentMessage.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     CreateEnvironmentMessage.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
     CreateEnvironmentMessage.add_member(:options_to_remove, Shapes::ShapeRef.new(shape: OptionsSpecifierList, location_name: "OptionsToRemove"))
+    CreateEnvironmentMessage.add_member(:operations_role, Shapes::ShapeRef.new(shape: OperationsRole, location_name: "OperationsRole"))
     CreateEnvironmentMessage.struct_class = Types::CreateEnvironmentMessage
 
     CreatePlatformVersionRequest.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, required: true, location_name: "PlatformName"))
@@ -692,6 +700,9 @@ module Aws::ElasticBeanstalk
     DescribePlatformVersionResult.add_member(:platform_description, Shapes::ShapeRef.new(shape: PlatformDescription, location_name: "PlatformDescription"))
     DescribePlatformVersionResult.struct_class = Types::DescribePlatformVersionResult
 
+    DisassociateEnvironmentOperationsRoleMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "EnvironmentName"))
+    DisassociateEnvironmentOperationsRoleMessage.struct_class = Types::DisassociateEnvironmentOperationsRoleMessage
+
     ElasticBeanstalkServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ElasticBeanstalkServiceException.struct_class = Types::ElasticBeanstalkServiceException
 
@@ -715,6 +726,7 @@ module Aws::ElasticBeanstalk
     EnvironmentDescription.add_member(:tier, Shapes::ShapeRef.new(shape: EnvironmentTier, location_name: "Tier"))
     EnvironmentDescription.add_member(:environment_links, Shapes::ShapeRef.new(shape: EnvironmentLinks, location_name: "EnvironmentLinks"))
     EnvironmentDescription.add_member(:environment_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "EnvironmentArn"))
+    EnvironmentDescription.add_member(:operations_role, Shapes::ShapeRef.new(shape: OperationsRole, location_name: "OperationsRole"))
     EnvironmentDescription.struct_class = Types::EnvironmentDescription
 
     EnvironmentDescriptionsList.member = Shapes::ShapeRef.new(shape: EnvironmentDescription)
@@ -1224,6 +1236,15 @@ module Aws::ElasticBeanstalk
         o.errors << Shapes::ShapeRef.new(shape: ManagedActionInvalidStateException)
       end)
 
+      api.add_operation(:associate_environment_operations_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateEnvironmentOperationsRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateEnvironmentOperationsRoleMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+      end)
+
       api.add_operation(:check_dns_availability, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CheckDNSAvailability"
         o.http_method = "POST"
@@ -1477,6 +1498,15 @@ module Aws::ElasticBeanstalk
         o.output = Shapes::ShapeRef.new(shape: DescribePlatformVersionResult)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
         o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
+      end)
+
+      api.add_operation(:disassociate_environment_operations_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateEnvironmentOperationsRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateEnvironmentOperationsRoleMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
       end)
 
       api.add_operation(:list_available_solution_stacks, Seahorse::Model::Operation.new.tap do |o|

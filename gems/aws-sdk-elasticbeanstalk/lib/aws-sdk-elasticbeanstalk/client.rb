@@ -390,6 +390,41 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # Add or change the operations role used by an environment. After this
+    # call is made, Elastic Beanstalk uses the associated operations role
+    # for permissions to downstream services during subsequent calls acting
+    # on this environment. For more information, see [Operations roles][1]
+    # in the *AWS Elastic Beanstalk Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the environment to which to set the operations role.
+    #
+    # @option params [required, String] :operations_role
+    #   The Amazon Resource Name (ARN) of an existing IAM role to be used as
+    #   the environment's operations role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_environment_operations_role({
+    #     environment_name: "EnvironmentName", # required
+    #     operations_role: "OperationsRole", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AssociateEnvironmentOperationsRole AWS API Documentation
+    #
+    # @overload associate_environment_operations_role(params = {})
+    # @param [Hash] params ({})
+    def associate_environment_operations_role(params = {}, options = {})
+      req = build_request(:associate_environment_operations_role, params)
+      req.send_request(options)
+    end
+
     # Checks if the specified CNAME is available.
     #
     # @option params [required, String] :cname_prefix
@@ -511,6 +546,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].environment_links[0].link_name #=> String
     #   resp.environments[0].environment_links[0].environment_name #=> String
     #   resp.environments[0].environment_arn #=> String
+    #   resp.environments[0].operations_role #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments AWS API Documentation
@@ -1068,7 +1104,7 @@ module Aws::ElasticBeanstalk
     #
     # @option params [String] :platform_arn
     #   The Amazon Resource Name (ARN) of the custom platform to use with the
-    #   environment. For more information, see [ Custom Platforms][1] in the
+    #   environment. For more information, see [Custom Platforms][1] in the
     #   *AWS Elastic Beanstalk Developer Guide*.
     #
     #   <note markdown="1"> If you specify `PlatformArn`, don't specify `SolutionStackName`.
@@ -1088,6 +1124,19 @@ module Aws::ElasticBeanstalk
     # @option params [Array<Types::OptionSpecification>] :options_to_remove
     #   A list of custom user-defined configuration options to remove from the
     #   configuration set for this new environment.
+    #
+    # @option params [String] :operations_role
+    #   The Amazon Resource Name (ARN) of an existing IAM role to be used as
+    #   the environment's operations role. If specified, Elastic Beanstalk
+    #   uses the operations role for permissions to downstream services during
+    #   this call and during subsequent calls acting on this environment. To
+    #   specify an operations role, you must have the `iam:PassRole`
+    #   permission for the role. For more information, see [Operations
+    #   roles][1] in the *AWS Elastic Beanstalk Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
     #
     # @return [Types::EnvironmentDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1111,6 +1160,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
     #   * {Types::EnvironmentDescription#environment_arn #environment_arn} => String
+    #   * {Types::EnvironmentDescription#operations_role #operations_role} => String
     #
     #
     # @example Example: To create a new environment for an application
@@ -1182,6 +1232,7 @@ module Aws::ElasticBeanstalk
     #         option_name: "ConfigurationOptionName",
     #       },
     #     ],
+    #     operations_role: "OperationsRole",
     #   })
     #
     # @example Response structure
@@ -1214,6 +1265,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
     #   resp.environment_arn #=> String
+    #   resp.operations_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment AWS API Documentation
     #
@@ -2474,6 +2526,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].environment_links[0].link_name #=> String
     #   resp.environments[0].environment_links[0].environment_name #=> String
     #   resp.environments[0].environment_arn #=> String
+    #   resp.environments[0].operations_role #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments AWS API Documentation
@@ -2850,6 +2903,37 @@ module Aws::ElasticBeanstalk
     # @param [Hash] params ({})
     def describe_platform_version(params = {}, options = {})
       req = build_request(:describe_platform_version, params)
+      req.send_request(options)
+    end
+
+    # Disassociate the operations role from an environment. After this call
+    # is made, Elastic Beanstalk uses the caller's permissions for
+    # permissions to downstream services during subsequent calls acting on
+    # this environment. For more information, see [Operations roles][1] in
+    # the *AWS Elastic Beanstalk Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #
+    # @option params [required, String] :environment_name
+    #   The name of the environment from which to disassociate the operations
+    #   role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_environment_operations_role({
+    #     environment_name: "EnvironmentName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DisassociateEnvironmentOperationsRole AWS API Documentation
+    #
+    # @overload disassociate_environment_operations_role(params = {})
+    # @param [Hash] params ({})
+    def disassociate_environment_operations_role(params = {}, options = {})
+      req = build_request(:disassociate_environment_operations_role, params)
       req.send_request(options)
     end
 
@@ -3518,6 +3602,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
     #   * {Types::EnvironmentDescription#environment_arn #environment_arn} => String
+    #   * {Types::EnvironmentDescription#operations_role #operations_role} => String
     #
     #
     # @example Example: To terminate an environment
@@ -3587,6 +3672,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
     #   resp.environment_arn #=> String
+    #   resp.operations_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment AWS API Documentation
     #
@@ -4057,6 +4143,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
     #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
     #   * {Types::EnvironmentDescription#environment_arn #environment_arn} => String
+    #   * {Types::EnvironmentDescription#operations_role #operations_role} => String
     #
     #
     # @example Example: To update an environment to a new version
@@ -4203,6 +4290,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
     #   resp.environment_arn #=> String
+    #   resp.operations_role #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment AWS API Documentation
     #
@@ -4249,14 +4337,16 @@ module Aws::ElasticBeanstalk
     #   Must be the ARN of an Elastic Beanstalk resource.
     #
     # @option params [Array<Types::Tag>] :tags_to_add
-    #   A list of tags to add or update.
+    #   A list of tags to add or update. If a key of an existing tag is added,
+    #   the tag's value is updated.
     #
-    #   If a key of an existing tag is added, the tag's value is updated.
+    #   Specify at least one of these parameters: `TagsToAdd`, `TagsToRemove`.
     #
     # @option params [Array<String>] :tags_to_remove
-    #   A list of tag keys to remove.
+    #   A list of tag keys to remove. If a tag key doesn't exist, it is
+    #   silently ignored.
     #
-    #   If a tag key doesn't exist, it is silently ignored.
+    #   Specify at least one of these parameters: `TagsToAdd`, `TagsToRemove`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4381,7 +4471,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

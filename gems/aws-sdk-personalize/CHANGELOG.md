@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-06-05)
+------------------
+
+* Feature - [Personalize] Adds ability to create and apply filters.
+
 1.12.0 (2020-05-28)
 ------------------
 

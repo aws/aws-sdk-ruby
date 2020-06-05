@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-06-05)
+------------------
+
+* Feature - [Personalize] Adds ability to apply filter to real-time recommendations
+
 1.10.0 (2020-05-28)
 ------------------
 

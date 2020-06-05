@@ -30,6 +30,7 @@ module Aws::SageMakerRuntime
     #         accept: "Header",
     #         custom_attributes: "CustomAttributesHeader",
     #         target_model: "TargetModelHeader",
+    #         target_variant: "TargetVariantHeader",
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -47,7 +48,7 @@ module Aws::SageMakerRuntime
     #   to the model.
     #
     #   For information about the format of the request body, see [Common
-    #   Data Formats—Inference][1].
+    #   Data Formats-Inference][1].
     #
     #
     #
@@ -80,8 +81,16 @@ module Aws::SageMakerRuntime
     #   @return [String]
     #
     # @!attribute [rw] target_model
-    #   Specifies the model to be requested for an inference when invoking a
-    #   multi-model endpoint.
+    #   The model to request for inference when invoking a multi-model
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_variant
+    #   Specify the production variant to send the inference request to when
+    #   invoking an endpoint that is running two or more variants. Note that
+    #   this parameter overrides the default behavior for the endpoint,
+    #   which is to distribute the invocation traffic based on the variant
+    #   weights.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
@@ -92,7 +101,8 @@ module Aws::SageMakerRuntime
       :content_type,
       :accept,
       :custom_attributes,
-      :target_model)
+      :target_model,
+      :target_variant)
       include Aws::Structure
     end
 
@@ -100,7 +110,7 @@ module Aws::SageMakerRuntime
     #   Includes the inference provided by the model.
     #
     #   For information about the format of the response body, see [Common
-    #   Data Formats—Inference][1].
+    #   Data Formats-Inference][1].
     #
     #
     #
