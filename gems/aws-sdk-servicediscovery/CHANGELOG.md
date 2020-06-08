@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-06-08)
+------------------
+
+* Feature - Added support for tagging Service and Namespace type resources  in Cloud Map
+
 1.23.0 (2020-05-28)
 ------------------
 

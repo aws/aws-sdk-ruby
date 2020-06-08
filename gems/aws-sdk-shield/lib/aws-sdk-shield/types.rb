@@ -22,9 +22,9 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # In order to grant the necessary access to the DDoS Response Team, the
-    # user submitting the request must have the `iam:PassRole` permission.
-    # This error indicates the user did not have the appropriate
+    # In order to grant the necessary access to the DDoS Response Team
+    # (DRT), the user submitting the request must have the `iam:PassRole`
+    # permission. This error indicates the user did not have the appropriate
     # permissions. For more information, see [Granting a User Permissions to
     # Pass a Role to an AWS Service][1].
     #
@@ -125,6 +125,46 @@ module Aws::Shield
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheckResponse AWS API Documentation
     #
     class AssociateHealthCheckResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateProactiveEngagementDetailsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         emergency_contact_list: [ # required
+    #           {
+    #             email_address: "EmailAddress", # required
+    #             phone_number: "PhoneNumber",
+    #             contact_notes: "ContactNotes",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] emergency_contact_list
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you for escalations to the DRT and to
+    #   initiate proactive customer support.
+    #
+    #   To enable proactive engagement, the contact list must include at
+    #   least one phone number.
+    #
+    #   <note markdown="1"> The contacts that you provide here replace any contacts that were
+    #   already defined. If you already have contacts defined and want to
+    #   use them, retrieve the list using `DescribeEmergencyContactSettings`
+    #   and then provide it here.
+    #
+    #    </note>
+    #   @return [Array<Types::EmergencyContact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetailsRequest AWS API Documentation
+    #
+    class AssociateProactiveEngagementDetailsRequest < Struct.new(
+      :emergency_contact_list)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateProactiveEngagementDetailsResponse AWS API Documentation
+    #
+    class AssociateProactiveEngagementDetailsResponse < Aws::EmptyStructure; end
 
     # The details of a DDoS attack.
     #
@@ -500,8 +540,10 @@ module Aws::Shield
     class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses that the DRT can use to contact you during
-    #   a suspected attack.
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive
+    #   customer support.
     #   @return [Array<Types::EmergencyContact>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsResponse AWS API Documentation
@@ -569,6 +611,16 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagementRequest AWS API Documentation
+    #
+    class DisableProactiveEngagementRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableProactiveEngagementResponse AWS API Documentation
+    #
+    class DisableProactiveEngagementResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateDRTLogBucketRequest
     #   data as a hash:
     #
@@ -631,27 +683,49 @@ module Aws::Shield
     #
     class DisassociateHealthCheckResponse < Aws::EmptyStructure; end
 
-    # Contact information that the DRT can use to contact you during a
-    # suspected attack.
+    # Contact information that the DRT can use to contact you if you have
+    # proactive engagement enabled, for escalations to the DRT and to
+    # initiate proactive customer support.
     #
     # @note When making an API call, you may pass EmergencyContact
     #   data as a hash:
     #
     #       {
     #         email_address: "EmailAddress", # required
+    #         phone_number: "PhoneNumber",
+    #         contact_notes: "ContactNotes",
     #       }
     #
     # @!attribute [rw] email_address
-    #   An email address that the DRT can use to contact you during a
-    #   suspected attack.
+    #   The email address for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number for the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_notes
+    #   Additional notes regarding the contact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EmergencyContact AWS API Documentation
     #
     class EmergencyContact < Struct.new(
-      :email_address)
+      :email_address,
+      :phone_number,
+      :contact_notes)
       include Aws::Structure
     end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagementRequest AWS API Documentation
+    #
+    class EnableProactiveEngagementRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableProactiveEngagementResponse AWS API Documentation
+    #
+    class EnableProactiveEngagementResponse < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -976,8 +1050,8 @@ module Aws::Shield
       include Aws::Structure
     end
 
-    # Exception that indicates that the protection state has been modified
-    # by another client. You can retry the request.
+    # Exception that indicates that the resource state has been modified by
+    # another client. Retrieve the resource and then retry your request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1107,6 +1181,19 @@ module Aws::Shield
     #   Specifies how many protections of a given type you can create.
     #   @return [Array<Types::Limit>]
     #
+    # @!attribute [rw] proactive_engagement_status
+    #   If `ENABLED`, the DDoS Response Team (DRT) will use email and phone
+    #   to notify contacts about escalations to the DRT and to initiate
+    #   proactive customer support.
+    #
+    #   If `PENDING`, you have requested proactive engagement and the
+    #   request is pending. The status changes to `ENABLED` when your
+    #   request is fully processed.
+    #
+    #   If `DISABLED`, the DRT will not proactively notify contacts about
+    #   escalations or to initiate proactive customer support.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
@@ -1114,7 +1201,8 @@ module Aws::Shield
       :end_time,
       :time_commitment_in_seconds,
       :auto_renew,
-      :limits)
+      :limits,
+      :proactive_engagement_status)
       include Aws::Structure
     end
 
@@ -1217,13 +1305,20 @@ module Aws::Shield
     #         emergency_contact_list: [
     #           {
     #             email_address: "EmailAddress", # required
+    #             phone_number: "PhoneNumber",
+    #             contact_notes: "ContactNotes",
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] emergency_contact_list
-    #   A list of email addresses that the DRT can use to contact you during
-    #   a suspected attack.
+    #   A list of email addresses and phone numbers that the DDoS Response
+    #   Team (DRT) can use to contact you if you have proactive engagement
+    #   enabled, for escalations to the DRT and to initiate proactive
+    #   customer support.
+    #
+    #   If you have proactive engagement enabled, the contact list must
+    #   include at least one phone number.
     #   @return [Array<Types::EmergencyContact>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettingsRequest AWS API Documentation

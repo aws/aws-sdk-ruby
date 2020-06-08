@@ -32,10 +32,13 @@ module Aws::ServiceDiscovery
   # * {NamespaceAlreadyExists}
   # * {NamespaceNotFound}
   # * {OperationNotFound}
+  # * {RequestLimitExceeded}
   # * {ResourceInUse}
   # * {ResourceLimitExceeded}
+  # * {ResourceNotFoundException}
   # * {ServiceAlreadyExists}
   # * {ServiceNotFound}
+  # * {TooManyTagsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -163,6 +166,21 @@ module Aws::ServiceDiscovery
       end
     end
 
+    class RequestLimitExceeded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ServiceDiscovery::Types::RequestLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceInUse < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -183,6 +201,21 @@ module Aws::ServiceDiscovery
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ServiceDiscovery::Types::ResourceLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ServiceDiscovery::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -230,6 +263,26 @@ module Aws::ServiceDiscovery
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ServiceDiscovery::Types::TooManyTagsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_name
+        @data[:resource_name]
       end
     end
 
