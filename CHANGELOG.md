@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.523 (2020-06-08)
+------------------
+
 * Feature - Aws::ServiceDiscovery - Updated the API, and documentation for AWS Cloud Map.
 
 * Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
