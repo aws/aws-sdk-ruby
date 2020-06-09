@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-sts/plugins/sts_regional_endpoints.rb'
@@ -70,6 +71,7 @@ module Aws::STS
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::STS::Plugins::STSRegionalEndpoints)

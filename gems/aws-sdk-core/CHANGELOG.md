@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `httpChecksumRequired` on operations that require Content MD5 validation.
+
 3.98.0 (2020-06-05)
 ------------------
 

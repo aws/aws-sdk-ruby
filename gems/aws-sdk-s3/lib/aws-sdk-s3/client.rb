@@ -24,6 +24,7 @@ require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
@@ -85,6 +86,7 @@ module Aws::S3
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::Accelerate)
@@ -180,9 +182,9 @@ module Aws::S3
     #
     #   @option options [Boolean] :compute_checksums (true)
     #     When `true` a MD5 checksum will be computed for every request that
-    #     sends a body.  When `false`, MD5 checksums will only be computed
-    #     for operations that require them.  Checksum errors returned by Amazon
-    #     S3 are automatically retried up to `:retry_limit` times.
+    #     optionally allows for a Content MD5 header.  When `false`, MD5 checksums
+    #     will not be computed for optional operations. Checksum errors returned by
+    #     Amazon S3 are automatically retried up to `:retry_limit` times.
     #
     #   @option options [Boolean] :convert_params (true)
     #     When `true`, an attempt is made to coerce request parameters into
