@@ -33,6 +33,7 @@ module Aws::DirectConnect
     BGPAuthKey = Shapes::StringShape.new(name: 'BGPAuthKey')
     BGPPeer = Shapes::StructureShape.new(name: 'BGPPeer')
     BGPPeerId = Shapes::StringShape.new(name: 'BGPPeerId')
+    BGPPeerIdList = Shapes::ListShape.new(name: 'BGPPeerIdList')
     BGPPeerList = Shapes::ListShape.new(name: 'BGPPeerList')
     BGPPeerState = Shapes::StringShape.new(name: 'BGPPeerState')
     BGPStatus = Shapes::StringShape.new(name: 'BGPStatus')
@@ -126,7 +127,9 @@ module Aws::DirectConnect
     DirectConnectServerException = Shapes::StructureShape.new(name: 'DirectConnectServerException')
     DisassociateConnectionFromLagRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionFromLagRequest')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
+    EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FailureTestHistoryStatus = Shapes::StringShape.new(name: 'FailureTestHistoryStatus')
     GatewayIdToAssociate = Shapes::StringShape.new(name: 'GatewayIdToAssociate')
     GatewayIdentifier = Shapes::StringShape.new(name: 'GatewayIdentifier')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
@@ -144,6 +147,8 @@ module Aws::DirectConnect
     LagName = Shapes::StringShape.new(name: 'LagName')
     LagState = Shapes::StringShape.new(name: 'LagState')
     Lags = Shapes::StructureShape.new(name: 'Lags')
+    ListVirtualInterfaceTestHistoryRequest = Shapes::StructureShape.new(name: 'ListVirtualInterfaceTestHistoryRequest')
+    ListVirtualInterfaceTestHistoryResponse = Shapes::StructureShape.new(name: 'ListVirtualInterfaceTestHistoryResponse')
     Loa = Shapes::StructureShape.new(name: 'Loa')
     LoaContent = Shapes::BlobShape.new(name: 'LoaContent')
     LoaContentType = Shapes::StringShape.new(name: 'LoaContentType')
@@ -177,7 +182,12 @@ module Aws::DirectConnect
     RouteFilterPrefix = Shapes::StructureShape.new(name: 'RouteFilterPrefix')
     RouteFilterPrefixList = Shapes::ListShape.new(name: 'RouteFilterPrefixList')
     RouterConfig = Shapes::StringShape.new(name: 'RouterConfig')
+    StartBgpFailoverTestRequest = Shapes::StructureShape.new(name: 'StartBgpFailoverTestRequest')
+    StartBgpFailoverTestResponse = Shapes::StructureShape.new(name: 'StartBgpFailoverTestResponse')
+    StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     StateChangeError = Shapes::StringShape.new(name: 'StateChangeError')
+    StopBgpFailoverTestRequest = Shapes::StructureShape.new(name: 'StopBgpFailoverTestRequest')
+    StopBgpFailoverTestResponse = Shapes::StructureShape.new(name: 'StopBgpFailoverTestResponse')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -185,6 +195,8 @@ module Aws::DirectConnect
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TestDuration = Shapes::IntegerShape.new(name: 'TestDuration')
+    TestId = Shapes::StringShape.new(name: 'TestId')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -205,6 +217,8 @@ module Aws::DirectConnect
     VirtualInterfaceName = Shapes::StringShape.new(name: 'VirtualInterfaceName')
     VirtualInterfaceRegion = Shapes::StringShape.new(name: 'VirtualInterfaceRegion')
     VirtualInterfaceState = Shapes::StringShape.new(name: 'VirtualInterfaceState')
+    VirtualInterfaceTestHistory = Shapes::StructureShape.new(name: 'VirtualInterfaceTestHistory')
+    VirtualInterfaceTestHistoryList = Shapes::ListShape.new(name: 'VirtualInterfaceTestHistoryList')
     VirtualInterfaceType = Shapes::StringShape.new(name: 'VirtualInterfaceType')
     VirtualInterfaces = Shapes::StructureShape.new(name: 'VirtualInterfaces')
 
@@ -280,6 +294,8 @@ module Aws::DirectConnect
     BGPPeer.add_member(:bgp_status, Shapes::ShapeRef.new(shape: BGPStatus, location_name: "bgpStatus"))
     BGPPeer.add_member(:aws_device_v2, Shapes::ShapeRef.new(shape: AwsDeviceV2, location_name: "awsDeviceV2"))
     BGPPeer.struct_class = Types::BGPPeer
+
+    BGPPeerIdList.member = Shapes::ShapeRef.new(shape: BGPPeerId)
 
     BGPPeerList.member = Shapes::ShapeRef.new(shape: BGPPeer)
 
@@ -646,6 +662,18 @@ module Aws::DirectConnect
     Lags.add_member(:lags, Shapes::ShapeRef.new(shape: LagList, location_name: "lags"))
     Lags.struct_class = Types::Lags
 
+    ListVirtualInterfaceTestHistoryRequest.add_member(:test_id, Shapes::ShapeRef.new(shape: TestId, location_name: "testId"))
+    ListVirtualInterfaceTestHistoryRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+    ListVirtualInterfaceTestHistoryRequest.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerIdList, location_name: "bgpPeers"))
+    ListVirtualInterfaceTestHistoryRequest.add_member(:status, Shapes::ShapeRef.new(shape: FailureTestHistoryStatus, location_name: "status"))
+    ListVirtualInterfaceTestHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    ListVirtualInterfaceTestHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVirtualInterfaceTestHistoryRequest.struct_class = Types::ListVirtualInterfaceTestHistoryRequest
+
+    ListVirtualInterfaceTestHistoryResponse.add_member(:virtual_interface_test_history, Shapes::ShapeRef.new(shape: VirtualInterfaceTestHistoryList, location_name: "virtualInterfaceTestHistory"))
+    ListVirtualInterfaceTestHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVirtualInterfaceTestHistoryResponse.struct_class = Types::ListVirtualInterfaceTestHistoryResponse
+
     Loa.add_member(:loa_content, Shapes::ShapeRef.new(shape: LoaContent, location_name: "loaContent"))
     Loa.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
     Loa.struct_class = Types::Loa
@@ -753,6 +781,20 @@ module Aws::DirectConnect
 
     RouteFilterPrefixList.member = Shapes::ShapeRef.new(shape: RouteFilterPrefix)
 
+    StartBgpFailoverTestRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
+    StartBgpFailoverTestRequest.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerIdList, location_name: "bgpPeers"))
+    StartBgpFailoverTestRequest.add_member(:test_duration_in_minutes, Shapes::ShapeRef.new(shape: TestDuration, location_name: "testDurationInMinutes"))
+    StartBgpFailoverTestRequest.struct_class = Types::StartBgpFailoverTestRequest
+
+    StartBgpFailoverTestResponse.add_member(:virtual_interface_test, Shapes::ShapeRef.new(shape: VirtualInterfaceTestHistory, location_name: "virtualInterfaceTest"))
+    StartBgpFailoverTestResponse.struct_class = Types::StartBgpFailoverTestResponse
+
+    StopBgpFailoverTestRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
+    StopBgpFailoverTestRequest.struct_class = Types::StopBgpFailoverTestRequest
+
+    StopBgpFailoverTestResponse.add_member(:virtual_interface_test, Shapes::ShapeRef.new(shape: VirtualInterfaceTestHistory, location_name: "virtualInterfaceTest"))
+    StopBgpFailoverTestResponse.struct_class = Types::StopBgpFailoverTestResponse
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -828,6 +870,18 @@ module Aws::DirectConnect
     VirtualInterface.struct_class = Types::VirtualInterface
 
     VirtualInterfaceList.member = Shapes::ShapeRef.new(shape: VirtualInterface)
+
+    VirtualInterfaceTestHistory.add_member(:test_id, Shapes::ShapeRef.new(shape: TestId, location_name: "testId"))
+    VirtualInterfaceTestHistory.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+    VirtualInterfaceTestHistory.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerIdList, location_name: "bgpPeers"))
+    VirtualInterfaceTestHistory.add_member(:status, Shapes::ShapeRef.new(shape: FailureTestHistoryStatus, location_name: "status"))
+    VirtualInterfaceTestHistory.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
+    VirtualInterfaceTestHistory.add_member(:test_duration_in_minutes, Shapes::ShapeRef.new(shape: TestDuration, location_name: "testDurationInMinutes"))
+    VirtualInterfaceTestHistory.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "startTime"))
+    VirtualInterfaceTestHistory.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "endTime"))
+    VirtualInterfaceTestHistory.struct_class = Types::VirtualInterfaceTestHistory
+
+    VirtualInterfaceTestHistoryList.member = Shapes::ShapeRef.new(shape: VirtualInterfaceTestHistory)
 
     VirtualInterfaces.add_member(:virtual_interfaces, Shapes::ShapeRef.new(shape: VirtualInterfaceList, location_name: "virtualInterfaces"))
     VirtualInterfaces.struct_class = Types::VirtualInterfaces
@@ -1350,6 +1404,36 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateConnectionFromLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:list_virtual_interface_test_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVirtualInterfaceTestHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVirtualInterfaceTestHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVirtualInterfaceTestHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:start_bgp_failover_test, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBgpFailoverTest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartBgpFailoverTestRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartBgpFailoverTestResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:stop_bgp_failover_test, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopBgpFailoverTest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopBgpFailoverTestRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopBgpFailoverTestResponse)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

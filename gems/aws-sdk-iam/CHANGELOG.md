@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2020-06-03)
+------------------
+
+* Feature - GenerateServiceLastAccessedDetails will now return ActionLastAccessed details for certain S3 control plane actions
+
 1.38.0 (2020-05-28)
 ------------------
 

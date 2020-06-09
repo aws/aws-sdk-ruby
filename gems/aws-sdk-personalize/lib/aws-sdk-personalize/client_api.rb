@@ -49,6 +49,8 @@ module Aws::Personalize
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
     CreateEventTrackerRequest = Shapes::StructureShape.new(name: 'CreateEventTrackerRequest')
     CreateEventTrackerResponse = Shapes::StructureShape.new(name: 'CreateEventTrackerResponse')
+    CreateFilterRequest = Shapes::StructureShape.new(name: 'CreateFilterRequest')
+    CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
     CreateSchemaRequest = Shapes::StructureShape.new(name: 'CreateSchemaRequest')
     CreateSchemaResponse = Shapes::StructureShape.new(name: 'CreateSchemaResponse')
     CreateSolutionRequest = Shapes::StructureShape.new(name: 'CreateSolutionRequest')
@@ -80,6 +82,7 @@ module Aws::Personalize
     DeleteDatasetGroupRequest = Shapes::StructureShape.new(name: 'DeleteDatasetGroupRequest')
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
     DeleteEventTrackerRequest = Shapes::StructureShape.new(name: 'DeleteEventTrackerRequest')
+    DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
     DeleteSchemaRequest = Shapes::StructureShape.new(name: 'DeleteSchemaRequest')
     DeleteSolutionRequest = Shapes::StructureShape.new(name: 'DeleteSolutionRequest')
     DescribeAlgorithmRequest = Shapes::StructureShape.new(name: 'DescribeAlgorithmRequest')
@@ -98,6 +101,8 @@ module Aws::Personalize
     DescribeEventTrackerResponse = Shapes::StructureShape.new(name: 'DescribeEventTrackerResponse')
     DescribeFeatureTransformationRequest = Shapes::StructureShape.new(name: 'DescribeFeatureTransformationRequest')
     DescribeFeatureTransformationResponse = Shapes::StructureShape.new(name: 'DescribeFeatureTransformationResponse')
+    DescribeFilterRequest = Shapes::StructureShape.new(name: 'DescribeFilterRequest')
+    DescribeFilterResponse = Shapes::StructureShape.new(name: 'DescribeFilterResponse')
     DescribeRecipeRequest = Shapes::StructureShape.new(name: 'DescribeRecipeRequest')
     DescribeRecipeResponse = Shapes::StructureShape.new(name: 'DescribeRecipeResponse')
     DescribeSchemaRequest = Shapes::StructureShape.new(name: 'DescribeSchemaRequest')
@@ -118,6 +123,10 @@ module Aws::Personalize
     FeatureTransformation = Shapes::StructureShape.new(name: 'FeatureTransformation')
     FeatureTransformationParameters = Shapes::MapShape.new(name: 'FeatureTransformationParameters')
     FeaturizationParameters = Shapes::MapShape.new(name: 'FeaturizationParameters')
+    Filter = Shapes::StructureShape.new(name: 'Filter')
+    FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
+    FilterSummary = Shapes::StructureShape.new(name: 'FilterSummary')
+    Filters = Shapes::ListShape.new(name: 'Filters')
     GetSolutionMetricsRequest = Shapes::StructureShape.new(name: 'GetSolutionMetricsRequest')
     GetSolutionMetricsResponse = Shapes::StructureShape.new(name: 'GetSolutionMetricsResponse')
     HPOConfig = Shapes::StructureShape.new(name: 'HPOConfig')
@@ -147,6 +156,8 @@ module Aws::Personalize
     ListDatasetsResponse = Shapes::StructureShape.new(name: 'ListDatasetsResponse')
     ListEventTrackersRequest = Shapes::StructureShape.new(name: 'ListEventTrackersRequest')
     ListEventTrackersResponse = Shapes::StructureShape.new(name: 'ListEventTrackersResponse')
+    ListFiltersRequest = Shapes::StructureShape.new(name: 'ListFiltersRequest')
+    ListFiltersResponse = Shapes::StructureShape.new(name: 'ListFiltersResponse')
     ListRecipesRequest = Shapes::StructureShape.new(name: 'ListRecipesRequest')
     ListRecipesResponse = Shapes::StructureShape.new(name: 'ListRecipesResponse')
     ListSchemasRequest = Shapes::StructureShape.new(name: 'ListSchemasRequest')
@@ -225,6 +236,7 @@ module Aws::Personalize
 
     BatchInferenceJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
     BatchInferenceJob.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
+    BatchInferenceJob.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     BatchInferenceJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     BatchInferenceJob.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     BatchInferenceJob.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
@@ -299,6 +311,7 @@ module Aws::Personalize
 
     CreateBatchInferenceJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
     CreateBatchInferenceJobRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
+    CreateBatchInferenceJobRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     CreateBatchInferenceJobRequest.add_member(:num_results, Shapes::ShapeRef.new(shape: NumBatchResults, location_name: "numResults"))
     CreateBatchInferenceJobRequest.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchInferenceJobInput, required: true, location_name: "jobInput"))
     CreateBatchInferenceJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, required: true, location_name: "jobOutput"))
@@ -349,6 +362,14 @@ module Aws::Personalize
     CreateEventTrackerResponse.add_member(:event_tracker_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "eventTrackerArn"))
     CreateEventTrackerResponse.add_member(:tracking_id, Shapes::ShapeRef.new(shape: TrackingId, location_name: "trackingId"))
     CreateEventTrackerResponse.struct_class = Types::CreateEventTrackerResponse
+
+    CreateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateFilterRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
+    CreateFilterRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, required: true, location_name: "filterExpression"))
+    CreateFilterRequest.struct_class = Types::CreateFilterRequest
+
+    CreateFilterResponse.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    CreateFilterResponse.struct_class = Types::CreateFilterResponse
 
     CreateSchemaRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateSchemaRequest.add_member(:schema, Shapes::ShapeRef.new(shape: AvroSchema, required: true, location_name: "schema"))
@@ -493,6 +514,9 @@ module Aws::Personalize
     DeleteEventTrackerRequest.add_member(:event_tracker_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "eventTrackerArn"))
     DeleteEventTrackerRequest.struct_class = Types::DeleteEventTrackerRequest
 
+    DeleteFilterRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "filterArn"))
+    DeleteFilterRequest.struct_class = Types::DeleteFilterRequest
+
     DeleteSchemaRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "schemaArn"))
     DeleteSchemaRequest.struct_class = Types::DeleteSchemaRequest
 
@@ -546,6 +570,12 @@ module Aws::Personalize
 
     DescribeFeatureTransformationResponse.add_member(:feature_transformation, Shapes::ShapeRef.new(shape: FeatureTransformation, location_name: "featureTransformation"))
     DescribeFeatureTransformationResponse.struct_class = Types::DescribeFeatureTransformationResponse
+
+    DescribeFilterRequest.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "filterArn"))
+    DescribeFilterRequest.struct_class = Types::DescribeFilterRequest
+
+    DescribeFilterResponse.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
+    DescribeFilterResponse.struct_class = Types::DescribeFilterResponse
 
     DescribeRecipeRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recipeArn"))
     DescribeRecipeRequest.struct_class = Types::DescribeRecipeRequest
@@ -603,6 +633,27 @@ module Aws::Personalize
 
     FeaturizationParameters.key = Shapes::ShapeRef.new(shape: ParameterName)
     FeaturizationParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    Filter.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    Filter.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    Filter.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    Filter.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    Filter.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    Filter.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    Filter.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, location_name: "filterExpression"))
+    Filter.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    Filter.struct_class = Types::Filter
+
+    FilterSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    FilterSummary.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
+    FilterSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    FilterSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    FilterSummary.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    FilterSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    FilterSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    FilterSummary.struct_class = Types::FilterSummary
+
+    Filters.member = Shapes::ShapeRef.new(shape: FilterSummary)
 
     GetSolutionMetricsRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
     GetSolutionMetricsRequest.struct_class = Types::GetSolutionMetricsRequest
@@ -701,6 +752,15 @@ module Aws::Personalize
     ListEventTrackersResponse.add_member(:event_trackers, Shapes::ShapeRef.new(shape: EventTrackers, location_name: "eventTrackers"))
     ListEventTrackersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListEventTrackersResponse.struct_class = Types::ListEventTrackersResponse
+
+    ListFiltersRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    ListFiltersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFiltersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListFiltersRequest.struct_class = Types::ListFiltersRequest
+
+    ListFiltersResponse.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    ListFiltersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFiltersResponse.struct_class = Types::ListFiltersResponse
 
     ListRecipesRequest.add_member(:recipe_provider, Shapes::ShapeRef.new(shape: RecipeProvider, location_name: "recipeProvider"))
     ListRecipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -941,6 +1001,18 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:create_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFilterResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_schema, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSchema"
         o.http_method = "POST"
@@ -1018,6 +1090,16 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_schema, Seahorse::Model::Operation.new.tap do |o|
@@ -1118,6 +1200,16 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeFeatureTransformationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFeatureTransformationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFilterResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -1266,6 +1358,16 @@ module Aws::Personalize
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_filters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFilters"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFiltersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFiltersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:list_recipes, Seahorse::Model::Operation.new.tap do |o|

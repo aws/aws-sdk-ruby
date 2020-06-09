@@ -1331,8 +1331,11 @@ module Aws::ServiceCatalog
     #
     #   Name
     #
-    #   : The name of the AWS Systems Manager Document. For example,
-    #     `AWS-RestartEC2Instance`.
+    #   : The name of the AWS Systems Manager document (SSM document). For
+    #     example, `AWS-RestartEC2Instance`.
+    #
+    #     If you are using a shared SSM document, you must provide the ARN
+    #     instead of the name.
     #
     #   Version
     #
@@ -1935,20 +1938,25 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :id
+    # @option params [String] :id
     #   The product identifier.
+    #
+    # @option params [String] :name
+    #   The product name.
     #
     # @return [Types::DescribeProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProductOutput#product_view_summary #product_view_summary} => Types::ProductViewSummary
     #   * {Types::DescribeProductOutput#provisioning_artifacts #provisioning_artifacts} => Array&lt;Types::ProvisioningArtifact&gt;
     #   * {Types::DescribeProductOutput#budgets #budgets} => Array&lt;Types::BudgetDetail&gt;
+    #   * {Types::DescribeProductOutput#launch_paths #launch_paths} => Array&lt;Types::LaunchPath&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_product({
     #     accept_language: "AcceptLanguage",
-    #     id: "Id", # required
+    #     id: "Id",
+    #     name: "ProductViewName",
     #   })
     #
     # @example Response structure
@@ -1972,6 +1980,9 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifacts[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
     #   resp.budgets #=> Array
     #   resp.budgets[0].budget_name #=> String
+    #   resp.launch_paths #=> Array
+    #   resp.launch_paths[0].id #=> String
+    #   resp.launch_paths[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProduct AWS API Documentation
     #
@@ -1994,8 +2005,11 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :id
+    # @option params [String] :id
     #   The product identifier.
+    #
+    # @option params [String] :name
+    #   The product name.
     #
     # @return [Types::DescribeProductAsAdminOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2009,7 +2023,8 @@ module Aws::ServiceCatalog
     #
     #   resp = client.describe_product_as_admin({
     #     accept_language: "AcceptLanguage",
-    #     id: "Id", # required
+    #     id: "Id",
+    #     name: "ProductViewName",
     #   })
     #
     # @example Response structure
@@ -2257,11 +2272,17 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
-    # @option params [required, String] :provisioning_artifact_id
+    # @option params [String] :provisioning_artifact_id
     #   The identifier of the provisioning artifact.
     #
-    # @option params [required, String] :product_id
+    # @option params [String] :product_id
     #   The product identifier.
+    #
+    # @option params [String] :provisioning_artifact_name
+    #   The provisioning artifact name.
+    #
+    # @option params [String] :product_name
+    #   The product name.
     #
     # @option params [Boolean] :verbose
     #   Indicates whether a verbose level of detail is enabled.
@@ -2276,8 +2297,10 @@ module Aws::ServiceCatalog
     #
     #   resp = client.describe_provisioning_artifact({
     #     accept_language: "AcceptLanguage",
-    #     provisioning_artifact_id: "Id", # required
-    #     product_id: "Id", # required
+    #     provisioning_artifact_id: "Id",
+    #     product_id: "Id",
+    #     provisioning_artifact_name: "ProvisioningArtifactName",
+    #     product_name: "ProductViewName",
     #     verbose: false,
     #   })
     #
@@ -5025,9 +5048,9 @@ module Aws::ServiceCatalog
     # @option params [required, Hash<String,String>] :provisioned_product_properties
     #   A map that contains the provisioned product properties to be updated.
     #
-    #   The `OWNER` key only accepts user ARNs. The owner is the user that is
-    #   allowed to see, update, terminate, and execute service actions in the
-    #   provisioned product.
+    #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the user
+    #   that is allowed to see, update, terminate, and execute service actions
+    #   in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM user within the same account. Both end user owners and
@@ -5282,7 +5305,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

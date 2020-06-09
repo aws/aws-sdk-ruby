@@ -2005,6 +2005,7 @@ module Aws::ElastiCache
     #         global_replication_group_id: "String",
     #         primary_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         multi_az_enabled: false,
     #         num_cache_clusters: 1,
     #         preferred_cache_cluster_a_zs: ["String"],
     #         num_node_groups: 1,
@@ -2097,6 +2098,9 @@ module Aws::ElastiCache
     #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_az_enabled
     #   @return [Boolean]
     #
     # @!attribute [rw] num_cache_clusters
@@ -2484,6 +2488,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :primary_cluster_id,
       :automatic_failover_enabled,
+      :multi_az_enabled,
       :num_cache_clusters,
       :preferred_cache_cluster_a_zs,
       :num_node_groups,
@@ -5352,6 +5357,7 @@ module Aws::ElastiCache
     #         primary_cluster_id: "String",
     #         snapshotting_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         multi_az_enabled: false,
     #         node_group_id: "String",
     #         cache_security_group_names: ["String"],
     #         security_group_ids: ["String"],
@@ -5405,6 +5411,9 @@ module Aws::ElastiCache
     #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_az_enabled
     #   @return [Boolean]
     #
     # @!attribute [rw] node_group_id
@@ -5586,6 +5595,7 @@ module Aws::ElastiCache
       :primary_cluster_id,
       :snapshotting_cluster_id,
       :automatic_failover_enabled,
+      :multi_az_enabled,
       :node_group_id,
       :cache_security_group_names,
       :security_group_ids,
@@ -6472,6 +6482,9 @@ module Aws::ElastiCache
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [String]
     #
+    # @!attribute [rw] multi_az
+    #   @return [String]
+    #
     # @!attribute [rw] configuration_endpoint
     #   The configuration endpoint for this replication group. Use the
     #   configuration endpoint to connect to this replication group.
@@ -6573,6 +6586,7 @@ module Aws::ElastiCache
       :node_groups,
       :snapshotting_cluster_id,
       :automatic_failover,
+      :multi_az,
       :configuration_endpoint,
       :snapshot_retention_limit,
       :snapshot_window,

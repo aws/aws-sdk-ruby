@@ -403,6 +403,10 @@ module Aws::PersonalizeRuntime
     #   relevant when getting a user's recommendations, such as the user's
     #   current location or device type.
     #
+    # @option params [String] :filter_arn
+    #   The ARN of the filter to apply to the returned recommendations. For
+    #   more information, see Using Filters with Amazon Personalize.
+    #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
@@ -417,6 +421,7 @@ module Aws::PersonalizeRuntime
     #     context: {
     #       "AttributeName" => "AttributeValue",
     #     },
+    #     filter_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -447,7 +452,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -166,6 +166,34 @@ module Aws::MediaPackageVod
       include Aws::Structure
     end
 
+    # CDN Authorization credentials
+    #
+    # @note When making an API call, you may pass Authorization
+    #   data as a hash:
+    #
+    #       {
+    #         cdn_identifier_secret: "__string", # required
+    #         secrets_role_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cdn_identifier_secret
+    #   The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager
+    #   that is used for CDN authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that allows
+    #   MediaPackage to communicate with AWS Secrets Manager.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/Authorization AWS API Documentation
+    #
+    class Authorization < Struct.new(
+      :cdn_identifier_secret,
+      :secrets_role_arn)
+      include Aws::Structure
+    end
+
     # A CMAF encryption configuration.
     #
     # @note When making an API call, you may pass CmafEncryption
@@ -527,11 +555,19 @@ module Aws::MediaPackageVod
     #   data as a hash:
     #
     #       {
+    #         authorization: {
+    #           cdn_identifier_secret: "__string", # required
+    #           secrets_role_arn: "__string", # required
+    #         },
     #         id: "__string", # required
     #         tags: {
     #           "__string" => "__string",
     #         },
     #       }
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] id
     #   @return [String]
@@ -543,6 +579,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingGroupRequest AWS API Documentation
     #
     class CreatePackagingGroupRequest < Struct.new(
+      :authorization,
       :id,
       :tags)
       include Aws::Structure
@@ -550,6 +587,10 @@ module Aws::MediaPackageVod
 
     # @!attribute [rw] arn
     #   @return [String]
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] domain_name
     #   @return [String]
@@ -565,6 +606,7 @@ module Aws::MediaPackageVod
     #
     class CreatePackagingGroupResponse < Struct.new(
       :arn,
+      :authorization,
       :domain_name,
       :id,
       :tags)
@@ -931,6 +973,10 @@ module Aws::MediaPackageVod
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
     # @!attribute [rw] domain_name
     #   @return [String]
     #
@@ -945,6 +991,7 @@ module Aws::MediaPackageVod
     #
     class DescribePackagingGroupResponse < Struct.new(
       :arn,
+      :authorization,
       :domain_name,
       :id,
       :tags)
@@ -1536,6 +1583,10 @@ module Aws::MediaPackageVod
     #   The ARN of the PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
     # @!attribute [rw] domain_name
     #   The fully qualified domain name for Assets in the PackagingGroup.
     #   @return [String]
@@ -1552,6 +1603,7 @@ module Aws::MediaPackageVod
     #
     class PackagingGroup < Struct.new(
       :arn,
+      :authorization,
       :domain_name,
       :id,
       :tags)
@@ -1560,6 +1612,10 @@ module Aws::MediaPackageVod
 
     # Parameters used to create a new MediaPackage VOD PackagingGroup
     # resource.
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] id
     #   The ID of the PackagingGroup.
@@ -1572,6 +1628,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingGroupCreateParameters AWS API Documentation
     #
     class PackagingGroupCreateParameters < Struct.new(
+      :authorization,
       :id,
       :tags)
       include Aws::Structure
@@ -1593,6 +1650,19 @@ module Aws::MediaPackageVod
     class PackagingGroupList < Struct.new(
       :next_token,
       :packaging_groups)
+      include Aws::Structure
+    end
+
+    # Parameters used to update a MediaPackage packaging group.
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/PackagingGroupUpdateParameters AWS API Documentation
+    #
+    class PackagingGroupUpdateParameters < Struct.new(
+      :authorization)
       include Aws::Structure
     end
 
@@ -1697,6 +1767,7 @@ module Aws::MediaPackageVod
     end
 
     # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/TagsModel AWS API Documentation
@@ -1745,6 +1816,60 @@ module Aws::MediaPackageVod
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePackagingGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authorization: {
+    #           cdn_identifier_secret: "__string", # required
+    #           secrets_role_arn: "__string", # required
+    #         },
+    #         id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UpdatePackagingGroupRequest AWS API Documentation
+    #
+    class UpdatePackagingGroupRequest < Struct.new(
+      :authorization,
+      :id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with a resource
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UpdatePackagingGroupResponse AWS API Documentation
+    #
+    class UpdatePackagingGroupResponse < Struct.new(
+      :arn,
+      :authorization,
+      :domain_name,
+      :id,
+      :tags)
       include Aws::Structure
     end
 

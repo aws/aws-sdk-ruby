@@ -2744,6 +2744,77 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListVirtualInterfaceTestHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         test_id: "TestId",
+    #         virtual_interface_id: "VirtualInterfaceId",
+    #         bgp_peers: ["BGPPeerId"],
+    #         status: "FailureTestHistoryStatus",
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] test_id
+    #   The ID of the virtual interface failover test.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface that was tested.
+    #   @return [String]
+    #
+    # @!attribute [rw] bgp_peers
+    #   The BGP peers that were placed in the DOWN state during the virtual
+    #   interface failover test.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the virtual interface failover test.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results
+    #   are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceTestHistoryRequest AWS API Documentation
+    #
+    class ListVirtualInterfaceTestHistoryRequest < Struct.new(
+      :test_id,
+      :virtual_interface_id,
+      :bgp_peers,
+      :status,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface_test_history
+    #   The ID of the tested virtual interface.
+    #   @return [Array<Types::VirtualInterfaceTestHistory>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceTestHistoryResponse AWS API Documentation
+    #
+    class ListVirtualInterfaceTestHistoryResponse < Struct.new(
+      :virtual_interface_test_history,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Information about a Letter of Authorization - Connecting Facility
     # Assignment (LOA-CFA) for a connection.
     #
@@ -2882,6 +2953,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -2972,6 +3045,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -3055,6 +3130,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -3139,6 +3216,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -3219,6 +3298,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -3304,6 +3385,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -3397,6 +3480,81 @@ module Aws::DirectConnect
     #
     class RouteFilterPrefix < Struct.new(
       :cidr)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartBgpFailoverTestRequest
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_id: "VirtualInterfaceId", # required
+    #         bgp_peers: ["BGPPeerId"],
+    #         test_duration_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface you want to test.
+    #   @return [String]
+    #
+    # @!attribute [rw] bgp_peers
+    #   The BGP peers to place in the DOWN state.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] test_duration_in_minutes
+    #   The time in minutes that the virtual interface failover test will
+    #   last.
+    #
+    #   Maximum value: 180 minutes (3 hours).
+    #
+    #   Default: 180 minutes (3 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StartBgpFailoverTestRequest AWS API Documentation
+    #
+    class StartBgpFailoverTestRequest < Struct.new(
+      :virtual_interface_id,
+      :bgp_peers,
+      :test_duration_in_minutes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface_test
+    #   Information about the virtual interface failover test.
+    #   @return [Types::VirtualInterfaceTestHistory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StartBgpFailoverTestResponse AWS API Documentation
+    #
+    class StartBgpFailoverTestResponse < Struct.new(
+      :virtual_interface_test)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopBgpFailoverTestRequest
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_id: "VirtualInterfaceId", # required
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface you no longer want to test.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StopBgpFailoverTestRequest AWS API Documentation
+    #
+    class StopBgpFailoverTestRequest < Struct.new(
+      :virtual_interface_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] virtual_interface_test
+    #   Information about the virtual interface failover test.
+    #   @return [Types::VirtualInterfaceTestHistory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StopBgpFailoverTestResponse AWS API Documentation
+    #
+    class StopBgpFailoverTestResponse < Struct.new(
+      :virtual_interface_test)
       include Aws::Structure
     end
 
@@ -3667,6 +3825,8 @@ module Aws::DirectConnect
     #
     # @!attribute [rw] virtual_interface_name
     #   The name of the virtual interface assigned by the customer network.
+    #   The name has a maximum of 100 characters. The following are valid
+    #   characters: a-z, 0-9 and a hyphen (-).
     #   @return [String]
     #
     # @!attribute [rw] vlan
@@ -3810,6 +3970,55 @@ module Aws::DirectConnect
       :region,
       :aws_device_v2,
       :tags)
+      include Aws::Structure
+    end
+
+    # Information about the virtual interface failover test.
+    #
+    # @!attribute [rw] test_id
+    #   The ID of the virtual interface failover test.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the tested virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] bgp_peers
+    #   The BGP peers that were put in the DOWN state as part of the virtual
+    #   interface failover test.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the virtual interface failover test.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The owner ID of the tested virtual interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_duration_in_minutes
+    #   The time that the virtual interface failover test ran in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the virtual interface moves to the DOWN state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the virtual interface moves out of the DOWN state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterfaceTestHistory AWS API Documentation
+    #
+    class VirtualInterfaceTestHistory < Struct.new(
+      :test_id,
+      :virtual_interface_id,
+      :bgp_peers,
+      :status,
+      :owner_account,
+      :test_duration_in_minutes,
+      :start_time,
+      :end_time)
       include Aws::Structure
     end
 

@@ -236,19 +236,19 @@ module Aws::CloudFront
     #
     # You must create at least as many cache behaviors (including the
     # default cache behavior) as you have origins if you want CloudFront to
-    # distribute objects from all of the origins. Each cache behavior
-    # specifies the one origin from which you want CloudFront to get
-    # objects. If you have two origins and only the default cache behavior,
-    # the default cache behavior will cause CloudFront to get objects from
-    # one of the origins, but the other origin is never used.
+    # serve objects from all of the origins. Each cache behavior specifies
+    # the one origin from which you want CloudFront to get objects. If you
+    # have two origins and only the default cache behavior, the default
+    # cache behavior will cause CloudFront to get objects from one of the
+    # origins, but the other origin is never used.
     #
-    # For the current limit on the number of cache behaviors that you can
-    # add to a distribution, see [Amazon CloudFront Limits][1] in the *AWS
-    # General Reference*.
+    # For the current quota (formerly known as limit) on the number of cache
+    # behaviors that you can add to a distribution, see [Quotas][1] in the
+    # *Amazon CloudFront Developer Guide*.
     #
-    # If you don't want to specify any cache behaviors, include only an
-    # empty `CacheBehaviors` element. Don't include an empty
-    # `CacheBehavior` element, or CloudFront returns a `MalformedXML` error.
+    # If you don’t want to specify any cache behaviors, include only an
+    # empty `CacheBehaviors` element. Don’t include an empty `CacheBehavior`
+    # element because this is invalid.
     #
     # To delete all cache behaviors in an existing distribution, update the
     # distribution configuration and include only an empty `CacheBehaviors`
@@ -258,12 +258,12 @@ module Aws::CloudFront
     # distribution configuration and specify all of the cache behaviors that
     # you want to include in the updated distribution.
     #
-    # For more information about cache behaviors, see [Cache Behaviors][2]
-    # in the *Amazon CloudFront Developer Guide*.
+    # For more information about cache behaviors, see [Cache Behavior
+    # Settings][2] in the *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
     #
     # @note When making an API call, you may pass CacheBehavior
@@ -349,9 +349,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] target_origin_id
     #   The value of `ID` for the origin that you want CloudFront to route
-    #   requests to when a request matches the path pattern either for a
-    #   cache behavior or for the default cache behavior in your
-    #   distribution.
+    #   requests to when they match this cache behavior.
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
@@ -367,15 +365,15 @@ module Aws::CloudFront
     #   target origin that match the `PathPattern` for this cache behavior,
     #   specify `true` for `Enabled`, and specify the applicable values for
     #   `Quantity` and `Items`. For more information, see [Serving Private
-    #   Content through CloudFront][1] in the *Amazon CloudFront Developer
-    #   Guide*.
+    #   Content with Signed URLs and Signed Cookies][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
-    #   If you don't want to require signed URLs in requests for objects
+    #   If you don’t want to require signed URLs in requests for objects
     #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
     #   `Quantity`. Omit `Items`.
     #
     #   To add, change, or remove one or more trusted signers, change
-    #   `Enabled` to `true` (if it's currently `false`), change `Quantity`
+    #   `Enabled` to `true` (if it’s currently `false`), change `Quantity`
     #   as applicable, and specify all of the trusted signers that you want
     #   to include in the updated distribution.
     #
@@ -399,26 +397,25 @@ module Aws::CloudFront
     #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
     #     returns an HTTP status code of 403 (Forbidden).
     #
-    #   For more information about requiring the HTTPS protocol, see [Using
-    #   an HTTPS Connection to Access Your Objects][1] in the *Amazon
+    #   For more information about requiring the HTTPS protocol, see
+    #   [Requiring HTTPS Between Viewers and CloudFront][1] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
     #   fetched from the origin using HTTPS is never to use any other
     #   protocol to fetch the object. If you have recently changed from HTTP
-    #   to HTTPS, we recommend that you clear your objects' cache because
+    #   to HTTPS, we recommend that you clear your objects’ cache because
     #   cached objects are protocol agnostic. That means that an edge
     #   location will return an object from the cache regardless of whether
     #   the current request protocol matches the protocol used previously.
-    #   For more information, see [Managing How Long Content Stays in an
-    #   Edge Cache (Expiration)][2] in the *Amazon CloudFront Developer
-    #   Guide*.
+    #   For more information, see [Managing Cache Expiration][2] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html
     #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [String]
     #
@@ -515,8 +512,7 @@ module Aws::CloudFront
     # @!attribute [rw] field_level_encryption_id
     #   The value of `ID` for the field-level encryption configuration that
     #   you want CloudFront to use for encrypting specific fields of data
-    #   for a cache behavior or for the default cache behavior in your
-    #   distribution.
+    #   for this cache behavior.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CacheBehavior AWS API Documentation
@@ -1164,6 +1160,8 @@ module Aws::CloudFront
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
     #                 },
+    #                 connection_attempts: 1,
+    #                 connection_timeout: 1,
     #               },
     #             ],
     #           },
@@ -1419,6 +1417,8 @@ module Aws::CloudFront
     #                     origin_read_timeout: 1,
     #                     origin_keepalive_timeout: 1,
     #                   },
+    #                   connection_attempts: 1,
+    #                   connection_timeout: 1,
     #                 },
     #               ],
     #             },
@@ -2204,8 +2204,13 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A custom origin or an Amazon S3 bucket configured as a website
-    # endpoint.
+    # A custom origin. A custom origin is any origin that is *not* an Amazon
+    # S3 bucket, with one exception. An Amazon S3 bucket that is [configured
+    # with static website hosting][1] *is* a custom origin.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
     #
     # @note When making an API call, you may pass CustomOriginConfig
     #   data as a hash:
@@ -2223,48 +2228,68 @@ module Aws::CloudFront
     #       }
     #
     # @!attribute [rw] http_port
-    #   The HTTP port the custom origin listens on.
+    #   The HTTP port that CloudFront uses to connect to the origin. Specify
+    #   the HTTP port that the origin listens on.
     #   @return [Integer]
     #
     # @!attribute [rw] https_port
-    #   The HTTPS port the custom origin listens on.
+    #   The HTTPS port that CloudFront uses to connect to the origin.
+    #   Specify the HTTPS port that the origin listens on.
     #   @return [Integer]
     #
     # @!attribute [rw] origin_protocol_policy
-    #   The origin protocol policy to apply to your origin.
+    #   Specifies the protocol (HTTP or HTTPS) that CloudFront uses to
+    #   connect to the origin. Valid values are:
+    #
+    #   * `http-only` – CloudFront always uses HTTP to connect to the
+    #     origin.
+    #
+    #   * `match-viewer` – CloudFront connects to the origin using the same
+    #     protocol that the viewer used to connect to CloudFront.
+    #
+    #   * `https-only` – CloudFront always uses HTTPS to connect to the
+    #     origin.
     #   @return [String]
     #
     # @!attribute [rw] origin_ssl_protocols
-    #   The SSL/TLS protocols that you want CloudFront to use when
-    #   communicating with your origin over HTTPS.
+    #   Specifies the minimum SSL/TLS protocol that CloudFront uses when
+    #   connecting to your origin over HTTPS. Valid values include `SSLv3`,
+    #   `TLSv1`, `TLSv1.1`, and `TLSv1.2`.
+    #
+    #   For more information, see [Minimum Origin SSL Protocol][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols
     #   @return [Types::OriginSslProtocols]
     #
     # @!attribute [rw] origin_read_timeout
-    #   You can create a custom origin read timeout. All timeout units are
-    #   in seconds. The default origin read timeout is 30 seconds, but you
-    #   can configure custom timeout lengths using the CloudFront API. The
-    #   minimum timeout length is 4 seconds; the maximum is 60 seconds.
+    #   Specifies how long, in seconds, CloudFront waits for a response from
+    #   the origin. This is also known as the *origin response timeout*. The
+    #   minimum timeout is 1 second, the maximum is 60 seconds, and the
+    #   default (if you don’t specify otherwise) is 30 seconds.
     #
-    #   If you need to increase the maximum time limit, contact the [AWS
-    #   Support Center][1].
+    #   For more information, see [Origin Response Timeout][1] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/support/home#/
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout
     #   @return [Integer]
     #
     # @!attribute [rw] origin_keepalive_timeout
-    #   You can create a custom keep-alive timeout. All timeout units are in
-    #   seconds. The default keep-alive timeout is 5 seconds, but you can
-    #   configure custom timeout lengths using the CloudFront API. The
-    #   minimum timeout length is 1 second; the maximum is 60 seconds.
+    #   Specifies how long, in seconds, CloudFront persists its connection
+    #   to the origin. The minimum timeout is 1 second, the maximum is 60
+    #   seconds, and the default (if you don’t specify otherwise) is 5
+    #   seconds.
     #
-    #   If you need to increase the maximum time limit, contact the [AWS
-    #   Support Center][1].
+    #   For more information, see [Origin Keep-alive Timeout][1] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/support/home#/
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CustomOriginConfig AWS API Documentation
@@ -2279,10 +2304,10 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that describes the default cache behavior if you don't
-    # specify a `CacheBehavior` element or if files don't match any of the
-    # values of `PathPattern` in `CacheBehavior` elements. You must create
-    # exactly one default cache behavior.
+    # A complex type that describes the default cache behavior if you don’t
+    # specify a `CacheBehavior` element or if request URLs don’t match any
+    # of the values of `PathPattern` in `CacheBehavior` elements. You must
+    # create exactly one default cache behavior.
     #
     # @note When making an API call, you may pass DefaultCacheBehavior
     #   data as a hash:
@@ -2341,9 +2366,7 @@ module Aws::CloudFront
     #
     # @!attribute [rw] target_origin_id
     #   The value of `ID` for the origin that you want CloudFront to route
-    #   requests to when a request matches the path pattern either for a
-    #   cache behavior or for the default cache behavior in your
-    #   distribution.
+    #   requests to when they use the default cache behavior.
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
@@ -2359,15 +2382,15 @@ module Aws::CloudFront
     #   target origin that match the `PathPattern` for this cache behavior,
     #   specify `true` for `Enabled`, and specify the applicable values for
     #   `Quantity` and `Items`. For more information, see [Serving Private
-    #   Content through CloudFront][1] in the <i> Amazon CloudFront
-    #   Developer Guide</i>.
+    #   Content with Signed URLs and Signed Cookies][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
-    #   If you don't want to require signed URLs in requests for objects
+    #   If you don’t want to require signed URLs in requests for objects
     #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
     #   `Quantity`. Omit `Items`.
     #
     #   To add, change, or remove one or more trusted signers, change
-    #   `Enabled` to `true` (if it's currently `false`), change `Quantity`
+    #   `Enabled` to `true` (if it’s currently `false`), change `Quantity`
     #   as applicable, and specify all of the trusted signers that you want
     #   to include in the updated distribution.
     #
@@ -2391,26 +2414,25 @@ module Aws::CloudFront
     #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
     #     returns an HTTP status code of 403 (Forbidden).
     #
-    #   For more information about requiring the HTTPS protocol, see [Using
-    #   an HTTPS Connection to Access Your Objects][1] in the *Amazon
+    #   For more information about requiring the HTTPS protocol, see
+    #   [Requiring HTTPS Between Viewers and CloudFront][1] in the *Amazon
     #   CloudFront Developer Guide*.
     #
     #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
     #   fetched from the origin using HTTPS is never to use any other
     #   protocol to fetch the object. If you have recently changed from HTTP
-    #   to HTTPS, we recommend that you clear your objects' cache because
+    #   to HTTPS, we recommend that you clear your objects’ cache because
     #   cached objects are protocol agnostic. That means that an edge
     #   location will return an object from the cache regardless of whether
     #   the current request protocol matches the protocol used previously.
-    #   For more information, see [Managing How Long Content Stays in an
-    #   Edge Cache (Expiration)][2] in the *Amazon CloudFront Developer
-    #   Guide*.
+    #   For more information, see [Managing Cache Expiration][2] in the
+    #   *Amazon CloudFront Developer Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html
     #   [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
     #   @return [String]
     #
@@ -2507,8 +2529,7 @@ module Aws::CloudFront
     # @!attribute [rw] field_level_encryption_id
     #   The value of `ID` for the field-level encryption configuration that
     #   you want CloudFront to use for encrypting specific fields of data
-    #   for a cache behavior or for the default cache behavior in your
-    #   distribution.
+    #   for the default cache behavior.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DefaultCacheBehavior AWS API Documentation
@@ -2862,6 +2883,8 @@ module Aws::CloudFront
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
     #               },
+    #               connection_attempts: 1,
+    #               connection_timeout: 1,
     #             },
     #           ],
     #         },
@@ -3336,6 +3359,8 @@ module Aws::CloudFront
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
     #                 },
+    #                 connection_attempts: 1,
+    #                 connection_timeout: 1,
     #               },
     #             ],
     #           },
@@ -4976,7 +5001,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The argument is invalid.
+    # An argument is invalid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6140,19 +6165,36 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), Amazon MediaStore, or other server from which
-    # CloudFront gets your files. This can also be an origin group, if
-    # you've created an origin group. You must specify at least one origin
-    # or origin group.
+    # An origin.
     #
-    # For the current limit on the number of origins or origin groups that
-    # you can specify for a distribution, see [Amazon CloudFront Limits][1]
-    # in the *AWS General Reference*.
+    # An origin is the location where content is stored, and from which
+    # CloudFront gets content to serve to viewers. To specify an origin:
+    #
+    # * Use the `S3OriginConfig` type to specify an Amazon S3 bucket that is
+    #   <i> <b>not</b> </i> configured with static website hosting.
+    #
+    # * Use the `CustomOriginConfig` type to specify various other kinds of
+    #   content containers or HTTP servers, including:
+    #
+    #   * An Amazon S3 bucket that is configured with static website hosting
+    #
+    #   * An Elastic Load Balancing load balancer
+    #
+    #   * An AWS Elemental MediaPackage origin
+    #
+    #   * An AWS Elemental MediaStore container
+    #
+    #   * Any other HTTP server, running on an Amazon EC2 instance or any
+    #     other kind of host
+    #
+    # For the current maximum number of origins that you can specify per
+    # distribution, see [General Quotas on Web Distributions][1] in the
+    # *Amazon CloudFront Developer Guide* (quotas were formerly referred to
+    # as limits).
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions
     #
     # @note When making an API call, you may pass Origin
     #   data as a hash:
@@ -6184,60 +6226,23 @@ module Aws::CloudFront
     #           origin_read_timeout: 1,
     #           origin_keepalive_timeout: 1,
     #         },
+    #         connection_attempts: 1,
+    #         connection_timeout: 1,
     #       }
     #
     # @!attribute [rw] id
-    #   A unique identifier for the origin or origin group. The value of
-    #   `Id` must be unique within the distribution.
+    #   A unique identifier for the origin. This value must be unique within
+    #   the distribution.
     #
-    #   When you specify the value of `TargetOriginId` for the default cache
-    #   behavior or for another cache behavior, you indicate the origin to
-    #   which you want the cache behavior to route requests by specifying
-    #   the value of the `Id` element for that origin. When a request
-    #   matches the path pattern for that cache behavior, CloudFront routes
-    #   the request to the specified origin. For more information, see
-    #   [Cache Behavior Settings][1] in the *Amazon CloudFront Developer
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
+    #   Use this value to specify the `TargetOriginId` in a CacheBehavior or
+    #   DefaultCacheBehavior.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   **Amazon S3 origins**\: The DNS name of the Amazon S3 bucket from
-    #   which you want CloudFront to get objects for this origin, for
-    #   example, `myawsbucket.s3.amazonaws.com`. If you set up your bucket
-    #   to be configured as a website endpoint, enter the Amazon S3 static
-    #   website hosting endpoint for the bucket.
+    #   The domain name for the origin.
     #
-    #   For more information about specifying this value for different types
-    #   of origins, see [Origin Domain Name][1] in the *Amazon CloudFront
-    #   Developer Guide*.
-    #
-    #   Constraints for Amazon S3 origins:
-    #
-    #   * If you configured Amazon S3 Transfer Acceleration for your bucket,
-    #     don't specify the `s3-accelerate` endpoint for `DomainName`.
-    #
-    #   * The bucket name must be between 3 and 63 characters long
-    #     (inclusive).
-    #
-    #   * The bucket name must contain only lowercase characters, numbers,
-    #     periods, underscores, and dashes.
-    #
-    #   * The bucket name must not contain adjacent periods.
-    #
-    #   **Custom Origins**\: The DNS domain name for the HTTP server from
-    #   which you want CloudFront to get objects for this origin, for
-    #   example, `www.example.com`.
-    #
-    #   Constraints for custom origins:
-    #
-    #   * `DomainName` must be a valid DNS name that contains only a-z, A-Z,
-    #     0-9, dot (.), hyphen (-), or underscore (\_) characters.
-    #
-    #   * The name cannot exceed 128 characters.
+    #   For more information, see [Origin Domain Name][1] in the *Amazon
+    #   CloudFront Developer Guide*.
     #
     #
     #
@@ -6245,47 +6250,71 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] origin_path
-    #   An optional element that causes CloudFront to request your content
-    #   from a directory in your Amazon S3 bucket or your custom origin.
-    #   When you include the `OriginPath` element, specify the directory
-    #   name, beginning with a `/`. CloudFront appends the directory name to
-    #   the value of `DomainName`, for example, `example.com/production`. Do
-    #   not include a `/` at the end of the directory name.
+    #   An optional path that CloudFront appends to the origin domain name
+    #   when CloudFront requests content from the origin.
     #
-    #   For example, suppose you've specified the following values for your
-    #   distribution:
+    #   For more information, see [Origin Path][1] in the *Amazon CloudFront
+    #   Developer Guide*.
     #
-    #   * `DomainName`\: An Amazon S3 bucket named `myawsbucket`.
     #
-    #   * `OriginPath`\: `/production`
     #
-    #   * `CNAME`\: `example.com`
-    #
-    #   When a user enters `example.com/index.html` in a browser, CloudFront
-    #   sends a request to Amazon S3 for
-    #   `myawsbucket/production/index.html`.
-    #
-    #   When a user enters `example.com/acme/index.html` in a browser,
-    #   CloudFront sends a request to Amazon S3 for
-    #   `myawsbucket/production/acme/index.html`.
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath
     #   @return [String]
     #
     # @!attribute [rw] custom_headers
-    #   A complex type that contains names and values for the custom headers
-    #   that you want.
+    #   A list of HTTP header names and values that CloudFront adds to
+    #   requests it sends to the origin.
+    #
+    #   For more information, see [Adding Custom Headers to Origin
+    #   Requests][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html
     #   @return [Types::CustomHeaders]
     #
     # @!attribute [rw] s3_origin_config
-    #   A complex type that contains information about the Amazon S3 origin.
-    #   If the origin is a custom origin, use the `CustomOriginConfig`
-    #   element instead.
+    #   Use this type to specify an origin that is an Amazon S3 bucket that
+    #   is <i> <b>not</b> </i> configured with static website hosting. To
+    #   specify any other type of origin, including an Amazon S3 bucket that
+    #   is configured with static website hosting, use the
+    #   `CustomOriginConfig` type instead.
     #   @return [Types::S3OriginConfig]
     #
     # @!attribute [rw] custom_origin_config
-    #   A complex type that contains information about a custom origin. If
-    #   the origin is an Amazon S3 bucket, use the `S3OriginConfig` element
-    #   instead.
+    #   Use this type to specify an origin that is a content container or
+    #   HTTP server, including an Amazon S3 bucket that is configured with
+    #   static website hosting. To specify an Amazon S3 bucket that is <i>
+    #   <b>not</b> </i> configured with static website hosting, use the
+    #   `S3OriginConfig` type instead.
     #   @return [Types::CustomOriginConfig]
+    #
+    # @!attribute [rw] connection_attempts
+    #   The number of times that CloudFront attempts to connect to the
+    #   origin. The minimum number is 1, the maximum is 3, and the default
+    #   (if you don’t specify otherwise) is 3.
+    #
+    #   For more information, see [Origin Connection Attempts][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts
+    #   @return [Integer]
+    #
+    # @!attribute [rw] connection_timeout
+    #   The number of seconds that CloudFront waits when trying to establish
+    #   a connection to the origin. The minimum timeout is 1 second, the
+    #   maximum is 10 seconds, and the default (if you don’t specify
+    #   otherwise) is 10 seconds.
+    #
+    #   For more information, see [Origin Connection Timeout][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/Origin AWS API Documentation
     #
@@ -6295,7 +6324,9 @@ module Aws::CloudFront
       :origin_path,
       :custom_headers,
       :s3_origin_config,
-      :custom_origin_config)
+      :custom_origin_config,
+      :connection_attempts,
+      :connection_timeout)
       include Aws::Structure
     end
 
@@ -6573,6 +6604,8 @@ module Aws::CloudFront
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
     #             },
+    #             connection_attempts: 1,
+    #             connection_timeout: 1,
     #           },
     #         ],
     #       }
@@ -6628,7 +6661,7 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # The precondition given in one or more of the request-header fields
+    # The precondition given in one or more of the request header fields
     # evaluated to `false`.
     #
     # @!attribute [rw] message
@@ -7017,8 +7050,8 @@ module Aws::CloudFront
     end
 
     # A complex type that contains information about the Amazon S3 origin.
-    # If the origin is a custom origin, use the `CustomOriginConfig` element
-    # instead.
+    # If the origin is a custom origin or an S3 bucket that is configured as
+    # a website endpoint, use the `CustomOriginConfig` element instead.
     #
     # @note When making an API call, you may pass S3OriginConfig
     #   data as a hash:
@@ -8180,6 +8213,8 @@ module Aws::CloudFront
     #                   origin_read_timeout: 1,
     #                   origin_keepalive_timeout: 1,
     #                 },
+    #                 connection_attempts: 1,
+    #                 connection_timeout: 1,
     #               },
     #             ],
     #           },

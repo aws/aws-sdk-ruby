@@ -355,7 +355,7 @@ module Aws::SageMakerRuntime
     #   the model.
     #
     #   For information about the format of the request body, see [Common Data
-    #   Formats—Inference][1].
+    #   Formats-Inference][1].
     #
     #
     #
@@ -384,8 +384,14 @@ module Aws::SageMakerRuntime
     #   [1]: https://tools.ietf.org/html/rfc7230#section-3.2.6
     #
     # @option params [String] :target_model
-    #   Specifies the model to be requested for an inference when invoking a
-    #   multi-model endpoint.
+    #   The model to request for inference when invoking a multi-model
+    #   endpoint.
+    #
+    # @option params [String] :target_variant
+    #   Specify the production variant to send the inference request to when
+    #   invoking an endpoint that is running two or more variants. Note that
+    #   this parameter overrides the default behavior for the endpoint, which
+    #   is to distribute the invocation traffic based on the variant weights.
     #
     # @return [Types::InvokeEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -403,6 +409,7 @@ module Aws::SageMakerRuntime
     #     accept: "Header",
     #     custom_attributes: "CustomAttributesHeader",
     #     target_model: "TargetModelHeader",
+    #     target_variant: "TargetVariantHeader",
     #   })
     #
     # @example Response structure
@@ -434,7 +441,7 @@ module Aws::SageMakerRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemakerruntime'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

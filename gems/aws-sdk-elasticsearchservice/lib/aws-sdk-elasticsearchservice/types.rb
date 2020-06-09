@@ -8,6 +8,38 @@
 module Aws::ElasticsearchService
   module Types
 
+    # Container for the parameters to the
+    # `AcceptInboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass AcceptInboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to accept.
+    #   @return [String]
+    #
+    class AcceptInboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `AcceptInboundCrossClusterSearchConnection` operation.
+    # Contains details of accepted inbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `InboundCrossClusterSearchConnection` of accepted
+    #   inbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnection]
+    #
+    class AcceptInboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
+      include Aws::Structure
+    end
+
     # An error occurred because user does not have permissions to access the
     # resource. Returns HTTP status code 403.
     #
@@ -552,6 +584,86 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to the
+    # `CreateOutboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass CreateOutboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_domain_info: { # required
+    #           owner_id: "OwnerId",
+    #           domain_name: "DomainName", # required
+    #           region: "Region",
+    #         },
+    #         destination_domain_info: { # required
+    #           owner_id: "OwnerId",
+    #           domain_name: "DomainName", # required
+    #           region: "Region",
+    #         },
+    #         connection_alias: "ConnectionAlias", # required
+    #       }
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] connection_alias
+    #   Specifies the connection alias that will be used by the customer for
+    #   this connection.
+    #   @return [String]
+    #
+    class CreateOutboundCrossClusterSearchConnectionRequest < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :connection_alias)
+      include Aws::Structure
+    end
+
+    # The result of a `CreateOutboundCrossClusterSearchConnection` request.
+    # Contains the details of the newly created cross-cluster search
+    # connection.
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] connection_alias
+    #   Specifies the connection alias provided during the create connection
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_status
+    #   Specifies the `OutboundCrossClusterSearchConnectionStatus` for the
+    #   newly created connection.
+    #   @return [Types::OutboundCrossClusterSearchConnectionStatus]
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   Unique id for the created outbound connection, which is used for
+    #   subsequent operations on connection.
+    #   @return [String]
+    #
+    class CreateOutboundCrossClusterSearchConnectionResponse < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :connection_alias,
+      :connection_status,
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
     # Container for request parameters to ` CreatePackage ` operation.
     #
     # @note When making an API call, you may pass CreatePackageRequest
@@ -633,6 +745,72 @@ module Aws::ElasticsearchService
     #
     class DeleteElasticsearchDomainResponse < Struct.new(
       :domain_status)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DeleteInboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass DeleteInboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to permanently
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteInboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `DeleteInboundCrossClusterSearchConnection` operation.
+    # Contains details of deleted inbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `InboundCrossClusterSearchConnection` of deleted
+    #   inbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnection]
+    #
+    class DeleteInboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DeleteOutboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass DeleteOutboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the outbound connection that you want to permanently
+    #   delete.
+    #   @return [String]
+    #
+    class DeleteOutboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `DeleteOutboundCrossClusterSearchConnection`
+    # operation. Contains details of deleted outbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `OutboundCrossClusterSearchConnection` of deleted
+    #   outbound connection.
+    #   @return [Types::OutboundCrossClusterSearchConnection]
+    #
+    class DeleteOutboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
       include Aws::Structure
     end
 
@@ -810,6 +988,136 @@ module Aws::ElasticsearchService
     #
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DescribeInboundCrossClusterSearchConnections` operation.
+    #
+    # @note When making an API call, you may pass DescribeInboundCrossClusterSearchConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "NonEmptyString",
+    #             values: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filters used to match properties for inbound cross-cluster
+    #   search connection. Available `Filter` names for this operation are:
+    #   * cross-cluster-search-connection-id
+    #   * source-domain-info.domain-name
+    #   * source-domain-info.owner-id
+    #   * source-domain-info.region
+    #   * destination-domain-info.domain-name
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeInboundCrossClusterSearchConnectionsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeInboundCrossClusterSearchConnections`
+    # request. Contains the list of connections matching the filter
+    # criteria.
+    #
+    # @!attribute [rw] cross_cluster_search_connections
+    #   Consists of list of `InboundCrossClusterSearchConnection` matching
+    #   the specified filter criteria.
+    #   @return [Array<Types::InboundCrossClusterSearchConnection>]
+    #
+    # @!attribute [rw] next_token
+    #   If more results are available and NextToken is present, make the
+    #   next request to the same API with the received NextToken to paginate
+    #   the remaining results.
+    #   @return [String]
+    #
+    class DescribeInboundCrossClusterSearchConnectionsResponse < Struct.new(
+      :cross_cluster_search_connections,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `DescribeOutboundCrossClusterSearchConnections` operation.
+    #
+    # @note When making an API call, you may pass DescribeOutboundCrossClusterSearchConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             name: "NonEmptyString",
+    #             values: ["NonEmptyString"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   A list of filters used to match properties for outbound
+    #   cross-cluster search connection. Available `Filter` names for this
+    #   operation are: * cross-cluster-search-connection-id
+    #   * destination-domain-info.domain-name
+    #   * destination-domain-info.owner-id
+    #   * destination-domain-info.region
+    #   * source-domain-info.domain-name
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeOutboundCrossClusterSearchConnectionsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeOutboundCrossClusterSearchConnections`
+    # request. Contains the list of connections matching the filter
+    # criteria.
+    #
+    # @!attribute [rw] cross_cluster_search_connections
+    #   Consists of list of `OutboundCrossClusterSearchConnection` matching
+    #   the specified filter criteria.
+    #   @return [Array<Types::OutboundCrossClusterSearchConnection>]
+    #
+    # @!attribute [rw] next_token
+    #   If more results are available and NextToken is present, make the
+    #   next request to the same API with the received NextToken to paginate
+    #   the remaining results.
+    #   @return [String]
+    #
+    class DescribeOutboundCrossClusterSearchConnectionsResponse < Struct.new(
+      :cross_cluster_search_connections,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1088,6 +1396,35 @@ module Aws::ElasticsearchService
     #
     class DomainInfo < Struct.new(
       :domain_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DomainInformation
+    #   data as a hash:
+    #
+    #       {
+    #         owner_id: "OwnerId",
+    #         domain_name: "DomainName", # required
+    #         region: "Region",
+    #       }
+    #
+    # @!attribute [rw] owner_id
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   @return [String]
+    #
+    class DomainInformation < Struct.new(
+      :owner_id,
+      :domain_name,
+      :region)
       include Aws::Structure
     end
 
@@ -1627,6 +1964,33 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # A filter used to limit results when describing inbound or outbound
+    # cross-cluster search connections. Multiple values can be specified per
+    # filter. A cross-cluster search connection must match at least one of
+    # the specified values for it to be returned from an operation.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString",
+    #         values: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Contains one or more values for the filter.
+    #   @return [Array<String>]
+    #
+    class Filter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
     # Container for request parameters to `
     # GetCompatibleElasticsearchVersions ` operation.
     #
@@ -1766,6 +2130,63 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies details of an inbound connection.
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   Specifies the connection id for the inbound cross-cluster search
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_status
+    #   Specifies the `InboundCrossClusterSearchConnectionStatus` for the
+    #   outbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnectionStatus]
+    #
+    class InboundCrossClusterSearchConnection < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :cross_cluster_search_connection_id,
+      :connection_status)
+      include Aws::Structure
+    end
+
+    # Specifies the coonection status of an inbound cross-cluster search
+    # connection.
+    #
+    # @!attribute [rw] status_code
+    #   The state code for inbound connection. This can be one of the
+    #   following:
+    #
+    #   * PENDING\_ACCEPTANCE: Inbound connection is not yet accepted by
+    #     destination domain owner.
+    #   * APPROVED: Inbound connection is pending acceptance by destination
+    #     domain owner.
+    #   * REJECTING: Inbound connection rejection is in process.
+    #   * REJECTED: Inbound connection is rejected.
+    #   * DELETING: Inbound connection deletion is in progress.
+    #   * DELETED: Inbound connection is deleted and cannot be used further.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies verbose information for the inbound connection status.
+    #   @return [String]
+    #
+    class InboundCrossClusterSearchConnectionStatus < Struct.new(
+      :status_code,
+      :message)
+      include Aws::Structure
+    end
+
     # InstanceCountLimits represents the limits on number of instances that
     # be created in Amazon Elasticsearch for given InstanceType.
     #
@@ -1803,6 +2224,11 @@ module Aws::ElasticsearchService
     # http status code of 500.
     #
     class InternalException < Aws::EmptyStructure; end
+
+    # The request processing has failed because of invalid pagination token
+    # provided by customer. Returns an HTTP status code of 400.
+    #
+    class InvalidPaginationTokenException < Aws::EmptyStructure; end
 
     # An exception for trying to create or access sub-resource that is
     # either invalid or not supported. Gives http status code of 409.
@@ -2250,6 +2676,72 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies details of an outbound connection.
+    #
+    # @!attribute [rw] source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #   @return [Types::DomainInformation]
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   Specifies the connection id for the outbound cross-cluster search
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_alias
+    #   Specifies the connection alias for the outbound cross-cluster search
+    #   connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_status
+    #   Specifies the `OutboundCrossClusterSearchConnectionStatus` for the
+    #   outbound connection.
+    #   @return [Types::OutboundCrossClusterSearchConnectionStatus]
+    #
+    class OutboundCrossClusterSearchConnection < Struct.new(
+      :source_domain_info,
+      :destination_domain_info,
+      :cross_cluster_search_connection_id,
+      :connection_alias,
+      :connection_status)
+      include Aws::Structure
+    end
+
+    # Specifies the connection status of an outbound cross-cluster search
+    # connection.
+    #
+    # @!attribute [rw] status_code
+    #   The state code for outbound connection. This can be one of the
+    #   following:
+    #
+    #   * VALIDATING: The outbound connection request is being validated.
+    #   * VALIDATION\_FAILED: Validation failed for the connection request.
+    #   * PENDING\_ACCEPTANCE: Outbound connection request is validated and
+    #     is not yet accepted by destination domain owner.
+    #   * PROVISIONING: Outbound connection request is in process.
+    #   * ACTIVE: Outbound connection is active and ready to use.
+    #   * REJECTED: Outbound connection request is rejected by destination
+    #     domain owner.
+    #   * DELETING: Outbound connection deletion is in progress.
+    #   * DELETED: Outbound connection is deleted and cannot be used
+    #     further.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies verbose information for the outbound connection status.
+    #   @return [String]
+    #
+    class OutboundCrossClusterSearchConnectionStatus < Struct.new(
+      :status_code,
+      :message)
+      include Aws::Structure
+    end
+
     # Basic information about a package.
     #
     # @!attribute [rw] package_id
@@ -2381,6 +2873,38 @@ module Aws::ElasticsearchService
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `RejectInboundCrossClusterSearchConnection` operation.
+    #
+    # @note When making an API call, you may pass RejectInboundCrossClusterSearchConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to reject.
+    #   @return [String]
+    #
+    class RejectInboundCrossClusterSearchConnectionRequest < Struct.new(
+      :cross_cluster_search_connection_id)
+      include Aws::Structure
+    end
+
+    # The result of a `RejectInboundCrossClusterSearchConnection` operation.
+    # Contains details of rejected inbound connection.
+    #
+    # @!attribute [rw] cross_cluster_search_connection
+    #   Specifies the `InboundCrossClusterSearchConnection` of rejected
+    #   inbound connection.
+    #   @return [Types::InboundCrossClusterSearchConnection]
+    #
+    class RejectInboundCrossClusterSearchConnectionResponse < Struct.new(
+      :cross_cluster_search_connection)
       include Aws::Structure
     end
 

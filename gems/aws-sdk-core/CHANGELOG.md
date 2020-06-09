@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Validate `:region` as a valid DNS host label.
 
+3.98.0 (2020-06-05)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 3.97.1 (2020-06-01)
 ------------------
 

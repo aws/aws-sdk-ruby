@@ -11,6 +11,7 @@ module Aws::ServiceDiscovery
 
     include Seahorse::Model
 
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AttrKey = Shapes::StringShape.new(name: 'AttrKey')
     AttrValue = Shapes::StringShape.new(name: 'AttrValue')
@@ -34,6 +35,7 @@ module Aws::ServiceDiscovery
     DeregisterInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterInstanceResponse')
     DiscoverInstancesRequest = Shapes::StructureShape.new(name: 'DiscoverInstancesRequest')
     DiscoverInstancesResponse = Shapes::StructureShape.new(name: 'DiscoverInstancesResponse')
+    DiscoverMaxResults = Shapes::IntegerShape.new(name: 'DiscoverMaxResults')
     DnsConfig = Shapes::StructureShape.new(name: 'DnsConfig')
     DnsConfigChange = Shapes::StructureShape.new(name: 'DnsConfigChange')
     DnsProperties = Shapes::StructureShape.new(name: 'DnsProperties')
@@ -78,6 +80,8 @@ module Aws::ServiceDiscovery
     ListOperationsResponse = Shapes::StructureShape.new(name: 'ListOperationsResponse')
     ListServicesRequest = Shapes::StructureShape.new(name: 'ListServicesRequest')
     ListServicesResponse = Shapes::StructureShape.new(name: 'ListServicesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     Namespace = Shapes::StructureShape.new(name: 'Namespace')
@@ -108,11 +112,13 @@ module Aws::ServiceDiscovery
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RegisterInstanceRequest = Shapes::StructureShape.new(name: 'RegisterInstanceRequest')
     RegisterInstanceResponse = Shapes::StructureShape.new(name: 'RegisterInstanceResponse')
+    RequestLimitExceeded = Shapes::StructureShape.new(name: 'RequestLimitExceeded')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceInUse = Shapes::StructureShape.new(name: 'ResourceInUse')
     ResourceLimitExceeded = Shapes::StructureShape.new(name: 'ResourceLimitExceeded')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePath = Shapes::StringShape.new(name: 'ResourcePath')
     RoutingPolicy = Shapes::StringShape.new(name: 'RoutingPolicy')
     Service = Shapes::StructureShape.new(name: 'Service')
@@ -125,7 +131,17 @@ module Aws::ServiceDiscovery
     ServiceNotFound = Shapes::StructureShape.new(name: 'ServiceNotFound')
     ServiceSummariesList = Shapes::ListShape.new(name: 'ServiceSummariesList')
     ServiceSummary = Shapes::StructureShape.new(name: 'ServiceSummary')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateInstanceCustomHealthStatusRequest = Shapes::StructureShape.new(name: 'UpdateInstanceCustomHealthStatusRequest')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
@@ -136,6 +152,7 @@ module Aws::ServiceDiscovery
     CreateHttpNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "Name"))
     CreateHttpNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreateHttpNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    CreateHttpNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateHttpNamespaceRequest.struct_class = Types::CreateHttpNamespaceRequest
 
     CreateHttpNamespaceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -145,6 +162,7 @@ module Aws::ServiceDiscovery
     CreatePrivateDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreatePrivateDnsNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreatePrivateDnsNamespaceRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Vpc"))
+    CreatePrivateDnsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePrivateDnsNamespaceRequest.struct_class = Types::CreatePrivateDnsNamespaceRequest
 
     CreatePrivateDnsNamespaceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -153,6 +171,7 @@ module Aws::ServiceDiscovery
     CreatePublicDnsNamespaceRequest.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "Name"))
     CreatePublicDnsNamespaceRequest.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CreatorRequestId", metadata: {"idempotencyToken"=>true}))
     CreatePublicDnsNamespaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    CreatePublicDnsNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePublicDnsNamespaceRequest.struct_class = Types::CreatePublicDnsNamespaceRequest
 
     CreatePublicDnsNamespaceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
@@ -165,6 +184,7 @@ module Aws::ServiceDiscovery
     CreateServiceRequest.add_member(:dns_config, Shapes::ShapeRef.new(shape: DnsConfig, location_name: "DnsConfig"))
     CreateServiceRequest.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
     CreateServiceRequest.add_member(:health_check_custom_config, Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
+    CreateServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
@@ -193,7 +213,7 @@ module Aws::ServiceDiscovery
 
     DiscoverInstancesRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "NamespaceName"))
     DiscoverInstancesRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "ServiceName"))
-    DiscoverInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DiscoverInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DiscoverMaxResults, location_name: "MaxResults"))
     DiscoverInstancesRequest.add_member(:query_parameters, Shapes::ShapeRef.new(shape: Attributes, location_name: "QueryParameters"))
     DiscoverInstancesRequest.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatusFilter, location_name: "HealthStatus"))
     DiscoverInstancesRequest.struct_class = Types::DiscoverInstancesRequest
@@ -337,6 +357,12 @@ module Aws::ServiceDiscovery
     ListServicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListServicesResponse.struct_class = Types::ListServicesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     Namespace.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     Namespace.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     Namespace.add_member(:name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "Name"))
@@ -417,11 +443,17 @@ module Aws::ServiceDiscovery
     RegisterInstanceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
     RegisterInstanceResponse.struct_class = Types::RegisterInstanceResponse
 
+    RequestLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestLimitExceeded.struct_class = Types::RequestLimitExceeded
+
     ResourceInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceInUse.struct_class = Types::ResourceInUse
 
     ResourceLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceLimitExceeded.struct_class = Types::ResourceLimitExceeded
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     Service.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     Service.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -442,7 +474,7 @@ module Aws::ServiceDiscovery
     ServiceAlreadyExists.struct_class = Types::ServiceAlreadyExists
 
     ServiceChange.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
-    ServiceChange.add_member(:dns_config, Shapes::ShapeRef.new(shape: DnsConfigChange, required: true, location_name: "DnsConfig"))
+    ServiceChange.add_member(:dns_config, Shapes::ShapeRef.new(shape: DnsConfigChange, location_name: "DnsConfig"))
     ServiceChange.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "HealthCheckConfig"))
     ServiceChange.struct_class = Types::ServiceChange
 
@@ -468,6 +500,30 @@ module Aws::ServiceDiscovery
     ServiceSummary.add_member(:health_check_custom_config, Shapes::ShapeRef.new(shape: HealthCheckCustomConfig, location_name: "HealthCheckCustomConfig"))
     ServiceSummary.add_member(:create_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateDate"))
     ServiceSummary.struct_class = Types::ServiceSummary
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateInstanceCustomHealthStatusRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ServiceId"))
     UpdateInstanceCustomHealthStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "InstanceId"))
@@ -510,6 +566,7 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_private_dns_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -522,6 +579,7 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_public_dns_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -534,6 +592,7 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: NamespaceAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_service, Seahorse::Model::Operation.new.tap do |o|
@@ -546,6 +605,7 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:delete_namespace, Seahorse::Model::Operation.new.tap do |o|
@@ -596,6 +656,7 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: NamespaceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
       end)
 
       api.add_operation(:get_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -717,6 +778,16 @@ module Aws::ServiceDiscovery
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
       api.add_operation(:register_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterInstance"
         o.http_method = "POST"
@@ -728,6 +799,27 @@ module Aws::ServiceDiscovery
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFound)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
       end)
 
       api.add_operation(:update_instance_custom_health_status, Seahorse::Model::Operation.new.tap do |o|

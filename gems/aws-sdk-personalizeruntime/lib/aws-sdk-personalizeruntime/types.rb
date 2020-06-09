@@ -76,6 +76,7 @@ module Aws::PersonalizeRuntime
     #         context: {
     #           "AttributeName" => "AttributeValue",
     #         },
+    #         filter_arn: "Arn",
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -107,6 +108,11 @@ module Aws::PersonalizeRuntime
     #   user's current location or device type.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter to apply to the returned recommendations. For
+    #   more information, see Using Filters with Amazon Personalize.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation
     #
     class GetRecommendationsRequest < Struct.new(
@@ -114,7 +120,8 @@ module Aws::PersonalizeRuntime
       :item_id,
       :user_id,
       :num_results,
-      :context)
+      :context,
+      :filter_arn)
       include Aws::Structure
     end
 
@@ -151,9 +158,9 @@ module Aws::PersonalizeRuntime
     #   @return [String]
     #
     # @!attribute [rw] score
-    #   A numeric representation of the model's certainty in the item's
-    #   suitability. For more information on scoring logic, see
-    #   how-scores-work.
+    #   A numeric representation of the model's certainty that the item
+    #   will be the next user selection. For more information on scoring
+    #   logic, see how-scores-work.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/PredictedItem AWS API Documentation

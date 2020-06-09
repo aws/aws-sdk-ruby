@@ -628,6 +628,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -1772,6 +1773,8 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #
+    # @option params [Boolean] :multi_az_enabled
+    #
     # @option params [Integer] :num_cache_clusters
     #   The number of nodes in the cluster.
     #
@@ -2226,6 +2229,7 @@ module Aws::ElastiCache
     #     global_replication_group_id: "String",
     #     primary_cluster_id: "String",
     #     automatic_failover_enabled: false,
+    #     multi_az_enabled: false,
     #     num_cache_clusters: 1,
     #     preferred_cache_cluster_a_zs: ["String"],
     #     num_node_groups: 1,
@@ -2296,6 +2300,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -2692,6 +2697,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -3130,6 +3136,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -5587,6 +5594,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_groups[0].snapshotting_cluster_id #=> String
     #   resp.replication_groups[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_groups[0].multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_groups[0].configuration_endpoint.address #=> String
     #   resp.replication_groups[0].configuration_endpoint.port #=> Integer
     #   resp.replication_groups[0].snapshot_retention_limit #=> Integer
@@ -6875,6 +6883,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -7788,6 +7797,8 @@ module Aws::ElastiCache
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #
+    # @option params [Boolean] :multi_az_enabled
+    #
     # @option params [String] :node_group_id
     #   Deprecated. This parameter is not used.
     #
@@ -8025,6 +8036,7 @@ module Aws::ElastiCache
     #     primary_cluster_id: "String",
     #     snapshotting_cluster_id: "String",
     #     automatic_failover_enabled: false,
+    #     multi_az_enabled: false,
     #     node_group_id: "String",
     #     cache_security_group_names: ["String"],
     #     security_group_ids: ["String"],
@@ -8072,6 +8084,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -8190,6 +8203,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -8751,6 +8765,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -8878,6 +8893,7 @@ module Aws::ElastiCache
     #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
     #   resp.replication_group.snapshotting_cluster_id #=> String
     #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.multi_az #=> String, one of "enabled", "disabled"
     #   resp.replication_group.configuration_endpoint.address #=> String
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
@@ -8913,7 +8929,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -316,7 +316,8 @@ module Aws::MediaConvert
     # corresponding settings object. The following lists the codec enum,
     # settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3,
     # Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3,
-    # Ac3Settings * EAC3, Eac3Settings * EAC3\_ATMOS, Eac3AtmosSettings
+    # Ac3Settings * EAC3, Eac3Settings * EAC3\_ATMOS, Eac3AtmosSettings *
+    # VORBIS, VorbisSettings * OPUS, OpusSettings
     #
     # @note When making an API call, you may pass AudioCodecSettings
     #   data as a hash:
@@ -348,7 +349,7 @@ module Aws::MediaConvert
     #           channels: 1,
     #           sample_rate: 1,
     #         },
-    #         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #         eac_3_atmos_settings: {
     #           bitrate: 1,
     #           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -398,6 +399,16 @@ module Aws::MediaConvert
     #           bitrate: 1,
     #           channels: 1,
     #           rate_control_mode: "CBR", # accepts CBR, VBR
+    #           sample_rate: 1,
+    #           vbr_quality: 1,
+    #         },
+    #         opus_settings: {
+    #           bitrate: 1,
+    #           channels: 1,
+    #           sample_rate: 1,
+    #         },
+    #         vorbis_settings: {
+    #           channels: 1,
     #           sample_rate: 1,
     #           vbr_quality: 1,
     #         },
@@ -454,6 +465,16 @@ module Aws::MediaConvert
     #   to the value MP3.
     #   @return [Types::Mp3Settings]
     #
+    # @!attribute [rw] opus_settings
+    #   Required when you set Codec, under AudioDescriptions>CodecSettings,
+    #   to the value OPUS.
+    #   @return [Types::OpusSettings]
+    #
+    # @!attribute [rw] vorbis_settings
+    #   Required when you set Codec, under AudioDescriptions>CodecSettings,
+    #   to the value Vorbis.
+    #   @return [Types::VorbisSettings]
+    #
     # @!attribute [rw] wav_settings
     #   Required when you set (Codec) under
     #   (AudioDescriptions)>(CodecSettings) to the value WAV.
@@ -470,6 +491,8 @@ module Aws::MediaConvert
       :eac_3_settings,
       :mp_2_settings,
       :mp_3_settings,
+      :opus_settings,
+      :vorbis_settings,
       :wav_settings)
       include Aws::Structure
     end
@@ -518,7 +541,7 @@ module Aws::MediaConvert
     #             channels: 1,
     #             sample_rate: 1,
     #           },
-    #           codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #           codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #           eac_3_atmos_settings: {
     #             bitrate: 1,
     #             bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -568,6 +591,16 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             channels: 1,
     #             rate_control_mode: "CBR", # accepts CBR, VBR
+    #             sample_rate: 1,
+    #             vbr_quality: 1,
+    #           },
+    #           opus_settings: {
+    #             bitrate: 1,
+    #             channels: 1,
+    #             sample_rate: 1,
+    #           },
+    #           vorbis_settings: {
+    #             channels: 1,
     #             sample_rate: 1,
     #             vbr_quality: 1,
     #           },
@@ -641,7 +674,7 @@ module Aws::MediaConvert
     #   enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings
     #   * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings *
     #   AC3, Ac3Settings * EAC3, Eac3Settings * EAC3\_ATMOS,
-    #   Eac3AtmosSettings
+    #   Eac3AtmosSettings * VORBIS, VorbisSettings * OPUS, OpusSettings
     #   @return [Types::AudioCodecSettings]
     #
     # @!attribute [rw] custom_language_code
@@ -783,7 +816,7 @@ module Aws::MediaConvert
     #       {
     #         custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #         default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #         external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #         external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         offset: 1,
     #         pids: [1],
@@ -1751,8 +1784,8 @@ module Aws::MediaConvert
     end
 
     # Ignore this setting unless your input captions format is SCC. To have
-    # the service compensate for differing framerates between your input
-    # captions and input video, specify the framerate of the captions file.
+    # the service compensate for differing frame rates between your input
+    # captions and input video, specify the frame rate of the captions file.
     # Specify this value as a fraction, using the settings Framerate
     # numerator (framerateNumerator) and Framerate denominator
     # (framerateDenominator). For example, you might specify 24 / 1 for 24
@@ -1768,15 +1801,15 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] framerate_denominator
-    #   Specify the denominator of the fraction that represents the
-    #   framerate for the setting Caption source framerate
+    #   Specify the denominator of the fraction that represents the frame
+    #   rate for the setting Caption source frame rate
     #   (CaptionSourceFramerate). Use this setting along with the setting
     #   Framerate numerator (framerateNumerator).
     #   @return [Integer]
     #
     # @!attribute [rw] framerate_numerator
-    #   Specify the numerator of the fraction that represents the framerate
-    #   for the setting Caption source framerate (CaptionSourceFramerate).
+    #   Specify the numerator of the fraction that represents the frame rate
+    #   for the setting Caption source frame rate (CaptionSourceFramerate).
     #   Use this setting along with the setting Framerate denominator
     #   (framerateDenominator).
     #   @return [Integer]
@@ -2380,7 +2413,7 @@ module Aws::MediaConvert
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
-    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         },
@@ -2589,7 +2622,7 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -2992,7 +3025,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -3042,6 +3075,16 @@ module Aws::MediaConvert
     #                           bitrate: 1,
     #                           channels: 1,
     #                           rate_control_mode: "CBR", # accepts CBR, VBR
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1,
+    #                         },
+    #                         opus_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1,
+    #                         },
+    #                         vorbis_settings: {
+    #                           channels: 1,
     #                           sample_rate: 1,
     #                           vbr_quality: 1,
     #                         },
@@ -3141,7 +3184,7 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
-    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     },
@@ -3271,7 +3314,7 @@ module Aws::MediaConvert
     #                         slices: 1,
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -3414,6 +3457,36 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
+    #                       vp_8_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                         rate_control_mode: "VBR", # accepts VBR
+    #                       },
+    #                       vp_9_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                         rate_control_mode: "VBR", # accepts VBR
+    #                       },
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
@@ -3499,6 +3572,7 @@ module Aws::MediaConvert
     #                         },
     #                         temporal_filter_settings: {
     #                           aggressive_mode: 1,
+    #                           post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                           speed: 1,
     #                           strength: 1,
     #                         },
@@ -3708,7 +3782,7 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -4103,7 +4177,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -4153,6 +4227,16 @@ module Aws::MediaConvert
     #                           bitrate: 1,
     #                           channels: 1,
     #                           rate_control_mode: "CBR", # accepts CBR, VBR
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1,
+    #                         },
+    #                         opus_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1,
+    #                         },
+    #                         vorbis_settings: {
+    #                           channels: 1,
     #                           sample_rate: 1,
     #                           vbr_quality: 1,
     #                         },
@@ -4252,7 +4336,7 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
-    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     },
@@ -4382,7 +4466,7 @@ module Aws::MediaConvert
     #                         slices: 1,
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -4525,6 +4609,36 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
+    #                       vp_8_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                         rate_control_mode: "VBR", # accepts VBR
+    #                       },
+    #                       vp_9_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                         rate_control_mode: "VBR", # accepts VBR
+    #                       },
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
@@ -4610,6 +4724,7 @@ module Aws::MediaConvert
     #                         },
     #                         temporal_filter_settings: {
     #                           aggressive_mode: 1,
+    #                           post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                           speed: 1,
     #                           strength: 1,
     #                         },
@@ -4787,7 +4902,7 @@ module Aws::MediaConvert
     #                   channels: 1,
     #                   sample_rate: 1,
     #                 },
-    #                 codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                 codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                 eac_3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -4837,6 +4952,16 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   channels: 1,
     #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   sample_rate: 1,
+    #                   vbr_quality: 1,
+    #                 },
+    #                 opus_settings: {
+    #                   bitrate: 1,
+    #                   channels: 1,
+    #                   sample_rate: 1,
+    #                 },
+    #                 vorbis_settings: {
+    #                   channels: 1,
     #                   sample_rate: 1,
     #                   vbr_quality: 1,
     #                 },
@@ -4935,7 +5060,7 @@ module Aws::MediaConvert
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
-    #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #             f4v_settings: {
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             },
@@ -5052,7 +5177,7 @@ module Aws::MediaConvert
     #                 slices: 1,
     #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -5195,6 +5320,36 @@ module Aws::MediaConvert
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
+    #               vp_8_settings: {
+    #                 bitrate: 1,
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 gop_size: 1.0,
+    #                 hrd_buffer_size: 1,
+    #                 max_bitrate: 1,
+    #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 par_denominator: 1,
+    #                 par_numerator: 1,
+    #                 quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                 rate_control_mode: "VBR", # accepts VBR
+    #               },
+    #               vp_9_settings: {
+    #                 bitrate: 1,
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 gop_size: 1.0,
+    #                 hrd_buffer_size: 1,
+    #                 max_bitrate: 1,
+    #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 par_denominator: 1,
+    #                 par_numerator: 1,
+    #                 quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                 rate_control_mode: "VBR", # accepts VBR
+    #               },
     #             },
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             crop: {
@@ -5280,6 +5435,7 @@ module Aws::MediaConvert
     #                 },
     #                 temporal_filter_settings: {
     #                   aggressive_mode: 1,
+    #                   post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                   speed: 1,
     #                   strength: 1,
     #                 },
@@ -6922,8 +7078,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] framerate
     #   Ignore this setting unless your input captions format is SCC. To
-    #   have the service compensate for differing framerates between your
-    #   input captions and input video, specify the framerate of the
+    #   have the service compensate for differing frame rates between your
+    #   input captions and input video, specify the frame rate of the
     #   captions file. Specify this value as a fraction, using the settings
     #   Framerate numerator (framerateNumerator) and Framerate denominator
     #   (framerateDenominator). For example, you might specify 24 / 1 for 24
@@ -7329,8 +7485,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   When set to INTERPOLATE, produces smoother motion during frame rate
-    #   conversion.
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use duplicate drop conversion.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -7423,9 +7579,13 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] par_control
-    #   Using the API, enable ParFollowSource if you want the service to use
-    #   the pixel aspect ratio from the input. Using the console, do this by
-    #   choosing Follow source for Pixel aspect ratio.
+    #   Optional. Specify how the service determines the pixel aspect ratio
+    #   (PAR) for this output. The default behavior, Follow source
+    #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
+    #   your output. To use a different PAR, choose (SPECIFIED). In the
+    #   console, SPECIFIED corresponds to any value other than Follow
+    #   source. When you choose SPECIFIED for this setting, you must also
+    #   specify values for the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
@@ -7437,9 +7597,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
-    #   Use Quality tuning level (H264QualityTuningLevel) to specifiy
-    #   whether to use fast single-pass, high-quality singlepass, or
-    #   high-quality multipass video encoding.
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, single-pass encoding.
     #   @return [String]
     #
     # @!attribute [rw] qvbr_settings
@@ -7716,7 +7876,7 @@ module Aws::MediaConvert
     #   choose Custom. The framerates shown in the dropdown list are decimal
     #   approximations of fractions. If you choose Custom, specify your
     #   frame rate as a fraction. If you are creating your transcoding job
-    #   sepecification as a JSON file without the console, use
+    #   specification as a JSON file without the console, use
     #   FramerateControl to specify which value the service uses for the
     #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
     #   want the service to use the frame rate from the input. Choose
@@ -7815,9 +7975,13 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] par_control
-    #   Using the API, enable ParFollowSource if you want the service to use
-    #   the pixel aspect ratio from the input. Using the console, do this by
-    #   choosing Follow source for Pixel aspect ratio.
+    #   Optional. Specify how the service determines the pixel aspect ratio
+    #   (PAR) for this output. The default behavior, Follow source
+    #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
+    #   your output. To use a different PAR, choose (SPECIFIED). In the
+    #   console, SPECIFIED corresponds to any value other than Follow
+    #   source. When you choose SPECIFIED for this setting, you must also
+    #   specify values for the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
@@ -7829,9 +7993,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
-    #   Use Quality tuning level (H265QualityTuningLevel) to specifiy
-    #   whether to use fast single-pass, high-quality singlepass, or
-    #   high-quality multipass video encoding.
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, single-pass encoding.
     #   @return [String]
     #
     # @!attribute [rw] qvbr_settings
@@ -8735,7 +8899,7 @@ module Aws::MediaConvert
     #           "__string" => {
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #             external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
@@ -8877,13 +9041,13 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_selectors
     #   Use Audio selectors (AudioSelectors) to specify a track or set of
     #   tracks from the input that you will use in your outputs. You can use
-    #   mutiple Audio selectors per input.
+    #   multiple Audio selectors per input.
     #   @return [Hash<String,Types::AudioSelector>]
     #
     # @!attribute [rw] caption_selectors
     #   Use Captions selectors (CaptionSelectors) to specify the captions
     #   data from the input that you will use in your outputs. You can use
-    #   mutiple captions selectors per input.
+    #   multiple captions selectors per input.
     #   @return [Hash<String,Types::CaptionSelector>]
     #
     # @!attribute [rw] crop
@@ -8895,7 +9059,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] deblock_filter
     #   Enable Deblock (InputDeblockFilter) to produce smoother motion in
-    #   the output. Default is disabled. Only manaully controllable for
+    #   the output. Default is disabled. Only manually controllable for
     #   MPEG2 and uncompressed video inputs.
     #   @return [String]
     #
@@ -9159,7 +9323,7 @@ module Aws::MediaConvert
     #           "__string" => {
     #             custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #             external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
@@ -9293,13 +9457,13 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_selectors
     #   Use Audio selectors (AudioSelectors) to specify a track or set of
     #   tracks from the input that you will use in your outputs. You can use
-    #   mutiple Audio selectors per input.
+    #   multiple Audio selectors per input.
     #   @return [Hash<String,Types::AudioSelector>]
     #
     # @!attribute [rw] caption_selectors
     #   Use Captions selectors (CaptionSelectors) to specify the captions
     #   data from the input that you will use in your outputs. You can use
-    #   mutiple captions selectors per input.
+    #   multiple captions selectors per input.
     #   @return [Hash<String,Types::CaptionSelector>]
     #
     # @!attribute [rw] crop
@@ -9311,7 +9475,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] deblock_filter
     #   Enable Deblock (InputDeblockFilter) to produce smoother motion in
-    #   the output. Default is disabled. Only manaully controllable for
+    #   the output. Default is disabled. Only manually controllable for
     #   MPEG2 and uncompressed video inputs.
     #   @return [String]
     #
@@ -9779,7 +9943,7 @@ module Aws::MediaConvert
     #               "__string" => {
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                 external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
@@ -10182,7 +10346,7 @@ module Aws::MediaConvert
     #                         channels: 1,
     #                         sample_rate: 1,
     #                       },
-    #                       codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                       codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                       eac_3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -10232,6 +10396,16 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         channels: 1,
     #                         rate_control_mode: "CBR", # accepts CBR, VBR
+    #                         sample_rate: 1,
+    #                         vbr_quality: 1,
+    #                       },
+    #                       opus_settings: {
+    #                         bitrate: 1,
+    #                         channels: 1,
+    #                         sample_rate: 1,
+    #                       },
+    #                       vorbis_settings: {
+    #                         channels: 1,
     #                         sample_rate: 1,
     #                         vbr_quality: 1,
     #                       },
@@ -10331,7 +10505,7 @@ module Aws::MediaConvert
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
-    #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                   f4v_settings: {
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   },
@@ -10461,7 +10635,7 @@ module Aws::MediaConvert
     #                       slices: 1,
     #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -10604,6 +10778,36 @@ module Aws::MediaConvert
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
+    #                     vp_8_settings: {
+    #                       bitrate: 1,
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       gop_size: 1.0,
+    #                       hrd_buffer_size: 1,
+    #                       max_bitrate: 1,
+    #                       par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       par_denominator: 1,
+    #                       par_numerator: 1,
+    #                       quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                       rate_control_mode: "VBR", # accepts VBR
+    #                     },
+    #                     vp_9_settings: {
+    #                       bitrate: 1,
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       gop_size: 1.0,
+    #                       hrd_buffer_size: 1,
+    #                       max_bitrate: 1,
+    #                       par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       par_denominator: 1,
+    #                       par_numerator: 1,
+    #                       quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                       rate_control_mode: "VBR", # accepts VBR
+    #                     },
     #                   },
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   crop: {
@@ -10689,6 +10893,7 @@ module Aws::MediaConvert
     #                       },
     #                       temporal_filter_settings: {
     #                         aggressive_mode: 1,
+    #                         post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                         speed: 1,
     #                         strength: 1,
     #                       },
@@ -10915,7 +11120,7 @@ module Aws::MediaConvert
     #               "__string" => {
     #                 custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                 external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
@@ -11310,7 +11515,7 @@ module Aws::MediaConvert
     #                         channels: 1,
     #                         sample_rate: 1,
     #                       },
-    #                       codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                       codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                       eac_3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -11360,6 +11565,16 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         channels: 1,
     #                         rate_control_mode: "CBR", # accepts CBR, VBR
+    #                         sample_rate: 1,
+    #                         vbr_quality: 1,
+    #                       },
+    #                       opus_settings: {
+    #                         bitrate: 1,
+    #                         channels: 1,
+    #                         sample_rate: 1,
+    #                       },
+    #                       vorbis_settings: {
+    #                         channels: 1,
     #                         sample_rate: 1,
     #                         vbr_quality: 1,
     #                       },
@@ -11459,7 +11674,7 @@ module Aws::MediaConvert
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   },
-    #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                   f4v_settings: {
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   },
@@ -11589,7 +11804,7 @@ module Aws::MediaConvert
     #                       slices: 1,
     #                       spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                     },
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -11732,6 +11947,36 @@ module Aws::MediaConvert
     #                       slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                       telecine: "NONE", # accepts NONE, HARD
     #                     },
+    #                     vp_8_settings: {
+    #                       bitrate: 1,
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       gop_size: 1.0,
+    #                       hrd_buffer_size: 1,
+    #                       max_bitrate: 1,
+    #                       par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       par_denominator: 1,
+    #                       par_numerator: 1,
+    #                       quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                       rate_control_mode: "VBR", # accepts VBR
+    #                     },
+    #                     vp_9_settings: {
+    #                       bitrate: 1,
+    #                       framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                       framerate_denominator: 1,
+    #                       framerate_numerator: 1,
+    #                       gop_size: 1.0,
+    #                       hrd_buffer_size: 1,
+    #                       max_bitrate: 1,
+    #                       par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                       par_denominator: 1,
+    #                       par_numerator: 1,
+    #                       quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                       rate_control_mode: "VBR", # accepts VBR
+    #                     },
     #                   },
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   crop: {
@@ -11817,6 +12062,7 @@ module Aws::MediaConvert
     #                       },
     #                       temporal_filter_settings: {
     #                         aggressive_mode: 1,
+    #                         post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                         speed: 1,
     #                         strength: 1,
     #                       },
@@ -13229,7 +13475,7 @@ module Aws::MediaConvert
     #   choose Custom. The framerates shown in the dropdown list are decimal
     #   approximations of fractions. If you choose Custom, specify your
     #   frame rate as a fraction. If you are creating your transcoding job
-    #   sepecification as a JSON file without the console, use
+    #   specification as a JSON file without the console, use
     #   FramerateControl to specify which value the service uses for the
     #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
     #   want the service to use the frame rate from the input. Choose
@@ -13238,8 +13484,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   When set to INTERPOLATE, produces smoother motion during frame rate
-    #   conversion.
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use duplicate drop conversion.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -13323,9 +13569,13 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] par_control
-    #   Using the API, enable ParFollowSource if you want the service to use
-    #   the pixel aspect ratio from the input. Using the console, do this by
-    #   choosing Follow source for Pixel aspect ratio.
+    #   Optional. Specify how the service determines the pixel aspect ratio
+    #   (PAR) for this output. The default behavior, Follow source
+    #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
+    #   your output. To use a different PAR, choose (SPECIFIED). In the
+    #   console, SPECIFIED corresponds to any value other than Follow
+    #   source. When you choose SPECIFIED for this setting, you must also
+    #   specify values for the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
@@ -13337,8 +13587,9 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] quality_tuning_level
-    #   Use Quality tuning level (Mpeg2QualityTuningLevel) to specifiy
-    #   whether to use single-pass or multipass video encoding.
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, single-pass encoding.
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
@@ -13665,6 +13916,7 @@ module Aws::MediaConvert
     #         },
     #         temporal_filter_settings: {
     #           aggressive_mode: 1,
+    #           post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #           speed: 1,
     #           strength: 1,
     #         },
@@ -13766,6 +14018,7 @@ module Aws::MediaConvert
     #
     #       {
     #         aggressive_mode: 1,
+    #         post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #         speed: 1,
     #         strength: 1,
     #       }
@@ -13776,6 +14029,14 @@ module Aws::MediaConvert
     #   complex scenes more aggressively and creates better VQ for low
     #   bitrate outputs.
     #   @return [Integer]
+    #
+    # @!attribute [rw] post_temporal_sharpening
+    #   Optional. When you set Noise reducer (noiseReducer) to Temporal
+    #   (TEMPORAL), you can optionally use this setting to apply additional
+    #   sharpening. The default behavior, Auto (AUTO) allows the transcoder
+    #   to determine whether to apply filtering, depending on input type and
+    #   quality.
+    #   @return [String]
     #
     # @!attribute [rw] speed
     #   The speed of the filter (higher number is faster). Low setting
@@ -13796,6 +14057,7 @@ module Aws::MediaConvert
     #
     class NoiseReducerTemporalFilterSettings < Struct.new(
       :aggressive_mode,
+      :post_temporal_sharpening,
       :speed,
       :strength)
       include Aws::Structure
@@ -13808,6 +14070,44 @@ module Aws::MediaConvert
     #
     class NotFoundException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Required when you set Codec, under AudioDescriptions>CodecSettings, to
+    # the value OPUS.
+    #
+    # @note When making an API call, you may pass OpusSettings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate: 1,
+    #         channels: 1,
+    #         sample_rate: 1,
+    #       }
+    #
+    # @!attribute [rw] bitrate
+    #   Optional. Specify the average bitrate in bits per second. Valid
+    #   values are multiples of 8000, from 32000 through 192000. The default
+    #   value is 96000, which we recommend for quality and bandwidth.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channels
+    #   Specify the number of channels in this output audio track. Choosing
+    #   Mono on the console gives you 1 output channel; choosing Stereo
+    #   gives you 2. In the API, valid values are 1 and 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   Optional. Sample rate in hz. Valid values are 16000, 24000, and
+    #   48000. The default value is 48000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OpusSettings AWS API Documentation
+    #
+    class OpusSettings < Struct.new(
+      :bitrate,
+      :channels,
+      :sample_rate)
       include Aws::Structure
     end
 
@@ -13858,7 +14158,7 @@ module Aws::MediaConvert
     #                 channels: 1,
     #                 sample_rate: 1,
     #               },
-    #               codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #               codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #               eac_3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -13908,6 +14208,16 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 channels: 1,
     #                 rate_control_mode: "CBR", # accepts CBR, VBR
+    #                 sample_rate: 1,
+    #                 vbr_quality: 1,
+    #               },
+    #               opus_settings: {
+    #                 bitrate: 1,
+    #                 channels: 1,
+    #                 sample_rate: 1,
+    #               },
+    #               vorbis_settings: {
+    #                 channels: 1,
     #                 sample_rate: 1,
     #                 vbr_quality: 1,
     #               },
@@ -14007,7 +14317,7 @@ module Aws::MediaConvert
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
-    #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #           f4v_settings: {
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           },
@@ -14137,7 +14447,7 @@ module Aws::MediaConvert
     #               slices: 1,
     #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -14280,6 +14590,36 @@ module Aws::MediaConvert
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
+    #             vp_8_settings: {
+    #               bitrate: 1,
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               gop_size: 1.0,
+    #               hrd_buffer_size: 1,
+    #               max_bitrate: 1,
+    #               par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               par_denominator: 1,
+    #               par_numerator: 1,
+    #               quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #               rate_control_mode: "VBR", # accepts VBR
+    #             },
+    #             vp_9_settings: {
+    #               bitrate: 1,
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               gop_size: 1.0,
+    #               hrd_buffer_size: 1,
+    #               max_bitrate: 1,
+    #               par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               par_denominator: 1,
+    #               par_numerator: 1,
+    #               quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #               rate_control_mode: "VBR", # accepts VBR
+    #             },
     #           },
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #           crop: {
@@ -14365,6 +14705,7 @@ module Aws::MediaConvert
     #               },
     #               temporal_filter_settings: {
     #                 aggressive_mode: 1,
+    #                 post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                 speed: 1,
     #                 strength: 1,
     #               },
@@ -14402,8 +14743,8 @@ module Aws::MediaConvert
     #   in File output groups. If you do not specify a value, the service
     #   will use default extensions by container type as follows * MPEG-2
     #   transport stream, m2ts * Quicktime, mov * MXF container, mxf *
-    #   MPEG-4 container, mp4 * No Container, the service will use codec
-    #   extensions (e.g. AAC, H265, H265, AC3)
+    #   MPEG-4 container, mp4 * WebM container, webm * No Container, the
+    #   service will use codec extensions (e.g. AAC, H265, H265, AC3)
     #   @return [String]
     #
     # @!attribute [rw] name_modifier
@@ -14743,7 +15084,7 @@ module Aws::MediaConvert
     #                     channels: 1,
     #                     sample_rate: 1,
     #                   },
-    #                   codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                   codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                   eac_3_atmos_settings: {
     #                     bitrate: 1,
     #                     bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -14793,6 +15134,16 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     channels: 1,
     #                     rate_control_mode: "CBR", # accepts CBR, VBR
+    #                     sample_rate: 1,
+    #                     vbr_quality: 1,
+    #                   },
+    #                   opus_settings: {
+    #                     bitrate: 1,
+    #                     channels: 1,
+    #                     sample_rate: 1,
+    #                   },
+    #                   vorbis_settings: {
+    #                     channels: 1,
     #                     sample_rate: 1,
     #                     vbr_quality: 1,
     #                   },
@@ -14892,7 +15243,7 @@ module Aws::MediaConvert
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               },
-    #               container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #               container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #               f4v_settings: {
     #                 moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #               },
@@ -15022,7 +15373,7 @@ module Aws::MediaConvert
     #                   slices: 1,
     #                   spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                 },
-    #                 codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #                 codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                 frame_capture_settings: {
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -15165,6 +15516,36 @@ module Aws::MediaConvert
     #                   slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                   telecine: "NONE", # accepts NONE, HARD
     #                 },
+    #                 vp_8_settings: {
+    #                   bitrate: 1,
+    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                   gop_size: 1.0,
+    #                   hrd_buffer_size: 1,
+    #                   max_bitrate: 1,
+    #                   par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   par_denominator: 1,
+    #                   par_numerator: 1,
+    #                   quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                   rate_control_mode: "VBR", # accepts VBR
+    #                 },
+    #                 vp_9_settings: {
+    #                   bitrate: 1,
+    #                   framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                   framerate_denominator: 1,
+    #                   framerate_numerator: 1,
+    #                   gop_size: 1.0,
+    #                   hrd_buffer_size: 1,
+    #                   max_bitrate: 1,
+    #                   par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                   par_denominator: 1,
+    #                   par_numerator: 1,
+    #                   quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                   rate_control_mode: "VBR", # accepts VBR
+    #                 },
     #               },
     #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #               crop: {
@@ -15250,6 +15631,7 @@ module Aws::MediaConvert
     #                   },
     #                   temporal_filter_settings: {
     #                     aggressive_mode: 1,
+    #                     post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                     speed: 1,
     #                     strength: 1,
     #                   },
@@ -15692,7 +16074,7 @@ module Aws::MediaConvert
     #                 channels: 1,
     #                 sample_rate: 1,
     #               },
-    #               codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #               codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #               eac_3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -15742,6 +16124,16 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 channels: 1,
     #                 rate_control_mode: "CBR", # accepts CBR, VBR
+    #                 sample_rate: 1,
+    #                 vbr_quality: 1,
+    #               },
+    #               opus_settings: {
+    #                 bitrate: 1,
+    #                 channels: 1,
+    #                 sample_rate: 1,
+    #               },
+    #               vorbis_settings: {
+    #                 channels: 1,
     #                 sample_rate: 1,
     #                 vbr_quality: 1,
     #               },
@@ -15840,7 +16232,7 @@ module Aws::MediaConvert
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           },
-    #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #           f4v_settings: {
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           },
@@ -15957,7 +16349,7 @@ module Aws::MediaConvert
     #               slices: 1,
     #               spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #             },
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -16100,6 +16492,36 @@ module Aws::MediaConvert
     #               slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #               telecine: "NONE", # accepts NONE, HARD
     #             },
+    #             vp_8_settings: {
+    #               bitrate: 1,
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               gop_size: 1.0,
+    #               hrd_buffer_size: 1,
+    #               max_bitrate: 1,
+    #               par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               par_denominator: 1,
+    #               par_numerator: 1,
+    #               quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #               rate_control_mode: "VBR", # accepts VBR
+    #             },
+    #             vp_9_settings: {
+    #               bitrate: 1,
+    #               framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #               framerate_denominator: 1,
+    #               framerate_numerator: 1,
+    #               gop_size: 1.0,
+    #               hrd_buffer_size: 1,
+    #               max_bitrate: 1,
+    #               par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #               par_denominator: 1,
+    #               par_numerator: 1,
+    #               quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #               rate_control_mode: "VBR", # accepts VBR
+    #             },
     #           },
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #           crop: {
@@ -16185,6 +16607,7 @@ module Aws::MediaConvert
     #               },
     #               temporal_filter_settings: {
     #                 aggressive_mode: 1,
+    #                 post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                 speed: 1,
     #                 strength: 1,
     #               },
@@ -16265,7 +16688,7 @@ module Aws::MediaConvert
     #   choose Custom. The framerates shown in the dropdown list are decimal
     #   approximations of fractions. If you choose Custom, specify your
     #   frame rate as a fraction. If you are creating your transcoding job
-    #   sepecification as a JSON file without the console, use
+    #   specification as a JSON file without the console, use
     #   FramerateControl to specify which value the service uses for the
     #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
     #   want the service to use the frame rate from the input. Choose
@@ -16274,8 +16697,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
-    #   When set to INTERPOLATE, produces smoother motion during frame rate
-    #   conversion.
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use duplicate drop conversion.
     #   @return [String]
     #
     # @!attribute [rw] framerate_denominator
@@ -16307,12 +16730,13 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] par_control
-    #   Use (ProresParControl) to specify how the service determines the
-    #   pixel aspect ratio. Set to Follow source (INITIALIZE\_FROM\_SOURCE)
-    #   to use the pixel aspect ratio from the input. To specify a different
-    #   pixel aspect ratio: Using the console, choose it from the dropdown
-    #   menu. Using the API, set ProresParControl to (SPECIFIED) and provide
-    #   for (ParNumerator) and (ParDenominator).
+    #   Optional. Specify how the service determines the pixel aspect ratio
+    #   (PAR) for this output. The default behavior, Follow source
+    #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
+    #   your output. To use a different PAR, choose (SPECIFIED). In the
+    #   console, SPECIFIED corresponds to any value other than Follow
+    #   source. When you choose SPECIFIED for this setting, you must also
+    #   specify values for the parNumerator and parDenominator settings.
     #   @return [String]
     #
     # @!attribute [rw] par_denominator
@@ -17352,7 +17776,7 @@ module Aws::MediaConvert
     #                 "__string" => {
     #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #                   external_audio_file_input: "__stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
@@ -17747,7 +18171,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -17797,6 +18221,16 @@ module Aws::MediaConvert
     #                           bitrate: 1,
     #                           channels: 1,
     #                           rate_control_mode: "CBR", # accepts CBR, VBR
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1,
+    #                         },
+    #                         opus_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           sample_rate: 1,
+    #                         },
+    #                         vorbis_settings: {
+    #                           channels: 1,
     #                           sample_rate: 1,
     #                           vbr_quality: 1,
     #                         },
@@ -17896,7 +18330,7 @@ module Aws::MediaConvert
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     },
-    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     },
@@ -18026,7 +18460,7 @@ module Aws::MediaConvert
     #                         slices: 1,
     #                         spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #                       },
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -18169,6 +18603,36 @@ module Aws::MediaConvert
     #                         slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                         telecine: "NONE", # accepts NONE, HARD
     #                       },
+    #                       vp_8_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                         rate_control_mode: "VBR", # accepts VBR
+    #                       },
+    #                       vp_9_settings: {
+    #                         bitrate: 1,
+    #                         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                         framerate_denominator: 1,
+    #                         framerate_numerator: 1,
+    #                         gop_size: 1.0,
+    #                         hrd_buffer_size: 1,
+    #                         max_bitrate: 1,
+    #                         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                         par_denominator: 1,
+    #                         par_numerator: 1,
+    #                         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                         rate_control_mode: "VBR", # accepts VBR
+    #                       },
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
@@ -18254,6 +18718,7 @@ module Aws::MediaConvert
     #                         },
     #                         temporal_filter_settings: {
     #                           aggressive_mode: 1,
+    #                           post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                           speed: 1,
     #                           strength: 1,
     #                         },
@@ -18418,7 +18883,7 @@ module Aws::MediaConvert
     #                   channels: 1,
     #                   sample_rate: 1,
     #                 },
-    #                 codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                 codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, VORBIS, OPUS, PASSTHROUGH
     #                 eac_3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -18468,6 +18933,16 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   channels: 1,
     #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   sample_rate: 1,
+    #                   vbr_quality: 1,
+    #                 },
+    #                 opus_settings: {
+    #                   bitrate: 1,
+    #                   channels: 1,
+    #                   sample_rate: 1,
+    #                 },
+    #                 vorbis_settings: {
+    #                   channels: 1,
     #                   sample_rate: 1,
     #                   vbr_quality: 1,
     #                 },
@@ -18566,7 +19041,7 @@ module Aws::MediaConvert
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             },
-    #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
+    #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, WEBM, RAW
     #             f4v_settings: {
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             },
@@ -18683,7 +19158,7 @@ module Aws::MediaConvert
     #                 slices: 1,
     #                 spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #               },
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -18826,6 +19301,36 @@ module Aws::MediaConvert
     #                 slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #                 telecine: "NONE", # accepts NONE, HARD
     #               },
+    #               vp_8_settings: {
+    #                 bitrate: 1,
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 gop_size: 1.0,
+    #                 hrd_buffer_size: 1,
+    #                 max_bitrate: 1,
+    #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 par_denominator: 1,
+    #                 par_numerator: 1,
+    #                 quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                 rate_control_mode: "VBR", # accepts VBR
+    #               },
+    #               vp_9_settings: {
+    #                 bitrate: 1,
+    #                 framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #                 framerate_denominator: 1,
+    #                 framerate_numerator: 1,
+    #                 gop_size: 1.0,
+    #                 hrd_buffer_size: 1,
+    #                 max_bitrate: 1,
+    #                 par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #                 par_denominator: 1,
+    #                 par_numerator: 1,
+    #                 quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #                 rate_control_mode: "VBR", # accepts VBR
+    #               },
     #             },
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             crop: {
@@ -18911,6 +19416,7 @@ module Aws::MediaConvert
     #                 },
     #                 temporal_filter_settings: {
     #                   aggressive_mode: 1,
+    #                   post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #                   speed: 1,
     #                   strength: 1,
     #                 },
@@ -19043,7 +19549,8 @@ module Aws::MediaConvert
     # corresponding settings object. The following lists the codec enum,
     # settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings * AV1,
     # Av1Settings * H\_264, H264Settings * H\_265, H265Settings * MPEG2,
-    # Mpeg2Settings * PRORES, ProresSettings
+    # Mpeg2Settings * PRORES, ProresSettings * VP8, Vp8Settings * VP9,
+    # Vp9Settings
     #
     # @note When making an API call, you may pass VideoCodecSettings
     #   data as a hash:
@@ -19066,7 +19573,7 @@ module Aws::MediaConvert
     #           slices: 1,
     #           spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #         },
-    #         codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #         codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #         frame_capture_settings: {
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -19209,6 +19716,36 @@ module Aws::MediaConvert
     #           slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #           telecine: "NONE", # accepts NONE, HARD
     #         },
+    #         vp_8_settings: {
+    #           bitrate: 1,
+    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #           gop_size: 1.0,
+    #           hrd_buffer_size: 1,
+    #           max_bitrate: 1,
+    #           par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           par_denominator: 1,
+    #           par_numerator: 1,
+    #           quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #           rate_control_mode: "VBR", # accepts VBR
+    #         },
+    #         vp_9_settings: {
+    #           bitrate: 1,
+    #           framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #           framerate_denominator: 1,
+    #           framerate_numerator: 1,
+    #           gop_size: 1.0,
+    #           hrd_buffer_size: 1,
+    #           max_bitrate: 1,
+    #           par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #           par_denominator: 1,
+    #           par_numerator: 1,
+    #           quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #           rate_control_mode: "VBR", # accepts VBR
+    #         },
     #       }
     #
     # @!attribute [rw] av_1_settings
@@ -19245,6 +19782,16 @@ module Aws::MediaConvert
     #   (VideoDescription)>(CodecSettings) to the value PRORES.
     #   @return [Types::ProresSettings]
     #
+    # @!attribute [rw] vp_8_settings
+    #   Required when you set (Codec) under
+    #   (VideoDescription)>(CodecSettings) to the value VP8.
+    #   @return [Types::Vp8Settings]
+    #
+    # @!attribute [rw] vp_9_settings
+    #   Required when you set (Codec) under
+    #   (VideoDescription)>(CodecSettings) to the value VP9.
+    #   @return [Types::Vp9Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoCodecSettings AWS API Documentation
     #
     class VideoCodecSettings < Struct.new(
@@ -19254,7 +19801,9 @@ module Aws::MediaConvert
       :h264_settings,
       :h265_settings,
       :mpeg_2_settings,
-      :prores_settings)
+      :prores_settings,
+      :vp_8_settings,
+      :vp_9_settings)
       include Aws::Structure
     end
 
@@ -19284,7 +19833,7 @@ module Aws::MediaConvert
     #             slices: 1,
     #             spatial_adaptive_quantization: "DISABLED", # accepts DISABLED, ENABLED
     #           },
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES
+    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, AV1, H_264, H_265, MPEG2, PRORES, VP8, VP9
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -19427,6 +19976,36 @@ module Aws::MediaConvert
     #             slow_pal: "DISABLED", # accepts DISABLED, ENABLED
     #             telecine: "NONE", # accepts NONE, HARD
     #           },
+    #           vp_8_settings: {
+    #             bitrate: 1,
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             hrd_buffer_size: 1,
+    #             max_bitrate: 1,
+    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #             rate_control_mode: "VBR", # accepts VBR
+    #           },
+    #           vp_9_settings: {
+    #             bitrate: 1,
+    #             framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #             framerate_denominator: 1,
+    #             framerate_numerator: 1,
+    #             gop_size: 1.0,
+    #             hrd_buffer_size: 1,
+    #             max_bitrate: 1,
+    #             par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #             par_denominator: 1,
+    #             par_numerator: 1,
+    #             quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #             rate_control_mode: "VBR", # accepts VBR
+    #           },
     #         },
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #         crop: {
@@ -19512,6 +20091,7 @@ module Aws::MediaConvert
     #             },
     #             temporal_filter_settings: {
     #               aggressive_mode: 1,
+    #               post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #               speed: 1,
     #               strength: 1,
     #             },
@@ -19549,7 +20129,8 @@ module Aws::MediaConvert
     #   the corresponding settings object. The following lists the codec
     #   enum, settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings
     #   * AV1, Av1Settings * H\_264, H264Settings * H\_265, H265Settings
-    #   * MPEG2, Mpeg2Settings * PRORES, ProresSettings
+    #   * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VP8,
+    #   Vp8Settings * VP9, Vp9Settings
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] color_metadata
@@ -19760,6 +20341,7 @@ module Aws::MediaConvert
     #           },
     #           temporal_filter_settings: {
     #             aggressive_mode: 1,
+    #             post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
     #             speed: 1,
     #             strength: 1,
     #           },
@@ -19936,6 +20518,331 @@ module Aws::MediaConvert
       :pid,
       :program_number,
       :rotate)
+      include Aws::Structure
+    end
+
+    # Required when you set Codec, under AudioDescriptions>CodecSettings, to
+    # the value Vorbis.
+    #
+    # @note When making an API call, you may pass VorbisSettings
+    #   data as a hash:
+    #
+    #       {
+    #         channels: 1,
+    #         sample_rate: 1,
+    #         vbr_quality: 1,
+    #       }
+    #
+    # @!attribute [rw] channels
+    #   Optional. Specify the number of channels in this output audio track.
+    #   Choosing Mono on the console gives you 1 output channel; choosing
+    #   Stereo gives you 2. In the API, valid values are 1 and 2. The
+    #   default value is 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   Optional. Specify the audio sample rate in Hz. Valid values are
+    #   22050, 32000, 44100, and 48000. The default value is 48000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vbr_quality
+    #   Optional. Specify the variable audio quality of this Vorbis output
+    #   from -1 (lowest quality, ~45 kbit/s) to 10 (highest quality, ~500
+    #   kbit/s). The default value is 4 (~128 kbit/s). Values 5 and 6 are
+    #   approximately 160 and 192 kbit/s, respectively.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VorbisSettings AWS API Documentation
+    #
+    class VorbisSettings < Struct.new(
+      :channels,
+      :sample_rate,
+      :vbr_quality)
+      include Aws::Structure
+    end
+
+    # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
+    # to the value VP8.
+    #
+    # @note When making an API call, you may pass Vp8Settings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate: 1,
+    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #         gop_size: 1.0,
+    #         hrd_buffer_size: 1,
+    #         max_bitrate: 1,
+    #         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         par_denominator: 1,
+    #         par_numerator: 1,
+    #         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #         rate_control_mode: "VBR", # accepts VBR
+    #       }
+    #
+    # @!attribute [rw] bitrate
+    #   Target bitrate in bits/second. For example, enter five megabits per
+    #   second as 5000000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_control
+    #   If you are using the console, use the Framerate setting to specify
+    #   the frame rate for this output. If you want to keep the same frame
+    #   rate as the input video, choose Follow source. If you want to do
+    #   frame rate conversion, choose a frame rate from the dropdown list or
+    #   choose Custom. The framerates shown in the dropdown list are decimal
+    #   approximations of fractions. If you choose Custom, specify your
+    #   frame rate as a fraction. If you are creating your transcoding job
+    #   specification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the frame rate from the input. Choose
+    #   SPECIFIED if you want the service to use the frame rate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use Drop duplicate (DUPLICATE\_DROP)
+    #   conversion. When you choose Interpolate (INTERPOLATE) instead, the
+    #   conversion produces smoother motion.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gop_size
+    #   GOP Length (keyframe interval) in frames. Must be greater than zero.
+    #   @return [Float]
+    #
+    # @!attribute [rw] hrd_buffer_size
+    #   Optional. Size of buffer (HRD buffer model) in bits. For example,
+    #   enter five megabits as 5000000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_bitrate
+    #   Ignore this setting unless you set qualityTuningLevel to
+    #   MULTI\_PASS. Optional. Specify the maximum bitrate in bits/second.
+    #   For example, enter five megabits per second as 5000000. The default
+    #   behavior uses twice the target bitrate as the maximum bitrate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_control
+    #   Optional. Specify how the service determines the pixel aspect ratio
+    #   (PAR) for this output. The default behavior, Follow source
+    #   (INITIALIZE\_FROM\_SOURCE), uses the PAR from your input video for
+    #   your output. To specify a different PAR in the console, choose any
+    #   value other than Follow source. To specify a different PAR by
+    #   editing the JSON job specification, choose SPECIFIED. When you
+    #   choose SPECIFIED for this setting, you must also specify values for
+    #   the parNumerator and parDenominator settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] par_denominator
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parDenominator is 33.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_numerator
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parNumerator is 40.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality_tuning_level
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, multi-pass encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_control_mode
+    #   With the VP8 codec, you can use only the variable bitrate (VBR) rate
+    #   control mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Vp8Settings AWS API Documentation
+    #
+    class Vp8Settings < Struct.new(
+      :bitrate,
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :gop_size,
+      :hrd_buffer_size,
+      :max_bitrate,
+      :par_control,
+      :par_denominator,
+      :par_numerator,
+      :quality_tuning_level,
+      :rate_control_mode)
+      include Aws::Structure
+    end
+
+    # Required when you set (Codec) under (VideoDescription)>(CodecSettings)
+    # to the value VP9.
+    #
+    # @note When making an API call, you may pass Vp9Settings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate: 1,
+    #         framerate_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         framerate_conversion_algorithm: "DUPLICATE_DROP", # accepts DUPLICATE_DROP, INTERPOLATE
+    #         framerate_denominator: 1,
+    #         framerate_numerator: 1,
+    #         gop_size: 1.0,
+    #         hrd_buffer_size: 1,
+    #         max_bitrate: 1,
+    #         par_control: "INITIALIZE_FROM_SOURCE", # accepts INITIALIZE_FROM_SOURCE, SPECIFIED
+    #         par_denominator: 1,
+    #         par_numerator: 1,
+    #         quality_tuning_level: "MULTI_PASS", # accepts MULTI_PASS, MULTI_PASS_HQ
+    #         rate_control_mode: "VBR", # accepts VBR
+    #       }
+    #
+    # @!attribute [rw] bitrate
+    #   Target bitrate in bits/second. For example, enter five megabits per
+    #   second as 5000000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_control
+    #   If you are using the console, use the Framerate setting to specify
+    #   the frame rate for this output. If you want to keep the same frame
+    #   rate as the input video, choose Follow source. If you want to do
+    #   frame rate conversion, choose a frame rate from the dropdown list or
+    #   choose Custom. The framerates shown in the dropdown list are decimal
+    #   approximations of fractions. If you choose Custom, specify your
+    #   frame rate as a fraction. If you are creating your transcoding job
+    #   specification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   frame rate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the frame rate from the input. Choose
+    #   SPECIFIED if you want the service to use the frame rate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   Optional. Specify how the transcoder performs framerate conversion.
+    #   The default behavior is to use Drop duplicate (DUPLICATE\_DROP)
+    #   conversion. When you choose Interpolate (INTERPOLATE) instead, the
+    #   conversion produces smoother motion.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] gop_size
+    #   GOP Length (keyframe interval) in frames. Must be greater than zero.
+    #   @return [Float]
+    #
+    # @!attribute [rw] hrd_buffer_size
+    #   Size of buffer (HRD buffer model) in bits. For example, enter five
+    #   megabits as 5000000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_bitrate
+    #   Ignore this setting unless you set qualityTuningLevel to
+    #   MULTI\_PASS. Optional. Specify the maximum bitrate in bits/second.
+    #   For example, enter five megabits per second as 5000000. The default
+    #   behavior uses twice the target bitrate as the maximum bitrate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_control
+    #   Optional. Specify how the service determines the pixel aspect ratio
+    #   for this output. The default behavior is to use the same pixel
+    #   aspect ratio as your input video.
+    #   @return [String]
+    #
+    # @!attribute [rw] par_denominator
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parDenominator is 33.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] par_numerator
+    #   Required when you set Pixel aspect ratio (parControl) to SPECIFIED.
+    #   On the console, this corresponds to any value other than Follow
+    #   source. When you specify an output pixel aspect ratio (PAR) that is
+    #   different from your input video PAR, provide your output PAR as a
+    #   ratio. For example, for D1/DV NTSC widescreen, you would specify the
+    #   ratio 40:33. In this example, the value for parNumerator is 40.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quality_tuning_level
+    #   Optional. Use Quality tuning level (qualityTuningLevel) to choose
+    #   how you want to trade off encoding speed for output video quality.
+    #   The default behavior is faster, lower quality, multi-pass encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate_control_mode
+    #   With the VP9 codec, you can use only the variable bitrate (VBR) rate
+    #   control mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Vp9Settings AWS API Documentation
+    #
+    class Vp9Settings < Struct.new(
+      :bitrate,
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :gop_size,
+      :hrd_buffer_size,
+      :max_bitrate,
+      :par_control,
+      :par_denominator,
+      :par_numerator,
+      :quality_tuning_level,
+      :rate_control_mode)
       include Aws::Structure
     end
 

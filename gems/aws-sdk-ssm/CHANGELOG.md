@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2020-06-04)
+------------------
+
+* Feature - SSM State Manager support for executing an association only at specified CRON schedule after creating/updating an association.
+
 1.79.0 (2020-05-28)
 ------------------
 

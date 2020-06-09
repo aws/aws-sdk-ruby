@@ -1260,8 +1260,11 @@ module Aws::ServiceCatalog
     #
     #   Name
     #
-    #   : The name of the AWS Systems Manager Document. For example,
-    #     `AWS-RestartEC2Instance`.
+    #   : The name of the AWS Systems Manager document (SSM document). For
+    #     example, `AWS-RestartEC2Instance`.
+    #
+    #     If you are using a shared SSM document, you must provide the ARN
+    #     instead of the name.
     #
     #   Version
     #
@@ -1880,7 +1883,8 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
+    #         id: "Id",
+    #         name: "ProductViewName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1897,11 +1901,16 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The product name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminInput AWS API Documentation
     #
     class DescribeProductAsAdminInput < Struct.new(
       :accept_language,
-      :id)
+      :id,
+      :name)
       include Aws::Structure
     end
 
@@ -1942,7 +1951,8 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         id: "Id", # required
+    #         id: "Id",
+    #         name: "ProductViewName",
     #       }
     #
     # @!attribute [rw] accept_language
@@ -1959,11 +1969,16 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] name
+    #   The product name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductInput AWS API Documentation
     #
     class DescribeProductInput < Struct.new(
       :accept_language,
-      :id)
+      :id,
+      :name)
       include Aws::Structure
     end
 
@@ -1980,12 +1995,17 @@ module Aws::ServiceCatalog
     #   Information about the associated budgets.
     #   @return [Array<Types::BudgetDetail>]
     #
+    # @!attribute [rw] launch_paths
+    #   Information about the associated launch paths.
+    #   @return [Array<Types::LaunchPath>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductOutput AWS API Documentation
     #
     class DescribeProductOutput < Struct.new(
       :product_view_summary,
       :provisioning_artifacts,
-      :budgets)
+      :budgets,
+      :launch_paths)
       include Aws::Structure
     end
 
@@ -2153,8 +2173,10 @@ module Aws::ServiceCatalog
     #
     #       {
     #         accept_language: "AcceptLanguage",
-    #         provisioning_artifact_id: "Id", # required
-    #         product_id: "Id", # required
+    #         provisioning_artifact_id: "Id",
+    #         product_id: "Id",
+    #         provisioning_artifact_name: "ProvisioningArtifactName",
+    #         product_name: "ProductViewName",
     #         verbose: false,
     #       }
     #
@@ -2176,6 +2198,14 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @!attribute [rw] provisioning_artifact_name
+    #   The provisioning artifact name.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_name
+    #   The product name.
+    #   @return [String]
+    #
     # @!attribute [rw] verbose
     #   Indicates whether a verbose level of detail is enabled.
     #   @return [Boolean]
@@ -2186,6 +2216,8 @@ module Aws::ServiceCatalog
       :accept_language,
       :provisioning_artifact_id,
       :product_id,
+      :provisioning_artifact_name,
+      :product_name,
       :verbose)
       include Aws::Structure
     end
@@ -2899,6 +2931,24 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidStateException AWS API Documentation
     #
     class InvalidStateException < Aws::EmptyStructure; end
+
+    # A launch path object.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the launch path.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the launch path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPath AWS API Documentation
+    #
+    class LaunchPath < Struct.new(
+      :id,
+      :name)
+      include Aws::Structure
+    end
 
     # Summary information about a product path for a user.
     #
@@ -6690,9 +6740,9 @@ module Aws::ServiceCatalog
     #   A map that contains the provisioned product properties to be
     #   updated.
     #
-    #   The `OWNER` key only accepts user ARNs. The owner is the user that
-    #   is allowed to see, update, terminate, and execute service actions in
-    #   the provisioned product.
+    #   The `OWNER` key accepts user ARNs and role ARNs. The owner is the
+    #   user that is allowed to see, update, terminate, and execute service
+    #   actions in the provisioned product.
     #
     #   The administrator can change the owner of a provisioned product to
     #   another IAM user within the same account. Both end user owners and

@@ -236,6 +236,7 @@ module Aws::APIGateway
     TestInvokeMethodResponse = Shapes::StructureShape.new(name: 'TestInvokeMethodResponse')
     ThrottleSettings = Shapes::StructureShape.new(name: 'ThrottleSettings')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TlsConfig = Shapes::StructureShape.new(name: 'TlsConfig')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedCacheControlHeaderStrategy = Shapes::StringShape.new(name: 'UnauthorizedCacheControlHeaderStrategy')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -915,6 +916,7 @@ module Aws::APIGateway
     Integration.add_member(:cache_namespace, Shapes::ShapeRef.new(shape: String, location_name: "cacheNamespace"))
     Integration.add_member(:cache_key_parameters, Shapes::ShapeRef.new(shape: ListOfString, location_name: "cacheKeyParameters"))
     Integration.add_member(:integration_responses, Shapes::ShapeRef.new(shape: MapOfIntegrationResponse, location_name: "integrationResponses"))
+    Integration.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     Integration.struct_class = Types::Integration
 
     IntegrationResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location_name: "statusCode"))
@@ -1092,6 +1094,7 @@ module Aws::APIGateway
     PutIntegrationRequest.add_member(:cache_key_parameters, Shapes::ShapeRef.new(shape: ListOfString, location_name: "cacheKeyParameters"))
     PutIntegrationRequest.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
     PutIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "timeoutInMillis"))
+    PutIntegrationRequest.add_member(:tls_config, Shapes::ShapeRef.new(shape: TlsConfig, location_name: "tlsConfig"))
     PutIntegrationRequest.struct_class = Types::PutIntegrationRequest
 
     PutIntegrationResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -1283,6 +1286,9 @@ module Aws::APIGateway
     ThrottleSettings.add_member(:burst_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "burstLimit"))
     ThrottleSettings.add_member(:rate_limit, Shapes::ShapeRef.new(shape: Double, location_name: "rateLimit"))
     ThrottleSettings.struct_class = Types::ThrottleSettings
+
+    TlsConfig.add_member(:insecure_skip_verification, Shapes::ShapeRef.new(shape: Boolean, location_name: "insecureSkipVerification"))
+    TlsConfig.struct_class = Types::TlsConfig
 
     TooManyRequestsException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Retry-After"))
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))

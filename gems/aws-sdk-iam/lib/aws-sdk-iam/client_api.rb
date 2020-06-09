@@ -11,6 +11,7 @@ module Aws::IAM
 
     include Seahorse::Model
 
+    AccessAdvisorUsageGranularityType = Shapes::StringShape.new(name: 'AccessAdvisorUsageGranularityType')
     AccessDetail = Shapes::StructureShape.new(name: 'AccessDetail')
     AccessDetails = Shapes::ListShape.new(name: 'AccessDetails')
     AccessKey = Shapes::StructureShape.new(name: 'AccessKey')
@@ -320,6 +321,8 @@ module Aws::IAM
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagRoleRequest = Shapes::StructureShape.new(name: 'TagRoleRequest')
     TagUserRequest = Shapes::StructureShape.new(name: 'TagUserRequest')
+    TrackedActionLastAccessed = Shapes::StructureShape.new(name: 'TrackedActionLastAccessed')
+    TrackedActionsLastAccessed = Shapes::ListShape.new(name: 'TrackedActionsLastAccessed')
     UnmodifiableEntityException = Shapes::StructureShape.new(name: 'UnmodifiableEntityException')
     UnrecognizedPublicKeyEncodingException = Shapes::StructureShape.new(name: 'UnrecognizedPublicKeyEncodingException')
     UntagRoleRequest = Shapes::StructureShape.new(name: 'UntagRoleRequest')
@@ -833,6 +836,7 @@ module Aws::IAM
     GenerateOrganizationsAccessReportResponse.struct_class = Types::GenerateOrganizationsAccessReportResponse
 
     GenerateServiceLastAccessedDetailsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
+    GenerateServiceLastAccessedDetailsRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: AccessAdvisorUsageGranularityType, location_name: "Granularity"))
     GenerateServiceLastAccessedDetailsRequest.struct_class = Types::GenerateServiceLastAccessedDetailsRequest
 
     GenerateServiceLastAccessedDetailsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: jobIDType, location_name: "JobId"))
@@ -993,6 +997,7 @@ module Aws::IAM
     GetServiceLastAccessedDetailsRequest.struct_class = Types::GetServiceLastAccessedDetailsRequest
 
     GetServiceLastAccessedDetailsResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: jobStatusType, required: true, location_name: "JobStatus"))
+    GetServiceLastAccessedDetailsResponse.add_member(:job_type, Shapes::ShapeRef.new(shape: AccessAdvisorUsageGranularityType, location_name: "JobType"))
     GetServiceLastAccessedDetailsResponse.add_member(:job_creation_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "JobCreationDate"))
     GetServiceLastAccessedDetailsResponse.add_member(:services_last_accessed, Shapes::ShapeRef.new(shape: ServicesLastAccessed, required: true, location_name: "ServicesLastAccessed"))
     GetServiceLastAccessedDetailsResponse.add_member(:job_completion_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "JobCompletionDate"))
@@ -1626,7 +1631,9 @@ module Aws::IAM
     ServiceLastAccessed.add_member(:last_authenticated, Shapes::ShapeRef.new(shape: dateType, location_name: "LastAuthenticated"))
     ServiceLastAccessed.add_member(:service_namespace, Shapes::ShapeRef.new(shape: serviceNamespaceType, required: true, location_name: "ServiceNamespace"))
     ServiceLastAccessed.add_member(:last_authenticated_entity, Shapes::ShapeRef.new(shape: arnType, location_name: "LastAuthenticatedEntity"))
+    ServiceLastAccessed.add_member(:last_authenticated_region, Shapes::ShapeRef.new(shape: stringType, location_name: "LastAuthenticatedRegion"))
     ServiceLastAccessed.add_member(:total_authenticated_entities, Shapes::ShapeRef.new(shape: integerType, location_name: "TotalAuthenticatedEntities"))
+    ServiceLastAccessed.add_member(:tracked_actions_last_accessed, Shapes::ShapeRef.new(shape: TrackedActionsLastAccessed, location_name: "TrackedActionsLastAccessed"))
     ServiceLastAccessed.struct_class = Types::ServiceLastAccessed
 
     ServiceNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: serviceNotSupportedMessage, location_name: "message"))
@@ -1720,6 +1727,14 @@ module Aws::IAM
     TagUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     TagUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: tagListType, required: true, location_name: "Tags"))
     TagUserRequest.struct_class = Types::TagUserRequest
+
+    TrackedActionLastAccessed.add_member(:action_name, Shapes::ShapeRef.new(shape: stringType, location_name: "ActionName"))
+    TrackedActionLastAccessed.add_member(:last_accessed_entity, Shapes::ShapeRef.new(shape: arnType, location_name: "LastAccessedEntity"))
+    TrackedActionLastAccessed.add_member(:last_accessed_time, Shapes::ShapeRef.new(shape: dateType, location_name: "LastAccessedTime"))
+    TrackedActionLastAccessed.add_member(:last_accessed_region, Shapes::ShapeRef.new(shape: stringType, location_name: "LastAccessedRegion"))
+    TrackedActionLastAccessed.struct_class = Types::TrackedActionLastAccessed
+
+    TrackedActionsLastAccessed.member = Shapes::ShapeRef.new(shape: TrackedActionLastAccessed)
 
     UnmodifiableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: unmodifiableEntityMessage, location_name: "message"))
     UnmodifiableEntityException.struct_class = Types::UnmodifiableEntityException

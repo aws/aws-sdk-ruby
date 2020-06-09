@@ -15,6 +15,12 @@ module Aws::ServiceDiscovery
     #         name: "NamespaceName", # required
     #         creator_request_id: "ResourceId",
     #         description: "ResourceDescription",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -35,12 +41,20 @@ module Aws::ServiceDiscovery
     #   A description for the namespace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to the namespace. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespaceRequest AWS API Documentation
     #
     class CreateHttpNamespaceRequest < Struct.new(
       :name,
       :creator_request_id,
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -69,6 +83,12 @@ module Aws::ServiceDiscovery
     #         creator_request_id: "ResourceId",
     #         description: "ResourceDescription",
     #         vpc: "ResourceId", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -97,13 +117,21 @@ module Aws::ServiceDiscovery
     #   with.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to the namespace. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespaceRequest AWS API Documentation
     #
     class CreatePrivateDnsNamespaceRequest < Struct.new(
       :name,
       :creator_request_id,
       :description,
-      :vpc)
+      :vpc,
+      :tags)
       include Aws::Structure
     end
 
@@ -131,6 +159,12 @@ module Aws::ServiceDiscovery
     #         name: "NamespaceName", # required
     #         creator_request_id: "ResourceId",
     #         description: "ResourceDescription",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -151,12 +185,20 @@ module Aws::ServiceDiscovery
     #   A description for the namespace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to the namespace. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePublicDnsNamespaceRequest AWS API Documentation
     #
     class CreatePublicDnsNamespaceRequest < Struct.new(
       :name,
       :creator_request_id,
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -203,6 +245,12 @@ module Aws::ServiceDiscovery
     #         health_check_custom_config: {
     #           failure_threshold: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -280,6 +328,13 @@ module Aws::ServiceDiscovery
     #   configuration from an existing service.
     #   @return [Types::HealthCheckCustomConfig]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to the service. Each tag consists of a key and an
+    #   optional value, both of which you define. Tag keys can have a
+    #   maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -289,7 +344,8 @@ module Aws::ServiceDiscovery
       :description,
       :dns_config,
       :health_check_config,
-      :health_check_custom_config)
+      :health_check_custom_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -1789,6 +1845,36 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tags for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags that are assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about a specified namespace.
     #
     # @!attribute [rw] id
@@ -2383,7 +2469,9 @@ module Aws::ServiceDiscovery
     #
     #   You can add up to 30 custom attributes. For each key-value pair, the
     #   maximum length of the attribute name is 255 characters, and the
-    #   maximum length of the attribute value is 1,024 characters.
+    #   maximum length of the attribute value is 1,024 characters. Total
+    #   size of all provided attributes (sum of all keys and values) must
+    #   not exceed 5,000 characters.
     #
     #
     #
@@ -2417,6 +2505,19 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # The operation can't be completed because you've reached the limit on
+    # the number of requests.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/RequestLimitExceeded AWS API Documentation
+    #
+    class RequestLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The specified resource can't be deleted because it contains other
     # resources. For example, you can't delete a service that contains any
     # instances.
@@ -2440,6 +2541,18 @@ module Aws::ServiceDiscovery
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ResourceLimitExceeded AWS API Documentation
     #
     class ResourceLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The operation can't be completed because the resource was not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -2564,7 +2677,7 @@ module Aws::ServiceDiscovery
     #
     #       {
     #         description: "ResourceDescription",
-    #         dns_config: { # required
+    #         dns_config: {
     #           dns_records: [ # required
     #             {
     #               type: "SRV", # required, accepts SRV, A, AAAA, CNAME
@@ -2912,6 +3025,117 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # A custom key-value pair associated with a resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key identifier, or name, of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The string value that's associated with the key of the tag. You can
+    #   set the value of a tag to an empty string, but you can't set the
+    #   value of a tag to null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the specified resource. Specifying the tag key is
+    #   required. You can set the value of a tag to an empty string, but you
+    #   can't set the value of a tag to null.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The list of tags on the resource is over the limit. The maximum number
+    # of tags that can be applied to a resource is 50.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   retrieve tags for.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys to remove from the specified resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateInstanceCustomHealthStatusRequest
     #   data as a hash:
     #
@@ -2951,7 +3175,7 @@ module Aws::ServiceDiscovery
     #         id: "ResourceId", # required
     #         service: { # required
     #           description: "ResourceDescription",
-    #           dns_config: { # required
+    #           dns_config: {
     #             dns_records: [ # required
     #               {
     #                 type: "SRV", # required, accepts SRV, A, AAAA, CNAME
