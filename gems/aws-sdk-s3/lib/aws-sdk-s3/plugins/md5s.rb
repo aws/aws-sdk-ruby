@@ -3,20 +3,15 @@ require 'openssl'
 module Aws
   module S3
     module Plugins
+      # @api private
+      # This plugin is effectively deprecated in favor of modeled
+      # httpChecksumRequired traits.
       class Md5s < Seahorse::Client::Plugin
-
-        # Amazon S3 requires these operations to have an MD5 checksum
-        REQUIRED_OPERATIONS = [
-          :delete_objects,
-          :put_bucket_cors,
-          :put_bucket_lifecycle,
-          :put_bucket_lifecycle_configuration,
-          :put_bucket_policy,
-          :put_bucket_replication,
-          :put_bucket_tagging,
-          :put_object_legal_hold,
-          :put_object_lock_configuration,
-          :put_object_retention
+        # These operations allow Content MD5 but are not required by
+        # httpChecksumRequired. This list should not grow.
+        OPTIONAL_OPERATIONS = [
+          :put_object,
+          :upload_part
         ]
 
         # @api private
@@ -63,20 +58,22 @@ module Aws
           default: true,
           doc_type: 'Boolean',
           docstring: <<-DOCS)
-When `true` a MD5 checksum will be computed for every request that
-sends a body.  When `false`, MD5 checksums will only be computed
-for operations that require them.  Checksum errors returned by Amazon
-S3 are automatically retried up to `:retry_limit` times.
+When `true` a MD5 checksum will be computed and sent in the Content Md5
+header for :put_object and :upload_part. When `false`, MD5 checksums
+will not be computed for these operations. Checksums are still computed
+for operations requiring them. Checksum errors returned by Amazon S3 are
+automatically retried up to `:retry_limit` times.
           DOCS
 
         def add_handlers(handlers, config)
-          # priority set low to ensure md5 is computed AFTER the request is
-          # built but before it is signed
-          handlers.add(Handler, {
-            priority: 10,
-            step: :build,
-            operations: config.compute_checksums ? nil : REQUIRED_OPERATIONS,
-          })
+          if config.compute_checksums
+            # priority set low to ensure md5 is computed AFTER the request is
+            # built but before it is signed
+            handlers.add(
+              Handler,
+              priority: 10, step: :build, operations: OPTIONAL_OPERATIONS
+            )
+          end
         end
 
       end
