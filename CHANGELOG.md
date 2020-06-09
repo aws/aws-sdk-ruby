@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.524 (2020-06-09)
+------------------
+
 * Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer Family.
 
 2.11.523 (2020-06-08)
