@@ -2,6 +2,7 @@ Unreleased Changes
 ------------------
 
 * Feature - Support `httpChecksumRequired` on operations that require Content MD5 validation.
+* Issue - Validate `:region` as a valid DNS host label.
 
 3.98.0 (2020-06-05)
 ------------------
