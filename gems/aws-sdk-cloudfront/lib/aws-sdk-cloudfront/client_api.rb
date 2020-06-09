@@ -1138,6 +1138,8 @@ module Aws::CloudFront
     Origin.add_member(:custom_headers, Shapes::ShapeRef.new(shape: CustomHeaders, location_name: "CustomHeaders"))
     Origin.add_member(:s3_origin_config, Shapes::ShapeRef.new(shape: S3OriginConfig, location_name: "S3OriginConfig"))
     Origin.add_member(:custom_origin_config, Shapes::ShapeRef.new(shape: CustomOriginConfig, location_name: "CustomOriginConfig"))
+    Origin.add_member(:connection_attempts, Shapes::ShapeRef.new(shape: integer, location_name: "ConnectionAttempts"))
+    Origin.add_member(:connection_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "ConnectionTimeout"))
     Origin.struct_class = Types::Origin
 
     OriginCustomHeader.add_member(:header_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "HeaderName"))

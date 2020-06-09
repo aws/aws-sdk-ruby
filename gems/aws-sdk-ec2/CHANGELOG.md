@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2020-06-04)
+------------------
+
+* Feature - New C5a instances, the latest generation of EC2's compute-optimized instances featuring AMD's 2nd Generation EPYC processors. C5a instances offer up to 96 vCPUs, 192 GiB of instance memory, 20 Gbps in Network bandwidth; New G4dn.metal bare metal instance with 8 NVIDIA T4 GPUs.
+
 1.164.0 (2020-05-28)
 ------------------
 

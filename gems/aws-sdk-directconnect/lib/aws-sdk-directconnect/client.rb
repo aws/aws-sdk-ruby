@@ -1966,6 +1966,15 @@ module Aws::DirectConnect
     # Connecting the private virtual interface to a VGW only provides access
     # to a single VPC within the same Region.
     #
+    # Setting the MTU of a virtual interface to 9001 (jumbo frames) can
+    # cause an update to the underlying physical connection if it wasn't
+    # updated to support jumbo frames. Updating the connection disrupts
+    # network connectivity for all virtual interfaces associated with the
+    # connection for up to 30 seconds. To check whether your connection
+    # supports jumbo frames, call DescribeConnections. To check whether your
+    # virtual interface supports jumbo frames, call
+    # DescribeVirtualInterfaces.
+    #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
     #
@@ -2197,6 +2206,15 @@ module Aws::DirectConnect
     # gateway and the Direct Connect gateway must be different. For example,
     # if you use the default ASN 64512 for both your the transit gateway and
     # Direct Connect gateway, the association request fails.
+    #
+    # Setting the MTU of a virtual interface to 8500 (jumbo frames) can
+    # cause an update to the underlying physical connection if it wasn't
+    # updated to support jumbo frames. Updating the connection disrupts
+    # network connectivity for all virtual interfaces associated with the
+    # connection for up to 30 seconds. To check whether your connection
+    # supports jumbo frames, call DescribeConnections. To check whether your
+    # virtual interface supports jumbo frames, call
+    # DescribeVirtualInterfaces.
     #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
@@ -3612,6 +3630,173 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Lists the virtual interface failover test history.
+    #
+    # @option params [String] :test_id
+    #   The ID of the virtual interface failover test.
+    #
+    # @option params [String] :virtual_interface_id
+    #   The ID of the virtual interface that was tested.
+    #
+    # @option params [Array<String>] :bgp_peers
+    #   The BGP peers that were placed in the DOWN state during the virtual
+    #   interface failover test.
+    #
+    # @option params [String] :status
+    #   The status of the virtual interface failover test.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If `MaxResults` is given a value larger than 100, only 100 results are
+    #   returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListVirtualInterfaceTestHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVirtualInterfaceTestHistoryResponse#virtual_interface_test_history #virtual_interface_test_history} => Array&lt;Types::VirtualInterfaceTestHistory&gt;
+    #   * {Types::ListVirtualInterfaceTestHistoryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_virtual_interface_test_history({
+    #     test_id: "TestId",
+    #     virtual_interface_id: "VirtualInterfaceId",
+    #     bgp_peers: ["BGPPeerId"],
+    #     status: "FailureTestHistoryStatus",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_test_history #=> Array
+    #   resp.virtual_interface_test_history[0].test_id #=> String
+    #   resp.virtual_interface_test_history[0].virtual_interface_id #=> String
+    #   resp.virtual_interface_test_history[0].bgp_peers #=> Array
+    #   resp.virtual_interface_test_history[0].bgp_peers[0] #=> String
+    #   resp.virtual_interface_test_history[0].status #=> String
+    #   resp.virtual_interface_test_history[0].owner_account #=> String
+    #   resp.virtual_interface_test_history[0].test_duration_in_minutes #=> Integer
+    #   resp.virtual_interface_test_history[0].start_time #=> Time
+    #   resp.virtual_interface_test_history[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ListVirtualInterfaceTestHistory AWS API Documentation
+    #
+    # @overload list_virtual_interface_test_history(params = {})
+    # @param [Hash] params ({})
+    def list_virtual_interface_test_history(params = {}, options = {})
+      req = build_request(:list_virtual_interface_test_history, params)
+      req.send_request(options)
+    end
+
+    # Starts the virtual interface failover test that verifies your
+    # configuration meets your resiliency requirements by placing the BGP
+    # peering session in the DOWN state. You can then send traffic to verify
+    # that there are no outages.
+    #
+    # You can run the test on public, private, transit, and hosted virtual
+    # interfaces.
+    #
+    # You can use [ListVirtualInterfaceTestHistory][1] to view the virtual
+    # interface test history.
+    #
+    # If you need to stop the test before the test interval completes, use
+    # [StopBgpFailoverTest][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html
+    # [2]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface you want to test.
+    #
+    # @option params [Array<String>] :bgp_peers
+    #   The BGP peers to place in the DOWN state.
+    #
+    # @option params [Integer] :test_duration_in_minutes
+    #   The time in minutes that the virtual interface failover test will
+    #   last.
+    #
+    #   Maximum value: 180 minutes (3 hours).
+    #
+    #   Default: 180 minutes (3 hours).
+    #
+    # @return [Types::StartBgpFailoverTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBgpFailoverTestResponse#virtual_interface_test #virtual_interface_test} => Types::VirtualInterfaceTestHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bgp_failover_test({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #     bgp_peers: ["BGPPeerId"],
+    #     test_duration_in_minutes: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_test.test_id #=> String
+    #   resp.virtual_interface_test.virtual_interface_id #=> String
+    #   resp.virtual_interface_test.bgp_peers #=> Array
+    #   resp.virtual_interface_test.bgp_peers[0] #=> String
+    #   resp.virtual_interface_test.status #=> String
+    #   resp.virtual_interface_test.owner_account #=> String
+    #   resp.virtual_interface_test.test_duration_in_minutes #=> Integer
+    #   resp.virtual_interface_test.start_time #=> Time
+    #   resp.virtual_interface_test.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StartBgpFailoverTest AWS API Documentation
+    #
+    # @overload start_bgp_failover_test(params = {})
+    # @param [Hash] params ({})
+    def start_bgp_failover_test(params = {}, options = {})
+      req = build_request(:start_bgp_failover_test, params)
+      req.send_request(options)
+    end
+
+    # Stops the virtual interface failover test.
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface you no longer want to test.
+    #
+    # @return [Types::StopBgpFailoverTestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopBgpFailoverTestResponse#virtual_interface_test #virtual_interface_test} => Types::VirtualInterfaceTestHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_bgp_failover_test({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.virtual_interface_test.test_id #=> String
+    #   resp.virtual_interface_test.virtual_interface_id #=> String
+    #   resp.virtual_interface_test.bgp_peers #=> Array
+    #   resp.virtual_interface_test.bgp_peers[0] #=> String
+    #   resp.virtual_interface_test.status #=> String
+    #   resp.virtual_interface_test.owner_account #=> String
+    #   resp.virtual_interface_test.test_duration_in_minutes #=> Integer
+    #   resp.virtual_interface_test.start_time #=> Time
+    #   resp.virtual_interface_test.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/StopBgpFailoverTest AWS API Documentation
+    #
+    # @overload stop_bgp_failover_test(params = {})
+    # @param [Hash] params ({})
+    def stop_bgp_failover_test(params = {}, options = {})
+      req = build_request(:stop_bgp_failover_test, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified AWS Direct Connect resource.
     # Each resource can have a maximum of 50 tags.
     #
@@ -3850,7 +4035,7 @@ module Aws::DirectConnect
     # network connectivity for all virtual interfaces associated with the
     # connection for up to 30 seconds. To check whether your connection
     # supports jumbo frames, call DescribeConnections. To check whether your
-    # virtual interface supports jumbo frames, call
+    # virtual q interface supports jumbo frames, call
     # DescribeVirtualInterfaces.
     #
     # @option params [required, String] :virtual_interface_id
@@ -3955,7 +4140,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

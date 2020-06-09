@@ -308,6 +308,41 @@ module Aws::ElasticsearchService
 
     # @!group API Operations
 
+    # Allows the destination domain owner to accept an inbound cross-cluster
+    # search connection request.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to accept.
+    #
+    # @return [Types::AcceptInboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptInboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::InboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_inbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload accept_inbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def accept_inbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:accept_inbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
     # Attaches tags to an existing Elasticsearch domain. Tags are a set of
     # case-sensitive key value pairs. An Elasticsearch domain may have up to
     # 10 tags. See [ Tagging Amazon Elasticsearch Service Domains for more
@@ -646,6 +681,64 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Creates a new cross-cluster search connection from a source domain to
+    # a destination domain.
+    #
+    # @option params [required, Types::DomainInformation] :source_domain_info
+    #   Specifies the `DomainInformation` for the source Elasticsearch domain.
+    #
+    # @option params [required, Types::DomainInformation] :destination_domain_info
+    #   Specifies the `DomainInformation` for the destination Elasticsearch
+    #   domain.
+    #
+    # @option params [required, String] :connection_alias
+    #   Specifies the connection alias that will be used by the customer for
+    #   this connection.
+    #
+    # @return [Types::CreateOutboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#source_domain_info #source_domain_info} => Types::DomainInformation
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#destination_domain_info #destination_domain_info} => Types::DomainInformation
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#connection_alias #connection_alias} => String
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#connection_status #connection_status} => Types::OutboundCrossClusterSearchConnectionStatus
+    #   * {Types::CreateOutboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection_id #cross_cluster_search_connection_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_outbound_cross_cluster_search_connection({
+    #     source_domain_info: { # required
+    #       owner_id: "OwnerId",
+    #       domain_name: "DomainName", # required
+    #       region: "Region",
+    #     },
+    #     destination_domain_info: { # required
+    #       owner_id: "OwnerId",
+    #       domain_name: "DomainName", # required
+    #       region: "Region",
+    #     },
+    #     connection_alias: "ConnectionAlias", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_domain_info.owner_id #=> String
+    #   resp.source_domain_info.domain_name #=> String
+    #   resp.source_domain_info.region #=> String
+    #   resp.destination_domain_info.owner_id #=> String
+    #   resp.destination_domain_info.domain_name #=> String
+    #   resp.destination_domain_info.region #=> String
+    #   resp.connection_alias #=> String
+    #   resp.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "VALIDATING", "VALIDATION_FAILED", "PROVISIONING", "ACTIVE", "REJECTED", "DELETING", "DELETED"
+    #   resp.connection_status.message #=> String
+    #   resp.cross_cluster_search_connection_id #=> String
+    #
+    # @overload create_outbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def create_outbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:create_outbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
     # Create a package for use with Amazon ES domains.
     #
     # @option params [required, String] :package_name
@@ -796,6 +889,77 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def delete_elasticsearch_service_role(params = {}, options = {})
       req = build_request(:delete_elasticsearch_service_role, params)
+      req.send_request(options)
+    end
+
+    # Allows the destination domain owner to delete an existing inbound
+    # cross-cluster search connection.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to permanently delete.
+    #
+    # @return [Types::DeleteInboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::InboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload delete_inbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_inbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:delete_inbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
+    # Allows the source domain owner to delete an existing outbound
+    # cross-cluster search connection.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the outbound connection that you want to permanently delete.
+    #
+    # @return [Types::DeleteOutboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteOutboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::OutboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_outbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_alias #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "VALIDATING", "VALIDATION_FAILED", "PROVISIONING", "ACTIVE", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload delete_outbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def delete_outbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:delete_outbound_cross_cluster_search_connection, params)
       req.send_request(options)
     end
 
@@ -1185,6 +1349,129 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def describe_elasticsearch_instance_type_limits(params = {}, options = {})
       req = build_request(:describe_elasticsearch_instance_type_limits, params)
+      req.send_request(options)
+    end
+
+    # Lists all the inbound cross-cluster search connections for a
+    # destination domain.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A list of filters used to match properties for inbound cross-cluster
+    #   search connection. Available `Filter` names for this operation are: *
+    #   cross-cluster-search-connection-id
+    #   * source-domain-info.domain-name
+    #   * source-domain-info.owner-id
+    #   * source-domain-info.region
+    #   * destination-domain-info.domain-name
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #
+    # @option params [String] :next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #
+    # @return [Types::DescribeInboundCrossClusterSearchConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInboundCrossClusterSearchConnectionsResponse#cross_cluster_search_connections #cross_cluster_search_connections} => Array&lt;Types::InboundCrossClusterSearchConnection&gt;
+    #   * {Types::DescribeInboundCrossClusterSearchConnectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inbound_cross_cluster_search_connections({
+    #     filters: [
+    #       {
+    #         name: "NonEmptyString",
+    #         values: ["NonEmptyString"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connections #=> Array
+    #   resp.cross_cluster_search_connections[0].source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connections[0].connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connections[0].connection_status.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_inbound_cross_cluster_search_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_inbound_cross_cluster_search_connections(params = {}, options = {})
+      req = build_request(:describe_inbound_cross_cluster_search_connections, params)
+      req.send_request(options)
+    end
+
+    # Lists all the outbound cross-cluster search connections for a source
+    # domain.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A list of filters used to match properties for outbound cross-cluster
+    #   search connection. Available `Filter` names for this operation are: *
+    #   cross-cluster-search-connection-id
+    #   * destination-domain-info.domain-name
+    #   * destination-domain-info.owner-id
+    #   * destination-domain-info.region
+    #   * source-domain-info.domain-name
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #
+    # @option params [String] :next_token
+    #   NextToken is sent in case the earlier API call results contain the
+    #   NextToken. It is used for pagination.
+    #
+    # @return [Types::DescribeOutboundCrossClusterSearchConnectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOutboundCrossClusterSearchConnectionsResponse#cross_cluster_search_connections #cross_cluster_search_connections} => Array&lt;Types::OutboundCrossClusterSearchConnection&gt;
+    #   * {Types::DescribeOutboundCrossClusterSearchConnectionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_outbound_cross_cluster_search_connections({
+    #     filters: [
+    #       {
+    #         name: "NonEmptyString",
+    #         values: ["NonEmptyString"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connections #=> Array
+    #   resp.cross_cluster_search_connections[0].source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connections[0].destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connections[0].cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connections[0].connection_alias #=> String
+    #   resp.cross_cluster_search_connections[0].connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "VALIDATING", "VALIDATION_FAILED", "PROVISIONING", "ACTIVE", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connections[0].connection_status.message #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_outbound_cross_cluster_search_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_outbound_cross_cluster_search_connections(params = {}, options = {})
+      req = build_request(:describe_outbound_cross_cluster_search_connections, params)
       req.send_request(options)
     end
 
@@ -1782,6 +2069,41 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Allows the destination domain owner to reject an inbound cross-cluster
+    # search connection request.
+    #
+    # @option params [required, String] :cross_cluster_search_connection_id
+    #   The id of the inbound connection that you want to reject.
+    #
+    # @return [Types::RejectInboundCrossClusterSearchConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectInboundCrossClusterSearchConnectionResponse#cross_cluster_search_connection #cross_cluster_search_connection} => Types::InboundCrossClusterSearchConnection
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_inbound_cross_cluster_search_connection({
+    #     cross_cluster_search_connection_id: "CrossClusterSearchConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cross_cluster_search_connection.source_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.source_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.owner_id #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.domain_name #=> String
+    #   resp.cross_cluster_search_connection.destination_domain_info.region #=> String
+    #   resp.cross_cluster_search_connection.cross_cluster_search_connection_id #=> String
+    #   resp.cross_cluster_search_connection.connection_status.status_code #=> String, one of "PENDING_ACCEPTANCE", "APPROVED", "REJECTING", "REJECTED", "DELETING", "DELETED"
+    #   resp.cross_cluster_search_connection.connection_status.message #=> String
+    #
+    # @overload reject_inbound_cross_cluster_search_connection(params = {})
+    # @param [Hash] params ({})
+    def reject_inbound_cross_cluster_search_connection(params = {}, options = {})
+      req = build_request(:reject_inbound_cross_cluster_search_connection, params)
+      req.send_request(options)
+    end
+
     # Removes the specified set of tags from the specified Elasticsearch
     # domain.
     #
@@ -2141,7 +2463,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

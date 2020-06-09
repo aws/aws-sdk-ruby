@@ -13,11 +13,13 @@ module Aws::GuardDuty
 
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
+    AccessControlList = Shapes::StructureShape.new(name: 'AccessControlList')
     AccessKeyDetails = Shapes::StructureShape.new(name: 'AccessKeyDetails')
     AccountDetail = Shapes::StructureShape.new(name: 'AccountDetail')
     AccountDetails = Shapes::ListShape.new(name: 'AccountDetails')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
+    AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
     Action = Shapes::StructureShape.new(name: 'Action')
     AdminAccount = Shapes::StructureShape.new(name: 'AdminAccount')
     AdminAccounts = Shapes::ListShape.new(name: 'AdminAccounts')
@@ -26,7 +28,10 @@ module Aws::GuardDuty
     ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
     AwsApiCallAction = Shapes::StructureShape.new(name: 'AwsApiCallAction')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BlockPublicAccess = Shapes::StructureShape.new(name: 'BlockPublicAccess')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketLevelPermissions = Shapes::StructureShape.new(name: 'BucketLevelPermissions')
+    BucketPolicy = Shapes::StructureShape.new(name: 'BucketPolicy')
     City = Shapes::StructureShape.new(name: 'City')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     Condition = Shapes::StructureShape.new(name: 'Condition')
@@ -49,6 +54,7 @@ module Aws::GuardDuty
     Criterion = Shapes::MapShape.new(name: 'Criterion')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
+    DefaultServerSideEncryption = Shapes::StructureShape.new(name: 'DefaultServerSideEncryption')
     DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
     DeleteDetectorResponse = Shapes::StructureShape.new(name: 'DeleteDetectorResponse')
     DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
@@ -174,6 +180,8 @@ module Aws::GuardDuty
     NotEquals = Shapes::ListShape.new(name: 'NotEquals')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
     Organization = Shapes::StructureShape.new(name: 'Organization')
+    Owner = Shapes::StructureShape.new(name: 'Owner')
+    PermissionConfiguration = Shapes::StructureShape.new(name: 'PermissionConfiguration')
     PortProbeAction = Shapes::StructureShape.new(name: 'PortProbeAction')
     PortProbeDetail = Shapes::StructureShape.new(name: 'PortProbeDetail')
     PortProbeDetails = Shapes::ListShape.new(name: 'PortProbeDetails')
@@ -181,10 +189,13 @@ module Aws::GuardDuty
     PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
     ProductCode = Shapes::StructureShape.new(name: 'ProductCode')
     ProductCodes = Shapes::ListShape.new(name: 'ProductCodes')
+    PublicAccess = Shapes::StructureShape.new(name: 'PublicAccess')
     PublishingStatus = Shapes::StringShape.new(name: 'PublishingStatus')
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
     RemotePortDetails = Shapes::StructureShape.new(name: 'RemotePortDetails')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    S3BucketDetail = Shapes::StructureShape.new(name: 'S3BucketDetail')
+    S3BucketDetails = Shapes::ListShape.new(name: 'S3BucketDetails')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Service = Shapes::StructureShape.new(name: 'Service')
@@ -208,6 +219,7 @@ module Aws::GuardDuty
     ThreatIntelligenceDetail = Shapes::StructureShape.new(name: 'ThreatIntelligenceDetail')
     ThreatIntelligenceDetails = Shapes::ListShape.new(name: 'ThreatIntelligenceDetails')
     ThreatNames = Shapes::ListShape.new(name: 'ThreatNames')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnarchiveFindingsRequest = Shapes::StructureShape.new(name: 'UnarchiveFindingsRequest')
     UnarchiveFindingsResponse = Shapes::StructureShape.new(name: 'UnarchiveFindingsResponse')
     UnprocessedAccount = Shapes::StructureShape.new(name: 'UnprocessedAccount')
@@ -236,6 +248,10 @@ module Aws::GuardDuty
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
 
+    AccessControlList.add_member(:allows_public_read_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowsPublicReadAccess"))
+    AccessControlList.add_member(:allows_public_write_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowsPublicWriteAccess"))
+    AccessControlList.struct_class = Types::AccessControlList
+
     AccessKeyDetails.add_member(:access_key_id, Shapes::ShapeRef.new(shape: String, location_name: "accessKeyId"))
     AccessKeyDetails.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "principalId"))
     AccessKeyDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: String, location_name: "userName"))
@@ -249,6 +265,9 @@ module Aws::GuardDuty
     AccountDetails.member = Shapes::ShapeRef.new(shape: AccountDetail)
 
     AccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    AccountLevelPermissions.add_member(:block_public_access, Shapes::ShapeRef.new(shape: BlockPublicAccess, location_name: "blockPublicAccess"))
+    AccountLevelPermissions.struct_class = Types::AccountLevelPermissions
 
     Action.add_member(:action_type, Shapes::ShapeRef.new(shape: String, location_name: "actionType"))
     Action.add_member(:aws_api_call_action, Shapes::ShapeRef.new(shape: AwsApiCallAction, location_name: "awsApiCallAction"))
@@ -279,6 +298,21 @@ module Aws::GuardDuty
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "__type"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    BlockPublicAccess.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Boolean, location_name: "ignorePublicAcls"))
+    BlockPublicAccess.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Boolean, location_name: "restrictPublicBuckets"))
+    BlockPublicAccess.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Boolean, location_name: "blockPublicAcls"))
+    BlockPublicAccess.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Boolean, location_name: "blockPublicPolicy"))
+    BlockPublicAccess.struct_class = Types::BlockPublicAccess
+
+    BucketLevelPermissions.add_member(:access_control_list, Shapes::ShapeRef.new(shape: AccessControlList, location_name: "accessControlList"))
+    BucketLevelPermissions.add_member(:bucket_policy, Shapes::ShapeRef.new(shape: BucketPolicy, location_name: "bucketPolicy"))
+    BucketLevelPermissions.add_member(:block_public_access, Shapes::ShapeRef.new(shape: BlockPublicAccess, location_name: "blockPublicAccess"))
+    BucketLevelPermissions.struct_class = Types::BucketLevelPermissions
+
+    BucketPolicy.add_member(:allows_public_read_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowsPublicReadAccess"))
+    BucketPolicy.add_member(:allows_public_write_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowsPublicWriteAccess"))
+    BucketPolicy.struct_class = Types::BucketPolicy
 
     City.add_member(:city_name, Shapes::ShapeRef.new(shape: String, location_name: "cityName"))
     City.struct_class = Types::City
@@ -380,6 +414,10 @@ module Aws::GuardDuty
 
     DeclineInvitationsResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: UnprocessedAccounts, required: true, location_name: "unprocessedAccounts"))
     DeclineInvitationsResponse.struct_class = Types::DeclineInvitationsResponse
+
+    DefaultServerSideEncryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: String, location_name: "encryptionType"))
+    DefaultServerSideEncryption.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsMasterKeyArn"))
+    DefaultServerSideEncryption.struct_class = Types::DefaultServerSideEncryption
 
     DeleteDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     DeleteDetectorRequest.struct_class = Types::DeleteDetectorRequest
@@ -794,6 +832,13 @@ module Aws::GuardDuty
     Organization.add_member(:org, Shapes::ShapeRef.new(shape: String, location_name: "org"))
     Organization.struct_class = Types::Organization
 
+    Owner.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    Owner.struct_class = Types::Owner
+
+    PermissionConfiguration.add_member(:bucket_level_permissions, Shapes::ShapeRef.new(shape: BucketLevelPermissions, location_name: "bucketLevelPermissions"))
+    PermissionConfiguration.add_member(:account_level_permissions, Shapes::ShapeRef.new(shape: AccountLevelPermissions, location_name: "accountLevelPermissions"))
+    PermissionConfiguration.struct_class = Types::PermissionConfiguration
+
     PortProbeAction.add_member(:blocked, Shapes::ShapeRef.new(shape: Boolean, location_name: "blocked"))
     PortProbeAction.add_member(:port_probe_details, Shapes::ShapeRef.new(shape: PortProbeDetails, location_name: "portProbeDetails"))
     PortProbeAction.struct_class = Types::PortProbeAction
@@ -817,6 +862,10 @@ module Aws::GuardDuty
 
     ProductCodes.member = Shapes::ShapeRef.new(shape: ProductCode)
 
+    PublicAccess.add_member(:permission_configuration, Shapes::ShapeRef.new(shape: PermissionConfiguration, location_name: "permissionConfiguration"))
+    PublicAccess.add_member(:effective_permission, Shapes::ShapeRef.new(shape: String, location_name: "effectivePermission"))
+    PublicAccess.struct_class = Types::PublicAccess
+
     RemoteIpDetails.add_member(:city, Shapes::ShapeRef.new(shape: City, location_name: "city"))
     RemoteIpDetails.add_member(:country, Shapes::ShapeRef.new(shape: Country, location_name: "country"))
     RemoteIpDetails.add_member(:geo_location, Shapes::ShapeRef.new(shape: GeoLocation, location_name: "geoLocation"))
@@ -829,9 +878,22 @@ module Aws::GuardDuty
     RemotePortDetails.struct_class = Types::RemotePortDetails
 
     Resource.add_member(:access_key_details, Shapes::ShapeRef.new(shape: AccessKeyDetails, location_name: "accessKeyDetails"))
+    Resource.add_member(:s3_bucket_details, Shapes::ShapeRef.new(shape: S3BucketDetails, location_name: "s3BucketDetails"))
     Resource.add_member(:instance_details, Shapes::ShapeRef.new(shape: InstanceDetails, location_name: "instanceDetails"))
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     Resource.struct_class = Types::Resource
+
+    S3BucketDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    S3BucketDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    S3BucketDetail.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    S3BucketDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    S3BucketDetail.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "owner"))
+    S3BucketDetail.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    S3BucketDetail.add_member(:default_server_side_encryption, Shapes::ShapeRef.new(shape: DefaultServerSideEncryption, location_name: "defaultServerSideEncryption"))
+    S3BucketDetail.add_member(:public_access, Shapes::ShapeRef.new(shape: PublicAccess, location_name: "publicAccess"))
+    S3BucketDetail.struct_class = Types::S3BucketDetail
+
+    S3BucketDetails.member = Shapes::ShapeRef.new(shape: S3BucketDetail)
 
     SecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     SecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))

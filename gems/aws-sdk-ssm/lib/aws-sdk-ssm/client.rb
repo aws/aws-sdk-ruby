@@ -703,6 +703,12 @@ module Aws::SSM
     #
     #   By default, all associations use `AUTO` mode.
     #
+    # @option params [Boolean] :apply_only_at_cron_interval
+    #   By default, when you create a new associations, the system runs it
+    #   immediately after it is created and then according to the schedule you
+    #   specified. Specify this option if you don't want an association to
+    #   run immediately after you create it.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -736,6 +742,7 @@ module Aws::SSM
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #     apply_only_at_cron_interval: false,
     #   })
     #
     # @example Response structure
@@ -774,6 +781,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -834,6 +842,7 @@ module Aws::SSM
     #         max_concurrency: "MaxConcurrency",
     #         compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #         sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #         apply_only_at_cron_interval: false,
     #       },
     #     ],
     #   })
@@ -875,6 +884,7 @@ module Aws::SSM
     #   resp.successful[0].max_concurrency #=> String
     #   resp.successful[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.successful[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.successful[0].apply_only_at_cron_interval #=> Boolean
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -896,6 +906,7 @@ module Aws::SSM
     #   resp.failed[0].entry.max_concurrency #=> String
     #   resp.failed[0].entry.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.failed[0].entry.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.failed[0].entry.apply_only_at_cron_interval #=> Boolean
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -2217,6 +2228,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -5815,6 +5827,7 @@ module Aws::SSM
     #   resp.association_versions[0].max_concurrency #=> String
     #   resp.association_versions[0].compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_versions[0].sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_versions[0].apply_only_at_cron_interval #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -8260,6 +8273,19 @@ module Aws::SSM
     #
     #   By default, all associations use `AUTO` mode.
     #
+    # @option params [Boolean] :apply_only_at_cron_interval
+    #   By default, when you update an association, the system runs it
+    #   immediately after it is updated and then according to the schedule you
+    #   specified. Specify this option if you don't want an association to
+    #   run immediately after you update it.
+    #
+    #   Also, if you specified this option when you created the association,
+    #   you can reset it. To do so, specify the
+    #   `no-apply-only-at-cron-interval` parameter when you update the
+    #   association from the command line. This parameter forces the
+    #   association to run immediately after updating it and according to the
+    #   interval specified.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -8294,6 +8320,7 @@ module Aws::SSM
     #     max_concurrency: "MaxConcurrency",
     #     compliance_severity: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, UNSPECIFIED
     #     sync_compliance: "AUTO", # accepts AUTO, MANUAL
+    #     apply_only_at_cron_interval: false,
     #   })
     #
     # @example Response structure
@@ -8332,6 +8359,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -8407,6 +8435,7 @@ module Aws::SSM
     #   resp.association_description.max_concurrency #=> String
     #   resp.association_description.compliance_severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "UNSPECIFIED"
     #   resp.association_description.sync_compliance #=> String, one of "AUTO", "MANUAL"
+    #   resp.association_description.apply_only_at_cron_interval #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -9506,7 +9535,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

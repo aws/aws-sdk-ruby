@@ -3005,6 +3005,7 @@ module Aws::IAM
     #
     #       {
     #         arn: "arnType", # required
+    #         granularity: "SERVICE_LEVEL", # accepts SERVICE_LEVEL, ACTION_LEVEL
     #       }
     #
     # @!attribute [rw] arn
@@ -3013,10 +3014,21 @@ module Aws::IAM
     #   in an attempt to access an AWS service.
     #   @return [String]
     #
+    # @!attribute [rw] granularity
+    #   The level of detail that you want to generate. You can specify
+    #   whether you want to generate information about the last attempt to
+    #   access services or actions. If you specify service-level
+    #   granularity, this operation generates only service data. If you
+    #   specify action-level granularity, it generates service and action
+    #   data. If you don't include this optional parameter, the operation
+    #   generates service data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateServiceLastAccessedDetailsRequest AWS API Documentation
     #
     class GenerateServiceLastAccessedDetailsRequest < Struct.new(
-      :arn)
+      :arn,
+      :granularity)
       include Aws::Structure
     end
 
@@ -4176,6 +4188,12 @@ module Aws::IAM
     #   The status of the job.
     #   @return [String]
     #
+    # @!attribute [rw] job_type
+    #   The type of job. Service jobs return information about when each
+    #   service was last accessed. Action jobs also include information
+    #   about when tracked actions within the service were last accessed.
+    #   @return [String]
+    #
     # @!attribute [rw] job_creation_date
     #   The date and time, in [ISO 8601 date-time format][1], when the
     #   report job was created.
@@ -4227,6 +4245,7 @@ module Aws::IAM
     #
     class GetServiceLastAccessedDetailsResponse < Struct.new(
       :job_status,
+      :job_type,
       :job_creation_date,
       :services_last_accessed,
       :job_completion_date,
@@ -9118,6 +9137,19 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [String]
     #
+    # @!attribute [rw] last_authenticated_region
+    #   The Region from which the authenticated entity (user or role) last
+    #   attempted to access the service. AWS does not report unauthenticated
+    #   requests.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
     # @!attribute [rw] total_authenticated_entities
     #   The total number of authenticated principals (root user, IAM users,
     #   or IAM roles) that have attempted to access the service.
@@ -9130,6 +9162,21 @@ module Aws::IAM
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
     #   @return [Integer]
     #
+    # @!attribute [rw] tracked_actions_last_accessed
+    #   An object that contains details about the most recent attempt to
+    #   access a tracked action within the service.
+    #
+    #   This field is null if there no tracked actions or if the principal
+    #   did not use the tracked actions within the [reporting period][1].
+    #   This field is also null if the report was generated at the service
+    #   level and not the action level. For more information, see the
+    #   `Granularity` field in GenerateServiceLastAccessedDetails.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Array<Types::TrackedActionLastAccessed>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceLastAccessed AWS API Documentation
     #
     class ServiceLastAccessed < Struct.new(
@@ -9137,7 +9184,9 @@ module Aws::IAM
       :last_authenticated,
       :service_namespace,
       :last_authenticated_entity,
-      :total_authenticated_entities)
+      :last_authenticated_region,
+      :total_authenticated_entities,
+      :tracked_actions_last_accessed)
       include Aws::Structure
     end
 
@@ -9716,7 +9765,7 @@ module Aws::IAM
     #   this operation. An IAM entity can only have one permissions boundary
     #   in effect at a time. For example, if a permissions boundary is
     #   attached to an entity and you pass in a different permissions
-    #   boundary policy using this parameter, then the new permission
+    #   boundary policy using this parameter, then the new permissions
     #   boundary policy is used for the simulation. For more information
     #   about permissions boundaries, see [Permissions Boundaries for IAM
     #   Entities][1] in the *IAM User Guide*. The policy input is specified
@@ -10079,6 +10128,66 @@ module Aws::IAM
     class TagUserRequest < Struct.new(
       :user_name,
       :tags)
+      include Aws::Structure
+    end
+
+    # Contains details about the most recent attempt to access an action
+    # within the service.
+    #
+    # This data type is used as a response element in the
+    # GetServiceLastAccessedDetails operation.
+    #
+    # @!attribute [rw] action_name
+    #   The name of the tracked action to which access was attempted.
+    #   Tracked actions are actions that report activity to IAM.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_accessed_entity
+    #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
+    #   resources.
+    #
+    #   For more information about ARNs, go to [Amazon Resource Names (ARNs)
+    #   and AWS Service Namespaces][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_accessed_time
+    #   The date and time, in [ISO 8601 date-time format][1], when an
+    #   authenticated entity most recently attempted to access the tracked
+    #   service. AWS does not report unauthenticated requests.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][2].
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_accessed_region
+    #   The Region from which the authenticated entity (user or role) last
+    #   attempted to access the tracked action. AWS does not report
+    #   unauthenticated requests.
+    #
+    #   This field is null if no IAM entities attempted to access the
+    #   service within the [reporting period][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/TrackedActionLastAccessed AWS API Documentation
+    #
+    class TrackedActionLastAccessed < Struct.new(
+      :action_name,
+      :last_accessed_entity,
+      :last_accessed_time,
+      :last_accessed_region)
       include Aws::Structure
     end
 

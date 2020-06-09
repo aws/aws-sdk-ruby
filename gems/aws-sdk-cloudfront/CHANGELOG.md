@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-06-05)
+------------------
+
+* Feature - Amazon CloudFront adds support for configurable origin connection attempts and origin connection timeout.
+
 1.28.0 (2020-05-28)
 ------------------
 

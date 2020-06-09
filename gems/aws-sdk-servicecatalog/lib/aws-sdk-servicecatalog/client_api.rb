@@ -169,8 +169,10 @@ module Aws::ServiceCatalog
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     LastRequestId = Shapes::StringShape.new(name: 'LastRequestId')
+    LaunchPath = Shapes::StructureShape.new(name: 'LaunchPath')
     LaunchPathSummaries = Shapes::ListShape.new(name: 'LaunchPathSummaries')
     LaunchPathSummary = Shapes::StructureShape.new(name: 'LaunchPathSummary')
+    LaunchPaths = Shapes::ListShape.new(name: 'LaunchPaths')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAcceptedPortfolioSharesInput = Shapes::StructureShape.new(name: 'ListAcceptedPortfolioSharesInput')
     ListAcceptedPortfolioSharesOutput = Shapes::StructureShape.new(name: 'ListAcceptedPortfolioSharesOutput')
@@ -746,7 +748,8 @@ module Aws::ServiceCatalog
     DescribePortfolioShareStatusOutput.struct_class = Types::DescribePortfolioShareStatusOutput
 
     DescribeProductAsAdminInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProductAsAdminInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DescribeProductAsAdminInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    DescribeProductAsAdminInput.add_member(:name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "Name"))
     DescribeProductAsAdminInput.struct_class = Types::DescribeProductAsAdminInput
 
     DescribeProductAsAdminOutput.add_member(:product_view_detail, Shapes::ShapeRef.new(shape: ProductViewDetail, location_name: "ProductViewDetail"))
@@ -757,12 +760,14 @@ module Aws::ServiceCatalog
     DescribeProductAsAdminOutput.struct_class = Types::DescribeProductAsAdminOutput
 
     DescribeProductInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
+    DescribeProductInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    DescribeProductInput.add_member(:name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "Name"))
     DescribeProductInput.struct_class = Types::DescribeProductInput
 
     DescribeProductOutput.add_member(:product_view_summary, Shapes::ShapeRef.new(shape: ProductViewSummary, location_name: "ProductViewSummary"))
     DescribeProductOutput.add_member(:provisioning_artifacts, Shapes::ShapeRef.new(shape: ProvisioningArtifacts, location_name: "ProvisioningArtifacts"))
     DescribeProductOutput.add_member(:budgets, Shapes::ShapeRef.new(shape: Budgets, location_name: "Budgets"))
+    DescribeProductOutput.add_member(:launch_paths, Shapes::ShapeRef.new(shape: LaunchPaths, location_name: "LaunchPaths"))
     DescribeProductOutput.struct_class = Types::DescribeProductOutput
 
     DescribeProductViewInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
@@ -793,8 +798,10 @@ module Aws::ServiceCatalog
     DescribeProvisionedProductPlanOutput.struct_class = Types::DescribeProvisionedProductPlanOutput
 
     DescribeProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
-    DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
-    DescribeProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProductId"))
+    DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProvisioningArtifactId"))
+    DescribeProvisioningArtifactInput.add_member(:product_id, Shapes::ShapeRef.new(shape: Id, location_name: "ProductId"))
+    DescribeProvisioningArtifactInput.add_member(:provisioning_artifact_name, Shapes::ShapeRef.new(shape: ProvisioningArtifactName, location_name: "ProvisioningArtifactName"))
+    DescribeProvisioningArtifactInput.add_member(:product_name, Shapes::ShapeRef.new(shape: ProductViewName, location_name: "ProductName"))
     DescribeProvisioningArtifactInput.add_member(:verbose, Shapes::ShapeRef.new(shape: Verbose, location_name: "Verbose"))
     DescribeProvisioningArtifactInput.struct_class = Types::DescribeProvisioningArtifactInput
 
@@ -940,6 +947,10 @@ module Aws::ServiceCatalog
 
     InvalidStateException.struct_class = Types::InvalidStateException
 
+    LaunchPath.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    LaunchPath.add_member(:name, Shapes::ShapeRef.new(shape: PortfolioName, location_name: "Name"))
+    LaunchPath.struct_class = Types::LaunchPath
+
     LaunchPathSummaries.member = Shapes::ShapeRef.new(shape: LaunchPathSummary)
 
     LaunchPathSummary.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -947,6 +958,8 @@ module Aws::ServiceCatalog
     LaunchPathSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     LaunchPathSummary.add_member(:name, Shapes::ShapeRef.new(shape: PortfolioName, location_name: "Name"))
     LaunchPathSummary.struct_class = Types::LaunchPathSummary
+
+    LaunchPaths.member = Shapes::ShapeRef.new(shape: LaunchPath)
 
     LimitExceededException.struct_class = Types::LimitExceededException
 
@@ -2055,6 +2068,7 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DescribeProductAsAdminInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeProductAsAdminOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:describe_product_view, Seahorse::Model::Operation.new.tap do |o|
@@ -2093,6 +2107,7 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: DescribeProvisioningArtifactInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeProvisioningArtifactOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
       end)
 
       api.add_operation(:describe_provisioning_parameters, Seahorse::Model::Operation.new.tap do |o|

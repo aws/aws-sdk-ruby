@@ -16,6 +16,7 @@ module Aws::MediaPackageVod
     AssetCreateParameters = Shapes::StructureShape.new(name: 'AssetCreateParameters')
     AssetList = Shapes::StructureShape.new(name: 'AssetList')
     AssetShallow = Shapes::StructureShape.new(name: 'AssetShallow')
+    Authorization = Shapes::StructureShape.new(name: 'Authorization')
     CmafEncryption = Shapes::StructureShape.new(name: 'CmafEncryption')
     CmafPackage = Shapes::StructureShape.new(name: 'CmafPackage')
     CreateAssetRequest = Shapes::StructureShape.new(name: 'CreateAssetRequest')
@@ -66,6 +67,7 @@ module Aws::MediaPackageVod
     PackagingGroup = Shapes::StructureShape.new(name: 'PackagingGroup')
     PackagingGroupCreateParameters = Shapes::StructureShape.new(name: 'PackagingGroupCreateParameters')
     PackagingGroupList = Shapes::StructureShape.new(name: 'PackagingGroupList')
+    PackagingGroupUpdateParameters = Shapes::StructureShape.new(name: 'PackagingGroupUpdateParameters')
     Profile = Shapes::StringShape.new(name: 'Profile')
     SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
@@ -78,6 +80,8 @@ module Aws::MediaPackageVod
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdatePackagingGroupRequest = Shapes::StructureShape.new(name: 'UpdatePackagingGroupRequest')
+    UpdatePackagingGroupResponse = Shapes::StructureShape.new(name: 'UpdatePackagingGroupResponse')
     __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
@@ -128,6 +132,10 @@ module Aws::MediaPackageVod
     AssetShallow.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AssetShallow.struct_class = Types::AssetShallow
 
+    Authorization.add_member(:cdn_identifier_secret, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "cdnIdentifierSecret"))
+    Authorization.add_member(:secrets_role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secretsRoleArn"))
+    Authorization.struct_class = Types::Authorization
+
     CmafEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     CmafEncryption.struct_class = Types::CmafEncryption
 
@@ -174,11 +182,13 @@ module Aws::MediaPackageVod
     CreatePackagingConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePackagingConfigurationResponse.struct_class = Types::CreatePackagingConfigurationResponse
 
+    CreatePackagingGroupRequest.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     CreatePackagingGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     CreatePackagingGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePackagingGroupRequest.struct_class = Types::CreatePackagingGroupRequest
 
     CreatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreatePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     CreatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     CreatePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreatePackagingGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -247,6 +257,7 @@ module Aws::MediaPackageVod
     DescribePackagingGroupRequest.struct_class = Types::DescribePackagingGroupRequest
 
     DescribePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     DescribePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     DescribePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribePackagingGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -352,11 +363,13 @@ module Aws::MediaPackageVod
     PackagingConfigurationList.struct_class = Types::PackagingConfigurationList
 
     PackagingGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    PackagingGroup.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     PackagingGroup.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     PackagingGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     PackagingGroup.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PackagingGroup.struct_class = Types::PackagingGroup
 
+    PackagingGroupCreateParameters.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     PackagingGroupCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     PackagingGroupCreateParameters.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     PackagingGroupCreateParameters.struct_class = Types::PackagingGroupCreateParameters
@@ -364,6 +377,9 @@ module Aws::MediaPackageVod
     PackagingGroupList.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     PackagingGroupList.add_member(:packaging_groups, Shapes::ShapeRef.new(shape: __listOfPackagingGroup, location_name: "packagingGroups"))
     PackagingGroupList.struct_class = Types::PackagingGroupList
+
+    PackagingGroupUpdateParameters.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    PackagingGroupUpdateParameters.struct_class = Types::PackagingGroupUpdateParameters
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -397,6 +413,17 @@ module Aws::MediaPackageVod
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UpdatePackagingGroupRequest.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    UpdatePackagingGroupRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
+    UpdatePackagingGroupRequest.struct_class = Types::UpdatePackagingGroupRequest
+
+    UpdatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdatePackagingGroupResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
+    UpdatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
+    UpdatePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    UpdatePackagingGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    UpdatePackagingGroupResponse.struct_class = Types::UpdatePackagingGroupResponse
 
     __listOfAssetShallow.member = Shapes::ShapeRef.new(shape: AssetShallow)
 
@@ -646,6 +673,20 @@ module Aws::MediaPackageVod
         o.http_request_uri = "/tags/{resource-arn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:update_packaging_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePackagingGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/packaging_groups/{id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePackagingGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePackagingGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

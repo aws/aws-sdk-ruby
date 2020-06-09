@@ -718,7 +718,7 @@ module Aws::Lightsail
     # private server (or *instance*).
     #
     # @!attribute [rw] price
-    #   The price in US dollars (e.g., `5.0`).
+    #   The price in US dollars (e.g., `5.0`) of the bundle.
     #   @return [Float]
     #
     # @!attribute [rw] cpu_count
@@ -4628,7 +4628,7 @@ module Aws::Lightsail
     #
     #       {
     #         instance_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System
+    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage
     #         period: 1, # required
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
@@ -4646,6 +4646,38 @@ module Aws::Lightsail
     #   Valid instance metric names are listed below, along with the most
     #   useful `statistics` to include in your request, and the published
     #   `unit` value.
+    #
+    #   * <b> <code>BurstCapacityPercentage</code> </b> - The percentage of
+    #     CPU performance available for your instance to burst above its
+    #     baseline. Your instance continously accrues and consumes burst
+    #     capacity. Burst capacity stops accruing when your instance's
+    #     `BurstCapacityPercentage` reaches 100%. For more information, see
+    #     [Viewing instance burst capacity in Amazon Lightsail][1].
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     `Unit`\: The published unit is `Percent`.
+    #
+    #   * <b> <code>BurstCapacityTime</code> </b> - The available amount of
+    #     time for your instance to burst at 100% CPU utilization. Your
+    #     instance continously accrues and consumes burst capacity. Burst
+    #     capacity time stops accruing when your instance's
+    #     `BurstCapacityPercentage` metric reaches 100%.
+    #
+    #     Burst capacity time is consumed at the full rate only when your
+    #     instance operates at 100% CPU utilization. For example, if your
+    #     instance operates at 50% CPU utilization in the burstable zone for
+    #     a 5-minute period, then it consumes CPU burst capacity minutes at
+    #     a 50% rate in that period. Your instance consumed 2 minutes and 30
+    #     seconds of CPU burst capacity minutes in the 5-minute period. For
+    #     more information, see [Viewing instance burst capacity in Amazon
+    #     Lightsail][1].
+    #
+    #     `Statistics`\: The most useful statistics are `Maximum` and
+    #     `Average`.
+    #
+    #     `Unit`\: The published unit is `Seconds`.
     #
     #   * <b> <code>CPUUtilization</code> </b> - The percentage of allocated
     #     compute units that are currently in use on the instance. This
@@ -4708,6 +4740,10 @@ module Aws::Lightsail
     #     `Statistics`\: The most useful statistic is `Sum`.
     #
     #     `Unit`\: The published unit is `Count`.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-viewing-instance-burst-capacity
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -4775,12 +4811,11 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] metric_name
-    #   The metric name to return data for.
+    #   The name of the metric returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   An array of key-value pairs containing information about the results
-    #   of your get instance metric data request.
+    #   An array of objects that describe the metric data returned.
     #   @return [Array<Types::MetricDatapoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricDataResult AWS API Documentation
@@ -5236,7 +5271,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] unit
     #   The unit for the metric data request. Valid units depend on the
-    #   metric data being required. For the valid units with each available
+    #   metric data being requested. For the valid units with each available
     #   metric, see the `metricName` parameter.
     #   @return [String]
     #
@@ -5282,98 +5317,11 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] metric_name
-    #   The metric about which you are receiving information. Valid values
-    #   are listed below, along with the most useful `statistics` to include
-    #   in your request.
-    #
-    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number
-    #     of TLS connections initiated by the client that did not establish
-    #     a session with the load balancer. Possible causes include a
-    #     mismatch of ciphers or protocols.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`.
-    #
-    #   * <b> <code>HealthyHostCount</code> </b> - The number of target
-    #     instances that are considered healthy.
-    #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
-    #     and `Maximum`.
-    #
-    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
-    #     instances that are considered unhealthy.
-    #
-    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
-    #     and `Maximum`.
-    #
-    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
-    #     4XX client error codes that originate from the load balancer.
-    #     Client errors are generated when requests are malformed or
-    #     incomplete. These requests have not been received by the target
-    #     instance. This count does not include any response codes generated
-    #     by the target instances.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
-    #     5XX server error codes that originate from the load balancer. This
-    #     count does not include any response codes generated by the target
-    #     instances.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
-    #     HTTP response codes generated by the target instances. This does
-    #     not include any response codes generated by the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
-    #
-    #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
-    #     seconds, after the request leaves the load balancer until a
-    #     response from the target instance is received.
-    #
-    #     `Statistics`\: The most useful statistic is `Average`.
-    #
-    #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
-    #     connections that were rejected because the load balancer had
-    #     reached its maximum number of connections.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`.
-    #
-    #   * <b> <code>RequestCount</code> </b> - The number of requests
-    #     processed over IPv4. This count includes only the requests with a
-    #     response generated by a target instance of the load balancer.
-    #
-    #     `Statistics`\: The most useful statistic is `Sum`. Note that
-    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #   The name of the metric returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   An array of metric datapoint objects.
+    #   An array of objects that describe the metric data returned.
     #   @return [Array<Types::MetricDatapoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerMetricDataResult AWS API Documentation
@@ -6127,7 +6075,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] unit
     #   The unit for the metric data request. Valid units depend on the
-    #   metric data being required. For the valid units with each available
+    #   metric data being requested. For the valid units with each available
     #   metric, see the `metricName` parameter.
     #   @return [String]
     #
@@ -6173,12 +6121,11 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] metric_name
-    #   The name of the metric.
+    #   The name of the metric returned.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   An object describing the result of your get relational database
-    #   metric data request.
+    #   An array of objects that describe the metric data returned.
     #   @return [Array<Types::MetricDatapoint>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricDataResult AWS API Documentation
@@ -7683,7 +7630,8 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The status of the SSL/TLS certificate. Valid values are below.
+    #   The validation status of the SSL/TLS certificate. Valid values are
+    #   below.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -8390,7 +8338,7 @@ module Aws::Lightsail
     #
     #       {
     #         alarm_name: "ResourceName", # required
-    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput
+    #         metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, BurstCapacityTime, BurstCapacityPercentage
     #         monitored_resource_name: "ResourceName", # required
     #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #         threshold: 1.0, # required
@@ -8414,9 +8362,9 @@ module Aws::Lightsail
     #
     #   The following metrics are available for each resource type:
     #
-    #   * **Instances**\: `CPUUtilization`, `NetworkIn`, `NetworkOut`,
-    #     `StatusCheckFailed`, `StatusCheckFailed_Instance`, and
-    #     `StatusCheckFailed_System`.
+    #   * **Instances**\: `BurstCapacityPercentage`, `BurstCapacityTime`,
+    #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
+    #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
     #
     #   * **Load balancers**\: `ClientTLSNegotiationErrorCount`,
     #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,
@@ -8428,6 +8376,13 @@ module Aws::Lightsail
     #   * **Relational databases**\: `CPUUtilization`,
     #     `DatabaseConnections`, `DiskQueueDepth`, `FreeStorageSpace`,
     #     `NetworkReceiveThroughput`, and `NetworkTransmitThroughput`.
+    #
+    #   For more information about these metrics, see [Metrics available in
+    #   Lightsail][1].
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-resource-health-metrics#available-metrics
     #   @return [String]
     #
     # @!attribute [rw] monitored_resource_name

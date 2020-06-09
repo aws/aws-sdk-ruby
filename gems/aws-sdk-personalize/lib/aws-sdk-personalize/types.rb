@@ -142,6 +142,10 @@ module Aws::Personalize
     #   The Amazon Resource Name (ARN) of the batch inference job.
     #   @return [String]
     #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter used on the batch inference job.
+    #   @return [String]
+    #
     # @!attribute [rw] failure_reason
     #   If the batch inference job failed, the reason for the failure.
     #   @return [String]
@@ -198,6 +202,7 @@ module Aws::Personalize
     class BatchInferenceJob < Struct.new(
       :job_name,
       :batch_inference_job_arn,
+      :filter_arn,
       :failure_reason,
       :solution_version_arn,
       :num_results,
@@ -537,6 +542,7 @@ module Aws::Personalize
     #       {
     #         job_name: "Name", # required
     #         solution_version_arn: "Arn", # required
+    #         filter_arn: "Arn",
     #         num_results: 1,
     #         job_input: { # required
     #           s3_data_source: { # required
@@ -560,6 +566,12 @@ module Aws::Personalize
     # @!attribute [rw] solution_version_arn
     #   The Amazon Resource Name (ARN) of the solution version that will be
     #   used to generate the batch inference recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter to apply to the batch inference job. For more
+    #   information on using filters, see Using Filters with Amazon
+    #   Personalize.
     #   @return [String]
     #
     # @!attribute [rw] num_results
@@ -587,6 +599,7 @@ module Aws::Personalize
     class CreateBatchInferenceJobRequest < Struct.new(
       :job_name,
       :solution_version_arn,
+      :filter_arn,
       :num_results,
       :job_input,
       :job_output,
@@ -841,6 +854,56 @@ module Aws::Personalize
     class CreateEventTrackerResponse < Struct.new(
       :event_tracker_arn,
       :tracking_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         dataset_group_arn: "Arn", # required
+    #         filter_expression: "FilterExpression", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The ARN of the dataset group that the filter will belong to.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   The filter expression that designates the interaction types that the
+    #   filter will filter out. A filter expression must follow the
+    #   following format:
+    #
+    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
+    #
+    #   Where "EVENT\_TYPE" is the type of event to filter out. To filter
+    #   out all items with any interactions history, set `"*"` as the
+    #   EVENT\_TYPE. For more information, see Using Filters with Amazon
+    #   Personalize.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilterRequest AWS API Documentation
+    #
+    class CreateFilterRequest < Struct.new(
+      :name,
+      :dataset_group_arn,
+      :filter_expression)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_arn
+    #   The ARN of the new filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateFilterResponse AWS API Documentation
+    #
+    class CreateFilterResponse < Struct.new(
+      :filter_arn)
       include Aws::Structure
     end
 
@@ -1670,6 +1733,24 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DeleteFilterRequest AWS API Documentation
+    #
+    class DeleteFilterRequest < Struct.new(
+      :filter_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteSchemaRequest
     #   data as a hash:
     #
@@ -1950,6 +2031,35 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFilterRequest AWS API Documentation
+    #
+    class DescribeFilterRequest < Struct.new(
+      :filter_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The filter's details.
+    #   @return [Types::Filter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeFilterResponse AWS API Documentation
+    #
+    class DescribeFilterResponse < Struct.new(
+      :filter)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeRecipeRequest
     #   data as a hash:
     #
@@ -2216,6 +2326,105 @@ module Aws::Personalize
       :default_parameters,
       :creation_date_time,
       :last_updated_date_time,
+      :status)
+      include Aws::Structure
+    end
+
+    # Contains information on a recommendation filter, including its ARN,
+    # status, and filter expression.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The time at which the filter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The time at which the filter was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The ARN of the dataset group to which the filter belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the filter failed, the reason for its failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_expression
+    #   Specifies the type of item interactions to filter out of
+    #   recommendation results. The filter expression must follow the
+    #   following format:
+    #
+    #   `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
+    #
+    #   Where "EVENT\_TYPE" is the type of event to filter out. For more
+    #   information, see Using Filters with Amazon Personalize.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :name,
+      :filter_arn,
+      :creation_date_time,
+      :last_updated_date_time,
+      :dataset_group_arn,
+      :failure_reason,
+      :filter_expression,
+      :status)
+      include Aws::Structure
+    end
+
+    # A short summary of a filter's attributes.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_arn
+    #   The ARN of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The time at which the filter was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The time at which the filter was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The ARN of the dataset group to which the filter belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the filter failed, the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/FilterSummary AWS API Documentation
+    #
+    class FilterSummary < Struct.new(
+      :name,
+      :filter_arn,
+      :creation_date_time,
+      :last_updated_date_time,
+      :dataset_group_arn,
+      :failure_reason,
       :status)
       include Aws::Structure
     end
@@ -2778,6 +2987,53 @@ module Aws::Personalize
     #
     class ListEventTrackersResponse < Struct.new(
       :event_trackers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFiltersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dataset_group_arn: "Arn",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dataset_group_arn
+    #   The ARN of the dataset group that contains the filters.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from the previous call to `ListFilters` for getting
+    #   the next set of filters (if they exist).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of filters to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListFiltersRequest AWS API Documentation
+    #
+    class ListFiltersRequest < Struct.new(
+      :dataset_group_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   A list of returned filters.
+    #   @return [Array<Types::FilterSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token for getting the next set of filters (if they exist).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListFiltersResponse AWS API Documentation
+    #
+    class ListFiltersResponse < Struct.new(
+      :filters,
       :next_token)
       include Aws::Structure
     end

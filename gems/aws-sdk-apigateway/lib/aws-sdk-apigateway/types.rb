@@ -4707,6 +4707,10 @@ module Aws::APIGateway
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #   @return [Hash<String,Types::IntegrationResponse>]
     #
+    # @!attribute [rw] tls_config
+    #   Specifies the TLS configuration for an integration.
+    #   @return [Types::TlsConfig]
+    #
     class Integration < Struct.new(
       :type,
       :http_method,
@@ -4721,7 +4725,8 @@ module Aws::APIGateway
       :timeout_in_millis,
       :cache_namespace,
       :cache_key_parameters,
-      :integration_responses)
+      :integration_responses,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -5457,6 +5462,9 @@ module Aws::APIGateway
     #         cache_key_parameters: ["String"],
     #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
     #         timeout_in_millis: 1,
+    #         tls_config: {
+    #           insecure_skip_verification: false,
+    #         },
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -5603,6 +5611,9 @@ module Aws::APIGateway
     #   is 29,000 milliseconds or 29 seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] tls_config
+    #   @return [Types::TlsConfig]
+    #
     class PutIntegrationRequest < Struct.new(
       :rest_api_id,
       :resource_id,
@@ -5619,7 +5630,8 @@ module Aws::APIGateway
       :cache_namespace,
       :cache_key_parameters,
       :content_handling,
-      :timeout_in_millis)
+      :timeout_in_millis,
+      :tls_config)
       include Aws::Structure
     end
 
@@ -6862,6 +6874,34 @@ module Aws::APIGateway
     class ThrottleSettings < Struct.new(
       :burst_limit,
       :rate_limit)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TlsConfig
+    #   data as a hash:
+    #
+    #       {
+    #         insecure_skip_verification: false,
+    #       }
+    #
+    # @!attribute [rw] insecure_skip_verification
+    #   Specifies whether API Gateway skips trust chain validation of the
+    #   server certificate during the TLS handshake. Supported only for
+    #   `HTTP` and `HTTP_PROXY` integrations. By default, API Gateway
+    #   validates that certificates for integration endpoints are issued by
+    #   a [supported Certificate Authority][1]. If enabled, API Gateway
+    #   skips trust chain validation of the server certificate. This is not
+    #   recommended, but it enables you to use certificates that are signed
+    #   by private Certificate Authorities, or certificates that are
+    #   self-signed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html
+    #   @return [Boolean]
+    #
+    class TlsConfig < Struct.new(
+      :insecure_skip_verification)
       include Aws::Structure
     end
 

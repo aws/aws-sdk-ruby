@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-06-05)
+------------------
+
+* Feature - You can now specify the production variant to send the inference request to, when invoking a SageMaker Endpoint that is running two or more variants.
+
 1.21.0 (2020-05-28)
 ------------------
 

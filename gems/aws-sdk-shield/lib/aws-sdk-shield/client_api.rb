@@ -19,6 +19,8 @@ module Aws::Shield
     AssociateDRTRoleResponse = Shapes::StructureShape.new(name: 'AssociateDRTRoleResponse')
     AssociateHealthCheckRequest = Shapes::StructureShape.new(name: 'AssociateHealthCheckRequest')
     AssociateHealthCheckResponse = Shapes::StructureShape.new(name: 'AssociateHealthCheckResponse')
+    AssociateProactiveEngagementDetailsRequest = Shapes::StructureShape.new(name: 'AssociateProactiveEngagementDetailsRequest')
+    AssociateProactiveEngagementDetailsResponse = Shapes::StructureShape.new(name: 'AssociateProactiveEngagementDetailsResponse')
     AttackDetail = Shapes::StructureShape.new(name: 'AttackDetail')
     AttackId = Shapes::StringShape.new(name: 'AttackId')
     AttackLayer = Shapes::StringShape.new(name: 'AttackLayer')
@@ -31,6 +33,7 @@ module Aws::Shield
     AttackVectorDescription = Shapes::StructureShape.new(name: 'AttackVectorDescription')
     AttackVectorDescriptionList = Shapes::ListShape.new(name: 'AttackVectorDescriptionList')
     AutoRenew = Shapes::StringShape.new(name: 'AutoRenew')
+    ContactNotes = Shapes::StringShape.new(name: 'ContactNotes')
     Contributor = Shapes::StructureShape.new(name: 'Contributor')
     CreateProtectionRequest = Shapes::StructureShape.new(name: 'CreateProtectionRequest')
     CreateProtectionResponse = Shapes::StructureShape.new(name: 'CreateProtectionResponse')
@@ -50,6 +53,8 @@ module Aws::Shield
     DescribeProtectionResponse = Shapes::StructureShape.new(name: 'DescribeProtectionResponse')
     DescribeSubscriptionRequest = Shapes::StructureShape.new(name: 'DescribeSubscriptionRequest')
     DescribeSubscriptionResponse = Shapes::StructureShape.new(name: 'DescribeSubscriptionResponse')
+    DisableProactiveEngagementRequest = Shapes::StructureShape.new(name: 'DisableProactiveEngagementRequest')
+    DisableProactiveEngagementResponse = Shapes::StructureShape.new(name: 'DisableProactiveEngagementResponse')
     DisassociateDRTLogBucketRequest = Shapes::StructureShape.new(name: 'DisassociateDRTLogBucketRequest')
     DisassociateDRTLogBucketResponse = Shapes::StructureShape.new(name: 'DisassociateDRTLogBucketResponse')
     DisassociateDRTRoleRequest = Shapes::StructureShape.new(name: 'DisassociateDRTRoleRequest')
@@ -61,6 +66,8 @@ module Aws::Shield
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EmergencyContact = Shapes::StructureShape.new(name: 'EmergencyContact')
     EmergencyContactList = Shapes::ListShape.new(name: 'EmergencyContactList')
+    EnableProactiveEngagementRequest = Shapes::StructureShape.new(name: 'EnableProactiveEngagementRequest')
+    EnableProactiveEngagementResponse = Shapes::StructureShape.new(name: 'EnableProactiveEngagementResponse')
     GetSubscriptionStateRequest = Shapes::StructureShape.new(name: 'GetSubscriptionStateRequest')
     GetSubscriptionStateResponse = Shapes::StructureShape.new(name: 'GetSubscriptionStateResponse')
     HealthCheckArn = Shapes::StringShape.new(name: 'HealthCheckArn')
@@ -90,6 +97,8 @@ module Aws::Shield
     MitigationList = Shapes::ListShape.new(name: 'MitigationList')
     NoAssociatedRoleException = Shapes::StructureShape.new(name: 'NoAssociatedRoleException')
     OptimisticLockException = Shapes::StructureShape.new(name: 'OptimisticLockException')
+    PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    ProactiveEngagementStatus = Shapes::StringShape.new(name: 'ProactiveEngagementStatus')
     Protection = Shapes::StructureShape.new(name: 'Protection')
     ProtectionId = Shapes::StringShape.new(name: 'ProtectionId')
     ProtectionName = Shapes::StringShape.new(name: 'ProtectionName')
@@ -141,6 +150,11 @@ module Aws::Shield
     AssociateHealthCheckRequest.struct_class = Types::AssociateHealthCheckRequest
 
     AssociateHealthCheckResponse.struct_class = Types::AssociateHealthCheckResponse
+
+    AssociateProactiveEngagementDetailsRequest.add_member(:emergency_contact_list, Shapes::ShapeRef.new(shape: EmergencyContactList, required: true, location_name: "EmergencyContactList"))
+    AssociateProactiveEngagementDetailsRequest.struct_class = Types::AssociateProactiveEngagementDetailsRequest
+
+    AssociateProactiveEngagementDetailsResponse.struct_class = Types::AssociateProactiveEngagementDetailsResponse
 
     AttackDetail.add_member(:attack_id, Shapes::ShapeRef.new(shape: AttackId, location_name: "AttackId"))
     AttackDetail.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
@@ -228,6 +242,10 @@ module Aws::Shield
     DescribeSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: Subscription, location_name: "Subscription"))
     DescribeSubscriptionResponse.struct_class = Types::DescribeSubscriptionResponse
 
+    DisableProactiveEngagementRequest.struct_class = Types::DisableProactiveEngagementRequest
+
+    DisableProactiveEngagementResponse.struct_class = Types::DisableProactiveEngagementResponse
+
     DisassociateDRTLogBucketRequest.add_member(:log_bucket, Shapes::ShapeRef.new(shape: LogBucket, required: true, location_name: "LogBucket"))
     DisassociateDRTLogBucketRequest.struct_class = Types::DisassociateDRTLogBucketRequest
 
@@ -244,9 +262,15 @@ module Aws::Shield
     DisassociateHealthCheckResponse.struct_class = Types::DisassociateHealthCheckResponse
 
     EmergencyContact.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
+    EmergencyContact.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
+    EmergencyContact.add_member(:contact_notes, Shapes::ShapeRef.new(shape: ContactNotes, location_name: "ContactNotes"))
     EmergencyContact.struct_class = Types::EmergencyContact
 
     EmergencyContactList.member = Shapes::ShapeRef.new(shape: EmergencyContact)
+
+    EnableProactiveEngagementRequest.struct_class = Types::EnableProactiveEngagementRequest
+
+    EnableProactiveEngagementResponse.struct_class = Types::EnableProactiveEngagementResponse
 
     GetSubscriptionStateRequest.struct_class = Types::GetSubscriptionStateRequest
 
@@ -345,6 +369,7 @@ module Aws::Shield
     Subscription.add_member(:time_commitment_in_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "TimeCommitmentInSeconds"))
     Subscription.add_member(:auto_renew, Shapes::ShapeRef.new(shape: AutoRenew, location_name: "AutoRenew"))
     Subscription.add_member(:limits, Shapes::ShapeRef.new(shape: Limits, location_name: "Limits"))
+    Subscription.add_member(:proactive_engagement_status, Shapes::ShapeRef.new(shape: ProactiveEngagementStatus, location_name: "ProactiveEngagementStatus"))
     Subscription.struct_class = Types::Subscription
 
     SummarizedAttackVector.add_member(:vector_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VectorType"))
@@ -438,6 +463,19 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: LimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+      end)
+
+      api.add_operation(:associate_proactive_engagement_details, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateProactiveEngagementDetails"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateProactiveEngagementDetailsRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateProactiveEngagementDetailsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
       end)
 
@@ -540,6 +578,19 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:disable_proactive_engagement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableProactiveEngagement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableProactiveEngagementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableProactiveEngagementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+      end)
+
       api.add_operation(:disassociate_drt_log_bucket, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateDRTLogBucket"
         o.http_method = "POST"
@@ -578,6 +629,19 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
       end)
 
+      api.add_operation(:enable_proactive_engagement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableProactiveEngagement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableProactiveEngagementRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableProactiveEngagementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
+      end)
+
       api.add_operation(:get_subscription_state, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSubscriptionState"
         o.http_method = "POST"
@@ -596,6 +660,12 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_protections, Seahorse::Model::Operation.new.tap do |o|
@@ -607,6 +677,12 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:update_emergency_contact_settings, Seahorse::Model::Operation.new.tap do |o|
