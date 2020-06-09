@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-06-09)
+------------------
+
+* Feature - This release updates the API so customers can test use of Source IP to allow, deny or limit access to data in their S3 buckets after integrating their identity provider.
+
 1.20.0 (2020-05-28)
 ------------------
 
